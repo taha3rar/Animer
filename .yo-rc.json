@@ -1,0 +1,21 @@
+{
+  "generator-ngx-rocket": {
+    "version": "5.3.0",
+    "props": {
+      "location": "path",
+      "appName": "agt-platform",
+      "target": ["web"],
+      "pwa": false,
+      "ui": "bootstrap",
+      "auth": true,
+      "lazy": true,
+      "angulartics": true,
+      "analyticsProvider": "ga",
+      "googleAnalyticsAccount": "UA-105421549-3",
+      "prettier": true,
+      "projectName": "agt-platform",
+      "packageManager": "npm",
+      "mobile": []
+    }
+  }
+}
