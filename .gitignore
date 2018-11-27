@@ -8,11 +8,6 @@
 # Dependencies
 /node_modules
 
-# Cordova
-/www
-/plugins
-/platforms
-
 # IDEs and editors
 .idea/*
 !.idea/runConfigurations/

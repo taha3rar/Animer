@@ -78,7 +78,8 @@ export class AuthenticationService {
    * @param credentials The user credentials.
    * @param remember True to remember credentials across sessions.
    */
-  private setCredentials(credentials?: Credentials, remember?: boolean) {
+  // private //make it public for testing purposes
+  setCredentials(credentials?: Credentials, remember?: boolean) {
     this._credentials = credentials || null;
 
     if (credentials) {
