@@ -45,7 +45,7 @@ describe('ApiService', () => {
       httpMock.expectOne({}).flush(mockArray);
     });
 
-    it('should return a string in case of error', () => {
+    it('should return an error object in case of error', () => {
       // Act
       const randomObjectSubscription = apiService.getAll('/foobar');
       const mockError = {
@@ -79,7 +79,120 @@ describe('ApiService', () => {
       httpMock.expectOne({}).flush(mockObject);
     });
 
-    it('should return a string in case of error', () => {
+    it('should return an error object in case of error', () => {
+      const params = new HttpParams();
+      params.set('id', 'sarasa');
+
+      // Act
+      const randomObjectSubscription = apiService.get('/foobar', params);
+      const mockError = {
+        status: 500,
+        statusText: 'error'
+      };
+
+      // Assert
+      randomObjectSubscription.subscribe((err: any) => {
+        expect(err.status).toBe(mockError.status);
+        expect(err.statusText).toBe(mockError.statusText);
+      });
+      httpMock.expectOne({}).flush(null, mockError);
+    });
+  });
+
+  describe('post', () => {
+    it('should return a single object', () => {
+      // Arrange
+      const mockObject = { a: 1, b: 2 };
+
+      // Act
+      const randomUserSubscription = apiService.post('/foobar', mockObject);
+
+      // Assert
+      randomUserSubscription.subscribe((object: any) => {
+        expect(object).toEqual(mockObject);
+      });
+      httpMock.expectOne({}).flush(mockObject);
+    });
+
+    it('should return an error object in case of error', () => {
+      // Arrange
+      const mockObject = { a: 1, b: 2 };
+
+      // Act
+      const randomObjectSubscription = apiService.post('/foobar', mockObject);
+      const mockError = {
+        status: 500,
+        statusText: 'error'
+      };
+
+      // Assert
+      randomObjectSubscription.subscribe((err: any) => {
+        expect(err.status).toBe(mockError.status);
+        expect(err.statusText).toBe(mockError.statusText);
+      });
+      httpMock.expectOne({}).flush(null, mockError);
+    });
+  });
+
+  describe('put', () => {
+    it('should return a single object', () => {
+      // Arrange
+      const params = new HttpParams();
+      params.set('id', 'sarasa');
+
+      const mockObject = { a: 1, b: 2 };
+
+      // Act
+      const randomUserSubscription = apiService.put('/foobar', params, mockObject);
+
+      // Assert
+      randomUserSubscription.subscribe((object: any) => {
+        expect(object).toEqual(mockObject);
+      });
+      httpMock.expectOne({}).flush(mockObject);
+    });
+
+    it('should return an error object in case of error', () => {
+      const params = new HttpParams();
+      params.set('id', 'sarasa');
+
+      const mockObject = { a: 1, b: 2 };
+
+      // Act
+      const randomObjectSubscription = apiService.put('/foobar', params, mockObject);
+      const mockError = {
+        status: 500,
+        statusText: 'error'
+      };
+
+      // Assert
+      randomObjectSubscription.subscribe((err: any) => {
+        expect(err.status).toBe(mockError.status);
+        expect(err.statusText).toBe(mockError.statusText);
+      });
+      httpMock.expectOne({}).flush(null, mockError);
+    });
+  });
+
+  describe('delete', () => {
+    it('should return a single object', () => {
+      // Arrange
+      const params = new HttpParams();
+      params.set('id', 'sarasa');
+
+      const mockObject = { a: 1, b: 2 };
+
+      // Act
+      const randomUserSubscription = apiService.put('/foobar', params);
+
+      // Assert
+      randomUserSubscription.subscribe((object: any) => {
+        expect(object).toEqual(mockObject);
+      });
+      httpMock.expectOne({}).flush(mockObject);
+    });
+
+    it('should return an error object in case of error', () => {
       const params = new HttpParams();
       params.set('id', 'sarasa');
 

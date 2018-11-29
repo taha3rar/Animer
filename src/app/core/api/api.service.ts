@@ -14,38 +14,40 @@ export class ApiService {
     return this.httpClient
       .cache()
       .get(`${environment.api_url}${path}`, { params })
-      .pipe(
-        map((body: any) => body),
-        catchError((err: any) => of(err))
-      );
+      .pipe(catchError((err: any) => of(err)));
   }
 
   getAll(path: string): Observable<any> {
     return this.httpClient
       .cache()
       .get(`${environment.api_url}${path}`)
-      .pipe(
-        map((body: any) => body),
-        catchError((err: any) => of(err))
-      );
+      .pipe(catchError((err: any) => of(err)));
   }
 
-  // put(path: string, body: Object = {}): Observable<any> {
-  //   return this.http.put(
-  //     `${environment.api_url}${path}`,
-  //     JSON.stringify(body)
-  //   ).pipe(catchError(this.formatErrors));
-  // }
+  put(path: string, params: HttpParams = new HttpParams(), body: Object = {}): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.httpClient
+      .put(`${environment.api_url}${path}`, JSON.stringify(body), {
+        headers: headers,
+        params: params
+      })
+      .pipe(catchError((err: any) => of(err)));
+  }
 
   post(path: string, body: Object = {}): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.httpClient.post(`${environment.api_url}${path}`, JSON.stringify(body), { headers: headers });
+    return this.httpClient
+      .post(`${environment.api_url}${path}`, JSON.stringify(body), { headers: headers })
+      .pipe(catchError((err: any) => of(err)));
   }
 
-  // delete(path): Observable<any> {
-  //   return this.http.delete(
-  //     `${environment.api_url}${path}`
-  //   ).pipe(catchError(this.formatErrors));
-  // }
+  delete(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+    return this.httpClient
+      .delete(`${environment.api_url}${path}`, {
+        params: params
+      })
+      .pipe(catchError(catchError((err: any) => of(err))));
+  }
 }

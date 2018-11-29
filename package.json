@@ -16,7 +16,8 @@
     "prettier": "prettier --write \"./{src,e2e}/**/*.{ts,js,scss}\"",
     "prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,scss}\"",
     "postinstall": "npm run prettier -s",
-    "precommit": "npm test & ng lint && pretty-quick --staged",
+    "precommit": "ng lint && pretty-quick --staged",
+    "prepush": "npm test",
     "generate": "ng generate"
   },
   "dependencies": {

@@ -31,7 +31,7 @@ export class AuthenticationService {
       email: context.username,
       password: context.password
     };
-    console.log(data);
+
     return this.apiService.post('/user/login', data).pipe(
       map((user: Credentials) => {
         this.setCredentials(user, context.remember);
