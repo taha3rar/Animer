@@ -1,17 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-
-export interface Credentials {
-  // Customize received credentials here
-  username: string;
-  token: string;
-}
-
-export interface LoginContext {
-  username: string;
-  password: string;
-  remember?: boolean;
-}
+import { ApiService } from '../api/api.service';
+import { map } from 'rxjs/operators';
+import { Credentials, LoginContext } from '../models/user/login-models';
 
 const credentialsKey = 'credentials';
 
@@ -23,7 +14,7 @@ const credentialsKey = 'credentials';
 export class AuthenticationService {
   private _credentials: Credentials | null;
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -36,13 +27,17 @@ export class AuthenticationService {
    * @return The user credentials.
    */
   login(context: LoginContext): Observable<Credentials> {
-    // Replace by proper authentication call
     const data = {
-      username: context.username,
-      token: '123456'
+      email: context.username,
+      password: context.password
     };
-    this.setCredentials(data, context.remember);
-    return of(data);
+    console.log(data);
+    return this.apiService.post('/user/login', data).pipe(
+      map((user: Credentials) => {
+        this.setCredentials(user, context.remember);
+        return user;
+      })
+    );
   }
 
   /**

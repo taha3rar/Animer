@@ -45,7 +45,22 @@ describe('AuthInterceptor', () => {
 
   it('should add token to the request headers', () => {
     // Arrange
-    const credentials = { username: 'Toto', token: 'sarasa' };
+    const credentials = {
+      user: {
+        email: 'test',
+        token: '123',
+        _id: '1234567',
+        personal_information: {
+          first_name: 'Diego',
+          last_name: 'Milito',
+          job_title: 'Captain',
+          bio: 'Racing idol',
+          profile_picture: 'an url',
+          phone_number: '123456'
+        },
+        permissions: ['test']
+      }
+    };
     authService.setCredentials(credentials);
 
     // Act
@@ -53,7 +68,7 @@ describe('AuthInterceptor', () => {
 
     // Assert
     httpMock.expectOne(
-      r => r.headers.has('Authorization') && r.headers.get('Authorization') === `JWT ${credentials.token}`
+      r => r.headers.has('Authorization') && r.headers.get('Authorization') === `JWT ${credentials.user.token}`
     );
   });
 });

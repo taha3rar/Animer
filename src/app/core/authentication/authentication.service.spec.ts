@@ -1,6 +1,8 @@
 import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 
-import { AuthenticationService, Credentials } from './authentication.service';
+import { AuthenticationService } from './authentication.service';
+import { Credentials } from '../models/user/login-models';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 const credentialsKey = 'credentials';
 
@@ -9,6 +11,7 @@ describe('AuthenticationService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [AuthenticationService]
     });
   });
@@ -35,7 +38,7 @@ describe('AuthenticationService', () => {
       // Assert
       request.subscribe(credentials => {
         expect(credentials).toBeDefined();
-        expect(credentials.token).toBeDefined();
+        expect(credentials.user.token).toBeDefined();
       });
     }));
 
@@ -54,8 +57,8 @@ describe('AuthenticationService', () => {
         expect(authenticationService.isAuthenticated()).toBe(true);
         expect(authenticationService.credentials).toBeDefined();
         expect(authenticationService.credentials).not.toBeNull();
-        expect((<Credentials>authenticationService.credentials).token).toBeDefined();
-        expect((<Credentials>authenticationService.credentials).token).not.toBeNull();
+        expect((<Credentials>authenticationService.credentials).user.token).toBeDefined();
+        expect((<Credentials>authenticationService.credentials).user.token).not.toBeNull();
       });
     }));
 
