@@ -143,7 +143,7 @@ describe('ApiService', () => {
       const mockObject = { a: 1, b: 2 };
 
       // Act
-      const randomUserSubscription = apiService.put('/foobar', params, mockObject);
+      const randomUserSubscription = apiService.put('/foobar', mockObject, params);
 
       // Assert
       randomUserSubscription.subscribe((object: any) => {
@@ -159,7 +159,7 @@ describe('ApiService', () => {
       const mockObject = { a: 1, b: 2 };
 
       // Act
-      const randomObjectSubscription = apiService.put('/foobar', params, mockObject);
+      const randomObjectSubscription = apiService.put('/foobar', mockObject, params);
       const mockError = {
         status: 500,
         statusText: 'error'

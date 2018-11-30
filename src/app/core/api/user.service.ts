@@ -1,24 +1,54 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { User } from '../models/user/user';
+import { Observable } from 'rxjs';
+import { BaseService } from './base.service';
+import { Passwords } from '../models/user/passwords';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  constructor(private apiService: ApiService) {}
-
-  getUser(id: string) {
-    const params = new HttpParams();
-    params.set('id', id);
-    return this.apiService.get('/user/', params).pipe(data => {
-      return data;
-    });
+export class UserService extends BaseService {
+  constructor(protected _apiService: ApiService) {
+    super(_apiService, '/user');
   }
 
-  getAllUsers() {
-    return this.apiService.get('/user/').pipe(data => {
-      return data;
-    });
+  getClientsFromUser(id: string): Observable<User[]> {
+    return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
+  }
+
+  getSuppliersFromUser(id: string): Observable<User[]> {
+    return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
+  }
+
+  // TODO: Type return object properly, not use any. Check in the backend.
+  saveProfileImage(image: string): Observable<any> {
+    const body = { image: image };
+    return this.apiService.post('/image/user', body).pipe(map(data => data));
+  }
+
+  // TODO: Type return object properly, not use any. Check in the backend.
+  saveCompanyImage(image: string): Observable<any> {
+    const body = { image: image };
+    return this.apiService.post('/image/company', body).pipe(map(data => data));
+  }
+
+  update(user: User): Observable<User> {
+    return super.update(user).pipe(
+      map(data => {
+        // TODO: update the current user in authService
+        return data.user;
+      })
+    );
+  }
+  // //Save new invited client
+  // saveInvitedClient(client): Observable<any> {
+  //   return this.apiService.post('/user/client', client)
+  //     .pipe(map(data => data));
+  // }
+
+  changePassword(id: string, passwords: Passwords): Observable<User> {
+    return this.apiService.put(`/user/${id}/password`, passwords).pipe(map(data => data));
   }
 }

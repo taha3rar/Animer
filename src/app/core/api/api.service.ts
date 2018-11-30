@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ApiService {
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.httpClient
       .cache()
-      .get(`${environment.api_url}${path}`, { params })
+      .get(`${environment.api_url}${path}`, { params: params })
       .pipe(catchError((err: any) => of(err)));
   }
 
@@ -24,7 +24,7 @@ export class ApiService {
       .pipe(catchError((err: any) => of(err)));
   }
 
-  put(path: string, params: HttpParams = new HttpParams(), body: Object = {}): Observable<any> {
+  put(path: string, body: Object = {}, params: HttpParams = new HttpParams()): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.httpClient

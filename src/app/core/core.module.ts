@@ -15,6 +15,7 @@ import { CacheInterceptor } from './http/cache.interceptor';
 import { AuthInterceptor } from './authentication/auth.interceptor';
 import { UserService } from './api/user.service';
 import { ApiService } from './api/api.service';
+import { BaseService } from './api/base.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
@@ -27,8 +28,8 @@ import { ApiService } from './api/api.service';
     ErrorHandlerInterceptor,
     CacheInterceptor,
     AuthInterceptor,
-    UserService,
     ApiService,
+    UserService,
     {
       provide: HttpClient,
       useClass: HttpService

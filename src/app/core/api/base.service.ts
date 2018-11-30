@@ -1,0 +1,23 @@
+import { ApiService } from './api.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+export abstract class BaseService {
+  constructor(protected apiService: ApiService, protected path: string) {}
+
+  get(id: string): Observable<any> {
+    return this.apiService.get(`${this.path}/${id}`).pipe(map(data => data));
+  }
+
+  getAll(): Observable<any[]> {
+    return this.apiService.get(this.path).pipe(map(data => data));
+  }
+
+  create(object: any): Observable<any> {
+    return this.apiService.post(this.path, object).pipe(map(data => data));
+  }
+
+  update(object: any): Observable<any> {
+    return this.apiService.put(this.path, object).pipe(map(data => data));
+  }
+}
