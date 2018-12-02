@@ -1,3 +1,14 @@
 <p class="left">
   menu works!
 </p>
+
+<div>
+  <ul>
+    <li routerLinkActive="active" *ngFor="let menuitem of menuItems">
+      <!--If is a single link-->
+      <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
+        <p>{{menuitem.title}}</p>
+      </a>
+    </li>
+  </ul>
+</div>

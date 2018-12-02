@@ -1,4 +1,64 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@app/core';
+import { Credentials } from '@app/core/models/user/login-models';
+
+export interface RouteInfo {
+  path: string;
+  title: string;
+  type: string;
+  icontype: string;
+  neededPermission?: string;
+}
+
+// Menu Items
+export const ROUTES: RouteInfo[] = [
+  {
+    path: '/dashboard',
+    title: 'Dashboard',
+    type: 'link',
+    icontype: 'dashboard'
+  },
+  {
+    path: '/transactions',
+    title: 'Transactions',
+    type: 'link',
+    icontype: 'compare_arrows',
+    neededPermission: 'list-transactions'
+  },
+  {
+    path: '/orders',
+    title: 'Orders',
+    type: 'link',
+    icontype: 'all_inclusive'
+  },
+  {
+    path: '/invoices',
+    title: 'Invoices',
+    type: 'link',
+    icontype: 'receipt'
+  },
+  {
+    path: '/products',
+    title: 'Products',
+    type: 'link',
+    icontype: 'spa',
+    neededPermission: 'list-products'
+  },
+  {
+    path: '/clients',
+    title: 'Clients',
+    type: 'link',
+    icontype: 'people',
+    neededPermission: 'list-clients'
+  },
+  {
+    path: '/ecosystems',
+    title: 'Ecosystems',
+    type: 'link',
+    icontype: 'group_work',
+    neededPermission: 'list-ecosystems'
+  }
+];
 
 @Component({
   selector: 'app-menu',
@@ -6,7 +66,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  constructor() {}
+  menuItems: RouteInfo[];
+  currentCredentials: Credentials;
 
-  ngOnInit() {}
+  constructor(private authService: AuthenticationService) {}
+
+  ngOnInit() {
+    this.currentCredentials = this.authService.credentials;
+
+    if (this.currentCredentials.user.permissions) {
+      this.menuItems = ROUTES.filter(
+        mi =>
+          mi.neededPermission ? this.currentCredentials.user.permissions.some(p => p === mi.neededPermission) : true
+      );
+    }
+  }
 }
