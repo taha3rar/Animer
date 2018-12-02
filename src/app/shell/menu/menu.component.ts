@@ -74,7 +74,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.currentCredentials = this.authService.credentials;
 
-    if (this.currentCredentials.user.permissions) {
+    if (this.currentCredentials && this.currentCredentials.user.permissions) {
       this.menuItems = ROUTES.filter(
         mi =>
           mi.neededPermission ? this.currentCredentials.user.permissions.some(p => p === mi.neededPermission) : true
