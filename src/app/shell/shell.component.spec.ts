@@ -7,6 +7,7 @@ import { AuthenticationService, CoreModule, MockAuthenticationService } from '@a
 
 import { ShellComponent } from './shell.component';
 import { HeaderComponent } from './header/header.component';
+import { MenuComponent } from './menu/menu.component';
 
 describe('ShellComponent', () => {
   let component: ShellComponent;
@@ -16,7 +17,7 @@ describe('ShellComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, TranslateModule.forRoot(), NgbModule, CoreModule],
       providers: [{ provide: AuthenticationService, useClass: MockAuthenticationService }],
-      declarations: [HeaderComponent, ShellComponent]
+      declarations: [MenuComponent, HeaderComponent, ShellComponent]
     }).compileComponents();
   }));
 
