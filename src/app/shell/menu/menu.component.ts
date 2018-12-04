@@ -45,7 +45,7 @@ export const ROUTES: RouteInfo[] = [
     neededPermission: 'list-products'
   },
   {
-    path: '/clients',
+    path: '/client/list',
     title: 'Clients',
     type: 'link',
     icontype: 'people',

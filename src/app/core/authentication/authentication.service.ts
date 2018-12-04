@@ -3,8 +3,7 @@ import { Observable, of } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { map } from 'rxjs/operators';
 import { Credentials, LoginContext } from '../models/user/login-models';
-
-const credentialsKey = 'credentials';
+import { JwtService } from './jwt.service';
 
 /**
  * Provides a base for authentication workflow.
@@ -12,14 +11,7 @@ const credentialsKey = 'credentials';
  */
 @Injectable()
 export class AuthenticationService {
-  private _credentials: Credentials | null;
-
-  constructor(private apiService: ApiService) {
-    const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
-    if (savedCredentials) {
-      this._credentials = JSON.parse(savedCredentials);
-    }
-  }
+  constructor(private apiService: ApiService, private jwtService: JwtService) {}
 
   /**
    * Authenticates the user.
@@ -34,7 +26,7 @@ export class AuthenticationService {
 
     return this.apiService.post('/user/login', data).pipe(
       map((user: Credentials) => {
-        this.setCredentials(user, context.remember);
+        this.jwtService.setCredentials(user, context.remember);
         return user;
       })
     );
@@ -46,7 +38,7 @@ export class AuthenticationService {
    */
   logout(): Observable<boolean> {
     // Customize credentials invalidation here
-    this.setCredentials();
+    this.jwtService.setCredentials();
     return of(true);
   }
 
@@ -55,7 +47,7 @@ export class AuthenticationService {
    * @return True if the user is authenticated.
    */
   isAuthenticated(): boolean {
-    return !!this.credentials;
+    return !!this.jwtService.credentials;
   }
 
   /**
@@ -63,7 +55,15 @@ export class AuthenticationService {
    * @return The user credentials or null if the user is not authenticated.
    */
   get credentials(): Credentials | null {
-    return this._credentials;
+    return this.jwtService.credentials;
+  }
+
+  /**
+   * Gets the user id.
+   * @return The user id or null if the user is not authenticated.
+   */
+  get currentUserId(): string | null {
+    return this.jwtService.currentUserId;
   }
 
   /**
@@ -75,14 +75,6 @@ export class AuthenticationService {
    */
   // private //make it public for testing purposes
   setCredentials(credentials?: Credentials, remember?: boolean) {
-    this._credentials = credentials || null;
-
-    if (credentials) {
-      const storage = remember ? localStorage : sessionStorage;
-      storage.setItem(credentialsKey, JSON.stringify(credentials));
-    } else {
-      sessionStorage.removeItem(credentialsKey);
-      localStorage.removeItem(credentialsKey);
-    }
+    this.jwtService.setCredentials(credentials, remember);
   }
 }

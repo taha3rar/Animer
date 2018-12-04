@@ -3,15 +3,16 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { JwtService } from './jwt.service';
 
 describe('AuthInterceptor', () => {
   let http: HttpClient;
   let httpMock: HttpTestingController;
   let authInterceptor: AuthInterceptor;
-  let authService: AuthenticationService;
+  let jwtService: JwtService;
 
-  function createInterceptor(_authService: AuthenticationService) {
-    authInterceptor = new AuthInterceptor(_authService);
+  function createInterceptor(_jwtService: JwtService) {
+    authInterceptor = new AuthInterceptor(_jwtService);
     return authInterceptor;
   }
 
@@ -32,10 +33,10 @@ describe('AuthInterceptor', () => {
 
   beforeEach(inject(
     [HttpClient, HttpTestingController, AuthenticationService],
-    (_http: HttpClient, _httpMock: HttpTestingController, _authService: AuthenticationService) => {
+    (_http: HttpClient, _httpMock: HttpTestingController, _jwtService: JwtService) => {
       http = _http;
       httpMock = _httpMock;
-      authService = _authService;
+      jwtService = _jwtService;
     }
   ));
 
@@ -61,7 +62,7 @@ describe('AuthInterceptor', () => {
         permissions: ['test']
       }
     };
-    authService.setCredentials(credentials);
+    jwtService.setCredentials(credentials);
 
     // Act
     http.get('/toto').subscribe();
