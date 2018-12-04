@@ -15,7 +15,7 @@ import { CacheInterceptor } from './http/cache.interceptor';
 import { AuthInterceptor } from './authentication/auth.interceptor';
 import { UserService } from './api/user.service';
 import { ApiService } from './api/api.service';
-import { BaseService } from './api/base.service';
+import { JwtService } from './authentication/jwt.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
@@ -28,6 +28,7 @@ import { BaseService } from './api/base.service';
     ErrorHandlerInterceptor,
     CacheInterceptor,
     AuthInterceptor,
+    JwtService,
     ApiService,
     UserService,
     {
