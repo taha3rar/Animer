@@ -37,20 +37,20 @@
       </li>
 
       <li>
-        <figure class="img-shape"><img src="../../../assets/img/profile-img.jpg" class="user-img" /></figure>
+        <figure class="img-shape"><img src="{{ profilePicture }}" class="user-img" /></figure>
       </li>
       <li>
         <div class="nav-item" ngbDropdown placement="bottom-right">
-          <a  id="user-dropdown" class="dropdown-toggle dropdown-button" data-toggle="dropdown" aria-expanded="true" ngbDropdownToggle>Alex Benn</a>
+          <a  id="user-dropdown" class="dropdown-toggle dropdown-button" data-toggle="dropdown" aria-expanded="true" ngbDropdownToggle>{{ username }}</a>
           <div ngbDropdownMenu aria-labelledby="user-dropdown">
 
             <button class="dropdown-item">
               <i class="material-icons pull-left">settings</i>
               <span>Settings</span>
             </button>
-            <button class="dropdown-item">
+            <button (click)="logout()" class="dropdown-item">
               <i class="material-icons pull-left">power_settings_new</i>
-              <span>Log Out</span>
+              <span translate>Logout</span>
             </button>
         </div>
           <!-- <div ngbDropdownMenu aria-labelledby="user-dropdown">

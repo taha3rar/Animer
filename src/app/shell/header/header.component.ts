@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService, I18nService } from '@app/core';
+import { Credentials } from '@app/core/models/user/login-models';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ import { AuthenticationService, I18nService } from '@app/core';
 })
 export class HeaderComponent implements OnInit {
   menuHidden = true;
+  credentials: Credentials;
 
   constructor(
     private router: Router,
@@ -17,7 +19,9 @@ export class HeaderComponent implements OnInit {
     private i18nService: I18nService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.credentials = this.authenticationService.credentials;
+  }
 
   toggleMenu() {
     this.menuHidden = !this.menuHidden;
@@ -40,7 +44,20 @@ export class HeaderComponent implements OnInit {
   }
 
   get username(): string | null {
-    const credentials = this.authenticationService.credentials;
-    return credentials ? credentials.user.email : null;
+    if (this.credentials) {
+      return `${this.credentials.user.personal_information.first_name} ${
+        this.credentials.user.personal_information.last_name
+      }`;
+    }
+
+    return null;
+  }
+
+  get profilePicture(): string | null {
+    if (this.credentials && this.credentials.user && this.credentials.user.personal_information.profile_picture) {
+      return this.credentials.user.personal_information.profile_picture;
+    }
+
+    return '../../../assets/img/profile-img.jpg'; // TODO: Change this default picture
   }
 }

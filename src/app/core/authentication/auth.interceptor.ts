@@ -9,9 +9,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const credentials = this.jwtService.credentials;
-    console.log('credentials');
-    console.log(credentials);
-    if (credentials.user.token) {
+
+    if (credentials && credentials.user) {
       request = request.clone({
         headers: request.headers.append('Authorization', `JWT ${credentials.user.token}`)
       });
