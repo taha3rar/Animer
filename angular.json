@@ -87,8 +87,8 @@
             "karmaConfig": "src/karma.conf.js",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [],
-            "styles": ["src/main.scss"],
+            "scripts": ["./node_modules/jquery/dist/jquery.min.js", "node_modules/bootstrap/dist/js/bootstrap.js"],
+            "styles": ["src/main.scss", "node_modules/bootstrap/dist/css/bootstrap.min.css", "src/assets/styles.scss"],
             "assets": ["src/favicon.ico", "src/apple-touch-icon.png", "src/robots.txt", "src/assets"]
           }
         },

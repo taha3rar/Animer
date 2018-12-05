@@ -1,0 +1,46 @@
+.doc-card {
+  display: flex;
+  width: 20.5rem;
+  flex-direction: column;
+  border-radius: 3px;
+  border: 1px solid $light-gray-2;
+  padding: 0.8rem;
+
+  div:nth-child(2),
+  div:nth-child(3) {
+    align-self: center;
+    text-align: center;
+  }
+
+  span {
+    color: $light-gray-2;
+  }
+
+  .icon:hover {
+    color: $red-color;
+    cursor: pointer;
+  }
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  border-radius: 3px;
+  border: 1px solid $light-gray-2;
+  padding: 0.8rem;
+
+  div:nth-child(2) {
+    align-self: center;
+    text-align: center;
+  }
+}
+
+.img-shape {
+  width: 6rem;
+  height: 6rem;
+  -webkit-shape-outsite: circle(50% at 50% 50%);
+  shape-outside: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
+  box-shadow: 0px 3px 3rem rgba(black, 0.2);
+}

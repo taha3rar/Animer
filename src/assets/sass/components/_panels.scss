@@ -1,0 +1,75 @@
+.helper-panel {
+  margin-top: 1rem;
+  margin-bottom: 3.5rem;
+  min-height: 3rem;
+  background-color: white;
+  padding: 1rem;
+  color: $light-gray;
+  border-radius: 2px;
+  border: 1px solid #ebebeb;
+
+  p {
+    padding-left: 1.3rem;
+    margin: 0;
+    display: inline;
+    vertical-align: middle;
+    line-height: 2.6rem;
+  }
+}
+
+.panel-tab {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  padding: 0.5rem 0.5rem;
+}
+
+.col-md-12 {
+  padding: 0px !important;
+}
+
+.quote-right-side {
+  border-left: 1px dashed $light-gray;
+  padding-left: 2rem;
+}
+
+.invoice-right-side {
+  border: 1px dashed $light-gray;
+  margin: 3.1rem 0px;
+  padding: 2rem 2.7rem;
+}
+
+.pricing {
+  display: flex;
+  justify-content: space-between;
+
+  div:last-child {
+    text-align: center;
+    border-left: 1px solid $light-gray;
+    align-self: center;
+    padding-left: 2rem;
+  }
+
+  div:first-child {
+    margin-right: -2rem;
+  }
+}
+
+.docs-section {
+  display: flex;
+
+  .doc-card:not(:last-child) {
+    margin-right: 3rem;
+  }
+}
+
+.po-right-side {
+  padding: 1.5rem 1.5rem;
+  background-color: $bg-color;
+}
+
+.subtotal-price {
+  border: 1px dashed black;
+  padding: 2rem;
+  text-align: center;
+  margin: 2.5rem 0px;
+}

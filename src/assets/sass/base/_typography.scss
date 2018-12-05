@@ -1,0 +1,60 @@
+.main-title {
+  font-size: 1.7rem;
+  color: $main-title-color;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+
+  a {
+    display: inline-block;
+    vertical-align: middle;
+    color: black;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.heading-2 {
+  font-size: 1.4rem;
+  color: $dark-gray;
+  font-weight: 600;
+  margin: 5px 0px;
+}
+
+.heading-3 {
+  color: $light-gray;
+  font-size: 1.3rem;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.heading-4-blue {
+  font-size: 1.4rem;
+  color: $primary-color;
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.modal-title {
+  font-size: 1.7rem;
+  color: $dark-gray;
+  margin: 0;
+  font-weight: 600;
+}
+
+.normal-text-bold {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  color: $main-title-color;
+}
+
+.heading-big {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: $dark-gray;
+}

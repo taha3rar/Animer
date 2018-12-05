@@ -6,12 +6,31 @@
 // Theme variables, must be included before the libraries to allow overriding defaults
 @import "theme/theme-variables";
 
-// 3rd party libraries
+// // 3rd party libraries
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
 
-// Theme customization
+// // Theme customization
 @import "theme/theme";
+/* You can add global styles to this file, and also import other style files */
+@import "assets/sass/abstracts/mixins";
+@import "assets/sass/abstracts/variables";
+
+@import "assets/sass/base/animations";
+@import "assets/sass/base/typography";
+@import "assets/sass/base/utilities";
+@import "assets/sass/base/base";
+
+@import "assets/sass/components/buttons";
+@import "assets/sass/components/cards";
+@import "assets/sass/components/forms";
+@import "assets/sass/components/panels";
+@import "assets/sass/components/tables";
+@import "assets/sass/components/modals";
+
+@import "assets/sass/layout/footer";
+@import "assets/sass/layout/navbars";
+@import "assets/sass/layout/main-panel";

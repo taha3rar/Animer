@@ -1,14 +1,60 @@
-<p class="left">
-  menu works!
-</p>
 
-<div>
+<!-- <div>
   <ul>
-    <li routerLinkActive="active" *ngFor="let menuitem of menuItems">
+    <li routerLinkActive="active" *ngFor="let menuitem of menuItems"> -->
       <!--If is a single link-->
-      <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
+      <!-- <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
         <p>{{menuitem.title}}</p>
       </a>
     </li>
   </ul>
-</div>
+</div> -->
+
+<div class="sidebar-wrapper">
+    <div class="sidebar">
+      <ul class="nav">
+        <li  *ngFor="let menuitem of menuItems"  routerLinkActive="active"  class="nav-item">
+          <a [routerLink]="[menuitem.path]">
+            <i class="material-icons ">{{menuitem.icontype}}</i>
+            <p>{{menuitem.title}}</p>
+          </a>
+        </li>
+        <!-- <li routerLinkActive="active" class="nav-item">
+          <a [routerLink]="['/products']">
+            <i class="material-icons">spa</i>
+            <p>PRODUCTS</p>
+          </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a [routerLink]="['/transactions']">
+            <i class="material-icons">compare_arrows</i>
+            <p>TRANSACTIONS</p>
+          </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a [routerLink]="['/orders']">
+            <i class="material-icons">all_inclusive</i>
+            <p>ORDERS</p>
+          </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a [routerLink]="['/invoices']">
+            <i class="material-icons">receipt</i>
+            <p>INVOICES</p>
+          </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a [routerLink]="['/clients']">
+            <i class="material-icons">people</i>
+            <p>CLIENTS</p>
+          </a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a [routerLink]="['/ecosystems']">
+            <i class="material-icons">group_work</i>
+            <p>ECOSYSTEMS</p>
+          </a>
+        </li> -->
+      </ul>
+    </div>
+  </div>
