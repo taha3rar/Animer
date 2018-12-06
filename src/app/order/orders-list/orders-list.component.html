@@ -1,96 +1,58 @@
-<h1 class="main-title">Orders</h1>
+<h1 translate class="main-title">Orders</h1>
 
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
-  <p>
-    Orders allow you to place new orders from your clients/ ecosystems/ Avenews-gt. You can also see all your orders and make actions on them, easily!
+  <p translate>
+    Orders list legend
   </p>
 </div>
 
-<h1 class="main-title">Orders List</h1>
+<h1 translate class="main-title">Orders List</h1>
 
 <button class="btn-primary-transp pull-right">
   <i class="material-icons">arrow_upward</i>
-  <span>Export All Orders</span>
+  <span translate>Export All Orders</span>
 </button>
 
 <button class="btn-primary-filled pull-right">
-  <i class="material-icons">add</i> <span>Place Order</span>
+  <i class="material-icons">add</i> <span translate>Place Order</span>
 </button>
 
 <table class="table main-table">
   <thead>
     <tr>
-      <th class="text-center">ID</th>
+      <th translate class="text-center">ID</th>
       <th translate>Date</th>
-      <th>Company</th>
-      <th>Contact</th>
-      <th>Packages</th>
-      <th>Price</th>
-      <th>Status</th>
-      <th class="text-right">Actions</th>
+      <th translate>Company</th>
+      <th translate>Contact</th>
+      <th translate>Packages</th>
+      <th translate>Price</th>
+      <th translate>Status</th>
+      <th translate class="text-right">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="text-center">212</td>
-      <td>21/08/2018</td>
-      <td>Avenews-GT</td>
-      <td>Ishai Ben Or</td>
-      <td>17/868 kg</td>
-      <td>400 USD</td>
-      <td>Invoice Received</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
+    <tr *ngFor="let order of orders">
+      <td class="text-center">{{ order.numericId }}</td>
+      <td>{{ order.date_created | date: "dd/MM/yyyy" }}</td>
+      <td>
+        <span *ngIf="userId == order.seller._id">{{ order.buyer.company_name }}</span>
+        <span *ngIf="userId == order.buyer._id">{{ order.seller.company_name }}</span>
       </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>21/08/2018</td>
-      <td>Avenews-GT</td>
-      <td>Ishai Ben Or</td>
-      <td>17/868 kg</td>
-      <td>400 USD</td>
-      <td>Invoice Received</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
+      <td>
+        <span *ngIf="userId == order.seller._id">{{ order.buyer.first_name }} {{ order.buyer.last_name }}</span>
+        <span *ngIf="userId == order.buyer._id">{{ order.seller.first_name }} {{ order.seller.last_name }}</span>
       </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>21/08/2018</td>
-      <td>Avenews-GT</td>
-      <td>Ishai Ben Or</td>
-      <td>17/868 kg</td>
-      <td>400 USD</td>
-      <td>Invoice Received</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
+      <td>
+        <span *ngIf="order.total_weight">{{ order.total_weight | roundUp }} {{ order.document_weight_unit }}
+        <span *ngIf="hasProcessedProduct(order)" style="font-size :9px;color:gray">Excluding processed products</span></span>
+        <span *ngIf="!order.total_weight">N/A</span>
       </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>21/08/2018</td>
-      <td>Avenews-GT</td>
-      <td>Ishai Ben Or</td>
-      <td>17/868 kg</td>
-      <td>400 USD</td>
-      <td>Invoice Received</td>
+      <td>
+        <span *ngIf="order.total_due">{{ order.total_due | number: "1.2-2" }} {{ order.currency }}</span>
+        <span *ngIf="!order.total_due">N/A</span>
+      </td>
+      <td>{{ order.status }}</td>
       <td class="text-right">
         <button class="btn round-button-primary">
           <i class="material-icons">remove_red_eye</i>
