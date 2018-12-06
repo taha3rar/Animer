@@ -37,9 +37,16 @@ export class AuthenticationService {
    * @return True if the user was logged out successfully.
    */
   logout(): Observable<boolean> {
-    // Customize credentials invalidation here
-    this.jwtService.setCredentials();
-    return of(true);
+    const data = {
+      _id: this.jwtService.currentUserId
+    };
+
+    return this.apiService.post('/user/logout', data).pipe(
+      map(() => {
+        this.jwtService.setCredentials();
+        return true;
+      })
+    );
   }
 
   /**
