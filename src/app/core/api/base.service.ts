@@ -9,6 +9,10 @@ export abstract class BaseService {
     return this.apiService.get(`${this.path}/${id}`).pipe(map(data => data));
   }
 
+  getByUser(userId: string): Observable<any> {
+    return this.apiService.get(`${this.path}/user/${userId}`).pipe(map(data => data));
+  }
+
   getAll(): Observable<any[]> {
     return this.apiService.get(this.path).pipe(map(data => data));
   }

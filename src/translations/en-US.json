@@ -13,5 +13,6 @@
   "Username or password incorrect.": "Username or password incorrect.",
   "Remember me": "Remember me",
   "Version": "Version",
-  "Date": "Date"
+  "Date": "Date",
+  "Transactions help legend": "Transactions allow you to place new quote requests to your clients/ ecosystems/ Avenews-gt. You can also see all your transactions and make actions on them, easily!"
 }

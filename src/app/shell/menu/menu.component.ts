@@ -19,7 +19,7 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'dashboard'
   },
   {
-    path: '/transactions',
+    path: '/transaction/list',
     title: 'Transactions',
     type: 'link',
     icontype: 'compare_arrows',

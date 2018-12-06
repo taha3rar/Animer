@@ -1,105 +1,43 @@
-<h1 class="main-title">Transactions</h1>
+<h1 translate class="main-title">Transactions</h1>
 
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
-  <p>
-    Transactions allow you to place new quote requests to your clients/
-    ecosystems/ Avenews-gt. You can also see all your transactions and make
-    actions on them, easily!
+  <p translate>
+    Transactions help legend
   </p>
 </div>
 
-<h1 class="main-title">Transactions List</h1>
+<h1 translate class="main-title">Transactions List</h1>
 
 <button class="btn-primary-transp pull-right">
   <i class="material-icons">arrow_upward</i>
-  <span>Export All Transactions</span>
+  <span translate>Export All Transactions</span>
 </button>
 
 <button class="btn-primary-filled pull-right">
-  <i class="material-icons">add</i> <span>New Transaction</span>
+  <i class="material-icons">add</i> <span translate>New Transaction</span>
 </button>
 
 <table class="table main-table">
   <thead>
     <tr>
-      <th class="text-center">ID</th>
-      <th>Product</th>
-      <th>Transaction Type</th>
-      <th>Total Weight</th>
-      <th>Status</th>
-      <th class="text-right">Actions</th>
+      <th class="text-center" translate>ID</th>
+      <th translate>Product</th>
+      <th translate>Transaction Type</th>
+      <th translate>Total Weight</th>
+      <th translate>Status</th>
+      <th translate class="text-right">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Coffee Beans</td>
-      <td>International</td>
-      <td>10/kg</td>
-      <td>Proforma Invoice Recieved</td>
+    <tr *ngFor="let transaction of transactions">
+      <td class="text-center">{{ transaction.numericId }}</td>
+      <td>{{ transaction.produce }}</td>
+      <td>{{ transaction.transaction_type }}</td>
+      <td>{{ transaction.total_weight }} / {{ transaction.weight_unit }}</td>
+      <td>{{ transaction.status }}</td>
       <td class="text-right">
         <button class="btn round-button-primary" [routerLink]="[212]">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Coffee Beans</td>
-      <td>International</td>
-      <td>10/kg</td>
-      <td>Proforma Invoice Recieved</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Coffee Beans</td>
-      <td>International</td>
-      <td>10/kg</td>
-      <td>Proforma Invoice Recieved</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Coffee Beans</td>
-      <td>International</td>
-      <td>10/kg</td>
-      <td>Proforma Invoice Recieved</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Coffee Beans</td>
-      <td>International</td>
-      <td>10/kg</td>
-      <td>Proforma Invoice Recieved</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
           <i class="material-icons">remove_red_eye</i>
         </button>
         <button class="btn round-button-red">
@@ -113,25 +51,25 @@
 <div class="modal-box">
   <div class="modal-box-content">
     <div class="modal-box-heading">
-      <h2 class="modal-title">Create Quote Request</h2>
+      <h2 translate class="modal-title">Create Quote Request</h2>
     </div>
     <div class="modal-box-left">
       <ul>
         <li class="step step-active">
           <span class="step-number-active">1</span>
-          <span>Add product details</span>
+          <span translate>Add product details</span>
         </li>
         <li class="step">
           <div class="step-number">2</div>
-          <span>Add packing details</span>
+          <span translate>Add packing details</span>
         </li>
         <li class="step">
           <div class="step-number">3</div>
-          <span>Add shipping details</span>
+          <span translate>Add shipping details</span>
         </li>
         <li class="step">
           <div class="step-number">4</div>
-          Additional details
+          <span translate>Additional details</span>
         </li>
       </ul>
     </div>
@@ -141,7 +79,7 @@
           <div class="modal-box-right-body">
           <div class="col-lg-6 col-md-12">
             <div class="form-group">
-              <label>Produce Name</label>
+              <label translate>Produce Name</label>
               <input
                 type="text"
                 class="form-control"
@@ -151,13 +89,13 @@
           </div>
           <div class="col-lg-6 col-md-12">
             <div class="form-group">
-              <label>Variety</label>
+              <label translate>Variety</label>
               <input type="text" class="form-control" placeholder="Ex. Kona" />
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group">
-              <label>Specifications</label>
+              <label translate>Specifications</label>
               <textarea
                 class="form-control"
                 style="resize: none;"
@@ -165,7 +103,7 @@
               ></textarea>
             </div>
           </div>
-          <button class="btn-next pull-right" data-step="step-2">Next Step &rarr;</button>
+          <button translate class="btn-next pull-right" data-step="step-2">Next Step &rarr;</button>
         </div>
       </div>
       </form>
