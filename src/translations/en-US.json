@@ -1,18 +1,5 @@
 {
-  "APP_NAME": "agt-platform",
-  "About": "About",
-  "Hello world !": "Hello world !",
-  "Home": "Home",
-  "Logged in as": "Logged in as",
-  "Login": "Login",
-  "Logout": "Logout",
-  "Password": "Password",
-  "Password is required": "Password is required",
-  "Username": "Username",
-  "Username is required": "Username is required",
-  "Username or password incorrect.": "Username or password incorrect.",
-  "Remember me": "Remember me",
-  "Version": "Version",
   "Date": "Date",
-  "Transactions help legend": "Transactions allow you to place new quote requests to your clients/ ecosystems/ Avenews-gt. You can also see all your transactions and make actions on them, easily!"
+  "Transaction list help legend": "Transactions allow you to place new quote requests to your clients/ ecosystems/ Avenews-gt. You can also see all your transactions and make actions on them, easily!",
+  "Product list help legend": "Here you can find all your products that you have uploaded, and create new ones!"
 }

@@ -1,102 +1,49 @@
-<h1 class="main-title">Products</h1>
+<h1 translate class="main-title">Products</h1>
 
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
-  <p>
-    Here you can find all your products that you have uploaded, and create new
-    ones!/p>
+  <p translate>
+    Product list help legend
   </p>
 </div>
 
-<h1 class="main-title">Products List</h1>
+<h1 translate class="main-title">Products List</h1>
 
 <button class="btn-primary-filled pull-right">
-  <i class="material-icons">add</i> <span>New Product</span>
+  <i class="material-icons">add</i> <span translate>New Product</span>
 </button>
 
 <table class="table main-table">
   <thead>
     <tr>
-      <th class="text-center">ID</th>
-      <th>Product</th>
-      <th>SKU</th>
-      <th>Package Type</th>
-      <th>Inventory</th>
-      <th class="text-right">Actions</th>
+      <th translate class="text-center">ID</th>
+      <th translate>Product</th>
+      <th translate>SKU</th>
+      <th translate>Package Type</th>
+      <th translate>Inventory</th>
+      <th translate class="text-right">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Chia Seeds</td>
-      <td>22255</td>
-      <td>Bag</td>
-      <td>5 Packages</td>
+    <tr *ngFor="let product of products">
+      <td class="text-center">{{ product.numericId }}</td>
+      <td *ngIf="product.product_type!='processed'">{{ product.produce }} / {{ product.variety }}</td>
+      <td *ngIf="product.product_type=='processed'">{{ product.produce }}</td>
+      <td>{{ product.sku }}</td>
+      <td>{{ product.type_of_package }}</td>
+      <td *ngIf="product.product_type!='processed'">{{ product.total_weight }} {{ product.weight_unit }}</td>
+      <td *ngIf="product.product_type=='processed'">{{ product.quantity }} Packages</td>
       <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">edit</i>
-        </button>
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Chia Seeds</td>
-      <td>22255</td>
-      <td>Bag</td>
-      <td>5 Packages</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">edit</i>
-        </button>
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Chia Seeds</td>
-      <td>22255</td>
-      <td>Bag</td>
-      <td>5 Packages</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">edit</i>
-        </button>
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Chia Seeds</td>
-      <td>22255</td>
-      <td>Bag</td>
-      <td>5 Packages</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">edit</i>
-        </button>
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
+          <button class="btn round-button-primary">
+            <i class="material-icons">edit</i>
+          </button>
+          <button class="btn round-button-primary">
+            <i class="material-icons">remove_red_eye</i>
+          </button>
+          <button class="btn round-button-red">
+            <i class="material-icons">delete</i>
+          </button>
+        </td>
     </tr>
   </tbody>
 </table>

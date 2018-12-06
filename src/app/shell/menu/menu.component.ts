@@ -26,19 +26,19 @@ export const ROUTES: RouteInfo[] = [
     neededPermission: 'list-transactions'
   },
   {
-    path: '/orders',
+    path: '/order/list',
     title: 'Orders',
     type: 'link',
     icontype: 'all_inclusive'
   },
   {
-    path: '/invoices',
+    path: '/invoice/list',
     title: 'Invoices',
     type: 'link',
     icontype: 'receipt'
   },
   {
-    path: '/products',
+    path: '/product/list',
     title: 'Products',
     type: 'link',
     icontype: 'spa',
@@ -52,7 +52,7 @@ export const ROUTES: RouteInfo[] = [
     neededPermission: 'list-clients'
   },
   {
-    path: '/ecosystems',
+    path: '/ecosystem/list',
     title: 'Ecosystems',
     type: 'link',
     icontype: 'group_work',

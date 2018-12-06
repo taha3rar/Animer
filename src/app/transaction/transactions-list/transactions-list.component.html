@@ -3,7 +3,7 @@
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
   <p translate>
-    Transactions help legend
+    Transaction list help legend
   </p>
 </div>
 
@@ -34,7 +34,7 @@
       <td class="text-center">{{ transaction.numericId }}</td>
       <td>{{ transaction.produce }}</td>
       <td>{{ transaction.transaction_type }}</td>
-      <td>{{ transaction.total_weight }} / {{ transaction.weight_unit }}</td>
+      <td>{{ transaction.total_weight }} {{ transaction.weight_unit }}</td>
       <td>{{ transaction.status }}</td>
       <td class="text-right">
         <button class="btn round-button-primary" [routerLink]="[212]">
