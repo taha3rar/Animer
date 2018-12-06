@@ -6,7 +6,7 @@
     <ul class="navigation-right">
       <li>
         <div class="dropdown">
-          <i class="material-icons dropdown-toggle" data-toggle="dropdown" aria-expanded="true">notifications</i>
+          <i class="material-icons" data-toggle="dropdown" aria-expanded="true">notifications</i>
           <span class="notification">5</span>
           <ul class="dropdown-menu pull-right notifications">
             <li class="dropdown-item">
@@ -40,10 +40,9 @@
         <figure class="img-shape"><img src="{{ profilePicture }}" class="user-img" /></figure>
       </li>
       <li>
-        <div class="nav-item" ngbDropdown placement="bottom-right">
+        <div ngbDropdown placement="bottom-right">
           <a  id="user-dropdown" class="dropdown-toggle dropdown-button" data-toggle="dropdown" aria-expanded="true" ngbDropdownToggle>{{ username }}</a>
           <div ngbDropdownMenu aria-labelledby="user-dropdown">
-
             <button class="dropdown-item">
               <i class="material-icons pull-left">settings</i>
               <span>Settings</span>
@@ -53,16 +52,10 @@
               <span translate>Logout</span>
             </button>
         </div>
-          <!-- <div ngbDropdownMenu aria-labelledby="user-dropdown">
-            <button class="dropdown-item">
-              <i class="material-icons ">settings</i>
-              <p>Settings</p>
-            </button>
-            </div> -->
         </div>
       </li>
       <li>
-        <div class="nav-item" ngbDropdown placement="bottom-right">
+        <div ngbDropdown>
           <a id="language-dropdown" class="nav-link" ngbDropdownToggle>{{ currentLanguage }}</a>
           <div ngbDropdownMenu aria-labelledby="language-dropdown">
             <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">

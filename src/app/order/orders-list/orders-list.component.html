@@ -1,33 +1,62 @@
-<h1 class="main-title">Transactions</h1>
+<h1 class="main-title">Orders</h1>
 
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
-  <p>Here you can see all your invoices that have been sent to you!</p>
+  <p>
+    Orders allow you to place new orders from your clients/ ecosystems/ Avenews-gt. You can also see all your orders and make actions on them, easily!
+  </p>
 </div>
 
-<h1 class="main-title">Clients List</h1>
+<h1 class="main-title">Orders List</h1>
 
+<button class="btn-primary-transp pull-right">
+  <i class="material-icons">arrow_upward</i>
+  <span>Export All Orders</span>
+</button>
 
 <button class="btn-primary-filled pull-right">
-  <i class="material-icons">add</i> <span>Add Client</span>
+  <i class="material-icons">add</i> <span>Place Order</span>
 </button>
 
 <table class="table main-table">
   <thead>
     <tr>
       <th class="text-center">ID</th>
+      <th>Date</th>
       <th>Company</th>
-      <th>Contact Name</th>
-      <th>Type</th>
+      <th>Contact</th>
+      <th>Packages</th>
+      <th>Price</th>
+      <th>Status</th>
       <th class="text-right">Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="text-center">212</td>
-      <td>Stark Industries</td>
-      <td>Tony Stark</td>
-      <td>Seller</td>
+      <td>21/08/2018</td>
+      <td>Avenews-GT</td>
+      <td>Ishai Ben Or</td>
+      <td>17/868 kg</td>
+      <td>400 USD</td>
+      <td>Invoice Received</td>
+      <td class="text-right">
+        <button class="btn round-button-primary" [routerLink]="['22']">
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button class="btn round-button-red">
+          <i class="material-icons">delete</i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">212</td>
+      <td>21/08/2018</td>
+      <td>Avenews-GT</td>
+      <td>Ishai Ben Or</td>
+      <td>17/868 kg</td>
+      <td>400 USD</td>
+      <td>Invoice Received</td>
       <td class="text-right">
         <button class="btn round-button-primary">
           <i class="material-icons">remove_red_eye</i>
@@ -39,9 +68,12 @@
     </tr>
     <tr>
       <td class="text-center">212</td>
-      <td>Stark Industries</td>
-      <td>Tony Stark</td>
-      <td>Seller</td>
+      <td>21/08/2018</td>
+      <td>Avenews-GT</td>
+      <td>Ishai Ben Or</td>
+      <td>17/868 kg</td>
+      <td>400 USD</td>
+      <td>Invoice Received</td>
       <td class="text-right">
         <button class="btn round-button-primary">
           <i class="material-icons">remove_red_eye</i>
@@ -53,23 +85,12 @@
     </tr>
     <tr>
       <td class="text-center">212</td>
-      <td>Stark Industries</td>
-      <td>Tony Stark</td>
-      <td>Seller</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Stark Industries</td>
-      <td>Tony Stark</td>
-      <td>Seller</td>
+      <td>21/08/2018</td>
+      <td>Avenews-GT</td>
+      <td>Ishai Ben Or</td>
+      <td>17/868 kg</td>
+      <td>400 USD</td>
+      <td>Invoice Received</td>
       <td class="text-right">
         <button class="btn round-button-primary">
           <i class="material-icons">remove_red_eye</i>

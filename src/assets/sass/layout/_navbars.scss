@@ -61,18 +61,16 @@
       }
 
       .dropdown-item {
-        margin-right: 0px !important;
-        padding: 1.5rem 1.5rem;
+        margin-right: 0 !important;
+        padding: 1.5rem 1rem;
 
         i {
           margin-right: 1rem;
           font-size: 2rem;
-          vertical-align: middle;
         }
 
         span {
-          font-size: 1.3rem;
-          vertical-align: middle;
+          font-size: 1.4rem;
         }
 
         p {
@@ -88,7 +86,9 @@
 
     .dropdown-menu.notifications {
       width: 30rem;
-
+      .col-md-10 {
+        padding-left: 0px !important;
+      }
       p {
         color: #919191;
       }
@@ -122,12 +122,12 @@
       &-item {
         list-style: none;
         text-align: center;
-
+        text-transform: uppercase;
         a,
         a:active,
         a:visited {
-          padding-top: 1.8rem;
-          padding-bottom: 1.8rem;
+          padding-top: 1.7rem;
+          padding-bottom: 1.7rem;
           text-decoration: none;
           color: rgb(165, 178, 190);
         }
@@ -176,4 +176,5 @@
 .nav-tabs > li.active > a:hover,
 .nav-tabs {
   border: none;
+  font-size: 1.4rem;
 }
