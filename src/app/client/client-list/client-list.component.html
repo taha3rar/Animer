@@ -23,53 +23,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Stark Industries</td>
-      <td>Tony Stark</td>
-      <td>Seller</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Stark Industries</td>
-      <td>Tony Stark</td>
-      <td>Seller</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Stark Industries</td>
-      <td>Tony Stark</td>
-      <td>Seller</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Stark Industries</td>
-      <td>Tony Stark</td>
-      <td>Seller</td>
+    <tr *ngFor="let client of clients">
+      <td class="text-center">{{ client.numericId }}</td>
+      <td>{{ client.company_name }}</td>
+      <td>{{ client.first_name }} {{ client.last_name }}</td>
+      <td>{{ client.role }}</td>
       <td class="text-right">
         <button class="btn round-button-primary">
           <i class="material-icons">remove_red_eye</i>

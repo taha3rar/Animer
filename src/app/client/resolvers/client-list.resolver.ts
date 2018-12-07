@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { Resolve } from '@angular/router';
 import { UserService, AuthenticationService } from '@app/core';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { User } from '@app/core/models/user/user';
+import { Client } from '@app/core/models/user/client';
 
 @Injectable()
-export class ClientListResolver implements Resolve<User[]> {
+export class ClientListResolver implements Resolve<Client[]> {
   constructor(private authService: AuthenticationService, private userService: UserService) {}
 
-  resolve(): Observable<User[]> {
+  resolve(): Observable<Client[]> {
     const currentUserId = this.authService.currentUserId;
 
     return this.userService.getClientsFromUser(currentUserId).pipe(

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '@app/core/models/user/user';
+import { Client } from '@app/core/models/user/client';
 
 @Component({
   selector: 'app-client-list',
@@ -8,7 +8,7 @@ import { User } from '@app/core/models/user/user';
   styleUrls: ['./client-list.component.scss']
 })
 export class ClientListComponent implements OnInit {
-  clients: User[];
+  clients: Client[];
 
   constructor(private route: ActivatedRoute) {}
 
