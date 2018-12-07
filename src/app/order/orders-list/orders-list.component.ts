@@ -1,14 +1,7 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from '@app/core/models/order/order';
 import { AuthenticationService } from '@app/core';
-
-@Pipe({ name: 'roundUp' })
-export class RoundUpPipe implements PipeTransform {
-  transform(input: number) {
-    return Math.ceil(input);
-  }
-}
 
 @Component({
   selector: 'app-orders-list',
