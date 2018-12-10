@@ -36,7 +36,8 @@
 
 .invoice-right-side {
   border: 1px dashed $light-gray;
-  margin: 3.1rem 0px;
+  margin-top: 3.1rem;
+  margin-bottom: 1rem;
   padding: 2rem 2.7rem;
 }
 
@@ -74,4 +75,149 @@
   padding: 2rem;
   text-align: center;
   margin: 2.5rem 0px;
+}
+
+.stats-card {
+  border-left: 4px solid $primary-color;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.welcome-panel {
+  margin-top: 2rem;
+  min-height: 46.5rem;
+  [class^="col"] {
+    padding: 0px !important;
+  }
+
+  .panel-body {
+    padding: 0px;
+  }
+
+  .panel-header {
+    border-bottom: 1px solid $light-gray-2;
+    padding: 2rem;
+    font-size: 1.7rem;
+    color: $dark-gray-2;
+    font-weight: 600;
+
+    p {
+      margin-bottom: 0px !important;
+    }
+  }
+
+  .panel-left {
+    height: 100%;
+    .step {
+      list-style: none;
+      width: 100%;
+      height: 18%;
+      border-bottom: 1px solid $light-gray-2;
+      padding: 2.3rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $dark-gray-2;
+
+      &-number {
+        background-color: $light-gray-2;
+        @include stepNumber;
+
+        &-active {
+          background-color: $primary-color;
+          @include stepNumber;
+        }
+      }
+    }
+    .active {
+      color: $dark-gray;
+      border-bottom: 3px solid $primary-color;
+      background-color: $light-gray-3;
+    }
+  }
+
+  .label {
+    font-size: 1.6rem;
+    color: $dark-gray-2;
+    font-weight: 600;
+    padding: 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $dark-gray-2;
+    }
+  }
+}
+
+.vector-tutorial {
+  width: 23.5rem;
+  min-height: 17.3rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.panel-right {
+  padding: 3rem;
+  height: 38.3rem;
+  border-left: 1px solid $light-gray-2;
+}
+
+.panel-todo {
+  margin-top: 2rem;
+  min-height: 46.5rem;
+
+  .panel-header {
+    border-bottom: 1px solid $light-gray-2;
+    padding: 2rem;
+    font-size: 1.7rem;
+    color: $dark-gray-2;
+    font-weight: 600;
+
+    p {
+      margin-bottom: 0px !important;
+    }
+  }
+
+  .panel-body {
+    padding: 0px;
+  }
+
+  .todo-item {
+    list-style: none;
+  }
+}
+
+.todo-item {
+  border-left: 3px solid $primary-color;
+  padding: 1.5rem 0.5rem;
+  border-bottom: 1px solid $light-gray-2;
+  min-height: 8.5rem;
+  display: flex;
+
+  .todo-date {
+    border-right: 1px solid $light-gray-2;
+    margin: 0 auto;
+    text-align: center;
+    & :first-child {
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    & :nth-child(2) {
+      font-size: 1.4rem;
+      margin: 0;
+    }
+  }
+
+  .todo-details {
+    & :first-child {
+      margin: 0 !important;
+    }
+    & :nth-child(2) {
+      font-size: 1.4rem;
+      margin: 0 !important;
+    }
+  }
 }

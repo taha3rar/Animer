@@ -1,0 +1,40 @@
+<h1 class="main-title">
+  <a class="material-icons">keyboard_backspace</a> Transactions
+</h1>
+
+<div class="col-md-12">
+  <ul class="wizard">
+    <li class="completed">
+      <a data-toggle="tab" class="label" href="#quoteRequest"><span class="round-tab">1</span>Quote request sent</a>
+    </li>
+    <li class="completed active">
+      <a data-toggle="tab" class="label" href="#proformaInvoice"><span class="round-tab">2</span>Proforma invoice recieved</a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#purchaseOrder"><span class="round-tab">3</span>Generate purchase order</a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label"><span class="round-tab">4</span>Review and send </a>
+    </li>
+  </ul>
+</div>
+
+<div class="col-md-12">
+  <div class="tab-content">
+    <div class="tab-pane" id="quoteRequest">
+      <div class="panel panel-tab">
+        <div class="panel-body"><app-transaction-quote-request></app-transaction-quote-request></div>
+      </div>
+    </div>
+    <div class="tab-pane active" id="proformaInvoice">
+      <div class="panel panel-tab">
+        <div class="panel-body"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
+      </div>
+    </div>
+    <div class="tab-pane" id="purchaseOrder">
+      <div class="panel panel-tab">
+        <div class="panel-body"><app-transaction-po></app-transaction-po></div>
+      </div>
+    </div>
+  </div>
+</div>

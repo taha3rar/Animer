@@ -47,19 +47,6 @@
         vertical-align: middle;
       }
 
-      .img-shape {
-        width: 3rem;
-        height: 3rem;
-        -webkit-shape-outsite: circle(50% at 50% 50%);
-        shape-outside: circle(50% at 50% 50%);
-        clip-path: circle(50% at 50% 50%);
-      }
-
-      .user-img {
-        height: 100%;
-        transform: translateX(-1rem);
-      }
-
       .dropdown-item {
         margin-right: 0 !important;
         padding: 1.5rem 1rem;
@@ -122,6 +109,7 @@
       &-item {
         list-style: none;
         text-align: center;
+        position: relative;
         text-transform: uppercase;
         a,
         a:active,
@@ -145,8 +133,14 @@
           color: $primary-color;
         }
 
-        &.active {
-          border-left: 3.5px solid $primary-color;
+        &.active::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 3.5px;
+          background-color: $primary-color;
         }
       }
     }
@@ -177,4 +171,17 @@
 .nav-tabs {
   border: none;
   font-size: 1.4rem;
+}
+
+.img-shape {
+  width: 3rem;
+  height: 3rem;
+  -webkit-shape-outsite: circle(50% at 50% 50%);
+  shape-outside: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
+}
+
+.user-img {
+  height: 100%;
+  transform: translateX(-1rem);
 }

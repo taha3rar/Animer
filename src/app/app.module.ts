@@ -20,6 +20,7 @@ import { OrderModule } from './order/order.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ProductModule } from './product/product.module';
 import { EcosystemModule } from './ecosystem/ecosystem.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { EcosystemModule } from './ecosystem/ecosystem.module';
     OrderModule,
     InvoiceModule,
     ProductModule,
+    DashboardModule,
     EcosystemModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     AppRoutingModule // must be imported as the last module as it contains the fallback route

@@ -8,6 +8,7 @@ import { TransactionPoComponent } from './transaction-po/transaction-po.componen
 import { TransactionProformaInvoiceComponent } from './transaction-proforma-invoice/transaction-proforma-invoice.component';
 import { TransactionQuoteRequestComponent } from './transaction-quote-request/transaction-quote-request.component';
 import { TransactionListResolver } from './resolvers/transaction-list.resolver';
+import { TransactionComponent } from './transaction.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TransactionListResolver } from './resolvers/transaction-list.resolver';
     TransactionDocumentsComponent,
     TransactionPoComponent,
     TransactionProformaInvoiceComponent,
-    TransactionQuoteRequestComponent
+    TransactionQuoteRequestComponent,
+    TransactionComponent
   ],
   imports: [CommonModule, TransactionRoutingModule, TranslateModule],
   providers: [TransactionListResolver]

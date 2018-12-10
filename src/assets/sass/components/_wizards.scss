@@ -1,0 +1,82 @@
+.wizard {
+  list-style: none;
+  width: 100%;
+  z-index: 888;
+  margin-bottom: 3rem;
+  li:first-child:nth-last-child(4),
+  li:first-child:nth-last-child(4) ~ li {
+    width: 24%;
+    background-color: white;
+    position: relative;
+    display: inline-block;
+    height: 5rem;
+    box-shadow: 0px 0rem 0.3rem rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+  }
+
+  a {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+  }
+  li:not(:last-child) {
+    margin-right: 1.333%;
+  }
+
+  li.completed,
+  li.active {
+    position: relative;
+    color: black;
+
+    .round-tab {
+      width: 3rem;
+      height: 3rem;
+      line-height: 3.2rem;
+      display: inline-block;
+      border-radius: 3rem;
+      background: $primary-color;
+      color: white;
+      text-align: center;
+      font-size: 1.6rem;
+      margin-right: 1rem;
+    }
+
+    & > a {
+      color: $dark-gray;
+    }
+  }
+
+  .active::after {
+    content: "";
+    position: absolute;
+    background-color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 100%;
+    left: 16%;
+    transform: rotate(45deg);
+    margin-top: -1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .disabled > a {
+    color: $light-gray-2;
+  }
+}
+
+.disabled .round-tab {
+  width: 3rem;
+  height: 3rem;
+  line-height: 2.8rem;
+  display: inline-block;
+  border-radius: 3rem;
+  background: #fff;
+  border: 2px solid $light-gray-2;
+  color: $light-gray-2;
+  text-align: center;
+  margin-right: 1rem;
+  font-size: 1.6rem;
+}
