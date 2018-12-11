@@ -33,7 +33,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     CoreModule,
     SharedModule,
     ShellModule,
-    HomeModule,
+    DashboardModule,
     LoginModule,
     ClientModule,
     TransactionModule,
