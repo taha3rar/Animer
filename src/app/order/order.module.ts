@@ -1,3 +1,4 @@
+import { OrderComponent } from './order.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrdersListComponent } from './orders-list/orders-list.component';
@@ -14,7 +15,8 @@ import { SharedModule } from '@app/shared';
     OrdersListComponent,
     OrderDocumentsComponent, // TODO: Check if it should be moved to a shared folder
     OrderInvoiceComponent, // TODO: Check if it should be moved to a shared folder
-    OrderPoComponent
+    OrderPoComponent,
+    OrderComponent
   ],
   imports: [CommonModule, TranslateModule, OrderRoutingModule, SharedModule],
   providers: [OrderListResolver]

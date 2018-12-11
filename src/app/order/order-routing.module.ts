@@ -1,3 +1,4 @@
+import { OrderComponent } from './order.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -13,6 +14,10 @@ const routes: Routes = [
       component: OrdersListComponent,
       resolve: { orders: OrderListResolver },
       data: { title: extract('Orders') }
+    },
+    {
+      path: 'order/:id',
+      component: OrderComponent
     }
   ])
 ];
