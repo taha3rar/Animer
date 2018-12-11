@@ -25,22 +25,66 @@
 .contact-card {
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  width: 26rem;
+  margin-top: 2.5rem;
   border-radius: 3px;
   border: 1px solid $light-gray-2;
   padding: 0.8rem;
 
+  .delete {
+    color: $light-gray;
+  }
+
   div:nth-child(2) {
     align-self: center;
     text-align: center;
+    p:last-child {
+      margin-bottom: 2rem;
+      color: $light-gray;
+      font-size: 1.4rem;
+    }
+
+    figure {
+      margin: 0 auto;
+    }
+  }
+
+  div:nth-child(3) {
+    background-color: $light-gray-3;
+    margin: -0.8rem;
+    padding: 1rem 1rem;
+    border-top: 1px solid $light-gray-2;
+    color: $light-gray;
+    font-size: 1.45rem;
+
+    i {
+      font-size: 1.5rem;
+    }
+
+    p:last-child {
+      margin: 0;
+    }
   }
 }
 
-.img-shape {
-  width: 6rem;
-  height: 6rem;
+.round-shape-img {
+  width: 6.8rem;
+  height: 6.8rem;
   -webkit-shape-outsite: circle(50% at 50% 50%);
   shape-outside: circle(50% at 50% 50%);
   clip-path: circle(50% at 50% 50%);
-  box-shadow: 0px 3px 3rem rgba(black, 0.2);
+}
+
+.round-shape-img img {
+  height: 100%;
+  box-shadow: 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+  transform: translatex(-1.5rem);
+}
+
+.contacts-section {
+  display: flex;
+}
+
+.contact-card:not(:last-child) {
+  margin-right: 2rem;
 }

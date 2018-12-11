@@ -94,18 +94,6 @@
     padding: 0px;
   }
 
-  .panel-header {
-    border-bottom: 1px solid $light-gray-2;
-    padding: 2rem;
-    font-size: 1.7rem;
-    color: $dark-gray-2;
-    font-weight: 600;
-
-    p {
-      margin-bottom: 0px !important;
-    }
-  }
-
   .panel-left {
     height: 100%;
     .step {
@@ -220,4 +208,65 @@
       margin: 0 !important;
     }
   }
+}
+
+.user-details {
+  background-image: linear-gradient(#fff 60%, #f1f1f1);
+  display: flex;
+  flex-direction: column;
+  min-height: 67.2rem;
+
+  div:first-child {
+    margin-top: 2.5rem;
+    align-self: center;
+    text-align: center;
+    font-size: 1.6rem;
+    padding-bottom: 1.5em;
+    figure {
+      margin: 0 auto;
+    }
+  }
+
+  div:nth-child(2) {
+    border-top: 1px solid $light-gray-2;
+    border-left: 3px solid $primary-color;
+    margin: 0 -15px;
+    padding: 1.5rem;
+  }
+
+  div:nth-child(3) {
+    border-top: 1px solid $light-gray-2;
+    border-left: 3px solid $secondary-color;
+    margin: 0 -15px;
+    padding: 1.5rem;
+  }
+}
+
+.user-settings {
+  background-image: linear-gradient(#fff 60%, #f1f1f1);
+  min-height: 67.2rem;
+  .panel-body {
+    padding: 0px;
+  }
+}
+
+.panel-header {
+  border-bottom: 1px solid $light-gray-2;
+  padding: 2rem;
+  font-size: 1.7rem;
+  color: $dark-gray-2;
+  font-weight: 600;
+
+  p {
+    margin-bottom: 0px !important;
+  }
+}
+
+.contact-info-section {
+  padding: 2rem;
+}
+
+.company-info-section {
+  padding: 2rem;
+  border-left: 1px solid $light-gray-2;
 }

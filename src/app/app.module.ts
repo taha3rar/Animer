@@ -1,3 +1,4 @@
+import { ProfileModule } from './profile/profile.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -40,6 +41,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     InvoiceModule,
     ProductModule,
     DashboardModule,
+    ProfileModule,
     EcosystemModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     AppRoutingModule // must be imported as the last module as it contains the fallback route

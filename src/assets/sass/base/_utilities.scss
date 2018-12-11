@@ -26,3 +26,13 @@
 .clearfix {
   clear: both;
 }
+
+.icon-text {
+  display: flex;
+  align-items: center;
+
+  i {
+    margin-right: 0.8rem;
+    padding-bottom: 0.6rem;
+  }
+}

@@ -31,6 +31,13 @@
   margin-bottom: 5px !important;
 }
 
+.heading-4 {
+  color: $dark-gray-2;
+  font-size: 1.3rem;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
 .heading-4-blue {
   font-size: 1.4rem;
   color: $primary-color;
@@ -48,8 +55,7 @@
 .normal-text-bold {
   font-size: 1.4rem;
   font-weight: 600;
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
+  margin: 6px 0;
   color: $main-title-color;
 }
 
