@@ -10,7 +10,6 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
