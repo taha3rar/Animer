@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
 import { Shell } from '@app/shell/shell.service';
+import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
+import { DashboardCounterResolver } from './resolvers/dashboard-counter.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -12,7 +13,10 @@ const routes: Routes = [
     },
     {
       path: 'dashboard',
-      component: DashboardComponent
+      component: DashboardMainComponent,
+      resolve: {
+        counter: DashboardCounterResolver
+      }
     }
   ])
 ];
