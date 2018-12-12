@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationService } from '@app/core';
+import { AuthenticationService, OrderService } from '@app/core';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '@app/core/models/user/user';
-import { OrderService } from '@app/core/api/order.service';
 import { Resolve } from '@angular/router';
 
 @Injectable()

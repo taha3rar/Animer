@@ -16,6 +16,11 @@ import { AuthInterceptor } from './authentication/auth.interceptor';
 import { UserService } from './api/user.service';
 import { ApiService } from './api/api.service';
 import { JwtService } from './authentication/jwt.service';
+import { EcosystemService } from './api/ecosystem.service';
+import { TransactionService } from './api/transaction.service';
+import { OrderService } from './api/order.service';
+import { InvoiceService } from './api/invoice.service';
+import { ProductService } from './api/product.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
@@ -31,6 +36,11 @@ import { JwtService } from './authentication/jwt.service';
     JwtService,
     ApiService,
     UserService,
+    EcosystemService,
+    TransactionService,
+    OrderService,
+    InvoiceService,
+    ProductService,
     {
       provide: HttpClient,
       useClass: HttpService

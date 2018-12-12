@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationService } from '@app/core';
+import { AuthenticationService, OrderService, TransactionService } from '@app/core';
 import { Resolve } from '@angular/router';
-import { OrderService } from '@app/core/api/order.service';
 import { Counter } from '../models/counter';
-import { TransactionService } from '@app/core/api/transaction.service';
 import { Transaction } from '@app/core/models/transaction';
 import { Order } from '@app/core/models/order/order';
 

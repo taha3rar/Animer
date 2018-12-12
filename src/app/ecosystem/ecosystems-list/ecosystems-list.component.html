@@ -22,67 +22,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Eco A</td>
-      <td>Seller</td>
-      <td>9</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Eco A</td>
-      <td>Seller</td>
-      <td>9</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Eco A</td>
-      <td>Seller</td>
-      <td>9</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Eco A</td>
-      <td>Seller</td>
-      <td>9</td>
-      <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">212</td>
-      <td>Eco A</td>
-      <td>Seller</td>
-      <td>9</td>
+    <tr *ngFor="let ecosystem of ecosystems">
+      <td class="text-center">{{ecosystem.numericId}}</td>
+      <td>{{ ecosystem.name }}</td>
+      <td>{{ ecosystem.type }}</td>
+      <td>{{ ecosystem.participants.length }}</td>
       <td class="text-right">
         <button class="btn round-button-primary">
           <i class="material-icons">remove_red_eye</i>
