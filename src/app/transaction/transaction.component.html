@@ -1,39 +1,93 @@
-<h1 class="main-title">
-  <a class="material-icons">keyboard_backspace</a> Transactions
-</h1>
 
-<div class="col-md-12">
-  <ul class="wizard">
-    <li class="completed">
-      <a data-toggle="tab" class="label" href="#quoteRequest"><span class="round-tab">1</span>Quote request sent</a>
-    </li>
-    <li class="completed active">
-      <a data-toggle="tab" class="label" href="#proformaInvoice"><span class="round-tab">2</span>Proforma invoice recieved</a>
-    </li>
-    <li class="disabled">
-      <a data-toggle="tab" class="label" href="#purchaseOrder"><span class="round-tab">3</span>Generate purchase order</a>
-    </li>
-    <li class="disabled">
-      <a data-toggle="tab" class="label"><span class="round-tab">4</span>Review and send </a>
-    </li>
-  </ul>
-</div>
+<h1 class="main-title"><a class="material-icons">keyboard_backspace</a> Transactions</h1>
+<div class="transaction-wrapper">
+  <div class="stepper">
+    <ul class="nav nav-tabs">
+      <li class="completed">
+        <a data-toggle="tab" class="label" href="#quoteRequest"><span class="round-tab">1</span>Quote request sent</a>
+      </li>
+      <li class="completed active">
+        <a data-toggle="tab" class="label" href="#proformaInvoice"
+          ><span class="round-tab">2</span>Proforma invoice recieved</a
+        >
+      </li>
+      <li class="disabled">
+        <a data-toggle="tab" class="label" href="#purchaseOrder"
+          ><span class="round-tab">3</span>Generate purchase order</a
+        >
+      </li>
+      <li class="disabled">
+        <a data-toggle="tab" class="label" href="#review"><span class="round-tab">4</span>Review and send </a>
+      </li>
+    </ul>
 
-<div class="col-md-12">
-  <div class="tab-content">
-    <div class="tab-pane" id="quoteRequest">
-      <div class="panel panel-tab">
-        <div class="panel-body"><app-transaction-quote-request></app-transaction-quote-request></div>
+    <div class="tab-content">
+      <div class="tab-pane" id="quoteRequest">
+        <div class="panel panel-tab">
+          <div class="panel-body"><app-transaction-quote-request></app-transaction-quote-request></div>
+        </div>
+      </div>
+      <div class="tab-pane active" id="proformaInvoice">
+        <div class="panel panel-tab">
+          <div class="panel-body"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
+        </div>
+      </div>
+      <div class="tab-pane" id="purchaseOrder">
+        <div class="panel panel-tab">
+          <div class="panel-body"><app-transaction-po></app-transaction-po></div>
+        </div>
+      </div>
+      <div class="tab-pane" id="review">
+        <div class="panel panel-tab">
+          <div class="panel-body"><app-transaction-po [completedPO]="true"></app-transaction-po></div>
+        </div>
       </div>
     </div>
-    <div class="tab-pane active" id="proformaInvoice">
-      <div class="panel panel-tab">
-        <div class="panel-body"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
+  </div>
+
+  <div class="docs-chat">
+      <div class="docs" (click)="adjustDiv()">
+        <i class="material-icons">folder_open</i>
+        <p>Documents</p>
+      </div>
+
+      <div class="chat" (click)="adjustDiv()">
+        <i class="material-icons">chat_bubble_outline</i>
+        <p>Chat</p>
       </div>
     </div>
-    <div class="tab-pane" id="purchaseOrder">
-      <div class="panel panel-tab">
-        <div class="panel-body"><app-transaction-po></app-transaction-po></div>
+
+  <div class="docs-tab" id="docs-tab">
+    <div class="header">
+      <button class="round-button-primary pull-right"><i class="material-icons">add</i></button>
+    </div>
+    <div class="doc-body">
+      <div class="doc-card">
+        <div><span class="pull-left">#122</span> <span class="material-icons pull-right icon">delete</span></div>
+        <div>
+          <img src="../../../assets/img/pdf.png" />
+          <p class="normal-text-bold">Contract.pdf</p>
+          <p class="heading-3">Uploaded by Alex Benn</p>
+        </div>
+        <div><p class="heading-3">10/28/2018</p></div>
+      </div>
+      <div class="doc-card">
+        <div><span class="pull-left">#122</span> <span class="material-icons pull-right icon">delete</span></div>
+        <div>
+          <img src="../../../assets/img/pdf.png" />
+          <p class="normal-text-bold">Contract.pdf</p>
+          <p class="heading-3">Uploaded by Alex Benn</p>
+        </div>
+        <div><p class="heading-3">10/28/2018</p></div>
+      </div>
+      <div class="doc-card">
+        <div><span class="pull-left">#122</span> <span class="material-icons pull-right icon">delete</span></div>
+        <div>
+          <img src="../../../assets/img/pdf.png" />
+          <p class="normal-text-bold">Contract.pdf</p>
+          <p class="heading-3">Uploaded by Alex Benn</p>
+        </div>
+        <div><p class="heading-3">10/28/2018</p></div>
       </div>
     </div>
   </div>

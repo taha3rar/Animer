@@ -1,0 +1,158 @@
+@import "../../assets/sass/abstracts/variables";
+
+.docs-chat {
+  margin-right: -4.5rem;
+  margin-top: -7.4rem;
+  height: calc(100vh - 6rem);
+  display: block;
+  background-color: white;
+  width: 5%;
+  font-size: 1.25rem;
+  float: right;
+  color: $light-gray;
+  border-left: 1px solid $light-gray-2;
+
+  .docs {
+    height: 50%;
+    cursor: pointer;
+    border-bottom: 2px solid $light-gray-2;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    i {
+      margin: 0 auto;
+      font-size: 2.8rem;
+    }
+  }
+
+  .chat {
+    height: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    i {
+      margin: 0 auto;
+      font-size: 2.8rem;
+    }
+  }
+}
+
+.docs-tab {
+  margin-top: -7.4rem;
+  height: calc(100vh - 6rem);
+  background-color: $light-gray-3;
+  font-size: 1.25rem;
+  width: 0px;
+  float: right;
+  overflow: hidden;
+  color: $light-gray;
+  border-left: 1px solid $light-gray-2;
+  transition: width 0.2s ease-in-out;
+}
+
+.header {
+  width: 100%;
+  background-color: white;
+  height: 6%;
+  border-bottom: 1px solid $light-gray-2;
+}
+
+.doc-body {
+  margin-top: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .doc-card:not(:last-child) {
+    margin-bottom: 2.5rem;
+    border: 1px solid #e0e0e0;
+  }
+}
+
+.stepper {
+  position: absolute;
+  width: 95%;
+  transition: width 0.2s ease-in-out;
+}
+
+.transaction-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.nav.nav-tabs {
+  list-style: none;
+  width: 100%;
+  z-index: 888;
+  margin-bottom: 3rem;
+  li:first-child:nth-last-child(4),
+  li:first-child:nth-last-child(4) ~ li {
+    width: 24%;
+    background-color: white;
+    position: relative;
+    display: inline-block;
+    height: 5rem;
+    box-shadow: 0px 0rem 0.3rem rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+  }
+
+  a {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    border: none;
+  }
+  li:not(:last-child) {
+    margin-right: 1.333%;
+  }
+
+  li.completed,
+  li.active {
+    position: relative;
+    color: black;
+    border-left: 3px solid $primary-color;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+
+    .round-tab {
+      width: 3rem;
+      height: 3rem;
+      line-height: 3.2rem;
+      display: inline-block;
+      border-radius: 3rem;
+      background: $primary-color;
+      color: white;
+      text-align: center;
+      font-size: 1.6rem;
+      margin-right: 1rem;
+    }
+
+    & > a {
+      color: $dark-gray;
+    }
+  }
+
+  .active::after {
+    content: "";
+    position: absolute;
+    background-color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 100%;
+    left: 16%;
+    transform: rotate(45deg);
+    margin-top: -1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .disabled > a {
+    color: $light-gray-2;
+  }
+}

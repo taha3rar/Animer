@@ -23,8 +23,10 @@
   border: 3px solid $primary-color;
   color: $primary-color;
   font-weight: 600;
-  padding: 0.7rem 2rem;
-  height: 4rem;
+  padding: 0 1.7rem;
+  font-size: 1.35rem;
+  margin: 0.5rem;
+  height: 3.55rem;
   margin: 0.5rem;
 
   i {
@@ -44,11 +46,11 @@
   background: $primary-color;
   border-radius: 10rem;
   color: white;
-  font-size: 1.4rem;
   font-weight: 600;
+  font-size: 0.7vw;
   margin: 0.5rem;
-  height: 4rem;
-  padding: 0.7rem 2rem;
+  height: 3.55rem;
+  padding: 0 1.7rem;
   border: none;
   i {
     font-size: 2rem;
@@ -66,8 +68,8 @@
 .round-button-red {
   border: none;
   border-radius: 50%;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 3.3rem;
+  width: 3.3rem;
   position: relative;
   background-color: $red-color;
   i {
@@ -77,7 +79,7 @@
     transform: translate(-50%, -50%);
     color: white;
     display: block;
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 }
 
@@ -85,10 +87,11 @@
   border: none;
   border-radius: 50%;
   margin-right: 1.2rem;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 3.3rem;
+  width: 3.3rem;
   position: relative;
   background-color: #37c1ce;
+  margin: 1rem;
   i {
     position: absolute;
     top: 50%;
@@ -96,7 +99,7 @@
     transform: translate(-50%, -50%);
     color: white;
     display: block;
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 }
 

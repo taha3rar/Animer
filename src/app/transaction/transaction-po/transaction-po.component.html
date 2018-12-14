@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row margin-bottom">
   <div class="col-md-9">
     <p class="heading-2">BUYER</p>
     <p class="heading-4">Avenews-gt</p>
@@ -58,58 +58,87 @@
     </table>
 
     <div class="row">
-      <div class="col-md-8">
-          <p class="heading-2">Shipping Details</p>
-          <div class="row">
-            <div class="col-md-3">
-              <p>From</p>
-              <p>GPS Coordinates</p>
-              <p>To</p>
-              <p>GPS Coordinates</p>
-              <p>Incoterms</p>
-            </div>
-            <div class="col-md-9">
-              <p>Kenya, Nairobi</p>
-              <p>[-34.8215904] [150.60216809999997]</p>
-              <p>Israel, Tel-Aviv Jaffa, Ahad Ha'am 54</p>
-              <p>[-34.8215904] [150.60216809999997]</p>
-              <p>None</p>
-            </div>
+      <div class="col-lg-8">
+        <p class="heading-4-blue">Container Details</p>
+        <p class="heading-4">Type: ft.1</p>
+        <p class="heading-4 margin-bottom">Quantity: 1</p>
+
+        <p class="heading-2 margin-top">Shipping Details</p>
+        <div class="row">
+          <div class="col-md-3">
+            <p>From</p>
+            <p>GPS Coordinates</p>
+            <p>To</p>
+            <p>GPS Coordinates</p>
+            <p>Incoterms</p>
           </div>
+          <div class="col-md-9">
+            <p>Kenya, Nairobi</p>
+            <p>[-34.8215904] [150.60216809999997]</p>
+            <p>Israel, Tel-Aviv Jaffa, Ahad Ha'am 54</p>
+            <p>[-34.8215904] [150.60216809999997]</p>
+            <p>None</p>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
-          <p class="heading-4-blue">Container Details</p>
-          <p class="heading-4">Type: ft.1</p>
-          <p class="heading-4">Quantity: 1</p>
+        <div class="invoice-right-side">
+          <p class="heading-big">PRICING</p>
+          <div class="pricing">
+            <div>
+              <p class="heading-2 ">Price per kg</p>
+              <p class="heading-2">Currency</p>
+              <p class="heading-2">Total weight</p>
+            </div>
+            <div>
+              <p class="heading-4-blue">10</p>
+              <p class="heading-4-blue">USD</p>
+              <p class="heading-4-blue">4353</p>
+            </div>
+            <div>
+              <p class="heading-2">TOTAL</p>
+              <p class="heading-4-blue">5000 USD</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-3">
-    <div class="invoice-right-side">
-      <p class="heading-big">PRICING</p>
-      <div class="pricing">
-        <div>
-          <p class="heading-2 ">Price per kg</p>
-          <p class="heading-2">Currency</p>
-          <p class="heading-2">Total weight</p>
-        </div>
-        <div>
-          <p class="heading-4-blue">10</p>
-          <p class="heading-4-blue">USD</p>
-          <p class="heading-4-blue">4353</p>
-        </div>
-        <div>
-          <p class="heading-2">TOTAL</p>
-          <p class="heading-4-blue">5000 USD</p>
-        </div>
+  <div *ngIf="completedPO == false" class="col-md-3">
+    <div class="form-group">
+      <label for="payment-terms" class="heading-2">Payment Terms</label>
+      <textarea class="form-control" id="payment-terms" rows="2"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="po-terms" class="heading-2">Purchase Order Terms & Conditions</label>
+      <textarea class="form-control" id="po-terms" rows="2"></textarea>
+    </div>
+    <p class="heading-2">Purchase Order is Valid by</p>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="mm/dd/yyyy"
+        aria-describedby="basic-addon2"
+      />
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2"><i class="glyphicon glyphicon-calendar"></i></span>
       </div>
     </div>
+    <div class="col-md-6 pull-right margin-bottom">
+      <button class="btn-block btn-primary-filled next-step" (click)="completed()">Next &rarr;</button>
+    </div>
+  </div>
+  <div class="col-md-3" *ngIf="completedPO">
     <p class="heading-2">Payment Terms</p>
-    <p>Lorem ipsum dolor sit amet</p>
+    <p>60 days</p>
     <p class="heading-2">Purchase Order Terms & Conditions</p>
-    <p>Lorem ipsum dolor sit amet</p>
+    <p>lurem ipsom</p>
     <p class="heading-2">Purchase Order is Valid by</p>
-    <p>10/11/2018s</p>
+    <p>22/04/2019</p>
+    <div class="col-md-6 pull-right margin-bottom">
+      <button class="btn-block btn-primary-filled next-step">Send</button>
+    </div>
   </div>
 </div>
 

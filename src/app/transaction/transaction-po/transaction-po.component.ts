@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-transaction-po',
@@ -6,7 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transaction-po.component.scss']
 })
 export class TransactionPoComponent implements OnInit {
+  @Input()
+  completedPO = false;
+
   constructor() {}
 
   ngOnInit() {}
+
+  completed() {
+    this.completedPO = true;
+  }
 }

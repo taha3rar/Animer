@@ -23,6 +23,10 @@
   float: right;
 }
 
+.padding-none {
+  padding: 0;
+}
+
 .clearfix {
   clear: both;
 }
@@ -35,4 +39,12 @@
     margin-right: 0.8rem;
     padding-bottom: 0.6rem;
   }
+}
+
+.zero-padding-right {
+  padding-right: 0px;
+}
+
+.zero-padding-left {
+  padding-left: 0px;
 }
