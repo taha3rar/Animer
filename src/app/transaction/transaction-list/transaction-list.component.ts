@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Transaction } from '@app/core/models/transaction';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-transactions-list',
-  templateUrl: './transactions-list.component.html',
-  styleUrls: ['./transactions-list.component.scss']
+  selector: 'app-transaction-list',
+  templateUrl: './transaction-list.component.html',
+  styleUrls: ['./transaction-list.component.scss']
 })
-export class TransactionsListComponent implements OnInit {
+export class TransactionListComponent implements OnInit {
   transactions: Transaction[];
 
   constructor(private route: ActivatedRoute) {}

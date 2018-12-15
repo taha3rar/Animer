@@ -3,15 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
-import { TransactionsListComponent } from '@app/transaction/transactions-list/transactions-list.component';
 import { TransactionListResolver } from './resolvers/transaction-list.resolver';
-import { TransactionComponent } from './transaction.component';
+import { TransactionListComponent } from './transaction-list/transaction-list.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'transaction/list',
-      component: TransactionsListComponent,
+      component: TransactionListComponent,
       resolve: { transactions: TransactionListResolver },
       data: { title: extract('Transactions') }
     },
