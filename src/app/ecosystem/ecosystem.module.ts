@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.component';
 import { EcosystemRoutingModule } from './ecosystem-routing.module';
-import { EcosystemComponent } from './ecosystem.component';
+import { EcosystemComponent } from './ecosystem/ecosystem.component';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
 
 @NgModule({

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.component';
-import { EcosystemComponent } from './ecosystem.component';
+import { EcosystemComponent } from './ecosystem/ecosystem.component';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
 
 const routes: Routes = [

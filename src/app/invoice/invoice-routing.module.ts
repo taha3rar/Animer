@@ -5,7 +5,7 @@ import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
-import { InvoiceComponent } from './invoice.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 const routes: Routes = [
   Shell.childRoutes([

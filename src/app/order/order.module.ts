@@ -1,4 +1,4 @@
-import { OrderComponent } from './order.component';
+import { OrderComponent } from './order/order.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrdersListComponent } from './orders-list/orders-list.component';

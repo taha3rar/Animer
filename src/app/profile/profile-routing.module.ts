@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent } from './profile/profile.component';
 import { extract } from '@app/core';
 
 const routes: Routes = [

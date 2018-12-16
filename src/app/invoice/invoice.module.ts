@@ -4,7 +4,7 @@ import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { InvoiceRoutingModule } from './invoice-routing.module';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
-import { InvoiceComponent } from './invoice.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 @NgModule({
   declarations: [InvoicesListComponent, InvoiceComponent],
