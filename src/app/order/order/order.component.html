@@ -1,0 +1,60 @@
+<h1 class="main-title">
+  <a class="material-icons">keyboard_backspace</a> Orders
+</h1>
+
+<div class="col-md-12">
+  <div class="panel">
+    <div class="panel-body">
+      <div class="col-md-3">
+        <p class="heading-3">ORDER NUMBER</p>
+        <p class="normal-text-bold">212</p>
+      </div>
+      <div class="col-md-3">
+        <p class="heading-3">DATE OF SUBMISSION</p>
+        <p class="normal-text-bold">10/21/2018</p>
+      </div>
+      <div class="col-md-3">
+        <p class="heading-3">SHIPPING TO</p>
+        <p class="normal-text-bold">Ishai Ben Or</p>
+        <p class="normal-text-bold">Haglili st. number 10, Tel Aviv, Israel</p>
+        <p class="normal-text-bold">Enterance B. Mailbox 7</p>
+      </div>
+      <div class="col-md-3">
+        <p class="heading-3">DELIVERY</p>
+        <p class="normal-text-bold">Estimated delivery date</p>
+        <p class="normal-text-bold">08/31/2018</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a data-toggle="tab" href="#purchaseOrder">Purchase Order</a>
+    </li>
+    <li><a data-toggle="tab" href="#invoice">Invoice</a></li>
+    <li><a data-toggle="tab" href="#documents">Necessary Documents</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="purchaseOrder">
+      <div class="panel panel-tab">
+        <div class="panel-body">
+          <app-order-po></app-order-po>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="invoice">
+      <div class="panel panel-tab">
+        <div class="panel-body">
+          <app-order-invoice></app-order-invoice>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="documents">
+      <div class="panel panel-tab">
+        <div class="panel-body"><app-order-documents></app-order-documents></div>
+      </div>
+    </div>
+  </div>
+</div>
