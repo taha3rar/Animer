@@ -1,4 +1,3 @@
-
 <h1 class="main-title"><a class="material-icons">keyboard_backspace</a> Transactions</h1>
 <div class="transaction-wrapper">
   <div class="stepper">
@@ -46,49 +45,78 @@
   </div>
 
   <div class="docs-chat">
-      <div class="docs" (click)="adjustDiv()">
-        <i class="material-icons">folder_open</i>
-        <p>Documents</p>
-      </div>
-
-      <div class="chat" (click)="adjustDiv()">
-        <i class="material-icons">chat_bubble_outline</i>
-        <p>Chat</p>
-      </div>
+    <div class="docs" (click)="adjustDiv('docs')">
+      <i class="material-icons">folder_open</i>
+      <p>Documents</p>
     </div>
 
-  <div class="docs-tab" id="docs-tab">
-    <div class="header">
-      <button class="round-button-primary pull-right"><i class="material-icons">add</i></button>
+    <div class="chat" (click)="adjustDiv('chat')">
+      <i class="material-icons">chat_bubble_outline</i>
+      <p>Chat</p>
     </div>
-    <div class="doc-body">
-      <div class="doc-card">
-        <div><span class="pull-left">#122</span> <span class="material-icons pull-right icon">delete</span></div>
-        <div>
-          <img src="../../../assets/img/pdf.png" />
-          <p class="normal-text-bold">Contract.pdf</p>
-          <p class="heading-3">Uploaded by Alex Benn</p>
-        </div>
-        <div><p class="heading-3">10/28/2018</p></div>
+  </div>
+
+
+  <div class="side-tab">
+    <div class="chat-content">
+      <div class="header">
+        <button class="btn btn-link"><i class="material-icons">close</i></button>
       </div>
-      <div class="doc-card">
-        <div><span class="pull-left">#122</span> <span class="material-icons pull-right icon">delete</span></div>
-        <div>
-          <img src="../../../assets/img/pdf.png" />
-          <p class="normal-text-bold">Contract.pdf</p>
-          <p class="heading-3">Uploaded by Alex Benn</p>
+      <div class="message-area-sender">
+        <div class="user-info">
+          <figure class="img-shape"><img src="../../assets/img/prof-img2.jpg" class="user-img" /></figure>
+          <span> Alex Benn</span>
         </div>
-        <div><p class="heading-3">10/28/2018</p></div>
+        <div class="message-bubble"><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p></div>
       </div>
-      <div class="doc-card">
-        <div><span class="pull-left">#122</span> <span class="material-icons pull-right icon">delete</span></div>
-        <div>
-          <img src="../../../assets/img/pdf.png" />
-          <p class="normal-text-bold">Contract.pdf</p>
-          <p class="heading-3">Uploaded by Alex Benn</p>
+      <div class="message-area-receiver">
+        <div class="user-info">
+          <span>Saradaa Saradaa</span>
+          <figure class="img-shape"><img src="../../assets/img/profile-img.jpg" class="user-img" /></figure>
         </div>
-        <div><p class="heading-3">10/28/2018</p></div>
+        <div class="message-bubble pull-right">
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non, voluptates.</p>
+        </div>
+      </div>
+      <div class="message-send">
+        <textarea placeholder="Type message here..." rows="4"></textarea>
+        <button class="round-button-primary pull-right"><i class="material-icons">send</i></button>
       </div>
     </div>
+
+    <div class="docs-content">
+        <div class="header">
+          <button class="round-button-primary pull-right"><i class="material-icons">add</i></button>
+        </div>
+        <div class="doc-body">
+          <div class="doc-card">
+            <div><span class="pull-left">#122</span> <span class="material-icons pull-right icon">delete</span></div>
+            <div>
+              <img src="../../../assets/img/pdf.png" />
+              <p class="normal-text-bold">Contract.pdf</p>
+              <p class="heading-3">Uploaded by Alex Benn</p>
+            </div>
+            <div><p class="heading-3">10/28/2018</p></div>
+          </div>
+          <div class="doc-card">
+            <div><span class="pull-left">#122</span> <span class="material-icons pull-right icon">delete</span></div>
+            <div>
+              <img src="../../../assets/img/pdf.png" />
+              <p class="normal-text-bold">Contract.pdf</p>
+              <p class="heading-3">Uploaded by Alex Benn</p>
+            </div>
+            <div><p class="heading-3">10/28/2018</p></div>
+          </div>
+          <div class="doc-card">
+            <div><span class="pull-left">#122</span> <span class="material-icons pull-right icon">delete</span></div>
+            <div>
+              <img src="../../../assets/img/pdf.png" />
+              <p class="normal-text-bold">Contract.pdf</p>
+              <p class="heading-3">Uploaded by Alex Benn</p>
+            </div>
+            <div><p class="heading-3">10/28/2018</p></div>
+          </div>
+        </div>
+      </div>
   </div>
 </div>

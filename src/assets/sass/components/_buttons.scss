@@ -20,14 +20,14 @@
 .btn-primary-transp {
   background: transparent;
   border-radius: 10rem;
+  position: relative;
   border: 3px solid $primary-color;
   color: $primary-color;
   font-weight: 600;
-  padding: 0 1.7rem;
-  font-size: 1.35rem;
+  padding: 0 2.8rem;
+  font-size: 1.4rem;
   margin: 0.5rem;
   height: 3.55rem;
-  margin: 0.5rem;
 
   i {
     font-size: 2rem;
@@ -47,10 +47,11 @@
   border-radius: 10rem;
   color: white;
   font-weight: 600;
-  font-size: 0.7vw;
+  font-size: 1.4rem;
   margin: 0.5rem;
+  transition: all 0.5s;
   height: 3.55rem;
-  padding: 0 1.7rem;
+  padding: 0 2.8rem;
   border: none;
   i {
     font-size: 2rem;
@@ -62,6 +63,10 @@
   span {
     font-size: 1.5rem;
     vertical-align: middle;
+  }
+
+  &:hover {
+    background-color: #04a9be;
   }
 }
 

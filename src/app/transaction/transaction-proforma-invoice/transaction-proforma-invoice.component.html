@@ -1,4 +1,4 @@
-<div class="row margin-bottom" >
+<div class="row margin-bottom-2" >
   <div class="col-md-9">
     <p class="heading-2">BUYER</p>
     <p class="heading-4">Avenews-gt</p>
@@ -16,14 +16,16 @@
 <div class="row">
   <div class="col-md-9">
     <p class="heading-2">Product Details</p>
-    <table class="panel-table">
+    <table class="table table-striped margin-bottom-2">
       <thead>
+        <tr style="font-size: 1.34rem;">
         <th>Produce</th>
         <th>Variety</th>
         <th>Tolerance</th>
         <th>SKU</th>
         <th>Product Specifications</th>
         <th>Approvals & Certifications</th>
+      </tr>
       </thead>
       <tbody>
         <tr>
@@ -36,18 +38,21 @@
         </tr>
       </tbody>
     </table>
+
     <p class="heading-2">Packing Details</p>
     <p class="heading-4-blue">Package Details</p>
-    <table class="panel-table margin-bottom">
+    <table class="table table-striped margin-bottom">
       <thead>
+        <tr style="font-size: 1.34rem;">
         <th>Type of package</th>
         <th>Packaged product weight</th>
         <th>Weight unit</th>
         <th>Qunatity</th>
         <th>Total Weight</th>
+      </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="table-light">
           <td>Bag</td>
           <td>45</td>
           <td>kg</td>
@@ -57,9 +62,11 @@
       </tbody>
     </table>
 
+    <div class="margin-bottom-2">
     <p class="heading-4-blue">Container Details</p>
     <p class="heading-4">Type: ft.1</p>
     <p class="heading-4 margin-bottom">Quantity: 1</p>
+  </div>
   </div>
   <div class="col-md-3">
     <div class="invoice-right-side">
@@ -77,18 +84,10 @@
         </div>
         <div>
           <p class="heading-2">TOTAL</p>
-          <p class="heading-4-blue">5000 USD</p>
+          <p class="heading-4-blue" style="font-size:1.9rem">5000 USD</p>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-7">
-  <button class="btn-block btn-primary-filled next-step">Next Step</button>
-</div>
-<div class="col-md-5 zero-padding-left">
-  <button class="btn-block btn-primary-transp">Download</button>
-</div>
-</div>
   </div>
 </div>
 
@@ -117,23 +116,23 @@
     <div class="col-md-6">
       <div class="border-top">
       <p class="heading-2">Additional Details</p>
-      <div class="row">
-        <div class="col-md-3">
+      <div class="details">
+        <div>
           <p>Expected receiving date</p>
           <p>Quote request remarks</p>
           <p>Quote request valid until</p>
         </div>
-        <div class="col-md-3">
+        <div>
           <p>28/10/2018</p>
           <p>No</p>
           <p>7/10/2018</p>
         </div>
-        <div class="col-md-3">
+        <div>
           <p>Expected dalivery date</p>
           <p>Proforma invoice remarks</p>
           <p>Proforma invoice valid until</p>
         </div>
-        <div class="col-md-3">
+        <div>
           <p>28/10/2018</p>
           <p>No</p>
           <p>7/10/2018</p>
@@ -142,3 +141,5 @@
     </div>
   </div>
 </div>
+<button class="btn-primary-filled next-step pull-right"> <span> Generate Purchase Order &rarr; </span></button>
+<button class="btn-primary-transp pull-right">Download PDF</button>

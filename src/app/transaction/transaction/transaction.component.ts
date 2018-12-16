@@ -14,14 +14,23 @@ export class TransactionComponent implements OnInit {
 
   ngOnInit() {}
 
-  adjustDiv() {
+  adjustDiv(type: string) {
     if (this.sideDivVisible === false) {
-      $('.stepper').css('width', '80%');
-      $('.docs-tab').css('width', '15%');
+      $('.stepper').css('width', '80.5%');
+      setTimeout(function() {
+        $('.side-tab').css('width', '13.5%');
+      }, 100);
+      if (type === 'docs') {
+        $('.chat-content').hide();
+        $('.docs-content').show();
+      } else {
+        $('.docs-content').hide();
+        $('.chat-content').show();
+      }
       this.sideDivVisible = true;
     } else {
-      $('.stepper').css('width', '95%');
-      $('.docs-tab').css('width', '0px');
+      $('.stepper').css('width', '96%');
+      $('.side-tab').css('width', '0px');
       this.sideDivVisible = false;
     }
   }

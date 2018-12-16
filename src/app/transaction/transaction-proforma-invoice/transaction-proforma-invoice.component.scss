@@ -1,0 +1,12 @@
+.details {
+  display: flex;
+
+  div:nth-child(2) {
+    margin-right: 8rem;
+  }
+
+  div:nth-child(1),
+  div:nth-child(3) {
+    margin-right: 3rem;
+  }
+}

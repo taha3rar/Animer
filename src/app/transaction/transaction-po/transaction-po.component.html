@@ -16,14 +16,16 @@
 <div class="row">
   <div class="col-md-9">
     <p class="heading-2">Product Details</p>
-    <table class="panel-table">
+    <table class="table table-striped margin-bottom-2">
       <thead>
-        <th>Produce</th>
-        <th>Variety</th>
-        <th>Tolerance</th>
-        <th>SKU</th>
-        <th>Product Specifications</th>
-        <th>Approvals and Certifications</th>
+        <tr>
+          <th>Produce</th>
+          <th>Variety</th>
+          <th>Tolerance</th>
+          <th>SKU</th>
+          <th>Product Specifications</th>
+          <th>Approvals & Certifications</th>
+        </tr>
       </thead>
       <tbody>
         <tr>
@@ -31,23 +33,25 @@
           <td>Kona</td>
           <td>none</td>
           <td>5345345111</td>
-          <td>Type: Fully-Washed Grade: Fancy Screen: 18 Crop: 2017</td>
+          <td>Type: Fully-Washed Grade</td>
           <td>none</td>
         </tr>
       </tbody>
     </table>
     <p class="heading-2">Packing Details</p>
     <p class="heading-4-blue">Package Details</p>
-    <table class="panel-table margin-bottom">
+    <table class="table table-striped margin-bottom">
       <thead>
+        <tr>
         <th>Type of package</th>
         <th>Packaged product weight</th>
         <th>Weight unit</th>
         <th>Qunatity</th>
         <th>Total Weight</th>
+      </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="table-light">
           <td>Bag</td>
           <td>45</td>
           <td>kg</td>
@@ -64,7 +68,7 @@
         <p class="heading-4 margin-bottom">Quantity: 1</p>
 
         <p class="heading-2 margin-top">Shipping Details</p>
-        <div class="row">
+        <div class="row margin-bottom-2">
           <div class="col-md-3">
             <p>From</p>
             <p>GPS Coordinates</p>
@@ -104,7 +108,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="completedPO == false" class="col-md-3">
+  <div *ngIf="completedPO == false" class="col-md-3 padding-all" style="background-color: rgba(250, 250, 250, 0.933)">
     <div class="form-group">
       <label for="payment-terms" class="heading-2">Payment Terms</label>
       <textarea class="form-control" id="payment-terms" rows="2"></textarea>
@@ -115,18 +119,10 @@
     </div>
     <p class="heading-2">Purchase Order is Valid by</p>
     <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="mm/dd/yyyy"
-        aria-describedby="basic-addon2"
-      />
+      <input type="text" class="form-control" placeholder="mm/dd/yyyy" aria-describedby="basic-addon2" />
       <div class="input-group-append">
         <span class="input-group-text" id="basic-addon2"><i class="glyphicon glyphicon-calendar"></i></span>
       </div>
-    </div>
-    <div class="col-md-6 pull-right margin-bottom">
-      <button class="btn-block btn-primary-filled next-step" (click)="completed()">Next &rarr;</button>
     </div>
   </div>
   <div class="col-md-3" *ngIf="completedPO">
@@ -189,3 +185,4 @@
     </div>
   </div>
 </div>
+<button class="pull-right btn-primary-filled next-step" (click)="completed()">Next &rarr;</button>
