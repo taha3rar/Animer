@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    S3_BUCKET: '<S3_BUCKET_HERE>'
+    S3_BUCKET: 'codepipeline-us-east-2-331725871889/nwpl-dev-deploy-2'
     APP_NAME: 'agt'
     BUILD_ENV: 'dev'
 
@@ -20,17 +20,17 @@ phases:
       - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
       - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
       - sudo apt-get update -y
-      - sudo apt-get install -y yarn
+      # - sudo apt-get install -y yarn
       # Install Angular CLI, If you are not using Angular 6, install angular/cli@1.7.0 or lower, confirm by running ng -v inside your project folder
-      - yarn global add @angular/cli@6.0.8
+      # - yarn global add @angular/cli@6.0.8
       # Install node dependancies.
-      - yarn install
+      - npm install
 
   build:
     commands:
       # Builds Angular application. You can also build using custom environment here like mock or staging
       - echo Build started on `date`
-      - ng build --${BUILD_ENV}
+      - ng build
 
   post_build:
     commands:
