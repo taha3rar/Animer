@@ -24,6 +24,13 @@
   margin: 5px 0px;
 }
 
+.label-2 {
+  font-size: 1.3rem;
+  color: $dark-gray;
+  font-weight: 600;
+  margin: 5px 0px;
+}
+
 .heading-3 {
   color: $light-gray;
   font-size: 1.3rem;
@@ -57,6 +64,11 @@
   font-weight: 600;
   margin: 6px 0;
   color: $main-title-color;
+}
+
+.normal-text-light {
+  font-size: 1.4rem;
+  color: $light-gray;
 }
 
 .heading-big {

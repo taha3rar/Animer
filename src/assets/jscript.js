@@ -1,7 +1,6 @@
 $(function() {
   $(document).ready(function() {
-    function triggerClick(elem, target) {
-      $('#' + target).addClass('animate');
+    function triggerClick(elem) {
       $(elem).click();
     }
 
@@ -25,6 +24,7 @@ $(function() {
     });
 
     $btn_next.on('click', function() {
+      console.log($btn_next);
       $tab_active = $progressWizard.find('.active');
       $tab_active.next().addClass('completed');
 
@@ -32,8 +32,22 @@ $(function() {
       $tab_active.find('a[data-toggle="tab"]');
 
       $tab_next = $tab_active.next().find('a[data-toggle="tab"]');
-      $tab_target = $tab_next.attr('href').substr(1);
-      triggerClick($tab_next, $tab_target);
+      triggerClick($tab_next);
+    });
+
+    var $stepperBar = $('.step-bar'),
+      $tab_next,
+      $active_tab;
+
+    $next = $('.wizard').find('.btn-next');
+
+    $next.on('click', function() {
+      $active_tab = $stepperBar.find('.active');
+      $active_tab.next().addClass('completed');
+
+      $active_tab.find('a[data-toggle="tab"]');
+      $tab_next = $active_tab.next().find('a[data-toggle="tab"]');
+      triggerClick($tab_next);
     });
   });
 });

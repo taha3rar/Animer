@@ -6,12 +6,13 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
+  font-size: 1.2rem;
   display: none;
   &-content {
+    min-height: 53rem;
     @include absCenter;
-    width: 49%;
+    width: 50%;
     background-color: white;
-    height: 50rem;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     overflow: hidden;
@@ -20,15 +21,15 @@
   &-left {
     width: 33.33333%;
     height: 87%;
-    border-right: 1px solid $light-gray-2;
     float: left;
   }
 
   &-right {
     width: 66.66667%;
-    height: 87%;
+    min-height: 53rem;
     background-color: $bg-color;
     float: left;
+    border-left: 1px solid $light-gray-2;
     padding: 3rem;
   }
 
@@ -41,25 +42,55 @@
     width: 100%;
     height: 18%;
     border-bottom: 1px solid $light-gray-2;
-    padding: 2.3rem;
-    font-size: 1.6rem;
+    padding: 1rem;
+    font-size: 1.55rem;
     font-weight: 700;
     color: $light-gray-2;
+    border-bottom: 5px solid transparent;
 
     &-number {
       background-color: $light-gray-2;
       @include stepNumber;
-
-      &-active {
-        background-color: $primary-color;
-        @include stepNumber;
-      }
     }
 
-    &-active {
-      color: $dark-gray;
-      border-bottom: 3px solid $primary-color;
+    a,
+    a:hover,
+    a:focus {
+      text-decoration: none;
+      color: $light-gray-2;
+      font-size: 1.55rem;
+      border: none;
+    }
+  }
+
+  li.step.active {
+    border-top: 1px solid $light-gray-2;
+    border-bottom: 5px solid $primary-color;
+    background-color: $bg-color;
+    transition: border-bottom 0.3s;
+
+    a {
       background-color: $bg-color;
+    }
+
+    .step-number {
+      background-color: $primary-color;
+      @include stepNumber;
+    }
+  }
+
+  li.step.completed {
+    background-color: $bg-color;
+    border-top: 1px solid $light-gray-2;
+    border-bottom: 1px solid $light-gray-2;
+
+    a {
+      background-color: $bg-color;
+    }
+
+    .step-number {
+      background-color: $primary-color;
+      @include stepNumber;
     }
   }
 }

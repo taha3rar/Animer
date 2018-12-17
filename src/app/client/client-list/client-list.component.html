@@ -1,4 +1,4 @@
-<h1 class="main-title">Transactions</h1>
+<h1 class="main-title">Clients</h1>
 
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
@@ -7,10 +7,7 @@
 
 <h1 class="main-title">Clients List</h1>
 
-
-<button class="btn-primary-filled pull-right">
-  <i class="material-icons">add</i> <span>Add Client</span>
-</button>
+<button class="btn-primary-filled pull-right"><i class="material-icons">add</i> <span>Add Client</span></button>
 
 <table class="table main-table">
   <thead>
@@ -29,13 +26,12 @@
       <td>{{ client.first_name }} {{ client.last_name }}</td>
       <td>{{ client.role }}</td>
       <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="btn round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
+        <button class="btn round-button-primary"><i class="material-icons">remove_red_eye</i></button>
+        <button class="btn round-button-red"><i class="material-icons">delete</i></button>
       </td>
     </tr>
   </tbody>
 </table>
+
+<app-add-client></app-add-client>
+

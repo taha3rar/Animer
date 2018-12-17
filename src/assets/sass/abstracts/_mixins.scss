@@ -8,11 +8,11 @@
 @mixin stepNumber {
   border-radius: 100%;
   display: inline-block;
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 3.4rem;
+  height: 3.4rem;
   color: white;
   clip-path: circle(50% at 50% 50%);
   text-align: center;
   margin-right: 1rem;
-  line-height: 3.6rem;
+  line-height: 3.4rem;
 }
