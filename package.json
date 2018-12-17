@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "build": "ng build --prod",
-    "start": "ng serve --aot",
+    "build": "ng build",
+    "start": "ng serve --aot --configuration=dev",
+    "start-local": "ng serve --aot --configuration=local",
+    "start-staging": "ng serve --aot --configuration=staging",
+    "start-prod": "ng serve --prod",
     "lint": "ng lint && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
     "test": "ng test",
     "test:ci": "npm run lint -s && ng test --code-coverage --watch=false",
@@ -17,7 +20,11 @@
     "prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,scss}\"",
     "postinstall": "npm run prettier -s",
     "precommit": "ng lint && pretty-quick --staged",
-    "generate": "ng generate"
+    "generate": "ng generate",
+    "deploy": "node ./scripts/deploy-prod.js",
+    "deploy-staging": "node ./scripts/deploy-staging.js",
+    "predeploy": "ng build --prod",
+    "predeploy-staging": "ng build --configuration=staging"
   },
   "dependencies": {
     "@angular/animations": "^7.0.0",
@@ -33,6 +40,7 @@
     "@ng-bootstrap/ng-bootstrap": "^3.3.0",
     "@ngx-translate/core": "^10.0.1",
     "angulartics2": "^6.0.0",
+    "aws-sdk": "^2.377.0",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.6",
     "jquery": "^3.3.1",
