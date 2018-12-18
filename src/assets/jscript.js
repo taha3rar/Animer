@@ -5,8 +5,9 @@ $(function() {
     }
 
     handleStepper();
-    $(document).on('click', '[data-toggle="wizard"]', function() {
-      $('.modal-box').show();
+    $(document).on('click', '[data-toggle="wizard"]', function(e) {
+      $targetModal = $(this).data('target');
+      $($targetModal).show();
       handleStepper();
     });
 
