@@ -1,26 +1,27 @@
 <div class="modal-box">
-    <div class="modal-box-content">
+  <div class="modal-box-content">
+    <div class="stepper">
       <div class="modal-box-heading"><h2 translate class="modal-title">Create Quote Request</h2></div>
       <div class="modal-box-left">
         <ul class="nav nav-tabs stepper-bar">
-          <li class="step active">
+          <li class="active">
             <a href="#client-details" data-toggle="tab"
               ><span class="step-number">1</span> <span translate>Add client details</span></a
             >
           </li>
-          <li class="step">
+          <li class="disabled">
             <a href="#company-details" data-toggle="tab"
               ><div class="step-number">2</div>
               <span translate>Add company details</span></a
             >
           </li>
-          <li class="step">
+          <li class="disabled">
             <a href="#ecosystem" data-toggle="tab"
               ><div class="step-number">3</div>
               <span translate>Choose ecosystem</span></a
             >
           </li>
-          <li class="step">
+          <li class="disabled">
             <a href="#review" data-toggle="tab">
               <div class="step-number">4</div>
               <span translate>Review and confirm</span></a
@@ -29,7 +30,7 @@
         </ul>
       </div>
       <div class="modal-box-right">
-        <div class="tab-content hlhl">
+        <div class="tab-content">
           <div class="row tab-pane active margin-none" id="client-details">
             <div class="col-md-12">
               <div class="modal-box-right-body">
@@ -86,187 +87,182 @@
                 </div>
               </div>
             </div>
-            <button class="btn-next pull-right">Next &rarr;</button>
+            <button class="btn-next next-step">Next &rarr;</button>
           </div>
           <div class="row tab-pane margin-none" id="company-details">
             <div class="col-md-12">
-              <div class="modal-box-right-body">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="company_name">Company Name</label>
-                    <input type="text" class="form-control" id="company_name" placeholder="Type company name here..." />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="company_number">Company Number</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="company_number"
-                      placeholder="Type company number here..."
-                    />
-                  </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="company_name">Company Name</label>
+                  <input type="text" class="form-control" id="company_name" placeholder="Type company name here..." />
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="cstreet_address">Street address</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="cstreet_address"
-                      placeholder="Type street address here..."
-                    />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control" id="city" placeholder="Type city here..." />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label for="country">Country</label>
-                    <input type="text" class="form-control" id="country" placeholder="Type country here..." />
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="state">State/province/region</label>
-                    <input type="text" class="form-control" id="state" placeholder="Type state/province/region here..." />
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="zip_code">Zip Code</label>
-                    <input type="text" class="form-control" id="zip_code" placeholder="Type zip code here..." />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="additional_details">Additional Details</label>
-                  <textarea
+                <div class="form-group col-md-6">
+                  <label for="company_number">Company Number</label>
+                  <input
                     type="text"
                     class="form-control"
-                    id="additional_details"
-                    rows="2"
-                    placeholder="Type state/province/region here..."
-                  ></textarea>
+                    id="company_number"
+                    placeholder="Type company number here..."
+                  />
                 </div>
               </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="cstreet_address">Street address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cstreet_address"
+                    placeholder="Type street address here..."
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" id="city" placeholder="Type city here..." />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" id="country" placeholder="Type country here..." />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="state">State/province/region</label>
+                  <input type="text" class="form-control" id="state" placeholder="Type state/province/region here..." />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="zip_code">Zip Code</label>
+                  <input type="text" class="form-control" id="zip_code" placeholder="Type zip code here..." />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="additional_details">Additional Details</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="additional_details"
+                  rows="2"
+                  placeholder="Type state/province/region here..."
+                ></textarea>
+              </div>
             </div>
-            <button class="btn-next pull-right">Next &rarr;</button>
+            <button class="btn-next next-step">Next &rarr;</button>
           </div>
           <div class="row tab-pane margin-none" id="ecosystem">
             <div class="col-md-12">
-              <div class="modal-box-right-body">
-                <p>You Ecosystems List</p>
+              <p class="heading-2">You Ecosystems List</p>
 
-                <table class="table main-table">
-                  <thead>
-                    <tr>
-                      <th>Add to Ecosystem</th>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Clients</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><input type="checkbox" value="" /></td>
-                      <td>ECO A</td>
-                      <td>Sellers</td>
-                      <td>5 members</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox" value="" /></td>
-                      <td>ECO A</td>
-                      <td>Sellers</td>
-                      <td>5 members</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <button class="btn-next pull-right">Next &rarr;</button>
-              </div>
+              <table class="table main-table">
+                <thead>
+                  <tr>
+                    <th>Add to Ecosystem</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Clients</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="checkbox" value="" /></td>
+                    <td>ECO A</td>
+                    <td>Sellers</td>
+                    <td>5 members</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" value="" /></td>
+                    <td>ECO A</td>
+                    <td>Sellers</td>
+                    <td>5 members</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+            <button class="btn-next next-step">Next &rarr;</button>
           </div>
           <div class="row tab-pane" id="review">
             <div class="col-md-12">
-              <div class="modal-box-right-body">
-                <button class="btn-icons pull-right"><i class="material-icons">edit</i></button>
-                <div class="row margin-none">
-                  <div class="col-md-4">
-                    <div class="icon-text">
-                      <i class="material-icons">person</i> <span class="heading-2"> Client Details</span>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div>
-                      <p class="label-2">Contact Name</p>
-                      <p class="normal-text-light">Brad Pitt</p>
-                    </div>
-                    <div>
-                      <p class="label-2">Email Address</p>
-                      <p class="normal-text-light">brad-pitt.1@gmail.com</p>
-                    </div>
-                    <div>
-                      <p class="label-2">Additional details</p>
-                      <p class="normal-text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div>
-                      <p class="label-2">Contact ID</p>
-                      <p class="normal-text-light">312445687</p>
-                    </div>
-                    <div>
-                      <p class="label-2">Phone Number</p>
-                      <p class="normal-text-light">+18474912628</p>
-                    </div>
+              <button class="btn-icons  pull-right" (click)="targetStep('client-details')"><i class="material-icons">edit</i></button>
+              <div class="row margin-none">
+                <div class="col-md-4">
+                  <div class="icon-text">
+                    <i class="material-icons">person</i> <span class="heading-2"> Client Details</span>
                   </div>
                 </div>
-                <hr />
-                <button class="btn pull-right"><i class="material-icons">edit</i></button>
-                <div class="row margin-none">
-                  <div class="col-md-4">
-                    <div class="icon-text">
-                      <i class="material-icons">business</i> <span class="heading-2"> Company Details</span>
-                    </div>
+                <div class="col-md-4">
+                  <div>
+                    <p class="label-2">Contact Name</p>
+                    <p class="normal-text-light">Brad Pitt</p>
                   </div>
-                  <div class="col-md-4">
-                    <div>
-                      <p class="label-2">Company name</p>
-                      <p class="normal-text-light">Pitt Industiries</p>
-                    </div>
-                    <div>
-                      <p class="label-2">Street</p>
-                      <p class="normal-text-light">Maple, 51</p>
-                    </div>
-                    <div>
-                      <p class="label-2">Country</p>
-                      <p class="normal-text-light">USA</p>
-                    </div>
-                    <div>
-                      <p class="label-2">Additional details</p>
-                      <p class="normal-text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
+                  <div>
+                    <p class="label-2">Email Address</p>
+                    <p class="normal-text-light">brad-pitt.1@gmail.com</p>
                   </div>
-                  <div class="col-md-4">
-                    <div>
-                      <p class="label-2">Company number</p>
-                      <p class="normal-text-light">Pitt Industiries</p>
-                    </div>
-                    <div>
-                      <p class="label-2">Zip code</p>
-                      <p class="normal-text-light">Maple, 51</p>
-                    </div>
-                    <div>
-                      <p class="label-2">City</p>
-                      <p class="normal-text-light">San Fransisco</p>
-                    </div>
-                    <div>
-                      <p class="label-2">State/province/region</p>
-                      <p class="normal-text-light">California</p>
-                    </div>
+                  <div>
+                    <p class="label-2">Additional details</p>
+                    <p class="normal-text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div>
+                    <p class="label-2">Contact ID</p>
+                    <p class="normal-text-light">312445687</p>
+                  </div>
+                  <div>
+                    <p class="label-2">Phone Number</p>
+                    <p class="normal-text-light">+18474912628</p>
                   </div>
                 </div>
               </div>
-              <button class="btn-next pull-right">Submit</button>
+              <hr />
+              <button class="btn-icons pull-right" (click)="targetStep('company-details')"><i class="material-icons">edit</i></button>
+              <div class="row margin-none">
+                <div class="col-md-4">
+                  <div class="icon-text">
+                    <i class="material-icons">business</i> <span class="heading-2"> Company Details</span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div>
+                    <p class="label-2">Company name</p>
+                    <p class="normal-text-light">Pitt Industiries</p>
+                  </div>
+                  <div>
+                    <p class="label-2">Street</p>
+                    <p class="normal-text-light">Maple, 51</p>
+                  </div>
+                  <div>
+                    <p class="label-2">Country</p>
+                    <p class="normal-text-light">USA</p>
+                  </div>
+                  <div>
+                    <p class="label-2">Additional details</p>
+                    <p class="normal-text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div>
+                    <p class="label-2">Company number</p>
+                    <p class="normal-text-light">Pitt Industiries</p>
+                  </div>
+                  <div>
+                    <p class="label-2">Zip code</p>
+                    <p class="normal-text-light">Maple, 51</p>
+                  </div>
+                  <div>
+                    <p class="label-2">City</p>
+                    <p class="normal-text-light">San Fransisco</p>
+                  </div>
+                  <div>
+                    <p class="label-2">State/province/region</p>
+                    <p class="normal-text-light">California</p>
+                  </div>
+                </div>
+              </div>
             </div>
+            <button class="btn-next">Submit</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

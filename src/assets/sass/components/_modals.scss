@@ -29,8 +29,15 @@
     min-height: 53rem;
     background-color: $bg-color;
     float: left;
+    position: relative;
     border-left: 1px solid $light-gray-2;
     padding: 3rem;
+
+    .btn-next {
+      position: absolute;
+      right: 2.5rem;
+      bottom: 3rem;
+    }
   }
 
   &-heading {
@@ -38,59 +45,65 @@
     border-bottom: 1px solid $light-gray-2;
   }
 
-  .step {
-    width: 100%;
-    height: 18%;
-    border-bottom: 1px solid $light-gray-2;
-    padding: 1rem;
-    font-size: 1.55rem;
-    font-weight: 700;
-    color: $light-gray-2;
-    border-bottom: 5px solid transparent;
-
-    &-number {
-      background-color: $light-gray-2;
-      @include stepNumber;
-    }
-
-    a,
-    a:hover,
-    a:focus {
-      text-decoration: none;
+  .nav.nav-tabs {
+    li {
+      width: 100%;
+      height: 18%;
+      list-style: none;
+      border-bottom: 1px solid $light-gray-2;
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: $light-gray-2;
+      border-bottom: 5px solid transparent;
+
+      .step-number {
+        background-color: $light-gray-2;
+        @include stepNumber;
+      }
+
+      a,
+      a:hover,
+      a:focus {
+        text-decoration: none;
+        color: $light-gray-2;
+        font-size: 1.5rem;
+        border: none;
+      }
+    }
+
+    li.completed {
+      background-color: $bg-color;
+      border-bottom: 1px solid $light-gray-2;
+
+      a {
+        background-color: $bg-color;
+        color: $dark-gray;
+        font-size: 1.5rem;
+      }
+
+      .step-number {
+        background-color: $primary-color;
+        @include stepNumber;
+      }
+    }
+
+    li.active {
+      border-top: 1px solid $light-gray-2;
+      border-bottom: 5px solid $primary-color;
+      background-color: $bg-color;
+      transition: border-bottom 0.2s;
       font-size: 1.55rem;
-      border: none;
-    }
-  }
 
-  li.step.active {
-    border-top: 1px solid $light-gray-2;
-    border-bottom: 5px solid $primary-color;
-    background-color: $bg-color;
-    transition: border-bottom 0.3s;
+      a {
+        background-color: $bg-color;
+        color: $dark-gray;
+      }
 
-    a {
-      background-color: $bg-color;
-    }
-
-    .step-number {
-      background-color: $primary-color;
-      @include stepNumber;
-    }
-  }
-
-  li.step.completed {
-    background-color: $bg-color;
-    border-top: 1px solid $light-gray-2;
-    border-bottom: 1px solid $light-gray-2;
-
-    a {
-      background-color: $bg-color;
-    }
-
-    .step-number {
-      background-color: $primary-color;
-      @include stepNumber;
+      .step-number {
+        background-color: $primary-color;
+        @include stepNumber;
+      }
     }
   }
 }
