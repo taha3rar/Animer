@@ -10,7 +10,7 @@ import { Invoice } from '@app/core/models/order/invoice';
 })
 export class InvoicesListComponent implements OnInit {
   invoices: Invoice[];
-
+  page = 1;
   constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
 
   ngOnInit() {

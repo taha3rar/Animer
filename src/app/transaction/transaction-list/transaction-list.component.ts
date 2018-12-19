@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class TransactionListComponent implements OnInit {
   transactions: Transaction[];
 
+  page = 1;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {

@@ -25,7 +25,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products">
+    <tr *ngFor="let product of products | paginate: { itemsPerPage: 6, currentPage: page }">
       <td class="text-center">{{ product.numericId }}</td>
       <td *ngIf="product.product_type!='processed'">{{ product.produce }} / {{ product.variety }}</td>
       <td *ngIf="product.product_type=='processed'">{{ product.produce }}</td>
@@ -47,3 +47,6 @@
     </tr>
   </tbody>
 </table>
+
+<ngb-pagination [collectionSize]="products.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+

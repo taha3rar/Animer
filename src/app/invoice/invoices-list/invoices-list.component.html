@@ -25,7 +25,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let invoice of invoices">
+    <tr *ngFor="let invoice of invoices | paginate: { itemsPerPage: 6, currentPage: page }">
       <td class="text-center">{{invoice.numericId}}</td>
       <td>{{invoice.date_created | date: 'dd/MM/yyyy'}}</td>
       <td>
@@ -44,3 +44,5 @@
     </tr>
   </tbody>
 </table>
+
+<ngb-pagination [collectionSize]="invoices.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>

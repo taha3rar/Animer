@@ -5,9 +5,15 @@ $(function() {
     }
 
     handleStepper();
+
     $(document).on('click', '[data-toggle="wizard"]', function(e) {
       $targetModal = $(this).data('target');
       $($targetModal).show();
+      $($targetModal)
+        .find('[data-dismiss="modal"]')
+        .on('click', function() {
+          $($targetModal).hide();
+        });
       handleStepper();
     });
 
@@ -35,7 +41,6 @@ $(function() {
         $tab_active.addClass('completed');
 
         $tab_active.next().removeClass('disabled');
-        $tab_active.find('a[data-toggle="tab"]');
 
         $tab_next = $tab_active.next().find('a[data-toggle="tab"]');
         triggerClick($tab_next);

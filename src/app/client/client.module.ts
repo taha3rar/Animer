@@ -5,9 +5,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ClientListComponent } from './client-list/client-list.component';
 import { ClientListResolver } from './resolvers/client-list.resolver';
 import { AddClientComponent } from './add-client/add-client.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  imports: [CommonModule, ClientRoutingModule, TranslateModule],
+  imports: [CommonModule, ClientRoutingModule, TranslateModule, NgbModule, NgxPaginationModule],
   declarations: [ClientListComponent, AddClientComponent],
   providers: [ClientListResolver]
 })

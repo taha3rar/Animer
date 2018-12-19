@@ -10,6 +10,7 @@ import { AuthenticationService } from '@app/core';
 })
 export class OrdersListComponent implements OnInit {
   orders: Order[];
+  page = 1;
 
   constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
 

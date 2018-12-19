@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EcosystemsListComponent implements OnInit {
   ecosystems: Ecosystem[];
+  page = 1;
 
   constructor(private route: ActivatedRoute) {}
 

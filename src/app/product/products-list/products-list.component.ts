@@ -10,6 +10,8 @@ import { Product } from '@app/core/models/product';
 export class ProductsListComponent implements OnInit {
   products: Product[];
 
+  page = 1;
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {

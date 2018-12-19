@@ -9,13 +9,20 @@
   font-size: 1.2rem;
   display: none;
   &-content {
-    min-height: 53rem;
+    min-height: 48rem;
     @include absCenter;
     width: 50%;
     background-color: white;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     overflow: hidden;
+  }
+
+  .modal-box-heading {
+    i {
+      font-size: 1.9rem;
+      cursor: pointer;
+    }
   }
 
   &-left {
@@ -26,7 +33,7 @@
 
   &-right {
     width: 66.66667%;
-    min-height: 53rem;
+    min-height: 45rem;
     background-color: $bg-color;
     float: left;
     position: relative;
@@ -36,7 +43,7 @@
     .btn-next {
       position: absolute;
       right: 2.5rem;
-      bottom: 3rem;
+      bottom: 2rem;
     }
   }
 
@@ -73,11 +80,9 @@
     }
 
     li.completed {
-      background-color: $bg-color;
       border-bottom: 1px solid $light-gray-2;
 
       a {
-        background-color: $bg-color;
         color: $dark-gray;
         font-size: 1.5rem;
       }

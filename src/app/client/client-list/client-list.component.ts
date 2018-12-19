@@ -9,6 +9,7 @@ import { Client } from '@app/core/models/user/client';
 })
 export class ClientListComponent implements OnInit {
   clients: Client[];
+  page = 1;
 
   constructor(private route: ActivatedRoute) {}
 

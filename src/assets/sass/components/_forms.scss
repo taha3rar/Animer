@@ -5,12 +5,15 @@
 
 .form-group {
   input,
-  select,
   textarea {
     font-size: 1.2rem;
     padding: 1.5rem;
     border-radius: 0.8rem;
   }
+}
+
+.select-1 {
+  padding: 1.5rem;
 }
 
 .input-group {

@@ -1,9 +1,11 @@
 <div class="modal-box" id="addClientWizard">
   <div class="modal-box-content">
     <div class="stepper">
-      <div class="modal-box-heading"><h2 translate class="modal-title">Create Quote Request</h2></div>
+      <div class="modal-box-heading">
+        <i class="material-icons pull-right" data-dismiss="modal" >close</i>
+        <h2 translate class="modal-title">Create Quote Request</h2></div>
       <div class="modal-box-left">
-        <ul class="nav nav-tabs stepper-bar">
+        <ul class="nav nav-tabs">
           <li class="active">
             <a href="#client-details" data-toggle="tab"
               ><span class="step-number">1</span> <span translate>Add client details</span></a
@@ -33,57 +35,55 @@
         <div class="tab-content">
           <div class="row tab-pane active margin-none" id="client-details">
             <div class="col-md-12">
-              <div class="modal-box-right-body">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="first_name">Client First Name</label>
-                    <input type="text" class="form-control" id="first_name" placeholder="Type first name here..." />
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="first_name">Client First Name</label>
+                  <input type="text" class="form-control" id="first_name" placeholder="Type first name here..." />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="last_name">Client Last Name</label>
+                  <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="Email">Email Address</label>
+                <input type="email" class="form-control" id="Email" placeholder="Type email here..." />
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="phone">Phone Number</label> <input type="tel" class="form-control" id="phone" />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="last_name">Contact Id</label>
+                  <input type="text" class="form-control" id="last_name" placeholder="Type contact id here..." />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Profile Type</label>
+                  <div class="radio margin-top-none">
+                    <label><input type="radio" name="seller_type" checked />Seller of agricultural products</label>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="last_name">Client Last Name</label>
-                    <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." />
+                  <div class="radio">
+                    <label><input type="radio" name="seller_type" />Seller of processed products</label>
+                  </div>
+                  <label>Send Invitation By</label>
+                  <div class="checkbox margin-top-none">
+                    <label><input type="checkbox" value="email" />Email Address</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" value="phone" />Phone Number</label>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="Email">Email Address</label>
-                  <input type="email" class="form-control" id="Email" placeholder="Type email here..." />
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="phone">Phone Number</label> <input type="tel" class="form-control" id="phone" />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="last_name">Contact Id</label>
-                    <input type="text" class="form-control" id="last_name" placeholder="Type contact id here..." />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label>Profile Type</label>
-                    <div class="radio margin-top-none">
-                      <label><input type="radio" name="seller_type" checked />Seller of agricultural products</label>
-                    </div>
-                    <div class="radio">
-                      <label><input type="radio" name="seller_type" />Seller of processed products</label>
-                    </div>
-                    <label>Send Invitation By</label>
-                    <div class="checkbox margin-top-none">
-                      <label><input type="checkbox" value="email" />Email Address</label>
-                    </div>
-                    <div class="checkbox">
-                      <label><input type="checkbox" value="phone" />Phone Number</label>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="additional_details">Additional details</label>
-                    <textarea
-                      type="text"
-                      class="form-control"
-                      id="additional_details"
-                      rows="3"
-                      placeholder="Type additional details here..."
-                    ></textarea>
-                  </div>
+                <div class="form-group col-md-6">
+                  <label for="additional_details">Additional details</label>
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    id="additional_details"
+                    rows="3"
+                    placeholder="Type additional details here..."
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -142,7 +142,7 @@
                   class="form-control"
                   id="additional_details"
                   rows="2"
-                  placeholder="Type state/province/region here..."
+                  placeholder="Type additional details here..."
                 ></textarea>
               </div>
             </div>
@@ -181,7 +181,9 @@
           </div>
           <div class="row tab-pane" id="review">
             <div class="col-md-12">
-              <button class="btn-icons  pull-right" (click)="targetStep('client-details')"><i class="material-icons">edit</i></button>
+              <button class="btn-icons  pull-right" (click)="targetStep('client-details')">
+                <i class="material-icons">edit</i>
+              </button>
               <div class="row margin-none">
                 <div class="col-md-4">
                   <div class="icon-text">
@@ -214,7 +216,9 @@
                 </div>
               </div>
               <hr />
-              <button class="btn-icons pull-right" (click)="targetStep('company-details')"><i class="material-icons">edit</i></button>
+              <button class="btn-icons pull-right" (click)="targetStep('company-details')">
+                <i class="material-icons">edit</i>
+              </button>
               <div class="row margin-none">
                 <div class="col-md-4">
                   <div class="icon-text">

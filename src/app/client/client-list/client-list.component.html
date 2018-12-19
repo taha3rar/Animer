@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let client of clients">
+    <tr *ngFor="let client of clients | paginate: { itemsPerPage: 6, currentPage: page }">
       <td class="text-center">{{ client.numericId }}</td>
       <td>{{ client.company_name }}</td>
       <td>{{ client.first_name }} {{ client.last_name }}</td>
@@ -32,6 +32,8 @@
     </tr>
   </tbody>
 </table>
+
+<ngb-pagination [collectionSize]="clients.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
 
 <app-add-client></app-add-client>
 

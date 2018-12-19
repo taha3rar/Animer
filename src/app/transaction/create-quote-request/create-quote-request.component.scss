@@ -1,0 +1,19 @@
+.center-text-btn {
+  display: flex;
+  align-items: center;
+
+  & :first-child {
+    margin-right: 1.3rem;
+    text-align: center;
+  }
+
+  & :nth-child(2) {
+    margin-bottom: 0px !important;
+  }
+}
+
+select {
+  font-size: 1.25rem;
+  height: 3.2rem;
+  border-radius: 0.8rem;
+}

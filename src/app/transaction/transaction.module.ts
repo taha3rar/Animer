@@ -9,6 +9,8 @@ import { TransactionQuoteRequestComponent } from './transaction-quote-request/tr
 import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { CreateQuoteRequestComponent } from './create-quote-request/create-quote-request.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,9 +19,10 @@ import { TransactionComponent } from './transaction/transaction.component';
     TransactionProformaInvoiceComponent,
     TransactionQuoteRequestComponent,
     TransactionComponent,
-    TransactionListComponent
+    TransactionListComponent,
+    CreateQuoteRequestComponent
   ],
-  imports: [CommonModule, TransactionRoutingModule, TranslateModule],
+  imports: [CommonModule, TransactionRoutingModule, TranslateModule, NgbModule],
   providers: [TransactionListResolver]
 })
 export class TransactionModule {}

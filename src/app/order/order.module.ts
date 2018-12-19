@@ -9,6 +9,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { SharedModule } from '@app/shared';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,7 @@ import { SharedModule } from '@app/shared';
     OrderPoComponent,
     OrderComponent
   ],
-  imports: [CommonModule, TranslateModule, OrderRoutingModule, SharedModule],
+  imports: [CommonModule, TranslateModule, OrderRoutingModule, SharedModule, NgxPaginationModule, NgbModule],
   providers: [OrderListResolver]
 })
 export class OrderModule {}
