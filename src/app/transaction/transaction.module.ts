@@ -11,6 +11,7 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
 import { TransactionComponent } from './transaction/transaction.component';
 import { CreateQuoteRequestComponent } from './create-quote-request/create-quote-request.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TransactionListComponent,
     CreateQuoteRequestComponent
   ],
-  imports: [CommonModule, TransactionRoutingModule, TranslateModule, NgbModule],
+  imports: [CommonModule, TransactionRoutingModule, TranslateModule, NgbModule, NgxPaginationModule],
   providers: [TransactionListResolver]
 })
 export class TransactionModule {}

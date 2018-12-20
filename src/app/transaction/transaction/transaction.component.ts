@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 declare const $: any;
 
@@ -10,7 +11,7 @@ declare const $: any;
 export class TransactionComponent implements OnInit {
   sideDivVisible = false;
 
-  constructor() {}
+  constructor(private location: Location) {}
 
   ngOnInit() {}
 
@@ -33,5 +34,9 @@ export class TransactionComponent implements OnInit {
       $('.side-tab').css('width', '0px');
       this.sideDivVisible = false;
     }
+  }
+
+  back() {
+    this.location.back();
   }
 }

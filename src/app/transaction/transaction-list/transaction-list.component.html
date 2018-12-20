@@ -29,17 +29,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let transaction of transactions">
+    <tr *ngFor="let transaction of transactions | paginate: { itemsPerPage: 6, currentPage: page }">
       <td class="text-center">{{ transaction.numericId }}</td>
       <td>{{ transaction.produce }}</td>
       <td>{{ transaction.transaction_type }}</td>
       <td>{{ transaction.total_weight }} {{ transaction.weight_unit }}</td>
       <td>{{ transaction.status }}</td>
       <td class="text-right">
-        <button class="btn round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
+        <button class="btn round-button-primary" data-toggle="stepper">
+          <i class="material-icons" routerLink="/transaction/2">remove_red_eye</i>
         </button>
-        <button class="btn round-button-red">
+        <button class="btn round-button-red" (click)="warning()">
           <i class="material-icons">delete</i>
         </button>
       </td>
@@ -109,4 +109,9 @@
     </div>
   </div>
 </div>
+
+<pagination-controls
+(pageChange)="page = $event"
+></pagination-controls>
+
 <app-create-quote-request></app-create-quote-request>

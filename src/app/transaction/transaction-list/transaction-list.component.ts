@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from '@app/core/models/transaction';
 import { ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-transaction-list',
@@ -16,6 +17,14 @@ export class TransactionListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(({ transactions }) => {
       this.transactions = transactions;
+    });
+  }
+
+  warning() {
+    swal({
+      title: 'Are you sure?',
+      text: 'Once deleted, you will not be able to recover this product!',
+      icon: 'warning'
     });
   }
 }

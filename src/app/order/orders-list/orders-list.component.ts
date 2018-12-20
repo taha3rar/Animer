@@ -32,4 +32,12 @@ export class OrdersListComponent implements OnInit {
     }
     return false;
   }
+
+  warning() {
+    swal({
+      title: 'Are you sure?',
+      text: 'Once deleted, you will not be able to recover this order!',
+      icon: 'warning'
+    });
+  }
 }

@@ -271,3 +271,9 @@
   padding: 2rem;
   border-left: 1px solid $light-gray-2;
 }
+
+.nav .nav-tabs {
+  a:hover {
+    font-size: 1.2rem;
+  }
+}

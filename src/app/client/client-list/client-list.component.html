@@ -6,7 +6,6 @@
 </div>
 
 <h1 class="main-title">Clients List</h1>
-
 <button class="btn-primary-filled pull-right" data-toggle="wizard" data-target="#addClientWizard"><i class="material-icons">add</i> <span>Add Client</span></button>
 
 <table class="table main-table">
@@ -27,13 +26,15 @@
       <td>{{ client.role }}</td>
       <td class="text-right">
         <button class="btn round-button-primary"><i class="material-icons">remove_red_eye</i></button>
-        <button class="btn round-button-red"><i class="material-icons">delete</i></button>
+        <button class="btn round-button-red" (click)="warning()"><i class="material-icons">delete</i></button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<ngb-pagination [collectionSize]="clients.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+<pagination-controls
+(pageChange)="page = $event"
+></pagination-controls>
 
 <app-add-client></app-add-client>
 

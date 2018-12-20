@@ -38,11 +38,13 @@
       </td>
       <td>{{invoice.total_due}} {{invoice.currency}}</td>
       <td class="text-right">
-        <a class="btn round-button-primary"><i class="material-icons">remove_red_eye</i></a>
-        <button class="btn round-button-red"><i class="material-icons">delete</i></button>
+        <a class="btn round-button-primary" routerLink="/invoice/2"><i class="material-icons">remove_red_eye</i></a>
+        <button class="btn round-button-red" (click)="warning()"><i class="material-icons">delete</i></button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<ngb-pagination [collectionSize]="invoices.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+<pagination-controls
+(pageChange)="page = $event"
+></pagination-controls>

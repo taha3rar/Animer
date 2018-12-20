@@ -18,4 +18,12 @@ export class EcosystemsListComponent implements OnInit {
       this.ecosystems = ecosystems;
     });
   }
+
+  warning() {
+    swal({
+      title: 'Are you sure?',
+      text: 'Once deleted, you will not be able to recover this ecosystem!',
+      icon: 'warning'
+    });
+  }
 }

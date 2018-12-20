@@ -17,6 +17,10 @@ $(function() {
       handleStepper();
     });
 
+    $(document).on('click', '[data-toggle="stepper"]', function(e) {
+      handleStepper();
+    });
+
     function handleStepper() {
       var $progressWizard = $('.stepper'),
         $tab_active,

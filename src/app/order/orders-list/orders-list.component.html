@@ -32,7 +32,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders">
+    <tr *ngFor="let order of orders | paginate: { itemsPerPage: 6, currentPage: page }">
       <td class="text-center">{{ order.numericId }}</td>
       <td>{{ order.date_created | date: "dd/MM/yyyy" }}</td>
       <td>
@@ -54,10 +54,10 @@
       </td>
       <td>{{ order.status }}</td>
       <td class="text-right">
-        <button class="btn round-button-primary">
+        <button class="btn round-button-primary" routerLink="/order/2">
           <i class="material-icons">remove_red_eye</i>
         </button>
-        <button class="btn round-button-red">
+        <button class="btn round-button-red" (click)="warning()">
           <i class="material-icons">delete</i>
         </button>
       </td>
@@ -65,4 +65,6 @@
   </tbody>
 </table>
 
-
+<pagination-controls
+(pageChange)="page = $event"
+></pagination-controls>

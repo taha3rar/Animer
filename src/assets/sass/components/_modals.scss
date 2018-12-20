@@ -8,6 +8,7 @@
   z-index: 1000;
   font-size: 1.2rem;
   display: none;
+
   &-content {
     min-height: 48rem;
     @include absCenter;

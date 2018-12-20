@@ -1,3 +1,4 @@
+
 <h1 class="main-title">Transactions</h1>
 
 <div class="helper-panel">
@@ -28,10 +29,10 @@
       <td>{{ ecosystem.type }}</td>
       <td>{{ ecosystem.participants.length }}</td>
       <td class="text-right">
-        <button class="btn round-button-primary">
+        <button class="btn round-button-primary" routerLink="/ecosystem/2">
           <i class="material-icons">remove_red_eye</i>
         </button>
-        <button class="btn round-button-red">
+        <button class="btn round-button-red" (click)="warning()">
           <i class="material-icons">delete</i>
         </button>
       </td>
@@ -39,5 +40,6 @@
   </tbody>
 </table>
 
-<ngb-pagination [collectionSize]="ecosystems.length" [(page)]="page" aria-label="Default pagination" size="lg"></ngb-pagination>
-
+<pagination-controls
+(pageChange)="page = $event"
+></pagination-controls>

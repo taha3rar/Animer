@@ -22,4 +22,12 @@ export class InvoicesListComponent implements OnInit {
   get userId() {
     return this.authService.currentUserId;
   }
+
+  warning() {
+    swal({
+      title: 'Are you sure?',
+      text: 'Once deleted, you will not be able to recover this invoice!',
+      icon: 'warning'
+    });
+  }
 }
