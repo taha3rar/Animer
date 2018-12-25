@@ -1,9 +1,13 @@
-// @import "src/theme/theme-variables";
+.dropdown-submenu {
+  position: relative;
+}
 
-// .navbar {
-//   margin-bottom: $spacer;
-// }
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: -101%;
+  margin-top: -1px;
 
-// .nav-link.dropdown-toggle {
-//   cursor: pointer;
-// }
+  li :active {
+    background-color: white !important;
+  }
+}

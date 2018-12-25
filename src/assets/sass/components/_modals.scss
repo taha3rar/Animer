@@ -8,7 +8,6 @@
   z-index: 1000;
   font-size: 1.2rem;
   display: none;
-
   &-content {
     min-height: 48rem;
     @include absCenter;
@@ -19,11 +18,14 @@
     overflow: hidden;
   }
 
-  .modal-box-heading {
-    i {
-      font-size: 1.9rem;
-      cursor: pointer;
-    }
+  &-content-sm {
+    min-height: 62rem;
+    @include absCenter;
+    width: 23.3%;
+    background-color: white;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
   }
 
   &-left {
@@ -112,4 +114,22 @@
       }
     }
   }
+}
+
+.modal-box-heading {
+  i {
+    font-size: 1.9rem;
+    cursor: pointer;
+  }
+}
+
+.img-circular {
+  width: 120px;
+  height: 120px;
+  background-size: cover;
+  display: block;
+  border-radius: 60px;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  box-shadow: 0px 5px 1rem rgba(0, 0, 0, 0.2);
 }

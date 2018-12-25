@@ -60,3 +60,17 @@
 .padding-all {
   padding: 2.5rem;
 }
+
+.center-text-btn {
+  display: flex;
+  align-items: center;
+
+  & :first-child {
+    margin-right: 1.3rem;
+    text-align: center;
+  }
+
+  & :nth-child(2) {
+    margin-bottom: 0px !important;
+  }
+}

@@ -5,6 +5,7 @@ import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductListResolver } from './resolvers/product-list.resolver';
+import { ProductGeneratorComponent } from './product-generator/product-generator.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -13,6 +14,10 @@ const routes: Routes = [
       component: ProductsListComponent,
       resolve: { products: ProductListResolver },
       data: { title: extract('Products') }
+    },
+    {
+      path: 'product/generator',
+      component: ProductGeneratorComponent
     }
   ])
 ];

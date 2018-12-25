@@ -22,11 +22,11 @@ $(function() {
     });
 
     function handleStepper() {
-      var $progressWizard = $('.stepper'),
+      var $progressStepper = $('.stepper'),
         $tab_active,
         $tab_next,
-        $btn_next = $progressWizard.find('.next-step'),
-        $tab_toggle = $progressWizard.find('[data-toggle="tab"]');
+        $btn_next = $progressStepper.find('.next-step'),
+        $tab_toggle = $progressStepper.find('[data-toggle="tab"]');
 
       $tab_toggle.on('show.bs.tab', function(e) {
         var $target = $(e.target);
@@ -40,7 +40,7 @@ $(function() {
       });
 
       $btn_next.on('click', function() {
-        $tab_active = $progressWizard.find('.active');
+        $tab_active = $progressStepper.find('.active');
         $tab_active.next().addClass('completed');
         $tab_active.addClass('completed');
 

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService, I18nService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
 
+declare const $: any;
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -61,3 +63,15 @@ export class HeaderComponent implements OnInit {
     return '../../../assets/img/profile-img.jpg'; // TODO: Change this default picture
   }
 }
+
+$(document).on('click', '.dropdown-submenu span', function(e: any) {
+  $(this)
+    .next('ul')
+    .toggle();
+  e.stopPropagation();
+  e.preventDefault();
+});
+
+$(document).on('click', '.sub-ul span', function() {
+  $('.sub-ul').hide();
+});

@@ -1,69 +1,70 @@
 <!-- Top Navbar -->
 <div class="navbar-wrapper">
-  <div class="navigation-bar">
-    <div class="navigation-brand"><img src="../../../assets/img/logo.png" alt="logo" class="brand-img" /></div>
+    <div class="navigation-bar">
+      <div class="navigation-brand"><img src="../../../assets/img/logo.png" alt="logo" class="brand-img" /></div>
 
-    <ul class="navigation-right">
-      <li>
-        <div class="dropdown">
-          <i class="material-icons" data-toggle="dropdown" aria-expanded="true">notifications</i>
-          <span class="notification">5</span>
-          <ul class="dropdown-menu pull-right notifications">
-            <li class="dropdown-item">
-              <div class="row">
-                <div class="col-md-2">
-                  <figure class="img-shape"><img src="../../../assets/img/prof-img2.jpg" class="user-img" /></figure>
+      <ul class="navigation-right">
+        <li>
+          <div class="dropdown">
+            <i class="material-icons" data-toggle="dropdown" aria-expanded="true">notifications</i>
+            <span class="notification">5</span>
+            <ul class="dropdown-menu pull-right notifications">
+              <li class="dropdown-item">
+                <div class="row">
+                  <div class="col-md-2">
+                    <figure class="img-shape"><img src="../../../assets/img/prof-img2.jpg" class="user-img" /></figure>
+                  </div>
+                  <div class="col-md-10">
+                    <b>Tom Benn</b> sent you a <b>Proforma Invoice</b>
+                    <p>16/11/2019 10:45AM</p>
+                  </div>
                 </div>
-                <div class="col-md-10">
-                  <b>Tom Benn</b> sent you a <b>Proforma Invoice</b>
-                  <p>16/11/2019 10:45AM</p>
+              </li>
+              <li class="dropdown-item">
+                <div class="row">
+                  <div class="col-md-2">
+                    <figure class="img-shape"><img src="../../../assets/img/prof-img2.jpg" class="user-img" /></figure>
+                  </div>
+                  <div class="col-md-10">
+                    <b>Tom Benn</b> sent you a <b>Proforma Invoice</b>
+                    <p>16/11/2019 10:45AM</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li class="dropdown-item">
-              <div class="row">
-                <div class="col-md-2">
-                  <figure class="img-shape"><img src="../../../assets/img/prof-img2.jpg" class="user-img" /></figure>
-                </div>
-                <div class="col-md-10">
-                  <b>Tom Benn</b> sent you a <b>Proforma Invoice</b>
-                  <p>16/11/2019 10:45AM</p>
-                </div>
-              </div>
-            </li>
-            <li><a href="#" class="see-all">See All</a></li>
-          </ul>
-        </div>
-      </li>
-
-      <li>
-        <figure class="img-shape"><img src="{{ profilePicture }}" class="user-img" /></figure>
-      </li>
-      <li>
-        <div ngbDropdown placement="bottom-right">
-          <a  id="user-dropdown" class="dropdown-toggle dropdown-button" data-toggle="dropdown" aria-expanded="true" ngbDropdownToggle>{{ username }}</a>
-          <div ngbDropdownMenu aria-labelledby="user-dropdown">
-            <button class="dropdown-item">
-              <i class="material-icons pull-left">settings</i>
-              <span>Settings</span>
-            </button>
-            <button (click)="logout()" class="dropdown-item">
-              <i class="material-icons pull-left">power_settings_new</i>
-              <span translate>Logout</span>
-            </button>
-        </div>
-        </div>
-      </li>
-      <li>
-        <div ngbDropdown>
-          <a id="language-dropdown" class="nav-link" ngbDropdownToggle>{{ currentLanguage }}</a>
-          <div ngbDropdownMenu aria-labelledby="language-dropdown">
-            <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">
-              {{ language }}
-            </button>
+              </li>
+              <li><a href="#" class="see-all">See All</a></li>
+            </ul>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+
+        <li>
+          <figure class="img-shape"><img src="{{ profilePicture }}" class="user-img" /></figure>
+        </li>
+        <li id="user-li">
+          <div ngbDropdown placement="bottom-right">
+            <a  id="user-dropdown" class="dropdown-toggle dropdown-button" data-toggle="dropdown" aria-expanded="true" ngbDropdownToggle>{{ username }}</a>
+            <div ngbDropdownMenu aria-labelledby="user-dropdown">
+              <ul>
+              <li class="dropdown-item" routerLink= "/profile">
+                <i class="material-icons pull-left" >settings</i>
+                <span>Settings</span>
+              </li>
+              <li (click)="logout()" class="dropdown-item">
+                <i class="material-icons pull-left">power_settings_new</i>
+                <span translate>Logout</span>
+              </li>
+              <li class="dropdown-submenu dropdown-item">
+                  <i class="material-icons pull-left" >language</i>
+                  <span class="test" href="#">Language <span class="caret"></span></span>
+                  <ul class="dropdown-menu sub-ul">
+                      <li>
+                        <span class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">{{ language }}</span>
+                      </li>
+                  </ul>
+                </li>
+              </ul>
+          </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>

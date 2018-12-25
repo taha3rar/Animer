@@ -6,10 +6,33 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProductRoutingModule } from './product-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductProfileComponent } from './product-profile/product-profile.component';
+import { ProductGeneratorComponent } from './product-generator/product-generator.component';
+import { ProductPackingDetailsComponent } from './product-packing-details/product-packing-details.component';
+import { ProductPricingDetailsComponent } from './product-pricing-details/product-pricing-details.component';
+import { ProductShippingDetailsComponent } from './product-shipping-details/product-shipping-details.component';
+import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ProductReviewComponent } from './product-review/product-review.component';
 
 @NgModule({
-  declarations: [ProductsListComponent],
-  imports: [CommonModule, TranslateModule, ProductRoutingModule, NgxPaginationModule, NgbModule],
+  declarations: [
+    ProductsListComponent,
+    ProductProfileComponent,
+    ProductGeneratorComponent,
+    ProductPackingDetailsComponent,
+    ProductPricingDetailsComponent,
+    ProductShippingDetailsComponent,
+    ProductReviewComponent
+  ],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    ProductRoutingModule,
+    NgxPaginationModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
   providers: [ProductListResolver]
 })
 export class ProductModule {}

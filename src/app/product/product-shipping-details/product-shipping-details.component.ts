@@ -1,0 +1,22 @@
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { countries } from '@app/shared/_helpers/_countries';
+
+@Component({
+  selector: 'app-product-shipping-details',
+  templateUrl: './product-shipping-details.component.html',
+  styleUrls: ['./product-shipping-details.component.scss']
+})
+export class ProductShippingDetailsComponent implements OnInit {
+  countriesList;
+  public searchControl: FormControl;
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
+
+  constructor() {}
+
+  ngOnInit() {
+    this.countriesList = countries;
+    this.searchControl = new FormControl();
+  }
+}

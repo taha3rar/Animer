@@ -1,0 +1,122 @@
+<div class="row">
+  <div class="col-md-6 margin-top">
+      <button class="btn-icons  pull-right" (click)="targetStep('productDetails')">
+          <i class="material-icons">edit</i>
+        </button>
+    <div class="icon-text margin-bottom">
+      <i class="material-icons">description </i>
+      <p class="heading-2">Product Details</p>
+    </div>
+    <div class="prod-details">
+      <div class="prod-img-heading">
+        <figure
+          class="img-circular"
+          style="background-image: url('../../../assets/img/chia.jpg'); margin: 0 auto;"
+        ></figure>
+        <p class="heading-2" style="text-align:center;">Chia Seeds</p>
+      </div>
+      <div>
+        <p class="heading-2">Ingredients</p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum odit at quis totam quaerat quos. Doloremque
+          dolore et omnis nesciunt?
+        </p>
+        <p class="heading-2">SKU</p>
+        <p>4134</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 margin-top" style="border-left:1px solid rgba(0,0,0,0.08);">
+      <button class="btn-icons  pull-right" (click)="targetStep('shippingDetails')">
+          <i class="material-icons">edit</i>
+        </button>
+    <div class="icon-text margin-bottom">
+      <i class="material-icons">local_shipping </i>
+      <p class="heading-2">Shipping Details</p>
+    </div>
+    <div style="padding-left:4.6%;">
+      <p class="heading-2">Loading location</p>
+      <p>Jl. Klp. Lilin Utara II No.df4/1, Curug Sangereng</p>
+      <p class="heading-2">GPS coordinates</p>
+      <p>[-6.246298200000001] [106.62240739999993]</p>
+      <p class="heading-2">HS tariff code</p>
+      <p>0222</p>
+    </div>
+  </div>
+</div>
+<div class="details-row">
+  <div class="section-icon">
+    <img src="../../../assets/img/pack.png" width="22" height="25" /> <span class="heading-2">Packing Details</span>
+  </div>
+  <div class="details-right">
+      <button class="btn-icons pull-right" (click)="targetStep('packingDetails')">
+          <i class="material-icons">edit</i>
+        </button>
+    <p class="heading-2">Containing Package Details</p>
+    <div class="packing-flex">
+      <div>
+        <p class="heading-2">Type of package</p>
+        <p>Bag</p>
+        <p class="heading-2">Number of items per packge</p>
+        <p>500</p>
+      </div>
+      <div>
+      <p class="heading-2">Total amount of items</p>
+      <p>1000</p>
+      <p class="heading-2">Additional packing details</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt!</p>
+    </div>
+      <div>
+        <p class="heading-2">Total amount of packing items</p>
+        <p>200</p>
+      </div>
+    </div>
+    <hr>
+    <p class="heading-2">Individual Item Details</p>
+    <div class="packing-flex">
+      <div>
+        <p class="heading-2">Item packing type</p>
+        <p>Bag</p>
+      </div>
+      <div>
+        <p class="heading-2">Item Measurement Unit </p>
+        <p>Grams</p>
+      </div>
+      <div>
+        <p class="heading-2">Amount of grams in individual Green Coffee</p>
+        <p>200</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="details-row">
+  <div class="section-icon" >
+      <div class="icon-text">
+          <i class="material-icons">monetization_on</i>
+          <p class="heading-2">Pricing Details</p>
+        </div>
+      </div>
+        <div class="details-right">
+            <button class="btn-icons pull-right" (click)="targetStep('pricingDetails')">
+                <i class="material-icons">edit</i>
+              </button>
+          <div class="packing-flex">
+                  <div>
+                    <p class="heading-2">Total amount of packages</p>
+                    <p>10</p>
+                    <p class="heading-2">Additional pricing details</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis.</p>
+                  </div>
+                  <div>
+                    <p class="heading-2">Price per package</p>
+                    <p>10 USD</p>
+                  </div>
+                  <div>
+                  <p class="heading-2">Total price</p>
+                  <p>555</p>
+                </div>
+          </div>
+        </div>
+</div>
+
+<button class="btn-primary-filled pull-right">Add Product</button>

@@ -185,4 +185,4 @@
     </div>
   </div>
 </div>
-<button class="pull-right btn-primary-filled next-step" (click)="completed()">Next &rarr;</button>
+<button *ngIf="completedPO == false" class="pull-right btn-primary-filled next-step" (click)="completed()">Next &rarr;</button>

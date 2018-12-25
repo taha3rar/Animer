@@ -2,16 +2,14 @@
 
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
-  <p translate>
-    Product list help legend
-  </p>
+  <p translate>Product list help legend</p>
 </div>
 
-<h1 translate class="main-title">Products List</h1>
-
-<button class="btn-primary-filled pull-right">
+<button class="btn-primary-filled pull-right" routerLink="/product/generator">
   <i class="material-icons">add</i> <span translate>New Product</span>
 </button>
+
+<h1 translate class="main-title">Products List</h1>
 
 <table class="table main-table">
   <thead>
@@ -25,29 +23,31 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products | paginate: { itemsPerPage: 6, currentPage: page }">
+    <tr *ngFor="let product of (products | paginate: { itemsPerPage: 6, currentPage: page })">
       <td class="text-center">{{ product.numericId }}</td>
-      <td *ngIf="product.product_type!='processed'">{{ product.produce }} / {{ product.variety }}</td>
-      <td *ngIf="product.product_type=='processed'">{{ product.produce }}</td>
+      <td *ngIf="product.product_type != 'processed'">{{ product.produce }} / {{ product.variety }}</td>
+      <td *ngIf="product.product_type == 'processed'">{{ product.produce }}</td>
       <td>{{ product.sku }}</td>
       <td>{{ product.type_of_package }}</td>
-      <td *ngIf="product.product_type!='processed'">{{ product.total_weight }} {{ product.weight_unit }}</td>
-      <td *ngIf="product.product_type=='processed'">{{ product.quantity }} Packages</td>
+      <td *ngIf="product.product_type != 'processed'">{{ product.total_weight }} {{ product.weight_unit }}</td>
+      <td *ngIf="product.product_type == 'processed'">{{ product.quantity }} Packages</td>
       <td class="text-right">
-          <button class="btn round-button-primary">
-            <i class="material-icons">edit</i>
-          </button>
-          <button class="btn round-button-primary">
-            <i class="material-icons">remove_red_eye</i>
-          </button>
-          <button class="btn round-button-red" (click)="warning()">
-            <i class="material-icons">delete</i>
-          </button>
-        </td>
+        <button class="btn round-button-primary"><i class="material-icons">edit</i></button>
+        <button class="btn round-button-primary" data-toggle="wizard" data-target="#productProfileWizard"><i class="material-icons">remove_red_eye</i></button>
+        <button class="btn round-button-red" (click)="warning()"><i class="material-icons">delete</i></button>
+      </td>
     </tr>
   </tbody>
 </table>
 
-<pagination-controls
-(pageChange)="page = $event"
-></pagination-controls>
+<pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+<div class="modal-box" id="productProfileWizard">
+  <div class="modal-box-content-sm">
+    <div class="modal-box-heading">
+        <i class="material-icons pull-right" data-dismiss="modal" >close</i>
+      <p translate class="modal-title">Product Overview</p>
+    </div>
+    <app-product-profile></app-product-profile>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="total_amount_packages">Total Amount of Packages</label>
+      <input type="text" class="form-control" id="total_amount_packages" value="3" />
+    </div>
+    <div class="form-group">
+      <label for="total_amount_packages">Total Price</label>
+      <input type="text" class="form-control" id="total_amount_packages" value="160 USD" />
+    </div>
+    <div class="form-group">
+      <label for="price_per_package">Price per Package</label>
+      <input type="text" class="form-control" id="price_per_package" placeholder="Type price per package here..." />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="currency">Currency</label>
+      <select id="currency" placeholder="Choose currency" class="form-control">
+        <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="additional_pricing">Additional Pricing Details</label>
+      <textarea class="form-control" rows="5" placeholder="Type additional pricing details here..."></textarea>
+    </div>
+  </div>
+</div>
+
+<button class="btn-primary-filled pull-right next-step">Save</button>
