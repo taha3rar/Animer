@@ -8,7 +8,7 @@ import { countries } from '@app/shared/_helpers/_countries';
   styleUrls: ['./product-shipping-details.component.scss']
 })
 export class ProductShippingDetailsComponent implements OnInit {
-  countriesList;
+  countriesList: any;
   public searchControl: FormControl;
   @ViewChild('search')
   public searchElementRef: ElementRef;

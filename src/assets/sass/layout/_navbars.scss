@@ -182,16 +182,3 @@
   border: none;
   font-size: 1.4rem;
 }
-
-.img-shape {
-  width: 3rem;
-  height: 3rem;
-  -webkit-shape-outsite: circle(50% at 50% 50%);
-  shape-outside: circle(50% at 50% 50%);
-  clip-path: circle(50% at 50% 50%);
-}
-
-.user-img {
-  height: 100%;
-  transform: translateX(-1rem);
-}

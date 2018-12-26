@@ -13,6 +13,7 @@ import { ProductPricingDetailsComponent } from './product-pricing-details/produc
 import { ProductShippingDetailsComponent } from './product-shipping-details/product-shipping-details.component';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProductReviewComponent } from './product-review/product-review.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProductReviewComponent } from './product-review/product-review.componen
     ProductPackingDetailsComponent,
     ProductPricingDetailsComponent,
     ProductShippingDetailsComponent,
-    ProductReviewComponent
+    ProductReviewComponent,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,

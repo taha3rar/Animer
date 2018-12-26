@@ -1,0 +1,63 @@
+@import "../../../assets/sass/abstracts/variables";
+
+.nav.nav-tabs {
+  list-style: none;
+  width: 100%;
+  z-index: 888;
+  margin-bottom: 3rem;
+  li:first-child:nth-last-child(5),
+  li:first-child:nth-last-child(5) ~ li {
+    width: 25%;
+    background-color: white;
+    position: relative;
+    display: inline-block;
+    height: 5rem;
+    box-shadow: 0px 0rem 0.3rem rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+  }
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  margin-right: -4.6rem;
+  margin-left: -4.6rem;
+  padding: 1rem 2.5rem;
+  margin-top: -3.5rem;
+}
+
+.panel-header :nth-child(2) {
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.panel-header::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+input.search-bar-rounded {
+  width: 20rem;
+  height: 3.7rem;
+  border-radius: 5rem;
+  font-size: 1.3rem;
+  margin-right: 2rem;
+  border: 1px solid #eeeeee;
+  padding-left: 1.5rem;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
+
+  &::placeholder {
+    color: #bbbbbb;
+  }
+}
+
+.products-col {
+  float: left;
+  width: 74.6%;
+}
+
+.summary-col {
+  width: 24%;
+  float: right;
+}

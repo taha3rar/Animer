@@ -11,6 +11,11 @@ import { OrderListResolver } from './resolvers/order-list.resolver';
 import { SharedModule } from '@app/shared';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrderGeneratorComponent } from './order-generator/order-generator.component';
+import { OrderGeneratorSuppliersComponent } from './order-generator/order-generator-suppliers/order-generator-suppliers.component';
+import { OrderGeneratorProductsComponent } from './order-generator/order-generator-products/order-generator-products.component';
+import { OrderGeneratorPoComponent } from './order-generator/order-generator-po/order-generator-po.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,9 +23,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     OrderDocumentsComponent, // TODO: Check if it should be moved to a shared folder
     OrderInvoiceComponent, // TODO: Check if it should be moved to a shared folder
     OrderPoComponent,
-    OrderComponent
+    OrderComponent,
+    OrderGeneratorComponent,
+    OrderGeneratorSuppliersComponent,
+    OrderGeneratorProductsComponent,
+    OrderGeneratorPoComponent
   ],
-  imports: [CommonModule, TranslateModule, OrderRoutingModule, SharedModule, NgxPaginationModule, NgbModule],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    OrderRoutingModule,
+    SharedModule,
+    NgxPaginationModule,
+    NgbModule,
+    FormsModule
+  ],
   providers: [OrderListResolver]
 })
 export class OrderModule {}

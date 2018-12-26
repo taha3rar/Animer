@@ -1,0 +1,57 @@
+<h1 class="main-title btn-main" (click)="back()"><a class="material-icons">keyboard_backspace</a> Orders</h1>
+<div class="stepper-wrapper">
+  <div class="stepper">
+    <ul class="nav nav-tabs">
+      <li class="completed">
+        <a data-toggle="tab" class="label" href="#supplier"> <span class="round-tab">1</span>Choose a supplier </a>
+      </li>
+      <li class="active">
+        <a data-toggle="tab" class="label" href="#products"> <span class="round-tab">2</span>Choose products </a>
+      </li>
+      <li class="disabled">
+        <a data-toggle="tab" class="label" href="#purchaseOrder">
+          <span class="round-tab">3</span> Create purchase order
+        </a>
+      </li>
+      <li class="disabled">
+        <a data-toggle="tab" class="label" href="#review"> <span class="round-tab">4</span>Review and confirm </a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane" id="supplier">
+        <div class="panel panel-tab">
+          <div class="panel-body">
+            <div class="panel-header">
+              <div>
+                <p>My Suppliers</p>
+              </div>
+              <div>
+                <button class="btn-primary-transp"><i class="material-icons">add</i> <span>Add Supplier</span></button>
+                <button class="btn-primary-filled next-step">Next Step &rarr;</button>
+              </div>
+            </div>
+            <app-order-generator-suppliers></app-order-generator-suppliers>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane active" id="products">
+          <div class="panel panel-tab products-col">
+            <div class="panel-body">
+              <div class="panel-header">
+                <div>
+                  <p>Michael James Inventory</p>
+                </div>
+                <div>
+                  <input type="text" [(ngModel)]="term" class="search-bar-rounded" type="text" placeholder="Search products...">
+                  <button class="btn-primary-filled next-step">Next Step &rarr;</button>
+                </div>
+              </div>
+              <app-order-generator-products></app-order-generator-products>
+            </div>
+          </div>
+          <div class="panel panel-tab summary-col"></div>
+        </div>
+    </div>
+  </div>
+</div>

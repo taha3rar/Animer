@@ -6,6 +6,7 @@ import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { OrdersListComponent } from './orders-list/orders-list.component';
+import { OrderGeneratorComponent } from './order-generator/order-generator.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -14,6 +15,10 @@ const routes: Routes = [
       component: OrdersListComponent,
       resolve: { orders: OrderListResolver },
       data: { title: extract('Orders') }
+    },
+    {
+      path: 'order/generator',
+      component: OrderGeneratorComponent
     },
     {
       path: 'order/:id',

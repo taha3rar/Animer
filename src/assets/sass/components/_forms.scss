@@ -27,3 +27,43 @@
     font-size: 1.4rem;
   }
 }
+
+.form_radio_label {
+  position: relative;
+}
+
+.form_radio_btn {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: -1.2rem;
+  background-color: white;
+  transition: background-color 0.2s;
+
+  &::after {
+    content: "\f00c";
+    font-family: FontAwesome;
+    font-size: 1.1rem;
+    color: white;
+    padding-top: 2.5px;
+    @include absCenter;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+}
+
+.form_radio:checked + .form_radio_label .form_radio_btn::after {
+  opacity: 1;
+}
+
+.form_radio:checked + .form_radio_label .form_radio_btn {
+  background-color: #00d841;
+}
+
+.form_radio {
+  display: none;
+}
