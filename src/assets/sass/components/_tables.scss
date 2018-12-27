@@ -57,3 +57,46 @@
 table {
   margin: 1rem 0rem;
 }
+
+.table-blue {
+  margin-top: 2rem;
+  border-spacing: 0 1rem;
+  width: 100%;
+  border-collapse: separate;
+  thead {
+    color: white;
+    font-size: 1.2rem;
+    background-color: $primary-color;
+    font-weight: 700;
+
+    th:first-child {
+      border-radius: 5px 0 0 5px;
+    }
+
+    th:last-child {
+      border-radius: 0 5px 5px 0;
+    }
+  }
+
+  tbody tr {
+    background-color: white;
+    font-size: 1.4rem;
+    box-shadow: 0 5px 15px -15px rgba(0, 0, 0, 0.4);
+
+    td:first-child {
+      border-radius: 5px 0 0 5px;
+    }
+
+    td:last-child {
+      border-radius: 0 5px 5px 0;
+    }
+  }
+
+  th,
+  td,
+  thead {
+    border: none !important;
+    padding: 0.8rem 1.8rem;
+    vertical-align: middle !important;
+  }
+}

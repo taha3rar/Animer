@@ -16,6 +16,9 @@ import { OrderGeneratorSuppliersComponent } from './order-generator/order-genera
 import { OrderGeneratorProductsComponent } from './order-generator/order-generator-products/order-generator-products.component';
 import { OrderGeneratorPoComponent } from './order-generator/order-generator-po/order-generator-po.component';
 import { FormsModule } from '@angular/forms';
+// tslint:disable-next-line:max-line-length
+import { OrderGeneratorSummaryComponent } from './order-generator/order-generator-products/order-generator-summary/order-generator-summary.component';
+import { OrderGeneratorReviewOrderComponent } from './order-generator/order-generator-review-order/order-generator-review-order.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     OrderGeneratorComponent,
     OrderGeneratorSuppliersComponent,
     OrderGeneratorProductsComponent,
-    OrderGeneratorPoComponent
+    OrderGeneratorPoComponent,
+    OrderGeneratorSummaryComponent,
+    OrderGeneratorReviewOrderComponent
   ],
   imports: [
     CommonModule,

@@ -886,3 +886,17 @@ div.switch5 > input.switch:focus ~ label:before {
 .btn-main {
   cursor: pointer;
 }
+
+.btn-circle {
+  border: none;
+  background-color: #666666;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  color: white;
+  i {
+    vertical-align: middle;
+
+    font-size: 2rem;
+  }
+}

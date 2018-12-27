@@ -27,22 +27,36 @@
     <div class="tab-content">
       <div class="tab-pane" id="quoteRequest">
         <div class="panel panel-tab">
-          <div class="panel-body"><app-transaction-quote-request></app-transaction-quote-request></div>
+          <div class="panel-body">
+              <div class="padding-all-2">
+            <app-transaction-quote-request></app-transaction-quote-request>
+            </div>
+          </div>
         </div>
       </div>
       <div class="tab-pane active" id="proformaInvoice">
         <div class="panel panel-tab">
-          <div class="panel-body"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
+          <div class="panel-body">
+              <div class="padding-all-2">
+            <app-transaction-proforma-invoice></app-transaction-proforma-invoice>
+            </div>
+          </div>
         </div>
       </div>
       <div class="tab-pane" id="purchaseOrder">
         <div class="panel panel-tab">
-          <div class="panel-body"><app-transaction-po></app-transaction-po></div>
+          <div class="panel-body">
+              <div class="padding-all-2">
+            <app-transaction-po></app-transaction-po></div>
+            </div>
         </div>
       </div>
       <div class="tab-pane" id="review">
         <div class="panel panel-tab">
-          <div class="panel-body"><app-transaction-po [completedPO]="true"></app-transaction-po></div>
+          <div class="panel-body">
+              <div class="padding-all-2">
+            <app-transaction-po [completedPO]="true"></app-transaction-po></div>
+            </div>
         </div>
       </div>
     </div>

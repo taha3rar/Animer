@@ -1,5 +1,9 @@
 @import "../../../assets/sass/abstracts/variables";
 
+.wrapper {
+  margin-bottom: 3rem;
+}
+
 .nav.nav-tabs {
   list-style: none;
   width: 100%;
@@ -20,10 +24,10 @@
 .panel-header {
   display: flex;
   align-items: center;
-  margin-right: -4.6rem;
-  margin-left: -4.6rem;
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
   padding: 1rem 2.5rem;
-  margin-top: -3.5rem;
+  margin-top: -1.5rem;
 }
 
 .panel-header :nth-child(2) {

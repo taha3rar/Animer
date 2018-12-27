@@ -1,3 +1,225 @@
-<p>
-  order-generator-po works!
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <div class="info">
+      <p class="heading-2">ISSUED BY</p>
+      <div class="row">
+        <div class="col-md-4">
+          <p>Issuer name</p>
+          <p>Ishai Ben Or</p>
+        </div>
+        <div class="col-md-4">
+          <p>Company name</p>
+          <p>Avenews-gt</p>
+        </div>
+        <div class="col-md-4">
+          <p>Email address</p>
+          <p>Ishai@avenews-gt.com</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p>City</p>
+          <p>Tel-Aviv Jaffa</p>
+        </div>
+        <div class="col-md-4">
+          <p>Street address</p>
+          <p>Ahad Ha'am 54</p>
+        </div>
+        <div class="col-md-4">
+          <p>Zip code</p>
+          <p>808855</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>Phone Number</p>
+          <p>0548733589</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="info">
+      <p class="heading-2">ISSUED FOR</p>
+      <div class="row">
+        <div class="col-md-4">
+          <p>Recipient name</p>
+          <p>Tom Stark</p>
+        </div>
+        <div class="col-md-4">
+          <p>Company name</p>
+          <p>Stark Industries</p>
+        </div>
+        <div class="col-md-4">
+          <p>Email address</p>
+          <p>Ishai@avenews-gt.com</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p>City</p>
+          <p>Tel-Aviv Jaffa</p>
+        </div>
+        <div class="col-md-4">
+          <p>Street address</p>
+          <p>Ahad Ha'am 54</p>
+        </div>
+        <div class="col-md-4">
+          <p>Zip code</p>
+          <p>808855</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>Phone Number</p>
+          <p>0548733589</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <table class="table-blue">
+      <thead>
+        <tr>
+          <th>PRODUCT</th>
+          <th class="text-center">PACKAGES</th>
+          <th class="text-center">TOTAL AMOUNT</th>
+          <th class="text-center">RATE</th>
+          <th class="text-center">TOTAL PRICE</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Green Coffee Beans</td>
+          <td class="text-center"><button class="btn-circle stepUp"><i class="material-icons">add</i></button> 100 (BAG / 50 KG) <button class="btn-circle stepDown"><i class="material-icons">remove</i></button></td>
+          <td class="text-center">5,000 KG</td>
+          <td class="text-center">50 KES / KG</td>
+          <td class="text-center">1000 KES</td>
+          <td class="text-center"><button class="btn-circle remove"><i class="material-icons">remove</i></button>
+          <button class="btn-circle edit"><i class="material-icons">edit</i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <button class="btn-primary-filled"><i class="material-icons">add</i> Add New Product</button>
+    <button class="btn-primary-transp">
+      <i class="material-icons rotate">attach_file</i> <span>Upload Document</span>
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-5">
+    <div class="comments">
+      <label for="payment_comments">Comments or special instructions for payment</label>
+      <textarea rows="4" id="payment_comments" placeholder="Type comments here..."></textarea>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="comments">
+      <label for="po_comments">Comments or special instructions for purchase order</label>
+      <textarea rows="4" id="po_comments" placeholder="Type comments here..."></textarea>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="subtotal-price pull-right">
+      <p class="heading-2">SUBTOTAL</p>
+      <p class="heading-4-blue">500 USD</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="info">
+      <p class="heading-2">SIGNED BY</p>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="first_name">First Name</label>
+          <input type="text" class="form-control" id="first_name" placeholder="Type first name here..." />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="last_name">Last Name</label>
+          <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="company_name">Company Name</label>
+          <input type="text" class="form-control" id="company_name" placeholder="Type company name here..." />
+        </div>
+      </div>
+      <div class="row">
+          <div class="form-group col-md-8">
+            <label for="PO_valid_date">Purchase Order is Valid by</label>
+            <div class="input-group">
+              <input
+                id="PO_valid_date"
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="ddpp"
+                ngbDatepicker
+                #ddpp="ngbDatepicker"
+              />
+              <div class="input-group-append">
+                <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <p class="normal-text-bold">Date of Issue</p>
+          <p>11/14/2018</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="info">
+      <p class="heading-2">DELIVERED TO</p>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="contact_name">Contact Name</label> <input type="text" class="form-control" id="contact_name" placeholder="Typle contact name here..." />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="street_address">Street Address</label>
+          <input type="text" class="form-control" id="street_address" placeholder="Typle street address here..."/>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="city">City</label> <input type="text" class="form-control" id="city" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="zip_code">Zip Code</label> <input type="text" class="form-control" id="zip_code" placeholder="Typle zip code here..." />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="phone">Phone</label> <input type="tel" placeholder="Type phone number here..." class="form-control" id="phone" />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="expected_delivery">Expected Delivery Date</label>
+          <div class="input-group">
+            <input
+              id="expected_delivery"
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="ddp"
+              ngbDatepicker
+              #ddp="ngbDatepicker"
+            />
+            <div class="input-group-append">
+              <button class="btn glyphicon glyphicon-calendar" style="position:0;" (click)="ddp.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="btn-primary-filled pull-right next-step">Next Step &rarr;</button>
+<button class="btn-primary-transp pull-right btn-draft">Save Draft</button>
