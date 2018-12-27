@@ -25,10 +25,9 @@
       <td class="text-center">{{ client.numericId }}</td>
       <td>{{ client.company_name }}</td>
       <td>{{ client.first_name }} {{ client.last_name }}</td>
-      <td>{{ client.role }}</td>
+      <td style="text-transform: capitalize;">{{ client.role }}</td>
       <td class="text-right">
         <button class="btn round-button-primary"><i class="material-icons">remove_red_eye</i></button>
-        <button class="btn round-button-red" (click)="warning()"><i class="material-icons">delete</i></button>
       </td>
     </tr>
   </tbody>
@@ -38,5 +37,5 @@
 (pageChange)="page = $event"
 ></pagination-controls>
 
-<app-add-client></app-add-client>
+<app-client-generator></app-client-generator>
 

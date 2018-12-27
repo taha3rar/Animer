@@ -18,12 +18,4 @@ export class ClientListComponent implements OnInit {
       this.clients = clients;
     });
   }
-
-  warning() {
-    swal({
-      title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this client!',
-      icon: 'warning'
-    });
-  }
 }
