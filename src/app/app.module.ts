@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
@@ -44,8 +45,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
     ProfileModule,
     EcosystemModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+    NgxPermissionsModule.forRoot(),
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
+  exports: [NgxPermissionsModule],
   declarations: [AppComponent],
   providers: [],
   bootstrap: [AppComponent]

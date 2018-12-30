@@ -5,6 +5,7 @@ import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouteReusableStrategy } from './route-reusable-strategy';
 import { AuthenticationService } from './authentication/authentication.service';
+import { NgxPermissionsModule } from 'ngx-permissions';
 import { AuthenticationGuard } from './authentication/authentication.guard';
 import { I18nService } from './i18n.service';
 import { HttpService } from './http/http.service';
@@ -23,7 +24,8 @@ import { InvoiceService } from './api/invoice.service';
 import { ProductService } from './api/product.service';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
+  imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule, NgxPermissionsModule.forRoot()],
+  exports: [NgxPermissionsModule],
   providers: [
     AuthenticationService,
     AuthenticationGuard,

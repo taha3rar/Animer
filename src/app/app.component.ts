@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from './core/authentication/authentication.service';
 import { merge } from 'rxjs';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { environment } from '@env/environment';
 import { Logger, I18nService } from '@app/core';
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private translateService: TranslateService,
+    private authenticationService: AuthenticationService,
     // do not remove the analytics injection, even if the call in ngOnInit() is removed
     // this injection initializes page tracking through the router
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
@@ -62,5 +65,7 @@ export class AppComponent implements OnInit {
           this.titleService.setTitle(this.translateService.instant(title));
         }
       });
+    // Set permissions on every refresh
+    this.authenticationService.setPermissions(this.authenticationService.credentials);
   }
 }

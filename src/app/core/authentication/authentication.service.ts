@@ -4,6 +4,7 @@ import { ApiService } from '../api/api.service';
 import { map } from 'rxjs/operators';
 import { Credentials, LoginContext } from '../models/user/login-models';
 import { JwtService } from './jwt.service';
+import { NgxPermissionsService, NgxPermissionsObject } from 'ngx-permissions';
 
 /**
  * Provides a base for authentication workflow.
@@ -11,7 +12,11 @@ import { JwtService } from './jwt.service';
  */
 @Injectable()
 export class AuthenticationService {
-  constructor(private apiService: ApiService, private jwtService: JwtService) {}
+  constructor(
+    private apiService: ApiService,
+    private jwtService: JwtService,
+    private permissionsService: NgxPermissionsService
+  ) {}
 
   /**
    * Authenticates the user.
@@ -27,6 +32,7 @@ export class AuthenticationService {
     return this.apiService.post('/user/login', data).pipe(
       map((user: Credentials) => {
         this.jwtService.setCredentials(user, context.remember);
+        this.setPermissions(user);
         return user;
       })
     );
@@ -44,6 +50,7 @@ export class AuthenticationService {
     return this.apiService.post('/user/logout', data).pipe(
       map(() => {
         this.jwtService.setCredentials();
+        this.removePermissions();
         return true;
       })
     );
@@ -83,5 +90,23 @@ export class AuthenticationService {
   // private //make it public for testing purposes
   setCredentials(credentials?: Credentials, remember?: boolean) {
     this.jwtService.setCredentials(credentials, remember);
+  }
+
+  /**
+   * Sets the user permissions from the permissions field of the Credentials objects
+   * @return The user permissions
+   */
+  setPermissions(credentials?: Credentials): Observable<NgxPermissionsObject> {
+    this.permissionsService.addPermission(credentials.user.permissions);
+    return this.permissionsService.permissions$.pipe(permissions => {
+      return permissions;
+    });
+  }
+
+  /**
+   * Removes the user permissions from the permissions. To be called while logging out
+   */
+  removePermissions() {
+    this.permissionsService.flushPermissions();
   }
 }
