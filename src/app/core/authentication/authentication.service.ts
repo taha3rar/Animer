@@ -93,20 +93,32 @@ export class AuthenticationService {
   }
 
   /**
+   * Sets the user permissions from permissions field of the Credentials objects
+   * to be called on each the main app component to get the permissions on every refresh
+   */
+  setCurrentPermissions(): void {
+    this.setPermissions(this.credentials);
+  }
+
+  /**
    * Sets the user permissions from the permissions field of the Credentials objects
    * @return The user permissions
    */
-  setPermissions(credentials?: Credentials): Observable<NgxPermissionsObject> {
-    this.permissionsService.addPermission(credentials.user.permissions);
-    return this.permissionsService.permissions$.pipe(permissions => {
-      return permissions;
-    });
+  private setPermissions(credentials?: Credentials): Observable<NgxPermissionsObject> {
+    if (credentials != null) {
+      if (credentials.user != null) {
+        this.permissionsService.addPermission(credentials.user.permissions);
+        return this.permissionsService.permissions$.pipe(permissions => {
+          return permissions;
+        });
+      }
+    }
   }
 
   /**
    * Removes the user permissions from the permissions. To be called while logging out
    */
-  removePermissions() {
+  private removePermissions(): void {
     this.permissionsService.flushPermissions();
   }
 }

@@ -6,7 +6,6 @@ import { AuthenticationService } from './core/authentication/authentication.serv
 import { merge } from 'rxjs';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
-import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { environment } from '@env/environment';
 import { Logger, I18nService } from '@app/core';
@@ -66,6 +65,6 @@ export class AppComponent implements OnInit {
         }
       });
     // Set permissions on every refresh
-    this.authenticationService.setPermissions(this.authenticationService.credentials);
+    this.authenticationService.setCurrentPermissions();
   }
 }
