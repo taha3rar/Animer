@@ -1,12 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Invoice } from '@app/core/models/order/invoice';
-<<<<<<< HEAD
-
-=======
-import { ActivatedRoute } from '@angular/router';
-import swal from 'sweetalert';
-import { AuthenticationService } from '@app/core';
->>>>>>> Disclaimer added
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
