@@ -15,6 +15,10 @@ import { InvoiceInventoryComponent } from './invoice-generator/invoice-generator
 import { InvoiceAgriculturalProductComponent } from './invoice-generator/invoice-generator-invoice/invoice-agricultural-product/invoice-agricultural-product.component';
 // tslint:disable-next-line:max-line-length
 import { InvoiceProcessedProductComponent } from './invoice-generator/invoice-generator-invoice/invoice-processed-product/invoice-processed-product.component';
+import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,16 @@ import { InvoiceProcessedProductComponent } from './invoice-generator/invoice-ge
     InvoiceAgriculturalProductComponent,
     InvoiceProcessedProductComponent
   ],
-  imports: [CommonModule, TranslateModule, InvoiceRoutingModule, SharedModule, NgbModule],
-  providers: [InvoiceListResolver]
+  imports: [
+    CommonModule,
+    TranslateModule,
+    InvoiceRoutingModule,
+    SharedModule,
+    NgbModule,
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [InvoiceListResolver, InvoiceBuyersResolver, InvoiceSellerResolver]
 })
 export class InvoiceModule {}

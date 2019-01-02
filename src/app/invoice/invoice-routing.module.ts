@@ -7,6 +7,8 @@ import { Shell } from '@app/shell/shell.service';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
+import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -18,7 +20,11 @@ const routes: Routes = [
     },
     {
       path: 'invoice/generator',
-      component: InvoiceGeneratorComponent
+      component: InvoiceGeneratorComponent,
+      resolve: {
+        clients: InvoiceBuyersResolver,
+        seller: InvoiceSellerResolver
+      }
     },
     {
       path: 'invoice/:id',

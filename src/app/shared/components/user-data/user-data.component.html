@@ -1,0 +1,37 @@
+<div *ngIf="user">
+  <div class="row">
+    <div class="col-md-4">
+      <p *ngIf="issued_by">Issuer name</p>
+      <p *ngIf="issued_for">Recipient name</p>
+      <p>{{user.first_name}} {{user.last_name}}</p>
+    </div>
+    <div class="col-md-4">
+      <p>Company name</p>
+      <p>{{user.company_name}}</p>
+    </div>
+    <div class="col-md-4">
+      <p>Email address</p>
+      <p>{{user.email}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <p>City</p>
+      <p>{{user.city}}</p>
+    </div>
+    <div class="col-md-4">
+      <p>Street address</p>
+      <p>{{user.address}}</p>
+    </div>
+    <div class="col-md-4">
+      <p>Zip code</p>
+      <p>{{user.zipcode}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>Phone Number</p>
+      <p>{{user.phone_number}}</p>
+    </div>
+  </div>
+</div>

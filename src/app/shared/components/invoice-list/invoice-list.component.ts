@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Invoice } from '@app/core/models/order/invoice';
-import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert';
 import { AuthenticationService } from '@app/core';
 @Component({
@@ -13,7 +12,7 @@ export class InvoiceListComponent implements OnInit {
   invoices: Invoice[];
   page = 1;
 
-  constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit() {}
 

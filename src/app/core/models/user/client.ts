@@ -7,4 +7,5 @@ export class Client {
   phone_number: string;
   role: string;
   _id: string;
+  profile_picture: string;
 }

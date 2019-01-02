@@ -21,4 +21,8 @@ export class InvoicesListComponent implements OnInit {
   get userId() {
     return this.authService.currentUserId;
   }
+
+  get helpLegend() {
+    return 'Here you can see all your invoices that have been sent to you!'; // TODO: Change based on the current user role
+  }
 }

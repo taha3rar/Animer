@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { LoaderComponent } from './loader/loader.component';
 import { RoundUpPipe } from './pipes/roundup.pipe';
-import { InvoiceListComponent } from './list-components/invoice-list/invoice-list.component';
+import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { OrderListComponent } from './list-components/order-list/order-list.component';
-import { TransactionsListComponent } from './list-components/transactions-list/transactions-list.component';
-import { DocumentListComponent } from './list-components/document-list/document-list.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
+import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
+import { DocumentListComponent } from './components/document-list/document-list.component';
+import { UserDataComponent } from './components/user-data/user-data.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule],
@@ -17,7 +18,8 @@ import { DocumentListComponent } from './list-components/document-list/document-
     InvoiceListComponent,
     OrderListComponent,
     TransactionsListComponent,
-    DocumentListComponent
+    DocumentListComponent,
+    UserDataComponent
   ],
   exports: [
     LoaderComponent,
@@ -25,7 +27,8 @@ import { DocumentListComponent } from './list-components/document-list/document-
     InvoiceListComponent,
     OrderListComponent,
     TransactionsListComponent,
-    DocumentListComponent
+    DocumentListComponent,
+    UserDataComponent
   ]
 })
 export class SharedModule {}

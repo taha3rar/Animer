@@ -10,5 +10,5 @@ export class User {
   city: string;
   zipcode: string;
   phone_number: string;
-  contact_by: [string];
+  contact_by: string[];
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService, I18nService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
+import { defaultValues } from '@app/shared/_helpers/default_values';
 
 declare const $: any;
 
@@ -60,7 +61,7 @@ export class HeaderComponent implements OnInit {
       return this.credentials.user.personal_information.profile_picture;
     }
 
-    return '../../../assets/img/profile-img.jpg'; // TODO: Change this default picture
+    return defaultValues.profile_picture;
   }
 }
 

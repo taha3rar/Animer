@@ -1,112 +1,29 @@
-<div class="row margin-top" >
-  <div class="col-md-2">
-    <div class="card">
-      <div>
-        <input type="radio" class="form_radio" id="supplierSelection1" name="supplier" />
-        <label for="supplierSelection1" class="form_radio_label"> <span class="form_radio_btn"></span> </label>
-        <p class="pull-right">#231</p>
+<div class="panel panel-tab">
+  <div class="panel-body">
+    <div class="panel-header">
+      <div><p>My Buyers</p></div>
+      <button class="btn-primary-filled pull-right next-step">Next Step &rarr;</button>
+    </div>
+    <div class="padding-all-2">
+      <div class="row margin-top" >
+        <div class="col-md-2" *ngFor="let client of (clients | paginate: { itemsPerPage: 6, currentPage: page })">
+          <div class="card">
+            <div>
+              <input type="radio" class="form_radio" id="{{client.numericId}}" name="supplier" [value]="client" [(ngModel)]="invoice.buyer" />
+              <label for="{{client.numericId}}" class="form_radio_label"> <span class="form_radio_btn"></span> </label>
+              <p class="pull-right">#{{client.numericId}}</p>
+            </div>
+            <div>
+              <figure class="img-circular-md" [style.background-image]="'url(' + profilePicture(client) + ')'"></figure>
+            </div>
+            <div>
+              <p class="heading-2">{{client.first_name}} {{client.last_name}}</p>
+              <p>{{client.company_name}}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <figure class="img-circular-md" style="background-image: url('../../../../assets/img/prof-img2.jpg')"></figure>
-      </div>
-      <div>
-        <p class="heading-2">Michael James</p>
-        <p>Hogwarts</p>
-      </div>
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </div>
   </div>
-  <div class="col-md-2">
-    <div class="card">
-      <div>
-        <input type="radio" class="form_radio" id="supplierSelection2" name="supplier" />
-        <label for="supplierSelection2" class="form_radio_label"> <span class="form_radio_btn"></span> </label>
-        <p class="pull-right">#231</p>
-      </div>
-      <div>
-        <figure
-          class="img-circular-md"
-          style="background-image: url('../../../../assets/img/woman_placeholder.svg')"
-        ></figure>
-      </div>
-      <div>
-        <p class="heading-2">Alexa Benn</p>
-        <p>Hogwarts</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="card">
-      <div>
-        <input type="radio" class="form_radio" id="supplierSelection3" name="supplier" />
-        <label for="supplierSelection3" class="form_radio_label"> <span class="form_radio_btn"></span> </label>
-        <p class="pull-right">#231</p>
-      </div>
-      <div>
-        <figure
-          class="img-circular-md"
-          style="background-image: url('../../../../assets/img/male_placeholder.jpg')"
-        ></figure>
-      </div>
-      <div>
-        <p class="heading-2">Tom Bennett</p>
-        <p>Bennett Industries</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="card">
-      <div>
-        <input type="radio" class="form_radio" id="supplierSelection4" name="supplier" />
-        <label for="supplierSelection4" class="form_radio_label"> <span class="form_radio_btn"></span> </label>
-        <p class="pull-right">#231</p>
-      </div>
-      <div>
-        <figure
-          class="img-circular-md"
-          style="background-image: url('../../../../assets/img/profile-img.jpg')"
-        ></figure>
-      </div>
-      <div>
-        <p class="heading-2">Tom Bennett</p>
-        <p>Bennett Industries</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2"><div class="card">
-      <div>
-        <input type="radio" class="form_radio" id="supplierSelection5" name="supplier" />
-        <label for="supplierSelection5" class="form_radio_label"> <span class="form_radio_btn"></span> </label>
-        <p class="pull-right">#231</p>
-      </div>
-      <div>
-        <figure
-          class="img-circular-md"
-          style="background-image: url('../../../../assets/img/prof-img3.jpg')"
-        ></figure>
-      </div>
-      <div>
-        <p class="heading-2">Tom Bennett</p>
-        <p>Bennett Industries</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="card">
-      <div>
-        <input type="radio" class="form_radio" id="supplierSelection6" name="supplier" />
-        <label for="supplierSelection6" class="form_radio_label"> <span class="form_radio_btn"></span> </label>
-        <p class="pull-right">#231</p>
-      </div>
-      <div>
-        <figure
-          class="img-circular-md"
-          style="background-image: url('../../../../assets/img/woman_placeholder.svg')"
-        ></figure>
-      </div>
-      <div>
-        <p class="heading-2">Tom Bennett</p>
-        <p>Bennett Industries</p>
-      </div>
-  </div>
-</div>
 </div>

@@ -15,7 +15,7 @@ export class UserService extends BaseService {
     super(_apiService, '/user');
   }
 
-  getClientsFromUser(id: string): Observable<Client[]> {
+  getClientsByUser(id: string): Observable<Client[]> {
     return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
   }
 
