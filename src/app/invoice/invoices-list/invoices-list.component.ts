@@ -10,7 +10,6 @@ import { Invoice } from '@app/core/models/order/invoice';
 })
 export class InvoicesListComponent implements OnInit {
   invoices: Invoice[];
-  page = 1;
   constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
 
   ngOnInit() {
@@ -21,13 +20,5 @@ export class InvoicesListComponent implements OnInit {
 
   get userId() {
     return this.authService.currentUserId;
-  }
-
-  warning() {
-    swal({
-      title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this invoice!',
-      icon: 'warning'
-    });
   }
 }

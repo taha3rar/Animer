@@ -6,45 +6,9 @@
 </div>
 
 <button class="btn-primary-transp pull-right">
-    <i class="material-icons">arrow_upward</i> <span translate>Export All Invoices</span>
-  </button>
+  <i class="material-icons">arrow_upward</i> <span translate>Export All Invoices</span>
+</button>
 
-  <button class="btn-primary-filled pull-right"><i class="material-icons">add</i> <span translate>New Invoice</span></button>
+  <button class="btn-primary-filled pull-right" data-toggle="stepper" routerLink="/invoice/generator"><i class="material-icons">add</i> <span translate>New Invoice</span></button>
 
-<h1 translate class="main-title">Invoices List</h1>
-
-<table class="table main-table">
-  <thead>
-    <tr>
-      <th translate class="text-center">ID</th>
-      <th translate>Issued at</th>
-      <th translate>Issued for</th>
-      <th translate>Signed by</th>
-      <th translate>Total due</th>
-      <th translate class="text-right">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let invoice of invoices | paginate: { itemsPerPage: 6, currentPage: page }">
-      <td class="text-center">{{invoice.numericId}}</td>
-      <td>{{invoice.date_created | date: 'dd/MM/yyyy'}}</td>
-      <td>
-        <span *ngIf="userId == invoice.seller._id">{{ invoice.buyer.company_name }}</span>
-        <span *ngIf="userId == invoice.buyer._id">{{ invoice.seller.company_name }}</span>
-      </td>
-      <td>
-        <span *ngIf="userId == invoice.seller._id">{{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }}</span>
-        <span *ngIf="userId == invoice.buyer._id">{{ invoice.seller.first_name }} {{ invoice.seller.last_name }}</span>
-      </td>
-      <td>{{invoice.total_due}} {{invoice.currency}}</td>
-      <td class="text-right">
-        <a class="btn round-button-primary" routerLink="/invoice/2"><i class="material-icons">remove_red_eye</i></a>
-        <button class="btn round-button-red" (click)="warning()"><i class="material-icons">delete</i></button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<pagination-controls
-(pageChange)="page = $event"
-></pagination-controls>
+<app-invoice-list [invoices]="invoices"></app-invoice-list>

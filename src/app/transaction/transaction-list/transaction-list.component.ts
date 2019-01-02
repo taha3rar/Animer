@@ -11,20 +11,11 @@ import swal from 'sweetalert';
 export class TransactionListComponent implements OnInit {
   transactions: Transaction[];
 
-  page = 1;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data.subscribe(({ transactions }) => {
       this.transactions = transactions;
-    });
-  }
-
-  warning() {
-    swal({
-      title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this product!',
-      icon: 'warning'
     });
   }
 }

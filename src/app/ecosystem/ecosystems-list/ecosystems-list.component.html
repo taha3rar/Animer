@@ -6,7 +6,7 @@
   <p>Here you can see all your ecosystems and create new ones!</p>
 </div>
 
-<button class="btn-primary-filled pull-right">
+<button class="btn-primary-filled pull-right" data-toggle="wizard" data-target="#newEcosystem">
     <i class="material-icons">add</i> <span>New Ecosystem</span>
   </button>
 
@@ -43,3 +43,5 @@
 <pagination-controls
 (pageChange)="page = $event"
 ></pagination-controls>
+
+<app-ecosystem-generator></app-ecosystem-generator>

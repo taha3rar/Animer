@@ -18,10 +18,30 @@
     overflow: hidden;
   }
 
+  &-content-lg {
+    min-height: 48rem;
+    @include absCenter;
+    width: 63%;
+    background-color: white;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
   &-content-sm {
     min-height: 62rem;
     @include absCenter;
     width: 23.3%;
+    background-color: white;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  &-content-sm-2 {
+    min-height: 62rem;
+    @include absCenter;
+    width: 37%;
     background-color: white;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
     border-radius: 5px;

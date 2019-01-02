@@ -34,15 +34,7 @@ import { OrderGeneratorReviewOrderComponent } from './order-generator/order-gene
     OrderGeneratorSummaryComponent,
     OrderGeneratorReviewOrderComponent
   ],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    OrderRoutingModule,
-    SharedModule,
-    NgxPaginationModule,
-    NgbModule,
-    FormsModule
-  ],
+  imports: [SharedModule, CommonModule, TranslateModule, OrderRoutingModule, NgbModule, FormsModule],
   providers: [OrderListResolver]
 })
 export class OrderModule {}

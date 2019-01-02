@@ -1,3 +1,4 @@
+import { ClientComponent } from './client/client.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -13,6 +14,10 @@ const routes: Routes = [
       component: ClientListComponent,
       resolve: { clients: ClientListResolver },
       data: { title: extract('Clients') }
+    },
+    {
+      path: 'client/:id',
+      component: ClientComponent
     }
   ])
 ];

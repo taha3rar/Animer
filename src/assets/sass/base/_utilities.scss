@@ -78,3 +78,19 @@
 .padding-all-2 {
   padding: 2rem;
 }
+
+.display-inline {
+  display: flex;
+
+  & :not(:last-child) {
+    margin-right: 1rem;
+  }
+}
+
+.disclaimer {
+  display: flex;
+
+  & div:first-child {
+    margin-right: 2.5rem;
+  }
+}

@@ -1,0 +1,85 @@
+<div class="modal-box" id="newEcosystem">
+  <div class="modal-box-content">
+    <div class="stepper">
+      <div class="modal-box-heading">
+        <i class="material-icons pull-right" data-dismiss="modal">close</i>
+        <h2 translate class="modal-title">Create Client</h2>
+      </div>
+      <div class="modal-box-left">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#ecosystem-details" data-toggle="tab"
+              ><span class="step-number">1</span> <span translate>Ecosystem details</span></a
+            >
+          </li>
+          <li class="disabled">
+            <a href="#ecosystem-clients" data-toggle="tab"
+              ><div class="step-number">2</div>
+              <span translate>Ecosystem clients</span></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="modal-box-right">
+        <div class="tab-content">
+          <div class="tab-pane active" id="ecosystem-details">
+            <div class="row margin-none">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="ecosystem-name">Ecosystem Name</label>
+                  <input id="ecosystem-name" type="text" class="form-control" placeholder="Type ecosystem name here...">
+                </div>
+              </div>
+            </div>
+            <div class="row margin-none">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ecosystem-desc">Ecosystem Description</label>
+                    <textarea id="ecosystem-desc" class="form-control" type="text" rows="4" placeholder="Type ecosystem name here..."></textarea>
+                  </div>
+                </div>
+              </div>
+              <button class="btn-primary-filled pull-right next-step">Next Step &rarr; </button>
+          </div>
+          <div class="tab-pane" id="ecosystem-clients">
+            <p class="heading-2">My clients list</p>
+              <div style="margin: 0 auto;">
+                  <table class="table main-table">
+                      <thead>
+                        <tr>
+                          <th>Add to Ecosystem</th>
+                          <th>ID</th>
+                          <th>Company</th>
+                          <th>Contact</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><input type="checkbox" class="checkbox" id="checkbox1"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label></td>
+                          <td>335</td>
+                          <td>Stark industries</td>
+                          <td>Harry Potter</td>
+                        </tr>
+                        <tr>
+                          <td><input type="checkbox" class="checkbox" id="checkbox2"/><label class="checkbox_label" for="checkbox2"><span class="form_checkbox_btn"></span></label></td>
+                          <td>342</td>
+                          <td>Stark industries</td>
+                          <td>Harry Potter</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox" id="checkbox3"/><label class="checkbox_label" for="checkbox3"><span class="form_checkbox_btn"></span></label></td>
+                            <td>342</td>
+                            <td>Stark industries</td>
+                            <td>Harry Potter</td>
+                          </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <button class="btn-primary-filled pull-right">Create Ecosystem</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

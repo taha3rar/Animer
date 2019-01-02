@@ -1,0 +1,64 @@
+@import "../../../assets/sass/abstracts/variables";
+
+.back {
+  cursor: pointer;
+}
+.client-tabs {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  height: calc(100vh - 6rem);
+  width: 15%;
+  background-image: linear-gradient(white, #f2f2f2);
+  padding: 1.5rem 2rem;
+  border-right: 1px solid $light-gray-2;
+  display: flex;
+  flex-direction: column;
+
+  & div:nth-child(2) {
+    align-self: center;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+
+  & div:nth-child(3) {
+    font-size: 1.55rem;
+    padding-left: 5rem;
+    margin-left: -1rem;
+    overflow: hidden;
+    ul {
+      list-style: none;
+
+      li {
+        margin-bottom: 1rem;
+      }
+
+      li a {
+        color: rgb(122, 122, 122);
+        text-decoration: none;
+      }
+
+      .active > a {
+        font-weight: bold;
+        font-size: 1.55rem;
+        color: $primary-color;
+        transition: all 0.3s;
+      }
+    }
+  }
+
+  & div:not(:last-child) {
+    margin-bottom: 5rem;
+  }
+}
+
+.tabs-content {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 85%;
+  height: 95%;
+  padding: 3.5rem 3.7rem;
+}

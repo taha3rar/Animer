@@ -1,0 +1,42 @@
+<div class="wrapper wizard" >
+<h1 class="main-title btn-main" (click)="back()"><a class="material-icons">keyboard_backspace</a> Invoices</h1>
+
+  <div class="stepper-wrapper">
+    <div class="stepper">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a data-toggle="tab" class="label" href="#chooseBuyer"> <span class="round-tab">1</span>Choose a Buyer </a>
+        </li>
+        <li class="disabled">
+          <a data-toggle="tab" class="label" href="#fillInvoice"> <span class="round-tab">2</span>Fill Invoice</a>
+        </li>
+        <li class="disabled">
+          <a data-toggle="tab" class="label" href="#reviewSend"> <span class="round-tab">3</span> Review and Send </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="chooseBuyer">
+          <div class="panel panel-tab">
+            <div class="panel-body">
+              <div class="panel-header">
+                <div><p>My Buyers</p></div>
+                <button class="btn-primary-filled next-step">Next Step &rarr;</button>
+              </div>
+              <div class="padding-all-2"><app-invoice-generator-buyers></app-invoice-generator-buyers></div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="fillInvoice">
+          <app-invoice-generator-invoice></app-invoice-generator-invoice>
+        </div>
+
+        <div class="tab-pane" id="reviewSend">
+          <div class="panel panel-tab">
+            <div class="panel-body"><app-invoice [generateInvoice]="true"></app-invoice></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

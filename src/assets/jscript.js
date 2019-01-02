@@ -4,9 +4,19 @@ $(function() {
       $(elem).click();
     }
 
+    $(document).on('click', '[data-toggle="popup"]', function(e) {
+      $targetModal = $(this).data('target');
+      $($targetModal).show();
+      $($targetModal)
+        .find('[data-dismiss="modal"]')
+        .on('click', function() {
+          $($targetModal).hide();
+        });
+    });
+
     handleStepper();
 
-    $(document).on('click', '[data-toggle="wizard"]', function(e) {
+    $(document).on('click', '[data-toggle="wizard"]', function() {
       $targetModal = $(this).data('target');
       $($targetModal).show();
       $($targetModal)
@@ -17,11 +27,12 @@ $(function() {
       handleStepper();
     });
 
-    $(document).on('click', '[data-toggle="stepper"]', function(e) {
+    $(document).on('click', '[data-toggle="stepper"]', function() {
       handleStepper();
     });
 
     function handleStepper() {
+      console.log('onShow');
       var $progressStepper = $('.stepper'),
         $tab_active,
         $tab_next,

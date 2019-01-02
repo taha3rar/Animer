@@ -1,0 +1,88 @@
+<div class="modal-box" id="newAgriProduct">
+  <div class="modal-box-content-sm-2">
+    <div class="modal-box-heading">
+      <i class="material-icons pull-right" data-dismiss="modal">close</i>
+      <h2 translate class="modal-title">Add Agricultural Product</h2>
+    </div>
+    <div class="padding-all">
+      <p class="heading-2">Product</p>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="product-name">Product Name</label>
+          <input type="text" id="product-name" class="form-control" placeholder="Ex. Green coffee beans" />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="variety">Variety</label>
+          <input type="text" id="variety" class="form-control" placeholder="Ex. Kona" />
+        </div>
+      </div>
+      <p class="heading-2">Amount</p>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="weight-unit">Weight Unit</label>
+          <select id="weight-unit" class="form-control">
+            <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="total-amount">Total Amount</label>
+          <input type="number" min="0" id="total-amount" class="form-control" placeholder="Ex. 100" />
+        </div>
+      </div>
+      <p class="heading-2">Packcage</p>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="product-name">Package Type</label>
+          <input type="text" id="package-type" class="form-control" placeholder="Ex. Box" />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="variety">Total Number of Packages</label>
+          <input type="text" id="total-packages" class="form-control" placeholder="Ex. 10" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="average-amount-packaged-product">Average Amount per Packaged Product</label>
+          <input type="number" min="0" id="average-amount-packaged-product" class="form-control" placeholder="Ex. 10" />
+        </div>
+      </div>
+      <p class="heading-2">Price</p>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="product-name">Price per</label>
+          <input type="text" id="price-per" class="form-control" placeholder="Ex. 20" />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="currecny">Currency</label>
+          <select id="currency" class="form-control">
+            <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="package-price">Price per Package</label>
+          <input type="text" class="form-control" id="package-price" placeholder="Ex. 15" />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="total-price">Total Price</label>
+          <input type="text" id="total-price" class="form-control" placeholder="Ex. 150" />
+        </div>
+      </div>
+      <div class="center-text-btn">
+          <span class="heading-2 margin-bottom ">Add to Inventory</span>
+          <div class="switch">
+            <input
+              id="add_to_inventory_switch"
+              class="cmn-toggle cmn-toggle-round-flat"
+              type="checkbox"
+              checked
+            />
+            <label for="add_to_inventory_switch"></label>
+          </div>
+        </div>
+      <button class="btn-primary-filled pull-right">Add Product</button>
+    </div>
+  </div>
+</div>

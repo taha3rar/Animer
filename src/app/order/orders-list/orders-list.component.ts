@@ -12,32 +12,11 @@ export class OrdersListComponent implements OnInit {
   orders: Order[];
   page = 1;
 
-  constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data.subscribe(({ orders }) => {
       this.orders = orders;
-    });
-  }
-
-  get userId() {
-    return this.authService.currentUserId;
-  }
-
-  hasProcessedProduct(order: Order) {
-    for (let i = 0; i < order.products.length; i++) {
-      if (order.products[i].product_type === 'processed') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  warning() {
-    swal({
-      title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this order!',
-      icon: 'warning'
     });
   }
 }

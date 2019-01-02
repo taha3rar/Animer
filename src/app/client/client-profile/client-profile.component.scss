@@ -1,0 +1,57 @@
+@import "../../../assets/sass/abstracts/variables";
+
+.personal-details-card {
+  background-image: url(../../../assets/img/user.png);
+  background-position-x: 107.5%;
+  background-position-y: 76px;
+  background-size: 210px;
+  background-repeat: no-repeat;
+  font-size: 1.5rem;
+  min-height: 280px;
+  padding: 2.5rem 3rem;
+  margin-bottom: 3rem;
+}
+
+.company-details-card {
+  background-image: url(../../../assets/img/company.png);
+  background-position-x: 101%;
+  background-position-y: 78px;
+  background-size: 210px;
+  background-repeat: no-repeat;
+  font-size: 1.5rem;
+  min-height: 280px;
+  padding: 2.5rem 3rem;
+  margin-bottom: 3rem;
+}
+
+.status-bar {
+  margin-bottom: 10px;
+  min-width: 25%;
+  text-align: center;
+  background-color: white;
+  float: left;
+  min-height: 100%;
+  font-size: 1.5rem;
+  border-right: 1px solid $light-gray-2;
+  padding: 1rem;
+  font-weight: bold;
+
+  &:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  p:first-child {
+    padding-top: 1.5rem;
+    font-size: 3rem;
+  }
+}
+
+.col-md-12 {
+  border: 1px solid $light-gray-2;
+}

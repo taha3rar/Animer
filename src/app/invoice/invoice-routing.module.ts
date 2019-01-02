@@ -1,3 +1,4 @@
+import { InvoiceGeneratorComponent } from './invoice-generator/invoice-generator.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -14,6 +15,10 @@ const routes: Routes = [
       component: InvoicesListComponent,
       resolve: { invoices: InvoiceListResolver },
       data: { title: extract('Invoices') }
+    },
+    {
+      path: 'invoice/generator',
+      component: InvoiceGeneratorComponent
     },
     {
       path: 'invoice/:id',

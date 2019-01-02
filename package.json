@@ -8,7 +8,6 @@
     "start": "ng serve --aot --configuration=dev",
     "start-local": "ng serve --aot --configuration=local",
     "start-staging": "ng serve --aot --configuration=staging",
-    "start-prod": "ng serve --prod",
     "lint": "ng lint && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
     "test": "ng test",
     "test:ci": "npm run lint -s && ng test --code-coverage --watch=false",

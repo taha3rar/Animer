@@ -1,0 +1,16 @@
+.card {
+  div:nth-child(2) {
+    align-self: center;
+    text-align: center;
+  }
+
+  div:nth-child(3) {
+    align-self: center;
+    text-align: center;
+
+    p:nth-child(2) {
+      color: #8d8d8d;
+      font-weight: 600;
+    }
+  }
+}
