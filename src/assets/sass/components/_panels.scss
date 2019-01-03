@@ -101,12 +101,12 @@
       list-style: none;
       width: 100%;
       height: 18%;
+      display: block;
       border-bottom: 1px solid $light-gray-2;
       padding: 2.3rem;
       font-size: 1.5rem;
       font-weight: 700;
       color: $dark-gray-2;
-
       &-number {
         background-color: $light-gray-2;
         @include stepNumber;

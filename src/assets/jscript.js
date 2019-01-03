@@ -10,7 +10,7 @@ $(function() {
       $($targetModal)
         .find('[data-dismiss="modal"]')
         .on('click', function() {
-          $($targetModal).hide();
+          $($targetModal).fadeOut('fast');
         });
     });
 
@@ -22,7 +22,7 @@ $(function() {
       $($targetModal)
         .find('[data-dismiss="modal"]')
         .on('click', function() {
-          $($targetModal).hide();
+          $($targetModal).fadeOut('fast');
         });
       handleStepper();
     });
@@ -32,7 +32,6 @@ $(function() {
     });
 
     function handleStepper() {
-      console.log('onShow');
       var $progressStepper = $('.stepper'),
         $tab_active,
         $tab_next,

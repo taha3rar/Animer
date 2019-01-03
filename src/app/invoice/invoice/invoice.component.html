@@ -1,4 +1,4 @@
-<h1 *ngIf="!generateInvoice" class="main-title btn-main" (click)="back()">
+<h1 *ngIf="!generateInvoice" class="main-title btn-main margin-bottom-2" (click)="back()">
   <a class="material-icons">keyboard_backspace</a> Invoices
 </h1>
 <div class="col-md-12">
@@ -107,9 +107,9 @@
             <button *ngIf="generateInvoice" class="btn-primary-filled pull-right">Send Invoice</button>
             <button class=" btn-primary-transp pull-right">Download PDF</button>
             <div class="disclaimer" *ngIf="generateInvoice">
-              <div>
+            <div>
             <input type="checkbox" class="checkbox" id="checkbox1"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label>
-          </div>
+            </div>
             <p>I have read and accepted <a style="color:blue; cursor:pointer;" (click)="disclaimerPopup()">the disclaimer</a>.</p>
           </div>
     </div>

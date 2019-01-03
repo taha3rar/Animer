@@ -51,7 +51,7 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="phone">Phone Number</label> <input type="tel" class="form-control" id="phone" />
+                  <label for="tel">Phone Number</label> <input type="tel" class="form-control" id="phone" placeholder="Type phone number here..." />
                 </div>
                 <div class="form-group col-md-6">
                   <label for="last_name">Contact Id</label>
@@ -61,29 +61,39 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label>Profile Type</label>
-                  <div class="radio margin-top-none">
-                    <label><input type="radio" name="seller_type" checked />Seller of agricultural products</label>
-                  </div>
-                  <div class="radio">
-                    <label><input type="radio" name="seller_type" />Seller of processed products</label>
-                  </div>
-                  <label>Send Invitation By</label>
-                  <div class="checkbox margin-top-none">
-                    <label><input type="checkbox" value="email" />Email Address</label>
-                  </div>
-                  <div class="checkbox">
-                    <label><input type="checkbox" value="phone" />Phone Number</label>
-                  </div>
+                  <div class="margin-bottom">
+                  <input type="radio" class="form_radio" id="agriSeller" name="profile_type" />
+                  <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
+                  <label style="font-weight:100;">Seller of agricultural products </label>
+                </div>
+                <div>
+                    <input type="radio" class="form_radio" id="agriBuyer" name="profile_type" />
+                    <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
+                    <label style="font-weight:100;">Buyer of agricultural products </label>
+                </div>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="additional_details">Additional details</label>
-                  <textarea
-                    type="text"
-                    class="form-control"
-                    id="additional_details"
-                    rows="3"
-                    placeholder="Type additional details here..."
-                  ></textarea>
+                    <label for="additional_details">Additional details</label>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      id="additional_details"
+                      rows="2"
+                      placeholder="Type additional details here..."
+                    ></textarea>
+                  </div>
+              </div>
+              <div class="form-row" style="margin-bottom:2rem;">
+                <div class="col">
+                  <label>Send invitation by</label><br>
+                  <div>
+                  <input type="checkbox" class="checkbox" id="checkbox_sms"/><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
+                  <label for="checkbox_sms" style="font-weight:100;">SMS</label>
+                </div>
+                <div>
+                    <input type="checkbox" class="checkbox" id="checkbox_phone"/><label class="checkbox_label" for="checkbox_phone"><span class="form_checkbox_btn"></span></label>
+                    <label for="checkbox_sms" style="font-weight:100;">Phone Number</label>
+                </div>
                 </div>
               </div>
             </div>
@@ -163,13 +173,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><input type="checkbox" value="" /></td>
+                    <td><input type="checkbox" class="checkbox" id="checkbox1"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label>
+                    </td>
                     <td>ECO A</td>
                     <td>Sellers</td>
                     <td>5 members</td>
                   </tr>
                   <tr>
-                    <td><input type="checkbox" value="" /></td>
+                    <td><input type="checkbox" class="checkbox" id="checkbox2"/><label class="checkbox_label" for="checkbox2"><span class="form_checkbox_btn"></span></label>
                     <td>ECO A</td>
                     <td>Sellers</td>
                     <td>5 members</td>
