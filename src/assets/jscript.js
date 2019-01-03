@@ -1,5 +1,24 @@
 $(function() {
   $(document).ready(function() {
+    $('#toggle').change(function() {
+      if ($(this).is(':checked')) {
+        $('.sidebar-wrapper').animate({
+          width: 'toggle'
+        });
+      } else {
+        $('.sidebar-wrapper').animate({
+          width: 'hide'
+        });
+      }
+    });
+
+    $(window).resize(function() {
+      if ($(window).width() > 580) {
+        console.log('true');
+        $('.sidebar-wrapper').show();
+      }
+    });
+
     function triggerClick(elem) {
       $(elem).click();
     }
@@ -50,6 +69,7 @@ $(function() {
       });
 
       $btn_next.on('click', function() {
+        console.log('clicked');
         $tab_active = $progressStepper.find('.active');
         $tab_active.next().addClass('completed');
         $tab_active.addClass('completed');

@@ -11,3 +11,23 @@
     background-color: white !important;
   }
 }
+
+.user-image {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+
+  & :first-child {
+    margin-right: 6px;
+  }
+}
+
+#flex-notif {
+  display: flex;
+
+  & :nth-child(2) {
+    margin-top: -5.5px;
+    margin-left: -3rem;
+  }
+}

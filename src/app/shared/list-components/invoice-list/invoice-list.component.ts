@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Invoice } from '@app/core/models/order/invoice';
+import swal from 'sweetalert';
+
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',

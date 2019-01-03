@@ -1,12 +1,16 @@
 <!-- Top Navbar -->
 <div class="navbar-wrapper">
     <div class="navigation-bar">
+        <label class="checkbox-toggle" for="toggle">&#9776;</label>
+        <input type="checkbox" id="toggle"/>
       <div class="navigation-brand"><img src="../../../assets/img/logo.png" alt="logo" class="brand-img" /></div>
       <ul class="navigation-right">
         <li>
           <div class="dropdown">
-            <i class="material-icons" data-toggle="dropdown" aria-expanded="true">notifications</i>
+            <div id="flex-notif" data-toggle="dropdown" aria-expanded="true">
+            <i class="material-icons">notifications</i>
             <span class="notification">5</span>
+          </div>
             <ul class="dropdown-menu pull-right notifications">
               <li class="dropdown-item">
                 <div class="row">
@@ -34,13 +38,12 @@
             </ul>
           </div>
         </li>
-
-        <li>
-          <figure class="img-shape"><img src="{{ profilePicture }}" class="user-img" /></figure>
-        </li>
         <li id="user-li">
           <div ngbDropdown placement="bottom-right">
+            <div class="user-image">
+            <figure class="img-shape"><img src="{{ profilePicture }}" class="user-img" /></figure>
             <a  id="user-dropdown" class="dropdown-toggle dropdown-button" data-toggle="dropdown" aria-expanded="true" ngbDropdownToggle>{{ username }}</a>
+          </div>
             <div ngbDropdownMenu aria-labelledby="user-dropdown">
               <ul>
               <li class="dropdown-item" routerLink= "/profile">

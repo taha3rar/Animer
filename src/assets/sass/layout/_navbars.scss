@@ -6,10 +6,10 @@
 
   .navbar-wrapper {
     width: calc(100% - 17rem);
-    padding: 1.8rem 1.6rem;
-    right: 0;
+    padding: 1.5rem 1.6rem;
     background-color: #fff;
     height: 6rem;
+    right: 0;
     position: fixed;
     z-index: 1000;
     border-bottom: 1px solid #e5e5e5;
@@ -26,6 +26,7 @@
       .navigation-brand {
         position: absolute;
         left: 2rem;
+        top: 0;
       }
 
       .brand-img {
@@ -36,9 +37,10 @@
       .navigation-right {
         position: absolute;
         right: 3rem;
+        top: 0;
 
         li:not(:last-child) {
-          margin-right: 1rem;
+          margin-right: 2rem;
         }
       }
 
@@ -92,6 +94,7 @@
     left: 0;
     top: 0;
     bottom: 0;
+    z-index: 100;
     width: 17rem;
     background-image: linear-gradient(#fff, #f9f9f9);
     border-right: 1px solid #e5e5e5;
@@ -158,21 +161,18 @@
 }
 
 .notification {
-  position: absolute;
-  top: 0;
   border: 1px solid #fff;
-  right: 1.2rem;
-  font-size: 9px;
+  font-size: 10px;
   background: #f44336;
   color: #ffffff;
-  min-width: 17px;
-  padding: 0px 5px;
-  height: 1.7rem;
-  border-radius: 1rem;
-  text-align: center;
-  line-height: 1.7rem;
-  vertical-align: middle;
-  display: block;
+  width: 19px;
+  font-weight: bold;
+  line-height: normal;
+  height: 19px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-tabs > li.active > a,
@@ -181,4 +181,43 @@
 .nav-tabs {
   border: none;
   font-size: 1.4rem;
+}
+
+.checkbox-toggle {
+  display: none;
+}
+
+.dots {
+  display: none;
+}
+
+@media screen and (max-width: 580px) {
+  .sidebar-wrapper {
+    display: none;
+  }
+  .main-panel {
+    width: 100% !important;
+  }
+  .navbar-wrapper {
+    width: 100% !important;
+  }
+
+  .navigation-right {
+    right: 1rem !important;
+  }
+  .checkbox-toggle {
+    font-size: 2rem;
+    display: inline-block;
+    width: 2rem;
+    margin: 0;
+  }
+
+  .brand-img,
+  .navigation-right li:first-child {
+    display: none !important;
+  }
+}
+
+#toggle {
+  display: none;
 }
