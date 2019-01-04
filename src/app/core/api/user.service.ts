@@ -23,6 +23,10 @@ export class UserService extends BaseService {
     return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
   }
 
+  saveInvitedClient(client: User): Observable<any> {
+    return this.apiService.post('/user/client', client).pipe(map(data => data));
+  }
+
   // TODO: Type return object properly, not use any. Check in the backend. Also move this method to another service
   saveProfileImage(image: string): Observable<any> {
     const body = { image: image };

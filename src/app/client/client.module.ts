@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientRoutingModule } from './client-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClientListComponent } from './client-list/client-list.component';
@@ -16,7 +17,16 @@ import { ClientDocumentsComponent } from './client-documents/client-documents.co
 import { SharedModule } from '@app/shared';
 
 @NgModule({
-  imports: [CommonModule, ClientRoutingModule, TranslateModule, NgbModule, SharedModule, NgxPaginationModule],
+  imports: [
+    CommonModule,
+    ClientRoutingModule,
+    TranslateModule,
+    NgbModule,
+    SharedModule,
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   // tslint:disable-next-line:max-line-length
   declarations: [
     ClientListComponent,

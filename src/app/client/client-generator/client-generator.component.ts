@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../core/authentication/authentication.service';
+import { User } from '../../core/models/user/user';
 
 declare const $: any;
 
@@ -8,9 +10,15 @@ declare const $: any;
   styleUrls: ['./client-generator.component.scss']
 })
 export class ClientGeneratorComponent implements OnInit {
-  constructor() {}
+  private invitedClient: User;
 
-  ngOnInit() {}
+  constructor(private authenticationService: AuthenticationService) {}
+
+  ngOnInit() {
+    this.invitedClient = new User();
+    this.invitedClient.roles = ['seller'];
+    console.log(this.authenticationService.credentials);
+  }
 
   targetStep(step: string) {
     const tab = $('a[href="#' + step + '"]');

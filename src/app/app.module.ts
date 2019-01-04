@@ -1,7 +1,7 @@
 import { ProfileModule } from './profile/profile.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -26,7 +26,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot(),
