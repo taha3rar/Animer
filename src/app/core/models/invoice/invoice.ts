@@ -1,5 +1,5 @@
-import { User } from './user';
-import { Product } from './product';
+import { User } from '../order/user';
+import { Product } from '../order//product';
 
 export class Invoice {
   _id: string;
@@ -18,7 +18,7 @@ export class Invoice {
   sign_by: {
     first_name: string;
     last_name: string;
-    company_title: string;
+    company_name: string;
     date: string;
   };
   deliver_to: {
@@ -26,11 +26,11 @@ export class Invoice {
     address: string;
     city: string;
     zip_code: string;
-    phone: string;
+    phone_number: string;
     expected_delivery_date: string;
   };
-  order_comments: string;
-  order_id: string;
+  order_comments: string; // TODO: Check if it can be deleted
+  order_id: string; // Used for single invoice
   personal_po_id: string;
   invoice_comment: string;
   payment_comments: string;
@@ -39,4 +39,28 @@ export class Invoice {
   draft: boolean;
   total_packages: Number;
   total_weight: Number;
+
+  constructor() {
+    const date = Date.now();
+    this.sign_by = {
+      date: date.toString(),
+      first_name: '',
+      last_name: '',
+      company_name: ''
+    };
+
+    this.deliver_to = {
+      contact_name: '',
+      address: '',
+      city: '',
+      zip_code: '',
+      phone_number: '',
+      expected_delivery_date: ''
+    };
+
+    this.buyer = new User();
+    this.seller = new User();
+
+    this.date_created = date.toString();
+  }
 }

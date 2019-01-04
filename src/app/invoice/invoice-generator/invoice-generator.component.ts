@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Invoice } from '@app/core/models/order/invoice';
+import { Invoice } from '@app/core/models/invoice/invoice';
 import { ActivatedRoute } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
@@ -16,6 +16,7 @@ export class InvoiceGeneratorComponent implements OnInit {
 
   ngOnInit() {
     this.invoice = new Invoice();
+
     this.route.data.subscribe(({ seller }) => {
       this.invoice.seller = this.getSmallSeller(seller);
     });

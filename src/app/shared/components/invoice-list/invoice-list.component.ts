@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Invoice } from '@app/core/models/order/invoice';
+import { Invoice } from '@app/core/models/invoice/invoice';
 import swal from 'sweetalert';
 import { AuthenticationService } from '@app/core';
 @Component({

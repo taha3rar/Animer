@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Invoice } from '@app/core/models/order/invoice';
+import { Invoice } from '@app/core/models/invoice/invoice';
 
 @Component({
   selector: 'app-invoice-generator-invoice',

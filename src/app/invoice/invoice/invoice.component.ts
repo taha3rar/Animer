@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import swal from 'sweetalert';
+import { Invoice } from '@app/core/models/invoice/invoice';
 
 @Component({
   selector: 'app-invoice',
@@ -10,6 +11,9 @@ import swal from 'sweetalert';
 export class InvoiceComponent implements OnInit {
   @Input()
   generateInvoice = false;
+
+  @Input()
+  invoice: Invoice;
 
   constructor(private location: Location) {}
 
@@ -35,5 +39,21 @@ export class InvoiceComponent implements OnInit {
         'cost, damages related directly or indirectly to the Buyer and/or Seller in respect to the above and the ' +
         'Buyer and Seller hereby waive any such claim against the Company.</p>'
     });
+  }
+
+  get issuer() {
+    return this.invoice.seller;
+  }
+
+  get buyer() {
+    return this.invoice.buyer;
+  }
+
+  get sign_by() {
+    return this.invoice.sign_by;
+  }
+
+  get deliver_to() {
+    return this.invoice.deliver_to;
   }
 }

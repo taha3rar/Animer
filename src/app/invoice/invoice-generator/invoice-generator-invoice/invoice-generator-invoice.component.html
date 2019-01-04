@@ -17,7 +17,7 @@
   <div class="row">
     <div class="col-md-4"><p class="heading-2">Purchase Order Number</p></div>
     <div class="col-md-8">
-      <div class="form-group"><input type="text" name="PONumber" class="form-control" /></div>
+      <div class="form-group"><input type="text" name="PONumber" [(ngModel)]="invoice.personal_po_id" class="form-control" /></div>
     </div>
   </div>
 </div>
@@ -74,13 +74,13 @@
   <div class="col-md-5">
     <div class="comments">
       <label for="payment_comments">Comments or special instructions for payment</label>
-      <textarea rows="4" id="payment_comments" placeholder="Type comments here..."></textarea>
+      <textarea rows="4" id="payment_comments" placeholder="Type comments here..." [(ngModel)]="invoice.payment_comments"></textarea>
     </div>
   </div>
   <div class="col-md-4">
     <div class="comments">
       <label for="po_comments">Comments or special instructions for purchase order</label>
-      <textarea rows="4" id="po_comments" placeholder="Type comments here..."></textarea>
+      <textarea rows="4" id="po_comments" placeholder="Type comments here..." [(ngModel)]="invoice.order_comments"></textarea>
     </div>
   </div>
   <div class="col-md-3">
@@ -117,16 +117,16 @@
       <p class="heading-2">SIGNED BY</p>
       <div class="form-row">
         <div class="form-group col-md-4">
-          <label for="first_name">First Name</label>
-          <input type="text" class="form-control" id="first_name" placeholder="Type first name here..." />
+          <label for="first_name">First Name *</label>
+          <input type="text" class="form-control" id="first_name" placeholder="Type first name here..." [(ngModel)]="invoice.sign_by.first_name" required />
         </div>
         <div class="form-group col-md-4">
-          <label for="last_name">Last Name</label>
-          <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." />
+          <label for="last_name">Last Name *</label>
+          <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." [(ngModel)]="invoice.sign_by.last_name" required />
         </div>
         <div class="form-group col-md-4">
-          <label for="company_name">Company Name</label>
-          <input type="text" class="form-control" id="company_name" placeholder="Type company name here..." />
+          <label for="company_name">Company Name *</label>
+          <input type="text" class="form-control" id="company_name" placeholder="Type company name here..." [(ngModel)]="invoice.sign_by.company_name" required/>
         </div>
       </div>
       <div class="row">
@@ -140,6 +140,8 @@
               name="ddpp"
               ngbDatepicker
               #ddpp="ngbDatepicker"
+              [(ngModel)]="invoice.valid_until"
+              required
             />
             <div class="input-group-append">
               <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
@@ -148,7 +150,7 @@
         </div>
         <div class="col-md-4">
           <p class="normal-text-bold">Date of Issue</p>
-          <p>11/14/2018</p>
+          <p>{{ invoice.date_created }}</p>
         </div>
       </div>
     </div>
@@ -159,24 +161,24 @@
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="contact_name">Contact Name</label>
-          <input type="text" class="form-control" id="contact_name" placeholder="Typle contact name here..." />
+          <input type="text" class="form-control" id="contact_name" placeholder="Typle contact name here..." [(ngModel)]="invoice.deliver_to.contact_name" required />
         </div>
         <div class="form-group col-md-4">
           <label for="street_address">Street Address</label>
-          <input type="text" class="form-control" id="street_address" placeholder="Typle street address here..." />
+          <input type="text" class="form-control" id="street_address" placeholder="Typle street address here..." [(ngModel)]="invoice.deliver_to.address" required />
         </div>
         <div class="form-group col-md-4">
-          <label for="city">City</label> <input type="text" class="form-control" id="city" />
+          <label for="city">City</label> <input type="text" class="form-control" id="city" [(ngModel)]="invoice.deliver_to.city" required />
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="zip_code">Zip Code</label>
-          <input type="text" class="form-control" id="zip_code" placeholder="Typle zip code here..." />
+          <input type="text" class="form-control" id="zip_code" placeholder="Typle zip code here..." [(ngModel)]="invoice.deliver_to.zip_code" required />
         </div>
         <div class="form-group col-md-4">
           <label for="phone">Phone</label>
-          <input type="tel" placeholder="Type phone number here..." class="form-control" id="phone" />
+          <input type="tel" placeholder="Type phone number here..." class="form-control" id="phone" [(ngModel)]="invoice.deliver_to.phone_number" required />
         </div>
         <div class="form-group col-md-4">
           <label for="expected_delivery">Expected Delivery Date</label>
@@ -188,6 +190,8 @@
               name="ddp"
               ngbDatepicker
               #ddp="ngbDatepicker"
+              [(ngModel)]="invoice.deliver_to.expected_delivery_date"
+              required
             />
             <div class="input-group-append">
               <button

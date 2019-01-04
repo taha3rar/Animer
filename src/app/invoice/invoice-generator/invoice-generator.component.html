@@ -17,7 +17,7 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="chooseBuyer">
-            <app-invoice-generator-buyers [invoice]="invoice"></app-invoice-generator-buyers>
+          <app-invoice-generator-buyers [invoice]="invoice"></app-invoice-generator-buyers>
         </div>
         <div class="tab-pane" id="fillInvoice">
           <app-invoice-generator-invoice [invoice]="invoice"></app-invoice-generator-invoice>
@@ -25,7 +25,7 @@
 
         <div class="tab-pane" id="reviewSend">
           <div class="panel panel-tab">
-            <div class="panel-body"><app-invoice [generateInvoice]="true"></app-invoice></div>
+            <div class="panel-body"><app-invoice [generateInvoice]="true" [invoice]="invoice"></app-invoice></div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
-import { Invoice } from '@app/core/models/order/invoice';
+import { Invoice } from '@app/core/models/invoice/invoice';
 
 @Component({
   selector: 'app-client-invoices',
