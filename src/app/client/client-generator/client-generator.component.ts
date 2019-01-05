@@ -10,13 +10,12 @@ declare const $: any;
   styleUrls: ['./client-generator.component.scss']
 })
 export class ClientGeneratorComponent implements OnInit {
-  private invitedClient: User;
+  public invitedClient: User;
 
   constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
     this.invitedClient = new User();
-    this.invitedClient.roles = ['seller'];
     console.log(this.authenticationService.credentials);
   }
 

@@ -54,7 +54,8 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="tel">Phone Number</label> <input type="tel" class="form-control" id="phone" placeholder="Type phone number here..." />
+                  <label for="tel">Phone Number *</label> <input type="tel" class="form-control" id="phone" placeholder="Type phone number here..."
+                    [(ngModel)]="invitedClient.personal_information.phone_number" required/>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="last_name">Contact Id</label>
@@ -65,12 +66,12 @@
                 <div class="form-group col-md-6">
                   <label>Profile Type</label>
                   <div class="margin-bottom">
-                  <input type="radio" class="form_radio" id="agriSeller" name="profile_type" />
+                  <input type="radio" class="form_radio" id="agriSeller" name="profile_type" value="seller" [(ngModel)]="invitedClient.roles" required/>
                   <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
                   <label style="font-weight:100;">Seller of agricultural products </label>
                 </div>
                 <div>
-                    <input type="radio" class="form_radio" id="agriBuyer" name="profile_type" />
+                    <input type="radio" class="form_radio" id="agriBuyer" name="profile_type" value="buyer" [(ngModel)]="invitedClient.roles" />
                     <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
                     <label style="font-weight:100;">Buyer of agricultural products </label>
                 </div>
@@ -83,6 +84,7 @@
                       id="additional_details"
                       rows="2"
                       placeholder="Type additional details here..."
+                      [(ngModel)]="invitedClient.personal_information.bio"
                     ></textarea>
                   </div>
               </div>
@@ -90,11 +92,11 @@
                 <div class="col">
                   <label>Send invitation by</label><br>
                   <div>
-                  <input type="checkbox" class="checkbox" id="checkbox_sms"/><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
+                  <input type="checkbox" class="checkbox" name="contact_type" id="checkbox_sms" [(ngModel)]="invitedClient.contact_by" required/><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
                   <label for="checkbox_sms" style="font-weight:100;">SMS</label>
                 </div>
                 <div>
-                    <input type="checkbox" class="checkbox" id="checkbox_phone"/><label class="checkbox_label" for="checkbox_phone"><span class="form_checkbox_btn"></span></label>
+                    <input type="checkbox" class="checkbox" name="contact_type" id="checkbox_phone" [(ngModel)]="invitedClient.contact_by"/><label class="checkbox_label" for="checkbox_phone"><span class="form_checkbox_btn"></span></label>
                     <label for="checkbox_sms" style="font-weight:100;">Phone Number</label>
                 </div>
                 </div>
@@ -106,8 +108,8 @@
             <div class="col-md-12">
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="company_name">Company Name</label>
-                  <input type="text" class="form-control" id="company_name" placeholder="Type company name here..." required/>
+                  <label for="company_name">Company Name *</label>
+                  <input type="text" class="form-control" id="company_name" placeholder="Type company name here..."value="seller" [(ngModel)]="invitedClient.company_information.company_name" required/>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="company_number">Company Number</label>
@@ -116,6 +118,7 @@
                     class="form-control"
                     id="company_number"
                     placeholder="Type company number here..."
+                    [(ngModel)]="invitedClient.company_information.company_registered_number"
                   />
                 </div>
               </div>
@@ -127,26 +130,27 @@
                     class="form-control"
                     id="cstreet_address"
                     placeholder="Type street address here..."
+                    [(ngModel)]="invitedClient.company_information.street"
                     required
                   />
                 </div>
                 <div class="form-group col-md-6">
                   <label for="city">City</label>
-                  <input type="text" class="form-control" id="city" placeholder="Type city here..." required/>
+                  <input type="text" class="form-control" id="city" placeholder="Type city here..." [(ngModel)]="invitedClient.company_information.city" required/>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-4">
                   <label for="country">Country</label>
-                  <input type="text" class="form-control" id="country" placeholder="Type country here..." required/>
+                  <input type="text" class="form-control" id="country" placeholder="Type country here..." [(ngModel)]="invitedClient.company_information.country" required/>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="state">State/province/region</label>
-                  <input type="text" class="form-control" id="state" placeholder="Type state/province/region here..." />
+                  <input type="text" class="form-control" id="state" placeholder="Type state/province/region here..." [(ngModel)]="invitedClient.company_information.state_province_region" />
                 </div>
                 <div class="form-group col-md-4">
                   <label for="zip_code">Zip Code</label>
-                  <input type="text" class="form-control" id="zip_code" placeholder="Type zip code here..." required/>
+                  <input type="text" class="form-control" id="zip_code" placeholder="Type zip code here..." [(ngModel)]="invitedClient.company_information.zipcode" required/>
                 </div>
               </div>
               <div class="form-group">
@@ -157,6 +161,7 @@
                   id="additional_details"
                   rows="2"
                   placeholder="Type additional details here..."
+                  [(ngModel)]="invitedClient.company_information.bio"
                 ></textarea>
               </div>
             </div>
@@ -208,15 +213,15 @@
                 <div class="col-md-4">
                   <div>
                     <p class="label-2">Contact Name</p>
-                    <p class="normal-text-light">{{invitedClient.personal_information.first_name}}</p>
+                    <p class="normal-text-light">{{invitedClient.personal_information.first_name}} {{invitedClient.personal_information.last_name}}</p>
                   </div>
                   <div>
                     <p class="label-2">Email Address</p>
-                    <p class="normal-text-light">brad-pitt.1@gmail.com</p>
+                    <p class="normal-text-light">{{invitedClient.email}}</p>
                   </div>
                   <div>
                     <p class="label-2">Additional details</p>
-                    <p class="normal-text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <p class="normal-text-light">{{invitedClient.personal_information.bio}}</p>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -226,7 +231,7 @@
                   </div>
                   <div>
                     <p class="label-2">Phone Number</p>
-                    <p class="normal-text-light">+18474912628</p>
+                    <p class="normal-text-light">{{invitedClient.personal_information.phone_number}}</p>
                   </div>
                 </div>
               </div>
@@ -243,37 +248,37 @@
                 <div class="col-md-4">
                   <div>
                     <p class="label-2">Company name</p>
-                    <p class="normal-text-light">Pitt Industiries</p>
+                    <p class="normal-text-light">{{invitedClient.company_information.company_name}}</p>
                   </div>
                   <div>
                     <p class="label-2">Street</p>
-                    <p class="normal-text-light">Maple, 51</p>
+                    <p class="normal-text-light">{{invitedClient.company_information.street}}</p>
                   </div>
                   <div>
                     <p class="label-2">Country</p>
-                    <p class="normal-text-light">USA</p>
+                    <p class="normal-text-light">{{invitedClient.company_information.country}}</p>
                   </div>
                   <div>
                     <p class="label-2">Additional details</p>
-                    <p class="normal-text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="normal-text-light">{{invitedClient.company_information.bio}}</p>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div>
                     <p class="label-2">Company number</p>
-                    <p class="normal-text-light">Pitt Industiries</p>
+                    <p class="normal-text-light">{{invitedClient.company_information.company_registered_number}}</p>
                   </div>
                   <div>
                     <p class="label-2">Zip code</p>
-                    <p class="normal-text-light">Maple, 51</p>
+                    <p class="normal-text-light">{{invitedClient.company_information.zipcode}}</p>
                   </div>
                   <div>
                     <p class="label-2">City</p>
-                    <p class="normal-text-light">San Fransisco</p>
+                    <p class="normal-text-light">{{invitedClient.company_information.city}}</p>
                   </div>
                   <div>
                     <p class="label-2">State/province/region</p>
-                    <p class="normal-text-light">California</p>
+                    <p class="normal-text-light">{{invitedClient.company_information.state_province_region}}</p>
                   </div>
                 </div>
               </div>
