@@ -34,28 +34,27 @@
       <div class="modal-box-right">
         <div class="tab-content">
           <div class="row tab-pane active margin-none" id="client-details">
+            <form [formGroup]="clientDetailsForm">
             <div class="col-md-12">
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="first_name">Client First Name *</label>
-                  <input type="text" class="form-control" id="first_name" placeholder="Type first name here..."
-                    [(ngModel)]="invitedClient.personal_information.first_name" required/>
+                  <input type="text" formControlName="firstName" class="form-control" id="first_name" placeholder="Type first name here..."/>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="last_name">Client Last Name *</label>
-                  <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." 
-                    [(ngModel)]="invitedClient.personal_information.last_name" required/>
+                  <input type="text" formControlName="lastName" class="form-control" id="last_name" placeholder="Type last name here..." 
+                    required/>
                 </div>
               </div>
               <div class="form-group">
                 <label for="Email">Email Address *</label>
-                <input type="email" class="form-control" id="Email" placeholder="Type email here..."
-                  [(ngModel)]="invitedClient.email" required/>
+                <input type="email" formControlName="email" class="form-control" id="Email" placeholder="Type email here..." />
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="tel">Phone Number *</label> <input type="tel" class="form-control" id="phone" placeholder="Type phone number here..."
-                    [(ngModel)]="invitedClient.personal_information.phone_number" required/>
+                  <label for="tel">Phone Number *</label>
+                  <input type="tel" formControlName="phoneNumber" class="form-control" id="phone" placeholder="Type phone number here..."/>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="last_name">Contact Id</label>
@@ -66,12 +65,12 @@
                 <div class="form-group col-md-6">
                   <label>Profile Type</label>
                   <div class="margin-bottom">
-                  <input type="radio" class="form_radio" id="agriSeller" name="profile_type" value="seller" [(ngModel)]="invitedClient.roles" required/>
+                  <input type="radio" class="form_radio" id="agriSeller" name="profileType" (change)="onChangeProfileType('seller', $event.target.checked)" />
                   <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
                   <label style="font-weight:100;">Seller of agricultural products </label>
                 </div>
                 <div>
-                    <input type="radio" class="form_radio" id="agriBuyer" name="profile_type" value="buyer" [(ngModel)]="invitedClient.roles" />
+                    <input type="radio" class="form_radio" id="agriBuyer" name="profileType" (change)="onChangeProfileType('buyer', $event.target.checked)" />
                     <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
                     <label style="font-weight:100;">Buyer of agricultural products </label>
                 </div>
@@ -84,6 +83,7 @@
                       id="additional_details"
                       rows="2"
                       placeholder="Type additional details here..."
+                      [ngModelOptions]="{standalone: true}"
                       [(ngModel)]="invitedClient.personal_information.bio"
                     ></textarea>
                   </div>
@@ -92,24 +92,26 @@
                 <div class="col">
                   <label>Send invitation by</label><br>
                   <div>
-                  <input type="checkbox" class="checkbox" name="contact_type" id="checkbox_sms" [(ngModel)]="invitedClient.contact_by" required/><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
-                  <label for="checkbox_sms" style="font-weight:100;">SMS</label>
+                  <input type="checkbox" class="checkbox" name="contact_type"  id="checkbox_sms" (change)="onChangeContactType('email', $event.target.checked)" /><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
+                  <label for="checkbox_sms" style="font-weight:100;">email</label>
                 </div>
                 <div>
-                    <input type="checkbox" class="checkbox" name="contact_type" id="checkbox_phone" [(ngModel)]="invitedClient.contact_by"/><label class="checkbox_label" for="checkbox_phone"><span class="form_checkbox_btn"></span></label>
-                    <label for="checkbox_sms" style="font-weight:100;">Phone Number</label>
+                    <input type="checkbox" class="checkbox" name="contact_type" id="checkbox_phone" (change)="onChangeContactType('phone', $event.target.checked)" /><label class="checkbox_label" for="checkbox_phone"><span class="form_checkbox_btn"></span></label>
+                    <label for="checkbox_sms" style="font-weight:100;">SMS</label>
                 </div>
                 </div>
               </div>
             </div>
-            <button class="btn-next next-step pull-right">Next &rarr;</button>
+            <button [disabled]="!clientDetailsForm.valid" class="btn-next next-step pull-right">Next &rarr;</button>
+            </form>
           </div>
           <div class="row tab-pane margin-none" id="company-details">
+            <form [formGroup]="companyDetailsForm">
             <div class="col-md-12">
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="company_name">Company Name *</label>
-                  <input type="text" class="form-control" id="company_name" placeholder="Type company name here..."value="seller" [(ngModel)]="invitedClient.company_information.company_name" required/>
+                  <input type="text" formControlName="companyName" class="form-control" id="company_name" placeholder="Type company name here..." />
                 </div>
                 <div class="form-group col-md-6">
                   <label for="company_number">Company Number</label>
@@ -118,39 +120,39 @@
                     class="form-control"
                     id="company_number"
                     placeholder="Type company number here..."
+                    [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="invitedClient.company_information.company_registered_number"
                   />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="cstreet_address">Street address</label>
+                  <label for="cstreet_address">Street address *</label>
                   <input
                     type="text"
+                    formControlName="address"
                     class="form-control"
                     id="cstreet_address"
                     placeholder="Type street address here..."
-                    [(ngModel)]="invitedClient.company_information.street"
-                    required
                   />
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="city">City</label>
-                  <input type="text" class="form-control" id="city" placeholder="Type city here..." [(ngModel)]="invitedClient.company_information.city" required/>
+                  <label for="city">City *</label>
+                  <input type="text" formControlName="city" class="form-control" id="city" placeholder="Type city here..." />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-4">
-                  <label for="country">Country</label>
-                  <input type="text" class="form-control" id="country" placeholder="Type country here..." [(ngModel)]="invitedClient.company_information.country" required/>
+                  <label for="country">Country *</label>
+                  <input type="text" formControlName="country" class="form-control" id="country" placeholder="Type country here..." />
                 </div>
                 <div class="form-group col-md-4">
                   <label for="state">State/province/region</label>
-                  <input type="text" class="form-control" id="state" placeholder="Type state/province/region here..." [(ngModel)]="invitedClient.company_information.state_province_region" />
+                  <input type="text" class="form-control" id="state" placeholder="Type state/province/region here..." [(ngModel)]="invitedClient.company_information.state_province_region" [ngModelOptions]="{standalone: true}"/>
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="zip_code">Zip Code</label>
-                  <input type="text" class="form-control" id="zip_code" placeholder="Type zip code here..." [(ngModel)]="invitedClient.company_information.zipcode" required/>
+                  <label for="zip_code">Zip Code *</label>
+                  <input type="text" formControlName="zipcode" class="form-control" id="zip_code" placeholder="Type zip code here..."/>
                 </div>
               </div>
               <div class="form-group">
@@ -161,11 +163,17 @@
                   id="additional_details"
                   rows="2"
                   placeholder="Type additional details here..."
+                  [ngModelOptions]="{standalone: true}"
                   [(ngModel)]="invitedClient.company_information.bio"
                 ></textarea>
               </div>
             </div>
+<<<<<<< HEAD
             <button class="btn-next next-step pull-right">Next &rarr;</button>
+=======
+            <button [disabled]="!companyDetailsForm.valid" class="btn-next next-step">Next &rarr;</button>
+            </form>
+>>>>>>> Add client logic implemented
           </div>
           <div class="row tab-pane margin-none" id="ecosystem">
             <div class="col-md-12">
@@ -213,11 +221,11 @@
                 <div class="col-md-4">
                   <div>
                     <p class="label-2">Contact Name</p>
-                    <p class="normal-text-light">{{invitedClient.personal_information.first_name}} {{invitedClient.personal_information.last_name}}</p>
+                    <p class="normal-text-light">{{clientf.firstName.value}} {{clientf.lastName.value}}</p>
                   </div>
                   <div>
                     <p class="label-2">Email Address</p>
-                    <p class="normal-text-light">{{invitedClient.email}}</p>
+                    <p class="normal-text-light">{{clientf.email.value}}</p>
                   </div>
                   <div>
                     <p class="label-2">Additional details</p>
@@ -231,7 +239,7 @@
                   </div>
                   <div>
                     <p class="label-2">Phone Number</p>
-                    <p class="normal-text-light">{{invitedClient.personal_information.phone_number}}</p>
+                    <p class="normal-text-light">{{clientf.phoneNumber.value}}</p>
                   </div>
                 </div>
               </div>
@@ -248,15 +256,15 @@
                 <div class="col-md-4">
                   <div>
                     <p class="label-2">Company name</p>
-                    <p class="normal-text-light">{{invitedClient.company_information.company_name}}</p>
+                    <p class="normal-text-light">{{companyf.companyName.value}}</p>
                   </div>
                   <div>
                     <p class="label-2">Street</p>
-                    <p class="normal-text-light">{{invitedClient.company_information.street}}</p>
+                    <p class="normal-text-light">{{companyf.address.value}}</p>
                   </div>
                   <div>
                     <p class="label-2">Country</p>
-                    <p class="normal-text-light">{{invitedClient.company_information.country}}</p>
+                    <p class="normal-text-light">{{companyf.country.value}}</p>
                   </div>
                   <div>
                     <p class="label-2">Additional details</p>
@@ -270,11 +278,11 @@
                   </div>
                   <div>
                     <p class="label-2">Zip code</p>
-                    <p class="normal-text-light">{{invitedClient.company_information.zipcode}}</p>
+                    <p class="normal-text-light">{{companyf.zipcode.value}}</p>
                   </div>
                   <div>
                     <p class="label-2">City</p>
-                    <p class="normal-text-light">{{invitedClient.company_information.city}}</p>
+                    <p class="normal-text-light">{{companyf.city.value}}</p>
                   </div>
                   <div>
                     <p class="label-2">State/province/region</p>
@@ -283,7 +291,11 @@
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
             <button class="btn-next pull-right">Submit</button>
+=======
+            <button [disabled]="!companyDetailsForm.valid || !clientDetailsForm.valid" (click)="onGeneralSubmit()" class="btn-next">Submit</button>
+>>>>>>> Add client logic implemented
           </div>
         </div>
       </div>
