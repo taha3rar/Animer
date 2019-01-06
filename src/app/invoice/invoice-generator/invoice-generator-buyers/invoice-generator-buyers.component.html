@@ -2,9 +2,11 @@
   <div class="panel-body">
     <div class="panel-header">
       <div><p>My Buyers</p></div>
-      <button class="btn-primary-filled pull-right next-step">Next Step &rarr;</button>
+      <button class="bttn-primary pull-right next-step">Next Step &rarr;</button>
     </div>
     <div class="padding-all-2">
+      <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_right</i></button>
+      <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_left</i></button>
       <div class="row margin-top" >
         <div class="col-md-2" *ngFor="let client of (clients | paginate: { itemsPerPage: 6, currentPage: page })">
           <div class="card">
@@ -23,7 +25,6 @@
           </div>
         </div>
       </div>
-      <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </div>
   </div>
 </div>

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Product } from '@app/core/models/order/product';
+import { countries } from '@app/shared/_helpers/_countries';
+import { certifications } from '@app/shared/_helpers/product_details';
 
 @Component({
   selector: 'app-product-details',
@@ -6,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-  constructor() {}
+  @Input()
+  product: Product;
+  isProcessed = false;
+  countries = countries;
+  allCerts = certifications;
 
-  ngOnInit() {}
+  constructor() {}
+  ngOnInit() {
+    // if (this.product.product_type === 'processed') {
+    //   this.isProcessed = true;
+    // }
+  }
 }

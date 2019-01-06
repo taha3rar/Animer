@@ -1,5 +1,5 @@
 
-<div class="packing-details">
+<div class="packing-details" *ngIf="isProcessed">
 <p class="heading-2 margin-bottom ">Containing Package Details</p>
 <div class="row">
   <div class="col-md-6">
@@ -29,7 +29,7 @@
 </div>
 </div>
 
-<div class="row margin-none">
+<div class="row margin-none" *ngIf="isProcessed">
     <div class="center-text-btn">
         <span class="heading-2 margin-bottom ">Individual Item Details</span>
         <div class="switch">
@@ -44,7 +44,7 @@
       </div>
 </div>
 
-<div class="form-row">
+<div class="form-row" *ngIf="isProcessed">
   <div class="form-group col-md-4">
     <label for="item_packing_type">Item Packing Type</label>
     <input type="text" class="form-control" id="item_packing_type" placeholder="Type item packing type here... ">
@@ -61,4 +61,59 @@
   </div>
 </div>
 
-<button class="btn-primary-filled pull-right next-step">Save</button>
+<div class="packing-details" *ngIf="!isProcessed">
+    <p class="heading-2 margin-bottom ">Containing Package Details</p>
+    <div class="row">
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="package_type">Type of Package</label>
+              <input type="text" class="form-control" id="package_type" placeholder="Enter type of package here..." />
+          </div>
+          <div class="form-group">
+              <label for="noOfPackages">Total Number of Packages</label>
+              <input type="number" class="form-control" id="noOfPackages" placeholder="Type number of packages here..." />
+          </div>
+          <div class="form-group">
+              <label for="total_packages">Total Amount of Packages Available</label>
+              <input type="text" class="form-control" id="total_amount" placeholder="Type amount of packages available here..." />
+          </div>
+          <div class="center-text-btn">
+              <span class="heading-2 margin-bottom ">These are estimated values</span>
+              <div class="switch">
+                <input
+                  id="estimated_values"
+                  class="cmn-toggle cmn-toggle-round-flat"
+                  type="checkbox"
+                  checked
+                />
+                <label for="estimated_values"></label>
+              </div>
+            </div>
+      </div>
+      <div class="col-md-6">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="package_weight">Weight of the Packaged Product</label>
+                <input type="number" class="form-control" id="package_weight" placeholder="Enter weight of the packaged product..." />
+            </div>
+            <div class="form-group col-md-4">
+                <label for="weight_unit">Weight Unit</label>
+                <select class="form-control" id="weight_unit">
+                  <option selected="selected">Select weight unit...</option>
+                  <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="total_weight">Total Weight</label>
+              <input type="number" class="form-control" id="total_weight"/>
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="additional_packing_details">Additional packing details</label>
+              <textarea class="form-control" id="additional_packing_details" rows="4" placeholder="Type additional packing details here..." ></textarea>
+          </div>
+      </div>
+    </div>
+    </div>
+
+<button class="bttn-primary pull-right next-step">Save</button>

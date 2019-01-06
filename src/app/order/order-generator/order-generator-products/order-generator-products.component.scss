@@ -71,19 +71,3 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-button:active {
-  transform: translateY(2px);
-  border: none;
-}
-
-button:focus {
-  outline: none;
-}
-
-.btn-icons {
-  i {
-    font-size: 1.8rem;
-    color: $light-gray;
-  }
-}

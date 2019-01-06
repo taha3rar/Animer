@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { Invoice } from '@app/core/models/order/invoice';
 import swal from 'sweetalert';
@@ -12,7 +13,11 @@ export class InvoiceListComponent implements OnInit {
   invoices: Invoice[];
   page = 1;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {
+    this.route.data.subscribe(({ invoices }) => {
+      this.invoices = invoices;
+    });
+  }
 
   ngOnInit() {}
 

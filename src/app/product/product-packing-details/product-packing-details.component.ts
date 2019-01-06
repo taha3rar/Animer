@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { processedPackageUnits } from '@app/shared/_helpers/processed';
+import { Product } from '@app/core/models/order/product';
 
 @Component({
   selector: 'app-product-packing-details',
@@ -8,8 +9,15 @@ import { processedPackageUnits } from '@app/shared/_helpers/processed';
 })
 export class ProductPackingDetailsComponent implements OnInit {
   units = processedPackageUnits;
+  @Input()
+  product: Product;
+  isProcessed = false;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // if (this.product.product_type === 'processed') {
+    //   this.isProcessed = true;
+    // }
+  }
 }

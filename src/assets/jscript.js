@@ -14,7 +14,6 @@ $(function() {
 
     $(window).resize(function() {
       if ($(window).width() > 580) {
-        console.log('true');
         $('.sidebar-wrapper').show();
       }
     });
@@ -33,7 +32,9 @@ $(function() {
         });
     });
 
-    handleStepper();
+    setTimeout(function() {
+      handleStepper();
+    }, 800);
 
     $(document).on('click', '[data-toggle="wizard"]', function() {
       $targetModal = $(this).data('target');
@@ -46,8 +47,10 @@ $(function() {
       handleStepper();
     });
 
-    $(document).on('click', '[data-toggle="stepper"]', function() {
-      handleStepper();
+    $(document).on('click', '[data-toggle="stepper"]', function(e) {
+      setTimeout(function() {
+        handleStepper();
+      }, 800);
     });
 
     function handleStepper() {
@@ -69,7 +72,6 @@ $(function() {
       });
 
       $btn_next.on('click', function() {
-        console.log('clicked');
         $tab_active = $progressStepper.find('.active');
         $tab_active.next().addClass('completed');
         $tab_active.addClass('completed');

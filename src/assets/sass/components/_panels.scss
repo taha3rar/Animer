@@ -93,6 +93,7 @@
 
   .panel-body {
     padding: 0px;
+    width: 100%;
   }
 
   .row {
@@ -101,14 +102,19 @@
 
   .panel-left {
     height: 100%;
-    width: 100%;
+    min-width: 33%;
+    display: block;
     .step {
       list-style: none;
-      height: 18%;
       display: block;
       border-bottom: 1px solid $light-gray-2;
       padding: 2.3rem;
       font-size: 1.5rem;
+      white-space: normal;
+      // float: left;
+      width: 100%;
+      height: auto;
+      word-wrap: break-word;
       font-weight: 700;
       color: $dark-gray-2;
       &-number {
@@ -120,6 +126,13 @@
           @include stepNumber;
         }
       }
+    }
+    a {
+      white-space: normal;
+      // float: left;
+      width: 100%;
+      height: auto;
+      word-wrap: break-word;
     }
     .active {
       color: $dark-gray;
@@ -143,14 +156,18 @@
 }
 
 .vector-tutorial {
-  width: 23.5rem;
-  min-height: 17.3rem;
+  width: 100%;
+  max-width: 23.5rem;
+  max-height: 17.3rem;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
 .panel-right {
+  display: block;
+  min-width: 67%;
   padding: 3rem;
   height: 38.3rem;
   border-left: 1px solid $light-gray-2;
@@ -183,7 +200,7 @@
 
 .todo-item {
   border-left: 3px solid $primary-color;
-  padding: 1.5rem 0.5rem;
+  padding: 1.5rem 0;
   border-bottom: 1px solid $light-gray-2;
   min-height: 8.5rem;
   display: flex;

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="isProcessed">
   <div class="col-md-6">
     <div class="form-group">
       <label for="total_amount_packages">Total Amount of Packages</label>
@@ -28,4 +28,38 @@
   </div>
 </div>
 
-<button class="btn-primary-filled pull-right next-step">Save</button>
+<div *ngIf="!isProcessed">
+    <div class="col-md-6">
+        <div class="form-group">
+          <label for="total_weight">Total Weight</label>
+          <input type="number" class="form-control" id="total_weight" placeholder="Total weight" />
+        </div>
+        <div class="form-group">
+          <label for="total_amount_packages">Currency</label>
+          <select type="text" class="form-control" id="total_amount_packages">
+            <option selected="selected">Choose currency...</option>
+            <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="price_per_package">Total Price</label>
+          <input type="number" class="form-control" id="total_price" placeholder="Total price" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+          <div class="form-group">
+            <label for="total_weight">Price per Unit</label>
+            <input type="number" class="form-control" id="price_unit" />
+          </div>
+          <div class="form-group">
+            <label for="package_price">Price per Package</label>
+            <input type="number" class="form-control" id="package_price"/>
+          </div>
+          <div class="form-group">
+            <label for="additional_pricing">Additional Pricing Details</label>
+            <textarea type="number" class="form-control" id="additional_pricing" rows="2" placeholder="Additional pricing details..."></textarea>
+          </div>
+        </div>
+</div>
+<button class="bttn-primary pull-right next-step">Save</button>
