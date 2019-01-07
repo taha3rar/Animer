@@ -31,8 +31,4 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
   get date_created() {
     return this.form.controls.date_created.value;
   }
-
-  save() {
-    console.log(this.form);
-  }
 }
