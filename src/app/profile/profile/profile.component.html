@@ -8,7 +8,7 @@
           <figure class="round-shape-img"><img *ngIf="user.personal_information.profile_picture" src="user.personal_information.profile_picture" alt="profile-image" />
             <i *ngIf="!user.personal_information.profile_picture" class="material-icons icon" style="font-size: 50px">person</i></figure>
           <p class="heading-2">{{user.personal_information.first_name}} {{user.personal_information.last_name}}</p>
-          <p class="normal-text-bold">{{user.roles}}</p>
+          <p class="normal-text-bold">{{userRole | titlecase}}</p>
         </div>
         <div>
           <p class="heading-2">Contact Information</p>

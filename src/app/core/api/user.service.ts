@@ -43,7 +43,7 @@ export class UserService extends BaseService {
     return super.update(id, user).pipe(
       map(data => {
         // TODO: update the current user in authService
-        return data.user;
+        return data;
       })
     );
   }
