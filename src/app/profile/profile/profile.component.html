@@ -5,29 +5,29 @@
     <div class="panel">
       <div class="panel-body user-details">
         <div>
-          <figure class="round-shape-img"><img src="../../assets/img/profile-img.jpg" alt="profile-image" /></figure>
-          <p class="heading-2">Alex Benn</p>
-          <p class="normal-text-bold">Chief Product Officer</p>
+          <figure class="round-shape-img"><img *ngIf="user.personal_information.profile_picture" src="user.personal_information.profile_picture" alt="profile-image" />
+            <i *ngIf="!user.personal_information.profile_picture" class="material-icons icon" style="font-size: 50px">person</i></figure>
+          <p class="heading-2">{{user.personal_information.first_name}} {{user.personal_information.last_name}}</p>
+          <p class="normal-text-bold">{{user.roles}}</p>
         </div>
         <div>
           <p class="heading-2">Contact Information</p>
           <p class="heading-3">Email Address</p>
-          <p class="heading-4">Ishai@avenews-gt.com</p>
+          <p class="heading-4">{{user.email}}</p>
           <p class="heading-3">Phone Number</p>
-          <p class="heading-4">0547377649</p>
-          <p class="heading-3">Location</p>
-          <p class="heading-4">Tel-Aviv, Israel</p>
-          <p class="heading-4">Ahad Ha'am 54</p>
+          <p class="heading-4">{{user.personal_information.phone_number}}</p>
         </div>
         <div>
           <p class="heading-2">Company Information</p>
           <p class="heading-3">Company Name</p>
-          <p class="heading-4">Avenews-gt</p>
+          <p class="heading-4">{{user.company_information.company_name}}</p>
           <p class="heading-3">Company Email</p>
-          <p class="heading-4">Ishai@avenews-gt.com</p>
+          <p class="heading-4">{{user.company_information.company_email}}</p>
           <p class="heading-3">Location</p>
-          <p class="heading-4">Tel-Aviv, Israel</p>
-          <p class="heading-4">Ahad Ha'am 54</p>
+          <p class="heading-4">{{user.company_information.city}}, {{user.company_information.country}}</p>
+          <p class="heading-4">{{user.company_information.street}}</p>
+          <p class="heading-4">{{user.company_information.zipcode}}</p>
+          <p class="heading-4">{{user.company_information.state_province_region}}</p>
         </div>
       </div>
     </div>
@@ -43,101 +43,86 @@
           <div class="icon-text">
             <i class="material-icons">person</i><span class="heading-2"> CONTACT INFROMATION</span>
           </div>
-          <form id="contact-info-form">
+          <form [formGroup]="clientDetailsForm" (ngSubmit)="onSubmitClientDetails()" id="contact-info-form">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="fist-name">First Name</label>
-                <input type="text" class="form-control" id="fist-name" value="Alex" />
+                <label for="fist-name">First Name *</label>
+                <input type="text" formControlName="firstName" class="form-control" id="fist-name" />
               </div>
               <div class="form-group col-md-6">
-                <label for="last-name">Last Name</label>
-                <input type="text" class="form-control" id="last-name" value="Benn" />
+                <label for="last-name">Last Name *</label>
+                <input type="text" formControlName="lastName" class="form-control" id="last-name" />
               </div>
             </div>
             <div class="form-group">
-              <label for="email-address">Email Address</label>
-              <input type="email" class="form-control" id="email-address" value="alex.benn@gmail.com" />
+              <label for="email-address">Email Address *</label>
+              <input type="email" formControlName="email" class="form-control" id="email-address" />
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="phone">Phone Number</label>
-                <input type="text" class="form-control" id="phone" value="0507372836" />
+                <label for="phone">Phone Number *</label>
+                <input type="text" formControlName="phoneNumber" class="form-control" id="phone" />
               </div>
               <div class="form-group col-md-6">
-                <label for="country">Country</label>
-                <select id="country" class="form-control">
-                  <option selected>Israel</option>
-                  <option>...</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="city">City</label> <input type="text" class="form-control" id="city" value="Tel-Aviv" />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="zip-code">Zip Code</label>
-                <input type="text" class="form-control" id="zip-code" value="68088" />
+                <label for="country">Job Title</label>
+                <input type="text" formControlName="jobTitle" class="form-control" id="job-title" />
               </div>
             </div>
             <div class="form-group">
-              <label for="street-address">Street Address</label>
-              <input type="text" class="form-control" id="street-address" value="Meor Enayeem 10" />
-            </div>
+                <label for="street-address">About</label>
+                <textarea type="span" rows="3" formControlName="bio" class="form-control" id="client-bio"></textarea>
+              </div>
+            <button type="submit" class="bttn-primary pull-right" [disabled]="!clientDetailsForm.valid">Save Changes</button>
           </form>
-          <button class="bttn-primary pull-right">Save Changes</button>
         </div>
         <div class="col-md-6 company-info-section">
           <div class="icon-text">
             <i class="material-icons">business</i><span class="heading-2"> COMPANY INFROMATION</span>
           </div>
-          <form id="contact-info-form">
+          <form [formGroup]="companyDetailsForm" (ngSubmit)="onSubmitCompanyDetails()" id="contact-info-form">
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="company-name">Company Registered Name</label>
-                  <input type="text" class="form-control" id="company-name" value="Sweetunda" />
+                  <label for="company-name">Company Registered Name *</label>
+                  <input type="text" formControlName="companyName" class="form-control" id="company-name" />
                 </div>
                 <div class="form-group col-md-6">
                   <label for="comapny-number">Company Registered Number</label>
-                  <input type="text" class="form-control" id="comapny-number" value="fc123244" />
+                  <input type="text" formControlName="companyNumber" class="form-control" id="comapny-number" />
                 </div>
               </div>
               <div class="form-group">
                 <label for="company-email-address">Email Address</label>
-                <input type="email" class="form-control" id="company-email-address" value="alex.benn@Sweetunda.com" />
+                <input type="email" formControlName="email" class="form-control" id="company-email-address" />
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="phone">Phone Number</label>
-                  <input type="text" class="form-control" id="phone" value="0507372836" />
+                  <input type="text" formControlName="phoneNumber" class="form-control" id="phone" />
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="country">Country</label>
-                  <select id="country" class="form-control">
-                    <option selected>Israel</option>
-                    <option>...</option>
-                  </select>
+                  <label for="country">Country *</label>
+                  <input type="text" formControlName="country" class="form-control" id="street">
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="city">City</label> <input type="text" class="form-control" id="city" value="Tel-Aviv" />
+                  <label for="city">City *</label> <input type="text" formControlName="city" class="form-control" id="city" />
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="zip-code">Zip Code</label>
-                  <input type="text" class="form-control" id="zip-code" value="68088" />
+                  <label for="zip-code">Zip Code *</label>
+                  <input type="text" formControlName="zipcode" class="form-control" id="zip-code" />
                 </div>
               </div>
               <div class="form-group">
-                <label for="street-address">Street Address</label>
-                <input type="text" class="form-control" id="street-address" value="Meor Enayeem 10" />
+                <label for="street-address">Street Address *</label>
+                <input type="text" formControlName="address" class="form-control" id="street-address" />
               </div>
               <div class="form-group">
                   <label for="street-address">About</label>
-                  <textarea type="span" rows="3" class="form-control" id="street-address">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo tempor incididunt ut labore et dolore magna aliqua</textarea>
-                </div>
-            </form>
-            <button class="bttn-primary pull-right">Save Changes</button>
+                  <textarea type="span" rows="3" formControlName="bio" class="form-control" id="street-address"></textarea>
+              </div>
+              <button type="submit" class="bttn-primary pull-right" [disabled]="!companyDetailsForm.valid">Save Changes</button>
+          </form>
         </div>
       </div>
     </div>

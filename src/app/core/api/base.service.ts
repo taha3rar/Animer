@@ -21,7 +21,7 @@ export abstract class BaseService {
     return this.apiService.post(this.path, object).pipe(map(data => data));
   }
 
-  update(object: any): Observable<any> {
-    return this.apiService.put(this.path, object).pipe(map(data => data));
+  update(id: string, object: any): Observable<any> {
+    return this.apiService.put(`${this.path}/${id}`, object).pipe(map(data => data));
   }
 }

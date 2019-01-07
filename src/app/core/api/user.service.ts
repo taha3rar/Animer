@@ -39,14 +39,15 @@ export class UserService extends BaseService {
     return this.apiService.post('/image/company', body).pipe(map(data => data));
   }
 
-  update(user: User): Observable<User> {
-    return super.update(user).pipe(
+  update(id: string, user: User): Observable<User> {
+    return super.update(id, user).pipe(
       map(data => {
         // TODO: update the current user in authService
         return data.user;
       })
     );
   }
+
   // //Save new invited client
   // saveInvitedClient(client): Observable<any> {
   //   return this.apiService.post('/user/client', client)
