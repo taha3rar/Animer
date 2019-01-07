@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
-import { UserService } from '../../core/api/user.service';
-import { AuthenticationService } from '../../core/authentication/authentication.service';
 import { Resolve } from '@angular/router';
+import { UserService, AuthenticationService } from '@app/core';
+import { Observable, EMPTY } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { User } from '@app/core/models/user/user';
 
 @Injectable()
-export class CurrentUserResolver implements Resolve<any> {
-  constructor(private userService: UserService, private authenticationService: AuthenticationService) {}
+export class CurrentUserResolver implements Resolve<User> {
+  constructor(private authService: AuthenticationService, private userService: UserService) {}
 
-  resolve() {
-    return this.userService.get(this.authenticationService.currentUserId);
+  resolve(): Observable<User> {
+    const currentUserId = this.authService.currentUserId;
+
+    return this.userService.get(currentUserId).pipe(
+      catchError(err => {
+        console.error(err);
+        return EMPTY.pipe();
+      })
+    );
   }
 }
