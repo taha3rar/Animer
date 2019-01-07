@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { defaultValues } from '@app/shared/_helpers/default_values';
 import { Invoice } from '@app/core/models/invoice/invoice';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-invoice-generator-buyers',
@@ -11,7 +12,7 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 })
 export class InvoiceGeneratorBuyersComponent implements OnInit {
   @Input()
-  invoice: Invoice;
+  form: FormGroup;
   clients: Client[];
   page = 1;
 
@@ -25,5 +26,9 @@ export class InvoiceGeneratorBuyersComponent implements OnInit {
 
   profilePicture(client: Client) {
     return client.profile_picture || defaultValues.profile_picture;
+  }
+
+  get validBuyer() {
+    return this.form.controls.buyer.valid;
   }
 }

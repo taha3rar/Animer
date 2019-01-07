@@ -1,30 +1,32 @@
-<div class="panel panel-tab">
-  <div class="panel-body">
-    <div class="panel-header">
-      <div><p>My Buyers</p></div>
-      <button class="bttn-primary pull-right next-step">Next Step &rarr;</button>
-    </div>
-    <div class="padding-all-2">
-      <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_right</i></button>
-      <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_left</i></button>
-      <div class="row margin-top clearfix" >
-        <div class="col-md-2" *ngFor="let client of (clients | paginate: { itemsPerPage: 6, currentPage: page })">
-          <div class="card">
-            <div>
-              <input type="radio" class="form_radio" id="{{client.numericId}}" name="supplier" [value]="client" [(ngModel)]="invoice.buyer" />
-              <label for="{{client.numericId}}" class="form_radio_label"> <span class="form_radio_btn"></span> </label>
-              <p class="pull-right">#{{client.numericId}}</p>
-            </div>
-            <div>
-              <figure class="img-circular-md" [style.background-image]="'url(' + profilePicture(client) + ')'"></figure>
-            </div>
-            <div>
-              <p class="heading-2">{{client.first_name}} {{client.last_name}}</p>
-              <p>{{client.company_name}}</p>
+<form [formGroup]="form">
+  <div class="panel panel-tab">
+    <div class="panel-body">
+      <div class="panel-header">
+        <div><p>My Buyers</p></div>
+        <button class="bttn-primary pull-right next-step" [disabled]="!validBuyer">Next Step &rarr;</button>
+      </div>
+      <div class="padding-all-2">
+        <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_right</i></button>
+        <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_left</i></button>
+        <div class="row margin-top clearfix" >
+          <div class="col-md-2" *ngFor="let client of (clients | paginate: { itemsPerPage: 6, currentPage: page })">
+            <div class="card">
+              <div>
+                <input type="radio" class="form_radio" id="{{client.numericId}}" [value]="client" formControlName="buyer" />
+                <label for="{{client.numericId}}" class="form_radio_label"> <span class="form_radio_btn"></span> </label>
+                <p class="pull-right">#{{client.numericId}}</p>
+              </div>
+              <div>
+                <figure class="img-circular-md" [style.background-image]="'url(' + profilePicture(client) + ')'"></figure>
+              </div>
+              <div>
+                <p class="heading-2">{{client.first_name}} {{client.last_name}}</p>
+                <p>{{client.company_name}}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</form>

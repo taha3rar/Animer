@@ -11,21 +11,23 @@
           <a data-toggle="tab" class="label" href="#fillInvoice"> <span class="round-tab">2</span>Fill Invoice</a>
         </li>
         <li class="disabled">
-          <a data-toggle="tab" class="label" href="#reviewSend"> <span class="round-tab">3</span> Review and Send </a>
+          <a data-toggle="tab" class="label" href="#reviewSend"> <span class="round-tab">3</span>Review and Send </a>
         </li>
       </ul>
 
       <div class="tab-content">
         <div class="tab-pane active" id="chooseBuyer">
-          <app-invoice-generator-buyers [invoice]="invoice"></app-invoice-generator-buyers>
+          <app-invoice-generator-buyers [form]="invoiceForm"></app-invoice-generator-buyers>
         </div>
         <div class="tab-pane" id="fillInvoice">
-          <app-invoice-generator-invoice [invoice]="invoice"></app-invoice-generator-invoice>
+          <app-invoice-generator-invoice [form]="invoiceForm"></app-invoice-generator-invoice>
         </div>
 
         <div class="tab-pane" id="reviewSend">
           <div class="panel panel-tab">
-            <div class="panel-body"><app-invoice [generateInvoice]="true" [invoice]="invoice"></app-invoice></div>
+            <div class="panel-body">
+              <!-- <app-invoice [generateInvoice]="true" [invoice]="invoice"></app-invoice> -->
+            </div>
           </div>
         </div>
       </div>
