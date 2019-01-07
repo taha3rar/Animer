@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transaction-proforma-invoice.component.scss']
 })
 export class TransactionProformaInvoiceComponent implements OnInit {
+  seller = false;
   constructor() {}
 
   ngOnInit() {}

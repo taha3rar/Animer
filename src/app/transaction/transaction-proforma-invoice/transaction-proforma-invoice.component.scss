@@ -10,3 +10,12 @@
     margin-right: 3rem;
   }
 }
+
+.total {
+  display: flex;
+  border-top: 1px solid #eeee;
+
+  & p:last-child {
+    margin-left: auto;
+  }
+}

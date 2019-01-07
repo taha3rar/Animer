@@ -1,4 +1,4 @@
-<div class="row margin-bottom-2" >
+<div class="row margin-bottom-2">
   <div class="col-md-9">
     <p class="heading-2">BUYER</p>
     <p class="heading-4">Avenews-gt</p>
@@ -14,18 +14,18 @@
 </div>
 
 <div class="row">
-  <div class="col-md-9">
+  <div class="col">
     <p class="heading-2">Product Details</p>
     <table class="table table-striped margin-bottom-2">
       <thead>
         <tr style="font-size: 1.34rem;">
-        <th>Produce</th>
-        <th>Variety</th>
-        <th>Tolerance</th>
-        <th>SKU</th>
-        <th>Product Specifications</th>
-        <th>Approvals & Certifications</th>
-      </tr>
+          <th>Produce</th>
+          <th>Variety</th>
+          <th>Tolerance</th>
+          <th>SKU</th>
+          <th>Product Specifications</th>
+          <th>Approvals & Certifications</th>
+        </tr>
       </thead>
       <tbody>
         <tr>
@@ -44,12 +44,12 @@
     <table class="table table-striped margin-bottom">
       <thead>
         <tr style="font-size: 1.34rem;">
-        <th>Type of package</th>
-        <th>Packaged product weight</th>
-        <th>Weight unit</th>
-        <th>Qunatity</th>
-        <th>Total Weight</th>
-      </tr>
+          <th>Type of package</th>
+          <th>Packaged product weight</th>
+          <th>Weight unit</th>
+          <th>Qunatity</th>
+          <th>Total Weight</th>
+        </tr>
       </thead>
       <tbody>
         <tr class="table-light">
@@ -62,29 +62,31 @@
       </tbody>
     </table>
 
-    <div class="margin-bottom-2">
-    <p class="heading-4-blue">Container Details</p>
-    <p class="heading-4">Type: ft.1</p>
-    <p class="heading-4 margin-bottom">Quantity: 1</p>
-  </div>
-  </div>
-  <div class="col-md-3">
-    <div class="invoice-right-side">
-      <p class="heading-big">PRICING</p>
-      <div class="pricing">
-        <div>
-          <p class="heading-2 ">Price per kg</p>
-          <p class="heading-2">Currency</p>
-          <p class="heading-2">Total weight</p>
-        </div>
-        <div>
-          <p class="heading-4-blue">10</p>
-          <p class="heading-4-blue">USD</p>
-          <p class="heading-4-blue">4353</p>
-        </div>
-        <div>
-          <p class="heading-2">TOTAL</p>
-          <p class="heading-4-blue" style="font-size:1.9rem">5000 USD</p>
+    <div class="row margin-bottom-2">
+      <div class="col-lg-9 col-md-7">
+          <p class="heading-4-blue">Container Details</p>
+          <p class="heading-4">Type: ft.1</p>
+          <p class="heading-4 margin-bottom">Quantity: 1</p>
+      </div>
+      <div class="col-lg-3 col-md-5">
+        <div class="invoice-right-side">
+          <p class="heading-big">PRICING</p>
+          <div class="pricing">
+            <div>
+              <p class="heading-2 ">Price per kg</p>
+              <p class="heading-2">Currency</p>
+              <p class="heading-2">Total weight</p>
+            </div>
+            <div>
+              <p class="heading-4-blue">10</p>
+              <p class="heading-4-blue">USD</p>
+              <p class="heading-4-blue">4353</p>
+            </div>
+          </div>
+          <div class="total">
+            <p class="heading-2">TOTAL</p>
+            <p class="heading-4-blue" style="font-size:1.9rem">5000 USD</p>
+          </div>
         </div>
       </div>
     </div>
@@ -93,7 +95,7 @@
 
 <div class="row">
   <div class="col-md-6">
-      <div class="border-top">
+    <div class="border-top">
       <p class="heading-2">Shipping Details</p>
       <div class="row">
         <div class="col-md-3">
@@ -110,11 +112,11 @@
           <p>[-34.8215904] [150.60216809999997]</p>
           <p>None</p>
         </div>
-        </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="border-top">
+  </div>
+  <div class="col-md-6">
+    <div class="border-top">
       <p class="heading-2">Additional Details</p>
       <div class="details">
         <div>
@@ -141,5 +143,5 @@
     </div>
   </div>
 </div>
-<button class="bttn-primary next-step pull-right"> <span> Generate Purchase Order &rarr; </span></button>
+<button *ngIf="!seller" class="bttn-primary next-step pull-right"><span> Generate Purchase Order &rarr; </span></button>
 <button class="btn-primary-transp pull-right">Download PDF</button>

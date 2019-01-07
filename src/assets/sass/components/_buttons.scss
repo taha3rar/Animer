@@ -52,11 +52,11 @@ button:active {
   color: white;
   font-weight: 600;
   font-size: 1.4rem;
-  min-width: 20rem;
+  min-width: 18rem;
   margin: 0.5rem;
   transition: all 0.5s;
   height: 3.55rem;
-  padding: 0 2.8rem;
+  padding: 0 1.8rem;
   border: none;
   i {
     font-size: 2rem;
@@ -78,6 +78,19 @@ button:active {
   }
 }
 
+.bttn-disabled {
+  background-color: #cccccc;
+  color: #999999;
+  border-radius: 10rem;
+  font-weight: 600;
+  font-size: 1.4rem;
+  min-width: 18rem;
+  height: 3.55rem;
+  padding: 0 1.8rem;
+  border: none;
+  margin: 0.5rem;
+}
+
 .bttn-add span:before {
   content: "\f067";
   position: absolute;
@@ -90,7 +103,7 @@ button:active {
 }
 
 .bttn-add:hover span {
-  padding-left: 25px;
+  padding-left: 20px;
 }
 
 .bttn-add:hover span::before {

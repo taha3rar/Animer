@@ -39,22 +39,15 @@
   border: 1px dashed $light-gray;
   margin-top: 3.1rem;
   margin-bottom: 1rem;
-  padding: 2rem 2.7rem;
+  padding: 1.5rem 1.5rem;
 }
 
 .pricing {
   display: flex;
   justify-content: space-between;
 
-  div:last-child {
-    text-align: center;
-    border-left: 1px solid $light-gray;
-    align-self: center;
-    padding-left: 2rem;
-  }
-
   div:first-child {
-    margin-right: -2rem;
+    margin-right: 1rem;
   }
 }
 

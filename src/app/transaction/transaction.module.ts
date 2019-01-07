@@ -12,6 +12,7 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { CreateQuoteRequestComponent } from './create-quote-request/create-quote-request.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '@app/shared';
+import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SharedModule } from '@app/shared';
     TransactionQuoteRequestComponent,
     TransactionComponent,
     TransactionListComponent,
-    CreateQuoteRequestComponent
+    CreateQuoteRequestComponent,
+    TransactionDetailsComponent
   ],
   imports: [CommonModule, TransactionRoutingModule, TranslateModule, NgbModule, SharedModule],
   providers: [TransactionListResolver]

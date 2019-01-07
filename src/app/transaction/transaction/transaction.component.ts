@@ -10,6 +10,7 @@ declare const $: any;
 })
 export class TransactionComponent implements OnInit {
   sideDivVisible = false;
+  seller = false;
 
   constructor(private location: Location) {}
 
