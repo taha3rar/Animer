@@ -1,3 +1,4 @@
+import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransactionRoutingModule } from './transaction-routing.module';
@@ -26,6 +27,6 @@ import { TransactionDetailsComponent } from './transaction-details/transaction-d
     TransactionDetailsComponent
   ],
   imports: [CommonModule, TransactionRoutingModule, TranslateModule, NgbModule, SharedModule],
-  providers: [TransactionListResolver]
+  providers: [TransactionListResolver, QuoteRequestResolver]
 })
 export class TransactionModule {}

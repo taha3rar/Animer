@@ -11,6 +11,7 @@ export * from './http/cache.interceptor';
 export * from './http/error-handler.interceptor';
 export * from './route-reusable-strategy';
 export * from './logger.service';
+export * from './api/qr.service';
 export * from './api/user.service';
 export * from './api/transaction.service';
 export * from './api/product.service';

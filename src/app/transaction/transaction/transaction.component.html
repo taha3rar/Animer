@@ -4,10 +4,12 @@
 <div class="stepper-wrapper">
   <div class="stepper">
     <ul class="nav nav-tabs">
-      <li class="completed">
-        <a data-toggle="tab" class="label" href="#quoteRequest"> <span class="round-tab">1</span>Quote request sent </a>
-      </li>
       <li class="completed active">
+        <a data-toggle="tab" class="label" href="#quoteRequest">
+          <span class="round-tab">1</span>Quote request sent
+        </a>
+      </li>
+      <li class="completed ">
         <a data-toggle="tab" class="label" href="#proformaInvoice">
           <span class="round-tab">2</span>Proforma invoice recieved
         </a>
@@ -23,22 +25,15 @@
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane" id="quoteRequest">
+      <div class="tab-pane active" id="quoteRequest">
         <div class="panel panel-tab">
           <div class="panel-body">
             <div class="padding-all-2"><app-transaction-quote-request></app-transaction-quote-request></div>
           </div>
         </div>
       </div>
-      <div class="tab-pane active" id="proformaInvoice">
-        <!-- Proforma Invoice for buyer-->
-        <div class="panel panel-tab" *ngIf="!seller">
-          <div class="panel-body">
-            <div class="padding-all-2"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
-          </div>
-        </div>
-        <!-- Proforma Invoice for seller-->
-        <div class="panel panel-tab details-col" *ngIf="seller">
+      <div class="tab-pane" id="proformaInvoice">
+        <div class="panel panel-tab">
           <div class="panel-body">
             <div class="panel-header"><p>Add Proforma Invoice Details</p></div>
             <app-transaction-details></app-transaction-details>

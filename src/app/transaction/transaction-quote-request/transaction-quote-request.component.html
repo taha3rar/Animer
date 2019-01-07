@@ -1,9 +1,9 @@
 <div class="row">
-<div class="col">
-  <p class="heading-4">Avenews-gt</p>
-  <p class="heading-4">Ishai Ben Or</p>
-  <p class="heading-4">Ahad Ha'am 54</p>
-</div>
+  <div class="col">
+    <p class="heading-4">Avenews-gt</p>
+    <p class="heading-4">Ishai Ben Or</p>
+    <p class="heading-4">Ahad Ha'am 54</p>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-8">
@@ -16,9 +16,9 @@
       </thead>
       <tbody>
         <tr>
-          <td>Green Coffee</td>
-          <td>Kona</td>
-          <td>Type: Fully-Washed Grade: Fancy Screen: 18 Crop: 2017</td>
+          <td>{{quoteRequest.produce}}</td>
+          <td>{{quoteRequest.variety}}</td>
+          <td>{{quoteRequest.specification}}</td>
         </tr>
       </tbody>
     </table>
@@ -35,35 +35,32 @@
       </thead>
       <tbody>
         <tr>
-          <td>Bag</td>
-          <td>45</td>
-          <td>kg</td>
-          <td>450</td>
-          <td>20250</td>
+          <td>{{quoteRequest.type_of_package}}</td>
+          <td>{{quoteRequest.package_weight}}</td>
+          <td>{{quoteRequest.weight_unit}}</td>
+          <td>{{quoteRequest.quantity}}</td>
+          <td>{{quoteRequest.total_weight}}</td>
         </tr>
       </tbody>
     </table>
 
     <p class="heading-4-blue">Container Details</p>
-    <p class="heading-4">Type: ft.1</p>
-    <p class="heading-4">Quantity: 1</p>
+    <p class="heading-4">Type: {{quoteRequest.container_type}}</p>
+    <p class="heading-4">Quantity: {{quoteRequest.container_quantity}}</p>
   </div>
   <div class="col-md-4">
     <div class="quote-right-side">
       <!-- Shipping Details -->
       <p class="heading-2">Shipping Details</p>
-      <p class="heading-4">Israel</p>
-      <p class="heading-4">Tel-Aviv Jaffa</p>
-      <p class="heading-4">Ahad Ha'am 54</p>
+      <p class="heading-4">{{quoteRequest.point_of_delivery}}</p>
       <p class="heading-4">
-        GPS Coordinates: [-34.8215904] [150.60216809999997]
+        GPS Coordinates: {{quoteRequest.gps_coordinates[0]}}, {{quoteRequest.gps_coordinates[1]}}
       </p>
-      <p class="heading-4">Incoterms: Ex-Works</p>
+      <p class="heading-4">Incoterms: {{quoteRequest.incoterms}}</p>
       <!-- Additional Details -->
       <p class="heading-2 margin-top">Additional Details</p>
-      <p class="heading-4">Expected receiving date: 28/10/2018</p>
-      <p class="heading-4">Quote request remarks: No</p>
+      <p class="heading-4">Expected receiving date: {{quoteRequest.receive_date | date:'longDate'}}</p>
+      <p class="heading-4">Quote request remarks: {{quoteRequest.remarks}}</p>
     </div>
   </div>
 </div>
-

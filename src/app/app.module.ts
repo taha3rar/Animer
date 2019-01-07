@@ -23,6 +23,7 @@ import { ProductModule } from './product/product.module';
 import { EcosystemModule } from './ecosystem/ecosystem.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [

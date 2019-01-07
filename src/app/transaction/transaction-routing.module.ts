@@ -1,3 +1,4 @@
+import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -17,7 +18,8 @@ const routes: Routes = [
     },
     {
       path: 'transaction/:id',
-      component: TransactionComponent
+      component: TransactionComponent,
+      resolve: { quoteRequest: QuoteRequestResolver }
     }
   ])
 ];

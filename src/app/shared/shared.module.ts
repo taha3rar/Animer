@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,7 +11,6 @@ import { TransactionsListComponent } from './components/transactions-list/transa
 import { DocumentListComponent } from './components/document-list/document-list.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
-import { RouterModule } from '@angular/router';
 import { BaseListComponent } from './components/base-list/base-list.component';
 import { UserDocumentComponent } from './components/user-document-list/user-document-list.component';
 
