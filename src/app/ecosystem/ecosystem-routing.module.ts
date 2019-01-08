@@ -5,6 +5,7 @@ import { Shell } from '@app/shell/shell.service';
 import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.component';
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
+import { UserClientResolver } from './resolvers/user-client.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -13,7 +14,8 @@ const routes: Routes = [
       component: EcosystemsListComponent,
       data: { title: extract('Ecosystems') },
       resolve: {
-        ecosystems: EcosystemListResolver
+        ecosystems: EcosystemListResolver,
+        userClients: UserClientResolver
       }
     },
     {

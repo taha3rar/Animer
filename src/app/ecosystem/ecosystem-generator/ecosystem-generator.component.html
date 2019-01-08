@@ -24,11 +24,12 @@
       <div class="modal-box-right">
         <div class="tab-content">
           <div class="tab-pane active" id="ecosystem-details">
+            <form [formGroup]="newEcosystemForm">
             <div class="row margin-none">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="ecosystem-name">Ecosystem Name</label>
-                  <input id="ecosystem-name" type="text" class="form-control" placeholder="Type ecosystem name here...">
+                  <label for="ecosystem-name">Ecosystem Name *</label>
+                  <input id="ecosystem-name" type="text" formControlName="name" class="form-control" placeholder="Type ecosystem name here...">
                 </div>
               </div>
             </div>
@@ -36,11 +37,12 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="ecosystem-desc">Ecosystem Description</label>
-                    <textarea id="ecosystem-desc" class="form-control" type="text" rows="4" placeholder="Type ecosystem name here..."></textarea>
+                    <textarea id="ecosystem-desc" formControlName="description" class="form-control" type="text" rows="4" placeholder="Type ecosystem name here..."></textarea>
                   </div>
                 </div>
               </div>
-              <button class="bttn-primary pull-right next-step">Next Step &rarr; </button>
+              <button class="bttn-primary pull-right next-step" [disabled]="!newEcosystemForm.valid">Next Step &rarr; </button>
+            </form>
           </div>
           <div class="tab-pane" id="ecosystem-clients">
             <p class="heading-2">My clients list</p>
@@ -55,28 +57,19 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td><input type="checkbox" class="checkbox" id="checkbox1"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label></td>
-                          <td>335</td>
-                          <td>Stark industries</td>
-                          <td>Harry Potter</td>
+                        <tr *ngFor="let userClient of userClients | paginate: { itemsPerPage: 5, currentPage: page };  let i = index">
+                          <td><input type="checkbox" class="checkbox" id="checkbox{{i}}" [checked]="existClient(userClient)" (click)="toggleAddClient(userClient)"/><label class="checkbox_label" for="checkbox{{i}}"><span class="form_checkbox_btn"></span></label></td>
+                          <td>{{userClient.numericId}}</td>
+                          <td>{{userClient.company_name}}</td>
+                          <td>{{userClient.first_name}} {{userClient.last_name}}</td>
                         </tr>
-                        <tr>
-                          <td><input type="checkbox" class="checkbox" id="checkbox2"/><label class="checkbox_label" for="checkbox2"><span class="form_checkbox_btn"></span></label></td>
-                          <td>342</td>
-                          <td>Stark industries</td>
-                          <td>Harry Potter</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox" id="checkbox3"/><label class="checkbox_label" for="checkbox3"><span class="form_checkbox_btn"></span></label></td>
-                            <td>342</td>
-                            <td>Stark industries</td>
-                            <td>Harry Potter</td>
-                          </tr>
                       </tbody>
                     </table>
+                    <pagination-controls
+                      (pageChange)="page = $event"
+                    ></pagination-controls>
                 </div>
-                <button class="bttn-primary pull-right">Create Ecosystem</button>
+                <button class="bttn-primary pull-right" [disabled]="!newEcosystemForm.valid" (click)="submitEcosystem()">Create Ecosystem</button>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ export class EcosystemsListComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.ecosystems = this.route.snapshot['ecosystems'];
+    this.ecosystems = this.route.snapshot.data['ecosystems'];
     console.log(this.ecosystems);
   }
 
