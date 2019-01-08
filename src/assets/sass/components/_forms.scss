@@ -33,6 +33,13 @@
   position: relative;
 }
 
+input:active,
+input:focus,
+button:active,
+button:focus {
+  outline: none;
+}
+
 .form_radio_btn {
   height: 1.8rem;
   width: 1.8rem;

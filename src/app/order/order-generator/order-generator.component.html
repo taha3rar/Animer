@@ -42,6 +42,7 @@
               <div class="panel-header">
                 <div><p>Michael James Inventory</p></div>
                 <div>
+                  <div class="search-box">
                   <input
                     type="text"
                     [(ngModel)]="term"
@@ -49,7 +50,9 @@
                     type="text"
                     placeholder="Search products..."
                   />
-                  <button class="bttn-primary"><i class="material-icons">add</i>Add New Product</button>
+                  <i class="material-icons">search</i>
+                </div>
+                  <button class="bttn-primary next-step">Next Step &rarr;</button>
                 </div>
               </div>
               <div class="padding-all-2"><app-order-generator-products></app-order-generator-products></div>

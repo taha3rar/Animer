@@ -17,10 +17,6 @@
   }
 }
 
-button:active {
-  outline: none;
-}
-
 .btn-primary-transp {
   background: transparent;
   border-radius: 10rem;
@@ -159,11 +155,6 @@ button:active {
   }
 }
 
-.btn:focus {
-  outline: none !important;
-  border: none;
-}
-
 .btn-next {
   background-image: linear-gradient(to right, $primary-color, $secondary-color);
   color: white;
@@ -218,10 +209,11 @@ button:active {
 }
 
 .btn-icons,
+.btn:focus,
 .btn-icons:focus,
 .btn-icons:active {
   background: none;
-  outline: none;
+  outline: none !important;
   border: none;
 
   i {

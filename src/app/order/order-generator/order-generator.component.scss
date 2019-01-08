@@ -65,3 +65,15 @@ input.search-bar-rounded {
   width: 24%;
   float: right;
 }
+
+.search-box {
+  position: relative;
+  display: inline;
+
+  i {
+    position: absolute;
+    top: -1px;
+    color: #d3d3d3;
+    right: 3.5rem;
+  }
+}
