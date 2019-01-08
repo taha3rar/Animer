@@ -45,14 +45,15 @@ export class HttpCacheService {
    * @return The cached data or null if no cached data exists for this request.
    */
   getCacheData(url: string): HttpResponse<any> | null {
-    const cacheEntry = this.cachedData[url];
-
-    if (cacheEntry) {
-      log.debug(`Cache hit for key: "${url}"`);
-      return cacheEntry.data;
-    }
-
     return null;
+    // const cacheEntry = this.cachedData[url];
+
+    // if (cacheEntry) {
+    //   log.debug(`Cache hit for key: "${url}"`);
+    //   return cacheEntry.data;
+    // }
+
+    // return null;
   }
 
   /**
