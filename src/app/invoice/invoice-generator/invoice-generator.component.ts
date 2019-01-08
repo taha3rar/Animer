@@ -66,7 +66,8 @@ export class InvoiceGeneratorComponent implements OnInit {
       deliver_to_zip_code: ['', Validators.required],
       deliver_to_phone_number: ['', Validators.required],
       deliver_to_expected_delivery_date: ['', Validators.required],
-      date_created: [Date.now(), Validators.required]
+      date_created: [Date.now(), Validators.required],
+      products: this.formBuilder.array([], Validators.required)
     });
 
     this.route.data.subscribe(({ seller }) => {

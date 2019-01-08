@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-invoice-inventory',
@@ -6,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoice-inventory.component.scss']
 })
 export class InvoiceInventoryComponent implements OnInit {
+  @Input()
+  form: FormGroup;
+
   constructor() {}
 
   ngOnInit() {}
+
+  addProduct() {
+    console.log(this.form);
+    this.form.value.products.push({
+      sarasa: true
+    });
+  }
 }
