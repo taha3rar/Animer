@@ -24,6 +24,7 @@
     </table>
 
     <p class="heading-2">Packing Details</p>
+    <div *ngIf="quoteRequest.type_of_package">
     <p class="heading-4-blue">Package Details</p>
     <table class="panel-table">
       <thead>
@@ -37,16 +38,19 @@
         <tr>
           <td>{{quoteRequest.type_of_package}}</td>
           <td>{{quoteRequest.package_weight}}</td>
-          <td>{{quoteRequest.weight_unit}}</td>
+          <td>{{quoteRequest.weight_unit | uppercase}}</td>
           <td>{{quoteRequest.quantity}}</td>
           <td>{{quoteRequest.total_weight}}</td>
         </tr>
       </tbody>
     </table>
+  </div>
+    <div *ngIf="quoteRequest.container_type">
+      <p class="heading-4-blue">Container Details</p>
+      <p class="heading-4">Type: {{quoteRequest.container_type}}</p>
+      <p class="heading-4">Quantity: {{quoteRequest.container_quantity}}</p>
+    </div>
 
-    <p class="heading-4-blue">Container Details</p>
-    <p class="heading-4">Type: {{quoteRequest.container_type}}</p>
-    <p class="heading-4">Quantity: {{quoteRequest.container_quantity}}</p>
   </div>
   <div class="col-md-4">
     <div class="quote-right-side">
@@ -56,10 +60,10 @@
       <p class="heading-4">
         GPS Coordinates: {{quoteRequest.gps_coordinates[0]}}, {{quoteRequest.gps_coordinates[1]}}
       </p>
-      <p class="heading-4">Incoterms: {{quoteRequest.incoterms}}</p>
+      <p *ngIf="quoteRequest.incoterms" class="heading-4">Incoterms: {{quoteRequest.incoterms}}</p>
       <!-- Additional Details -->
       <p class="heading-2 margin-top">Additional Details</p>
-      <p class="heading-4">Expected receiving date: {{quoteRequest.receive_date | date:'longDate'}}</p>
+      <p class="heading-4">Expected receiving date: {{quoteRequest.receive_date | date:'MM/dd/yy'}}</p>
       <p class="heading-4">Quote request remarks: {{quoteRequest.remarks}}</p>
     </div>
   </div>

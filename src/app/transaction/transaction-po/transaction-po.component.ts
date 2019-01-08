@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { PurchaseOrder } from '@app/core/models/transaction/po';
 
 @Component({
   selector: 'app-transaction-po',
@@ -10,12 +12,11 @@ export class TransactionPoComponent implements OnInit {
 
   @Input()
   completedPO = false;
+  purchaseOrder: PurchaseOrder = new PurchaseOrder();
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {}
-
-  completed() {
-    this.completedPO = true;
+  ngOnInit() {
+    this.purchaseOrder = this.route.snapshot.data['purchaseOrder'];
   }
 }

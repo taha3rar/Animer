@@ -1,3 +1,5 @@
+import { PurchaseOrderService } from './api/po.service';
+import { QrService } from './api/qr.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
@@ -22,6 +24,7 @@ import { TransactionService } from './api/transaction.service';
 import { OrderService } from './api/order.service';
 import { InvoiceService } from './api/invoice.service';
 import { ProductService } from './api/product.service';
+import { ProformaInvoiceService } from './api/pi.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule, NgxPermissionsModule.forRoot()],
@@ -43,6 +46,9 @@ import { ProductService } from './api/product.service';
     OrderService,
     InvoiceService,
     ProductService,
+    QrService,
+    ProformaInvoiceService,
+    PurchaseOrderService,
     {
       provide: HttpClient,
       useClass: HttpService

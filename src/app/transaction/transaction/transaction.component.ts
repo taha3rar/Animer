@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 declare const $: any;
 
@@ -10,11 +11,22 @@ declare const $: any;
 })
 export class TransactionComponent implements OnInit {
   sideDivVisible = false;
-  seller = false;
+  purchaseOrder = false;
+  proformaInvoice = false;
 
-  constructor(private location: Location) {}
+  constructor(
+    private location: Location,
+    private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.route.snapshot.data['proformaInvoice']) {
+      this.proformaInvoice = true;
+    }
+
+    if(this.route.snapshot.data['purchaseOrder']) {
+      this.purchaseOrder = true;
+    }
+  }
 
   adjustDiv(type: string) {
     if (this.sideDivVisible === false) {

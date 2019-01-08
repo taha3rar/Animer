@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 <h1 class="main-title btn-main margin-bottom-2" (click)="back()">
   <a class="material-icons">keyboard_backspace</a> Transactions
 </h1>
+=======
+<h1 class="main-title btn-main margin-bottom-2" (click)="back()"><a class="material-icons">keyboard_backspace</a>
+  Transactions</h1>
+>>>>>>> Proforma Invoice Logic
 <div class="stepper-wrapper">
   <div class="stepper">
     <ul class="nav nav-tabs">
@@ -9,18 +14,25 @@
           <span class="round-tab">1</span>Quote request sent
         </a>
       </li>
-      <li class="completed ">
+      <li [ngClass]="{'completed':proformaInvoice,'disabled': !proformaInvoice}">
         <a data-toggle="tab" class="label" href="#proformaInvoice">
           <span class="round-tab">2</span>Proforma invoice recieved
         </a>
       </li>
-      <li class="disabled">
+      <li [ngClass]="{'completed':proformaInvoice || purchaseOrder,'disabled': !purchaseOrder && !proformaInvoice}">
         <a data-toggle="tab" class="label" href="#purchaseOrder">
           <span class="round-tab">3</span>Generate purchase order
         </a>
       </li>
+<<<<<<< HEAD
       <li class="disabled">
         <a data-toggle="tab" class="label" href="#review"> <span class="round-tab">4</span>Review and send </a>
+=======
+      <li [ngClass]="{'completed':purchaseOrder,'disabled': !purchaseOrder}">
+        <a data-toggle="tab" class="label" href="#review">
+          <span class="round-tab">4</span>Review and send
+        </a>
+>>>>>>> Proforma Invoice Logic
       </li>
     </ul>
 
@@ -28,13 +40,20 @@
       <div class="tab-pane active" id="quoteRequest">
         <div class="panel panel-tab">
           <div class="panel-body">
+<<<<<<< HEAD
             <div class="padding-all-2"><app-transaction-quote-request></app-transaction-quote-request></div>
+=======
+            <div class="padding-all-2">
+              <app-transaction-quote-request></app-transaction-quote-request>
+            </div>
+>>>>>>> Proforma Invoice Logic
           </div>
         </div>
       </div>
       <div class="tab-pane" id="proformaInvoice">
         <div class="panel panel-tab">
           <div class="panel-body">
+<<<<<<< HEAD
             <div class="panel-header"><p>Add Proforma Invoice Details</p></div>
             <app-transaction-details></app-transaction-details>
           </div>
@@ -42,20 +61,37 @@
         <div class="panel panel-tab pi-col" *ngIf="seller">
           <div class="panel-body">
             <div class="padding-all-2"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
+=======
+            <div class="padding-all-2">
+              <app-transaction-proforma-invoice></app-transaction-proforma-invoice>
+            </div>
+>>>>>>> Proforma Invoice Logic
           </div>
         </div>
       </div>
       <div class="tab-pane" id="purchaseOrder">
         <div class="panel panel-tab">
           <div class="panel-body">
+<<<<<<< HEAD
             <div class="padding-all-2"><app-transaction-po></app-transaction-po></div>
+=======
+            <div class="padding-all-2">
+              <app-transaction-po></app-transaction-po>
+            </div>
+>>>>>>> Proforma Invoice Logic
           </div>
         </div>
       </div>
       <div class="tab-pane" id="review">
         <div class="panel panel-tab">
           <div class="panel-body">
+<<<<<<< HEAD
             <div class="padding-all-2"><app-transaction-po [completedPO]="true"></app-transaction-po></div>
+=======
+            <div class="padding-all-2">
+              <app-transaction-po [completedPO]="true"></app-transaction-po>
+            </div>
+>>>>>>> Proforma Invoice Logic
           </div>
         </div>
       </div>
@@ -84,7 +120,9 @@
           <figure class="img-shape"><img src="../../assets/img/prof-img2.jpg" class="user-img" /></figure>
           <span> Alex Benn</span>
         </div>
-        <div class="message-bubble"><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p></div>
+        <div class="message-bubble">
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+        </div>
       </div>
       <div class="message-area-receiver">
         <div class="user-info">

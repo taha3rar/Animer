@@ -29,16 +29,16 @@
       </thead>
       <tbody>
         <tr>
-          <td>Green Coffee</td>
-          <td>Kona</td>
-          <td>none</td>
-          <td>5345345111</td>
-          <td>Type: Fully-Washed Grade</td>
-          <td>none</td>
+          <td>{{proformaInvoice.produce}}</td>
+          <td>{{proformaInvoice.variety}}</td>
+          <td>{{proformaInvoice.tolerance}}</td>
+          <td>{{proformaInvoice.stock_keeping_unit}}</td>
+          <td>{{proformaInvoice.specification}}</td>
+          <td><span *ngFor="let certification of proformaInvoice.certifications">{{certification}}> </span></td>
         </tr>
       </tbody>
     </table>
-
+    <div *ngIf="proformaInvoice.type_of_package"> 
     <p class="heading-2">Packing Details</p>
     <p class="heading-4-blue">Package Details</p>
     <table class="table table-striped margin-bottom">
@@ -53,40 +53,40 @@
       </thead>
       <tbody>
         <tr class="table-light">
-          <td>Bag</td>
-          <td>45</td>
-          <td>kg</td>
-          <td>450</td>
-          <td>20250</td>
+          <td>{{proformaInvoice.type_of_package}}</td>
+          <td>{{proformaInvoice.package_weight}}</td>
+          <td>{{proformaInvoice.package_weight_unit | uppercase}}</td>
+          <td>{{proformaInvoice.quantity}}</td>
+          <td>{{proformaInvoice.total_weight}}</td>
         </tr>
       </tbody>
     </table>
-
-    <div class="row margin-bottom-2">
-      <div class="col-lg-9 col-md-7">
-          <p class="heading-4-blue">Container Details</p>
-          <p class="heading-4">Type: ft.1</p>
-          <p class="heading-4 margin-bottom">Quantity: 1</p>
-      </div>
-      <div class="col-lg-3 col-md-5">
-        <div class="invoice-right-side">
-          <p class="heading-big">PRICING</p>
-          <div class="pricing">
-            <div>
-              <p class="heading-2 ">Price per kg</p>
-              <p class="heading-2">Currency</p>
-              <p class="heading-2">Total weight</p>
-            </div>
-            <div>
-              <p class="heading-4-blue">10</p>
-              <p class="heading-4-blue">USD</p>
-              <p class="heading-4-blue">4353</p>
-            </div>
-          </div>
-          <div class="total">
-            <p class="heading-2">TOTAL</p>
-            <p class="heading-4-blue" style="font-size:1.9rem">5000 USD</p>
-          </div>
+  </div>
+  <div *ngIf="proformaInvoice.container_type">
+    <div class="margin-bottom-2">
+    <p class="heading-4-blue">Container Details</p>
+    <p class="heading-4">Type: {{proformaInvoice.container_type}}</p>
+    <p class="heading-4 margin-bottom">Quantity: {{proformaInvoice.container_quantity}}</p>
+  </div>
+  </div>
+  </div>
+  <div class="col-md-3">
+    <div class="invoice-right-side">
+      <p class="heading-big">PRICING</p>
+      <div class="pricing">
+        <div>
+          <p class="heading-2 ">Price per {{proformaInvoice.package_weight_unit | uppercase}}</p>
+          <p class="heading-2">Currency</p>
+          <p class="heading-2">Total weight</p>
+        </div>
+        <div>
+          <p class="heading-4-blue">{{proformaInvoice.quantity}}</p>
+          <p class="heading-4-blue">{{proformaInvoice.currency | uppercase}}</p>
+          <p class="heading-4-blue">{{proformaInvoice.total_weight}}</p>
+        </div>
+        <div>
+          <p class="heading-2">TOTAL</p>
+          <p class="heading-4-blue" style="font-size:1.9rem">{{proformaInvoice.total_price}} {{proformaInvoice.currency | uppercase}}</p>
         </div>
       </div>
     </div>
@@ -106,11 +106,11 @@
           <p>Incoterms</p>
         </div>
         <div class="col-md-9">
-          <p>Kenya, Nairobi</p>
-          <p>[-34.8215904] [150.60216809999997]</p>
-          <p>Israel, Tel-Aviv Jaffa, Ahad Ha'am 54</p>
-          <p>[-34.8215904] [150.60216809999997]</p>
-          <p>None</p>
+          <p>{{proformaInvoice.point_of_loading}}</p>
+          <p>{{proformaInvoice.gps_coordinates_loading[0]}} {{proformaInvoice.gps_coordinates_loading[1]}}</p>
+          <p>{{proformaInvoice.point_of_delivery}}</p>
+          <p>{{proformaInvoice.gps_coordinates_delivery[0]}} {{proformaInvoice.gps_coordinates_delivery[1]}}</p>
+          <p>{{proformaInvoice.incoterms}}</p>
         </div>
       </div>
     </div>
@@ -125,9 +125,9 @@
           <p>Quote request valid until</p>
         </div>
         <div>
-          <p>28/10/2018</p>
-          <p>No</p>
-          <p>7/10/2018</p>
+          <p>{{proformaInvoice.expected_receiving_date}}</p>
+          <p>{{quoteRequest.remarks}}</p>
+          <p>{{quoteRequest.valid_until | date:'MM/dd/yy'}}</p>
         </div>
         <div>
           <p>Expected dalivery date</p>
@@ -135,9 +135,9 @@
           <p>Proforma invoice valid until</p>
         </div>
         <div>
-          <p>28/10/2018</p>
-          <p>No</p>
-          <p>7/10/2018</p>
+          <p>{{proformaInvoice.expected_delivering_date}}</p>
+          <p>{{proformaInvoice.remarks}}</p>
+          <p>{{proformaInvoice.valid_until | date:'MM/dd/yy'}}</p>
         </div>
       </div>
     </div>

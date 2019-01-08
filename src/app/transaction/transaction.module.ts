@@ -1,3 +1,4 @@
+import { BuyerResolver } from './resolvers/buyer.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,8 @@ import { CreateQuoteRequestComponent } from './create-quote-request/create-quote
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '@app/shared';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
+import { ProformaInvoiceResolver } from './resolvers/proforma-invoice.resolver';
+import { PurchaseOrderResolver } from './resolvers/purchase-order.resolver';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,6 @@ import { TransactionDetailsComponent } from './transaction-details/transaction-d
     TransactionDetailsComponent
   ],
   imports: [CommonModule, TransactionRoutingModule, TranslateModule, NgbModule, SharedModule],
-  providers: [TransactionListResolver, QuoteRequestResolver]
+  providers: [TransactionListResolver, QuoteRequestResolver, BuyerResolver, ProformaInvoiceResolver, PurchaseOrderResolver]
 })
 export class TransactionModule {}
