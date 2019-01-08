@@ -9,6 +9,7 @@ import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
 import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
+import { InvoiceResolver } from './resolvers/invoice.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -28,7 +29,10 @@ const routes: Routes = [
     },
     {
       path: 'invoice/:id',
-      component: InvoiceComponent
+      component: InvoiceComponent,
+      resolve: {
+        invoice: InvoiceResolver
+      }
     }
   ])
 ];

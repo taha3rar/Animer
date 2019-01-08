@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import swal from 'sweetalert';
-import { Invoice } from '@app/core/models/invoice/invoice';
+import { ActivatedRoute } from '@angular/router';
+import { Invoice } from '@app/core/models/order/invoice';
 
 @Component({
   selector: 'app-invoice',
@@ -15,9 +16,15 @@ export class InvoiceComponent implements OnInit {
   @Input()
   invoice: Invoice;
 
-  constructor(private location: Location) {}
+  constructor(private location: Location, private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.generateInvoice) {
+      this.route.data.subscribe(({ invoice }) => {
+        this.invoice = invoice;
+      });
+    }
+  }
 
   back() {
     this.location.back();
