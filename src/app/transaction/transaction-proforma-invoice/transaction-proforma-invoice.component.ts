@@ -9,13 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transaction-proforma-invoice.component.scss']
 })
 export class TransactionProformaInvoiceComponent implements OnInit {
-
   proformaInvoice: ProformaInvoice = new ProformaInvoice();
   quoteRequest: QuoteRequest = new QuoteRequest();
 
-  constructor(
-    private route: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.proformaInvoice = this.route.snapshot.data['proformaInvoice'];

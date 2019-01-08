@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transaction-quote-request.component.scss']
 })
 export class TransactionQuoteRequestComponent implements OnInit {
-
   quoteRequest: QuoteRequest = new QuoteRequest();
   buyer: User = new User();
 

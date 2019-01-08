@@ -14,16 +14,14 @@ export class TransactionComponent implements OnInit {
   purchaseOrder = false;
   proformaInvoice = false;
 
-  constructor(
-    private location: Location,
-    private route: ActivatedRoute) {}
+  constructor(private location: Location, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    if(this.route.snapshot.data['proformaInvoice']) {
+    if (this.route.snapshot.data['proformaInvoice']) {
       this.proformaInvoice = true;
     }
 
-    if(this.route.snapshot.data['purchaseOrder']) {
+    if (this.route.snapshot.data['purchaseOrder']) {
       this.purchaseOrder = true;
     }
   }

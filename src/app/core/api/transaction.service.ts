@@ -10,9 +10,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TransactionService extends BaseService {
-  constructor(
-    protected apiService: ApiService,
-    protected userService: UserService) {
+  constructor(protected apiService: ApiService, protected userService: UserService) {
     super(apiService, '/transaction');
   }
 

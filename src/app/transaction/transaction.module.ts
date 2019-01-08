@@ -30,6 +30,12 @@ import { PurchaseOrderResolver } from './resolvers/purchase-order.resolver';
     TransactionDetailsComponent
   ],
   imports: [CommonModule, TransactionRoutingModule, TranslateModule, NgbModule, SharedModule],
-  providers: [TransactionListResolver, QuoteRequestResolver, BuyerResolver, ProformaInvoiceResolver, PurchaseOrderResolver]
+  providers: [
+    TransactionListResolver,
+    QuoteRequestResolver,
+    BuyerResolver,
+    ProformaInvoiceResolver,
+    PurchaseOrderResolver
+  ]
 })
 export class TransactionModule {}
