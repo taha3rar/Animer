@@ -5,7 +5,7 @@ import { UserService } from '../../core/api/user.service';
 import { AuthenticationService } from '../../core/authentication/authentication.service';
 import { User } from '../../core/models/user/user';
 import { Credentials } from '../../core/models/user/login-models';
-import { newExpression } from 'babel-types';
+import { defaultValues } from '@app/shared/_helpers/default_values';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   currentUserId: string;
   clientDetailsForm: FormGroup;
   companyDetailsForm: FormGroup;
+  credentials: Credentials;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.credentials = this.authenticationService.credentials;
     this.currentUserId = this.authenticationService.currentUserId;
     this.user = this.route.snapshot.data['currentUser'];
     this.clientDetailsForm = this.formBuilder.group({
@@ -59,6 +61,14 @@ export class ProfileComponent implements OnInit {
 
   get userRole() {
     return this.user.roles[0];
+  }
+
+  get profilePicture(): string | null {
+    if (this.credentials && this.credentials.user && this.credentials.user.personal_information.profile_picture) {
+      return this.credentials.user.personal_information.profile_picture;
+    }
+
+    return defaultValues.profile_picture;
   }
 
   onSubmitClientDetails() {
