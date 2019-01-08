@@ -7,6 +7,7 @@ import { UserService } from '@app/core/api/user.service';
 import { EcosystemService } from '@app/core/api/ecosystem.service';
 import { Ecosystem } from '@app/core/models/ecosystem';
 import { del } from 'selenium-webdriver/http';
+import { User } from '@app/core/models/user/user';
 
 @Component({
   selector: 'app-ecosystem-generator',
@@ -17,6 +18,7 @@ export class EcosystemGeneratorComponent implements OnInit {
   newEcosystemForm: FormGroup;
   newEcosystem: Ecosystem;
   userClients: Client[];
+  user: User;
   clientsAdded: any;
 
   constructor(
@@ -32,8 +34,10 @@ export class EcosystemGeneratorComponent implements OnInit {
     this.clientsAdded = [];
     this.newEcosystem = new Ecosystem();
     this.userClients = this.route.snapshot.data['userClients'];
+    this.user = this.route.snapshot.data['user'];
     this.newEcosystemForm = this.formBuilder.group({
       name: ['', Validators.required],
+      ecosystemType: ['', Validators.required],
       description: ['']
     });
   }
@@ -58,6 +62,7 @@ export class EcosystemGeneratorComponent implements OnInit {
 
   submitEcosystem() {
     this.newEcosystem.name = this.ecosystemf.name.value;
+    this.newEcosystem.type = this.ecosystemf.ecosystemType.value;
     this.newEcosystem.description = this.ecosystemf.description.value;
     this.ecosystemService.create(this.newEcosystem).subscribe(data => {
       this.router.navigateByUrl('/ecosystems');

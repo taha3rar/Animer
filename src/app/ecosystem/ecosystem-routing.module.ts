@@ -6,6 +6,7 @@ import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.compo
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
 import { UserClientResolver } from './resolvers/user-client.resolver';
+import { UserResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -15,6 +16,7 @@ const routes: Routes = [
       data: { title: extract('Ecosystems') },
       resolve: {
         ecosystems: EcosystemListResolver,
+        user: UserResolver,
         userClients: UserClientResolver
       }
     },
