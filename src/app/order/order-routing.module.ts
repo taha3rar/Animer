@@ -14,7 +14,8 @@ const routes: Routes = [
       path: 'order/list',
       component: OrdersListComponent,
       resolve: { orders: OrderListResolver },
-      data: { title: extract('Orders') }
+      data: { title: extract('Orders') },
+      runGuardsAndResolvers: 'always'
     },
     {
       path: 'order/generator',

@@ -1,20 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Order } from '@app/core/models/order/order';
-import { ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '@app/core';
-import swal from 'sweetalert';
+import { AuthenticationService, OrderService } from '@app/core';
+import { BaseListComponent } from '../base-list/base-list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss']
 })
-export class OrderListComponent implements OnInit {
+export class OrderListComponent extends BaseListComponent implements OnInit {
   @Input()
   orders: Order[];
   page = 1;
 
-  constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private orderService: OrderService,
+    protected router: Router
+  ) {
+    super(orderService, router, {
+      deleteText: 'Once deleted, you will not be able to recover this order!'
+    });
+  }
 
   ngOnInit() {}
 
@@ -29,13 +37,5 @@ export class OrderListComponent implements OnInit {
       }
     }
     return false;
-  }
-
-  warning() {
-    swal({
-      title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this order!',
-      icon: 'warning'
-    });
   }
 }
