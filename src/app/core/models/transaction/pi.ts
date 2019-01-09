@@ -7,7 +7,7 @@ export class ProformaInvoice {
   specification: string;
   tolerance: string;
   type_of_package: string;
-  package_weight: string;
+  package_weight: number;
   package_weight_unit: string;
   quantity: number;
   total_weight: number;
@@ -17,7 +17,7 @@ export class ProformaInvoice {
   gps_coordinates_delivery: number[];
   container_type: string;
   container_quantity: number;
-  incoterms: string[];
+  incoterms: string;
   expected_receiving_date: Date;
   expected_delivering_date: Date;
   price_per_unit: number;
@@ -27,15 +27,5 @@ export class ProformaInvoice {
   currency: string;
   remarks: string;
   valid_until: Date;
-  date_created: Date;
   transaction_id: string;
-  created_by: {
-    _id: string;
-    first_name: string;
-    last_name: string;
-    email: string;
-    phone_number: string;
-    contact_by: string[];
-  };
-  approved: boolean;
 }

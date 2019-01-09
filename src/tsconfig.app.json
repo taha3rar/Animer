@@ -1,5 +1,8 @@
 {
   "extends": "../tsconfig.json",
+  "paths": {
+    "socket.io-client": ["../node_modules/socket.io-client/dist/socket.io.slim.js"]
+  },
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "./",

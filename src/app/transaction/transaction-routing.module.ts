@@ -1,5 +1,5 @@
 import { PurchaseOrderResolver } from './resolvers/purchase-order.resolver';
-import { BuyerResolver } from './resolvers/buyer.resolver';
+import { TransactionResolver } from './resolvers/transaction.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -26,7 +26,7 @@ const routes: Routes = [
         quoteRequest: QuoteRequestResolver,
         proformaInvoice: ProformaInvoiceResolver,
         purchaseOrder: PurchaseOrderResolver,
-        buyer: BuyerResolver
+        transaction: TransactionResolver
       }
     }
   ])

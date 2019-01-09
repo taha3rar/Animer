@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from './../../core/authentication/authentication.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { Transaction } from '@app/core/models/transaction';
+import { ProformaInvoice } from '@app/core/models/transaction/pi';
 
 declare const $: any;
 
@@ -12,18 +15,19 @@ declare const $: any;
 export class TransactionComponent implements OnInit {
   sideDivVisible = false;
   purchaseOrder = false;
-  proformaInvoice = false;
+  proformaInvoiceGenrated = true;
+  transaction: Transaction = new Transaction();
+  isSeller = false;
 
-  constructor(private location: Location, private route: ActivatedRoute) {}
+  constructor(private location: Location, private route: ActivatedRoute, private authService: AuthenticationService) {}
 
   ngOnInit() {
-    if (this.route.snapshot.data['proformaInvoice']) {
-      this.proformaInvoice = true;
+    const currentUserId = this.authService.currentUserId;
+    this.transaction = this.route.snapshot.data['transaction'];
+    if (currentUserId === this.transaction.seller_id) {
+      this.isSeller = true;
     }
-
-    if (this.route.snapshot.data['purchaseOrder']) {
-      this.purchaseOrder = true;
-    }
+    console.log(this.transaction);
   }
 
   adjustDiv(type: string) {

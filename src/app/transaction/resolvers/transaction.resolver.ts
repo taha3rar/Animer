@@ -1,4 +1,3 @@
-import { UserService } from './../../core/api/user.service';
 import { Injectable } from '@angular/core';
 import { TransactionService } from '@app/core';
 import { Observable, EMPTY } from 'rxjs';
@@ -7,18 +6,13 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Transaction } from '@app/core/models/transaction';
 
 @Injectable()
-export class BuyerResolver implements Resolve<Transaction> {
+export class TransactionResolver implements Resolve<Transaction> {
   buyerId: string;
-  constructor(private transactionService: TransactionService, private userService: UserService) {}
+  constructor(private transactionService: TransactionService) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Transaction> {
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const transactionId = route.params['id'];
-
-    this.transactionService.get(transactionId).subscribe(data => {
-      this.buyerId = data.created_by._id;
-    });
-
-    return this.userService.get(this.buyerId).pipe(
+    return this.transactionService.get(transactionId).pipe(
       catchError(err => {
         console.error(err);
         return EMPTY.pipe();

@@ -25,6 +25,7 @@ import { OrderService } from './api/order.service';
 import { InvoiceService } from './api/invoice.service';
 import { ProductService } from './api/product.service';
 import { ProformaInvoiceService } from './api/pi.service';
+import { ChatService } from './api/chat.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule, NgxPermissionsModule.forRoot()],
@@ -49,6 +50,7 @@ import { ProformaInvoiceService } from './api/pi.service';
     QrService,
     ProformaInvoiceService,
     PurchaseOrderService,
+    ChatService,
     {
       provide: HttpClient,
       useClass: HttpService

@@ -1,18 +1,11 @@
-<<<<<<< HEAD
-<h1 class="main-title btn-main margin-bottom-2" (click)="back()">
-  <a class="material-icons">keyboard_backspace</a> Transactions
-</h1>
-=======
+
 <h1 class="main-title btn-main margin-bottom-2" (click)="back()"><a class="material-icons">keyboard_backspace</a>
   Transactions</h1>
->>>>>>> Proforma Invoice Logic
 <div class="stepper-wrapper">
   <div class="stepper">
     <ul class="nav nav-tabs">
       <li class="completed active">
-        <a data-toggle="tab" class="label" href="#quoteRequest">
-          <span class="round-tab">1</span>Quote request sent
-        </a>
+        <a data-toggle="tab" class="label" href="#quoteRequest"> <span class="round-tab">1</span>Quote request sent </a>
       </li>
       <li [ngClass]="{'completed':proformaInvoice,'disabled': !proformaInvoice}">
         <a data-toggle="tab" class="label" href="#proformaInvoice">
@@ -24,15 +17,10 @@
           <span class="round-tab">3</span>Generate purchase order
         </a>
       </li>
-<<<<<<< HEAD
-      <li class="disabled">
-        <a data-toggle="tab" class="label" href="#review"> <span class="round-tab">4</span>Review and send </a>
-=======
       <li [ngClass]="{'completed':purchaseOrder,'disabled': !purchaseOrder}">
         <a data-toggle="tab" class="label" href="#review">
           <span class="round-tab">4</span>Review and send
         </a>
->>>>>>> Proforma Invoice Logic
       </li>
     </ul>
 
@@ -40,62 +28,52 @@
       <div class="tab-pane active" id="quoteRequest">
         <div class="panel panel-tab">
           <div class="panel-body">
-<<<<<<< HEAD
-            <div class="padding-all-2"><app-transaction-quote-request></app-transaction-quote-request></div>
-=======
             <div class="padding-all-2">
               <app-transaction-quote-request></app-transaction-quote-request>
             </div>
->>>>>>> Proforma Invoice Logic
           </div>
         </div>
       </div>
       <div class="tab-pane" id="proformaInvoice">
-        <div class="panel panel-tab">
+        <!-- Proforma Invoice for buyer-->
+        <div class="panel panel-tab" *ngIf="!isSeller">
           <div class="panel-body">
-<<<<<<< HEAD
+            <div class="padding-all-2"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
+          </div>
+        </div>
+        <!-- Proforma Invoice for seller-->
+        <div class="panel panel-tab details-col" *ngIf="isSeller">
+          <div class="panel-body">
             <div class="panel-header"><p>Add Proforma Invoice Details</p></div>
             <app-transaction-details></app-transaction-details>
           </div>
         </div>
-        <div class="panel panel-tab pi-col" *ngIf="seller">
+        <div class="panel panel-tab pi-col" *ngIf="isSeller">
           <div class="panel-body">
             <div class="padding-all-2"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
-=======
-            <div class="padding-all-2">
-              <app-transaction-proforma-invoice></app-transaction-proforma-invoice>
-            </div>
->>>>>>> Proforma Invoice Logic
           </div>
         </div>
       </div>
       <div class="tab-pane" id="purchaseOrder">
         <div class="panel panel-tab">
           <div class="panel-body">
-<<<<<<< HEAD
-            <div class="padding-all-2"><app-transaction-po></app-transaction-po></div>
-=======
             <div class="padding-all-2">
               <app-transaction-po></app-transaction-po>
             </div>
->>>>>>> Proforma Invoice Logic
           </div>
         </div>
       </div>
       <div class="tab-pane" id="review">
         <div class="panel panel-tab">
           <div class="panel-body">
-<<<<<<< HEAD
-            <div class="padding-all-2"><app-transaction-po [completedPO]="true"></app-transaction-po></div>
-=======
-            <div class="padding-all-2">
-              <app-transaction-po [completedPO]="true"></app-transaction-po>
+        <div class="tab-pane" id="review">
+          <div class="panel panel-tab">
+            <div class="panel-body">
+              <div class="padding-all-2"><app-transaction-po [completedPO]="true"></app-transaction-po></div>
             </div>
->>>>>>> Proforma Invoice Logic
           </div>
         </div>
       </div>
-    </div>
   </div>
 
   <div class="docs-chat">
@@ -111,33 +89,7 @@
   </div>
 
   <div class="side-tab">
-    <div class="chat-content">
-      <div class="header">
-        <button class="btn btn-link"><i class="material-icons">close</i></button>
-      </div>
-      <div class="message-area-sender">
-        <div class="user-info">
-          <figure class="img-shape"><img src="../../assets/img/prof-img2.jpg" class="user-img" /></figure>
-          <span> Alex Benn</span>
-        </div>
-        <div class="message-bubble">
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-        </div>
-      </div>
-      <div class="message-area-receiver">
-        <div class="user-info">
-          <span>Saradaa Saradaa</span>
-          <figure class="img-shape"><img src="../../assets/img/profile-img.jpg" class="user-img" /></figure>
-        </div>
-        <div class="message-bubble pull-right">
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non, voluptates.</p>
-        </div>
-      </div>
-      <div class="message-send">
-        <textarea placeholder="Type message here..." rows="4"></textarea>
-        <button class="round-button-primary pull-right"><i class="material-icons">send</i></button>
-      </div>
-    </div>
+    <app-tansaction-chat></app-tansaction-chat>
 
     <div class="docs-content">
       <div class="header">
