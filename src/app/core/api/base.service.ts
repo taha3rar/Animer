@@ -24,4 +24,8 @@ export abstract class BaseService {
   update(id: string, object: any): Observable<any> {
     return this.apiService.put(`${this.path}/${id}`, object).pipe(map(data => data));
   }
+
+  delete(id: string): Observable<any> {
+    return this.apiService.delete(`${this.path}/${id}`).pipe(map(data => data));
+  }
 }

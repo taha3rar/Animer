@@ -9,9 +9,10 @@ import { TransactionsListComponent } from './components/transactions-list/transa
 import { DocumentListComponent } from './components/document-list/document-list.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [CommonModule, NgxPaginationModule],
+  imports: [CommonModule, NgxPaginationModule, RouterModule],
   declarations: [
     LoaderComponent,
     RoundUpPipe,

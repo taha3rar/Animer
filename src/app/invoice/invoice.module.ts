@@ -19,6 +19,7 @@ import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
+import { InvoiceResolver } from './resolvers/invoice.resolver';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,6 @@ import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [InvoiceListResolver, InvoiceBuyersResolver, InvoiceSellerResolver]
+  providers: [InvoiceListResolver, InvoiceBuyersResolver, InvoiceSellerResolver, InvoiceResolver]
 })
 export class InvoiceModule {}

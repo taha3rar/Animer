@@ -18,6 +18,7 @@ export class Shell {
       component: ShellComponent,
       children: routes,
       canActivate: [AuthenticationGuard],
+      runGuardsAndResolvers: 'always',
       // Reuse ShellComponent instance when navigating between child views
       data: { reuse: true }
     };

@@ -17,7 +17,8 @@ const routes: Routes = [
       path: 'invoice/list',
       component: InvoicesListComponent,
       resolve: { invoices: InvoiceListResolver },
-      data: { title: extract('Invoices') }
+      data: { title: extract('Invoices') },
+      runGuardsAndResolvers: 'always'
     },
     {
       path: 'invoice/generator',

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import swal from 'sweetalert';
 import { ActivatedRoute } from '@angular/router';
-import { Invoice } from '@app/core/models/order/invoice';
+import { Invoice } from '@app/core/models/invoice/invoice';
 
 @Component({
   selector: 'app-invoice',
