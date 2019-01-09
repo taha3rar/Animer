@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 import swal from 'sweetalert';
 import { ActivatedRoute } from '@angular/router';
 import { Invoice } from '@app/core/models/invoice/invoice';
+import * as jspdf from 'jspdf';
+import * as html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-invoice',
@@ -62,5 +64,14 @@ export class InvoiceComponent implements OnInit {
 
   get deliver_to() {
     return this.invoice.deliver_to;
+  }
+
+  download() {
+    html2canvas(document.getElementById('pdfContent'), { windowWidth: 900, windowHeight: 1000 }).then(canvas => {
+      const pdf = new jspdf('p', 'mm', 'a4');
+      const img = canvas.toDataURL('image/png');
+      pdf.addImage(img, 'PNG', 0, 0, 208, 300);
+      pdf.save(`invoice-${this.invoice.numericId}.pdf`);
+    });
   }
 }
