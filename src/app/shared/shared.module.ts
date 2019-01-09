@@ -10,6 +10,7 @@ import { DocumentListComponent } from './components/document-list/document-list.
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
 import { RouterModule } from '@angular/router';
+import { BaseListComponent } from './components/base-list/base-list.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, RouterModule],
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     OrderListComponent,
     TransactionsListComponent,
     DocumentListComponent,
-    UserDataComponent
+    UserDataComponent,
+    BaseListComponent
   ],
   exports: [
     LoaderComponent,
