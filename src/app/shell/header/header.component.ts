@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService, I18nService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
 import { defaultValues } from '@app/shared/_helpers/default_values';
+import { link } from 'fs';
 
 declare const $: any;
 
@@ -65,14 +66,15 @@ export class HeaderComponent implements OnInit {
   }
 }
 
-$(document).on('click', '.dropdown-submenu span', function(e: any) {
-  $(this)
-    .next('ul')
-    .toggle();
-  e.stopPropagation();
-  e.preventDefault();
+$(window).ready(function() {
+  $('body').on('click', 'ul > li.dropdown-submenu', function(e: any) {
+    $(this)
+      .find('ul')
+      .toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
 });
-
 $(document).on('click', '.sub-ul span', function() {
   $('.sub-ul').hide();
 });

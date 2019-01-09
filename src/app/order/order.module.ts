@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
 import { OrderGeneratorSummaryComponent } from './order-generator/order-generator-products/order-generator-summary/order-generator-summary.component';
 import { OrderGeneratorReviewOrderComponent } from './order-generator/order-generator-review-order/order-generator-review-order.component';
+import { OrderInvoiceGeneratorComponent } from './order-generator-seller/order-invoice-generator/order-invoice-generator.component';
+import { OrderGeneratorSellerComponent } from './order-generator-seller/order-generator-seller.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { OrderGeneratorReviewOrderComponent } from './order-generator/order-gene
     OrderGeneratorProductsComponent,
     OrderGeneratorPoComponent,
     OrderGeneratorSummaryComponent,
-    OrderGeneratorReviewOrderComponent
+    OrderGeneratorReviewOrderComponent,
+    OrderGeneratorSellerComponent,
+    OrderInvoiceGeneratorComponent
   ],
   imports: [SharedModule, CommonModule, TranslateModule, OrderRoutingModule, NgbModule, FormsModule],
   providers: [OrderListResolver]

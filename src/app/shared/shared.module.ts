@@ -9,8 +9,12 @@ import { TransactionsListComponent } from './components/transactions-list/transa
 import { DocumentListComponent } from './components/document-list/document-list.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
+<<<<<<< HEAD
 import { RouterModule } from '@angular/router';
 import { BaseListComponent } from './components/base-list/base-list.component';
+=======
+import { InvoicesComponent } from './components/invoices/invoices.component';
+>>>>>>> order generator for  the seller and translation menu arrow direction
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, RouterModule],
@@ -22,7 +26,11 @@ import { BaseListComponent } from './components/base-list/base-list.component';
     TransactionsListComponent,
     DocumentListComponent,
     UserDataComponent,
+<<<<<<< HEAD
     BaseListComponent
+=======
+    InvoicesComponent
+>>>>>>> order generator for  the seller and translation menu arrow direction
   ],
   exports: [
     LoaderComponent,
@@ -31,7 +39,8 @@ import { BaseListComponent } from './components/base-list/base-list.component';
     OrderListComponent,
     TransactionsListComponent,
     DocumentListComponent,
-    UserDataComponent
+    UserDataComponent,
+    InvoicesComponent
   ]
 })
 export class SharedModule {}

@@ -85,18 +85,8 @@
   display: flex;
 
   div:first-child {
-    width: 60%;
+    width: 70%;
   }
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  font-size: 1.35rem !important;
 }
 
 .info {

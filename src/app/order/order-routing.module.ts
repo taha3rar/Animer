@@ -1,3 +1,4 @@
+import { OrderGeneratorSellerComponent } from './order-generator-seller/order-generator-seller.component';
 import { OrderComponent } from './order/order.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -19,7 +20,7 @@ const routes: Routes = [
     },
     {
       path: 'order/generator',
-      component: OrderGeneratorComponent
+      component: OrderGeneratorSellerComponent
     },
     {
       path: 'order/:id',

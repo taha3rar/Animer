@@ -6,6 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./order-po.component.scss']
 })
 export class OrderPoComponent implements OnInit {
+  buyer = false;
+
   constructor() {}
 
   ngOnInit() {}

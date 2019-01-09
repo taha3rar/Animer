@@ -1,0 +1,114 @@
+<div class="col-md-12">
+    <div class="panel panel-tab">
+      <div class="panel-body">
+          <p class="pull-right margin-none ">INV #5312</p>
+          <div class="row clearfix">
+            <div class="col-md-9">
+              <p class="heading-2">ISSUED BY</p>
+              <p class="heading-4">Ishai Ben Or #124</p>
+              <p class="heading-4">Avenews-gt #12443</p>
+              <p class="heading-4">Ishai@avenwes-gt.com</p>
+              <p class="heading-4">Ahad Ha'am 54, Tel-Aviv Jaffa 68088</p>
+              <p class="heading-4">TEL: 0547377649</p>
+            </div>
+            <div class="col-md-3">
+              <p class="heading-2">ISSUED FOR</p>
+              <p class="heading-4">Tony Stark</p>
+              <p class="heading-4">Stark Industries</p>
+              <p class="heading-4">Tom@stark.com</p>
+              <p class="heading-4">Meor Enayeem, Tel-Aviv Jaffa 68088</p>
+              <p class="heading-4">TEL: 0547377649</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-9">
+              <p class="heading-2">Products</p>
+              <table class="panel-table">
+                <thead>
+                  <th>Produce</th>
+                  <th>Package</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Green Coffee</td>
+                    <td>Bag</td>
+                    <td>100 USD per Box</td>
+                    <td>20</td>
+                    <td>2000 USD</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="subtotal-price pull-right">
+                <div class="row">
+                  <div class="col-md-6">
+                    <p class="heading-4-blue">Subtotal</p>
+                    <p class="heading-4-blue">VAT%</p>
+                    <p class="heading-4-blue">Discount%</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="heading-2">2000 USD</p>
+                    <p class="heading-2">0</p>
+                    <p class="heading-2">0</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><p class="heading-4-blue">TOTAL</p></div>
+                  <div class="col-md-6"><p class="heading-2">2000 USD</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="po-right-side">
+                <p class="heading-2">
+                  Comments or special instructions for purchase order
+                </p>
+                <p>Lorem ipsum lorem ipsum</p>
+                <p class="heading-2">Comments or special instructions for payments</p>
+                <p>60 days</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="border-top">
+                <p class="heading-2">Signed by</p>
+                <div class="row">
+                  <div class="col-md-3">
+                    <p>Ishai Ben Or</p>
+                    <p>Avenews-GT</p>
+                    <p>PO valid by 10/11/2018</p>
+                    <p>Date of issue 10/11/2018</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="border-top">
+                <p class="heading-2">Delivered to</p>
+                <p>Tom Stark</p>
+                <p>Tel Aviv, Meor Enayeem 10 6808852</p>
+                <p>0547377649</p>
+                <p>Expected delivery date 10/12/2018</p>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div>
+              <button *ngIf="generateInvoice" class="bttn-primary pull-right">Send Invoice</button>
+              <button class=" btn-primary-transp pull-right">Download PDF</button>
+              <div class="disclaimer" *ngIf="generateInvoice">
+              <div>
+              <input type="checkbox" class="checkbox" id="checkbox1"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label>
+              </div>
+              <p>I have read and accepted <a style="color:blue; cursor:pointer;" (click)="disclaimerPopup()">the disclaimer</a>.</p>
+            </div>
+      </div>
+    </div>
+  </div>
