@@ -10,6 +10,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
 import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
+import { ProductCurrentUserResolver } from './resolvers/products-currentUser.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -25,7 +26,8 @@ const routes: Routes = [
       component: InvoiceGeneratorComponent,
       resolve: {
         clients: InvoiceBuyersResolver,
-        seller: InvoiceSellerResolver
+        seller: InvoiceSellerResolver,
+        products: ProductCurrentUserResolver
       }
     },
     {
