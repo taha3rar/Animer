@@ -17,6 +17,7 @@ export class EcosystemGeneratorComponent implements OnInit {
   userClients: Client[];
   user: User;
   clientsAdded: any;
+  page: 1;
   @ViewChild('closeModal')
   closeModal: ElementRef;
 
