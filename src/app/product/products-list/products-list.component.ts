@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '@app/core/models/product';
+import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
+import { ProductService } from '@app/core';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss']
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent extends BaseListComponent implements OnInit {
   products: Product[];
-
+  selectedProduct: Product;
   page = 1;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private productService: ProductService, protected router: Router) {
+    super(productService, router, {
+      deleteText: 'Once deleted, you will not be able to recover this product!'
+    });
+    this.selectedProduct = new Product();
+  }
 
   ngOnInit() {
     this.route.data.subscribe(({ products }) => {
@@ -20,11 +27,7 @@ export class ProductsListComponent implements OnInit {
     });
   }
 
-  warning() {
-    swal({
-      title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this product!',
-      icon: 'warning'
-    });
+  setProductOverview(index: string) {
+    this.selectedProduct = this.products[index];
   }
 }

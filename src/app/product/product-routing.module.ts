@@ -13,7 +13,8 @@ const routes: Routes = [
       path: 'product/list',
       component: ProductsListComponent,
       resolve: { products: ProductListResolver },
-      data: { title: extract('Products') }
+      data: { title: extract('Products') },
+      runGuardsAndResolvers: 'always'
     },
     {
       path: 'product/generator',

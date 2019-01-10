@@ -6,6 +6,8 @@ export class Ecosystem {
       numericId: string;
       last_name: string;
       email: string;
+      phone_number: string;
+      profile_picture: string;
     }
   ];
   owner_role: string;
@@ -15,6 +17,8 @@ export class Ecosystem {
     first_name: string;
     last_name: string;
     email: string;
+    phone_number: string;
+    profile_picture: string;
   };
   _id: string;
   name: string;

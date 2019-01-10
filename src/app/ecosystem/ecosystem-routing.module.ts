@@ -27,7 +27,8 @@ const routes: Routes = [
       component: EcosystemComponent,
       resolve: {
         ecosystem: EcosystemResolver
-      }
+      },
+      runGuardsAndResolvers: 'always'
     }
   ])
 ];

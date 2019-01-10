@@ -1,25 +1,30 @@
 <div class="product-profile">
   <div>
-    <figure class="img-circular" style="background-image: url('../../../assets/img/chia.jpg');"></figure>
-    <p class="heading-2">Chia Seeds</p>
-    <p class="normal-text-bold">SKU KS944RUR</p>
+    <figure class="img-circular" [style.background-image]="'url(' + product_image() + ')'"></figure>
+    <p class="heading-2">{{ product.produce}}</p>
+    <p class="normal-text-bold" *ngIf="product.sku">SKU {{ product.sku }}</p>
   </div>
   <div class="availability-block">
     <p class="heading-4-blue">Availability</p>
     <div class="col-md-7">
       <p>Amount of packages available</p>
       <p>Type of package</p>
-      <p>Packaged Produce Weight</p>
-      <p>Total Weight</p>
+      <p *ngIf="agricultural_product">Packaged Produce Weight</p>
+      <p *ngIf="processed_product">Number of items per package</p>
+      <p *ngIf="agricultural_product">Total Weight</p>
+      <p *ngIf="processed_product && product.item_package_type">Amount of {{product.item_measurement_unit}} in individual {{product.item_package_type}}</p>
     </div>
     <div class="col-md-5">
-      <p>5 packages</p>
-      <p>Bag</p>
-      <p>55/kg</p>
-      <p>257/kg</p>
+      <p>{{ product.quantity }} packages</p>
+      <p>{{ product.type_of_package }}</p>
+      <p *ngIf="agricultural_product">{{ product.package_weight  | number : '1.2-2'  }}/{{ product.weight_unit }}</p>
+      <p *ngIf="processed_product">{{ product.items_per_package }} units</p>
+      <p *ngIf="agricultural_product">{{ product.total_weight | number : '1.2-2' }}/{{ product.weight_unit }}</p>
+      <p *ngIf="processed_product && product.item_package_type">{{ product.item_measurement_amount }}</p>
     </div>
   </div>
   <div class="pricing">
-    <p class="heading-4-blue">55 USD/kg</p>
+    <p class="heading-4-blue" *ngIf="agricultural_product">{{ product.currency }} {{ product.price_per_unit | number : '1.2-2' }}//{{ product.weight_unit }}</p>
+    <p class="heading-4-blue" *ngIf="processed_product">{{ product.currency }} {{ product.package_price  | number : '1.2-2'  }}/{{ product.type_of_package }}</p>
   </div>
 </div>

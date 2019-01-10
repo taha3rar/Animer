@@ -7,78 +7,18 @@
     <p class="heading-3">Owned by {{ ownedBy }}</p>
 
     <div class="contacts-section">
-      <div class="contact-card">
-        <div class="delete"><span class="pull-right material-icons">delete</span></div>
+      <div class="contact-card" *ngFor="let user of ecosystem.participants">
+        <div class="delete"><span class="pull-right material-icons" (click)="warning(user._id)">delete</span></div>
         <div>
-          <figure class="round-shape-img"><img src="../../assets/img/profile-img.jpg" alt="contact-img" /></figure>
-          <p class="normal-text-bold">Tony Stark</p>
-          <p>Stark Industries</p>
+          <figure class="round-shape-img"><img src="{{ getProfilePicture(user.profile_picture) }}" alt="contact-img" /></figure>
+          <p class="normal-text-bold">{{ user.first_name }} {{ user.last_name }}</p>
+          <p>{{ user.company_name }}</p>
         </div>
         <div>
-          <p><i class="material-icons">alternate_email</i> Tristanfarms@gmail.com</p>
-          <p><i class="material-icons">phone</i> 0547883648</p>
+          <p><i class="material-icons">alternate_email</i> {{ user.email }}</p>
+          <p><i class="material-icons">phone</i> {{ user.phone_number }}</p>
         </div>
       </div>
-      <div class="contact-card">
-        <div class="delete"><span class="pull-right material-icons">delete</span></div>
-        <div>
-          <figure class="round-shape-img"><img src="../../assets/img/profile-img.jpg" alt="contact-img" /></figure>
-          <p class="normal-text-bold">Tony Stark</p>
-          <p>Stark Industries</p>
-        </div>
-        <div>
-          <p><i class="material-icons">alternate_email</i> Tristanfarms@gmail.com</p>
-          <p><i class="material-icons">phone</i> 0547883648</p>
-        </div>
-      </div>
-      <div class="contact-card">
-        <div class="delete"><span class="pull-right material-icons">delete</span></div>
-        <div>
-          <figure class="round-shape-img"><img src="../../assets/img/profile-img.jpg" alt="contact-img" /></figure>
-          <p class="normal-text-bold">Tony Stark</p>
-          <p>Stark Industries</p>
-        </div>
-        <div>
-          <p><i class="material-icons">alternate_email</i> Tristanfarms@gmail.com</p>
-          <p><i class="material-icons">phone</i> 0547883648</p>
-        </div>
-      </div>
-      <div class="contact-card">
-        <div class="delete"><span class="pull-right material-icons">delete</span></div>
-        <div>
-          <figure class="round-shape-img"><img src="../../assets/img/profile-img.jpg" alt="contact-img" /></figure>
-          <p class="normal-text-bold">Tony Stark</p>
-          <p>Stark Industries</p>
-        </div>
-        <div>
-          <p><i class="material-icons">alternate_email</i> Tristanfarms@gmail.com</p>
-          <p><i class="material-icons">phone</i> 0547883648</p>
-        </div>
-      </div>
-      <div class="contact-card">
-          <div class="delete"><span class="pull-right material-icons">delete</span></div>
-          <div>
-            <figure class="round-shape-img"><img src="../../assets/img/profile-img.jpg" alt="contact-img" /></figure>
-            <p class="normal-text-bold">Tony Stark</p>
-            <p>Stark Industries</p>
-          </div>
-          <div>
-            <p><i class="material-icons">alternate_email</i> Tristanfarms@gmail.com</p>
-            <p><i class="material-icons">phone</i> 0547883648</p>
-          </div>
-        </div>
-        <div class="contact-card">
-            <div class="delete"><span class="pull-right material-icons">delete</span></div>
-            <div>
-              <figure class="round-shape-img"><img src="../../assets/img/profile-img.jpg" alt="contact-img" /></figure>
-              <p class="normal-text-bold">Tony Stark</p>
-              <p>Stark Industries</p>
-            </div>
-            <div>
-              <p><i class="material-icons">alternate_email</i> Tristanfarms@gmail.com</p>
-              <p><i class="material-icons">phone</i> 0547883648</p>
-            </div>
-          </div>
     </div>
   </div>
 </div>
