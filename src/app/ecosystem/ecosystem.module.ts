@@ -11,10 +11,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EcosystemAddClientComponent } from './ecosystem-add-client/ecosystem-add-client.component';
 import { EcosystemGeneratorComponent } from './ecosystem-generator/ecosystem-generator.component';
+import { EcosystemResolver } from './resolvers/ecosystem.resolver';
 
 @NgModule({
   declarations: [EcosystemsListComponent, EcosystemComponent, EcosystemGeneratorComponent, EcosystemAddClientComponent],
   imports: [CommonModule, EcosystemRoutingModule, NgxPaginationModule, NgbModule, FormsModule, ReactiveFormsModule],
-  providers: [EcosystemListResolver, UserClientResolver, UserResolver]
+  providers: [EcosystemListResolver, UserClientResolver, UserResolver, EcosystemResolver]
 })
 export class EcosystemModule {}

@@ -2,7 +2,7 @@
   <div class="modal-box-content">
     <div class="stepper">
       <div class="modal-box-heading">
-        <i class="material-icons pull-right" data-dismiss="modal">close</i>
+        <i class="material-icons pull-right" data-dismiss="modal" #closeModal>close</i>
         <h2 translate class="modal-title">Create Client</h2>
       </div>
       <div class="modal-box-left">
@@ -38,12 +38,12 @@
                   <div *ngIf="user.roles[0] == 'buyer' || user.roles[0] == 'agribusiness'">
                     <input type="radio" formControlName="ecosystemType" class="form_radio" id="agriSeller" value="seller" name="ecosystemType" />
                     <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                    <label style="font-weight:100;">Sellers</label>
+                    <label for="agriSeller" style="font-weight:100;">Sellers</label>
                   </div>
                   <div *ngIf="user.roles[0] == 'seller' || user.roles[0] == 'agribusiness'">
                     <input type="radio" formControlName="ecosystemType" class="form_radio" id="agriBuyer" value="buyer" name="ecosystemType" />
                     <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                    <label style="font-weight:100;">Buyers</label>
+                    <label for="agriBuyer" style="font-weight:100;">Buyers</label>
                   </div>
                 </div>
               </div>
@@ -93,3 +93,4 @@
     </div>
   </div>
 </div>
+<div id="closeModal"></div>

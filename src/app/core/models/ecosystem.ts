@@ -9,15 +9,13 @@ export class Ecosystem {
     }
   ];
   owner_role: string;
-  created_by: [
-    {
-      _id: string;
-      numericId: string;
-      first_name: string;
-      last_name: string;
-      email: string;
-    }
-  ];
+  created_by: {
+    _id: string;
+    numericId: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+  };
   _id: string;
   name: string;
   description: string;
