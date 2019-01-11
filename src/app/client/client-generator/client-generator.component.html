@@ -2,7 +2,7 @@
   <div class="modal-box-content">
     <div class="stepper">
       <div class="modal-box-heading">
-        <i class="material-icons pull-right" data-dismiss="modal" >close</i>
+        <i class="material-icons pull-right" data-dismiss="modal" #closeModal >close</i>
         <h2 translate class="modal-title">Create Client</h2></div>
       <div class="modal-box-left">
         <ul class="nav nav-tabs">
@@ -179,24 +179,21 @@
                 <thead>
                   <tr>
                     <th>Add to Ecosystem</th>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Type</th>
-                    <th>Clients</th>
+                    <th>Members</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><input type="checkbox" class="checkbox" id="checkbox1"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label>
-                    </td>
-                    <td>ECO A</td>
-                    <td>Sellers</td>
-                    <td>5 members</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox" class="checkbox" id="checkbox2"/><label class="checkbox_label" for="checkbox2"><span class="form_checkbox_btn"></span></label>
-                    <td>ECO A</td>
-                    <td>Sellers</td>
-                    <td>5 members</td>
+                  <tr *ngFor="let ecosystem of ecosystems">
+                      <td>
+                        <input type="checkbox" class="checkbox" [id]="ecosystem.numericId" (change)="pushEcosystem(ecosystem)"/><label class="checkbox_label" [for]="ecosystem.numericId"><span class="form_checkbox_btn"></span></label>
+                      </td>
+                    <td>{{ ecosystem.numericId }}</td>
+                    <td>{{ ecosystem.name }}</td>
+                    <td style="text-transform: capitalize;">{{ ecosystem.type }}</td>
+                    <td>{{ ecosystem.participants.length }}</td>
                   </tr>
                 </tbody>
               </table>

@@ -6,14 +6,19 @@ import { extract } from '@app/core';
 import { ClientListComponent } from './client-list/client-list.component';
 import { Shell } from '@app/shell/shell.service';
 import { ClientListResolver } from './resolvers/client-list.resolver';
+import { EcosystemListResolver } from '@app/ecosystem/resolvers/ecosystem-list.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'client/list',
       component: ClientListComponent,
-      resolve: { clients: ClientListResolver },
-      data: { title: extract('Clients') }
+      resolve: {
+        clients: ClientListResolver,
+        ecosystems: EcosystemListResolver
+      },
+      data: { title: extract('Clients') },
+      runGuardsAndResolvers: 'always'
     },
     {
       path: 'client/:id',

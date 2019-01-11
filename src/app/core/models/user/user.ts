@@ -23,8 +23,8 @@ export class User {
     last_name: String;
     email: String;
   };
-  permissions: [string];
-  roles: [string];
+  permissions: string[];
+  roles: string[];
   _id: string;
   numericId: number;
   image: string;
@@ -33,5 +33,8 @@ export class User {
   constructor() {
     this.personal_information = new PersonalInformation();
     this.company_information = new CompanyInformation();
+    this.permissions = [];
+    this.contact_by = [];
+    this.roles = [];
   }
 }
