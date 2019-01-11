@@ -1,7 +1,7 @@
 <div class="modal-box" id="addClienEcoModal">
   <div class="modal-box-content">
     <div class="modal-box-heading">
-      <i class="material-icons pull-right" data-dismiss="modal">close</i>
+      <i class="material-icons pull-right" data-dismiss="modal" #closeModal>close</i>
       <h2 translate class="modal-title">MY CLIENTS</h2>
     </div>
 
@@ -16,28 +16,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><input type="checkbox" class="checkbox" id="checkbox1"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label></td>
-            <td>335</td>
-            <td>Stark industries</td>
-            <td>Harry Potter</td>
+          <tr *ngFor="let client of clients">
+            <td><input type="checkbox" class="checkbox" [id]="client.numericId" (change)="pushClient(client)"/><label class="checkbox_label" [for]="client.numericId"><span class="form_checkbox_btn"></span></label></td>
+            <td>{{ client.numericId }}</td>
+            <td>{{ client.company_name }}</td>
+            <td>{{ client.first_name }} {{ client.last_name }}</td>
           </tr>
-          <tr>
-            <td><input type="checkbox" class="checkbox" id="checkbox2"/><label class="checkbox_label" for="checkbox2"><span class="form_checkbox_btn"></span></label></td>
-            <td>342</td>
-            <td>Stark industries</td>
-            <td>Harry Potter</td>
-          </tr>
-          <tr>
-              <td><input type="checkbox" class="checkbox" id="checkbox3"/><label class="checkbox_label" for="checkbox3"><span class="form_checkbox_btn"></span></label></td>
-              <td>342</td>
-              <td>Stark industries</td>
-              <td>Harry Potter</td>
-            </tr>
         </tbody>
       </table>
   </div>
 
-  <button class="bttn-primary pull right">Save Changes</button>
+  <button class="bttn-primary pull right" (click)="save()">Save Changes</button>
 </div>
 </div>

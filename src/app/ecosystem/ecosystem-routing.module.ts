@@ -5,7 +5,7 @@ import { Shell } from '@app/shell/shell.service';
 import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.component';
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
-import { UserClientResolver } from './resolvers/user-client.resolver';
+import { UserClientListResolver } from './resolvers/user-client-list.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
 
@@ -18,7 +18,7 @@ const routes: Routes = [
       resolve: {
         ecosystems: EcosystemListResolver,
         user: UserResolver,
-        userClients: UserClientResolver
+        userClients: UserClientListResolver
       },
       runGuardsAndResolvers: 'always'
     },
@@ -26,7 +26,8 @@ const routes: Routes = [
       path: 'ecosystem/:id',
       component: EcosystemComponent,
       resolve: {
-        ecosystem: EcosystemResolver
+        ecosystem: EcosystemResolver,
+        userClients: UserClientListResolver
       },
       runGuardsAndResolvers: 'always'
     }

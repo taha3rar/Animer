@@ -48,12 +48,6 @@ export class UserService extends BaseService {
     );
   }
 
-  // //Save new invited client
-  // saveInvitedClient(client): Observable<any> {
-  //   return this.apiService.post('/user/client', client)
-  //     .pipe(map(data => data));
-  // }
-
   changePassword(id: string, passwords: Passwords): Observable<User> {
     return this.apiService.put(`/user/${id}/password`, passwords).pipe(map(data => data));
   }

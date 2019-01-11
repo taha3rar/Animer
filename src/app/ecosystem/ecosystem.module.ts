@@ -5,7 +5,7 @@ import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.compo
 import { EcosystemRoutingModule } from './ecosystem-routing.module';
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
-import { UserClientResolver } from './resolvers/user-client.resolver';
+import { UserClientListResolver } from './resolvers/user-client-list.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +16,6 @@ import { EcosystemResolver } from './resolvers/ecosystem.resolver';
 @NgModule({
   declarations: [EcosystemsListComponent, EcosystemComponent, EcosystemGeneratorComponent, EcosystemAddClientComponent],
   imports: [CommonModule, EcosystemRoutingModule, NgxPaginationModule, NgbModule, FormsModule, ReactiveFormsModule],
-  providers: [EcosystemListResolver, UserClientResolver, UserResolver, EcosystemResolver]
+  providers: [EcosystemListResolver, UserClientListResolver, UserResolver, EcosystemResolver]
 })
 export class EcosystemModule {}

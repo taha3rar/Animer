@@ -7,7 +7,7 @@ import { AuthenticationService } from '@app/core/authentication/authentication.s
 import { Client } from '@app/core/models/user/client';
 
 @Injectable()
-export class UserClientResolver implements Resolve<Client[]> {
+export class UserClientListResolver implements Resolve<Client[]> {
   constructor(private authService: AuthenticationService, private userService: UserService) {}
 
   resolve(): Observable<Client[]> {

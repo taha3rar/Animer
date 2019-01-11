@@ -5,6 +5,7 @@ import { Ecosystem } from '@app/core/models/ecosystem';
 import { defaultValues } from '@app/shared/_helpers/default_values';
 import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
 import { EcosystemService } from '@app/core';
+import { Client } from '@app/core/models/user/client';
 
 @Component({
   selector: 'app-ecosystem',
@@ -13,6 +14,9 @@ import { EcosystemService } from '@app/core';
 })
 export class EcosystemComponent extends BaseListComponent implements OnInit {
   ecosystem: Ecosystem;
+  userClients: Client[];
+  potentialClients: Client[];
+
   constructor(
     private location: Location,
     private route: ActivatedRoute,
@@ -25,8 +29,15 @@ export class EcosystemComponent extends BaseListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.subscribe(({ ecosystem }) => {
+    this.route.data.subscribe(({ ecosystem, userClients }) => {
       this.ecosystem = ecosystem;
+      this.userClients = userClients;
+
+      this.potentialClients = userClients.filter((item: Client) => {
+        return !ecosystem.participants.some((other: Client) => {
+          return item._id === other._id;
+        });
+      });
     });
   }
 
