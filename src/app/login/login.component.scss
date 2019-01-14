@@ -1,5 +1,7 @@
 @import "src/theme/theme-variables";
 @import "~bootstrap/scss/mixins/_breakpoints";
+@import "../../assets/sass/abstracts/variables";
+@import "../../assets/sass/base/animations";
 
 .login-container {
   position: absolute;
@@ -26,4 +28,113 @@
   .container {
     width: 100%;
   }
+}
+
+.login-wrapper {
+  padding-top: 18vh !important;
+  min-height: calc(100vh - 70px);
+}
+
+.full-page-background {
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: block;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center center;
+  background-image: url("../../assets/img/rsz_login_background_2.png");
+}
+
+.btn-primary {
+  background-color: $primary-color;
+  border: none;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2),
+    0 1px 5px 0 rgba(0, 188, 212, 0.12);
+  padding: 0.7rem 0.75rem;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $primary-color !important;
+    box-shadow: 0 14px 26px -12px rgba(0, 188, 212, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12),
+      0 8px 10px -5px rgba(0, 188, 212, 0.2);
+  }
+}
+
+.form-check {
+  padding-left: 5px;
+
+  span {
+    padding-left: 18px;
+  }
+}
+
+.d-block:not(:nth-child(2)) {
+  margin-bottom: 1.5rem;
+}
+
+.navbar > .container {
+  display: block !important;
+}
+
+.navbar > .container > .navbar-header > a {
+  color: white;
+  padding: 1rem 1.5rem;
+  font-size: 1.7rem;
+}
+
+.navbar.navbar-primary {
+  padding: 1rem 0;
+  margin-bottom: -71px;
+}
+
+.full-page-background {
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  display: block;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center center;
+}
+
+footer {
+  display: block;
+  width: 100%;
+
+  a,
+  .copyright,
+  a:hover {
+    color: white;
+    font-size: 1.4rem;
+    text-decoration: none;
+  }
+}
+
+footer ul {
+  list-style: none;
+}
+
+.btn-link {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.login-wrapper .card {
+  animation: slide-in 0.5s;
+  transition: all 0.3s linear;
+}
+
+.card-title {
+  margin-bottom: 1.8rem;
+}
+
+.form-group {
+  margin-bottom: 1.8rem;
 }
