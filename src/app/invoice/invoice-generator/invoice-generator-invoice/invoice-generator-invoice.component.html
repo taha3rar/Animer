@@ -36,7 +36,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr >
           <td>Green Coffee Beans</td>
           <td class="text-center">
             <button class="btn-circle stepUp"><i class="material-icons">add</i></button> 100 (BAG / 50 KG)
@@ -60,8 +60,8 @@
       <div class="dropdown">
           <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
           <ul class="dropdown-menu">
-            <li><a data-toggle="popup" data-target="#newProductInv">From Inventory</a></li>
-            <li><a data-toggle="popup" data-target="#newAgriProduct">New Agricultural Product</a></li>
+            <li><a (click)="openDialogInventory()">From Inventory</a></li>
+            <li><a data-toggle="popup" data-target="#newAgriProduct" (click)="display()">New Agricultural Product</a></li>
             <li><a data-toggle="popup" data-target="#newProcessedProduct">New Processed Product</a></li>
           </ul>
         </div>
@@ -209,6 +209,6 @@
 <button class="bttn-primary pull-right next-step" [disabled]="!form.valid">Next Step &rarr;</button>
 <button class="btn-primary-transp pull-right btn-draft">Save Draft</button>
 </form>
-<app-invoice-inventory></app-invoice-inventory>
-<app-invoice-agricultural-product></app-invoice-agricultural-product>
-<app-invoice-processed-product></app-invoice-processed-product>
+<!-- <app-invoice-inventory [productList]="productList" [form]="form"></app-invoice-inventory>
+<app-invoice-agricultural-product [productList]="productList"></app-invoice-agricultural-product>
+<app-invoice-processed-product></app-invoice-processed-product> -->

@@ -6,7 +6,7 @@ export class Invoice {
   buyer: User;
   seller: User;
   numericId: string;
-  products: [Product];
+  products: [];
   vat_amount: number;
   vat_percentage: number;
   discount_amount: number;

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, destroyPlatform } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '@app/core/models/product';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { AuthenticationService, ProductService } from '@app/core';
 import { EcosystemAddClientComponent } from '@app/ecosystem/ecosystem-add-client/ecosystem-add-client.component';
 
 @Component({
@@ -15,18 +17,29 @@ export class InvoiceInventoryComponent implements OnInit {
   @Input()
   form: FormGroup;
   @Input()
-  productList: Product[];
+  productList: any[];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private productService: ProductService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<InvoiceInventoryComponent>,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.products = this.route.snapshot.data['products'];
+    // this.products = this.route.snapshot.data['products'];
+    // this.productService.getByUser(this.authenticationService.currentUserId)
+    //   .subscribe(data => {
+    //     this.products = data;
+    //     console.log(data);
+    //   })
+    // console.log(this.products);
     this.products.forEach(product => {
       product['quantityMax'] = product.quantity;
       product.quantity = 0;
       product.total_price = 0;
     });
-    console.log(this.products);
   }
 
   incrementQ(product: any) {
@@ -56,6 +69,7 @@ export class InvoiceInventoryComponent implements OnInit {
 
   addProducts() {
     this.productList = this.productList.concat(this.productChoice);
+    console.log(this.productList);
     this.ngOnInit();
   }
 }

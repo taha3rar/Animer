@@ -1,6 +1,8 @@
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { InvoiceRoutingModule } from './invoice-routing.module';
@@ -41,7 +43,10 @@ import { ProductCurrentUserResolver } from './resolvers/products-currentUser.res
     NgbModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [InvoiceListResolver, InvoiceBuyersResolver, InvoiceSellerResolver, InvoiceResolver, ProductCurrentUserResolver]
 })

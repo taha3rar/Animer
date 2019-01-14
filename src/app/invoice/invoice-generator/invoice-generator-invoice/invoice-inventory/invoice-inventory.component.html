@@ -1,103 +1,99 @@
-<div class="modal-box" id="newProductInv">
-  <div class="modal-box-content-lg">
-    <div class="modal-box-heading">
-      <i class="material-icons pull-right" data-dismiss="modal">close</i>
-      <h2 translate class="modal-title">My Inventory</h2>
-    </div>
-    <div class="padding-all">
-      <div class="margin-bottom">
-        <button class="btn-icons pull-right"><i class="material-icons">arrow_forward_ios</i></button>
-        <button class="btn-icons pull-right"><i class="material-icons">arrow_back_ios</i></button>
-        <p class="normal-text-bold">Agricultural Products</p>
-      </div>
-      <div class="row clearfix">
-        <div *ngFor="let product of products" class="col-md-3">
-          <div *ngIf="product.product_type=='agricultural'" class="card">
-            <div>
-              <p class="pull-right margin-none">{{product.price_per_unit}} {{product.currency}}/<small>{{product.weight_unit
-                  | uppercase}}</small></p>
-            </div>
-            <div class="product-details">
-              <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
-              <p class="heading-2">
-                {{product.produce}} <br />
-                {{product.variety}}
-              </p>
-            </div>
-            <div class="package-details">
-              <div>
-                <p>Packages available</p>
-                <p>Type of package</p>
-                <p>Package weight</p>
-                <p>Total weight</p>
-              </div>
-              <div>
-                <p>{{product.quantityMax}}</p>
-                <p>{{product.type_of_package}}</p>
-                <p>{{product.package_weight}}/{{product.weight_unit | uppercase}}</p>
-                <p>{{product.total_weight}} {{product.weight_unit | uppercase}}</p>
-              </div>
-            </div>
+<div class="modal-box-heading">
+  <a class="material-icons pull-right">close</a>
+  <h2 translate class="modal-title">My Inventory</h2>
+</div>
+<div class="padding-all">
+  <div class="margin-bottom">
+    <button class="btn-icons pull-right"><i class="material-icons">arrow_forward_ios</i></button>
+    <button class="btn-icons pull-right"><i class="material-icons">arrow_back_ios</i></button>
+    <p class="normal-text-bold">Agricultural Products</p>
+  </div>
+  <div class="row clearfix">
+    <div *ngFor="let product of products" class="col-md-4">
+      <div *ngIf="product.product_type=='agricultural'" class="card">
+        <div>
+          <p class="pull-right margin-none">{{product.price_per_unit}} {{product.currency}}/<small>{{product.weight_unit
+              | uppercase}}</small></p>
+        </div>
+        <div class="product-details">
+          <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
+          <p class="heading-2">
+            {{product.produce}} <br />
+            {{product.variety}}
+          </p>
+        </div>
+        <div class="package-details">
+          <div>
+            <p>Packages available</p>
+            <p>Type of package</p>
+            <p>Package weight</p>
+            <p>Total weight</p>
+          </div>
+          <div>
+            <p>{{product.quantityMax}}</p>
+            <p>{{product.type_of_package}}</p>
+            <p>{{product.package_weight}}/{{product.weight_unit | uppercase}}</p>
+            <p>{{product.total_weight}} {{product.weight_unit | uppercase}}</p>
+          </div>
+        </div>
 
-            <div class="quantity">
-              <p class="normal-text-bold">Quantity</p>
-              <button class="btn-circle" (click)=incrementQ(product)><i class="material-icons">add</i></button>
-              <input type="number" min="0" max="{{product.quantityMax}}" value="0" [(ngModel)]="product.quantity" />
-              <button class="btn-circle" (click)=decrementQ(product)><i class="material-icons">remove</i></button>
+        <div class="quantity">
+          <p class="normal-text-bold">Quantity</p>
+          <button class="btn-circle" (click)=incrementQ(product)><i class="material-icons">add</i></button>
+          <input type="number" min="0" max="{{product.quantityMax}}" value="0" [(ngModel)]="product.quantity" />
+          <button class="btn-circle" (click)=decrementQ(product)><i class="material-icons">remove</i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Processed Products-->
+  <div class="margin-bottom margin-top">
+    <button class="btn-icons pull-right"><i class="material-icons">arrow_forward_ios</i></button>
+    <button class="btn-icons pull-right"><i class="material-icons">arrow_back_ios</i></button>
+    <p class="normal-text-bold">Processed Products</p>
+  </div>
+  <div class="row clearfix">
+    <ng-container *ngFor="let product of products">
+      <div *ngIf="product.product_type=='processed'" class="col-md-4">
+        <div class="card">
+          <div>
+            <p class="pull-right margin-none">{{product.package_price}} {{product.currency}}/<small>{{product.type_of_package}}</small></p>
+          </div>
+          <div class="product-details">
+            <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
+            <p class="heading-2">
+              {{product.produce}} <br />
+            </p>
+          </div>
+          <div class="package-details">
+            <div>
+              <p>Packages available</p>
+              <p>Type of package</p>
+              <p *ngIf="product.item_measurement_amount">Item packing type</p>
+              <p *ngIf="product.item_measurement_amount">Items per package</p>
+              <p *ngIf="product.item_measurement_amount">Amount of</p>
             </div>
+            <div>
+              <p>{{product.quantityMax}}</p>
+              <p>{{product.type_of_package}}</p>
+              <p *ngIf="product.item_measurement_amount">{{product.item_package_type}}</p>
+              <p *ngIf="product.item_measurement_amount">{{product.items_per_package}}</p>
+              <p *ngIf="product.item_measurement_amount">{{product.item_measurement_amount}}
+                {{product.item_measurement_unit}}/{{product.item_package_type}}</p>
+            </div>
+          </div>
+
+          <div class="quantity">
+            <p class="normal-text-bold">Quantity</p>
+            <button class="btn-circle" (click)=incrementQ(product)><i class="material-icons">add</i></button>
+            <input type="number" min="0" max="{{product.quantityMax}}" value="0" [(ngModel)]="product.quantity" />
+            <button class="btn-circle" (click)=decrementQ(product)><i class="material-icons">remove</i></button>
           </div>
         </div>
       </div>
-
-      <!--Processed Products-->
-      <div class="margin-bottom margin-top">
-        <button class="btn-icons pull-right"><i class="material-icons">arrow_forward_ios</i></button>
-        <button class="btn-icons pull-right"><i class="material-icons">arrow_back_ios</i></button>
-        <p class="normal-text-bold">Processed Products</p>
-      </div>
-      <div class="row clearfix">
-        <ng-container *ngFor="let product of products">
-          <div *ngIf="product.product_type=='processed'" class="col-md-3">
-            <div class="card">
-              <div>
-                <p class="pull-right margin-none">{{product.package_price}} {{product.currency}}/<small>{{product.type_of_package}}</small></p>
-              </div>
-              <div class="product-details">
-                <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
-                <p class="heading-2">
-                  {{product.produce}} <br />
-                </p>
-              </div>
-              <div class="package-details">
-                <div>
-                  <p>Packages available</p>
-                  <p>Type of package</p>
-                  <p *ngIf="product.item_measurement_amount">Item packing type</p>
-                  <p *ngIf="product.item_measurement_amount">Items per package</p>
-                  <p *ngIf="product.item_measurement_amount">Amount of</p>
-                </div>
-                <div>
-                  <p>{{product.quantityMax}}</p>
-                  <p>{{product.type_of_package}}</p>
-                  <p *ngIf="product.item_measurement_amount">{{product.item_package_type}}</p>
-                  <p *ngIf="product.item_measurement_amount">{{product.items_per_package}}</p>
-                  <p *ngIf="product.item_measurement_amount">{{product.item_measurement_amount}}
-                    {{product.item_measurement_unit}}/{{product.item_package_type}}</p>
-                </div>
-              </div>
-
-              <div class="quantity">
-                <p class="normal-text-bold">Quantity</p>
-                <button class="btn-circle" (click)=incrementQ(product)><i class="material-icons">add</i></button>
-                <input type="number" min="0" max="{{product.quantityMax}}" value="0" [(ngModel)]="product.quantity" />
-                <button class="btn-circle" (click)=decrementQ(product)><i class="material-icons">remove</i></button>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-      </div>
-      <button [disabled]="existenceProduct()" class="bttn-primary pull-right" data-dismiss="modal" (click)="addProducts()">Submit</button>
-
-    </div>
+    </ng-container>
   </div>
+  <button [disabled]="existenceProduct()" class="bttn-primary pull-right" data-dismiss="modal" (click)="addProducts()">Submit</button>
+
 </div>
