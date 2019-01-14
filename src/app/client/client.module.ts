@@ -15,6 +15,11 @@ import { ClientOrdersComponent } from './client-orders/client-orders.component';
 import { ClientInvoicesComponent } from './client-invoices/client-invoices.component';
 import { ClientDocumentsComponent } from './client-documents/client-documents.component';
 import { SharedModule } from '@app/shared';
+import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
+import { UserResolver } from './resolvers/user.resolver';
+import { OrderListResolver } from './resolvers/order-list.resolver';
+import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
+import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 
 @NgModule({
   imports: [
@@ -38,6 +43,13 @@ import { SharedModule } from '@app/shared';
     ClientInvoicesComponent,
     ClientDocumentsComponent
   ],
-  providers: [ClientListResolver]
+  providers: [
+    ClientListResolver,
+    UserResolver,
+    EcosystemListResolver,
+    OrderListResolver,
+    InvoiceListResolver,
+    TransactionListResolver
+  ]
 })
 export class ClientModule {}

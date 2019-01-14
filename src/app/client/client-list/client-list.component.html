@@ -27,7 +27,7 @@
       <td>{{ client.first_name }} {{ client.last_name }}</td>
       <td style="text-transform: capitalize;">{{ client.role }}</td>
       <td class="text-right">
-        <button class="btn round-button-primary" routerLink="/client/2"><i class="material-icons">remove_red_eye</i></button>
+        <button class="btn round-button-primary" [routerLink]="['/client', client._id]"><i class="material-icons">remove_red_eye</i></button>
       </td>
     </tr>
   </tbody>

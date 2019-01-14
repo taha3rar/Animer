@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Order } from '@app/core/models/order/order';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
@@ -9,16 +9,13 @@ import { AuthenticationService } from '@app/core';
   styleUrls: ['./client-orders.component.scss']
 })
 export class ClientOrdersComponent implements OnInit {
+  @Input()
   orders: Order[];
   page = 1;
 
   constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
 
-  ngOnInit() {
-    this.route.data.subscribe(({ orders }) => {
-      this.orders = orders;
-    });
-  }
+  ngOnInit() {}
 
   hasProcessedProduct(order: Order) {
     for (let i = 0; i < order.products.length; i++) {

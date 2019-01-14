@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { AuthenticationService, ProductService } from '@app/core';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { User } from '@app/core/models/user/user';
 import { Resolve } from '@angular/router';
+import { Product } from '@app/core/models/order/product';
 
 @Injectable()
-export class ProductListResolver implements Resolve<User[]> {
+export class ProductListResolver implements Resolve<Product[]> {
   constructor(private authService: AuthenticationService, private productService: ProductService) {}
 
-  resolve(): Observable<User[]> {
+  resolve(): Observable<Product[]> {
     const currentUserId = this.authService.currentUserId;
 
     return this.productService.getByUser(currentUserId).pipe(
