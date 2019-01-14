@@ -5,9 +5,17 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule, NgbModule, LoginRoutingModule, NgbModule.forRoot()],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    NgbModule,
+    LoginRoutingModule,
+    NgxPermissionsModule.forRoot()
+  ],
   declarations: [LoginComponent],
   entryComponents: [LoginComponent]
 })

@@ -11,6 +11,7 @@ import { UserDataComponent } from './components/user-data/user-data.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
 import { RouterModule } from '@angular/router';
 import { BaseListComponent } from './components/base-list/base-list.component';
+import { UserDocumentComponent } from './components/user-document-list/user-document-list.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, RouterModule],
@@ -22,6 +23,7 @@ import { BaseListComponent } from './components/base-list/base-list.component';
     TransactionsListComponent,
     DocumentListComponent,
     UserDataComponent,
+    UserDocumentComponent,
     BaseListComponent
   ],
   exports: [
@@ -31,7 +33,8 @@ import { BaseListComponent } from './components/base-list/base-list.component';
     OrderListComponent,
     TransactionsListComponent,
     DocumentListComponent,
-    UserDataComponent
+    UserDataComponent,
+    UserDocumentComponent
   ]
 })
 export class SharedModule {}

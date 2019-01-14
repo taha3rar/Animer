@@ -11,6 +11,7 @@ import { UserResolver } from './resolvers/user.resolver';
 import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
+import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -31,8 +32,10 @@ const routes: Routes = [
         user: UserResolver,
         transactions: TransactionListResolver,
         orders: OrderListResolver,
-        invoices: InvoiceListResolver
-      }
+        invoices: InvoiceListResolver,
+        documents: UserDocumentListResolver
+      },
+      runGuardsAndResolvers: 'always'
     }
   ])
 ];

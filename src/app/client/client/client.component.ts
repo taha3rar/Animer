@@ -35,12 +35,12 @@ export class ClientComponent implements OnInit {
       this.transactions = transactions;
       this.orders = orders;
       this.invoices = invoices;
-      // this.documents = documents;
+      this.documents = documents;
 
       this.counter = {
         transactions: this.transactions.length,
         orders: this.orders.length,
-        documents: 0, // this.documents.length,
+        documents: this.documents.length,
         invoices: this.invoices.length
       };
     });

@@ -1,0 +1,18 @@
+<div class="docs-section" *ngFor="let document of documents | paginate: { itemsPerPage: 7, currentPage: page }">
+  <div class="doc-card">
+    <div>
+      <span class="pull-left">#{{ document.numericId }}</span>
+      <span class="material-icons pull-right icon" (click)="warning(document._id)">delete</span>
+    </div>
+    <div>
+      <img src="../../../assets/img/pdf.png" />
+      <p class="normal-text-bold">{{ document.file_name }}</p>
+      <p class="heading-3">Uploaded by {{ document.uploaded_by.first_name }} {{ document.uploaded_by.last_name }}</p>
+    </div>
+    <div><p class="heading-3">{{ document.date_created | date: 'dd/MM/yyyy'}}</p></div>
+  </div>
+</div>
+
+<pagination-controls
+(pageChange)="page = $event"
+></pagination-controls>
