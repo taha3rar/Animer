@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { FormGroup } from '@angular/forms';
-import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
-import { Product } from '@app/core/models/product';
+import { InvoiceService } from '@app/core/api/invoice.service';
 import { InvoiceInventoryComponent } from './invoice-inventory/invoice-inventory.component';
 import { InvoiceAgriculturalProductComponent } from './invoice-agricultural-product/invoice-agricultural-product.component';
 import { InvoiceProcessedProductComponent } from './invoice-processed-product/invoice-processed-product.component';
@@ -15,11 +15,17 @@ import { InvoiceProcessedProductComponent } from './invoice-processed-product/in
   styleUrls: ['./invoice-generator-invoice.component.scss']
 })
 export class InvoiceGeneratorInvoiceComponent implements OnInit {
-  productList: any[] = [];
+  productList: ProductInvoice[] = [];
+  newInvoice: Invoice;
   @Input()
   form: FormGroup;
 
-  constructor(private dialog: MatDialog, private route: ActivatedRoute) {}
+  constructor(
+    private invoiceService: InvoiceService,
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.onChanges();
@@ -92,28 +98,44 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
         });
         this.productList = this.productList.concat(newProducts);
       }
-      console.log(this.productList);
     });
   }
 
-  openDialogAgricultural(): void {
+  updateProduct(index: number): void {
+    if (this.productList[index].product_type === 'processed') {
+      this.openDialogProcessed(index);
+    }
+    if (this.productList[index].product_type === 'agricultural') {
+      this.openDialogAgricultural(index);
+    }
+  }
+
+  openDialogAgricultural(index?: number): void {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
     dialogConfig.height = '770px';
     dialogConfig.width = '850px';
+    dialogConfig.data = {
+      productList: this.productList,
+      index: index
+    };
 
     const dialogRef = this.dialog.open(InvoiceAgriculturalProductComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(newProduct => {
-      if (newProduct) {
-        this.updateTotalDue(newProduct.product_subtotal);
-        this.productList.push(newProduct);
+    dialogRef.afterClosed().subscribe(data => {
+      if (data && data.event === 'submit') {
+        this.updateTotalDue(data.product.product_subtotal);
+        this.productList.push(data.product);
       }
-      console.log(this.productList);
+      if (data && data.event === 'update') {
+        this.updateTotalDue(-data.oldSubtotal);
+        this.updateTotalDue(data.product.product_subtotal);
+        this.productList[data.index] = data.product;
+      }
     });
   }
 
-  openDialogProcessed(): void {
+  openDialogProcessed(index?: number): void {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
@@ -126,15 +148,21 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
         this.updateTotalDue(newProduct.product_subtotal);
         this.productList.push(newProduct);
       }
-      console.log(this.productList);
+    });
+  }
+
+  draftInvoice() {
+    this.newInvoice = this.form.value;
+    this.newInvoice.products = this.productList;
+    console.log(this.newInvoice);
+    this.invoiceService.draft(this.newInvoice).subscribe((invoice: Invoice) => {
+      this.router.navigateByUrl('/invoices');
     });
   }
 
   save() {
-    console.log(this.form);
-  }
-
-  display() {
-    console.log(this.productList);
+    this.newInvoice = this.form.value;
+    this.newInvoice.products = this.productList;
+    console.log(this.newInvoice);
   }
 }

@@ -62,7 +62,7 @@
             <td class="text-center">{{product.product_subtotal}} {{product.currency}}</td>
             <td class="text-center">
               <button class="btn-circle remove" (click)="deleteProduct(i)"><i class="material-icons">remove</i></button>
-              <button class="btn-circle edit"><i class="material-icons">edit</i></button>
+              <button class="btn-circle edit" (click)="updateProduct(i)"><i class="material-icons">edit</i></button>
             </td>
           </tr>
         </tbody>
@@ -207,5 +207,5 @@
     </div>
   </div>
   <button class="bttn-primary pull-right next-step" [disabled]="!form.valid">Next Step &rarr;</button>
-  <button class="btn-primary-transp pull-right btn-draft">Save Draft</button>
+  <button class="btn-primary-transp pull-right btn-draft" (click)="draftInvoice()">Save Draft</button>
 </form>

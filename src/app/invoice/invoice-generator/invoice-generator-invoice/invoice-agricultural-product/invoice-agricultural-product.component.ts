@@ -2,7 +2,7 @@ import { currencies } from './../../../../shared/_helpers/product_details';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { processedPackageUnits } from '@app/shared/_helpers/processed';
-import { Product } from '@app/core/models/order/product';
+import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -13,60 +13,101 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class InvoiceAgriculturalProductComponent implements OnInit {
   units = processedPackageUnits;
   currencies = currencies;
-  product: any;
-  productForm: FormGroup;
+  product: ProductInvoice;
+  update: boolean;
+  oldSubtotal: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<InvoiceAgriculturalProductComponent>,
-    private formBuilder: FormBuilder
+    public dialogRef: MatDialogRef<InvoiceAgriculturalProductComponent>
   ) {}
 
   ngOnInit() {
-    this.productForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      variety: ['', Validators.required],
-      weight_unit: ['', Validators.required],
-      total_amount: ['', Validators.required],
-      type_of_package: ['', [Validators.required]],
-      number_of_packages: ['', [Validators.required]],
-      package_weight: ['', [Validators.required]],
-      price_per_unit: ['', [Validators.required]],
-      currency: ['', [Validators.required]],
-      price_per_package: ['', [Validators.required]],
-      total_price: ['', [Validators.required]],
-      to_inventory: ['true', [Validators.required]]
-    });
+    this.update = false;
+    if (this.data.index >= 0) {
+      this.product = JSON.parse(JSON.stringify(this.data.productList[this.data.index]));
+      this.oldSubtotal = this.product.product_subtotal;
+      this.update = true;
+    } else {
+      this.product = {
+        _id: undefined,
+        numericId: undefined,
+        product_type: 'agricultural',
+        produce: undefined,
+        variety: undefined,
+        type_of_package: undefined,
+        package_weight: undefined,
+        weight_unit: undefined,
+        weight_details: true,
+        total_weight: undefined,
+        item_package_type: undefined,
+        item_measurement_amount: undefined,
+        item_measurement_unit: undefined,
+        items_per_package: undefined,
+        total_amount_items: undefined,
+        package_price: undefined,
+        price_per_unit: undefined,
+        quantity: undefined,
+        product_subtotal: undefined,
+        individual_details: false,
+        price_details: true,
+        out_of_inventory: false,
+        to_inventory: false
+      };
+    }
   }
 
   onExit(): void {
     this.dialogRef.close();
   }
-
-  get productf() {
-    return this.productForm.controls;
+  setAverageAmountPerPackage() {
+    if (this.product.total_weight && this.product.quantity) {
+      this.product.package_weight = Number((this.product.total_weight / this.product.quantity).toFixed(2));
+    } else {
+      this.product.package_weight = undefined;
+    }
   }
 
-  addProduct() {
-    this.product = {
-      product_type: 'agricultural',
-      produce: this.productf.name.value,
-      variety: this.productf.variety.value,
-      type_of_package: this.productf.type_of_package.value,
-      quantity: this.productf.number_of_packages.value,
-      package_weight: this.productf.package_weight.value,
-      weight_unit: this.productf.weight_unit.value,
-      total_weight: this.productf.total_amount.value,
-      price_per_unit: this.productf.price_per_unit.value,
-      package_price: this.productf.price_per_package.value,
-      product_subtotal: this.productf.total_price.value,
-      to_inventory: this.productf.to_inventory.value,
-      currency: this.productf.currency.value,
-      out_of_inventory: true,
-      weight_details: true,
-      price_details: true,
-      has_package_details: true
-    };
-    this.dialogRef.close(this.product);
+  setPriceUnit() {
+    if (this.product.total_weight && this.product.price_per_unit) {
+      this.product.product_subtotal = Number((this.product.price_per_unit * this.product.total_weight).toFixed(2));
+      if (this.product.quantity) {
+        this.product.package_price = Number((this.product.product_subtotal / this.product.quantity).toFixed(2));
+      } else {
+        this.product.package_price = undefined;
+      }
+    } else {
+      this.product.product_subtotal = undefined;
+    }
+  }
+
+  setPricePackage() {
+    if (this.product.quantity && this.product.package_price) {
+      this.product.product_subtotal = Number((this.product.quantity * this.product.package_price).toFixed(2));
+      if (this.product.total_weight) {
+        this.product.price_per_unit = Number((this.product.product_subtotal / this.product.total_weight).toFixed(2));
+      } else {
+        this.product.price_per_unit = undefined;
+      }
+    } else {
+      this.product.product_subtotal = undefined;
+    }
+  }
+
+  addProduct(): void {
+    this.dialogRef.close({
+      event: 'submit',
+      product: this.product
+    });
+  }
+
+  updateProduct(): void {
+    this.data.productList[this.data.index] = this.product;
+    this.dialogRef.close({
+      event: 'update',
+      index: this.data.index,
+      oldSubtotal: this.oldSubtotal,
+      product: this.product
+    });
   }
 }

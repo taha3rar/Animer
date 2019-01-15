@@ -16,4 +16,8 @@ export class InvoiceService extends BaseService {
   getByUserIdAndClientId(userId: string, clientId: string): Observable<Invoice[]> {
     return this.apiService.get(`/user/${userId}/client/${clientId}/invoice`).pipe(map(data => data));
   }
+
+  draft(invoice: Invoice) {
+    return this.apiService.post(`/invoice/draft`, invoice).pipe(map(data => data));
+  }
 }

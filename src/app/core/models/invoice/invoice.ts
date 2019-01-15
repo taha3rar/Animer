@@ -1,12 +1,12 @@
 import { User } from '../order/user';
-import { Product } from '../order//product';
+import { ProductInvoice } from './product-invoice';
 
 export class Invoice {
   _id: string;
   buyer: User;
   seller: User;
   numericId: string;
-  products: [];
+  products: ProductInvoice[];
   vat_amount: number;
   vat_percentage: number;
   discount_amount: number;
