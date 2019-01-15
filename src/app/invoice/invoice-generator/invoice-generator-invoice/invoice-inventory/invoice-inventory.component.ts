@@ -1,10 +1,6 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Product } from '@app/core/models/product';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { AuthenticationService, ProductService } from '@app/core';
-import { EcosystemAddClientComponent } from '@app/ecosystem/ecosystem-add-client/ecosystem-add-client.component';
 
 @Component({
   selector: 'app-invoice-inventory',
@@ -13,40 +9,23 @@ import { EcosystemAddClientComponent } from '@app/ecosystem/ecosystem-add-client
 })
 export class InvoiceInventoryComponent implements OnInit {
   products: Product[];
-  productChoice: Product[] = [];
-  @Input()
-  form: FormGroup;
-  @Input()
-  productList: any[];
+  newProducts: Product[] = [];
 
-  constructor(
-    private authenticationService: AuthenticationService,
-    private productService: ProductService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<InvoiceInventoryComponent>,
-    private route: ActivatedRoute
-  ) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<InvoiceInventoryComponent>) {}
 
   ngOnInit() {
-    // this.products = this.route.snapshot.data['products'];
-    // this.productService.getByUser(this.authenticationService.currentUserId)
-    //   .subscribe(data => {
-    //     this.products = data;
-    //     console.log(data);
-    //   })
-    // console.log(this.products);
+    this.products = this.data.products;
     this.products.forEach(product => {
       product['quantityMax'] = product.quantity;
-      product.quantity = 0;
-      product.total_price = 0;
     });
   }
 
+  onExit() {
+    this.dialogRef.close();
+  }
+
   incrementQ(product: any) {
-    if (product.quantity === 0) {
-      this.productChoice.push(product);
-    }
-    if (product.quantity <= product.quantityMax) {
+    if (product.quantity < product.quantityMax) {
       product.quantity += 1;
     } else {
       product.quantity = product.quantityMax;
@@ -58,18 +37,21 @@ export class InvoiceInventoryComponent implements OnInit {
     } else {
       product.quantity = 0;
     }
-    if (product.quantity === 0) {
-      this.productChoice.splice(this.productList.indexOf(product), 1);
-    }
-  }
-
-  existenceProduct() {
-    return this.productChoice.length < 1;
   }
 
   addProducts() {
-    this.productList = this.productList.concat(this.productChoice);
-    console.log(this.productList);
-    this.ngOnInit();
+    this.products.forEach(product => {
+      if (product.quantity > 0) {
+        if (product.product_type === 'agricultural') {
+          product['total_weight'] = product.package_weight * product.quantity;
+          product['product_subtotal'] = product.package_price * product.quantity;
+        }
+        if (product.product_type === 'processed') {
+          product['product_subtotal'] = product.package_price * product.quantity;
+        }
+        this.newProducts.push(product);
+      }
+    });
+    this.dialogRef.close(this.newProducts);
   }
 }

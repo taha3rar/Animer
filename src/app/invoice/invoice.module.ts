@@ -48,6 +48,13 @@ import { ProductCurrentUserResolver } from './resolvers/products-currentUser.res
     MatDialogModule,
     MatButtonModule
   ],
-  providers: [InvoiceListResolver, InvoiceBuyersResolver, InvoiceSellerResolver, InvoiceResolver, ProductCurrentUserResolver]
+  entryComponents: [InvoiceInventoryComponent, InvoiceAgriculturalProductComponent, InvoiceProcessedProductComponent],
+  providers: [
+    InvoiceListResolver,
+    InvoiceBuyersResolver,
+    InvoiceSellerResolver,
+    InvoiceResolver,
+    ProductCurrentUserResolver
+  ]
 })
 export class InvoiceModule {}

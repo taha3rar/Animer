@@ -1,214 +1,211 @@
 <form [formGroup]="form">
-<div class="row">
-  <div class="col-md-6">
-    <div class="info">
-      <p class="heading-2">ISSUED BY</p>
-      <app-user-data [user]="issuer" [issued_by]="true"></app-user-data>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="info">
-      <p class="heading-2">ISSUED FOR</p>
-      <app-user-data [user]="buyer" [issued_for]="true"></app-user-data>
-    </div>
-  </div>
-</div>
-
-<div class="card">
   <div class="row">
-    <div class="col-md-4"><p class="heading-2">Purchase Order Number</p></div>
-    <div class="col-md-8">
-      <div class="form-group"><input type="text" name="PONumber" formControlName="personal_po_id" class="form-control" /></div>
+    <div class="col-md-6">
+      <div class="info">
+        <p class="heading-2">ISSUED BY</p>
+        <app-user-data [user]="issuer" [issued_by]="true"></app-user-data>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="info">
+        <p class="heading-2">ISSUED FOR</p>
+        <app-user-data [user]="buyer" [issued_for]="true"></app-user-data>
+      </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col">
-    <table class="table-blue">
-      <thead>
-        <tr>
-          <th>PRODUCT</th>
-          <th class="text-center">PACKAGES</th>
-          <th class="text-center">TOTAL AMOUNT</th>
-          <th class="text-center">RATE</th>
-          <th class="text-center">TOTAL PRICE</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr >
-          <td>Green Coffee Beans</td>
-          <td class="text-center">
-            <button class="btn-circle stepUp"><i class="material-icons">add</i></button> 100 (BAG / 50 KG)
-            <button class="btn-circle stepDown"><i class="material-icons">remove</i></button>
-          </td>
-          <td class="text-center">5,000 KG</td>
-          <td class="text-center">50 KES / KG</td>
-          <td class="text-center">1000 KES</td>
-          <td class="text-center">
-            <button class="btn-circle remove"><i class="material-icons">remove</i></button>
-            <button class="btn-circle edit"><i class="material-icons">edit</i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col">
+  <div class="card">
+    <div class="row">
+      <div class="col-md-4">
+        <p class="heading-2">Purchase Order Number</p>
+      </div>
+      <div class="col-md-8">
+        <div class="form-group"><input type="text" name="PONumber" formControlName="personal_po_id" class="form-control" /></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table-blue">
+        <thead>
+          <tr>
+            <th>PRODUCT</th>
+            <th class="text-center">PACKAGES</th>
+            <th class="text-center">TOTAL AMOUNT</th>
+            <th class="text-center">RATE</th>
+            <th class="text-center">TOTAL PRICE</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productList; let i = index">
+            <td>
+              <span *ngIf="product.product_type==='agricultural'">{{product.produce}} / {{product.variety}}</span>
+              <span *ngIf="product.product_type==='processed'">{{product.produce}}</span>
+            </td>
+            <td class="text-center">
+              <!-- <button class="btn-circle stepUp"><i class="material-icons">add</i></button> -->
+              <span *ngIf="product.product_type==='agricultural'">{{product.quantity}} ({{product.type_of_package |
+                uppercase}} / {{product.package_weight}} {{product.weight_unit | uppercase}})</span>
+              <span *ngIf="product.product_type==='processed'">{{product.quantity}} ({{product.type_of_package |
+                uppercase}} / {{product.item_measurement_amount}} {{product.item_package_type}}<span *ngIf="product.item_measurement_amount>1">s</span>)</span>
+              <!-- <button class="btn-circle stepDown"><i class="material-icons">remove</i></button> -->
+            </td>
+            <td class="text-center">
+                <span *ngIf="product.product_type==='agricultural'">{{product.total_weight}} {{product.weight_unit | uppercase}}</span>
+                <span *ngIf="product.product_type==='processed'">N/A</span>
+            </td>
+            <td class="text-center">
+                <span *ngIf="product.product_type==='agricultural'">{{product.price_per_unit}} {{product.currency}} / {{product.weight_unit | uppercase}}</span>
+                <span *ngIf="product.product_type==='processed'">{{product.package_price}} {{product.currency}} / {{product.type_of_package | uppercase}}</span>
+            </td>
+            <td class="text-center">{{product.product_subtotal}} {{product.currency}}</td>
+            <td class="text-center">
+              <button class="btn-circle remove" (click)="deleteProduct(i)"><i class="material-icons">remove</i></button>
+              <button class="btn-circle edit"><i class="material-icons">edit</i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
       <div class="dropdown">
-          <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
-          <ul class="dropdown-menu">
-            <li><a (click)="openDialogInventory()">From Inventory</a></li>
-            <li><a data-toggle="popup" data-target="#newAgriProduct" (click)="display()">New Agricultural Product</a></li>
-            <li><a data-toggle="popup" data-target="#newProcessedProduct">New Processed Product</a></li>
-          </ul>
-        </div>
-    <button class="btn-primary-transp" >
-      <i class="material-icons rotate">attach_file</i> <span>Upload Document</span>
-    </button>
+        <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
+        <ul class="dropdown-menu">
+          <li><a (click)="openDialogInventory()">From Inventory</a></li>
+          <li><a (click)="openDialogAgricultural()">New Agricultural Product</a></li>
+          <li><a (click)="openDialogProcessed()">New Processed Product</a></li>
+        </ul>
+      </div>
+      <button class="btn-primary-transp">
+        <i class="material-icons rotate">attach_file</i> <span>Upload Document</span>
+      </button>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-md-5">
-    <div class="comments">
-      <label for="payment_comments">Comments or special instructions for payment</label>
-      <textarea rows="4" id="payment_comments" placeholder="Type comments here..." formControlName="payment_comments"></textarea>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="comments">
-      <label for="po_comments">Comments or special instructions for purchase order</label>
-      <textarea rows="4" id="po_comments" placeholder="Type comments here..." formControlName="order_comments"></textarea>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="price-box pull-right">
-      <div class="price-wrapper">
-        <div>
-          <p class="heading-4-blue">Subtotal</p>
-          <div class="display-inline">
-            <p class="heading-4-blue">VAT %</p>
-            <input class="form-control" style="width:23%;" type="number" value="0"/>
-          </div>
-          <div class="display-inline">
-            <p class="heading-4-blue">Discount %</p>
-            <input class="form-control" style="width:23%;" type="number" value="0"/>
-          </div>
-        </div>
-        <div class="subtotals">
-          <p class="heading-2">500,044 KES</p>
-          <p class="heading-2">500,044 KES</p>
-          <p class="heading-2">500,044 KES</p>
-        </div>
-      </div>
-      <div class="total">
-        <p class="heading-4-blue">Total</p>
-        <p class="heading-2">500,044 KES</p>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="comments">
+        <label for="payment_comments">Comments or special instructions for payment</label>
+        <textarea rows="4" id="payment_comments" placeholder="Type comments here..." formControlName="payment_comments"></textarea>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="info">
-      <p class="heading-2">SIGNED BY</p>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="first_name">First Name *</label>
-          <input type="text" class="form-control" id="first_name" placeholder="Type first name here..." formControlName="sign_by_first_name" />
-        </div>
-        <div class="form-group col-md-4">
-          <label for="last_name">Last Name *</label>
-          <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." formControlName="sign_by_last_name"/>
-        </div>
-        <div class="form-group col-md-4">
-          <label for="company_name">Company Name *</label>
-          <input type="text" class="form-control" id="company_name" placeholder="Type company name here..." formControlName="sign_by_company_name"/>
-        </div>
+    <div class="col-md-4">
+      <div class="comments">
+        <label for="po_comments">Comments or special instructions for purchase order</label>
+        <textarea rows="4" id="po_comments" placeholder="Type comments here..." formControlName="order_comments"></textarea>
       </div>
-      <div class="row">
-        <div class="form-group col-md-8">
-          <label for="PO_valid_date">Purchase Order is Valid by *</label>
-          <div class="input-group">
-            <input
-              id="PO_valid_date"
-              class="form-control"
-              placeholder="yyyy-mm-dd"
-              name="ddpp"
-              ngbDatepicker
-              #ddpp="ngbDatepicker"
-              formControlName="valid_until"
-            />
-            <div class="input-group-append">
-              <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
+    </div>
+    <div class="col-md-3">
+      <div class="price-box pull-right">
+        <div class="price-wrapper">
+          <div>
+            <p class="heading-4-blue">Subtotal</p>
+            <div class="display-inline">
+              <p class="heading-4-blue">VAT %</p>
+              <input formControlName="vat_percentage" class="form-control" style="width:23%;" type="number" value="0" />
+            </div>
+            <div class="display-inline">
+              <p class="heading-4-blue">Discount %</p>
+              <input formControlName="discount_percentage" class="form-control" style="width:23%;" type="number" value="0" />
             </div>
           </div>
+          <div class="subtotals">
+            <p class="heading-2">{{invoice.subtotal.value | number : '1.2-2'}} KES</p>
+            <p class="heading-2">{{invoice.vat_amount.value | number : '1.2-2'}} KES</p>
+            <p class="heading-2">{{invoice.discount_amount.value | number : '1.2-2'}} KES</p>
+          </div>
         </div>
-        <div class="col-md-4">
-          <p class="normal-text-bold">Date of Issue</p>
-          <p>{{ date_created }}</p>
+        <div class="total">
+          <p class="heading-4-blue">Total</p>
+          <p class="heading-2">{{invoice.total_due.value | number : '1.2-2'}} KES</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="info">
-      <p class="heading-2">DELIVERED TO</p>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="contact_name">Contact Name *</label>
-          <input type="text" class="form-control" id="contact_name" placeholder="Typle contact name here..." formControlName="deliver_to_contact_name" />
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="info">
+        <p class="heading-2">SIGNED BY</p>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="first_name">First Name *</label>
+            <input type="text" class="form-control" id="first_name" placeholder="Type first name here..."
+              formControlName="sign_by_first_name" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="last_name">Last Name *</label>
+            <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." formControlName="sign_by_last_name" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="company_name">Company Name *</label>
+            <input type="text" class="form-control" id="company_name" placeholder="Type company name here..."
+              formControlName="sign_by_company_name" />
+          </div>
         </div>
-        <div class="form-group col-md-4">
-          <label for="street_address">Street Address *</label>
-          <input type="text" class="form-control" id="street_address" placeholder="Typle street address here..." formControlName="deliver_to_address" />
-        </div>
-        <div class="form-group col-md-4">
-          <label for="city">City *</label> <input type="text" class="form-control" id="city" formControlName="deliver_to_city" />
+        <div class="row">
+          <div class="form-group col-md-8">
+            <label for="PO_valid_date">Purchase Order is Valid by *</label>
+            <div class="input-group">
+              <input id="PO_valid_date" class="form-control" placeholder="yyyy-mm-dd" name="ddpp" ngbDatepicker #ddpp="ngbDatepicker"
+                formControlName="valid_until" />
+              <div class="input-group-append">
+                <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <p class="normal-text-bold">Date of Issue</p>
+            <p>{{ date_created }}</p>
+          </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="zip_code">Zip Code *</label>
-          <input type="text" class="form-control" id="zip_code" placeholder="Typle zip code here..." formControlName="deliver_to_zip_code" />
+    </div>
+    <div class="col-md-6">
+      <div class="info">
+        <p class="heading-2">DELIVERED TO</p>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="contact_name">Contact Name *</label>
+            <input type="text" class="form-control" id="contact_name" placeholder="Typle contact name here..."
+              formControlName="deliver_to_contact_name" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="street_address">Street Address *</label>
+            <input type="text" class="form-control" id="street_address" placeholder="Typle street address here..."
+              formControlName="deliver_to_address" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="city">City *</label> <input type="text" class="form-control" id="city" formControlName="deliver_to_city" />
+          </div>
         </div>
-        <div class="form-group col-md-4">
-          <label for="phone">Phone *</label>
-          <input type="tel" placeholder="Type phone number here..." class="form-control" id="phone" formControlName="deliver_to_phone_number" />
-        </div>
-        <div class="form-group col-md-4">
-          <label for="expected_delivery">Expected Delivery Date *</label>
-          <div class="input-group">
-            <input
-              id="expected_delivery"
-              class="form-control"
-              placeholder="yyyy-mm-dd"
-              name="ddp"
-              ngbDatepicker
-              #ddp="ngbDatepicker"
-              formControlName="deliver_to_expected_delivery_date"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn glyphicon glyphicon-calendar"
-                style="position:0;"
-                (click)="ddp.toggle()"
-                type="button"
-              ></button>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="zip_code">Zip Code *</label>
+            <input type="text" class="form-control" id="zip_code" placeholder="Typle zip code here..." formControlName="deliver_to_zip_code" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="phone">Phone *</label>
+            <input type="tel" placeholder="Type phone number here..." class="form-control" id="phone" formControlName="deliver_to_phone_number" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="expected_delivery">Expected Delivery Date *</label>
+            <div class="input-group">
+              <input id="expected_delivery" class="form-control" placeholder="yyyy-mm-dd" name="ddp" ngbDatepicker #ddp="ngbDatepicker"
+                formControlName="deliver_to_expected_delivery_date" />
+              <div class="input-group-append">
+                <button class="btn glyphicon glyphicon-calendar" style="position:0;" (click)="ddp.toggle()" type="button"></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<button class="bttn-primary pull-right next-step" [disabled]="!form.valid">Next Step &rarr;</button>
-<button class="btn-primary-transp pull-right btn-draft">Save Draft</button>
+  <button class="bttn-primary pull-right next-step" [disabled]="!form.valid">Next Step &rarr;</button>
+  <button class="btn-primary-transp pull-right btn-draft">Save Draft</button>
 </form>
-<!-- <app-invoice-inventory [productList]="productList" [form]="form"></app-invoice-inventory>
-<app-invoice-agricultural-product [productList]="productList"></app-invoice-agricultural-product>
-<app-invoice-processed-product></app-invoice-processed-product> -->

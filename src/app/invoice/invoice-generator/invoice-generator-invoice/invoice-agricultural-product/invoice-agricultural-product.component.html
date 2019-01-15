@@ -1,91 +1,83 @@
-<div class="modal-box" id="newAgriProduct">
-  <div class="modal-box-content-sm-2">
-    <div class="modal-box-heading">
-      <i class="material-icons pull-right" data-dismiss="modal">close</i>
-      <h2 translate class="modal-title">Add Agricultural Product</h2>
-    </div>
-    <div class="padding-all">
-      <form [formGroup]=productForm (ngSubmit)="addProduct()">
-      <p class="heading-2">Product</p>
+<div class="modal-box-heading">
+  <a (click)="onExit()"><i class="material-icons pull-right">close</i></a>
+  <h2 translate class="modal-title">Add Agricultural Product</h2>
+</div>
+<div class="padding-all">
+  <form [formGroup]=productForm (ngSubmit)="addProduct()">
+    <p class="heading-2">Product</p>
 
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="product-name">Product Name *</label>
-          <input type="text" id="product-name" formControlName="name" class="form-control" placeholder="Ex. Green coffee beans" />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="variety">Variety *</label>
-          <input type="text" id="variety" formControlName="variety" class="form-control" placeholder="Ex. Kona" />
-        </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="product-name">Product Name *</label>
+        <input type="text" id="product-name" formControlName="name" class="form-control" placeholder="Ex. Green coffee beans" />
       </div>
-      <p class="heading-2">Amount *</p>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="weight-unit">Weight Unit *</label>
-          <select id="weight-unit" formControlName="weight_unit" class="form-control">
-            <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
-          </select>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="total-amount">Total Amount *</label>
-          <input type="number" min="0" id="total-amount" formControlName="total_amount" class="form-control" placeholder="Ex. 100" />
-        </div>
+      <div class="form-group col-md-6">
+        <label for="variety">Variety *</label>
+        <input type="text" id="variety" formControlName="variety" class="form-control" placeholder="Ex. Kona" />
       </div>
-      <p class="heading-2">Package *</p>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="product-name">Package Type *</label>
-          <input type="text" id="package-type" formControlName="type_of_package" class="form-control" placeholder="Ex. Box" />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="variety">Total Number of Packages *</label>
-          <input type="text" id="total-packages" formControlName="number_of_packages" class="form-control" placeholder="Ex. 10" />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="average-amount-packaged-product">Average Amount per Packaged Product *</label>
-          <input type="number" min="0" id="average-amount-packaged-product" formControlName="package_weight" class="form-control" placeholder="Ex. 10" />
-        </div>
-      </div>
-      <p class="heading-2">Price</p>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="product-name">Price per unit *</label>
-          <input type="text" id="price-per" formControlName="price_per_unit" class="form-control" placeholder="Ex. 20" />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="currecny">Currency *</label>
-          <select id="currency" formControlName="currency" class="form-control">
-            <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="package-price">Price per Package *</label>
-          <input type="number" formControlName="price_per_package" class="form-control" id="package-price" placeholder="Ex. 15" />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="total-price">Total Price *</label>
-          <input type="number" id="total-price" formControlName="total_price" class="form-control" placeholder="Ex. 150" />
-        </div>
-      </div>
-      <div class="center-text-btn">
-          <span class="heading-2 margin-bottom ">Add to Inventory</span>
-          <div class="switch">
-            <input
-              id="add_to_inventory_switch"
-              formControlName="to_inventory"
-              class="cmn-toggle cmn-toggle-round-flat"
-              type="checkbox"
-              checked
-            />
-            <label for="add_to_inventory_switch"></label>
-          </div>
-        </div>
-      <button [disabled]="productForm.valid" class="bttn-primary pull-right">Add Product</button>
-      </form>
     </div>
-  </div>
+    <p class="heading-2">Amount *</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="weight-unit">Weight Unit *</label>
+        <select id="weight-unit" formControlName="weight_unit" class="form-control">
+          <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="total-amount">Total Amount *</label>
+        <input type="number" min="0" id="total-amount" formControlName="total_amount" class="form-control" placeholder="Ex. 100" />
+      </div>
+    </div>
+    <p class="heading-2">Package *</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="product-name">Package Type *</label>
+        <input type="text" id="package-type" formControlName="type_of_package" class="form-control" placeholder="Ex. Box" />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="variety">Total Number of Packages *</label>
+        <input type="text" id="total-packages" formControlName="number_of_packages" class="form-control" placeholder="Ex. 10" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="average-amount-packaged-product">Average Amount per Packaged Product *</label>
+        <input type="number" min="0" id="average-amount-packaged-product" formControlName="package_weight" class="form-control"
+          placeholder="Ex. 10" />
+      </div>
+    </div>
+    <p class="heading-2">Price</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="product-name">Price per unit *</label>
+        <input type="text" id="price-per" formControlName="price_per_unit" class="form-control" placeholder="Ex. 20" />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="currecny">Currency *</label>
+        <select id="currency" formControlName="currency" class="form-control">
+          <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="package-price">Price per Package *</label>
+        <input type="number" formControlName="price_per_package" class="form-control" id="package-price" placeholder="Ex. 15" />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="total-price">Total Price *</label>
+        <input type="number" id="total-price" formControlName="total_price" class="form-control" placeholder="Ex. 150" />
+      </div>
+    </div>
+    <div class="center-text-btn">
+      <span class="heading-2 margin-bottom ">Add to Inventory</span>
+      <div class="switch">
+        <input id="add_to_inventory_switch" formControlName="to_inventory" class="cmn-toggle cmn-toggle-round-flat"
+          type="checkbox" checked />
+        <label for="add_to_inventory_switch"></label>
+      </div>
+    </div>
+    <button [disabled]="!productForm.valid" class="bttn-primary pull-right">Add Product</button>
+  </form>
 </div>

@@ -11,8 +11,6 @@ export class ProductCurrentUserResolver implements Resolve<Product[]> {
 
   resolve(): Observable<Product[]> {
     const currentUserId = this.authService.currentUserId;
-    console.log(currentUserId);
-    console.log(this.productService.getByUser(currentUserId));
 
     return this.productService.getByUser(currentUserId).pipe(
       catchError(err => {

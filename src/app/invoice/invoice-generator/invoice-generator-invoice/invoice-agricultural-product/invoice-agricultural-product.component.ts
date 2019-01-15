@@ -1,8 +1,9 @@
 import { currencies } from './../../../../shared/_helpers/product_details';
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { processedPackageUnits } from '@app/shared/_helpers/processed';
 import { Product } from '@app/core/models/order/product';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-invoice-agricultural-product',
@@ -12,11 +13,14 @@ import { Product } from '@app/core/models/order/product';
 export class InvoiceAgriculturalProductComponent implements OnInit {
   units = processedPackageUnits;
   currencies = currencies;
+  product: any;
   productForm: FormGroup;
-  @Input()
-  productList: any;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<InvoiceAgriculturalProductComponent>,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.productForm = this.formBuilder.group({
@@ -35,13 +39,16 @@ export class InvoiceAgriculturalProductComponent implements OnInit {
     });
   }
 
+  onExit(): void {
+    this.dialogRef.close();
+  }
+
   get productf() {
     return this.productForm.controls;
   }
 
   addProduct() {
-    console.log(this.productList);
-    const product = {
+    this.product = {
       product_type: 'agricultural',
       produce: this.productf.name.value,
       variety: this.productf.variety.value,
@@ -49,16 +56,17 @@ export class InvoiceAgriculturalProductComponent implements OnInit {
       quantity: this.productf.number_of_packages.value,
       package_weight: this.productf.package_weight.value,
       weight_unit: this.productf.weight_unit.value,
-      total_weight: this.productf.package_weight.value * this.productf.number_of_packages.value,
+      total_weight: this.productf.total_amount.value,
       price_per_unit: this.productf.price_per_unit.value,
       package_price: this.productf.price_per_package.value,
       product_subtotal: this.productf.total_price.value,
-      out_of_inventory: this.productf.to_inventory.value,
+      to_inventory: this.productf.to_inventory.value,
+      currency: this.productf.currency.value,
+      out_of_inventory: true,
       weight_details: true,
       price_details: true,
       has_package_details: true
     };
-    this.productList.push(product);
-    console.log(this.productList);
+    this.dialogRef.close(this.product);
   }
 }

@@ -54,6 +54,12 @@ export class InvoiceGeneratorComponent implements OnInit {
         this.userIdValidator()
       ],
       personal_po_id: '',
+      vat_amount: 0,
+      vat_percentage: 0,
+      discount_amount: 0,
+      discount_percentage: 0,
+      total_due: [0, Validators.required],
+      subtotal: [0, Validators.required],
       payment_comments: '',
       order_comments: '',
       valid_until: ['', Validators.required],

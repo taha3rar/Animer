@@ -1,5 +1,5 @@
 <div class="modal-box-heading">
-  <a class="material-icons pull-right">close</a>
+  <a (click)=onExit()><i class="material-icons pull-right">close</i></a>
   <h2 translate class="modal-title">My Inventory</h2>
 </div>
 <div class="padding-all">
@@ -94,6 +94,6 @@
       </div>
     </ng-container>
   </div>
-  <button [disabled]="existenceProduct()" class="bttn-primary pull-right" data-dismiss="modal" (click)="addProducts()">Submit</button>
+  <button class="bttn-primary pull-right" data-dismiss="modal" (click)="addProducts()">Submit</button>
 
 </div>
