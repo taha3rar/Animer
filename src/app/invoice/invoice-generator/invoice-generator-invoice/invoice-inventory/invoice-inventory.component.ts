@@ -14,9 +14,10 @@ export class InvoiceInventoryComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<InvoiceInventoryComponent>) {}
 
   ngOnInit() {
-    this.products = this.data.products;
-    this.products.forEach(product => {
+    this.products = JSON.parse(JSON.stringify(this.data.products));
+    this.products.forEach((product: Product) => {
       product['quantityMax'] = product.quantity;
+      product.quantity = 0;
     });
   }
 
