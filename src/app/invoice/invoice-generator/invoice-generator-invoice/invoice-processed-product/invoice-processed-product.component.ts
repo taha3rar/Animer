@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { processedPackageUnits } from '@app/shared/_helpers/processed';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
+import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
 import { currencies } from '@app/shared/_helpers/product_details';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
@@ -19,7 +19,7 @@ export class InvoiceProcessedProductComponent implements OnInit {
   currency: string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
     public dialogRef: MatDialogRef<InvoiceProcessedProductComponent>
   ) {}
 
@@ -28,7 +28,7 @@ export class InvoiceProcessedProductComponent implements OnInit {
     if (this.data.currency) {
       this.currency = this.data.currency;
     }
-    if (this.data.index >= 0) {
+    if (Number(this.data.index) >= 0) {
       this.product = JSON.parse(JSON.stringify(this.data.productList[this.data.index]));
       this.oldSubtotal = this.product.product_subtotal;
       this.update = true;
