@@ -29,7 +29,7 @@
         <input type="number" min="0" id="total-amount" [(ngModel)]="product.total_weight" name="total_weight" (ngModelChange)="setAverageAmountPerPackage();setPriceUnit();" class="form-control" placeholder="Ex. 100" required/>
       </div>
     </div>
-    <p class="heading-2">Package *</p>
+    <p class="heading-2">Package</p>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="product-name">Package Type *</label>
@@ -42,9 +42,9 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="average-amount-packaged-product">Average Amount per Packaged Product *</label>
+        <label for="average-amount-packaged-product">Average Amount ({{product.weight_unit | uppercase}}) per Packaged Product *</label>
         <input type="number" min="0" id="average-amount-packaged-product" name="package_weight" [(ngModel)]="product.package_weight" class="form-control"
-          placeholder="Automatic Field" disabled required/>
+          disabled required/>
       </div>
     </div>
     <p class="heading-2">Price</p>
@@ -55,7 +55,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="currecny">Currency *</label>
-        <select id="currency" [(ngModel)]="product.currency" name="currency" class="form-control" required>
+        <select id="currency" [(ngModel)]="currency" name="currency" class="form-control" required [disabled]="data.currency">
           <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
         </select>
       </div>
@@ -67,7 +67,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="total-price">Total Price *</label>
-        <input type="number" id="total-price"  name="total_price" [(ngModel)]="product.product_subtotal" class="form-control" placeholder="Automatic Field" disabled required/>
+        <input type="number" id="total-price"  name="total_price" [(ngModel)]="product.product_subtotal" class="form-control" disabled required/>
       </div>
     </div>
     <div class="center-text-btn">

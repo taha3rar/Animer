@@ -60,7 +60,7 @@ export class InvoiceGeneratorComponent implements OnInit {
       discount_percentage: 0,
       total_due: [0, Validators.required],
       subtotal: [0, Validators.required],
-      currency: ['', Validators.required],
+      currency: [undefined, Validators.required],
       payment_comments: '',
       order_comments: '',
       sign_by: this.formBuilder.group({

@@ -1,6 +1,5 @@
 import { currencies } from './../../../../shared/_helpers/product_details';
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { processedPackageUnits } from '@app/shared/_helpers/processed';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -16,6 +15,7 @@ export class InvoiceAgriculturalProductComponent implements OnInit {
   product: ProductInvoice;
   update: boolean;
   oldSubtotal: number;
+  currency: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -24,6 +24,9 @@ export class InvoiceAgriculturalProductComponent implements OnInit {
 
   ngOnInit() {
     this.update = false;
+    if (this.data.currency) {
+      this.currency = this.data.currency;
+    }
     if (this.data.index >= 0) {
       this.product = JSON.parse(JSON.stringify(this.data.productList[this.data.index]));
       this.oldSubtotal = this.product.product_subtotal;
@@ -60,6 +63,7 @@ export class InvoiceAgriculturalProductComponent implements OnInit {
   onExit(): void {
     this.dialogRef.close();
   }
+
   setAverageAmountPerPackage() {
     if (this.product.total_weight && this.product.quantity) {
       this.product.package_weight = Number((this.product.total_weight / this.product.quantity).toFixed(2));
@@ -97,7 +101,8 @@ export class InvoiceAgriculturalProductComponent implements OnInit {
   addProduct(): void {
     this.dialogRef.close({
       event: 'submit',
-      product: this.product
+      product: this.product,
+      currency: this.currency
     });
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { processedPackageUnits } from '@app/shared/_helpers/processed';
+import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { currencies } from '@app/shared/_helpers/product_details';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
@@ -12,55 +13,89 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class InvoiceProcessedProductComponent implements OnInit {
   units = processedPackageUnits;
   currencies = currencies;
-  product: any;
-  productForm: FormGroup;
+  product: ProductInvoice;
+  update: Boolean;
+  oldSubtotal: Number;
+  currency: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<InvoiceProcessedProductComponent>,
-    private formBuilder: FormBuilder
+    public dialogRef: MatDialogRef<InvoiceProcessedProductComponent>
   ) {}
 
   ngOnInit() {
-    this.productForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      type_of_package: ['', Validators.required],
-      number_of_packages: ['', Validators.required],
-      items_per_package: ['', Validators.required],
-      item_package_type: ['', Validators.required],
-      total_amount_items: ['', Validators.required],
-      item_measurement_unit: ['', Validators.required],
-      item_measurement_amount: ['', Validators.required],
-      price_per_package: ['', Validators.required],
-      currency: ['', Validators.required],
-      total_price: ['', Validators.required],
-      to_inventory: ['true', [Validators.required]]
-    });
+    this.update = false;
+    if (this.data.currency) {
+      this.currency = this.data.currency;
+    }
+    if (this.data.index >= 0) {
+      this.product = JSON.parse(JSON.stringify(this.data.productList[this.data.index]));
+      this.oldSubtotal = this.product.product_subtotal;
+      this.update = true;
+    } else {
+      this.product = {
+        _id: undefined,
+        numericId: undefined,
+        product_type: 'processed',
+        produce: undefined,
+        variety: undefined,
+        type_of_package: undefined,
+        package_weight: undefined,
+        weight_unit: undefined,
+        weight_details: true,
+        total_weight: undefined,
+        item_package_type: undefined,
+        item_measurement_amount: undefined,
+        item_measurement_unit: undefined,
+        items_per_package: undefined,
+        total_amount_items: undefined,
+        package_price: undefined,
+        price_per_unit: undefined,
+        quantity: undefined,
+        product_subtotal: undefined,
+        individual_details: true,
+        price_details: true,
+        out_of_inventory: false,
+        to_inventory: false
+      };
+    }
   }
 
   onExit(): void {
     this.dialogRef.close();
   }
 
-  get productf() {
-    return this.productForm.controls;
+  setTotalItemsAmount() {
+    if (this.product.items_per_package && this.product.quantity) {
+      this.product.total_amount_items = Number((this.product.items_per_package * this.product.quantity).toFixed(2));
+    } else {
+      this.product.total_amount_items = undefined;
+    }
   }
 
-  addProduct() {
-    this.product = {
-      product_type: 'processed',
-      produce: this.productf.name.value,
-      type_of_package: this.productf.type_of_package.value,
-      quantity: this.productf.number_of_packages.value,
-      package_price: this.productf.price_per_package.value,
-      product_subtotal: this.productf.total_price.value,
-      to_inventory: this.productf.to_inventory.value,
-      currency: this.productf.currency.value,
-      out_of_inventory: true,
-      individual_details: true,
-      price_details: true,
-      has_package_details: true
-    };
-    this.dialogRef.close(this.product);
+  setPricePackage() {
+    if (this.product.quantity && this.product.package_price) {
+      this.product.product_subtotal = Number((this.product.quantity * this.product.package_price).toFixed(2));
+    } else {
+      this.product.product_subtotal = undefined;
+    }
+  }
+
+  addProduct(): void {
+    this.dialogRef.close({
+      event: 'submit',
+      product: this.product,
+      currency: this.currency
+    });
+  }
+
+  updateProduct(): void {
+    this.data.productList[this.data.index] = this.product;
+    this.dialogRef.close({
+      event: 'update',
+      index: this.data.index,
+      oldSubtotal: this.oldSubtotal,
+      product: this.product
+    });
   }
 }

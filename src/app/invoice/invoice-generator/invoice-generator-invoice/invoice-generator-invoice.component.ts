@@ -79,8 +79,13 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
   }
 
   deleteProduct(index: number): void {
+    console.log(this.productList);
     this.updateTotalDue(-this.productList[index].product_subtotal);
     this.productList.splice(index, 1);
+    if (this.productList.length < 1) {
+      this.invoice['currency'].setValue(undefined);
+    }
+    console.log(this.productList);
   }
 
   openDialogInventory(): void {
@@ -124,14 +129,15 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
     dialogConfig.width = '850px';
     dialogConfig.data = {
       productList: this.productList,
-      index: index
+      index: index,
+      currency: this.invoice.currency.value
     };
 
     const dialogRef = this.dialog.open(InvoiceAgriculturalProductComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
       if (data && data.event === 'submit') {
         if (!this.invoice.currency.value) {
-          this.invoice['currency'].setValue(data.product.currency);
+          this.invoice['currency'].setValue(data.currency);
         }
         this.updateTotalDue(data.product.product_subtotal);
         this.productList.push(data.product);
@@ -150,12 +156,25 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.height = '800px';
     dialogConfig.width = '850px';
+    dialogConfig.data = {
+      productList: this.productList,
+      index: index,
+      currency: this.invoice.currency.value
+    };
 
     const dialogRef = this.dialog.open(InvoiceProcessedProductComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(newProduct => {
-      if (newProduct) {
-        this.updateTotalDue(newProduct.product_subtotal);
-        this.productList.push(newProduct);
+    dialogRef.afterClosed().subscribe(data => {
+      if (data && data.event === 'submit') {
+        if (!this.invoice.currency.value) {
+          this.invoice['currency'].setValue(data.currency);
+        }
+        this.updateTotalDue(data.product.product_subtotal);
+        this.productList.push(data.product);
+      }
+      if (data && data.event === 'update') {
+        this.updateTotalDue(-data.oldSubtotal);
+        this.updateTotalDue(data.product.product_subtotal);
+        this.productList[data.index] = data.product;
       }
     });
   }
