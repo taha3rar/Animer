@@ -60,24 +60,32 @@ export class InvoiceGeneratorComponent implements OnInit {
       discount_percentage: 0,
       total_due: [0, Validators.required],
       subtotal: [0, Validators.required],
+      currency: ['', Validators.required],
       payment_comments: '',
       order_comments: '',
-      valid_until: ['', Validators.required],
-      sign_by_first_name: ['', Validators.required],
-      sign_by_last_name: ['', Validators.required],
-      sign_by_company_name: ['', Validators.required],
-      deliver_to_contact_name: ['', Validators.required],
-      deliver_to_address: ['', Validators.required],
-      deliver_to_city: ['', Validators.required],
-      deliver_to_zip_code: ['', Validators.required],
-      deliver_to_phone_number: ['', Validators.required],
-      deliver_to_expected_delivery_date: ['', Validators.required],
+      sign_by: this.formBuilder.group({
+        date: ['', Validators.required],
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        company_name: ['', Validators.required]
+      }),
+      deliver_to: this.formBuilder.group({
+        contact_name: ['', Validators.required],
+        address: ['', Validators.required],
+        city: ['', Validators.required],
+        zip_code: ['', Validators.required],
+        phone_number: ['', Validators.required],
+        expected_delivery_date: ['', Validators.required]
+      }),
       date_created: [Date.now(), Validators.required]
     });
 
     this.route.data.subscribe(({ seller }) => {
       this.invoiceForm.controls.seller.setValue(this.getSmallSeller(seller));
     });
+  }
+  receiveNewInvoice($event: Invoice) {
+    this.invoice = $event;
   }
 
   userIdValidator(): ValidatorFn {

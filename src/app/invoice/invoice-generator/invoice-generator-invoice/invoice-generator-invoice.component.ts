@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
@@ -8,6 +8,7 @@ import { InvoiceService } from '@app/core/api/invoice.service';
 import { InvoiceInventoryComponent } from './invoice-inventory/invoice-inventory.component';
 import { InvoiceAgriculturalProductComponent } from './invoice-agricultural-product/invoice-agricultural-product.component';
 import { InvoiceProcessedProductComponent } from './invoice-processed-product/invoice-processed-product.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-invoice-generator-invoice',
@@ -17,6 +18,8 @@ import { InvoiceProcessedProductComponent } from './invoice-processed-product/in
 export class InvoiceGeneratorInvoiceComponent implements OnInit {
   productList: ProductInvoice[] = [];
   newInvoice: Invoice;
+  @Output()
+  newInvoiceEvent = new EventEmitter<Invoice>();
   @Input()
   form: FormGroup;
 
@@ -94,6 +97,9 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
     dialogRef.afterClosed().subscribe(newProducts => {
       if (newProducts) {
         newProducts.forEach((newProduct: any) => {
+          if (!this.invoice.currency.value) {
+            this.invoice['currency'].setValue(newProduct.currency);
+          }
           this.updateTotalDue(newProduct.product_subtotal);
         });
         this.productList = this.productList.concat(newProducts);
@@ -124,6 +130,9 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
     const dialogRef = this.dialog.open(InvoiceAgriculturalProductComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
       if (data && data.event === 'submit') {
+        if (!this.invoice.currency.value) {
+          this.invoice['currency'].setValue(data.product.currency);
+        }
         this.updateTotalDue(data.product.product_subtotal);
         this.productList.push(data.product);
       }
@@ -152,17 +161,25 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
   }
 
   draftInvoice() {
+    this.invoice['deliver_to_expected_delivery_date'].setValue(
+      moment(this.invoice.deliver_to_expected_delivery_date.value).toJSON()
+    );
+    this.invoice['valid_until'].setValue(moment(this.invoice.valid_until.value).toJSON());
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.productList;
-    console.log(this.newInvoice);
+    this.newInvoice.draft = true;
     this.invoiceService.draft(this.newInvoice).subscribe((invoice: Invoice) => {
-      this.router.navigateByUrl('/invoices');
+      this.router.navigateByUrl('/invoice/list');
     });
   }
 
-  save() {
+  toReview() {
+    this.invoice['sign_by'].patchValue({ date: moment(this.form['controls'].sign_by['controls'].date.value).toJSON() });
+    this.invoice['deliver_to'].patchValue({
+      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
+    });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.productList;
-    console.log(this.newInvoice);
+    this.newInvoiceEvent.emit(this.newInvoice);
   }
 }

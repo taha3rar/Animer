@@ -20,13 +20,13 @@
           <app-invoice-generator-buyers [form]="invoiceForm"></app-invoice-generator-buyers>
         </div>
         <div class="tab-pane" id="fillInvoice">
-          <app-invoice-generator-invoice [form]="invoiceForm"></app-invoice-generator-invoice>
+          <app-invoice-generator-invoice [form]="invoiceForm" (newInvoiceEvent)="receiveNewInvoice($event)"></app-invoice-generator-invoice>
         </div>
 
         <div class="tab-pane" id="reviewSend">
           <div class="panel panel-tab">
             <div class="panel-body">
-              <!-- <app-invoice [generateInvoice]="true" [invoice]="invoice"></app-invoice> -->
+              <app-invoice *ngIf="invoice" [generateInvoice]="true" [invoice]="invoice"></app-invoice>
             </div>
           </div>
         </div>

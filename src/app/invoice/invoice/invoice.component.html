@@ -114,7 +114,7 @@
                 <div class="col-md-9">
                   <p>{{ sign_by.first_name }} {{ sign_by.last_name }}</p>
                   <p>{{ sign_by.company_name }}</p>
-                  <p>PO valid by: {{ invoice.valid_until | date: 'dd/MM/yyyy' }}</p>
+                  <p>PO valid by: {{ sign_by.date | date: 'dd/MM/yyyy' }}</p>
                   <p>Date of issue: {{ invoice.date_created | date: 'dd/MM/yyyy' }}</p>
                 </div>
               </div>
@@ -133,11 +133,11 @@
 
         <hr>
         <div>
-            <button *ngIf="generateInvoice" class="bttn-primary pull-right">Send Invoice</button>
+            <button *ngIf="generateInvoice" class="bttn-primary pull-right" (click)="saveInvoice()" [disabled]="!disclaimerAccepted">Send Invoice</button>
             <button class="btn-primary-transp pull-right" data-html2canvas-ignore="true" (click)="download()">Download PDF</button>
             <div class="disclaimer" *ngIf="generateInvoice">
             <div>
-            <input type="checkbox" class="checkbox" id="checkbox1"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label>
+            <input type="checkbox" class="checkbox" id="checkbox1" [(ngModel)]="disclaimerAccepted"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label>
             </div>
             <p>I have read and accepted <a style="color:blue; cursor:pointer;" (click)="disclaimerPopup()">the disclaimer</a>.</p>
           </div>

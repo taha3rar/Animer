@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import swal from 'sweetalert';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '@app/core/models/invoice/invoice';
+import { InvoiceService } from '@app/core/api/invoice.service';
 import * as jspdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
 
@@ -12,15 +13,22 @@ import * as html2canvas from 'html2canvas';
   styleUrls: ['./invoice.component.scss']
 })
 export class InvoiceComponent implements OnInit {
+  disclaimerAccepted: boolean;
   @Input()
   generateInvoice = false;
 
   @Input()
   invoice: Invoice;
 
-  constructor(private location: Location, private route: ActivatedRoute) {}
+  constructor(
+    private invoiceService: InvoiceService,
+    private location: Location,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.disclaimerAccepted = false;
     if (!this.generateInvoice) {
       this.route.data.subscribe(({ invoice }) => {
         this.invoice = invoice;
@@ -66,12 +74,18 @@ export class InvoiceComponent implements OnInit {
     return this.invoice.deliver_to;
   }
 
-  download() {
+  download(): void {
     html2canvas(document.getElementById('pdfContent'), { windowWidth: 900, windowHeight: 1000 }).then(canvas => {
       const pdf = new jspdf('p', 'mm', 'a4');
       const img = canvas.toDataURL('image/png');
       pdf.addImage(img, 'PNG', 0, 0, 208, 300);
       pdf.save(`invoice-${this.invoice.numericId}.pdf`);
+    });
+  }
+
+  saveInvoice(): void {
+    this.invoiceService.save(this.invoice).subscribe((invoice: Invoice) => {
+      this.router.navigateByUrl('/invoice/list');
     });
   }
 }
