@@ -79,13 +79,11 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
   }
 
   deleteProduct(index: number): void {
-    console.log(this.productList);
     this.updateTotalDue(-this.productList[index].product_subtotal);
     this.productList.splice(index, 1);
     if (this.productList.length < 1) {
       this.invoice['currency'].setValue(undefined);
     }
-    console.log(this.productList);
   }
 
   openDialogInventory(): void {
