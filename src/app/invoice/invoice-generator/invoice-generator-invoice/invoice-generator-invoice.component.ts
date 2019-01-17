@@ -74,7 +74,7 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
       (this.invoice.discount_percentage.value / 100) * (this.invoice.vat_amount.value + this.invoice.subtotal.value)
     );
     this.invoice['total_due'].setValue(
-      this.invoice.subtotal.value + this.invoice.vat_amount.value + this.invoice.discount_amount.value
+      this.invoice.subtotal.value + this.invoice.vat_amount.value - this.invoice.discount_amount.value
     );
   }
 

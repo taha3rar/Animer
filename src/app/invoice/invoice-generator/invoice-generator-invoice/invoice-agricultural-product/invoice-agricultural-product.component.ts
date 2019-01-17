@@ -35,6 +35,8 @@ export class InvoiceAgriculturalProductComponent implements OnInit {
     } else {
       this.product = new ProductInvoice();
     }
+
+    this.product.product_type = 'agricultural';
   }
 
   onExit(): void {

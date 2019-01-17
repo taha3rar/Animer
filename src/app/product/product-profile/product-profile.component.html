@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="pricing">
-    <p class="heading-4-blue" *ngIf="agricultural_product">{{ product.currency }} {{ product.price_per_unit | number : '1.2-2' }}//{{ product.weight_unit }}</p>
+    <p class="heading-4-blue" *ngIf="agricultural_product">{{ product.currency }} {{ product.price_per_unit | number : '1.2-2' }}/{{ product.weight_unit }}</p>
     <p class="heading-4-blue" *ngIf="processed_product">{{ product.currency }} {{ product.package_price  | number : '1.2-2'  }}/{{ product.type_of_package }}</p>
   </div>
 </div>

@@ -9,8 +9,8 @@
     <p class="normal-text-bold">Agricultural Products</p>
   </div>
   <div class="row clearfix">
-    <div *ngFor="let product of products" class="col-md-4">
-      <div *ngIf="product.product_type=='agricultural'" class="card">
+    <div *ngFor="let product of agriculturalProducts" class="col-md-4">
+      <div class="card">
         <div>
           <p class="pull-right margin-none">{{product.price_per_unit}} {{product.currency}}/<small>{{product.weight_unit
               | uppercase}}</small></p>
@@ -54,8 +54,8 @@
     <p class="normal-text-bold">Processed Products</p>
   </div>
   <div class="row clearfix">
-    <ng-container *ngFor="let product of products">
-      <div *ngIf="product.product_type=='processed'" class="col-md-4">
+    <ng-container *ngFor="let product of processedProducts">
+      <div class="col-md-4">
         <div class="card">
           <div>
             <p class="pull-right margin-none">{{product.package_price}} {{product.currency}}/<small>{{product.type_of_package}}</small></p>

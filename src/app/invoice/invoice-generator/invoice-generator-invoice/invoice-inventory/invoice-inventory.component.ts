@@ -9,6 +9,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class InvoiceInventoryComponent implements OnInit {
   products: Product[];
+  agriculturalProducts: Product[];
+  processedProducts: Product[];
   newProducts: Product[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<InvoiceInventoryComponent>) {}
@@ -19,6 +21,9 @@ export class InvoiceInventoryComponent implements OnInit {
       product['quantityMax'] = product.quantity;
       product.quantity = 0;
     });
+
+    this.agriculturalProducts = this.products.filter(p => p.product_type === 'agricultural');
+    this.processedProducts = this.products.filter(p => p.product_type === 'processed');
   }
 
   onExit() {

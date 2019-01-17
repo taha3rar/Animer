@@ -35,6 +35,8 @@ export class InvoiceProcessedProductComponent implements OnInit {
     } else {
       this.product = new ProductInvoice();
     }
+
+    this.product.product_type = 'processed';
   }
 
   onExit(): void {
