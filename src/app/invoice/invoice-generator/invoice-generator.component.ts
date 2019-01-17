@@ -84,6 +84,7 @@ export class InvoiceGeneratorComponent implements OnInit {
       this.invoiceForm.controls.seller.setValue(this.getSmallSeller(seller));
     });
   }
+
   receiveNewInvoice($event: Invoice) {
     this.invoice = $event;
   }

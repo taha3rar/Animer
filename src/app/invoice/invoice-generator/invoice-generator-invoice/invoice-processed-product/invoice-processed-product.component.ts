@@ -33,31 +33,7 @@ export class InvoiceProcessedProductComponent implements OnInit {
       this.oldSubtotal = this.product.product_subtotal;
       this.update = true;
     } else {
-      this.product = {
-        _id: undefined,
-        numericId: undefined,
-        product_type: 'processed',
-        produce: undefined,
-        variety: undefined,
-        type_of_package: undefined,
-        package_weight: undefined,
-        weight_unit: undefined,
-        weight_details: true,
-        total_weight: undefined,
-        item_package_type: undefined,
-        item_measurement_amount: undefined,
-        item_measurement_unit: undefined,
-        items_per_package: undefined,
-        total_amount_items: undefined,
-        package_price: undefined,
-        price_per_unit: undefined,
-        quantity: undefined,
-        product_subtotal: undefined,
-        individual_details: true,
-        price_details: true,
-        out_of_inventory: false,
-        to_inventory: false
-      };
+      this.product = new ProductInvoice();
     }
   }
 

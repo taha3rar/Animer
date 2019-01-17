@@ -20,8 +20,4 @@ export class InvoiceService extends BaseService {
   draft(invoice: Invoice) {
     return this.apiService.post(`/invoice/draft`, invoice).pipe(map(data => data));
   }
-
-  save(invoice: Invoice) {
-    return this.apiService.post(`/invoice`, invoice).pipe(map(data => data));
-  }
 }

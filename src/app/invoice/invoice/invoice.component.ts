@@ -6,6 +6,8 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 import { InvoiceService } from '@app/core/api/invoice.service';
 import * as jspdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
+import { Product } from '@app/core/models/product';
+import { ProductService } from '@app/core';
 
 @Component({
   selector: 'app-invoice',
@@ -22,6 +24,7 @@ export class InvoiceComponent implements OnInit {
 
   constructor(
     private invoiceService: InvoiceService,
+    private productService: ProductService,
     private location: Location,
     private route: ActivatedRoute,
     private router: Router
@@ -84,7 +87,13 @@ export class InvoiceComponent implements OnInit {
   }
 
   saveInvoice(): void {
-    this.invoiceService.save(this.invoice).subscribe((invoice: Invoice) => {
+    this.invoiceService.create(this.invoice).subscribe((invoice: Invoice) => {
+      for (let i = 0; i < this.invoice.products.length; i++) {
+        if (this.invoice.products[i].to_inventory) {
+          const product = this.invoice.products[i].toProduct(invoice);
+          this.productService.create(product).subscribe();
+        }
+      }
       this.router.navigateByUrl('/invoice/list');
     });
   }

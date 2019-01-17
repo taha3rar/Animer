@@ -120,39 +120,18 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
   }
 
   openDialogAgricultural(index?: number): void {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '770px';
-    dialogConfig.width = '850px';
-    dialogConfig.data = {
-      productList: this.productList,
-      index: index,
-      currency: this.invoice.currency.value
-    };
-
-    const dialogRef = this.dialog.open(InvoiceAgriculturalProductComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(data => {
-      if (data && data.event === 'submit') {
-        if (!this.invoice.currency.value) {
-          this.invoice['currency'].setValue(data.currency);
-        }
-        this.updateTotalDue(data.product.product_subtotal);
-        this.productList.push(data.product);
-      }
-      if (data && data.event === 'update') {
-        this.updateTotalDue(-data.oldSubtotal);
-        this.updateTotalDue(data.product.product_subtotal);
-        this.productList[data.index] = data.product;
-      }
-    });
+    this.openDialog('770px', InvoiceAgriculturalProductComponent, index);
   }
 
   openDialogProcessed(index?: number): void {
+    this.openDialog('800px', InvoiceProcessedProductComponent, index);
+  }
+
+  openDialog(height: string, component: any, index?: number): void {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '800px';
+    dialogConfig.height = height;
     dialogConfig.width = '850px';
     dialogConfig.data = {
       productList: this.productList,
@@ -160,7 +139,7 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
       currency: this.invoice.currency.value
     };
 
-    const dialogRef = this.dialog.open(InvoiceProcessedProductComponent, dialogConfig);
+    const dialogRef = this.dialog.open(component, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
       if (data && data.event === 'submit') {
         if (!this.invoice.currency.value) {
