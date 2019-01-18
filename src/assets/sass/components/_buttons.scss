@@ -965,3 +965,9 @@ div.switch5 > input.switch:focus ~ label:before {
 select.custom-select {
   font-size: 1.2rem !important;
 }
+
+.bttn-transparent {
+  background: none;
+  outline: none;
+  border: none;
+}
