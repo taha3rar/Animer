@@ -7,7 +7,12 @@
     <div class="panel">
       <div class="panel-body user-details">
         <div>
-          <figure class="round-shape-img"><img src="{{profilePicture}}" alt="profile-image" /></figure>
+          <figure class="img-circular" [ngStyle]="{ 'background-image': 'url(' + profilePicture + ')'}" >
+            <div class="upload-block">
+              <i class="material-icons">camera_alt</i>
+              <p>Update</p>
+            </div>
+          </figure>
           <p class="heading-2">{{user.personal_information.first_name}} {{user.personal_information.last_name}}</p>
           <p class="normal-text-bold">{{userRole | titlecase}}</p>
         </div>
