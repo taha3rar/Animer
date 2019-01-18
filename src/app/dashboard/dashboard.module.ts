@@ -8,6 +8,7 @@ import { DashboardTodoPanelComponent } from './dashboard-todo-panel/dashboard-to
 import { DashboardActivityPanelComponent } from './dashboard-activity-panel/dashboard-activity-panel.component';
 import { DashboardCounterPanelComponent } from './dashboard-counter-panel/dashboard-counter-panel.component';
 import { DashboardCounterResolver } from './resolvers/dashboard-counter.resolver';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { DashboardCounterResolver } from './resolvers/dashboard-counter.resolver
     DashboardActivityPanelComponent,
     DashboardCounterPanelComponent
   ],
-  imports: [CommonModule, TranslateModule, DashboardRoutingModule],
+  imports: [CommonModule, TranslateModule, DashboardRoutingModule, NgxPermissionsModule.forRoot()],
   providers: [DashboardCounterResolver]
 })
 export class DashboardModule {}

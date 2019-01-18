@@ -30,9 +30,12 @@ export class BaseListComponent implements OnInit {
     swal({
       title: 'Are you sure?',
       text: this.options.deleteText,
-      icon: 'warning'
-    }).then(() => {
-      this.delete(id);
+      icon: 'warning',
+      buttons: ['Cancel', 'OK']
+    }).then((willDelete: boolean) => {
+      if (willDelete) {
+        this.delete(id);
+      }
     });
   }
 }
