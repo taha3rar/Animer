@@ -16,7 +16,7 @@ import * as moment from 'moment';
   styleUrls: ['./invoice-generator-invoice.component.scss']
 })
 export class InvoiceGeneratorInvoiceComponent implements OnInit {
-  productList: ProductInvoice[] = [];
+  products: ProductInvoice[] = [];
   newInvoice: Invoice;
   @Output()
   newInvoiceEvent = new EventEmitter<Invoice>();
@@ -78,10 +78,11 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
     );
   }
 
-  deleteProduct(index: number): void {
-    this.updateTotalDue(-this.productList[index].product_subtotal);
-    this.productList.splice(index, 1);
-    if (this.productList.length < 1) {
+  deleteProduct($event: number): void {
+    const index = $event;
+    this.updateTotalDue(-this.products[index].product_subtotal);
+    this.products.splice(index, 1);
+    if (this.products.length < 1) {
       this.invoice['currency'].setValue(undefined);
     }
   }
@@ -105,39 +106,48 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
           }
           this.updateTotalDue(newProduct.product_subtotal);
         });
-        this.productList = this.productList.concat(newProducts);
+        this.products = this.products.concat(newProducts);
       }
     });
   }
 
-  updateProduct(index: number): void {
-    if (this.productList[index].product_type === 'processed') {
+  updateProduct($event: number): void {
+    const index = $event;
+    if (this.products[index].product_type === 'processed') {
       this.openDialogProcessed(index);
     }
-    if (this.productList[index].product_type === 'agricultural') {
+    if (this.products[index].product_type === 'agricultural') {
       this.openDialogAgricultural(index);
     }
   }
 
   openDialogAgricultural(index?: number): void {
-    this.openDialog('770px', InvoiceAgriculturalProductComponent, index);
+    const data = {
+      productList: this.products,
+      index: index,
+      currency: this.invoice.currency.value
+    };
+
+    this.openDialog('770px', InvoiceAgriculturalProductComponent, data);
   }
 
   openDialogProcessed(index?: number): void {
-    this.openDialog('800px', InvoiceProcessedProductComponent, index);
+    const data = {
+      productList: this.products,
+      index: index,
+      currency: this.invoice.currency.value
+    };
+
+    this.openDialog('800px', InvoiceProcessedProductComponent, data);
   }
 
-  openDialog(height: string, component: any, index?: number): void {
+  openDialog(height: string, component: any, dialogData: any): void {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
     dialogConfig.height = height;
     dialogConfig.width = '850px';
-    dialogConfig.data = {
-      productList: this.productList,
-      index: index,
-      currency: this.invoice.currency.value
-    };
+    dialogConfig.data = dialogData;
 
     const dialogRef = this.dialog.open(component, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
@@ -146,12 +156,12 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
           this.invoice['currency'].setValue(data.currency);
         }
         this.updateTotalDue(data.product.product_subtotal);
-        this.productList.push(data.product);
+        this.products.push(data.product);
       }
       if (data && data.event === 'update') {
         this.updateTotalDue(-data.oldSubtotal);
         this.updateTotalDue(data.product.product_subtotal);
-        this.productList[data.index] = data.product;
+        this.products[data.index] = data.product;
       }
     });
   }
@@ -162,9 +172,9 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
     );
     this.invoice['valid_until'].setValue(moment(this.invoice.valid_until.value).toJSON());
     this.newInvoice = this.form.value;
-    this.newInvoice.products = this.productList;
+    this.newInvoice.products = this.products;
     this.newInvoice.draft = true;
-    this.invoiceService.draft(this.newInvoice).subscribe((invoice: Invoice) => {
+    this.invoiceService.draft(this.newInvoice).subscribe(() => {
       this.router.navigateByUrl('/invoice/list');
     });
   }
@@ -175,7 +185,7 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
       expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
     });
     this.newInvoice = this.form.value;
-    this.newInvoice.products = this.productList;
+    this.newInvoice.products = this.products;
     this.newInvoiceEvent.emit(this.newInvoice);
   }
 }

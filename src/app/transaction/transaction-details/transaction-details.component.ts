@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { certifications, currencies } from '@app/shared/_helpers/product_details';
-import { processedPackageUnits } from '@app/shared/_helpers/processed';
+import { measureUnits } from '@app/shared/_helpers/measure';
 import { incotermsGroups } from '@app/shared/_helpers/incoterms';
 
 @Component({
@@ -10,7 +10,7 @@ import { incotermsGroups } from '@app/shared/_helpers/incoterms';
 })
 export class TransactionDetailsComponent implements OnInit {
   allCerts = certifications;
-  units = processedPackageUnits;
+  units = measureUnits;
   incotermsGroups = incotermsGroups;
   currencies = currencies;
   constructor() {}

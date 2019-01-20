@@ -1,46 +1,19 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { processedPackageUnits } from '@app/shared/_helpers/processed';
-import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
-import { currencies } from '@app/shared/_helpers/product_details';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { BaseProductInvoice } from '../../base-product-invoice';
 
 @Component({
   selector: 'app-invoice-processed-product',
   templateUrl: './invoice-processed-product.component.html',
   styleUrls: ['./invoice-processed-product.component.scss']
 })
-export class InvoiceProcessedProductComponent implements OnInit {
-  units = processedPackageUnits;
-  currencies = currencies;
-  product: ProductInvoice;
-  update: Boolean;
-  oldSubtotal: Number;
-  currency: string;
-
+export class InvoiceProcessedProductComponent extends BaseProductInvoice implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
     public dialogRef: MatDialogRef<InvoiceProcessedProductComponent>
-  ) {}
-
-  ngOnInit() {
-    this.update = false;
-    if (this.data.currency) {
-      this.currency = this.data.currency;
-    }
-    if (Number(this.data.index) >= 0) {
-      this.product = JSON.parse(JSON.stringify(this.data.productList[this.data.index]));
-      this.oldSubtotal = this.product.product_subtotal;
-      this.update = true;
-    } else {
-      this.product = new ProductInvoice();
-    }
-
-    this.product.product_type = 'processed';
-  }
-
-  onExit(): void {
-    this.dialogRef.close();
+  ) {
+    super(dialogRef, data, 'processed');
   }
 
   setTotalItemsAmount() {
@@ -57,23 +30,5 @@ export class InvoiceProcessedProductComponent implements OnInit {
     } else {
       this.product.product_subtotal = undefined;
     }
-  }
-
-  addProduct(): void {
-    this.dialogRef.close({
-      event: 'submit',
-      product: this.product,
-      currency: this.currency
-    });
-  }
-
-  updateProduct(): void {
-    this.data.productList[this.data.index] = this.product;
-    this.dialogRef.close({
-      event: 'update',
-      index: this.data.index,
-      oldSubtotal: this.oldSubtotal,
-      product: this.product
-    });
   }
 }

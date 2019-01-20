@@ -1,46 +1,19 @@
-import { currencies } from './../../../../shared/_helpers/product_details';
 import { Component, OnInit, Inject } from '@angular/core';
-import { processedPackageUnits } from '@app/shared/_helpers/processed';
-import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { BaseProductInvoice } from '../../base-product-invoice';
 
 @Component({
   selector: 'app-invoice-agricultural-product',
   templateUrl: './invoice-agricultural-product.component.html',
   styleUrls: ['./invoice-agricultural-product.component.scss']
 })
-export class InvoiceAgriculturalProductComponent implements OnInit {
-  units = processedPackageUnits;
-  currencies = currencies;
-  product: ProductInvoice;
-  update: boolean;
-  oldSubtotal: number;
-  currency: string;
-
+export class InvoiceAgriculturalProductComponent extends BaseProductInvoice {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
     public dialogRef: MatDialogRef<InvoiceAgriculturalProductComponent>
-  ) {}
-
-  ngOnInit() {
-    this.update = false;
-    if (this.data.currency) {
-      this.currency = this.data.currency;
-    }
-    if (Number(this.data.index) >= 0) {
-      this.product = JSON.parse(JSON.stringify(this.data.productList[this.data.index]));
-      this.oldSubtotal = this.product.product_subtotal;
-      this.update = true;
-    } else {
-      this.product = new ProductInvoice();
-    }
-
-    this.product.product_type = 'agricultural';
-  }
-
-  onExit(): void {
-    this.dialogRef.close();
+  ) {
+    super(dialogRef, data, 'agricultural');
   }
 
   setAverageAmountPerPackage() {
@@ -75,23 +48,5 @@ export class InvoiceAgriculturalProductComponent implements OnInit {
     } else {
       this.product.product_subtotal = undefined;
     }
-  }
-
-  addProduct(): void {
-    this.dialogRef.close({
-      event: 'submit',
-      product: this.product,
-      currency: this.currency
-    });
-  }
-
-  updateProduct(): void {
-    this.data.productList[this.data.index] = this.product;
-    this.dialogRef.close({
-      event: 'update',
-      index: this.data.index,
-      oldSubtotal: this.oldSubtotal,
-      product: this.product
-    });
   }
 }

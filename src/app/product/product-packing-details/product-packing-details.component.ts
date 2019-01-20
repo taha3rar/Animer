@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { processedPackageUnits } from '@app/shared/_helpers/processed';
+import { measureUnits } from '@app/shared/_helpers/measure';
 import { Product } from '@app/core/models/order/product';
 
 @Component({
@@ -8,7 +8,7 @@ import { Product } from '@app/core/models/order/product';
   styleUrls: ['./product-packing-details.component.scss']
 })
 export class ProductPackingDetailsComponent implements OnInit {
-  units = processedPackageUnits;
+  units = measureUnits;
   @Input()
   product: Product;
   isProcessed = false;

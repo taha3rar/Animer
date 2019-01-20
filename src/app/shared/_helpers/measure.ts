@@ -1,4 +1,4 @@
-export const processedPackageUnits = [
+export const measureUnits = [
   { value: 'gr', viewValue: 'Grams' },
   { value: 'kg', viewValue: 'Kilograms' },
   { value: 'mt', viewValue: 'MT' },

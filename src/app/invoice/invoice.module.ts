@@ -24,6 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
 import { ProductCurrentUserResolver } from './resolvers/products-currentUser.resolver';
+// tslint:disable-next-line:max-line-length
+import { InvoiceProductListComponent } from './invoice-generator/invoice-generator-invoice/invoice-product-list/invoice-product-list.component';
+// tslint:disable-next-line:max-line-length
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { ProductCurrentUserResolver } from './resolvers/products-currentUser.res
     InvoiceGeneratorInvoiceComponent,
     InvoiceInventoryComponent,
     InvoiceAgriculturalProductComponent,
-    InvoiceProcessedProductComponent
+    InvoiceProcessedProductComponent,
+    InvoiceProductListComponent
   ],
   imports: [
     CommonModule,
