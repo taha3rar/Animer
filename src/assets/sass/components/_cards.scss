@@ -21,11 +21,16 @@
 
   div:nth-child(2),
   div:nth-child(3) {
+    position: relative;
     align-self: center;
     text-align: center;
   }
 
-  span {
+  span.pull-left {
+    color: $light-gray;
+  }
+
+  span.pull-right {
     color: $light-gray-2;
   }
 
@@ -33,6 +38,45 @@
     color: $red-color;
     cursor: pointer;
   }
+
+  .bttn-view {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    position: absolute;
+    top: 35.5%;
+    left: 58%;
+    background-color: white;
+    color: #37c1ce;
+    transition: transform 0.1s ease-in;
+  }
+
+  .bttn-view ~ span {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    position: absolute;
+    font-size: 1.2rem;
+    top: 40%;
+    right: 5px;
+    color: $light-gray;
+    transition: transform 0.1s ease-in;
+  }
+}
+
+.doc-card:hover .bttn-view,
+.doc-card:hover .bttn-view ~ span {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.doc-card:not(:hover) .bttn-view,
+.doc-card:not(:hover) .bttn-view ~ span {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px);
+  transition: all 0.1s ease-in;
 }
 
 .contact-card {
