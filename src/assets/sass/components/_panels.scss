@@ -51,11 +51,19 @@
   }
 }
 
+.docs-wrapper {
+  background-color: white;
+  padding: 1rem 3rem 3.5rem 3rem;
+  border-radius: 0.7rem;
+  margin-top: 2rem;
+  box-shadow: 0px 3px 1rem rgba(0, 0, 0, 0.055);
+}
+
 .docs-section {
   display: flex;
 
   .doc-card:not(:last-child) {
-    margin-right: 3rem;
+    margin-right: 2.5rem;
   }
 }
 

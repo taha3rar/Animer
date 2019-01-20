@@ -13,7 +13,7 @@
 
 .doc-card {
   display: flex;
-  width: 80%;
+  width: 21rem;
   flex-direction: column;
   border-radius: 5px;
   border: 1px solid $light-gray-2;
@@ -31,11 +31,24 @@
   }
 
   span.pull-right {
-    color: $light-gray-2;
+    color: #dadada;
+  }
+
+  span.pull-right:nth-child(2) {
+    font-size: 2.2rem !important;
+  }
+
+  span.pull-right:nth-child(3) {
+    font-size: 2.3rem !important;
   }
 
   .icon:hover {
     color: $red-color;
+    cursor: pointer;
+  }
+
+  .download:hover {
+    color: $light-gray;
     cursor: pointer;
   }
 

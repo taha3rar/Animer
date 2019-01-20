@@ -131,11 +131,7 @@
     0 8px 10px -5px rgba($red-color, 0.2);
 }
 
-.round-button-primary:hover {
-  box-shadow: 0 14px 26px -12px rgba($primary-color, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12),
-    0 8px 10px -5px rgba($primary-color, 0.2);
-}
-
+.round-button-primary-exp,
 .round-button-primary {
   border: none;
   border-radius: 50%;
@@ -144,6 +140,7 @@
   position: relative;
   background-color: #37c1ce;
   margin: 0.5rem;
+
   i {
     position: absolute;
     top: 50%;
@@ -153,6 +150,48 @@
     display: block;
     font-size: 2rem;
   }
+
+  span {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    visibility: hidden;
+  }
+}
+
+.round-button-primary:hover {
+  box-shadow: 0 14px 26px -12px rgba($primary-color, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba($primary-color, 0.2);
+}
+
+.round-button-primary-exp:hover {
+  box-shadow: 0 14px 26px -12px rgba($primary-color, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba($primary-color, 0.2);
+  width: 18rem;
+  border-radius: 19px;
+  transition: width 0.4s ease-out;
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-10%, -50%);
+    color: white;
+    display: block;
+    font-size: 2rem;
+  }
+
+  span {
+    padding-left: 1.5rem;
+    visibility: visible;
+    transition-delay: 0.21s;
+  }
+}
+
+.round-button-primary-exp:not(:hover) {
+  width: 3.3rem;
+  border-radius: 20px;
+  transition: width 0.4s ease-out;
 }
 
 .btn-next {
