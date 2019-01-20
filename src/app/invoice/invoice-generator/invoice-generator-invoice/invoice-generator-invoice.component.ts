@@ -87,6 +87,16 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
     }
   }
 
+  updateProduct($event: number): void {
+    const index = $event;
+    if (this.products[index].product_type === 'processed') {
+      this.openDialogProcessed(index);
+    }
+    if (this.products[index].product_type === 'agricultural') {
+      this.openDialogAgricultural(index);
+    }
+  }
+
   openDialogInventory(): void {
     const dialogConfig = new MatDialogConfig();
 
@@ -109,16 +119,6 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
         this.products = this.products.concat(newProducts);
       }
     });
-  }
-
-  updateProduct($event: number): void {
-    const index = $event;
-    if (this.products[index].product_type === 'processed') {
-      this.openDialogProcessed(index);
-    }
-    if (this.products[index].product_type === 'agricultural') {
-      this.openDialogAgricultural(index);
-    }
   }
 
   openDialogAgricultural(index?: number): void {
