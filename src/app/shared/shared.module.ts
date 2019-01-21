@@ -1,6 +1,7 @@
 import { RouterModule } from '@angular/router';
+import { CsvService } from './services/csv.service';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { LoaderComponent } from './loader/loader.component';
 import { RoundUpPipe } from './pipes/roundup.pipe';
@@ -43,9 +44,8 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
     TransactionsListComponent,
     TransactionDocumentListComponent,
     UserDataComponent,
-    UserDocumentComponent,
-    GooglePlacesDirective,
-    UploadPictureComponent
-  ]
+    UserDocumentComponent
+  ],
+  providers: [CsvService, DatePipe]
 })
 export class SharedModule {}

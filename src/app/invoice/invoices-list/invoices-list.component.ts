@@ -18,6 +18,7 @@ export class InvoicesListComponent implements OnInit {
   viewAsAgri = true;
 
   constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
+  exportInit = false;
 
   ngOnInit() {
     this.route.data.subscribe(({ invoices, invoicesAsBuyer, invoicesAsSeller }) => {
@@ -41,6 +42,14 @@ export class InvoicesListComponent implements OnInit {
     } else {
       this.viewAsAgri = true;
       this.invoices = this.allInvoices;
+    }
+  }
+  
+  initExport() {
+    if (this.exportInit === false) {
+      this.exportInit = true;
+    } else {
+      this.exportInit = false;
     }
   }
 

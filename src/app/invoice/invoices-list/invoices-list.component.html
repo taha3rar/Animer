@@ -35,3 +35,14 @@
   </div>
 </div>
 <app-invoice-list [invoices]="invoices"></app-invoice-list>
+<button (click)="initExport()" class="btn-primary-transp pull-right">
+  <i class="material-icons">arrow_upward</i> 
+  <span *ngIf="!exportInit" translate>Export Invoices</span>
+  <span *ngIf="exportInit" translate>Choose Invoices To Export</span>
+</button>
+
+
+
+<button *ngxPermissionsOnly="['create-invoice']" class="bttn-primary bttn-add pull-right" data-toggle="stepper" routerLink="/invoice/generator"><span translate>New Invoice</span></button>
+
+<app-invoice-list [exportInit]="exportInit" [invoices]="invoices"></app-invoice-list>

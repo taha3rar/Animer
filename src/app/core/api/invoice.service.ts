@@ -28,4 +28,12 @@ export class InvoiceService extends BaseService {
   draft(invoice: Invoice) {
     return this.apiService.post(`/invoice/draft`, invoice).pipe(map(data => data));
   }
+
+  getByOrder(orderId: String): Observable<Invoice> {
+    return this.apiService.get(`/invoice/order/${orderId}`).pipe(
+      map(data => {
+        return data;
+      })
+    );
+  }
 }
