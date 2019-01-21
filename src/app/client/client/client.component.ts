@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '@app/core/models/user/user';
@@ -26,7 +26,8 @@ export class ClientComponent implements OnInit {
   orders: Order[];
   documents: any[];
   counter: Counter = new Counter();
-
+  @ViewChildren('tabs')
+  tabs: ElementRef;
   constructor(private location: Location, private route: ActivatedRoute) {}
 
   ngOnInit() {

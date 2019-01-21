@@ -19,10 +19,10 @@
       <td>{{ transaction.total_weight }} {{ transaction.weight_unit }}</td>
       <td>{{ transaction.status }}</td>
       <td class="text-right">
-        <a class="btn round-button-primary" [routerLink]="['/transaction/', transaction._id]">
-          <i class="material-icons">remove_red_eye</i>
-        </a>
-        <button class="btn round-button-red" (click)="warning(transaction._id)">
+        <button class="round-button-primary" data-toggle="stepper">
+          <i class="material-icons" [routerLink]="['/transaction/', transaction._id]">remove_red_eye</i>
+        </button>
+        <button class="round-button-red" (click)="warning(transaction._id)">
           <i class="material-icons">delete</i>
         </button>
       </td>

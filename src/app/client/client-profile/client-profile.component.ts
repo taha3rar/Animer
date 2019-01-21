@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { User } from '@app/core/models/user/user';
 import { Counter } from '../client/client.component';
 
@@ -12,8 +12,19 @@ export class ClientProfileComponent implements OnInit {
   user: User;
   @Input()
   counter: Counter;
-
+  @Input()
+  tabs: any;
   constructor() {}
 
   ngOnInit() {}
+
+  activateTab(tabRef: string) {
+    $(this.tabs)
+      .find('.active')
+      .removeClass('active');
+    $(this.tabs)
+      .find('a[href="#' + tabRef + '"]')
+      .parent()
+      .addClass('active');
+  }
 }

@@ -48,10 +48,16 @@
 
   p:first-child {
     padding-top: 1.5rem;
-    font-size: 3rem;
+    font-size: 2rem;
   }
 }
 
 .col-md-12 {
   border: 1px solid $light-gray-2;
+
+  a,
+  a:hover {
+    text-decoration: none;
+    color: $light-gray;
+  }
 }

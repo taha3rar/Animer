@@ -5,7 +5,7 @@
     <p>{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
   </div>
   <div>
-    <ul class="nav flex-column">
+    <ul class="nav flex-column" #tabs>
       <li class="active"><a data-toggle="tab" href="#userProfile">User Profile</a></li>
       <li><a data-toggle="tab" href="#transactions">Transactions</a></li>
       <li><a data-toggle="tab" href="#orders">Orders</a></li>
@@ -17,7 +17,7 @@
 
 <div class="tabs-content">
 <div class="tab-content">
-  <div class="tab-pane active" id="userProfile"><app-client-profile [user]="user" [counter]="counter"></app-client-profile></div>
+  <div class="tab-pane active" id="userProfile"><app-client-profile [tabs]="tabs" [user]="user" [counter]="counter"></app-client-profile></div>
   <div class="tab-pane" id="transactions"><app-client-transactions [transactions]="transactions"></app-client-transactions></div>
   <div class="tab-pane" id="orders"><app-client-orders [orders]="orders"></app-client-orders></div>
   <div class="tab-pane" id="invoices"><app-client-invoices [invoices]="invoices"></app-client-invoices></div>

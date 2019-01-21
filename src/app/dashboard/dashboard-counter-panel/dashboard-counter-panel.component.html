@@ -1,34 +1,34 @@
 <div class="row">
   <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
       <div class="panel stats-card">
-        <div class="panel-body">
+        <a routerLink="/order/list" class="panel-body">
           <p class="stats-number">{{ counter.orders }}</p>
           <p class="stats-label">Orders</p>
-        </div>
+        </a>
       </div>
     </div>
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
       <div class="panel stats-card">
-        <div class="panel-body">
+        <a href="/transaction/list" class="panel-body">
           <p class="stats-number">{{ counter.quote_requests }}</p>
           <p class="stats-label">Quote Requests</p>
-        </div>
+        </a>
       </div>
     </div>
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
       <div class="panel stats-card">
-        <div class="panel-body">
+        <a href="/transaction/list"class="panel-body">
           <p class="stats-number">{{ counter.proforma_invoices }}</p>
           <p class="stats-label">Proforma Invoice</p>
-        </div>
+        </a>
       </div>
     </div>
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
       <div class="panel stats-card">
-        <div class="panel-body">
+        <a href="/transaction/list" class="panel-body">
           <p class="stats-number">{{ counter.purchase_orders }}</p>
           <p class="stats-label">Purchase Order</p>
-        </div>
+        </a>
       </div>
     </div>
 </div>

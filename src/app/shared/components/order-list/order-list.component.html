@@ -36,8 +36,8 @@
       </td>
       <td>{{ order.status }}</td>
       <td class="text-right">
-          <a class="btn round-button-primary" [routerLink]="['/order', order._id]"><i class="material-icons">remove_red_eye</i></a>
-          <button class="btn round-button-red" (click)="warning(order._id)"><i class="material-icons">delete</i></button>
+          <button class="round-button-primary" [routerLink]="['/order', order._id]"><i class="material-icons">remove_red_eye</i></button>
+          <button class="round-button-red" (click)="warning(order._id)"><i class="material-icons">delete</i></button>
       </td>
     </tr>
   </tbody>

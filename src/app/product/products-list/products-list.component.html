@@ -32,9 +32,9 @@
       <td *ngIf="product.product_type != 'processed'">{{ product.total_weight }} {{ product.weight_unit }}</td>
       <td *ngIf="product.product_type == 'processed'">{{ product.quantity }} Packages</td>
       <td class="text-right">
-        <button class="btn round-button-primary"><i class="material-icons">edit</i></button>
-        <button class="btn round-button-primary" data-toggle="wizard" data-target="#productProfileWizard" (click)="setProductOverview(i)"><i class="material-icons">remove_red_eye</i></button>
-        <button class="btn round-button-red" (click)="warning(product._id)"><i class="material-icons">delete</i></button>
+        <button class="round-button-primary"><i class="material-icons">edit</i></button>
+        <button class="round-button-primary" data-toggle="wizard" data-target="#productProfileWizard" (click)="setProductOverview(i)"><i class="material-icons">remove_red_eye</i></button>
+        <button class="round-button-red" (click)="warning(product._id)"><i class="material-icons">delete</i></button>
       </td>
     </tr>
   </tbody>

@@ -27,21 +27,21 @@
 
 <div class="row margin-none">
   <div class="col-md-12">
-    <div class="status-bar">
+    <a class="status-bar" data-toggle="tab" href="#transactions" (click)="activateTab('transactions')">
       <p>{{ counter.transactions }}</p>
       <p>TRANSACTIONS</p>
-    </div>
-    <div class="status-bar">
+    </a>
+    <a class="status-bar" data-toggle="tab" href="#orders" (click)="activateTab('orders')">
       <p>{{ counter.orders }}</p>
       <p>ORDERS</p>
-    </div>
-    <div class="status-bar">
+    </a>
+    <a class="status-bar" data-toggle="tab" href="#invoices" (click)="activateTab('invoices')">
       <p>{{ counter.invoices }}</p>
       <p>INVOICES</p>
-    </div>
-    <div class="status-bar">
+    </a>
+    <a class="status-bar" data-toggle="tab" href="#documents" (click)="activateTab('documents')">
       <p>{{ counter.documents }}</p>
       <p>DOCUMENTS</p>
-    </div>
+    </a>
   </div>
 </div>

@@ -29,10 +29,10 @@
       <td style="text-transform: capitalize;">{{ ecosystem.type }}</td>
       <td>{{ ecosystem.participants.length }}</td>
       <td class="text-right">
-        <button class="btn round-button-primary" [routerLink]="['/ecosystem', ecosystem._id]">
+        <button class="round-button-primary" [routerLink]="['/ecosystem', ecosystem._id]">
           <i class="material-icons">remove_red_eye</i>
         </button>
-        <button class="btn round-button-red" (click)="warning(ecosystem._id)">
+        <button class="round-button-red" (click)="warning(ecosystem._id)">
           <i class="material-icons">delete</i>
         </button>
       </td>

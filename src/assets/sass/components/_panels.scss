@@ -83,6 +83,12 @@
   border-left: 4px solid $primary-color;
   font-size: 1.4rem;
   text-align: center;
+
+  a:hover,
+  a {
+    color: $dark-gray;
+    text-decoration: none !important;
+  }
 }
 
 .welcome-panel {
@@ -109,7 +115,6 @@
       list-style: none;
       display: block;
       border-bottom: 1px solid $light-gray-2;
-      padding: 2.3rem;
       font-size: 1.5rem;
       white-space: normal;
       // float: left;
@@ -130,9 +135,10 @@
     }
     a {
       white-space: normal;
-      // float: left;
+      display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      padding: 2.3rem;
       word-wrap: break-word;
     }
     .active {
