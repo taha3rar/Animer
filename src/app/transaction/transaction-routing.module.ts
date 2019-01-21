@@ -10,14 +10,21 @@ import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { ProformaInvoiceResolver } from './resolvers/proforma-invoice.resolver';
+import { UserEcosystemsResolver } from './resolvers/ecosystem-list.resolver';
+import { UserSupplierListResolver } from './resolvers/supplier-list.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'transaction/list',
       component: TransactionListComponent,
-      resolve: { transactions: TransactionListResolver },
-      data: { title: extract('Transactions') }
+      resolve: {
+        transactions: TransactionListResolver,
+        suppliers: UserSupplierListResolver,
+        ecosystems: UserEcosystemsResolver
+      },
+      data: { title: extract('Transactions') },
+      runGuardsAndResolvers: 'always'
     },
     {
       path: 'transaction/:id',

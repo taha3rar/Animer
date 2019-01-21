@@ -28,4 +28,5 @@ export class QuoteRequest {
   valid_until: string;
   // Related to transaction
   transaction_id: string;
+  transaction_type: string;
 }

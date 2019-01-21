@@ -19,8 +19,8 @@ export class UserService extends BaseService {
     return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
   }
 
-  getSuppliersFromUser(id: string): Observable<User[]> {
-    return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
+  getSuppliersByUser(id: string): Observable<Client[]> {
+    return this.apiService.get(`${this.path}/${id}/supplier`).pipe(map(data => data));
   }
 
   saveInvitedClient(client: User): Observable<any> {

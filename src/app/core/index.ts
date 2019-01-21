@@ -13,7 +13,7 @@ export * from './route-reusable-strategy';
 export * from './logger.service';
 export * from './api/pi.service';
 export * from './api/po.service';
-export * from './api/qr.service';
+export * from './api/quote-request.service';
 export * from './api/user.service';
 export * from './api/transaction.service';
 export * from './api/product.service';

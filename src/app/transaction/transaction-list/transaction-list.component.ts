@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from '@app/core/models/transaction';
 import { ActivatedRoute } from '@angular/router';
-import swal from 'sweetalert';
 
 @Component({
   selector: 'app-transaction-list',

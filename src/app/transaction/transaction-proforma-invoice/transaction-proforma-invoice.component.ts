@@ -1,9 +1,9 @@
-import { QuoteRequest } from './../../core/models/transaction/qr';
 import { ActivatedRoute } from '@angular/router';
 import { ProformaInvoice } from '@app/core/models/transaction/pi';
 import { Component, OnInit, Input } from '@angular/core';
 import { Transaction } from '@app/core/models/transaction';
 import { AuthenticationService } from '@app/core';
+import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 
 @Component({
   selector: 'app-transaction-proforma-invoice',

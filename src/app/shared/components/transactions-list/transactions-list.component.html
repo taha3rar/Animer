@@ -15,14 +15,14 @@
     <tr *ngFor="let transaction of transactions | paginate: { itemsPerPage: 6, currentPage: page }">
       <td class="text-center">{{ transaction.numericId }}</td>
       <td>{{ transaction.produce }}</td>
-      <td>{{ transaction.transaction_type }}</td>
+      <td style="text-transform:capitalize;">{{ transaction.transaction_type }}</td>
       <td>{{ transaction.total_weight }} {{ transaction.weight_unit }}</td>
       <td>{{ transaction.status }}</td>
       <td class="text-right">
-        <a class="btn round-button-primary" [routerLink]="['/transaction/',transaction._id]">
+        <a class="btn round-button-primary" [routerLink]="['/transaction/', transaction._id]">
           <i class="material-icons">remove_red_eye</i>
         </a>
-        <button class="btn round-button-red" (click)="warning()">
+        <button class="btn round-button-red" (click)="warning(transaction._id)">
           <i class="material-icons">delete</i>
         </button>
       </td>

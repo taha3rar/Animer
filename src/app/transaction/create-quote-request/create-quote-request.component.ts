@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { incotermsGroups } from '@app/shared/_helpers/incoterms';
-import { countries } from '@app/shared/_helpers/_countries';
-import { packageUnits, containerType } from '@app/shared/_helpers/packaging_details';
-
-declare const $: any;
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Client } from '@app/core/models/user/client';
+import { Ecosystem } from '@app/core/models/ecosystem';
+import { Router, ActivatedRoute } from '@angular/router';
+import { QuoteRequestService } from '@app/core/api/quote-request.service';
+import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
+import { QuoteRequestRecipients } from '@app/core/models/transaction/quote-request/quote-request-recipients';
 
 @Component({
   selector: 'app-create-quote-request',
@@ -11,27 +12,35 @@ declare const $: any;
   styleUrls: ['./create-quote-request.component.scss']
 })
 export class CreateQuoteRequestComponent implements OnInit {
-  incotermsGroups = incotermsGroups;
-  countriesList = countries;
-  units = packageUnits;
-  containerType = containerType;
-  constructor() {}
+  suppliers: Client[];
+  ecosystems: Ecosystem[];
+  quoteRequest: QuoteRequest;
+  @ViewChild('closeModal')
+  closeModal: ElementRef;
 
-  ngOnInit() {}
-
-  checkContainerToggle() {
-    if ($('#container_switch').is(':checked')) {
-      return false;
-    } else {
-      return true;
-    }
+  constructor(private quoteRequestService: QuoteRequestService, private router: Router, private route: ActivatedRoute) {
+    this.route.data.subscribe(({ suppliers, ecosystems }) => {
+      this.suppliers = suppliers;
+      this.ecosystems = ecosystems;
+    });
   }
 
-  checkPackageToggle() {
-    if ($('#packing_switch').is(':checked')) {
-      return false;
+  ngOnInit() {
+    this.quoteRequest = new QuoteRequest();
+  }
+
+  submit($event: QuoteRequestRecipients) {
+    const recipients = $event;
+
+    if (this.quoteRequest.international) {
+      this.quoteRequest.transaction_type = 'international';
     } else {
-      return true;
+      this.quoteRequest.transaction_type = 'local';
     }
+
+    this.quoteRequestService.sendToRecipients(this.quoteRequest, recipients);
+
+    this.router.navigate([this.router.url]);
+    this.closeModal.nativeElement.click();
   }
 }

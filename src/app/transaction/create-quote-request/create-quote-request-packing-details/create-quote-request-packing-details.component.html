@@ -1,0 +1,102 @@
+<div class="col-md-12">
+  <form [formGroup]="packingDetailsForm">
+    <div class="center-text-btn">
+      <span class="heading-2">Container details</span>
+      <div class="switch">
+        <input
+          id="container_switch"
+          class="cmn-toggle cmn-toggle-round-flat"
+          type="checkbox"
+          formControlName="container_details"
+          checked
+        />
+        <label for="container_switch"></label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="container_type">Container type</label>
+        <select class="form-control" id="container_type" formControlName="container_type">
+          <option selected="selected">20 ft.</option>
+          <option>40 ft.</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="container_quantity">Container quantity</label>
+        <input
+          type="number"
+          formControlName="container_quantity"
+          step="1"
+          id="container_quantity"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="center-text-btn">
+      <span class="heading-2">Packing details</span>
+      <div class="switch">
+        <input
+          id="packing_switch"
+          class="cmn-toggle cmn-toggle-round-flat"
+          formControlName="packing_details"
+          type="checkbox"
+          checked
+        />
+        <label for="packing_switch"></label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4 margin-bottom">
+        <label for="type_of_package">Type of Package</label>
+        <input
+          name="type_of_package"
+          formControlName="type_of_package"
+          type="text"
+          class="form-control"
+          id="type_of_package"
+          placeholder="Enter package type here..."
+        />
+      </div>
+      <div class="form-group col-md-4 margin-bottom">
+        <label for="package_weight">Package weight</label>
+        <input type="text" class="form-control" id="package_weight" formControlName="package_weight" />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="weight_unit">Weight unit</label>
+        <select class="form-control" id="weight_unit" formControlName="weight_unit">
+          <option selected>KG</option>
+          <option>LB</option>
+          <option>MT</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 margin-bottom">
+        <label for="package_quantity">Package quantity</label>
+        <input
+          formControlName="package_quantity"
+          type="text"
+          class="form-control"
+          id="package_quantity"
+          placeholder="Enter package quantity here..."
+        />
+      </div>
+      <div class="form-group col-md-6 margin-bottom">
+        <label for="total_weight">Total weight</label>
+        <input type="text" class="form-control" id="total_weight" formControlName="total_weight" />
+      </div>
+    </div>
+    <div class="form-group margin-bottom">
+      <label for="additional_details">Additional Details</label>
+      <textarea
+        type="text"
+        class="form-control"
+        formControlName="additional_details"
+        id="additional_details"
+        rows="2"
+        placeholder="Type additional details here..."
+      ></textarea>
+    </div>
+  </form>
+</div>
+<button class="btn-next next-step pull-right" [disabled]="!packingDetailsForm.valid" (click)="next()">Next &rarr;</button>

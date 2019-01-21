@@ -17,12 +17,16 @@ export class TransactionService extends BaseService {
   getByUserIdAndClientId(userId: string, clientId: string): Observable<Transaction[]> {
     return this.apiService.get(`/user/${userId}/client/${clientId}/transaction`).pipe(map(data => data));
   }
-  
-  getBuyer(transactionId: any) {
+
+  getBuyer(transactionId: string) {
     let buyerId;
     this.apiService.get(`${this.path}/${transactionId}`).subscribe(data => {
       buyerId = data.buyer._id;
     });
     return this.userService.get(buyerId).pipe(map(data => data));
+  }
+
+  setSeller(id: string, sellerId: string): Observable<Transaction> {
+    return this.apiService.put(`/transaction/${id}/seller`, { _id: sellerId });
   }
 }

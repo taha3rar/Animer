@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
-import { QuoteRequest } from '@app/core/models/transaction/qr';
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from '@app/core/models/transaction';
+import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 
 @Component({
   selector: 'app-transaction-quote-request',

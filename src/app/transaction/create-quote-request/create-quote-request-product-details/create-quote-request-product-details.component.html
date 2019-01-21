@@ -1,0 +1,26 @@
+<div class="col-md-12">
+  <form [formGroup]="productDetailsForm">
+    <div class="form-row">
+      <div class="form-group col-md-6 margin-bottom">
+        <label for="produce_name">Produce Name</label>
+        <input type="text" formControlName="produce" id="produce_name" class="form-control" placeholder="Type produce name here..." />
+      </div>
+      <div class="form-group col-md-6 margin-bottom">
+        <label for="variety">Variety</label>
+        <input type="text" formControlName="variety"  id="variety" class="form-control" placeholder="Type variety here..." />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="specification">Specification</label>
+      <textarea
+        type="text"
+        class="form-control"
+        id="specification"
+        rows="2"
+        placeholder="Type specification here..."
+        formControlName="specification" 
+      ></textarea>
+    </div>
+  </form>
+</div>
+<button class="btn-next next-step pull-right" [disabled]="!productDetailsForm.valid" (click)="next()">Next &rarr;</button>

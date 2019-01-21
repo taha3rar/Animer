@@ -1,8 +1,7 @@
 import { PurchaseOrderService } from './api/po.service';
-import { QrService } from './api/qr.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouteReusableStrategy } from './route-reusable-strategy';
@@ -26,6 +25,7 @@ import { InvoiceService } from './api/invoice.service';
 import { ProductService } from './api/product.service';
 import { ProformaInvoiceService } from './api/pi.service';
 import { ChatService } from './api/chat.service';
+import { QuoteRequestService } from './api/quote-request.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule, NgxPermissionsModule.forRoot()],
@@ -47,7 +47,7 @@ import { ChatService } from './api/chat.service';
     OrderService,
     InvoiceService,
     ProductService,
-    QrService,
+    QuoteRequestService,
     ProformaInvoiceService,
     PurchaseOrderService,
     ChatService,
