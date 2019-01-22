@@ -1,0 +1,18 @@
+<div class="panel panel-tab details-col" *ngIf="!piGenerated">
+  <div class="panel-body">
+    <div class="panel-header"><p>Add Proforma Invoice Details</p></div>
+    <app-transaction-proforma-invoice-details [proformaInvoice]="proformaInvoice"></app-transaction-proforma-invoice-details>
+  </div>
+</div>
+<div class="panel panel-tab" [ngClass]="{'pi-col': !piGenerated}">
+  <div class="panel-body">
+    <div class="padding-all-2">
+      <app-transaction-proforma-invoice 
+        [quoteRequest]="quoteRequest"
+        [transaction]="transaction"
+        [proformaInvoice]="proformaInvoice">
+      </app-transaction-proforma-invoice>
+      <button *ngIf="seller" (click)="sendProformaInvoice()" class="bttn-primary pull-right">Send Proforma Invoice</button>
+    </div>
+  </div>
+</div>

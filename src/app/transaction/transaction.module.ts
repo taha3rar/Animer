@@ -14,7 +14,6 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { CreateQuoteRequestComponent } from './create-quote-request/create-quote-request.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '@app/shared';
-import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 import { TransactionChatComponent } from './transaction-chat/transaction-chat.component';
 // tslint:disable-next-line:max-line-length
 import { CreateQuoteRequestProductDetailsComponent } from './create-quote-request/create-quote-request-product-details/create-quote-request-product-details.component';
@@ -29,6 +28,13 @@ import { UserEcosystemsResolver } from './resolvers/ecosystem-list.resolver';
 import { UserSupplierListResolver } from './resolvers/supplier-list.resolver';
 import { TransactionSellerComponent } from './transaction/transaction-seller/transaction-seller.component';
 import { TransactionBuyerComponent } from './transaction/transaction-buyer/transaction-buyer.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
+// tslint:disable-next-line:max-line-length
+import { TransactionProformaInvoiceDetailsComponent } from './transaction-proforma-invoice/transaction-proforma-invoice-details/transaction-proforma-invoice-details.component';
+// tslint:disable-next-line:max-line-length
+import { TransactionProformaInvoiceSellerComponent } from './transaction-proforma-invoice/transaction-proforma-invoice-seller/transaction-proforma-invoice-seller.component';
+// tslint:disable-next-line:max-line-length
+import { TransactionProformaInvoiceBuyerComponent } from './transaction-proforma-invoice/transaction-proforma-invoice-buyer/transaction-proforma-invoice-buyer.component';
 
 @NgModule({
   declarations: [
@@ -39,16 +45,26 @@ import { TransactionBuyerComponent } from './transaction/transaction-buyer/trans
     TransactionComponent,
     TransactionListComponent,
     CreateQuoteRequestComponent,
-    TransactionDetailsComponent,
+    TransactionProformaInvoiceDetailsComponent,
     TransactionChatComponent,
     CreateQuoteRequestProductDetailsComponent,
     CreateQuoteRequestPackingDetailsComponent,
     CreateQuoteRequestShippingDetailsComponent,
     CreateQuoteRequestAdditionalDetailsComponent,
     TransactionSellerComponent,
-    TransactionBuyerComponent
+    TransactionBuyerComponent,
+    TransactionProformaInvoiceSellerComponent,
+    TransactionProformaInvoiceBuyerComponent
   ],
-  imports: [CommonModule, TransactionRoutingModule, TranslateModule, NgbModule, SharedModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    TransactionRoutingModule,
+    TranslateModule,
+    NgbModule,
+    SharedModule,
+    ReactiveFormsModule,
+    NgxPermissionsModule.forRoot()
+  ],
   providers: [
     TransactionListResolver,
     QuoteRequestResolver,

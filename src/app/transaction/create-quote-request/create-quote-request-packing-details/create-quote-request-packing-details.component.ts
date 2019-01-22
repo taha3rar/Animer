@@ -12,7 +12,7 @@ export class CreateQuoteRequestPackingDetailsComponent implements OnInit {
   @Input()
   quoteRequest: QuoteRequest;
   units = packageUnits;
-  containerType = containerType;
+  containerTypes = containerType;
   packingDetailsForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}

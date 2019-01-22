@@ -1,20 +1,14 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
-import { Transaction } from '@app/core/models/transaction';
-import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@app/core';
+import { BaseTransaction } from '../base-transaction';
 
 @Component({
   selector: 'app-transaction-quote-request',
   templateUrl: './transaction-quote-request.component.html',
   styleUrls: ['./transaction-quote-request.component.scss']
 })
-export class TransactionQuoteRequestComponent implements OnInit {
-  @Input()
-  quoteRequest: QuoteRequest;
-  @Input()
-  transaction: Transaction;
-
-  constructor() {}
-
-  ngOnInit() {}
+export class TransactionQuoteRequestComponent extends BaseTransaction {
+  constructor(protected authenticationService: AuthenticationService) {
+    super(authenticationService);
+  }
 }

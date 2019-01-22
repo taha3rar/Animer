@@ -32,7 +32,7 @@
           <td>{{proformaInvoice.tolerance}}</td>
           <td>{{proformaInvoice.stock_keeping_unit}}</td>
           <td>{{proformaInvoice.specification}}</td>
-          <td><span *ngFor="let certification of proformaInvoice.certifications">{{certification}}> </span></td>
+          <td><span *ngFor="let certification of proformaInvoice.certifications">{{certification}} </span></td>
         </tr>
       </tbody>
     </table>
@@ -45,7 +45,7 @@
             <th>Type of package</th>
             <th>Packaged product weight</th>
             <th>Weight unit</th>
-            <th>Qunatity</th>
+            <th>Quantity</th>
             <th>Total Weight</th>
           </tr>
         </thead>
@@ -123,9 +123,9 @@
           <p>Quote request valid until</p>
         </div>
         <div>
-          <p>{{proformaInvoice.expected_receiving_date}}</p>
+          <p>{{proformaInvoice.expected_receiving_date | date:'dd/MM/yy'}}</p>
           <p>{{quoteRequest.remarks}}</p>
-          <p>{{quoteRequest.valid_until | date:'MM/dd/yy'}}</p>
+          <p>{{quoteRequest.valid_until | date:'dd/MM/yy'}}</p>
         </div>
         <div>
           <p>Expected dalivery date</p>
@@ -133,13 +133,12 @@
           <p>Proforma invoice valid until</p>
         </div>
         <div>
-          <p>{{proformaInvoice.expected_delivering_date}}</p>
+          <p>{{proformaInvoice.expected_delivering_date | date:'dd/MM/yy' }}</p>
           <p>{{proformaInvoice.remarks}}</p>
-          <p>{{proformaInvoice.valid_until | date:'MM/dd/yy'}}</p>
+          <p>{{proformaInvoice.valid_until | date:'dd/MM/yy'}}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-<button *ngIf="!seller" class="bttn-primary next-step pull-right"><span> Generate Purchase Order &rarr; </span></button>
 <button class="btn-primary-transp pull-right">Download PDF</button>

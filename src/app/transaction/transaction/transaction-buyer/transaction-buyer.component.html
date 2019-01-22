@@ -1,0 +1,77 @@
+<div class="stepper-wrapper">
+  <div class="stepper">
+    <ul class="nav nav-tabs">
+      <li class="completed active">
+        <a data-toggle="tab" class="label" href="#quoteRequest"> <span class="round-tab">1</span>Quote request sent </a>
+      </li>
+      <li [ngClass]="{'completed':piGenerated,'disabled': !piGenerated}">
+        <a data-toggle="tab" class="label" href="#proformaInvoice">
+          <span class="round-tab">2</span>
+          <span *ngIf="piGenerated">Proforma invoice received</span>
+          <span *ngIf="!piGenerated">Waiting proforma invoice</span>
+        </a>
+      </li>
+      <li [ngClass]="{'completed': poGenerated, 'disabled': !poGenerated }">
+        <a data-toggle="tab" class="label" href="#purchaseOrder">
+          <span class="round-tab">3</span>
+          <span *ngIf="poGenerated">Purchase order sent</span>
+          <span *ngIf="!poGenerated">Generate purchase order</span>
+        </a>
+      </li>
+      <li *ngIf="!poGenerated" [ngClass]="{'completed': poGenerated, 'disabled': !poGenerated }">
+        <a data-toggle="tab" class="label" href="#review">
+          <span class="round-tab">4</span>Review and send
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="quoteRequest">
+        <div class="panel panel-tab">
+          <div class="panel-body">
+            <div class="padding-all-2">
+              <app-transaction-quote-request [quoteRequest]="quoteRequest" [transaction]="transaction"></app-transaction-quote-request>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="proformaInvoice">
+        <div class="panel panel-tab">
+          <div class="panel-body">
+            <div class="padding-all-2">
+              <app-transaction-proforma-invoice-buyer 
+                [quoteRequest]="quoteRequest"
+                [transaction]="transaction"
+                [proformaInvoice]="proformaInvoice">
+              </app-transaction-proforma-invoice-buyer>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="purchaseOrder">
+        <div class="panel panel-tab">
+          <div class="panel-body">
+            <div class="padding-all-2">
+              <!-- <app-transaction-po></app-transaction-po> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="review" *ngIf="!poGenerated">
+        <div class="panel panel-tab">
+          <div class="panel-body">
+            <div class="tab-pane" id="review">
+              <div class="panel panel-tab">
+                <div class="panel-body">
+                  <div class="padding-all-2">
+                    <!-- <app-transaction-po [completedPO]="true"></app-transaction-po></div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
