@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Transaction } from '@app/core/models/transaction';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 
@@ -9,13 +9,12 @@ import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-r
   styleUrls: ['./transaction-quote-request.component.scss']
 })
 export class TransactionQuoteRequestComponent implements OnInit {
-  quoteRequest: QuoteRequest = new QuoteRequest();
-  transaction: Transaction = new Transaction();
+  @Input()
+  quoteRequest: QuoteRequest;
+  @Input()
+  transaction: Transaction;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.quoteRequest = this.route.snapshot.data['quoteRequest'];
-    this.transaction = this.route.snapshot.data['transaction'];
-  }
+  ngOnInit() {}
 }

@@ -1,4 +1,3 @@
-import { PurchaseOrderResolver } from './resolvers/purchase-order.resolver';
 import { TransactionResolver } from './resolvers/transaction.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { NgModule } from '@angular/core';
@@ -9,7 +8,6 @@ import { Shell } from '@app/shell/shell.service';
 import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionComponent } from './transaction/transaction.component';
-import { ProformaInvoiceResolver } from './resolvers/proforma-invoice.resolver';
 import { UserEcosystemsResolver } from './resolvers/ecosystem-list.resolver';
 import { UserSupplierListResolver } from './resolvers/supplier-list.resolver';
 
@@ -31,8 +29,6 @@ const routes: Routes = [
       component: TransactionComponent,
       resolve: {
         quoteRequest: QuoteRequestResolver,
-        proformaInvoice: ProformaInvoiceResolver,
-        purchaseOrder: PurchaseOrderResolver,
         transaction: TransactionResolver
       }
     }

@@ -37,36 +37,36 @@
       </tbody>
     </table>
     <div *ngIf="proformaInvoice.type_of_package"> 
-    <p class="heading-2">Packing Details</p>
-    <p class="heading-4-blue">Package Details</p>
-    <table class="table table-striped margin-bottom">
-      <thead>
-        <tr style="font-size: 1.34rem;">
-          <th>Type of package</th>
-          <th>Packaged product weight</th>
-          <th>Weight unit</th>
-          <th>Qunatity</th>
-          <th>Total Weight</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-light">
-          <td>{{proformaInvoice.type_of_package}}</td>
-          <td>{{proformaInvoice.package_weight}}</td>
-          <td>{{proformaInvoice.package_weight_unit | uppercase}}</td>
-          <td>{{proformaInvoice.quantity}}</td>
-          <td>{{proformaInvoice.total_weight}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div *ngIf="proformaInvoice.container_type">
-    <div class="margin-bottom-2">
-    <p class="heading-4-blue">Container Details</p>
-    <p class="heading-4">Type: {{proformaInvoice.container_type}}</p>
-    <p class="heading-4 margin-bottom">Quantity: {{proformaInvoice.container_quantity}}</p>
-  </div>
-  </div>
+      <p class="heading-2">Packing Details</p>
+      <p class="heading-4-blue">Package Details</p>
+      <table class="table table-striped margin-bottom">
+        <thead>
+          <tr style="font-size: 1.34rem;">
+            <th>Type of package</th>
+            <th>Packaged product weight</th>
+            <th>Weight unit</th>
+            <th>Qunatity</th>
+            <th>Total Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-light">
+            <td>{{proformaInvoice.type_of_package}}</td>
+            <td>{{proformaInvoice.package_weight}}</td>
+            <td>{{proformaInvoice.package_weight_unit | uppercase}}</td>
+            <td>{{proformaInvoice.quantity}}</td>
+            <td>{{proformaInvoice.total_weight}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="proformaInvoice.container_type">
+      <div class="margin-bottom-2">
+        <p class="heading-4-blue">Container Details</p>
+        <p class="heading-4">Type: {{proformaInvoice.container_type}}</p>
+        <p class="heading-4 margin-bottom">Quantity: {{proformaInvoice.container_quantity}}</p>
+      </div>
+    </div>
   </div>
   <div class="col-md-3">
     <div class="invoice-right-side">

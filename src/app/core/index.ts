@@ -11,7 +11,7 @@ export * from './http/cache.interceptor';
 export * from './http/error-handler.interceptor';
 export * from './route-reusable-strategy';
 export * from './logger.service';
-export * from './api/pi.service';
+export * from './api/proforma-invoice.service';
 export * from './api/po.service';
 export * from './api/quote-request.service';
 export * from './api/user.service';

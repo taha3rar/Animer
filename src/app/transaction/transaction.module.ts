@@ -15,8 +15,6 @@ import { CreateQuoteRequestComponent } from './create-quote-request/create-quote
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '@app/shared';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
-import { ProformaInvoiceResolver } from './resolvers/proforma-invoice.resolver';
-import { PurchaseOrderResolver } from './resolvers/purchase-order.resolver';
 import { TransactionChatComponent } from './transaction-chat/transaction-chat.component';
 // tslint:disable-next-line:max-line-length
 import { CreateQuoteRequestProductDetailsComponent } from './create-quote-request/create-quote-request-product-details/create-quote-request-product-details.component';
@@ -29,6 +27,8 @@ import { CreateQuoteRequestAdditionalDetailsComponent } from './create-quote-req
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserEcosystemsResolver } from './resolvers/ecosystem-list.resolver';
 import { UserSupplierListResolver } from './resolvers/supplier-list.resolver';
+import { TransactionSellerComponent } from './transaction/transaction-seller/transaction-seller.component';
+import { TransactionBuyerComponent } from './transaction/transaction-buyer/transaction-buyer.component';
 
 @NgModule({
   declarations: [
@@ -44,14 +44,14 @@ import { UserSupplierListResolver } from './resolvers/supplier-list.resolver';
     CreateQuoteRequestProductDetailsComponent,
     CreateQuoteRequestPackingDetailsComponent,
     CreateQuoteRequestShippingDetailsComponent,
-    CreateQuoteRequestAdditionalDetailsComponent
+    CreateQuoteRequestAdditionalDetailsComponent,
+    TransactionSellerComponent,
+    TransactionBuyerComponent
   ],
   imports: [CommonModule, TransactionRoutingModule, TranslateModule, NgbModule, SharedModule, ReactiveFormsModule],
   providers: [
     TransactionListResolver,
     QuoteRequestResolver,
-    ProformaInvoiceResolver,
-    PurchaseOrderResolver,
     TransactionResolver,
     UserSupplierListResolver,
     UserEcosystemsResolver

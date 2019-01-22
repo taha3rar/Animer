@@ -1,11 +1,13 @@
 import { AuthenticationService } from './../../core/authentication/authentication.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Transaction } from '@app/core/models/transaction';
-import { ProformaInvoice } from '@app/core/models/transaction/pi';
-
-declare const $: any;
+import { ProformaInvoice } from '@app/core/models/transaction/proforma-invoice';
+import { PurchaseOrderService } from '@app/core';
+import { PurchaseOrder } from '@app/core/models/transaction/po';
+import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
+import { ProformaInvoiceService } from '@app/core/api/proforma-invoice.service';
 
 @Component({
   selector: 'app-transaction',
@@ -14,20 +16,42 @@ declare const $: any;
 })
 export class TransactionComponent implements OnInit {
   sideDivVisible = false;
-  purchaseOrder = false;
-  proformaInvoiceGenrated = true;
-  transaction: Transaction = new Transaction();
   isSeller = false;
+  transaction: Transaction = new Transaction();
+  quoteRequest: QuoteRequest;
+  proformaInvoice: ProformaInvoice;
+  purchaseOrder = PurchaseOrder;
 
-  constructor(private location: Location, private route: ActivatedRoute, private authService: AuthenticationService) {}
+  constructor(
+    private location: Location,
+    private route: ActivatedRoute,
+    private authService: AuthenticationService,
+    private proformaInvoiceService: ProformaInvoiceService,
+    private purchaseOrderService: PurchaseOrderService
+  ) {}
 
   ngOnInit() {
     const currentUserId = this.authService.currentUserId;
-    this.transaction = this.route.snapshot.data['transaction'];
-    if (currentUserId === this.transaction.seller_id) {
-      this.isSeller = true;
-    }
-    console.log(this.transaction);
+    this.route.data.subscribe(({ transaction, quoteRequest }) => {
+      this.transaction = transaction;
+      this.quoteRequest = quoteRequest;
+
+      if (currentUserId === this.transaction.seller_id) {
+        this.isSeller = true;
+      }
+
+      if (this.transaction.proforma_invoice_id) {
+        this.proformaInvoiceService.get(this.transaction.proforma_invoice_id).subscribe(proformaInvoice => {
+          this.proformaInvoice = proformaInvoice;
+        });
+      }
+
+      if (this.transaction.purchase_order_id) {
+        this.purchaseOrderService.get(this.transaction.purchase_order_id).subscribe(purchaseOrder => {
+          this.purchaseOrder = purchaseOrder;
+        });
+      }
+    });
   }
 
   adjustDiv(type: string) {

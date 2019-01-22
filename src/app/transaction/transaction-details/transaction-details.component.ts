@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { certifications, currencies } from '@app/shared/_helpers/product_details';
 import { measureUnits } from '@app/shared/_helpers/measure';
 import { incotermsGroups } from '@app/shared/_helpers/incoterms';
-import { ProformaInvoice } from '@app/core/models/transaction/pi';
+import { ProformaInvoice } from '@app/core/models/transaction/proforma-invoice';
 
 @Component({
   selector: 'app-transaction-details',

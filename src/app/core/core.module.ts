@@ -23,7 +23,7 @@ import { TransactionService } from './api/transaction.service';
 import { OrderService } from './api/order.service';
 import { InvoiceService } from './api/invoice.service';
 import { ProductService } from './api/product.service';
-import { ProformaInvoiceService } from './api/pi.service';
+import { ProformaInvoiceService } from './api/proforma-invoice.service';
 import { ChatService } from './api/chat.service';
 import { QuoteRequestService } from './api/quote-request.service';
 

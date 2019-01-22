@@ -1,149 +1,87 @@
 
 <h1 class="main-title btn-main margin-bottom-2" (click)="back()"><a class="material-icons">keyboard_backspace</a>
-  Transactions</h1>
-<div class="stepper-wrapper">
-  <div class="stepper">
-    <ul class="nav nav-tabs">
-      <li class="completed active">
-        <a data-toggle="tab" class="label" href="#quoteRequest"> <span class="round-tab">1</span>Quote request sent </a>
-      </li>
-      <li [ngClass]="{'completed':proformaInvoice,'disabled': !proformaInvoice}">
-        <a data-toggle="tab" class="label" href="#proformaInvoice">
-          <span class="round-tab">2</span>Proforma invoice recieved
-        </a>
-      </li>
-      <li [ngClass]="{'completed':proformaInvoice || purchaseOrder,'disabled': !purchaseOrder && !proformaInvoice}">
-        <a data-toggle="tab" class="label" href="#purchaseOrder">
-          <span class="round-tab">3</span>Generate purchase order
-        </a>
-      </li>
-      <li [ngClass]="{'completed':purchaseOrder,'disabled': !purchaseOrder}">
-        <a data-toggle="tab" class="label" href="#review">
-          <span class="round-tab">4</span>Review and send
-        </a>
-      </li>
-    </ul>
+  Transactions
+</h1>
+<app-transaction-seller *ngIf="isSeller" 
+  [transaction]="transaction"
+  [quoteRequest]="quoteRequest"
+  [proformaInvoice]="proformaInvoice"
+  [purchaseOrder]="purchaseOrder"
+></app-transaction-seller>
+<app-transaction-buyer *ngIf="!isSeller"
+  [transaction]="transaction"
+  [quoteRequest]="quoteRequest"
+  [proformaInvoice]="proformaInvoice"
+  [purchaseOrder]="purchaseOrder"
+></app-transaction-buyer>
 
-    <div class="tab-content">
-      <div class="tab-pane active" id="quoteRequest">
-        <div class="panel panel-tab">
-          <div class="panel-body">
-            <div class="padding-all-2">
-              <app-transaction-quote-request></app-transaction-quote-request>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="proformaInvoice">
-        <!-- Proforma Invoice for buyer-->
-        <div class="panel panel-tab" *ngIf="!isSeller">
-          <div class="panel-body">
-            <div class="padding-all-2"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
-          </div>
-        </div>
-        <!-- Proforma Invoice for seller-->
-        <div class="panel panel-tab details-col" *ngIf="isSeller">
-          <div class="panel-body">
-            <div class="panel-header"><p>Add Proforma Invoice Details</p></div>
-            <app-transaction-details></app-transaction-details>
-          </div>
-        </div>
-        <div class="panel panel-tab pi-col" *ngIf="isSeller">
-          <div class="panel-body">
-            <div class="padding-all-2"><app-transaction-proforma-invoice></app-transaction-proforma-invoice></div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="purchaseOrder">
-        <div class="panel panel-tab">
-          <div class="panel-body">
-            <div class="padding-all-2">
-              <app-transaction-po></app-transaction-po>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="review">
-        <div class="panel panel-tab">
-          <div class="panel-body">
-        <div class="tab-pane" id="review">
-          <div class="panel panel-tab">
-            <div class="panel-body">
-              <div class="padding-all-2"><app-transaction-po [completedPO]="true"></app-transaction-po></div>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="docs-chat">
+  <div class="docs" (click)="adjustDiv('docs')">
+    <i class="material-icons">folder_open</i>
+    <p>Documents</p>
   </div>
 
-  <div class="docs-chat">
-    <div class="docs" (click)="adjustDiv('docs')">
-      <i class="material-icons">folder_open</i>
-      <p>Documents</p>
-    </div>
-
-    <div class="chat" (click)="adjustDiv('chat')">
-      <i class="material-icons">chat_bubble_outline</i>
-      <p>Chat</p>
-    </div>
+  <div class="chat" (click)="adjustDiv('chat')">
+    <i class="material-icons">chat_bubble_outline</i>
+    <p>Chat</p>
   </div>
+</div>
+  
+<div class="side-tab">
+  <app-tansaction-chat></app-tansaction-chat>
 
-  <div class="side-tab">
-    <app-tansaction-chat></app-tansaction-chat>
-
-    <div class="docs-content">
-      <div class="header">
-        <button class="round-button-primary pull-right"><i class="material-icons">add</i></button>
+  <div class="docs-content">
+    <div class="header">
+      <button class="round-button-primary pull-right"><i class="material-icons">add</i></button>
+    </div>
+    <div class="doc-body">
+      <div class="doc-card">
+        <div>
+          <span class="pull-left">#122</span>
+          <span class="material-icons pull-right icon" placement="top" data-container="body" ngbTooltip="Delete"
+            >delete</span
+          >
+          <span class="pull-right material-icons download" placement="top" ngbTooltip="Download">cloud_download</span>
+        </div>
+        <div>
+          <img src="../../../assets/img/pdf.png" />
+          <a href="" target="_blank"> <span class="material-icons bttn-view">pageview</span> <span>View</span> </a>
+          <p class="normal-text-bold">Contract.pdf</p>
+          <p class="heading-3">Uploaded by Alex Benn</p>
+        </div>
+        <div><p class="heading-3">10/28/2018</p></div>
       </div>
-      <div class="doc-body">
-        <div class="doc-card">
-          <div>
-            <span class="pull-left">#122</span>
-            <span class="material-icons pull-right icon" placement="top" data-container="body" ngbTooltip="Delete"
-              >delete</span
-            >
-            <span class="pull-right material-icons download" placement="top" ngbTooltip="Download">cloud_download</span>
-          </div>
-          <div>
-            <img src="../../../assets/img/pdf.png" />
-            <a href="" target="_blank"> <span class="material-icons bttn-view">pageview</span> <span>View</span> </a>
-            <p class="normal-text-bold">Contract.pdf</p>
-            <p class="heading-3">Uploaded by Alex Benn</p>
-          </div>
-          <div><p class="heading-3">10/28/2018</p></div>
+      <div class="doc-card">
+        <div>
+          <span class="pull-left">#122</span>
+          <span class="material-icons pull-right icon" placement="top" data-container="body" ngbTooltip="Delete"
+            >delete</span
+          >
+          <span class="pull-right material-icons download" placement="top" ngbTooltip="Download">cloud_download</span>
         </div>
-        <div class="doc-card">
-          <div>
-            <span class="pull-left">#122</span>
-            <span class="material-icons pull-right icon" placement="top" data-container="body" ngbTooltip="Delete"
-              >delete</span
-            >
-            <span class="pull-right material-icons download" placement="top" ngbTooltip="Download">cloud_download</span>
-          </div>
-          <div>
-            <img src="../../../assets/img/pdf.png" />
-            <a href="" target="_blank"> <span class="material-icons bttn-view">pageview</span> <span>View</span> </a>
-            <p class="normal-text-bold">Contract.pdf</p>
-            <p class="heading-3">Uploaded by Alex Benn</p>
-          </div>
-          <div><p class="heading-3">10/28/2018</p></div>
+        <div>
+          <img src="../../../assets/img/pdf.png" />
+          <a href="" target="_blank"> <span class="material-icons bttn-view">pageview</span> <span>View</span> </a>
+          <p class="normal-text-bold">Contract.pdf</p>
+          <p class="heading-3">Uploaded by Alex Benn</p>
         </div>
-        <div class="doc-card">
-          <div>
-            <span class="pull-left">#122</span>
-            <span class="material-icons pull-right icon" placement="top" data-container="body" ngbTooltip="Delete"
-              >delete</span
-            >
-            <span class="pull-right material-icons download" placement="top" ngbTooltip="Download">cloud_download</span>
-          </div>
-          <div>
-            <img src="../../../assets/img/pdf.png" />
-            <a href="" target="_blank"> <span class="material-icons bttn-view">pageview</span> <span>View</span> </a>
-            <p class="normal-text-bold">Contract.pdf</p>
-            <p class="heading-3">Uploaded by Alex Benn</p>
-          </div>
-          <div><p class="heading-3">10/28/2018</p></div>
+        <div><p class="heading-3">10/28/2018</p></div>
+      </div>
+      <div class="doc-card">
+        <div>
+          <span class="pull-left">#122</span>
+          <span class="material-icons pull-right icon" placement="top" data-container="body" ngbTooltip="Delete"
+            >delete</span
+          >
+          <span class="pull-right material-icons download" placement="top" ngbTooltip="Download">cloud_download</span>
         </div>
+        <div>
+          <img src="../../../assets/img/pdf.png" />
+          <a href="" target="_blank"> <span class="material-icons bttn-view">pageview</span> <span>View</span> </a>
+          <p class="normal-text-bold">Contract.pdf</p>
+          <p class="heading-3">Uploaded by Alex Benn</p>
+        </div>
+        <div><p class="heading-3">10/28/2018</p></div>
       </div>
     </div>
   </div>

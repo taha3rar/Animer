@@ -23,15 +23,15 @@ export class Transaction {
     last_name: string;
     email: string;
   };
-  quote_request_id: String;
-  proforma_invoice_id: String;
-  logistics_id: String;
-  purchase_order_id: String;
+  quote_request_id: string;
+  proforma_invoice_id: string;
+  logistics_id: string;
+  purchase_order_id: string;
   documents_id: [
     {
-      _id: String;
-      type: String;
-      url: String;
+      _id: string;
+      type: string;
+      url: string;
     }
   ];
 }
