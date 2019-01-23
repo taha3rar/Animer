@@ -12,7 +12,7 @@ export * from './http/error-handler.interceptor';
 export * from './route-reusable-strategy';
 export * from './logger.service';
 export * from './api/proforma-invoice.service';
-export * from './api/po.service';
+export * from './api/purchase-order.service';
 export * from './api/quote-request.service';
 export * from './api/user.service';
 export * from './api/transaction.service';

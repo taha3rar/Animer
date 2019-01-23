@@ -10,7 +10,7 @@ export class QuoteRequest {
   container_type: string;
   container_quantity: number;
   type_of_package: string;
-  package_weight: number;
+  package_weight: string;
   weight_unit: string;
   quantity: number;
   total_weight: number;

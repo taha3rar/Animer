@@ -34,14 +34,16 @@
         <app-transaction-proforma-invoice-seller
           [quoteRequest]="quoteRequest"
           [transaction]="transaction"
-          [proformaInvoice]="proformaInvoice">
-        </app-transaction-proforma-invoice-seller>
+        ></app-transaction-proforma-invoice-seller>
       </div>
       <div class="tab-pane" id="purchaseOrder">
         <div class="panel panel-tab">
           <div class="panel-body">
             <div class="padding-all-2">
-              <app-transaction-po></app-transaction-po>
+              <app-transaction-po
+                [quoteRequest]="quoteRequest"
+                [transaction]="transaction"
+              ></app-transaction-po>
             </div>
           </div>
         </div>

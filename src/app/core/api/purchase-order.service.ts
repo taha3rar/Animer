@@ -1,4 +1,4 @@
-import { PurchaseOrder } from './../models/transaction/po';
+import { PurchaseOrder } from './../models/transaction/purchase-order';
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { ApiService } from './api.service';

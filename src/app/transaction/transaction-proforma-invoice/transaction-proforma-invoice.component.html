@@ -33,7 +33,7 @@
           <td>{{proformaInvoice.stock_keeping_unit}}</td>
           <td>{{proformaInvoice.specification}}</td>
           <td>
-            <ul *ngIf="proformaInvoice.certifications[0]">
+            <ul *ngIf="proformaInvoice.certifications && proformaInvoice.certifications[0]">
               <li *ngFor="let certification of proformaInvoice.certifications" style="list-style: none;">{{certification}}</li>
             </ul>
           </td>
@@ -146,3 +146,4 @@
   </div>
 </div>
 <button class="btn-primary-transp pull-right">Download PDF</button>
+<!-- <button class="bttn-primary next-step pull-right"><span> Generate Purchase Order &rarr; </span></button> -->

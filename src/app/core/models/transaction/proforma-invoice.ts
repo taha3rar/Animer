@@ -9,7 +9,7 @@ export class ProformaInvoice {
   specification: string;
   tolerance: string;
   type_of_package: string;
-  package_weight: number;
+  package_weight: string;
   package_weight_unit: string;
   quantity: number;
   total_weight: number;

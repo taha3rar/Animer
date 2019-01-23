@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { incotermsGroups } from '@app/shared/_helpers/incoterms';
-import { countries } from '@app/shared/_helpers/_countries';
+import { incotermsGroups } from '@app/shared/helpers/incoterms';
+import { countries } from '@app/shared/helpers/countries';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 import * as moment from 'moment';

@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '@app/core/models/user/user';
-import { defaultValues } from '@app/shared/_helpers/default_values';
+import { defaultValues } from '@app/shared/helpers/default_values';
 import { Transaction } from '@app/core/models/transaction';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { Order } from '@app/core/models/order/order';

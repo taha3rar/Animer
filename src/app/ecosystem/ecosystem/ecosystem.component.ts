@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ecosystem } from '@app/core/models/ecosystem';
-import { defaultValues } from '@app/shared/_helpers/default_values';
+import { defaultValues } from '@app/shared/helpers/default_values';
 import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
 import { EcosystemService } from '@app/core';
 import { Client } from '@app/core/models/user/client';

@@ -5,14 +5,10 @@
 <app-transaction-seller *ngIf="isSeller" 
   [transaction]="transaction"
   [quoteRequest]="quoteRequest"
-  [proformaInvoice]="proformaInvoice"
-  [purchaseOrder]="purchaseOrder"
 ></app-transaction-seller>
 <app-transaction-buyer *ngIf="!isSeller"
   [transaction]="transaction"
   [quoteRequest]="quoteRequest"
-  [proformaInvoice]="proformaInvoice"
-  [purchaseOrder]="purchaseOrder"
 ></app-transaction-buyer>
 
 <div class="docs-chat">

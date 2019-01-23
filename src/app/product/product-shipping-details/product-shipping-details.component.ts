@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { countries } from '@app/shared/_helpers/_countries';
+import { countries } from '@app/shared/helpers/countries';
 
 @Component({
   selector: 'app-product-shipping-details',

@@ -12,10 +12,13 @@
         </a>
       </li>
       <li [ngClass]="{'completed': poGenerated, 'disabled': !poGenerated }">
-        <a data-toggle="tab" class="label" href="#purchaseOrder">
+        <a *ngIf="!poGenerated" data-toggle="tab" class="label" href="#purchaseOrder">
           <span class="round-tab">3</span>
-          <span *ngIf="poGenerated">Purchase order sent</span>
-          <span *ngIf="!poGenerated">Generate purchase order</span>
+          <span>Generate purchase order</span>
+        </a>
+        <a *ngIf="poGenerated" data-toggle="tab" class="label" href="#review">
+          <span class="round-tab">3</span>
+          <span>Purchase order sent</span>
         </a>
       </li>
       <li *ngIf="!poGenerated" [ngClass]="{'completed': poGenerated, 'disabled': !poGenerated }">
@@ -30,43 +33,43 @@
         <div class="panel panel-tab">
           <div class="panel-body">
             <div class="padding-all-2">
-              <app-transaction-quote-request [quoteRequest]="quoteRequest" [transaction]="transaction"></app-transaction-quote-request>
+              <app-transaction-quote-request
+                [quoteRequest]="quoteRequest"
+                [transaction]="transaction"
+              ></app-transaction-quote-request>
             </div>
           </div>
         </div>
       </div>
       <div class="tab-pane" id="proformaInvoice">
-        <div class="panel panel-tab">
-          <div class="panel-body">
-            <div class="padding-all-2">
-              <app-transaction-proforma-invoice-buyer 
-                [quoteRequest]="quoteRequest"
-                [transaction]="transaction"
-                [proformaInvoice]="proformaInvoice">
-              </app-transaction-proforma-invoice-buyer>
-            </div>
-          </div>
-        </div>
+        <app-transaction-proforma-invoice-buyer 
+          [quoteRequest]="quoteRequest"
+          [transaction]="transaction"
+        >
+        </app-transaction-proforma-invoice-buyer>
       </div>
       <div class="tab-pane" id="purchaseOrder">
         <div class="panel panel-tab">
           <div class="panel-body">
             <div class="padding-all-2">
-              <!-- <app-transaction-po></app-transaction-po> -->
+              <app-transaction-po
+                [quoteRequest]="quoteRequest"
+                [transaction]="transaction"
+              ></app-transaction-po>
             </div>
           </div>
         </div>
       </div>
-      <div class="tab-pane" id="review" *ngIf="!poGenerated">
+      <div class="tab-pane" id="review">
         <div class="panel panel-tab">
           <div class="panel-body">
-            <div class="tab-pane" id="review">
-              <div class="panel panel-tab">
-                <div class="panel-body">
-                  <div class="padding-all-2">
-                    <!-- <app-transaction-po [completedPO]="true"></app-transaction-po></div> -->
-                </div>
-              </div>
+            <div class="padding-all-2">
+              <!-- <app-transaction-po 
+                [quoteRequest]="quoteRequest"
+                [transaction]="transaction"
+                [proformaInvoice]="proformaInvoice"  
+                [completedPO]="true"
+              ></app-transaction-po> -->
             </div>
           </div>
         </div>

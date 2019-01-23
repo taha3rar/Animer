@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { certifications, currencies } from '@app/shared/_helpers/product_details';
-import { incotermsGroups } from '@app/shared/_helpers/incoterms';
+import { certifications, currencies } from '@app/shared/helpers/product_details';
+import { incotermsGroups } from '@app/shared/helpers/incoterms';
 import { ProformaInvoice } from '@app/core/models/transaction/proforma-invoice';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { packageUnits, containerType } from '@app/shared/_helpers/packaging_details';
+import { packageUnits, containerType } from '@app/shared/helpers/packaging_details';
 import * as moment from 'moment';
 
 @Component({

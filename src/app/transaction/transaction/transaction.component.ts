@@ -3,11 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Transaction } from '@app/core/models/transaction';
-import { ProformaInvoice } from '@app/core/models/transaction/proforma-invoice';
-import { PurchaseOrderService } from '@app/core';
-import { PurchaseOrder } from '@app/core/models/transaction/po';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
-import { ProformaInvoiceService } from '@app/core/api/proforma-invoice.service';
 
 @Component({
   selector: 'app-transaction',
@@ -19,16 +15,8 @@ export class TransactionComponent implements OnInit {
   isSeller = false;
   transaction: Transaction = new Transaction();
   quoteRequest: QuoteRequest;
-  proformaInvoice: ProformaInvoice;
-  purchaseOrder = PurchaseOrder;
 
-  constructor(
-    private location: Location,
-    private route: ActivatedRoute,
-    private authService: AuthenticationService,
-    private proformaInvoiceService: ProformaInvoiceService,
-    private purchaseOrderService: PurchaseOrderService
-  ) {}
+  constructor(private location: Location, private route: ActivatedRoute, private authService: AuthenticationService) {}
 
   ngOnInit() {
     const currentUserId = this.authService.currentUserId;
@@ -38,18 +26,6 @@ export class TransactionComponent implements OnInit {
 
       if (currentUserId === this.transaction.seller_id) {
         this.isSeller = true;
-      }
-
-      if (this.transaction.proforma_invoice_id) {
-        this.proformaInvoiceService.get(this.transaction.proforma_invoice_id).subscribe(proformaInvoice => {
-          this.proformaInvoice = proformaInvoice;
-        });
-      }
-
-      if (this.transaction.purchase_order_id) {
-        this.purchaseOrderService.get(this.transaction.purchase_order_id).subscribe(purchaseOrder => {
-          this.purchaseOrder = purchaseOrder;
-        });
       }
     });
   }

@@ -5,7 +5,7 @@ import { UserService } from '../../core/api/user.service';
 import { AuthenticationService } from '../../core/authentication/authentication.service';
 import { User } from '../../core/models/user/user';
 import { Credentials } from '../../core/models/user/login-models';
-import { defaultValues } from '@app/shared/_helpers/default_values';
+import { defaultValues } from '@app/shared/helpers/default_values';
 
 @Component({
   selector: 'app-profile',

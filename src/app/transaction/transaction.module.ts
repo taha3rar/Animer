@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { TransactionRoutingModule } from './transaction-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { TransactionDocumentsComponent } from './transaction-documents/transaction-documents.component';
-import { TransactionPoComponent } from './transaction-po/transaction-po.component';
 import { TransactionProformaInvoiceComponent } from './transaction-proforma-invoice/transaction-proforma-invoice.component';
 import { TransactionQuoteRequestComponent } from './transaction-quote-request/transaction-quote-request.component';
 import { TransactionListResolver } from './resolvers/transaction-list.resolver';
@@ -35,11 +34,12 @@ import { TransactionProformaInvoiceDetailsComponent } from './transaction-profor
 import { TransactionProformaInvoiceSellerComponent } from './transaction-proforma-invoice/transaction-proforma-invoice-seller/transaction-proforma-invoice-seller.component';
 // tslint:disable-next-line:max-line-length
 import { TransactionProformaInvoiceBuyerComponent } from './transaction-proforma-invoice/transaction-proforma-invoice-buyer/transaction-proforma-invoice-buyer.component';
+import { TransactionPurchaseOrderComponent } from './transaction-purchase-order/transaction-purchase-order.component';
 
 @NgModule({
   declarations: [
     TransactionDocumentsComponent,
-    TransactionPoComponent,
+    TransactionPurchaseOrderComponent,
     TransactionProformaInvoiceComponent,
     TransactionQuoteRequestComponent,
     TransactionComponent,

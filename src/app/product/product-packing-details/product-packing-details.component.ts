@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { measureUnits } from '@app/shared/_helpers/measure';
+import { measureUnits } from '@app/shared/helpers/measure';
 import { Product } from '@app/core/models/order/product';
 
 @Component({

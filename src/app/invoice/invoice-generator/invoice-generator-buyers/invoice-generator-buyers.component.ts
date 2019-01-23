@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
-import { defaultValues } from '@app/shared/_helpers/default_values';
+import { defaultValues } from '@app/shared/helpers/default_values';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { FormGroup } from '@angular/forms';
 

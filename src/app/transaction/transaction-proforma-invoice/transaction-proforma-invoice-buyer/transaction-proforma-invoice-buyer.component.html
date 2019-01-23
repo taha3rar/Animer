@@ -1,6 +1,15 @@
-<app-transaction-proforma-invoice 
-  [quoteRequest]="quoteRequest"
-  [transaction]="transaction"
-  [proformaInvoice]="proformaInvoice">
-</app-transaction-proforma-invoice>
-<button class="bttn-primary next-step pull-right"><span> Generate Purchase Order &rarr; </span></button>
+<div class="panel panel-tab" [ngClass]="{'pi-col': !piGenerated}">
+  <div class="panel-body">
+    <div class="padding-all-2">
+      <app-transaction-proforma-invoice 
+        [quoteRequest]="quoteRequest"
+        [transaction]="transaction"
+        [proformaInvoice]="proformaInvoice"
+      >
+      </app-transaction-proforma-invoice>
+      <span>
+        <button  *ngIf="canGeneratePO" class="bttn-primary next-step pull-right"><span> Generate Purchase Order &rarr; </span></button>
+      </span>
+    </div>
+  </div>
+</div>

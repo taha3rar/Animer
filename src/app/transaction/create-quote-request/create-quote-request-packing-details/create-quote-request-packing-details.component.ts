@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { packageUnits, containerType } from '@app/shared/_helpers/packaging_details';
+import { packageUnits, containerType } from '@app/shared/helpers/packaging_details';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 

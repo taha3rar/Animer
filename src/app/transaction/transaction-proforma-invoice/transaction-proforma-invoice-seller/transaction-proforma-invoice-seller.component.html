@@ -1,7 +1,10 @@
 <div class="panel panel-tab details-col" *ngIf="!piGenerated">
   <div class="panel-body">
     <div class="panel-header"><p>Add Proforma Invoice Details</p></div>
-    <app-transaction-proforma-invoice-details [proformaInvoice]="proformaInvoice" (piReadyEvent)="enableSubmission($event)"></app-transaction-proforma-invoice-details>
+    <app-transaction-proforma-invoice-details
+      [proformaInvoice]="proformaInvoice"
+      (piReadyEvent)="enableSubmission($event)"
+    ></app-transaction-proforma-invoice-details>
   </div>
 </div>
 <div class="panel panel-tab" [ngClass]="{'pi-col': !piGenerated}">

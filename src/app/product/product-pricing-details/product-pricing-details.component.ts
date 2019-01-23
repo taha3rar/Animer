@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { currencies } from '@app/shared/_helpers/product_details';
+import { currencies } from '@app/shared/helpers/product_details';
 import { Product } from '@app/core/models/order/product';
 
 @Component({

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService, I18nService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
-import { defaultValues } from '@app/shared/_helpers/default_values';
+import { defaultValues } from '@app/shared/helpers/default_values';
 
 declare const $: any;
 

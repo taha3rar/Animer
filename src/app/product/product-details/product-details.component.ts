@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '@app/core/models/order/product';
-import { countries } from '@app/shared/_helpers/_countries';
-import { certifications } from '@app/shared/_helpers/product_details';
+import { countries } from '@app/shared/helpers/countries';
+import { certifications } from '@app/shared/helpers/product_details';
 
 @Component({
   selector: 'app-product-details',
