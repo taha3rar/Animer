@@ -1,7 +1,7 @@
 <div class="panel panel-tab details-col" *ngIf="!piGenerated">
   <div class="panel-body">
     <div class="panel-header"><p>Add Proforma Invoice Details</p></div>
-    <app-transaction-proforma-invoice-details [proformaInvoice]="proformaInvoice"></app-transaction-proforma-invoice-details>
+    <app-transaction-proforma-invoice-details [proformaInvoice]="proformaInvoice" (piReadyEvent)="enableSubmission($event)"></app-transaction-proforma-invoice-details>
   </div>
 </div>
 <div class="panel panel-tab" [ngClass]="{'pi-col': !piGenerated}">
@@ -10,9 +10,10 @@
       <app-transaction-proforma-invoice 
         [quoteRequest]="quoteRequest"
         [transaction]="transaction"
-        [proformaInvoice]="proformaInvoice">
+        [proformaInvoice]="proformaInvoice"
+      >
       </app-transaction-proforma-invoice>
-      <button *ngIf="seller" (click)="sendProformaInvoice()" class="bttn-primary pull-right">Send Proforma Invoice</button>
+      <button *ngIf="seller && piReady" (click)="sendProformaInvoice()" class="bttn-primary pull-right">Send Proforma Invoice</button>
     </div>
   </div>
 </div>

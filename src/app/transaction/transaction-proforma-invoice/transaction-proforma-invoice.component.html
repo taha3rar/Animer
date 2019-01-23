@@ -32,7 +32,11 @@
           <td>{{proformaInvoice.tolerance}}</td>
           <td>{{proformaInvoice.stock_keeping_unit}}</td>
           <td>{{proformaInvoice.specification}}</td>
-          <td><span *ngFor="let certification of proformaInvoice.certifications">{{certification}} </span></td>
+          <td>
+            <ul *ngIf="proformaInvoice.certifications[0]">
+              <li *ngFor="let certification of proformaInvoice.certifications" style="list-style: none;">{{certification}}</li>
+            </ul>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -78,7 +82,7 @@
           <p class="heading-2">Total weight</p>
         </div>
         <div>
-          <p class="heading-4-blue">{{proformaInvoice.quantity}}</p>
+          <p class="heading-4-blue">{{proformaInvoice.price_per_unit}}</p>
           <p class="heading-4-blue">{{proformaInvoice.currency | uppercase}}</p>
           <p class="heading-4-blue">{{proformaInvoice.total_weight}}</p>
         </div>
@@ -128,7 +132,7 @@
           <p>{{quoteRequest.valid_until | date:'dd/MM/yy'}}</p>
         </div>
         <div>
-          <p>Expected dalivery date</p>
+          <p>Expected delivery date</p>
           <p>Proforma invoice remarks</p>
           <p>Proforma invoice valid until</p>
         </div>

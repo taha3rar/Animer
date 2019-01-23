@@ -16,19 +16,19 @@ export class ProformaInvoice {
   point_of_loading: string;
   gps_coordinates_loading: string[];
   point_of_delivery: string;
-  gps_coordinates_delivery: number[];
+  gps_coordinates_delivery: string[];
   container_type: string;
   container_quantity: number;
   incoterms: string;
-  expected_receiving_date: Date;
-  expected_delivering_date: Date;
+  expected_receiving_date: string;
+  expected_delivering_date: string;
   price_per_unit: number;
   pricing_weight_unit: string;
   total_price: number;
   pricing_details: string;
   currency: string;
   remarks: string;
-  valid_until: Date;
+  valid_until: string;
   transaction_id: string;
 
   constructor(quoteRequest: QuoteRequest = new QuoteRequest()) {
@@ -44,10 +44,11 @@ export class ProformaInvoice {
     this.quantity = quoteRequest.quantity;
     this.total_weight = quoteRequest.total_weight;
     this.point_of_delivery = quoteRequest.point_of_delivery;
-    this.gps_coordinates_delivery = []; // quoteRequest.gps_coordinates;
-    this.gps_coordinates_loading = [];
+    this.gps_coordinates_delivery = ['43.6824666', '-79.54016200000001']; // quoteRequest.gps_coordinates;
+    this.gps_coordinates_loading = ['43.6824666', '-79.54016200000001'];
     this.incoterms = quoteRequest.incoterms;
     this.pricing_weight_unit = quoteRequest.weight_unit;
     this.transaction_id = quoteRequest.transaction_id;
+    this.expected_receiving_date = quoteRequest.receive_date;
   }
 }

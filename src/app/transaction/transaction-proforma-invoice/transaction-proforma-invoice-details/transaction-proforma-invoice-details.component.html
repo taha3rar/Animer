@@ -1,7 +1,11 @@
 <form [formGroup]="piForm">
   <p class="heading-4-blue margin-top">Additional Product Details</p>
   <div class="form-group">
-    <label for="tolerance">Tolerance</label>
+    <label for="tolerance">Stock Keeping Unit (SKU)</label>
+    <input type="text"  id="sku" class="form-control" formControlName="sku" />
+  </div>
+  <div class="form-group">
+    <label for="tolerance">Tolerance *</label>
     <textarea type="text" rows="1" id="tolerance" class="form-control" formControlName="tolerance"></textarea>
   </div>
   <div class="form-group">
@@ -26,33 +30,43 @@
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label>Type of Package</label>
+      <label>Type of Package *</label>
       <input type="text" class="form-control" formControlName="type_of_package" />
     </div>
     <div class="form-group col-md-6">
-      <label>Package Weight</label>
+      <label>Package Weight *</label>
       <input type="number" class="form-control" formControlName="package_weight" />
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="weight-unit">Weight Unit</label>
+      <label for="weight-unit">Weight Unit *</label>
       <select class="form-control" formControlName="weight_unit">
         <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
       </select>
     </div>
     <div class="form-group col-md-6">
-      <label>Quantity</label>
+      <label>Quantity *</label>
       <input type="number" class="form-control" formControlName="quantity" />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Total weight *</label>
+      <input type="number" class="form-control" formControlName="total_weight" />
     </div>
   </div>
   <p class="heading-4-blue margin-top">Shipping Details</p>
   <div class="form-group">
-    <label for="origin-address">Address of Origin</label>
+    <label for="origin-address">Address of Origin *</label>
     <input type="text" id="origin-address" class="form-control" formControlName="address_origin" />
   </div>
   <div class="form-group">
-    <label for="incoterms">Choose Incoterms</label>
+      <label for="origin-address">GPS Coordinates *</label>
+      <input type="text" id="gps" class="form-control" readonly formControlName="gps_origin" />
+    </div>
+  <div class="form-group">
+    <label for="incoterms">Choose Incoterms *</label>
     <select class="browser-default custom-select" id="incoterm" formControlName="incoterms">
       <optgroup *ngFor="let group of incotermsGroups" [label]="group.name">
         <option *ngFor="let incoterm of group.incoterms" [value]="incoterm.value">{{ incoterm.viewValue }}</option>
@@ -61,7 +75,7 @@
   </div>
   <p class="heading-4-blue margin-top">Pricing Details</p>
   <div class="form-group">
-    <label for="pricing-weight-unit">Pricing Weight Unit</label>
+    <label for="pricing-weight-unit">Pricing Weight Unit *</label>
     <select class="form-control" formControlName="pricing_weight_unit">
       <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
     </select>
@@ -69,15 +83,21 @@
 
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="currency">Currency</label>
+      <label for="currency">Currency *</label>
       <select id="currency" class="form-control" formControlName="currency">
         <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
       </select>
     </div>
 
     <div class="form-group col-md-6">
-      <label for="price-per">Price per</label>
+      <label for="price-per">Price per *</label>
       <input type="number" id="price-per" class="form-control" formControlName="price_per_unit"/>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Total price *</label>
+      <input type="number" class="form-control" formControlName="total_price" />
     </div>
   </div>
 
@@ -87,11 +107,24 @@
   </div>
   <p class="heading-4-blue margin-top">Additional Details</p>
   <div class="form-group">
-    <label for="delivery-date">Expected Delivery Date</label>
-    <input type="text" id="delivery-date" class="form-control" readonly formControlName="delivery_date"/>
+      <label for="pi-valid-del-date">Expected Delivery Date *</label>
+      <div class="input-group">
+        <input
+          id="pi-valid-del-date"
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="dpp"
+          ngbDatepicker
+          #dppp="ngbDatepicker"
+          formControlName="delivery_date"
+        />
+        <div class="input-group-append">
+          <button class="btn glyphicon glyphicon-calendar" (click)="dppp.toggle()" type="button"></button>
+        </div>
+      </div>
   </div>
   <div class="form-group">
-    <label for="pi-valid-date">Proforma Invoice Valid Until</label>
+    <label for="pi-valid-date">Proforma Invoice Valid Until *</label>
     <div class="input-group">
         <input
           id="pi-valid-date"

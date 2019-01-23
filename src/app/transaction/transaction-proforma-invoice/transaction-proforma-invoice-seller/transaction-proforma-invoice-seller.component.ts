@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseTransaction } from '@app/transaction/base-transaction';
-import { AuthenticationService } from '@app/core';
+import { AuthenticationService, ProformaInvoiceService } from '@app/core';
 import { ProformaInvoice } from '@app/core/models/transaction/proforma-invoice';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-proforma-invoice-seller',
@@ -9,7 +10,12 @@ import { ProformaInvoice } from '@app/core/models/transaction/proforma-invoice';
   styleUrls: ['./transaction-proforma-invoice-seller.component.scss']
 })
 export class TransactionProformaInvoiceSellerComponent extends BaseTransaction implements OnInit {
-  constructor(protected authenticationService: AuthenticationService) {
+  piReady: boolean;
+  constructor(
+    protected authenticationService: AuthenticationService,
+    private proformaInvoiceService: ProformaInvoiceService,
+    private router: Router
+  ) {
     super(authenticationService);
   }
 
@@ -20,7 +26,13 @@ export class TransactionProformaInvoiceSellerComponent extends BaseTransaction i
     }
   }
 
+  enableSubmission($event: boolean) {
+    this.piReady = $event;
+  }
+
   sendProformaInvoice() {
-    console.log(this.proformaInvoice);
+    this.proformaInvoiceService.create(this.proformaInvoice).subscribe(pi => {
+      this.router.navigateByUrl('/transaction/list');
+    });
   }
 }
