@@ -8,6 +8,8 @@ import { Shell } from '@app/shell/shell.service';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { OrderGeneratorComponent } from './order-generator/order-generator.component';
+import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
+import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -20,7 +22,11 @@ const routes: Routes = [
     },
     {
       path: 'order/generator',
-      component: OrderGeneratorSellerComponent
+      component: OrderGeneratorComponent,
+      resolve: {
+        buyer: OrderBuyerResolver,
+        sellers: OrderSellersResolver
+      }
     },
     {
       path: 'order/:id',

@@ -1,32 +1,22 @@
 <div class="order-summary">
   <p class="heading-2">Products</p>
 
-  <div class="product-item">
+  <div class="product-item" *ngFor="let product of productList">
     <figure
       class="img-circular-sm margin-none"
       style="background-image: url('../../../../assets/img/chia.jpg');"
     ></figure>
     <div>
-      <p>Chia Seeds</p>
-      <p>12 USD/kg</p>
+      <p>{{product.produce}} {{product.variety}}</p>
+      <p *ngIf="product.product_type==='agricultural'">{{product.price_per_unit}} {{product.currency}}/{{product.weight_unit}}</p>
+      <p *ngIf="product.product_type==='processed'">{{product.package_price}} {{product.currency}}/{{product.type_of_package}}</p>
     </div>
-    <p class="quantity">x1</p>
+    <p class="quantity">x{{product.quantity}}</p>
   </div>
-  <div class="product-item">
-      <figure
-        class="img-circular-sm margin-none"
-        style="background-image: url('../../../../assets/img/coffee.jpg');"
-      ></figure>
-      <div>
-        <p>Green Coffee</p>
-        <p>12 USD/kg</p>
-      </div>
-      <p class="quantity">x5</p>
-    </div>
 
     <div class="total">
       <p>TOTAL</p>
-      <p class="heading-3-blue">142 USD</p>
+      <p class="heading-3-blue">{{order.subtotal.value}} {{order.currency.value}}</p>
     </div>
 </div>
 

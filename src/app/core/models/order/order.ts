@@ -1,4 +1,4 @@
-import { Product } from './product';
+import { ProductInvoice } from '../invoice/product-invoice';
 import { User } from './user';
 
 export class Order {
@@ -7,7 +7,7 @@ export class Order {
   // Buyer and Seller information
   buyer: User;
   seller: User;
-  products: [Product];
+  products: ProductInvoice[];
   vat: number;
   total_due: number;
   currency: string;

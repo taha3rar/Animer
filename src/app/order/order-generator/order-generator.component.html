@@ -1,5 +1,6 @@
 <div class="wrapper">
-  <h1 class="main-title btn-main margin-bottom-2" (click)="back()"><a class="material-icons">keyboard_backspace</a> Orders</h1>
+  <h1 class="main-title btn-main margin-bottom-2" (click)="back()"><a class="material-icons">keyboard_backspace</a>
+    Orders</h1>
   <div class="stepper-wrapper">
     <div class="stepper">
       <ul class="nav nav-tabs">
@@ -21,59 +22,22 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="supplier">
-          <div class="panel panel-tab">
-            <div class="panel-body">
-              <div class="panel-header">
-                <div><p>My Suppliers</p></div>
-                <div>
-                  <button class="btn-primary-transp">
-                    <i class="material-icons">add</i> <span>Add Supplier</span>
-                  </button>
-                  <button class="bttn-primary next-step">Next Step &rarr;</button>
-                </div>
-              </div>
-              <div class="padding-all-2"><app-order-generator-suppliers></app-order-generator-suppliers></div>
-            </div>
-          </div>
+          <app-order-generator-suppliers></app-order-generator-suppliers>
         </div>
         <div class="tab-pane" id="products">
-          <div class="panel panel-tab products-col">
-            <div class="panel-body">
-              <div class="panel-header">
-                <div><p>Michael James Inventory</p></div>
-                <div>
-                  <div class="search-box">
-                  <input
-                    type="text"
-                    [(ngModel)]="term"
-                    class="search-bar-rounded"
-                    type="text"
-                    placeholder="Search products..."
-                  />
-                  <i class="material-icons">search</i>
-                </div>
-                  <button class="bttn-primary next-step">Next Step &rarr;</button>
-                </div>
-              </div>
-              <div class="padding-all-2"><app-order-generator-products></app-order-generator-products></div>
-            </div>
-          </div>
-          <div class="panel panel-tab summary-col">
-            <div class="panel-body">
-              <div class="panel-header"><p>Order Summary</p></div>
-              <div class="padding-all-2"><app-order-generator-summary></app-order-generator-summary></div>
-            </div>
-          </div>
+          <app-order-generator-products></app-order-generator-products>
         </div>
 
-        <div class="tab-pane" id="purchaseOrder"><app-order-generator-po></app-order-generator-po></div>
+        <div class="tab-pane" id="purchaseOrder">
+          <app-order-generator-po></app-order-generator-po>
+        </div>
 
         <div class="tab-pane" id="review">
           <div class="panel panel-tab">
             <div class="panel-body">
               <div class="padding-all-2">
-              <app-order-generator-review-order></app-order-generator-review-order>
-            </div>
+                <app-order-generator-review-order></app-order-generator-review-order>
+              </div>
             </div>
           </div>
         </div>

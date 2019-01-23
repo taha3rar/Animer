@@ -1,147 +1,125 @@
-<div class="margin-bottom">
-  <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_right</i></button>
-  <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_left</i></button>
-  <p class="normal-text-bold">Agricultural Products</p>
+<div class="panel panel-tab products-col">
+  <div class="panel-body">
+    <div class="panel-header">
+      <div>
+        <p>Michael James Inventory</p>
+      </div>
+      <div>
+        <div class="search-box">
+          <input type="text" [(ngModel)]="term" class="search-bar-rounded" type="text" placeholder="Search products..." />
+          <i class="material-icons">search</i>
+        </div>
+        <button class="btn-primary-transp" (click)="addProducts()">
+          <i class="material-icons">add</i> <span>Add Selected Products to Basket</span>
+        </button>
+        <button class="bttn-primary next-step" (click)="toOrderGenerator()">Next Step &rarr;</button>
+      </div>
+    </div>
+    <div class="padding-all-2">
+      <div class="margin-bottom">
+        <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_right</i></button>
+        <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_left</i></button>
+        <p class="normal-text-bold">Agricultural Products</p>
+      </div>
+      <div class="row clearfix">
+        <div *ngFor="let product of agriculturalProducts" class="col-md-3">
+          <div class="card">
+            <div>
+              <p class="pull-right margin-none">{{product.price_per_unit}} {{product.currency}}/<small>{{product.weight_unit
+                  | uppercase}}</small></p>
+            </div>
+            <div class="product-details">
+              <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
+              <p class="heading-2">
+                {{product.produce}} <br />
+                {{product.variety}}
+              </p>
+            </div>
+            <div class="package-details">
+              <div>
+                <p>Packages available</p>
+                <p>Type of package</p>
+                <p>Package weight</p>
+                <p>Total weight</p>
+              </div>
+              <div>
+                <p>{{product.quantityMax}}</p>
+                <p>{{product.type_of_package}}</p>
+                <p>{{product.package_weight}}/{{product.weight_unit | uppercase}}</p>
+                <p>{{product.total_weight}} {{product.weight_unit | uppercase}}</p>
+              </div>
+            </div>
+
+            <div class="quantity">
+              <p class="normal-text-bold">Quantity</p>
+              <button class="btn-circle" (click)=incrementQuantity(product)><i class="material-icons">add</i></button>
+              <input type="number" min="0" max="{{product.quantityMax}}" value="0" [(ngModel)]="product.quantity" />
+              <button class="btn-circle" (click)=decrementQuantity(product)><i class="material-icons">remove</i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Processed Products-->
+      <div class="margin-bottom margin-top">
+        <button class="btn-icons pull-right"><i class="material-icons">arrow_forward_ios</i></button>
+        <button class="btn-icons pull-right"><i class="material-icons">arrow_back_ios</i></button>
+        <p class="normal-text-bold">Processed Products</p>
+      </div>
+      <div class="row clearfix">
+        <ng-container *ngFor="let product of processedProducts">
+          <div class="col-md-3">
+            <div class="card">
+              <div>
+                <p class="pull-right margin-none">{{product.package_price}} {{product.currency}}/<small>{{product.type_of_package}}</small></p>
+              </div>
+              <div class="product-details">
+                <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
+                <p class="heading-2">
+                  {{product.produce}} <br />
+                </p>
+              </div>
+              <div class="package-details">
+                <div>
+                  <p>Packages available</p>
+                  <p>Type of package</p>
+                  <p *ngIf="product.item_measurement_amount">Item packing type</p>
+                  <p *ngIf="product.item_measurement_amount">Items per package</p>
+                  <p *ngIf="product.item_measurement_amount">Amount of</p>
+                </div>
+                <div>
+                  <p>{{product.quantityMax}}</p>
+                  <p>{{product.type_of_package}}</p>
+                  <p *ngIf="product.item_measurement_amount">{{product.item_package_type}}</p>
+                  <p *ngIf="product.item_measurement_amount">{{product.items_per_package}}</p>
+                  <p *ngIf="product.item_measurement_amount">{{product.item_measurement_amount}}
+                    {{product.item_measurement_unit}}/{{product.item_package_type}}</p>
+                </div>
+              </div>
+
+              <div class="quantity">
+                <p class="normal-text-bold">Quantity</p>
+                <button class="btn-circle" (click)=incrementQuantity(product)><i class="material-icons">add</i></button>
+                <input type="number" min="0" max="{{product.quantityMax}}" value="0" [(ngModel)]="product.quantity" />
+                <button class="btn-circle" (click)=decrementQuantity(product)><i class="material-icons">remove</i></button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="row clearfix">
-  <div class="col-md-3">
-    <div class="card">
-      <div>
-        <p class="pull-right margin-none">12 USD/<small>kg</small></p>
-      </div>
-      <div class="product-details">
-        <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
-        <p class="heading-2">
-          Chia Seeds <br />
-          Variety
-        </p>
-      </div>
-      <div class="package-details">
-        <div>
-          <p>Packages available</p>
-          <p>Type of package</p>
-          <p>Package weight</p>
-          <p>Total weight</p>
-        </div>
-        <div>
-          <p>12</p>
-          <p>Bag</p>
-          <p>45/kg</p>
-          <p>540kg</p>
-        </div>
-      </div>
-
-      <div class="quantity">
-        <p class="normal-text-bold">Quantity</p>
-        <button class="btn-circle"><i class="material-icons">add</i></button>
-        <input type="number" min="0" max="1900" value="0" />
-        <button class="btn-circle"><i class="material-icons">remove</i></button>
-      </div>
+<div class="panel panel-tab summary-col">
+  <div class="panel-body">
+    <div class="panel-header">
+      <p>Order Summary</p>
+      <button class="btn-icons" (click)="deleteProducts()">
+        <i class="material-icons">delete</i>
+      </button>
     </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card">
-      <div>
-        <p class="pull-right margin-none">12 USD/<small>kg</small></p>
-      </div>
-      <div class="product-details">
-        <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
-        <p class="heading-2">
-          Chia Seeds <br />
-          Variety
-        </p>
-      </div>
-      <div class="package-details">
-        <div>
-          <p>Packages available</p>
-          <p>Type of package</p>
-          <p>Package weight</p>
-          <p>Total weight</p>
-        </div>
-        <div>
-          <p>12</p>
-          <p>Bag</p>
-          <p>45/kg</p>
-          <p>540kg</p>
-        </div>
-      </div>
-
-      <div class="quantity">
-        <p class="normal-text-bold">Quantity</p>
-        <button class="btn-circle"><i class="material-icons">add</i></button>
-        <input type="number" min="0" max="1900" value="0" />
-        <button class="btn-circle"><i class="material-icons">remove</i></button>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card">
-      <div>
-        <p class="pull-right margin-none">12 USD/<small>kg</small></p>
-      </div>
-      <div class="product-details">
-        <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
-        <p class="heading-2">
-          Chia Seeds <br />
-          Variety
-        </p>
-      </div>
-      <div class="package-details">
-        <div>
-          <p>Packages available</p>
-          <p>Type of package</p>
-          <p>Package weight</p>
-          <p>Total weight</p>
-        </div>
-        <div>
-          <p>12</p>
-          <p>Bag</p>
-          <p>45/kg</p>
-          <p>540kg</p>
-        </div>
-      </div>
-
-      <div class="quantity">
-        <p class="normal-text-bold">Quantity</p>
-        <button class="btn-circle"><i class="material-icons">add</i></button>
-        <input type="number" min="0" max="1900" value="0" />
-        <button class="btn-circle"><i class="material-icons">remove</i></button>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card">
-      <div>
-        <p class="pull-right margin-none">12 USD/<small>kg</small></p>
-      </div>
-      <div class="product-details">
-        <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/coffee.jpg');"></figure>
-        <p class="heading-2">
-          Green Coffee Beans <br />
-          Kona
-        </p>
-      </div>
-      <div class="package-details">
-        <div>
-          <p>Packages available</p>
-          <p>Type of package</p>
-          <p>Package weight</p>
-          <p>Total weight</p>
-        </div>
-        <div>
-          <p>12</p>
-          <p>Bag</p>
-          <p>45/kg</p>
-          <p>540kg</p>
-        </div>
-      </div>
-
-      <div class="quantity">
-        <p class="normal-text-bold">Quantity</p>
-        <button class="btn-circle"><i class="material-icons">add</i></button>
-        <input type="number" min="0" max="1900" value="0" />
-        <button class="btn-circle"><i class="material-icons">remove</i></button>
-      </div>
+    <div class="padding-all-2">
+      <app-order-generator-summary [productList]="newProducts" [form]="form"></app-order-generator-summary>
     </div>
   </div>
 </div>

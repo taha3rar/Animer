@@ -1,0 +1,47 @@
+@import "../../../../assets/sass/abstracts/variables";
+
+.remove {
+  background-color: transparent;
+  border: 1px solid $red-color;
+  color: $red-color;
+  margin-right: 1rem;
+}
+
+.edit {
+  background-color: transparent;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+
+  i {
+    font-size: 1.6rem;
+  }
+}
+
+.dropdown {
+  display: inline;
+  .dropdown-menu {
+    margin-top: 1.8rem;
+    width: 96%;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+    li {
+      padding-right: 10px;
+      color: #666666;
+      padding-top: 5px;
+      border-left: 3px solid #37ce95;
+      padding-bottom: 5px;
+      a {
+        padding-left: 15px;
+      }
+    }
+
+    li:nth-child(2) {
+      border-left: 3px solid #37c1ce;
+    }
+
+    li:not(:last-child) {
+      border-bottom: 1px solid #f2f2f2;
+    }
+  }
+}

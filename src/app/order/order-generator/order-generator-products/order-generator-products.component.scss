@@ -71,3 +71,60 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
+  padding: 1rem 2.5rem;
+  margin-top: -1.5rem;
+}
+
+.panel-header :nth-child(2) {
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.panel-header::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+input.search-bar-rounded {
+  width: 20rem;
+  height: 3.7rem;
+  border-radius: 5rem;
+  font-size: 1.3rem;
+  margin-right: 2rem;
+  border: 1px solid #eeeeee;
+  padding-left: 1.5rem;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
+
+  &::placeholder {
+    color: #bbbbbb;
+  }
+}
+
+.products-col {
+  float: left;
+  width: 74.6%;
+}
+
+.summary-col {
+  width: 24%;
+  float: right;
+}
+
+.search-box {
+  position: relative;
+  display: inline;
+
+  i {
+    position: absolute;
+    top: -1px;
+    color: #d3d3d3;
+    right: 3.5rem;
+  }
+}

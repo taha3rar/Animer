@@ -17,4 +17,8 @@ export class OrderService extends BaseService {
     console.log('here');
     return this.apiService.get(`/user/${userId}/client/${clientId}/order`).pipe(map(data => data));
   }
+
+  draft(order: Order) {
+    return this.apiService.post(`/order/draft`, order).pipe(map(data => data));
+  }
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Product } from '@app/core/models/product';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-order-generator-summary',
@@ -6,7 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-generator-summary.component.scss']
 })
 export class OrderGeneratorSummaryComponent implements OnInit {
+  @Input()
+  productList: Product[];
+  @Input()
+  form: FormGroup;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.productList);
+  }
+
+  get order() {
+    return this.form.controls;
+  }
 }

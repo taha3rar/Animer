@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Client } from '@app/core/models/user/client';
+import { defaultValues } from '@app/shared/_helpers/default_values';
+import { FormGroup } from '@angular/forms';
+import { OrderDataService } from '../order-data.service';
 
 @Component({
   selector: 'app-order-generator-suppliers',
@@ -6,7 +11,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-generator-suppliers.component.scss']
 })
 export class OrderGeneratorSuppliersComponent implements OnInit {
-  constructor() {}
+  form: FormGroup;
+  clients: Client[];
+  page = 1;
 
-  ngOnInit() {}
+  constructor(private route: ActivatedRoute, private orderDataService: OrderDataService) {}
+
+  ngOnInit() {
+    this.clients = this.route.snapshot.data['sellers'];
+    this.orderDataService.currentForm.subscribe(form => {
+      this.form = form;
+    });
+  }
+
+  profilePicture(client: Client) {
+    return client.profile_picture || defaultValues.profile_picture;
+  }
+
+  get validSeller() {
+    return this.form.controls.seller.valid;
+  }
+
+  validateSeller() {
+    this.orderDataService.setForm(this.form);
+    this.orderDataService.currentForm.subscribe(form => {
+      this.form = form;
+    });
+  }
 }
