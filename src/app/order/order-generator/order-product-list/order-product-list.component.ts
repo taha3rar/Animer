@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
-import { currencies } from '@app/shared/_helpers/product_details';
 import { OrderAgriculturalProductComponent } from './order-agricultural-product/order-agricultural-product.component';
 import { OrderProcessedProductComponent } from './order-processed-product/order-processed-product.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
