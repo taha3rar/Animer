@@ -28,7 +28,7 @@ export class PurchaseOrder {
   pricing_details: string;
   currency: string;
   remarks: string;
-  valid_until: Date;
+  valid_until: string;
   carrier_company_name: string;
   carrier_company_phone_number: string;
   contact_person_full_name: string;

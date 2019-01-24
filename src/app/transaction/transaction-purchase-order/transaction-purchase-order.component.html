@@ -111,31 +111,42 @@
     </div>
   </div>
   <div *ngIf="!completedPO && !purchaseOrder._id" class="col-md-3 padding-all" style="background-color: rgba(250, 250, 250, 0.933)">
-    <div class="form-group">
-      <label for="payment-terms" class="heading-2">Payment Terms</label>
-      <textarea class="form-control" id="payment-terms" rows="2"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="po-terms" class="heading-2">Purchase Order Terms & Conditions</label>
-      <textarea class="form-control" id="po-terms" rows="2"></textarea>
-    </div>
-    <p class="heading-2">Purchase Order is Valid by</p>
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="mm/dd/yyyy" aria-describedby="basic-addon2" />
-      <div class="input-group-append">
-        <span class="input-group-text" id="basic-addon2"><i class="glyphicon glyphicon-calendar"></i></span>
+    <form [formGroup]="poForm">
+      <div class="form-group">
+        <label for="payment-terms" class="heading-2">Payment Terms</label>
+        <textarea class="form-control" id="payment-terms" rows="2" formControlName="payment_terms"></textarea>
       </div>
-    </div>
+      <div class="form-group">
+        <label for="po-terms" class="heading-2">Purchase Order Terms & Conditions</label>
+        <textarea class="form-control" id="po-terms" rows="2" formControlName="terms_conditions"></textarea>
+      </div>
+      <p class="heading-2">Purchase Order is Valid by</p>
+      <div class="input-group">
+        <input
+          id="po-valid-date"
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="dp"
+          ngbDatepicker
+          #dpp="ngbDatepicker"
+          formControlName="valid_until"
+        />
+        <div class="input-group-append">
+          <button class="btn glyphicon glyphicon-calendar" (click)="dpp.toggle()" type="button"></button>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="col-md-3" *ngIf="completedPO || purchaseOrder._id">
     <p class="heading-2">Payment Terms</p>
-    <p>{{ purchaseOrder.payment_terms }}</p>
+    <p>{{ purchaseOrder.payment_terms || purchaseOrderSpecificFields.payment_terms }}</p>
     <p class="heading-2">Purchase Order Terms & Conditions</p>
-    <p>{{ purchaseOrder.terms_conditions }}</p>
+    <p>{{ purchaseOrder.terms_conditions || purchaseOrderSpecificFields.terms_conditions }}</p>
     <p class="heading-2">Purchase Order is Valid by</p>
-    <p>{{ purchaseOrder.valid_until | date:'dd/MM/yy' }}</p>
+    <p *ngIf="purchaseOrder.valid_until">{{ purchaseOrder.valid_until | date:'dd/MM/yy' }}</p>
+    <p *ngIf="!purchaseOrder.valid_until && purchaseOrderSpecificFields.valid_until">{{ purchaseOrderSpecificFields.valid_until | date:'dd/MM/yy' }}</p>
     <div class="col-md-6 pull-right margin-bottom" *ngIf="!purchaseOrder._id">
-      <button class="btn-block bttn-primary next-step">Send</button>
+      <button class="btn-block bttn-primary next-step" (click)="submit()">Send</button>
     </div>
   </div>
 </div>
@@ -188,4 +199,4 @@
   </div>
 </div>
 <button class="btn-primary-transp pull-right">Download PDF</button>
-<button *ngIf="!completedPO && !purchaseOrder._id" class="pull-right bttn-primary next-step" (click)="completed()">Next &rarr;</button>
+<button *ngIf="!completedPO && !purchaseOrder._id" [disabled]="!poForm.valid" class="pull-right bttn-primary next-step" (click)="completed()">Next &rarr;</button>
