@@ -1,62 +1,28 @@
-<div class="row">
+<form [formGroup]="form">
+  <div class="row">
     <div class="col-md-6">
       <div class="info">
         <p class="heading-2">ISSUED BY</p>
-        <app-user-data></app-user-data>
+        <app-user-data [user]="form.value.seller.value" [issued_by]="true"></app-user-data>
       </div>
     </div>
     <div class="col-md-6">
       <div class="info">
         <p class="heading-2">ISSUED FOR</p>
-        <app-user-data></app-user-data>
+        <app-user-data [user]="form.value.buyer.value" [issued_for]="true"></app-user-data>
       </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="row">
-      <div class="col-md-4"><p class="heading-2">Purchase Order Number</p></div>
-      <div class="col-md-8">
-       <p class="heading-4">5822</p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <table class="table-blue">
-        <thead>
-          <tr>
-            <th>PRODUCT</th>
-            <th class="text-center">PACKAGES</th>
-            <th class="text-center">TOTAL AMOUNT</th>
-            <th class="text-center">RATE</th>
-            <th class="text-center">TOTAL PRICE</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Green Coffee Beans</td>
-            <td class="text-center">
-              <button class="btn-circle stepUp"><i class="material-icons">add</i></button> 100 (BAG / 50 KG)
-              <button class="btn-circle stepDown"><i class="material-icons">remove</i></button>
-            </td>
-            <td class="text-center">5,000 KG</td>
-            <td class="text-center">50 KES / KG</td>
-            <td class="text-center">1000 KES</td>
-            <td class="text-center">
-              <button class="btn-circle remove"><i class="material-icons">remove</i></button>
-              <button class="btn-circle edit"><i class="material-icons">edit</i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 
   <div class="row">
     <div class="col">
-      <button class="btn-primary-transp" >
+      <app-order-invoice-product-list [products]="products" [currency]="invoice.currency.value" (deleteProductEvent)="deleteProduct($event)" (updateProductEvent)="updateProduct($event)"></app-order-invoice-product-list>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <button class="btn-primary-transp">
         <i class="material-icons rotate">attach_file</i> <span>Upload Document</span>
       </button>
     </div>
@@ -66,13 +32,13 @@
     <div class="col-md-5">
       <div class="comments">
         <label for="payment_comments">Comments or special instructions for payment</label>
-        <textarea rows="4" id="payment_comments" placeholder="Type comments here..."></textarea>
+        <textarea rows="4" id="payment_comments" placeholder="Type comments here..." formControlName="payment_comments"></textarea>
       </div>
     </div>
     <div class="col-md-4">
       <div class="comments">
         <label for="po_comments">Comments or special instructions for purchase order</label>
-        <textarea rows="4" id="po_comments" placeholder="Type comments here..."></textarea>
+        <textarea rows="4" id="po_comments" placeholder="Type comments here..." formControlName="order_comments"></textarea>
       </div>
     </div>
     <div class="col-md-3">
@@ -82,118 +48,106 @@
             <p class="heading-4-blue">Subtotal</p>
             <div class="display-inline">
               <p class="heading-4-blue">VAT %</p>
-              <input class="form-control" style="width:23%;" type="number" value="0" />
+              <input formControlName="vat_percentage" class="form-control" style="width:23%;" type="number" value="0" />
             </div>
             <div class="display-inline">
               <p class="heading-4-blue">Discount %</p>
-              <input class="form-control" style="width:23%;" type="number" value="0" />
+              <input formControlName="discount_percentage" class="form-control" style="width:23%;" type="number" value="0" />
             </div>
           </div>
           <div class="subtotals">
-            <p class="heading-2">500,044 KES</p>
-            <p class="heading-2">500,044 KES</p>
-            <p class="heading-2">500,044 KES</p>
+              <p class="heading-2">{{invoice.subtotal.value | number : '1.2-2'}} {{invoice.currency.value}}</p>
+              <p class="heading-2">{{invoice.vat_amount.value | number : '1.2-2'}} {{invoice.currency.value}}</p>
+              <p class="heading-2">{{invoice.discount_amount.value | number : '1.2-2'}} {{invoice.currency.value}}</p>
           </div>
         </div>
         <div class="total">
           <p class="heading-4-blue">Total</p>
-          <p class="heading-2">500,044 KES</p>
+          <p class="heading-2">{{invoice.total_due.value | number : '1.2-2'}} {{invoice.currency.value}}</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6">
-      <div class="info">
-        <p class="heading-2">SIGNED BY</p>
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <label for="first_name">First Name</label>
-            <input type="text" class="form-control" id="first_name" placeholder="Type first name here..." />
-          </div>
-          <div class="form-group col-md-4">
-            <label for="last_name">Last Name</label>
-            <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." />
-          </div>
-          <div class="form-group col-md-4">
-            <label for="company_name">Company Name</label>
-            <input type="text" class="form-control" id="company_name" placeholder="Type company name here..." />
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-8">
-            <label for="PO_valid_date">Purchase Order is Valid by</label>
-            <div class="input-group">
-              <input
-                id="PO_valid_date"
-                class="form-control"
-                placeholder="yyyy-mm-dd"
-                name="ddpp"
-                ngbDatepicker
-                #ddpp="ngbDatepicker"
-              />
-              <div class="input-group-append">
-                <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
-              </div>
+      <div class="col-md-6">
+        <div formGroupName="sign_by" class="info">
+          <p class="heading-2">SIGNED BY</p>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="first_name">First Name *</label>
+              <input type="text" class="form-control" id="first_name" placeholder="Type first name here..."
+                formControlName="first_name" />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="last_name">Last Name *</label>
+              <input type="text" class="form-control" id="last_name" placeholder="Type last name here..." formControlName="last_name" />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="company_name">Company Name *</label>
+              <input type="text" class="form-control" id="company_name" placeholder="Type company name here..."
+                formControlName="company_name" />
             </div>
           </div>
-          <div class="col-md-4">
-            <p class="normal-text-bold">Date of Issue</p>
-            <p>11/14/2018</p>
+          <div class="row">
+            <div class="form-group col-md-8">
+              <label for="PO_valid_date">Purchase Order is Valid by *</label>
+              <div class="input-group">
+                <input id="PO_valid_date" class="form-control" placeholder="yyyy-mm-dd" name="ddpp" ngbDatepicker #ddpp="ngbDatepicker"
+                  formControlName="date" />
+                <div class="input-group-append">
+                  <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <p class="normal-text-bold">Date of Issue</p>
+              <p>{{ invoice.date_created.value | date: 'dd/MM/yyyy'}}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="info">
-        <p class="heading-2">DELIVERED TO</p>
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <label for="contact_name">Contact Name</label>
-            <input type="text" class="form-control" id="contact_name" placeholder="Typle contact name here..." />
+      <div class="col-md-6">
+        <div formGroupName="deliver_to" class="info">
+          <p class="heading-2">DELIVERED TO</p>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="contact_name">Contact Name *</label>
+              <input type="text" class="form-control" id="contact_name" placeholder="Typle contact name here..."
+                formControlName="contact_name" />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="street_address">Street Address *</label>
+              <input type="text" class="form-control" id="street_address" placeholder="Typle street address here..."
+                formControlName="address" />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="city">City *</label> <input type="text" class="form-control" id="city" formControlName="city" />
+            </div>
           </div>
-          <div class="form-group col-md-4">
-            <label for="street_address">Street Address</label>
-            <input type="text" class="form-control" id="street_address" placeholder="Typle street address here..." />
-          </div>
-          <div class="form-group col-md-4">
-            <label for="city">City</label> <input type="text" class="form-control" id="city" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <label for="zip_code">Zip Code</label>
-            <input type="text" class="form-control" id="zip_code" placeholder="Typle zip code here..." />
-          </div>
-          <div class="form-group col-md-4">
-            <label for="phone">Phone</label>
-            <input type="tel" placeholder="Type phone number here..." class="form-control" id="phone" />
-          </div>
-          <div class="form-group col-md-4">
-            <label for="expected_delivery">Expected Delivery Date</label>
-            <div class="input-group">
-              <input
-                id="expected_delivery"
-                class="form-control"
-                placeholder="yyyy-mm-dd"
-                name="ddp"
-                ngbDatepicker
-                #ddp="ngbDatepicker"
-              />
-              <div class="input-group-append">
-                <button
-                  class="btn glyphicon glyphicon-calendar"
-                  style="position:0;"
-                  (click)="ddp.toggle()"
-                  type="button"
-                ></button>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="zip_code">Zip Code *</label>
+              <input type="text" class="form-control" id="zip_code" placeholder="Typle zip code here..." formControlName="zip_code" />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="phone">Phone *</label>
+              <input type="tel" placeholder="Type phone number here..." class="form-control" id="phone" formControlName="phone_number" />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="expected_delivery">Expected Delivery Date *</label>
+              <div class="input-group">
+                <input id="expected_delivery" class="form-control" placeholder="yyyy-mm-dd" name="ddp" ngbDatepicker #ddp="ngbDatepicker"
+                  formControlName="expected_delivery_date" />
+                <div class="input-group-append">
+                  <button class="btn glyphicon glyphicon-calendar" style="position:0;" (click)="ddp.toggle()" type="button"></button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <button class="bttn-primary pull-right next-step">Next Step &rarr;</button>
-  <button class="btn-primary-transp pull-right btn-draft">Save Draft</button>
+    <button class="bttn-primary pull-right next-step" (click)="toReview()" [disabled]="!form.valid || products.length < 1">Next Step &rarr;</button>
+    <button class="btn-primary-transp pull-right btn-draft" (click)="draftInvoice()">Save Draft</button>
+  </form>

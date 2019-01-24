@@ -1,4 +1,3 @@
-import { OrderGeneratorSellerComponent } from './order-generator-seller/order-generator-seller.component';
 import { OrderComponent } from './order/order.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -8,8 +7,10 @@ import { Shell } from '@app/shell/shell.service';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { OrderGeneratorComponent } from './order-generator/order-generator.component';
+import { OrderGeneratorSellerComponent } from './order-generator-seller/order-generator-seller.component';
 import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
 import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
+import { OrderPoResolver } from './resolvers/order-po.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -26,6 +27,13 @@ const routes: Routes = [
       resolve: {
         buyer: OrderBuyerResolver,
         sellers: OrderSellersResolver
+      }
+    },
+    {
+      path: 'order/invoice/generator/:id',
+      component: OrderGeneratorSellerComponent,
+      resolve: {
+        order: OrderPoResolver
       }
     },
     {

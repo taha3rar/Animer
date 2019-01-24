@@ -28,9 +28,12 @@ import { OrderProductListComponent } from './order-generator/order-product-list/
 import { OrderAgriculturalProductComponent } from './order-generator/order-product-list/order-agricultural-product/order-agricultural-product.component';
 // tslint:disable-next-line:max-line-length
 import { OrderProcessedProductComponent } from './order-generator/order-product-list/order-processed-product/order-processed-product.component';
+// tslint:disable-next-line:max-line-length
+import { OrderInvoiceProductListComponent } from './order-generator-seller/order-invoice-generator/order-invoice-product-list/order-invoice-product-list.component';
 import { OrderDataService } from './order-generator/order-data.service';
 import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
 import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
+import { OrderPoResolver } from './resolvers/order-po.resolver';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
     OrderInvoiceGeneratorComponent,
     OrderProductListComponent,
     OrderAgriculturalProductComponent,
-    OrderProcessedProductComponent
+    OrderProcessedProductComponent,
+    OrderInvoiceProductListComponent
   ],
   imports: [
     SharedModule,
@@ -65,6 +69,6 @@ import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
     NgxPermissionsModule.forRoot()
   ],
   entryComponents: [OrderAgriculturalProductComponent, OrderProcessedProductComponent],
-  providers: [OrderListResolver, OrderSellersResolver, OrderBuyerResolver, OrderDataService]
+  providers: [OrderListResolver, OrderSellersResolver, OrderBuyerResolver, OrderDataService, OrderPoResolver]
 })
 export class OrderModule {}
