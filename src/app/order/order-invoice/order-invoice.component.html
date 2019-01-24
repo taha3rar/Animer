@@ -1,5 +1,6 @@
-<div id="pdfContent">
-  <p *ngIf="!generateInvoice" class="pull-right margin-none">INV #5312</p>
+<div *ngIf="!invoice && !generateInvoice">Your purchase order has been sent to the seller, please wait for his invoice</div>
+<div *ngIf="invoice || generateInvoice" id="pdfContent">
+  <p *ngIf="!generateInvoice" class="pull-right margin-none">INV #{{invoice?.numericId}}</p>
   <div class="row clearfix">
     <div class="col-md-9">
       <p class="heading-2">ISSUED BY</p>

@@ -8,22 +8,22 @@
     <div class="panel-body">
       <div class="col-md-3">
         <p class="heading-3">ORDER NUMBER</p>
-        <p class="normal-text-bold">212</p>
+        <p class="normal-text-bold">{{order?.numericId}}</p>
       </div>
       <div class="col-md-3">
         <p class="heading-3">DATE OF SUBMISSION</p>
-        <p class="normal-text-bold">10/21/2018</p>
+        <p class="normal-text-bold">{{ order?.date_created | date: 'dd/MM/yyyy' }}</p>
       </div>
       <div class="col-md-3">
         <p class="heading-3">SHIPPING TO</p>
-        <p class="normal-text-bold">Ishai Ben Or</p>
-        <p class="normal-text-bold">Haglili st. number 10, Tel Aviv, Israel</p>
-        <p class="normal-text-bold">Enterance B. Mailbox 7</p>
+        <p class="normal-text-bold">{{ order.deliver_to.contact_name }}</p>
+        <p class="normal-text-bold">{{ order.deliver_to.address }}, {{ order.deliver_to.city }} {{ order.deliver_to.zip_code }}</p>
+        <p class="normal-text-bold">{{ order.deliver_to.phone_number }}</p>
       </div>
       <div class="col-md-3">
         <p class="heading-3">DELIVERY</p>
         <p class="normal-text-bold">Estimated delivery date</p>
-        <p class="normal-text-bold">08/31/2018</p>
+        <p class="normal-text-bold">{{ order.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy'}}</p>
       </div>
     </div>
   </div>
@@ -41,14 +41,14 @@
     <div class="tab-pane active" id="purchaseOrder">
       <div class="panel panel-tab">
         <div class="panel-body">
-          <app-order-po></app-order-po>
+          <app-order-po [generateOrder]="false" [order]="order"></app-order-po>
         </div>
       </div>
     </div>
     <div class="tab-pane" id="invoice">
       <div class="panel panel-tab">
         <div class="panel-body">
-          <app-order-invoice></app-order-invoice>
+          <app-order-invoice [generateInvoice]="false" [invoice]="invoice"></app-order-invoice>
         </div>
       </div>
     </div>

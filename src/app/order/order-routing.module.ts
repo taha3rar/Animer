@@ -38,7 +38,10 @@ const routes: Routes = [
     },
     {
       path: 'order/:id',
-      component: OrderComponent
+      component: OrderComponent,
+      resolve: {
+        order: OrderPoResolver
+      }
     }
   ])
 ];

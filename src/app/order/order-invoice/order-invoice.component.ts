@@ -18,9 +18,7 @@ export class OrderInvoiceComponent implements OnInit {
 
   constructor(private invoiceService: InvoiceService, private router: Router) {}
 
-  ngOnInit() {
-    console.log(this.invoice);
-  }
+  ngOnInit() {}
 
   download(): void {
     html2canvas(document.getElementById('pdfContent'), { windowWidth: 900, windowHeight: 1000 }).then(canvas => {

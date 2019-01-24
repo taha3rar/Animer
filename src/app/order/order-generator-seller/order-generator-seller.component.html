@@ -5,7 +5,7 @@
     <div class="stepper">
       <ul class="nav nav-tabs">
         <li class="active">
-          <a data-toggle="tab" class="label" href="#po"><span class="round-tab">1</span>Purchase Order</a>
+          <a data-toggle="tab" class="label" href="#supplier"><span class="round-tab">1</span>Purchase Order</a>
         </li>
         <li class="disabled">
           <a data-toggle="tab" class="label" href="#gInvoice"><span class="round-tab">2</span>Generate Invoice</a>
@@ -15,11 +15,11 @@
         </li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane active" id="po">
+        <div class="tab-pane active" id="supplier">
           <div class="panel panel-tab">
             <div class="panel-body">
               <div class="padding-all-2">
-                <app-order-po [order]="order"></app-order-po>
+                <app-order-po [generateOrder]="false" [order]="order"></app-order-po>
               </div>
             </div>
           </div>
