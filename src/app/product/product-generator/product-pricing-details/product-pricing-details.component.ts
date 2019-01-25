@@ -19,12 +19,18 @@ export class ProductPricingDetailsComponent extends BaseProduct {
     return this.form.controls.quantity.value;
   }
 
+  get weight_unit() {
+    return this.form.controls.weight_unit.value;
+  }
+
   get validPricing() {
     const valid =
       this.form.controls.currency.valid &&
       this.form.controls.total_price.valid &&
       this.form.controls.package_price.valid &&
       this.form.controls.quantity.valid &&
+      this.form.controls.total_weight.valid &&
+      this.form.controls.price_per_unit.valid &&
       this.form.controls.pricing_details.valid;
 
     return valid;

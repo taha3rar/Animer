@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ProductDataService } from './product-data.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-product-generator',
@@ -31,7 +31,7 @@ export class ProductGeneratorComponent implements OnInit {
         product_id: [undefined],
         ingredients: [undefined],
         type_of_package: [undefined, Validators.required],
-        items_per_package: [undefined, Validators.required],
+        items_per_package: [undefined, this.productDataService.requiredForProcessed()],
         quantity: [undefined, Validators.required],
         total_amount_items: [undefined],
         package_details: [undefined],
@@ -41,21 +41,21 @@ export class ProductGeneratorComponent implements OnInit {
         pricing_details: [undefined],
         gps_coordinates: [undefined, Validators.required],
         loading_location: [undefined, Validators.required],
-        variety: [undefined],
+        variety: [undefined, this.productDataService.requiredForAgricultural()],
         approvals_and_certifications: [undefined],
         country_of_origin: [undefined],
         specification: [undefined],
         about: [undefined],
-        package_weight: [undefined],
-        weight_unit: [undefined],
-        total_weight: [undefined],
-        estimated_weight_values: [undefined],
+        package_weight: [undefined, this.productDataService.requiredForAgricultural()],
+        weight_unit: [undefined, this.productDataService.requiredForAgricultural()],
+        total_weight: [undefined, this.productDataService.requiredForAgricultural()],
+        estimated_weight_values: [false],
         individual_item_details: [undefined],
         item_package_type: [undefined, this.productDataService.requiredForProcessed()],
         item_measurement_unit: [undefined, this.productDataService.requiredForProcessed()],
         item_measurement_amount: [undefined, this.productDataService.requiredForProcessed()],
         item_package_details: [true],
-        price_per_unit: [undefined],
+        price_per_unit: [undefined, this.productDataService.requiredForAgricultural()],
         international_buyers: [true],
         excluded_countries: [undefined, Validators.required],
         tariff_code: [undefined, Validators.required]

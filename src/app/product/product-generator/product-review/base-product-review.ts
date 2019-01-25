@@ -1,23 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseProduct } from '../base-product';
 import { ProductDataService } from '../product-data.service';
 import { Product } from '@app/core/models/product';
 import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
+import { BaseProduct } from '../base-product';
 import { defaultValues } from '@app/shared/helpers/default_values';
+import { OnInit } from '@angular/core';
 
-@Component({
-  selector: 'app-product-review',
-  templateUrl: './product-review.component.html',
-  styleUrls: ['./product-review.component.scss']
-})
-export class ProductReviewComponent extends BaseProduct implements OnInit {
+export class BaseProductReview extends BaseProduct implements OnInit {
   product: Product;
 
   constructor(
     protected productDataService: ProductDataService,
-    private productService: ProductService,
-    private router: Router
+    protected productService: ProductService,
+    protected router: Router
   ) {
     super(productDataService);
   }

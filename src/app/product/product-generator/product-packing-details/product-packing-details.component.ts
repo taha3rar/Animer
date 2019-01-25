@@ -19,6 +19,7 @@ export class ProductPackingDetailsComponent extends BaseProduct implements OnIni
   ngOnInit() {
     super.ngOnInit();
 
+    // processed logic
     this.form.get('item_package_details').valueChanges.subscribe(packageDetails => {
       if (packageDetails) {
         this.form.get('item_package_type').enable();
@@ -45,6 +46,10 @@ export class ProductPackingDetailsComponent extends BaseProduct implements OnIni
       this.form.controls.quantity.valid &&
       this.form.controls.total_amount_items.valid &&
       this.form.controls.package_details.valid &&
+      this.form.controls.package_weight.valid &&
+      this.form.controls.weight_unit.valid &&
+      this.form.controls.total_weight.valid &&
+      this.form.controls.estimated_weight_values.valid &&
       (this.form.controls.item_package_type.valid || this.form.controls.item_package_type.disabled) &&
       (this.form.controls.item_measurement_unit.valid || this.form.controls.item_measurement_unit.disabled) &&
       (this.form.controls.item_measurement_amount.valid || this.form.controls.item_measurement_amount.disabled);

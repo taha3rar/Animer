@@ -77,11 +77,12 @@
       <div class="tab-pane" id="review">
         <div class="panel panel-tab">
           <div class="panel-body">
-              <div class="panel-header">
-                  <p>Review Product</p>
-              </div>
-              <div class="padding-all-2">
-            <app-product-review></app-product-review>
+            <div class="panel-header">
+                <p>Review Product</p>
+            </div>
+            <div class="padding-all-2">
+              <app-product-review-processed *ngIf="isProcessed"></app-product-review-processed>
+              <app-product-review-agricultural *ngIf="!isProcessed"></app-product-review-agricultural>
             </div>
           </div>
         </div>
