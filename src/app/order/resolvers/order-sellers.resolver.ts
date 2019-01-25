@@ -12,7 +12,7 @@ export class OrderSellersResolver implements Resolve<Client[]> {
   resolve(): Observable<Client[]> {
     const currentUserId = this.authService.currentUserId;
 
-    return this.userService.getClientsByUser(currentUserId).pipe(
+    return this.userService.getSuppliersByUser(currentUserId).pipe(
       catchError(err => {
         console.error(err);
         return EMPTY.pipe();

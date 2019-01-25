@@ -11,6 +11,7 @@ declare const $: any;
   styleUrls: ['./order-generator-products.component.scss']
 })
 export class OrderGeneratorProductsComponent implements OnInit {
+  term: string;
   form: FormGroup;
   products: Product[];
   agriculturalProducts: Product[];

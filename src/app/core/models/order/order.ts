@@ -10,12 +10,14 @@ export class Order {
   products: ProductInvoice[];
   vat: number;
   total_due: number;
+  subtotal: number;
   currency: string;
   document_weight_unit: string;
   sign_by: {
     first_name: string;
     last_name: string;
     company_title: string;
+    company_name: string;
     date: string;
   };
   deliver_to: {

@@ -110,7 +110,7 @@
         <p class="heading-2">Delivered to</p>
         <p>{{ order.deliver_to.contact_name }}</p>
         <p>{{ order.deliver_to.address }}, {{ order.deliver_to.city }} {{ order.deliver_to.zip_code }}</p>
-        <p>{{ order.deliver_to.phone_number }}</p>
+        <p>{{ order.deliver_to.phone }}</p>
         <p>Expected delivery date: {{ order.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy'}}</p>
         <button *ngIf="!buyer && !order.invoice" class="bttn-primary pull-right next-step">Generate Invoice</button>
         <button class="btn-primary-transp pull-right" (click)="download()">Download PDF</button>

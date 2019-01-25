@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ProductDataService } from './product-data.service';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-generator',
@@ -23,6 +23,7 @@ export class ProductGeneratorComponent implements OnInit {
   ngOnInit() {
     this.route.queryParamMap.subscribe((params: ParamMap) => {
       this.productDataService.setType(params.get('type') || 'agricultural'); // default
+      this.isProcessed = this.productDataService.isProcessed();
 
       this.productForm = this.formBuilder.group({
         product_type: [this.productDataService.type, Validators.required],
