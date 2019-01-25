@@ -13,6 +13,7 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
   products: Product[];
   selectedProduct: Product;
   page = 1;
+  itemsPerPage = 6;
 
   constructor(private route: ActivatedRoute, private productService: ProductService, protected router: Router) {
     super(productService, router, {
@@ -28,6 +29,7 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
   }
 
   setProductOverview(index: string) {
+    index = (this.page - 1) * this.itemsPerPage + index;
     this.selectedProduct = this.products[index];
   }
 }

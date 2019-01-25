@@ -38,7 +38,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="excluded_countries">Excluded countries</label>
-        <select class="browser-default custom-select" id="excluded_countries" formControlName="excluded_countries">
+        <select class="browser-default custom-select" id="excluded_countries" formControlName="excluded_countries" multiple>
           <option *ngFor="let country of countriesList" [value]="country.value">
             {{ country.viewValue }}
           </option>

@@ -1,9 +1,9 @@
 export const measureUnits = [
-  { value: 'gr', viewValue: 'Grams' },
-  { value: 'kg', viewValue: 'Kilograms' },
-  { value: 'mt', viewValue: 'MT' },
-  { value: 'lb', viewValue: 'LB' },
-  { value: 'ml', viewValue: 'Milliliters' },
-  { value: 'li', viewValue: 'Liters' },
-  { value: 'oz', viewValue: 'OZ' }
+  { value: 'GR', viewValue: 'Grams' },
+  { value: 'KG', viewValue: 'Kilograms' },
+  { value: 'MT', viewValue: 'MT' },
+  { value: 'LB', viewValue: 'LB' },
+  { value: 'ML', viewValue: 'Milliliters' },
+  { value: 'LI', viewValue: 'Liters' },
+  { value: 'OZ', viewValue: 'OZ' }
 ];

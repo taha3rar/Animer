@@ -5,8 +5,11 @@
   <p translate>Product list help legend</p>
 </div>
 
-<button class="bttn-primary bttn-add pull-right" data-toggle="stepper" routerLink="/product/generator">
-  <span translate>New Product</span>
+<button class="bttn-primary bttn-add pull-right" data-toggle="stepper" [routerLink]="['/product/generator']" [queryParams]="{type: 'processed'}">
+  <span translate>New Processed Product</span>
+</button>
+<button class="bttn-primary bttn-add pull-right" data-toggle="stepper" [routerLink]="['/product/generator']"  [queryParams]="{type: 'agricultural'}">
+  <span translate>New Agricultural Product</span>
 </button>
 
 <h1 translate class="main-title">Products List</h1>
@@ -23,7 +26,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of (products | paginate: { itemsPerPage: 6, currentPage: page }); let i = index">
+    <tr *ngFor="let product of (products | paginate: { itemsPerPage: itemsPerPage, currentPage: page }); let i = index">
       <td class="text-center">{{ product.numericId }}</td>
       <td *ngIf="product.product_type != 'processed'">{{ product.produce }} / {{ product.variety }}</td>
       <td *ngIf="product.product_type == 'processed'">{{ product.produce }}</td>

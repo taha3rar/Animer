@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-6 margin-top">
-      <button class="btn-icons  pull-right" (click)="targetStep('productDetails')">
-          <i class="material-icons">edit</i>
-        </button>
+    <button class="btn-icons  pull-right" (click)="targetStep('productDetails')">
+      <i class="material-icons">edit</i>
+    </button>
     <div class="icon-text margin-bottom">
       <i class="material-icons">description </i>
       <p class="heading-2">Product Details</p>
@@ -13,16 +13,17 @@
           class="img-circular"
           style="background-image: url('../../../assets/img/chia.jpg'); margin: 0 auto;"
         ></figure>
-        <p class="heading-2" style="text-align:center;">Chia Seeds</p>
+        <p class="heading-2" style="text-align:center;">{{ product.produce }}</p>
       </div>
-      <div>
+      <div *ngIf="isProcessed">
         <p class="heading-2">Ingredients</p>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum odit at quis totam quaerat quos. Doloremque
-          dolore et omnis nesciunt?
+          {{ product.ingredients}}
         </p>
         <p class="heading-2">SKU</p>
-        <p>4134</p>
+        <p>{{ product.sku }}</p>
+        <p class="heading-2">Product code</p>
+        <p>{{ product.product_id }}</p>
       </div>
     </div>
   </div>
@@ -36,11 +37,11 @@
     </div>
     <div style="padding-left:4.6%;">
       <p class="heading-2">Loading location</p>
-      <p>Jl. Klp. Lilin Utara II No.df4/1, Curug Sangereng</p>
+      <p>{{ product.loading_location }}</p>
       <p class="heading-2">GPS coordinates</p>
-      <p>[-6.246298200000001] [106.62240739999993]</p>
+      <p>{{ product.gps_coordinates }}</p>
       <p class="heading-2">HS tariff code</p>
-      <p>0222</p>
+      <p>{{ product.tariff_code }}</p>
     </div>
   </div>
 </div>
@@ -56,35 +57,36 @@
     <div class="packing-flex">
       <div>
         <p class="heading-2">Type of package</p>
-        <p>Bag</p>
-        <p class="heading-2">Number of items per packge</p>
-        <p>500</p>
+        <p>{{ product.type_of_package }}</p>
+        <p class="heading-2">Number of items per package</p>
+        <p>{{ product.items_per_package }}</p>
       </div>
       <div>
       <p class="heading-2">Total amount of items</p>
-      <p>1000</p>
+      <p>{{ product.total_amount_items }}</p>
       <p class="heading-2">Additional packing details</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt!</p>
+      <p>{{ product.package_details }}</p>
     </div>
       <div>
         <p class="heading-2">Total amount of packing items</p>
-        <p>200</p>
+        <p>{{ product.quantity }}</p>
       </div>
     </div>
-    <hr>
-    <p class="heading-2">Individual Item Details</p>
-    <div class="packing-flex">
+    <hr *ngIf="product.item_package_details">
+    <p *ngIf="product.item_package_details" class="heading-2">Individual Item Details</p>
+    <div *ngIf="product.item_package_details" class="packing-flex">
       <div>
         <p class="heading-2">Item packing type</p>
-        <p>Bag</p>
+        <p>{{ product.item_package_type }}</p>
       </div>
       <div>
         <p class="heading-2">Item Measurement Unit </p>
-        <p>Grams</p>
+        <p>{{ product.item_measurement_unit }}</p>
       </div>
       <div>
-        <p class="heading-2">Amount of grams in individual Green Coffee</p>
-        <p>200</p>
+        <p class="heading-2">Amount of {{ product.item_measurement_unit }} in individual {{ product.item_package_type }}
+        </p>
+        <p>{{ product.item_measurement_amount }}</p>
       </div>
     </div>
   </div>
@@ -103,20 +105,20 @@
           <div class="packing-flex">
                   <div>
                     <p class="heading-2">Total amount of packages</p>
-                    <p>10</p>
+                    <p>{{ product.quantity }}</p>
                     <p class="heading-2">Additional pricing details</p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis.</p>
+                    <p>{{ product.pricing_details }}</p>
                   </div>
                   <div>
                     <p class="heading-2">Price per package</p>
-                    <p>10 USD</p>
+                    <p>{{ product.package_price }} {{ product.currency }}</p>
                   </div>
                   <div>
                   <p class="heading-2">Total price</p>
-                  <p>555</p>
+                  <p>{{ product.total_price }} {{ product.currency }}</p>
                 </div>
           </div>
         </div>
 </div>
 
-<button class="bttn-primary pull-right">Add Product</button>
+<button class="bttn-primary pull-right" (click)="save()" [disabled]="!form.valid">Add Product</button>

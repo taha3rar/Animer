@@ -8,12 +8,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductProfileComponent } from './product-profile/product-profile.component';
 import { ProductGeneratorComponent } from './product-generator/product-generator.component';
-import { ProductPackingDetailsComponent } from './product-packing-details/product-packing-details.component';
-import { ProductPricingDetailsComponent } from './product-pricing-details/product-pricing-details.component';
-import { ProductShippingDetailsComponent } from './product-shipping-details/product-shipping-details.component';
-import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ProductReviewComponent } from './product-review/product-review.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ProductReviewComponent } from './product-generator/product-review/product-review.component';
+import { ProductPackingDetailsComponent } from './product-generator/product-packing-details/product-packing-details.component';
+import { ProductPricingDetailsComponent } from './product-generator/product-pricing-details/product-pricing-details.component';
+import { ProductShippingDetailsComponent } from './product-generator/product-shipping-details/product-shipping-details.component';
+import { ProductDetailsComponent } from './product-generator/product-details/product-details.component';
+import { ProductDataService } from './product-generator/product-data.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,6 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [ProductListResolver]
+  providers: [ProductListResolver, ProductDataService]
 })
 export class ProductModule {}

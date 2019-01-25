@@ -1,4 +1,4 @@
-@import "../../../assets/sass/abstracts/variables";
+@import "../../../../assets/sass/abstracts/variables";
 
 select {
   font-size: 1.25rem;
@@ -6,15 +6,15 @@ select {
   border-radius: 0.8rem;
 }
 
-.form-row:not(:nth-child(3)) {
-  padding-top: 3rem;
+.form-group:not(:nth-child(5)):not(:nth-child(3)) {
+  padding-bottom: 1rem;
+}
+
+.packing-details {
+  padding: 2rem 0;
 }
 
 .bttn-primary {
   background-image: linear-gradient(to right, #55d5d1, $primary-color);
   box-shadow: 0 3px 1rem rgba(0, 0, 0, 0.2);
-}
-
-.form-group {
-  padding-bottom: 1.2rem;
 }

@@ -32,7 +32,7 @@ export class Product {
   total_price: number;
   currency: string;
   loading_location: string;
-  gps_coordinates: string;
+  gps_coordinates: string[];
   international_buyers: boolean;
   excluded_countries: string[];
   tariff_code: string;
