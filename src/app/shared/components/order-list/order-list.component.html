@@ -37,7 +37,7 @@
       <td>{{ order.status }}</td>
       <td class="text-right">
           <button *ngIf="order.invoice || userId == order.buyer._id" class="round-button-primary" [routerLink]="['/order', order._id]"><i class="material-icons">remove_red_eye</i></button>
-          <button *ngIf="userId == order.seller._id && !order.invoice" class="round-button-primary" data-toggle="stepper" [routerLink]="['/order/invoice/generator', order._id]"><i class="material-icons">remove_red_eye</i></button>
+          <button *ngIf="userId == order.seller._id && !order.invoice" class="round-button-primary" [routerLink]="['/order/invoice/generator', order._id]"><i class="material-icons">remove_red_eye</i></button>
           <button class="round-button-red" (click)="warning(order._id)"><i class="material-icons">delete</i></button>
       </td>
     </tr>
