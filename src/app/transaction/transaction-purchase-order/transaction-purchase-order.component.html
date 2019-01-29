@@ -1,13 +1,13 @@
 <div class="row margin-bottom">
   <div class="col-md-9">
     <p class="heading-2">BUYER</p>
-    <p class="heading-4">{{transaction.buyer.email}}</p>
-    <p class="heading-4">{{transaction.buyer.first_name}} {{transaction.buyer.last_name}}</p>
+    <p class="heading-4">{{ transaction.buyer.email }}</p>
+    <p class="heading-4">{{ transaction.buyer.first_name }} {{ transaction.buyer.last_name }}</p>
   </div>
   <div class="col-md-3">
     <p class="heading-2">SELLER</p>
-    <p class="heading-4">{{transaction.seller.email}}</p>
-    <p class="heading-4">{{transaction.seller.first_name}} {{transaction.buyer.last_name}}</p>
+    <p class="heading-4">{{ transaction.seller.email }}</p>
+    <p class="heading-4">{{ transaction.seller.first_name }} {{ transaction.buyer.last_name }}</p>
   </div>
 </div>
 
@@ -33,8 +33,10 @@
           <td>{{ purchaseOrder.stock_keeping_unit || '-' }}</td>
           <td>{{ purchaseOrder.specification }}</td>
           <td>
-            <ul *ngIf="purchaseOrder.certifications &&  purchaseOrder.certifications[0]">
-                <li *ngFor="let certification of purchaseOrder.certifications" style="list-style: none;">{{ certification }}</li>
+            <ul *ngIf="purchaseOrder.certifications && purchaseOrder.certifications[0]">
+              <li *ngFor="let certification of purchaseOrder.certifications" style="list-style: none;">
+                {{ certification }}
+              </li>
             </ul>
           </td>
         </tr>
@@ -45,29 +47,29 @@
     <table class="table table-striped margin-bottom">
       <thead>
         <tr>
-        <th>Type of package</th>
-        <th>Packaged product weight</th>
-        <th>Weight unit</th>
-        <th>Qunatity</th>
-        <th>Total Weight</th>
-      </tr>
+          <th>Type of package</th>
+          <th>Packaged product weight</th>
+          <th>Weight unit</th>
+          <th>Qunatity</th>
+          <th>Total Weight</th>
+        </tr>
       </thead>
       <tbody>
         <tr class="table-light">
-          <td>{{purchaseOrder.type_of_package}}</td>
-          <td>{{purchaseOrder.package_weight}}</td>
-          <td>{{purchaseOrder.package_weight_unit | uppercase}}</td>
-          <td>{{purchaseOrder.quantity}}</td>
-          <td>{{purchaseOrder.total_weight}}</td>
+          <td>{{ purchaseOrder.type_of_package }}</td>
+          <td>{{ purchaseOrder.package_weight }}</td>
+          <td>{{ purchaseOrder.package_weight_unit | uppercase }}</td>
+          <td>{{ purchaseOrder.quantity }}</td>
+          <td>{{ purchaseOrder.total_weight }}</td>
         </tr>
       </tbody>
     </table>
 
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-8 col-md-8">
         <p class="heading-4-blue">Container Details</p>
-        <p class="heading-4">Type: {{purchaseOrder.container_type}}</p>
-        <p class="heading-4 margin-bottom">Quantity: {{purchaseOrder.container_quantity}}</p>
+        <p class="heading-4">Type: {{ purchaseOrder.container_type }}</p>
+        <p class="heading-4 margin-bottom">Quantity: {{ purchaseOrder.container_quantity }}</p>
 
         <p class="heading-2 margin-top">Shipping Details</p>
         <div class="row margin-bottom-2">
@@ -79,38 +81,43 @@
             <p>Incoterms</p>
           </div>
           <div class="col-md-9">
-            <p>{{purchaseOrder.point_of_loading}}</p>
-            <p>{{purchaseOrder.gps_coordinates_loading[0]}} {{purchaseOrder.gps_coordinates_loading[1]}}</p>
-            <p>{{purchaseOrder.point_of_delivery}}</p>
-            <p>{{purchaseOrder.gps_coordinates_delivery[0]}} {{purchaseOrder.gps_coordinates_delivery[1]}}</p>
-            <p>{{purchaseOrder.incoterms}}</p>
+            <p>{{ purchaseOrder.point_of_loading }}</p>
+            <p>{{ purchaseOrder.gps_coordinates_loading[0] }} {{ purchaseOrder.gps_coordinates_loading[1] }}</p>
+            <p>{{ purchaseOrder.point_of_delivery }}</p>
+            <p>{{ purchaseOrder.gps_coordinates_delivery[0] }} {{ purchaseOrder.gps_coordinates_delivery[1] }}</p>
+            <p>{{ purchaseOrder.incoterms }}</p>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="invoice-right-side">
           <p class="heading-big">PRICING</p>
-          <div class="pricing">
-            <div>
-              <p class="heading-2 ">Price per {{purchaseOrder.package_weight_unit | uppercase}}</p>
-              <p class="heading-2">Currency</p>
-              <p class="heading-2">Total weight</p>
+          <div>
+            <span class="heading-2 ">Price per {{ purchaseOrder.package_weight_unit | uppercase }}</span>
+            <span class="heading-4-blue">{{ purchaseOrder.price_per_unit }}</span
+            ><br />
+            <span class="heading-2">Currency</span>
+            <span class="heading-4-blue">{{ purchaseOrder.currency | uppercase }}</span>
+            <div class="margin-bottom">
+              <span class="heading-2">Total weight</span>
+              <span class="heading-4-blue">{{ purchaseOrder.total_weight }}</span>
             </div>
-            <div>
-              <p class="heading-4-blue">{{purchaseOrder.price_per_unit}}</p>
-              <p class="heading-4-blue">{{purchaseOrder.currency | uppercase}}</p>
-              <p class="heading-4-blue">{{purchaseOrder.total_weight}}</p>
-            </div>
-            <div>
-              <p class="heading-2">TOTAL</p>
-              <p class="heading-4-blue">{{purchaseOrder.total_price}} {{purchaseOrder.currency | uppercase}}</p>
-            </div>
+          </div>
+          <div class="total-block">
+            <span class="heading-2">TOTAL</span>
+            <span class="heading-4-blue" style="font-size:1.6rem">
+              {{ purchaseOrder.total_price }} {{ purchaseOrder.currency | uppercase }}
+            </span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="!completedPO && !purchaseOrder._id" class="col-md-3 padding-all" style="background-color: rgba(250, 250, 250, 0.933)">
+  <div
+    *ngIf="!completedPO && !purchaseOrder._id"
+    class="col-md-3 padding-all"
+    style="background-color: rgba(250, 250, 250, 0.933)"
+  >
     <form [formGroup]="poForm">
       <div class="form-group">
         <label for="payment-terms" class="heading-2">Payment Terms</label>
@@ -143,11 +150,10 @@
     <p class="heading-2">Purchase Order Terms & Conditions</p>
     <p>{{ purchaseOrder.terms_conditions || purchaseOrderSpecificFields.terms_conditions }}</p>
     <p class="heading-2">Purchase Order is Valid by</p>
-    <p *ngIf="purchaseOrder.valid_until">{{ purchaseOrder.valid_until | date:'dd/MM/yy' }}</p>
-    <p *ngIf="!purchaseOrder.valid_until && purchaseOrderSpecificFields.valid_until">{{ purchaseOrderSpecificFields.valid_until | date:'dd/MM/yy' }}</p>
-    <div class="col-md-6 pull-right margin-bottom" *ngIf="!purchaseOrder._id">
-      <button class="btn-block bttn-primary next-step" (click)="submit()">Send</button>
-    </div>
+    <p *ngIf="purchaseOrder.valid_until">{{ purchaseOrder.valid_until | date: 'dd/MM/yy' }}</p>
+    <p *ngIf="!purchaseOrder.valid_until && purchaseOrderSpecificFields.valid_until">
+      {{ purchaseOrderSpecificFields.valid_until | date: 'dd/MM/yy' }}
+    </p>
   </div>
 </div>
 
@@ -173,30 +179,33 @@
   <div class="col-md-6">
     <div class="border-top">
       <p class="heading-2">Additional Details</p>
-      <div class="row">
-        <div class="col-md-3">
-          <p>Expected receiving date</p>
-          <p>Quote request remarks</p>
-          <p>Quote request valid until</p>
-        </div>
-        <div class="col-md-3">
-          <p>{{ quoteRequest.receive_date | date:'dd/MM/yy' }}</p>
-          <p>{{ quoteRequest.remarks || 'None' }}</p>
-          <p>{{ quoteRequest.valid_until | date:'dd/MM/yy' }}</p>
-        </div>
-        <div class="col-md-3">
-          <p>Expected delivery date</p>
-          <p>Proforma invoice remarks</p>
-          <p>Proforma invoice valid until</p>
-        </div>
-        <div class="col-md-3">
-            <p>{{ proformaInvoice.expected_delivering_date | date:'dd/MM/yy' }}</p>
-            <p>{{ proformaInvoice.remarks || 'None' }}</p>
-            <p>{{ proformaInvoice.valid_until | date:'dd/MM/yy' }}</p>
-        </div>
+      <div>
+        <span>Expected receiving date</span> <span>{{ quoteRequest.receive_date | date: 'dd/MM/yy' }}</span>
       </div>
+      <div>
+        <span>Quote request remarks</span> <span>{{ quoteRequest.remarks || 'None' }}</span>
+      </div>
+      <div>
+        <span>Quote request valid until</span> <span>{{ quoteRequest.valid_until | date: 'dd/MM/yy' }}</span>
+      </div>
+      <div>
+        <span>Expected delivery date</span>
+        <span>{{ proformaInvoice.expected_delivering_date | date: 'dd/MM/yy' }}</span>
+      </div>
+      <div>
+        <span>Proforma invoice remarks</span> <span>{{ proformaInvoice.remarks || 'None' }}</span>
+      </div>
+      <span>Proforma invoice valid until</span> <span>{{ proformaInvoice.valid_until | date: 'dd/MM/yy' }}</span>
     </div>
   </div>
 </div>
+    <button class="bttn-primary next-step pull-right" *ngIf="!purchaseOrder._id && completedPO" (click)="submit()">Send</button>
 <button class="btn-primary-transp pull-right">Download PDF</button>
-<button *ngIf="!completedPO && !purchaseOrder._id" [disabled]="!poForm.valid" class="pull-right bttn-primary next-step" (click)="completed()">Next &rarr;</button>
+<button
+  *ngIf="!completedPO && !purchaseOrder._id"
+  [disabled]="!poForm.valid"
+  class="pull-right bttn-primary next-step"
+  (click)="completed()"
+>
+  Next &rarr;
+</button>

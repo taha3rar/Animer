@@ -1,74 +1,4 @@
 @import "../../../assets/sass/abstracts/variables";
-@import "../../../assets/sass/base/animations";
-
-.docs-chat {
-  position: fixed;
-  bottom: 0;
-  margin-top: -7.4rem;
-  right: 0;
-  height: 100vh;
-  background-color: white;
-  width: 3.5%;
-  font-size: 1.25rem;
-  float: right;
-  color: $light-gray;
-  border-left: 1px solid $light-gray-2;
-
-  .docs {
-    height: 50%;
-    cursor: pointer;
-    border-bottom: 2px solid $light-gray-2;
-    align-items: center;
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    i {
-      margin: 0 auto;
-      font-size: 2.8rem;
-    }
-  }
-
-  .chat {
-    height: 50%;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    i {
-      margin: 0 auto;
-      font-size: 2.8rem;
-    }
-  }
-
-  .chat:hover,
-  .docs:hover {
-    color: $primary-color;
-  }
-}
-
-.side-tab {
-  bottom: 0;
-  height: calc(100% - 6rem);
-  right: 3.5%;
-  background-color: $light-gray-3;
-  font-size: 1.25rem;
-  width: 0px;
-  overflow: hidden;
-  color: $light-gray;
-  border-left: 1px solid $light-gray-2;
-  position: fixed;
-
-  .docs-content {
-    margin-top: 8rem;
-    display: none;
-  }
-
-  .chat-content {
-    margin-top: 5.5rem;
-    display: none;
-  }
-}
 
 .header {
   width: 100%;
@@ -77,19 +7,6 @@
   border-bottom: 1px solid $light-gray-2;
   position: absolute;
   top: 0;
-}
-
-.doc-body {
-  margin-top: 2.2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .doc-card:not(:last-child) {
-    margin-bottom: 2.5rem;
-    border: 1px solid #e0e0e0;
-  }
 }
 
 .message-area-sender {
@@ -183,23 +100,7 @@
   height: 2.3rem;
 }
 
-.stepper {
-  width: 95.6%;
-}
-
-.details-col {
-  width: 24%;
-  float: left;
-}
-
-.pi-col {
-  float: right;
-  width: 74.7%;
-}
-
-.panel-header {
-  margin-right: -1.5rem;
-  margin-left: -1.5rem;
-  padding: 1.5rem 2.5rem;
-  margin-top: -1.5rem;
+.chat-content {
+  margin-top: 5.5rem;
+  display: none;
 }

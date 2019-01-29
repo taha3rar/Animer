@@ -19,3 +19,38 @@
     margin-left: auto;
   }
 }
+
+.border-top span:nth-of-type(even) {
+  position: absolute;
+  word-break: break-all;
+  left: 22rem;
+}
+
+.border-top div {
+  margin-bottom: 0.8rem;
+}
+
+.flex-row .invoice-right-side span:nth-of-type(even) {
+  position: absolute;
+  word-wrap: break-word;
+  left: 16rem;
+}
+
+.invoice-right-side {
+  margin-top: 1rem !important;
+}
+
+.flex-row .invoice-right-side .heading-4-blue {
+  margin: 1px 0;
+  font-size: 1.5rem;
+}
+
+.flex-row {
+  display: flex;
+
+  .invoice-right-side {
+    position: relative;
+    width: 34rem;
+    margin-left: auto;
+  }
+}
