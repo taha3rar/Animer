@@ -30,7 +30,6 @@ export class OrderInvoiceComponent implements OnInit {
   }
 
   saveInvoice(): void {
-    console.log(this.invoice);
     this.invoiceService.create(this.invoice).subscribe(data => {
       this.router.navigateByUrl('/order/list');
     });

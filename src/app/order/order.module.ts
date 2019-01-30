@@ -34,6 +34,7 @@ import { OrderDataService } from './order-generator/order-data.service';
 import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
 import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
+import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,13 @@ import { OrderPoResolver } from './resolvers/order-po.resolver';
     NgxPermissionsModule.forRoot()
   ],
   entryComponents: [OrderAgriculturalProductComponent, OrderProcessedProductComponent],
-  providers: [OrderListResolver, OrderSellersResolver, OrderBuyerResolver, OrderDataService, OrderPoResolver]
+  providers: [
+    OrderListResolver,
+    OrderSellersResolver,
+    OrderBuyerResolver,
+    OrderDataService,
+    OrderPoResolver,
+    OrderInvoiceResolver
+  ]
 })
 export class OrderModule {}

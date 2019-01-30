@@ -16,3 +16,19 @@
     border-radius: 5px;
   }
 }
+.nav.nav-tabs.draft {
+  list-style: none;
+  width: 100%;
+  z-index: 888;
+  margin-bottom: 3rem;
+  li:first-child:nth-last-child(2),
+  li:first-child:nth-last-child(2) ~ li {
+    width: 49.3%;
+    background-color: white;
+    position: relative;
+    display: inline-block;
+    height: 5rem;
+    box-shadow: 0px 0rem 0.3rem rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+  }
+}

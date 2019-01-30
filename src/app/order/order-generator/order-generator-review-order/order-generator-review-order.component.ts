@@ -20,7 +20,6 @@ export class OrderGeneratorReviewOrderComponent implements OnInit {
     this.orderDataService.newOrder.subscribe(order => {
       if (order) {
         this.order = order;
-        console.log(this.order);
       }
     });
   }

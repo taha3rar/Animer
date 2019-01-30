@@ -3,13 +3,13 @@
     <div class="col-md-6">
       <div class="info">
         <p class="heading-2">ISSUED BY</p>
-        <app-user-data [user]="form.value.seller.value" [issued_by]="true"></app-user-data>
+        <app-user-data [user]="seller" [issued_by]="true"></app-user-data>
       </div>
     </div>
     <div class="col-md-6">
       <div class="info">
         <p class="heading-2">ISSUED FOR</p>
-        <app-user-data [user]="form.value.buyer.value" [issued_for]="true"></app-user-data>
+        <app-user-data [user]="buyer" [issued_for]="true"></app-user-data>
       </div>
     </div>
   </div>

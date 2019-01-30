@@ -18,7 +18,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
     this.order = this.route.snapshot.data['order'];
-    if (this.order.invoice) {
+    if (this.order.invoice && !this.order.invoice.draft) {
       this.invoiceService.get(this.order.invoice._id).subscribe(invoice => {
         this.invoice = invoice;
       });

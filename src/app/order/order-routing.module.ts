@@ -11,6 +11,7 @@ import { OrderGeneratorSellerComponent } from './order-generator-seller/order-ge
 import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
 import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
+import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -41,6 +42,13 @@ const routes: Routes = [
       component: OrderGeneratorSellerComponent,
       resolve: {
         order: OrderPoResolver
+      }
+    },
+    {
+      path: 'order/invoice/generator/draft/:id',
+      component: OrderGeneratorSellerComponent,
+      resolve: {
+        invoice: OrderInvoiceResolver
       }
     },
     {
