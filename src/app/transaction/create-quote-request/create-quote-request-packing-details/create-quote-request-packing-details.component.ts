@@ -27,7 +27,7 @@ export class CreateQuoteRequestPackingDetailsComponent implements OnInit {
       package_weight: ['', Validators.required],
       weight_unit: ['', Validators.required],
       package_quantity: ['', Validators.required],
-      total_weight: ['', Validators.required],
+      total_weight: [undefined, Validators.required],
       additional_details: ['']
     });
 
@@ -74,10 +74,30 @@ export class CreateQuoteRequestPackingDetailsComponent implements OnInit {
         this.packingDetailsForm.get('total_weight').setValue('');
       }
     });
+    this.onChanges();
+  }
+
+  onChanges(): void {
+    this.packingDetailsForm.get('package_weight').valueChanges.subscribe(val => {
+      this.setTotalWeight();
+    });
+    this.packingDetailsForm.get('package_quantity').valueChanges.subscribe(val => {
+      this.setTotalWeight();
+    });
   }
 
   get packingDetailsf() {
     return this.packingDetailsForm.controls;
+  }
+
+  setTotalWeight() {
+    if (this.packingDetailsf.package_weight.value && this.packingDetailsf.package_quantity.value) {
+      this.packingDetailsf['total_weight'].setValue(
+        Number((this.packingDetailsf.package_weight.value * this.packingDetailsf.package_quantity.value).toFixed(2))
+      );
+    } else {
+      this.packingDetailsf['total_weight'].setValue(undefined);
+    }
   }
 
   next() {

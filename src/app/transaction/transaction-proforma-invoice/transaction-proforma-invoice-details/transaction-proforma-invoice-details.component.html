@@ -53,7 +53,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label>Total weight *</label>
-      <input type="number" class="form-control" formControlName="total_weight" />
+      <input type="number" class="form-control" readonly formControlName="total_weight" />
     </div>
   </div>
   <p class="heading-4-blue margin-top">Shipping Details</p>
@@ -90,14 +90,14 @@
     </div>
 
     <div class="form-group col-md-6">
-      <label for="price-per">Price per *</label>
+      <label for="price-per">Price per {{pif.pricing_weight_unit.value}} *</label>
       <input type="number" id="price-per" class="form-control" formControlName="price_per_unit"/>
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label>Total price *</label>
-      <input type="number" class="form-control" formControlName="total_price" />
+      <input type="number" class="form-control" readonly formControlName="total_price" />
     </div>
   </div>
 

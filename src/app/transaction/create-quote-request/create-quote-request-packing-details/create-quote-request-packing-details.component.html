@@ -58,7 +58,7 @@
       </div>
       <div class="form-group col-md-4 margin-bottom">
         <label for="package_weight">Package weight</label>
-        <input type="text" class="form-control" id="package_weight" formControlName="package_weight" />
+        <input type="number" class="form-control" id="package_weight" formControlName="package_weight" />
       </div>
       <div class="form-group col-md-4">
         <label for="weight_unit">Weight unit</label>
@@ -72,7 +72,7 @@
         <label for="package_quantity">Package quantity</label>
         <input
           formControlName="package_quantity"
-          type="text"
+          type="number"
           class="form-control"
           id="package_quantity"
           placeholder="Enter package quantity here..."
@@ -80,7 +80,7 @@
       </div>
       <div class="form-group col-md-6 margin-bottom">
         <label for="total_weight">Total weight</label>
-        <input type="text" class="form-control" id="total_weight" formControlName="total_weight" />
+        <input type="number" class="form-control" id="total_weight" readonly formControlName="total_weight" />
       </div>
     </div>
     <div class="form-group margin-bottom">

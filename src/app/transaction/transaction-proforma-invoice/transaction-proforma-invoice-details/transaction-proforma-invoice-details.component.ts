@@ -50,6 +50,39 @@ export class TransactionProformaInvoiceDetailsComponent implements OnInit {
       delivery_date: [moment(this.proformaInvoice.expected_delivering_date).format('DD/MM/YY'), Validators.required],
       remarks: ['']
     });
+    this.onChanges();
+  }
+
+  onChanges(): void {
+    this.piForm.get('package_weight').valueChanges.subscribe(val => {
+      this.setTotalWeight();
+      this.setTotalPrice();
+    });
+    this.piForm.get('quantity').valueChanges.subscribe(val => {
+      this.setTotalWeight();
+      this.setTotalPrice();
+    });
+    this.piForm.get('price_per_unit').valueChanges.subscribe(val => {
+      this.setTotalPrice();
+    });
+  }
+
+  setTotalWeight() {
+    if (this.pif.package_weight.value && this.pif.quantity.value) {
+      this.pif['total_weight'].setValue(Number((this.pif.package_weight.value * this.pif.quantity.value).toFixed(2)));
+    } else {
+      this.pif['total_weight'].setValue(undefined);
+    }
+  }
+
+  setTotalPrice() {
+    if (this.pif.total_weight.value && this.pif.price_per_unit.value) {
+      this.pif['total_price'].setValue(
+        Number((this.pif.total_weight.value * this.pif.price_per_unit.value).toFixed(2))
+      );
+    } else {
+      this.pif['total_price'].setValue(undefined);
+    }
   }
 
   get pif() {
