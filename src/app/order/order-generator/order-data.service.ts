@@ -19,7 +19,7 @@ export class OrderDataService {
     this.formSource.next(form);
   }
 
-  setProductList(productList: Product[]) {
+  setProductList(productList: any[]) {
     this.productListSource.next(productList);
   }
 

@@ -1,7 +1,8 @@
 <div class="wrapper">
   <h1 class="main-title btn-main margin-bottom-2" (click)="back()"><a class="material-icons">keyboard_backspace</a>
     Orders</h1>
-  <div class="stepper-wrapper">
+  <!-- Main Generator -->
+  <div *ngIf="!isDraft" class="stepper-wrapper">
     <div class="stepper">
       <ul class="nav nav-tabs">
         <li class="active">
@@ -32,6 +33,37 @@
           <app-order-generator-po></app-order-generator-po>
         </div>
 
+        <div class="tab-pane" id="review">
+          <div class="panel panel-tab">
+            <div class="panel-body">
+              <div class="padding-all-2">
+                <app-order-generator-review-order></app-order-generator-review-order>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- draftGenerator -->
+  <div *ngIf="isDraft" class="stepper-wrapper">
+    <div class="stepper">
+      <ul class="nav nav-tabs draft">
+        <li class="active">
+          <a data-toggle="tab" class="label" href="#purchaseOrder">
+            <span class="round-tab">1</span> Create purchase order
+          </a>
+        </li>
+        <li class="disabled">
+          <a data-toggle="tab" class="label" href="#review"> <span class="round-tab">2</span>Review and confirm </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="purchaseOrder">
+          <app-order-generator-po></app-order-generator-po>
+        </div>
         <div class="tab-pane" id="review">
           <div class="panel panel-tab">
             <div class="panel-body">
