@@ -1,3 +1,4 @@
+import { StepperService } from '@app/core/stepper.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -28,7 +29,8 @@ export class ClientGeneratorComponent implements OnInit {
     private ecosystemService: EcosystemService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private stepperService: StepperService
   ) {}
 
   ngOnInit() {
@@ -51,8 +53,7 @@ export class ClientGeneratorComponent implements OnInit {
       zipcode: ['', [Validators.required]],
       country: ['', [Validators.required]]
     });
-
-    this.handleStepper();
+    this.stepperService.stepperInit();
   }
 
   targetStep(step: string) {
@@ -129,37 +130,5 @@ export class ClientGeneratorComponent implements OnInit {
   closeAndRefresh(): any {
     this.closeModal.nativeElement.click();
     this.router.navigate([this.router.url]);
-  }
-
-  handleStepper() {
-    $(function() {
-      const $progressStepper = $('.stepper');
-      let $tab_active: any;
-      let $tab_next: any;
-      const $btn_next = $progressStepper.find('.next-step');
-      const $tab_toggle = $progressStepper.find('[data-toggle="tab"]');
-
-      $tab_toggle.on('show.bs.tab', function(e: any) {
-        const $target = $(e.target);
-
-        if (!$target.parent().hasClass('active, disabled')) {
-          $target.parent().removeClass('active');
-        }
-        if ($target.parent().hasClass('disabled')) {
-          return false;
-        }
-      });
-
-      $btn_next.on('click', function() {
-        $tab_active = $progressStepper.find('.active');
-        $tab_active.next().addClass('completed');
-        $tab_active.addClass('completed');
-
-        $tab_active.next().removeClass('disabled');
-
-        $tab_next = $tab_active.next().children('a[data-toggle="tab"]');
-        $($tab_next).trigger('click');
-      });
-    });
   }
 }
