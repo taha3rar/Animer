@@ -57,6 +57,7 @@ export class OrderGeneratorPoComponent implements OnInit {
     });
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
+    this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.draft = true;
     this.orderService.draft(this.newOrder).subscribe(() => {
       this.router.navigateByUrl('/order/list');
@@ -69,8 +70,8 @@ export class OrderGeneratorPoComponent implements OnInit {
       expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
     });
     this.newOrder = this.form.value;
-    this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.products = this.products;
+    this.newOrder.total_due = this.order.subtotal.value;
     this.orderDataService.setNewOrder(this.newOrder);
   }
 }

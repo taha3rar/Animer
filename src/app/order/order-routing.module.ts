@@ -30,6 +30,13 @@ const routes: Routes = [
       }
     },
     {
+      path: 'order/generator/:id',
+      component: OrderGeneratorComponent,
+      resolve: {
+        order: OrderPoResolver
+      }
+    },
+    {
       path: 'order/invoice/generator/:id',
       component: OrderGeneratorSellerComponent,
       resolve: {
