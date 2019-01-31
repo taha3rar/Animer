@@ -53,6 +53,8 @@
   <div class="form-group">
     <label for="destination_address">Address of destination</label>
     <input
+      appGooglePlace
+      (onSelect)="setAddress($event)"
       type="text"
       class="form-control"
       id="destination_address"
@@ -63,7 +65,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="gps_coordinates">GPS coordinates</label>
-      <input class="form-control" id="gps_coordinates" placeholder="GPS coordinates" readonly formControlName="gps_coordinates" />
+      <input class="form-control" id="gps_coordinates" readonly placeholder="GPS coordinates" readonly formControlName="gps_coordinates" />
     </div>
     <div class="form-group col-md-6">
       <label for="expected_delivery_date">Expected delivery date</label>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { incotermsGroups } from '@app/shared/helpers/incoterms';
 import { countries } from '@app/shared/helpers/countries';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -16,8 +16,10 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
   incotermsGroups = incotermsGroups;
   countriesList = countries;
   shippingDetailsForm: FormGroup;
+  public addrKeys: string[];
+  public addr: object;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private zone: NgZone) {}
 
   ngOnInit() {
     this.shippingDetailsForm = this.formBuilder.group({
@@ -55,6 +57,19 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
 
   get shippingDetailsf() {
     return this.shippingDetailsForm.controls;
+  }
+
+  setAddress(addrObj: any) {
+    this.zone.run(() => {
+      this.addr = addrObj;
+      this.addrKeys = Object.keys(addrObj);
+      if (this.addr['lat'] && this.addr['lng']) {
+        this.shippingDetailsForm.patchValue({
+          address: this.addr['formatted_address'],
+          gps_coordinates: '[' + this.addr['lat'] + '] [' + this.addr['lng'] + ']'
+        });
+      }
+    });
   }
 
   next() {

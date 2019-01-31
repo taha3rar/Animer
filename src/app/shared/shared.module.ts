@@ -13,6 +13,7 @@ import { UserDataComponent } from './components/user-data/user-data.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
 import { BaseListComponent } from './components/base-list/base-list.component';
 import { UserDocumentComponent } from './components/user-document-list/user-document-list.component';
+import { GooglePlacesDirective } from './directives/google-places.directive';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule],
@@ -25,7 +26,8 @@ import { UserDocumentComponent } from './components/user-document-list/user-docu
     DocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
-    BaseListComponent
+    BaseListComponent,
+    GooglePlacesDirective
   ],
   exports: [
     LoaderComponent,
@@ -35,7 +37,8 @@ import { UserDocumentComponent } from './components/user-document-list/user-docu
     TransactionsListComponent,
     DocumentListComponent,
     UserDataComponent,
-    UserDocumentComponent
+    UserDocumentComponent,
+    GooglePlacesDirective
   ]
 })
 export class SharedModule {}
