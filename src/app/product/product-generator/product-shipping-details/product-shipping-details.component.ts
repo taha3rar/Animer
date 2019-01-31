@@ -50,6 +50,7 @@ export class ProductShippingDetailsComponent extends BaseProduct implements OnIn
     return valid;
   }
 
+<<<<<<< HEAD
   setAddress(addrObj: any) {
     this.zone.run(() => {
       this.addr = addrObj;
@@ -60,6 +61,11 @@ export class ProductShippingDetailsComponent extends BaseProduct implements OnIn
           gps_coordinates: '[' + this.addr['lat'] + '] [' + this.addr['lng'] + ']'
         });
       }
+=======
+  multiSelectHandler() {
+    $(document).ready(function() {
+      $('.selectpicker').selectpicker();
+>>>>>>> multiselect added
     });
   }
 
