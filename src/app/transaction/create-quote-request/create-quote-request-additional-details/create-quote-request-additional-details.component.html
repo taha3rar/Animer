@@ -1,3 +1,4 @@
+<h4 class="margin-bottom"><strong>Send quote request to</strong></h4>
 <div class="col-md-12">
   <form [formGroup]="additionalDetailsForm">
     <div class="row margin-bottom">
@@ -31,12 +32,12 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <select class="custom-select custom-select-lg mb-3" aria-placeholder="Choose clients" formControlName="suppliers" multiple>
+        <select class="form-control selectpicker mb-3" aria-placeholder="Choose clients" formControlName="suppliers" multiple>
           <option *ngFor="let supplier of suppliers" [value]="supplier">{{ supplier.first_name }} {{ supplier.last_name }}</option>
         </select>
       </div>
       <div class="form-group col-md-4">
-        <select class="custom-select custom-select-lg mb-3" aria-placeholder="Choose ecosystem" formControlName="ecosystems" multiple>
+        <select class="form-control selectpicker mb-3" aria-placeholder="Choose ecosystem" formControlName="ecosystems" multiple>
             <option *ngFor="let eco of ecosystems" [value]="eco">{{ eco.name }} - {{ eco.type }}</option>
         </select>
       </div>

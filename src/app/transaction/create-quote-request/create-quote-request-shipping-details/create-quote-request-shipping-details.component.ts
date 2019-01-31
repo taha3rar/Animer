@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 import * as moment from 'moment';
 
+declare const $: any;
 @Component({
   selector: 'app-create-quote-request-shipping-details',
   templateUrl: './create-quote-request-shipping-details.component.html',
@@ -55,6 +56,8 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
         this.shippingDetailsForm.get('excluded_countries').setValue([]);
       }
     });
+
+    this.multiSelectHandler();
   }
 
   get shippingDetailsf() {
@@ -86,5 +89,11 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
     this.quoteRequest.gps_coordinates.push(this.shippingDetailsf.gps_coordinate_lat.value);
     this.quoteRequest.receive_date = moment(this.shippingDetailsf.expected_delivery_date.value).toJSON();
     this.quoteRequest.point_of_delivery = this.shippingDetailsf.address.value;
+  }
+
+  multiSelectHandler() {
+    $(document).ready(function() {
+      $('.selectpicker').selectpicker();
+    });
   }
 }

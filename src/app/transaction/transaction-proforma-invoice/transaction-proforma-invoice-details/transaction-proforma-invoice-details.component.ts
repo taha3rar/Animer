@@ -5,7 +5,7 @@ import { ProformaInvoice } from '@app/core/models/transaction/proforma-invoice';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { packageUnits, containerType } from '@app/shared/helpers/packaging_details';
 import * as moment from 'moment';
-
+declare const $: any;
 @Component({
   selector: 'app-transaction-proforma-invoice-details',
   templateUrl: './transaction-proforma-invoice-details.component.html',
@@ -30,6 +30,7 @@ export class TransactionProformaInvoiceDetailsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private zone: NgZone) {}
 
   ngOnInit() {
+    this.multiSelectHandler();
     this.piForm = this.formBuilder.group({
       sku: [this.proformaInvoice.stock_keeping_unit],
       tolerance: [this.proformaInvoice.tolerance, Validators.required],
@@ -133,5 +134,11 @@ export class TransactionProformaInvoiceDetailsComponent implements OnInit {
     this.proformaInvoice.valid_until = moment(this.pif.valid_until.value).toJSON();
 
     this.piReadyEvent.emit(true);
+  }
+
+  multiSelectHandler() {
+    $(document).ready(function() {
+      $('.selectpicker').selectpicker();
+    });
   }
 }

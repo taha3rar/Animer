@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuoteRequestRecipients } from '@app/core/models/transaction/quote-request/quote-request-recipients';
 import * as moment from 'moment';
 
+declare const $: any;
 @Component({
   selector: 'app-create-quote-request-additional-details',
   templateUrl: './create-quote-request-additional-details.component.html',
@@ -25,6 +26,8 @@ export class CreateQuoteRequestAdditionalDetailsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    this.multiSelectHandler();
+
     this.additionalDetailsForm = this.formBuilder.group({
       send_suppliers: [true, Validators.required],
       send_ecosystems: [true, Validators.required],
@@ -68,5 +71,11 @@ export class CreateQuoteRequestAdditionalDetailsComponent implements OnInit {
     recipients.avenews = this.additionalDetailsf.send_avenews.value;
 
     this.submitQuoteRequestEvent.emit(recipients);
+  }
+
+  multiSelectHandler() {
+    $(document).ready(function() {
+      $('.selectpicker').selectpicker();
+    });
   }
 }

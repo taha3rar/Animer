@@ -3,6 +3,7 @@ import { countries } from '@app/shared/helpers/countries';
 import { BaseProduct } from '../base-product';
 import { ProductDataService } from '../product-data.service';
 import { Validators } from '@angular/forms';
+declare const $: any;
 
 @Component({
   selector: 'app-product-shipping-details',
@@ -19,6 +20,7 @@ export class ProductShippingDetailsComponent extends BaseProduct implements OnIn
   }
 
   ngOnInit() {
+    this.multiSelectHandler();
     super.ngOnInit();
     this.countriesList = countries;
 
@@ -58,6 +60,12 @@ export class ProductShippingDetailsComponent extends BaseProduct implements OnIn
           gps_coordinates: '[' + this.addr['lat'] + '] [' + this.addr['lng'] + ']'
         });
       }
+    });
+  }
+  
+  multiSelectHandler() {
+    $(document).ready(function() {
+      $('.selectpicker').selectpicker();
     });
   }
 }
