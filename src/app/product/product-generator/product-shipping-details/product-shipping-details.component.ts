@@ -74,4 +74,10 @@ export class ProductShippingDetailsComponent extends BaseProduct implements OnIn
       $('.selectpicker').selectpicker();
     });
   }
+
+  multiSelectHandler() {
+    $(document).ready(function() {
+      $('.selectpicker').selectpicker();
+    });
+  }
 }
