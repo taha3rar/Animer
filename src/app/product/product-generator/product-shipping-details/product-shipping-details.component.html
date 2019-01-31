@@ -3,6 +3,8 @@
     <div class="form-group col-md-6">
       <label for="loading_location">Loading Location *</label>
       <input
+        appGooglePlace
+        (onSelect)="setAddress($event)"
         type="text"
         id="loading_location"
         class="form-control"
@@ -13,7 +15,7 @@
     </div>
     <div class="form-group col-md-6">
       <label for="gps_coordinates">GPS coordinates *</label>
-      <input class="form-control" formControlName="gps_coordinates" id="gps_coordinates" placeholder="GPS coordinates" />
+      <input class="form-control" readonly formControlName="gps_coordinates" id="gps_coordinates" placeholder="GPS coordinates" />
     </div>
   </div>
 

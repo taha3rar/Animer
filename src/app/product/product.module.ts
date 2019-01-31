@@ -18,6 +18,7 @@ import { ProductDetailsComponent } from './product-generator/product-details/pro
 import { ProductDataService } from './product-generator/product-data.service';
 // tslint:disable-next-line:max-line-length
 import { ProductReviewAgriculturalComponent } from './product-generator/product-review/product-review-agricultural/product-review-agricultural.component';
+import { GooglePlacesDirective } from '../shared/directives/google-places.directive';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ProductReviewAgriculturalComponent } from './product-generator/product-
     ProductShippingDetailsComponent,
     ProductReviewProcessedComponent,
     ProductDetailsComponent,
-    ProductReviewAgriculturalComponent
+    ProductReviewAgriculturalComponent,
+    GooglePlacesDirective
   ],
   imports: [
     CommonModule,
