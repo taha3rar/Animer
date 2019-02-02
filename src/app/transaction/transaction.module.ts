@@ -22,7 +22,7 @@ import { CreateQuoteRequestPackingDetailsComponent } from './create-quote-reques
 import { CreateQuoteRequestShippingDetailsComponent } from './create-quote-request/create-quote-request-shipping-details/create-quote-request-shipping-details.component';
 // tslint:disable-next-line:max-line-length
 import { CreateQuoteRequestAdditionalDetailsComponent } from './create-quote-request/create-quote-request-additional-details/create-quote-request-additional-details.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserEcosystemsResolver } from './resolvers/ecosystem-list.resolver';
 import { UserSupplierListResolver } from './resolvers/supplier-list.resolver';
 import { TransactionSellerComponent } from './transaction/transaction-seller/transaction-seller.component';
@@ -63,6 +63,7 @@ import { TransactionPurchaseOrderComponent } from './transaction-purchase-order/
     NgbModule,
     SharedModule,
     ReactiveFormsModule,
+    FormsModule,
     NgxPermissionsModule.forRoot()
   ],
   providers: [

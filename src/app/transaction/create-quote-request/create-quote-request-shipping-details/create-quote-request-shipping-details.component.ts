@@ -16,6 +16,7 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
   incotermsGroups = incotermsGroups;
   countriesList = countries;
   shippingDetailsForm: FormGroup;
+  gpsCoordinates: string;
   public addrKeys: string[];
   public addr: object;
 
@@ -28,7 +29,8 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
       incoterms: ['', Validators.required],
       excluded_countries: [this.formBuilder.array([Validators.required])],
       address: ['', Validators.required],
-      gps_coordinates: [''],
+      gps_coordinate_lng: [''],
+      gps_coordinate_lat: [''],
       expected_delivery_date: ['', Validators.required]
     });
 
@@ -66,18 +68,22 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
       if (this.addr['lat'] && this.addr['lng']) {
         this.shippingDetailsForm.patchValue({
           address: this.addr['formatted_address'],
-          gps_coordinates: '[' + this.addr['lat'] + '] [' + this.addr['lng'] + ']'
+          gps_coordinate_lng: this.addr['lng'],
+          gps_coordinate_lat: this.addr['lat']
         });
+        this.gpsCoordinates = '[' + this.addr['lat'] + '] [' + this.addr['lng'] + ']';
       }
     });
   }
 
   next() {
-    this.quoteRequest.excluded_coutries = this.shippingDetailsf.excluded_countries.value;
+    this.quoteRequest.excluded_coutries = this.shippingDetailsForm.value.excluded_countries.value;
     this.quoteRequest.incoterms = this.shippingDetailsf.incoterms.value;
     this.quoteRequest.international = this.shippingDetailsf.international_quote_request.value;
     this.quoteRequest.local = this.shippingDetailsf.local_quote_request.value;
-    this.quoteRequest.gps_coordinates = this.shippingDetailsf.gps_coordinates.value;
+    this.quoteRequest.gps_coordinates = [];
+    this.quoteRequest.gps_coordinates.push(this.shippingDetailsf.gps_coordinate_lng.value);
+    this.quoteRequest.gps_coordinates.push(this.shippingDetailsf.gps_coordinate_lat.value);
     this.quoteRequest.receive_date = moment(this.shippingDetailsf.expected_delivery_date.value).toJSON();
     this.quoteRequest.point_of_delivery = this.shippingDetailsf.address.value;
   }
