@@ -4,143 +4,168 @@
 <div class="col-md-12" id="pdfContent">
   <div class="panel panel-tab">
     <div class="panel-body">
-        <p *ngIf="invoice.personal_po_id" class="pull-left margin-none ">PO #{{ invoice.personal_po_id }}</p>
-        <p *ngIf="invoice._id" class="pull-right margin-none ">INV #{{ invoice.numericId }}</p>
-        <div class="row clearfix">
-          <div class="col-md-9">
-            <p class="heading-2">ISSUED BY</p>
-            <p class="heading-4">{{ issuer.first_name }} {{ issuer.last_name }}</p>
-            <p class="heading-4">{{ issuer.company_name }}</p>
-            <p class="heading-4">{{ issuer.email }}</p>
-            <p class="heading-4">{{ issuer.address }}, {{ issuer.city }} {{ issuer.zipcode }}</p>
-            <p class="heading-4">TEL: {{ issuer.phone_number }}</p>
-          </div>
-          <div class="col-md-3">
-            <p class="heading-2">ISSUED FOR</p>
-            <p class="heading-4">{{ buyer.first_name }} {{ buyer.last_name }}</p>
-            <p class="heading-4">{{ buyer.company_name }}</p>
-            <p class="heading-4">{{ buyer.email }}</p>
-            <p class="heading-4">{{ buyer.address }}, {{ buyer.city }} {{ buyer.zipcode }}</p>
-            <p class="heading-4">TEL: {{ buyer.phone_number }}</p>
-          </div>
+      <p *ngIf="invoice.personal_po_id" class="pull-left margin-none ">PO #{{ invoice.personal_po_id }}</p>
+      <p *ngIf="invoice._id" class="pull-right margin-none ">INV #{{ invoice.numericId }}</p>
+      <div class="row clearfix">
+        <div class="col-md-9">
+          <p class="heading-2">ISSUED BY</p>
+          <p class="heading-4">{{ issuer.first_name }} {{ issuer.last_name }}</p>
+          <p class="heading-4">{{ issuer.company_name }}</p>
+          <p class="heading-4">{{ issuer.email }}</p>
+          <p class="heading-4">{{ issuer.address }}, {{ issuer.city }} {{ issuer.zipcode }}</p>
+          <p class="heading-4">TEL: {{ issuer.phone_number }}</p>
         </div>
+        <div class="col-md-3">
+          <p class="heading-2">ISSUED FOR</p>
+          <p class="heading-4">{{ buyer.first_name }} {{ buyer.last_name }}</p>
+          <p class="heading-4">{{ buyer.company_name }}</p>
+          <p class="heading-4">{{ buyer.email }}</p>
+          <p class="heading-4">{{ buyer.address }}, {{ buyer.city }} {{ buyer.zipcode }}</p>
+          <p class="heading-4">TEL: {{ buyer.phone_number }}</p>
+        </div>
+      </div>
 
-        <div class="row">
-          <div class="col-md-9">
-            <p class="heading-2">Products</p>
-            <table class="panel-table">
-              <thead>
-                <th>Product</th>
-                <th>Packages</th>
-                <th>Amount</th>
-                <th>Rate</th>
-                <th>Price</th>
-              </thead>
-              <tbody>
-                <tr *ngFor="let row of invoice.products">
-                  <td>
-                    <span *ngIf="!row.product_type || row.product_type=='agricultural'">
-                      {{row.produce}} / {{row.variety}}
-                    </span>
-                    <span *ngIf="row.product_type=='processed' && row.item_package_type">
-                      {{row.produce}} / {{row.item_measurement_amount}} {{row.item_measurement_unit}} / {{row.item_package_type}}
-                    </span>
-                    <span *ngIf="row.product_type=='processed' && !row.item_package_type">
-                      {{row.produce}}
-                    </span>
-                  </td>
-                  <td>
-                    <span *ngIf="!row.product_type || row.product_type=='agricultural'">
-                      {{row.quantity}} ({{row.type_of_package}} / {{row.package_weight}} {{row.weight_unit}})
-                    </span>
-                    <span *ngIf="row.product_type=='processed' && row.item_package_type">
-                      {{row.quantity}} ({{row.type_of_package}} / {{row.items_per_package}}<span *ngIf="row.items_per_package>1"> items)</span><span *ngIf="row.items_per_package==0"> item)</span>
-                    </span>
-                    <span *ngIf="row.product_type=='processed' && !row.item_package_type">
-                      {{row.quantity}} ({{row.type_of_package}})
-                    </span>
-                  </td>
-                  <td>
-                    <span *ngIf="!row.product_type || row.product_type=='agricultural'">{{row.total_weight}} {{row.weight_unit}}</span>
-                    <span *ngIf="row.product_type=='processed'">N/A</span>
-                  </td>
-                  <td>
-                    <span *ngIf="!row.product_type || row.product_type=='agricultural'">{{row.price_per_unit}} {{invoice.currency}} / {{row.weight_unit}}</span>
-                    <span *ngIf="row.product_type=='processed'">{{row.package_price}} {{invoice.currency}} / {{row.type_of_package}}</span>
-                  </td>
-                  <td>
-                    <span id="total">{{row.product_subtotal | number:'1.2-2'}} {{invoice.currency}}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div class="subtotal-price col-md-4 pull-right">
-              <div class="row">
-                <div class="col-md-6">
-                  <p class="heading-4-blue">Subtotal</p>
-                  <p class="heading-4-blue">VAT%</p>
-                  <p class="heading-4-blue">Discount%</p>
-                </div>
-                <div class="col-md-6">
-                  <p class="heading-2">{{invoice.subtotal | number:'1.2-2'}} {{invoice.currency}}</p>
-                  <p class="heading-2">{{invoice.vat_amount | number:'1.2-2'}} {{invoice.currency}}</p>
-                  <p class="heading-2">{{invoice.discount_amount | number:'1.2-2'}} {{invoice.currency}}</p>
+      <div class="row">
+        <div class="col-md-9">
+          <p class="heading-2">Products</p>
+          <table class="panel-table">
+            <thead>
+              <th>Product</th>
+              <th>Packages</th>
+              <th>Amount</th>
+              <th>Rate</th>
+              <th>Price</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of invoice.products">
+                <td>
+                  <span *ngIf="!row.product_type || row.product_type == 'agricultural'">
+                    {{ row.produce }} / {{ row.variety }}
+                  </span>
+                  <span *ngIf="row.product_type == 'processed' && row.item_package_type">
+                    {{ row.produce }} / {{ row.item_measurement_amount }} {{ row.item_measurement_unit }} /
+                    {{ row.item_package_type }}
+                  </span>
+                  <span *ngIf="row.product_type == 'processed' && !row.item_package_type"> {{ row.produce }} </span>
+                </td>
+                <td>
+                  <span *ngIf="!row.product_type || row.product_type == 'agricultural'">
+                    {{ row.quantity }} ({{ row.type_of_package }} / {{ row.package_weight }} {{ row.weight_unit }})
+                  </span>
+                  <span *ngIf="row.product_type == 'processed' && row.item_package_type">
+                    {{ row.quantity }} ({{ row.type_of_package }} / {{ row.items_per_package
+                    }}<span *ngIf="row.items_per_package > 1"> items)</span
+                    ><span *ngIf="row.items_per_package == 0"> item)</span>
+                  </span>
+                  <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
+                    {{ row.quantity }} ({{ row.type_of_package }})
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="!row.product_type || row.product_type == 'agricultural'"
+                    >{{ row.total_weight }} {{ row.weight_unit }}</span
+                  >
+                  <span *ngIf="row.product_type == 'processed'">N/A</span>
+                </td>
+                <td>
+                  <span *ngIf="!row.product_type || row.product_type == 'agricultural'"
+                    >{{ row.price_per_unit }} {{ invoice.currency }} / {{ row.weight_unit }}</span
+                  >
+                  <span *ngIf="row.product_type == 'processed'"
+                    >{{ row.package_price }} {{ invoice.currency }} / {{ row.type_of_package }}</span
+                  >
+                </td>
+                <td>
+                  <span id="total">{{ row.product_subtotal | number: '1.2-2' }} {{ invoice.currency }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="col-md-3 pull-right margin-bottom-2">
+            <div class="invoice-right-side">
+              <p class="heading-big">PRICING</p>
+              <div>
+                <span class="heading-2 ">Subtotal</span>
+                <span class="heading-4-blue">{{ invoice.subtotal | number: '1.2-2' }} {{ invoice.currency }}</span
+                ><br />
+                <span class="heading-2">VAT%</span>
+                <span class="heading-4-blue">{{ invoice.vat_amount | number: '1.2-2' }} {{ invoice.currency }}</span>
+                <div class="margin-bottom">
+                  <span class="heading-2">Discount%</span>
+                  <span class="heading-4-blue"
+                    >{{ invoice.discount_amount | number: '1.2-2' }} {{ invoice.currency }}</span
+                  >
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6"><p class="heading-4-blue">TOTAL</p></div>
-                <div class="col-md-6"><p class="heading-2">{{invoice.total_due | number:'1.2-2'}} {{invoice.currency}}</p></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="po-right-side">
-              <p class="heading-2">
-                Comments or special instructions for purchase order
-              </p>
-              <p>{{ invoice.order_comments || 'None'}}</p>
-              <p class="heading-2">Comments or special instructions for payments</p>
-              <p> {{ invoice.payment_comments || 'None'}}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="border-top">
-              <p class="heading-2">Signed by</p>
-              <div class="row">
-                <div class="col-md-9">
-                  <p>{{ sign_by.first_name }} {{ sign_by.last_name }}</p>
-                  <p>{{ sign_by.company_name }}</p>
-                  <p>PO valid by: {{ sign_by.date | date: 'dd/MM/yyyy' }}</p>
-                  <p>Date of issue: {{ invoice.date_created | date: 'dd/MM/yyyy' }}</p>
-                </div>
+              <div class="border-top">
+                <span class="heading-2">TOTAL</span>
+                <span class="heading-4-blue" style="font-size:1.6rem">
+                  {{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}
+                </span>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="border-top">
-              <p class="heading-2">Delivered to</p>
-              <p>{{ deliver_to.contact_name }}</p>
-              <p>{{ deliver_to.address }}, {{ deliver_to.city }} {{ deliver_to.zip_code }}</p>
-              <p>{{ deliver_to.phone_number }}</p>
-              <p>Expected delivery date: {{ deliver_to.expected_delivery_date | date: 'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3">
+          <div class="po-right-side">
+            <p class="heading-2">Comments or special instructions for purchase order</p>
+            <p>{{ invoice.order_comments || 'None' }}</p>
+            <p class="heading-2">Comments or special instructions for payments</p>
+            <p>{{ invoice.payment_comments || 'None' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="border-top">
+            <p class="heading-2">Signed by</p>
+            <div class="row">
+              <div class="col-md-9">
+                <p>{{ sign_by.first_name }} {{ sign_by.last_name }}</p>
+                <p>{{ sign_by.company_name }}</p>
+                <p>PO valid by: {{ sign_by.date | date: 'dd/MM/yyyy' }}</p>
+                <p>Date of issue: {{ invoice.date_created | date: 'dd/MM/yyyy' }}</p>
+              </div>
             </div>
           </div>
         </div>
-
-        <hr>
-        <div>
-            <button *ngIf="generateInvoice" class="bttn-primary pull-right" (click)="saveInvoice()" [disabled]="!disclaimerAccepted">Send Invoice</button>
-            <button class="btn-primary-transp pull-right" data-html2canvas-ignore="true" (click)="download()">Download PDF</button>
-            <div class="disclaimer" *ngIf="generateInvoice">
-            <div>
-            <input type="checkbox" class="checkbox" id="checkbox1" [(ngModel)]="disclaimerAccepted"/><label class="checkbox_label" for="checkbox1"><span class="form_checkbox_btn"></span></label>
-            </div>
-            <p>I have read and accepted <a style="color:blue; cursor:pointer;" (click)="disclaimerPopup()">the disclaimer</a>.</p>
+        <div class="col-md-6">
+          <div class="border-top">
+            <p class="heading-2">Delivered to</p>
+            <p>{{ deliver_to.contact_name }}</p>
+            <p>{{ deliver_to.address }}, {{ deliver_to.city }} {{ deliver_to.zip_code }}</p>
+            <p>{{ deliver_to.phone_number }}</p>
+            <p>Expected delivery date: {{ deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}</p>
           </div>
+        </div>
+      </div>
+      <div>
+        <button
+          *ngIf="generateInvoice"
+          class="bttn-primary pull-right"
+          (click)="saveInvoice()"
+          [disabled]="!disclaimerAccepted"
+        >
+          Send Invoice
+        </button>
+        <button class="btn-primary-transp pull-right" data-html2canvas-ignore="true" (click)="download()">
+          Download PDF
+        </button>
+        <div class="disclaimer" *ngIf="generateInvoice">
+          <div>
+            <input type="checkbox" class="checkbox" id="checkbox1" [(ngModel)]="disclaimerAccepted" /><label
+              class="checkbox_label"
+              for="checkbox1"
+              ><span class="form_checkbox_btn"></span
+            ></label>
+          </div>
+          <p>
+            I have read and accepted
+            <a style="color:blue; cursor:pointer;" (click)="disclaimerPopup()">the disclaimer</a>.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

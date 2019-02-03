@@ -4,16 +4,34 @@
   text-align: center;
 }
 
+div.row {
+  padding-left: 3rem;
+}
+
+.section-icon {
+  width: 15.8%;
+}
+
+.shipping-block {
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+
+  .section-icon {
+    width: 35%;
+    padding-right: 0px !important;
+  }
+}
+
 .prod-details {
   width: 100%;
   display: flex;
+  padding-bottom: 2.5rem;
 
   & div:not(:last-child) {
-    padding-right: 11.5%;
+    margin-right: 12%;
   }
 
   .prod-img-heading {
-    width: 45%;
+    width: 20%;
   }
 }
 
@@ -30,8 +48,7 @@
 }
 
 .details-row {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  margin: 0px -35px;
+  margin: 0px -15px;
   padding: 25px 50px;
   display: flex;
 
@@ -45,7 +62,6 @@
   }
 }
 
-.section-icon {
-  width: 15.8%;
-  padding-right: 3%;
+.details-row:not(:first-child) {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }

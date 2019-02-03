@@ -1,4 +1,6 @@
-<h1 class="main-title btn-main margin-bottom-2" (click)="back()"><a class="material-icons">keyboard_backspace</a> Products</h1>
+<h1 class="main-title btn-main margin-bottom-2" (click)="back()">
+  <a class="material-icons">keyboard_backspace</a> Products
+</h1>
 <div class="stepper-wrapper">
   <div class="stepper">
     <ul class="nav nav-tabs">
@@ -33,7 +35,7 @@
           <div class="panel-body">
             <div class="panel-header"><p>Product Details</p></div>
             <div class="padding-all-2">
-            <app-product-details></app-product-details>
+              <app-product-details></app-product-details>
             </div>
           </div>
         </div>
@@ -45,7 +47,7 @@
               <p>Packing Details</p>
             </div>
             <div class="padding-all-2">
-            <app-product-packing-details></app-product-packing-details>
+              <app-product-packing-details></app-product-packing-details>
             </div>
           </div>
         </div>
@@ -53,11 +55,11 @@
       <div class="tab-pane" id="pricingDetails">
         <div class="panel panel-tab">
           <div class="panel-body">
-              <div class="panel-header">
-                  <p>Pricing Details</p>
-                </div>
-                <div class="padding-all-2">
-            <app-product-pricing-details></app-product-pricing-details>
+            <div class="panel-header">
+              <p>Pricing Details</p>
+            </div>
+            <div class="padding-all-2">
+              <app-product-pricing-details></app-product-pricing-details>
             </div>
           </div>
         </div>
@@ -65,22 +67,22 @@
       <div class="tab-pane" id="shippingDetails">
         <div class="panel panel-tab">
           <div class="panel-body">
-              <div class="panel-header">
-                  <p>Shipping Details</p>
-              </div>
-              <div class="padding-all-2">
-            <app-product-shipping-details></app-product-shipping-details>
+            <div class="panel-header">
+              <p>Shipping Details</p>
             </div>
+            <div class="padding-all-2">
+              <app-product-shipping-details></app-product-shipping-details>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
       <div class="tab-pane" id="review">
         <div class="panel panel-tab">
           <div class="panel-body">
             <div class="panel-header">
-                <p>Review Product</p>
+              <p>Review Product</p>
             </div>
-            <div class="padding-all-2">
+            <div>
               <app-product-review-processed *ngIf="isProcessed"></app-product-review-processed>
               <app-product-review-agricultural *ngIf="!isProcessed"></app-product-review-agricultural>
             </div>

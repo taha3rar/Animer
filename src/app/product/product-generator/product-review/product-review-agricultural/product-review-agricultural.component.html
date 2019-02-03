@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 margin-top">
+  <div class="col-md-6 padding-top-md">
     <button class="btn-icons  pull-right" (click)="targetStep('productDetails')">
       <i class="material-icons">edit</i>
     </button>
@@ -31,21 +31,27 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 margin-top" style="border-left:1px solid rgba(0,0,0,0.08);">
-      <button class="btn-icons  pull-right" (click)="targetStep('shippingDetails')">
+  <div class="col-md-6 shipping-block">
+    <div class="details-row">
+      <div class="section-icon  margin-bottom">
+        <div class="icon-text">
+          <i class="material-icons">local_shipping</i>
+          <p class="heading-2">Shipping Details</p>
+        </div>
+      </div>
+      <div class="details-right">
+        <button class="btn-icons  pull-right" (click)="targetStep('shippingDetails')">
           <i class="material-icons">edit</i>
         </button>
-    <div class="icon-text margin-bottom">
-      <i class="material-icons">local_shipping </i>
-      <p class="heading-2">Shipping Details</p>
-    </div>
-    <div style="padding-left:4.6%;">
-      <p class="heading-2">Loading location</p>
-      <p>{{ product.loading_location }}</p>
-      <p class="heading-2">GPS coordinates</p>
-      <p>{{ product.gps_coordinates }}</p>
-      <p class="heading-2">HS tariff code</p>
-      <p>{{ product.tariff_code }}</p>
+        <div class="shipping-block-details">
+          <p class="heading-2">Loading location</p>
+          <p>{{ product.loading_location }}</p>
+          <p class="heading-2">GPS coordinates</p>
+          <p>{{ product.gps_coordinates }}</p>
+          <p class="heading-2">HS tariff code</p>
+          <p>{{ product.tariff_code }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -54,9 +60,9 @@
     <img src="../../../assets/img/pack.png" width="22" height="25" /> <span class="heading-2">Packing Details</span>
   </div>
   <div class="details-right">
-      <button class="btn-icons pull-right" (click)="targetStep('packingDetails')">
-          <i class="material-icons">edit</i>
-        </button>
+    <button class="btn-icons pull-right" (click)="targetStep('packingDetails')">
+      <i class="material-icons">edit</i>
+    </button>
     <p class="heading-2">Containing Package Details</p>
     <div class="packing-flex">
       <div>
@@ -66,11 +72,11 @@
         <p *ngIf="isProcessed">{{ product.quantity }}</p>
       </div>
       <div>
-      <p class="heading-2">Weight of the packaged product</p>
-      <p>{{ product.package_weight }} {{ product.weight_unit }}</p>
-      <p class="heading-2">Additional packing details</p>
-      <p>{{ product.package_details }}</p>
-    </div>
+        <p class="heading-2">Weight of the packaged product</p>
+        <p>{{ product.package_weight }} {{ product.weight_unit }}</p>
+        <p class="heading-2">Additional packing details</p>
+        <p>{{ product.package_details }}</p>
+      </div>
       <div>
         <p class="heading-2">Total Weight</p>
         <p>{{ product.total_weight }} {{ product.weight_unit }}</p>
@@ -79,7 +85,7 @@
   </div>
 </div>
 <div class="details-row">
-  <div class="section-icon" >
+  <div class="section-icon">
     <div class="icon-text">
       <i class="material-icons">monetization_on</i>
       <p class="heading-2">Pricing Details</p>

@@ -11,9 +11,11 @@
         <input type="text" class="form-control" id="product_name" formControlName="produce" placeholder="Type product name here..." />
       </div>
       <div class="form-group">
-        <label for="sku">Stock keeping unit (SKU)</label>
-        <input type="text" class="form-control" id="sku" placeholder="Type SKU here..." formControlName="sku" />
-      </div>
+          <label for="sku">Stock keeping unit (SKU)</label>
+          <input type="text" class="form-control" id="sku" placeholder="Type SKU here..." formControlName="sku" />
+        </div>
+    </div>
+    <div class="product-details">
       <div class="form-group">
         <label for="product_codes">Product code (Barcode, ISBN, UPC, GTIN)</label>
         <input type="text" class="form-control" id="product_codes" placeholder="Type product code here..." formControlName="product_id" />
@@ -21,8 +23,8 @@
       <div class="form-group">
         <label for="ingredients">Ingredients</label>
         <textarea type="text" class="form-control" id="ingredients" placeholder="Type ingredients here..." formControlName="ingredients"></textarea>
-      </div>
     </div>
+  </div>
   </div>
 
   <div class="product" *ngIf="!isProcessed">
