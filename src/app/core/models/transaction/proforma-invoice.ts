@@ -44,8 +44,8 @@ export class ProformaInvoice {
     this.quantity = quoteRequest.quantity;
     this.total_weight = quoteRequest.total_weight;
     this.point_of_delivery = quoteRequest.point_of_delivery;
-    this.gps_coordinates_delivery = ['43.6824666', '-79.54016200000001']; // quoteRequest.gps_coordinates;
-    this.gps_coordinates_loading = ['43.6824666', '-79.54016200000001'];
+    this.gps_coordinates_delivery = []; // quoteRequest.gps_coordinates;
+    this.gps_coordinates_loading = [];
     this.incoterms = quoteRequest.incoterms;
     this.pricing_weight_unit = quoteRequest.weight_unit;
     this.transaction_id = quoteRequest.transaction_id;

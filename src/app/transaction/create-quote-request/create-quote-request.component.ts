@@ -44,7 +44,6 @@ export class CreateQuoteRequestComponent implements OnInit {
     } else {
       this.quoteRequest.transaction_type = 'local';
     }
-    console.log(this.quoteRequest);
     this.quoteRequestService.sendToRecipients(this.quoteRequest, recipients);
 
     this.router.navigate([this.router.url]);

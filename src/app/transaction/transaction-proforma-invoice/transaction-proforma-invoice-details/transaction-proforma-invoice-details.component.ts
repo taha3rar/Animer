@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { certifications, currencies } from '@app/shared/helpers/product_details';
 import { incotermsGroups } from '@app/shared/helpers/incoterms';
 import { ProformaInvoice } from '@app/core/models/transaction/proforma-invoice';
@@ -23,8 +23,11 @@ export class TransactionProformaInvoiceDetailsComponent implements OnInit {
   incotermsGroups = incotermsGroups;
   currencies = currencies;
   containerTypes = containerType;
+  gpsCoordinates: string;
+  public addrKeys: string[];
+  public addr: object;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private zone: NgZone) {}
 
   ngOnInit() {
     this.piForm = this.formBuilder.group({
@@ -39,7 +42,8 @@ export class TransactionProformaInvoiceDetailsComponent implements OnInit {
       quantity: [this.proformaInvoice.quantity, Validators.required],
       total_weight: [this.proformaInvoice.total_weight, Validators.required],
       address_origin: [this.proformaInvoice.point_of_loading, Validators.required],
-      gps_origin: [this.proformaInvoice.gps_coordinates_loading, Validators.required],
+      gps_coordinate_origin_lng: [''],
+      gps_coordinate_origin_lat: [''],
       incoterms: [this.proformaInvoice.incoterms],
       pricing_weight_unit: [this.proformaInvoice.package_weight_unit, Validators.required],
       total_price: [this.proformaInvoice.total_price, Validators.required],
@@ -89,6 +93,21 @@ export class TransactionProformaInvoiceDetailsComponent implements OnInit {
     return this.piForm.controls;
   }
 
+  setAddress(addrObj: any) {
+    this.zone.run(() => {
+      this.addr = addrObj;
+      this.addrKeys = Object.keys(addrObj);
+      if (this.addr['lat'] && this.addr['lng']) {
+        this.piForm.patchValue({
+          address_origin: this.addr['formatted_address'],
+          gps_coordinate_origin_lng: this.addr['lng'],
+          gps_coordinate_origin_lat: this.addr['lat']
+        });
+        this.gpsCoordinates = '[' + this.addr['lat'] + '] [' + this.addr['lng'] + ']';
+      }
+    });
+  }
+
   review() {
     this.proformaInvoice.remarks = this.pif.remarks.value;
     this.proformaInvoice.stock_keeping_unit = this.pif.sku.value;
@@ -103,7 +122,8 @@ export class TransactionProformaInvoiceDetailsComponent implements OnInit {
     this.proformaInvoice.total_weight = this.pif.total_weight.value;
     this.proformaInvoice.total_price = this.pif.total_price.value;
     this.proformaInvoice.point_of_loading = this.pif.address_origin.value;
-    this.proformaInvoice.gps_coordinates_loading = this.pif.gps_origin.value;
+    this.proformaInvoice.gps_coordinates_loading.push(this.pif.gps_coordinate_origin_lng.value);
+    this.proformaInvoice.gps_coordinates_loading.push(this.pif.gps_coordinate_origin_lat.value);
     this.proformaInvoice.incoterms = this.pif.incoterms.value;
     this.proformaInvoice.pricing_weight_unit = this.pif.pricing_weight_unit.value;
     this.proformaInvoice.currency = this.pif.currency.value;

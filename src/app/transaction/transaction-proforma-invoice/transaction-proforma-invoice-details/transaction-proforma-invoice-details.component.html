@@ -59,11 +59,17 @@
   <p class="heading-4-blue margin-top">Shipping Details</p>
   <div class="form-group">
     <label for="origin-address">Address of Origin *</label>
-    <input type="text" id="origin-address" class="form-control" formControlName="address_origin" />
+    <input 
+    appGooglePlace
+    (onSelect)="setAddress($event)"
+    type="text" 
+    id="origin-address" 
+    class="form-control" 
+    formControlName="address_origin" />
   </div>
   <div class="form-group">
       <label for="origin-address">GPS Coordinates *</label>
-      <input type="text" id="gps" class="form-control" readonly formControlName="gps_origin" />
+      <input type="text" id="gps" class="form-control" readonly [(ngModel)]="gpsCoordinates" [ngModelOptions]="{standalone: true}" />
     </div>
   <div class="form-group">
     <label for="incoterms">Choose Incoterms *</label>
