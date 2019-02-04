@@ -13,6 +13,7 @@ declare const $: any;
 export class OrderGeneratorProductsComponent implements OnInit {
   term: string;
   form: FormGroup;
+  page = 1;
   products: Product[];
   agriculturalProducts: Product[];
   processedProducts: Product[];
@@ -87,5 +88,18 @@ export class OrderGeneratorProductsComponent implements OnInit {
 
   toOrderGenerator() {
     this.orderDataService.setProductList(this.newProducts);
+  }
+
+  onNextPage(itemsnumber: number) {
+    const numberOfPages = Math.ceil(itemsnumber / 4);
+    if (this.page < numberOfPages) {
+      this.page++;
+    }
+  }
+
+  onBackPage() {
+    if (this.page > 1) {
+      this.page--;
+    }
   }
 }

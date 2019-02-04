@@ -6,8 +6,8 @@
         <button class="bttn-primary pull-right next-step" [disabled]="!validSeller" (click)="validateSeller()">Next Step &rarr;</button>
       </div>
       <div class="padding-all-2">
-        <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_right</i></button>
-        <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_left</i></button>
+        <button class="btn-icons pull-right" (click)="onNextPage(clients.length)"><i class="material-icons">keyboard_arrow_right</i></button>
+        <button class="btn-icons pull-right" (click)="onBackPage()"><i class="material-icons">keyboard_arrow_left</i></button>
         <div class="row margin-top clearfix">
           <div class="col-md-2" *ngFor="let client of (clients | paginate: { itemsPerPage: 6, currentPage: page })">
             <div class="card">

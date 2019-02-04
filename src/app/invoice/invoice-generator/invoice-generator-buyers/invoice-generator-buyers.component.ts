@@ -31,4 +31,17 @@ export class InvoiceGeneratorBuyersComponent implements OnInit {
   get validBuyer() {
     return this.form.controls.buyer.valid;
   }
+
+  onNextPage(clientsnumber: number) {
+    const numberOfPages = Math.ceil(clientsnumber / 6);
+    if (this.page < numberOfPages) {
+      this.page++;
+    }
+  }
+
+  onBackPage() {
+    if (this.page >= 1) {
+      this.page--;
+    }
+  }
 }

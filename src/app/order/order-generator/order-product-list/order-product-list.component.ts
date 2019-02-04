@@ -79,7 +79,7 @@ export class OrderProductListComponent implements OnInit {
       currency: this.order.currency.value
     };
 
-    this.openDialog('770px', OrderAgriculturalProductComponent, data);
+    this.openDialog('720px', OrderAgriculturalProductComponent, data);
   }
 
   openDialogProcessed(index?: number): void {
@@ -89,7 +89,7 @@ export class OrderProductListComponent implements OnInit {
       currency: this.order.currency.value
     };
 
-    this.openDialog('800px', OrderProcessedProductComponent, data);
+    this.openDialog('780px', OrderProcessedProductComponent, data);
   }
 
   openDialog(height: string, component: any, dialogData: any): void {

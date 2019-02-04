@@ -2,7 +2,7 @@
   <div class="panel-body">
     <div class="panel-header">
       <div>
-        <p>{{seller.first_name}} {{seller.last_name}} Inventory</p>
+        <p>{{seller.first_name | titlecase}} {{seller.last_name | titlecase}} Inventory</p>
       </div>
       <div>
         <div class="search-box">
@@ -17,12 +17,12 @@
     </div>
     <div class="padding-all-2">
       <div class="margin-bottom">
-        <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_right</i></button>
-        <button class="btn-icons pull-right"><i class="material-icons">keyboard_arrow_left</i></button>
+        <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length)"><i class="material-icons">keyboard_arrow_right</i></button>
+        <button class="btn-icons pull-right" (click)="onBackPage()"><i class="material-icons">keyboard_arrow_left</i></button>
         <p class="normal-text-bold">Agricultural Products</p>
       </div>
       <div class="row clearfix">
-        <div *ngFor="let product of agriculturalProducts" class="col-md-3">
+        <div *ngFor="let product of (agriculturalProducts | paginate: { itemsPerPage: 4, currentPage: page })" class="col-md-3">
           <div class="card">
             <div>
               <p class="pull-right margin-none">{{product.price_per_unit}} {{product.currency}}/<small>{{product.weight_unit
@@ -61,9 +61,9 @@
       </div>
 
       <!--Processed Products-->
-      <div class="margin-bottom margin-top">
-        <button class="btn-icons pull-right"><i class="material-icons">arrow_forward_ios</i></button>
-        <button class="btn-icons pull-right"><i class="material-icons">arrow_back_ios</i></button>
+      <div class="margin-bottom margin-top" *ngIf="processedProducts?.length !== 0">
+        <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length)"><i class="material-icons">keyboard_arrow_right</i></button>
+        <button class="btn-icons pull-right" (click)="onBackPage()"><i class="material-icons">keyboard_arrow_left</i></button>
         <p class="normal-text-bold">Processed Products</p>
       </div>
       <div class="row clearfix">

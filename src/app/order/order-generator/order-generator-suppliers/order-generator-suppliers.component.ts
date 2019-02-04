@@ -38,4 +38,17 @@ export class OrderGeneratorSuppliersComponent implements OnInit {
       this.form = form;
     });
   }
+
+  onNextPage(clientsnumber: number) {
+    const numberOfPages = Math.ceil(clientsnumber / 6);
+    if (this.page < numberOfPages) {
+      this.page++;
+    }
+  }
+
+  onBackPage() {
+    if (this.page > 1) {
+      this.page--;
+    }
+  }
 }

@@ -17,6 +17,7 @@
 }
 
 .card .package-details {
+  font-size: 1.4rem;
   display: flex;
   padding: 1rem 1.2rem;
 
@@ -63,7 +64,6 @@
 
 .btn-circle {
   position: relative;
-  transform: all 0.3s ease-out;
 }
 
 .btn-circle:first-of-type {
@@ -94,4 +94,8 @@ button:focus {
 
 .bttn-primary {
   margin-bottom: 2rem;
+}
+
+.modal-box-heading {
+  margin: -2.4rem -2.4rem 0 -2.4rem;
 }

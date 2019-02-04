@@ -101,8 +101,8 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '700px';
-    dialogConfig.width = '850px';
+    dialogConfig.height = '900px';
+    dialogConfig.width = '980px';
     dialogConfig.data = {
       products: this.route.snapshot.data['products']
     };
