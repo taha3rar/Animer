@@ -1,3 +1,4 @@
+import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
@@ -10,12 +11,14 @@ import { OrderDataService } from '../order-data.service';
   templateUrl: './order-generator-suppliers.component.html',
   styleUrls: ['./order-generator-suppliers.component.scss']
 })
-export class OrderGeneratorSuppliersComponent implements OnInit {
+export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit {
   form: FormGroup;
   clients: Client[];
   page = 1;
 
-  constructor(private route: ActivatedRoute, private orderDataService: OrderDataService) {}
+  constructor(private route: ActivatedRoute, private orderDataService: OrderDataService) {
+    super();
+  }
 
   ngOnInit() {
     this.clients = this.route.snapshot.data['sellers'];
@@ -37,18 +40,5 @@ export class OrderGeneratorSuppliersComponent implements OnInit {
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
     });
-  }
-
-  onNextPage(clientsnumber: number) {
-    const numberOfPages = Math.ceil(clientsnumber / 6);
-    if (this.page < numberOfPages) {
-      this.page++;
-    }
-  }
-
-  onBackPage() {
-    if (this.page > 1) {
-      this.page--;
-    }
   }
 }

@@ -14,6 +14,7 @@ import { InvoiceListComponent } from './components/invoice-list/invoice-list.com
 import { BaseListComponent } from './components/base-list/base-list.component';
 import { UserDocumentComponent } from './components/user-document-list/user-document-list.component';
 import { GooglePlacesDirective } from './directives/google-places.directive';
+import { BaseNavigationComponent } from './components/base-navigation/base-navigation.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule],
@@ -26,6 +27,7 @@ import { GooglePlacesDirective } from './directives/google-places.directive';
     DocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
+    BaseNavigationComponent,
     BaseListComponent,
     GooglePlacesDirective
   ],

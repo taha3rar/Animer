@@ -1,3 +1,4 @@
+import { BaseNavigationComponent } from './../../../shared/components/base-navigation/base-navigation.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
@@ -10,14 +11,14 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './invoice-generator-buyers.component.html',
   styleUrls: ['./invoice-generator-buyers.component.scss']
 })
-export class InvoiceGeneratorBuyersComponent implements OnInit {
+export class InvoiceGeneratorBuyersComponent extends BaseNavigationComponent implements OnInit {
   @Input()
   form: FormGroup;
   clients: Client[];
-  page = 1;
 
-  constructor(private route: ActivatedRoute) {}
-
+  constructor(private route: ActivatedRoute) {
+    super();
+  }
   ngOnInit() {
     this.route.data.subscribe(({ clients }) => {
       this.clients = clients;
@@ -30,18 +31,5 @@ export class InvoiceGeneratorBuyersComponent implements OnInit {
 
   get validBuyer() {
     return this.form.controls.buyer.valid;
-  }
-
-  onNextPage(clientsnumber: number) {
-    const numberOfPages = Math.ceil(clientsnumber / 6);
-    if (this.page < numberOfPages) {
-      this.page++;
-    }
-  }
-
-  onBackPage() {
-    if (this.page >= 1) {
-      this.page--;
-    }
   }
 }

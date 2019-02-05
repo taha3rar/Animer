@@ -17,7 +17,7 @@
     </div>
     <div class="padding-all-2">
       <div class="margin-bottom">
-        <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length)"><i class="material-icons">keyboard_arrow_right</i></button>
+        <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length, 4)"><i class="material-icons">keyboard_arrow_right</i></button>
         <button class="btn-icons pull-right" (click)="onBackPage()"><i class="material-icons">keyboard_arrow_left</i></button>
         <p class="normal-text-bold">Agricultural Products</p>
       </div>
@@ -62,7 +62,7 @@
 
       <!--Processed Products-->
       <div class="margin-bottom margin-top" *ngIf="processedProducts?.length !== 0">
-        <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length)"><i class="material-icons">keyboard_arrow_right</i></button>
+        <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length, 4)"><i class="material-icons">keyboard_arrow_right</i></button>
         <button class="btn-icons pull-right" (click)="onBackPage()"><i class="material-icons">keyboard_arrow_left</i></button>
         <p class="normal-text-bold">Processed Products</p>
       </div>

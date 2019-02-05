@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Product } from '@app/core/models/product';
 import { ProductService } from '@app/core/api/product.service';
 import { OrderDataService } from '../order-data.service';
+import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
 
 declare const $: any;
 @Component({
@@ -10,16 +11,17 @@ declare const $: any;
   templateUrl: './order-generator-products.component.html',
   styleUrls: ['./order-generator-products.component.scss']
 })
-export class OrderGeneratorProductsComponent implements OnInit {
+export class OrderGeneratorProductsComponent extends BaseNavigationComponent implements OnInit {
   term: string;
   form: FormGroup;
-  page = 1;
   products: Product[];
   agriculturalProducts: Product[];
   processedProducts: Product[];
   newProducts: Product[] = [];
 
-  constructor(private productService: ProductService, private orderDataService: OrderDataService) {}
+  constructor(private productService: ProductService, private orderDataService: OrderDataService) {
+    super();
+  }
 
   ngOnInit() {
     this.orderDataService.currentForm.subscribe(form => {
@@ -88,18 +90,5 @@ export class OrderGeneratorProductsComponent implements OnInit {
 
   toOrderGenerator() {
     this.orderDataService.setProductList(this.newProducts);
-  }
-
-  onNextPage(itemsnumber: number) {
-    const numberOfPages = Math.ceil(itemsnumber / 4);
-    if (this.page < numberOfPages) {
-      this.page++;
-    }
-  }
-
-  onBackPage() {
-    if (this.page > 1) {
-      this.page--;
-    }
   }
 }
