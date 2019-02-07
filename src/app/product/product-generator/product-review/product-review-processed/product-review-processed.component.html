@@ -11,7 +11,8 @@
       <div class="prod-img-heading">
         <figure
           class="img-circular"
-          style="background-image: url('../../../assets/img/chia.jpg'); margin: 0 auto;"
+          [ngStyle]="{ 'background-image': 'url(' + product_image + ')'}"
+          style="margin: 0 auto;"
         ></figure>
         <p class="heading-2" style="text-align:center;">{{ product.produce }}</p>
       </div>

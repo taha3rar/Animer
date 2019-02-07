@@ -25,8 +25,11 @@ export class BaseProductReview extends BaseProduct implements OnInit {
     });
   }
 
-  product_image() {
-    return this.product.image || defaultValues.product_picture;
+  get product_image() {
+    if (!this.product.image) {
+      return this.product.product_type === 'processed' ? defaultValues.processed_picture : defaultValues.agri_picture;
+    }
+    return this.product.image;
   }
 
   targetStep(target: string) {

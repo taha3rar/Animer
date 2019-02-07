@@ -3,6 +3,7 @@ import { countries } from '@app/shared/helpers/countries';
 import { certifications } from '@app/shared/helpers/product_details';
 import { ProductDataService } from '../product-data.service';
 import { BaseProduct } from '../base-product';
+import { defaultValues } from '@app/shared/helpers/default_values';
 
 @Component({
   selector: 'app-product-details',
@@ -30,5 +31,9 @@ export class ProductDetailsComponent extends BaseProduct {
       this.form.controls.about.valid;
 
     return valid;
+  }
+
+  get product_image() {
+    return this.isProcessed ? defaultValues.processed_picture : defaultValues.agri_picture;
   }
 }

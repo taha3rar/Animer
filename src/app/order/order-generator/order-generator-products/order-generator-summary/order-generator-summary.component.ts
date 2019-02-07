@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '@app/core/models/product';
 import { FormGroup } from '@angular/forms';
+import { defaultValues } from '@app/shared/helpers/default_values';
 
 @Component({
   selector: 'app-order-generator-summary',
@@ -21,5 +22,12 @@ export class OrderGeneratorSummaryComponent implements OnInit {
 
   get order() {
     return this.form.controls;
+  }
+
+  product_image(product: Product) {
+    if (!product.image) {
+      return product.product_type === 'processed' ? defaultValues.processed_picture : defaultValues.agri_picture;
+    }
+    return product.image;
   }
 }

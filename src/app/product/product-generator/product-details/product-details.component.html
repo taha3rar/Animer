@@ -2,7 +2,7 @@
   <div class="product" *ngIf="isProcessed">
     <div class="product-img">
       <p class="heading-2">Upload product image</p>
-      <figure class="img-circular" style="background-image: url('../../../assets/img/placeholder-product.svg')"></figure>
+      <figure class="img-circular" [ngStyle]="{ 'background-image': 'url(' + product_image + ')'}"></figure>
       <button class="bttn-primary">Upload Image</button>
     </div>
     <div class="product-details">
@@ -30,7 +30,7 @@
   <div class="product" *ngIf="!isProcessed">
     <div class="product-img">
       <p class="heading-2">Upload product image</p>
-      <figure class="img-circular" style="background-image: url('../../../assets/img/placeholder-product.svg')"></figure>
+      <figure class="img-circular" [ngStyle]="{ 'background-image': 'url(' + product_image + ')'}"></figure>
       <button class="bttn-primary">Upload Image</button>
     </div>
     <div class="product-details">

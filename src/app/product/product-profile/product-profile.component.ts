@@ -24,6 +24,9 @@ export class ProductProfileComponent implements OnInit {
   }
 
   product_image() {
-    return this.product.image || defaultValues.product_picture;
+    if (!this.product.image) {
+      return this.product.product_type === 'processed' ? defaultValues.processed_picture : defaultValues.agri_picture;
+    }
+    return this.product.image;
   }
 }

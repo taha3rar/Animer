@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Product } from '@app/core/models/product';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { defaultValues } from '@app/shared/helpers/default_values';
 
 @Component({
   selector: 'app-invoice-inventory',
@@ -59,5 +60,12 @@ export class InvoiceInventoryComponent implements OnInit {
       }
     });
     this.dialogRef.close(this.newProducts);
+  }
+
+  product_image(product: Product) {
+    if (!product.image) {
+      return product.product_type === 'processed' ? defaultValues.processed_picture : defaultValues.agri_picture;
+    }
+    return product.image;
   }
 }

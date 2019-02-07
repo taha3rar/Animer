@@ -16,7 +16,7 @@
               | uppercase}}</small></p>
         </div>
         <div class="product-details">
-          <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
+          <figure class="img-circular-sm" [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')'}"></figure>
           <p class="heading-2">
             {{product.produce}} <br />
             {{product.variety}}
@@ -61,7 +61,7 @@
             <p class="pull-right margin-none">{{product.package_price}} {{product.currency}}/<small>{{product.type_of_package}}</small></p>
           </div>
           <div class="product-details">
-            <figure class="img-circular-sm" style="background-image: url('../../../../assets/img/chia.jpg');"></figure>
+            <figure class="img-circular-sm" [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')'}"></figure>
             <p class="heading-2">
               {{product.produce}} <br />
             </p>

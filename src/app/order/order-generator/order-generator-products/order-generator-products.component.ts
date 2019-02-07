@@ -4,6 +4,7 @@ import { Product } from '@app/core/models/product';
 import { ProductService } from '@app/core/api/product.service';
 import { OrderDataService } from '../order-data.service';
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
+import { defaultValues } from '@app/shared/helpers/default_values';
 
 declare const $: any;
 @Component({
@@ -80,6 +81,13 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
         this.newProducts.push(product);
       }
     });
+  }
+
+  product_image(product: Product) {
+    if (!product.image) {
+      return product.product_type === 'processed' ? defaultValues.processed_picture : defaultValues.agri_picture;
+    }
+    return product.image;
   }
 
   deleteProducts() {

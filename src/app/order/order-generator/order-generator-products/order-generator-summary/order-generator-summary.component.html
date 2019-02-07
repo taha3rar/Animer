@@ -4,7 +4,7 @@
   <div class="product-item" *ngFor="let product of productList">
     <figure
       class="img-circular-sm margin-none"
-      style="background-image: url('../../../../assets/img/chia.jpg');"
+      [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')'}"
     ></figure>
     <div>
       <p>{{product.produce}} {{product.variety}}</p>
