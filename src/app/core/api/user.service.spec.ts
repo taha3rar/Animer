@@ -7,7 +7,8 @@ describe('UserService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
-    }));
+    })
+  );
 
   it('should be created', () => {
     const service: UserService = TestBed.get(UserService);

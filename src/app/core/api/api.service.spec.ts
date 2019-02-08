@@ -13,7 +13,8 @@ describe('ApiService', () => {
     TestBed.configureTestingModule({
       imports: [CoreModule, HttpClientTestingModule],
       providers: [HttpCacheService]
-    }));
+    })
+  );
 
   beforeEach(inject(
     [HttpCacheService, ApiService, HttpTestingController],
