@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let transaction of transactions | paginate: { itemsPerPage: 6, currentPage: page }">
+    <tr *ngFor="let transaction of transactions | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
       <td class="text-center">{{ transaction.numericId }}</td>
       <td>{{ transaction.produce }}</td>
       <td style="text-transform:capitalize;">{{ transaction.transaction_type }}</td>

@@ -8,11 +8,12 @@
       <th translate>Issued for</th>
       <th translate>Signed by</th>
       <th translate>Total due</th>
+      <th translate>Status</th>
       <th translate class="text-right">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let invoice of invoices | paginate: { itemsPerPage: 6, currentPage: page }">
+    <tr *ngFor="let invoice of invoices | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
       <td class="text-center">{{invoice.numericId}}</td>
       <td>{{invoice.date_created | date: 'dd/MM/yyyy'}}</td>
       <td>
@@ -24,6 +25,7 @@
         <span *ngIf="userId == invoice.buyer._id">{{ invoice.seller.first_name }} {{ invoice.seller.last_name }}</span>
       </td>
       <td>{{ invoice.total_due | number: "1.2-2" }} {{ invoice.currency }}</td>
+      <td>{{ invoice.status }}</td>
       <td class="text-right">
         <button class="round-button-primary" [routerLink]="['/invoice', invoice._id]"><i class="material-icons">remove_red_eye</i></button>
         <button class="round-button-red" (click)="warning(invoice._id)"><i class="material-icons">delete</i></button>

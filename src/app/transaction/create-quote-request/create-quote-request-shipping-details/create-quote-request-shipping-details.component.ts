@@ -47,7 +47,9 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
       if (internationalQuoteRequest) {
         this.shippingDetailsForm.get('local_quote_request').setValue(false, { emitEvent: false });
         this.shippingDetailsForm.get('incoterms').enable();
+        this.shippingDetailsForm.get('incoterms').setValidators([Validators.required]);
         this.shippingDetailsForm.get('excluded_countries').enable();
+        this.shippingDetailsForm.get('excluded_countries').setValidators([Validators.required]);
       } else {
         this.shippingDetailsForm.get('local_quote_request').setValue(true, { emitEvent: false });
         this.shippingDetailsForm.get('incoterms').disable();
@@ -80,7 +82,7 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
   }
 
   next() {
-    this.quoteRequest.excluded_coutries = this.shippingDetailsForm.value.excluded_countries.value;
+    this.quoteRequest.excluded_coutries = this.shippingDetailsf.excluded_countries.value;
     this.quoteRequest.incoterms = this.shippingDetailsf.incoterms.value;
     this.quoteRequest.international = this.shippingDetailsf.international_quote_request.value;
     this.quoteRequest.local = this.shippingDetailsf.local_quote_request.value;

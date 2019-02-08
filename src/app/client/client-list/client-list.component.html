@@ -21,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let client of clients | paginate: { itemsPerPage: 6, currentPage: page }">
+    <tr *ngFor="let client of clients | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
       <td class="text-center">{{ client.numericId }}</td>
       <td>{{ client.company_name }}</td>
       <td>{{ client.first_name }} {{ client.last_name }}</td>

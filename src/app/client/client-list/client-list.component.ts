@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
+import { defaultValues } from '@app/shared/helpers/default_values';
 
 @Component({
   selector: 'app-client-list',
@@ -10,6 +11,7 @@ import { Client } from '@app/core/models/user/client';
 export class ClientListComponent implements OnInit {
   clients: Client[];
   page = 1;
+  itemsPerPage = defaultValues.items_per_page;
 
   constructor(private route: ActivatedRoute) {}
 

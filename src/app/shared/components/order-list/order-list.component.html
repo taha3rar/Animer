@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders | paginate: { itemsPerPage: 6, currentPage: page }">
+    <tr *ngFor="let order of orders | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
       <td class="text-center">{{ order.numericId }}</td>
       <td>{{ order.date_created | date: "dd/MM/yyyy" }}</td>
       <td>
