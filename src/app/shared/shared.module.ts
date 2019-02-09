@@ -15,6 +15,7 @@ import { BaseListComponent } from './components/base-list/base-list.component';
 import { UserDocumentComponent } from './components/user-document-list/user-document-list.component';
 import { GooglePlacesDirective } from './directives/google-places.directive';
 import { BaseNavigationComponent } from './components/base-navigation/base-navigation.component';
+import { UploadPictureComponent } from './components/upload-picture/upload-picture.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule],
@@ -29,7 +30,8 @@ import { BaseNavigationComponent } from './components/base-navigation/base-navig
     UserDocumentComponent,
     BaseNavigationComponent,
     BaseListComponent,
-    GooglePlacesDirective
+    GooglePlacesDirective,
+    UploadPictureComponent
   ],
   exports: [
     LoaderComponent,
@@ -40,7 +42,8 @@ import { BaseNavigationComponent } from './components/base-navigation/base-navig
     DocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
-    GooglePlacesDirective
+    GooglePlacesDirective,
+    UploadPictureComponent
   ]
 })
 export class SharedModule {}

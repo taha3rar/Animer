@@ -67,7 +67,6 @@ export class ProfileComponent implements OnInit {
     if (this.credentials && this.credentials.user && this.credentials.user.personal_information.profile_picture) {
       return this.credentials.user.personal_information.profile_picture;
     }
-
     return defaultValues.profile_picture;
   }
 
