@@ -41,8 +41,8 @@
         <li id="user-li">
           <div ngbDropdown placement="bottom-right">
             <div class="user-image">
-            <figure class="img-shape"><img src="{{ profilePicture }}" class="user-img" /></figure>
-            <a  id="user-dropdown" class="dropdown-toggle dropdown-button" data-toggle="dropdown" aria-expanded="true" ngbDropdownToggle>{{ username }}</a>
+            <figure class="img-circular-xs" [style.background-image]="'url(' + profilePicture + ')'"></figure>
+            <a id="user-dropdown" class="dropdown-toggle dropdown-button" data-toggle="dropdown" aria-expanded="true" ngbDropdownToggle>{{ username }}</a>
           </div>
             <div ngbDropdownMenu aria-labelledby="user-dropdown">
               <ul>
