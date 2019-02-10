@@ -24,7 +24,11 @@ phases:
       - echo Finished building the Angular app
   post_build:
     commands:
+<<<<<<< HEAD:buildspec-staging.yml
       - aws s3 sync ./dist s3://agt-frontend-dev --acl 'public-read' --delete
+=======
+      - aws s3 sync ./dist s3://agt-frontend-$AGT_BUILD_ENV --acl 'public-read' --delete
+>>>>>>> Update buildspec.yml:buildspec.yml
     finally:
       - echo Synced the newest distribution to S3
 artifacts:
