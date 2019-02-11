@@ -36,4 +36,9 @@ export class ProductDetailsComponent extends BaseProduct {
   get product_image() {
     return this.isProcessed ? defaultValues.processed_picture : defaultValues.agri_picture;
   }
+
+  receiveImage($event: string) {
+    this.form.controls.image.setValue($event);
+    console.log(this.form.controls.image.value);
+  }
 }

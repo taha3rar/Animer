@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { acceptedMimeTypes } from '@app/shared/helpers/pictureMimeTypes';
-import { UserService, AuthenticationService } from '@app/core';
+import { UserService, AuthenticationService, ProductService } from '@app/core';
 import { User } from '@app/core/models/user/user';
 
 @Component({
@@ -15,10 +15,16 @@ export class UploadPictureComponent implements OnInit {
   picture: string | ArrayBuffer;
   @Input()
   user: User;
+  @Output()
+  imageEvent = new EventEmitter<string>();
   @ViewChild('picInput')
   picInput: ElementRef;
 
-  constructor(private userService: UserService, private authenticationService: AuthenticationService) {}
+  constructor(
+    private userService: UserService,
+    private productService: ProductService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {}
 
@@ -51,6 +57,12 @@ export class UploadPictureComponent implements OnInit {
               // TODO
             }
           );
+        }
+        if (this.type === 'product') {
+          this.productService.saveImage(base64File).subscribe(res => {
+            this.picture = res.url;
+            this.imageEvent.emit(this.picture.toString());
+          });
         }
       };
     } else {

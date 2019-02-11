@@ -49,6 +49,7 @@ export class ProductGeneratorComponent implements OnInit {
         country_of_origin: [undefined],
         specification: [undefined],
         about: [undefined],
+        image: [undefined],
         package_weight: [undefined, this.productDataService.requiredForAgricultural()],
         weight_unit: [undefined, this.productDataService.requiredForAgricultural()],
         total_weight: [undefined, this.productDataService.requiredForAgricultural()],
