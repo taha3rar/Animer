@@ -39,6 +39,5 @@ export class ProductDetailsComponent extends BaseProduct {
 
   receiveImage($event: string) {
     this.form.controls.image.setValue($event);
-    console.log(this.form.controls.image.value);
   }
 }
