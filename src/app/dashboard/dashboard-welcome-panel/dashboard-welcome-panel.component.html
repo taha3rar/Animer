@@ -7,7 +7,7 @@
             <li class="step active"><a data-toggle="tab" class="label" href="#place-order">Place an Order</a></li>
             <li class="step" *ngxPermissionsOnly="['list-clients']"><a data-toggle="tab" class="label" href="#add-clients">Add Your Clients</a></li>
             <li class="step" *ngxPermissionsOnly="['list-ecosystems']"><a data-toggle="tab" class="label" href="#create-ecosystem">Create an Ecosystem</a></li>
-            <li class="step" *ngxPermissionsOnly="['list-transactions']"><a data-toggle="tab" class="label" href="#make-transaction">Make Transaction</a></li>
+            <!-- <li class="step" *ngxPermissionsOnly="['list-transactions']"><a data-toggle="tab" class="label" href="#make-transaction">Make Transaction</a></li> -->
           </ul>
         </div>
         <div class="panel-right tab-content">
@@ -36,7 +36,7 @@
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/ecosystem/list">Create Ecosystem</button>
           </div>
-          <div class="tab-pane" id="make-transaction" *ngxPermissionsOnly="['list-transactions']">
+          <!-- <div class="tab-pane" id="make-transaction" *ngxPermissionsOnly="['list-transactions']">
             <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Create a transaction!</p>
             <p class="normal-text-bold">
@@ -44,7 +44,7 @@
               is complete for the purchase and sale of agricultural produce.
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/transaction/list">Create Transaction</button>
-          </div>
+          </div> -->
       </div>
     </div>
     </div>

@@ -13,25 +13,25 @@ import { UserSupplierListResolver } from './resolvers/supplier-list.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
-    {
-      path: 'transaction/list',
-      component: TransactionListComponent,
-      resolve: {
-        transactions: TransactionListResolver,
-        suppliers: UserSupplierListResolver,
-        ecosystems: UserEcosystemsResolver
-      },
-      data: { title: extract('Transactions') },
-      runGuardsAndResolvers: 'always'
-    },
-    {
-      path: 'transaction/:id',
-      component: TransactionComponent,
-      resolve: {
-        quoteRequest: QuoteRequestResolver,
-        transaction: TransactionResolver
-      }
-    }
+    // {
+    //   path: 'transaction/list',
+    //   component: TransactionListComponent,
+    //   resolve: {
+    //     transactions: TransactionListResolver,
+    //     suppliers: UserSupplierListResolver,
+    //     ecosystems: UserEcosystemsResolver
+    //   },
+    //   data: { title: extract('Transactions') },
+    //   runGuardsAndResolvers: 'always'
+    // },
+    // {
+    //   path: 'transaction/:id',
+    //   component: TransactionComponent,
+    //   resolve: {
+    //     quoteRequest: QuoteRequestResolver,
+    //     transaction: TransactionResolver
+    //   }
+    // }
   ])
 ];
 
