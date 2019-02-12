@@ -5,6 +5,7 @@ import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductListResolver } from './resolvers/product-list.resolver';
+import { ProductResolver } from './resolvers/product.resolver';
 import { ProductGeneratorComponent } from './product-generator/product-generator.component';
 
 const routes: Routes = [
@@ -19,6 +20,11 @@ const routes: Routes = [
     {
       path: 'product/generator',
       component: ProductGeneratorComponent
+    },
+    {
+      path: 'product/edit/:id',
+      component: ProductGeneratorComponent,
+      resolve: { product: ProductResolver }
     }
   ])
 ];

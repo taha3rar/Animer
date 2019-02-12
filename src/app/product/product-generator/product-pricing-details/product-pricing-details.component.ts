@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { currencies } from '@app/shared/helpers/product_details';
 import { BaseProduct } from '../base-product';
 import { ProductDataService } from '../product-data.service';
@@ -10,6 +10,8 @@ import { ProductDataService } from '../product-data.service';
 })
 export class ProductPricingDetailsComponent extends BaseProduct {
   currencies = currencies;
+  @Input()
+  edit: boolean;
 
   constructor(protected productDataService: ProductDataService) {
     super(productDataService);

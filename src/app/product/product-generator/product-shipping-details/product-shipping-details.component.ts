@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Input } from '@angular/core';
 import { countries } from '@app/shared/helpers/countries';
 import { BaseProduct } from '../base-product';
 import { ProductDataService } from '../product-data.service';
@@ -14,6 +14,8 @@ export class ProductShippingDetailsComponent extends BaseProduct implements OnIn
   public addrKeys: string[];
   public addr: object;
   countriesList: any;
+  @Input()
+  edit: boolean;
 
   constructor(protected productDataService: ProductDataService, private zone: NgZone) {
     super(productDataService);
@@ -23,6 +25,12 @@ export class ProductShippingDetailsComponent extends BaseProduct implements OnIn
     this.multiSelectHandler();
     super.ngOnInit();
     this.countriesList = countries;
+    if (!this.form.controls.international_buyers.value) {
+      this.form.get('tariff_code').disable();
+      this.form.get('tariff_code').setValue('');
+      this.form.get('excluded_countries').disable();
+      this.form.get('excluded_countries').setValue('');
+    }
 
     this.form.get('international_buyers').valueChanges.subscribe(international => {
       if (international) {

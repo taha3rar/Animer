@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { countries } from '@app/shared/helpers/countries';
 import { certifications } from '@app/shared/helpers/product_details';
 import { ProductDataService } from '../product-data.service';
@@ -13,6 +13,8 @@ import { defaultValues } from '@app/shared/helpers/default_values';
 export class ProductDetailsComponent extends BaseProduct {
   countries = countries;
   allCerts = certifications;
+  @Input()
+  edit: boolean;
 
   constructor(protected productDataService: ProductDataService) {
     super(productDataService);

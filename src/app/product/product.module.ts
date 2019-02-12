@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductListResolver } from './resolvers/product-list.resolver';
+import { ProductResolver } from './resolvers/product.resolver';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductRoutingModule } from './product-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -42,6 +43,6 @@ import { SharedModule } from '@app/shared';
     FormsModule,
     SharedModule
   ],
-  providers: [ProductListResolver, ProductDataService]
+  providers: [ProductListResolver, ProductResolver, ProductDataService]
 })
 export class ProductModule {}

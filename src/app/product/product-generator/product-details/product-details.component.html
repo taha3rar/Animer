@@ -148,4 +148,9 @@
     </div>
   </div>
 </form>
-<button class="bttn-primary pull-right next-step" [disabled]="!validDetails" (click)="next()">Next</button>
+<button *ngIf="!edit" class="bttn-primary pull-right next-step" [disabled]="!validDetails" (click)="next()">
+  Next
+</button>
+<button *ngIf="edit" class="bttn-primary pull-right next-step" [disabled]="!validDetails" (click)="next()">
+  Submit
+</button>

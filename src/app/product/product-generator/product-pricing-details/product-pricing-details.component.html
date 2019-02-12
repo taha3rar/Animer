@@ -3,11 +3,24 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="total_amount_packages">Total Amount of Packages *</label>
-        <input type="text" class="form-control" id="total_amount_packages" formControlName="quantity" readonly [value]="quantity" />
+        <input
+          type="text"
+          class="form-control"
+          id="total_amount_packages"
+          formControlName="quantity"
+          readonly
+          [value]="quantity"
+        />
       </div>
       <div class="form-group">
         <label for="price_per_package">Price per Package *</label>
-        <input type="number" class="form-control" id="price_per_package" placeholder="Type price per package here..." formControlName="package_price"/>
+        <input
+          type="number"
+          class="form-control"
+          id="price_per_package"
+          placeholder="Type price per package here..."
+          formControlName="package_price"
+        />
       </div>
       <div class="form-group">
         <label for="total_amount_packages">Total Price *</label>
@@ -24,43 +37,72 @@
 
       <div class="form-group">
         <label for="additional_pricing">Additional Pricing Details</label>
-        <textarea class="form-control" rows="5" placeholder="Type additional pricing details here..." formControlName="pricing_details"></textarea>
+        <textarea
+          class="form-control"
+          rows="5"
+          placeholder="Type additional pricing details here..."
+          formControlName="pricing_details"
+        ></textarea>
       </div>
     </div>
   </div>
   <div class="row" *ngIf="!isProcessed">
-      <div class="col-md-6">
-          <div class="form-group">
-            <label for="total_weight">Total Weight *</label>
-            <input type="number" class="form-control" id="total_weight" placeholder="Total weight" formControlName="total_weight" />
-          </div>
-          <div class="form-group">
-            <label for="total_amount_packages">Currency *</label>
-            <select type="text" class="form-control" id="total_amount_packages" formControlName="currency">
-              <option selected="selected">Choose currency...</option>
-              <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="price_per_package">Total Price *</label>
-            <input type="number" class="form-control" id="total_price" placeholder="Total price" formControlName="total_price"/>
-          </div>
-        </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="total_weight">Total Weight *</label>
+        <input
+          type="number"
+          class="form-control"
+          id="total_weight"
+          placeholder="Total weight"
+          formControlName="total_weight"
+        />
+      </div>
+      <div class="form-group">
+        <label for="total_amount_packages">Currency *</label>
+        <select type="text" class="form-control" id="total_amount_packages" formControlName="currency">
+          <option selected="selected">Choose currency...</option>
+          <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="price_per_package">Total Price *</label>
+        <input
+          type="number"
+          class="form-control"
+          id="total_price"
+          placeholder="Total price"
+          formControlName="total_price"
+        />
+      </div>
+    </div>
 
-        <div class="col-md-6">
-            <div class="form-group">
-              <label for="total_weight">Price per {{ weight_unit }} *</label>
-              <input type="number" class="form-control" id="price_unit" formControlName="price_per_unit" />
-            </div>
-            <div class="form-group">
-              <label for="package_price">Price per Package *</label>
-              <input type="number" class="form-control" id="package_price" formControlName="package_price"/>
-            </div>
-            <div class="form-group">
-              <label for="additional_pricing">Additional Pricing Details</label>
-              <textarea type="number" class="form-control" id="additional_pricing" rows="2" placeholder="Additional pricing details..." formControlName="pricing_details"></textarea>
-            </div>
-          </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="total_weight">Price per {{ weight_unit }} *</label>
+        <input type="number" class="form-control" id="price_unit" formControlName="price_per_unit" />
+      </div>
+      <div class="form-group">
+        <label for="package_price">Price per Package *</label>
+        <input type="number" class="form-control" id="package_price" formControlName="package_price" />
+      </div>
+      <div class="form-group">
+        <label for="additional_pricing">Additional Pricing Details</label>
+        <textarea
+          type="number"
+          class="form-control"
+          id="additional_pricing"
+          rows="2"
+          placeholder="Additional pricing details..."
+          formControlName="pricing_details"
+        ></textarea>
+      </div>
+    </div>
   </div>
 </form>
-<button class="bttn-primary pull-right next-step" [disabled]="!validPricing" (click)="next()">Next</button>
+<button *ngIf="!edit" class="bttn-primary pull-right next-step" [disabled]="!validPricing" (click)="next()">
+  Next
+</button>
+<button *ngIf="edit" class="bttn-primary pull-right next-step" [disabled]="!validPricing" (click)="next()">
+  Submit
+</button>

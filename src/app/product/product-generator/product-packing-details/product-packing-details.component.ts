@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { measureUnits } from '@app/shared/helpers/measure';
 import { BaseProduct } from '../base-product';
 import { ProductDataService } from '../product-data.service';
@@ -11,6 +11,8 @@ import { Validators } from '@angular/forms';
 })
 export class ProductPackingDetailsComponent extends BaseProduct implements OnInit {
   units = measureUnits;
+  @Input()
+  edit: boolean;
 
   constructor(protected productDataService: ProductDataService) {
     super(productDataService);
@@ -18,7 +20,14 @@ export class ProductPackingDetailsComponent extends BaseProduct implements OnIni
 
   ngOnInit() {
     super.ngOnInit();
-
+    if (!this.form.controls.item_package_details) {
+      this.form.get('item_package_type').disable();
+      this.form.get('item_package_type').setValue('');
+      this.form.get('item_measurement_unit').disable();
+      this.form.get('item_measurement_unit').setValue('');
+      this.form.get('item_measurement_amount').disable();
+      this.form.get('item_measurement_amount').setValue('');
+    }
     // processed logic
     this.form.get('item_package_details').valueChanges.subscribe(packageDetails => {
       if (packageDetails) {

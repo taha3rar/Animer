@@ -4,38 +4,75 @@
 <div class="stepper-wrapper">
   <div class="stepper">
     <ul class="nav nav-tabs">
-      <li class="active">
+      <li *ngIf="!edit" class="active">
         <a data-toggle="tab" class="label" href="#productDetails">
           <span class="round-tab">1</span>Add product details
         </a>
       </li>
-      <li class="disabled">
+      <li *ngIf="edit" class="completed">
+        <a data-toggle="tab" class="label" href="#productDetails">
+          <span class="round-tab">1</span>Edit product details
+        </a>
+      </li>
+      <li *ngIf="!edit" class="disabled">
         <a data-toggle="tab" class="label" href="#packingDetails">
           <span class="round-tab">2</span>Add packing details
         </a>
       </li>
-      <li class="disabled">
+      <li *ngIf="edit" class="completed">
+        <a data-toggle="tab" class="label" href="#packingDetails">
+          <span class="round-tab">2</span>Edit packing details
+        </a>
+      </li>
+      <li *ngIf="!edit" class="disabled">
         <a data-toggle="tab" class="label" href="#pricingDetails">
           <span class="round-tab">3</span> Add pricing details
         </a>
       </li>
-      <li class="disabled">
+      <li *ngIf="edit" class="completed">
+        <a data-toggle="tab" class="label" href="#pricingDetails">
+          <span class="round-tab">3</span> Edit pricing details
+        </a>
+      </li>
+      <li *ngIf="!edit" class="disabled">
         <a data-toggle="tab" class="label" href="#shippingDetails">
           <span class="round-tab">4</span>Add shipping details
         </a>
       </li>
-      <li class="disabled">
+      <li *ngIf="edit" class="completed">
+        <a data-toggle="tab" class="label" href="#shippingDetails">
+          <span class="round-tab">4</span>Edit shipping details
+        </a>
+      </li>
+      <li *ngIf="!edit" class="disabled">
+        <a data-toggle="tab" class="label" href="#review"> <span class="round-tab">5</span>Review and confirm </a>
+      </li>
+      <li *ngIf="edit" class="completed active">
         <a data-toggle="tab" class="label" href="#review"> <span class="round-tab">5</span>Review and confirm </a>
       </li>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="productDetails">
+      <div *ngIf="!edit" class="tab-pane active" id="productDetails">
         <div class="panel panel-tab">
           <div class="panel-body">
-            <div class="panel-header"><p>Product Details</p></div>
+            <div class="panel-header">
+              <p>Product Details</p>
+            </div>
             <div class="padding-all-2">
-              <app-product-details></app-product-details>
+              <app-product-details [edit]="edit"></app-product-details>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="edit" class="tab-pane" id="productDetails">
+        <div class="panel panel-tab">
+          <div class="panel-body">
+            <div class="panel-header">
+              <p>Product Details</p>
+            </div>
+            <div class="padding-all-2">
+              <app-product-details [edit]="edit"></app-product-details>
             </div>
           </div>
         </div>
@@ -47,7 +84,7 @@
               <p>Packing Details</p>
             </div>
             <div class="padding-all-2">
-              <app-product-packing-details></app-product-packing-details>
+              <app-product-packing-details [edit]="edit"></app-product-packing-details>
             </div>
           </div>
         </div>
@@ -59,7 +96,7 @@
               <p>Pricing Details</p>
             </div>
             <div class="padding-all-2">
-              <app-product-pricing-details></app-product-pricing-details>
+              <app-product-pricing-details [edit]="edit"></app-product-pricing-details>
             </div>
           </div>
         </div>
@@ -71,20 +108,33 @@
               <p>Shipping Details</p>
             </div>
             <div class="padding-all-2">
-              <app-product-shipping-details></app-product-shipping-details>
+              <app-product-shipping-details [edit]="edit"></app-product-shipping-details>
             </div>
           </div>
         </div>
       </div>
-      <div class="tab-pane" id="review">
+      <div *ngIf="!edit" class="tab-pane" id="review">
         <div class="panel panel-tab">
           <div class="panel-body">
             <div class="panel-header">
               <p>Review Product</p>
             </div>
             <div>
-              <app-product-review-processed *ngIf="isProcessed"></app-product-review-processed>
-              <app-product-review-agricultural *ngIf="!isProcessed"></app-product-review-agricultural>
+              <app-product-review-processed *ngIf="isProcessed" [edit]="edit"></app-product-review-processed>
+              <app-product-review-agricultural *ngIf="!isProcessed" [edit]="edit"></app-product-review-agricultural>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="edit" class="tab-pane active" id="review">
+        <div class="panel panel-tab">
+          <div class="panel-body">
+            <div class="panel-header">
+              <p>Review Product</p>
+            </div>
+            <div>
+              <app-product-review-processed *ngIf="isProcessed" [edit]="edit"></app-product-review-processed>
+              <app-product-review-agricultural *ngIf="!isProcessed" [edit]="edit"></app-product-review-agricultural>
             </div>
           </div>
         </div>

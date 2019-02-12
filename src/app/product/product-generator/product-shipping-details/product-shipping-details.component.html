@@ -15,21 +15,39 @@
     </div>
     <div class="form-group col-md-6">
       <label for="gps_coordinates">GPS coordinates *</label>
-      <input class="form-control" readonly formControlName="gps_coordinates" id="gps_coordinates" placeholder="GPS coordinates" />
+      <input
+        class="form-control"
+        readonly
+        formControlName="gps_coordinates"
+        id="gps_coordinates"
+        placeholder="GPS coordinates"
+      />
     </div>
   </div>
 
   <div class="center-text-btn margin-bottom">
-      <label for="international_switch">Product can be sold internationally</label>
-      <div class="switch">
-        <input id="international_switch" class="cmn-toggle cmn-toggle-round-flat" type="checkbox" checked formControlName="international_buyers" />
-        <label for="international_switch"></label>
-      </div>
+    <label for="international_switch">Product can be sold internationally</label>
+    <div class="switch">
+      <input
+        id="international_switch"
+        class="cmn-toggle cmn-toggle-round-flat"
+        type="checkbox"
+        checked
+        formControlName="international_buyers"
+      />
+      <label for="international_switch"></label>
     </div>
+  </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="tariff_code">HS Tariff Code</label>
-      <input type="number" placeholder="Type HS tariff code here..." class="form-control" id="tariff_code" formControlName="tariff_code" />
+      <input
+        type="number"
+        placeholder="Type HS tariff code here..."
+        class="form-control"
+        id="tariff_code"
+        formControlName="tariff_code"
+      />
       <p class="help-block">
         <a target="_blank" href="https://www.tradefinanceglobal.com/freight-forwarding/incoterms/">Search incoterms</a>
         for international shipping
@@ -37,10 +55,21 @@
     </div>
     <div class="form-group col-md-6">
       <label for="excluded_countries">Excluded countries</label>
-      <select class="selectpicker form-control" id="excluded_countries" formControlName="excluded_countries" data-size="5" multiple>
+      <select
+        class="selectpicker form-control"
+        id="excluded_countries"
+        formControlName="excluded_countries"
+        data-size="5"
+        multiple
+      >
         <option *ngFor="let country of countriesList" [value]="country.viewValue"> {{ country.viewValue }} </option>
       </select>
     </div>
   </div>
 </form>
-<button class="bttn-primary pull-right next-step" [disabled]="!validShipping" (click)="next()">Review</button>
+<button *ngIf="!edit" class="bttn-primary pull-right next-step" [disabled]="!validShipping" (click)="next()">
+  Next
+</button>
+<button *ngIf="edit" class="bttn-primary pull-right next-step" [disabled]="!validShipping" (click)="next()">
+  Submit
+</button>

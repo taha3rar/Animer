@@ -39,8 +39,16 @@ export class BaseProductReview extends BaseProduct implements OnInit {
 
   save() {
     if (this.form.valid) {
-      this.product.gps_coordinates = ['43.6824666', '-79.54016200000001']; // TODO: change this
       this.productService.create(this.product).subscribe(() => {
+        this.router.navigateByUrl('/product/list');
+      });
+    }
+  }
+
+  update() {
+    if (this.form.valid) {
+      this.product._id = this.productDataService.productId;
+      this.productService.update(this.product._id, this.product).subscribe(() => {
         this.router.navigateByUrl('/product/list');
       });
     }

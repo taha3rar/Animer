@@ -5,10 +5,18 @@
   <p translate>Product list help legend</p>
 </div>
 
-<button class="bttn-primary bttn-add pull-right" [routerLink]="['/product/generator']" [queryParams]="{type: 'processed'}">
+<button
+  class="bttn-primary bttn-add pull-right"
+  [routerLink]="['/product/generator']"
+  [queryParams]="{ type: 'processed' }"
+>
   <span translate>New Processed Product</span>
 </button>
-<button class="bttn-primary bttn-add pull-right" [routerLink]="['/product/generator']"  [queryParams]="{type: 'agricultural'}">
+<button
+  class="bttn-primary bttn-add pull-right"
+  [routerLink]="['/product/generator']"
+  [queryParams]="{ type: 'agricultural' }"
+>
   <span translate>New Agricultural Product</span>
 </button>
 
@@ -35,8 +43,30 @@
       <td *ngIf="product.product_type != 'processed'">{{ product.total_weight }} {{ product.weight_unit }}</td>
       <td *ngIf="product.product_type == 'processed'">{{ product.quantity }} Packages</td>
       <td class="text-right">
-        <button class="round-button-primary"><i class="material-icons">edit</i></button>
-        <button class="round-button-primary" data-toggle="wizard" data-target="#productProfileWizard" (click)="setProductOverview(i)"><i class="material-icons">remove_red_eye</i></button>
+        <button
+          *ngIf="product.product_type == 'processed'"
+          class="round-button-primary"
+          [routerLink]="['/product/edit', product._id]"
+          [queryParams]="{ type: 'processed' }"
+        >
+          <i class="material-icons">edit</i>
+        </button>
+        <button
+          *ngIf="product.product_type != 'processed'"
+          class="round-button-primary"
+          [routerLink]="['/product/edit', product._id]"
+          [queryParams]="{ type: 'agricultural' }"
+        >
+          <i class="material-icons">edit</i>
+        </button>
+        <button
+          class="round-button-primary"
+          data-toggle="wizard"
+          data-target="#productProfileWizard"
+          (click)="setProductOverview(i)"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
         <button class="round-button-red" (click)="warning(product._id)"><i class="material-icons">delete</i></button>
       </td>
     </tr>
@@ -48,7 +78,7 @@
 <div class="modal-box" id="productProfileWizard">
   <div class="modal-box-content-sm" style="width: 30%">
     <div class="modal-box-heading">
-        <i class="material-icons pull-right" data-dismiss="modal" >close</i>
+      <i class="material-icons pull-right" data-dismiss="modal">close</i>
       <p translate class="modal-title">Product Overview</p>
     </div>
     <app-product-profile [product]="selectedProduct"></app-product-profile>

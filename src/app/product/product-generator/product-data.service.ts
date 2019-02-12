@@ -4,6 +4,7 @@ import { FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
 
 @Injectable()
 export class ProductDataService {
+  productId: string;
   type: string;
   formSource = new BehaviorSubject(undefined);
   currentForm = this.formSource.asObservable();
@@ -16,6 +17,10 @@ export class ProductDataService {
 
   setType(type: string) {
     this.type = type;
+  }
+
+  setProductId(productId: string) {
+    this.productId = productId;
   }
 
   isProcessed() {

@@ -11,7 +11,7 @@
       <div class="prod-img-heading">
         <figure
           class="img-circular"
-          [ngStyle]="{ 'background-image': 'url(' + product_image + ')'}"
+          [ngStyle]="{ 'background-image': 'url(' + product_image + ')' }"
           style="margin: 0 auto;"
         ></figure>
         <p class="heading-2" style="text-align:center;">{{ product.produce }}</p>
@@ -115,4 +115,5 @@
   </div>
 </div>
 
-<button class="bttn-primary pull-right" (click)="save()" [disabled]="!form.valid">Add Product</button>
+<button *ngIf="!edit" class="bttn-primary pull-right" (click)="save()" [disabled]="!form.valid">Add Product</button>
+<button *ngIf="edit" class="bttn-primary pull-right" (click)="update()" [disabled]="!form.valid">update Product</button>

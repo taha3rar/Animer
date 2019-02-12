@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BaseProductReview } from '../base-product-review';
 import { ProductDataService } from '../../product-data.service';
 import { ProductService } from '@app/core';
@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-review-agricultural.component.scss']
 })
 export class ProductReviewAgriculturalComponent extends BaseProductReview {
+  @Input()
+  edit: boolean;
+
   constructor(
     protected productDataService: ProductDataService,
     protected productService: ProductService,
