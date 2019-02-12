@@ -167,10 +167,10 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
   }
 
   draftInvoice() {
-    this.invoice['deliver_to_expected_delivery_date'].setValue(
-      moment(this.invoice.deliver_to_expected_delivery_date.value).toJSON()
-    );
-    this.invoice['valid_until'].setValue(moment(this.invoice.valid_until.value).toJSON());
+    this.invoice['sign_by'].patchValue({ date: moment(this.form['controls'].sign_by['controls'].date.value).toJSON() });
+    this.invoice['deliver_to'].patchValue({
+      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
+    });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.draft = true;
