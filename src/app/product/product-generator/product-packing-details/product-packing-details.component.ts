@@ -20,7 +20,7 @@ export class ProductPackingDetailsComponent extends BaseProduct implements OnIni
 
   ngOnInit() {
     super.ngOnInit();
-    if (!this.form.controls.item_package_details) {
+    if (!this.form.controls.item_package_details.value) {
       this.form.get('item_package_type').disable();
       this.form.get('item_package_type').setValue('');
       this.form.get('item_measurement_unit').disable();
