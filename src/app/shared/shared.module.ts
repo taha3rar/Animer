@@ -17,7 +17,6 @@ import { GooglePlacesDirective } from './directives/google-places.directive';
 import { BaseNavigationComponent } from './components/base-navigation/base-navigation.component';
 import { UploadPictureComponent } from './components/upload-picture/upload-picture.component';
 import { BaseValidationComponent } from './components/base-validation/base-validation.component';
-import { UploadPictureComponent } from './components/upload-picture/upload-picture.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule],
