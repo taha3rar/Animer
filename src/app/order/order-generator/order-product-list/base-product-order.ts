@@ -1,9 +1,9 @@
 import { MatDialogRef } from '@angular/material';
 import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
-import { currencies } from '@app/shared/helpers/product_details';
 import { measureUnits } from '@app/shared/helpers/measure';
 import { OnInit } from '@angular/core';
+import { currencies } from '@app/shared/helpers/currencies';
 
 export class BaseProductOrder implements OnInit {
   currency: string;

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { currencies } from '@app/shared/helpers/product_details';
 import { BaseProduct } from '../base-product';
 import { ProductDataService } from '../product-data.service';
+import { currencies } from '@app/shared/helpers/currencies';
 
 @Component({
   selector: 'app-product-pricing-details',

@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter, NgZone } from '@angular/core';
-import { certifications, currencies } from '@app/shared/helpers/product_details';
+import { certifications } from '@app/shared/helpers/product_details';
 import { incotermsGroups } from '@app/shared/helpers/incoterms';
 import { ProformaInvoice } from '@app/core/models/transaction/proforma-invoice';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { packageUnits, containerType } from '@app/shared/helpers/packaging_details';
 import * as moment from 'moment';
+import { currencies } from '@app/shared/helpers/currencies';
 declare const $: any;
 @Component({
   selector: 'app-transaction-proforma-invoice-details',

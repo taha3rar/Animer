@@ -120,10 +120,3 @@ export const certifications = [
   'Vegan Certified',
   'Veteran Owned - NaVOBA'
 ];
-
-export const currencies = [
-  { value: 'USD', viewValue: 'USD' },
-  { value: 'EUR', viewValue: 'EUR' },
-  { value: 'KES', viewValue: 'KES' },
-  { value: 'ZAR', viewValue: 'ZAR' }
-];
