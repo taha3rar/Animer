@@ -1,4 +1,4 @@
-$size: 6rem;
+$size: 6.5rem;
 
 figure {
   position: relative;
@@ -14,27 +14,33 @@ figure {
   border-bottom-right-radius: $size * 2;
   bottom: 0;
   opacity: 0.7;
-  i {
+  label:nth-of-type(1) {
     transform: scale(0.8);
     color: white;
     font-size: 2.2rem;
-    padding-top: 1rem;
+    cursor: pointer;
+    padding-top: 0.8rem;
     transition: transform 0.2s ease-out;
   }
 
-  p {
+  label:nth-of-type(2) {
     color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-top: -7px;
+    font-size: 1.19rem;
+    display: block;
     cursor: pointer;
+    font-weight: bold;
+    margin-top: -7px;
   }
 }
 
 figure:hover .upload-block {
   visibility: visible;
 
-  i {
+  label {
     transform: scale(1);
   }
+}
+
+.bttn-file {
+  display: none;
 }

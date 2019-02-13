@@ -1,5 +1,7 @@
 <figure class="img-circular" [ngStyle]="{ 'background-image': 'url(' + picture + ')' }">
   <div class="upload-block">
-    <input #picInput type="file" (change)="previewPic()" />
+    <label class="material-icons" for="pic-upload" >camera_alt</label>
+    <label for="pic-upload">Update image</label>
+    <input #picInput type="file" id="pic-upload" class="bttn-file" (change)="previewPic()" />
   </div>
 </figure>
