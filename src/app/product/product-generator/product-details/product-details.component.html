@@ -2,11 +2,8 @@
   <div class="product" *ngIf="isProcessed">
     <div class="product-img">
       <p class="heading-2">Upload product image</p>
-      <app-upload-picture
-        [picture]="product_image"
-        [type]="'product'"
-        (imageEvent)="receiveImage($event)"
-      ></app-upload-picture>
+      <app-upload-picture [picture]="product_image" [type]="'product'" (imageEvent)="receiveImage($event)">
+      </app-upload-picture>
       <button class="bttn-primary" disabled>Upload Image</button>
     </div>
     <div class="product-details">
@@ -52,11 +49,8 @@
   <div class="product" *ngIf="!isProcessed">
     <div class="product-img">
       <p class="heading-2">Upload product image</p>
-      <app-upload-picture
-        [picture]="product_image"
-        [type]="'product'"
-        (imageEvent)="receiveImage($event)"
-      ></app-upload-picture>
+      <app-upload-picture [picture]="product_image" [type]="'product'" (imageEvent)="receiveImage($event)">
+      </app-upload-picture>
       <button class="bttn-primary" disabled>Upload Image</button>
     </div>
     <div class="product-details">
@@ -148,9 +142,7 @@
     </div>
   </div>
 </form>
-<button *ngIf="!edit" class="bttn-primary pull-right next-step" [disabled]="!validDetails" (click)="next()">
-  Next
-</button>
-<button *ngIf="edit" class="bttn-primary pull-right next-step" [disabled]="!validDetails" (click)="next()">
-  Submit
+<button class="bttn-primary pull-right next-step" [disabled]="!validDetails" (click)="next()">
+  <span *ngIf="!edit">Next</span>
+  <span *ngIf="edit">Submit</span>
 </button>

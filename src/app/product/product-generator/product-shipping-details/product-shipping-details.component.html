@@ -67,9 +67,7 @@
     </div>
   </div>
 </form>
-<button *ngIf="!edit" class="bttn-primary pull-right next-step" [disabled]="!validShipping" (click)="next()">
-  Next
-</button>
-<button *ngIf="edit" class="bttn-primary pull-right next-step" [disabled]="!validShipping" (click)="next()">
-  Submit
+<button class="bttn-primary pull-right next-step" [disabled]="!validShipping" (click)="next()">
+  <span *ngIf="!edit">Next</span>
+  <span *ngIf="edit">Submit</span>
 </button>

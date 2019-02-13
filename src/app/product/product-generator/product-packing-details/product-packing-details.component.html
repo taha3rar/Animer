@@ -189,9 +189,7 @@
     </div>
   </div>
 </form>
-<button *ngIf="!edit" class="bttn-primary pull-right next-step" [disabled]="!validPacking" (click)="next()">
-  Next
-</button>
-<button *ngIf="edit" class="bttn-primary pull-right next-step" [disabled]="!validPacking" (click)="next()">
-  Submit
+<button class="bttn-primary pull-right next-step" [disabled]="!validPacking" (click)="next()">
+  <span *ngIf="!edit">Next</span>
+  <span *ngIf="edit">Submit</span>
 </button>
