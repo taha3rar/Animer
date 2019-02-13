@@ -148,3 +148,8 @@ label {
 .bootstrap-select .dropdown-menu {
   width: 200px !important;
 }
+
+.selectpicker:disabled + button.dropdown-toggle {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
