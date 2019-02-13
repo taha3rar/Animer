@@ -46,4 +46,8 @@ export class ProductDetailsComponent extends BaseProduct {
   receiveImage($event: string) {
     this.form.controls.image.setValue($event);
   }
+  onSubmit() {
+    this.form.controls.produce.markAsTouched({ onlySelf: true });
+    this.form.controls.variety.markAsTouched({ onlySelf: true });
+  }
 }
