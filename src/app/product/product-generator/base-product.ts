@@ -1,16 +1,20 @@
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { OnInit } from '@angular/core';
 import { ProductDataService } from './product-data.service';
 import { FormGroup } from '@angular/forms';
 
-export class BaseProduct implements OnInit {
+export class BaseProduct extends BaseValidationComponent implements OnInit {
   form: FormGroup;
   isProcessed: boolean;
 
-  constructor(protected productDataService: ProductDataService) {}
+  constructor(protected productDataService: ProductDataService) {
+    super();
+  }
 
   ngOnInit() {
     this.productDataService.currentForm.subscribe(form => {
       this.form = form;
+      this.formInput = form;
     });
 
     this.isProcessed = this.productDataService.isProcessed();
@@ -25,5 +29,6 @@ export class BaseProduct implements OnInit {
     this.productDataService.currentForm.subscribe(form => {
       this.form = form;
     });
+    this.formInput = this.form;
   }
 }

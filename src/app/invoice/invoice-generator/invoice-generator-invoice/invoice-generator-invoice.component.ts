@@ -9,13 +9,14 @@ import { InvoiceInventoryComponent } from './invoice-inventory/invoice-inventory
 import { InvoiceAgriculturalProductComponent } from './invoice-agricultural-product/invoice-agricultural-product.component';
 import { InvoiceProcessedProductComponent } from './invoice-processed-product/invoice-processed-product.component';
 import * as moment from 'moment';
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 
 @Component({
   selector: 'app-invoice-generator-invoice',
   templateUrl: './invoice-generator-invoice.component.html',
   styleUrls: ['./invoice-generator-invoice.component.scss']
 })
-export class InvoiceGeneratorInvoiceComponent implements OnInit {
+export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent implements OnInit {
   products: ProductInvoice[] = [];
   newInvoice: Invoice;
   @Output()
@@ -28,10 +29,13 @@ export class InvoiceGeneratorInvoiceComponent implements OnInit {
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.onChanges();
+    this.formInput = this.form;
   }
 
   onChanges(): void {

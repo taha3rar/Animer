@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BaseProduct } from '../base-product';
 import { ProductDataService } from '../product-data.service';
 import { currencies } from '@app/shared/helpers/currencies';
@@ -8,7 +8,7 @@ import { currencies } from '@app/shared/helpers/currencies';
   templateUrl: './product-pricing-details.component.html',
   styleUrls: ['./product-pricing-details.component.scss']
 })
-export class ProductPricingDetailsComponent extends BaseProduct {
+export class ProductPricingDetailsComponent extends BaseProduct implements OnInit {
   currencies = currencies;
   @Input()
   edit: boolean;
@@ -36,5 +36,13 @@ export class ProductPricingDetailsComponent extends BaseProduct {
       this.form.controls.pricing_details.valid;
 
     return valid;
+  }
+
+  onSubmit() {
+    this.form.controls.currency.markAsTouched({ onlySelf: true });
+    this.form.controls.total_weight.markAsTouched({ onlySelf: true });
+    this.form.controls.price_per_unit.markAsTouched({ onlySelf: true });
+    this.form.controls.total_price.markAsTouched({ onlySelf: true });
+    this.form.controls.package_price.markAsTouched({ onlySelf: true });
   }
 }

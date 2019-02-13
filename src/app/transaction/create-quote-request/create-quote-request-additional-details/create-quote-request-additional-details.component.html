@@ -42,7 +42,7 @@
         </select>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="showFieldStyle('valid_until')">
       <label for="qr_valid_date"> Quote request valid until </label>
       <div class="input-group">
         <input
@@ -58,6 +58,9 @@
           <button class="btn glyphicon glyphicon-calendar" (click)="dp.toggle()" type="button"></button>
         </div>
       </div>
+      <div class="help-block">
+        <p *ngIf="isFieldInvalid('valid_until')">This field is required</p>
+      </div>
     </div>
     <div class="form-group">
       <label for="qoute_request_valid">Quote request remarks</label>
@@ -68,7 +71,11 @@
         placeholder="Type quote request remarks here..."
         formControlName="remarks"
       />
+      <div class="help-block">
+        <p *ngIf="isFieldInvalid('remarks')">This field is required</p>
+      </div>
     </div>
   </form>
 </div>
-<button class="btn-next pull-right" (click)="submit()" [disabled]="!additionalDetailsForm.valid">Submit</button>
+<button class="btn-next pull-right" (click)="onSubmit(additionalDetailsForm)" [hidden]="additionalDetailsForm.valid">Submit</button>
+<button class="btn-next pull-right" (click)="submit()" [hidden]="!additionalDetailsForm.valid">Submit</button>

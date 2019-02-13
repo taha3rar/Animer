@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="formInput">
   <div class="row" *ngIf="isProcessed">
     <div class="col-md-6">
       <div class="form-group">
@@ -12,7 +12,7 @@
           [value]="quantity"
         />
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('package_price')">
         <label for="price_per_package">Price per Package *</label>
         <input
           type="number"
@@ -21,18 +21,27 @@
           placeholder="Type price per package here..."
           formControlName="package_price"
         />
+        <div *ngIf="isFieldInvalid('package_price')" class="help-block">
+          <p>This field is required</p>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('total_price')">
         <label for="total_amount_packages">Total Price *</label>
         <input type="number" class="form-control" id="total_amount_packages" formControlName="total_price" />
+        <div *ngIf="isFieldInvalid('total_price')" class="help-block">
+          <p>This field is required</p>
+        </div>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('currency')">
         <label for="currency">Currency *</label>
         <select id="currency" placeholder="Choose currency" class="form-control" formControlName="currency">
           <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
         </select>
+        <div *ngIf="isFieldInvalid('currency')" class="help-block">
+          <p>This field is required</p>
+        </div>
       </div>
 
       <div class="form-group">
@@ -47,7 +56,7 @@
     </div>
   </div>
   <div class="row" *ngIf="!isProcessed">
-    <div class="col-md-6">
+    <div class="col-md-6" [ngClass]="showFieldStyle('total_weight')">
       <div class="form-group">
         <label for="total_weight">Total Weight *</label>
         <input
@@ -57,15 +66,21 @@
           placeholder="Total weight"
           formControlName="total_weight"
         />
+        <div *ngIf="isFieldInvalid('total_weight')" class="help-block">
+          <p>This field is required</p>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('currency')">
         <label for="total_amount_packages">Currency *</label>
         <select type="text" class="form-control" id="total_amount_packages" formControlName="currency">
           <option selected="selected">Choose currency...</option>
           <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
         </select>
+        <div *ngIf="isFieldInvalid('currency')" class="help-block">
+          <p>This field is required</p>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('total_price')">
         <label for="price_per_package">Total Price *</label>
         <input
           type="number"
@@ -74,17 +89,26 @@
           placeholder="Total price"
           formControlName="total_price"
         />
+        <div *ngIf="isFieldInvalid('total_price')" class="help-block">
+          <p>This field is required</p>
+        </div>
       </div>
     </div>
 
     <div class="col-md-6">
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('price_per_unit')">
         <label for="total_weight">Price per {{ weight_unit }} *</label>
         <input type="number" class="form-control" id="price_unit" formControlName="price_per_unit" />
+        <div class="help-block" *ngIf="isFieldInvalid('price_per_unit')">
+          <p>This field is required</p>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('package_price')">
         <label for="package_price">Price per Package *</label>
         <input type="number" class="form-control" id="package_price" formControlName="package_price" />
+        <div *ngIf="isFieldInvalid('package_price')" class="help-block">
+          <p>This field is required</p>
+        </div>
       </div>
       <div class="form-group">
         <label for="additional_pricing">Additional Pricing Details</label>
@@ -100,7 +124,8 @@
     </div>
   </div>
 </form>
-<button class="bttn-primary pull-right next-step" [disabled]="!validPricing" (click)="next()">
+<button class="bttn-primary pull-right next-step" [hidden]="!validPricing" (click)="next()">
   <span *ngIf="!edit">Next</span>
   <span *ngIf="edit">Submit</span>
 </button>
+<button class="bttn-primary pull-right" [hidden]="validPricing" (click)="onSubmit()">Next</button>

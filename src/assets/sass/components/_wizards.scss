@@ -116,6 +116,12 @@
   }
 }
 
+.help-block p,
+.help-block,
+.has-error {
+  margin-bottom: 0px !important;
+}
+
 @keyframes fade {
   0% {
     opacity: 0;

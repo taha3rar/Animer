@@ -1,3 +1,4 @@
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { StepperService } from '@app/core/stepper.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
@@ -15,7 +16,7 @@ declare const $: any;
   templateUrl: './client-generator.component.html',
   styleUrls: ['./client-generator.component.scss']
 })
-export class ClientGeneratorComponent implements OnInit {
+export class ClientGeneratorComponent extends BaseValidationComponent implements OnInit {
   invitedClient: User = new User();
   clientDetailsForm: FormGroup;
   companyDetailsForm: FormGroup;
@@ -31,7 +32,9 @@ export class ClientGeneratorComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private stepperService: StepperService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.route.data.subscribe(({ ecosystems }) => {
@@ -54,6 +57,7 @@ export class ClientGeneratorComponent implements OnInit {
       country: ['', [Validators.required]]
     });
     this.stepperService.stepperInit();
+    this.formInput = this.clientDetailsForm;
   }
 
   targetStep(step: string) {
@@ -130,5 +134,15 @@ export class ClientGeneratorComponent implements OnInit {
   closeAndRefresh(): any {
     this.closeModal.nativeElement.click();
     this.router.navigate([this.router.url]);
+  }
+
+  isFieldInvalidComp(field: string) {
+    return this.companyDetailsForm.get(field).invalid && this.companyDetailsForm.get(field).touched;
+  }
+
+  showFieldStyleComp(field: string) {
+    return {
+      'has-error': this.isFieldInvalidComp(field)
+    };
   }
 }

@@ -11,13 +11,14 @@ import { OrderProcessedProductComponent } from '../../order-generator/order-prod
 import * as moment from 'moment';
 
 import { FormGroup } from '@angular/forms';
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 
 @Component({
   selector: 'app-order-invoice-generator',
   templateUrl: './order-invoice-generator.component.html',
   styleUrls: ['./order-invoice-generator.component.scss']
 })
-export class OrderInvoiceGeneratorComponent implements OnInit {
+export class OrderInvoiceGeneratorComponent extends BaseValidationComponent implements OnInit {
   newInvoice: Invoice;
   @Input()
   form: FormGroup;
@@ -26,10 +27,13 @@ export class OrderInvoiceGeneratorComponent implements OnInit {
   @Output()
   newInvoiceEvent = new EventEmitter<Invoice>();
 
-  constructor(private invoiceService: InvoiceService, private dialog: MatDialog, private router: Router) {}
+  constructor(private invoiceService: InvoiceService, private dialog: MatDialog, private router: Router) {
+    super();
+  }
 
   ngOnInit() {
     this.onChanges();
+    this.formInput = this.form;
   }
 
   onChanges(): void {

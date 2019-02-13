@@ -1,49 +1,53 @@
 <form [formGroup]="form">
-  <div class="packing-details" *ngIf="isProcessed">
-    <p class="heading-2 margin-bottom ">Containing Package Details</p>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="package_type">Type of Package *</label>
-          <input
-            type="text"
-            class="form-control"
-            id="package_type"
-            formControlName="type_of_package"
-            placeholder="Enter type of package here..."
-          />
+    <div class="packing-details" *ngIf="isProcessed">
+        <p class="heading-2 margin-bottom ">Containing Package Details</p>
+            <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" [ngClass]="showFieldStyle('type_of_package')">
+                    <label for="package_type">Type of Package *</label>
+                    <input type="text" class="form-control" id="package_type" formControlName="type_of_package" placeholder="Enter type of package here..." />
+                    <div *ngIf="isFieldInvalid('type_of_package')" class="help-block">
+                      <p>This field is required</p>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('items_per_package')">
+                    <label for="noOfItems">Number of Items per Package *</label>
+                    <input type="number" class="form-control" id="noOfItems" placeholder="Type number of items here..." formControlName="items_per_package" />
+                    <div *ngIf="isFieldInvalid('items_per_package')" class="help-block">
+                      <p>This field is required</p>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('quantity')">
+                    <label for="total_packages">Total Amount of Packages Available *</label>
+                    <input type="number" class="form-control" id="total_amount" formControlName="quantity" placeholder="Type amount of packages available here..." />
+                    <div *ngIf="isFieldInvalid('quantity')" class="help-block">
+                      <p>This field is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="total_items">Total Amount of Items</label>
+                    <input type="number" class="form-control" id="total_items" placeholder="Type total amount of items here..." formControlName="total_amount_items" />
+                </div>
+                <div class="form-group">
+                    <label for="additional_packing_details">Additional packing details</label>
+                    <textarea class="form-control" id="additional_packing_details" rows="4" placeholder="Type additional packing details here..." formControlName="package_details" ></textarea>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="noOfItems">Number of Items per Package *</label>
-          <input
-            type="number"
-            class="form-control"
-            id="noOfItems"
-            placeholder="Type number of items here..."
-            formControlName="items_per_package"
-          />
+    </div>
+
+    <div class="form-row" *ngIf="isProcessed">
+        <div class="form-group col-md-4" [ngClass]="showFieldStyle('item_package_type')">
+            <label for="item_packing_type">Item Packing Type</label>
+            <input type="text" class="form-control" id="item_packing_type" placeholder="Type item packing type here... " formControlName="item_package_type">
         </div>
-        <div class="form-group">
-          <label for="total_packages">Total Amount of Packages Available *</label>
-          <input
-            type="number"
-            class="form-control"
-            id="total_amount"
-            formControlName="quantity"
-            placeholder="Type amount of packages available here..."
-          />
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="total_items">Total Amount of Items</label>
-          <input
-            type="number"
-            class="form-control"
-            id="total_items"
-            placeholder="Type total amount of items here..."
-            formControlName="total_amount_items"
-          />
+        <div class="form-group col-md-4" [ngClass]="showFieldStyle('item_measurement_unit')">
+            <label for="item_measurement_unit">Item Measurement Unit</label>
+            <select  id="item_measurement_unit" placeholder="Choose measurment unit" class="form-control" formControlName="item_measurement_unit">
+                <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
+            </select>
         </div>
         <div class="form-group">
           <label for="additional_packing_details">Additional packing details</label>
@@ -56,8 +60,6 @@
           ></textarea>
         </div>
       </div>
-    </div>
-  </div>
 
   <div class="row margin-none" *ngIf="isProcessed">
     <div class="center-text-btn">
@@ -109,87 +111,84 @@
     </div>
   </div>
 
-  <div class="packing-details" *ngIf="!isProcessed">
-    <p class="heading-2 margin-bottom ">Containing Package Details</p>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="package_type">Type of Package *</label>
-          <input
-            type="text"
-            class="form-control"
-            id="package_type"
-            placeholder="Enter type of package here..."
-            formControlName="type_of_package"
-          />
-        </div>
-        <div class="form-group">
-          <label for="noOfPackages">Total Number of Packages *</label>
-          <input
-            type="number"
-            class="form-control"
-            id="noOfPackages"
-            placeholder="Type number of packages here..."
-            formControlName="quantity"
-          />
-        </div>
-        <!-- <div class="form-group">
+    <div class="packing-details" *ngIf="!isProcessed">
+        <p class="heading-2 margin-bottom ">Containing Package Details</p>
+        <div class="row">
+            <div class="col-md-6" [ngClass]="showFieldStyle('type_of_package')">
+                <div class="form-group">
+                    <label for="package_type">Type of Package *</label>
+                    <input type="text" class="form-control" id="package_type" placeholder="Enter type of package here..." formControlName="type_of_package" />
+                    <div *ngIf="isFieldInvalid('type_of_package')" class="help-block">
+                      <p>This field is required</p>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('quantity')">
+                    <label for="noOfPackages">Total Number of Packages *</label>
+                    <input type="number" class="form-control" id="noOfPackages" placeholder="Type number of packages here..." formControlName="quantity" />
+                    <div *ngIf="isFieldInvalid('quantity')" class="help-block">
+                      <p>This field is required</p>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
                     <label for="total_packages">Total Amount of Packages Available</label>
                     <input type="text" class="form-control" id="total_amount" placeholder="Type amount of packages available here..." />
                 </div> -->
-        <div class="center-text-btn">
-          <span class="heading-2 margin-bottom ">These are estimated values</span>
-          <div class="switch">
-            <input
-              id="estimated_values"
-              class="cmn-toggle cmn-toggle-round-flat"
-              type="checkbox"
-              formControlName="estimated_weight_values"
-              checked
-            />
-            <label for="estimated_values"></label>
-          </div>
+                <div class="center-text-btn">
+                    <span class="heading-2 margin-bottom ">These are estimated values</span>
+                    <div class="switch">
+                        <input
+                        id="estimated_values"
+                        class="cmn-toggle cmn-toggle-round-flat"
+                        type="checkbox"
+                        formControlName="estimated_weight_values"
+                        checked
+                        />
+                        <label for="estimated_values"></label>
+                    </div>
+                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-row">
+                    <div class="form-group col-md-5" [ngClass]="showFieldStyle('package_weight')">
+                        <label for="package_weight">Weight of the Packaged Product *</label>
+                        <input type="number" class="form-control" id="package_weight" placeholder="Enter weight of the packaged product..." formControlName="package_weight" />
+                        <div *ngIf="isFieldInvalid('package_weight')" class="help-block">
+                          <p>This field is required</p>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3" [ngClass]="showFieldStyle('weight_unit')">
+                        <label for="weight_unit">Weight Unit *</label>
+                        <select class="form-control" id="weight_unit" formControlName="weight_unit">
+                            <option selected="selected">Select weight unit...</option>
+                            <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
+                        </select>
+                        <div *ngIf="isFieldInvalid('weight_unit')" class="help-block">
+                          <p>This field is required</p>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4" [ngClass]="showFieldStyle('total_weight')">
+                        <label for="total_weight">Total Weight *</label>
+                        <input type="number" class="form-control" id="total_weight" formControlName="total_weight"/>
+                        <div *ngIf="isFieldInvalid('total_weight')" class="help-block">
+                          <p>This field is required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="additional_packing_details">Additional packing details</label>
+                    <textarea class="form-control" id="additional_packing_details" rows="4" formControlName="package_details" placeholder="Type additional packing details here..." ></textarea>
+                </div>
+            </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-row">
-          <div class="form-group col-md-5">
-            <label for="package_weight">Weight of the Packaged Product *</label>
-            <input
-              type="number"
-              class="form-control"
-              id="package_weight"
-              placeholder="Enter weight of the packaged product..."
-              formControlName="package_weight"
-            />
-          </div>
-          <div class="form-group col-md-3">
-            <label for="weight_unit">Weight Unit *</label>
-            <select class="form-control" id="weight_unit" formControlName="weight_unit">
-              <option selected="selected">Select weight unit...</option>
-              <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
-            </select>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="total_weight">Total Weight *</label>
-            <input type="number" class="form-control" id="total_weight" formControlName="total_weight" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="additional_packing_details">Additional packing details</label>
-          <textarea
-            class="form-control"
-            id="additional_packing_details"
-            rows="4"
-            formControlName="package_details"
-            placeholder="Type additional packing details here..."
-          ></textarea>
-        </div>
-      </div>
-    </div>
-  </div>
 </form>
-<button class="bttn-primary pull-right next-step" [disabled]="!validPacking" (click)="next()">
+
+<button class="bttn-primary pull-right next-step" [hidden]="!validPacking" (click)="next()">
   <span *ngIf="!edit">Next</span>
   <span *ngIf="edit">Submit</span>
 </button>
+<button class="bttn-primary pull-right" [hidden]="validPacking" (click)="onSubmit()">
+  <span *ngIf="!edit">Next</span>
+  <span *ngIf="edit">Submit</span>
+</button>
+

@@ -1,3 +1,4 @@
+import { BaseValidationComponent } from './../../../shared/components/base-validation/base-validation.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -7,12 +8,14 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   templateUrl: './create-quote-request-product-details.component.html',
   styleUrls: ['./create-quote-request-product-details.component.scss']
 })
-export class CreateQuoteRequestProductDetailsComponent implements OnInit {
+export class CreateQuoteRequestProductDetailsComponent extends BaseValidationComponent implements OnInit {
   @Input()
   quoteRequest: QuoteRequest;
   productDetailsForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+    super();
+  }
 
   ngOnInit() {
     this.productDetailsForm = this.formBuilder.group({
@@ -20,6 +23,7 @@ export class CreateQuoteRequestProductDetailsComponent implements OnInit {
       variety: ['', Validators.required],
       specification: ['', Validators.required]
     });
+    this.formInput = this.productDetailsForm;
   }
 
   get productDetailsf() {

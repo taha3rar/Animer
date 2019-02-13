@@ -1,3 +1,4 @@
+import { BaseValidationComponent } from './../../../shared/components/base-validation/base-validation.component';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 import { Client } from '@app/core/models/user/client';
@@ -12,7 +13,7 @@ declare const $: any;
   templateUrl: './create-quote-request-additional-details.component.html',
   styleUrls: ['./create-quote-request-additional-details.component.scss']
 })
-export class CreateQuoteRequestAdditionalDetailsComponent implements OnInit {
+export class CreateQuoteRequestAdditionalDetailsComponent extends BaseValidationComponent implements OnInit {
   @Input()
   quoteRequest: QuoteRequest;
   @Input()
@@ -23,7 +24,9 @@ export class CreateQuoteRequestAdditionalDetailsComponent implements OnInit {
   submitQuoteRequestEvent = new EventEmitter<QuoteRequestRecipients>();
   additionalDetailsForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+    super();
+  }
 
   ngOnInit() {
     this.multiSelectHandler();
@@ -55,6 +58,8 @@ export class CreateQuoteRequestAdditionalDetailsComponent implements OnInit {
         this.additionalDetailsForm.get('ecosystems').setValue([]);
       }
     });
+
+    this.formInput = this.additionalDetailsForm;
   }
 
   get additionalDetailsf() {

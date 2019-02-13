@@ -37,24 +37,28 @@
             <form [formGroup]="clientDetailsForm">
             <div class="col-md-12">
               <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" [ngClass]="showFieldStyle('firstName')">
                   <label for="first_name">Client First Name *</label>
                   <input type="text" formControlName="firstName" class="form-control" id="first_name" placeholder="Type first name here..."/>
+                  <div class="help-block" *ngIf="isFieldInvalid('firstName')"><p>This field is required</p></div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" [ngClass]="showFieldStyle('lastName')">
                   <label for="last_name">Client Last Name *</label>
-                  <input type="text" formControlName="lastName" class="form-control" id="last_name" placeholder="Type last name here..." 
+                  <input type="text" formControlName="lastName" class="form-control" id="last_name" placeholder="Type last name here..."
                     required/>
+                    <div class="help-block" *ngIf="isFieldInvalid('lastName')"><p>This field is required</p></div>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" [ngClass]="showFieldStyle('email')">
                 <label for="Email">Email Address *</label>
                 <input type="email" formControlName="email" class="form-control" id="Email" placeholder="Type email here..." />
+                <div class="help-block" *ngIf="isFieldInvalid('email')"><p>This field is required</p></div>
               </div>
               <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" [ngClass]="showFieldStyle('phoneNumber')">
                   <label for="tel">Phone Number *</label>
                   <input type="tel" formControlName="phoneNumber" class="form-control" id="phone" placeholder="Type phone number here..."/>
+                <div class="help-block" *ngIf="isFieldInvalid('phoneNumber')"><p>This field is required</p></div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="last_name">Contact Id</label>
@@ -102,16 +106,20 @@
                 </div>
               </div>
             </div>
-            <button [disabled]="!clientDetailsForm.valid" class="btn-next next-step pull-right">Next &rarr;</button>
+            <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">Next &rarr;</button>
+            <button [hidden]="clientDetailsForm.valid" class="btn-next pull-right" (click)="onSubmit(clientDetailsForm)">Next &rarr;</button>
             </form>
           </div>
           <div class="row tab-pane margin-none" id="company-details">
             <form [formGroup]="companyDetailsForm">
             <div class="col-md-12">
               <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" [ngClass]="showFieldStyleComp('companyName')">
                   <label for="company_name">Company Name *</label>
                   <input type="text" formControlName="companyName" class="form-control" id="company_name" placeholder="Type company name here..." />
+                  <div *ngIf="isFieldInvalidComp('companyName')" class="help-block">
+                    <p>This field is required</p>
+                  </div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="company_number">Company Number</label>
@@ -126,7 +134,7 @@
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" [ngClass]="showFieldStyleComp('address')">
                   <label for="cstreet_address">Street address *</label>
                   <input
                     type="text"
@@ -135,24 +143,36 @@
                     id="cstreet_address"
                     placeholder="Type street address here..."
                   />
+                  <div *ngIf="isFieldInvalidComp('address')" class="help-block">
+                    <p>This field is required</p>
+                  </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" [ngClass]="showFieldStyleComp('city')">
                   <label for="city">City *</label>
                   <input type="text" formControlName="city" class="form-control" id="city" placeholder="Type city here..." />
+                  <div *ngIf="isFieldInvalidComp('city')" class="help-block">
+                    <p>This field is required</p>
+                  </div>
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4" [ngClass]="showFieldStyleComp('country')">
                   <label for="country">Country *</label>
                   <input type="text" formControlName="country" class="form-control" id="country" placeholder="Type country here..." />
+                  <div *ngIf="isFieldInvalidComp('country')" class="help-block">
+                    <p>This field is required</p>
+                  </div>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="state">State/province/region</label>
                   <input type="text" class="form-control" id="state" placeholder="Type state/province/region here..." [(ngModel)]="invitedClient.company_information.state_province_region" [ngModelOptions]="{standalone: true}"/>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4" [ngClass]="showFieldStyleComp('zipcode')">
                   <label for="zip_code">Zip Code *</label>
                   <input type="text" formControlName="zipcode" class="form-control" id="zip_code" placeholder="Type zip code here..."/>
+                  <div *ngIf="isFieldInvalidComp('zipcode')" class="help-block">
+                    <p>This field is required</p>
+                  </div>
                 </div>
               </div>
               <div class="form-group">
@@ -168,7 +188,8 @@
                 ></textarea>
               </div>
             </div>
-            <button [disabled]="!companyDetailsForm.valid" class="btn-next next-step pull-right">Next &rarr;</button>
+            <button [hidden]="!companyDetailsForm.valid" class="btn-next next-step pull-right">Next &rarr;</button>
+            <button [hidden]="companyDetailsForm.valid" class="btn-next pull-right" (click)="onSubmit(companyDetailsForm)">Next &rarr;</button>
             </form>
           </div>
           <div class="row tab-pane margin-none" id="ecosystem">

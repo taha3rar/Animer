@@ -1,4 +1,4 @@
-<form [formGroup]="shippingDetailsForm">
+<form [formGroup]="shippingDetailsForm" >
   <div class="col-md-12">
     <div class="row">
       <div class="col-md-6">
@@ -26,15 +26,18 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="incoterm">Incoterm</label>
-        <select class="browser-default custom-select" id="incoterm" formControlName="incoterms">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('incoterms')">
+        <label for="incoterm">Incoterm *</label>
+        <select class="form-control" id="incoterm" formControlName="incoterms">
           <optgroup *ngFor="let group of incotermsGroups" [label]="group.name" [disabled]="group.disabled">
             <option *ngFor="let incoterm of group.incoterms" [value]="incoterm.value">{{
               incoterm.viewValue
             }}</option>
           </optgroup>
         </select>
+        <div class="help-block">
+          <p *ngIf="isFieldInvalid('incoterms')">This field is required</p>
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="excluded_countries">Excluded countries</label>
@@ -50,24 +53,20 @@
       </p>
     </div>
   </div>
-  <div class="form-group">
-    <label for="destination_address">Address of destination</label>
-    <input
-      appGooglePlace
-      (onSelect)="setAddress($event)"
-      type="text"
-      class="form-control"
-      id="destination_address"
-      placeholder="Type destination address here..."
-      formControlName="address"
-    />
+  <div class="form-group" [ngClass]="showFieldStyle('address')">
+    <label for="destination_address">Address of destination *</label>
+    <input appGooglePlace (onSelect)="setAddress($event)" type="text" class="form-control" id="destination_address" placeholder="Type destination address here..."
+      formControlName="address"/>
+    <div class="help-block">
+      <p *ngIf="isFieldInvalid('address')">This field is required</p>
+    </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="gps_coordinates">GPS coordinates</label>
       <input class="form-control" id="gps_coordinates" readonly placeholder="GPS coordinates" readonly [(ngModel)]="gpsCoordinates" [ngModelOptions]="{standalone: true}" />
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6" [ngClass]="showFieldStyle('expected_delivery_date')">
       <label for="expected_delivery_date">Expected delivery date</label>
       <div class="input-group">
         <input
@@ -83,7 +82,11 @@
           <button class="btn glyphicon glyphicon-calendar" (click)="ddp.toggle()" type="button"></button>
         </div>
       </div>
+      <div class="help-block">
+        <p *ngIf="isFieldInvalid('expected_delivery_date')">This field is required</p>
+      </div>
     </div>
   </div>
 </form>
-<button class="btn-next next-step pull-right" [disabled]="!shippingDetailsForm.valid" (click)="next()">Next &rarr;</button>
+<button class="btn-next pull-right" [hidden]="shippingDetailsForm.valid" (click)="onSubmit(shippingDetailsForm)">Next &rarr;</button>
+<button class="btn-next next-step pull-right" [hidden]="!shippingDetailsForm.valid" (click)="next()">Next &rarr;</button>

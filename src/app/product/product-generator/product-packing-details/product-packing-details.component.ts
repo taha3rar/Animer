@@ -65,4 +65,16 @@ export class ProductPackingDetailsComponent extends BaseProduct implements OnIni
 
     return valid;
   }
+
+  onSubmit() {
+    this.form.controls.type_of_package.markAsTouched({ onlySelf: true });
+    this.form.controls.items_per_package.markAsTouched({ onlySelf: true });
+    this.form.controls.quantity.markAsTouched({ onlySelf: true });
+    this.form.controls.package_weight.markAsTouched({ onlySelf: true });
+    this.form.controls.weight_unit.markAsTouched({ onlySelf: true });
+    this.form.controls.total_weight.markAsTouched({ onlySelf: true });
+    this.form.controls.item_package_type.markAsTouched({ onlySelf: true });
+    this.form.controls.item_measurement_unit.markAsTouched({ onlySelf: true });
+    this.form.controls.item_measurement_amount.markAsTouched({ onlySelf: true });
+  }
 }

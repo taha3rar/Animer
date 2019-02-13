@@ -4,6 +4,7 @@ import { countries } from '@app/shared/helpers/countries';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 import * as moment from 'moment';
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 
 declare const $: any;
 @Component({
@@ -11,7 +12,7 @@ declare const $: any;
   templateUrl: './create-quote-request-shipping-details.component.html',
   styleUrls: ['./create-quote-request-shipping-details.component.scss']
 })
-export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
+export class CreateQuoteRequestShippingDetailsComponent extends BaseValidationComponent implements OnInit {
   @Input()
   quoteRequest: QuoteRequest;
   incotermsGroups = incotermsGroups;
@@ -21,7 +22,9 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
   public addrKeys: string[];
   public addr: object;
 
-  constructor(private formBuilder: FormBuilder, private zone: NgZone) {}
+  constructor(private formBuilder: FormBuilder, private zone: NgZone) {
+    super();
+  }
 
   ngOnInit() {
     this.shippingDetailsForm = this.formBuilder.group({
@@ -59,6 +62,7 @@ export class CreateQuoteRequestShippingDetailsComponent implements OnInit {
       }
     });
 
+    this.formInput = this.shippingDetailsForm;
     this.multiSelectHandler();
   }
 

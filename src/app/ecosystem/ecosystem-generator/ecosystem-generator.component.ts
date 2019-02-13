@@ -1,3 +1,4 @@
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +13,7 @@ import { StepperService } from '@app/core/stepper.service';
   templateUrl: './ecosystem-generator.component.html',
   styleUrls: ['./ecosystem-generator.component.scss']
 })
-export class EcosystemGeneratorComponent implements OnInit {
+export class EcosystemGeneratorComponent extends BaseValidationComponent implements OnInit {
   newEcosystemForm: FormGroup;
   newEcosystem: Ecosystem;
   userClients: Client[];
@@ -28,7 +29,9 @@ export class EcosystemGeneratorComponent implements OnInit {
     private route: ActivatedRoute,
     private ecosystemService: EcosystemService,
     private stepperService: StepperService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.stepperService.stepperInit();
@@ -41,6 +44,7 @@ export class EcosystemGeneratorComponent implements OnInit {
       ecosystemType: ['', Validators.required],
       description: ['']
     });
+    this.formInput = this.newEcosystemForm;
   }
 
   get ecosystemf() {

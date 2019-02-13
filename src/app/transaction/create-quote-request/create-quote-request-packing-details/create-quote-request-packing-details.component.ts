@@ -1,3 +1,4 @@
+import { BaseValidationComponent } from './../../../shared/components/base-validation/base-validation.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { packageUnits, containerType } from '@app/shared/helpers/packaging_details';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
@@ -8,14 +9,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './create-quote-request-packing-details.component.html',
   styleUrls: ['./create-quote-request-packing-details.component.scss']
 })
-export class CreateQuoteRequestPackingDetailsComponent implements OnInit {
+export class CreateQuoteRequestPackingDetailsComponent extends BaseValidationComponent implements OnInit {
   @Input()
   quoteRequest: QuoteRequest;
   units = packageUnits;
   containerTypes = containerType;
   packingDetailsForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+    super();
+  }
 
   ngOnInit() {
     this.packingDetailsForm = this.formBuilder.group({
@@ -75,6 +78,7 @@ export class CreateQuoteRequestPackingDetailsComponent implements OnInit {
       }
     });
     this.onChanges();
+    this.formInput = this.packingDetailsForm;
   }
 
   onChanges(): void {

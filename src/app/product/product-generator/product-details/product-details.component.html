@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="formInput">
   <div class="product" *ngIf="isProcessed">
     <div class="product-img">
       <p class="heading-2">Upload product image</p>
@@ -7,15 +7,12 @@
       <button class="bttn-primary" disabled>Upload Image</button>
     </div>
     <div class="product-details">
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('produce')">
         <label for="product_name">Product Name *</label>
-        <input
-          type="text"
-          class="form-control"
-          id="product_name"
-          formControlName="produce"
-          placeholder="Type product name here..."
-        />
+        <input type="text" class="form-control" id="product_name" formControlName="produce" placeholder="Type product name here..." />
+        <div class="help-block">
+          <p *ngIf="isFieldInvalid('produce')">This field is required</p>
+        </div>
       </div>
       <div class="form-group">
         <label for="sku">Stock keeping unit (SKU)</label>
@@ -54,25 +51,19 @@
       <button class="bttn-primary" disabled>Upload Image</button>
     </div>
     <div class="product-details">
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('produce')">
         <label for="product_name">Product *</label>
-        <input
-          type="text"
-          class="form-control"
-          id="product_name"
-          formControlName="produce"
-          placeholder="Type product name here..."
-        />
+        <input type="text" class="form-control" id="product_name" formControlName="produce"  placeholder="Type product name here..." />
+        <div *ngIf="isFieldInvalid('produce')" class="help-block">
+          <p>This field is required</p>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="showFieldStyle('variety')">
         <label for="variety">Variety *</label>
-        <input
-          type="text"
-          class="form-control"
-          id="variety"
-          placeholder="Type variety here..."
-          formControlName="variety"
-        />
+        <input type="text" class="form-control" id="variety" placeholder="Type variety here..." formControlName="variety"  />
+        <div *ngIf="isFieldInvalid('variety')" class="help-block">
+          <p>This field is required</p>
+        </div>
       </div>
       <div class="form-group">
         <label for="sku">Stock keeping unit (SKU)</label>
@@ -142,7 +133,13 @@
     </div>
   </div>
 </form>
-<button class="bttn-primary pull-right next-step" [disabled]="!validDetails" (click)="next()">
+<button class="bttn-primary pull-right next-step" [hidden]="!validDetails" (click)="next()">
   <span *ngIf="!edit">Next</span>
   <span *ngIf="edit">Submit</span>
 </button>
+<button class="bttn-primary pull-right" [hidden]="validDetails" (click)="onSubmit()">
+  <span *ngIf="!edit">Next</span>
+  <span *ngIf="edit">Submit</span>
+</button>
+
+

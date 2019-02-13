@@ -1,3 +1,4 @@
+import { BaseValidationComponent } from './../../../shared/components/base-validation/base-validation.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -12,18 +13,21 @@ import * as moment from 'moment';
   templateUrl: './order-generator-po.component.html',
   styleUrls: ['./order-generator-po.component.scss']
 })
-export class OrderGeneratorPoComponent implements OnInit {
+export class OrderGeneratorPoComponent extends BaseValidationComponent implements OnInit {
   newOrder: Order;
   form: FormGroup;
   selectedProducts: any[];
   products: ProductInvoice[] = [];
 
-  constructor(private orderDataService: OrderDataService, private orderService: OrderService, private router: Router) {}
+  constructor(private orderDataService: OrderDataService, private orderService: OrderService, private router: Router) {
+    super();
+  }
 
   ngOnInit() {
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
     });
+    this.formInput = this.form;
   }
 
   get order() {
