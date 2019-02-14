@@ -45,6 +45,43 @@ export class ProductShippingDetailsComponent extends BaseProduct implements OnIn
         this.form.get('excluded_countries').setValue('');
       }
     });
+    this.onChanges();
+  }
+
+  onChanges() {
+    this.form.get('quantity').valueChanges.subscribe(val => {
+      if (!this.isProcessed) {
+        this.setTotalWeight();
+      } else {
+        this.setTotalItems();
+      }
+    });
+    this.form.get('package_weight').valueChanges.subscribe(val => {
+      this.setTotalWeight();
+    });
+    this.form.get('items_per_package').valueChanges.subscribe(val => {
+      this.setTotalItems();
+    });
+  }
+
+  setTotalWeight() {
+    if (this.form.controls.quantity.value && this.form.controls.package_weight.value) {
+      this.form.patchValue({
+        total_weight: (this.form.controls.quantity.value * this.form.controls.package_weight.value).toFixed(2)
+      });
+    } else {
+      this.form.patchValue({ total_weight: 0 });
+    }
+  }
+
+  setTotalItems() {
+    if (this.form.controls.quantity.value && this.form.controls.items_per_package.value) {
+      this.form.patchValue({
+        total_amount_items: (this.form.controls.quantity.value * this.form.controls.items_per_package.value).toFixed(2)
+      });
+    } else {
+      this.form.patchValue({ total_amount_items: 0 });
+    }
   }
 
   get validShipping() {

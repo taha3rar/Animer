@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BaseProduct } from '../base-product';
 import { ProductDataService } from '../product-data.service';
 import { currencies } from '@app/shared/helpers/currencies';
@@ -15,6 +15,66 @@ export class ProductPricingDetailsComponent extends BaseProduct implements OnIni
 
   constructor(protected productDataService: ProductDataService) {
     super(productDataService);
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.onChanges();
+  }
+
+  onChanges() {
+    this.form.get('package_price').valueChanges.subscribe(val => {
+      if (!this.isProcessed) {
+        this.setAgriculturalTotalPrice('package');
+      } else {
+        this.setProcessedTotalPrice();
+      }
+    });
+    this.form.get('price_per_unit').valueChanges.subscribe(val => {
+      this.setAgriculturalTotalPrice('unit');
+    });
+  }
+
+  setProcessedTotalPrice() {
+    if (this.form.controls.quantity.value && this.form.controls.package_price.value) {
+      this.form.patchValue({
+        total_price: (this.form.controls.quantity.value * this.form.controls.package_price.value).toFixed(2)
+      });
+    } else {
+      this.form.patchValue({ total_price: 0 });
+    }
+  }
+
+  setAgriculturalTotalPrice(type: string) {
+    if (
+      this.form.controls.quantity.value &&
+      (this.form.controls.package_price.value || this.form.controls.price_per_unit.value)
+    ) {
+      if (type === 'package') {
+        this.form.patchValue({
+          total_price: (this.form.controls.quantity.value * this.form.controls.package_price.value).toFixed(2)
+        });
+        this.form.patchValue(
+          {
+            price_per_unit: (this.form.controls.total_price.value / this.form.controls.total_weight.value).toFixed(2)
+          },
+          { emitEvent: false }
+        );
+      }
+      if (type === 'unit') {
+        this.form.patchValue({
+          total_price: (this.form.controls.total_weight.value * this.form.controls.price_per_unit.value).toFixed(2)
+        });
+        this.form.patchValue(
+          {
+            package_price: (this.form.controls.total_price.value / this.form.controls.quantity.value).toFixed(2)
+          },
+          { emitEvent: false }
+        );
+      }
+    } else {
+      this.form.patchValue({ total_price: 0 });
+    }
   }
 
   get quantity() {

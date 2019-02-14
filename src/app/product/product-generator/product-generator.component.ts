@@ -47,10 +47,10 @@ export class ProductGeneratorComponent implements OnInit {
           this.productDataService.requiredForProcessed()
         ],
         quantity: [this.product.quantity || undefined, Validators.required],
-        total_amount_items: [this.product.total_amount_items || undefined],
+        total_amount_items: [this.product.total_amount_items || 0],
         package_details: this.product.package_details || [undefined],
         package_price: [this.product.package_price || undefined, Validators.required],
-        total_price: [this.product.total_price || undefined, Validators.required],
+        total_price: [this.product.total_price || 0, Validators.required],
         currency: [this.product.currency || undefined, Validators.required],
         pricing_details: [this.product.pricing_details || undefined],
         gps_coordinates: [this.product.gps_coordinates || undefined, Validators.required],
@@ -63,7 +63,7 @@ export class ProductGeneratorComponent implements OnInit {
         image: [this.product.image || undefined],
         package_weight: [this.product.package_weight || undefined, this.productDataService.requiredForAgricultural()],
         weight_unit: [this.product.weight_unit || undefined, this.productDataService.requiredForAgricultural()],
-        total_weight: [this.product.total_weight || undefined, this.productDataService.requiredForAgricultural()],
+        total_weight: [this.product.total_weight || 0, this.productDataService.requiredForAgricultural()],
         estimated_weight_values: [this.product.estimated_weight_values || false],
         individual_item_details: [this.product.individual_item_details || undefined],
         item_package_type: [
