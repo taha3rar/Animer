@@ -84,8 +84,8 @@ export class OrderGeneratorSellerComponent implements OnInit {
         Validators.required
       ],
       currency: [this.document.currency, Validators.required],
-      payment_comments: this.document.payment_comments,
-      order_comments: this.document.order_comments,
+      payment_comments: undefined,
+      order_comments: undefined,
       sign_by: this.formBuilder.group({
         date: [this.document.sign_by.date, Validators.required],
         first_name: [this.document.sign_by.first_name, Validators.required],
