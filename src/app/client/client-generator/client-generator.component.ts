@@ -1,7 +1,7 @@
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { StepperService } from '@app/core/stepper.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../core/api/user.service';
 import { User } from '../../core/models/user/user';
@@ -42,22 +42,41 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     });
 
     this.clientDetailsForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: [undefined, Validators.required],
+      lastName: [undefined, Validators.required],
+      email: [undefined, [Validators.email]],
       profileType: this.formBuilder.array([], Validators.required),
-      phoneNumber: ['', [Validators.required]],
+      phoneNumber: [undefined],
       contactTypes: this.formBuilder.array([], Validators.required)
     });
     this.companyDetailsForm = this.formBuilder.group({
-      companyName: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      zipcode: ['', [Validators.required]],
-      country: ['', [Validators.required]]
+      companyName: [undefined, [Validators.required]],
+      address: [undefined, [Validators.required]],
+      city: [undefined, [Validators.required]],
+      zipcode: [undefined, [Validators.required]],
+      country: [undefined, [Validators.required]]
     });
     this.stepperService.stepperInit();
     this.formInput = this.clientDetailsForm;
+  }
+
+  isRequired(abstractControl: AbstractControl) {
+    if (abstractControl.validator) {
+      const validator = abstractControl.validator({} as AbstractControl);
+      if (validator && validator.required) {
+        return true;
+      }
+    }
+    if (abstractControl['controls']) {
+      for (const controlName in abstractControl['controls']) {
+        if (abstractControl['controls'][controlName]) {
+          if (this.isRequired(abstractControl['controls'][controlName])) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   targetStep(step: string) {
@@ -75,21 +94,34 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
 
   onChangeContactType(contactType: string, isChecked: boolean) {
     const contactTypesFormArray = <FormArray>this.clientDetailsForm.controls.contactTypes;
-
     if (isChecked) {
       contactTypesFormArray.push(new FormControl(contactType));
+      if (contactType === 'email') {
+        this.clientf.email.setValidators([Validators.required, Validators.email]);
+        this.clientf.email.updateValueAndValidity();
+      } else {
+        this.clientf.phoneNumber.setValidators([Validators.required]);
+        this.clientf.phoneNumber.updateValueAndValidity();
+      }
     } else {
       const index = contactTypesFormArray.controls.findIndex(x => x.value === contactType);
       contactTypesFormArray.removeAt(index);
+      if (contactType === 'email') {
+        this.clientf.email.setValidators([Validators.email]);
+        this.clientf.email.updateValueAndValidity();
+      } else {
+        this.clientf.phoneNumber.setValidators([]);
+        this.clientf.phoneNumber.updateValueAndValidity();
+      }
     }
   }
 
-  onChangeProfileType(profilType: string, isChecked: boolean) {
+  onChangeProfileType(profileType: string, isChecked: boolean) {
     const profileTypeFormArray = <FormArray>this.clientDetailsForm.controls.profileType;
 
     if (isChecked) {
       profileTypeFormArray.removeAt(0);
-      profileTypeFormArray.push(new FormControl(profilType));
+      profileTypeFormArray.push(new FormControl(profileType));
     }
   }
 
