@@ -8,6 +8,7 @@ import { Shell } from '@app/shell/shell.service';
 import { ClientListResolver } from './resolvers/client-list.resolver';
 import { EcosystemListResolver } from '@app/ecosystem/resolvers/ecosystem-list.resolver';
 import { UserResolver } from './resolvers/user.resolver';
+import { CurrentUserResolver } from './resolvers/current-user.resolver';
 import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
@@ -19,6 +20,7 @@ const routes: Routes = [
       path: 'client/list',
       component: ClientListComponent,
       resolve: {
+        currentUser: CurrentUserResolver,
         clients: ClientListResolver,
         ecosystems: EcosystemListResolver
       },

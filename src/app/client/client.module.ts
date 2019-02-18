@@ -21,6 +21,7 @@ import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
+import { CurrentUserResolver } from './resolvers/current-user.resolver';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { UserDocumentListResolver } from './resolvers/document-list.resolver';
   providers: [
     ClientListResolver,
     UserResolver,
+    CurrentUserResolver,
     EcosystemListResolver,
     OrderListResolver,
     InvoiceListResolver,

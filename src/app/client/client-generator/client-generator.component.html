@@ -82,13 +82,14 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label>Profile Type</label>
-                    <div class="margin-bottom">
+                    <div *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'buyer'"
+                      class="margin-bottom">
                       <input type="radio" class="form_radio" id="agriSeller" name="profileType"
                         (change)="onChangeProfileType('seller', $event.target.checked)" />
                       <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
                       <label style="font-weight:100;">Seller of agricultural products </label>
                     </div>
-                    <div>
+                    <div *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'seller'">
                       <input type="radio" class="form_radio" id="agriBuyer" name="profileType"
                         (change)="onChangeProfileType('buyer', $event.target.checked)" />
                       <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>

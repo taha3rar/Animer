@@ -7,7 +7,7 @@ import { UserService } from '../../core/api/user.service';
 import { User } from '../../core/models/user/user';
 import { Ecosystem } from '@app/core/models/ecosystem';
 import { Client } from '@app/core/models/user/client';
-import { EcosystemService } from '@app/core';
+import { EcosystemService, AuthenticationService } from '@app/core';
 
 declare const $: any;
 
@@ -16,7 +16,8 @@ declare const $: any;
   templateUrl: './client-generator.component.html',
   styleUrls: ['./client-generator.component.scss']
 })
-export class ClientGeneratorComponent extends BaseValidationComponent implements OnInit {
+export class ClientGeneratorComponent implements OnInit {
+  currentUser: User;
   invitedClient: User = new User();
   clientDetailsForm: FormGroup;
   companyDetailsForm: FormGroup;
@@ -37,6 +38,7 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
   }
 
   ngOnInit() {
+    this.currentUser = this.route.snapshot.data['currentUser'];
     this.route.data.subscribe(({ ecosystems }) => {
       this.ecosystems = ecosystems;
     });
