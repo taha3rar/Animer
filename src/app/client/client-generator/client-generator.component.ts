@@ -7,7 +7,9 @@ import { UserService } from '../../core/api/user.service';
 import { User } from '../../core/models/user/user';
 import { Ecosystem } from '@app/core/models/ecosystem';
 import { Client } from '@app/core/models/user/client';
-import { EcosystemService, AuthenticationService } from '@app/core';
+import { EcosystemService } from '@app/core';
+import { countries } from '@app/shared/helpers/countries';
+import * as libphonenumber from 'google-libphonenumber';
 
 declare const $: any;
 
@@ -23,6 +25,11 @@ export class ClientGeneratorComponent implements OnInit {
   companyDetailsForm: FormGroup;
   ecosystems: Ecosystem[];
   ecosystemsToBeAdded: Ecosystem[] = [];
+  countries = countries;
+  phoneUtil: any;
+  regionCode: string;
+  phoneCode: string;
+  partialPhoneNumber: string;
   @ViewChild('closeModal')
   closeModal: ElementRef;
 
@@ -42,6 +49,9 @@ export class ClientGeneratorComponent implements OnInit {
     this.route.data.subscribe(({ ecosystems }) => {
       this.ecosystems = ecosystems;
     });
+    this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+    this.regionCode = 'US';
+    this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
 
     this.clientDetailsForm = this.formBuilder.group({
       firstName: [undefined, Validators.required],
@@ -125,6 +135,19 @@ export class ClientGeneratorComponent implements OnInit {
       profileTypeFormArray.removeAt(0);
       profileTypeFormArray.push(new FormControl(profileType));
     }
+  }
+
+  changeRegionCode() {
+    this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
+    const PNF = libphonenumber.PhoneNumberFormat;
+    let phoneNumber;
+    try {
+      phoneNumber = this.phoneUtil.parse(this.partialPhoneNumber, this.regionCode);
+    } catch (error) {
+      // console.log("Phone Number is not correct");
+      return;
+    }
+    this.clientDetailsForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
   }
 
   pushEcosystem(ecosystem: Ecosystem) {
