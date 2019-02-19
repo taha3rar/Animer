@@ -18,7 +18,7 @@ declare const $: any;
   templateUrl: './client-generator.component.html',
   styleUrls: ['./client-generator.component.scss']
 })
-export class ClientGeneratorComponent implements OnInit {
+export class ClientGeneratorComponent extends BaseValidationComponent implements OnInit {
   currentUser: User;
   invitedClient: User = new User();
   clientDetailsForm: FormGroup;
