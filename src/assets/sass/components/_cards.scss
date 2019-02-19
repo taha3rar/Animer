@@ -77,6 +77,39 @@
   }
 }
 
+.doc-card-upload {
+  border: 1px dashed $primary-color;
+  width: 21rem;
+  background-color: #f6fdff;
+  margin-right: 2.5rem;
+  padding: 0.8rem;
+
+  #btn-input {
+    display: none;
+  }
+
+  #add-btn {
+    font-size: 8rem;
+    cursor: pointer;
+    color: $primary-color;
+    text-align: center;
+    text-align: center;
+    display: block;
+    margin-top: 2rem;
+  }
+
+  p {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 2.5rem;
+    font-size: 1.4rem;
+  }
+}
+
+.doc-card-upload:hover {
+  background-color: rgb(235, 248, 252);
+}
+
 .doc-card:hover .bttn-view,
 .doc-card:hover .bttn-view ~ span {
   visibility: visible;

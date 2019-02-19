@@ -1,6 +1,3 @@
-<button class="round-button-primary-exp pull-right" style="margin-bottom:12px; margin-top:0px;"><i class="material-icons">add</i>
-  <span>Upload document</span>
-</button>
 <div class="docs-wrapper clearfix">
   <button class="btn-icons pull-right" style="margin-top:.5rem;">
     <i class="material-icons">keyboard_arrow_right</i>
@@ -8,11 +5,15 @@
   <button class="btn-icons pull-right" style="margin-top:.5rem;">
     <i class="material-icons">keyboard_arrow_left</i>
   </button>
-  <div
-    class="docs-section clearfix"
-    *ngFor="let document of (documents | paginate: { itemsPerPage: 7, currentPage: page })"
-  >
-    <div class="doc-card clearfix">
+  <div class="docs-section clearfix">
+  <div class="doc-card-upload">
+      <div>
+        <label class="material-icons" id="add-btn" for="btn-input">add</label>
+        <input type="file" id="btn-input" />
+        <p>Upload Document</p>
+      </div>
+  </div>
+    <div *ngFor="let document of (documents | paginate: { itemsPerPage: 6, currentPage: page })" class="doc-card clearfix">
       <div>
         <span class="pull-left">#{{ document.numericId }}</span>
         <span
