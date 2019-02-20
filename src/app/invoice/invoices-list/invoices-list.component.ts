@@ -20,6 +20,7 @@ export class InvoicesListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
   exportInit = false;
 
+
   ngOnInit() {
     this.route.data.subscribe(({ invoices, invoicesAsBuyer, invoicesAsSeller }) => {
       this.invoices = invoices;
