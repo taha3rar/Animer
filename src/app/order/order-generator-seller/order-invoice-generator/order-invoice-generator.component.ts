@@ -32,6 +32,7 @@ export class OrderInvoiceGeneratorComponent extends BaseValidationComponent impl
   }
 
   ngOnInit() {
+    console.log(this.form.value);
     this.onChanges();
     this.formInput = this.form;
   }

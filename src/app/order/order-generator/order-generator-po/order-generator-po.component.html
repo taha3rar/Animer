@@ -14,10 +14,8 @@
     </div>
   </div>
 
-  <app-order-product-list
-    (updateProductsEvent)="updateProducts($event)"
-    (updateFormEvent)="updateForm($event)"
-  ></app-order-product-list>
+  <app-order-product-list (updateProductsEvent)="updateProducts($event)" (updateFormEvent)="updateForm($event)">
+  </app-order-product-list>
 
   <div class="row">
     <div class="col-md-5">
@@ -96,7 +94,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-md-8"[ngClass]="showFieldStyleNested('sign_by', 'date')">
+          <div class="form-group col-md-8" [ngClass]="showFieldStyleNested('sign_by', 'date')">
             <label for="PO_valid_date">Purchase Order is Valid by *</label>
             <div class="input-group">
               <input
@@ -220,6 +218,8 @@
   <button class="bttn-primary pull-right next-step" (click)="toReview()" [hidden]="!form.valid || products.length < 1">
     Next Step &rarr;
   </button>
-  <button class="bttn-primary pull-right margin-vertical-big" (click)="onSubmit(form)" [hidden]="form.valid || products.length > 1" >Next Step &rarr;</button>
+  <button class="bttn-primary pull-right" (click)="onSubmit(form)" [hidden]="form.valid || products.length > 1">
+    Next Step &rarr;
+  </button>
   <button class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
 </form>
