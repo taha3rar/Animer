@@ -62,10 +62,10 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
       contactTypes: this.formBuilder.array([], Validators.required)
     });
     this.companyDetailsForm = this.formBuilder.group({
-      companyName: [undefined, [Validators.required]],
-      address: [undefined, [Validators.required]],
-      city: [undefined, [Validators.required]],
-      zipcode: [undefined, [Validators.required]],
+      companyName: [undefined],
+      address: [undefined],
+      city: [undefined],
+      zipcode: [undefined],
       country: [undefined, [Validators.required]]
     });
     this.stepperService.stepperInit();
