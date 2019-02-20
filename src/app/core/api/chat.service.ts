@@ -27,6 +27,7 @@ export class ChatService {
   }
 
   public getInitialMessages = () => {
+    // tslint:disable-next-line: deprecation
     return Observable.create((observer: any) => {
       this.socket.on('initial-message', (initialMsg: any) => {
         observer.next(initialMsg);
@@ -35,6 +36,7 @@ export class ChatService {
   };
 
   public getMessages = () => {
+    // tslint:disable-next-line: deprecation
     return Observable.create((observer: any) => {
       this.socket.on('new-message', (message: any) => {
         observer.next(message);

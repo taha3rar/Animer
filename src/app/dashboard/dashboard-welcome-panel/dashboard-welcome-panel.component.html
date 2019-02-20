@@ -1,16 +1,21 @@
 <div class="panel welcome-panel">
-    <div class="panel-body">
-      <div class="panel-header"><p>Get ready to buy online. Read the following to get started!</p></div>
-      <div class="flex">
-        <div class="panel-left">
-          <ul>
-            <li class="step active"><a data-toggle="tab" class="label" href="#place-order">Place an Order</a></li>
-            <li class="step" *ngxPermissionsOnly="['list-clients']"><a data-toggle="tab" class="label" href="#add-clients">Add Your Clients</a></li>
-            <li class="step" *ngxPermissionsOnly="['list-ecosystems']"><a data-toggle="tab" class="label" href="#create-ecosystem">Create an Ecosystem</a></li>
-            <!-- <li class="step" *ngxPermissionsOnly="['list-transactions']"><a data-toggle="tab" class="label" href="#make-transaction">Make Transaction</a></li> -->
-          </ul>
-        </div>
-        <div class="panel-right tab-content">
+  <div class="panel-body">
+    <div class="panel-header"><p>Get ready to buy online. Read the following to get started!</p></div>
+    <div class="flex">
+      <div class="panel-left">
+        <ul>
+          <li class="step active"><a data-toggle="tab" class="label" href="#place-order">Place an Order</a></li>
+          <li class="step" *ngxPermissionsOnly="['list-clients']">
+            <a data-toggle="tab" class="label" href="#add-clients">Add Your Clients</a>
+          </li>
+          <li class="step" *ngxPermissionsOnly="['list-ecosystems']">
+            <a data-toggle="tab" class="label" href="#create-ecosystem">Create an Ecosystem</a>
+          </li>
+          <!-- <li class="step" *ngxPermissionsOnly="['list-transactions']"><a data-toggle="tab" class="label" href="#make-transaction">Make Transaction</a></li> -->
+        </ul>
+      </div>
+      <div class="panel-right">
+        <div class="tab-content">
           <div class="tab-pane active" id="place-order">
             <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Place an order from your suppliers!</p>
@@ -31,8 +36,8 @@
             <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Create an Ecosystem</p>
             <p class="normal-text-bold">
-              Ecosystems enables communication between business networks with common characteristics. Designed to
-              boost network performance and provide the user with data sharing capabilities
+              Ecosystems enables communication between business networks with common characteristics. Designed to boost
+              network performance and provide the user with data sharing capabilities
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/ecosystem/list">Create Ecosystem</button>
           </div>
@@ -45,7 +50,8 @@
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/transaction/list">Create Transaction</button>
           </div> -->
+        </div>
       </div>
     </div>
-    </div>
   </div>
+</div>

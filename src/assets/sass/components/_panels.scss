@@ -94,13 +94,18 @@
 
 .welcome-panel {
   margin-top: 2rem;
-  min-height: 46.5rem;
+  min-height: 60rem;
   [class^="col"] {
     padding: 0px !important;
   }
 
+  .tab-content {
+    margin-top: 4rem;
+  }
+
   .panel-body {
     padding: 0px;
+    height: 60rem;
     width: 100%;
   }
 
@@ -161,6 +166,10 @@
       color: $dark-gray-2;
     }
   }
+
+  .panel-right {
+    height: 90%;
+  }
 }
 
 .vector-tutorial {
@@ -176,6 +185,7 @@
 .panel-right {
   display: block;
   min-width: 67%;
+  height: 100%;
   padding: 3rem;
   height: 38.3rem;
   border-left: 1px solid $light-gray-2;
@@ -304,5 +314,53 @@
 .nav .nav-tabs {
   a:hover {
     font-size: 1.2rem;
+  }
+}
+
+.counter-panel {
+  min-height: 58.5rem;
+  margin-top: 2rem;
+
+  .col-md-6:first-child,
+  .col-md-12 {
+    padding-right: 15px !important;
+    padding-left: 3rem !important;
+  }
+
+  .counter-box {
+    border-radius: 5px;
+    background-image: linear-gradient(#fff 100%, #f1f1f1);
+    width: 100%;
+    height: 28.6rem;
+    margin-bottom: 3rem;
+    padding-top: 3.8rem;
+
+    p.stats-label {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.8rem;
+      padding-top: 2rem;
+    }
+    a,
+    a:hover {
+      text-decoration: none;
+      color: #585858;
+    }
+  }
+
+  .circle {
+    height: 17rem;
+    width: 17rem;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 5px solid $primary-color;
+
+    p {
+      text-align: center;
+      font-size: 2.8rem;
+      font-weight: 800;
+      vertical-align: middle;
+      line-height: 16.5rem;
+    }
   }
 }
