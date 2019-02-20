@@ -1,11 +1,11 @@
 <!-- Top Navbar -->
 <div class="navbar-wrapper">
-    <div class="navigation-bar">
-        <label class="checkbox-toggle" for="toggle">&#9776;</label>
-        <input type="checkbox" id="toggle"/>
-      <div class="navigation-brand"><img src="../../../assets/img/logo.png" alt="logo" class="brand-img" /></div>
-      <ul class="navigation-right">
-        <li>
+  <div class="navigation-bar">
+    <label class="checkbox-toggle" for="toggle">&#9776;</label>
+    <input type="checkbox" id="toggle" />
+    <div class="navigation-brand"><img src="../../../assets/img/logo.png" alt="logo" class="brand-img" /></div>
+    <ul class="navigation-right">
+      <!-- <li>
           <div class="dropdown">
             <div id="flex-notif" data-toggle="dropdown" aria-expanded="true">
             <i class="material-icons">notifications</i>
@@ -37,36 +37,43 @@
               <li><a routerLink="/notifications" class="see-all">See All</a></li>
             </ul>
           </div>
-        </li>
-        <li id="user-li">
-          <div ngbDropdown placement="bottom-right">
-            <div class="user-image">
+        </li> -->
+      <li id="user-li">
+        <div ngbDropdown placement="bottom-right">
+          <div class="user-image">
             <figure class="img-circular-xs" [style.background-image]="'url(' + profilePicture + ')'"></figure>
-            <a id="user-dropdown" class="dropdown-toggle dropdown-button" data-toggle="dropdown" aria-expanded="true" ngbDropdownToggle>{{ username }}</a>
+            <a
+              id="user-dropdown"
+              class="dropdown-toggle dropdown-button"
+              data-toggle="dropdown"
+              aria-expanded="true"
+              ngbDropdownToggle
+              >{{ username }}</a
+            >
           </div>
-            <div ngbDropdownMenu aria-labelledby="user-dropdown">
-              <ul>
-              <li class="dropdown-item" routerLink= "/profile">
-                <i class="material-icons pull-left" >settings</i>
+          <div ngbDropdownMenu aria-labelledby="user-dropdown">
+            <ul>
+              <li class="dropdown-item" routerLink="/profile">
+                <i class="material-icons pull-left">settings</i>
                 <span>Settings</span>
               </li>
               <li (click)="logout()" class="dropdown-item">
                 <i class="material-icons pull-left">power_settings_new</i>
                 <span translate>Logout</span>
               </li>
-              <li class="dropdown-submenu dropdown-item">
-                  <i class="material-icons pull-left" >language</i>
-                  <span class="test" href="#">Language <span class="caret" style="transform: rotate(90deg)"></span></span>
-                  <ul class="dropdown-menu sub-ul">
-                      <li>
-                        <span class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">{{ language }}</span>
-                      </li>
-                  </ul>
-                </li>
-              </ul>
+              <!-- <li class="dropdown-submenu dropdown-item">
+                <i class="material-icons pull-left" >language</i>
+                <span class="test" href="#">Language <span class="caret" style="transform: rotate(90deg)"></span></span>
+                <ul class="dropdown-menu sub-ul">
+                    <li>
+                      <span class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">{{ language }}</span>
+                    </li>
+                </ul>
+              </li> -->
+            </ul>
           </div>
-          </div>
-        </li>
-      </ul>
-    </div>
+        </div>
+      </li>
+    </ul>
   </div>
+</div>
