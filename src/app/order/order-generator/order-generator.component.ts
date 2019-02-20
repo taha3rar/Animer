@@ -1,3 +1,4 @@
+import { StepperService } from './../../core/forms/stepper.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
@@ -5,7 +6,6 @@ import { OrderDataService } from './order-data.service';
 import { ActivatedRoute } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
-import { StepperService } from '@app/core/stepper.service';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 
@@ -131,9 +131,5 @@ export class OrderGeneratorComponent implements OnInit {
       phone_number: seller.personal_information.phone_number,
       contact_by: seller.contact_by
     };
-  }
-
-  back() {
-    this.location.back();
   }
 }

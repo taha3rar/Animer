@@ -44,7 +44,7 @@ export class InvoicesListComponent implements OnInit {
       this.invoices = this.allInvoices;
     }
   }
-  
+
   initExport() {
     if (this.exportInit === false) {
       this.exportInit = true;

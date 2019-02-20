@@ -19,7 +19,7 @@ export class CsvService {
   getInvoices(invoices: any) {
     const today = this.datePipe.transform(Date.now(), 'dd-MM-yyyy');
     let totalAmounts = 0;
-    let exportedData = [
+    const exportedData = [
       {
         //   Required Header
         id: 1,
@@ -35,7 +35,7 @@ export class CsvService {
     ];
     let i = 3;
     //   Get Total Due and mpesa phone number
-    for (let row of invoices) {
+    for (const row of invoices) {
       if (row.total_due > 0) {
         exportedData.push({ id: i, amount: row.total_due, number: row.seller.phone_number });
         i++;
@@ -53,7 +53,6 @@ export class CsvService {
 
   export(data: any) {
     const today = this.datePipe.transform(Date.now(), 'dd-MM-yyyy');
-    let exportData = [];
 
     const options = {
       fieldSeparator: ',',
