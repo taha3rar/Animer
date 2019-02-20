@@ -1,3 +1,4 @@
+import { BaseProduct } from './product-generator/base-product';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsListComponent } from './products-list/products-list.component';
@@ -20,6 +21,7 @@ import { ProductDataService } from './product-generator/product-data.service';
 // tslint:disable-next-line:max-line-length
 import { ProductReviewAgriculturalComponent } from './product-generator/product-review/product-review-agricultural/product-review-agricultural.component';
 import { SharedModule } from '@app/shared';
+import { BaseProductReview } from './product-generator/product-review/base-product-review';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { SharedModule } from '@app/shared';
     ProductShippingDetailsComponent,
     ProductReviewProcessedComponent,
     ProductDetailsComponent,
-    ProductReviewAgriculturalComponent
+    ProductReviewAgriculturalComponent,
+    BaseProduct,
+    BaseProductReview
   ],
   imports: [
     CommonModule,
