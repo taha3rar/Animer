@@ -178,8 +178,8 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'zip_code')">
-            <label for="zip_code">Zip Code *</label>
+          <div class="form-group col-md-4">
+            <label for="zip_code">Zip Code</label>
             <input
               type="text"
               class="form-control"
@@ -187,9 +187,6 @@
               placeholder="Type zip code here..."
               formControlName="zip_code"
             />
-            <div class="help-block">
-              <p *ngIf="isFieldInvalidNested('deliver_to', 'zip_code')">This field is required</p>
-            </div>
           </div>
           <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'phone')">
             <label for="phone">Phone *</label>
@@ -204,8 +201,8 @@
               <p *ngIf="isFieldInvalidNested('deliver_to', 'phone')">This field is required</p>
             </div>
           </div>
-          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'expected_delivery_date')">
-            <label for="expected_delivery">Expected Delivery Date *</label>
+          <div class="form-group col-md-4">
+            <label for="expected_delivery">Expected Delivery Date</label>
             <div class="input-group">
               <input
                 id="expected_delivery"
@@ -224,9 +221,6 @@
                   type="button"
                 ></button>
               </div>
-            </div>
-            <div class="help-block">
-              <p *ngIf="isFieldInvalidNested('deliver_to', 'expected_delivery_date')">This field is required</p>
             </div>
           </div>
         </div>

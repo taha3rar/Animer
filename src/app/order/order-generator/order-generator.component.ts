@@ -89,12 +89,9 @@ export class OrderGeneratorComponent implements OnInit {
         contact_name: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.contact_name, Validators.required],
         address: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.address, Validators.required],
         city: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.city, Validators.required],
-        zip_code: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.zip_code, Validators.required],
+        zip_code: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.zip_code],
         phone: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.phone, Validators.required],
-        expected_delivery_date: [
-          Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.expected_delivery_date,
-          Validators.required
-        ]
+        expected_delivery_date: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.expected_delivery_date]
       }),
       date_created: [Date.now(), Validators.required]
     });
