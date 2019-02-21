@@ -33,7 +33,7 @@ export class ChatService {
         observer.next(initialMsg);
       });
     });
-  };
+  }
 
   public getMessages = () => {
     // tslint:disable-next-line: deprecation
@@ -42,7 +42,7 @@ export class ChatService {
         observer.next(message);
       });
     });
-  };
+  }
 
   public disconnect(reason: any) {
     console.log('closed in the chat : ' + reason);
