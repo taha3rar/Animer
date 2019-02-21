@@ -70,6 +70,10 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     });
     this.stepperService.stepperInit();
     this.formInput = this.clientDetailsForm;
+
+    setTimeout(function() {
+      $('.selectpicker').selectpicker();
+    }, 200);
   }
 
   isRequired(abstractControl: AbstractControl) {
@@ -201,5 +205,17 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     return {
       'has-error': this.isFieldInvalidComp(field)
     };
+  }
+
+  generateLink(code: any, country: any) {
+    // tslint:disable-next-line:quotemark
+    return (
+      "<img src='../../../assets/img/flags/" +
+      code +
+      ".png' height='20' height='28'>" +
+      '<span>\xa0\xa0' +
+      country +
+      '</span>'
+    );
   }
 }

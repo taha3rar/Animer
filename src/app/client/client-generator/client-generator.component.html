@@ -84,27 +84,36 @@
                     <label for="region_code"
                       >Phone Number<span *ngIf="isRequired(clientf.phoneNumber) === true"> *</span></label
                     >
-                    <select
-                      id="region_code"
-                      placeholder="Choose measurment unit"
-                      class="form-control col-md-2"
-                      [(ngModel)]="regionCode"
-                      [ngModelOptions]="{ standalone: true }"
-                      (change)="changeRegionCode()"
-                    >
-                      <option *ngFor="let country of countries" [value]="country.value">
-                        <img src="../../../assets/img/flags/{{ country.value }}.png" /> {{ country.viewValue }}
-                      </option>
-                    </select>
-                    <input
-                      type="tel"
-                      class="form-control col-md-8"
-                      id="phone"
-                      placeholder="Type phone number here..."
-                      [(ngModel)]="partialPhoneNumber"
-                      [ngModelOptions]="{ standalone: true }"
-                      (ngModelChange)="changeRegionCode()"
-                    />
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <select
+                          data-width="65px"
+                          id="region_code"
+                          data-live-search="true"
+                          placeholder="Choose measurment unit"
+                          class="selectpicker"
+                          data-size="7"
+                          [(ngModel)]="regionCode"
+                          [ngModelOptions]="{ standalone: true }"
+                          (change)="changeRegionCode()"
+                        >
+                          <option
+                            *ngFor="let country of countries"
+                            [value]="country.value"
+                            [attr.data-content]="generateLink(country.value, country.viewValue)"
+                          ></option>
+                        </select>
+                      </div>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        placeholder="Type phone number here..."
+                        [(ngModel)]="partialPhoneNumber"
+                        [ngModelOptions]="{ standalone: true }"
+                        (ngModelChange)="changeRegionCode()"
+                      />
+                    </div>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="id_number">Identification Number (ID)</label>
