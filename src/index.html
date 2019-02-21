@@ -1,48 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>Avenews GT</title>
-  <base href="/"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="icon" type="image/x-icon" href="favicon.png"/>
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png"/>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link
+  <head>
+    <meta charset="utf-8" />
+    <title>Avenews GT</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
+    <link
+      rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link
       rel="stylesheet"
       type="text/css"
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
     />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="assets/jscript.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxT5sat71m9HbA_qIr71jQmx8Vp_leQCs&libraries=places" async defer></script>
-</head>
-<body>
-  <!-- Google Analytics -->
-  <!-- <script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <script
+      src="//code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/jscript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxT5sat71m9HbA_qIr71jQmx8Vp_leQCs&libraries=places"
+      async
+      defer
+    ></script>
+    <script>
+      window.intercomSettings = {
+        app_id: 'zjpiv02o'
+      };
+    </script>
+    <script>
+      (function() {
+        var w = window;
+        var ic = w.Intercom;
+        if (typeof ic === 'function') {
+          ic('reattach_activator');
+          ic('update', intercomSettings);
+        } else {
+          var d = document;
+          var i = function() {
+            i.c(arguments);
+          };
+          i.q = [];
+          i.c = function(args) {
+            i.q.push(args);
+          };
+          w.Intercom = i;
+
+          function l() {
+            var s = d.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = 'https://widget.intercom.io/widget/zjpiv02o';
+            var x = d.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+          }
+          if (w.attachEvent) {
+            w.attachEvent('onload', l);
+          } else {
+            w.addEventListener('load', l, false);
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- Google Analytics -->
+    <!-- <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-105421549-3', 'auto');
   </script> -->
-  <!-- End Google Analytics -->
-  <!--[if lt IE 10]>
-  <p>
-    You are using an <strong>outdated</strong> browser.
-    Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-  </p>
-  <![endif]-->
-  <noscript>
-    <p>
-      This page requires JavaScript to work properly. Please enable JavaScript in your browser.
-    </p>
-  </noscript>
-  <app-root>
-  </app-root>
-</body>
+    <!-- End Google Analytics -->
+    <!--[if lt IE 10]>
+      <p>
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <noscript>
+      <p>
+        This page requires JavaScript to work properly. Please enable JavaScript in your browser.
+      </p>
+    </noscript>
+    <app-root> </app-root>
+  </body>
 </html>
