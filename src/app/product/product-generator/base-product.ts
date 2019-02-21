@@ -1,8 +1,9 @@
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
-import { OnInit } from '@angular/core';
+import { OnInit, Injectable } from '@angular/core';
 import { ProductDataService } from './product-data.service';
 import { FormGroup } from '@angular/forms';
 
+@Injectable()
 export class BaseProduct extends BaseValidationComponent implements OnInit {
   form: FormGroup;
   isProcessed: boolean;

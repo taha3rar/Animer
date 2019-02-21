@@ -4,8 +4,9 @@ import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
 import { BaseProduct } from '../base-product';
 import { defaultValues } from '@app/shared/helpers/default_values';
-import { OnInit } from '@angular/core';
+import { OnInit, Injectable } from '@angular/core';
 
+@Injectable()
 export class BaseProductReview extends BaseProduct implements OnInit {
   product: Product;
 

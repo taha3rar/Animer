@@ -45,8 +45,8 @@
     <div class="col-md-6 col-sm-12">
       <div class="counter-box">
         <div class="circle">
-          <a>
-            <p>0</p>
+          <a [routerLink]="['/invoice/list']">
+            <p>{{ counter.invoices }}</p>
           </a>
         </div>
         <p class="stats-label">Proforma Invoices</p>
@@ -54,11 +54,11 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12" *ngxPermissionsOnly="['list-products']">
       <div class="counter-box">
         <div class="circle">
-          <a>
-            <p>0</p>
+          <a [routerLink]="['/product/list']">
+            <p>{{ counter.products }}</p>
           </a>
         </div>
         <p class="stats-label">Products</p>
@@ -67,8 +67,8 @@
     <div class="col-md-6 col-sm-12">
       <div class="counter-box">
         <div class="circle">
-          <a>
-            <p>0</p>
+          <a [routerLink]="['/client/list']">
+            <p>{{ counter.clients }}</p>
           </a>
         </div>
         <p class="stats-label">Clients</p>

@@ -5,8 +5,14 @@
   <p>Here you can see all your clients and create new ones!</p>
 </div>
 
-
-<button class="bttn-primary bttn-add pull-right" data-toggle="wizard" data-target="#addClientWizard"><span>Add Client</span></button>
+<button
+  class="bttn-primary bttn-add pull-right"
+  data-toggle="wizard"
+  *ngxPermissionsOnly="['create-client']"
+  data-target="#addClientWizard"
+>
+  <span>Add Client</span>
+</button>
 
 <h1 class="main-title">Clients List</h1>
 
@@ -21,21 +27,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let client of clients | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+    <tr *ngFor="let client of (clients | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
       <td class="text-center">{{ client.numericId }}</td>
       <td>{{ client.company_name }}</td>
       <td>{{ client.first_name }} {{ client.last_name }}</td>
       <td style="text-transform: capitalize;">{{ client.role }}</td>
       <td class="text-right">
-        <button class="round-button-primary" [routerLink]="['/client', client._id]"><i class="material-icons">remove_red_eye</i></button>
+        <button class="round-button-primary" [routerLink]="['/client', client._id]">
+          <i class="material-icons">remove_red_eye</i>
+        </button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<pagination-controls
-(pageChange)="page = $event"
-></pagination-controls>
+<pagination-controls (pageChange)="page = $event"></pagination-controls>
 
 <app-client-generator></app-client-generator>
-

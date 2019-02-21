@@ -22,6 +22,7 @@ import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 import { CurrentUserResolver } from './resolvers/current-user.resolver';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { CurrentUserResolver } from './resolvers/current-user.resolver';
     SharedModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPermissionsModule.forRoot()
   ],
   // tslint:disable-next-line:max-line-length
   declarations: [
