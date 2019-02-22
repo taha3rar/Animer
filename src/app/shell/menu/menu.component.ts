@@ -33,7 +33,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/invoice/list',
-    title: 'Proforma Invoices',
+    title: 'Invoices',
     type: 'link',
     icontype: 'receipt'
   },

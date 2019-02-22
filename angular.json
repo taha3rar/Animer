@@ -51,10 +51,10 @@
               ]
             },
             "local": {
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": false,
+              "extractCss": true,
               "namedChunks": false,
               "aot": false,
               "extractLicenses": false,
@@ -76,7 +76,7 @@
               "aot": false,
               "extractLicenses": false,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -85,10 +85,10 @@
               ]
             },
             "staging": {
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": false,
+              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": false,
