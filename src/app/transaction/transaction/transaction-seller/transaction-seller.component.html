@@ -2,16 +2,18 @@
   <div class="stepper">
     <ul class="nav nav-tabs">
       <li class="completed active">
-        <a data-toggle="tab" class="label" href="#quoteRequest"><span class="round-tab">1</span>Quote request received</a>
+        <a data-toggle="tab" class="label" href="#quoteRequest"
+          ><span class="round-tab">1</span>Quote request received</a
+        >
       </li>
-      <li [ngClass]="{'completed':piGenerated,'disabled': !piGenerated}">
+      <li [ngClass]="{ completed: piGenerated, disabled: !piGenerated }">
         <a data-toggle="tab" class="label" href="#proformaInvoice">
           <span class="round-tab">2</span>
           <span *ngIf="piGenerated">Proforma Invoice sent</span>
-          <span *ngIf="!piGenerated">Generate proforma invoice</span>
+          <span *ngIf="!piGenerated">Generate Proforma Invoice</span>
         </a>
       </li>
-      <li [ngClass]="{'completed': poGenerated,'disabled': !poGenerated}">
+      <li [ngClass]="{ completed: poGenerated, disabled: !poGenerated }">
         <a data-toggle="tab" class="label" href="#purchaseOrder">
           <span class="round-tab">3</span>
           <span *ngIf="poGenerated">Purchase order received</span>
@@ -25,7 +27,10 @@
         <div class="panel panel-tab">
           <div class="panel-body">
             <div class="padding-all-2">
-              <app-transaction-quote-request [quoteRequest]="quoteRequest" [transaction]="transaction"></app-transaction-quote-request>
+              <app-transaction-quote-request
+                [quoteRequest]="quoteRequest"
+                [transaction]="transaction"
+              ></app-transaction-quote-request>
             </div>
           </div>
         </div>
@@ -40,10 +45,7 @@
         <div class="panel panel-tab">
           <div class="panel-body">
             <div class="padding-all-2">
-              <app-transaction-po
-                [quoteRequest]="quoteRequest"
-                [transaction]="transaction"
-              ></app-transaction-po>
+              <app-transaction-po [quoteRequest]="quoteRequest" [transaction]="transaction"></app-transaction-po>
             </div>
           </div>
         </div>
@@ -51,4 +53,3 @@
     </div>
   </div>
 </div>
-  

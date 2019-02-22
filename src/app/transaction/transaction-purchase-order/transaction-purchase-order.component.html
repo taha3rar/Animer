@@ -193,13 +193,15 @@
         <span>{{ proformaInvoice.expected_delivering_date | date: 'dd/MM/yy' }}</span>
       </div>
       <div>
-        <span>Proforma invoice remarks</span> <span>{{ proformaInvoice.remarks || 'None' }}</span>
+        <span>Proforma Invoice remarks</span> <span>{{ proformaInvoice.remarks || 'None' }}</span>
       </div>
-      <span>Proforma invoice valid until</span> <span>{{ proformaInvoice.valid_until | date: 'dd/MM/yy' }}</span>
+      <span>Proforma Invoice valid until</span> <span>{{ proformaInvoice.valid_until | date: 'dd/MM/yy' }}</span>
     </div>
   </div>
 </div>
-    <button class="bttn-primary next-step pull-right" *ngIf="!purchaseOrder._id && completedPO" (click)="submit()">Send</button>
+<button class="bttn-primary next-step pull-right" *ngIf="!purchaseOrder._id && completedPO" (click)="submit()">
+  Send
+</button>
 <button class="btn-primary-transp pull-right">Download PDF</button>
 <button
   *ngIf="!completedPO && !purchaseOrder._id"

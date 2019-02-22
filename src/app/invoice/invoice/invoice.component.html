@@ -1,11 +1,11 @@
 <h1 *ngIf="!generateInvoice" class="main-title btn-main margin-bottom-2" (click)="back()">
-  <a class="material-icons">keyboard_backspace</a> Invoices
+  <a class="material-icons">keyboard_backspace</a> Proforma Invoices
 </h1>
 <div class="col-md-12" id="pdfContent">
   <div class="panel panel-tab">
     <div class="panel-body">
       <p *ngIf="invoice.personal_po_id" class="pull-left margin-none ">PO #{{ invoice.personal_po_id }}</p>
-      <p *ngIf="invoice._id" class="pull-right margin-none ">INV #{{ invoice.numericId }}</p>
+      <p *ngIf="invoice._id" class="pull-right margin-none ">PI #{{ invoice.numericId }}</p>
       <div class="row clearfix">
         <div class="col-md-9">
           <p class="heading-2">ISSUED BY</p>
@@ -147,7 +147,7 @@
           (click)="saveInvoice()"
           [disabled]="!disclaimerAccepted"
         >
-          Send Invoice
+          Send Proforma Invoice
         </button>
         <button class="btn-primary-transp pull-right" data-html2canvas-ignore="true" (click)="download()">
           Download PDF

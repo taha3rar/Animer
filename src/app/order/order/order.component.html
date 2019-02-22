@@ -1,14 +1,11 @@
-
-<h1 class="main-title btn-main" (click)="back()">
-  <a class="material-icons">keyboard_backspace</a> Orders
-</h1>
+<h1 class="main-title btn-main" (click)="back()"><a class="material-icons">keyboard_backspace</a> Orders</h1>
 
 <div class="col-md-12">
   <div class="panel">
     <div class="panel-body">
       <div class="col-md-3">
         <p class="heading-3">ORDER NUMBER</p>
-        <p class="normal-text-bold">{{order?.numericId}}</p>
+        <p class="normal-text-bold">{{ order?.numericId }}</p>
       </div>
       <div class="col-md-3">
         <p class="heading-3">DATE OF SUBMISSION</p>
@@ -17,13 +14,15 @@
       <div class="col-md-3">
         <p class="heading-3">SHIPPING TO</p>
         <p class="normal-text-bold">{{ order.deliver_to.contact_name }}</p>
-        <p class="normal-text-bold">{{ order.deliver_to.address }}, {{ order.deliver_to.city }} {{ order.deliver_to.zip_code }}</p>
+        <p class="normal-text-bold">
+          {{ order.deliver_to.address }}, {{ order.deliver_to.city }} {{ order.deliver_to.zip_code }}
+        </p>
         <p class="normal-text-bold">{{ order.deliver_to.phone }}</p>
       </div>
       <div class="col-md-3">
         <p class="heading-3">DELIVERY</p>
         <p class="normal-text-bold">Estimated delivery date</p>
-        <p class="normal-text-bold">{{ order.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy'}}</p>
+        <p class="normal-text-bold">{{ order.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}</p>
       </div>
     </div>
   </div>
@@ -34,7 +33,7 @@
     <li class="active">
       <a data-toggle="tab" href="#purchaseOrder">Purchase Order</a>
     </li>
-    <li><a data-toggle="tab" href="#invoice">Invoice</a></li>
+    <li><a data-toggle="tab" href="#invoice">Proforma Invoice</a></li>
     <li><a data-toggle="tab" href="#documents">Necessary Documents</a></li>
   </ul>
   <div class="tab-content">

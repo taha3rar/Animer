@@ -1,4 +1,4 @@
-<h1 translate class="main-title">Invoices List</h1>
+<h1 translate class="main-title">Proforma Invoices List</h1>
 
 <table class="table main-table">
   <thead>
@@ -13,9 +13,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let invoice of invoices | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
-      <td class="text-center">{{invoice.numericId}}</td>
-      <td>{{invoice.date_created | date: 'dd/MM/yyyy'}}</td>
+    <tr *ngFor="let invoice of (invoices | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
+      <td class="text-center">{{ invoice.numericId }}</td>
+      <td>{{ invoice.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>
         <span *ngIf="userId == invoice.seller._id">{{ invoice.buyer.company_name }}</span>
         <span *ngIf="userId == invoice.buyer._id">{{ invoice.seller.company_name }}</span>
@@ -24,10 +24,12 @@
         <span *ngIf="userId == invoice.seller._id">{{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }}</span>
         <span *ngIf="userId == invoice.buyer._id">{{ invoice.seller.first_name }} {{ invoice.seller.last_name }}</span>
       </td>
-      <td>{{ invoice.total_due | number: "1.2-2" }} {{ invoice.currency }}</td>
+      <td>{{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}</td>
       <td>{{ invoice.status }}</td>
       <td class="text-right">
-        <button class="round-button-primary" [routerLink]="['/invoice', invoice._id]"><i class="material-icons">remove_red_eye</i></button>
+        <button class="round-button-primary" [routerLink]="['/invoice', invoice._id]">
+          <i class="material-icons">remove_red_eye</i>
+        </button>
         <button class="round-button-red" (click)="warning(invoice._id)"><i class="material-icons">delete</i></button>
       </td>
     </tr>

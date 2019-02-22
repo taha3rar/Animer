@@ -1,8 +1,8 @@
 <div *ngIf="!invoice && !generateInvoice">
-  Your purchase order has been sent to the seller, please wait for his invoice
+  Your purchase order has been sent to the seller, please wait for his Proforma Invoice
 </div>
 <div *ngIf="invoice || generateInvoice" id="pdfContent">
-  <p *ngIf="!generateInvoice" class="pull-right margin-none">INV #{{ invoice?.numericId }}</p>
+  <p *ngIf="!generateInvoice" class="pull-right margin-none">PI #{{ invoice?.numericId }}</p>
   <div class="row clearfix">
     <div class="col-md-9">
       <p class="heading-2">ISSUED BY</p>
@@ -107,7 +107,7 @@
     <div class="col-md-3">
       <div class="po-right-side">
         <p class="heading-2">
-          Comments or special instructions for invoice
+          Comments or special instructions for Proforma Invoice
         </p>
         <p>{{ invoice?.order_comments || 'None' }}</p>
         <p class="heading-2">Comments or special instructions for payments</p>
