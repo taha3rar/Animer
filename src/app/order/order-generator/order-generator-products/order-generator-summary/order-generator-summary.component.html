@@ -1,23 +1,26 @@
 <div class="order-summary">
   <p class="heading-2">Products</p>
-
-  <div class="product-item" *ngFor="let product of productList">
-    <figure
-      class="img-circular-sm margin-none"
-      [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')'}"
-    ></figure>
-    <div>
-      <p>{{product.produce}} {{product.variety}}</p>
-      <p *ngIf="product.product_type==='agricultural'">{{product.price_per_unit}} {{product.currency}}/{{product.weight_unit}}</p>
-      <p *ngIf="product.product_type==='processed'">{{product.package_price}} {{product.currency}}/{{product.type_of_package}}</p>
+  <ng-container *ngFor="let product of productList">
+    <div class="product-item" *ngIf="product.quantity > 0">
+      <figure
+        class="img-circular-sm margin-none"
+        [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
+      ></figure>
+      <div>
+        <p>{{ product.produce }} {{ product.variety }}</p>
+        <p *ngIf="product.product_type === 'agricultural'">
+          {{ product.price_per_unit }} {{ product.currency }}/{{ product.weight_unit }}
+        </p>
+        <p *ngIf="product.product_type === 'processed'">
+          {{ product.package_price }} {{ product.currency }}/{{ product.type_of_package }}
+        </p>
+      </div>
+      <p class="quantity">x{{ product.quantity }}</p>
     </div>
-    <p class="quantity">x{{product.quantity}}</p>
+  </ng-container>
+
+  <div class="total">
+    <p>TOTAL</p>
+    <p class="heading-3-blue">{{ order.subtotal.value | number: '1.2-2' }} {{ currency }}</p>
   </div>
-
-    <div class="total">
-      <p>TOTAL</p>
-      <p class="heading-3-blue">{{order.subtotal.value}} {{order.currency.value}}</p>
-    </div>
 </div>
-
-

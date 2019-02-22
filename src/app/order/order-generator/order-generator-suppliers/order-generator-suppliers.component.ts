@@ -25,6 +25,7 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
     });
+    console.log(this.form);
   }
 
   profilePicture(client: Client) {
@@ -32,7 +33,11 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
   }
 
   get validSeller() {
-    return this.form.controls.seller.valid;
+    if (this.form.value.seller.controls) {
+      return this.form.value.seller.controls.valid;
+    } else {
+      return true;
+    }
   }
 
   validateSeller() {

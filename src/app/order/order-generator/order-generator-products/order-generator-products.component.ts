@@ -19,6 +19,7 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   agriculturalProducts: Product[];
   processedProducts: Product[];
   newProducts: Product[] = [];
+  currency: string = undefined;
 
   constructor(private productService: ProductService, private orderDataService: OrderDataService) {
     super();
@@ -55,6 +56,7 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
     } else {
       product.quantity = product.quantityMax;
     }
+    this.productsValidation(false);
   }
   decrementQuantity(product: any) {
     if (product.quantity > 0) {
@@ -62,13 +64,26 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
     } else {
       product.quantity = 0;
     }
+    this.productsValidation(false);
   }
 
-  addProducts() {
+  checkProductInput(product: any) {
+    if (product.quantity > product.quantityMax) {
+      product.quantity = product.quantityMax;
+    } else if (product.quantity <= 0) {
+      product.quantity = 0;
+    } else {
+      product.quantity = product.quantity;
+    }
+    this.productsValidation(false);
+  }
+
+  productsValidation(submit: boolean) {
+    this.order['subtotal'].setValue(0);
     this.products.forEach(product => {
       if (product.quantity > 0) {
-        if (!this.order.currency.value) {
-          this.order['currency'].setValue(product.currency);
+        if (!this.currency) {
+          this.currency = product.currency;
         }
         if (product.product_type === 'agricultural') {
           product['total_weight'] = product.package_weight * product.quantity;
@@ -78,9 +93,14 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
           product['product_subtotal'] = product.package_price * product.quantity;
         }
         this.order['subtotal'].setValue(this.order.subtotal.value + product['product_subtotal']);
-        this.newProducts.push(product);
+        if (submit) {
+          this.newProducts.push(product);
+        }
       }
     });
+    if (this.order.subtotal.value === 0) {
+      this.currency = undefined;
+    }
   }
 
   product_image(product: Product) {
@@ -97,6 +117,10 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   }
 
   toOrderGenerator() {
+    this.productsValidation(true);
+    if (this.currency) {
+      this.order['currency'].setValue(this.currency);
+    }
     this.orderDataService.setProductList(this.newProducts);
   }
 }

@@ -25,11 +25,11 @@ export class OrderProductListComponent implements OnInit {
   ngOnInit() {
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
+      this.currency = this.form.value.currency;
     });
     this.orderDataService.currentProductList.subscribe(data => {
       if (data) {
         this.products = data;
-        this.currency = data[0].currency;
         this.updateProducts(this.products);
       }
     });

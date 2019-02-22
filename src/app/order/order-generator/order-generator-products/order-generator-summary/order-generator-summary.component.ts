@@ -13,6 +13,8 @@ export class OrderGeneratorSummaryComponent implements OnInit {
   productList: Product[];
   @Input()
   form: FormGroup;
+  @Input()
+  currency: string;
 
   constructor() {}
 
