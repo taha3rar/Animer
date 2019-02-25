@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
@@ -20,6 +20,19 @@ export class InvoicesListComponent implements OnInit {
     this.route.data.subscribe(({ invoices }) => {
       this.invoices = invoices;
     });
+  }
+
+  viewAs(profileType: any) {
+    this.viewAsSeller = false;
+    this.viewAsBuyer = false;
+    this.viewAsAgri = false;
+    if (profileType === 'seller') {
+      this.viewAsSeller = true;
+    } else if (profileType === 'buyer') {
+      this.viewAsBuyer = true;
+    } else {
+      this.viewAsAgri = true;
+    }
   }
 
   get userId() {

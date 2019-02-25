@@ -22,4 +22,17 @@ export class OrdersListComponent implements OnInit {
       this.orders = orders;
     });
   }
+
+  viewAs(profileType: any) {
+    this.viewAsSeller = false;
+    this.viewAsBuyer = false;
+    this.viewAsAgri = false;
+    if (profileType === 'seller') {
+      this.viewAsSeller = true;
+    } else if (profileType === 'buyer') {
+      this.viewAsBuyer = true;
+    } else {
+      this.viewAsAgri = true;
+    }
+  }
 }

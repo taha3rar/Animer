@@ -22,24 +22,14 @@
   <div class="pull-left two-btns ">
     <p class="heading-2">View records as:</p>
     <div class="two-btns-inner">
-      <button
-        (click)="this.viewAsBuyer = false; this.viewAsAgri = false; this.viewAsSeller = true"
-        [ngClass]="{ active: this.viewAsSeller }"
-      >
+      <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
         Seller
       </button>
-      <button
-        (click)="this.viewAsBuyer = true; this.viewAsAgri = false; this.viewAsSeller = false"
-        [ngClass]="{ active: this.viewAsBuyer }"
-      >
+      <button (click)="viewAs('buyer')" [class.active]="this.viewAsBuyer">
         Buyer
       </button>
     </div>
-    <button
-      (click)="this.viewAsBuyer = false; this.viewAsAgri = true; this.viewAsSeller = false"
-      [ngClass]="{ active: this.viewAsAgri }"
-      class="bttn-primary-sm"
-    >
+    <button (click)="viewAs('agri')" [class.active]="this.viewAsAgri" class="bttn-primary-sm">
       All
     </button>
   </div>
