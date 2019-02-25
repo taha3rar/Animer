@@ -21,7 +21,7 @@
   background: transparent;
   border-radius: 10rem;
   position: relative;
-  border: 3px solid $primary-color;
+  border: 2.5px solid $primary-color;
   color: $primary-color;
   font-weight: 600;
   padding: 0 2.8rem;
@@ -39,6 +39,62 @@
   span {
     font-size: 1.5rem;
     vertical-align: middle;
+  }
+}
+
+.two-btns {
+  display: flex;
+  align-items: center;
+
+  &-inner {
+    border-radius: 7rem;
+    border: 3px solid $primary-color;
+    width: 25rem;
+    margin-left: 1.5rem;
+    height: 3.55rem;
+
+    button {
+      width: 50%;
+      height: 100%;
+      background-color: transparent;
+      border: none;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    button:first-child {
+      border-right: 2.3px solid $primary-color;
+    }
+
+    button:first-child.active {
+      background-color: $primary-color;
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+      color: white;
+    }
+
+    button:nth-child(2).active {
+      background-color: $primary-color;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      color: white;
+    }
+  }
+
+  .bttn-primary-sm {
+    border-radius: 10rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+    padding: 0 1.9rem;
+    border: none;
+    border: 2.5px solid $primary-color;
+    background-color: transparent;
+    height: 3.55rem;
+    margin-left: 1rem;
+  }
+  .bttn-primary-sm.active {
+    background: $primary-color;
+    color: white;
   }
 }
 

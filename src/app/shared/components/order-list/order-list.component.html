@@ -1,5 +1,3 @@
-<h1 translate class="main-title">Orders List</h1>
-
 <table class="table main-table">
   <thead>
     <tr>
@@ -14,9 +12,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+    <tr *ngFor="let order of (orders | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
       <td class="text-center">{{ order.numericId }}</td>
-      <td>{{ order.date_created | date: "dd/MM/yyyy" }}</td>
+      <td>{{ order.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>
         <span *ngIf="userId == order.seller._id">{{ order.buyer.company_name }}</span>
         <span *ngIf="userId == order.buyer._id">{{ order.seller.company_name }}</span>
@@ -26,27 +24,64 @@
         <span *ngIf="userId == order.buyer._id">{{ order.seller.first_name }} {{ order.seller.last_name }}</span>
       </td>
       <td>
-        <span *ngIf="order.total_weight">{{ order.total_weight | roundUp }} {{ order.document_weight_unit }}
-        <span *ngIf="hasProcessedProduct(order)" style="font-size :9px;color:gray">Excluding processed products</span></span>
+        <span *ngIf="order.total_weight"
+          >{{ order.total_weight | roundUp }} {{ order.document_weight_unit }}
+          <span *ngIf="hasProcessedProduct(order)" style="font-size :9px;color:gray"
+            >Excluding processed products</span
+          ></span
+        >
         <span *ngIf="!order.total_weight">N/A</span>
       </td>
       <td>
-        <span *ngIf="order.total_due">{{ order.total_due | number: "1.2-2" }} {{ order.currency }}</span>
+        <span *ngIf="order.total_due">{{ order.total_due | number: '1.2-2' }} {{ order.currency }}</span>
         <span *ngIf="!order.total_due">N/A</span>
       </td>
       <td>{{ order.status }}</td>
       <td class="text-right">
-          <button *ngIf="userId == order.buyer._id && !order.draft" data-toggle="stepper" class="round-button-primary" [routerLink]="['/order', order._id]"><i class="material-icons">remove_red_eye</i></button>
-          <button *ngIf="userId == order.seller._id && !order.draft && order.invoice?._id && !order.invoice?.draft" data-toggle="stepper" class="round-button-primary" [routerLink]="['/order', order._id]"><i class="material-icons">remove_red_eye</i></button>
-          <button *ngIf="(order.invoice || userId == order.buyer._id) && order.draft" class="round-button-primary" data-toggle="stepper" [routerLink]="['/order/generator', order._id]"><i class="material-icons">remove_red_eye</i></button>
-          <button *ngIf="userId == order.seller._id && !order.invoice" class="round-button-primary" data-toggle="stepper" [routerLink]="['/order/invoice/generator', order._id]"><i class="material-icons">remove_red_eye</i></button>
-          <button *ngIf="userId == order.seller._id && order.invoice?.draft" class="round-button-primary" data-toggle="stepper" [routerLink]="['/order/invoice/generator/draft', order.invoice._id]"><i class="material-icons">remove_red_eye</i></button>
-          <button class="round-button-red" (click)="warning(order._id)"><i class="material-icons">delete</i></button>
+        <button
+          *ngIf="userId == order.buyer._id && !order.draft"
+          data-toggle="stepper"
+          class="round-button-primary"
+          [routerLink]="['/order', order._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button
+          *ngIf="userId == order.seller._id && !order.draft && order.invoice?._id && !order.invoice?.draft"
+          data-toggle="stepper"
+          class="round-button-primary"
+          [routerLink]="['/order', order._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button
+          *ngIf="(order.invoice || userId == order.buyer._id) && order.draft"
+          class="round-button-primary"
+          data-toggle="stepper"
+          [routerLink]="['/order/generator', order._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button
+          *ngIf="userId == order.seller._id && !order.invoice"
+          class="round-button-primary"
+          data-toggle="stepper"
+          [routerLink]="['/order/invoice/generator', order._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button
+          *ngIf="userId == order.seller._id && order.invoice?.draft"
+          class="round-button-primary"
+          data-toggle="stepper"
+          [routerLink]="['/order/invoice/generator/draft', order.invoice._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button class="round-button-red" (click)="warning(order._id)"><i class="material-icons">delete</i></button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<pagination-controls
-(pageChange)="page = $event"
-></pagination-controls>
+<pagination-controls (pageChange)="page = $event"></pagination-controls>

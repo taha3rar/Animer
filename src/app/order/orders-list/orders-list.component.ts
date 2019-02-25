@@ -11,6 +11,9 @@ import { AuthenticationService } from '@app/core';
 export class OrdersListComponent implements OnInit {
   orders: Order[];
   page = 1;
+  viewAsSeller = false;
+  viewAsBuyer = false;
+  viewAsAgri = true;
 
   constructor(private route: ActivatedRoute) {}
 

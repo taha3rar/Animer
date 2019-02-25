@@ -10,6 +10,10 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 })
 export class InvoicesListComponent implements OnInit {
   invoices: Invoice[];
+  viewAsSeller = false;
+  viewAsBuyer = false;
+  viewAsAgri = true;
+
   constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
 
   ngOnInit() {

@@ -3,11 +3,15 @@
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
   <p translate>
-      Orders allow you to place new orders from your clients/ecosystems/Avenews-GT. You can also see all your orders and make actions on them, easily!
+    Orders allow you to place new orders from your clients/ecosystems/Avenews-GT. You can also see all your orders and
+    make actions on them, easily!
   </p>
 </div>
 
-<button class="btn-primary-transp pull-right">
+<h1 translate class="main-title">Orders List</h1>
+
+<div class="clearfix margin-top">
+  <button class="btn-primary-transp pull-right">
     <i class="material-icons">arrow_upward</i>
     <span translate>Export All Orders</span>
   </button>
@@ -15,5 +19,31 @@
   <button *ngxPermissionsOnly="['create-order']" class="bttn-primary bttn-add pull-right" routerLink="/order/generator">
     <span translate>Place Order </span>
   </button>
+
+  <div class="pull-left two-btns ">
+    <p class="heading-2">View records as:</p>
+    <div class="two-btns-inner">
+      <button
+        (click)="this.viewAsBuyer = false; this.viewAsAgri = false; this.viewAsSeller = true"
+        [ngClass]="{ active: this.viewAsSeller }"
+      >
+        Seller
+      </button>
+      <button
+        (click)="this.viewAsBuyer = true; this.viewAsAgri = false; this.viewAsSeller = false"
+        [ngClass]="{ active: this.viewAsBuyer }"
+      >
+        Buyer
+      </button>
+    </div>
+    <button
+      (click)="this.viewAsBuyer = false; this.viewAsAgri = true; this.viewAsSeller = false"
+      [ngClass]="{ active: this.viewAsAgri }"
+      class="bttn-primary-sm"
+    >
+      All
+    </button>
+  </div>
+</div>
 
 <app-order-list [orders]="orders"></app-order-list>
