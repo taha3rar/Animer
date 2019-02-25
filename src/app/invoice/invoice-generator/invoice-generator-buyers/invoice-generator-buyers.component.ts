@@ -22,7 +22,6 @@ export class InvoiceGeneratorBuyersComponent extends BaseNavigationComponent imp
   ngOnInit() {
     this.route.data.subscribe(({ clients }) => {
       this.clients = clients;
-      console.log(this.clients);
     });
   }
 
