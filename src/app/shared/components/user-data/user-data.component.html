@@ -3,35 +3,39 @@
     <div class="col-md-4">
       <p *ngIf="issued_by">Issuer name</p>
       <p *ngIf="issued_for">Recipient name</p>
-      <p>{{user.first_name}} {{user.last_name}}</p>
+      <p>{{ user.first_name }} {{ user.last_name }}</p>
     </div>
     <div class="col-md-4">
       <p>Company name</p>
-      <p>{{user.company_name}}</p>
+      <p>{{ user.company_name }}</p>
     </div>
     <div class="col-md-4">
       <p>Email address</p>
-      <p>{{user.email}}</p>
+      <p>{{ user.email }}</p>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <p>City</p>
-      <p>{{user.city}}</p>
+      <p>{{ user.city ? user.city : 'N/A' }}</p>
     </div>
     <div class="col-md-4">
       <p>Street address</p>
-      <p>{{user.address}}</p>
+      <p>{{ user.address ? user.address : 'N/A' }}</p>
     </div>
     <div class="col-md-4">
       <p>Zip code</p>
-      <p>{{user.zipcode}}</p>
+      <p>{{ user.zipcode ? user.zipcode : 'N/A' }}</p>
     </div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col-md-4">
+      <p>Country</p>
+      <p>{{ user.country ? user.country : 'N/A' }}</p>
+    </div>
+    <div class="col-md-4">
       <p>Phone Number</p>
-      <p>{{user.phone_number}}</p>
+      <p>{{ user.phone_number }}</p>
     </div>
   </div>
 </div>

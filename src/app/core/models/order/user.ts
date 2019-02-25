@@ -8,6 +8,7 @@ export class User {
   company_number: string;
   address: string;
   city: string;
+  country: string;
   zipcode: string;
   phone_number: string;
   contact_by: string[];

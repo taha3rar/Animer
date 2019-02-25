@@ -53,6 +53,7 @@ export class InvoiceGeneratorComponent implements OnInit {
           company_number: ['', Validators.required],
           address: ['', Validators.required],
           city: ['', Validators.required],
+          country: ['', Validators.required],
           zipcode: ['', Validators.required],
           phone_number: ['', Validators.required],
           contact_by: [this.formBuilder.array([], Validators.required)]
@@ -113,6 +114,7 @@ export class InvoiceGeneratorComponent implements OnInit {
       company_number: seller.company_information.company_registered_number,
       address: seller.company_information.street,
       city: seller.company_information.city,
+      country: seller.company_information.country,
       zipcode: seller.company_information.zipcode,
       phone_number: seller.personal_information.phone_number,
       contact_by: seller.contact_by
