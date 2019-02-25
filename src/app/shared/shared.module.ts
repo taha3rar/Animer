@@ -8,15 +8,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
-import { DocumentListComponent } from './components/document-list/document-list.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
 import { BaseListComponent } from './components/base-list/base-list.component';
-import { UserDocumentComponent } from './components/user-document-list/user-document-list.component';
 import { GooglePlacesDirective } from './directives/google-places.directive';
 import { BaseNavigationComponent } from './components/base-navigation/base-navigation.component';
 import { UploadPictureComponent } from './components/upload-picture/upload-picture.component';
 import { BaseValidationComponent } from './components/base-validation/base-validation.component';
+import { UserDocumentComponent } from './components/document-list/user-document-list/user-document-list.component';
+import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule],
@@ -26,7 +26,7 @@ import { BaseValidationComponent } from './components/base-validation/base-valid
     InvoiceListComponent,
     OrderListComponent,
     TransactionsListComponent,
-    DocumentListComponent,
+    TransactionDocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
     BaseNavigationComponent,
@@ -41,7 +41,7 @@ import { BaseValidationComponent } from './components/base-validation/base-valid
     InvoiceListComponent,
     OrderListComponent,
     TransactionsListComponent,
-    DocumentListComponent,
+    TransactionDocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
     GooglePlacesDirective,

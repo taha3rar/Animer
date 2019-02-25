@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-order-documents',
@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-documents.component.scss']
 })
 export class OrderDocumentsComponent implements OnInit {
+  @Input()
+  documents: Document[];
+  @Input()
+  transaction_id: string;
+
   constructor() {}
 
   ngOnInit() {}

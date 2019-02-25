@@ -9,6 +9,8 @@ import { UserDocument } from '@app/core/models/user/document';
 export class ClientDocumentsComponent implements OnInit {
   @Input()
   documents: UserDocument[];
+  @Input()
+  client_id: string;
 
   constructor() {}
 

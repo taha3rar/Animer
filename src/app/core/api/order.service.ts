@@ -14,7 +14,6 @@ export class OrderService extends BaseService {
   }
 
   getByUserIdAndClientId(userId: string, clientId: string): Observable<Order[]> {
-    console.log('here');
     return this.apiService.get(`/user/${userId}/client/${clientId}/order`).pipe(map(data => data));
   }
 

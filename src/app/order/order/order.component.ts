@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Order } from '@app/core/models/order/order';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { InvoiceService } from '@app/core';
+import { Document } from '@app/core/models/order/document';
 
 @Component({
   selector: 'app-order',
@@ -13,16 +14,21 @@ import { InvoiceService } from '@app/core';
 export class OrderComponent implements OnInit {
   order: Order;
   invoice: Invoice;
+  documents: Document[];
 
   constructor(private location: Location, private route: ActivatedRoute, private invoiceService: InvoiceService) {}
 
   ngOnInit() {
-    this.order = this.route.snapshot.data['order'];
-    if (this.order.invoice && !this.order.invoice.draft) {
-      this.invoiceService.get(this.order.invoice._id).subscribe(invoice => {
-        this.invoice = invoice;
-      });
-    }
+    this.route.data.subscribe(({ order, documents }) => {
+      this.order = order;
+      this.documents = documents;
+
+      if (this.order.invoice && !this.order.invoice.draft) {
+        this.invoiceService.get(this.order.invoice._id).subscribe(invoice => {
+          this.invoice = invoice;
+        });
+      }
+    });
   }
 
   back() {

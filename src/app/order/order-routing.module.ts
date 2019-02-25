@@ -12,6 +12,7 @@ import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
 import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
+import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -55,8 +56,10 @@ const routes: Routes = [
       path: 'order/:id',
       component: OrderComponent,
       resolve: {
-        order: OrderPoResolver
-      }
+        order: OrderPoResolver,
+        documents: OrderDocumentsResolver
+      },
+      runGuardsAndResolvers: 'always'
     }
   ])
 ];

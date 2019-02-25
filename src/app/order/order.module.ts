@@ -35,6 +35,7 @@ import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
 import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
+import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
     OrderBuyerResolver,
     OrderDataService,
     OrderPoResolver,
-    OrderInvoiceResolver
+    OrderInvoiceResolver,
+    OrderDocumentsResolver
   ]
 })
 export class OrderModule {}
