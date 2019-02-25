@@ -6,9 +6,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@app/shared/shared.module';
 import { ProfileComponent } from './profile/profile.component';
 import { from } from 'rxjs';
+import { ProfilePasswordComponent } from './profile-password/profile-password.component';
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [ProfileComponent, ProfilePasswordComponent],
   imports: [CommonModule, TranslateModule, ProfileRoutingModule, FormsModule, ReactiveFormsModule, SharedModule]
 })
 export class ProfileModule {}

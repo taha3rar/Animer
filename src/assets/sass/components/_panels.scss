@@ -291,6 +291,20 @@
   }
 }
 
+.password-box {
+  background-image: linear-gradient(#fff 60%, #f1f1f1);
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 6rem;
+  .panel-body {
+    padding: 0px;
+  }
+
+  .bttn-primary {
+    margin-top: 2rem;
+  }
+}
+
 .panel-header {
   border-bottom: 1px solid $light-gray-2;
   padding: 2rem;
