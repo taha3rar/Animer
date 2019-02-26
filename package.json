@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "build": "ng build",
+    "build-dev": "ng build --configuration=dev",
+    "build-staging": "ng build --configuration=staging",
+    "build-prod": "ng build --prod",
     "start": "ng serve -o --configuration=dev",
     "start-local": "ng serve --aot --configuration=local",
     "start-staging": "ng serve --aot --configuration=staging",
