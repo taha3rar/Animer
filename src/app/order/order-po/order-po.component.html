@@ -51,7 +51,7 @@
               <span *ngIf="row.product_type == 'processed' && row.item_package_type">
                 {{ row.quantity }} ({{ row.type_of_package }} / {{ row.items_per_package
                 }}<span *ngIf="row.items_per_package > 1"> items)</span
-                ><span *ngIf="row.items_per_package == 0"> item)</span>
+                ><span *ngIf="row.items_per_package == 1"> item)</span>
               </span>
               <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
                 {{ row.quantity }} ({{ row.type_of_package }})
@@ -80,7 +80,7 @@
 
       <div class="subtotal-price pull-right">
         <p class="heading-2">SUBTOTAL</p>
-        <p class="heading-4-blue">{{ order.total_due }} {{ order.currency }}</p>
+        <p class="heading-4-blue">{{ order.total_due | number: '1.2-2' }} {{ order.currency }}</p>
       </div>
     </div>
     <div class="col-md-3">

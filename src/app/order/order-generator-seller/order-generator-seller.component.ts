@@ -103,7 +103,7 @@ export class OrderGeneratorSellerComponent implements OnInit {
         ],
         expected_delivery_date: [this.document.deliver_to.expected_delivery_date, Validators.required]
       }),
-      date_created: [Date.now(), Validators.required]
+      date_created: [this.document.date_created, Validators.required]
     });
 
     this.invoiceForm.controls.seller.setValue(this.document.seller);

@@ -59,6 +59,7 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
     this.order['deliver_to'].patchValue({
       expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
     });
+    this.form.patchValue({ date_created: moment(this.form['controls'].date_created.value).toJSON() });
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.total_due = this.order.subtotal.value;
@@ -73,6 +74,7 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
     this.order['deliver_to'].patchValue({
       expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
     });
+    this.form.patchValue({ date_created: moment(this.form['controls'].date_created.value).toJSON() });
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.total_due = this.order.subtotal.value;

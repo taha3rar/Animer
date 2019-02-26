@@ -34,7 +34,7 @@
             <span *ngIf="product.product_type == 'processed' && product.item_package_type">
               {{ product.quantity }} ({{ product.type_of_package }} / {{ product.items_per_package
               }}<span *ngIf="product.items_per_package > 1"> items)</span
-              ><span *ngIf="product.items_per_package == 0"> item)</span>
+              ><span *ngIf="product.items_per_package == 1"> item)</span>
             </span>
             <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
               {{ product.quantity }} ({{ product.type_of_package }})

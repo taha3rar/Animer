@@ -43,7 +43,7 @@
     <div class="col-md-2">
       <div class="subtotal-price pull-right">
         <p class="heading-2">SUBTOTAL</p>
-        <p class="heading-4-blue">{{ order.subtotal.value }} {{ order.currency.value }}</p>
+        <p class="heading-4-blue">{{ order.subtotal.value | number: '1.2-2' }} {{ order.currency.value }}</p>
       </div>
     </div>
   </div>

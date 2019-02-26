@@ -32,42 +32,46 @@
         <tbody>
           <tr *ngFor="let row of order?.products">
             <td>
-              <span *ngIf="!row.product_type || row.product_type=='agricultural'">
-                {{row.produce}} / {{row.variety}}
+              <span *ngIf="!row.product_type || row.product_type == 'agricultural'">
+                {{ row.produce }} / {{ row.variety }}
               </span>
-              <span *ngIf="row.product_type=='processed' && row.item_package_type">
-                {{row.produce}} / {{row.item_measurement_amount}} {{row.item_measurement_unit}} /
-                {{row.item_package_type}}
+              <span *ngIf="row.product_type == 'processed' && row.item_package_type">
+                {{ row.produce }} / {{ row.item_measurement_amount }} {{ row.item_measurement_unit }} /
+                {{ row.item_package_type }}
               </span>
-              <span *ngIf="row.product_type=='processed' && !row.item_package_type">
-                {{row.produce}}
-              </span>
-            </td>
-            <td>
-              <span *ngIf="!row.product_type || row.product_type=='agricultural'">
-                {{row.quantity}} ({{row.type_of_package}} / {{row.package_weight}} {{row.weight_unit}})
-              </span>
-              <span *ngIf="row.product_type=='processed' && row.item_package_type">
-                {{row.quantity}} ({{row.type_of_package}} / {{row.items_per_package}}<span *ngIf="row.items_per_package>1">
-                  items)</span><span *ngIf="row.items_per_package==0"> item)</span>
-              </span>
-              <span *ngIf="row.product_type=='processed' && !row.item_package_type">
-                {{row.quantity}} ({{row.type_of_package}})
+              <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
+                {{ row.produce }}
               </span>
             </td>
             <td>
-              <span *ngIf="!row.product_type || row.product_type=='agricultural'">{{row.total_weight}}
-                {{row.weight_unit}}</span>
-              <span *ngIf="row.product_type=='processed'">N/A</span>
+              <span *ngIf="!row.product_type || row.product_type == 'agricultural'">
+                {{ row.quantity }} ({{ row.type_of_package }} / {{ row.package_weight }} {{ row.weight_unit }})
+              </span>
+              <span *ngIf="row.product_type == 'processed' && row.item_package_type">
+                {{ row.quantity }} ({{ row.type_of_package }} / {{ row.items_per_package
+                }}<span *ngIf="row.items_per_package > 1"> items)</span
+                ><span *ngIf="row.items_per_package == 0"> item)</span>
+              </span>
+              <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
+                {{ row.quantity }} ({{ row.type_of_package }})
+              </span>
             </td>
             <td>
-              <span *ngIf="!row.product_type || row.product_type=='agricultural'">{{row.price_per_unit}}
-                {{order?.currency}} / {{row.weight_unit}}</span>
-              <span *ngIf="row.product_type=='processed'">{{row.package_price}} {{order?.currency}} /
-                {{row.type_of_package}}</span>
+              <span *ngIf="!row.product_type || row.product_type == 'agricultural'"
+                >{{ row.total_weight }} {{ row.weight_unit }}</span
+              >
+              <span *ngIf="row.product_type == 'processed'">N/A</span>
             </td>
             <td>
-              <span id="total">{{row.product_subtotal | number:'1.2-2'}} {{order?.currency}}</span>
+              <span *ngIf="!row.product_type || row.product_type == 'agricultural'"
+                >{{ row.price_per_unit }} {{ order?.currency }} / {{ row.weight_unit }}</span
+              >
+              <span *ngIf="row.product_type == 'processed'"
+                >{{ row.package_price }} {{ order?.currency }} / {{ row.type_of_package }}</span
+              >
+            </td>
+            <td>
+              <span id="total">{{ row.product_subtotal | number: '1.2-2' }} {{ order?.currency }}</span>
             </td>
           </tr>
         </tbody>
@@ -75,7 +79,7 @@
 
       <div class="subtotal-price pull-right">
         <p class="heading-2">SUBTOTAL</p>
-        <p class="heading-4-blue">{{order?.subtotal}} {{order?.currency}}</p>
+        <p class="heading-4-blue">{{ order?.subtotal | number: '1.2-2' }} {{ order?.currency }}</p>
       </div>
     </div>
     <div class="col-md-3">
@@ -83,9 +87,9 @@
         <p class="heading-2">
           Comments or special instructions for purchase order
         </p>
-        <p>{{ order?.order_comments || 'None'}}</p>
+        <p>{{ order?.order_comments || 'None' }}</p>
         <p class="heading-2">Comments or special instructions for payments</p>
-        <p>{{ order?.payment_comments || 'None'}}</p>
+        <p>{{ order?.payment_comments || 'None' }}</p>
       </div>
     </div>
   </div>
@@ -95,7 +99,7 @@
       <div class="border-top">
         <p class="heading-2">Signed by</p>
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-6">
             <p>{{ order?.sign_by.first_name }} {{ order?.sign_by.last_name }}</p>
             <p>{{ order?.sign_by.company_name }}</p>
             <p>PO valid by: {{ order?.sign_by.date | date: 'dd/MM/yyyy' }}</p>
@@ -110,7 +114,7 @@
         <p>{{ order?.deliver_to.contact_name }}</p>
         <p>{{ order?.deliver_to.address }}, {{ order?.deliver_to.city }} {{ order?.deliver_to.zip_code }}</p>
         <p>{{ order?.deliver_to.phone }}</p>
-        <p>Expected delivery date: {{ order?.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy'}}</p>
+        <p>Expected delivery date: {{ order?.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}</p>
         <button class="bttn-primary pull-right" (click)="saveOrder()">Submit</button>
         <button class="btn-primary-transp pull-right" (click)="download()">Download PDF</button>
       </div>
