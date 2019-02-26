@@ -1,4 +1,4 @@
-import { RouterModule } from '@angular/router';
+import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -8,8 +8,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component';
-import { LoginLayoutComponent } from './login-layout/login-layout.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -21,7 +20,7 @@ import { LoginLayoutComponent } from './login-layout/login-layout.component';
     RouterModule,
     NgxPermissionsModule.forRoot()
   ],
-  declarations: [LoginComponent, ForgotPasswordComponent, ResetPasswordComponent, LoginLayoutComponent],
+  declarations: [LoginComponent, ForgotPasswordComponent, ResetPasswordComponent],
   entryComponents: [LoginComponent]
 })
 export class LoginModule {}
