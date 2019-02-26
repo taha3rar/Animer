@@ -4,8 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  api_url: 'https://staging.api.agt-platform.com',
+  production: true,
+  api_url: 'https://prod.api.agt-platform.com',
   chat_url: 'http://18.218.147.84:3800',
   version: '2.0.0-dev',
   defaultLanguage: 'en-US',
