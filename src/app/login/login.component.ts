@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
   closeResult: string;
+  forgotPassword = false;
 
   constructor(
     private router: Router,
@@ -52,6 +53,10 @@ export class LoginComponent implements OnInit {
           this.error = error;
         }
       );
+  }
+
+  changeCard() {
+    this.forgotPassword = true;
   }
 
   setLanguage(language: string) {

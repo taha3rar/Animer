@@ -32,7 +32,7 @@
 }
 
 .padding-none {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .clearfix {
@@ -75,6 +75,10 @@
   }
 }
 
+.c-p {
+  color: $primary-color !important;
+}
+
 .padding-all-2 {
   padding: 2rem;
 }
@@ -101,4 +105,28 @@
 
 .margin-vertical-big {
   margin: 3rem 0px !important;
+}
+
+.circle {
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  i {
+    margin: 0 auto;
+  }
+}
+
+.circle.circle-success {
+  background-color: #eefff2;
+  border: 2px solid #2ca800;
+  color: #2ca800 !important;
+}
+
+.circle.circle-fail {
+  background-color: #ffeeee;
+  border: 2px solid #a80000;
+  color: #a80000;
 }
