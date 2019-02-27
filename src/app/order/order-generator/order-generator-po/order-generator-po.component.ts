@@ -18,6 +18,7 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
   form: FormGroup;
   selectedProducts: any[];
   products: ProductInvoice[] = [];
+  productsValid = true;
 
   constructor(private orderDataService: OrderDataService, private orderService: OrderService, private router: Router) {
     super();
@@ -52,6 +53,10 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
 
   updateForm($event: FormGroup) {
     this.form = $event;
+  }
+
+  checkProducts() {
+    this.productsValid = false;
   }
 
   draftOrder() {

@@ -51,6 +51,20 @@
   }
 }
 
+.panel {
+  width: 30%;
+  margin-top: 1.2rem;
+}
+
+.panel-body {
+  border-left: 3px solid red;
+  border-radius: 4px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  background-color: rgb(255, 233, 233);
+  padding: 10px;
+}
+
 .price-box {
   border: 1px dashed black;
   padding: 1.6rem 2.5rem;

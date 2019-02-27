@@ -23,6 +23,7 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
   newInvoiceEvent = new EventEmitter<Invoice>();
   @Input()
   form: FormGroup;
+  productsValid = true;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -191,5 +192,9 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoiceEvent.emit(this.newInvoice);
+  }
+
+  checkProducts() {
+    this.productsValid = false;
   }
 }

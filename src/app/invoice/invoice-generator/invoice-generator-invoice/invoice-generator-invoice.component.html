@@ -26,6 +26,9 @@
       </div>
     </div>
   </div>
+  <div class="panel" [hidden]="products.length != 0 || productsValid">
+    <div class="panel-body">Please choose product!</div>
+  </div>
   <div class="row">
     <div class="col">
       <app-invoice-product-list
@@ -36,7 +39,6 @@
       ></app-invoice-product-list>
     </div>
   </div>
-
   <div class="row">
     <div class="col">
       <div class="dropdown">
@@ -52,7 +54,6 @@
       </button> -->
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-5">
       <div class="comments">
@@ -279,6 +280,7 @@
   <button
     class="bttn-primary pull-right margin-vertical-big"
     (click)="onSubmit(form)"
+    (click)="checkProducts()"
     [hidden]="form.valid || products.length > 1"
   >
     Next Step &rarr;
