@@ -10,6 +10,9 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 })
 export class InvoicesListComponent implements OnInit {
   invoices: Invoice[];
+  allInvoices: Invoice[];
+  buyerInvoices: Invoice[];
+  sellerInvoices: Invoice[];
   viewAsSeller = false;
   viewAsBuyer = false;
   viewAsAgri = true;
@@ -17,8 +20,11 @@ export class InvoicesListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({ invoices }) => {
+    this.route.data.subscribe(({ invoices, invoicesAsBuyer, invoicesAsSeller }) => {
       this.invoices = invoices;
+      this.allInvoices = invoices;
+      this.buyerInvoices = invoicesAsBuyer;
+      this.sellerInvoices = invoicesAsSeller;
     });
   }
 
@@ -28,10 +34,13 @@ export class InvoicesListComponent implements OnInit {
     this.viewAsAgri = false;
     if (profileType === 'seller') {
       this.viewAsSeller = true;
+      this.invoices = this.sellerInvoices;
     } else if (profileType === 'buyer') {
       this.viewAsBuyer = true;
+      this.invoices = this.buyerInvoices;
     } else {
       this.viewAsAgri = true;
+      this.invoices = this.allInvoices;
     }
   }
 

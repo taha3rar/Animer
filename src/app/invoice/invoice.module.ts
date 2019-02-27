@@ -26,6 +26,8 @@ import { InvoiceResolver } from './resolvers/invoice.resolver';
 import { ProductCurrentUserResolver } from './resolvers/products-currentUser.resolver';
 // tslint:disable-next-line:max-line-length
 import { InvoiceProductListComponent } from './invoice-generator/invoice-generator-invoice/invoice-product-list/invoice-product-list.component';
+import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
+import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.resolver';
 // tslint:disable-next-line:max-line-length
 
 @NgModule({
@@ -57,6 +59,8 @@ import { InvoiceProductListComponent } from './invoice-generator/invoice-generat
   entryComponents: [InvoiceInventoryComponent, InvoiceAgriculturalProductComponent, InvoiceProcessedProductComponent],
   providers: [
     InvoiceListResolver,
+    InvoiceListAsBuyerResolver,
+    InvoiceListAsSellerResolver,
     InvoiceBuyersResolver,
     InvoiceSellerResolver,
     InvoiceResolver,

@@ -36,6 +36,8 @@ import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
+import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
+import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
   entryComponents: [OrderAgriculturalProductComponent, OrderProcessedProductComponent],
   providers: [
     OrderListResolver,
+    OrderListAsBuyerResolver,
+    OrderListAsSellerResolver,
     OrderSellersResolver,
     OrderBuyerResolver,
     OrderDataService,

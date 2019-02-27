@@ -11,13 +11,19 @@ import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
 import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
 import { ProductCurrentUserResolver } from './resolvers/products-currentUser.resolver';
+import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
+import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'invoice/list',
       component: InvoicesListComponent,
-      resolve: { invoices: InvoiceListResolver },
+      resolve: {
+        invoices: InvoiceListResolver,
+        invoicesAsBuyer: InvoiceListAsBuyerResolver,
+        invoicesAsSeller: InvoiceListAsSellerResolver
+      },
       data: { title: extract('Invoices') },
       runGuardsAndResolvers: 'always'
     },

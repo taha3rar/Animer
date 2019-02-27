@@ -13,13 +13,19 @@ import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
+import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
+import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'order/list',
       component: OrdersListComponent,
-      resolve: { orders: OrderListResolver },
+      resolve: {
+        orders: OrderListResolver,
+        ordersAsBuyer: OrderListAsBuyerResolver,
+        ordersAsSeller: OrderListAsSellerResolver
+      },
       data: { title: extract('Orders') },
       runGuardsAndResolvers: 'always'
     },
