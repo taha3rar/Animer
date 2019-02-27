@@ -18,8 +18,8 @@ phases:
       - echo npm install finished
   build:
     commands:
-      - npm run build-${AGT_BUILD_ENV}
-      # - npm run test:ci
+      - npm run build-staging
+      # - npm run test:ci 
     finally:
       - echo Finished building the Angular app
   post_build:
