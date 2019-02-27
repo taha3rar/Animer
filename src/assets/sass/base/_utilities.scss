@@ -107,7 +107,7 @@
   margin: 3rem 0px !important;
 }
 
-.circle {
+.circle-indicator {
   width: 6.5rem;
   height: 6.5rem;
   border-radius: 50%;
@@ -119,13 +119,13 @@
   }
 }
 
-.circle.circle-success {
+.circle-indicator.circle-success {
   background-color: #eefff2;
   border: 2px solid #2ca800;
   color: #2ca800 !important;
 }
 
-.circle.circle-fail {
+.circle-indicator.circle-fail {
   background-color: #ffeeee;
   border: 2px solid #a80000;
   color: #a80000;
