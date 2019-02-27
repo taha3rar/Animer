@@ -17,7 +17,7 @@ export class CsvService {
   ) {}
 
   getInvoices(invoices: any) {
-    const today = this.datePipe.transform(Date.now(), 'dd-MM-yyyy');
+    const today = this.datePipe.transform(Date.now(), 'ddMMyyyy');
     let totalAmounts = 0;
     const exportedData = [
       {
@@ -37,7 +37,7 @@ export class CsvService {
     //   Get Total Due and mpesa phone number
     for (const row of invoices) {
       if (row.total_due > 0) {
-        exportedData.push({ id: i, amount: row.total_due, number: row.seller.phone_number });
+        exportedData.push({ id: 3, amount: row.total_due, number: row.seller.phone_number });
         i++;
       }
     }
@@ -47,7 +47,7 @@ export class CsvService {
       totalAmounts += parseFloat(exportedData[n].amount);
     }
     // Add last information needed
-    exportedData.push({ id: i, amount: exportedData.length.toString(), number: totalAmounts.toString() });
+    exportedData.push({ id: 9, amount: exportedData.length.toString(), number: totalAmounts.toString() });
     this.export(exportedData);
   }
 
