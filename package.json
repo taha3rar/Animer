@@ -12,7 +12,6 @@
     "start-staging": "ng serve --aot --configuration=staging",
     "lint": "ng lint && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
     "test": "ng test",
-    "build:ci": "ng build --configuration=staging",
     "test:ci": "npm run lint -s && ng test --code-coverage --browsers=ChromeHeadless",
     "e2e": "ng e2e",
     "translations:extract": "ngx-translate-extract --input ./src --output ./src/translations/template.json --format=json --clean -sort --marker extract",
@@ -22,11 +21,7 @@
     "prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,scss}\"",
     "postinstall": "npm run prettier -s",
     "precommit": "ng lint && pretty-quick --staged",
-    "generate": "ng generate",
-    "deploy": "node ./scripts/deploy-prod.js",
-    "deploy-staging": "node ./scripts/deploy-staging.js",
-    "predeploy": "ng build --prod",
-    "predeploy-staging": "ng build --configuration=staging"
+    "generate": "ng generate"
   },
   "dependencies": {
     "@angular/animations": "^7.0.0",
