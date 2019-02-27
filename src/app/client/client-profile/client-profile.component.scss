@@ -26,13 +26,12 @@
 
 .status-bar {
   margin-bottom: 10px;
-  min-width: 25%;
+  min-width: 33.333%;
   text-align: center;
   background-color: white;
   float: left;
   min-height: 100%;
   font-size: 1.5rem;
-  border-right: 1px solid $light-gray-2;
   padding: 1rem;
   font-weight: bold;
 
@@ -49,6 +48,10 @@
   p:first-child {
     padding-top: 1.5rem;
     font-size: 2rem;
+  }
+
+  &:not(:last-child) {
+    border-right: 1px solid $light-gray-2;
   }
 }
 
