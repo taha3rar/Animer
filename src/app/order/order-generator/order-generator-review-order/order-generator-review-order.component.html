@@ -116,7 +116,6 @@
         <p>{{ order?.deliver_to.phone }}</p>
         <p>Expected delivery date: {{ order?.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}</p>
         <button class="bttn-primary pull-right" (click)="saveOrder()">Submit</button>
-        <button class="btn-primary-transp pull-right" (click)="download()">Download PDF</button>
       </div>
     </div>
   </div>

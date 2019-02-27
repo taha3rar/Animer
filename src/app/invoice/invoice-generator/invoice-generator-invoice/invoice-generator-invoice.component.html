@@ -194,7 +194,7 @@
               type="text"
               class="form-control"
               id="contact_name"
-              placeholder="Typle contact name here..."
+              placeholder="Type contact name here..."
               formControlName="contact_name"
             />
             <div class="help-block">
@@ -207,7 +207,7 @@
               type="text"
               class="form-control"
               id="street_address"
-              placeholder="Typle street address here..."
+              placeholder="Type street address here..."
               formControlName="address"
             />
             <div class="help-block">
@@ -215,7 +215,8 @@
             </div>
           </div>
           <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'city')">
-            <label for="city">City *</label> <input type="text" class="form-control" id="city" formControlName="city" />
+            <label for="city">City *</label>
+            <input type="text" class="form-control" id="city" placeholder="Type city here..." formControlName="city" />
             <div class="help-block">
               <p *ngIf="isFieldInvalidNested('deliver_to', 'city')">This field is required</p>
             </div>
@@ -228,7 +229,7 @@
               type="text"
               class="form-control"
               id="zip_code"
-              placeholder="Typle zip code here..."
+              placeholder="Type zip code here..."
               formControlName="zip_code"
             />
             <div class="help-block">

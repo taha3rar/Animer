@@ -138,7 +138,9 @@
         <p>{{ invoice?.deliver_to.phone_number }}</p>
         <p>Expected delivery date: {{ invoice?.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}</p>
         <button *ngIf="generateInvoice" class="bttn-primary pull-right" (click)="saveInvoice()">Send Invoice</button>
-        <button class=" btn-primary-transp pull-right" (click)="download()">Download PDF</button>
+        <button *ngIf="!generateInvoice" class=" btn-primary-transp pull-right" (click)="download()">
+          Download PDF
+        </button>
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@ export class OrderInvoiceComponent implements OnInit {
   @Input()
   invoice: Invoice;
   @Input()
-  generateInvoice: Invoice;
+  generateInvoice: false;
 
   constructor(private invoiceService: InvoiceService, private router: Router) {}
 

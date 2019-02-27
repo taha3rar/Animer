@@ -149,7 +149,12 @@
         >
           Send Proforma Invoice
         </button>
-        <button class="btn-primary-transp pull-right" data-html2canvas-ignore="true" (click)="download()">
+        <button
+          *ngIf="!generateInvoice"
+          class="btn-primary-transp pull-right"
+          data-html2canvas-ignore="true"
+          (click)="download()"
+        >
           Download PDF
         </button>
         <div class="disclaimer" *ngIf="generateInvoice">
