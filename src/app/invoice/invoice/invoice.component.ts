@@ -57,7 +57,12 @@ export class InvoiceComponent implements OnInit {
         'Digital Platform and therefore, in such event, the Buyer and the Seller will be obligated to use other ' +
         'methods to execute their financial transaction and the Company shall not be liable in any manner to any ' +
         'cost, damages related directly or indirectly to the Buyer and/or Seller in respect to the above and the ' +
-        'Buyer and Seller hereby waive any such claim against the Company.</p>'
+        'Buyer and Seller hereby waive any such claim against the Company',
+      buttons: [false, 'I agree']
+    }).then(value => {
+      if (value) {
+        this.disclaimerAccepted = true;
+      }
     });
   }
 
@@ -87,14 +92,18 @@ export class InvoiceComponent implements OnInit {
   }
 
   saveInvoice(): void {
-    this.invoiceService.create(this.invoice).subscribe((invoice: Invoice) => {
-      for (let i = 0; i < this.invoice.products.length; i++) {
-        if (this.invoice.products[i].to_inventory) {
-          const product = this.invoice.products[i].toProduct(invoice);
-          this.productService.create(product).subscribe();
+    if (this.disclaimerAccepted === false) {
+      this.disclaimerPopup();
+    } else {
+      this.invoiceService.create(this.invoice).subscribe((invoice: Invoice) => {
+        for (let i = 0; i < this.invoice.products.length; i++) {
+          if (this.invoice.products[i].to_inventory) {
+            const product = this.invoice.products[i].toProduct(invoice);
+            this.productService.create(product).subscribe();
+          }
         }
-      }
-      this.router.navigateByUrl('/invoice/list');
-    });
+        this.router.navigateByUrl('/invoice/list');
+      });
+    }
   }
 }

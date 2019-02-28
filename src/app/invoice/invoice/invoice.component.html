@@ -141,12 +141,7 @@
         </div>
       </div>
       <div>
-        <button
-          *ngIf="generateInvoice"
-          class="bttn-primary pull-right"
-          (click)="saveInvoice()"
-          [disabled]="!disclaimerAccepted"
-        >
+        <button *ngIf="generateInvoice" class="bttn-primary pull-right" (click)="saveInvoice()">
           Send Proforma Invoice
         </button>
         <button
