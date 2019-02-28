@@ -229,16 +229,22 @@
       </div>
     </div>
   </div>
-  <button class="bttn-primary pull-right next-step" (click)="toReview()" [hidden]="!form.valid || products.length < 1">
-    Next Step &rarr;
-  </button>
-  <button
-    class="bttn-primary pull-right"
-    (click)="checkProducts()"
-    (click)="onSubmit(form)"
-    [hidden]="form.valid || products.length > 1"
-  >
-    Next Step &rarr;
-  </button>
-  <button class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
+  <div class="margin-top margin-bottom-2 clearfix">
+    <button
+      class="bttn-primary pull-right next-step"
+      (click)="toReview()"
+      [hidden]="!form.valid || products.length < 1"
+    >
+      Next Step &rarr;
+    </button>
+    <button
+      class="bttn-primary pull-right"
+      (click)="checkProducts()"
+      (click)="onSubmit(form)"
+      [hidden]="form.valid || products.length > 1"
+    >
+      Next Step &rarr;
+    </button>
+    <button class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
+  </div>
 </form>

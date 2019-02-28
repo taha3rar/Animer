@@ -26,9 +26,6 @@
       </div>
     </div>
   </div>
-  <div class="panel" [hidden]="products.length != 0 || productsValid">
-    <div class="panel-body">Please choose product!</div>
-  </div>
   <div class="row">
     <div class="col">
       <app-invoice-product-list
@@ -53,6 +50,9 @@
         <i class="material-icons rotate">attach_file</i> <span>Upload Document</span>
       </button> -->
     </div>
+  </div>
+  <div class="panel" [hidden]="products.length != 0 || productsValid">
+    <div class="panel-body">Please choose product!</div>
   </div>
   <div class="row">
     <div class="col-md-5">
@@ -278,16 +278,22 @@
       </div>
     </div>
   </div>
-  <button
-    class="bttn-primary pull-right margin-vertical-big"
-    (click)="onSubmit(form)"
-    (click)="checkProducts()"
-    [hidden]="form.valid || products.length > 1"
-  >
-    Next Step &rarr;
-  </button>
-  <button class="bttn-primary pull-right next-step" (click)="toReview()" [hidden]="!form.valid || products.length < 1">
-    Next Step &rarr;
-  </button>
-  <button class="btn-primary-transp pull-right btn-draft" (click)="draftInvoice()">Save Draft</button>
+  <div class="margin-bottom-2 margin-top clearfix">
+    <button
+      class="bttn-primary pull-right"
+      (click)="onSubmit(form)"
+      (click)="checkProducts()"
+      [hidden]="form.valid || products.length > 1"
+    >
+      Next Step &rarr;
+    </button>
+    <button
+      class="bttn-primary pull-right next-step"
+      (click)="toReview()"
+      [hidden]="!form.valid || products.length < 1"
+    >
+      Next Step &rarr;
+    </button>
+    <button class="btn-primary-transp pull-right btn-draft" (click)="draftInvoice()">Save Draft</button>
+  </div>
 </form>
