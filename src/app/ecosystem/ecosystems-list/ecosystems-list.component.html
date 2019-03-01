@@ -1,14 +1,13 @@
-
-<h1 class="main-title">Transactions</h1>
+<h1 class="main-title">Ecosystems</h1>
 
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
-  <p>Here you can see all your ecosystems and create new ones!</p>
+  <p>Here you can review existing ecosystems and create new ones!</p>
 </div>
 
 <button class="bttn-primary bttn-add pull-right" data-toggle="wizard" data-target="#newEcosystem">
-    <span>New Ecosystem</span>
-  </button>
+  <span>New Ecosystem</span>
+</button>
 
 <h1 class="main-title">Ecosystems List</h1>
 
@@ -23,8 +22,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let ecosystem of ecosystems | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
-      <td class="text-center">{{ecosystem.numericId}}</td>
+    <tr *ngFor="let ecosystem of (ecosystems | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
+      <td class="text-center">{{ ecosystem.numericId }}</td>
       <td>{{ ecosystem.name }}</td>
       <td style="text-transform: capitalize;">{{ ecosystem.type }}</td>
       <td>{{ ecosystem.participants.length }}</td>
@@ -40,8 +39,6 @@
   </tbody>
 </table>
 
-<pagination-controls
-(pageChange)="page = $event"
-></pagination-controls>
+<pagination-controls (pageChange)="page = $event"></pagination-controls>
 
 <app-ecosystem-generator></app-ecosystem-generator>
