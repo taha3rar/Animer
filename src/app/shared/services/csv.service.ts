@@ -8,7 +8,27 @@ import { DatePipe } from '@angular/common';
 export class CsvService {
   constructor(private datePipe: DatePipe) {}
 
-  getInvoices(invoices: any) {
+  generateAndDownload(objects: any[], headers: any, filename: string) {
+    const today = this.datePipe.transform(Date.now(), 'dd_MM_yyyy_hh::mm');
+
+    objects.unshift(headers);
+
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showTitle: false,
+      title: `${filename} ${today}`,
+      useTextFile: false,
+      useBom: true,
+      filename: `${today}_${filename}`,
+      useKeysAsHeaders: false
+    };
+    const csvExporter = new ExportToCsv(options);
+    csvExporter.generateCsv(objects);
+  }
+
+  getInvoicesForPayment(invoices: any) {
     const today = this.datePipe.transform(Date.now(), 'ddMMyyyy');
     let totalAmounts = 0;
     const exportedData = [

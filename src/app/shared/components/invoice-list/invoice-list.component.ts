@@ -47,7 +47,7 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     }
   }
 
-  downloadCsv() {
-    this.csv.getInvoices(this.invoicesToExport);
+  downloadCsvForPayment() {
+    this.csv.getInvoicesForPayment(this.invoicesToExport);
   }
 }

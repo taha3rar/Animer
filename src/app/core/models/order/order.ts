@@ -36,7 +36,8 @@ export class Order {
   payment_comments: string;
   date_created: string;
   valid_until: string;
+  status: string;
   draft: boolean;
-  total_packages: Number;
-  total_weight: Number;
+  total_packages: number;
+  total_weight: number;
 }

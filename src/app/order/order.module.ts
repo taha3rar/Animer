@@ -1,6 +1,6 @@
 import { OrderComponent } from './order/order.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe, DatePipe } from '@angular/common';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { OrderDocumentsComponent } from './order-documents/order-documents.component';
@@ -38,6 +38,7 @@ import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
+import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,10 @@ import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.reso
     OrderDataService,
     OrderPoResolver,
     OrderInvoiceResolver,
-    OrderDocumentsResolver
+    OrderDocumentsResolver,
+    RoundUpPipe,
+    DecimalPipe,
+    DatePipe
   ]
 })
 export class OrderModule {}

@@ -12,7 +12,7 @@
     <span *ngIf="!exportInit" translate>Export Proforma Invoices For Payment</span>
     <span *ngIf="exportInit" translate>Choose Invoices To Export</span>
   </button>
-  <button class="btn-primary-transp pull-right">
+  <button class="btn-primary-transp pull-right" (click)="exportAll()">
     <i class="material-icons">arrow_upward</i> <span translate>Export All Proforma Invoices</span>
   </button>
 
