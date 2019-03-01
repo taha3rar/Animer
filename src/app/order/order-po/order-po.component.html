@@ -119,7 +119,9 @@
         <button *ngIf="!buyer && !order.invoice" class="bttn-primary pull-right next-step">
           Generate Proforma Invoice
         </button>
-        <button class="btn-primary-transp pull-right" (click)="download()">Download PDF</button>
+        <button class="btn-primary-transp pull-right" (click)="downloadPopup()" (click)="download()">
+          Download PDF
+        </button>
       </div>
     </div>
   </div>

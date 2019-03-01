@@ -66,6 +66,26 @@ export class InvoiceComponent implements OnInit {
     });
   }
 
+  downloadPopup() {
+    swal({
+      title: 'Download as PDF',
+      className: 'swal-pdf',
+      text: 'Please choose the type of proforma invoice document you would like to download:',
+      buttons: {
+        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o' },
+        copyDoc: { text: 'Copy Document', value: 'copy' }
+      }
+    }).then(value => {
+      if (value === 'original') {
+        // Download original
+        console.log(value);
+      } else {
+        // Download copy
+        console.log(value);
+      }
+    });
+  }
+
   get issuer() {
     return this.invoice.seller;
   }
