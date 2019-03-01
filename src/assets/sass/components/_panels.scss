@@ -257,7 +257,7 @@
   flex-direction: column;
   min-height: 67.2rem;
 
-  div:first-child {
+  #profile-image {
     margin-top: 2.5rem;
     align-self: center;
     text-align: center;
@@ -268,14 +268,14 @@
     }
   }
 
-  div:nth-child(2) {
+  #profile-contact-info {
     border-top: 1px solid $light-gray-2;
     border-left: 3px solid $primary-color;
     margin: 0 -15px;
     padding: 1.5rem;
   }
 
-  div:nth-child(3) {
+  #profile-company-info {
     border-top: 1px solid $light-gray-2;
     border-left: 3px solid $secondary-color;
     margin: 0 -15px;

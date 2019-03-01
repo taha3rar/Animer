@@ -6,19 +6,19 @@
   <div class="col-md-3">
     <div class="panel">
       <div class="panel-body user-details">
-        <div>
+        <div id="profile-image">
           <app-upload-picture [picture]="profilePicture" [type]="'profile'" [user]="user"></app-upload-picture>
           <p class="heading-2">{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
           <p class="normal-text-bold">{{ userRole | titlecase }}</p>
         </div>
-        <div>
+        <div id="profile-contact-info">
           <p class="heading-2">Contact Information</p>
           <p class="heading-3">Email Address</p>
           <p class="heading-4">{{ user.email }}</p>
           <p class="heading-3">Phone Number</p>
           <p class="heading-4">{{ user.personal_information.phone_number }}</p>
         </div>
-        <div>
+        <div id="profile-company-info">
           <p class="heading-2">Company Information</p>
           <p class="heading-3">Company Name</p>
           <p class="heading-4">{{ user.company_information.company_name }}</p>

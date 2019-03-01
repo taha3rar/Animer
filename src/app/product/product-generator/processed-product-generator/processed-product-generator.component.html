@@ -1,0 +1,136 @@
+<div class="modal-box-heading">
+  <a><i class="material-icons pull-right">close</i></a>
+  <h2 translate class="modal-title">Add Processed Product</h2>
+</div>
+<div class="padding-all">
+  <form #modalForm="ngForm" (keydown.enter)="$event.preventDefault()">
+    <p class="heading-2">Product</p>
+
+    <div class="product-placeholder-box">
+      <app-upload-picture [picture]="productImage" [type]="'product'"> </app-upload-picture>
+      <p class="heading-2 ">Product Image</p>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="product-name">Product Name *</label>
+        <input type="text" id="product-name" name="name" class="form-control" placeholder="Ex. Orange juice" required />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="product-name">Product SKU</label>
+        <input type="text" id="product-sku" name="sku" class="form-control" placeholder="Ex. I00055" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="product-name">Package Type *</label>
+        <input
+          type="text"
+          id="package-type"
+          name="type_of_package"
+          class="form-control"
+          placeholder="Ex. Box"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="variety">Total Number of Packages *</label>
+        <input type="number" id="total-packages" name="quantity" class="form-control" placeholder="Ex. 20" required />
+      </div>
+    </div>
+    <p class="heading-2">Item</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="items-per-package">Number of Items per Package *</label>
+        <input
+          type="number"
+          min="0"
+          id="items-per-package"
+          name="items_per_package"
+          class="form-control"
+          placeholder="Ex. 10"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="item-packing-type">Item Packing Type *</label>
+        <input
+          type="text"
+          id="item-packing-type"
+          name="item_package_type"
+          class="form-control"
+          placeholder="Ex. Bottle"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="total-items-amount">Total Amount of Items *</label>
+        <input
+          type="number"
+          min="0"
+          id="total-items-amount"
+          name="total_amount_items"
+          class="form-control"
+          placeholder="Ex. 40"
+          disabled
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="measurement-unit">Measurement Unit *</label>
+        <select id="measurement-unit" name="item_measurement_unit" class="form-control" required>
+          <option selected="selected"></option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="itemMeasurementAmount">Amount of in individual *</label>
+        <input
+          min="0"
+          type="number"
+          class="form-control"
+          name="item_measurement_amount"
+          placeholder="Ex. 5"
+          id="itemMeasurementAmount"
+          required
+        />
+      </div>
+    </div>
+    <p class="heading-2">Price</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="package-price">Price per Package *</label>
+        <input
+          type="number"
+          name="package_price"
+          class="form-control"
+          id="package-price"
+          placeholder="Ex. 15"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="currecny">Currency *</label>
+        <select id="currency" name="currency" class="form-control" required>
+          <option></option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="total-price">Total Price *</label>
+        <input
+          type="number"
+          id="total-price"
+          name="product_subtotal"
+          class="form-control"
+          placeholder="Ex. 300"
+          required
+        />
+      </div>
+    </div>
+    <button type="submit" [disabled]="!modalForm.form.valid" class="bttn-primary pull-right">Add Product</button>
+  </form>
+</div>

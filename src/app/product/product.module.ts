@@ -9,6 +9,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductProfileComponent } from './product-profile/product-profile.component';
+import { MatDialogModule, MatButtonModule } from '@angular/material';
 import { ProductGeneratorComponent } from './product-generator/product-generator.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
@@ -22,6 +23,9 @@ import { ProductDataService } from './product-generator/product-data.service';
 import { ProductReviewAgriculturalComponent } from './product-generator/product-review/product-review-agricultural/product-review-agricultural.component';
 import { SharedModule } from '@app/shared';
 import { BaseProductReview } from './product-generator/product-review/base-product-review';
+// tslint:disable-next-line:max-line-length
+import { AgriculturalProductGeneratorComponent } from './product-generator/agricultural-product-generator/agricultural-product-generator.component';
+import { ProcessedProductGeneratorComponent } from './product-generator/processed-product-generator/processed-product-generator.component';
 
 @NgModule({
   declarations: [
@@ -35,14 +39,20 @@ import { BaseProductReview } from './product-generator/product-review/base-produ
     ProductDetailsComponent,
     ProductReviewAgriculturalComponent,
     BaseProduct,
-    BaseProductReview
+    BaseProductReview,
+    AgriculturalProductGeneratorComponent,
+    ProcessedProductGeneratorComponent
   ],
+  entryComponents: [AgriculturalProductGeneratorComponent, ProcessedProductGeneratorComponent],
+
   imports: [
     CommonModule,
     TranslateModule,
     ProductRoutingModule,
     NgxPaginationModule,
     NgbModule,
+    MatDialogModule,
+    MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
     SharedModule
