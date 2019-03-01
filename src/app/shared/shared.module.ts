@@ -44,7 +44,8 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
     TransactionsListComponent,
     TransactionDocumentListComponent,
     UserDataComponent,
-    UserDocumentComponent
+    UserDocumentComponent,
+    UploadPictureComponent
   ],
   providers: [CsvService, DatePipe]
 })

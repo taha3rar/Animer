@@ -1,20 +1,12 @@
-import { AuthenticationService } from '@app/core/authentication/authentication.service';
-
 import { Injectable } from '@angular/core';
 import { ExportToCsv } from 'export-to-csv';
 import { DatePipe } from '@angular/common';
-import { InvoiceService } from '@app/core';
-import * as math from 'mathjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CsvService {
-  constructor(
-    private datePipe: DatePipe,
-    private invoiceService: InvoiceService,
-    private authService: AuthenticationService
-  ) {}
+  constructor(private datePipe: DatePipe) {}
 
   getInvoices(invoices: any) {
     const today = this.datePipe.transform(Date.now(), 'ddMMyyyy');
