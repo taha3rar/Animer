@@ -132,4 +132,8 @@ export class OrderGeneratorComponent implements OnInit {
       contact_by: seller.contact_by
     };
   }
+
+  back() {
+    this.location.back();
+  }
 }
