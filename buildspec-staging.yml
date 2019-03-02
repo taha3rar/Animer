@@ -19,12 +19,12 @@ phases:
   build:
     commands:
       - npm run build-staging
-      # - npm run test:ci 
+      # - npm run test:ci
     finally:
       - echo Finished building the Angular app
   post_build:
     commands:
-      - aws s3 sync ./dist s3://agt-frontend-${AGT_BUILD_ENV} --acl 'public-read' --delete
+      - aws s3 sync ./dist s3://agt-frontend-staging --acl 'public-read' --delete
     finally:
       - echo Synced the newest distribution to S3
 artifacts:
