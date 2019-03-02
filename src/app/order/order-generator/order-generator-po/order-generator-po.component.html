@@ -14,7 +14,11 @@
     </div>
   </div>
 
-  <app-order-product-list (updateProductsEvent)="updateProducts($event)" (updateFormEvent)="updateForm($event)">
+  <app-order-product-list
+    [currency]="order.currency.value"
+    (updateProductsEvent)="updateProducts($event)"
+    (updateFormEvent)="updateForm($event)"
+  >
   </app-order-product-list>
   <div class="panel" [hidden]="products.length != 0 || productsValid">
     <div class="panel-body">Please choose product!</div>
