@@ -7,6 +7,8 @@ import { User } from '../../core/models/user/user';
 import { Credentials } from '../../core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
 
+declare const $: any;
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -70,6 +72,26 @@ export class ProfileComponent implements OnInit {
     return defaultValues.profile_picture;
   }
 
+  isFieldInvalid(field: string) {
+    return this.clientDetailsForm.get(field).invalid && this.clientDetailsForm.get(field).touched;
+  }
+
+  showFieldStyle(field: string) {
+    return {
+      'has-error': this.isFieldInvalid(field)
+    };
+  }
+
+  isFieldInvalidComp(field: string) {
+    return this.companyDetailsForm.get(field).invalid && this.companyDetailsForm.get(field).touched;
+  }
+
+  showFieldStyleComp(field: string) {
+    return {
+      'has-error': this.isFieldInvalidComp(field)
+    };
+  }
+
   onSubmitClientDetails() {
     this.user.personal_information.first_name = this.clientf.firstName.value;
     this.user.personal_information.last_name = this.clientf.lastName.value;
@@ -82,6 +104,21 @@ export class ProfileComponent implements OnInit {
       credentialsToUpdate.user.personal_information = data.personal_information;
       credentialsToUpdate.user.email = data.email;
       this.authenticationService.setCredentials(credentialsToUpdate);
+      $.notify(
+        {
+          icon: 'notifications',
+          message: 'Changes saved'
+        },
+        {
+          type: 'success',
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'right'
+          },
+          offset: 78
+        }
+      );
     });
   }
 
@@ -95,6 +132,22 @@ export class ProfileComponent implements OnInit {
     this.user.company_information.zipcode = this.companyf.zipcode.value;
     this.user.company_information.country = this.companyf.country.value;
     this.user.company_information.bio = this.companyf.bio.value;
-    this.userService.update(this.currentUserId, this.user).subscribe(data => {});
+    this.userService.update(this.currentUserId, this.user).subscribe(data => {
+      $.notify(
+        {
+          icon: 'notifications',
+          message: 'Changes saved'
+        },
+        {
+          type: 'success',
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'right'
+          },
+          offset: 78
+        }
+      );
+    });
   }
 }
