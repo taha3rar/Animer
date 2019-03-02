@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@app/core';
@@ -17,11 +17,7 @@ export class ForgotPasswordComponent implements OnInit {
   username: string;
   forgotPasswordForm: FormGroup;
 
-  constructor(
-    private location: Location,
-    private formBuilder: FormBuilder,
-    private authService: AuthenticationService
-  ) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthenticationService) {}
 
   ngOnInit() {
     this.forgotPasswordForm = this.formBuilder.group({

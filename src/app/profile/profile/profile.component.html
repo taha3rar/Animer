@@ -67,8 +67,8 @@
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="phone">Phone Number *</label>
-                <input type="text" formControlName="phoneNumber" class="form-control" id="phone" readonly />
+                <label for="personal-phone">Phone Number *</label>
+                <input type="text" formControlName="phoneNumber" class="form-control" id="personal-phone" readonly />
               </div>
               <div class="form-group col-md-6">
                 <label for="country">Job Title</label>
@@ -88,7 +88,7 @@
           <div class="icon-text">
             <i class="material-icons">business</i><span class="heading-2"> COMPANY INFORMATION</span>
           </div>
-          <form [formGroup]="companyDetailsForm" (ngSubmit)="onSubmitCompanyDetails()" id="contact-info-form">
+          <form [formGroup]="companyDetailsForm" (ngSubmit)="onSubmitCompanyDetails()" id="company-info-form">
             <div class="form-row">
               <div class="form-group col-md-6" [ngClass]="showFieldStyleComp('companyName')">
                 <label for="company-name">Company Registered Name *</label>
@@ -143,8 +143,8 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="street-address">About</label>
-              <textarea type="span" rows="3" formControlName="bio" class="form-control" id="street-address"></textarea>
+              <label for="about">About</label>
+              <textarea type="span" rows="3" formControlName="bio" class="form-control" id="about"></textarea>
             </div>
             <button type="submit" class="bttn-primary pull-right" [disabled]="!companyDetailsForm.valid">
               Save Changes
