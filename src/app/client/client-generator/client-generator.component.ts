@@ -148,7 +148,7 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     try {
       phoneNumber = this.phoneUtil.parse(this.partialPhoneNumber, this.regionCode);
     } catch (error) {
-      // console.log("Phone Number is not correct");
+      this.clientDetailsForm.patchValue({ phoneNumber: undefined });
       return;
     }
     this.clientDetailsForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
@@ -161,6 +161,10 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     } else {
       this.ecosystemsToBeAdded.push(ecosystem);
     }
+  }
+
+  display() {
+    console.log(this.clientDetailsForm);
   }
 
   onGeneralSubmit() {

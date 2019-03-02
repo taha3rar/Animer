@@ -9,7 +9,7 @@
         <ul class="nav nav-tabs">
           <li class="active">
             <a href="#client-details" data-toggle="tab"
-              ><span class="step-number">1</span> <span translate>Add client details</span></a
+              ><span class="step-number">1</span> <span translate>Add contact details</span></a
             >
           </li>
           <li class="disabled">
@@ -39,7 +39,7 @@
               <div class="col-md-12">
                 <div class="form-row">
                   <div class="form-group col-md-6" [ngClass]="showFieldStyle('firstName')">
-                    <label for="first_name">Client First Name *</label>
+                    <label for="first_name">First Name *</label>
                     <input
                       type="text"
                       formControlName="firstName"
@@ -52,7 +52,7 @@
                     </div>
                   </div>
                   <div class="form-group col-md-6" [ngClass]="showFieldStyle('lastName')">
-                    <label for="last_name">Client Last Name *</label>
+                    <label for="last_name">Last Name *</label>
                     <input
                       type="text"
                       formControlName="lastName"
@@ -153,6 +153,13 @@
                       <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
                       <label style="font-weight:100;">Buyer of agricultural products </label>
                     </div>
+                    <div
+                      style="color:darkred"
+                      class="help-block"
+                      *ngIf="clientDetailsForm.controls.profileType.invalid"
+                    >
+                      <p>This field is required</p>
+                    </div>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="additional_details">Additional details</label>
@@ -178,7 +185,7 @@
                         id="checkbox_sms"
                         (change)="onChangeContactType('email', $event.target.checked)"
                       /><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
-                      <label for="checkbox_sms" style="font-weight:100;">email</label>
+                      <label for="checkbox_sms" style="font-weight:100;">Email</label>
                     </div>
                     <div>
                       <input
@@ -192,10 +199,19 @@
                       ></label>
                       <label for="checkbox_sms" style="font-weight:100;">SMS</label>
                     </div>
+                    <div
+                      style="color:darkred"
+                      class="help-block"
+                      *ngIf="clientDetailsForm.controls.contactTypes.invalid"
+                    >
+                      <p>Please choose at least one option</p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">Next &rarr;</button>
+              <button (click)="display()" [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
+                Next &rarr;
+              </button>
               <button
                 [hidden]="clientDetailsForm.valid"
                 class="btn-next pull-right"
@@ -279,7 +295,7 @@
                     />
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="zip_code">Zip Code *</label>
+                    <label for="zip_code">Zip Code</label>
                     <input
                       type="text"
                       formControlName="zipcode"
