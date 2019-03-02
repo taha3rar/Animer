@@ -5,7 +5,7 @@
         <div>
           <p>My Buyers</p>
         </div>
-        <button *ngIf="clients?.length >= 1" class="bttn-primary pull-right next-step" [disabled]="!validBuyer">
+        <button [hidden]="clients?.length < 1" class="bttn-primary pull-right next-step" [disabled]="!validBuyer">
           Next Step &rarr;
         </button>
       </div>
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div class="add-supplier-box" *ngIf="clients?.length < 1">
+      <div class="add-supplier-box" [hidden]="clients?.length > 0">
         <img src="../../../../assets/img/default/pi-po/noClient.png" width="285" height="183" />
         <p>You have no clients yet !</p>
         <button class="bttn-primary bttn-add" data-toggle="wizard data" data-target="#addClientWizard">

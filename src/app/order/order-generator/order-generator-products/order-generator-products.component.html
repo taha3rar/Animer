@@ -4,7 +4,7 @@
       <div>
         <p>{{ seller.first_name | titlecase }} {{ seller.last_name | titlecase }} Inventory</p>
       </div>
-      <div *ngIf="products?.length >= 1">
+      <div [hidden]="products?.length < 1">
         <div class="search-box">
           <input
             type="text"
@@ -145,7 +145,7 @@
         </ng-container>
       </div>
     </div>
-    <div class="add-supplier-box" *ngIf="products?.length < 1">
+    <div class="add-supplier-box" [hidden]="products?.length > 0">
       <img src="../../../../assets/img/default/pi-po/noProducts.png" />
       <p>{{ seller.first_name | titlecase }} {{ seller.last_name | titlecase }} has no inventory.</p>
       <button class="bttn-primary next-step">
