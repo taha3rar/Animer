@@ -4,7 +4,7 @@
       <div>
         <p>{{ seller.first_name | titlecase }} {{ seller.last_name | titlecase }} Inventory</p>
       </div>
-      <div>
+      <div *ngIf="products?.length >= 1">
         <div class="search-box">
           <input
             type="text"
@@ -18,7 +18,7 @@
         <button class="bttn-primary next-step" (click)="toOrderGenerator()">Next Step &rarr;</button>
       </div>
     </div>
-    <div class="padding-all-2">
+    <div class="padding-all-2" *ngIf="products?.length >= 1">
       <div class="margin-bottom">
         <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length, 4)">
           <i class="material-icons">keyboard_arrow_right</i>
@@ -144,6 +144,13 @@
           </div>
         </ng-container>
       </div>
+    </div>
+    <div class="add-supplier-box" *ngIf="products?.length < 1">
+      <img src="../../../../assets/img/default/pi-po/noProducts.png" />
+      <p>{{ seller.first_name | titlecase }} {{ seller.last_name | titlecase }} has no inventory.</p>
+      <button class="bttn-primary next-step">
+        Next Step &rarr;
+      </button>
     </div>
   </div>
 </div>

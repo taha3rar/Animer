@@ -14,7 +14,6 @@ export class StepperService {
       let $tab_next: any;
       const $btn_next = $progressStepper.find('.next-step');
       const $tab_toggle = $progressStepper.find('[data-toggle="tab"]');
-      console.log($btn_next);
       $tab_toggle.on('show.bs.tab', function(e: any) {
         const $target = $(e.target);
 
