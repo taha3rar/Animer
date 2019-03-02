@@ -38,6 +38,14 @@ export class AuthenticationService {
     );
   }
 
+  forgotPassword(username: string): Observable<boolean> {
+    const data = {
+      email: username
+    };
+
+    return this.apiService.post('/user/forgot-password', data).pipe(map(() => true));
+  }
+
   /**
    * Logs out the user and clear credentials.
    * @return True if the user was logged out successfully.
