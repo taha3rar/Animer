@@ -17,6 +17,7 @@ export class OrdersListComponent implements OnInit {
   buyerOrders: Order[];
   sellerOrders: Order[];
   page = 1;
+  agribusinessUser: boolean;
   viewAsSeller = false;
   viewAsBuyer = false;
   viewAsAgri = true;
@@ -31,6 +32,7 @@ export class OrdersListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.agribusinessUser = this.authService.isAgribusiness;
     this.route.data.subscribe(({ orders, ordersAsBuyer, ordersAsSeller }) => {
       this.orders = orders;
       this.allOrders = orders;

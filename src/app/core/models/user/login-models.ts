@@ -7,6 +7,7 @@ export interface Credentials {
     personal_information: PersonalInformation;
     email: string;
     permissions: string[];
+    roles: string[];
   };
 }
 
