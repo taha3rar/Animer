@@ -24,7 +24,7 @@
     <span translate>New Profoma Invoice</span>
   </button>
 
-  <div class="pull-left two-btns ">
+  <div class="pull-left two-btns" *ngIf="agribusinessUser">
     <p class="heading-2">View records as:</p>
     <div class="two-btns-inner">
       <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">

@@ -88,6 +88,10 @@ export class AuthenticationService {
     return this.jwtService.currentUserId;
   }
 
+  get isAgribusiness(): boolean {
+    return this.credentials.user.roles.includes('agribusiness');
+  }
+
   /**
    * Sets the user credentials.
    * The credentials may be persisted across sessions by setting the `remember` parameter to true.

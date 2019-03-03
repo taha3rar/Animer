@@ -19,6 +19,7 @@ export class InvoicesListComponent implements OnInit {
   viewAsBuyer = false;
   viewAsAgri = true;
   exportInit = false;
+  agribusinessUser: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,7 @@ export class InvoicesListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.agribusinessUser = this.authService.isAgribusiness;
     this.route.data.subscribe(({ invoices, invoicesAsBuyer, invoicesAsSeller }) => {
       this.invoices = invoices;
       this.allInvoices = invoices;

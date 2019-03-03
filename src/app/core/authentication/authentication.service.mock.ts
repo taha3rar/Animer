@@ -15,7 +15,8 @@ export class MockAuthenticationService {
         profile_picture: 'an url',
         phone_number: '123456'
       },
-      permissions: ['test']
+      permissions: ['test'],
+      roles: ['agribusiness']
     }
   };
 
@@ -33,7 +34,8 @@ export class MockAuthenticationService {
           profile_picture: 'an url',
           phone_number: '123456'
         },
-        permissions: ['test']
+        permissions: ['test'],
+        roles: ['agribusiness']
       }
     });
   }
