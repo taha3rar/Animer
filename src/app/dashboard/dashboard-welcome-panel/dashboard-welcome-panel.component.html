@@ -4,10 +4,10 @@
     <div class="flex">
       <div class="panel-left">
         <ul>
-          <li class="step" *ngxPermissionsOnly="['create-client']">
+          <li class="step active" *ngxPermissionsOnly="['create-client']">
             <a data-toggle="tab" class="label" href="#add-clients">Add Clients</a>
           </li>
-          <li class="step active" *ngxPermissionsOnly="['create-order']">
+          <li class="step" [class.active]="currentUser.roles[0] === 'buyer'" *ngxPermissionsOnly="['create-order']">
             <a data-toggle="tab" class="label" href="#place-order">Place a new Purchase Order</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-ecosystem']">
@@ -16,7 +16,7 @@
           <li class="step" *ngIf="currentUser.roles[0] === 'buyer'">
             <a data-toggle="tab" class="label" href="#review-pi">Review Proforma Invoices</a>
           </li>
-          <li class="step" *ngxPermissionsOnly="['create-pi']">
+          <li class="step" [class.active]="currentUser.roles[0] === 'seller'" *ngxPermissionsOnly="['create-pi']">
             <a data-toggle="tab" class="label" href="#create-pi">Issue a Proforma Invoice</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-product']">
@@ -30,7 +30,7 @@
       </div>
       <div class="panel-right">
         <div class="tab-content">
-          <div class="tab-pane" id="add-clients" *ngxPermissionsOnly="['create-client']">
+          <div class="tab-pane active" id="add-clients" *ngxPermissionsOnly="['create-client']">
             <figure class="vector-container"><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Go ahead and add your clients to your network on Avenews-GT</p>
             <p class="normal-text-bold">
@@ -40,7 +40,12 @@
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/client/list">Add Clients</button>
           </div>
-          <div class="tab-pane active" id="place-order" *ngxPermissionsOnly="['create-order']">
+          <div
+            class="tab-pane"
+            id="place-order"
+            [class.active]="currentUser.roles[0] === 'buyer'"
+            *ngxPermissionsOnly="['create-order']"
+          >
             <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Easily order products directly from your suppliers</p>
             <p class="normal-text-bold">
@@ -74,7 +79,12 @@
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/invoices/list">Go to Proforma Invoice</button>
           </div>
-          <div class="tab-pane" id="create-pi" *ngxPermissionsOnly="['create-pi']">
+          <div
+            class="tab-pane"
+            [class.active]="currentUser.roles[0] === 'seller'"
+            id="create-pi"
+            *ngxPermissionsOnly="['create-pi']"
+          >
             <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Easily distribute Proforma Invoices directly to your clients</p>
             <p class="normal-text-bold">
