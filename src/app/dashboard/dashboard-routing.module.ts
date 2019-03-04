@@ -1,3 +1,4 @@
+import { CurrentUserResolver } from './../profile/resolvers/currentUser.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
@@ -16,7 +17,8 @@ const routes: Routes = [
       path: 'dashboard',
       component: DashboardMainComponent,
       resolve: {
-        counter: DashboardCounterResolver
+        counter: DashboardCounterResolver,
+        user: CurrentUserResolver
       },
       data: { title: extract('Dashboard') }
     }

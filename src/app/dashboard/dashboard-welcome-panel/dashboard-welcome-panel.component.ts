@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '@app/core/models/user/user';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-welcome-panel',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-welcome-panel.component.scss']
 })
 export class DashboardWelcomePanelComponent implements OnInit {
-  constructor() {}
+  currentUser: User;
 
-  ngOnInit() {}
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.currentUser = this.route.snapshot.data['user'];
+  }
 }
