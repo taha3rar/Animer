@@ -84,7 +84,7 @@
                     <label for="region_code"
                       >Phone Number<span *ngIf="isRequired(clientf.phoneNumber) === true"> *</span></label
                     >
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="showFieldStyle('phoneNumber')">
                       <div class="input-group-prepend">
                         <select
                           data-width="65px"
@@ -112,7 +112,15 @@
                         [(ngModel)]="partialPhoneNumber"
                         [ngModelOptions]="{ standalone: true }"
                         (ngModelChange)="changeRegionCode()"
+                        (click)="markAsTouched('phoneNumber')"
                       />
+                    </div>
+                    <div
+                      style="color:#a94442"
+                      class="help-block"
+                      *ngIf="isFieldInvalid('phoneNumber') && isRequired(clientf.phoneNumber) === true"
+                    >
+                      <p>This field is required</p>
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -154,7 +162,7 @@
                       <label style="font-weight:100;">Buyer of agricultural products </label>
                     </div>
                     <div
-                      style="color:darkred"
+                      style="color:#a94442"
                       class="help-block"
                       *ngIf="clientDetailsForm.controls.profileType.invalid"
                     >
@@ -185,7 +193,7 @@
                         id="checkbox_sms"
                         (change)="onChangeContactType('email', $event.target.checked)"
                       /><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
-                      <label for="checkbox_sms" style="font-weight:100;">Email</label>
+                      <label for="checkbox_sms" style="font-weight:100;">EMAIL</label>
                     </div>
                     <div>
                       <input
@@ -200,7 +208,7 @@
                       <label for="checkbox_sms" style="font-weight:100;">SMS</label>
                     </div>
                     <div
-                      style="color:darkred"
+                      style="color:#a94442"
                       class="help-block"
                       *ngIf="clientDetailsForm.controls.contactTypes.invalid"
                     >
