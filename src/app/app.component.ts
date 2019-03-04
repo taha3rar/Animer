@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import {
+  Router,
+  NavigationEnd,
+  NavigationCancel,
+  NavigationError,
+  NavigationStart,
+  Event,
+  ActivatedRoute
+} from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from './core/authentication/authentication.service';
@@ -18,6 +26,8 @@ const log = new Logger('App');
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  showLoading = true;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -28,7 +38,20 @@ export class AppComponent implements OnInit {
     // this injection initializes page tracking through the router
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private i18nService: I18nService
-  ) {}
+  ) {
+    this.router.events.subscribe((routerEvent: Event) => {
+      if (routerEvent instanceof NavigationStart) {
+        this.showLoading = true;
+      }
+      if (
+        routerEvent instanceof NavigationEnd ||
+        routerEvent instanceof NavigationError ||
+        routerEvent instanceof NavigationCancel
+      ) {
+        this.showLoading = false;
+      }
+    });
+  }
 
   ngOnInit() {
     // Setup logger
