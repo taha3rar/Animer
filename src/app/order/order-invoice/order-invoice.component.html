@@ -27,11 +27,11 @@
       <p class="heading-2">Products</p>
       <table class="panel-table">
         <thead>
-          <th>Produce</th>
-          <th>Package</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
+          <th>Product</th>
+          <th>Packages</th>
+          <th>Amount</th>
+          <th>Rate</th>
+          <th>Total Price</th>
         </thead>
         <tbody>
           <tr *ngFor="let row of invoice?.products">
@@ -132,7 +132,7 @@
     </div>
     <div class="col-md-6">
       <div class="border-top">
-        <p class="heading-2">Delivered to</p>
+        <p class="heading-2">Deliver to</p>
         <p>{{ invoice?.deliver_to.contact_name }}</p>
         <p>{{ invoice?.deliver_to.address }}, {{ invoice?.deliver_to.city }} {{ invoice?.deliver_to.zip_code }}</p>
         <p>{{ invoice?.deliver_to.phone_number }}</p>

@@ -196,6 +196,10 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     });
   }
 
+  markAsTouched(formControl: string) {
+    this.clientDetailsForm.get(formControl).markAsTouched();
+  }
+
   closeAndRefresh(): any {
     this.closeModal.nativeElement.click();
     this.router.navigate([this.router.url]);

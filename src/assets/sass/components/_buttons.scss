@@ -46,39 +46,36 @@
   display: flex;
   align-items: center;
 
-  &-inner {
-    border-radius: 7rem;
-    border: 2px solid $primary-color;
-    width: 25rem;
-    margin-left: 1.5rem;
+  button {
+    width: 12rem;
     height: 3.55rem;
+    background-color: transparent;
+    border: none;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border: 2px solid $primary-color;
+  }
 
-    button {
-      width: 49.95%;
-      height: 100%;
-      background-color: transparent;
-      border: none;
-      font-size: 1.4rem;
-      font-weight: bold;
-    }
+  button:nth-of-type(1) {
+    margin-left: 1.5rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    border-right: none;
+  }
 
-    button:first-child {
-      border-right: 2.3px solid $primary-color;
-    }
+  button:nth-of-type(2) {
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+  }
 
-    button:first-child.active {
-      background-color: $primary-color;
-      border-top-left-radius: 1rem;
-      border-bottom-left-radius: 1rem;
-      color: white;
-    }
+  button:nth-of-type(1).active {
+    background-color: $primary-color;
+    color: white;
+  }
 
-    button:nth-child(2).active {
-      background-color: $primary-color;
-      border-top-right-radius: 1rem;
-      border-bottom-right-radius: 1rem;
-      color: white;
-    }
+  button:nth-of-type(2).active {
+    background-color: $primary-color;
+    color: white;
   }
 
   .bttn-primary-sm {
@@ -90,6 +87,7 @@
     border: 2px solid $primary-color;
     background-color: transparent;
     height: 3.55rem;
+    width: 6.5rem;
     margin-left: 1rem;
   }
   .bttn-primary-sm.active {

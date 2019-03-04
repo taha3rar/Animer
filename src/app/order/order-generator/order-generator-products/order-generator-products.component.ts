@@ -20,17 +20,20 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   processedProducts: Product[];
   newProducts: Product[] = [];
   currency: string = undefined;
+  noInventory: boolean;
 
   constructor(private productService: ProductService, private orderDataService: OrderDataService) {
     super();
   }
 
   ngOnInit() {
+    this.noInventory = false;
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
       if (this.seller._id) {
         this.productService.getByUser(this.seller._id).subscribe(data => {
           this.products = data;
+          this.products.length > 1 ? (this.noInventory = false) : (this.noInventory = true);
           this.products.forEach((product: Product) => {
             product['quantityMax'] = product.quantity;
             product.quantity = 0;
