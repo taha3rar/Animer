@@ -64,7 +64,7 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
   openDialog(height: string, component: any, dialogData: any): void {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.autoFocus = true;
+    dialogConfig.autoFocus = false;
     dialogConfig.height = height;
     dialogConfig.width = '800px';
 
