@@ -13,16 +13,22 @@ export class InvoiceInventoryComponent implements OnInit {
   agriculturalProducts: Product[];
   processedProducts: Product[];
   newProducts: Product[] = [];
+  currency: string = undefined;
+  noCurrency: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<InvoiceInventoryComponent>) {}
 
   ngOnInit() {
+    this.noCurrency = true;
     this.products = JSON.parse(JSON.stringify(this.data.products));
     this.products.forEach((product: Product) => {
       product['quantityMax'] = product.quantity;
       product.quantity = 0;
     });
-
+    this.currency = this.data.currency;
+    if (this.currency) {
+      this.noCurrency = false;
+    }
     this.agriculturalProducts = this.products.filter(p => p.product_type === 'agricultural');
     this.processedProducts = this.products.filter(p => p.product_type === 'processed');
   }
@@ -37,6 +43,7 @@ export class InvoiceInventoryComponent implements OnInit {
     } else {
       product.quantity = product.quantityMax;
     }
+    this.productsValidation(false);
   }
   decrementQ(product: any) {
     if (product.quantity > 0) {
@@ -44,11 +51,27 @@ export class InvoiceInventoryComponent implements OnInit {
     } else {
       product.quantity = 0;
     }
+    this.productsValidation(false);
   }
 
-  addProducts() {
+  checkProductInput(product: any) {
+    if (product.quantity > product.quantityMax) {
+      product.quantity = product.quantityMax;
+    } else if (product.quantity <= 0) {
+      product.quantity = 0;
+    } else {
+      product.quantity = product.quantity;
+    }
+    this.productsValidation(false);
+  }
+
+  productsValidation(submit: boolean) {
+    let subtotal = 0;
     this.products.forEach(product => {
       if (product.quantity > 0) {
+        if (!this.currency) {
+          this.currency = product.currency;
+        }
         if (product.product_type === 'agricultural') {
           product['total_weight'] = product.package_weight * product.quantity;
           product['product_subtotal'] = product.package_price * product.quantity;
@@ -56,10 +79,18 @@ export class InvoiceInventoryComponent implements OnInit {
         if (product.product_type === 'processed') {
           product['product_subtotal'] = product.package_price * product.quantity;
         }
-        this.newProducts.push(product);
+        subtotal = subtotal + product['product_subtotal'];
+        if (submit) {
+          this.newProducts.push(product);
+        }
       }
     });
-    this.dialogRef.close(this.newProducts);
+    if (subtotal === 0 && this.noCurrency) {
+      this.currency = undefined;
+    }
+    if (submit) {
+      this.dialogRef.close(this.newProducts);
+    }
   }
 
   product_image(product: Product) {
