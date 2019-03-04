@@ -107,7 +107,7 @@ export class ProfileComponent implements OnInit {
       $.notify(
         {
           icon: 'notifications',
-          message: 'Changes saved'
+          message: 'Changes saved!'
         },
         {
           type: 'success',
