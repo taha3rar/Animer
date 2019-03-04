@@ -145,7 +145,7 @@
         </ng-container>
       </div>
     </div>
-    <div class="add-supplier-box" [hidden]="products?.length > 0">
+    <div class="add-supplier-box" [hidden]="!noInventory">
       <img src="../../../../assets/img/default/pi-po/noProducts.png" />
       <p>{{ seller.first_name | titlecase }} {{ seller.last_name | titlecase }} has no inventory.</p>
       <button class="bttn-primary next-step">
