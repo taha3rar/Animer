@@ -111,7 +111,7 @@ export class ProfileComponent implements OnInit {
         },
         {
           type: 'success',
-          timer: 2000,
+          timer: 5000,
           placement: {
             from: 'top',
             align: 'right'
@@ -140,7 +140,7 @@ export class ProfileComponent implements OnInit {
         },
         {
           type: 'success',
-          timer: 2000,
+          timer: 5000,
           placement: {
             from: 'top',
             align: 'right'
