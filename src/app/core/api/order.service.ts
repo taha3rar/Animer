@@ -25,6 +25,10 @@ export class OrderService extends BaseService {
     return this.apiService.get(`${this.path}/user/${userId}/seller`).pipe(map(data => data));
   }
 
+  getPdf(orderId: string, version: string): Observable<Blob> {
+    return this.apiService.getPdf(`${this.path}/${orderId}/pdf/${version}`).pipe(map(data => data));
+  }
+
   draft(order: Order) {
     return this.apiService.post(`/order/draft`, order).pipe(map(data => data));
   }
