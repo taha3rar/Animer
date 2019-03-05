@@ -4,13 +4,17 @@
     <div class="flex">
       <div class="panel-left">
         <ul>
-          <li class="step" [class.active]="currentUser.roles[0] === 'seller'" *ngxPermissionsOnly="['create-pi']">
+          <li
+            class="step"
+            [class.active]="currentUser.roles[0] === 'seller' || currentUser.roles[0] === 'agribusiness'"
+            *ngxPermissionsOnly="['create-pi']"
+          >
             <a data-toggle="tab" class="label" href="#create-pi">Issue a Proforma Invoice</a>
           </li>
           <li class="step" [class.active]="currentUser.roles[0] === 'buyer'" *ngxPermissionsOnly="['create-order']">
             <a data-toggle="tab" class="label" href="#place-order">Place a new Purchase Order</a>
           </li>
-          <li class="step active" *ngxPermissionsOnly="['create-client']">
+          <li class="step" *ngxPermissionsOnly="['create-client']">
             <a data-toggle="tab" class="label" href="#add-clients">Add Clients</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-ecosystem']">
@@ -30,7 +34,7 @@
       </div>
       <div class="panel-right">
         <div class="tab-content">
-          <div class="tab-pane active" id="add-clients" *ngxPermissionsOnly="['create-client']">
+          <div class="tab-pane" id="add-clients" *ngxPermissionsOnly="['create-client']">
             <figure class="vector-container"><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Go ahead and add your clients to your network on Avenews-GT</p>
             <p class="normal-text-bold">
@@ -81,7 +85,7 @@
           </div>
           <div
             class="tab-pane"
-            [class.active]="currentUser.roles[0] === 'seller'"
+            [class.active]="currentUser.roles[0] === 'seller' || currentUser.roles[0] === 'agribusiness'"
             id="create-pi"
             *ngxPermissionsOnly="['create-pi']"
           >
