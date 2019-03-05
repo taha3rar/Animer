@@ -4,20 +4,20 @@
     <div class="flex">
       <div class="panel-left">
         <ul>
-          <li class="step active" *ngxPermissionsOnly="['create-client']">
-            <a data-toggle="tab" class="label" href="#add-clients">Add Clients</a>
+          <li class="step" [class.active]="currentUser.roles[0] === 'seller'" *ngxPermissionsOnly="['create-pi']">
+            <a data-toggle="tab" class="label" href="#create-pi">Issue a Proforma Invoice</a>
           </li>
           <li class="step" [class.active]="currentUser.roles[0] === 'buyer'" *ngxPermissionsOnly="['create-order']">
             <a data-toggle="tab" class="label" href="#place-order">Place a new Purchase Order</a>
+          </li>
+          <li class="step active" *ngxPermissionsOnly="['create-client']">
+            <a data-toggle="tab" class="label" href="#add-clients">Add Clients</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-ecosystem']">
             <a data-toggle="tab" class="label" href="#create-ecosystem">Create an Ecosystem</a>
           </li>
           <li class="step" *ngIf="currentUser.roles[0] === 'buyer'">
             <a data-toggle="tab" class="label" href="#review-pi">Review Proforma Invoices</a>
-          </li>
-          <li class="step" [class.active]="currentUser.roles[0] === 'seller'" *ngxPermissionsOnly="['create-pi']">
-            <a data-toggle="tab" class="label" href="#create-pi">Issue a Proforma Invoice</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-product']">
             <a data-toggle="tab" class="label" href="#create-product">Create an Inventory</a>
