@@ -29,11 +29,6 @@
         top: 0;
       }
 
-      .brand-img {
-        width: 12.8rem;
-        height: 2.7rem;
-      }
-
       .navigation-right {
         position: absolute;
         right: 3rem;
@@ -221,4 +216,17 @@
 
 #toggle {
   display: none;
+}
+
+.logo-wrapper {
+  text-align: center;
+  padding-top: 1rem;
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 1.2rem;
+}
+.brand-img {
+  width: 12.8rem;
+  margin-top: 1rem;
+  height: 2.7rem;
 }
