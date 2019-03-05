@@ -35,8 +35,8 @@ export class ProfileComponent implements OnInit {
     this.clientDetailsForm = this.formBuilder.group({
       firstName: [this.user.personal_information.first_name, Validators.required],
       lastName: [this.user.personal_information.last_name, Validators.required],
-      email: [this.user.email, [Validators.required, Validators.email]],
-      phoneNumber: [this.user.personal_information.phone_number, [Validators.required]],
+      email: [this.user.email, [Validators.email]],
+      phoneNumber: [this.user.personal_information.phone_number],
       jobTitle: [this.user.personal_information.job_title],
       bio: [this.user.personal_information.bio]
     });
