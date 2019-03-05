@@ -4,6 +4,7 @@ import { AuthenticationService } from '@app/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { CsvService } from '@app/shared/services/csv.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
+declare const $: any;
 
 @Component({
   selector: 'app-invoices-list',
@@ -15,6 +16,7 @@ export class InvoicesListComponent implements OnInit {
   allInvoices: Invoice[];
   buyerInvoices: Invoice[];
   sellerInvoices: Invoice[];
+  invoicesToExport: any[] = [];
   viewAsSeller = false;
   viewAsBuyer = false;
   viewAsAgri = true;
@@ -26,7 +28,8 @@ export class InvoicesListComponent implements OnInit {
     private authService: AuthenticationService,
     private csvService: CsvService,
     private datePipe: DatePipe,
-    private decimalPipe: DecimalPipe
+    private decimalPipe: DecimalPipe,
+    private csv: CsvService
   ) {}
 
   ngOnInit() {
@@ -58,8 +61,10 @@ export class InvoicesListComponent implements OnInit {
   initExport() {
     if (this.exportInit === false) {
       this.exportInit = true;
+      $('.dropdown button span').html('Select Proforma Invoices');
     } else {
       this.exportInit = false;
+      $('.dropdown button span').html('Actions');
     }
   }
 
@@ -105,5 +110,12 @@ export class InvoicesListComponent implements OnInit {
 
   get helpLegend() {
     return 'Here you can see all your invoices that have been sent to you!'; // TODO: Change based on the current user role
+  }
+
+  downloadCsvForPayment() {
+    this.csv.getInvoicesForPayment(this.invoicesToExport);
+    this.exportInit = false;
+    this.invoicesToExport = [];
+    $('.dropdown button span').html('Actions');
   }
 }

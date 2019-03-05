@@ -21,7 +21,7 @@
   background: transparent;
   border-radius: 10rem;
   position: relative;
-  border: 2px solid $primary-color;
+  border: 1px solid $primary-color;
   color: $primary-color;
   font-weight: 600;
   padding: 0 2.8rem;
@@ -42,18 +42,25 @@
   }
 }
 
+.bttns-flex {
+  margin-top: 2.5rem;
+  display: flex;
+}
+
 .two-btns {
+  margin-top: 0.5rem !important;
   display: flex;
   align-items: center;
+  margin-left: 1rem;
 
   button {
-    width: 12rem;
+    width: 10rem;
     height: 3.55rem;
     background-color: transparent;
     border: none;
     font-size: 1.4rem;
     font-weight: bold;
-    border: 2px solid $primary-color;
+    border: 1px solid $primary-color;
   }
 
   button:nth-of-type(1) {
@@ -82,18 +89,58 @@
     border-radius: 10rem;
     font-weight: 600;
     font-size: 1.4rem;
-    padding: 0 1.9rem;
+    padding: 0 1rem;
     border: none;
-    border: 2px solid $primary-color;
+    border: 1px solid $primary-color;
     background-color: transparent;
     height: 3.55rem;
-    width: 6.5rem;
+    width: 5.5rem;
     margin-left: 1rem;
   }
   .bttn-primary-sm.active {
     background: $primary-color;
     color: white;
   }
+}
+
+.bttn-primary-sm:hover {
+  box-shadow: 0 14px 26px -12px rgba(#04a9be, 0.2), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(#04a9be, 0.2);
+}
+
+.bttn-download-sm {
+  border-radius: 10rem;
+  font-weight: 600;
+  font-size: 5px;
+  padding: 0.4rem 1.5rem 0 1.5rem;
+  border: none;
+  background-color: #0fd18f;
+  height: 3.55rem;
+  width: 5.5rem;
+  margin-left: 1rem;
+  color: white;
+
+  i {
+    font-size: 2rem;
+  }
+}
+
+.bttn-download-sm:hover {
+  box-shadow: 0 14px 26px -12px rgba(#0fd18f, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba(#0fd18f, 0.2);
+}
+
+.bttn-white {
+  background-color: white;
+  border-radius: 10rem;
+  color: $dark-gray;
+  font-weight: 600;
+  font-size: 1.4rem;
+  min-width: 18rem;
+  height: 3.55rem;
+  border: none;
+  padding: 0 2rem;
+  box-shadow: 0 2px 2px 0 hsla(0, 0%, 60%, 0.14), 0 3px 1px -2px hsla(0, 0%, 60%, 0.2),
+    0 1px 5px 0 hsla(0, 0%, 60%, 0.12);
 }
 
 .bttn-primary {
@@ -107,6 +154,8 @@
   transition: all 0.5s;
   height: 3.55rem;
   padding: 0 1.8rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2),
+    0 2px 5px 0 rgba(0, 188, 212, 0.12);
   border: none;
   i {
     font-size: 2rem;
