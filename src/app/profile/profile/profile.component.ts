@@ -41,13 +41,12 @@ export class ProfileComponent implements OnInit {
       bio: [this.user.personal_information.bio]
     });
     this.companyDetailsForm = this.formBuilder.group({
-      companyName: [this.user.company_information.company_name, [Validators.required]],
+      companyName: [this.user.company_information.company_name],
       companyNumber: [this.user.company_information.company_registered_number, [Validators.required]],
-      email: [this.user.company_information.company_email, [Validators.email]],
-      phoneNumber: [this.user.company_information.phone],
-      address: [this.user.company_information.street, [Validators.required]],
-      city: [this.user.company_information.city, [Validators.required]],
-      zipcode: [this.user.company_information.zipcode, [Validators.required]],
+      stateRegionProvince: [this.user.company_information.state_province_region],
+      address: [this.user.company_information.street],
+      city: [this.user.company_information.city],
+      zipcode: [this.user.company_information.zipcode],
       country: [this.user.company_information.country, [Validators.required]],
       bio: [this.user.company_information.bio]
     });
@@ -125,8 +124,7 @@ export class ProfileComponent implements OnInit {
   onSubmitCompanyDetails() {
     this.user.company_information.company_name = this.companyf.companyName.value;
     this.user.company_information.company_registered_number = this.companyf.companyNumber.value;
-    this.user.company_information.company_email = this.companyf.email.value;
-    this.user.company_information.phone = this.companyf.phoneNumber.value;
+    this.user.company_information.state_province_region = this.companyf.stateRegionProvince.value;
     this.user.company_information.street = this.companyf.address.value;
     this.user.company_information.city = this.companyf.city.value;
     this.user.company_information.zipcode = this.companyf.zipcode.value;
