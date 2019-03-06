@@ -57,6 +57,7 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
       firstName: [undefined, Validators.required],
       lastName: [undefined, Validators.required],
       email: [undefined, [Validators.email]],
+      jobTitle: [undefined],
       profileType: this.formBuilder.array([], Validators.required),
       phoneNumber: [undefined],
       contactTypes: this.formBuilder.array([], Validators.required)
@@ -171,6 +172,7 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     this.invitedClient.personal_information.first_name = this.clientf.firstName.value;
     this.invitedClient.personal_information.last_name = this.clientf.lastName.value;
     this.invitedClient.email = this.clientf.email.value;
+    this.invitedClient.personal_information.job_title = this.clientf.jobTitle.value;
     this.invitedClient.personal_information.phone_number = this.clientf.phoneNumber.value;
     this.invitedClient.roles = this.clientf.profileType.value;
     this.invitedClient.contact_by = this.clientf.contactTypes.value;
