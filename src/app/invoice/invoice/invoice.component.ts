@@ -4,9 +4,7 @@ import swal from 'sweetalert';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { InvoiceService } from '@app/core/api/invoice.service';
-import * as jspdf from 'jspdf';
-import * as html2canvas from 'html2canvas';
-import { Product } from '@app/core/models/product';
+import { saveAs as importedSaveAs } from 'file-saver';
 import { ProductService } from '@app/core';
 
 @Component({
@@ -77,11 +75,9 @@ export class InvoiceComponent implements OnInit {
       }
     }).then(value => {
       if (value === 'original') {
-        // Download original
-        console.log(value);
+        this.download('original');
       } else {
-        // Download copy
-        console.log(value);
+        this.download('copy');
       }
     });
   }
@@ -102,12 +98,10 @@ export class InvoiceComponent implements OnInit {
     return this.invoice.deliver_to;
   }
 
-  download(): void {
-    html2canvas(document.getElementById('pdfContent'), { windowWidth: 900, windowHeight: 1000 }).then(canvas => {
-      const pdf = new jspdf('p', 'mm', 'a4');
-      const img = canvas.toDataURL('image/png');
-      pdf.addImage(img, 'PNG', 0, 0, 208, 300);
-      pdf.save(`invoice-${this.invoice.numericId}.pdf`);
+  download(version: string): void {
+    this.invoiceService.getPdf(this.invoice._id, version).subscribe(data => {
+      const blob = new Blob([data], { type: 'application/pdf' });
+      importedSaveAs(blob, `proforma-invoice-${this.invoice.numericId}-${version}`);
     });
   }
 

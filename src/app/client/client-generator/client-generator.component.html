@@ -148,7 +148,7 @@
                         (change)="onChangeProfileType('seller', $event.target.checked)"
                       />
                       <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                      <label style="font-weight:100;">Seller of agricultural products </label>
+                      <label style="font-weight:400;">Seller of agricultural products </label>
                     </div>
                     <div *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'seller'">
                       <input
@@ -159,7 +159,7 @@
                         (change)="onChangeProfileType('buyer', $event.target.checked)"
                       />
                       <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                      <label style="font-weight:100;">Buyer of agricultural products </label>
+                      <label style="font-weight:400;">Buyer of agricultural products </label>
                     </div>
                     <div
                       style="color:#a94442"
@@ -193,7 +193,7 @@
                         id="checkbox_sms"
                         (change)="onChangeContactType('email', $event.target.checked)"
                       /><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
-                      <label for="checkbox_sms" style="font-weight:100;">EMAIL</label>
+                      <label for="checkbox_sms" style="font-weight:400;">EMAIL</label>
                     </div>
                     <div>
                       <input
@@ -205,7 +205,7 @@
                       /><label class="checkbox_label" for="checkbox_phone"
                         ><span class="form_checkbox_btn"></span
                       ></label>
-                      <label for="checkbox_sms" style="font-weight:100;">SMS</label>
+                      <label for="checkbox_sms" style="font-weight:400;">SMS</label>
                     </div>
                     <div
                       style="color:#a94442"
@@ -280,13 +280,11 @@
                 <div class="form-row">
                   <div class="form-group col-md-4" [ngClass]="showFieldStyleComp('country')">
                     <label for="country">Country *</label>
-                    <input
-                      type="text"
-                      formControlName="country"
-                      class="form-control"
-                      id="country"
-                      placeholder="Type country here..."
-                    />
+                    <select id="country" name="country" class="form-control" formControlName="country">
+                      <option *ngFor="let country of countries" [value]="countries.viewValue" selected="selected">{{
+                        country.viewValue
+                      }}</option>
+                    </select>
                     <div class="help-block" *ngIf="isFieldInvalidComp('country')">
                       <p>This field is required</p>
                     </div>
@@ -400,7 +398,7 @@
                 <div class="col-md-4">
                   <div>
                     <p class="label-2">Contact ID</p>
-                    <p class="normal-text-light">312445687</p>
+                    <p class="normal-text-light">N/A</p>
                   </div>
                   <div>
                     <p class="label-2">Phone Number</p>

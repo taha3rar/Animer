@@ -1,5 +1,5 @@
 import { CsvService } from './../../services/csv.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { AuthenticationService, InvoiceService } from '@app/core';
 import { Router } from '@angular/router';
@@ -16,6 +16,8 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
   invoices: Invoice[];
   page = 1;
   invoicesToExport: any[] = [];
+  @Output() invoicesList = new EventEmitter();
+  checkedAll = false;
 
   constructor(
     private authService: AuthenticationService,
@@ -42,12 +44,22 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     const idx = this.invoicesToExport.indexOf(invoice);
     if (idx > -1) {
       this.invoicesToExport.splice(idx, 1);
+      this.checkedAll = false;
     } else {
       this.invoicesToExport.push(invoice);
     }
+    this.invoicesList.emit(this.invoicesToExport);
   }
 
-  downloadCsvForPayment() {
-    this.csv.getInvoicesForPayment(this.invoicesToExport);
+  exportAllRecords(event: any) {
+    this.invoicesToExport = [];
+    for (const invoice of this.invoices) {
+      this.invoicesToExport.push(invoice);
+    }
+    if (!event.target.checked) {
+      this.invoicesToExport = [];
+    }
+    this.invoicesList.emit(this.invoicesToExport);
+    this.checkedAll = true;
   }
 }

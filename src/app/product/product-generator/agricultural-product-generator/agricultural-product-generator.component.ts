@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { currencies } from '@app/shared/helpers/currencies';
-import { packageUnits } from '@app/shared/helpers/packaging_details';
+import { measureUnits } from '@app/shared/helpers/measure';
 import { Product } from '@app/core/models/order/product';
 import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class AgriculturalProductGeneratorComponent implements OnInit {
   productImage = defaultValues.agri_picture;
   productForm: FormGroup;
   currencies = currencies;
-  units = packageUnits;
+  units = measureUnits;
 
   constructor(
     private formBuilder: FormBuilder,

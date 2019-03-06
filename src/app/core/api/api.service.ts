@@ -10,6 +10,11 @@ import { catchError } from 'rxjs/operators';
 export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
+  getPdf(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+    return this.httpClient.cache().request('GET', `${environment.api_url}${path}`, { responseType: 'arraybuffer' });
+    // .pipe(catchError((err: any) => of(err)));
+  }
+
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.httpClient.cache().get(`${environment.api_url}${path}`, { params: params });
     // .pipe(catchError((err: any) => of(err)));

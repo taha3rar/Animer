@@ -63,7 +63,7 @@ export class ProfilePasswordComponent implements OnInit {
             },
             {
               type: 'success',
-              timer: 2000,
+              timer: 5000,
               placement: {
                 from: 'top',
                 align: 'right'
@@ -80,7 +80,7 @@ export class ProfilePasswordComponent implements OnInit {
             },
             {
               type: 'danger',
-              timer: 2000,
+              timer: 5000,
               placement: {
                 from: 'top',
                 align: 'right'

@@ -9,25 +9,28 @@
             [class.active]="currentUser.roles[0] === 'seller' || currentUser.roles[0] === 'agribusiness'"
             *ngxPermissionsOnly="['create-pi']"
           >
-            <a data-toggle="tab" class="label" href="#create-pi">Issue a Proforma Invoice</a>
+            <a data-toggle="tab" class="label" href="#create-pi">Proforma Invoice</a>
           </li>
-          <li class="step" [class.active]="currentUser.roles[0] === 'buyer'" *ngxPermissionsOnly="['create-order']">
-            <a data-toggle="tab" class="label" href="#place-order">Place a new Purchase Order</a>
+          <li class="step" [class.active]="currentUser.roles[0] === 'buyer'" *ngIf="currentUser.roles[0] === 'buyer'">
+            <a data-toggle="tab" class="label" href="#place-order">Orders</a>
+          </li>
+          <li class="step" *ngIf="currentUser.roles[0] === 'agribusiness'">
+            <a data-toggle="tab" class="label" href="#rec-iss-po">Orders</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-client']">
-            <a data-toggle="tab" class="label" href="#add-clients">Add Clients</a>
+            <a data-toggle="tab" class="label" href="#add-clients">Clients</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-ecosystem']">
-            <a data-toggle="tab" class="label" href="#create-ecosystem">Create an Ecosystem</a>
+            <a data-toggle="tab" class="label" href="#create-ecosystem">Ecosystems</a>
           </li>
           <li class="step" *ngIf="currentUser.roles[0] === 'buyer'">
-            <a data-toggle="tab" class="label" href="#review-pi">Review Proforma Invoices</a>
+            <a data-toggle="tab" class="label" href="#review-pi">Proforma Invoices</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-product']">
-            <a data-toggle="tab" class="label" href="#create-product">Create an Inventory</a>
+            <a data-toggle="tab" class="label" href="#create-product">Products</a>
           </li>
           <li class="step" *ngIf="currentUser.roles[0] === 'seller'">
-            <a data-toggle="tab" class="label" href="#receive-po">Receive Purchase Orders</a>
+            <a data-toggle="tab" class="label" href="#receive-po">Orders</a>
           </li>
           <!-- <li class="step" *ngxPermissionsOnly="['list-transactions']"><a data-toggle="tab" class="label" href="#make-transaction">Make Transaction</a></li> -->
         </ul>
@@ -35,14 +38,16 @@
       <div class="panel-right">
         <div class="tab-content">
           <div class="tab-pane" id="add-clients" *ngxPermissionsOnly="['create-client']">
-            <figure class="vector-container"><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
+            <figure class="vector-container">
+              <img src="../../../assets/img/dashboard-imgs/clients.png" class="vector-tutorial" />
+            </figure>
             <p class="panel-title">Go ahead and add your clients to your network on Avenews-GT</p>
             <p class="normal-text-bold">
               Do you have clients that you usually do business with? The Clients feature is where you can invite new
               clients to your network, centrally manage your existing clients, and review the transactions you have with
               them.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/client/list">Add Clients</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/client/list">Go to Clients</button>
           </div>
           <div
             class="tab-pane"
@@ -50,31 +55,34 @@
             [class.active]="currentUser.roles[0] === 'buyer'"
             *ngxPermissionsOnly="['create-order']"
           >
-            <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
+            <figure><img src="../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Easily order products directly from your suppliers</p>
             <p class="normal-text-bold">
               Create and distribute purchase orders to your sellers, review their proforma invoices, upload your own
-              necessary documents, and manage the entire trade process in one place. To start a new transaction, simply
-              click on the New Purchase Order button.
+              necessary documents, and manage the entire trade process in one place.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/order/list">Place Order</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/order/list">Go to Orders</button>
           </div>
           <div class="tab-pane" id="create-ecosystem" *ngxPermissionsOnly="['create-ecosystem']">
-            <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
+            <figure *ngIf="currentUser.roles[0] === 'seller'">
+              <img src="../../assets/img/dashboard-imgs/seller-ecosystems.png" class="vector-tutorial" />
+            </figure>
+            <figure *ngIf="currentUser.roles[0] === 'buyer' || currentUser.roles[0] === 'agribusiness'">
+              <img src="../../assets/img/dashboard-imgs/buyer-ecosystems.png" class="vector-tutorial" />
+            </figure>
             <p class="panel-title">Create customized groups of clients</p>
             <p class="normal-text-bold">
               Have a lot of clients? The Ecosystems feature is where you can create customized groups of clients with
-              common characteristics, such as location, product type, operation type and more. To add a new ecosystem,
-              simply start by clicking on the New Ecosystem button.
+              common characteristics, such as location, product type, operation type and more.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/ecosystem/list">Create Ecosystem</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/ecosystem/list">Go to Ecosystems</button>
           </div>
           <div
             class="tab-pane"
             id="review-pi"
             *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'buyer'"
           >
-            <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
+            <figure><img src="../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Receive Proforma Invoices directly from clients</p>
             <p class="normal-text-bold">
               The Proforma Invoices section is where you can review, download, and manage all of the proforma invoices
@@ -89,33 +97,42 @@
             id="create-pi"
             *ngxPermissionsOnly="['create-pi']"
           >
-            <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
+            <figure><img src="../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Easily distribute Proforma Invoices directly to your clients</p>
             <p class="normal-text-bold">
               The Invoices feature is where you can generate, review and distribute stand-alone proforma invoices, which
               are proforma invoices that are not connected directly to a purchase order you received from a buyer on the
-              platform. To generate a new stand-alone proforma invoice, simply click on the New Proforma Invoice button.
+              platform.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/invoices/list">New Proforma Invoice</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/invoices/list">Go to Proforma Invoices</button>
           </div>
           <div class="tab-pane" id="create-product" *ngxPermissionsOnly="['create-product']">
-            <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
+            <figure><img src="../../assets/img/dashboard-imgs/products.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Create a digital inventory for your products</p>
             <p class="normal-text-bold">
               The Products feature is where you can create a customizable inventory with digital product profiles that
-              holds key product details such as SKU, certifications, packing options and more. To add a product, simply
-              start by clicking on the Add New Product button.
+              holds key product details such as SKU, certifications, packing options and more.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/products/list">Add New Product</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/products/list">Go to Products</button>
           </div>
           <div class="tab-pane" id="receive-po" *ngIf="currentUser.roles[0] === 'seller'">
-            <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
+            <figure><img src="../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Receive and reply to purchase orders</p>
             <p class="normal-text-bold">
               The Orders feature is where you can receive purchase orders from your client, reply to them with
               customized proforma invoices, upload your own necessary documents, and manage the entire trade process in
               one place. Once a purchase order has been received, you will be notified and then all you need to do is
               reply with a proforma invoice.
+            </p>
+            <button class="btn-primary-shadow pull-right" routerLink="/orders/list">Go to Orders</button>
+          </div>
+          <div class="tab-pane" id="rec-iss-po" *ngIf="currentUser.roles[0] === 'agribusiness'">
+            <figure><img src="../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" /></figure>
+            <p class="panel-title">Easily order products directly from your suppliers</p>
+            <p class="normal-text-bold">
+              Create and distribute purchase orders to your sellers, review their proforma invoices, receive purchase
+              orders from your buyers, reply to them with customized proforma invoices, upload your own necessary
+              documents, and manage the entire trade process in one place.
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/orders/list">Go to Orders</button>
           </div>

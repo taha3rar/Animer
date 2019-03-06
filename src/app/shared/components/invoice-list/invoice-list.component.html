@@ -1,12 +1,15 @@
-<button *ngIf="exportInit" class="btn-primary-transp">
-  <i class="material-icons">arrow_downward</i>
-  <span (click)="downloadCsvForPayment()" translate>Download</span>
-</button>
-
 <table class="table main-table">
   <thead>
     <tr>
-      <th *ngIf="exportInit"></th>
+      <th *ngIf="exportInit" class="text-center">
+        <input
+          id="checkedAll"
+          type="checkbox"
+          class="checkbox"
+          (change)="exportAllRecords($event)"
+          [checked]="checkedAll"
+        /><label class="checkbox_label" for="checkedAll"><span class="form_checkbox_btn"></span></label>
+      </th>
       <th translate class="text-center">ID</th>
       <th translate>Issued at</th>
       <th translate>Issued for</th>
