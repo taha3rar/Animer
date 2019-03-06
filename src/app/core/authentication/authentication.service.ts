@@ -92,6 +92,14 @@ export class AuthenticationService {
     return this.credentials.user.roles.includes('agribusiness');
   }
 
+  get isSeller(): boolean {
+    return this.credentials.user.roles.includes('seller');
+  }
+
+  get isBuyer(): boolean {
+    return this.credentials.user.roles.includes('buyer');
+  }
+
   /**
    * Sets the user credentials.
    * The credentials may be persisted across sessions by setting the `remember` parameter to true.

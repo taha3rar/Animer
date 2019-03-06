@@ -109,7 +109,18 @@ export class InvoicesListComponent implements OnInit {
   }
 
   get helpLegend() {
-    return 'Here you can see all your invoices that have been sent to you!'; // TODO: Change based on the current user role
+    if (this.authService.isAgribusiness) {
+      // tslint:disable-next-line:max-line-length
+      return 'Generate, review and distribute stand-alone proforma invoices, which are proforma invoices that are not connected directly to a purchase order you received from a buyer on the platform.';
+    } else if (this.authService.isBuyer) {
+      // tslint:disable-next-line:max-line-length
+      return 'Review, download, and manage all of the proforma invoices submitted by your sellers in one place.';
+    } else if (this.authService.isSeller) {
+      // tslint:disable-next-line:max-line-length
+      return 'Generate, review and distribute stand-alone proforma invoices, which are proforma invoices that are not connected directly to a purchase order you received from a buyer on the platform.';
+    }
+
+    return '';
   }
 
   downloadCsvForPayment() {
