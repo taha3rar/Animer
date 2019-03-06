@@ -1,9 +1,9 @@
 import { MatDialogRef } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { defaultValues } from '@app/shared/helpers/default_values';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { currencies } from '@app/shared/helpers/currencies';
-import { packageUnits } from '@app/shared/helpers/packaging_details';
+import { measureUnits } from '@app/shared/helpers/measure';
 import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
 import { Product } from '@app/core/models/product';
@@ -18,7 +18,7 @@ export class ProcessedProductGeneratorComponent implements OnInit {
   productImage = defaultValues.processed_picture;
   productForm: FormGroup;
   currencies = currencies;
-  units = packageUnits;
+  units = measureUnits;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -99,6 +99,17 @@ export class ProcessedProductGeneratorComponent implements OnInit {
     return {
       'has-error': this.isFieldInvalid(field)
     };
+  }
+
+  checkForm(form: FormGroup) {
+    Object.keys(form.controls).forEach(field => {
+      const control = form.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.checkForm(control);
+      }
+    });
   }
 
   submit() {

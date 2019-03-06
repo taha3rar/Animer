@@ -184,7 +184,10 @@
         />
       </div>
     </div>
-    <button type="button" (click)="submit()" [disabled]="!productForm.valid" class="bttn-primary pull-right">
+    <button type="button" (click)="submit()" [hidden]="!productForm.valid" class="bttn-primary pull-right">
+      Add Product
+    </button>
+    <button type="button" (click)="checkForm(productForm)" [hidden]="productForm.valid" class="bttn-primary pull-right">
       Add Product
     </button>
   </form>
