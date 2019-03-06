@@ -38,7 +38,8 @@ export class ProfileComponent implements OnInit {
       email: [this.user.email, [Validators.email]],
       phoneNumber: [this.user.personal_information.phone_number],
       jobTitle: [this.user.personal_information.job_title],
-      bio: [this.user.personal_information.bio]
+      bio: [this.user.personal_information.bio],
+      userId: [this.user.user_personal_id]
     });
     this.companyDetailsForm = this.formBuilder.group({
       companyName: [this.user.company_information.company_name],
@@ -95,6 +96,7 @@ export class ProfileComponent implements OnInit {
     this.user.personal_information.first_name = this.clientf.firstName.value;
     this.user.personal_information.last_name = this.clientf.lastName.value;
     this.user.email = this.clientf.email.value;
+    this.user.user_personal_id = this.clientf.userId.value;
     this.user.personal_information.phone_number = this.clientf.phoneNumber.value;
     this.user.personal_information.job_title = this.clientf.jobTitle.value;
     this.user.personal_information.bio = this.clientf.bio.value;

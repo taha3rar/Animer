@@ -7,6 +7,7 @@ export class User {
   token: string;
   personal_information: PersonalInformation;
   company_information: CompanyInformation;
+  user_personal_id: string;
   clients: [
     {
       _id: string;
