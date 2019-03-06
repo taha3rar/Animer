@@ -94,11 +94,20 @@
   <div class="row">
     <div class="col-md-6">
       <div formGroupName="sign_by" class="info">
-        <p class="heading-2">SIGN BY</p>
+        <p class="heading-2">SIGNED BY</p>
         <div class="form-row">
-          <div class="form-group col-md-4">
-            <p class="normal-text-bold">First Name</p>
-            <p class="normal-text-light" style="color:black">{{ form.value.sign_by.first_name }}</p>
+          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('sign_by', 'first_name')">
+            <label for="contact_name">First Name *</label>
+            <input
+              type="text"
+              class="form-control"
+              id="first_name"
+              placeholder="Typle contact name here..."
+              formControlName="first_name"
+            />
+          </div>
+          <div class="help-block">
+            <p *ngIf="isFieldInvalidNested('sign_by', 'first_name')">This field is required</p>
           </div>
           <div class="form-group col-md-4">
             <p class="normal-text-bold">Last Name</p>
@@ -111,7 +120,7 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <p class="normal-text-bold">Proforma Invoice is valid by</p>
+            <p class="normal-text-bold">Purchase Order is valid by</p>
             <p>{{ form.value.sign_by.date | date: 'dd/MM/yyyy' }}</p>
           </div>
           <div class="col-md-6">
