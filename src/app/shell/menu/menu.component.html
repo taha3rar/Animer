@@ -6,7 +6,10 @@
     <ul class="nav">
       <li *ngFor="let menuitem of menuItems" class="nav-item">
         <a [routerLink]="[menuitem.path]" routerLinkActive="active">
-          <i class="material-icons">{{ menuitem.icontype }}</i>
+          <i class="fas {{ menuitem.icontype }}"></i>
+          <i *ngIf="menuitem.title === 'Dashboard' || menuitem.title === 'Ecosystems'" class="material-icons">{{
+            menuitem.icontype
+          }}</i>
           <p>{{ menuitem.title }}</p>
         </a>
       </li>
