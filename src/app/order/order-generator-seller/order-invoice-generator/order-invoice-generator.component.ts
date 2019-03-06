@@ -32,7 +32,6 @@ export class OrderInvoiceGeneratorComponent extends BaseValidationComponent impl
   }
 
   ngOnInit() {
-    console.log(this.form.value);
     this.onChanges();
     this.formInput = this.form;
   }
@@ -142,9 +141,15 @@ export class OrderInvoiceGeneratorComponent extends BaseValidationComponent impl
   }
 
   draftInvoice() {
-    this.invoice['sign_by'].patchValue({ date: moment(this.form['controls'].sign_by['controls'].date.value).toJSON() });
-    this.invoice['deliver_to'].patchValue({
-      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
+    this.invoice['sign_by'].patchValue({
+      date: moment(this.form['controls'].sign_by['controls'].date.value)
+        .subtract(1, 'months')
+        .toJSON()
+    });
+    this.form.patchValue({
+      date_created: moment(this.form['controls'].date_created.value)
+        .subtract(1, 'months')
+        .toJSON()
     });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
@@ -155,9 +160,15 @@ export class OrderInvoiceGeneratorComponent extends BaseValidationComponent impl
   }
 
   toReview() {
-    this.invoice['sign_by'].patchValue({ date: moment(this.form['controls'].sign_by['controls'].date.value).toJSON() });
-    this.invoice['deliver_to'].patchValue({
-      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
+    this.invoice['sign_by'].patchValue({
+      date: moment(this.form['controls'].sign_by['controls'].date.value)
+        .subtract(1, 'months')
+        .toJSON()
+    });
+    this.form.patchValue({
+      date_created: moment(this.form['controls'].date_created.value)
+        .subtract(1, 'months')
+        .toJSON()
     });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;

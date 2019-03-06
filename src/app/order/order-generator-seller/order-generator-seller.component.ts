@@ -90,7 +90,7 @@ export class OrderGeneratorSellerComponent implements OnInit {
         date: [this.document.sign_by.date, Validators.required],
         first_name: [this.document.sign_by.first_name, Validators.required],
         last_name: [this.document.sign_by.last_name, Validators.required],
-        company_name: [this.document.sign_by.company_name, Validators.required]
+        company_name: [this.document.sign_by.company_name]
       }),
       deliver_to: this.formBuilder.group({
         contact_name: [this.document.deliver_to.contact_name, Validators.required],

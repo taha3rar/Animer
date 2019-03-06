@@ -82,7 +82,7 @@ export class InvoiceGeneratorComponent implements OnInit {
         city: [''],
         zip_code: [''],
         phone_number: [''],
-        expected_delivery_date: ['']
+        expected_delivery_date: [undefined]
       }),
       date_created: [Date.now(), Validators.required]
     });
