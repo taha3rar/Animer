@@ -140,6 +140,7 @@
                     <input
                       type="text"
                       class="form-control"
+                      formControlName="user_personal_id"
                       id="id_number"
                       placeholder="Type Identification Number (ID) here..."
                     />
@@ -229,7 +230,7 @@
                   </div>
                 </div>
               </div>
-              <button (click)="display()" [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
+              <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
                 Next &rarr;
               </button>
               <button
@@ -293,7 +294,7 @@
                   <div class="form-group col-md-4" [ngClass]="showFieldStyleComp('country')">
                     <label for="country">Country *</label>
                     <select id="country" name="country" class="form-control" formControlName="country">
-                      <option *ngFor="let country of countries" [value]="countries.viewValue" selected="selected">{{
+                      <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
                         country.viewValue
                       }}</option>
                     </select>
@@ -410,7 +411,7 @@
                 <div class="col-md-4">
                   <div>
                     <p class="label-2">Contact ID</p>
-                    <p class="normal-text-light">N/A</p>
+                    <p class="normal-text-light">{{ clientf.user_personal_id.value }}</p>
                   </div>
                   <div>
                     <p class="label-2">Phone Number</p>
