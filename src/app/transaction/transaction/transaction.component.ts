@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Transaction } from '@app/core/models/transaction';
 import { QuoteRequest } from '@app/core/models/transaction/quote-request/quote-request';
 import { StepperService } from '@app/core/stepper.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-transaction',

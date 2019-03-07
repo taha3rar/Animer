@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
 import { Order } from '@app/core/models/order/order';
-import * as jspdf from 'jspdf';
-import * as html2canvas from 'html2canvas';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-order-generator-review-order',
@@ -21,15 +20,6 @@ export class OrderGeneratorReviewOrderComponent implements OnInit {
       if (order) {
         this.order = order;
       }
-    });
-  }
-
-  download(): void {
-    html2canvas(document.getElementById('pdfContent'), { windowWidth: 900, windowHeight: 1000 }).then(canvas => {
-      const pdf = new jspdf('p', 'mm', 'a4');
-      const img = canvas.toDataURL('image/png');
-      pdf.addImage(img, 'PNG', 0, 0, 208, 300);
-      pdf.save(`invoice-${this.order.numericId}.pdf`);
     });
   }
 

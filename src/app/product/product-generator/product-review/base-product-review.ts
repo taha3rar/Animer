@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BaseProduct } from '../base-product';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { OnInit, Injectable } from '@angular/core';
+import * as $ from 'jquery';
 
 @Injectable()
 export class BaseProductReview extends BaseProduct implements OnInit {
