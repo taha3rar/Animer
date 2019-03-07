@@ -14,6 +14,7 @@ import { OrderDataService } from '../order-data.service';
 export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit {
   form: FormGroup;
   clients: Client[];
+  nextBtnClicked = false;
   page = 1;
 
   constructor(private route: ActivatedRoute, private orderDataService: OrderDataService) {
@@ -45,5 +46,6 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
     });
+    this.nextBtnClicked = true;
   }
 }

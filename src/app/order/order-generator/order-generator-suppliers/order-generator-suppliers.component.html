@@ -3,11 +3,19 @@
     <div class="panel-body">
       <div class="panel-header">
         <div><p>My Suppliers</p></div>
-        <button class="bttn-primary pull-right next-step" [disabled]="!validSeller" (click)="validateSeller()">
-          Next Step &rarr;
-        </button>
+        <div class="pull-right">
+          <button class="bttn-primary" [hidden]="validSeller" (click)="validateSeller()">
+            Next Step &rarr;
+          </button>
+          <button class="bttn-primary next-step" [hidden]="!validSeller" (click)="validateSeller()">
+            Next Step &rarr;
+          </button>
+        </div>
       </div>
       <div class="padding-all-2" *ngIf="clients.length >= 1">
+        <div class="alert alert-danger" role="alert" [hidden]="validSeller || !nextBtnClicked">
+          Please choose a client!
+        </div>
         <button class="btn-icons pull-right" (click)="onNextPage(clients.length, 6)">
           <i class="material-icons">keyboard_arrow_right</i>
         </button>

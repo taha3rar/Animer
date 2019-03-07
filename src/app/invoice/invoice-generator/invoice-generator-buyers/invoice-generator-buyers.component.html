@@ -5,18 +5,30 @@
         <div>
           <p>My Buyers</p>
         </div>
-        <button [hidden]="clients?.length < 1" class="bttn-primary pull-right next-step" [disabled]="!validBuyer">
-          Next Step &rarr;
-        </button>
+        <div>
+          <button
+            [hidden]="clients?.length < 1 || validBuyer"
+            class="bttn-primary pull-right"
+            (click)="nextBtnClicked = true"
+          >
+            Next Step &rarr;
+          </button>
+          <button [hidden]="clients?.length < 1 || !validBuyer" class="bttn-primary pull-right next-step">
+            Next Step &rarr;
+          </button>
+        </div>
       </div>
       <div class="padding-all-2" *ngIf="clients?.length >= 1">
+        <div class="alert alert-danger" role="alert" [hidden]="validBuyer || !nextBtnClicked">
+          Please choose a client!
+        </div>
         <button class="btn-icons pull-right">
           <i class="material-icons" (click)="onNextPage(clients.length, 6)">keyboard_arrow_right</i>
         </button>
         <button class="btn-icons pull-right">
           <i class="material-icons" (click)="onBackPage()">keyboard_arrow_left</i>
         </button>
-        <div class="row margin-top">
+        <div class="row margin-top clearfix">
           <div class="col-md-2" *ngFor="let client of (clients | paginate: { itemsPerPage: 6, currentPage: page })">
             <div class="card">
               <div>

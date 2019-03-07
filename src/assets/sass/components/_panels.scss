@@ -392,3 +392,7 @@ div[data-notify="container"] {
   width: 100%;
   font-size: 1.4rem;
 }
+
+.alert {
+  animation: fade 0.2s linear;
+}
