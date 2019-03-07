@@ -100,6 +100,10 @@ export class AuthenticationService {
     return this.credentials.user.roles.includes('buyer');
   }
 
+  get isInvited(): boolean {
+    return this.credentials.user.roles.includes('client');
+  }
+
   /**
    * Sets the user credentials.
    * The credentials may be persisted across sessions by setting the `remember` parameter to true.

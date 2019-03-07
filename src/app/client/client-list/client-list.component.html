@@ -2,7 +2,11 @@
 
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
-  <p>Here you can see all your clients and create new ones!</p>
+  <p *ngIf="isInvited">Review your work with the client who invited you to his network.</p>
+  <p *ngIf="!isInvited">
+    Invite new clients to your network, centrally manage your existing clients, and review the transactions you have
+    with them.
+  </p>
 </div>
 <h1 class="main-title">Clients List</h1>
 
