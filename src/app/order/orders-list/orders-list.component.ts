@@ -57,6 +57,21 @@ export class OrdersListComponent implements OnInit {
     }
   }
 
+  get helpLegend() {
+    if (this.authService.isAgribusiness) {
+      // tslint:disable-next-line:max-line-length
+      return 'Create and distribute purchase orders to your sellers, review their proforma invoices, receive purchase orders from your buyers, reply to them with customized proforma invoices, upload your own necessary documents, and manage the entire trade process in one place.';
+    } else if (this.authService.isBuyer) {
+      // tslint:disable-next-line:max-line-length
+      return 'Create and distribute purchase orders to your sellers, review their proforma invoices, upload your own necessary documents, and manage the entire trade process in one place.';
+    } else if (this.authService.isSeller) {
+      // tslint:disable-next-line:max-line-length
+      return 'Receive purchase orders from your buyers, reply to them with customized proforma invoices, upload your own necessary documents, and manage the entire trade process in one place.';
+    }
+
+    return '';
+  }
+
   exportAll() {
     // TODO: Find a better way to do this, should be done in the shared component because the stuff to show is decided there
 

@@ -66,20 +66,20 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group" [ngClass]="showFieldStyle('email')">
-                  <label for="Email">Email Address<span *ngIf="isRequired(clientf.email) === true"> *</span></label>
-                  <input
-                    type="email"
-                    formControlName="email"
-                    class="form-control"
-                    id="Email"
-                    placeholder="Type email here..."
-                  />
-                  <div class="help-block" *ngIf="isFieldInvalid('email') && isRequired(clientf.email) === true">
-                    <p>This field is required</p>
-                  </div>
-                </div>
                 <div class="form-row">
+                  <div class="form-group col-md-6" [ngClass]="showFieldStyle('email')">
+                    <label for="Email">Email Address<span *ngIf="isRequired(clientf.email) === true"> *</span></label>
+                    <input
+                      type="email"
+                      formControlName="email"
+                      class="form-control"
+                      id="Email"
+                      placeholder="Type email here..."
+                    />
+                    <div class="help-block" *ngIf="isFieldInvalid('email') && isRequired(clientf.email) === true">
+                      <p>This field is required</p>
+                    </div>
+                  </div>
                   <div class="form-group col-md-6">
                     <label for="region_code"
                       >Phone Number<span *ngIf="isRequired(clientf.phoneNumber) === true"> *</span></label
@@ -123,11 +123,24 @@
                       <p>This field is required</p>
                     </div>
                   </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="job_tile">Job Title</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="jobTitle"
+                      placeholder="Type job title here..."
+                      id="job_tile"
+                    />
+                  </div>
                   <div class="form-group col-md-6">
                     <label for="id_number">Identification Number (ID)</label>
                     <input
                       type="text"
                       class="form-control"
+                      formControlName="user_personal_id"
                       id="id_number"
                       placeholder="Type Identification Number (ID) here..."
                     />
@@ -217,7 +230,7 @@
                   </div>
                 </div>
               </div>
-              <button (click)="display()" [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
+              <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
                 Next &rarr;
               </button>
               <button
@@ -281,7 +294,7 @@
                   <div class="form-group col-md-4" [ngClass]="showFieldStyleComp('country')">
                     <label for="country">Country *</label>
                     <select id="country" name="country" class="form-control" formControlName="country">
-                      <option *ngFor="let country of countries" [value]="countries.viewValue" selected="selected">{{
+                      <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
                         country.viewValue
                       }}</option>
                     </select>
@@ -398,7 +411,7 @@
                 <div class="col-md-4">
                   <div>
                     <p class="label-2">Contact ID</p>
-                    <p class="normal-text-light">N/A</p>
+                    <p class="normal-text-light">{{ clientf.user_personal_id.value }}</p>
                   </div>
                   <div>
                     <p class="label-2">Phone Number</p>

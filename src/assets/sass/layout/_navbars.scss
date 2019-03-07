@@ -151,6 +151,12 @@
           }
         }
       }
+
+      &-item:last-child i,
+      &-item:first-child i {
+        font-size: 3.7rem;
+        border-radius: 50px;
+      }
     }
   }
 }

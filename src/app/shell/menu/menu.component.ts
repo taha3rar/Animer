@@ -29,26 +29,26 @@ export const ROUTES: RouteInfo[] = [
     path: '/order/list',
     title: 'Orders',
     type: 'link',
-    icontype: 'all_inclusive'
+    icontype: 'fa-exchange-alt'
   },
   {
     path: '/invoice/list',
     title: 'Proforma Invoices',
     type: 'link',
-    icontype: 'receipt'
+    icontype: 'fa-file-invoice-dollar'
   },
   {
     path: '/product/list',
     title: 'Products',
     type: 'link',
-    icontype: 'spa',
+    icontype: 'fa-seedling',
     neededPermission: 'list-products'
   },
   {
     path: '/client/list',
     title: 'Clients',
     type: 'link',
-    icontype: 'people',
+    icontype: 'fa-user-friends',
     neededPermission: 'list-clients'
   },
   {

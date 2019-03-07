@@ -55,7 +55,7 @@
     <p class="heading-2">Amount *</p>
     <div class="form-row">
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('weight_unit')">
-        <label for="weight-unit">Weight Unit *</label>
+        <label for="weight-unit">Measurement Unit *</label>
         <select id="weight-unit" name="weight_unit" class="form-control" formControlName="weight_unit">
           <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
         </select>
@@ -180,7 +180,10 @@
         />
       </div>
     </div>
-    <button type="button" (click)="submit()" [disabled]="!productForm.valid" class="bttn-primary pull-right">
+    <button type="button" (click)="submit()" [hidden]="!productForm.valid" class="bttn-primary pull-right">
+      Add Product
+    </button>
+    <button type="button" (click)="checkForm(productForm)" [hidden]="productForm.valid" class="bttn-primary pull-right">
       Add Product
     </button>
   </form>

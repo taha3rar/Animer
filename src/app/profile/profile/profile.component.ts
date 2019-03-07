@@ -38,16 +38,16 @@ export class ProfileComponent implements OnInit {
       email: [this.user.email, [Validators.email]],
       phoneNumber: [this.user.personal_information.phone_number],
       jobTitle: [this.user.personal_information.job_title],
-      bio: [this.user.personal_information.bio]
+      bio: [this.user.personal_information.bio],
+      userId: [this.user.user_personal_id]
     });
     this.companyDetailsForm = this.formBuilder.group({
-      companyName: [this.user.company_information.company_name, [Validators.required]],
+      companyName: [this.user.company_information.company_name],
       companyNumber: [this.user.company_information.company_registered_number, [Validators.required]],
-      email: [this.user.company_information.company_email, [Validators.email]],
-      phoneNumber: [this.user.company_information.phone],
-      address: [this.user.company_information.street, [Validators.required]],
-      city: [this.user.company_information.city, [Validators.required]],
-      zipcode: [this.user.company_information.zipcode, [Validators.required]],
+      stateRegionProvince: [this.user.company_information.state_province_region],
+      address: [this.user.company_information.street],
+      city: [this.user.company_information.city],
+      zipcode: [this.user.company_information.zipcode],
       country: [this.user.company_information.country, [Validators.required]],
       bio: [this.user.company_information.bio]
     });
@@ -96,6 +96,7 @@ export class ProfileComponent implements OnInit {
     this.user.personal_information.first_name = this.clientf.firstName.value;
     this.user.personal_information.last_name = this.clientf.lastName.value;
     this.user.email = this.clientf.email.value;
+    this.user.user_personal_id = this.clientf.userId.value;
     this.user.personal_information.phone_number = this.clientf.phoneNumber.value;
     this.user.personal_information.job_title = this.clientf.jobTitle.value;
     this.user.personal_information.bio = this.clientf.bio.value;
@@ -125,8 +126,7 @@ export class ProfileComponent implements OnInit {
   onSubmitCompanyDetails() {
     this.user.company_information.company_name = this.companyf.companyName.value;
     this.user.company_information.company_registered_number = this.companyf.companyNumber.value;
-    this.user.company_information.company_email = this.companyf.email.value;
-    this.user.company_information.phone = this.companyf.phoneNumber.value;
+    this.user.company_information.state_province_region = this.companyf.stateRegionProvince.value;
     this.user.company_information.street = this.companyf.address.value;
     this.user.company_information.city = this.companyf.city.value;
     this.user.company_information.zipcode = this.companyf.zipcode.value;

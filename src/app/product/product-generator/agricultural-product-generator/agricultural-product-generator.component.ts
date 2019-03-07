@@ -1,7 +1,7 @@
 import { MatDialogRef } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { defaultValues } from '@app/shared/helpers/default_values';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { currencies } from '@app/shared/helpers/currencies';
 import { measureUnits } from '@app/shared/helpers/measure';
 import { Product } from '@app/core/models/order/product';
@@ -122,6 +122,17 @@ export class AgriculturalProductGeneratorComponent implements OnInit {
     return {
       'has-error': this.isFieldInvalid(field)
     };
+  }
+
+  checkForm(form: FormGroup) {
+    Object.keys(form.controls).forEach(field => {
+      const control = form.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.checkForm(control);
+      }
+    });
   }
 
   submit() {
