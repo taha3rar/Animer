@@ -33,8 +33,7 @@
       <td class="text-center">{{ invoice.numericId }}</td>
       <td>{{ invoice.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>
-        <span *ngIf="userId == invoice.seller._id">{{ invoice.buyer.company_name }}</span>
-        <span *ngIf="userId == invoice.buyer._id">{{ invoice.seller.company_name }}</span>
+        <span>{{ invoice.buyer.company_name }}</span>
       </td>
       <td>
         <span *ngIf="userId == invoice.seller._id">{{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }}</span>
