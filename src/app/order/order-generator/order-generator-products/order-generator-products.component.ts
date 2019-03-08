@@ -5,6 +5,7 @@ import { ProductService } from '@app/core/api/product.service';
 import { OrderDataService } from '../order-data.service';
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
 import { defaultValues } from '@app/shared/helpers/default_values';
+import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 
 declare const $: any;
 @Component({
@@ -15,11 +16,10 @@ declare const $: any;
 export class OrderGeneratorProductsComponent extends BaseNavigationComponent implements OnInit {
   term: string;
   form: FormGroup;
-  products: Product[];
+  products: any[];
   agriculturalProducts: Product[];
   processedProducts: Product[];
-  newProducts: Product[] = [];
-  currency: string = undefined;
+  newProducts: ProductInvoice[] = [];
   noInventory: boolean;
 
   constructor(private productService: ProductService, private orderDataService: OrderDataService) {
@@ -28,6 +28,7 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
 
   ngOnInit() {
     this.noInventory = false;
+    this.orderDataService.setProductList(undefined);
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
       if (this.seller._id) {
@@ -43,6 +44,11 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
         });
       }
     });
+    this.orderDataService.currentProductList.subscribe(data => {
+      if (data) {
+        this.newProducts = data;
+      }
+    });
   }
 
   get order() {
@@ -53,13 +59,14 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
     return this.form.controls.seller.value;
   }
 
+  // button change
   incrementQuantity(product: any) {
     if (product.quantity < product.quantityMax) {
       product.quantity += 1;
     } else {
       product.quantity = product.quantityMax;
     }
-    this.productsValidation(false);
+    this.productValidation(product);
   }
   decrementQuantity(product: any) {
     if (product.quantity > 0) {
@@ -67,9 +74,10 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
     } else {
       product.quantity = 0;
     }
-    this.productsValidation(false);
+    this.productValidation(product);
   }
 
+  // manually change
   checkProductInput(product: any) {
     if (product.quantity > product.quantityMax) {
       product.quantity = product.quantityMax;
@@ -78,31 +86,50 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
     } else {
       product.quantity = product.quantity;
     }
-    this.productsValidation(false);
+    this.productValidation(product);
   }
 
-  productsValidation(submit: boolean) {
-    this.order['subtotal'].setValue(0);
-    this.products.forEach(product => {
-      if (product.quantity > 0) {
-        if (!this.currency) {
-          this.currency = product.currency;
-        }
-        if (product.product_type === 'agricultural') {
-          product['total_weight'] = product.package_weight * product.quantity;
-          product['product_subtotal'] = product.package_price * product.quantity;
-        }
-        if (product.product_type === 'processed') {
-          product['product_subtotal'] = product.package_price * product.quantity;
-        }
-        this.order['subtotal'].setValue(this.order.subtotal.value + product['product_subtotal']);
-        if (submit) {
-          this.newProducts.push(product);
+  productValidation(product: any) {
+    if (product.quantity < 1) {
+      for (let i = 0; i < this.newProducts.length; i++) {
+        if (this.newProducts[i].numericId === product.numericId) {
+          this.updateProduct(product, true);
+          this.newProducts.splice(i, 1);
         }
       }
-    });
-    if (this.order.subtotal.value === 0) {
-      this.currency = undefined;
+      if (!this.order.subtotal.value || this.newProducts.length <= 0) {
+        this.order['currency'].setValue(undefined);
+        this.order['subtotal'].setValue(null);
+      }
+    } else {
+      if (!this.order.currency.value) {
+        this.order['currency'].setValue(product.currency);
+      }
+      for (let i = 0; i < this.newProducts.length; i++) {
+        if (this.newProducts[i].numericId === product.numericId) {
+          this.updateProduct(this.newProducts[i], true);
+          this.newProducts[i].quantity = product.quantity;
+          this.updateProduct(this.newProducts[i], false);
+          return;
+        }
+      }
+      this.updateProduct(product, false);
+      this.newProducts.push(product);
+    }
+  }
+
+  updateProduct(product: any, minusTotal: boolean) {
+    if (minusTotal) {
+      this.order['subtotal'].setValue(this.order.subtotal.value - product['product_subtotal']);
+    } else {
+      if (product.product_type === 'agricultural') {
+        product['total_weight'] = product.package_weight * product.quantity;
+        product['product_subtotal'] = product.package_price * product.quantity;
+      }
+      if (product.product_type === 'processed') {
+        product['product_subtotal'] = product.package_price * product.quantity;
+      }
+      this.order['subtotal'].setValue(this.order.subtotal.value + product['product_subtotal']);
     }
   }
 
@@ -120,10 +147,6 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   }
 
   toOrderGenerator() {
-    this.productsValidation(true);
-    if (this.currency) {
-      this.order['currency'].setValue(this.currency);
-    }
     this.orderDataService.setProductList(this.newProducts);
   }
 }

@@ -18,9 +18,7 @@ export class OrderGeneratorSummaryComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.productList);
-  }
+  ngOnInit() {}
 
   get order() {
     return this.form.controls;

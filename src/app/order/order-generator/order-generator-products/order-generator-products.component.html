@@ -64,7 +64,7 @@
               </div>
             </div>
 
-            <div *ngIf="!currency || product.currency === currency" class="quantity">
+            <div *ngIf="!order.currency.value || product.currency === order.currency.value" class="quantity">
               <p class="normal-text-bold">Quantity</p>
               <button class="btn-circle" (click)="incrementQuantity(product)"><i class="material-icons">add</i></button>
               <input
@@ -130,7 +130,7 @@
                 </div>
               </div>
 
-              <div *ngIf="!currency || product.currency === currency" class="quantity">
+              <div *ngIf="!order.currency.value || product.currency === order.currency.value" class="quantity">
                 <p class="normal-text-bold">Quantity</p>
                 <button class="btn-circle" (click)="incrementQuantity(product)">
                   <i class="material-icons">add</i>
@@ -161,8 +161,8 @@
     </div>
     <div class="padding-all-2">
       <app-order-generator-summary
-        [productList]="products"
-        [currency]="currency"
+        [productList]="newProducts"
+        [currency]="order.currency.value"
         [form]="form"
       ></app-order-generator-summary>
     </div>
