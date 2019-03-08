@@ -180,20 +180,39 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     this.invitedClient.company_information.zipcode = this.companyf.zipcode.value;
     this.invitedClient.company_information.country = this.companyf.country.value;
 
-    this.userService.saveInvitedClient(this.invitedClient).subscribe(data => {
-      if (data._id) {
-        const participant = new Client(data);
-        if (this.ecosystemsToBeAdded.length) {
-          this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
+    this.userService.saveInvitedClient(this.invitedClient).subscribe(
+      data => {
+        if (data._id) {
+          const participant = new Client(data);
+          if (this.ecosystemsToBeAdded.length) {
+            this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
+              this.closeAndRefresh();
+            });
+          } else {
             this.closeAndRefresh();
-          });
+          }
         } else {
-          this.closeAndRefresh();
+          console.log(data); // TODO: Manage errors
         }
-      } else {
-        console.log(data); // TODO: Manage errors
+      },
+      err => {
+        $.notify(
+          {
+            icon: 'notifications',
+            message: err.error.message
+          },
+          {
+            type: 'danger',
+            timer: 5000,
+            placement: {
+              from: 'top',
+              align: 'right'
+            },
+            offset: 78
+          }
+        );
       }
-    });
+    );
   }
 
   markAsTouched(formControl: string) {
