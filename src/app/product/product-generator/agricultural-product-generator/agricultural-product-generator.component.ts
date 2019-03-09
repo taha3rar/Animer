@@ -35,7 +35,9 @@ export class AgriculturalProductGeneratorComponent implements OnInit {
     const product = this.data.product;
     if (this.data.product) {
       this.onUpdate = true;
-      this.productImage = this.data.product.image;
+      if (this.data.product.image) {
+        this.productImage = this.data.product.image;
+      }
     }
     this.productForm = this.formBuilder.group({
       product_type: ['agricultural', Validators.required],

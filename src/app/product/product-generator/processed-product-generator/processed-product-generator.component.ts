@@ -19,6 +19,7 @@ export class ProcessedProductGeneratorComponent implements OnInit {
   productForm: FormGroup;
   currencies = currencies;
   units = measureUnits;
+  onUpdate: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,22 +30,29 @@ export class ProcessedProductGeneratorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.data);
+    this.onUpdate = false;
+    const product = this.data.product;
+    if (this.data.product) {
+      this.onUpdate = true;
+      if (this.data.product.image) {
+        this.productImage = this.data.product.image;
+      }
+    }
     this.productForm = this.formBuilder.group({
       product_type: ['processed', Validators.required],
-      produce: [undefined, Validators.required],
-      sku: [undefined],
-      type_of_package: [undefined, Validators.required],
-      items_per_package: [undefined, Validators.required],
-      quantity: [undefined, Validators.required],
-      total_amount_items: [0],
-      package_price: [undefined, Validators.required],
-      total_price: [0, Validators.required],
-      currency: [undefined, Validators.required],
-      item_package_details: [true, Validators.required],
-      item_package_type: [undefined, Validators.required],
-      item_measurement_unit: [undefined, Validators.required],
-      item_measurement_amount: [undefined, Validators.required]
+      produce: [product ? product.produce : undefined, Validators.required],
+      sku: [product ? product.sku : undefined],
+      type_of_package: [product ? product.type_of_package : undefined, Validators.required],
+      items_per_package: [product ? product.items_per_package : undefined, Validators.required],
+      quantity: [product ? product.quantity : undefined, Validators.required],
+      total_amount_items: [product ? product.total_amount_items : 0],
+      package_price: [product ? product.package_price : undefined, Validators.required],
+      total_price: [product ? product.total_price : 0, Validators.required],
+      currency: [product ? product.currency : undefined, Validators.required],
+      item_package_details: [product ? product.item_package_details : true, Validators.required],
+      item_package_type: [product ? product.item_package_type : undefined, Validators.required],
+      item_measurement_unit: [product ? product.item_measurement_unit : undefined, Validators.required],
+      item_measurement_amount: [product ? product.item_measurement_amount : undefined, Validators.required]
     });
     this.onChanges();
   }
@@ -117,8 +125,16 @@ export class ProcessedProductGeneratorComponent implements OnInit {
   submit() {
     this.newProduct = this.productForm.value;
     this.newProduct.image = this.productImage;
-    if (this.productForm.valid) {
-      this.productService.create(this.newProduct).subscribe(() => {
+    if (!this.onUpdate) {
+      if (this.productForm.valid) {
+        this.productService.create(this.newProduct).subscribe(() => {
+          this.dialog.close();
+          this.router.navigateByUrl('/product/list');
+        });
+      }
+    } else {
+      this.newProduct._id = this.data.product._id;
+      this.productService.update(this.newProduct._id, this.newProduct).subscribe(() => {
         this.dialog.close();
         this.router.navigateByUrl('/product/list');
       });

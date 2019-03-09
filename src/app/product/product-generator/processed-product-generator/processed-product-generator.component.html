@@ -120,7 +120,7 @@
           class="form-control"
           formControlName="item_measurement_unit"
         >
-          <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
+          <option *ngFor="let unit of units" [ngValue]="unit.value" selected="selected">{{ unit.viewValue }}</option>
         </select>
         <div class="help-block" *ngIf="isFieldInvalid('item_measurement_unit')">
           <p>This field is required</p>
@@ -163,7 +163,7 @@
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('currency')">
         <label for="currecny">Currency *</label>
         <select id="currency" name="currency" class="form-control" formControlName="currency">
-          <option *ngFor="let currency of currencies" [value]="currency.value">{{ currency.viewValue }}</option>
+          <option *ngFor="let currency of currencies" [ngValue]="currency.value">{{ currency.viewValue }}</option>
         </select>
         <div class="help-block" *ngIf="isFieldInvalid('currency')">
           <p>This field is required</p>
@@ -184,11 +184,27 @@
         />
       </div>
     </div>
-    <button type="button" (click)="submit()" [hidden]="!productForm.valid" class="bttn-primary pull-right">
+    <button type="button" (click)="submit()" [hidden]="!productForm.valid || onUpdate" class="bttn-primary pull-right">
       Add Product
     </button>
-    <button type="button" (click)="checkForm(productForm)" [hidden]="productForm.valid" class="bttn-primary pull-right">
+    <button type="button" (click)="submit()" [hidden]="!productForm.valid || !onUpdate" class="bttn-primary pull-right">
+      Update Product
+    </button>
+    <button
+      type="button"
+      (click)="checkForm(productForm)"
+      [hidden]="productForm.valid || onUpdate"
+      class="bttn-primary pull-right"
+    >
       Add Product
+    </button>
+    <button
+      type="button"
+      (click)="checkForm(productForm)"
+      [hidden]="productForm.valid || !onUpdate"
+      class="bttn-primary pull-right"
+    >
+      Update Product
     </button>
   </form>
 </div>

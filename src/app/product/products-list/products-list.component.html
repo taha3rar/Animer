@@ -42,8 +42,7 @@
         <button
           *ngIf="product.product_type == 'processed'"
           class="round-button-primary"
-          [routerLink]="['/product/edit', product._id]"
-          [queryParams]="{ type: 'processed' }"
+          (click)="openDialogProcessed(product)"
         >
           <i class="material-icons">edit</i>
         </button>
