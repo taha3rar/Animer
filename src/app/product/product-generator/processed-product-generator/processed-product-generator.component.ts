@@ -1,5 +1,5 @@
-import { MatDialogRef } from '@angular/material';
-import { Component, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { currencies } from '@app/shared/helpers/currencies';
@@ -21,6 +21,7 @@ export class ProcessedProductGeneratorComponent implements OnInit {
   units = measureUnits;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dialog: MatDialogRef<ProcessedProductGeneratorComponent>,
     private productService: ProductService,
@@ -28,6 +29,7 @@ export class ProcessedProductGeneratorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.data);
     this.productForm = this.formBuilder.group({
       product_type: ['processed', Validators.required],
       produce: [undefined, Validators.required],

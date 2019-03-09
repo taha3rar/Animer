@@ -45,18 +45,16 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
     this.selectedProduct = this.products[index];
   }
 
-  openDialogAgricultural(index?: number): void {
+  openDialogAgricultural(product: Product): void {
     const data = {
-      productList: this.products,
-      index: index
+      product: product
     };
     this.openDialog('915px', AgriculturalProductGeneratorComponent, data);
   }
 
-  openDialogProcessed(index?: number): void {
+  openDialogProcessed(product: Product): void {
     const data = {
-      productList: this.products,
-      index: index
+      product: product
     };
     this.openDialog('905px', ProcessedProductGeneratorComponent, data);
   }
@@ -67,6 +65,7 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
     dialogConfig.autoFocus = false;
     dialogConfig.height = height;
     dialogConfig.width = '800px';
+    dialogConfig.data = dialogData;
 
     const dialogRef = this.dialog.open(component, dialogConfig);
   }
