@@ -30,8 +30,8 @@
           <div>
             <p>Packages available</p>
             <p>Type of package</p>
-            <p>Package weight</p>
-            <p>Total weight</p>
+            <p>Package</p>
+            <p>Total available</p>
           </div>
           <div>
             <p>{{ product.quantityMax }}</p>
@@ -81,24 +81,32 @@
             <p class="heading-2">{{ product.produce }} <br /></p>
           </div>
           <div class="package-details">
-            <div>
-              <p>Packages available</p>
-              <p>Type of package</p>
-              <p *ngIf="product.item_measurement_amount">Item packing type</p>
-              <p *ngIf="product.item_measurement_amount">Items per package</p>
-              <p *ngIf="product.item_measurement_amount">Amount of</p>
-            </div>
-            <div>
-              <p>{{ product.quantityMax }}</p>
-              <p>{{ product.type_of_package }}</p>
-              <p *ngIf="product.item_measurement_amount">{{ product.item_package_type }}</p>
-              <p *ngIf="product.item_measurement_amount">{{ product.items_per_package }}</p>
-              <p *ngIf="product.item_measurement_amount">
-                {{ product.item_measurement_amount }} {{ product.item_measurement_unit }}/{{
-                  product.item_package_type
-                }}
-              </p>
-            </div>
+            <table>
+              <tr>
+                <td>Packages available</td>
+                <td>{{ product.quantityMax }}</td>
+              </tr>
+              <tr>
+                <td>Type of package</td>
+                <td>{{ product.type_of_package }}</td>
+              </tr>
+              <tr *ngIf="product.item_measurement_amount">
+                <td>Item packing type</td>
+                <td>{{ product.item_package_type }}</td>
+              </tr>
+              <tr *ngIf="product.item_measurement_amount">
+                <td>Items per package</td>
+                <td>{{ product.items_per_package }}</td>
+              </tr>
+              <tr *ngIf="product.item_measurement_amount">
+                <td>Amount of</td>
+                <td>
+                  {{ product.item_measurement_amount }} {{ product.item_measurement_unit }}/{{
+                    product.item_package_type
+                  }}
+                </td>
+              </tr>
+            </table>
           </div>
 
           <div *ngIf="!currency || product.currency === currency" class="quantity">

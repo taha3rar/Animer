@@ -17,9 +17,10 @@
 }
 
 .card .package-details {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   display: flex;
   padding: 1rem 1.2rem;
+  overflow: visible;
 
   div:first-child {
     color: #9b9b9b;
@@ -31,10 +32,29 @@
   }
 
   div:not(:last-child) {
-    margin-right: 2rem;
+    margin-right: 1rem;
   }
 }
 
+.card .package-details table {
+  font-size: 1.3rem;
+  border-collapse: separate;
+  border-spacing: 0 1rem;
+  tr {
+    margin-bottom: 1rem;
+  }
+  td:nth-child(odd) {
+    color: #9b9b9b;
+    font-weight: 600;
+    padding-right: 1rem;
+  }
+
+  td:nth-child(even) {
+    color: $light-gray;
+    text-align: left;
+    word-break: break-all;
+  }
+}
 .quantity {
   display: flex;
   height: 4.5rem;
