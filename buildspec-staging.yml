@@ -19,7 +19,7 @@ phases:
   build:
     commands:
       - npm run build-staging
-      # - npm run test:ci 
+      # - npm run test:ci
     finally:
       - echo Finished building the Angular app
   post_build:

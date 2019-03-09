@@ -92,123 +92,127 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
-      <div formGroupName="sign_by" class="info">
-        <p class="heading-2">SIGNED BY</p>
+    <div class="col-md-6 info">
+      <p class="heading-2">SIGNED BY</p>
+      <div formGroupName="sign_by">
         <div class="form-row">
-          <div class="form-group col-md-4">
-            <p class="normal-text-bold">First Name</p>
-            <p class="normal-text-light" style="color:black">{{ form.value.sign_by.first_name }}</p>
+          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('sign_by', 'first_name')">
+            <label for="first_name">First Name *</label>
+            <input
+              type="text"
+              class="form-control"
+              id="first_name"
+              placeholder="Type first name here..."
+              formControlName="first_name"
+            />
+            <div class="help-block">
+              <p *ngIf="isFieldInvalidNested('sign_by', 'first_name')">This field is required</p>
+            </div>
           </div>
-          <div class="form-group col-md-4">
-            <p class="normal-text-bold">Last Name</p>
-            <p class="normal-text-light" style="color:black">{{ form.value.sign_by.last_name }}</p>
+          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('sign_by', 'last_name')">
+            <label for="last_name">Last Name *</label>
+            <input
+              type="text"
+              class="form-control"
+              id="last_name"
+              placeholder="Type last name here..."
+              formControlName="last_name"
+            />
+            <div class="help-block">
+              <p *ngIf="isFieldInvalidNested('sign_by', 'last_name')">This field is required</p>
+            </div>
           </div>
-          <div class="form-group col-md-4">
-            <p class="normal-text-bold">Company Name</p>
-            <p class="normal-text-light" style="color:black">{{ form.value.sign_by.company_name }}</p>
+          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('sign_by', 'company_name')">
+            <label for="company_name">Company Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="company_name"
+              placeholder="Type company name here..."
+              formControlName="company_name"
+            />
+            <div class="help-block">
+              <p *ngIf="isFieldInvalidNested('sign_by', 'company_name')">This field is required</p>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <p class="normal-text-bold">Proforma Invoice is valid by</p>
-            <p>{{ form.value.sign_by.date | date: 'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="form-row">
+        <div formGroupName="sign_by" class="form-group col-md-6">
+          <div [ngClass]="showFieldStyleNested('sign_by', 'date')">
+            <label for="PO_valid_date">Proforma Invoice is Valid by *</label>
+            <div class="input-group">
+              <input
+                id="PO_valid_date"
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="ddpp"
+                ngbDatepicker
+                #ddpp="ngbDatepicker"
+                formControlName="date"
+              />
+              <div class="input-group-append">
+                <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
+              </div>
+            </div>
+            <div class="help-block">
+              <p *ngIf="isFieldInvalidNested('sign_by', 'date')">This field is required</p>
+            </div>
           </div>
-          <div class="col-md-6">
-            <p class="normal-text-bold">Date of Issue</p>
-            <p>{{ invoice.date_created.value | date: 'dd/MM/yyyy' }}</p>
+        </div>
+        <div class="form-group col-md-6" [ngClass]="showFieldStyle('date_created')">
+          <label for="PO_date_created">Date of issue *</label>
+          <div class="input-group">
+            <input
+              id="PO_date_created"
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="ddpp2"
+              ngbDatepicker
+              #ddpp="ngbDatepicker"
+              formControlName="date_created"
+            />
+            <div class="input-group-append">
+              <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
+            </div>
+          </div>
+          <div class="help-block">
+            <p *ngIf="isFieldInvalid('date_created')">This field is required</p>
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div formGroupName="deliver_to" class="info">
-        <p class="heading-2">DELIVERED TO</p>
+        <p class="heading-2">DELIVER TO</p>
         <div class="form-row">
-          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'contact_name')">
-            <label for="contact_name">Contact Name *</label>
-            <input
-              type="text"
-              class="form-control"
-              id="contact_name"
-              placeholder="Typle contact name here..."
-              formControlName="contact_name"
-            />
+          <div class="form-group col-md-4">
+            <label for="contact_name">Contact Name</label>
+            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.contact_name }}</p>
           </div>
-          <div class="help-block">
-            <p *ngIf="isFieldInvalidNested('deliver_to', 'contact_name')">This field is required</p>
+          <div class="form-group col-md-4">
+            <label for="contact_name">Street Adress</label>
+            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.address }}</p>
           </div>
-          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'address')">
-            <label for="street_address">Street Address *</label>
-            <input
-              type="text"
-              class="form-control"
-              id="street_address"
-              placeholder="Typle street address here..."
-              formControlName="address"
-            />
-            <div class="help-block">
-              <p *ngIf="isFieldInvalidNested('deliver_to', 'address')">This field is required</p>
-            </div>
-          </div>
-          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'city')">
-            <label for="city">City *</label> <input type="text" class="form-control" id="city" formControlName="city" />
-            <div class="help-block">
-              <p *ngIf="isFieldInvalidNested('deliver_to', 'city')">This field is required</p>
-            </div>
+          <div class="form-group col-md-4">
+            <label for="contact_name">City</label>
+            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.city }}</p>
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'zip_code')">
-            <label for="zip_code">Zip Code *</label>
-            <input
-              type="text"
-              class="form-control"
-              id="zip_code"
-              placeholder="Typle zip code here..."
-              formControlName="zip_code"
-            />
-            <div class="help-block">
-              <p *ngIf="isFieldInvalidNested('deliver_to', 'zip_code')">This field is required</p>
-            </div>
+          <div class="form-group col-md-4">
+            <label for="contact_name">Zipcode</label>
+            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.zip_code }}</p>
           </div>
-          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'phone_number')">
-            <label for="phone">Phone *</label>
-            <input
-              type="tel"
-              placeholder="Type phone number here..."
-              class="form-control"
-              id="phone"
-              formControlName="phone_number"
-            />
-            <div class="help-block">
-              <p *ngIf="isFieldInvalidNested('deliver_to', 'phone_number')">This field is required</p>
-            </div>
+          <div class="form-group col-md-4">
+            <label for="contact_name">Phone Number</label>
+            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.phone_number }}</p>
           </div>
-          <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'expected_delivery_date')">
-            <label for="expected_delivery">Expected Delivery Date *</label>
-            <div class="input-group">
-              <input
-                id="expected_delivery"
-                class="form-control"
-                placeholder="yyyy-mm-dd"
-                name="ddp"
-                ngbDatepicker
-                #ddp="ngbDatepicker"
-                formControlName="expected_delivery_date"
-              />
-              <div class="input-group-append">
-                <button
-                  class="btn glyphicon glyphicon-calendar"
-                  style="position:0;"
-                  (click)="ddp.toggle()"
-                  type="button"
-                ></button>
-              </div>
-            </div>
-            <div class="help-block">
-              <p *ngIf="isFieldInvalidNested('deliver_to', 'expected_delivery_date')">This field is required</p>
-            </div>
+          <div class="form-group col-md-4">
+            <label for="contact_name">Expected Delivery Date</label>
+            <p class="normal-text-light" style="color:black">
+              {{ form.value.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}
+            </p>
           </div>
         </div>
       </div>

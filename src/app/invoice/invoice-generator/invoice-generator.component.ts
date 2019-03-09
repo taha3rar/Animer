@@ -74,15 +74,15 @@ export class InvoiceGeneratorComponent implements OnInit {
         date: ['', Validators.required],
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
-        company_name: ['', Validators.required]
+        company_name: ['']
       }),
       deliver_to: this.formBuilder.group({
-        contact_name: ['', Validators.required],
-        address: ['', Validators.required],
-        city: ['', Validators.required],
-        zip_code: ['', Validators.required],
-        phone_number: ['', Validators.required],
-        expected_delivery_date: ['', Validators.required]
+        contact_name: [''],
+        address: [''],
+        city: [''],
+        zip_code: [''],
+        phone_number: [''],
+        expected_delivery_date: [undefined]
       }),
       date_created: [Date.now(), Validators.required]
     });

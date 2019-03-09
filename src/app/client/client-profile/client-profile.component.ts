@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from '@app/core/models/user/user';
 import { Counter } from '../client/client.component';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-client-profile',

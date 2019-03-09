@@ -2,6 +2,9 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
+import { CsvService } from '@app/shared/services/csv.service';
+import { DatePipe, DecimalPipe } from '@angular/common';
+declare const $: any;
 
 @Component({
   selector: 'app-invoices-list',
@@ -13,13 +16,24 @@ export class InvoicesListComponent implements OnInit {
   allInvoices: Invoice[];
   buyerInvoices: Invoice[];
   sellerInvoices: Invoice[];
+  invoicesToExport: any[] = [];
   viewAsSeller = false;
   viewAsBuyer = false;
   viewAsAgri = true;
+  exportInit = false;
+  agribusinessUser: boolean;
 
-  constructor(private route: ActivatedRoute, private authService: AuthenticationService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthenticationService,
+    private csvService: CsvService,
+    private datePipe: DatePipe,
+    private decimalPipe: DecimalPipe,
+    private csv: CsvService
+  ) {}
 
   ngOnInit() {
+    this.agribusinessUser = this.authService.isAgribusiness;
     this.route.data.subscribe(({ invoices, invoicesAsBuyer, invoicesAsSeller }) => {
       this.invoices = invoices;
       this.allInvoices = invoices;
@@ -44,11 +58,75 @@ export class InvoicesListComponent implements OnInit {
     }
   }
 
+  initExport() {
+    if (this.exportInit === false) {
+      this.exportInit = true;
+      $('.dropdown button span').html('Select Proforma Invoices');
+    } else {
+      this.exportInit = false;
+      $('.dropdown button span').html('Actions');
+    }
+  }
+
+  exportAll() {
+    // TODO: Find a better way to do this, should be done in the shared component because the stuff to show is decided there
+
+    const headers = {
+      id: 'ID',
+      issuedAt: 'Issued at',
+      issuedFor: 'Issued for',
+      signedBy: 'Signed by',
+      totalDue: 'Total due',
+      status: 'Status'
+    };
+
+    const invoices = this.invoices.map((invoice: Invoice) => {
+      const issuedFor =
+        this.authService.currentUserId === invoice.seller._id
+          ? invoice.buyer.company_name
+          : invoice.seller.company_name;
+
+      const signedBy =
+        this.authService.currentUserId === invoice.seller._id
+          ? `${invoice.buyer.first_name} ${invoice.buyer.last_name}`
+          : `${invoice.seller.first_name} ${invoice.seller.last_name}`;
+
+      return {
+        id: invoice.numericId,
+        issuedAt: this.datePipe.transform(invoice.date_created, 'dd/MM/yyyy'),
+        issuedFor: issuedFor,
+        signedBy: signedBy,
+        totalDue: `${this.decimalPipe.transform(invoice.total_due, '1.2-2')} ${invoice.currency}`,
+        status: invoice.status
+      };
+    });
+
+    this.csvService.generateAndDownload(invoices, headers, 'proforma_invoices');
+  }
+
   get userId() {
     return this.authService.currentUserId;
   }
 
   get helpLegend() {
-    return 'Here you can see all your invoices that have been sent to you!'; // TODO: Change based on the current user role
+    if (this.authService.isAgribusiness) {
+      // tslint:disable-next-line:max-line-length
+      return 'Generate, review and distribute stand-alone proforma invoices, which are proforma invoices that are not connected directly to a purchase order you received from a buyer on the platform.';
+    } else if (this.authService.isBuyer) {
+      // tslint:disable-next-line:max-line-length
+      return 'Review, download, and manage all of the proforma invoices submitted by your sellers in one place.';
+    } else if (this.authService.isSeller) {
+      // tslint:disable-next-line:max-line-length
+      return 'Generate, review and distribute stand-alone proforma invoices, which are proforma invoices that are not connected directly to a purchase order you received from a buyer on the platform.';
+    }
+
+    return '';
+  }
+
+  downloadCsvForPayment() {
+    this.csv.getInvoicesForPayment(this.invoicesToExport);
+    this.exportInit = false;
+    this.invoicesToExport = [];
+    $('.dropdown button span').html('Actions');
   }
 }

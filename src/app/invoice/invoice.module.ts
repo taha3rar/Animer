@@ -1,6 +1,6 @@
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe, DatePipe } from '@angular/common';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
@@ -64,7 +64,9 @@ import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.
     InvoiceBuyersResolver,
     InvoiceSellerResolver,
     InvoiceResolver,
-    ProductCurrentUserResolver
+    ProductCurrentUserResolver,
+    DecimalPipe,
+    DatePipe
   ]
 })
 export class InvoiceModule {}

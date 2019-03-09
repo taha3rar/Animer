@@ -1,7 +1,7 @@
 .main-table {
   border-collapse: separate;
   margin-top: 1rem;
-  border-spacing: 0 2rem;
+  border-spacing: 0 1.4rem;
   color: $dark-gray;
 
   tr {
@@ -11,8 +11,7 @@
   }
 
   th,
-  td,
-  thead {
+  td {
     border: none !important;
     padding: 1.1rem !important;
     vertical-align: middle !important;

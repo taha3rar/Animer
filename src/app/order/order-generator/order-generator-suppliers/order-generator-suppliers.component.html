@@ -3,30 +3,61 @@
     <div class="panel-body">
       <div class="panel-header">
         <div><p>My Suppliers</p></div>
-        <button class="bttn-primary pull-right next-step" [disabled]="!validSeller" (click)="validateSeller()">Next Step &rarr;</button>
+        <div class="pull-right">
+          <button class="bttn-primary" [hidden]="validSeller" (click)="validateSeller()">
+            Next Step &rarr;
+          </button>
+          <button class="bttn-primary next-step" [hidden]="!validSeller" (click)="validateSeller()">
+            Next Step &rarr;
+          </button>
+        </div>
       </div>
-      <div class="padding-all-2">
-        <button class="btn-icons pull-right" (click)="onNextPage(clients.length, 6)"><i class="material-icons">keyboard_arrow_right</i></button>
-        <button class="btn-icons pull-right" (click)="onBackPage()"><i class="material-icons">keyboard_arrow_left</i></button>
+      <div class="padding-all-2" *ngIf="clients.length >= 1">
+        <div class="alert alert-danger" role="alert" [hidden]="validSeller || !nextBtnClicked">
+          Please choose a client!
+        </div>
+        <button class="btn-icons pull-right" (click)="onNextPage(clients.length, 6)">
+          <i class="material-icons">keyboard_arrow_right</i>
+        </button>
+        <button class="btn-icons pull-right" (click)="onBackPage()">
+          <i class="material-icons">keyboard_arrow_left</i>
+        </button>
         <div class="row margin-top clearfix">
           <div class="col-md-2" *ngFor="let client of (clients | paginate: { itemsPerPage: 6, currentPage: page })">
             <div class="card">
               <div>
-                <input type="radio" class="form_radio" id="{{client.numericId}}" [value]="client" formControlName="seller" />
-                <label for="{{client.numericId}}" class="form_radio_label"> <span class="form_radio_btn"></span>
+                <input
+                  type="radio"
+                  class="form_radio"
+                  id="{{ client.numericId }}"
+                  [value]="client"
+                  formControlName="seller"
+                />
+                <label for="{{ client.numericId }}" class="form_radio_label">
+                  <span class="form_radio_btn"></span>
                 </label>
-                <p class="pull-right">#{{client.numericId}}</p>
+                <p class="pull-right">#{{ client.numericId }}</p>
               </div>
               <div>
-                <figure class="img-circular-md" [style.background-image]="'url(' + profilePicture(client) + ')'"></figure>
+                <figure
+                  class="img-circular-md"
+                  [style.background-image]="'url(' + profilePicture(client) + ')'"
+                ></figure>
               </div>
               <div>
-                <p class="heading-2">{{client.first_name}} {{client.last_name}}</p>
-                <p>{{client.company_name}}</p>
+                <p class="heading-2">{{ client.first_name }} {{ client.last_name }}</p>
+                <p>{{ client.company_name }}</p>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="add-supplier-box" *ngIf="clients.length == 0">
+        <img src="../../../../assets/img/default/pi-po/noClient.png" width="285" height="183" />
+        <p>You have no clients yet !</p>
+        <button class="bttn-primary bttn-add" data-toggle="wizard data" data-target="#addClientWizard">
+          Add client
+        </button>
       </div>
     </div>
   </div>

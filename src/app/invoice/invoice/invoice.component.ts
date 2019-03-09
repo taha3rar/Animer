@@ -4,9 +4,7 @@ import swal from 'sweetalert';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { InvoiceService } from '@app/core/api/invoice.service';
-import * as jspdf from 'jspdf';
-import * as html2canvas from 'html2canvas';
-import { Product } from '@app/core/models/product';
+import { saveAs as importedSaveAs } from 'file-saver';
 import { ProductService } from '@app/core';
 
 @Component({
@@ -57,7 +55,30 @@ export class InvoiceComponent implements OnInit {
         'Digital Platform and therefore, in such event, the Buyer and the Seller will be obligated to use other ' +
         'methods to execute their financial transaction and the Company shall not be liable in any manner to any ' +
         'cost, damages related directly or indirectly to the Buyer and/or Seller in respect to the above and the ' +
-        'Buyer and Seller hereby waive any such claim against the Company.</p>'
+        'Buyer and Seller hereby waive any such claim against the Company',
+      buttons: [false, 'I agree']
+    }).then(value => {
+      if (value) {
+        this.disclaimerAccepted = true;
+      }
+    });
+  }
+
+  downloadPopup() {
+    swal({
+      title: 'Download as PDF',
+      className: 'swal-pdf',
+      text: 'Please choose the type of proforma invoice document you would like to download:',
+      buttons: {
+        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o' },
+        copyDoc: { text: 'Copy Document', value: 'copy' }
+      }
+    }).then(value => {
+      if (value === 'original') {
+        this.download('original');
+      } else {
+        this.download('copy');
+      }
     });
   }
 
@@ -77,24 +98,26 @@ export class InvoiceComponent implements OnInit {
     return this.invoice.deliver_to;
   }
 
-  download(): void {
-    html2canvas(document.getElementById('pdfContent'), { windowWidth: 900, windowHeight: 1000 }).then(canvas => {
-      const pdf = new jspdf('p', 'mm', 'a4');
-      const img = canvas.toDataURL('image/png');
-      pdf.addImage(img, 'PNG', 0, 0, 208, 300);
-      pdf.save(`invoice-${this.invoice.numericId}.pdf`);
+  download(version: string): void {
+    this.invoiceService.getPdf(this.invoice._id, version).subscribe(data => {
+      const blob = new Blob([data], { type: 'application/pdf' });
+      importedSaveAs(blob, `proforma-invoice-${this.invoice.numericId}-${version}`);
     });
   }
 
   saveInvoice(): void {
-    this.invoiceService.create(this.invoice).subscribe((invoice: Invoice) => {
-      for (let i = 0; i < this.invoice.products.length; i++) {
-        if (this.invoice.products[i].to_inventory) {
-          const product = this.invoice.products[i].toProduct(invoice);
-          this.productService.create(product).subscribe();
+    if (this.disclaimerAccepted === false) {
+      this.disclaimerPopup();
+    } else {
+      this.invoiceService.create(this.invoice).subscribe((invoice: Invoice) => {
+        for (let i = 0; i < this.invoice.products.length; i++) {
+          if (this.invoice.products[i].to_inventory) {
+            const product = this.invoice.products[i].toProduct(invoice);
+            this.productService.create(product).subscribe();
+          }
         }
-      }
-      this.router.navigateByUrl('/invoice/list');
-    });
+        this.router.navigateByUrl('/invoice/list');
+      });
+    }
   }
 }

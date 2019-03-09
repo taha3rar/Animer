@@ -30,7 +30,10 @@
                 "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
               }
             ],
-            "scripts": ["./node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"]
+            "scripts": [
+              "./node_modules/bootstrap-select/dist/js/bootstrap-select.min.js",
+              "./node_modules/bootstrap-notify/bootstrap-notify.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -51,15 +54,15 @@
               ]
             },
             "local": {
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
+              "extractCss": false,
+              "namedChunks": true,
               "aot": false,
               "extractLicenses": false,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

@@ -124,7 +124,7 @@
               <div class="col-md-9">
                 <p>{{ sign_by.first_name }} {{ sign_by.last_name }}</p>
                 <p>{{ sign_by.company_name }}</p>
-                <p>PO valid by: {{ sign_by.date | date: 'dd/MM/yyyy' }}</p>
+                <p>PI valid by: {{ sign_by.date | date: 'dd/MM/yyyy' }}</p>
                 <p>Date of issue: {{ invoice.date_created | date: 'dd/MM/yyyy' }}</p>
               </div>
             </div>
@@ -132,7 +132,7 @@
         </div>
         <div class="col-md-6">
           <div class="border-top">
-            <p class="heading-2">Delivered to</p>
+            <p class="heading-2">Deliver to</p>
             <p>{{ deliver_to.contact_name }}</p>
             <p>{{ deliver_to.address }}, {{ deliver_to.city }} {{ deliver_to.zip_code }}</p>
             <p>{{ deliver_to.phone_number }}</p>
@@ -141,19 +141,14 @@
         </div>
       </div>
       <div>
-        <button
-          *ngIf="generateInvoice"
-          class="bttn-primary pull-right"
-          (click)="saveInvoice()"
-          [disabled]="!disclaimerAccepted"
-        >
+        <button *ngIf="generateInvoice" class="bttn-primary pull-right" (click)="saveInvoice()">
           Send Proforma Invoice
         </button>
         <button
           *ngIf="!generateInvoice"
           class="btn-primary-transp pull-right"
           data-html2canvas-ignore="true"
-          (click)="download()"
+          (click)="downloadPopup()"
         >
           Download PDF
         </button>

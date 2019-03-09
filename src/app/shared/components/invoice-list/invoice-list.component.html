@@ -1,6 +1,15 @@
 <table class="table main-table">
   <thead>
     <tr>
+      <th *ngIf="exportInit" class="text-center">
+        <input
+          id="checkedAll"
+          type="checkbox"
+          class="checkbox"
+          (change)="exportAllRecords($event)"
+          [checked]="checkedAll"
+        /><label class="checkbox_label" for="checkedAll"><span class="form_checkbox_btn"></span></label>
+      </th>
       <th translate class="text-center">ID</th>
       <th translate>Issued at</th>
       <th translate>Issued for</th>
@@ -11,7 +20,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let invoice of (invoices | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
+    <tr *ngFor="let invoice of (invoices | paginate: { itemsPerPage: 7, currentPage: page }); let i = index">
+      <td *ngIf="exportInit" class="text-center">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="checkbox{{ i }}"
+          [checked]="existInvoice(invoice)"
+          (click)="toggleInvoiceSelect(invoice)"
+        /><label class="checkbox_label" for="checkbox{{ i }}"><span class="form_checkbox_btn"></span></label>
+      </td>
       <td class="text-center">{{ invoice.numericId }}</td>
       <td>{{ invoice.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>

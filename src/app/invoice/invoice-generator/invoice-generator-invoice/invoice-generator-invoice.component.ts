@@ -109,7 +109,8 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
     dialogConfig.height = '900px';
     dialogConfig.width = '980px';
     dialogConfig.data = {
-      products: this.route.snapshot.data['products']
+      products: this.route.snapshot.data['products'],
+      currency: this.invoice.currency.value
     };
 
     const dialogRef = this.dialog.open(InvoiceInventoryComponent, dialogConfig);
@@ -172,9 +173,15 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
   }
 
   draftInvoice() {
-    this.invoice['sign_by'].patchValue({ date: moment(this.form['controls'].sign_by['controls'].date.value).toJSON() });
+    this.invoice['sign_by'].patchValue({
+      date: moment(this.form['controls'].sign_by['controls'].date.value)
+        .subtract(1, 'months')
+        .toJSON()
+    });
     this.invoice['deliver_to'].patchValue({
-      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
+      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value)
+        .subtract(1, 'months')
+        .toJSON()
     });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
@@ -185,9 +192,20 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
   }
 
   toReview() {
-    this.invoice['sign_by'].patchValue({ date: moment(this.form['controls'].sign_by['controls'].date.value).toJSON() });
+    this.invoice['sign_by'].patchValue({
+      date: moment(this.form['controls'].sign_by['controls'].date.value)
+        .subtract(1, 'months')
+        .toJSON()
+    });
     this.invoice['deliver_to'].patchValue({
-      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value).toJSON()
+      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value)
+        .subtract(1, 'months')
+        .toJSON()
+    });
+    this.form.patchValue({
+      date_created: moment(this.form['controls'].date_created.value)
+        .subtract(1, 'months')
+        .toJSON()
     });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;

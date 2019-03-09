@@ -100,7 +100,7 @@
   }
 
   .tab-content {
-    margin-top: 4rem;
+    margin-top: 1rem;
   }
 
   .panel-body {
@@ -173,13 +173,12 @@
 }
 
 .vector-tutorial {
-  width: 100%;
-  max-width: 23.5rem;
-  max-height: 17.3rem;
+  width: 58%;
   height: auto;
   margin-left: auto;
   margin-right: auto;
   display: block;
+  margin-bottom: 2rem;
 }
 
 .panel-right {
@@ -257,7 +256,7 @@
   flex-direction: column;
   min-height: 67.2rem;
 
-  div:first-child {
+  #profile-image {
     margin-top: 2.5rem;
     align-self: center;
     text-align: center;
@@ -268,14 +267,14 @@
     }
   }
 
-  div:nth-child(2) {
+  #profile-contact-info {
     border-top: 1px solid $light-gray-2;
     border-left: 3px solid $primary-color;
     margin: 0 -15px;
     padding: 1.5rem;
   }
 
-  div:nth-child(3) {
+  #profile-company-info {
     border-top: 1px solid $light-gray-2;
     border-left: 3px solid $secondary-color;
     margin: 0 -15px;
@@ -323,6 +322,10 @@
 .company-info-section {
   padding: 2rem;
   border-left: 1px solid $light-gray-2;
+}
+
+#company-info-form {
+  margin-top: 1.2rem;
 }
 
 .nav .nav-tabs {
@@ -377,4 +380,19 @@
       line-height: 16.5rem;
     }
   }
+}
+
+.add-supplier-box {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  margin-top: 3.5rem;
+}
+
+div[data-notify="container"] {
+  width: 100%;
+  font-size: 1.4rem;
+}
+
+.alert {
+  animation: fade 0.2s linear;
 }

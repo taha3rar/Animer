@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Order } from '@app/core/models/order/order';
-import * as jspdf from 'jspdf';
-import * as html2canvas from 'html2canvas';
-import { AuthenticationService } from '@app/core';
+import { AuthenticationService, OrderService } from '@app/core';
+import { saveAs as importedSaveAs } from 'file-saver';
 
 @Component({
   selector: 'app-order-po',
@@ -17,7 +16,7 @@ export class OrderPoComponent implements OnInit {
   @Input()
   generateOrder: boolean;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService, private orderService: OrderService) {}
 
   ngOnInit() {
     this.buyer = false;
@@ -27,12 +26,28 @@ export class OrderPoComponent implements OnInit {
     }
   }
 
-  download(): void {
-    html2canvas(document.getElementById('pdfContent'), { windowWidth: 900, windowHeight: 1000 }).then(canvas => {
-      const pdf = new jspdf('p', 'mm', 'a4');
-      const img = canvas.toDataURL('image/png');
-      pdf.addImage(img, 'PNG', 0, 0, 208, 300);
-      pdf.save(`invoice-${this.order.numericId}.pdf`);
+  download(version: string): void {
+    this.orderService.getPdf(this.order._id, version).subscribe(data => {
+      const blob = new Blob([data], { type: 'application/pdf' });
+      importedSaveAs(blob, `purchase-order-${this.order.numericId}-${version}`);
+    });
+  }
+
+  downloadPopup() {
+    swal({
+      title: 'Download as PDF',
+      className: 'swal-pdf',
+      text: 'Please choose the type of purchase order document you would like to download:',
+      buttons: {
+        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o' },
+        copyDoc: { text: 'Copy Document', value: 'copy' }
+      }
+    }).then(value => {
+      if (value === 'original') {
+        this.download('original');
+      } else {
+        this.download('copy');
+      }
     });
   }
 }

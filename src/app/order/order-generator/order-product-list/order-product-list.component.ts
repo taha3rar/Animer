@@ -13,8 +13,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 })
 export class OrderProductListComponent implements OnInit {
   form: FormGroup;
+  @Input()
   currency: string;
-  products: ProductInvoice[];
+  products: ProductInvoice[] = [];
   @Output()
   updateProductsEvent = new EventEmitter<ProductInvoice[]>();
   @Output()

@@ -7,10 +7,10 @@
 
 <h1 translate class="main-title">Proforma Invoices List</h1>
 <div class="clearfix margin-top">
-  <button class="btn-primary-transp pull-right">
-    <i class="material-icons">arrow_upward</i> <span translate>Export All Proforma Invoices</span>
+  <button class="btn-primary-transp pull-right" (click)="exportAll()">
+    <i class="material-icons">arrow_upward</i>
+    <span translate>Export All Proforma Invoices</span>
   </button>
-
   <button
     *ngxPermissionsOnly="['create-invoice']"
     class="bttn-primary bttn-add pull-right"
@@ -18,20 +18,40 @@
   >
     <span translate>New Profoma Invoice</span>
   </button>
-
-  <div class="pull-left two-btns ">
+  <div class="two-btns" *ngIf="agribusinessUser">
     <p class="heading-2">View records as:</p>
-    <div class="two-btns-inner">
-      <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
-        Seller
-      </button>
-      <button (click)="viewAs('buyer')" [class.active]="this.viewAsBuyer">
-        Buyer
-      </button>
-    </div>
+    <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
+      Seller
+    </button>
+    <button (click)="viewAs('buyer')" [class.active]="this.viewAsBuyer">
+      Buyer
+    </button>
     <button (click)="viewAs('agri')" [class.active]="this.viewAsAgri" class="bttn-primary-sm">
       All
     </button>
   </div>
 </div>
-<app-invoice-list [invoices]="invoices"></app-invoice-list>
+<!-- <div class="pull-left">
+  <div class="bttns-flex">
+    <div class="dropdown">
+      <button class="bttn-white dropdown-toggle" type="button" data-toggle="dropdown"><span>Actions</span></button>
+      <ul class="dropdown-menu">
+        <li><a (click)="initExport()" translate>Export Proforma Invoices For Payment</a></li>
+        <li><a (click)="exportAll()" translate>Export All Proforma Invoices</a></li>
+      </ul>
+    </div>
+    <button
+      class="bttn-download-sm"
+      ngbTooltip="Download"
+      [hidden]="invoicesToExport.length == 0 || !exportInit"
+      (click)="downloadCsvForPayment()"
+    >
+      <i class="material-icons">arrow_downward</i>
+    </button>
+  </div>
+</div> -->
+<app-invoice-list
+  [exportInit]="exportInit"
+  (invoicesList)="invoicesToExport = $event"
+  [invoices]="invoices"
+></app-invoice-list>

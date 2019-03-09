@@ -14,10 +14,14 @@
     </div>
   </div>
 
-  <app-order-product-list (updateProductsEvent)="updateProducts($event)" (updateFormEvent)="updateForm($event)">
+  <app-order-product-list
+    [currency]="order.currency.value"
+    (updateProductsEvent)="updateProducts($event)"
+    (updateFormEvent)="updateForm($event)"
+  >
   </app-order-product-list>
-  <div class="panel" [hidden]="products.length != 0 || productsValid">
-    <div class="panel-body">Please choose product!</div>
+  <div class="alert alert-danger" role="alert" [hidden]="products.length != 0 || productsValid">
+    Please choose product!
   </div>
   <div class="row">
     <div class="col-md-5">
@@ -126,7 +130,7 @@
               id="PO_date_created"
               class="form-control"
               placeholder="yyyy-mm-dd"
-              name="ddpp"
+              name="ddpp2"
               ngbDatepicker
               #ddpp="ngbDatepicker"
               formControlName="date_created"
@@ -229,16 +233,22 @@
       </div>
     </div>
   </div>
-  <button class="bttn-primary pull-right next-step" (click)="toReview()" [hidden]="!form.valid || products.length < 1">
-    Next Step &rarr;
-  </button>
-  <button
-    class="bttn-primary pull-right"
-    (click)="checkProducts()"
-    (click)="onSubmit(form)"
-    [hidden]="form.valid || products.length > 1"
-  >
-    Next Step &rarr;
-  </button>
-  <button class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
+  <div class="margin-top margin-bottom-2 clearfix">
+    <button
+      class="bttn-primary pull-right next-step"
+      (click)="toReview()"
+      [hidden]="!form.valid || products.length < 1"
+    >
+      Next Step &rarr;
+    </button>
+    <button
+      class="bttn-primary pull-right"
+      (click)="checkProducts()"
+      (click)="onSubmit(form)"
+      [hidden]="form.valid || products.length > 1"
+    >
+      Next Step &rarr;
+    </button>
+    <button class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
+  </div>
 </form>

@@ -1,6 +1,7 @@
 import { RouterModule } from '@angular/router';
+import { CsvService } from './services/csv.service';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { LoaderComponent } from './loader/loader.component';
 import { RoundUpPipe } from './pipes/roundup.pipe';
@@ -17,6 +18,7 @@ import { UploadPictureComponent } from './components/upload-picture/upload-pictu
 import { BaseValidationComponent } from './components/base-validation/base-validation.component';
 import { UserDocumentComponent } from './components/document-list/user-document-list/user-document-list.component';
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
+import { ClientGeneratorComponent } from '@app/client/client-generator/client-generator.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule],
@@ -44,8 +46,8 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
     TransactionDocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
-    GooglePlacesDirective,
     UploadPictureComponent
-  ]
+  ],
+  providers: [CsvService, DatePipe]
 })
 export class SharedModule {}

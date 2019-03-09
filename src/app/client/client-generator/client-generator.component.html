@@ -9,7 +9,7 @@
         <ul class="nav nav-tabs">
           <li class="active">
             <a href="#client-details" data-toggle="tab"
-              ><span class="step-number">1</span> <span translate>Add client details</span></a
+              ><span class="step-number">1</span> <span translate>Add contact details</span></a
             >
           </li>
           <li class="disabled">
@@ -39,7 +39,7 @@
               <div class="col-md-12">
                 <div class="form-row">
                   <div class="form-group col-md-6" [ngClass]="showFieldStyle('firstName')">
-                    <label for="first_name">Client First Name *</label>
+                    <label for="first_name">First Name *</label>
                     <input
                       type="text"
                       formControlName="firstName"
@@ -52,7 +52,7 @@
                     </div>
                   </div>
                   <div class="form-group col-md-6" [ngClass]="showFieldStyle('lastName')">
-                    <label for="last_name">Client Last Name *</label>
+                    <label for="last_name">Last Name *</label>
                     <input
                       type="text"
                       formControlName="lastName"
@@ -66,25 +66,25 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group" [ngClass]="showFieldStyle('email')">
-                  <label for="Email">Email Address<span *ngIf="isRequired(clientf.email) === true"> *</span></label>
-                  <input
-                    type="email"
-                    formControlName="email"
-                    class="form-control"
-                    id="Email"
-                    placeholder="Type email here..."
-                  />
-                  <div class="help-block" *ngIf="isFieldInvalid('email') && isRequired(clientf.email) === true">
-                    <p>This field is required</p>
-                  </div>
-                </div>
                 <div class="form-row">
+                  <div class="form-group col-md-6" [ngClass]="showFieldStyle('email')">
+                    <label for="Email">Email Address<span *ngIf="isRequired(clientf.email) === true"> *</span></label>
+                    <input
+                      type="email"
+                      formControlName="email"
+                      class="form-control"
+                      id="Email"
+                      placeholder="Type email here..."
+                    />
+                    <div class="help-block" *ngIf="isFieldInvalid('email') && isRequired(clientf.email) === true">
+                      <p>This field is required</p>
+                    </div>
+                  </div>
                   <div class="form-group col-md-6">
                     <label for="region_code"
                       >Phone Number<span *ngIf="isRequired(clientf.phoneNumber) === true"> *</span></label
                     >
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="showFieldStyle('phoneNumber')">
                       <div class="input-group-prepend">
                         <select
                           data-width="65px"
@@ -112,14 +112,35 @@
                         [(ngModel)]="partialPhoneNumber"
                         [ngModelOptions]="{ standalone: true }"
                         (ngModelChange)="changeRegionCode()"
+                        (click)="markAsTouched('phoneNumber')"
                       />
                     </div>
+                    <div
+                      style="color:#a94442"
+                      class="help-block"
+                      *ngIf="isFieldInvalid('phoneNumber') && isRequired(clientf.phoneNumber) === true"
+                    >
+                      <p>This field is required</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="job_tile">Job Title</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="jobTitle"
+                      placeholder="Type job title here..."
+                      id="job_tile"
+                    />
                   </div>
                   <div class="form-group col-md-6">
                     <label for="id_number">Identification Number (ID)</label>
                     <input
                       type="text"
                       class="form-control"
+                      formControlName="user_personal_id"
                       id="id_number"
                       placeholder="Type Identification Number (ID) here..."
                     />
@@ -140,7 +161,7 @@
                         (change)="onChangeProfileType('seller', $event.target.checked)"
                       />
                       <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                      <label style="font-weight:100;">Seller of agricultural products </label>
+                      <label style="font-weight:400;">Seller of agricultural products </label>
                     </div>
                     <div *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'seller'">
                       <input
@@ -151,7 +172,14 @@
                         (change)="onChangeProfileType('buyer', $event.target.checked)"
                       />
                       <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                      <label style="font-weight:100;">Buyer of agricultural products </label>
+                      <label style="font-weight:400;">Buyer of agricultural products </label>
+                    </div>
+                    <div
+                      style="color:#a94442"
+                      class="help-block"
+                      *ngIf="clientDetailsForm.controls.profileType.invalid"
+                    >
+                      <p>This field is required</p>
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -178,7 +206,7 @@
                         id="checkbox_sms"
                         (change)="onChangeContactType('email', $event.target.checked)"
                       /><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
-                      <label for="checkbox_sms" style="font-weight:100;">email</label>
+                      <label for="checkbox_sms" style="font-weight:400;">EMAIL</label>
                     </div>
                     <div>
                       <input
@@ -186,16 +214,25 @@
                         class="checkbox"
                         name="contact_type"
                         id="checkbox_phone"
-                        (change)="onChangeContactType('phone', $event.target.checked)"
+                        (change)="onChangeContactType('sms', $event.target.checked)"
                       /><label class="checkbox_label" for="checkbox_phone"
                         ><span class="form_checkbox_btn"></span
                       ></label>
-                      <label for="checkbox_sms" style="font-weight:100;">SMS</label>
+                      <label for="checkbox_sms" style="font-weight:400;">SMS</label>
+                    </div>
+                    <div
+                      style="color:#a94442"
+                      class="help-block"
+                      *ngIf="clientDetailsForm.controls.contactTypes.invalid"
+                    >
+                      <p>Please choose at least one option</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">Next &rarr;</button>
+              <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
+                Next &rarr;
+              </button>
               <button
                 [hidden]="clientDetailsForm.valid"
                 class="btn-next pull-right"
@@ -256,13 +293,11 @@
                 <div class="form-row">
                   <div class="form-group col-md-4" [ngClass]="showFieldStyleComp('country')">
                     <label for="country">Country *</label>
-                    <input
-                      type="text"
-                      formControlName="country"
-                      class="form-control"
-                      id="country"
-                      placeholder="Type country here..."
-                    />
+                    <select id="country" name="country" class="form-control" formControlName="country">
+                      <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
+                        country.viewValue
+                      }}</option>
+                    </select>
                     <div class="help-block" *ngIf="isFieldInvalidComp('country')">
                       <p>This field is required</p>
                     </div>
@@ -279,7 +314,7 @@
                     />
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="zip_code">Zip Code *</label>
+                    <label for="zip_code">Zip Code</label>
                     <input
                       type="text"
                       formControlName="zipcode"
@@ -376,7 +411,7 @@
                 <div class="col-md-4">
                   <div>
                     <p class="label-2">Contact ID</p>
-                    <p class="normal-text-light">312445687</p>
+                    <p class="normal-text-light">{{ clientf.user_personal_id.value }}</p>
                   </div>
                   <div>
                     <p class="label-2">Phone Number</p>

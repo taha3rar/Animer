@@ -1,13 +1,18 @@
-
 <div class="sidebar-wrapper">
-    <div class="sidebar">
-      <ul class="nav">
-        <li  *ngFor="let menuitem of menuItems"  class="nav-item">
-          <a [routerLink]="[menuitem.path]" routerLinkActive="active">
-            <i class="material-icons">{{menuitem.icontype}}</i>
-            <p>{{menuitem.title}}</p>
-          </a>
-        </li>
-      </ul>
+  <div class="sidebar">
+    <div class="logo-wrapper">
+      <img src="../../../assets/img/logo.png" alt="logo" class="brand-img" />
     </div>
+    <ul class="nav">
+      <li *ngFor="let menuitem of menuItems" class="nav-item">
+        <a [routerLink]="[menuitem.path]" routerLinkActive="active">
+          <i class="fas {{ menuitem.icontype }}"></i>
+          <i *ngIf="menuitem.title === 'Dashboard' || menuitem.title === 'Ecosystems'" class="material-icons">{{
+            menuitem.icontype
+          }}</i>
+          <p>{{ menuitem.title }}</p>
+        </a>
+      </li>
+    </ul>
   </div>
+</div>

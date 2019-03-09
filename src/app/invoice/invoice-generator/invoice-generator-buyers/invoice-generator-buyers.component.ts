@@ -15,7 +15,7 @@ export class InvoiceGeneratorBuyersComponent extends BaseNavigationComponent imp
   @Input()
   form: FormGroup;
   clients: Client[];
-
+  nextBtnClicked = false;
   constructor(private route: ActivatedRoute) {
     super();
   }

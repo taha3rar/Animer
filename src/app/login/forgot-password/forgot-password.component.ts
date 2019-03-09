@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '@app/core';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,8 +14,44 @@ export class ForgotPasswordComponent implements OnInit {
   // 1   -->  reset link successfully sent
   // 2   -->  reset link failed to send
   resetLinkStatus = 0;
+  username: string;
+  forgotPasswordForm: FormGroup;
 
-  constructor(private location: Location) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthenticationService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.forgotPasswordForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required]
+    });
+
+    this.forgotPasswordForm.get('email').valueChanges.subscribe(email => {
+      if (email) {
+        this.forgotPasswordForm.get('phone').setValue('', { emitEvent: false });
+        this.forgotPasswordForm.get('phone').setValidators([]);
+        this.forgotPasswordForm.get('email').setValidators([Validators.required, Validators.email]);
+      }
+    });
+
+    this.forgotPasswordForm.get('phone').valueChanges.subscribe(phone => {
+      if (phone) {
+        this.forgotPasswordForm.get('email').setValue('', { emitEvent: false });
+        this.forgotPasswordForm.get('email').setValidators([]);
+        this.forgotPasswordForm.get('phone').setValidators([Validators.required]);
+      }
+    });
+  }
+
+  recoverPassword() {
+    if (this.forgotPasswordForm.valid) {
+      this.username = this.forgotPasswordForm.value.email || this.forgotPasswordForm.value.phone;
+      this.authService.forgotPassword(this.username).subscribe(
+        () => (this.resetLinkStatus = 1),
+        err => {
+          console.log(err);
+          this.resetLinkStatus = 2;
+        }
+      );
+    }
+  }
 }

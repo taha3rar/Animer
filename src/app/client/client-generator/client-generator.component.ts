@@ -57,6 +57,8 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
       firstName: [undefined, Validators.required],
       lastName: [undefined, Validators.required],
       email: [undefined, [Validators.email]],
+      jobTitle: [undefined],
+      user_personal_id: [undefined],
       profileType: this.formBuilder.array([], Validators.required),
       phoneNumber: [undefined],
       contactTypes: this.formBuilder.array([], Validators.required)
@@ -148,7 +150,7 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     try {
       phoneNumber = this.phoneUtil.parse(this.partialPhoneNumber, this.regionCode);
     } catch (error) {
-      // console.log("Phone Number is not correct");
+      this.clientDetailsForm.patchValue({ phoneNumber: undefined });
       return;
     }
     this.clientDetailsForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
@@ -167,6 +169,8 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     this.invitedClient.personal_information.first_name = this.clientf.firstName.value;
     this.invitedClient.personal_information.last_name = this.clientf.lastName.value;
     this.invitedClient.email = this.clientf.email.value;
+    this.invitedClient.personal_information.job_title = this.clientf.jobTitle.value;
+    this.invitedClient.user_personal_id = this.clientf.user_personal_id.value;
     this.invitedClient.personal_information.phone_number = this.clientf.phoneNumber.value;
     this.invitedClient.roles = this.clientf.profileType.value;
     this.invitedClient.contact_by = this.clientf.contactTypes.value;
@@ -176,20 +180,43 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     this.invitedClient.company_information.zipcode = this.companyf.zipcode.value;
     this.invitedClient.company_information.country = this.companyf.country.value;
 
-    this.userService.saveInvitedClient(this.invitedClient).subscribe(data => {
-      if (data._id) {
-        const participant = new Client(data);
-        if (this.ecosystemsToBeAdded.length) {
-          this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
+    this.userService.saveInvitedClient(this.invitedClient).subscribe(
+      data => {
+        if (data._id) {
+          const participant = new Client(data);
+          if (this.ecosystemsToBeAdded.length) {
+            this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
+              this.closeAndRefresh();
+            });
+          } else {
             this.closeAndRefresh();
-          });
+          }
         } else {
-          this.closeAndRefresh();
+          console.log(data); // TODO: Manage errors
         }
-      } else {
-        console.log(data); // TODO: Manage errors
+      },
+      err => {
+        $.notify(
+          {
+            icon: 'notifications',
+            message: err.error.message
+          },
+          {
+            type: 'danger',
+            timer: 5000,
+            placement: {
+              from: 'top',
+              align: 'right'
+            },
+            offset: 78
+          }
+        );
       }
-    });
+    );
+  }
+
+  markAsTouched(formControl: string) {
+    this.clientDetailsForm.get(formControl).markAsTouched();
   }
 
   closeAndRefresh(): any {

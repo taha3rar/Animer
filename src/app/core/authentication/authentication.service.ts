@@ -38,6 +38,14 @@ export class AuthenticationService {
     );
   }
 
+  forgotPassword(username: string): Observable<boolean> {
+    const data = {
+      email: username
+    };
+
+    return this.apiService.post('/user/forgot-password', data).pipe(map(() => true));
+  }
+
   /**
    * Logs out the user and clear credentials.
    * @return True if the user was logged out successfully.
@@ -78,6 +86,22 @@ export class AuthenticationService {
    */
   get currentUserId(): string | null {
     return this.jwtService.currentUserId;
+  }
+
+  get isAgribusiness(): boolean {
+    return this.credentials.user.roles.includes('agribusiness');
+  }
+
+  get isSeller(): boolean {
+    return this.credentials.user.roles.includes('seller');
+  }
+
+  get isBuyer(): boolean {
+    return this.credentials.user.roles.includes('buyer');
+  }
+
+  get isInvited(): boolean {
+    return this.credentials.user.roles.includes('client');
   }
 
   /**
