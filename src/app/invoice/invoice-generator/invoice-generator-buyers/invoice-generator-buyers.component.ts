@@ -24,7 +24,6 @@ export class InvoiceGeneratorBuyersComponent extends BaseNavigationComponent imp
       this.clients = clients.filter(function(client: Client) {
         return client.role.includes('buyer');
       });
-      console.log(this.clients);
     });
   }
 
