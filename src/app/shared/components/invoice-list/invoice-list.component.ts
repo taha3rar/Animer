@@ -14,6 +14,8 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
   exportInit: boolean;
   @Input()
   invoices: Invoice[];
+  @Input()
+  viewAsSeller: boolean;
   page = 1;
   invoicesToExport: any[] = [];
   @Output() invoicesList = new EventEmitter();
