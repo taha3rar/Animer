@@ -12,51 +12,6 @@
   }
 }
 
-.card .package-details {
-  display: flex;
-  padding: 1rem 1.2rem;
-
-  div:first-child {
-    color: #9b9b9b;
-    font-weight: 600;
-  }
-
-  div:last-child {
-    color: $light-gray;
-  }
-
-  div:not(:last-child) {
-    margin-right: 1rem;
-  }
-}
-
-.quantity {
-  display: flex;
-  height: 4.5rem;
-  background-color: rgb(241, 241, 241);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  margin-bottom: -1rem;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  border-top: 1px solid $light-gray-2;
-  align-items: center;
-  padding-left: 2.3rem;
-
-  & p:first-child {
-    margin-right: 2rem;
-  }
-
-  input {
-    width: 4.5rem;
-    height: 58%;
-    margin: 0rem 1rem;
-    border-radius: 5px;
-    padding: 1rem;
-    border: 1px solid $light-gray-2;
-  }
-}
-
 .btn-circle {
   position: relative;
 }

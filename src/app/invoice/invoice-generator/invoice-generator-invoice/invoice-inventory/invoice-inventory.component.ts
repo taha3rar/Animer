@@ -2,13 +2,14 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Product } from '@app/core/models/product';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { defaultValues } from '@app/shared/helpers/default_values';
+import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
 
 @Component({
   selector: 'app-invoice-inventory',
   templateUrl: './invoice-inventory.component.html',
   styleUrls: ['./invoice-inventory.component.scss']
 })
-export class InvoiceInventoryComponent implements OnInit {
+export class InvoiceInventoryComponent extends BaseNavigationComponent implements OnInit {
   products: Product[];
   agriculturalProducts: Product[];
   processedProducts: Product[];
@@ -16,7 +17,9 @@ export class InvoiceInventoryComponent implements OnInit {
   currency: string = undefined;
   noCurrency: boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<InvoiceInventoryComponent>) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<InvoiceInventoryComponent>) {
+    super();
+  }
 
   ngOnInit() {
     this.noCurrency = true;

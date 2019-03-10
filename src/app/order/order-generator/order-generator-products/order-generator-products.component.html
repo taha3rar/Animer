@@ -5,7 +5,7 @@
         <p>{{ seller.first_name | titlecase }} {{ seller.last_name | titlecase }} Inventory</p>
       </div>
       <div [hidden]="inventoryProducts?.length < 1">
-        <div class="search-box">
+        <!-- <div class="search-box">
           <input
             type="text"
             [(ngModel)]="term"
@@ -14,7 +14,7 @@
             placeholder="Search products..."
           />
           <i class="material-icons">search</i>
-        </div>
+        </div> -->
         <button class="bttn-primary next-step" (click)="toOrderGenerator()">Next Step &rarr;</button>
       </div>
     </div>
@@ -33,7 +33,7 @@
           *ngFor="let product of (agriculturalProducts | paginate: { itemsPerPage: 4, currentPage: page })"
           class="col-md-3"
         >
-          <div class="card">
+          <div class="card card-agricultural">
             <div>
               <p class="pull-right margin-none">
                 {{ product.price_per_unit }} {{ product.currency }}/<small>{{ product.weight_unit | uppercase }}</small>
@@ -50,18 +50,24 @@
               </p>
             </div>
             <div class="package-details">
-              <div>
-                <p>Packages available</p>
-                <p>Type of package</p>
-                <p>Packages</p>
-                <p>Total available</p>
-              </div>
-              <div>
-                <p>{{ product.quantityMax }}</p>
-                <p>{{ product.type_of_package }}</p>
-                <p>{{ product.package_weight }}/{{ product.weight_unit | uppercase }}</p>
-                <p>{{ product.package_weight * product.quantityMax }} {{ product.weight_unit | uppercase }}</p>
-              </div>
+              <table>
+                <tr>
+                  <td>Packages available</td>
+                  <td>{{ product.quantityMax }}</td>
+                </tr>
+                <tr>
+                  <td>Type of package</td>
+                  <td>{{ product.type_of_package }}</td>
+                </tr>
+                <tr>
+                  <td>Package</td>
+                  <td>{{ product.package_weight }}/{{ product.weight_unit | uppercase }}</td>
+                </tr>
+                <tr>
+                  <td>Total available</td>
+                  <td>{{ product.package_weight * product.quantityMax }} {{ product.weight_unit | uppercase }}</td>
+                </tr>
+              </table>
             </div>
 
             <div *ngIf="!order.currency.value || product.currency === order.currency.value" class="quantity">
@@ -85,18 +91,18 @@
 
       <!--Processed Products-->
       <div class="margin-bottom margin-top" *ngIf="processedProducts?.length !== 0">
-        <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length, 4)">
+        <button class="btn-icons pull-right" (click)="onNextPage2(processedProducts.length, 4)">
           <i class="material-icons">keyboard_arrow_right</i>
         </button>
-        <button class="btn-icons pull-right" (click)="onBackPage()">
+        <button class="btn-icons pull-right" (click)="onBackPage2()">
           <i class="material-icons">keyboard_arrow_left</i>
         </button>
         <p class="normal-text-bold">Processed Products</p>
       </div>
       <div class="row clearfix">
-        <ng-container *ngFor="let product of processedProducts">
+        <ng-container *ngFor="let product of (processedProducts | paginate: { itemsPerPage: 4, currentPage: page2 })">
           <div class="col-md-3">
-            <div class="card">
+            <div class="card card-processed">
               <div>
                 <p class="pull-right margin-none">
                   {{ product.package_price }} {{ product.currency }}/<small>{{ product.type_of_package }}</small>
@@ -110,24 +116,32 @@
                 <p class="heading-2">{{ product.produce }} <br /></p>
               </div>
               <div class="package-details">
-                <div>
-                  <p>Packages available</p>
-                  <p>Type of package</p>
-                  <p *ngIf="product.item_measurement_amount">Item packing type</p>
-                  <p *ngIf="product.item_measurement_amount">Items per package</p>
-                  <p *ngIf="product.item_measurement_amount">Amount of</p>
-                </div>
-                <div>
-                  <p>{{ product.quantityMax }}</p>
-                  <p>{{ product.type_of_package }}</p>
-                  <p *ngIf="product.item_measurement_amount">{{ product.item_package_type }}</p>
-                  <p *ngIf="product.item_measurement_amount">{{ product.items_per_package }}</p>
-                  <p *ngIf="product.item_measurement_amount">
-                    {{ product.item_measurement_amount }} {{ product.item_measurement_unit }}/{{
-                      product.item_package_type
-                    }}
-                  </p>
-                </div>
+                <table>
+                  <tr>
+                    <td>Packages available</td>
+                    <td>{{ product.quantityMax }}</td>
+                  </tr>
+                  <tr>
+                    <td>Type of package</td>
+                    <td>{{ product.type_of_package }}</td>
+                  </tr>
+                  <tr *ngIf="product.item_measurement_amount">
+                    <td>Item packing type</td>
+                    <td>{{ product.item_package_type }}</td>
+                  </tr>
+                  <tr *ngIf="product.item_measurement_amount">
+                    <td>Items per package</td>
+                    <td>{{ product.items_per_package }}</td>
+                  </tr>
+                  <tr *ngIf="product.item_measurement_amount">
+                    <td>Amount</td>
+                    <td>
+                      {{ product.item_measurement_amount }} {{ product.item_measurement_unit }}/{{
+                        product.item_package_type
+                      }}
+                    </td>
+                  </tr>
+                </table>
               </div>
 
               <div *ngIf="!order.currency.value || product.currency === order.currency.value" class="quantity">
