@@ -21,7 +21,10 @@ export class InvoiceGeneratorBuyersComponent extends BaseNavigationComponent imp
   }
   ngOnInit() {
     this.route.data.subscribe(({ clients }) => {
-      this.clients = clients;
+      this.clients = clients.filter(function(client: Client) {
+        return client.role.includes('buyer');
+      });
+      console.log(this.clients);
     });
   }
 
