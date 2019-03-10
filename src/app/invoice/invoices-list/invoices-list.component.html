@@ -26,9 +26,9 @@
     <button (click)="viewAs('buyer')" [class.active]="this.viewAsBuyer">
       Buyer
     </button>
-    <button (click)="viewAs('agri')" [class.active]="this.viewAsAgri" class="bttn-primary-sm">
+    <!-- <button (click)="viewAs('agri')" [class.active]="this.viewAsAgri" class="bttn-primary-sm">
       All
-    </button>
+    </button> -->
   </div>
 </div>
 <!-- <div class="pull-left">
@@ -51,6 +51,7 @@
   </div>
 </div> -->
 <app-invoice-list
+  [viewAsSeller]="viewAsSeller"
   [exportInit]="exportInit"
   (invoicesList)="invoicesToExport = $event"
   [invoices]="invoices"

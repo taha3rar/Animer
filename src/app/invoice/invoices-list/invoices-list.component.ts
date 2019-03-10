@@ -22,6 +22,7 @@ export class InvoicesListComponent implements OnInit {
   viewAsAgri = true;
   exportInit = false;
   agribusinessUser: boolean;
+  sellerUser: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,11 +35,17 @@ export class InvoicesListComponent implements OnInit {
 
   ngOnInit() {
     this.agribusinessUser = this.authService.isAgribusiness;
+    this.sellerUser = this.authService.isSeller;
     this.route.data.subscribe(({ invoices, invoicesAsBuyer, invoicesAsSeller }) => {
       this.invoices = invoices;
       this.allInvoices = invoices;
       this.buyerInvoices = invoicesAsBuyer;
       this.sellerInvoices = invoicesAsSeller;
+      if (this.agribusinessUser || this.sellerUser) {
+        this.viewAs('seller');
+      } else {
+        this.viewAs('buyer');
+      }
     });
   }
 
@@ -49,12 +56,9 @@ export class InvoicesListComponent implements OnInit {
     if (profileType === 'seller') {
       this.viewAsSeller = true;
       this.invoices = this.sellerInvoices;
-    } else if (profileType === 'buyer') {
+    } else {
       this.viewAsBuyer = true;
       this.invoices = this.buyerInvoices;
-    } else {
-      this.viewAsAgri = true;
-      this.invoices = this.allInvoices;
     }
   }
 
