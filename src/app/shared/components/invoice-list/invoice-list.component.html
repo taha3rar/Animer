@@ -12,7 +12,10 @@
       </th>
       <th translate class="text-center">ID</th>
       <th translate>Issued at</th>
-      <th translate>Issued for</th>
+      <th translate>
+        <span *ngIf="viewAsSeller">Issued for</span>
+        <span *ngIf="!viewAsSeller">Issued by</span>
+      </th>
       <th translate>Signed by</th>
       <th translate>Total due</th>
       <th translate>Status</th>
@@ -33,12 +36,11 @@
       <td class="text-center">{{ invoice.numericId }}</td>
       <td>{{ invoice.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>
-        <span *ngIf="userId == invoice.seller._id">{{ invoice.buyer.company_name }}</span>
-        <span *ngIf="userId == invoice.buyer._id">{{ invoice.seller.company_name }}</span>
+        <span *ngIf="viewAsSeller">{{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }}</span>
+        <span *ngIf="!viewAsSeller">{{ invoice.seller.company_name }}</span>
       </td>
       <td>
-        <span *ngIf="userId == invoice.seller._id">{{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }}</span>
-        <span *ngIf="userId == invoice.buyer._id">{{ invoice.seller.first_name }} {{ invoice.seller.last_name }}</span>
+        <span>{{ invoice.sign_by.first_name }} {{ invoice.sign_by.last_name }}</span>
       </td>
       <td>{{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}</td>
       <td>{{ invoice.status }}</td>
