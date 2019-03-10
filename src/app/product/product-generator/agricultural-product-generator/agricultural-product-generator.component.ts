@@ -60,17 +60,17 @@ export class AgriculturalProductGeneratorComponent implements OnInit {
   onChanges(): void {
     this.productForm.get('quantity').valueChanges.subscribe(val => {
       this.setPackageWeight();
-      this.setPrice('package', false);
+      this.setPrice('unit');
     });
     this.productForm.get('total_weight').valueChanges.subscribe(val => {
       this.setPackageWeight();
-      this.setPrice('unit', false);
+      this.setPrice('unit');
     });
     this.productForm.get('package_price').valueChanges.subscribe(val => {
-      this.setPrice('package', true);
+      this.setPrice('package');
     });
     this.productForm.get('price_per_unit').valueChanges.subscribe(val => {
-      this.setPrice('unit', true);
+      this.setPrice('unit');
     });
   }
 
@@ -84,33 +84,29 @@ export class AgriculturalProductGeneratorComponent implements OnInit {
     }
   }
 
-  setPrice(type: string, updatePrice: boolean): void {
-    if (this.product.quantity.value && (this.product.package_price.value || this.product.price_per_unit.value)) {
+  setPrice(type: string): void {
+    if (this.product.total_weight.value && this.product.price_per_unit.value) {
       if (type === 'package') {
         this.productForm.patchValue({
           total_price: (this.product.quantity.value * this.product.package_price.value).toFixed(2)
         });
-        if (updatePrice) {
-          this.productForm.patchValue(
-            {
-              price_per_unit: (this.product.total_price.value / this.product.total_weight.value).toFixed(2)
-            },
-            { emitEvent: false }
-          );
-        }
+        this.productForm.patchValue(
+          {
+            price_per_unit: (this.product.total_price.value / this.product.total_weight.value).toFixed(2)
+          },
+          { emitEvent: false }
+        );
       }
       if (type === 'unit') {
         this.productForm.patchValue({
           total_price: (this.product.total_weight.value * this.product.price_per_unit.value).toFixed(2)
         });
-        if (updatePrice) {
-          this.productForm.patchValue(
-            {
-              package_price: (this.product.total_price.value / this.product.quantity.value).toFixed(2)
-            },
-            { emitEvent: false }
-          );
-        }
+        this.productForm.patchValue(
+          {
+            package_price: (this.product.total_price.value / this.product.quantity.value).toFixed(2)
+          },
+          { emitEvent: false }
+        );
       }
     } else {
       this.productForm.patchValue({ total_price: 0 });
