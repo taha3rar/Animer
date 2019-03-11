@@ -16,10 +16,10 @@ declare const $: any;
 export class OrderGeneratorProductsComponent extends BaseNavigationComponent implements OnInit {
   term: string;
   form: FormGroup;
-  products: any[];
+  inventoryProducts: any[];
   agriculturalProducts: Product[];
   processedProducts: Product[];
-  newProducts: ProductInvoice[] = [];
+  addedProducts: ProductInvoice[] = [];
   noInventory: boolean;
 
   constructor(private productService: ProductService, private orderDataService: OrderDataService) {
@@ -33,20 +33,20 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
       this.form = form;
       if (this.seller._id) {
         this.productService.getByUser(this.seller._id).subscribe(data => {
-          this.products = data;
-          this.products.length > 1 ? (this.noInventory = false) : (this.noInventory = true);
-          this.products.forEach((product: Product) => {
+          this.inventoryProducts = data;
+          this.inventoryProducts.length >= 1 ? (this.noInventory = false) : (this.noInventory = true);
+          this.inventoryProducts.forEach((product: Product) => {
             product['quantityMax'] = product.quantity;
             product.quantity = 0;
           });
-          this.agriculturalProducts = this.products.filter(p => p.product_type === 'agricultural');
-          this.processedProducts = this.products.filter(p => p.product_type === 'processed');
+          this.agriculturalProducts = this.inventoryProducts.filter(p => p.product_type === 'agricultural');
+          this.processedProducts = this.inventoryProducts.filter(p => p.product_type === 'processed');
         });
       }
     });
     this.orderDataService.currentProductList.subscribe(data => {
       if (data) {
-        this.newProducts = data;
+        this.addedProducts = data;
       }
     });
   }
@@ -91,13 +91,14 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
 
   productValidation(product: any) {
     if (product.quantity < 1) {
-      for (let i = 0; i < this.newProducts.length; i++) {
-        if (this.newProducts[i].numericId === product.numericId) {
-          this.updateProduct(product, true);
-          this.newProducts.splice(i, 1);
+      // Product deleted from addedProducts array if quantity set to 0
+      for (let i = 0; i < this.addedProducts.length; i++) {
+        if (this.addedProducts[i].numericId === product.numericId) {
+          this.order['subtotal'].setValue(this.order.subtotal.value - product['product_subtotal']);
+          this.addedProducts.splice(i, 1);
         }
       }
-      if (!this.order.subtotal.value || this.newProducts.length <= 0) {
+      if (!this.order.subtotal.value || this.addedProducts.length <= 0) {
         this.order['currency'].setValue(undefined);
         this.order['subtotal'].setValue(null);
       }
@@ -105,32 +106,31 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
       if (!this.order.currency.value) {
         this.order['currency'].setValue(product.currency);
       }
-      for (let i = 0; i < this.newProducts.length; i++) {
-        if (this.newProducts[i].numericId === product.numericId) {
-          this.updateProduct(this.newProducts[i], true);
-          this.newProducts[i].quantity = product.quantity;
-          this.updateProduct(this.newProducts[i], false);
+      // We check if the product is already in the addedProducts array
+      for (let i = 0; i < this.addedProducts.length; i++) {
+        if (this.addedProducts[i].numericId === product.numericId) {
+          this.order['subtotal'].setValue(this.order.subtotal.value - product['product_subtotal']);
+          // If so we update the product's quantity and update the subtotal
+          this.addedProducts[i].quantity = product.quantity;
+          this.updateTotal(this.addedProducts[i]);
           return;
         }
       }
-      this.updateProduct(product, false);
-      this.newProducts.push(product);
+      // If the product isn't in the addedProducts array, we update the subtotal and push it to the addedProducts array
+      this.updateTotal(product);
+      this.addedProducts.push(product);
     }
   }
 
-  updateProduct(product: any, minusTotal: boolean) {
-    if (minusTotal) {
-      this.order['subtotal'].setValue(this.order.subtotal.value - product['product_subtotal']);
-    } else {
-      if (product.product_type === 'agricultural') {
-        product['total_weight'] = product.package_weight * product.quantity;
-        product['product_subtotal'] = product.package_price * product.quantity;
-      }
-      if (product.product_type === 'processed') {
-        product['product_subtotal'] = product.package_price * product.quantity;
-      }
-      this.order['subtotal'].setValue(this.order.subtotal.value + product['product_subtotal']);
+  updateTotal(product: any) {
+    if (product.product_type === 'agricultural') {
+      product['total_weight'] = product.package_weight * product.quantity;
+      product['product_subtotal'] = product.package_price * product.quantity;
     }
+    if (product.product_type === 'processed') {
+      product['product_subtotal'] = product.package_price * product.quantity;
+    }
+    this.order['subtotal'].setValue(this.order.subtotal.value + product['product_subtotal']);
   }
 
   product_image(product: Product) {
@@ -141,12 +141,12 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   }
 
   deleteProducts() {
-    this.newProducts = [];
+    this.addedProducts = [];
     this.order['subtotal'].setValue(0);
     this.order['currency'].setValue(undefined);
   }
 
   toOrderGenerator() {
-    this.orderDataService.setProductList(this.newProducts);
+    this.orderDataService.setProductList(this.addedProducts);
   }
 }

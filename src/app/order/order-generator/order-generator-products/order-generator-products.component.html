@@ -4,7 +4,7 @@
       <div>
         <p>{{ seller.first_name | titlecase }} {{ seller.last_name | titlecase }} Inventory</p>
       </div>
-      <div [hidden]="products?.length < 1">
+      <div [hidden]="inventoryProducts?.length < 1">
         <div class="search-box">
           <input
             type="text"
@@ -18,7 +18,7 @@
         <button class="bttn-primary next-step" (click)="toOrderGenerator()">Next Step &rarr;</button>
       </div>
     </div>
-    <div class="padding-all-2" *ngIf="products?.length >= 1">
+    <div class="padding-all-2" *ngIf="inventoryProducts?.length >= 1">
       <div class="margin-bottom">
         <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length, 4)">
           <i class="material-icons">keyboard_arrow_right</i>
@@ -161,7 +161,7 @@
     </div>
     <div class="padding-all-2">
       <app-order-generator-summary
-        [productList]="newProducts"
+        [productList]="addedProducts"
         [currency]="order.currency.value"
         [form]="form"
       ></app-order-generator-summary>
