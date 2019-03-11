@@ -4,14 +4,19 @@
 </div>
 <div class="padding-all">
   <div class="margin-bottom">
-    <button class="btn-icons pull-right"><i class="material-icons">arrow_forward_ios</i></button>
-    <button class="btn-icons pull-right"><i class="material-icons">arrow_back_ios</i></button>
+    <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length, 3)">
+      <i class="material-icons">arrow_forward_ios</i>
+    </button>
+    <button class="btn-icons pull-right" (click)="onBackPage()"><i class="material-icons">arrow_back_ios</i></button>
     <p class="normal-text-bold">Agricultural Products</p>
   </div>
   <div class="row clearfix">
-    <div *ngFor="let product of agriculturalProducts" class="col-md-4">
-      <div class="card">
-        <div>
+    <div
+      *ngFor="let product of (agriculturalProducts | paginate: { itemsPerPage: 3, currentPage: page })"
+      class="col-md-4"
+    >
+      <div class="card card-agricultural">
+        <div class="card-inner-price">
           <p class="pull-right margin-none">
             {{ product.price_per_unit }} {{ product.currency }}/<small>{{ product.weight_unit | uppercase }}</small>
           </p>
@@ -27,20 +32,25 @@
           </p>
         </div>
         <div class="package-details">
-          <div>
-            <p>Packages available</p>
-            <p>Type of package</p>
-            <p>Package</p>
-            <p>Total available</p>
-          </div>
-          <div>
-            <p>{{ product.quantityMax }}</p>
-            <p>{{ product.type_of_package }}</p>
-            <p>{{ product.package_weight }}/{{ product.weight_unit | uppercase }}</p>
-            <p>{{ product.total_weight }} {{ product.weight_unit | uppercase }}</p>
-          </div>
+          <table>
+            <tr>
+              <td>Packages available</td>
+              <td>{{ product.quantityMax }}</td>
+            </tr>
+            <tr>
+              <td>Type of package</td>
+              <td>{{ product.type_of_package }}</td>
+            </tr>
+            <tr>
+              <td>Package</td>
+              <td>{{ product.package_weight }}/{{ product.weight_unit | uppercase }}</td>
+            </tr>
+            <tr>
+              <td>Total available</td>
+              <td>{{ product.total_weight }} {{ product.weight_unit | uppercase }}</td>
+            </tr>
+          </table>
         </div>
-
         <div *ngIf="!currency || product.currency === currency" class="quantity">
           <p class="normal-text-bold">Quantity</p>
           <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
@@ -60,15 +70,17 @@
 
   <!--Processed Products-->
   <div class="margin-bottom margin-top">
-    <button class="btn-icons pull-right"><i class="material-icons">arrow_forward_ios</i></button>
-    <button class="btn-icons pull-right"><i class="material-icons">arrow_back_ios</i></button>
+    <button class="btn-icons pull-right" (click)="onNextPage2(processedProducts.length, 3)">
+      <i class="material-icons">arrow_forward_ios</i>
+    </button>
+    <button class="btn-icons pull-right" (click)="onBackPage2()"><i class="material-icons">arrow_back_ios</i></button>
     <p class="normal-text-bold">Processed Products</p>
   </div>
   <div class="row clearfix">
-    <ng-container *ngFor="let product of processedProducts">
+    <ng-container *ngFor="let product of (processedProducts | paginate: { itemsPerPage: 3, currentPage: page2 })">
       <div class="col-md-4">
-        <div class="card">
-          <div>
+        <div class="card card-processed">
+          <div class="card-inner-price">
             <p class="pull-right margin-none">
               {{ product.package_price }} {{ product.currency }}/<small>{{ product.type_of_package }}</small>
             </p>
@@ -99,7 +111,7 @@
                 <td>{{ product.items_per_package }}</td>
               </tr>
               <tr *ngIf="product.item_measurement_amount">
-                <td>Amount of</td>
+                <td>Amount</td>
                 <td>
                   {{ product.item_measurement_amount }} {{ product.item_measurement_unit }}/{{
                     product.item_package_type
