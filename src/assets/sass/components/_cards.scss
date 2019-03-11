@@ -224,3 +224,100 @@
     margin-left: auto;
   }
 }
+
+.card-processed {
+  min-height: 30.6rem;
+
+  .quantity {
+    margin-top: auto;
+    display: flex;
+    height: 4.5rem;
+    justify-self: end;
+    background-color: rgb(241, 241, 241);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: -1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-top: 1px solid $light-gray-2;
+    align-items: center;
+    padding-left: 2.3rem;
+
+    & p:first-child {
+      margin-right: 2rem;
+    }
+
+    input {
+      width: 4.5rem;
+      height: 58%;
+      margin: 0rem 1rem;
+      border-radius: 5px;
+      padding: 1rem;
+      border: 1px solid $light-gray-2;
+    }
+  }
+}
+
+.card-agricultural {
+  min-height: 28rem;
+
+  .quantity {
+    margin-top: auto;
+    display: flex;
+    height: 4.5rem;
+    justify-self: end;
+    background-color: rgb(241, 241, 241);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: -1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-top: 1px solid $light-gray-2;
+    align-items: center;
+    padding-left: 2.3rem;
+
+    & p:first-child {
+      margin-right: 2rem;
+    }
+
+    input {
+      width: 4.5rem;
+      height: 58%;
+      margin: 0rem 1rem;
+      border-radius: 5px;
+      padding: 1rem;
+      border: 1px solid $light-gray-2;
+    }
+  }
+}
+
+.card .package-details table {
+  padding: 0rem 1rem;
+  margin-top: 0px;
+  font-size: 1.35rem;
+  border-collapse: separate;
+  border-spacing: 0 1rem;
+  width: 100%;
+
+  td:nth-child(odd) {
+    color: #9b9b9b;
+    font-weight: 600;
+    padding-right: 1rem;
+    word-wrap: break-word;
+    vertical-align: top;
+    text-align: left;
+    width: 69%;
+  }
+
+  td:nth-child(even) {
+    color: $light-gray;
+    word-break: break-word;
+    vertical-align: top;
+    text-align: left;
+    width: 31%;
+  }
+}
+
+.supplier-card {
+  height: 20.8rem;
+}

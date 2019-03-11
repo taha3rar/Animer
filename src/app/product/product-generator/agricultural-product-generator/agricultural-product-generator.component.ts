@@ -60,7 +60,7 @@ export class AgriculturalProductGeneratorComponent implements OnInit {
   onChanges(): void {
     this.productForm.get('quantity').valueChanges.subscribe(val => {
       this.setPackageWeight();
-      this.setPrice('package');
+      this.setPrice('unit');
     });
     this.productForm.get('total_weight').valueChanges.subscribe(val => {
       this.setPackageWeight();
@@ -85,7 +85,7 @@ export class AgriculturalProductGeneratorComponent implements OnInit {
   }
 
   setPrice(type: string): void {
-    if (this.product.quantity.value && (this.product.package_price.value || this.product.price_per_unit.value)) {
+    if (this.product.total_weight.value && this.product.price_per_unit.value) {
       if (type === 'package') {
         this.productForm.patchValue({
           total_price: (this.product.quantity.value * this.product.package_price.value).toFixed(2)

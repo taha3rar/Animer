@@ -129,7 +129,10 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('item_measurement_amount')">
-        <label for="itemMeasurementAmount">Amount of in individual *</label>
+        <label for="itemMeasurementAmount"
+          >Amount of {{ productForm.value.item_measurement_unit | uppercase }} in individual
+          {{ productForm.value.item_package_type }} *</label
+        >
         <input
           min="0"
           type="number"

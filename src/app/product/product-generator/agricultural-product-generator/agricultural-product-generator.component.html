@@ -154,14 +154,14 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('package_price')">
-        <label for="package-price">Price per Package *</label>
+        <label for="package-price">Estimated Price per Package *</label>
         <input
           type="number"
           name="package_price"
           class="form-control"
           id="package-price"
           formControlName="package_price"
-          placeholder="Ex. 15"
+          readonly
         />
         <div class="help-block" *ngIf="isFieldInvalid('package_price')">
           <p>This field is required</p>
