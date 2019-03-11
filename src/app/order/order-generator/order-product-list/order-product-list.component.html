@@ -12,56 +12,58 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products; let i = index">
-          <td>
-            <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-              {{ product.produce }} / {{ product.variety }}
-            </span>
-            <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-              {{ product.produce }} / {{ product.item_measurement_amount }}
-              {{ product.item_measurement_unit | uppercase }} /
-              {{ product.item_package_type }}
-            </span>
-            <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-              {{ product.produce }}
-            </span>
-          </td>
-          <td>
-            <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-              {{ product.quantity }} ({{ product.type_of_package }} / {{ product.package_weight }}
-              {{ product.weight_unit | uppercase }})
-            </span>
-            <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-              {{ product.quantity }} ({{ product.type_of_package }} / {{ product.items_per_package
-              }}<span *ngIf="product.items_per_package > 1"> items)</span
-              ><span *ngIf="product.items_per_package == 1"> item)</span>
-            </span>
-            <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-              {{ product.quantity }} ({{ product.type_of_package }})
-            </span>
-          </td>
-          <td>
-            <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
-              >{{ product.total_weight }} {{ product.weight_unit | uppercase }}</span
-            >
-            <span *ngIf="product.product_type == 'processed'">N/A</span>
-          </td>
-          <td>
-            <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
-              >{{ product.price_per_unit }} {{ currency }} / {{ product.weight_unit | uppercase }}</span
-            >
-            <span *ngIf="product.product_type == 'processed'"
-              >{{ product.package_price }} {{ currency }} / {{ product.type_of_package }}</span
-            >
-          </td>
-          <td>
-            <span id="total">{{ product.product_subtotal | number: '1.2-2' }} {{ currency }}</span>
-          </td>
-          <td class="text-center">
-            <button class="btn-circle remove" (click)="deleteProduct(i)"><i class="material-icons">remove</i></button>
-            <button class="btn-circle edit" (click)="updateProduct(i)"><i class="material-icons">edit</i></button>
-          </td>
-        </tr>
+        <ng-container *ngFor="let product of products; let i = index">
+          <tr>
+            <td>
+              <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
+                {{ product.produce }} / {{ product.variety }}
+              </span>
+              <span *ngIf="product.product_type == 'processed' && product.item_package_type">
+                {{ product.produce }} / {{ product.item_measurement_amount }}
+                {{ product.item_measurement_unit | uppercase }} /
+                {{ product.item_package_type }}
+              </span>
+              <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
+                {{ product.produce }}
+              </span>
+            </td>
+            <td>
+              <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
+                {{ product.quantity }} ({{ product.type_of_package }} / {{ product.package_weight }}
+                {{ product.weight_unit | uppercase }})
+              </span>
+              <span *ngIf="product.product_type == 'processed' && product.item_package_type">
+                {{ product.quantity }} ({{ product.type_of_package }} / {{ product.items_per_package
+                }}<span *ngIf="product.items_per_package > 1"> items)</span
+                ><span *ngIf="product.items_per_package == 1"> item)</span>
+              </span>
+              <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
+                {{ product.quantity }} ({{ product.type_of_package }})
+              </span>
+            </td>
+            <td>
+              <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
+                >{{ product.total_weight }} {{ product.weight_unit | uppercase }}</span
+              >
+              <span *ngIf="product.product_type == 'processed'">N/A</span>
+            </td>
+            <td>
+              <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
+                >{{ product.price_per_unit }} {{ currency }} / {{ product.weight_unit | uppercase }}</span
+              >
+              <span *ngIf="product.product_type == 'processed'"
+                >{{ product.package_price }} {{ currency }} / {{ product.type_of_package }}</span
+              >
+            </td>
+            <td>
+              <span id="total">{{ product.product_subtotal | number: '1.2-2' }} {{ currency }}</span>
+            </td>
+            <td class="text-center">
+              <button class="btn-circle remove" (click)="deleteProduct(i)"><i class="material-icons">remove</i></button>
+              <button class="btn-circle edit" (click)="updateProduct(i)"><i class="material-icons">edit</i></button>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>

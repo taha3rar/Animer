@@ -168,11 +168,11 @@
                 placeholder="yyyy-mm-dd"
                 name="ddpp"
                 ngbDatepicker
-                #ddpp="ngbDatepicker"
+                #dp1="ngbDatepicker"
                 formControlName="date"
               />
               <div class="input-group-append">
-                <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
+                <button class="btn glyphicon glyphicon-calendar" (click)="dp1.toggle()" type="button"></button>
               </div>
             </div>
             <div class="help-block">
@@ -186,14 +186,13 @@
             <input
               id="SPI_date_created"
               class="form-control"
-              placeholder="yyyy-mm-dd"
-              name="ddpp2"
+              placeholder="yyy-mm-dd"
               ngbDatepicker
-              #ddpp="ngbDatepicker"
+              #dp2="ngbDatepicker"
               formControlName="date_created"
             />
             <div class="input-group-append">
-              <button class="btn glyphicon glyphicon-calendar" (click)="ddpp.toggle()" type="button"></button>
+              <button class="btn glyphicon glyphicon-calendar" (click)="dp2.toggle()" type="button"></button>
             </div>
           </div>
           <div class="help-block">
@@ -276,14 +275,14 @@
                 placeholder="yyyy-mm-dd"
                 name="ddp"
                 ngbDatepicker
-                #ddp="ngbDatepicker"
+                #dp3="ngbDatepicker"
                 formControlName="expected_delivery_date"
               />
               <div class="input-group-append">
                 <button
                   class="btn glyphicon glyphicon-calendar"
                   style="position:0;"
-                  (click)="ddp.toggle()"
+                  (click)="dp3.toggle()"
                   type="button"
                 ></button>
               </div>

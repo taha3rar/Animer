@@ -34,19 +34,15 @@ export class OrderAgriculturalProductComponent extends BaseProductOrder {
       }
     } else {
       this.product.product_subtotal = undefined;
+      this.product.package_price = undefined;
     }
   }
 
   setPricePackage() {
-    if (this.product.quantity && this.product.package_price) {
-      this.product.product_subtotal = Number((this.product.quantity * this.product.package_price).toFixed(2));
-      if (this.product.total_weight) {
-        this.product.price_per_unit = Number((this.product.product_subtotal / this.product.total_weight).toFixed(2));
-      } else {
-        this.product.price_per_unit = undefined;
-      }
+    if (this.product.quantity && this.product.product_subtotal) {
+      this.product.package_price = Number((this.product.product_subtotal / this.product.quantity).toFixed(2));
     } else {
-      this.product.product_subtotal = undefined;
+      this.product.package_price = undefined;
     }
   }
 }
