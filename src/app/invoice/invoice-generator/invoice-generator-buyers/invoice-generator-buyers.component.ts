@@ -3,8 +3,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { defaultValues } from '@app/shared/helpers/default_values';
-import { Invoice } from '@app/core/models/invoice/invoice';
 import { FormGroup } from '@angular/forms';
+import { AuthenticationService } from '@app/core';
+import { User } from '@app/core/models/user/user';
 
 @Component({
   selector: 'app-invoice-generator-buyers',
@@ -12,14 +13,16 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./invoice-generator-buyers.component.scss']
 })
 export class InvoiceGeneratorBuyersComponent extends BaseNavigationComponent implements OnInit {
+  currentUser: User;
   @Input()
   form: FormGroup;
   clients: Client[];
   nextBtnClicked = false;
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private authService: AuthenticationService) {
     super();
   }
   ngOnInit() {
+    this.currentUser = this.route.snapshot.data['currentUser'];
     this.route.data.subscribe(({ clients }) => {
       this.clients = clients.filter(function(client: Client) {
         return client.role.includes('buyer');

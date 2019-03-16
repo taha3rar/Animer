@@ -1,4 +1,5 @@
 import { SharedModule } from './../shared/shared.module';
+import { ClientModule } from '@app/client/client.module';
 import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe, DatePipe } from '@angular/common';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
 import { ProductCurrentUserResolver } from './resolvers/products-currentUser.resolver';
+import { CurrentUserResolver } from './resolvers/current-user.resolver';
 // tslint:disable-next-line:max-line-length
 import { InvoiceProductListComponent } from './invoice-generator/invoice-generator-invoice/invoice-product-list/invoice-product-list.component';
 import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
@@ -54,6 +56,7 @@ import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
+    ClientModule,
     NgxPermissionsModule.forRoot()
   ],
   entryComponents: [InvoiceInventoryComponent, InvoiceAgriculturalProductComponent, InvoiceProcessedProductComponent],
@@ -65,6 +68,7 @@ import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.
     InvoiceSellerResolver,
     InvoiceResolver,
     ProductCurrentUserResolver,
+    CurrentUserResolver,
     DecimalPipe,
     DatePipe
   ]

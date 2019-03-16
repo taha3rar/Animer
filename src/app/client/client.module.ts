@@ -47,6 +47,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     ClientInvoicesComponent,
     ClientDocumentsComponent
   ],
+  exports: [ClientGeneratorComponent],
   providers: [
     ClientListResolver,
     UserResolver,

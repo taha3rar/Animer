@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
+import { CurrentUserResolver } from './resolvers/current-user.resolver';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { InvoiceComponent } from './invoice/invoice.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
       path: 'invoice/generator',
       component: InvoiceGeneratorComponent,
       resolve: {
+        currentUser: CurrentUserResolver,
         clients: InvoiceBuyersResolver,
         seller: InvoiceSellerResolver,
         products: ProductCurrentUserResolver
