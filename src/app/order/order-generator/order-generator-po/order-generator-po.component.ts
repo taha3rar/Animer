@@ -7,6 +7,7 @@ import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
 import * as moment from 'moment';
+import { Product } from '@app/core/models/product';
 
 @Component({
   selector: 'app-order-generator-po',
@@ -59,6 +60,22 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
     this.productsValid = false;
   }
 
+  measurementUnitConflict(products: ProductInvoice[]): string {
+    let baseMeasurementUnit: string;
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].product_type === 'agricultural') {
+        if (!baseMeasurementUnit) {
+          baseMeasurementUnit = products[i].weight_unit;
+        } else {
+          if (baseMeasurementUnit !== products[i].weight_unit) {
+            return undefined;
+          }
+        }
+      }
+    }
+    return baseMeasurementUnit;
+  }
+
   draftOrder() {
     this.order['sign_by'].patchValue({
       date: moment(this.form['controls'].sign_by['controls'].date.value)
@@ -77,6 +94,7 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
     });
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
+    this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.draft = true;
     this.orderService.draft(this.newOrder).subscribe(() => {
@@ -102,6 +120,7 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
     });
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
+    this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.orderDataService.setNewOrder(this.newOrder);
   }

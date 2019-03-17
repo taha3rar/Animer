@@ -2,7 +2,7 @@ import { RouterModule } from '@angular/router';
 import { CsvService } from './services/csv.service';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoaderComponent } from './loader/loader.component';
 import { RoundUpPipe } from './pipes/roundup.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -21,7 +21,7 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
 import { ClientGeneratorComponent } from '@app/client/client-generator/client-generator.component';
 
 @NgModule({
-  imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule],
+  imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, MatTooltipModule],
   declarations: [
     LoaderComponent,
     RoundUpPipe,

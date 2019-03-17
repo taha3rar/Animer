@@ -3,6 +3,7 @@ import { Order } from '@app/core/models/order/order';
 import { AuthenticationService, OrderService } from '@app/core';
 import { BaseListComponent } from '../base-list/base-list.component';
 import { Router } from '@angular/router';
+import 'hammerjs';
 
 @Component({
   selector: 'app-order-list',
@@ -13,6 +14,9 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
   @Input()
   orders: Order[];
   page = 1;
+  // tslint:disable-next-line:max-line-length
+  measurementUnitConflictMessage: String =
+    'This purchase order includes only processed products, for more information please click on the blue view button on the right side of the row';
 
   constructor(
     private authService: AuthenticationService,
@@ -24,7 +28,9 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.orders);
+  }
 
   get userId() {
     return this.authService.currentUserId;
