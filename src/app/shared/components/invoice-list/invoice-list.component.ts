@@ -32,7 +32,9 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.invoices);
+  }
 
   get userId() {
     return this.authService.currentUserId;
@@ -63,5 +65,14 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     }
     this.invoicesList.emit(this.invoicesToExport);
     this.checkedAll = true;
+  }
+
+  hasProcessedProduct(invoice: Invoice) {
+    for (let i = 0; i < invoice.products.length; i++) {
+      if (invoice.products[i].product_type === 'processed') {
+        return true;
+      }
+    }
+    return false;
   }
 }

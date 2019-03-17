@@ -180,6 +180,22 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
     });
   }
 
+  measurementUnitConflict(products: ProductInvoice[]): string {
+    let baseMeasurementUnit: string;
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].product_type === 'agricultural') {
+        if (!baseMeasurementUnit) {
+          baseMeasurementUnit = products[i].weight_unit;
+        } else {
+          if (baseMeasurementUnit !== products[i].weight_unit) {
+            return undefined;
+          }
+        }
+      }
+    }
+    return baseMeasurementUnit;
+  }
+
   draftInvoice() {
     this.invoice['sign_by'].patchValue({
       date: moment(this.form['controls'].sign_by['controls'].date.value)
@@ -198,6 +214,7 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
     });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
+    this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
     if (!this.draft) {
       this.invoiceService.draft(this.newInvoice).subscribe(() => {
@@ -228,6 +245,7 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
     });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
+    this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoiceEvent.emit(this.newInvoice);
   }
 

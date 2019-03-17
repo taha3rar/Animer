@@ -17,6 +17,8 @@
         <span *ngIf="!viewAsSeller">Issued by</span>
       </th>
       <th translate>Signed by</th>
+      <th translate>Product</th>
+      <th translate>Amount</th>
       <th translate>Total due</th>
       <th translate>Status</th>
       <th translate class="text-right">Actions</th>
@@ -41,6 +43,25 @@
       </td>
       <td>
         <span>{{ invoice.sign_by.first_name }} {{ invoice.sign_by.last_name }}</span>
+      </td>
+      <td>
+        <span *ngIf="invoice.products.length < 1">N/A</span>
+        <ng-container *ngIf="invoice.products.length == 1">
+          <span *ngIf="invoice.products[0].product_type != 'processed'"
+            >{{ invoice.products[0].produce }} / {{ invoice.products[0].variety }}</span
+          >
+          <span *ngIf="invoice.products[0].product_type == 'processed'">{{ invoice.products[0].produce }}</span>
+        </ng-container>
+        <span *ngIf="invoice.products.length > 1">Multiple Products</span>
+      </td>
+      <td>
+        <span *ngIf="invoice.total_weight"
+          >{{ invoice.total_weight | number: '1.2-2' }} {{ invoice.document_weight_unit }}
+          <span *ngIf="hasProcessedProduct(invoice)" style="font-size :9px;color:gray"
+            >Excluding processed products</span
+          ></span
+        >
+        <span *ngIf="!invoice.total_weight">N/A</span>
       </td>
       <td>{{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}</td>
       <td>{{ invoice.status }}</td>
