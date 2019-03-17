@@ -14,6 +14,7 @@ import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from
 })
 export class InvoiceGeneratorComponent implements OnInit {
   invoice: Invoice;
+  draftInvoice: Invoice;
   invoiceForm: FormGroup;
 
   constructor(
@@ -24,6 +25,7 @@ export class InvoiceGeneratorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.draftInvoice = this.route.snapshot.data['invoice'];
     this.invoiceForm = this.formBuilder.group({
       buyer: [
         this.formBuilder.group({
