@@ -49,6 +49,7 @@ export class InvoiceGeneratorComponent implements OnInit {
           address: ['', Validators.required],
           city: ['', Validators.required],
           zipcode: ['', Validators.required],
+          country: ['', Validators.required],
           phone_number: ['', Validators.required],
           contact_by: [this.formBuilder.array([], Validators.required)]
         }),
