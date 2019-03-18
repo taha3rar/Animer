@@ -80,7 +80,7 @@ export class OrdersListComponent implements OnInit {
       date: 'Date',
       company: 'Company',
       contact: 'Contact',
-      packages: 'Packages',
+      amount: 'Amount',
       price: 'Price',
       status: 'Status'
     };
@@ -94,8 +94,10 @@ export class OrdersListComponent implements OnInit {
           ? `${order.buyer.first_name} ${order.buyer.last_name}`
           : `${order.seller.first_name} ${order.seller.last_name}`;
 
-      const packages = order.total_weight
-        ? `${this.roundUpPipe.transform(order.total_weight)} ${order.document_weight_unit || ''}`
+      const amount = order.total_weight
+        ? order.document_weight_unit
+          ? `${this.decimalPipe.transform(order.total_weight, '1.2-2')} ${order.document_weight_unit || ''}`
+          : 'N/A'
         : 'N/A';
 
       const price = order.total_due
@@ -107,7 +109,7 @@ export class OrdersListComponent implements OnInit {
         date: this.datePipe.transform(order.date_created, 'dd/MM/yyyy'),
         company: company,
         contact: contact,
-        packages: packages,
+        amount: amount,
         price: price,
         status: order.status
       };

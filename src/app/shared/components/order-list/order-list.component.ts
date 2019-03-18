@@ -15,8 +15,11 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
   orders: Order[];
   page = 1;
   // tslint:disable-next-line:max-line-length
+  processedProductConflictMessage: String =
+    'This purchase order includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';
+  // tslint:disable-next-line:max-line-length
   measurementUnitConflictMessage: String =
-    'This purchase order includes only processed products, for more information please click on the blue view button on the right side of the row';
+    'This purchase order includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
 
   constructor(
     private authService: AuthenticationService,
@@ -28,9 +31,7 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log(this.orders);
-  }
+  ngOnInit() {}
 
   get userId() {
     return this.authService.currentUserId;

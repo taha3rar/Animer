@@ -24,14 +24,17 @@
         <span *ngIf="userId == order.buyer._id">{{ order.seller.first_name }} {{ order.seller.last_name }}</span>
       </td>
       <td>
-        <span *ngIf="order.total_weight"
+        <span *ngIf="order.total_weight && order.document_weight_unit"
           >{{ order.total_weight | number: '1.2-2' }} {{ order.document_weight_unit }}
-          <span *ngIf="hasProcessedProduct(order)" style="font-size :9px;color:gray"
+          <span *ngIf="hasProcessedProduct(order)" style="font-size :11px;color:gray"
             >Excluding processed products</span
           ></span
         >
+        <span *ngIf="order.total_weight && !order.document_weight_unit">
+          <i class="material-icons pull-left" matTooltip="{{ processedProductConflictMessage }}">help_outline</i>
+        </span>
         <span *ngIf="!order.total_weight"
-          ><i class="material-icons pull-left" matTooltip="{{ measurementUnitConflict }}">help_outline</i></span
+          ><i class="material-icons pull-left" matTooltip="{{ measurementUnitConflictMessage }}">help_outline</i></span
         >
       </td>
       <td>
