@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { Product } from '@app/core/models/order/product';
+import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 
 @Component({
   selector: 'app-invoice-generator',
@@ -15,6 +17,8 @@ import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from
 export class InvoiceGeneratorComponent implements OnInit {
   invoice: Invoice;
   draftInvoice: Invoice;
+  draft: boolean;
+  invoiceProducts: ProductInvoice[];
   invoiceForm: FormGroup;
 
   constructor(
@@ -25,7 +29,13 @@ export class InvoiceGeneratorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.draft = false;
     this.draftInvoice = this.route.snapshot.data['invoice'];
+    if (this.draftInvoice) {
+      this.draft = true;
+      this.invoiceProducts = this.draftInvoice.products;
+    }
+    console.log('draft', this.draftInvoice);
     this.invoiceForm = this.formBuilder.group({
       buyer: [
         this.formBuilder.group({
@@ -62,36 +72,53 @@ export class InvoiceGeneratorComponent implements OnInit {
         }),
         this.userIdValidator()
       ],
-      personal_po_id: '',
-      vat_amount: 0,
-      vat_percentage: 0,
-      discount_amount: 0,
-      discount_percentage: 0,
-      total_due: [0, Validators.required],
-      subtotal: [0, Validators.required],
-      currency: [undefined, Validators.required],
-      payment_comments: '',
-      order_comments: '',
+      _id: Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice._id,
+      personal_po_id: Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.personal_po_id,
+      vat_amount: Object.is(this.draftInvoice, undefined) ? 0 : this.draftInvoice.vat_amount,
+      vat_percentage: Object.is(this.draftInvoice, undefined) ? 0 : this.draftInvoice.vat_percentage,
+      discount_amount: Object.is(this.draftInvoice, undefined) ? 0 : this.draftInvoice.discount_amount,
+      discount_percentage: Object.is(this.draftInvoice, undefined) ? 0 : this.draftInvoice.discount_percentage,
+      total_due: [Object.is(this.draftInvoice, undefined) ? 0 : this.draftInvoice.total_due, Validators.required],
+      subtotal: [Object.is(this.draftInvoice, undefined) ? 0 : this.draftInvoice.subtotal, Validators.required],
+      currency: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.currency, Validators.required],
+      payment_comments: Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.payment_comments,
+      order_comments: Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.order_comments,
       sign_by: this.formBuilder.group({
-        date: ['', Validators.required],
-        first_name: ['', Validators.required],
-        last_name: ['', Validators.required],
-        company_name: ['']
+        date: [
+          Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.sign_by.date,
+          Validators.required
+        ],
+        first_name: [
+          Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.sign_by.first_name,
+          Validators.required
+        ],
+        last_name: [
+          Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.sign_by.last_name,
+          Validators.required
+        ],
+        company_name: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.sign_by.company_name]
       }),
       deliver_to: this.formBuilder.group({
-        contact_name: [''],
-        address: [''],
-        city: [''],
-        zip_code: [''],
-        phone_number: [''],
-        expected_delivery_date: [undefined]
+        contact_name: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.contact_name],
+        address: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.address],
+        city: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.city],
+        zip_code: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.zip_code],
+        phone_number: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.phone_number],
+        expected_delivery_date: [
+          Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.expected_delivery_date
+        ]
       }),
       date_created: [Date.now(), Validators.required]
     });
 
-    this.route.data.subscribe(({ seller }) => {
-      this.invoiceForm.controls.seller.setValue(this.getSmallSeller(seller));
-    });
+    if (!this.draftInvoice) {
+      this.route.data.subscribe(({ seller }) => {
+        this.invoiceForm.controls.seller.setValue(this.getSmallSeller(seller));
+      });
+    } else {
+      this.invoiceForm.controls.buyer.setValue(this.draftInvoice.buyer);
+      this.invoiceForm.controls.seller.setValue(this.draftInvoice.seller);
+    }
     this.stepperService.stepperInit();
   }
 

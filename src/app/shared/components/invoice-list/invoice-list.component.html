@@ -45,7 +45,14 @@
       <td>{{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}</td>
       <td>{{ invoice.status }}</td>
       <td class="text-right">
-        <button class="round-button-primary" [routerLink]="['/invoice', invoice._id]">
+        <button *ngIf="invoice.draft == false" class="round-button-primary" [routerLink]="['/invoice', invoice._id]">
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button
+          *ngIf="invoice.draft == true"
+          class="round-button-primary"
+          [routerLink]="['/invoice/generator', invoice._id]"
+        >
           <i class="material-icons">remove_red_eye</i>
         </button>
         <button class="round-button-red" (click)="warning(invoice._id)"><i class="material-icons">delete</i></button>

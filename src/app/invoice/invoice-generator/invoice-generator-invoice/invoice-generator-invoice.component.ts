@@ -23,6 +23,10 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
   newInvoiceEvent = new EventEmitter<Invoice>();
   @Input()
   form: FormGroup;
+  @Input()
+  draft: boolean;
+  @Input()
+  invoiceProducts: ProductInvoice[];
   productsValid = true;
 
   constructor(
@@ -35,6 +39,10 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
   }
 
   ngOnInit() {
+    console.log('form', this.form.value);
+    if (this.draft) {
+      this.products = this.invoiceProducts;
+    }
     this.onChanges();
     this.formInput = this.form;
   }
@@ -183,12 +191,23 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
         .subtract(1, 'months')
         .toJSON()
     });
+    this.form.patchValue({
+      date_created: moment(this.form['controls'].date_created.value)
+        .subtract(1, 'months')
+        .toJSON()
+    });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.draft = true;
-    this.invoiceService.draft(this.newInvoice).subscribe(() => {
-      this.router.navigateByUrl('/invoice/list');
-    });
+    if (!this.draft) {
+      this.invoiceService.draft(this.newInvoice).subscribe(() => {
+        this.router.navigateByUrl('/invoice/list');
+      });
+    } else {
+      this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(() => {
+        this.router.navigateByUrl('/invoice/list');
+      });
+    }
   }
 
   toReview() {

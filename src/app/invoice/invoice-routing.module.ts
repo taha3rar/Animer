@@ -38,9 +38,10 @@ const routes: Routes = [
     },
     {
       path: 'invoice/generator/:id',
-      component: InvoiceComponent,
+      component: InvoiceGeneratorComponent,
       resolve: {
-        invoice: InvoiceResolver
+        invoice: InvoiceResolver,
+        products: ProductCurrentUserResolver
       }
     },
     {

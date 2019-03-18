@@ -300,7 +300,7 @@
       class="bttn-primary pull-right"
       (click)="onSubmit(form)"
       (click)="checkProducts()"
-      [hidden]="form.valid || products.length > 1"
+      [hidden]="form.valid && products.length >= 1"
     >
       Next Step &rarr;
     </button>
