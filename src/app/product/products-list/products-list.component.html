@@ -36,8 +36,10 @@
       <td *ngIf="product.product_type == 'processed'">{{ product.produce }}</td>
       <td>{{ product.sku }}</td>
       <td>{{ product.type_of_package }}</td>
-      <td *ngIf="product.product_type != 'processed'">{{ product.total_weight }} {{ product.weight_unit }}</td>
-      <td *ngIf="product.product_type == 'processed'">{{ product.quantity }} Packages</td>
+      <td *ngIf="product.product_type != 'processed'">
+        {{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit }}
+      </td>
+      <td *ngIf="product.product_type == 'processed'">{{ product.quantity | number: '1.0' }} Packages</td>
       <td class="text-right">
         <button
           *ngIf="product.product_type == 'processed'"
