@@ -5,6 +5,9 @@
         <p style="margin-bottom:15px;"><strong>Contact Details</strong></p>
         <p>{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
         <p>{{ user.email }}</p>
+        <p>{{ user.personal_information.phone_number }}</p>
+        <p>{{ user.user_personal_id }}</p>
+        <p>{{ user.personal_information.job_title }}</p>
         <p style="width: 75%;">
           {{ user.personal_information.bio }}
         </p>
@@ -16,10 +19,11 @@
       <div class="card-content">
         <p style="margin-bottom:15px;"><strong>Company Details</strong></p>
         <p>{{ user.company_information.company_name }}</p>
+        <p>{{ user.company_information.company_registered_number }}</p>
+        <p>{{ user.company_information.street }}, {{ user.company_information.city }}</p>
+        <p>{{ user.company_information.zipcode }}, {{ user.company_information.state_province_region }}</p>
         <p>{{ user.company_information.country }}</p>
-        <p>{{ user.company_information.city }}</p>
-        <p>{{ user.company_information.street }}</p>
-        <p>{{ user.company_information.zipcode }}</p>
+        <p>{{ user.company_information.bio }}</p>
       </div>
     </div>
   </div>
