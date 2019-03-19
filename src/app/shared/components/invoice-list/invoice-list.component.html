@@ -55,13 +55,19 @@
         <span *ngIf="invoice.products.length > 1">Multiple Products</span>
       </td>
       <td>
-        <span *ngIf="invoice.total_weight"
+        <span *ngIf="invoice.total_weight && invoice.document_weight_unit"
           >{{ invoice.total_weight | number: '1.2-2' }} {{ invoice.document_weight_unit }}
-          <span *ngIf="hasProcessedProduct(invoice)" style="font-size :9px;color:gray"
+          <span *ngIf="hasProcessedProduct(invoice)" style="font-size :11px;color:gray"
             >Excluding processed products</span
           ></span
         >
-        <span *ngIf="!invoice.total_weight">N/A</span>
+        <span *ngIf="invoice.total_weight && !invoice.document_weight_unit">
+          <i class="material-icons pull-left" matTooltip="{{ processedProductConflictMessage }}">help_outline</i>
+        </span>
+        <span *ngIf="!invoice.total_weight && invoice.products.length > 0"
+          ><i class="material-icons pull-left" matTooltip="{{ measurementUnitConflictMessage }}">help_outline</i></span
+        >
+        <span *ngIf="invoice.products.length < 1">N/A</span>
       </td>
       <td>{{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}</td>
       <td>{{ invoice.status }}</td>

@@ -4,6 +4,8 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 import { AuthenticationService, InvoiceService } from '@app/core';
 import { Router } from '@angular/router';
 import { BaseListComponent } from '../base-list/base-list.component';
+import 'hammerjs';
+
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
@@ -20,6 +22,12 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
   invoicesToExport: any[] = [];
   @Output() invoicesList = new EventEmitter();
   checkedAll = false;
+  // tslint:disable-next-line:max-line-length
+  processedProductConflictMessage: String =
+    'This purchase order includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';
+  // tslint:disable-next-line:max-line-length
+  measurementUnitConflictMessage: String =
+    'This purchase order includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
 
   constructor(
     private authService: AuthenticationService,
@@ -32,9 +40,7 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log(this.invoices);
-  }
+  ngOnInit() {}
 
   get userId() {
     return this.authService.currentUserId;
