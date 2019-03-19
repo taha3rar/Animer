@@ -36,7 +36,7 @@
               {{ row.produce }} / {{ row.variety }}
             </span>
             <span *ngIf="row.product_type == 'processed' && row.item_package_type">
-              {{ row.produce }} / {{ row.item_measurement_amount }} {{ row.item_measurement_unit }} /
+              {{ row.produce }} / {{ row.item_measurement_amount | number: '1.2-2' }} {{ row.item_measurement_unit }} /
               {{ row.item_package_type }}
             </span>
             <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
@@ -45,29 +45,30 @@
           </td>
           <td>
             <span *ngIf="!row.product_type || row.product_type == 'agricultural'">
-              {{ row.quantity }} ({{ row.type_of_package }} / {{ row.package_weight }} {{ row.weight_unit }})
+              {{ row.quantity | number: '1.0' }} ({{ row.type_of_package }} /
+              {{ row.package_weight | number: '1.2-2' }} {{ row.weight_unit }})
             </span>
             <span *ngIf="row.product_type == 'processed' && row.item_package_type">
-              {{ row.quantity }} ({{ row.type_of_package }} / {{ row.items_per_package
+              {{ row.quantity | number: '1.0' }} ({{ row.type_of_package }} / {{ row.items_per_package | number: '1.0'
               }}<span *ngIf="row.items_per_package > 1"> items)</span
               ><span *ngIf="row.items_per_package == 1"> item)</span>
             </span>
             <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
-              {{ row.quantity }} ({{ row.type_of_package }})
+              {{ row.quantity | number: '1.0' }} ({{ row.type_of_package }})
             </span>
           </td>
           <td>
             <span *ngIf="!row.product_type || row.product_type == 'agricultural'"
-              >{{ row.total_weight }} {{ row.weight_unit }}</span
+              >{{ row.total_weight | number: '1.2-2' }} {{ row.weight_unit }}</span
             >
             <span *ngIf="row.product_type == 'processed'">N/A</span>
           </td>
           <td>
             <span *ngIf="!row.product_type || row.product_type == 'agricultural'"
-              >{{ row.price_per_unit }} {{ order.currency }} / {{ row.weight_unit }}</span
+              >{{ row.price_per_unit | number: '1.2-2' }} {{ order.currency }} / {{ row.weight_unit }}</span
             >
             <span *ngIf="row.product_type == 'processed'"
-              >{{ row.package_price }} {{ order.currency }} / {{ row.type_of_package }}</span
+              >{{ row.package_price | number: '1.2-2' }} {{ order.currency }} / {{ row.type_of_package }}</span
             >
           </td>
           <td>
