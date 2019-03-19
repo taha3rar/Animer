@@ -87,10 +87,10 @@ export class OrderGeneratorSellerComponent implements OnInit {
       payment_comments: undefined,
       order_comments: undefined,
       sign_by: this.formBuilder.group({
-        date: [this.document.sign_by.date, Validators.required],
-        first_name: [this.document.sign_by.first_name, Validators.required],
-        last_name: [this.document.sign_by.last_name, Validators.required],
-        company_name: [this.document.sign_by.company_name]
+        date: [undefined, Validators.required],
+        first_name: [undefined, Validators.required],
+        last_name: [undefined, Validators.required],
+        company_name: [undefined]
       }),
       deliver_to: this.formBuilder.group({
         contact_name: [this.document.deliver_to.contact_name, Validators.required],
