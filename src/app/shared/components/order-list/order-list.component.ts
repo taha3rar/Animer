@@ -14,11 +14,11 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
   @Input()
   orders: Order[];
   page = 1;
-  // tslint:disable-next-line:max-line-length
   processedProductConflictMessage: String =
+    // tslint:disable-next-line:max-line-length
     'This purchase order includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
-  // tslint:disable-next-line:max-line-length
   measurementUnitConflictMessage: String =
+    // tslint:disable-next-line:max-line-length
     'This purchase order includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';
 
   constructor(

@@ -64,6 +64,9 @@
           />
           <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
         </div>
+        <div *ngIf="currency && product.currency != currency" class="quantity">
+          <strong style="font-size :11px;">Choose products with the same currency</strong>
+        </div>
       </div>
     </div>
   </div>
@@ -133,6 +136,9 @@
               (ngModelChange)="checkProductInput(product)"
             />
             <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
+          </div>
+          <div *ngIf="currency && product.currency != currency" class="quantity">
+            <strong style="font-size :11px;">Choose products with the same currency</strong>
           </div>
         </div>
       </div>

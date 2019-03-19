@@ -85,6 +85,9 @@
                 <i class="material-icons">remove</i>
               </button>
             </div>
+            <div *ngIf="order.currency.value && product.currency != order.currency.value" class="quantity">
+              <strong style="font-size :11px;">Choose products with the same currency</strong>
+            </div>
           </div>
         </div>
       </div>
@@ -153,6 +156,9 @@
                 <button class="btn-circle" (click)="decrementQuantity(product)">
                   <i class="material-icons">remove</i>
                 </button>
+              </div>
+              <div *ngIf="order.currency.value && product.currency != order.currency.value" class="quantity">
+                <strong style="font-size :11px;">Choose products with the same currency</strong>
               </div>
             </div>
           </div>
