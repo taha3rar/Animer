@@ -32,9 +32,7 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log(this.invoices);
-  }
+  ngOnInit() {}
 
   get userId() {
     return this.authService.currentUserId;
