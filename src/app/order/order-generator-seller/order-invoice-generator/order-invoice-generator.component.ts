@@ -9,16 +9,15 @@ import { OrderAgriculturalProductComponent } from '../../order-generator/order-p
 // tslint:disable-next-line:max-line-length
 import { OrderProcessedProductComponent } from '../../order-generator/order-product-list/order-processed-product/order-processed-product.component';
 import * as moment from 'moment';
-
 import { FormGroup } from '@angular/forms';
-import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
+import { MeasurementValidationComponent } from '@app/shared/components/measurement-validation/measurement-validation.component';
 
 @Component({
   selector: 'app-order-invoice-generator',
   templateUrl: './order-invoice-generator.component.html',
   styleUrls: ['./order-invoice-generator.component.scss']
 })
-export class OrderInvoiceGeneratorComponent extends BaseValidationComponent implements OnInit {
+export class OrderInvoiceGeneratorComponent extends MeasurementValidationComponent implements OnInit {
   newInvoice: Invoice;
   @Input()
   form: FormGroup;
@@ -138,22 +137,6 @@ export class OrderInvoiceGeneratorComponent extends BaseValidationComponent impl
         this.products[data.index] = data.product;
       }
     });
-  }
-
-  measurementUnitConflict(products: ProductInvoice[]): string {
-    let baseMeasurementUnit: string;
-    for (let i = 0; i < products.length; i++) {
-      if (products[i].product_type === 'agricultural') {
-        if (!baseMeasurementUnit) {
-          baseMeasurementUnit = products[i].weight_unit;
-        } else {
-          if (baseMeasurementUnit !== products[i].weight_unit) {
-            return undefined;
-          }
-        }
-      }
-    }
-    return baseMeasurementUnit;
   }
 
   draftInvoice() {

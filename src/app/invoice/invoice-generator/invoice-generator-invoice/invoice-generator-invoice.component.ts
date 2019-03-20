@@ -9,14 +9,14 @@ import { InvoiceInventoryComponent } from './invoice-inventory/invoice-inventory
 import { InvoiceAgriculturalProductComponent } from './invoice-agricultural-product/invoice-agricultural-product.component';
 import { InvoiceProcessedProductComponent } from './invoice-processed-product/invoice-processed-product.component';
 import * as moment from 'moment';
-import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
+import { MeasurementValidationComponent } from '@app/shared/components/measurement-validation/measurement-validation.component';
 
 @Component({
   selector: 'app-invoice-generator-invoice',
   templateUrl: './invoice-generator-invoice.component.html',
   styleUrls: ['./invoice-generator-invoice.component.scss']
 })
-export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent implements OnInit {
+export class InvoiceGeneratorInvoiceComponent extends MeasurementValidationComponent implements OnInit {
   products: ProductInvoice[] = [];
   newInvoice: Invoice;
   @Output()
@@ -178,22 +178,6 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
         this.products[data.index] = data.product;
       }
     });
-  }
-
-  measurementUnitConflict(products: ProductInvoice[]): string {
-    let baseMeasurementUnit: string;
-    for (let i = 0; i < products.length; i++) {
-      if (products[i].product_type === 'agricultural') {
-        if (!baseMeasurementUnit) {
-          baseMeasurementUnit = products[i].weight_unit;
-        } else {
-          if (baseMeasurementUnit !== products[i].weight_unit) {
-            return undefined;
-          }
-        }
-      }
-    }
-    return baseMeasurementUnit;
   }
 
   draftInvoice() {

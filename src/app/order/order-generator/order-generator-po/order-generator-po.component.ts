@@ -1,4 +1,3 @@
-import { BaseValidationComponent } from './../../../shared/components/base-validation/base-validation.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -6,6 +5,7 @@ import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
+import { MeasurementValidationComponent } from '@app/shared/components/measurement-validation/measurement-validation.component';
 import * as moment from 'moment';
 import { Product } from '@app/core/models/product';
 
@@ -14,7 +14,7 @@ import { Product } from '@app/core/models/product';
   templateUrl: './order-generator-po.component.html',
   styleUrls: ['./order-generator-po.component.scss']
 })
-export class OrderGeneratorPoComponent extends BaseValidationComponent implements OnInit {
+export class OrderGeneratorPoComponent extends MeasurementValidationComponent implements OnInit {
   newOrder: Order;
   form: FormGroup;
   selectedProducts: any[];
@@ -58,22 +58,6 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
 
   checkProducts() {
     this.productsValid = false;
-  }
-
-  measurementUnitConflict(products: ProductInvoice[]): string {
-    let baseMeasurementUnit: string;
-    for (let i = 0; i < products.length; i++) {
-      if (products[i].product_type === 'agricultural') {
-        if (!baseMeasurementUnit) {
-          baseMeasurementUnit = products[i].weight_unit;
-        } else {
-          if (baseMeasurementUnit !== products[i].weight_unit) {
-            return undefined;
-          }
-        }
-      }
-    }
-    return baseMeasurementUnit;
   }
 
   draftOrder() {
