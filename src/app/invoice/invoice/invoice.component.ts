@@ -70,8 +70,8 @@ export class InvoiceComponent implements OnInit {
       className: 'swal-pdf',
       text: 'Please choose the type of proforma invoice document you would like to download:',
       buttons: {
-        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o' },
-        copyDoc: { text: 'Copy Document', value: 'copy' }
+        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o', closeModal: false },
+        copyDoc: { text: 'Copy Document', value: 'copy', closeModal: false }
       }
     }).then(value => {
       if (value === 'original') {
@@ -102,6 +102,7 @@ export class InvoiceComponent implements OnInit {
     this.invoiceService.getPdf(this.invoice._id, version).subscribe(data => {
       const blob = new Blob([data], { type: 'application/pdf' });
       importedSaveAs(blob, `proforma-invoice-${this.invoice.numericId}-${version}`);
+      swal.close();
     });
   }
 
