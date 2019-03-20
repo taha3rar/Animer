@@ -2,9 +2,9 @@ import { BaseNavigationComponent } from './../../../shared/components/base-navig
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
+import { Invoice } from '@app/core/models/invoice/invoice';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormGroup } from '@angular/forms';
-import { User } from '@app/core/models/user/user';
 
 @Component({
   selector: 'app-invoice-generator-buyers',
