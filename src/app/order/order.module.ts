@@ -10,7 +10,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { SharedModule } from '@app/shared';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateCustomParserFormatter } from '@app/shared/customization/ngb-date-parser-il-format';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { OrderGeneratorComponent } from './order-generator/order-generator.component';
 import { OrderGeneratorSuppliersComponent } from './order-generator/order-generator-suppliers/order-generator-suppliers.component';
@@ -86,7 +87,8 @@ import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
     OrderDocumentsResolver,
     RoundUpPipe,
     DecimalPipe,
-    DatePipe
+    DatePipe,
+    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ]
 })
 export class OrderModule {}
