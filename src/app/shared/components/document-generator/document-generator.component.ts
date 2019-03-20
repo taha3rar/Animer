@@ -6,7 +6,7 @@ import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
   selector: 'app-measurement-validation',
   template: ''
 })
-export class MeasurementValidationComponent extends BaseValidationComponent {
+export class DocumentGeneratorComponent extends BaseValidationComponent {
   constructor() {
     super();
   }

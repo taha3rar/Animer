@@ -9,14 +9,14 @@ import { InvoiceInventoryComponent } from './invoice-inventory/invoice-inventory
 import { InvoiceAgriculturalProductComponent } from './invoice-agricultural-product/invoice-agricultural-product.component';
 import { InvoiceProcessedProductComponent } from './invoice-processed-product/invoice-processed-product.component';
 import * as moment from 'moment';
-import { MeasurementValidationComponent } from '@app/shared/components/measurement-validation/measurement-validation.component';
+import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 
 @Component({
   selector: 'app-invoice-generator-invoice',
   templateUrl: './invoice-generator-invoice.component.html',
   styleUrls: ['./invoice-generator-invoice.component.scss']
 })
-export class InvoiceGeneratorInvoiceComponent extends MeasurementValidationComponent implements OnInit {
+export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent implements OnInit {
   products: ProductInvoice[] = [];
   newInvoice: Invoice;
   @Output()

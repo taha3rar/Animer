@@ -5,7 +5,7 @@ import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
-import { MeasurementValidationComponent } from '@app/shared/components/measurement-validation/measurement-validation.component';
+import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 import * as moment from 'moment';
 import { Product } from '@app/core/models/product';
 
@@ -14,7 +14,7 @@ import { Product } from '@app/core/models/product';
   templateUrl: './order-generator-po.component.html',
   styleUrls: ['./order-generator-po.component.scss']
 })
-export class OrderGeneratorPoComponent extends MeasurementValidationComponent implements OnInit {
+export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implements OnInit {
   newOrder: Order;
   form: FormGroup;
   selectedProducts: any[];
