@@ -1,5 +1,4 @@
 import { SharedModule } from './../shared/shared.module';
-import { ClientModule } from '@app/client/client.module';
 import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe, DatePipe } from '@angular/common';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
@@ -56,7 +55,6 @@ import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
-    ClientModule,
     NgxPermissionsModule.forRoot()
   ],
   entryComponents: [InvoiceInventoryComponent, InvoiceAgriculturalProductComponent, InvoiceProcessedProductComponent],
