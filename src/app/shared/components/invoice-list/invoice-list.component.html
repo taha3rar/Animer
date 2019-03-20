@@ -62,10 +62,10 @@
           ></span
         >
         <span *ngIf="invoice.total_weight && !invoice.document_weight_unit">
-          <i class="material-icons pull-left" matTooltip="{{ processedProductConflictMessage }}">help_outline</i>
+          <i class="material-icons pull-left" matTooltip="{{ measurementUnitConflictMessage }}">help_outline</i>
         </span>
         <span *ngIf="!invoice.total_weight && invoice.products.length > 0"
-          ><i class="material-icons pull-left" matTooltip="{{ measurementUnitConflictMessage }}">help_outline</i></span
+          ><i class="material-icons pull-left" matTooltip="{{ processedProductConflictMessage }}">help_outline</i></span
         >
         <span *ngIf="invoice.products.length < 1">N/A</span>
       </td>
