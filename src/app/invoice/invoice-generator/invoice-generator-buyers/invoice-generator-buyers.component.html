@@ -60,9 +60,9 @@
       </div>
       <div class="add-supplier-box" [hidden]="clients?.length > 0">
         <img src="../../../../assets/img/default/pi-po/noClient.png" width="285" height="183" />
-        <p>You have no clients yet !</p>
-        <button class="bttn-primary bttn-add" data-toggle="wizard" data-target="#addClientWizard">
-          <span>Add client</span>
+        <p>You have no clients yet! Please go to the clients page to add your clients.</p>
+        <button class="bttn-primary" [routerLink]="['/client/list']">
+          <span>Go to clients</span>
         </button>
       </div>
     </div>
