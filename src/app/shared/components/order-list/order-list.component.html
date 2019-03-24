@@ -39,7 +39,7 @@
         <span *ngIf="order.products.length < 1">N/A</span>
       </td>
       <td>
-        <span *ngIf="order.total_due">{{ order.total_due | number: '1.2-2' }} {{ order.currency }}</span>
+        <span *ngIf="order.total_due">{{ totalDue(order) | number: '1.2-2' }} {{ order.currency }}</span>
         <span *ngIf="!order.total_due">N/A</span>
       </td>
       <td>{{ order.status }}</td>

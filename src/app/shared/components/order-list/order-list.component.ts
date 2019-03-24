@@ -31,7 +31,9 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.orders);
+  }
 
   get userId() {
     return this.authService.currentUserId;
@@ -44,5 +46,21 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  totalDue(order: Order): Number {
+    if (order.invoice) {
+      if (order.invoice.draft && order.invoice.total_due && order.seller._id === this.userId) {
+        return order.invoice.total_due;
+      } else if (order.invoice.draft && order.invoice.total_due && order.buyer._id === this.userId) {
+        return order.invoice.total_due;
+      } else if (!order.invoice.draft && order.invoice.total_due) {
+        return order.invoice.total_due;
+      } else {
+        return order.total_due;
+      }
+    } else {
+      return order.total_due;
+    }
   }
 }
