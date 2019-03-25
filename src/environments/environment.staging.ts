@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  api_url: 'https://dev.api.agt-platform.com',
+  api_url: 'https://staging.api.agt-platform.com',
   chat_url: 'http://18.218.147.84:3800',
   version: '2.0.0-dev',
   defaultLanguage: 'en-US',
