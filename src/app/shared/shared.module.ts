@@ -18,6 +18,7 @@ import { UploadPictureComponent } from './components/upload-picture/upload-pictu
 import { BaseValidationComponent } from './components/base-validation/base-validation.component';
 import { UserDocumentComponent } from './components/document-list/user-document-list/user-document-list.component';
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
+import { DocumentGeneratorComponent } from './components/document-generator/document-generator.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, MatTooltipModule],
@@ -34,7 +35,8 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
     BaseValidationComponent,
     BaseListComponent,
     GooglePlacesDirective,
-    UploadPictureComponent
+    UploadPictureComponent,
+    DocumentGeneratorComponent
   ],
   exports: [
     LoaderComponent,
@@ -45,7 +47,8 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
     TransactionDocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
-    UploadPictureComponent
+    UploadPictureComponent,
+    DocumentGeneratorComponent
   ],
   providers: [CsvService, DatePipe]
 })
