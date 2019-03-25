@@ -101,7 +101,7 @@ export class OrderGeneratorSellerComponent implements OnInit {
           Object.is(this.order, undefined) ? this.invoice.deliver_to.phone_number : this.order.deliver_to.phone,
           Validators.required
         ],
-        expected_delivery_date: [this.document.deliver_to.expected_delivery_date, Validators.required]
+        expected_delivery_date: [this.document.deliver_to.expected_delivery_date]
       }),
       date_created: [this.document.date_created, Validators.required]
     });

@@ -31,9 +31,7 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log(this.orders);
-  }
+  ngOnInit() {}
 
   get userId() {
     return this.authService.currentUserId;
@@ -48,13 +46,13 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
     return false;
   }
 
+  // totalDue to be diplayed
+  // If the invoice is saved the invoice total_due is displayed to the seller
+  // If the invoice is geenrated the invoice total_due is displayed to the seller AND the buyer
+  // Otherwise, the order total_due is displayed
   totalDue(order: Order): Number {
-    if (order.invoice) {
-      if (order.invoice.draft && order.invoice.total_due && order.seller._id === this.userId) {
-        return order.invoice.total_due;
-      } else if (order.invoice.draft && order.invoice.total_due && order.buyer._id === this.userId) {
-        return order.invoice.total_due;
-      } else if (!order.invoice.draft && order.invoice.total_due) {
+    if (order.invoice && order.invoice.total_due) {
+      if (!order.invoice.draft || order.seller._id === this.userId) {
         return order.invoice.total_due;
       } else {
         return order.total_due;
