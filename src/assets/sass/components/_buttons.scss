@@ -374,6 +374,28 @@
   }
 }
 
+.bttn-icon {
+  border-radius: 50%;
+  border: none;
+  padding: 1rem 1rem 0.5rem 1rem;
+
+  i {
+    font-size: 2rem !important;
+  }
+}
+
+.bttn-icon.right {
+  position: absolute;
+  right: 13%;
+  top: 50%;
+}
+
+.bttn-icon.left {
+  position: absolute;
+  left: 13%;
+  top: 50%;
+}
+
 .onoffswitch {
   position: relative;
   width: 90px;
@@ -1129,4 +1151,10 @@ select.custom-select {
     box-shadow: 0 14px 26px -12px rgba(0, 188, 212, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12),
       0 8px 10px -5px rgba(0, 188, 212, 0.2);
   }
+}
+
+.close-modal {
+  cursor: pointer;
+  font-size: 1.7rem;
+  padding: 1rem;
 }

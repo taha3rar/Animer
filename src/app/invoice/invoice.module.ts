@@ -29,6 +29,7 @@ import { ProductCurrentUserResolver } from './resolvers/products-currentUser.res
 import { InvoiceProductListComponent } from './invoice-generator/invoice-generator-invoice/invoice-product-list/invoice-product-list.component';
 import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
 import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.resolver';
+import { TutorialsModule } from '@app/tutorials/tutorials.module';
 // tslint:disable-next-line:max-line-length
 
 @NgModule({
@@ -48,6 +49,7 @@ import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.
     TranslateModule,
     InvoiceRoutingModule,
     SharedModule,
+    TutorialsModule,
     NgbModule,
     NgxPaginationModule,
     FormsModule,

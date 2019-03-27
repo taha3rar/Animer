@@ -9,6 +9,14 @@
   font-size: 1.2rem;
   display: none;
 
+  &-content-wrapper {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &-content {
     min-height: 49rem;
     @include absCenter;
@@ -23,15 +31,38 @@
   }
 
   &-content-lg {
-    min-height: 48rem;
-    @include absCenter;
-    width: 63%;
+    height: 750px;
+    width: 1200px;
     background-color: white;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     overflow: hidden;
-    animation: open-modal 0.4s;
-    animation-timing-function: ease-out;
+    position: static;
+    .upper-part {
+      width: 100%;
+      height: 47%;
+
+      .tutoral-image-wrapper {
+        margin-top: 4.5rem !important;
+        width: 80%;
+        height: 85%;
+        margin: 0 auto;
+      }
+    }
+    .bottom-part {
+      width: 100%;
+      background-color: #00b7cf;
+      height: 53%;
+      color: white;
+      font-size: 1.65rem;
+      padding: 3.5rem 10rem 5rem 14rem;
+
+      h1 {
+        font-weight: 700;
+        margin-bottom: 2rem;
+        font-size: 2.8rem;
+      }
+    }
   }
 
   &-content-sm {
@@ -216,5 +247,39 @@
   .swal-button {
     width: 100%;
     padding: 8px 24px;
+  }
+}
+
+ul.tutorial-list {
+  list-style-type: none;
+  list-style-position: inside;
+  padding: 0px;
+  margin: 0;
+}
+
+ul.tutorial-list li {
+  background: url("assets/img/logo-xs.png") no-repeat left top;
+  height: 45px;
+  padding-left: 44px;
+  padding-top: 7px;
+}
+
+.nav-circles {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  div {
+    display: inline-block;
+    background-color: #8f8f8f;
+    border-radius: 50%;
+    width: 7px;
+    height: 7px;
+    margin-right: 5px;
+  }
+
+  .active {
+    background-color: white;
   }
 }

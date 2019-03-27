@@ -1,0 +1,84 @@
+<div class="modal-box" id="clientTutorials" *ngxPermissionsOnly="['create-client']">
+  <button class="bttn-icon right" (click)="nextSlide()" [hidden]="currentSlide == numberOfSlides">
+    <i class="material-icons">keyboard_arrow_right</i>
+  </button>
+  <button class="bttn-icon left" (click)="prevSlide()" [hidden]="currentSlide == 1">
+    <i class="material-icons">keyboard_arrow_left </i>
+  </button>
+  <button
+    class="bttn-icon right"
+    (click)="onClose()"
+    [hidden]="currentSlide != numberOfSlides"
+    data-dismiss="modal"
+    #closeModal
+  >
+    <i class="material-icons">check</i>
+  </button>
+  <div id="slide-1" [hidden]="currentSlide != 1" class="modal-box-content-wrapper">
+    <div class="modal-box-content-lg">
+      <i class="material-icons pull-right close-modal" (click)="onClose()" data-dismiss="modal" #closeModal>close</i>
+      <div class="upper-part">
+        <div class="tutoral-image-wrapper">
+          <img src="../../../../../assets/img/tutorial-imgs/clients.svg" alt="" />
+        </div>
+      </div>
+      <div class="bottom-part">
+        <h1>Welcome to Clients!</h1>
+        <p>
+          The Clients feature is where you can invite new clients to your network, centrally manage your existing
+          clients, and review the transactions you have with them. To add a new client, simply start by clicking on the
+          Add Client button.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="slide-2" [hidden]="currentSlide != 2" class="modal-box-content-wrapper">
+    <div class="modal-box-content-lg">
+      <i class="material-icons pull-right close-modal" (click)="onClose()" data-dismiss="modal" #closeModal>close</i>
+      <div class="upper-part" style="height: 41.9%;">
+        <div class="tutoral-image-wrapper">
+          <img src="../../../../../assets/img/tutorial-imgs/client-generator.svg" alt="" />
+        </div>
+      </div>
+      <div class="bottom-part" style="height: 58.1%;">
+        <h1>New Client</h1>
+        <p>
+          Adding a new client is composed of 4 simple steps:
+        </p>
+        <ul class="tutorial-list">
+          <li>Add contact details</li>
+          <li>Add company details</li>
+          <li>Add the client to an ecosystem (A customized group of clients)</li>
+          <li>Review and submit</li>
+        </ul>
+        <p>
+          At the end of each step, click on the Next button to proceed.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="nav-circles">
+    <div class="active" id="1"></div>
+    <div id="2"></div>
+  </div>
+</div>
+
+<div class="modal-box" id="clientTutorials" *ngxPermissionsOnly="!['create-client']">
+  <div class="modal-box-content-wrapper">
+    <div class="modal-box-content-lg">
+      <i class="material-icons pull-right close-modal" data-dismiss="modal" #closeModal>close</i>
+      <div class="upper-part">
+        <div class="tutoral-image-wrapper">
+          <img src="../../../../../assets/img/tutorial-imgs/clients-invited.svg" alt="" />
+        </div>
+      </div>
+      <div class="bottom-part">
+        <h1>Welcome to Clients!</h1>
+        <p>
+          The Clients feature is where you can review the work you have with the client who invited you to the platform.
+          To review the work you have with the client, simply click on the View button.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

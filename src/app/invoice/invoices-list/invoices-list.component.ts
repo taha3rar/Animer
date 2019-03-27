@@ -1,3 +1,4 @@
+import { InvoiceTutorialsComponent } from './../../tutorials/invoice-tutorials/invoice-tutorials.component';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';

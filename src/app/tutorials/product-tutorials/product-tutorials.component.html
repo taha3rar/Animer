@@ -1,0 +1,85 @@
+<div class="modal-box" id="productTutorials">
+  <button class="bttn-icon right" (click)="nextSlide()" [hidden]="currentSlide == 3">
+    <i class="material-icons">keyboard_arrow_right</i>
+  </button>
+  <button class="bttn-icon left" (click)="prevSlide()" [hidden]="currentSlide == 1">
+    <i class="material-icons">keyboard_arrow_left </i>
+  </button>
+  <button
+    class="bttn-icon right"
+    (click)="onClose()"
+    [hidden]="currentSlide != numberOfSlides"
+    data-dismiss="modal"
+    #closeModal
+  >
+    <i class="material-icons">check</i>
+  </button>
+  <div id="slide-1" [hidden]="currentSlide != 1" class="modal-box-content-wrapper">
+    <div class="modal-box-content-lg">
+      <i class="material-icons pull-right close-modal" (click)="onClose()" data-dismiss="modal" #closeModal>close</i>
+      <div class="upper-part">
+        <div class="tutoral-image-wrapper">
+          <img src="../../../assets/img/tutorial-imgs/products.svg" alt="" />
+        </div>
+      </div>
+      <div class="bottom-part">
+        <h1>Welcome to Products!</h1>
+        <p>
+          The Products feature is where you can create a customizable inventory with digital product profiles that holds
+          key product details such as SKU, certifications, packing options and more. To add a product, simply start by
+          clicking on the Add Product button and choose between:
+        </p>
+        <ul>
+          <li>Processed product - products such as jams, juices, paste,etc.</li>
+          <li>Agricultural product - raw products such as beans, grains, fruits, vegetables, etc.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="slide-2" [hidden]="currentSlide != 2" class="modal-box-content-wrapper">
+    <div class="modal-box-content-lg">
+      <i class="material-icons pull-right close-modal" (click)="onClose()" data-dismiss="modal" #closeModal>close</i>
+      <div class="upper-part">
+        <div class="tutoral-image-wrapper">
+          <img src="../../../../../assets/img/tutorial-imgs/product-generator.svg" alt="" />
+        </div>
+      </div>
+      <div class="bottom-part">
+        <h1>New Product</h1>
+        <p>
+          Adding a new product is composed of 4 simple steps:
+        </p>
+        <ul class="tutorial-list">
+          <li>Pick a buyer</li>
+          <li>
+            Add product details
+          </li>
+          <li>Add pricing details.</li>
+          <li>Review and send</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="slide-3" [hidden]="currentSlide != 3" class="modal-box-content-wrapper">
+    <div class="modal-box-content-lg">
+      <i class="material-icons pull-right close-modal" (click)="onClose()" data-dismiss="modal" #closeModal>close</i>
+      <div class="upper-part">
+        <div class="tutoral-image-wrapper">
+          <img src="../../../../../assets/img/tutorial-imgs/products-next.svg" alt="" />
+        </div>
+      </div>
+      <div class="bottom-part">
+        <h1>What else?</h1>
+        <p>
+          When you generate a product profile, your buyer can see it and order it directly from your inventory. In
+          addition, to review your product profiles, simply click on the View button in the relevant product row.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="nav-circles">
+    <div class="active" id="1"></div>
+    <div id="2"></div>
+    <div id="3"></div>
+  </div>
+</div>

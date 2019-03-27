@@ -21,7 +21,7 @@ export class OrdersListComponent implements OnInit {
   viewAsSeller = false;
   viewAsBuyer = false;
   viewAsAgri = true;
-
+  currentUser: any;
   constructor(
     private route: ActivatedRoute,
     private authService: AuthenticationService,
@@ -33,6 +33,7 @@ export class OrdersListComponent implements OnInit {
 
   ngOnInit() {
     this.agribusinessUser = this.authService.isAgribusiness;
+    this.currentUser = this.route.snapshot.data['currentUser'];
     this.route.data.subscribe(({ orders, ordersAsBuyer, ordersAsSeller }) => {
       this.orders = orders;
       this.allOrders = orders;

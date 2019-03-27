@@ -1,3 +1,4 @@
+import { TutorialsModule } from '@app/tutorials/tutorials.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +16,15 @@ import { EcosystemResolver } from './resolvers/ecosystem.resolver';
 
 @NgModule({
   declarations: [EcosystemsListComponent, EcosystemComponent, EcosystemGeneratorComponent, EcosystemAddClientComponent],
-  imports: [CommonModule, EcosystemRoutingModule, NgxPaginationModule, NgbModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    EcosystemRoutingModule,
+    NgxPaginationModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TutorialsModule
+  ],
   providers: [EcosystemListResolver, UserClientListResolver, UserResolver, EcosystemResolver]
 })
 export class EcosystemModule {}

@@ -15,6 +15,7 @@ import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
+import { CurrentUserResolver } from '@app/profile/resolvers/currentUser.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -24,7 +25,8 @@ const routes: Routes = [
       resolve: {
         orders: OrderListResolver,
         ordersAsBuyer: OrderListAsBuyerResolver,
-        ordersAsSeller: OrderListAsSellerResolver
+        ordersAsSeller: OrderListAsSellerResolver,
+        currentUser: CurrentUserResolver
       },
       data: { title: extract('Orders') },
       runGuardsAndResolvers: 'always'

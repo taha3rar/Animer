@@ -40,6 +40,7 @@ import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
 import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
+import { TutorialsModule } from '@app/tutorials/tutorials.module';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
     MatButtonModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    TutorialsModule,
     NgxPermissionsModule.forRoot()
   ],
   entryComponents: [OrderAgriculturalProductComponent, OrderProcessedProductComponent],

@@ -1,0 +1,58 @@
+<div class="modal-box" id="ecosystemsTutorials" *ngxPermissionsOnly="['create-ecosystem']">
+  <button class="bttn-icon right" (click)="nextSlide()" [hidden]="currentSlide == numberOfSlides">
+    <i class="material-icons">keyboard_arrow_right</i>
+  </button>
+  <button class="bttn-icon left" (click)="prevSlide()" [hidden]="currentSlide == 1">
+    <i class="material-icons">keyboard_arrow_left </i>
+  </button>
+  <button
+    class="bttn-icon right"
+    (click)="onClose()"
+    [hidden]="currentSlide != numberOfSlides"
+    data-dismiss="modal"
+    #closeModal
+  >
+    <i class="material-icons">check</i>
+  </button>
+  <div id="slide-1" [hidden]="currentSlide != 1" class="modal-box-content-wrapper">
+    <div class="modal-box-content-lg">
+      <i class="material-icons pull-right close-modal" (click)="onClose()" data-dismiss="modal" #closeModal>close</i>
+      <div class="upper-part">
+        <div class="tutoral-image-wrapper">
+          <img src="../../../../../assets/img/tutorial-imgs/ecosystem-list.svg" alt="" />
+        </div>
+      </div>
+      <div class="bottom-part">
+        <h1>Welcome to Ecosystems!</h1>
+        <p>
+          The Ecosystems feature is where you can create customized groups of clients with common characteristics, such
+          as location, product type, operation type and more. To add a new ecosystem, simply start by clicking on the
+          New Ecosystem button.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="slide-2" [hidden]="currentSlide != 2" class="modal-box-content-wrapper">
+    <div class="modal-box-content-lg">
+      <i class="material-icons pull-right close-modal" (click)="onClose()" data-dismiss="modal" #closeModal>close</i>
+      <div class="upper-part">
+        <div class="tutoral-image-wrapper">
+          <img src="../../../../../assets/img/tutorial-imgs/eco-generator.svg" alt="" />
+        </div>
+      </div>
+      <div class="bottom-part">
+        <h1>New Ecosystem</h1>
+        <p>Adding a new ecosystem is composed of 2 simple steps:</p>
+        <ul class="tutorial-list">
+          <li>Add ecosystem details</li>
+          <li>Choose the clients you would like to add to the ecosystem.</li>
+        </ul>
+        <p>At the end of each step, click on the <strong>Next</strong> button to proceed.</p>
+      </div>
+    </div>
+  </div>
+  <div class="nav-circles">
+    <div class="active" id="1"></div>
+    <div id="2"></div>
+  </div>
+</div>
