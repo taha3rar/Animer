@@ -22,10 +22,10 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
   invoicesToExport: any[] = [];
   @Output() invoicesList = new EventEmitter();
   checkedAll = false;
-  processedProductConflictMessage: String =
+  measurementUnitConflictMessage: String =
     // tslint:disable-next-line:max-line-length
     'This purchase order includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';
-  measurementUnitConflictMessage: String =
+  processedProductConflictMessage: String =
     // tslint:disable-next-line:max-line-length
     'This purchase order includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
 
