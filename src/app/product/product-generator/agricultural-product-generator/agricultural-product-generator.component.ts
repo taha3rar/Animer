@@ -1,5 +1,6 @@
+import { CanComponentDeactivate } from './../../../shared/guards/confirmation.guard';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { currencies } from '@app/shared/helpers/currencies';
@@ -8,13 +9,14 @@ import { Product } from '@app/core/models/order/product';
 import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
 import { ProductDataService } from '../product-data.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-agricultural-product-generator',
   templateUrl: './agricultural-product-generator.component.html',
   styleUrls: ['./agricultural-product-generator.component.scss']
 })
-export class AgriculturalProductGeneratorComponent implements OnInit {
+export class AgriculturalProductGeneratorComponent implements OnInit, CanComponentDeactivate {
   newProduct: Product;
   productImage = defaultValues.agri_picture;
   productForm: FormGroup;
@@ -55,6 +57,11 @@ export class AgriculturalProductGeneratorComponent implements OnInit {
       price_per_unit: [product ? product.price_per_unit : undefined, Validators.required]
     });
     this.onChanges();
+  }
+
+  @HostListener('window:beforeunload')
+  confirm() {
+    return !this.productForm.dirty;
   }
 
   onChanges(): void {
@@ -118,7 +125,21 @@ export class AgriculturalProductGeneratorComponent implements OnInit {
   }
 
   onExit(): void {
-    this.dialog.close();
+    if (!this.productForm.valid && this.productForm.dirty) {
+      swal({
+        text: 'Are you sure you want to leave this page? All information will be lost!',
+        buttons: ['Cancel', 'Yes'],
+        icon: 'warning'
+      }).then(value => {
+        if (value) {
+          this.dialog.close();
+        } else {
+          return false;
+        }
+      });
+    } else {
+      this.dialog.close();
+    }
   }
 
   receiveImage($event: any) {

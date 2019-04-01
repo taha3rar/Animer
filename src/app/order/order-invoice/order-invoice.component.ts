@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { Router } from '@angular/router';
 import { InvoiceService } from '@app/core/api/invoice.service';
@@ -14,12 +14,14 @@ export class OrderInvoiceComponent implements OnInit {
   invoice: Invoice;
   @Input()
   generateInvoice: false;
+  @Output() formSubmitted = new EventEmitter();
 
   constructor(private invoiceService: InvoiceService, private router: Router) {}
 
   ngOnInit() {}
 
   saveInvoice(): void {
+    this.formSubmitted.emit(true);
     this.invoiceService.create(this.invoice).subscribe(data => {
       this.router.navigateByUrl('/order/list');
     });

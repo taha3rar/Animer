@@ -6,19 +6,22 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-order-generator-seller',
   templateUrl: './order-generator-seller.component.html',
   styleUrls: ['./order-generator-seller.component.scss']
 })
-export class OrderGeneratorSellerComponent implements OnInit {
+export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeactivate {
   order: Order;
   document: any;
   invoiceForm: FormGroup;
   products: ProductInvoice[];
   invoice: Invoice;
   isDraft: Boolean;
+  formSubmitted: any;
 
   constructor(
     private location: Location,
@@ -118,5 +121,22 @@ export class OrderGeneratorSellerComponent implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  confirm() {
+    if (!this.invoiceForm.dirty || this.formSubmitted) {
+      return true;
+    }
+    return swal({
+      text: 'Are you sure you want to leave this page? All information will be lost!',
+      buttons: ['Cancel', 'Yes'],
+      icon: 'warning'
+    }).then(value => {
+      if (value) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 }

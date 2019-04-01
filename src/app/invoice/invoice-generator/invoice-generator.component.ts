@@ -1,25 +1,28 @@
 import { StepperService } from '@app/core/stepper.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 import { Invoice } from '@app/core/models/invoice/invoice';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, CanDeactivate } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Product } from '@app/core/models/order/product';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
+import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-invoice-generator',
   templateUrl: './invoice-generator.component.html',
   styleUrls: ['./invoice-generator.component.scss']
 })
-export class InvoiceGeneratorComponent implements OnInit {
+export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate {
   invoice: Invoice;
   draftInvoice: Invoice;
   draft: boolean;
   invoiceProducts: ProductInvoice[];
   invoiceForm: FormGroup;
+  formSubmitted: any;
 
   constructor(
     private location: Location,
@@ -123,6 +126,11 @@ export class InvoiceGeneratorComponent implements OnInit {
     this.stepperService.stepperInit();
   }
 
+  @HostListener('window:beforeunload')
+  CanDeactivate(): boolean {
+    return !this.invoiceForm.dirty;
+  }
+
   receiveNewInvoice($event: Invoice) {
     this.invoice = $event;
   }
@@ -149,6 +157,23 @@ export class InvoiceGeneratorComponent implements OnInit {
       phone_number: seller.personal_information.phone_number,
       contact_by: seller.contact_by
     };
+  }
+
+  confirm() {
+    if (!this.invoiceForm.dirty || this.formSubmitted) {
+      return true;
+    }
+    return swal({
+      text: 'Are you sure you want to leave this page? All information will be lost!',
+      buttons: ['Cancel', 'Yes'],
+      icon: 'warning'
+    }).then(value => {
+      if (value) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
   back() {

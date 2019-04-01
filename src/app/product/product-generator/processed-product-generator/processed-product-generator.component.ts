@@ -1,5 +1,6 @@
+import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { currencies } from '@app/shared/helpers/currencies';
@@ -7,13 +8,14 @@ import { measureUnits } from '@app/shared/helpers/measure';
 import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
 import { Product } from '@app/core/models/product';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-processed-product-generator',
   templateUrl: './processed-product-generator.component.html',
   styleUrls: ['./processed-product-generator.component.scss']
 })
-export class ProcessedProductGeneratorComponent implements OnInit {
+export class ProcessedProductGeneratorComponent implements OnInit, CanComponentDeactivate {
   newProduct: Product;
   productImage = defaultValues.processed_picture;
   productForm: FormGroup;
@@ -94,7 +96,26 @@ export class ProcessedProductGeneratorComponent implements OnInit {
   }
 
   onExit(): void {
-    this.dialog.close();
+    if (!this.productForm.valid && this.productForm.dirty) {
+      swal({
+        text: 'Are you sure you want to leave this page? All information will be lost!',
+        buttons: ['Cancel', 'Yes'],
+        icon: 'warning'
+      }).then(value => {
+        if (value) {
+          this.dialog.close();
+        } else {
+          return false;
+        }
+      });
+    } else {
+      this.dialog.close();
+    }
+  }
+
+  @HostListener('window:beforeunload')
+  confirm() {
+    return !this.productForm.dirty;
   }
 
   receiveImage($event: any) {

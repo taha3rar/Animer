@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import swal from 'sweetalert';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +19,8 @@ export class InvoiceComponent implements OnInit {
 
   @Input()
   invoice: Invoice;
+
+  @Output() formSubmitted = new EventEmitter();
 
   constructor(
     private invoiceService: InvoiceService,
@@ -107,6 +109,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   saveInvoice(): void {
+    this.formSubmitted.emit(true);
     if (this.disclaimerAccepted === false) {
       this.disclaimerPopup();
     } else {
