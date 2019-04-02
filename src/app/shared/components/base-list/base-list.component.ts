@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from '@app/core/api/base.service';
 import { Router } from '@angular/router';
 import { defaultValues } from '@app/shared/helpers/default_values';
+import { AuthenticationService } from '@app/core';
 
 export class ListOptions {
   deleteText: string;
@@ -13,6 +14,7 @@ export class ListOptions {
 })
 export class BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
+  usersWhiteList = ['bendemoseller@gmail.com', 'ishai@avenews-gt.com', 'javier@avenews-gt.com'];
 
   constructor(private service: BaseService, protected router: Router, private options: ListOptions) {}
 

@@ -14,6 +14,7 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
   @Input()
   orders: Order[];
   page = 1;
+  usersWhiteList = ['bendemoseller@gmail.com', 'ishai@avenews-gt.com', 'javier@avenews-gt.com'];
   processedProductConflictMessage: String =
     // tslint:disable-next-line:max-line-length
     'This purchase order includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
@@ -22,7 +23,7 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
     'This purchase order includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';
 
   constructor(
-    private authService: AuthenticationService,
+    protected authService: AuthenticationService,
     private orderService: OrderService,
     protected router: Router
   ) {
@@ -32,6 +33,11 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  get canDelete() {
+    // delete ability is only allowed for specific users
+    return this.usersWhiteList.includes(this.authService.credentials.user.email);
+  }
 
   get userId() {
     return this.authService.currentUserId;

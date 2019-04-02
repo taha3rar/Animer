@@ -30,7 +30,7 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     'This proforma invoice includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
 
   constructor(
-    private authService: AuthenticationService,
+    protected authService: AuthenticationService,
     protected invoiceService: InvoiceService,
     protected router: Router,
     private csv: CsvService
@@ -41,6 +41,11 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  get canDelete() {
+    // delete ability is only allowed for specific users
+    return this.usersWhiteList.includes(this.authService.credentials.user.email);
+  }
 
   get userId() {
     return this.authService.currentUserId;

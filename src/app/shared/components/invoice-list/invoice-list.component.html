@@ -82,7 +82,9 @@
         >
           <i class="material-icons">remove_red_eye</i>
         </button>
-        <!-- <button class="round-button-red" (click)="warning(invoice._id)"><i class="material-icons">delete</i></button> -->
+        <button *ngIf="canDelete" class="round-button-red" (click)="warning(invoice._id)">
+          <i class="material-icons">delete</i>
+        </button>
       </td>
     </tr>
   </tbody>
