@@ -20,6 +20,7 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
   newEcosystem: Ecosystem;
   userClients: Client[];
   user: User;
+  formSubmitted = false;
   clientsAdded: any;
   page: 1;
   @ViewChild('closeModal')
@@ -68,6 +69,7 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
   }
 
   submitEcosystem() {
+    this.formSubmitted = true;
     this.newEcosystem.name = this.ecosystemf.name.value;
     this.newEcosystem.type = this.ecosystemf.ecosystemType.value;
     this.newEcosystem.description = this.ecosystemf.description.value;
@@ -79,11 +81,12 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
 
   closeAndRefresh(): any {
     $('#newEcosystem').fadeOut('fast');
+    this.resetForm();
     this.router.navigate([this.router.url]);
   }
 
   onModalClose() {
-    if (!this.newEcosystemForm.valid && this.newEcosystemForm.dirty) {
+    if (!this.formSubmitted && this.newEcosystemForm.dirty) {
       swal({
         text: 'Are you sure you want to leave this page? All information will be lost!',
         buttons: ['Cancel', 'Yes'],
@@ -98,6 +101,29 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
     } else {
       this.closeAndRefresh();
     }
+  }
+
+  resetForm() {
+    this.newEcosystemForm.reset();
+    $('.stepper')
+      .find('li.completed:not(:first-child)')
+      .addClass('disabled');
+    $('.stepper')
+      .find('li.completed:last-child')
+      .removeClass('completed');
+    $('.stepper')
+      .find('li.active')
+      .removeClass('active');
+    $('.stepper')
+      .find('li:first-child')
+      .addClass('active');
+    $('.stepper')
+      .find('.tab-pane.active')
+      .removeClass('active');
+    $('.stepper')
+      .find('.tab-pane:first-child')
+      .addClass('active');
+    $('.checkbox').prop('checked', false);
   }
 
   @HostListener('window:beforeunload')

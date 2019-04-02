@@ -1,7 +1,7 @@
 import { CanComponentDeactivate } from './../../shared/guards/confirmation.guard';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { StepperService } from '@app/core/stepper.service';
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../core/api/user.service';
@@ -10,7 +10,6 @@ import { Ecosystem } from '@app/core/models/ecosystem';
 import { Client } from '@app/core/models/user/client';
 import { EcosystemService } from '@app/core';
 import { countries } from '@app/shared/helpers/countries';
-import swal from 'sweetalert';
 import * as libphonenumber from 'google-libphonenumber';
 
 declare const $: any;
@@ -20,7 +19,7 @@ declare const $: any;
   templateUrl: './client-generator.component.html',
   styleUrls: ['./client-generator.component.scss']
 })
-export class ClientGeneratorComponent extends BaseValidationComponent implements OnInit, CanComponentDeactivate {
+export class ClientGeneratorComponent extends BaseValidationComponent implements OnInit {
   currentUser: User;
   invitedClient: User = new User();
   clientDetailsForm: FormGroup;
@@ -34,7 +33,6 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
   partialPhoneNumber: string;
   @ViewChild('closeModal')
   closeModal: ElementRef;
-  clientSubmitted = false;
 
   constructor(
     private userService: UserService,
@@ -186,7 +184,6 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     this.userService.saveInvitedClient(this.invitedClient).subscribe(
       data => {
         if (data._id) {
-          this.clientSubmitted = true;
           const participant = new Client(data);
           if (this.ecosystemsToBeAdded.length) {
             this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
@@ -224,34 +221,8 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
   }
 
   closeAndRefresh(): any {
-    $('#addClientWizard').fadeOut('fast');
+    this.closeModal.nativeElement.click();
     this.router.navigate([this.router.url]);
-  }
-
-  onModalClose() {
-    if (
-      (!this.clientSubmitted && this.clientDetailsForm.dirty) ||
-      (!this.clientSubmitted && this.companyDetailsForm.dirty)
-    ) {
-      swal({
-        text: 'Are you sure you want to leave this page? All information will be lost!',
-        buttons: ['Cancel', 'Yes'],
-        icon: 'warning'
-      }).then(value => {
-        if (value) {
-          this.closeAndRefresh();
-        } else {
-          return false;
-        }
-      });
-    } else {
-      this.closeAndRefresh();
-    }
-  }
-
-  @HostListener('window:beforeunload')
-  confirm() {
-    return !this.clientDetailsForm.dirty;
   }
 
   isFieldInvalidComp(field: string) {
