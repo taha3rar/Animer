@@ -54,7 +54,7 @@ export class OrderGeneratorSellerComponent implements OnInit {
           city: ['', Validators.required],
           zipcode: ['', Validators.required],
           phone_number: ['', Validators.required],
-          contact_by: [this.formBuilder.array(this.document.buyer.contact_by)]
+          contact_by: [this.formBuilder.array(this.document.buyer.contact_by || [])]
         })
       ],
       seller: [
@@ -70,7 +70,7 @@ export class OrderGeneratorSellerComponent implements OnInit {
           city: ['', Validators.required],
           zipcode: ['', Validators.required],
           phone_number: ['', Validators.required],
-          contact_by: [this.formBuilder.array(this.document.seller.contact_by)]
+          contact_by: [this.formBuilder.array(this.document.seller.contact_by || [])]
         })
       ],
       order_id: [Object.is(this.order, undefined) ? this.invoice.order_id : this.order._id, Validators.required],
