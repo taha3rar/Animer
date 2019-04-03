@@ -21,6 +21,7 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
 import { DocumentGeneratorComponent } from './components/document-generator/document-generator.component';
 import { TutorialControlComponent } from './components/tutorial-control/tutorial-control.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { NotFoundComponent } from './componenets/not-found/not-found.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, ProgressbarModule.forRoot(), MatTooltipModule],
@@ -39,7 +40,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     GooglePlacesDirective,
     UploadPictureComponent,
     DocumentGeneratorComponent,
-    TutorialControlComponent
+    TutorialControlComponent,
+    NotFoundComponent
   ],
   exports: [
     LoaderComponent,

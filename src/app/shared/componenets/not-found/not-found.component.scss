@@ -1,0 +1,35 @@
+.background {
+  background-image: url("../../../../assets/img/404-background.png");
+  background-size: cover;
+  width: 100%;
+  background-repeat: no-repeat;
+  height: 800px;
+}
+
+#p-404 {
+  text-align: center;
+  padding-top: 11%;
+  font-size: 6rem;
+}
+
+#p-msg {
+  text-align: center;
+  padding-top: 1%;
+  font-size: 3rem;
+}
+
+.btn-wrapper {
+  margin-top: 1.5%;
+  text-align: center;
+}
+
+.bttn-primary {
+  font-size: 1.8rem;
+  height: 4.5rem;
+}
+
+.ground-img {
+  display: block;
+  margin: 0 auto;
+  margin-top: 17rem;
+}

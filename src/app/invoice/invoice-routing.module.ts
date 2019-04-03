@@ -1,5 +1,5 @@
 import { InvoiceGeneratorComponent } from './invoice-generator/invoice-generator.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { extract } from '@app/core';
