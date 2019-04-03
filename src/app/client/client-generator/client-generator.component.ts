@@ -33,6 +33,7 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
   partialPhoneNumber: string;
   @ViewChild('closeModal')
   closeModal: ElementRef;
+  clientSubmitted = false;
 
   constructor(
     private userService: UserService,
@@ -180,7 +181,7 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     this.invitedClient.company_information.city = this.companyf.city.value;
     this.invitedClient.company_information.zipcode = this.companyf.zipcode.value;
     this.invitedClient.company_information.country = this.companyf.country.value;
-
+    this.clientSubmitted = true;
     this.userService.saveInvitedClient(this.invitedClient).subscribe(
       data => {
         if (data._id) {
@@ -221,8 +222,60 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
   }
 
   closeAndRefresh(): any {
-    this.closeModal.nativeElement.click();
+    $('#addClientWizard').fadeOut('fast');
+    this.resetForm();
     this.router.navigate([this.router.url]);
+  }
+
+  resetForm() {
+    this.clientDetailsForm.reset();
+    this.companyDetailsForm.reset();
+    this.clientDetailsForm.controls.phoneNumber.clearValidators();
+    this.clientDetailsForm.controls.email.clearValidators();
+    this.clientDetailsForm.controls.email.setValidators([Validators.email]);
+    this.clientDetailsForm.controls.contactTypes.setErrors({ incorrect: true });
+    this.clientDetailsForm.controls.profileType.setErrors({ incorrect: true });
+
+    $('.stepper')
+      .find('li.completed:not(:first-child)')
+      .addClass('disabled');
+    $('.stepper')
+      .find('li.completed')
+      .removeClass('completed');
+    $('.stepper')
+      .find('li.active')
+      .removeClass('active');
+    $('.stepper')
+      .find('li:first-child')
+      .addClass('active');
+    $('.stepper')
+      .find('.tab-pane.active')
+      .removeClass('active');
+    $('.stepper')
+      .find('.tab-pane:first-child')
+      .addClass('active');
+    $('.checkbox').prop('checked', false);
+    $('.form_radio').prop('checked', false);
+    $('input[type=tel]').val('');
+    this.clientSubmitted = false;
+  }
+
+  onModalClose() {
+    if (!this.clientSubmitted && this.clientDetailsForm.dirty) {
+      swal({
+        text: 'Are you sure you want to leave this page? All information will be lost!',
+        buttons: ['Cancel', 'Yes'],
+        icon: 'warning'
+      }).then(value => {
+        if (value) {
+          this.closeAndRefresh();
+        } else {
+          return false;
+        }
+      });
+    } else {
+      this.closeAndRefresh();
+    }
   }
 
   isFieldInvalidComp(field: string) {
