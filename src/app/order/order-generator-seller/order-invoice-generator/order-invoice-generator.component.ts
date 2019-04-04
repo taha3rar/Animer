@@ -9,16 +9,15 @@ import { OrderAgriculturalProductComponent } from '../../order-generator/order-p
 // tslint:disable-next-line:max-line-length
 import { OrderProcessedProductComponent } from '../../order-generator/order-product-list/order-processed-product/order-processed-product.component';
 import * as moment from 'moment';
-
 import { FormGroup } from '@angular/forms';
-import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
+import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 
 @Component({
   selector: 'app-order-invoice-generator',
   templateUrl: './order-invoice-generator.component.html',
   styleUrls: ['./order-invoice-generator.component.scss']
 })
-export class OrderInvoiceGeneratorComponent extends BaseValidationComponent implements OnInit {
+export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent implements OnInit {
   newInvoice: Invoice;
   @Input()
   form: FormGroup;
@@ -153,6 +152,7 @@ export class OrderInvoiceGeneratorComponent extends BaseValidationComponent impl
     });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
+    this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
     this.invoiceService.draft(this.newInvoice).subscribe(() => {
       this.router.navigateByUrl('/order/list');
@@ -172,6 +172,7 @@ export class OrderInvoiceGeneratorComponent extends BaseValidationComponent impl
     });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
+    this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoiceEvent.emit(this.newInvoice);
   }
 }

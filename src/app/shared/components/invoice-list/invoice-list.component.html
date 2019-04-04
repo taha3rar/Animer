@@ -11,12 +11,14 @@
         /><label class="checkbox_label" for="checkedAll"><span class="form_checkbox_btn"></span></label>
       </th>
       <th translate class="text-center">ID</th>
-      <th translate>Issued at</th>
+      <th translate>Issued on</th>
       <th translate>
         <span *ngIf="viewAsSeller">Issued for</span>
         <span *ngIf="!viewAsSeller">Issued by</span>
       </th>
       <th translate>Signed by</th>
+      <th translate>Product</th>
+      <th translate>Amount</th>
       <th translate>Total due</th>
       <th translate>Status</th>
       <th translate class="text-right">Actions</th>
@@ -42,13 +44,47 @@
       <td>
         <span>{{ invoice.sign_by.first_name }} {{ invoice.sign_by.last_name }}</span>
       </td>
+      <td>
+        <span *ngIf="invoice.products.length < 1">N/A</span>
+        <ng-container *ngIf="invoice.products.length == 1">
+          <span *ngIf="invoice.products[0].product_type != 'processed'"
+            >{{ invoice.products[0].produce }} / {{ invoice.products[0].variety }}</span
+          >
+          <span *ngIf="invoice.products[0].product_type == 'processed'">{{ invoice.products[0].produce }}</span>
+        </ng-container>
+        <span *ngIf="invoice.products.length > 1">Multiple Products</span>
+      </td>
+      <td>
+        <span *ngIf="invoice.total_weight && invoice.document_weight_unit"
+          >{{ invoice.total_weight | number: '1.2-2' }} {{ invoice.document_weight_unit }}
+          <span *ngIf="hasProcessedProduct(invoice)" style="font-size :11px;color:gray"
+            >Excluding processed products</span
+          ></span
+        >
+        <span *ngIf="invoice.total_weight && !invoice.document_weight_unit">
+          <i class="material-icons pull-left" matTooltip="{{ measurementUnitConflictMessage }}">help_outline</i>
+        </span>
+        <span *ngIf="!invoice.total_weight && invoice.products.length > 0"
+          ><i class="material-icons pull-left" matTooltip="{{ processedProductConflictMessage }}">help_outline</i></span
+        >
+        <span *ngIf="invoice.products.length < 1">N/A</span>
+      </td>
       <td>{{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}</td>
       <td>{{ invoice.status }}</td>
       <td class="text-right">
-        <button class="round-button-primary" [routerLink]="['/invoice', invoice._id]">
+        <button *ngIf="invoice.draft == false" class="round-button-primary" [routerLink]="['/invoice', invoice._id]">
           <i class="material-icons">remove_red_eye</i>
         </button>
-        <button class="round-button-red" (click)="warning(invoice._id)"><i class="material-icons">delete</i></button>
+        <button
+          *ngIf="invoice.draft == true"
+          class="round-button-primary"
+          [routerLink]="['/invoice/generator', invoice._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button *ngIf="canDelete" class="round-button-red" (click)="warning(invoice._id)">
+          <i class="material-icons">delete</i>
+        </button>
       </td>
     </tr>
   </tbody>

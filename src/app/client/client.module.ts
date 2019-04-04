@@ -23,6 +23,7 @@ import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 import { CurrentUserResolver } from './resolvers/current-user.resolver';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { TutorialsModule } from '@app/tutorials/tutorials.module';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    TutorialsModule,
     NgxPermissionsModule.forRoot()
   ],
   // tslint:disable-next-line:max-line-length

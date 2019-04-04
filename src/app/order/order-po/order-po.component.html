@@ -1,33 +1,50 @@
-<p *ngIf="!generateOrder" class="right margin-none">PO #{{ order?.numericId }}</p>
-<div class="row clearfix">
-  <div class="col-md-9">
-    <p class="heading-2">ISSUED BY</p>
-    <p class="heading-4">{{ order.buyer.first_name }} {{ order.buyer.last_name }}</p>
-    <p class="heading-4">{{ order.buyer.company_name }}</p>
-    <p class="heading-4">{{ order.buyer.email }}</p>
-    <p class="heading-4">{{ order.buyer.address }}, {{ order.buyer.city }} {{ order.buyer.zipcode }}</p>
-    <p class="heading-4">TEL: {{ order.buyer.phone_number }}</p>
+<div class="padding-all">
+  <div class="border-box">
+    <h2>
+      PURCHASE ORDER <span *ngIf="!generateOrder">#{{ order?.numericId }}</span>
+    </h2>
+    <table>
+      <tr>
+        <td class="heading-4-blue">ISSUE DATE</td>
+        <td>{{ order.date_created | date: 'dd/MM/yyyy' }}</td>
+      </tr>
+      <tr>
+        <td class="heading-4-blue">VALID BY</td>
+        <td>{{ order.sign_by.date | date: 'dd/MM/yyyy' }}</td>
+      </tr>
+    </table>
   </div>
-  <div class="col-md-3">
-    <p class="heading-2">ISSUED FOR</p>
-    <p class="heading-4">{{ order.seller.first_name }} {{ order.seller.last_name }}</p>
-    <p class="heading-4">{{ order.seller.company_name }}</p>
-    <p class="heading-4">{{ order.seller.email }}</p>
-    <p class="heading-4">{{ order.seller.address }}, {{ order.seller.city }} {{ order.seller.zipcode }}</p>
-    <p class="heading-4">TEL: {{ order.seller.phone_number }}</p>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-9">
-    <p class="heading-2">Products</p>
-    <table class="panel-table">
+  <div class="row" style="padding-top: 5rem;">
+    <div class="col-md-6">
+      <p class="heading-4-blue">ISSUED BY</p>
+      <p class="heading-4">{{ order.buyer.first_name }} {{ order.buyer.last_name }}</p>
+      <p class="heading-4">{{ order.buyer.company_name }}</p>
+      <p class="heading-4">{{ order.buyer.email }}</p>
+      <p class="heading-4">{{ order.buyer.address }}, {{ order.buyer.city }} {{ order.buyer.zipcode }}</p>
+      <p class="heading-4">{{ order.buyer.phone_number }}</p>
+    </div>
+    <div class="col-md-3 col-md-offset-3">
+      <p class="heading-4-blue">ISSUED FOR</p>
+      <p class="heading-4">{{ order.seller.first_name }} {{ order.seller.last_name }}</p>
+      <p class="heading-4">{{ order.seller.company_name }}</p>
+      <p class="heading-4">{{ order.seller.email }}</p>
+      <p class="heading-4">{{ order.seller.address }}, {{ order.seller.city }} {{ order.seller.zipcode }}</p>
+      <p class="heading-4">{{ order.seller.phone_number }}</p>
+    </div>
+  </div>
+
+  <div style="padding-top: 2rem;">
+    <p class="heading-2">PRODUCTS</p>
+    <table class="products-table">
       <thead>
-        <th>Product</th>
-        <th>Packages</th>
-        <th>Total Amount</th>
-        <th>Rate</th>
-        <th>Total Price</th>
+        <tr>
+          <th>PRODUCT NAME</th>
+          <th>PACKAGES</th>
+          <th>AMOUNT</th>
+          <th>RATE</th>
+          <th>PRICE</th>
+        </tr>
       </thead>
       <tbody>
         <tr *ngFor="let row of order.products">
@@ -36,7 +53,7 @@
               {{ row.produce }} / {{ row.variety }}
             </span>
             <span *ngIf="row.product_type == 'processed' && row.item_package_type">
-              {{ row.produce }} / {{ row.item_measurement_amount }} {{ row.item_measurement_unit }} /
+              {{ row.produce }} / {{ row.item_measurement_amount | number: '1.2-2' }} {{ row.item_measurement_unit }} /
               {{ row.item_package_type }}
             </span>
             <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
@@ -45,29 +62,30 @@
           </td>
           <td>
             <span *ngIf="!row.product_type || row.product_type == 'agricultural'">
-              {{ row.quantity }} ({{ row.type_of_package }} / {{ row.package_weight }} {{ row.weight_unit }})
+              {{ row.quantity | number: '1.0' }} ({{ row.type_of_package }} /
+              {{ row.package_weight | number: '1.2-2' }} {{ row.weight_unit }})
             </span>
             <span *ngIf="row.product_type == 'processed' && row.item_package_type">
-              {{ row.quantity }} ({{ row.type_of_package }} / {{ row.items_per_package
+              {{ row.quantity | number: '1.0' }} ({{ row.type_of_package }} / {{ row.items_per_package | number: '1.0'
               }}<span *ngIf="row.items_per_package > 1"> items)</span
               ><span *ngIf="row.items_per_package == 1"> item)</span>
             </span>
             <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
-              {{ row.quantity }} ({{ row.type_of_package }})
+              {{ row.quantity | number: '1.0' }} ({{ row.type_of_package }})
             </span>
           </td>
           <td>
             <span *ngIf="!row.product_type || row.product_type == 'agricultural'"
-              >{{ row.total_weight }} {{ row.weight_unit }}</span
+              >{{ row.total_weight | number: '1.2-2' }} {{ row.weight_unit }}</span
             >
             <span *ngIf="row.product_type == 'processed'">N/A</span>
           </td>
           <td>
             <span *ngIf="!row.product_type || row.product_type == 'agricultural'"
-              >{{ row.price_per_unit }} {{ order.currency }} / {{ row.weight_unit }}</span
+              >{{ row.price_per_unit | number: '1.2-2' }} {{ order.currency }} / {{ row.weight_unit }}</span
             >
             <span *ngIf="row.product_type == 'processed'"
-              >{{ row.package_price }} {{ order.currency }} / {{ row.type_of_package }}</span
+              >{{ row.package_price | number: '1.2-2' }} {{ order.currency }} / {{ row.type_of_package }}</span
             >
           </td>
           <td>
@@ -76,51 +94,56 @@
         </tr>
       </tbody>
     </table>
-
-    <div class="subtotal-price pull-right">
-      <p class="heading-2">SUBTOTAL</p>
-      <p class="heading-4-blue">{{ order.total_due | number: '1.2-2' }} {{ order.currency }}</p>
-    </div>
   </div>
-  <div class="col-md-3">
-    <div class="po-right-side">
-      <p class="heading-2">
-        Comments or special instructions for purchase order
-      </p>
-      <p>{{ order.order_comments || 'None' }}</p>
-      <p class="heading-2">Comments or special instructions for payments</p>
-      <p>{{ order.payment_comments || 'None' }}</p>
-    </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="border-top">
-      <p class="heading-2">Signed by</p>
-      <div class="row">
-        <div class="col-md-4">
-          <p>{{ order.sign_by.first_name }} {{ order.sign_by.last_name }}</p>
-          <p>{{ order.sign_by.company_name }}</p>
-          <p>PO valid by: {{ order.sign_by.date | date: 'dd/MM/yyyy' }}</p>
-          <p>Date of issue: {{ order.date_created | date: 'dd/MM/yyyy' }}</p>
+  <div style="padding-top: 2rem;">
+    <div class="row">
+      <div class="col-md-9">
+        <p class="heading-2">NOTES</p>
+        <div>
+          <p class="heading-4-blue">PAYMENT NOTES</p>
+          <p>
+            {{ order.payment_comments || 'None' }}
+          </p>
+        </div>
+        <div>
+          <p class="heading-4-blue">PURCHASE ORDER NOTES</p>
+          <p>
+            {{ order.order_comments || 'None' }}
+          </p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="border-box center-items pull-left">
+          <p class="heading-2">SUBTOTAL</p>
+          <p class="heading-4-blue">{{ order.total_due | number: '1.2-2' }} {{ order.currency }}</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="border-top">
-      <p class="heading-2">Deliver to</p>
-      <p>{{ order.deliver_to.contact_name }}</p>
-      <p>{{ order.deliver_to.address }}, {{ order.deliver_to.city }} {{ order.deliver_to.zip_code }}</p>
-      <p>{{ order.deliver_to.phone }}</p>
-      <p>Expected delivery date: {{ order.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}</p>
-      <button *ngIf="!buyer && !order.invoice" class="bttn-primary pull-right next-step">
-        Generate Proforma Invoice
-      </button>
-      <button class="btn-primary-transp pull-right" (click)="downloadPopup()">
-        Download PDF
-      </button>
+
+  <div class="row" style="padding-top: 5rem;">
+    <div class="col-md-6">
+      <p class="heading-4-blue">SIGNED BY</p>
+      <p class="heading-4">{{ order.sign_by.first_name }} {{ order.sign_by.last_name }}</p>
+      <p class="heading-4">{{ order.sign_by.company_name }}</p>
+    </div>
+    <div class="col-md-3 col-md-offset-3">
+      <p class="heading-4-blue">DELIVER TO</p>
+      <p class="heading-4">{{ order.deliver_to.contact_name }}</p>
+      <p class="heading-4">
+        {{ order.deliver_to.address }}, {{ order.deliver_to.city }} {{ order.deliver_to.zip_code }}
+      </p>
+      <p class="heading-4">{{ order.deliver_to.phone }}</p>
+      <p class="heading-4">
+        Expected delivery date: {{ order.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}
+      </p>
     </div>
   </div>
+  <button *ngIf="!buyer && !order.invoice" class="bttn-primary pull-right next-step">
+    Generate Proforma Invoice
+  </button>
+  <button class="btn-primary-transp pull-right" (click)="downloadPopup()">
+    Download PDF
+  </button>
 </div>

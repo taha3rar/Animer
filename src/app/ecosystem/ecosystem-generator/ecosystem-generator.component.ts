@@ -1,23 +1,26 @@
+import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, CanDeactivate } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { EcosystemService } from '@app/core/api/ecosystem.service';
 import { Ecosystem } from '@app/core/models/ecosystem';
 import { User } from '@app/core/models/user/user';
 import { StepperService } from '@app/core/stepper.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-ecosystem-generator',
   templateUrl: './ecosystem-generator.component.html',
   styleUrls: ['./ecosystem-generator.component.scss']
 })
-export class EcosystemGeneratorComponent extends BaseValidationComponent implements OnInit {
+export class EcosystemGeneratorComponent extends BaseValidationComponent implements OnInit, CanComponentDeactivate {
   newEcosystemForm: FormGroup;
   newEcosystem: Ecosystem;
   userClients: Client[];
   user: User;
+  formSubmitted = false;
   clientsAdded: any;
   page: 1;
   @ViewChild('closeModal')
@@ -66,6 +69,7 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
   }
 
   submitEcosystem() {
+    this.formSubmitted = true;
     this.newEcosystem.name = this.ecosystemf.name.value;
     this.newEcosystem.type = this.ecosystemf.ecosystemType.value;
     this.newEcosystem.description = this.ecosystemf.description.value;
@@ -73,5 +77,57 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
       this.closeModal.nativeElement.click();
       this.router.navigate([this.router.url]);
     });
+  }
+
+  closeAndRefresh(): any {
+    $('#newEcosystem').fadeOut('fast');
+    this.resetForm();
+    this.router.navigate([this.router.url]);
+  }
+
+  onModalClose() {
+    if (!this.formSubmitted && this.newEcosystemForm.dirty) {
+      swal({
+        text: 'Are you sure you want to leave this page? All information will be lost!',
+        buttons: ['Cancel', 'Yes'],
+        icon: 'warning'
+      }).then(value => {
+        if (value) {
+          this.closeAndRefresh();
+        } else {
+          return false;
+        }
+      });
+    } else {
+      this.closeAndRefresh();
+    }
+  }
+
+  resetForm() {
+    this.newEcosystemForm.reset();
+    $('.stepper')
+      .find('li.completed:not(:first-child)')
+      .addClass('disabled');
+    $('.stepper')
+      .find('li.completed:last-child')
+      .removeClass('completed');
+    $('.stepper')
+      .find('li.active')
+      .removeClass('active');
+    $('.stepper')
+      .find('li:first-child')
+      .addClass('active');
+    $('.stepper')
+      .find('.tab-pane.active')
+      .removeClass('active');
+    $('.stepper')
+      .find('.tab-pane:first-child')
+      .addClass('active');
+    $('.checkbox').prop('checked', false);
+  }
+
+  @HostListener('window:beforeunload')
+  confirm() {
+    return !this.newEcosystemForm.dirty;
   }
 }

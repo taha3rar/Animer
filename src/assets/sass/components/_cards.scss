@@ -13,7 +13,7 @@
 
 .doc-card {
   display: flex;
-  width: 21rem;
+  width: 16.666%;
   flex-direction: column;
   border-radius: 5px;
   border: 1px solid $light-gray-2;
@@ -52,34 +52,36 @@
     cursor: pointer;
   }
 
-  .bttn-view {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-5px);
-    position: absolute;
-    top: 35.5%;
-    left: 58%;
-    background-color: white;
-    color: #37c1ce;
-    transition: transform 0.1s ease-in;
-  }
+  .file-image-wrapper {
+    position: relative;
 
-  .bttn-view ~ span {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-5px);
-    position: absolute;
-    font-size: 1.2rem;
-    top: 40%;
-    right: 5px;
-    color: $light-gray;
-    transition: transform 0.1s ease-in;
+    .bttn-view {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      bottom: -4px;
+      left: 58%;
+      background-color: white;
+      color: #37c1ce;
+      transition: transform 0.1s ease-in;
+    }
+
+    .bttn-view ~ span {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      font-size: 1.2rem;
+      bottom: -4px;
+      left: 70%;
+      color: $light-gray;
+      transition: transform 0.1s ease-in;
+    }
   }
 }
 
 .doc-card-upload {
   border: 1px dashed $primary-color;
-  width: 21rem;
+  width: 16%;
   background-color: #f6fdff;
   margin-right: 2.5rem;
   padding: 0.8rem;
@@ -95,7 +97,7 @@
     text-align: center;
     text-align: center;
     display: block;
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
 
   p {

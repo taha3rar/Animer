@@ -1,3 +1,4 @@
+import { ConfirmationGuard } from './../shared/guards/confirmation.guard';
 import { OrderComponent } from './order/order.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,6 +16,7 @@ import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
+import { CurrentUserResolver } from '@app/profile/resolvers/currentUser.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -24,7 +26,8 @@ const routes: Routes = [
       resolve: {
         orders: OrderListResolver,
         ordersAsBuyer: OrderListAsBuyerResolver,
-        ordersAsSeller: OrderListAsSellerResolver
+        ordersAsSeller: OrderListAsSellerResolver,
+        currentUser: CurrentUserResolver
       },
       data: { title: extract('Orders') },
       runGuardsAndResolvers: 'always'
@@ -35,7 +38,8 @@ const routes: Routes = [
       resolve: {
         buyer: OrderBuyerResolver,
         sellers: OrderSellersResolver
-      }
+      },
+      canDeactivate: [ConfirmationGuard]
     },
     {
       path: 'order/generator/:id',
@@ -49,7 +53,8 @@ const routes: Routes = [
       component: OrderGeneratorSellerComponent,
       resolve: {
         order: OrderPoResolver
-      }
+      },
+      canDeactivate: [ConfirmationGuard]
     },
     {
       path: 'order/invoice/generator/draft/:id',
@@ -73,6 +78,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [ConfirmationGuard]
 })
 export class OrderRoutingModule {}

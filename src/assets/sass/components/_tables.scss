@@ -99,3 +99,47 @@ table {
     vertical-align: middle !important;
   }
 }
+
+.products-table {
+  width: 100%;
+  margin-bottom: 3rem;
+
+  th {
+    color: #33c1ce;
+    text-align: left;
+  }
+
+  thead tr {
+    border-bottom: 1px solid #2ab7c4;
+  }
+
+  tr:not(:last-child) {
+    border-bottom: 1px solid #d6d6d6;
+  }
+
+  th,
+  td {
+    border-collapse: collapse;
+    padding: 1rem 1rem 0.3rem 1rem;
+  }
+}
+
+.border-box {
+  padding: 3rem 3.5rem;
+  border: 1px solid #e1e1e1;
+  word-wrap: break-word;
+  display: inline-block;
+  max-width: 100%;
+
+  h2 {
+    font-weight: bold;
+  }
+
+  table td:nth-of-type(1) {
+    padding-right: 2rem;
+  }
+
+  table {
+    margin-bottom: 0px !important;
+  }
+}

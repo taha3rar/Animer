@@ -4,6 +4,8 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 import { AuthenticationService, InvoiceService } from '@app/core';
 import { Router } from '@angular/router';
 import { BaseListComponent } from '../base-list/base-list.component';
+import 'hammerjs';
+
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
@@ -20,9 +22,15 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
   invoicesToExport: any[] = [];
   @Output() invoicesList = new EventEmitter();
   checkedAll = false;
+  measurementUnitConflictMessage: String =
+    // tslint:disable-next-line:max-line-length
+    'This proforma invoice includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';
+  processedProductConflictMessage: String =
+    // tslint:disable-next-line:max-line-length
+    'This proforma invoice includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
 
   constructor(
-    private authService: AuthenticationService,
+    protected authService: AuthenticationService,
     protected invoiceService: InvoiceService,
     protected router: Router,
     private csv: CsvService
@@ -33,6 +41,11 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  get canDelete() {
+    // delete ability is only allowed for specific users
+    return this.usersWhiteList.includes(this.authService.credentials.user.email);
+  }
 
   get userId() {
     return this.authService.currentUserId;
@@ -63,5 +76,14 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     }
     this.invoicesList.emit(this.invoicesToExport);
     this.checkedAll = true;
+  }
+
+  hasProcessedProduct(invoice: Invoice) {
+    for (let i = 0; i < invoice.products.length; i++) {
+      if (invoice.products[i].product_type === 'processed') {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -140,12 +140,12 @@
       <div class="form-row">
         <div formGroupName="sign_by" class="form-group col-md-6">
           <div [ngClass]="showFieldStyleNested('sign_by', 'date')">
-            <label for="PO_valid_date">Proforma Invoice is Valid by *</label>
+            <label for="PO_valid_date">Proforma Invoice is Valid until *</label>
             <div class="input-group">
               <input
                 id="PO_valid_date"
                 class="form-control"
-                placeholder="yyyy-mm-dd"
+                placeholder="dd/mm/yyyy"
                 name="ddpp"
                 ngbDatepicker
                 #dp1="ngbDatepicker"
@@ -166,7 +166,7 @@
             <input
               id="PO_date_created"
               class="form-control"
-              placeholder="yyyy-mm-dd"
+              placeholder="dd/mm/yyyy"
               name="ddpp2"
               ngbDatepicker
               #dp2="ngbDatepicker"

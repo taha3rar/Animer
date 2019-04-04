@@ -127,7 +127,7 @@
         <label for="po-terms" class="heading-2">Purchase Order Terms & Conditions</label>
         <textarea class="form-control" id="po-terms" rows="2" formControlName="terms_conditions"></textarea>
       </div>
-      <p class="heading-2">Purchase Order is Valid by</p>
+      <p class="heading-2">Purchase Order is Valid until</p>
       <div class="input-group">
         <input
           id="po-valid-date"
@@ -149,7 +149,7 @@
     <p>{{ purchaseOrder.payment_terms || purchaseOrderSpecificFields.payment_terms }}</p>
     <p class="heading-2">Purchase Order Terms & Conditions</p>
     <p>{{ purchaseOrder.terms_conditions || purchaseOrderSpecificFields.terms_conditions }}</p>
-    <p class="heading-2">Purchase Order is Valid by</p>
+    <p class="heading-2">Purchase Order is Valid until</p>
     <p *ngIf="purchaseOrder.valid_until">{{ purchaseOrder.valid_until | date: 'dd/MM/yy' }}</p>
     <p *ngIf="!purchaseOrder.valid_until && purchaseOrderSpecificFields.valid_until">
       {{ purchaseOrderSpecificFields.valid_until | date: 'dd/MM/yy' }}

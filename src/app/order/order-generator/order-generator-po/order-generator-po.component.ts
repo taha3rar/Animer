@@ -1,4 +1,3 @@
-import { BaseValidationComponent } from './../../../shared/components/base-validation/base-validation.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -6,14 +5,16 @@ import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
+import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 import * as moment from 'moment';
+import { Product } from '@app/core/models/product';
 
 @Component({
   selector: 'app-order-generator-po',
   templateUrl: './order-generator-po.component.html',
   styleUrls: ['./order-generator-po.component.scss']
 })
-export class OrderGeneratorPoComponent extends BaseValidationComponent implements OnInit {
+export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implements OnInit {
   newOrder: Order;
   form: FormGroup;
   selectedProducts: any[];
@@ -77,6 +78,7 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
     });
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
+    this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.draft = true;
     this.orderService.draft(this.newOrder).subscribe(() => {
@@ -102,6 +104,7 @@ export class OrderGeneratorPoComponent extends BaseValidationComponent implement
     });
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
+    this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.orderDataService.setNewOrder(this.newOrder);
   }

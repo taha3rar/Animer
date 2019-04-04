@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
@@ -12,7 +12,7 @@ import * as $ from 'jquery';
 })
 export class OrderGeneratorReviewOrderComponent implements OnInit {
   order: Order;
-
+  @Output() formSubmitted = new EventEmitter();
   constructor(private orderDataService: OrderDataService, private orderService: OrderService, private router: Router) {}
 
   ngOnInit() {
@@ -24,6 +24,7 @@ export class OrderGeneratorReviewOrderComponent implements OnInit {
   }
 
   saveOrder(): void {
+    this.formSubmitted.emit(true);
     this.orderService.create(this.order).subscribe((order: Order) => {
       this.router.navigateByUrl('/order/list');
     });

@@ -39,7 +39,11 @@
           <div class="panel panel-tab">
             <div class="panel-body">
               <div class="padding-all-2">
-                <app-order-invoice [generateInvoice]="true" [invoice]="invoice"></app-order-invoice>
+                <app-order-invoice
+                  (formSubmitted)="formSubmitted = $event"
+                  [generateInvoice]="true"
+                  [invoice]="invoice"
+                ></app-order-invoice>
               </div>
             </div>
           </div>

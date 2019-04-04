@@ -30,6 +30,7 @@ export class OrderPoComponent implements OnInit {
     this.orderService.getPdf(this.order._id, version).subscribe(data => {
       const blob = new Blob([data], { type: 'application/pdf' });
       importedSaveAs(blob, `purchase-order-${this.order.numericId}-${version}`);
+      swal.close();
     });
   }
 
@@ -39,8 +40,8 @@ export class OrderPoComponent implements OnInit {
       className: 'swal-pdf',
       text: 'Please choose the type of purchase order document you would like to download:',
       buttons: {
-        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o' },
-        copyDoc: { text: 'Copy Document', value: 'copy' }
+        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o', closeModal: false },
+        copyDoc: { text: 'Copy Document', value: 'copy', closeModal: false }
       }
     }).then(value => {
       if (value === 'original') {

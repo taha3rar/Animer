@@ -89,7 +89,7 @@
               submitted by your sellers in one place. Don’t worry about staying updated - once a proforma invoice has
               been received, you will be informed with live notifications.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/invoices/list">Go to Proforma Invoice</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/invoice/list">Go to Proforma Invoice</button>
           </div>
           <div
             class="tab-pane"
@@ -104,7 +104,7 @@
               are proforma invoices that are not connected directly to a purchase order you received from a buyer on the
               platform.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/invoices/list">Go to Proforma Invoices</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/invoice/list">Go to Proforma Invoices</button>
           </div>
           <div class="tab-pane" id="create-product" *ngxPermissionsOnly="['create-product']">
             <figure><img src="../../assets/img/dashboard-imgs/products.png" class="vector-tutorial" /></figure>
@@ -113,7 +113,7 @@
               The Products feature is where you can create a digital inventory with customizable product profiles that
               holds key product details such as SKU, certifications, packing options and more.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/products/list">Go to Products</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/product/list">Go to Products</button>
           </div>
           <div class="tab-pane" id="receive-po" *ngIf="currentUser.roles[0] === 'seller'">
             <figure><img src="../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" /></figure>
@@ -124,7 +124,7 @@
               one place. Once a purchase order has been received, you will be notified and then all you need to do is
               reply with a proforma invoice.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/orders/list">Go to Orders</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/order/list">Go to Orders</button>
           </div>
           <div class="tab-pane" id="rec-iss-po" *ngIf="currentUser.roles[0] === 'agribusiness'">
             <figure><img src="../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" /></figure>
@@ -134,7 +134,7 @@
               orders from your buyers, reply to them with customized proforma invoices, upload your own necessary
               documents, and manage the entire trade process in one place.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/orders/list">Go to Orders</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/order/list">Go to Orders</button>
           </div>
           <!-- <div class="tab-pane" id="make-transaction" *ngxPermissionsOnly="['list-transactions']">
             <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>

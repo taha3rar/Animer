@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import swal from 'sweetalert';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +19,8 @@ export class InvoiceComponent implements OnInit {
 
   @Input()
   invoice: Invoice;
+
+  @Output() formSubmitted = new EventEmitter();
 
   constructor(
     private invoiceService: InvoiceService,
@@ -70,8 +72,8 @@ export class InvoiceComponent implements OnInit {
       className: 'swal-pdf',
       text: 'Please choose the type of proforma invoice document you would like to download:',
       buttons: {
-        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o' },
-        copyDoc: { text: 'Copy Document', value: 'copy' }
+        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o', closeModal: false },
+        copyDoc: { text: 'Copy Document', value: 'copy', closeModal: false }
       }
     }).then(value => {
       if (value === 'original') {
@@ -102,10 +104,12 @@ export class InvoiceComponent implements OnInit {
     this.invoiceService.getPdf(this.invoice._id, version).subscribe(data => {
       const blob = new Blob([data], { type: 'application/pdf' });
       importedSaveAs(blob, `proforma-invoice-${this.invoice.numericId}-${version}`);
+      swal.close();
     });
   }
 
   saveInvoice(): void {
+    this.formSubmitted.emit(true);
     if (this.disclaimerAccepted === false) {
       this.disclaimerPopup();
     } else {

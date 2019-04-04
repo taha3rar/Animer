@@ -1,5 +1,5 @@
+<a class="pull-right need-help" data-toggle="wizard" data-target="#clientTutorials">Need help?</a>
 <h1 class="main-title">Clients</h1>
-
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
   <p *ngIf="isInvited">Review your work with the client who invited you to his network.</p>
@@ -49,3 +49,4 @@
 <pagination-controls (pageChange)="page = $event"></pagination-controls>
 
 <app-client-generator></app-client-generator>
+<app-client-tutorials></app-client-tutorials>

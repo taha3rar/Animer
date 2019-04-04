@@ -160,12 +160,12 @@
       <div class="form-row">
         <div formGroupName="sign_by" class="form-group col-md-6">
           <div [ngClass]="showFieldStyleNested('sign_by', 'date')">
-            <label for="SPI_valid_date">Proforma Invoice is Valid by *</label>
+            <label for="SPI_valid_date">Proforma Invoice is Valid until *</label>
             <div class="input-group">
               <input
                 id="SPI_valid_date"
                 class="form-control"
-                placeholder="yyyy-mm-dd"
+                placeholder="dd/mm/yyyy"
                 name="ddpp"
                 ngbDatepicker
                 #dp1="ngbDatepicker"
@@ -186,7 +186,7 @@
             <input
               id="SPI_date_created"
               class="form-control"
-              placeholder="yyy-mm-dd"
+              placeholder="dd/mm/yyyy"
               ngbDatepicker
               #dp2="ngbDatepicker"
               formControlName="date_created"
@@ -272,7 +272,7 @@
               <input
                 id="expected_delivery"
                 class="form-control"
-                placeholder="yyyy-mm-dd"
+                placeholder="dd/mm/yyyy"
                 name="ddp"
                 ngbDatepicker
                 #dp3="ngbDatepicker"
@@ -300,7 +300,7 @@
       class="bttn-primary pull-right"
       (click)="onSubmit(form)"
       (click)="checkProducts()"
-      [hidden]="form.valid || products.length > 1"
+      [hidden]="form.valid && products.length >= 1"
     >
       Next Step &rarr;
     </button>

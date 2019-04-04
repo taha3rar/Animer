@@ -5,7 +5,7 @@
       <th translate>Date</th>
       <th translate>Company</th>
       <th translate>Contact</th>
-      <th translate>Packages</th>
+      <th translate>Amount</th>
       <th translate>Price</th>
       <th translate>Status</th>
       <th translate class="text-right">Actions</th>
@@ -24,16 +24,22 @@
         <span *ngIf="userId == order.buyer._id">{{ order.seller.first_name }} {{ order.seller.last_name }}</span>
       </td>
       <td>
-        <span *ngIf="order.total_weight"
-          >{{ order.total_weight | roundUp }} {{ order.document_weight_unit }}
-          <span *ngIf="hasProcessedProduct(order)" style="font-size :9px;color:gray"
+        <span *ngIf="order.total_weight && order.document_weight_unit"
+          >{{ order.total_weight | number: '1.2-2' }} {{ order.document_weight_unit }}
+          <span *ngIf="hasProcessedProduct(order)" style="font-size :11px;color:gray"
             >Excluding processed products</span
           ></span
         >
-        <span *ngIf="!order.total_weight">N/A</span>
+        <span *ngIf="order.total_weight && !order.document_weight_unit">
+          <i class="material-icons pull-left" matTooltip="{{ measurementUnitConflictMessage }}">help_outline</i>
+        </span>
+        <span *ngIf="!order.total_weight && order.products.length > 0"
+          ><i class="material-icons pull-left" matTooltip="{{ processedProductConflictMessage }}">help_outline</i></span
+        >
+        <span *ngIf="order.products.length < 1">N/A</span>
       </td>
       <td>
-        <span *ngIf="order.total_due">{{ order.total_due | number: '1.2-2' }} {{ order.currency }}</span>
+        <span *ngIf="order.total_due">{{ totalDue(order) | number: '1.2-2' }} {{ order.currency }}</span>
         <span *ngIf="!order.total_due">N/A</span>
       </td>
       <td>{{ order.status }}</td>
@@ -78,7 +84,9 @@
         >
           <i class="material-icons">remove_red_eye</i>
         </button>
-        <button class="round-button-red" (click)="warning(order._id)"><i class="material-icons">delete</i></button>
+        <button *ngIf="canDelete" class="round-button-red" (click)="warning(order._id)">
+          <i class="material-icons">delete</i>
+        </button>
       </td>
     </tr>
   </tbody>

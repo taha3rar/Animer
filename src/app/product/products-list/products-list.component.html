@@ -1,3 +1,4 @@
+<a class="pull-right need-help" data-toggle="wizard" data-target="#productTutorials">Need help?</a>
 <h1 translate class="main-title">Products</h1>
 
 <div class="helper-panel">
@@ -36,8 +37,10 @@
       <td *ngIf="product.product_type == 'processed'">{{ product.produce }}</td>
       <td>{{ product.sku }}</td>
       <td>{{ product.type_of_package }}</td>
-      <td *ngIf="product.product_type != 'processed'">{{ product.total_weight }} {{ product.weight_unit }}</td>
-      <td *ngIf="product.product_type == 'processed'">{{ product.quantity }} Packages</td>
+      <td *ngIf="product.product_type != 'processed'">
+        {{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit }}
+      </td>
+      <td *ngIf="product.product_type == 'processed'">{{ product.quantity | number: '1.0' }} Packages</td>
       <td class="text-right">
         <button
           *ngIf="product.product_type == 'processed'"
@@ -78,3 +81,4 @@
     <app-product-profile [product]="selectedProduct"></app-product-profile>
   </div>
 </div>
+<app-product-tutorials></app-product-tutorials>

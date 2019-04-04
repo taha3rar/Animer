@@ -1,9 +1,11 @@
+import { InvoiceTutorialsComponent } from './../../tutorials/invoice-tutorials/invoice-tutorials.component';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { CsvService } from '@app/shared/services/csv.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
+import { Product } from '@app/core/models/product';
 declare const $: any;
 
 @Component({
@@ -80,6 +82,8 @@ export class InvoicesListComponent implements OnInit {
       issuedAt: 'Issued at',
       issuedFor: 'Issued for',
       signedBy: 'Signed by',
+      product: 'Product',
+      amount: 'Amount',
       totalDue: 'Total due',
       status: 'Status'
     };
@@ -87,19 +91,41 @@ export class InvoicesListComponent implements OnInit {
     const invoices = this.invoices.map((invoice: Invoice) => {
       const issuedFor =
         this.authService.currentUserId === invoice.seller._id
-          ? invoice.buyer.company_name
-          : invoice.seller.company_name;
-
-      const signedBy =
-        this.authService.currentUserId === invoice.seller._id
           ? `${invoice.buyer.first_name} ${invoice.buyer.last_name}`
           : `${invoice.seller.first_name} ${invoice.seller.last_name}`;
+
+      const signedBy =
+        invoice.sign_by.first_name && invoice.sign_by.last_name
+          ? `${invoice.sign_by.first_name} ${invoice.sign_by.last_name}`
+          : 'N/A';
+
+      let product;
+      if (invoice.products.length > 0) {
+        if (invoice.products.length === 1) {
+          product =
+            invoice.products[0].product_type === 'processed'
+              ? `${invoice.products[0].produce}`
+              : `${invoice.products[0].produce} / ${invoice.products[0].variety}`;
+        } else {
+          product = 'Multiple products';
+        }
+      } else {
+        product = 'N/A';
+      }
+
+      const amount = invoice.total_weight
+        ? invoice.document_weight_unit
+          ? `${this.decimalPipe.transform(invoice.total_weight, '1.2-2')} ${invoice.document_weight_unit || ''}`
+          : 'N/A'
+        : 'N/A';
 
       return {
         id: invoice.numericId,
         issuedAt: this.datePipe.transform(invoice.date_created, 'dd/MM/yyyy'),
         issuedFor: issuedFor,
         signedBy: signedBy,
+        product: product,
+        amount: amount,
         totalDue: `${this.decimalPipe.transform(invoice.total_due, '1.2-2')} ${invoice.currency}`,
         status: invoice.status
       };

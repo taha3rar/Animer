@@ -26,6 +26,7 @@ import { BaseProductReview } from './product-generator/product-review/base-produ
 // tslint:disable-next-line:max-line-length
 import { AgriculturalProductGeneratorComponent } from './product-generator/agricultural-product-generator/agricultural-product-generator.component';
 import { ProcessedProductGeneratorComponent } from './product-generator/processed-product-generator/processed-product-generator.component';
+import { TutorialsModule } from '@app/tutorials/tutorials.module';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ProcessedProductGeneratorComponent } from './product-generator/processe
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    TutorialsModule
   ],
   providers: [ProductListResolver, ProductResolver, ProductDataService]
 })

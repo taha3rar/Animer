@@ -1,5 +1,6 @@
 import { ProductInvoice } from '../invoice/product-invoice';
 import { User } from './user';
+import { NumberValueAccessor } from '@angular/forms/src/directives';
 
 export class Order {
   _id: string;
@@ -31,6 +32,7 @@ export class Order {
   invoice: {
     _id: string;
     draft: boolean;
+    total_due: number;
   };
   order_comments: string;
   payment_comments: string;

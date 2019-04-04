@@ -1,49 +1,47 @@
-<div class="docs-wrapper clearfix">
-  <button class="btn-icons pull-right" style="margin-top:.5rem;">
-    <i class="material-icons">keyboard_arrow_right</i>
-  </button>
-  <button class="btn-icons pull-right" style="margin-top:.5rem;">
-    <i class="material-icons">keyboard_arrow_left</i>
-  </button>
-  <div class="docs-section clearfix">
-    <div class="doc-card-upload">
-      <div>
-        <label class="material-icons" id="add-btn" for="btn-input">add</label>
-        <input type="file" id="btn-input" (change)="onFileChange($event)" />
-        <p>Upload Document</p>
-      </div>
+<button class="btn-icons pull-right" style="margin-top:.5rem;">
+  <i class="material-icons">keyboard_arrow_right</i>
+</button>
+<button class="btn-icons pull-right" style="margin-top:.5rem;">
+  <i class="material-icons">keyboard_arrow_left</i>
+</button>
+<div class="docs-section clearfix">
+  <div class="doc-card-upload">
+    <div>
+      <label class="material-icons" id="add-btn" for="btn-input">add</label>
+      <input type="file" id="btn-input" (change)="onFileChange($event)" />
+      <p>Upload Document</p>
     </div>
-    <div
-      *ngFor="let document of (documents | paginate: { itemsPerPage: 6, currentPage: page })"
-      class="doc-card clearfix"
-    >
-      <div>
-        <span class="pull-left">#{{ document.numericId }}</span>
-        <span
-          class="material-icons pull-right icon"
-          placement="top"
-          data-container="body"
-          ngbTooltip="Delete"
-          (click)="warning(document._id)"
-          >delete</span
-        >
-        <a href="{{ document.url }}" download="{{ document.file_name }}" target="_blank"
-          ><span class="pull-right material-icons download" placement="top" ngbTooltip="Download"
-            >cloud_download</span
-          ></a
-        >
-      </div>
-      <div>
+  </div>
+  <div
+    *ngFor="let document of (documents | paginate: { itemsPerPage: 5, currentPage: page })"
+    class="doc-card clearfix"
+  >
+    <div>
+      <span class="pull-left">#{{ document.numericId }}</span>
+      <span
+        class="material-icons pull-right icon"
+        placement="top"
+        data-container="body"
+        ngbTooltip="Delete"
+        (click)="warning(document._id)"
+        >delete</span
+      >
+      <a href="{{ document.url }}" download="{{ document.file_name }}" target="_blank"
+        ><span class="pull-right material-icons download" placement="top" ngbTooltip="Download">cloud_download</span></a
+      >
+    </div>
+    <div style="width:22rem;">
+      <div class="file-image-wrapper">
         <img src="../../../assets/img/pdf.png" />
         <a href="{{ document.url }}" target="_blank">
           <span class="material-icons bttn-view">pageview</span> <span>View</span>
         </a>
-        <p class="normal-text-bold">{{ document.file_name }}</p>
-        <p class="heading-3">Uploaded by {{ document.uploaded_by.first_name }} {{ document.uploaded_by.last_name }}</p>
       </div>
-      <div>
-        <p class="heading-3">{{ document.date_created | date: 'dd/MM/yyyy' }}</p>
-      </div>
+      <p class="normal-text-bold">{{ document.file_name }}</p>
+      <p class="heading-3">Uploaded by {{ document.uploaded_by.first_name }} {{ document.uploaded_by.last_name }}</p>
+    </div>
+    <div>
+      <p class="heading-3">{{ document.date_created | date: 'dd/MM/yyyy' }}</p>
     </div>
   </div>
 </div>

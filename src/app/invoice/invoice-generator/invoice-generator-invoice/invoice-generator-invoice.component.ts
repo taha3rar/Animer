@@ -9,20 +9,24 @@ import { InvoiceInventoryComponent } from './invoice-inventory/invoice-inventory
 import { InvoiceAgriculturalProductComponent } from './invoice-agricultural-product/invoice-agricultural-product.component';
 import { InvoiceProcessedProductComponent } from './invoice-processed-product/invoice-processed-product.component';
 import * as moment from 'moment';
-import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
+import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 
 @Component({
   selector: 'app-invoice-generator-invoice',
   templateUrl: './invoice-generator-invoice.component.html',
   styleUrls: ['./invoice-generator-invoice.component.scss']
 })
-export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent implements OnInit {
+export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent implements OnInit {
   products: ProductInvoice[] = [];
   newInvoice: Invoice;
   @Output()
   newInvoiceEvent = new EventEmitter<Invoice>();
   @Input()
   form: FormGroup;
+  @Input()
+  draft: boolean;
+  @Input()
+  invoiceProducts: ProductInvoice[];
   productsValid = true;
 
   constructor(
@@ -35,6 +39,10 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
   }
 
   ngOnInit() {
+    console.log('form', this.form.value);
+    if (this.draft) {
+      this.products = this.invoiceProducts;
+    }
     this.onChanges();
     this.formInput = this.form;
   }
@@ -183,12 +191,24 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
         .subtract(1, 'months')
         .toJSON()
     });
+    this.form.patchValue({
+      date_created: moment(this.form['controls'].date_created.value)
+        .subtract(1, 'months')
+        .toJSON()
+    });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
+    this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
-    this.invoiceService.draft(this.newInvoice).subscribe(() => {
-      this.router.navigateByUrl('/invoice/list');
-    });
+    if (!this.draft) {
+      this.invoiceService.draft(this.newInvoice).subscribe(() => {
+        this.router.navigateByUrl('/invoice/list');
+      });
+    } else {
+      this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(() => {
+        this.router.navigateByUrl('/invoice/list');
+      });
+    }
   }
 
   toReview() {
@@ -209,6 +229,7 @@ export class InvoiceGeneratorInvoiceComponent extends BaseValidationComponent im
     });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
+    this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoiceEvent.emit(this.newInvoice);
   }
 

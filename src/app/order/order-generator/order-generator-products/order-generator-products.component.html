@@ -85,6 +85,9 @@
                 <i class="material-icons">remove</i>
               </button>
             </div>
+            <div *ngIf="order.currency.value && product.currency != order.currency.value" class="quantity">
+              <strong style="font-size :11px;">Choose products with the same currency</strong>
+            </div>
           </div>
         </div>
       </div>
@@ -154,6 +157,9 @@
                   <i class="material-icons">remove</i>
                 </button>
               </div>
+              <div *ngIf="order.currency.value && product.currency != order.currency.value" class="quantity">
+                <strong style="font-size :11px;">Choose products with the same currency</strong>
+              </div>
             </div>
           </div>
         </ng-container>
@@ -171,7 +177,7 @@
 <div class="panel panel-tab summary-col">
   <div class="panel-body">
     <div class="panel-header">
-      <p>Order Summary</p>
+      <p>Add to Purchase Order</p>
     </div>
     <div class="padding-all-2">
       <app-order-generator-summary

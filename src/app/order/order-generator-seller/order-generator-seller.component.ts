@@ -6,19 +6,22 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-order-generator-seller',
   templateUrl: './order-generator-seller.component.html',
   styleUrls: ['./order-generator-seller.component.scss']
 })
-export class OrderGeneratorSellerComponent implements OnInit {
+export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeactivate {
   order: Order;
   document: any;
   invoiceForm: FormGroup;
   products: ProductInvoice[];
   invoice: Invoice;
   isDraft: Boolean;
+  formSubmitted: any;
 
   constructor(
     private location: Location,
@@ -54,7 +57,7 @@ export class OrderGeneratorSellerComponent implements OnInit {
           city: ['', Validators.required],
           zipcode: ['', Validators.required],
           phone_number: ['', Validators.required],
-          contact_by: [this.formBuilder.array(this.document.buyer.contact_by)]
+          contact_by: [this.formBuilder.array(this.document.buyer.contact_by || [])]
         })
       ],
       seller: [
@@ -70,7 +73,7 @@ export class OrderGeneratorSellerComponent implements OnInit {
           city: ['', Validators.required],
           zipcode: ['', Validators.required],
           phone_number: ['', Validators.required],
-          contact_by: [this.formBuilder.array(this.document.seller.contact_by)]
+          contact_by: [this.formBuilder.array(this.document.seller.contact_by || [])]
         })
       ],
       order_id: [Object.is(this.order, undefined) ? this.invoice.order_id : this.order._id, Validators.required],
@@ -87,10 +90,10 @@ export class OrderGeneratorSellerComponent implements OnInit {
       payment_comments: undefined,
       order_comments: undefined,
       sign_by: this.formBuilder.group({
-        date: [this.document.sign_by.date, Validators.required],
-        first_name: [this.document.sign_by.first_name, Validators.required],
-        last_name: [this.document.sign_by.last_name, Validators.required],
-        company_name: [this.document.sign_by.company_name]
+        date: [undefined, Validators.required],
+        first_name: [undefined, Validators.required],
+        last_name: [undefined, Validators.required],
+        company_name: [undefined]
       }),
       deliver_to: this.formBuilder.group({
         contact_name: [this.document.deliver_to.contact_name, Validators.required],
@@ -101,7 +104,7 @@ export class OrderGeneratorSellerComponent implements OnInit {
           Object.is(this.order, undefined) ? this.invoice.deliver_to.phone_number : this.order.deliver_to.phone,
           Validators.required
         ],
-        expected_delivery_date: [this.document.deliver_to.expected_delivery_date, Validators.required]
+        expected_delivery_date: [this.document.deliver_to.expected_delivery_date]
       }),
       date_created: [this.document.date_created, Validators.required]
     });
@@ -118,5 +121,22 @@ export class OrderGeneratorSellerComponent implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  confirm() {
+    if (!this.invoiceForm.dirty || this.formSubmitted) {
+      return true;
+    }
+    return swal({
+      text: 'Are you sure you want to leave this page? All information will be lost!',
+      buttons: ['Cancel', 'Yes'],
+      icon: 'warning'
+    }).then(value => {
+      if (value) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 }

@@ -1,26 +1,27 @@
 import { StepperService } from './../../core/forms/stepper.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { OrderDataService } from './order-data.service';
-import { ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert';
+import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
-
+import { CanComponentDeactivate } from '../../shared/guards/confirmation.guard';
 @Component({
   selector: 'app-order-generator',
   templateUrl: './order-generator.component.html',
   styleUrls: ['./order-generator.component.scss']
 })
-export class OrderGeneratorComponent implements OnInit {
+export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   term: any;
   orderForm: FormGroup;
   draftOrder: Order;
   isDraft: Boolean;
   draftProducts: ProductInvoice[] = [];
-
+  formSubmitted: boolean;
   constructor(
     private location: Location,
     private formBuilder: FormBuilder,
@@ -107,6 +108,11 @@ export class OrderGeneratorComponent implements OnInit {
     }
   }
 
+  @HostListener('window:beforeunload')
+  CanDeactivate(): boolean {
+    return !this.orderForm.dirty;
+  }
+
   get sign_by() {
     return this.draftOrder.sign_by;
   }
@@ -135,5 +141,26 @@ export class OrderGeneratorComponent implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  changeValue(recievedValue: any) {
+    this.formSubmitted = recievedValue;
+  }
+
+  confirm() {
+    if (!this.orderForm.dirty || this.formSubmitted) {
+      return true;
+    }
+    return swal({
+      text: 'Are you sure you want to leave this page? All information will be lost!',
+      buttons: ['Cancel', 'Yes'],
+      icon: 'warning'
+    }).then(value => {
+      if (value) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 }

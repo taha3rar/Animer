@@ -2,7 +2,7 @@ import { RouterModule } from '@angular/router';
 import { CsvService } from './services/csv.service';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoaderComponent } from './loader/loader.component';
 import { RoundUpPipe } from './pipes/roundup.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -18,10 +18,11 @@ import { UploadPictureComponent } from './components/upload-picture/upload-pictu
 import { BaseValidationComponent } from './components/base-validation/base-validation.component';
 import { UserDocumentComponent } from './components/document-list/user-document-list/user-document-list.component';
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
-import { ClientGeneratorComponent } from '@app/client/client-generator/client-generator.component';
+import { DocumentGeneratorComponent } from './components/document-generator/document-generator.component';
+import { TutorialControlComponent } from './components/tutorial-control/tutorial-control.component';
 
 @NgModule({
-  imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule],
+  imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, MatTooltipModule],
   declarations: [
     LoaderComponent,
     RoundUpPipe,
@@ -35,7 +36,9 @@ import { ClientGeneratorComponent } from '@app/client/client-generator/client-ge
     BaseValidationComponent,
     BaseListComponent,
     GooglePlacesDirective,
-    UploadPictureComponent
+    UploadPictureComponent,
+    DocumentGeneratorComponent,
+    TutorialControlComponent
   ],
   exports: [
     LoaderComponent,
@@ -46,7 +49,9 @@ import { ClientGeneratorComponent } from '@app/client/client-generator/client-ge
     TransactionDocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
-    UploadPictureComponent
+    UploadPictureComponent,
+    DocumentGeneratorComponent,
+    TutorialControlComponent
   ],
   providers: [CsvService, DatePipe]
 })

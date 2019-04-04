@@ -1,6 +1,6 @@
+<a class="pull-right need-help" data-toggle="wizard" data-target="#invoiceTutorials">Need help?</a>
 <h1 translate class="main-title">Proforma Invoices</h1>
-
-<div class="helper-panel">
+<div class="helper-panel clearfix">
   <i class="material-icons pull-left">info</i>
   <p>{{ helpLegend }}</p>
 </div>
@@ -56,3 +56,5 @@
   (invoicesList)="invoicesToExport = $event"
   [invoices]="invoices"
 ></app-invoice-list>
+
+<app-invoice-tutorials></app-invoice-tutorials>

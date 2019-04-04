@@ -1,6 +1,7 @@
 <div class="wrapper">
-  <h1 class="main-title btn-main margin-bottom-2" (click)="back()"><a class="material-icons">keyboard_backspace</a>
-    Orders</h1>
+  <h1 class="main-title btn-main margin-bottom-2" (click)="back()">
+    <a class="material-icons">keyboard_backspace</a> Orders
+  </h1>
   <!-- Main Generator -->
   <div *ngIf="!isDraft" class="stepper-wrapper">
     <div class="stepper">
@@ -37,7 +38,9 @@
           <div class="panel panel-tab">
             <div class="panel-body">
               <div class="padding-all-2">
-                <app-order-generator-review-order></app-order-generator-review-order>
+                <app-order-generator-review-order
+                  (formSubmitted)="changeValue($event)"
+                ></app-order-generator-review-order>
               </div>
             </div>
           </div>
