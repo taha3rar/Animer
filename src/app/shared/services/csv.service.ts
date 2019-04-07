@@ -41,7 +41,7 @@ export class CsvService {
       {
         //   Bank account number
         id: 2,
-        amount: '61569', // TODO: Get users bankaccount number
+        amount: 'Enter Bank Account Number', // TODO: Get users bankaccount number
         number: ''
       }
     ];
