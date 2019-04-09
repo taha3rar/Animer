@@ -15,7 +15,6 @@ export class OrderBuyerResolver implements Resolve<Client[]> {
     return this.userService.get(currentUserId).pipe(
       catchError(err => {
         console.error(err);
-        // return EMPTY.pipe();
         return this.router.navigateByUrl('/not-found');
       })
     );

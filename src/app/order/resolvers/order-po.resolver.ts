@@ -16,7 +16,6 @@ export class OrderPoResolver implements Resolve<Order> {
       catchError(err => {
         console.error(err);
         return this.router.navigateByUrl('/not-found');
-        // return EMPTY.pipe();
       })
     );
   }

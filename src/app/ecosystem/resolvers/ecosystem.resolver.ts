@@ -14,7 +14,6 @@ export class EcosystemResolver implements Resolve<Ecosystem> {
       catchError(err => {
         console.error(err);
         return this.router.navigateByUrl('/not-found');
-        // return EMPTY.pipe();
       })
     );
   }
