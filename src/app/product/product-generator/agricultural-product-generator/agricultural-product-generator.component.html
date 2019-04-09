@@ -4,9 +4,25 @@
   <h2 *ngIf="onUpdate" translate class="modal-title">Edit Product</h2>
 </div>
 <div class="padding-all">
+  <div class="mb-2" *ngIf="progressVisible">
+    <progressbar
+      class="progress-striped active"
+      [max]="100"
+      style="height: 30px !important;"
+      [value]="dynamic"
+      type="success"
+      ><i>Uploading...</i></progressbar
+    >
+  </div>
   <form [formGroup]="productForm" (keydown.enter)="$event.preventDefault()">
     <div class="product-placeholder-box">
-      <app-upload-picture [picture]="productImage" [type]="'product'" (imageEvent)="receiveImage($event)">
+      <app-upload-picture
+        [picture]="productImage"
+        [type]="'product'"
+        (loadEvent)="dynamic = $event"
+        (progressEvent)="handleProgress($event)"
+        (imageEvent)="receiveImage($event)"
+      >
       </app-upload-picture>
       <p class="heading-2 ">Product Image</p>
     </div>

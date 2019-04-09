@@ -20,9 +20,10 @@ import { UserDocumentComponent } from './components/document-list/user-document-
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
 import { DocumentGeneratorComponent } from './components/document-generator/document-generator.component';
 import { TutorialControlComponent } from './components/tutorial-control/tutorial-control.component';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
-  imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, MatTooltipModule],
+  imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, ProgressbarModule.forRoot(), MatTooltipModule],
   declarations: [
     LoaderComponent,
     RoundUpPipe,

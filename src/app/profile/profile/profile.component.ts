@@ -20,6 +20,8 @@ export class ProfileComponent implements OnInit {
   clientDetailsForm: FormGroup;
   companyDetailsForm: FormGroup;
   credentials: Credentials;
+  progressVisible = false;
+  dynamic = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -80,6 +82,15 @@ export class ProfileComponent implements OnInit {
     return {
       'has-error': this.isFieldInvalid(field)
     };
+  }
+
+  receiveImage($event: any) {
+    this.dynamic = 0;
+    this.progressVisible = false;
+  }
+
+  handleProgress($event: any) {
+    this.progressVisible = $event;
   }
 
   isFieldInvalidComp(field: string) {

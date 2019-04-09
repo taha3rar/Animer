@@ -1,3 +1,4 @@
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,6 +11,14 @@ import { ProfilePasswordComponent } from './profile-password/profile-password.co
 
 @NgModule({
   declarations: [ProfileComponent, ProfilePasswordComponent],
-  imports: [CommonModule, TranslateModule, ProfileRoutingModule, FormsModule, ReactiveFormsModule, SharedModule]
+  imports: [
+    CommonModule,
+    TranslateModule,
+    ProfileRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ProgressbarModule.forRoot(),
+    SharedModule
+  ]
 })
 export class ProfileModule {}

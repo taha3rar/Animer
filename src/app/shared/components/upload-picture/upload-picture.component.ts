@@ -16,10 +16,15 @@ export class UploadPictureComponent implements OnInit {
   @Input()
   user: User;
   @Output()
-  imageEvent = new EventEmitter<string>();
+  imageEvent = new EventEmitter<any>();
   @ViewChild('picInput')
   picInput: ElementRef;
-
+  @Output()
+  progressEvent = new EventEmitter<any>();
+  @Output()
+  loadEvent = new EventEmitter<any>();
+  hideBar = false;
+  dynamic = 0;
   constructor(
     private userService: UserService,
     private productService: ProductService,
@@ -39,7 +44,7 @@ export class UploadPictureComponent implements OnInit {
         let base64File;
         const picture = reader.result;
         base64File = picture.toString().split(',')[1];
-
+        this.progressEvent.emit(true);
         if (this.type === 'profile') {
           this.userService.saveProfileImage(base64File).subscribe(
             res => {
@@ -51,6 +56,7 @@ export class UploadPictureComponent implements OnInit {
                 const credentialsToUpdate = this.authenticationService.credentials;
                 credentialsToUpdate.user.personal_information = data.personal_information;
                 this.authenticationService.setCredentials(credentialsToUpdate);
+                this.imageEvent.emit(false);
               });
             },
             err => {
@@ -64,6 +70,10 @@ export class UploadPictureComponent implements OnInit {
             this.imageEvent.emit(this.picture.toString());
           });
         }
+      };
+      reader.onprogress = (data: any) => {
+        this.dynamic = (data.loaded / data.total) * 100;
+        this.loadEvent.emit(this.dynamic);
       };
     } else {
       // TODO

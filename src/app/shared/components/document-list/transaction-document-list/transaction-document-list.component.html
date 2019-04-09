@@ -4,6 +4,16 @@
 <button class="btn-icons pull-right" style="margin-top:.5rem;">
   <i class="material-icons">keyboard_arrow_left</i>
 </button>
+<div class="mb-3" style="display: none;">
+  <progressbar
+    class="progress-striped active"
+    [max]="max"
+    style="height: 30px !important;"
+    [value]="dynamic"
+    type="success"
+    ><i>Uploading...</i></progressbar
+  >
+</div>
 <div class="docs-section clearfix">
   <div class="doc-card-upload">
     <div>
