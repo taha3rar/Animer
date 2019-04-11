@@ -143,3 +143,36 @@ table {
     margin-bottom: 0px !important;
   }
 }
+
+.notifications-table {
+  width: 97%;
+  tr {
+    border-bottom: 1px solid #e9e9e9;
+  }
+
+  td {
+    padding-top: 5px;
+    p {
+      font-size: 1.35rem;
+      margin-bottom: 3px;
+      font-weight: 700;
+    }
+    p:nth-child(2) {
+      color: $light-gray;
+    }
+  }
+
+  .notification-off {
+    cursor: pointer;
+    color: $light-gray;
+  }
+
+  .notification-active {
+    cursor: pointer;
+    color: #0fd18f;
+  }
+
+  td:nth-child(2) {
+    text-align: right;
+  }
+}

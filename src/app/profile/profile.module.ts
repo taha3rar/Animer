@@ -8,6 +8,8 @@ import { SharedModule } from '@app/shared/shared.module';
 import { ProfileComponent } from './profile/profile.component';
 import { from } from 'rxjs';
 import { ProfilePasswordComponent } from './profile-password/profile-password.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
   declarations: [ProfileComponent, ProfilePasswordComponent],
@@ -18,7 +20,9 @@ import { ProfilePasswordComponent } from './profile-password/profile-password.co
     FormsModule,
     ReactiveFormsModule,
     ProgressbarModule.forRoot(),
-    SharedModule
+    SharedModule,
+    NgbModule,
+    MatTooltipModule
   ]
 })
 export class ProfileModule {}

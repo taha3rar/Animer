@@ -284,22 +284,36 @@
 
 .user-settings {
   background-image: linear-gradient(#fff 60%, #f1f1f1);
-  min-height: 67.2rem;
-  .panel-body {
-    padding: 0px;
-  }
-}
-
-.password-box {
-  background-image: linear-gradient(#fff 60%, #f1f1f1);
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 6rem;
   .panel-body {
     padding: 0px;
   }
 
-  .bttn-primary {
+  .panel-header {
+    display: flex;
+
+    .show-hide {
+      align-self: flex-start;
+      margin-left: auto;
+
+      &-btn {
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3f3f3;
+        box-shadow: 2px 2px 10px #c9c9c9;
+        border-radius: 50%;
+        width: 3.5rem;
+        height: 3.5rem;
+
+        i {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  .bttn-primary.change-password {
     margin-top: 2rem;
   }
 }
@@ -395,4 +409,8 @@ div[data-notify="container"] {
 
 .alert {
   animation: fade 0.2s linear;
+}
+
+.collapse.in {
+  display: block !important;
 }

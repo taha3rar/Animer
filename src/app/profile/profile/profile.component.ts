@@ -53,6 +53,22 @@ export class ProfileComponent implements OnInit {
       country: [this.user.company_information.country, [Validators.required]],
       bio: [this.user.company_information.bio]
     });
+
+    $('.collapse')
+      .on('shown.bs.collapse', function() {
+        $(this)
+          .parent()
+          .find('.glyphicon-plus')
+          .removeClass('glyphicon-plus')
+          .addClass('glyphicon-minus');
+      })
+      .on('hidden.bs.collapse', function() {
+        $(this)
+          .parent()
+          .find('.glyphicon-minus')
+          .toggleClass('glyphicon-minus')
+          .addClass('glyphicon-plus');
+      });
   }
 
   // Easier acces to form values

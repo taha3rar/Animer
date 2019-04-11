@@ -56,8 +56,8 @@
   button {
     width: 10rem;
     height: 3.55rem;
-    background-color: transparent;
-    border: none;
+    background-color: transparent !important;
+    border: none !important;
     font-size: 1.4rem;
     font-weight: bold;
     border: 1px solid $primary-color;
@@ -1157,4 +1157,12 @@ select.custom-select {
   cursor: pointer;
   font-size: 1.7rem;
   padding: 1rem;
+}
+
+.clear-icon-btn {
+  background: transparent;
+  border: none;
+  span {
+    font-size: 1.6rem;
+  }
 }

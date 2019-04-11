@@ -23,9 +23,12 @@ body {
 .tooltip {
   font-size: 1.3rem;
   font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .tooltip-inner {
-  padding: 0.7rem 1.2rem;
-  border-radius: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
 }
