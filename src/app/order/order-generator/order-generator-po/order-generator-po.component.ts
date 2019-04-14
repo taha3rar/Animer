@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { Order } from '@app/core/models/order/order';
@@ -8,6 +8,7 @@ import { OrderService } from '@app/core/api/order.service';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 import * as moment from 'moment';
 import { Product } from '@app/core/models/product';
+declare const $: any;
 
 @Component({
   selector: 'app-order-generator-po',
@@ -20,6 +21,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   selectedProducts: any[];
   products: ProductInvoice[] = [];
   productsValid = true;
+  @Output() newDraftPO = new EventEmitter();
 
   constructor(private orderDataService: OrderDataService, private orderService: OrderService, private router: Router) {
     super();
@@ -76,12 +78,27 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
         .subtract(1, 'months')
         .toJSON()
     });
+    this.newDraftPO.emit(true);
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.draft = true;
     this.orderService.draft(this.newOrder).subscribe(() => {
+      $.notify(
+        {
+          icon: 'notifications',
+          message: 'Your purchase order has been saved as a draft'
+        },
+        {
+          type: 'success',
+          timer: 1500,
+          placement: {
+            from: 'top',
+            align: 'right'
+          }
+        }
+      );
       this.router.navigateByUrl('/order/list');
     });
   }

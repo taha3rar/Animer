@@ -10,7 +10,7 @@ import { InvoiceAgriculturalProductComponent } from './invoice-agricultural-prod
 import { InvoiceProcessedProductComponent } from './invoice-processed-product/invoice-processed-product.component';
 import * as moment from 'moment';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
-
+declare const $: any;
 @Component({
   selector: 'app-invoice-generator-invoice',
   templateUrl: './invoice-generator-invoice.component.html',
@@ -28,6 +28,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   @Input()
   invoiceProducts: ProductInvoice[];
   productsValid = true;
+  @Output() savedAsDraft = new EventEmitter();
 
   constructor(
     private invoiceService: InvoiceService,
@@ -196,16 +197,45 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
         .subtract(1, 'months')
         .toJSON()
     });
+    this.savedAsDraft.emit(true);
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
     if (!this.draft) {
       this.invoiceService.draft(this.newInvoice).subscribe(() => {
+        $.notify(
+          {
+            icon: 'notifications',
+            message: 'Your proforma invoice has been saved as a draft'
+          },
+          {
+            type: 'success',
+            timer: 1500,
+            placement: {
+              from: 'top',
+              align: 'right'
+            }
+          }
+        );
         this.router.navigateByUrl('/invoice/list');
       });
     } else {
       this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(() => {
+        $.notify(
+          {
+            icon: 'notifications',
+            message: 'Your proforma invoice has been saved as a draft'
+          },
+          {
+            type: 'success',
+            timer: 1500,
+            placement: {
+              from: 'top',
+              align: 'right'
+            }
+          }
+        );
         this.router.navigateByUrl('/invoice/list');
       });
     }

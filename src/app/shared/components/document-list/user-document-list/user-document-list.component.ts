@@ -47,7 +47,24 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
           document.client_id = this.client_id;
           const base64File = (reader.result as string).split(',')[1];
           document.file = base64File;
-          this.userDocumentService.create(document).subscribe(() => this.router.navigate([this.router.url]));
+          this.userDocumentService.create(document).subscribe(() => {
+            $.notify(
+              {
+                icon: 'notifications',
+                message: 'Your document has been uploaded'
+              },
+              {
+                type: 'success',
+                timer: 1500,
+                placement: {
+                  from: 'top',
+                  align: 'right'
+                },
+                offset: 78
+              }
+            );
+            this.router.navigate([this.router.url]);
+          });
         };
       } else {
         $.notify(

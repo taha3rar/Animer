@@ -21,6 +21,7 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
   products: ProductInvoice[];
   invoice: Invoice;
   isDraft: Boolean;
+  draft: any;
   formSubmitted: any;
 
   constructor(
@@ -124,7 +125,7 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
   }
 
   confirm() {
-    if (!this.invoiceForm.dirty || this.formSubmitted) {
+    if (!this.invoiceForm.dirty || this.formSubmitted || this.draft) {
       return true;
     }
     return swal({

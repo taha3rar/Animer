@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Product } from '@app/core/models/product';
 import swal from 'sweetalert';
 
+declare const $: any;
 @Component({
   selector: 'app-processed-product-generator',
   templateUrl: './processed-product-generator.component.html',
@@ -152,6 +153,20 @@ export class ProcessedProductGeneratorComponent implements OnInit, CanComponentD
     if (!this.onUpdate) {
       if (this.productForm.valid) {
         this.productService.create(this.newProduct).subscribe(() => {
+          $.notify(
+            {
+              icon: 'notifications',
+              message: 'New product profile has been created!'
+            },
+            {
+              type: 'success',
+              timer: 1500,
+              placement: {
+                from: 'top',
+                align: 'right'
+              }
+            }
+          );
           this.dialog.close();
           this.router.navigateByUrl('/product/list');
         });
@@ -159,6 +174,20 @@ export class ProcessedProductGeneratorComponent implements OnInit, CanComponentD
     } else {
       this.newProduct._id = this.data.product._id;
       this.productService.update(this.newProduct._id, this.newProduct).subscribe(() => {
+        $.notify(
+          {
+            icon: 'notifications',
+            message: 'The product has been updated!'
+          },
+          {
+            type: 'success',
+            timer: 1500,
+            placement: {
+              from: 'top',
+              align: 'right'
+            }
+          }
+        );
         this.dialog.close();
         this.router.navigateByUrl('/product/list');
       });

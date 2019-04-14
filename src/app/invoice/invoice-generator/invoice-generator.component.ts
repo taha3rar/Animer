@@ -23,6 +23,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
   invoiceProducts: ProductInvoice[];
   invoiceForm: FormGroup;
   formSubmitted: any;
+  isDraft: boolean;
 
   constructor(
     private location: Location,
@@ -160,7 +161,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
   }
 
   confirm() {
-    if (!this.invoiceForm.dirty || this.formSubmitted) {
+    if (!this.invoiceForm.dirty || this.formSubmitted || this.isDraft) {
       return true;
     }
     return swal({
@@ -178,5 +179,9 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
 
   back() {
     this.location.back();
+  }
+
+  newDraftInvoice(recievedValue: any) {
+    this.isDraft = recievedValue;
   }
 }

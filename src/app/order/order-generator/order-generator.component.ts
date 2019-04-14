@@ -20,6 +20,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   orderForm: FormGroup;
   draftOrder: Order;
   isDraft: Boolean;
+  draft: any;
   draftProducts: ProductInvoice[] = [];
   formSubmitted: boolean;
   constructor(
@@ -148,7 +149,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   }
 
   confirm() {
-    if (!this.orderForm.dirty || this.formSubmitted) {
+    if (!this.orderForm.dirty || this.formSubmitted || this.draft) {
       return true;
     }
     return swal({

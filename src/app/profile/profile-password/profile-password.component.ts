@@ -59,7 +59,7 @@ export class ProfilePasswordComponent implements OnInit {
           $.notify(
             {
               icon: 'notifications',
-              message: 'Changes saved!'
+              message: 'Your password has been updated!'
             },
             {
               type: 'success',

@@ -188,9 +188,39 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
           const participant = new Client(data);
           if (this.ecosystemsToBeAdded.length) {
             this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
+              $.notify(
+                {
+                  icon: 'notifications',
+                  message: 'New client profile has been created'
+                },
+                {
+                  type: 'success',
+                  timer: 1500,
+                  placement: {
+                    from: 'top',
+                    align: 'right'
+                  },
+                  offset: 78
+                }
+              );
               this.closeAndRefresh();
             });
           } else {
+            $.notify(
+              {
+                icon: 'notifications',
+                message: 'New client profile has been created'
+              },
+              {
+                type: 'success',
+                timer: 1500,
+                placement: {
+                  from: 'top',
+                  align: 'right'
+                },
+                offset: 78
+              }
+            );
             this.closeAndRefresh();
           }
         } else {

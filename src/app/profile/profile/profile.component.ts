@@ -119,7 +119,7 @@ export class ProfileComponent implements OnInit {
       $.notify(
         {
           icon: 'notifications',
-          message: 'Changes saved!'
+          message: 'Your profile has been updated!'
         },
         {
           type: 'success',

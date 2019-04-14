@@ -10,6 +10,7 @@ import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
 import { ProductDataService } from '../product-data.service';
 import swal from 'sweetalert';
+declare const $: any;
 
 @Component({
   selector: 'app-agricultural-product-generator',
@@ -179,6 +180,20 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
     if (!this.onUpdate) {
       if (this.productForm.valid) {
         this.productService.create(this.newProduct).subscribe(() => {
+          $.notify(
+            {
+              icon: 'notifications',
+              message: 'New product profile has been created!'
+            },
+            {
+              type: 'success',
+              timer: 1500,
+              placement: {
+                from: 'top',
+                align: 'right'
+              }
+            }
+          );
           this.dialog.close();
           this.router.navigateByUrl('/product/list');
         });
@@ -186,6 +201,20 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
     } else {
       this.newProduct._id = this.data.product._id;
       this.productService.update(this.newProduct._id, this.newProduct).subscribe(() => {
+        $.notify(
+          {
+            icon: 'notifications',
+            message: 'The product has been updated!'
+          },
+          {
+            type: 'success',
+            timer: 1500,
+            placement: {
+              from: 'top',
+              align: 'right'
+            }
+          }
+        );
         this.dialog.close();
         this.router.navigateByUrl('/product/list');
       });

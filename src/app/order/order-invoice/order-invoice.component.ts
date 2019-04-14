@@ -3,7 +3,7 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 import { Router } from '@angular/router';
 import { InvoiceService } from '@app/core/api/invoice.service';
 import { saveAs as importedSaveAs } from 'file-saver';
-
+declare const $: any;
 @Component({
   selector: 'app-order-invoice',
   templateUrl: './order-invoice.component.html',
@@ -23,6 +23,20 @@ export class OrderInvoiceComponent implements OnInit {
   saveInvoice(): void {
     this.formSubmitted.emit(true);
     this.invoiceService.create(this.invoice).subscribe(data => {
+      $.notify(
+        {
+          icon: 'notifications',
+          message: 'Your proforma invoice has been sent!'
+        },
+        {
+          type: 'success',
+          timer: 1500,
+          placement: {
+            from: 'top',
+            align: 'right'
+          }
+        }
+      );
       this.router.navigateByUrl('/order/list');
     });
   }

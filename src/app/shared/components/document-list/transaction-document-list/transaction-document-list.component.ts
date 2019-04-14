@@ -51,6 +51,21 @@ export class TransactionDocumentListComponent extends BaseListComponent implemen
           document.file = base64File;
           this.documentService.create(document).subscribe(() => {
             $('.mb-3').css('display', 'none');
+            $.notify(
+              {
+                icon: 'notifications',
+                message: 'Your document has been uploaded'
+              },
+              {
+                type: 'success',
+                timer: 1500,
+                placement: {
+                  from: 'top',
+                  align: 'right'
+                },
+                offset: 78
+              }
+            );
             this.router.navigate([this.router.url]);
             this.dynamic = 0;
           });

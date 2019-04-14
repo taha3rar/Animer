@@ -11,6 +11,7 @@ import { OrderProcessedProductComponent } from '../../order-generator/order-prod
 import * as moment from 'moment';
 import { FormGroup } from '@angular/forms';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
+declare const $: any;
 
 @Component({
   selector: 'app-order-invoice-generator',
@@ -25,6 +26,7 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   products: ProductInvoice[];
   @Output()
   newInvoiceEvent = new EventEmitter<Invoice>();
+  @Output() newDraftInvoice = new EventEmitter();
 
   constructor(private invoiceService: InvoiceService, private dialog: MatDialog, private router: Router) {
     super();
@@ -150,11 +152,26 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
         .subtract(1, 'months')
         .toJSON()
     });
+    this.newDraftInvoice.emit(true);
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
     this.invoiceService.draft(this.newInvoice).subscribe(() => {
+      $.notify(
+        {
+          icon: 'notifications',
+          message: 'Your proforma invoice has been saved as a draft!'
+        },
+        {
+          type: 'success',
+          timer: 1500,
+          placement: {
+            from: 'top',
+            align: 'right'
+          }
+        }
+      );
       this.router.navigateByUrl('/order/list');
     });
   }

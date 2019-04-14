@@ -9,6 +9,7 @@ import { Ecosystem } from '@app/core/models/ecosystem';
 import { User } from '@app/core/models/user/user';
 import { StepperService } from '@app/core/stepper.service';
 import swal from 'sweetalert';
+declare const $: any;
 
 @Component({
   selector: 'app-ecosystem-generator',
@@ -74,6 +75,21 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
     this.newEcosystem.type = this.ecosystemf.ecosystemType.value;
     this.newEcosystem.description = this.ecosystemf.description.value;
     this.ecosystemService.create(this.newEcosystem).subscribe(data => {
+      $.notify(
+        {
+          icon: 'notifications',
+          message: 'New ecosystem has been created'
+        },
+        {
+          type: 'success',
+          timer: 1500,
+          placement: {
+            from: 'top',
+            align: 'right'
+          },
+          offset: 78
+        }
+      );
       this.closeModal.nativeElement.click();
       this.router.navigate([this.router.url]);
     });
