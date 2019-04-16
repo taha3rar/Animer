@@ -66,7 +66,7 @@ export class ProfileComponent implements OnInit {
         $(this)
           .parent()
           .find('.glyphicon-minus')
-          .toggleClass('glyphicon-minus')
+          .removeClass('glyphicon-minus')
           .addClass('glyphicon-plus');
       });
   }

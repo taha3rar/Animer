@@ -54,19 +54,16 @@
     <div class="panel user-settings">
       <div class="panel-body">
         <div class="panel-header">
-          <div>
-            <div class="icon-text"><i class="material-icons">settings</i> <span> Account Settings </span></div>
-            <p class="heading-3" style="margin-left:3.3rem;">Edit your profile information</p>
-          </div>
+          <div class="icon-text"><i class="material-icons">settings</i> <span> Account Settings</span></div>
           <div class="show-hide">
             <button
               class="show-hide-btn"
               type="button"
               data-toggle="collapse"
               data-target="#personalCompanySection"
-              aria-expanded="true"
+              aria-expanded="false"
             >
-              <i class="glyphicon glyphicon-plus"></i>
+              <i class="glyphicon glyphicon-minus"></i>
             </button>
           </div>
         </div>
@@ -212,7 +209,9 @@
                       <i class="material-icons notification-off" ngbTooltip="Turn notifications off"
                         >notifications_off</i
                       >
-                      <i class="material-icons notification-active">notifications_active</i>
+                      <i class="material-icons notification-active" ngbTooltip="Turn notifications on"
+                        >notifications_active</i
+                      >
                     </td>
                   </tr>
                   <tr>
@@ -224,7 +223,9 @@
                       <i class="material-icons notification-off" ngbTooltip="Turn notifications off"
                         >notifications_off</i
                       >
-                      <i class="material-icons notification-active">notifications_active</i>
+                      <i class="material-icons notification-active" ngbTooltip="Turn notifications on"
+                        >notifications_active</i
+                      >
                     </td>
                   </tr>
                 </table>
