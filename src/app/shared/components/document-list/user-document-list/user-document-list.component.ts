@@ -1,3 +1,4 @@
+import { AlertsService } from './../../../../core/alerts.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { BaseListComponent } from '../../base-list/base-list.component';
 import { UserDocumentService } from '@app/core/api/user-document.service';
@@ -27,7 +28,11 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
     'image/png'
   ];
 
-  constructor(private userDocumentService: UserDocumentService, protected router: Router) {
+  constructor(
+    private userDocumentService: UserDocumentService,
+    protected router: Router,
+    private alerts: AlertsService
+  ) {
     super(userDocumentService, router, {
       deleteText: 'Once deleted, you will not be able to recover this document!'
     });
@@ -48,21 +53,7 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
           const base64File = (reader.result as string).split(',')[1];
           document.file = base64File;
           this.userDocumentService.create(document).subscribe(() => {
-            $.notify(
-              {
-                icon: 'notifications',
-                message: 'Your document has been uploaded'
-              },
-              {
-                type: 'success',
-                timer: 1500,
-                placement: {
-                  from: 'top',
-                  align: 'right'
-                },
-                offset: 78
-              }
-            );
+            this.alerts.showAlert('Your document has been uploaded');
             this.router.navigate([this.router.url]);
           });
         };

@@ -1,3 +1,4 @@
+import { AlertsService } from './../../core/alerts.service';
 import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
@@ -32,7 +33,8 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
     private router: Router,
     private route: ActivatedRoute,
     private ecosystemService: EcosystemService,
-    private stepperService: StepperService
+    private stepperService: StepperService,
+    private alerts: AlertsService
   ) {
     super();
   }
@@ -75,21 +77,7 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
     this.newEcosystem.type = this.ecosystemf.ecosystemType.value;
     this.newEcosystem.description = this.ecosystemf.description.value;
     this.ecosystemService.create(this.newEcosystem).subscribe(data => {
-      $.notify(
-        {
-          icon: 'notifications',
-          message: 'New ecosystem has been created'
-        },
-        {
-          type: 'success',
-          timer: 1500,
-          placement: {
-            from: 'top',
-            align: 'right'
-          },
-          offset: 78
-        }
-      );
+      this.alerts.showAlert('New ecosystem has been created');
       this.closeModal.nativeElement.click();
       this.router.navigate([this.router.url]);
     });

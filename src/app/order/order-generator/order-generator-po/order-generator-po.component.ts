@@ -1,3 +1,4 @@
+import { AlertsService } from './../../../core/alerts.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -23,7 +24,12 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   productsValid = true;
   @Output() newDraftPO = new EventEmitter();
 
-  constructor(private orderDataService: OrderDataService, private orderService: OrderService, private router: Router) {
+  constructor(
+    private orderDataService: OrderDataService,
+    private orderService: OrderService,
+    private router: Router,
+    private alerts: AlertsService
+  ) {
     super();
   }
 
@@ -85,20 +91,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.draft = true;
     this.orderService.draft(this.newOrder).subscribe(() => {
-      $.notify(
-        {
-          icon: 'notifications',
-          message: 'Your purchase order has been saved as a draft'
-        },
-        {
-          type: 'success',
-          timer: 1500,
-          placement: {
-            from: 'top',
-            align: 'right'
-          }
-        }
-      );
+      this.alerts.showAlert('Your purchase order has been saved as a draft!');
       this.router.navigateByUrl('/order/list');
     });
   }

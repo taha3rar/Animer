@@ -1,3 +1,4 @@
+import { AlertsService } from './../../core/alerts.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -27,7 +28,8 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authenticationService: AuthenticationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alerts: AlertsService
   ) {}
 
   ngOnInit() {
@@ -116,21 +118,7 @@ export class ProfileComponent implements OnInit {
       credentialsToUpdate.user.personal_information = data.personal_information;
       credentialsToUpdate.user.email = data.email;
       this.authenticationService.setCredentials(credentialsToUpdate);
-      $.notify(
-        {
-          icon: 'notifications',
-          message: 'Your profile has been updated!'
-        },
-        {
-          type: 'success',
-          timer: 5000,
-          placement: {
-            from: 'top',
-            align: 'right'
-          },
-          offset: 78
-        }
-      );
+      this.alerts.showAlert('Your profile has been updated!');
     });
   }
 
@@ -144,21 +132,7 @@ export class ProfileComponent implements OnInit {
     this.user.company_information.country = this.companyf.country.value;
     this.user.company_information.bio = this.companyf.bio.value;
     this.userService.update(this.currentUserId, this.user).subscribe(data => {
-      $.notify(
-        {
-          icon: 'notifications',
-          message: 'Changes saved'
-        },
-        {
-          type: 'success',
-          timer: 5000,
-          placement: {
-            from: 'top',
-            align: 'right'
-          },
-          offset: 78
-        }
-      );
+      this.alerts.showAlert('Changes saved!');
     });
   }
 }

@@ -1,3 +1,4 @@
+import { AlertsService } from './../../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Invoice } from '@app/core/models/invoice/invoice';
@@ -28,7 +29,12 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   newInvoiceEvent = new EventEmitter<Invoice>();
   @Output() newDraftInvoice = new EventEmitter();
 
-  constructor(private invoiceService: InvoiceService, private dialog: MatDialog, private router: Router) {
+  constructor(
+    private invoiceService: InvoiceService,
+    private dialog: MatDialog,
+    private router: Router,
+    private alerts: AlertsService
+  ) {
     super();
   }
 
@@ -158,20 +164,7 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
     this.invoiceService.draft(this.newInvoice).subscribe(() => {
-      $.notify(
-        {
-          icon: 'notifications',
-          message: 'Your proforma invoice has been saved as a draft!'
-        },
-        {
-          type: 'success',
-          timer: 1500,
-          placement: {
-            from: 'top',
-            align: 'right'
-          }
-        }
-      );
+      this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
       this.router.navigateByUrl('/order/list');
     });
   }

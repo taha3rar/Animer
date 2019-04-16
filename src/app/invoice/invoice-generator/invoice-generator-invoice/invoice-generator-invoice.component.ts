@@ -1,3 +1,4 @@
+import { AlertsService } from './../../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,7 +35,8 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     private invoiceService: InvoiceService,
     private dialog: MatDialog,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alerts: AlertsService
   ) {
     super();
   }
@@ -204,38 +206,12 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     this.newInvoice.draft = true;
     if (!this.draft) {
       this.invoiceService.draft(this.newInvoice).subscribe(() => {
-        $.notify(
-          {
-            icon: 'notifications',
-            message: 'Your proforma invoice has been saved as a draft'
-          },
-          {
-            type: 'success',
-            timer: 1500,
-            placement: {
-              from: 'top',
-              align: 'right'
-            }
-          }
-        );
+        this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
         this.router.navigateByUrl('/invoice/list');
       });
     } else {
       this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(() => {
-        $.notify(
-          {
-            icon: 'notifications',
-            message: 'Your proforma invoice has been saved as a draft'
-          },
-          {
-            type: 'success',
-            timer: 1500,
-            placement: {
-              from: 'top',
-              align: 'right'
-            }
-          }
-        );
+        this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
         this.router.navigateByUrl('/invoice/list');
       });
     }

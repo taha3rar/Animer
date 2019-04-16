@@ -27,6 +27,7 @@ import { ProformaInvoiceService } from './api/proforma-invoice.service';
 import { ChatService } from './api/chat.service';
 import { QuoteRequestService } from './api/quote-request.service';
 import { PurchaseOrderService } from './api/purchase-order.service';
+import { AlertsService } from './alerts.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule, NgxPermissionsModule.forRoot()],
@@ -49,6 +50,7 @@ import { PurchaseOrderService } from './api/purchase-order.service';
     InvoiceService,
     ProductService,
     QuoteRequestService,
+    AlertsService,
     ProformaInvoiceService,
     PurchaseOrderService,
     ChatService,

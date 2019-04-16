@@ -1,3 +1,4 @@
+import { AlertsService } from '@app/core/alerts.service';
 import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
@@ -31,7 +32,8 @@ export class ProcessedProductGeneratorComponent implements OnInit, CanComponentD
     private formBuilder: FormBuilder,
     private dialog: MatDialogRef<ProcessedProductGeneratorComponent>,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private alerts: AlertsService
   ) {}
 
   ngOnInit() {
@@ -153,20 +155,7 @@ export class ProcessedProductGeneratorComponent implements OnInit, CanComponentD
     if (!this.onUpdate) {
       if (this.productForm.valid) {
         this.productService.create(this.newProduct).subscribe(() => {
-          $.notify(
-            {
-              icon: 'notifications',
-              message: 'New product profile has been created!'
-            },
-            {
-              type: 'success',
-              timer: 1500,
-              placement: {
-                from: 'top',
-                align: 'right'
-              }
-            }
-          );
+          this.alerts.showAlert('New product profile has been created!');
           this.dialog.close();
           this.router.navigateByUrl('/product/list');
         });
@@ -174,20 +163,7 @@ export class ProcessedProductGeneratorComponent implements OnInit, CanComponentD
     } else {
       this.newProduct._id = this.data.product._id;
       this.productService.update(this.newProduct._id, this.newProduct).subscribe(() => {
-        $.notify(
-          {
-            icon: 'notifications',
-            message: 'The product has been updated!'
-          },
-          {
-            type: 'success',
-            timer: 1500,
-            placement: {
-              from: 'top',
-              align: 'right'
-            }
-          }
-        );
+        this.alerts.showAlert('The product has been updated!');
         this.dialog.close();
         this.router.navigateByUrl('/product/list');
       });
