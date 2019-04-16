@@ -9,7 +9,6 @@ import { OrderService } from '@app/core/api/order.service';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 import * as moment from 'moment';
 import { Product } from '@app/core/models/product';
-declare const $: any;
 
 @Component({
   selector: 'app-order-generator-po',

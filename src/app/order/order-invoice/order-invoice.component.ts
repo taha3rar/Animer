@@ -4,7 +4,7 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 import { Router } from '@angular/router';
 import { InvoiceService } from '@app/core/api/invoice.service';
 import { saveAs as importedSaveAs } from 'file-saver';
-declare const $: any;
+import swal from 'sweetalert';
 @Component({
   selector: 'app-order-invoice',
   templateUrl: './order-invoice.component.html',

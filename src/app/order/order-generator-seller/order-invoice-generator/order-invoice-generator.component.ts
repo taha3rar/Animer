@@ -12,7 +12,6 @@ import { OrderProcessedProductComponent } from '../../order-generator/order-prod
 import * as moment from 'moment';
 import { FormGroup } from '@angular/forms';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
-declare const $: any;
 
 @Component({
   selector: 'app-order-invoice-generator',

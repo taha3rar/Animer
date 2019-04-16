@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { Product } from '@app/core/models/product';
 import swal from 'sweetalert';
 
-declare const $: any;
 @Component({
   selector: 'app-processed-product-generator',
   templateUrl: './processed-product-generator.component.html',

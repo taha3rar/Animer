@@ -8,8 +8,6 @@ import { User } from '../../core/models/user/user';
 import { Credentials } from '../../core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
 
-declare const $: any;
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

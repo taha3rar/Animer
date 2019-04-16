@@ -4,7 +4,6 @@ import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
 import { Order } from '@app/core/models/order/order';
 import { AlertsService } from '@app/core/alerts.service';
-declare const $: any;
 
 @Component({
   selector: 'app-order-generator-review-order',

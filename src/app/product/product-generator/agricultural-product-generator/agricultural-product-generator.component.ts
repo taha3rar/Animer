@@ -11,8 +11,6 @@ import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
 import { ProductDataService } from '../product-data.service';
 import swal from 'sweetalert';
-import { Alert } from 'selenium-webdriver';
-declare const $: any;
 
 @Component({
   selector: 'app-agricultural-product-generator',

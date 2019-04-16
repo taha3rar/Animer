@@ -11,7 +11,7 @@ import { InvoiceAgriculturalProductComponent } from './invoice-agricultural-prod
 import { InvoiceProcessedProductComponent } from './invoice-processed-product/invoice-processed-product.component';
 import * as moment from 'moment';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
-declare const $: any;
+
 @Component({
   selector: 'app-invoice-generator-invoice',
   templateUrl: './invoice-generator-invoice.component.html',
