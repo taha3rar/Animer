@@ -1,0 +1,188 @@
+<div class="modal-box-heading">
+  <a (click)="onExit()"><i class="material-icons pull-right">close</i></a>
+  <h2 translate class="modal-title">Add Processed Product</h2>
+</div>
+<div class="padding-all">
+  <form #modalForm="ngForm" (keydown.enter)="$event.preventDefault()">
+    <p class="heading-2">Product</p>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="product-name">Product Name *</label>
+        <input
+          type="text"
+          id="product-name"
+          [(ngModel)]="product.produce"
+          name="name"
+          class="form-control"
+          placeholder="Ex. Orange juice"
+          required
+        />
+      </div>
+    </div>
+    <p class="heading-2">Package</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="product-name">Package Type *</label>
+        <input
+          type="text"
+          id="package-type"
+          [(ngModel)]="product.type_of_package"
+          name="type_of_package"
+          class="form-control"
+          placeholder="Ex. Box"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="variety">Total Number of Packages *</label>
+        <input
+          type="number"
+          id="total-packages"
+          [(ngModel)]="product.quantity"
+          (ngModelChange)="setTotalItemsAmount(); setPricePackage()"
+          name="quantity"
+          class="form-control"
+          placeholder="Ex. 20"
+          required
+        />
+      </div>
+    </div>
+    <p class="heading-2">Item</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="items-per-package">Number of Items per Package *</label>
+        <input
+          type="number"
+          min="0"
+          id="items-per-package"
+          [(ngModel)]="product.items_per_package"
+          (ngModelChange)="setTotalItemsAmount()"
+          name="items_per_package"
+          class="form-control"
+          placeholder="Ex. 10"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="item-packing-type">Item Packing Type *</label>
+        <input
+          type="text"
+          id="item-packing-type"
+          [(ngModel)]="product.item_package_type"
+          name="item_package_type"
+          class="form-control"
+          placeholder="Ex. Bottle"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="total-items-amount">Total Amount of Items *</label>
+        <input
+          type="number"
+          min="0"
+          id="total-items-amount"
+          [(ngModel)]="product.total_amount_items"
+          name="total_amount_items"
+          class="form-control"
+          placeholder="Ex. 40"
+          disabled
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="measurement-unit">Measurement Unit *</label>
+        <select
+          id="measurement-unit"
+          [(ngModel)]="product.item_measurement_unit"
+          name="item_measurement_unit"
+          class="form-control"
+          required
+        >
+          <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="itemMeasurementAmount"
+          >Amount of {{ product.item_measurement_unit | uppercase }} in individual
+          {{ product.item_package_type }} *</label
+        >
+        <input
+          min="0"
+          type="number"
+          [(ngModel)]="product.item_measurement_amount"
+          class="form-control"
+          name="item_measurement_amount"
+          placeholder="Ex. 5"
+          id="itemMeasurementAmount"
+          required
+        />
+      </div>
+    </div>
+    <p class="heading-2">Price</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="package-price">Price per Package *</label>
+        <input
+          type="number"
+          [(ngModel)]="product.package_price"
+          (ngModelChange)="setPricePackage()"
+          name="package_price"
+          class="form-control"
+          id="package-price"
+          placeholder="Ex. 15"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="currecny">Currency *</label>
+        <select
+          id="currency"
+          [(ngModel)]="currency"
+          name="currency"
+          class="form-control"
+          [disabled]="data.currency"
+          required
+        >
+          <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="total-price">Total Price *</label>
+        <input
+          type="number"
+          id="total-price"
+          [(ngModel)]="product.product_subtotal"
+          name="product_subtotal"
+          class="form-control"
+          placeholder="Ex. 300"
+          required
+        />
+      </div>
+    </div>
+    <button
+      type="submit"
+      *ngIf="!update"
+      [disabled]="!modalForm.form.valid"
+      (click)="addProduct()"
+      class="bttn-primary pull-right"
+    >
+      Add Product
+    </button>
+    <button
+      type="submit"
+      *ngIf="update"
+      [disabled]="!modalForm.form.valid"
+      (click)="updateProduct()"
+      class="bttn-primary pull-right"
+    >
+      Update Product
+    </button>
+  </form>
+</div>

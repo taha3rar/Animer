@@ -1,14 +1,13 @@
 import { AlertsService } from './../../../core/alerts.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 import * as moment from 'moment';
-import { Product } from '@app/core/models/product';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-order-generator-po',
@@ -17,24 +16,31 @@ import { Product } from '@app/core/models/product';
 })
 export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implements OnInit {
   newOrder: Order;
-  form: FormGroup;
   selectedProducts: any[];
+  currency: string;
   products: ProductInvoice[] = [];
   productsValid = true;
   @Output() newDraftPO = new EventEmitter();
 
   constructor(
-    private orderDataService: OrderDataService,
+    public orderDataService: OrderDataService,
+    public dialog: MatDialog,
     private orderService: OrderService,
     private router: Router,
     private alerts: AlertsService
   ) {
-    super();
+    super(dialog, orderDataService);
   }
 
   ngOnInit() {
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
+      this.currency = this.form.value.currency;
+    });
+    this.orderDataService.currentProductList.subscribe(data => {
+      if (data) {
+        this.products = data;
+      }
     });
     this.formInput = this.form;
   }
@@ -53,18 +59,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
 
   get date_created() {
     return this.form.controls.date_created.value;
-  }
-
-  updateProducts($event: ProductInvoice[]) {
-    this.products = $event;
-  }
-
-  updateForm($event: FormGroup) {
-    this.form = $event;
-  }
-
-  checkProducts() {
-    this.productsValid = false;
   }
 
   draftOrder() {

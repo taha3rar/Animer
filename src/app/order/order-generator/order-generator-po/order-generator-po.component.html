@@ -16,10 +16,26 @@
 
   <app-order-product-list
     [currency]="order.currency.value"
+    [products]="products"
     (updateProductsEvent)="updateProducts($event)"
-    (updateFormEvent)="updateForm($event)"
+    (updateProductEvent)="updateProduct($event)"
+    (deleteProductEvent)="deleteProduct($event)"
   >
   </app-order-product-list>
+  <div class="row">
+    <div class="col">
+      <div class="dropdown">
+        <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
+        <ul class="dropdown-menu">
+          <li><a (click)="openDialogAgricultural()">New Agricultural Product</a></li>
+          <li><a (click)="openDialogProcessed()">New Processed Product</a></li>
+        </ul>
+      </div>
+      <!-- <button class="btn-primary-transp">
+        <i class="material-icons rotate">attach_file</i> <span>Upload Document</span>
+      </button> -->
+    </div>
+  </div>
   <div class="alert alert-danger" role="alert" [hidden]="products.length != 0 || productsValid">
     Please choose product!
   </div>

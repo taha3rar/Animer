@@ -39,7 +39,6 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
       this.draft = true;
       this.invoiceProducts = this.draftInvoice.products;
     }
-    console.log('draft', this.draftInvoice);
     this.invoiceForm = this.formBuilder.group({
       buyer: [
         this.formBuilder.group({

@@ -26,7 +26,6 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
     });
-    console.log(this.form);
   }
 
   profilePicture(client: Client) {
