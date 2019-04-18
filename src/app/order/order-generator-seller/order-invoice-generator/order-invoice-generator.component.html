@@ -64,7 +64,14 @@
             <p class="heading-4-blue">Subtotal</p>
             <div class="display-inline">
               <p class="heading-4-blue">VAT %</p>
-              <input formControlName="vat_percentage" class="form-control" style="width:23%;" type="number" value="0" />
+              <input
+                formControlName="vat_percentage"
+                class="form-control"
+                style="width:23%;"
+                type="number"
+                value="0"
+                min="0"
+              />
             </div>
             <div class="display-inline">
               <p class="heading-4-blue">Discount %</p>
@@ -74,6 +81,7 @@
                 style="width:23%;"
                 type="number"
                 value="0"
+                min="0"
               />
             </div>
           </div>
@@ -221,7 +229,7 @@
   <button class="bttn-primary pull-right next-step" (click)="toReview()" [hidden]="!form.valid || products.length < 1">
     Next Step &rarr;
   </button>
-  <button class="bttn-primary pull-right" (click)="onSubmit(form)" [hidden]="form.valid && products.length > 1">
+  <button class="bttn-primary pull-right" (click)="onSubmit(form)" [hidden]="form.valid && products.length >= 1">
     Next Step &rarr;
   </button>
   <button class="btn-primary-transp pull-right btn-draft" (click)="draftInvoice()">Save Draft</button>
