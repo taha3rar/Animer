@@ -13,6 +13,7 @@ import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
+import { ClientGuard } from './guards/client.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -30,6 +31,7 @@ const routes: Routes = [
     {
       path: 'client/:id',
       component: ClientComponent,
+      canActivate: [ClientGuard],
       resolve: {
         user: UserResolver,
         transactions: TransactionListResolver,
@@ -45,6 +47,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [ClientGuard]
 })
 export class ClientRoutingModule {}
