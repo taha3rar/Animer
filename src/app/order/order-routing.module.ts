@@ -17,6 +17,7 @@ import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
 import { CurrentUserResolver } from '@app/profile/resolvers/currentUser.resolver';
+import { OrderGuard } from './guards/order.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -66,6 +67,7 @@ const routes: Routes = [
     {
       path: 'order/:id',
       component: OrderComponent,
+      canActivate: [OrderGuard],
       resolve: {
         order: OrderPoResolver,
         documents: OrderDocumentsResolver
@@ -78,6 +80,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ConfirmationGuard]
+  providers: [OrderGuard, ConfirmationGuard]
 })
 export class OrderRoutingModule {}
