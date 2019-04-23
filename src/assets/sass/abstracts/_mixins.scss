@@ -24,6 +24,15 @@
   line-height: 3.4rem;
 }
 
+@mixin coverCenterBackground {
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 @mixin transform-translate-y($value) {
   -webkit-transform: translate3d(0, $value, 0);
   -moz-transform: translate3d(0, $value, 0);

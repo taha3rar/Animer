@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-not-found',
-  templateUrl: './not-found.component.html'
+  selector: 'app-unauthorized-page',
+  templateUrl: './unauthorized-page.component.html'
 })
-export class NotFoundComponent implements OnInit {
+export class UnauthorizedPageComponent implements OnInit {
   constructor(private location: Location) {}
 
   ngOnInit() {}

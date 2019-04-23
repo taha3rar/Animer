@@ -22,6 +22,7 @@ import { DocumentGeneratorComponent } from './components/document-generator/docu
 import { TutorialControlComponent } from './components/tutorial-control/tutorial-control.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UnauthorizedPageComponent } from './components/unauthorized-page/unauthorized-page.component';
 
 @NgModule({
   imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, ProgressbarModule.forRoot(), MatTooltipModule],
@@ -41,7 +42,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     UploadPictureComponent,
     DocumentGeneratorComponent,
     TutorialControlComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UnauthorizedPageComponent
   ],
   exports: [
     LoaderComponent,
