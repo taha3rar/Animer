@@ -27,14 +27,14 @@ export class OrderGuard implements CanActivate {
             if (userId === order.buyer._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           } else if (this.authenticationService.isAgribusiness) {
             if (userId === order.buyer._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           }
@@ -43,21 +43,21 @@ export class OrderGuard implements CanActivate {
             if (userId === order.seller._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           } else if (this.authenticationService.isBuyer) {
             if (userId === order.buyer._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           } else if (this.authenticationService.isAgribusiness) {
             if (userId === order.seller._id || userId === order.buyer._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           }

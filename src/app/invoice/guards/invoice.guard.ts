@@ -27,14 +27,14 @@ export class InvoiceGuard implements CanActivate {
             if (userId === invoice.seller._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           } else if (this.authenticationService.isAgribusiness) {
             if (userId === invoice.seller._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           }
@@ -43,21 +43,21 @@ export class InvoiceGuard implements CanActivate {
             if (userId === invoice.seller._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           } else if (this.authenticationService.isBuyer) {
             if (userId === invoice.buyer._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           } else if (this.authenticationService.isAgribusiness) {
             if (userId === invoice.seller._id || userId === invoice.buyer._id) {
               return true;
             } else {
-              this.router.navigate(['/not-found']);
+              this.router.navigate(['/unauthorized']);
               return false;
             }
           }

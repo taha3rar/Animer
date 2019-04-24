@@ -27,7 +27,7 @@ export class EcosystemGuard implements CanActivate {
         if (result) {
           return true;
         } else {
-          this.router.navigate(['/not-found']);
+          this.router.navigate(['/unauthorized']);
           return false;
         }
       }),
