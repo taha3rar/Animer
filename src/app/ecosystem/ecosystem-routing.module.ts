@@ -8,6 +8,7 @@ import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
 import { UserClientListResolver } from './resolvers/user-client-list.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
+import { EcosystemGuard } from './guards/ecosystem.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -25,6 +26,7 @@ const routes: Routes = [
     {
       path: 'ecosystem/:id',
       component: EcosystemComponent,
+      canActivate: [EcosystemGuard],
       resolve: {
         ecosystem: EcosystemResolver,
         userClients: UserClientListResolver
@@ -37,6 +39,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [EcosystemGuard]
 })
 export class EcosystemRoutingModule {}
