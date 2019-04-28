@@ -13,7 +13,7 @@ import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
-import { ClientGuard } from './guards/client.guard';
+import { ClientGuard } from '../shared/guards/client.guard';
 
 const routes: Routes = [
   Shell.childRoutes([

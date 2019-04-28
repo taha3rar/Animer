@@ -8,7 +8,7 @@ import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
 import { UserClientListResolver } from './resolvers/user-client-list.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
-import { EcosystemGuard } from './guards/ecosystem.guard';
+import { EcosystemGuard } from '../shared/guards/ecosystem.guard';
 
 const routes: Routes = [
   Shell.childRoutes([

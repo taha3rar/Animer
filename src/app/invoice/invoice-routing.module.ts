@@ -14,7 +14,7 @@ import { ProductCurrentUserResolver } from './resolvers/products-currentUser.res
 import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
 import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.resolver';
 import { ConfirmationGuard } from '@app/shared/guards/confirmation.guard';
-import { InvoiceGuard } from './guards/invoice.guard';
+import { InvoiceGuard } from '../shared/guards/invoice.guard';
 
 const routes: Routes = [
   Shell.childRoutes([

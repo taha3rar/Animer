@@ -17,8 +17,8 @@ import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
 import { CurrentUserResolver } from '@app/profile/resolvers/currentUser.resolver';
-import { OrderGuard } from './guards/order.guard';
-import { InvoiceGuard } from './guards/invoice.guard';
+import { OrderGuard } from '../shared/guards/order.guard';
+import { InvoiceGuard } from '../shared/guards/invoice.guard';
 
 const routes: Routes = [
   Shell.childRoutes([

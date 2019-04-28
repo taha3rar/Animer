@@ -20,11 +20,9 @@ export class EcosystemGuard implements CanActivate {
   ): Promise<boolean> | Observable<boolean> | boolean {
     const userId = this.authenticationService.currentUserId;
 
-    return this.ecosystemService.getByUser(userId).pipe(
-      map((ecosystems: Ecosystem[]) => {
-        const ecosystemIds = ecosystems.map(ecosystem => ecosystem._id);
-        const result = ecosystemIds.includes(route.params.id);
-        if (result) {
+    return this.ecosystemService.get(route.params.id).pipe(
+      map((ecosystem: Ecosystem) => {
+        if (ecosystem.created_by._id === userId) {
           return true;
         } else {
           this.router.navigate(['/unauthorized']);

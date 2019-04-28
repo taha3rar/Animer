@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from '@app/core/authentication/authentication.service';
+import { Invoice } from '@app/core/models/invoice/invoice';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { UserService } from '@app/core';
-import { Client } from '@app/core/models/user/client';
+import { InvoiceService } from '@app/core';
 
 @Injectable()
-export class ClientGuard implements CanActivate {
+export class InvoiceGuard implements CanActivate {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService
+    private invoiceService: InvoiceService
   ) {}
 
   canActivate(
@@ -20,11 +20,9 @@ export class ClientGuard implements CanActivate {
   ): Promise<boolean> | Observable<boolean> | boolean {
     const userId = this.authenticationService.currentUserId;
 
-    return this.userService.getClientsByUser(userId).pipe(
-      map((clients: Client[]) => {
-        const clientIds = clients.map(client => client._id);
-        const result = clientIds.includes(route.params.id);
-        if (result) {
+    return this.invoiceService.get(route.params.id).pipe(
+      map((invoice: Invoice) => {
+        if (userId === invoice.seller._id || (userId === invoice.buyer._id && !invoice.draft)) {
           return true;
         } else {
           this.router.navigate(['/unauthorized']);
