@@ -298,17 +298,20 @@
       &-btn {
         border: none;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #f3f3f3;
-        box-shadow: 2px 2px 10px #c9c9c9;
-        border-radius: 50%;
         width: 3.5rem;
         height: 3.5rem;
+        border-radius: 50%;
+        justify-content: center;
+        background-color: $light-gray-2;
+        transition: box-shadow 0.15s ease-in-out;
 
         i {
           font-size: 1.2rem;
         }
+      }
+
+      &-btn:hover {
+        box-shadow: 2px 2px 10px #c9c9c9;
       }
     }
   }

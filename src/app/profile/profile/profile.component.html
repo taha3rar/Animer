@@ -198,7 +198,7 @@
               </div>
             </div>
             <div class="collapse" id="notificationSection">
-              <div class="padding-all">
+              <div class="padding-all clearfix">
                 <table class="notifications-table">
                   <tr>
                     <td>
@@ -206,12 +206,10 @@
                       <p>Turned on</p>
                     </td>
                     <td>
-                      <i class="material-icons notification-off" ngbTooltip="Turn notifications off"
-                        >notifications_off</i
-                      >
-                      <i class="material-icons notification-active" ngbTooltip="Turn notifications on"
-                        >notifications_active</i
-                      >
+                      <select class="form-control">
+                        <option>On</option>
+                        <option>Off</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -220,15 +218,17 @@
                       <p>Turned on</p>
                     </td>
                     <td>
-                      <i class="material-icons notification-off" ngbTooltip="Turn notifications off"
-                        >notifications_off</i
-                      >
-                      <i class="material-icons notification-active" ngbTooltip="Turn notifications on"
-                        >notifications_active</i
-                      >
+                      <select class="form-control">
+                        <option>On</option>
+                        <option>Off</option>
+                      </select>
                     </td>
                   </tr>
                 </table>
+
+                <button type="submit" class="bttn-primary pull-right">
+                  Save Changes
+                </button>
               </div>
             </div>
           </div>
