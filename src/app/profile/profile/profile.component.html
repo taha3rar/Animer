@@ -6,25 +6,8 @@
   <div class="col-md-3">
     <div class="panel">
       <div class="panel-body user-details">
-        <div class="mb-2" *ngIf="progressVisible">
-          <progressbar
-            class="progress-striped active"
-            [max]="100"
-            style="height: 30px !important;"
-            [value]="dynamic"
-            type="success"
-            ><i>Uploading...</i></progressbar
-          >
-        </div>
         <div id="profile-image">
-          <app-upload-picture
-            (loadEvent)="dynamic = $event"
-            (progressEvent)="handleProgress($event)"
-            (imageEvent)="receiveImage($event)"
-            [picture]="profilePicture"
-            [type]="'profile'"
-            [user]="user"
-          ></app-upload-picture>
+          <app-upload-picture [picture]="profilePicture" [type]="'profile'" [user]="user"></app-upload-picture>
           <p class="heading-2">{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
           <p class="normal-text-bold">{{ userRole | titlecase }}</p>
         </div>

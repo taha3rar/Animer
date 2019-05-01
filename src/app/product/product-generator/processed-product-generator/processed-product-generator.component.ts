@@ -23,9 +23,7 @@ export class ProcessedProductGeneratorComponent implements OnInit, CanComponentD
   currencies = currencies;
   units = measureUnits;
   onUpdate: boolean;
-  progressVisible = false;
-  dynamic = 0;
-  max = 100;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
@@ -123,7 +121,6 @@ export class ProcessedProductGeneratorComponent implements OnInit, CanComponentD
   }
 
   receiveImage($event: any) {
-    this.progressVisible = false;
     this.productImage = $event;
   }
 

@@ -24,8 +24,7 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
   currencies = currencies;
   units = measureUnits;
   onUpdate: boolean;
-  progressVisible = false;
-  dynamic = 0;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
@@ -146,7 +145,6 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
   }
 
   receiveImage($event: any) {
-    this.progressVisible = false;
     this.productImage = $event;
   }
 
@@ -169,10 +167,6 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
         this.checkForm(control);
       }
     });
-  }
-
-  handleProgress($event: any) {
-    this.progressVisible = $event;
   }
 
   submit() {
