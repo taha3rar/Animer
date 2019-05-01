@@ -76,23 +76,36 @@ export class InvoicesListComponent implements OnInit {
 
   exportAll() {
     // TODO: Find a better way to do this, should be done in the shared component because the stuff to show is decided there
-
-    const headers = {
-      id: 'ID',
-      issuedAt: 'Issued at',
-      issuedFor: 'Issued for',
-      signedBy: 'Signed by',
-      product: 'Product',
-      amount: 'Amount',
-      totalDue: 'Total due',
-      status: 'Status'
-    };
+    let headers;
+    if (this.viewAsSeller) {
+      headers = {
+        id: 'ID',
+        issuedAt: 'Issued on',
+        issuance: 'Issued for',
+        signedBy: 'Signed by',
+        product: 'Product',
+        amount: 'Amount',
+        totalDue: 'Total due',
+        status: 'Status'
+      };
+    } else {
+      headers = {
+        id: 'ID',
+        issuedAt: 'Issued on',
+        issuance: 'Issued by',
+        signedBy: 'Signed by',
+        product: 'Product',
+        amount: 'Amount',
+        totalDue: 'Total due',
+        status: 'Status'
+      };
+    }
 
     const invoices = this.invoices.map((invoice: Invoice) => {
-      const issuedFor =
+      const issuance =
         this.authService.currentUserId === invoice.seller._id
           ? `${invoice.buyer.first_name} ${invoice.buyer.last_name}`
-          : `${invoice.seller.first_name} ${invoice.seller.last_name}`;
+          : `${invoice.seller.company_name}`;
 
       const signedBy =
         invoice.sign_by.first_name && invoice.sign_by.last_name
@@ -122,7 +135,7 @@ export class InvoicesListComponent implements OnInit {
       return {
         id: invoice.numericId,
         issuedAt: this.datePipe.transform(invoice.date_created, 'dd/MM/yyyy'),
-        issuedFor: issuedFor,
+        issuance: issuance,
         signedBy: signedBy,
         product: product,
         amount: amount,
