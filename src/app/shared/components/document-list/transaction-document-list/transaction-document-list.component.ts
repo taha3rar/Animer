@@ -18,7 +18,8 @@ export class TransactionDocumentListComponent extends BaseListComponent implemen
   transaction_id: string;
   page = 1;
   max = 100;
-  dynamic: any;
+  uploadingFileName: string;
+  dynamic = 0;
   acceptedMimeTypes = [
     'application/pdf',
     'image/jpeg',
@@ -42,17 +43,18 @@ export class TransactionDocumentListComponent extends BaseListComponent implemen
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       if (this.validateFile(file)) {
-        $('.mb-3').css('display', 'block');
+        $('.push-modal').css('display', 'block');
         reader.readAsDataURL(file);
         reader.onload = () => {
           const document = new Document();
           document.file_name = file.name.replace(/\.[^/.]+$/, '');
+          this.uploadingFileName = document.file_name;
           document.transaction_id = this.transaction_id;
           const base64File = (reader.result as string).split(',')[1];
           document.file = base64File;
           this.documentService.create(document).subscribe(() => {
-            $('.mb-3').css('display', 'none');
             this.alerts.showAlert('Your document has been uploaded');
+            $('.push-modal').css('display', 'none');
             this.router.navigate([this.router.url]);
             this.dynamic = 0;
           });
