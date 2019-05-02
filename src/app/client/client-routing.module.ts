@@ -9,7 +9,7 @@ import { ClientListResolver } from './resolvers/client-list.resolver';
 import { EcosystemListResolver } from '@app/ecosystem/resolvers/ecosystem-list.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { CurrentUserResolver } from './resolvers/current-user.resolver';
-import { TransactionListResolver } from './resolvers/transaction-list.resolver';
+// import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
@@ -34,7 +34,7 @@ const routes: Routes = [
       canActivate: [ClientGuard],
       resolve: {
         user: UserResolver,
-        transactions: TransactionListResolver,
+        // transactions: TransactionListResolver,
         orders: OrderListResolver,
         invoices: InvoiceListResolver,
         documents: UserDocumentListResolver

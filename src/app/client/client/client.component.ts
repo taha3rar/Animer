@@ -10,7 +10,7 @@ import { Order } from '@app/core/models/order/order';
 export class Counter {
   orders: number;
   documents: number;
-  transactions: number;
+  // transactions: number;
   invoices: number;
 }
 
@@ -21,7 +21,7 @@ export class Counter {
 })
 export class ClientComponent implements OnInit {
   user: User;
-  transactions: Transaction[];
+  // transactions: Transaction[];
   invoices: Invoice[];
   orders: Order[];
   documents: any[];
@@ -31,15 +31,15 @@ export class ClientComponent implements OnInit {
   constructor(private location: Location, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({ user, transactions, orders, invoices, documents }) => {
+    this.route.data.subscribe(({ user, orders, invoices, documents }) => {
       this.user = user;
-      this.transactions = transactions;
+      // this.transactions = transactions;
       this.orders = orders;
       this.invoices = invoices;
       this.documents = documents;
 
       this.counter = {
-        transactions: this.transactions.length,
+        // transactions: this.transactions.length,
         orders: this.orders.length,
         documents: this.documents.length,
         invoices: this.invoices.length
