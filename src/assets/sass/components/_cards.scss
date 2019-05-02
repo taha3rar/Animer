@@ -13,7 +13,7 @@
 
 .doc-card {
   display: flex;
-  width: 16.666%;
+  width: 16%;
   flex-direction: column;
   border-radius: 5px;
   border: 1px solid $light-gray-2;
@@ -83,7 +83,7 @@
   border: 1px dashed $primary-color;
   width: 16%;
   background-color: #f6fdff;
-  margin-right: 2.5rem;
+  margin-right: 0.8%;
   padding: 0.8rem;
 
   #btn-input {

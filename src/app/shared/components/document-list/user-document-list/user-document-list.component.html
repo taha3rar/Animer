@@ -1,4 +1,4 @@
-<div class="docs-wrapper clearfix">
+<div class="docs-wrapper">
   <button class="btn-icons pull-right" style="margin-top:.5rem;">
     <i class="material-icons">keyboard_arrow_right</i>
   </button>
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div
-      *ngFor="let document of (documents | paginate: { itemsPerPage: 6, currentPage: page })"
+      *ngFor="let document of (documents | paginate: { itemsPerPage: 5, currentPage: page })"
       class="doc-card clearfix"
     >
       <div>
@@ -33,11 +33,13 @@
           ></a
         >
       </div>
-      <div>
-        <img src="../../../assets/img/pdf.png" />
-        <a href="{{ document.url }}" target="_blank">
-          <span class="material-icons bttn-view">pageview</span> <span>View</span>
-        </a>
+      <div style="width:22rem;">
+        <div class="file-image-wrapper">
+          <img src="../../../assets/img/pdf.png" />
+          <a href="{{ document.url }}" target="_blank">
+            <span class="material-icons bttn-view">pageview</span> <span>View</span>
+          </a>
+        </div>
         <p class="normal-text-bold">{{ document.file_name }}</p>
         <p class="heading-3">Uploaded by {{ document.uploaded_by.first_name }} {{ document.uploaded_by.last_name }}</p>
       </div>
