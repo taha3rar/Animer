@@ -17,6 +17,8 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
   @Input()
   client_id: string;
   page = 1;
+  uploadingFileName: string;
+  dynamic = 0;
 
   acceptedMimeTypes = [
     'application/pdf',
@@ -45,17 +47,24 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       if (this.validateFile(file)) {
+        $('.push-modal').css('display', 'block');
         reader.readAsDataURL(file);
         reader.onload = () => {
           const document = new UserDocument();
           document.file_name = file.name.replace(/\.[^/.]+$/, '');
+          this.uploadingFileName = document.file_name;
           document.client_id = this.client_id;
           const base64File = (reader.result as string).split(',')[1];
           document.file = base64File;
           this.userDocumentService.create(document).subscribe(() => {
+            $('.push-modal').css('display', 'none');
             this.alerts.showAlert('Your document has been uploaded');
             this.router.navigate([this.router.url]);
+            this.dynamic = 0;
           });
+        };
+        reader.onprogress = (data: any) => {
+          this.dynamic = (data.loaded / data.total) * 100;
         };
       } else {
         $.notify(
