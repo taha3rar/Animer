@@ -8,31 +8,22 @@ import { User } from '@app/core/models/user/user';
 
 @Injectable()
 export class ClientGuard implements CanActivate {
-  constructor(private router: Router, private authService: AuthenticationService, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private userService: UserService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> | Observable<boolean> | boolean {
-    const userId = this.authService.currentUserId;
+    const userId = this.authenticationService.currentUserId;
 
     return this.userService.get(route.params.id).pipe(
       map((client: User) => {
-        if (this.authService.isAgribusiness) {
-          if (client.referrer && client.referrer._id === userId) {
-            return true;
-          } else {
-            this.router.navigate(['/unauthorized']);
-            return false;
-          }
-        } else if (this.authService.isSeller || this.authService.isBuyer) {
-          const isClient = client.clients.filter(user => user._id === userId).length > 0 ? true : false;
-          if (isClient) {
-            return true;
-          } else {
-            this.router.navigate(['/unauthorized']);
-            return false;
-          }
+        if (client.referrer._id === userId) {
+          return true;
         } else {
           this.router.navigate(['/unauthorized']);
           return false;

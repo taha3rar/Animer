@@ -10,6 +10,7 @@ import { Order } from '@app/core/models/order/order';
 export class Counter {
   orders: number;
   documents: number;
+  // transactions: number;
   invoices: number;
 }
 
@@ -32,11 +33,13 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(({ user, orders, invoices, documents }) => {
       this.user = user;
+      // this.transactions = transactions;
       this.orders = orders;
       this.invoices = invoices;
       this.documents = documents;
 
       this.counter = {
+        // transactions: this.transactions.length,
         orders: this.orders.length,
         documents: this.documents.length,
         invoices: this.invoices.length
