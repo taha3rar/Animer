@@ -21,7 +21,6 @@ export class Counter {
 })
 export class ClientComponent implements OnInit {
   user: User;
-  // transactions: Transaction[];
   invoices: Invoice[];
   orders: Order[];
   documents: any[];
