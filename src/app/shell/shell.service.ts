@@ -2,6 +2,7 @@ import { Routes, Route } from '@angular/router';
 
 import { AuthenticationGuard } from '@app/core';
 import { ShellComponent } from './shell/shell.component';
+import { NotificationListResolver } from './resolvers/notification-list.resolver';
 
 /**
  * Provides helper methods to create routes.
@@ -20,7 +21,8 @@ export class Shell {
       canActivate: [AuthenticationGuard],
       runGuardsAndResolvers: 'always',
       // Reuse ShellComponent instance when navigating between child views
-      data: { reuse: true }
+      data: { reuse: true },
+      resolve: { notifications: NotificationListResolver }
     };
   }
 }

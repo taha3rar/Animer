@@ -2,59 +2,35 @@
 
 <div class="row margin-none">
   <div class="col-md-10">
-    <div class="card notification-card">
+    <div
+      class="card notification-card"
+      *ngFor="let notification of (notifications | paginate: { itemsPerPage: itemsPerPage, currentPage: page })"
+    >
       <div>
-        <figure class="img-circular-sm" style="background-image: url('../../../assets/img/prof-img2.jpg')"></figure>
+        <figure class="img-circular-sm" [style.background-image]="'url(' + profilePicture(notification) + ')'"></figure>
       </div>
       <div>
-        <p><strong>Tom Benn</strong> has sent a <strong>Proforma Invoice</strong></p>
-        <p>11/13/2018 10:16 AM</p>
+        <p *ngIf="notification.type === 'proforma-invoice'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
+          <strong>Proforma Invoice</strong>
+        </p>
+        <p *ngIf="notification.type === 'purchase-order'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
+          <strong>Purchase Order</strong>
+        </p>
+        <p *ngIf="notification.type === 'document'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has uploaded a
+          <strong>Necessary Document</strong>
+        </p>
+        <p *ngIf="notification.type === 'contract'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has uploaded a
+          <strong>Necessary Document</strong>
+        </p>
+        <p>{{ notification.date_created | date: 'dd/MM/yyyy hh:mm aaa' }}</p>
       </div>
       <div class="clear-notification">
-        <button class="clear-icon-btn">
+        <button class="clear-icon-btn" (click)="clearNotification(notification._id)">
           <span ngbTooltip="Clear Notification" container="body" class="material-icons">clear</span>
-        </button>
-      </div>
-    </div>
-    <div class="card notification-card">
-      <div>
-        <figure class="img-circular-sm" style="background-image: url('../../../assets/img/prof-img2.jpg')"></figure>
-      </div>
-      <div>
-        <p><strong>Tom Benn</strong> has sent a <strong>Proforma Invoice</strong></p>
-        <p>11/13/2018 10:16 AM</p>
-      </div>
-      <div class="clear-notification">
-        <button class="clear-icon-btn" ngbTooltip="Clear Notification" container="body">
-          <span class="material-icons">clear</span>
-        </button>
-      </div>
-    </div>
-    <div class="card notification-card">
-      <div>
-        <figure class="img-circular-sm" style="background-image: url('../../../assets/img/prof-img2.jpg')"></figure>
-      </div>
-      <div>
-        <p><strong>Tom Benn</strong> has sent a <strong>Proforma Invoice</strong></p>
-        <p>11/13/2018 10:16 AM</p>
-      </div>
-      <div class="clear-notification">
-        <button class="clear-icon-btn" ngbTooltip="Clear Notification" container="body">
-          <span class="material-icons">clear</span>
-        </button>
-      </div>
-    </div>
-    <div class="card notification-card">
-      <div>
-        <figure class="img-circular-sm" style="background-image: url('../../../assets/img/prof-img2.jpg')"></figure>
-      </div>
-      <div>
-        <p><strong>Tom Benn</strong> has sent a <strong>Proforma Invoice</strong></p>
-        <p>11/13/2018 10:16 AM</p>
-      </div>
-      <div class="clear-notification">
-        <button class="clear-icon-btn" ngbTooltip="Clear Notification" container="body">
-          <span class="material-icons">clear</span>
         </button>
       </div>
     </div>

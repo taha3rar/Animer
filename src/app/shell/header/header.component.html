@@ -5,37 +5,7 @@
     <input type="checkbox" id="toggle" />
     <ul class="navigation-right">
       <li>
-        <div class="dropdown">
-          <div id="flex-notif" data-toggle="dropdown" aria-expanded="true">
-            <i class="material-icons">notifications</i>
-            <span class="notification">5</span>
-          </div>
-          <ul class="dropdown-menu pull-right notifications">
-            <li class="dropdown-item">
-              <div class="row">
-                <div class="col-md-2">
-                  <figure class="img-shape"><img src="../../../assets/img/prof-img2.jpg" class="user-img" /></figure>
-                </div>
-                <div class="col-md-10">
-                  <b>Tom Benn</b> sent you a <b>Proforma Invoice</b>
-                  <p>16/11/2019 10:45AM</p>
-                </div>
-              </div>
-            </li>
-            <li class="dropdown-item">
-              <div class="row">
-                <div class="col-md-2">
-                  <figure class="img-shape"><img src="../../../assets/img/prof-img2.jpg" class="user-img" /></figure>
-                </div>
-                <div class="col-md-10">
-                  <b>Tom Benn</b> sent you a <b>Proforma Invoice</b>
-                  <p>16/11/2019 10:45AM</p>
-                </div>
-              </div>
-            </li>
-            <li><a routerLink="/notifications" class="see-all">See All</a></li>
-          </ul>
-        </div>
+        <app-notification-list></app-notification-list>
       </li>
       <li id="user-li">
         <div ngbDropdown placement="bottom-right">

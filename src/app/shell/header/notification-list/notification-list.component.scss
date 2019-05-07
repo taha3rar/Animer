@@ -23,3 +23,22 @@
     margin-right: 6px;
   }
 }
+
+#flex-notif {
+  display: flex;
+
+  & :nth-child(2) {
+    margin-top: -5.5px;
+    margin-left: -3rem;
+  }
+}
+
+.see-all {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.notificationText > span {
+  font-size: 13px !important;
+}
