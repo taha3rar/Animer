@@ -229,6 +229,14 @@
   }
 }
 
+.notification-card:hover {
+  background-color: rgb(242, 246, 250);
+}
+
+.unread-notification {
+  background-color: #e9f8fb;
+}
+
 .notification-card:hover .clear-notification {
   display: inline-block;
 }
