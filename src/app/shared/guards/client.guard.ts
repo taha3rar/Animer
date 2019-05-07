@@ -14,12 +14,17 @@ export class ClientGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> | Observable<boolean> | boolean {
-    const userId = this.authService.currentUserId;
+    const loggedUserId = this.authService.currentUserId;
 
     return this.userService.get(route.params.id).pipe(
       map((client: User) => {
-        const isClient = client.clients.filter(user => user._id === userId).length > 0 ? true : false;
-        if ((client.referrer && client.referrer._id === userId) || isClient) {
+        // check if the logged user is a client of the client's profile he's intending to see
+        const isClient = client.clients.filter(u => u._id === loggedUserId).length > 0 ? true : false;
+
+        // check if the logged users referred the client's profile he's intending to see
+        const isReferrer = client.referrer && client.referrer._id === loggedUserId;
+
+        if (isReferrer || isClient) {
           return true;
         } else {
           this.router.navigate(['/unauthorized']);
