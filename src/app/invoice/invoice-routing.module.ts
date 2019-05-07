@@ -33,7 +33,7 @@ const routes: Routes = [
       path: 'invoice/generator',
       component: InvoiceGeneratorComponent,
       resolve: {
-        clients: InvoiceBuyersResolver,
+        buyers: InvoiceBuyersResolver,
         seller: InvoiceSellerResolver,
         products: ProductCurrentUserResolver
       },

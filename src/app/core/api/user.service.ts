@@ -19,6 +19,10 @@ export class UserService extends BaseService {
     return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
   }
 
+  getBuyersByUser(id: string): Observable<Client[]> {
+    return this.apiService.get(`${this.path}/${id}/buyer`).pipe(map(data => data));
+  }
+
   getSuppliersByUser(id: string): Observable<Client[]> {
     return this.apiService.get(`${this.path}/${id}/supplier`).pipe(map(data => data));
   }
