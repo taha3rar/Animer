@@ -8,7 +8,10 @@
       [ngClass]="{ 'unread-notification': notification.read === false }"
     >
       <div>
-        <figure class="img-circular-sm" [style.background-image]="'url(' + profilePicture(notification) + ')'"></figure>
+        <figure
+          class="img-circular img-circular-sm"
+          [style.background-image]="'url(' + profilePicture(notification) + ')'"
+        ></figure>
       </div>
       <div>
         <p *ngIf="notification.type === 'proforma-invoice'">

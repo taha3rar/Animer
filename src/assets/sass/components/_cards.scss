@@ -172,20 +172,6 @@
   }
 }
 
-.round-shape-img {
-  width: 6.8rem;
-  height: 6.8rem;
-  -webkit-shape-outsite: circle(50% at 50% 50%);
-  shape-outside: circle(50% at 50% 50%);
-  clip-path: circle(50% at 50% 50%);
-}
-
-.round-shape-img img {
-  height: 100%;
-  box-shadow: 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
-  transform: translatex(-1.5rem);
-}
-
 .contacts-section {
   display: flex;
 }

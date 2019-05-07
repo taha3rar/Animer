@@ -3,7 +3,7 @@
   <ng-container *ngFor="let product of productList">
     <div class="product-item" *ngIf="product.quantity > 0">
       <figure
-        class="img-circular-sm margin-none"
+        class="img-circular img-circular-sm margin-none"
         [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
       ></figure>
       <div>

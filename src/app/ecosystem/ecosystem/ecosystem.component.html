@@ -2,7 +2,9 @@
 
 <div class="panel">
   <div class="panel-body">
-    <button class="bttn-primary pull-right" data-toggle="wizard" data-target="#addClienEcoModal"><i class="material-icons">add</i> <span>Add Client</span></button>
+    <button class="bttn-primary pull-right" data-toggle="wizard" data-target="#addClienEcoModal">
+      <i class="material-icons">add</i> <span>Add Client</span>
+    </button>
     <p class="heading-2">{{ ecosystem.name }} Members</p>
     <p class="heading-3">Owned by {{ ownedBy }}</p>
 
@@ -10,7 +12,10 @@
       <div class="contact-card" *ngFor="let user of ecosystem.participants">
         <div class="delete"><span class="pull-right material-icons" (click)="warning(user._id)">delete</span></div>
         <div>
-          <figure class="round-shape-img"><img src="{{ getProfilePicture(user.profile_picture) }}" alt="contact-img" /></figure>
+          <figure
+            class="img-circular img-circular-md"
+            [style.background-image]="'url(' + getProfilePicture(user.profile_picture) + ')'"
+          ></figure>
           <p class="normal-text-bold">{{ user.first_name }} {{ user.last_name }}</p>
           <p>{{ user.company_name }}</p>
         </div>
