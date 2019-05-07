@@ -11,7 +11,10 @@
     >
       <div class="row" (click)="open(notification)">
         <div class="col-md-2">
-          <figure class="img-shape"><img src="{{ profilePicture(notification) }}" class="user-img" /></figure>
+          <figure
+            class="img-circular-xs"
+            [style.background-image]="'url(' + profilePicture(notification) + ')'"
+          ></figure>
         </div>
         <div class="col-md-10 notificationText">
           <span *ngIf="notification.type === 'proforma-invoice'"

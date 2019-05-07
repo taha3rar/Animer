@@ -88,6 +88,11 @@
     }
   }
 
+  .dropdown-item.active,
+  .dropdown-item:active {
+    color: #16181b;
+  }
+
   .sidebar-wrapper {
     position: fixed;
     left: 0;
