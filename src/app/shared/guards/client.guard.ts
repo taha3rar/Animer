@@ -18,21 +18,9 @@ export class ClientGuard implements CanActivate {
 
     return this.userService.get(route.params.id).pipe(
       map((client: User) => {
-        if (this.authService.isAgribusiness) {
-          if (client.referrer && client.referrer._id === userId) {
-            return true;
-          } else {
-            this.router.navigate(['/unauthorized']);
-            return false;
-          }
-        } else if (this.authService.isSeller || this.authService.isBuyer) {
-          const isClient = client.clients.filter(user => user._id === userId).length > 0 ? true : false;
-          if (isClient) {
-            return true;
-          } else {
-            this.router.navigate(['/unauthorized']);
-            return false;
-          }
+        const isClient = client.clients.filter(user => user._id === userId).length > 0 ? true : false;
+        if ((client.referrer && client.referrer._id === userId) || isClient) {
+          return true;
         } else {
           this.router.navigate(['/unauthorized']);
           return false;
