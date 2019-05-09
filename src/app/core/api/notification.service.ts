@@ -22,6 +22,7 @@ export class NotificationService extends BaseService {
       case 'proforma-invoice':
         return `/invoice/${notification.object_id}`;
       case 'purchase-order':
+        return `order/invoice/generator/${notification.object_id}`;
       case 'document':
         return `/order/${notification.object_id}`;
       case 'contract':

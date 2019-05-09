@@ -1,7 +1,7 @@
 <div class="dropdown">
   <div id="flex-notif" data-toggle="dropdown" aria-expanded="true">
     <i class="material-icons">notifications</i>
-    <span class="notification">{{ unreadNotificationsAmount }}</span>
+    <span *ngIf="unreadNotificationsAmount" class="notification">{{ unreadNotificationsAmount }}</span>
   </div>
   <ul class="dropdown-menu pull-right notifications">
     <li

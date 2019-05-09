@@ -11,9 +11,10 @@
         <figure
           class="img-circular img-circular-sm"
           [style.background-image]="'url(' + profilePicture(notification) + ')'"
+          (click)="open(notification)"
         ></figure>
       </div>
-      <div>
+      <div style="width: 90%" (click)="open(notification)">
         <p *ngIf="notification.type === 'proforma-invoice'">
           <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
           <strong>Proforma Invoice</strong>

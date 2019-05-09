@@ -36,4 +36,9 @@ export class NotificationListComponent implements OnInit {
       }
     );
   }
+
+  open(notification: Notification) {
+    this.service.markAsRead(notification._id).subscribe();
+    this.router.navigate([this.service.getUrl(notification) || this.router.url]);
+  }
 }
