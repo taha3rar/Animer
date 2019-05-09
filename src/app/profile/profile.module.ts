@@ -10,9 +10,10 @@ import { from } from 'rxjs';
 import { ProfilePasswordComponent } from './profile-password/profile-password.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTooltipModule } from '@angular/material';
+import { ProfileNotificationsComponent } from './profile-notifications/profile-notifications.component';
 
 @NgModule({
-  declarations: [ProfileComponent, ProfilePasswordComponent],
+  declarations: [ProfileComponent, ProfilePasswordComponent, ProfileNotificationsComponent],
   imports: [
     CommonModule,
     TranslateModule,

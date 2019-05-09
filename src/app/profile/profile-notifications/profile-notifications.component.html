@@ -1,0 +1,56 @@
+<div class="panel user-settings">
+  <form [formGroup]="notificationsSettingsForm">
+    <div class="panel-body">
+      <div class="panel-header">
+        <div class="icon-text"><i class="material-icons">notifications</i> <span> Notifications Settings </span></div>
+        <div class="show-hide">
+          <button
+            class="show-hide-btn"
+            type="button"
+            data-toggle="collapse"
+            data-target="#notificationSection"
+            aria-expanded="false"
+          >
+            <i class="glyphicon glyphicon-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="collapse" id="notificationSection">
+        <div class="padding-all clearfix">
+          <table class="notifications-table">
+            <tr>
+              <td>
+                <p>Receiving documents (Proforma invoices and purchase orders)</p>
+                <p *ngIf="poPiNotification == 'true'">Turned on</p>
+                <p *ngIf="poPiNotification == 'false'">Turned off</p>
+              </td>
+              <td>
+                <select class="form-control" formControlName="poPi">
+                  <option [value]="true">On</option>
+                  <option [value]="false">Off</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Necessary documents uploaded</p>
+                <p *ngIf="documentNotification == 'true'">Turned on</p>
+                <p *ngIf="documentNotification == 'false'">Turned off</p>
+              </td>
+              <td>
+                <select class="form-control" formControlName="documents">
+                  <option [value]="true">On</option>
+                  <option [value]="false">Off</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+
+          <button type="submit" class="bttn-primary pull-right" (click)="onSubmit()">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
