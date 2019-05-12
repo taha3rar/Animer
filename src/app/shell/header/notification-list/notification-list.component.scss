@@ -46,3 +46,9 @@
 .notificationText > span {
   font-size: 13px !important;
 }
+
+.notificationText {
+  overflow-x: auto;
+  word-wrap: break-word;
+  white-space: normal;
+}
