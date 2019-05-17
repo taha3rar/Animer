@@ -3,6 +3,7 @@ export class Notification {
   read: boolean;
   date_created: Date;
   type: String;
+  link: String;
   emitter: {
     _id: String;
     first_name: String;
