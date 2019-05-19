@@ -30,7 +30,7 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
     public dialog: MatDialog,
     private router: Router,
     private alerts: AlertsService
-    ) {
+  ) {
     super(dialog);
   }
 
