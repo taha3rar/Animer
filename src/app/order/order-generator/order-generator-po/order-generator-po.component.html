@@ -256,12 +256,7 @@
     >
       Next Step &rarr;
     </button>
-    <button
-      class="bttn-primary pull-right"
-      (click)="checkProducts()"
-      (click)="onSubmit(form)"
-      [hidden]="form.valid && products.length >= 1"
-    >
+    <button class="bttn-primary pull-right" [hidden]="form.valid && products.length > 0">
       Next Step &rarr;
     </button>
     <button class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
