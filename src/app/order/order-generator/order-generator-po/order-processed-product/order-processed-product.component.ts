@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { BaseProductOrder } from '../base-product-order';
+import { BaseProductOrder } from '../../order-product-list/base-product-order';
 
 @Component({
   selector: 'app-order-processed-product',

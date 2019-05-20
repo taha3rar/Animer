@@ -30,6 +30,7 @@ export class User {
   numericId: number;
   image: string;
   contact_by: string[];
+  notifications: string[];
 
   constructor() {
     this.personal_information = new PersonalInformation();

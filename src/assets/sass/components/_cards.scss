@@ -13,7 +13,7 @@
 
 .doc-card {
   display: flex;
-  width: 16.666%;
+  width: 16%;
   flex-direction: column;
   border-radius: 5px;
   border: 1px solid $light-gray-2;
@@ -83,7 +83,7 @@
   border: 1px dashed $primary-color;
   width: 16%;
   background-color: #f6fdff;
-  margin-right: 2.5rem;
+  margin-right: 0.8%;
   padding: 0.8rem;
 
   #btn-input {
@@ -172,20 +172,6 @@
   }
 }
 
-.round-shape-img {
-  width: 6.8rem;
-  height: 6.8rem;
-  -webkit-shape-outsite: circle(50% at 50% 50%);
-  shape-outside: circle(50% at 50% 50%);
-  clip-path: circle(50% at 50% 50%);
-}
-
-.round-shape-img img {
-  height: 100%;
-  box-shadow: 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
-  transform: translatex(-1.5rem);
-}
-
 .contacts-section {
   display: flex;
 }
@@ -202,6 +188,7 @@
   padding: 1rem;
   font-size: 1.35rem;
   border-left: 3.5px solid $primary-color;
+  cursor: pointer;
 
   div:first-child {
     padding-left: 1rem;
@@ -213,18 +200,32 @@
   }
 
   div:nth-child(2) p:first-child {
-    padding-top: 1rem;
-    margin-bottom: 0.6rem;
+    padding-top: 0.6rem;
+    margin-bottom: 2px !important;
   }
 
   div:nth-child(2) p:last-child {
     color: #9e9e9e;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0px !important;
   }
 
-  div:last-child {
+  .clear-notification:last-child {
     margin-left: auto;
+    align-self: flex-start;
+    display: none;
   }
+}
+
+.notification-card:hover {
+  background-color: rgb(242, 246, 250);
+}
+
+.unread-notification {
+  background-color: #e9f8fb;
+}
+
+.notification-card:hover .clear-notification {
+  display: inline-block;
 }
 
 .card-processed {
@@ -322,4 +323,29 @@
 
 .supplier-card {
   height: 20.8rem;
+}
+
+.notification-settings-card {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  div:first-child {
+    font-size: 1.4rem;
+    padding: 2.5rem 2.8rem;
+    font-weight: bold;
+    height: 50%;
+    width: 100%;
+    background-color: white;
+  }
+  div:last-child {
+    padding: 2rem 2.8rem;
+    height: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+    background-color: #d4e6e8;
+    p {
+      margin-bottom: 3px;
+    }
+  }
 }

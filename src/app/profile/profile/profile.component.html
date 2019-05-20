@@ -37,116 +37,132 @@
     <div class="panel user-settings">
       <div class="panel-body">
         <div class="panel-header">
-          <div class="icon-text"><i class="material-icons">settings</i> <span> Account Settings </span></div>
-          <p class="heading-3" style="margin-left:3.3rem;">Edit your profile information</p>
-        </div>
-        <div class="col-md-6 contact-info-section">
-          <div class="icon-text">
-            <i class="material-icons">person</i><span class="heading-2"> CONTACT INFORMATION</span>
-          </div>
-          <form [formGroup]="clientDetailsForm" (ngSubmit)="onSubmitClientDetails()" id="contact-info-form">
-            <div class="form-row">
-              <div class="form-group col-md-6" [ngClass]="showFieldStyle('firstName')">
-                <label for="fist-name">First Name *</label>
-                <input type="text" formControlName="firstName" class="form-control" id="fist-name" />
-                <div class="help-block" *ngIf="isFieldInvalid('firstName')">
-                  <p>This field is required</p>
-                </div>
-              </div>
-              <div class="form-group col-md-6" [ngClass]="showFieldStyle('lastName')">
-                <label for="last-name">Last Name *</label>
-                <input type="text" formControlName="lastName" class="form-control" id="last-name" />
-                <div class="help-block" *ngIf="isFieldInvalid('lastName')">
-                  <p>This field is required</p>
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="email-address">Email Address *</label>
-                <input type="email" formControlName="email" class="form-control" id="email-address" readonly />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="id">Identification Number (ID)</label>
-                <input type="text" formControlName="userId" class="form-control" id="id" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="personal-phone">Phone Number *</label>
-                <input type="text" formControlName="phoneNumber" class="form-control" id="personal-phone" readonly />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="country">Job Title</label>
-                <input type="text" formControlName="jobTitle" class="form-control" id="job-title" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="street-address">Additional Details</label>
-              <textarea type="span" rows="3" formControlName="bio" class="form-control" id="client-bio"></textarea>
-            </div>
-            <button type="submit" class="bttn-primary pull-right" [disabled]="!clientDetailsForm.valid">
-              Save Changes
+          <div class="icon-text"><i class="material-icons">settings</i> <span> Account Settings</span></div>
+          <div class="show-hide">
+            <button
+              class="show-hide-btn"
+              type="button"
+              data-toggle="collapse"
+              data-target="#personalCompanySection"
+              aria-expanded="false"
+            >
+              <i class="glyphicon glyphicon-minus"></i>
             </button>
-          </form>
-        </div>
-        <div class="col-md-6 company-info-section">
-          <div class="icon-text">
-            <i class="material-icons">business</i><span class="heading-2"> COMPANY INFORMATION</span>
           </div>
-          <form [formGroup]="companyDetailsForm" (ngSubmit)="onSubmitCompanyDetails()" id="company-info-form">
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="company-name">Company Registered Name</label>
-                <input type="text" formControlName="companyName" class="form-control" id="company-name" />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="comapny-number">Company Registered Number</label>
-                <input type="text" formControlName="companyNumber" class="form-control" id="comapny-number" />
-              </div>
+        </div>
+        <div class="collapse in" id="personalCompanySection">
+          <div class="col-md-6 contact-info-section">
+            <div class="icon-text">
+              <i class="material-icons">person</i><span class="heading-2"> CONTACT INFORMATION</span>
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-6" [ngClass]="showFieldStyleComp('country')">
-                <label for="country">Country *</label>
-                <input type="text" formControlName="country" class="form-control" id="street" />
-                <div class="help-block" *ngIf="isFieldInvalidComp('country')">
-                  <p>This field is required</p>
+            <form [formGroup]="clientDetailsForm" (ngSubmit)="onSubmitClientDetails()" id="contact-info-form">
+              <div class="form-row">
+                <div class="form-group col-md-6" [ngClass]="showFieldStyle('firstName')">
+                  <label for="fist-name">First Name *</label>
+                  <input type="text" formControlName="firstName" class="form-control" id="fist-name" />
+                  <div class="help-block" *ngIf="isFieldInvalid('firstName')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+                <div class="form-group col-md-6" [ngClass]="showFieldStyle('lastName')">
+                  <label for="last-name">Last Name *</label>
+                  <input type="text" formControlName="lastName" class="form-control" id="last-name" />
+                  <div class="help-block" *ngIf="isFieldInvalid('lastName')">
+                    <p>This field is required</p>
+                  </div>
                 </div>
               </div>
-              <div class="form-group col-md-6">
-                <label for="state">State/Province/Region</label>
-                <input type="text" formControlName="stateRegionProvince" class="form-control" id="state" />
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email-address">Email Address *</label>
+                  <input type="email" formControlName="email" class="form-control" id="email-address" readonly />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="id">Identification Number (ID)</label>
+                  <input type="text" formControlName="userId" class="form-control" id="id" />
+                </div>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="city">City</label>
-                <input type="text" formControlName="city" class="form-control" id="city" />
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="personal-phone">Phone Number *</label>
+                  <input type="text" formControlName="phoneNumber" class="form-control" id="personal-phone" readonly />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="country">Job Title</label>
+                  <input type="text" formControlName="jobTitle" class="form-control" id="job-title" />
+                </div>
               </div>
-              <div class="form-group col-md-6">
-                <label for="zip-code">Zip Code</label>
-                <input type="text" formControlName="zipcode" class="form-control" id="zip-code" />
+              <div class="form-group">
+                <label for="street-address">Additional Details</label>
+                <textarea type="span" rows="3" formControlName="bio" class="form-control" id="client-bio"></textarea>
               </div>
+              <button type="submit" class="bttn-primary pull-right" [disabled]="!clientDetailsForm.valid">
+                Save Changes
+              </button>
+            </form>
+          </div>
+          <div class="col-md-6 company-info-section">
+            <div class="icon-text">
+              <i class="material-icons">business</i><span class="heading-2"> COMPANY INFORMATION</span>
             </div>
-            <div class="form-group">
-              <label for="street-address">Street Address</label>
-              <input type="text" formControlName="address" class="form-control" id="street-address" />
-            </div>
-            <div class="form-group">
-              <label for="about">Additional Details</label>
-              <textarea type="span" rows="3" formControlName="bio" class="form-control" id="about"></textarea>
-            </div>
-            <button type="submit" class="bttn-primary pull-right" [disabled]="!companyDetailsForm.valid">
-              Save Changes
-            </button>
-          </form>
+            <form [formGroup]="companyDetailsForm" (ngSubmit)="onSubmitCompanyDetails()" id="company-info-form">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="company-name">Company Registered Name</label>
+                  <input type="text" formControlName="companyName" class="form-control" id="company-name" />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="comapny-number">Company Registered Number</label>
+                  <input type="text" formControlName="companyNumber" class="form-control" id="comapny-number" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6" [ngClass]="showFieldStyleComp('country')">
+                  <label for="country">Country *</label>
+                  <input type="text" formControlName="country" class="form-control" id="street" />
+                  <div class="help-block" *ngIf="isFieldInvalidComp('country')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="state">State/Province/Region</label>
+                  <input type="text" formControlName="stateRegionProvince" class="form-control" id="state" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="city">City</label>
+                  <input type="text" formControlName="city" class="form-control" id="city" />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="zip-code">Zip Code</label>
+                  <input type="text" formControlName="zipcode" class="form-control" id="zip-code" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="street-address">Street Address</label>
+                <input type="text" formControlName="address" class="form-control" id="street-address" />
+              </div>
+              <div class="form-group">
+                <label for="about">Additional Details</label>
+                <textarea type="span" rows="3" formControlName="bio" class="form-control" id="about"></textarea>
+              </div>
+              <button type="submit" class="bttn-primary pull-right" [disabled]="!companyDetailsForm.valid">
+                Save Changes
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-
     <div class="row">
       <div class="col">
         <app-profile-password></app-profile-password>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-profile-notifications></app-profile-notifications>
       </div>
     </div>
   </div>

@@ -1,3 +1,4 @@
+import { AlertsService } from './../../core/alerts.service';
 import { CanComponentDeactivate } from './../../shared/guards/confirmation.guard';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { StepperService } from '@app/core/stepper.service';
@@ -41,7 +42,8 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private stepperService: StepperService
+    private stepperService: StepperService,
+    private alerts: AlertsService
   ) {
     super();
   }
@@ -188,9 +190,11 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
           const participant = new Client(data);
           if (this.ecosystemsToBeAdded.length) {
             this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
+              this.alerts.showAlert('New client profile has been created!');
               this.closeAndRefresh();
             });
           } else {
+            this.alerts.showAlert('New client profile has been created!');
             this.closeAndRefresh();
           }
         } else {

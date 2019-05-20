@@ -33,6 +33,7 @@
             [form]="invoiceForm"
             [products]="products"
             (newInvoiceEvent)="receiveNewInvoice($event)"
+            (newDraftInvoice)="draft = $event"
           ></app-order-invoice-generator>
         </div>
         <div class="tab-pane" id="review">

@@ -1,3 +1,4 @@
+import { AlertsService } from '@app/core/alerts.service';
 import { CanComponentDeactivate } from './../../../shared/guards/confirmation.guard';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
@@ -29,7 +30,8 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
     private formBuilder: FormBuilder,
     private dialog: MatDialogRef<AgriculturalProductGeneratorComponent>,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private alerts: AlertsService
   ) {}
 
   ngOnInit() {
@@ -173,6 +175,7 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
     if (!this.onUpdate) {
       if (this.productForm.valid) {
         this.productService.create(this.newProduct).subscribe(() => {
+          this.alerts.showAlert('New product profile has been created!');
           this.dialog.close();
           this.router.navigateByUrl('/product/list');
         });
@@ -180,6 +183,7 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
     } else {
       this.newProduct._id = this.data.product._id;
       this.productService.update(this.newProduct._id, this.newProduct).subscribe(() => {
+        this.alerts.showAlert('The product has been updated!');
         this.dialog.close();
         this.router.navigateByUrl('/product/list');
       });

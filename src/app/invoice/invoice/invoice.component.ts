@@ -1,3 +1,4 @@
+import { AlertsService } from './../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import swal from 'sweetalert';
@@ -27,7 +28,8 @@ export class InvoiceComponent implements OnInit {
     private productService: ProductService,
     private location: Location,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertsService: AlertsService
   ) {}
 
   ngOnInit() {
@@ -120,6 +122,7 @@ export class InvoiceComponent implements OnInit {
             this.productService.create(product).subscribe();
           }
         }
+        this.alertsService.showAlert('Your proforma invoice has been sent');
         this.router.navigateByUrl('/invoice/list');
       });
     }

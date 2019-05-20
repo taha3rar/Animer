@@ -1,10 +1,10 @@
 import { StepperService } from './../../core/forms/stepper.service';
-import { Component, OnInit, Input, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { OrderDataService } from './order-data.service';
 import swal from 'sweetalert';
-import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { Order } from '@app/core/models/order/order';
@@ -20,6 +20,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   orderForm: FormGroup;
   draftOrder: Order;
   isDraft: Boolean;
+  draft: any;
   draftProducts: ProductInvoice[] = [];
   formSubmitted: boolean;
   constructor(
@@ -92,7 +93,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         city: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.city, Validators.required],
         zip_code: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.zip_code],
         phone: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.phone, Validators.required],
-        expected_delivery_date: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.expected_delivery_date]
+        expected_delivery_date: [Object.is(this.deliver_to, undefined) ? null : this.deliver_to.expected_delivery_date]
       }),
       date_created: [Date.now(), Validators.required]
     });
@@ -148,7 +149,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   }
 
   confirm() {
-    if (!this.orderForm.dirty || this.formSubmitted) {
+    if (!this.orderForm.dirty || this.formSubmitted || this.draft) {
       return true;
     }
     return swal({

@@ -16,10 +16,25 @@
 
   <app-order-product-list
     [currency]="order.currency.value"
-    (updateProductsEvent)="updateProducts($event)"
-    (updateFormEvent)="updateForm($event)"
+    [products]="products"
+    (updateProductEvent)="updateProduct($event)"
+    (deleteProductEvent)="deleteProduct($event)"
   >
   </app-order-product-list>
+  <div class="row">
+    <div class="col">
+      <div class="dropdown">
+        <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
+        <ul class="dropdown-menu">
+          <li><a (click)="openDialogAgricultural()">New Agricultural Product</a></li>
+          <li><a (click)="openDialogProcessed()">New Processed Product</a></li>
+        </ul>
+      </div>
+      <!-- <button class="btn-primary-transp">
+        <i class="material-icons rotate">attach_file</i> <span>Upload Document</span>
+      </button> -->
+    </div>
+  </div>
   <div class="alert alert-danger" role="alert" [hidden]="products.length != 0 || productsValid">
     Please choose product!
   </div>
@@ -241,12 +256,7 @@
     >
       Next Step &rarr;
     </button>
-    <button
-      class="bttn-primary pull-right"
-      (click)="checkProducts()"
-      (click)="onSubmit(form)"
-      [hidden]="form.valid && products.length >= 1"
-    >
+    <button class="bttn-primary pull-right" [hidden]="form.valid && products.length > 0">
       Next Step &rarr;
     </button>
     <button class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>

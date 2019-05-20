@@ -1,56 +1,21 @@
 <div class="modal-box-heading">
   <a (click)="onExit()"><i class="material-icons pull-right">close</i></a>
-  <h2 translate class="modal-title">Add Agricultural Product</h2>
+  <h2 translate class="modal-title">Add Processed Product</h2>
 </div>
 <div class="padding-all">
   <form #modalForm="ngForm" (keydown.enter)="$event.preventDefault()">
     <p class="heading-2">Product</p>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col">
         <label for="product-name">Product Name *</label>
         <input
           type="text"
           id="product-name"
           [(ngModel)]="product.produce"
-          class="form-control"
           name="name"
-          placeholder="Ex. Green coffee beans"
-          required
-        />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="variety">Variety *</label>
-        <input
-          type="text"
-          id="variety"
-          [(ngModel)]="product.variety"
           class="form-control"
-          name="variety"
-          placeholder="Ex. Kona"
-          required
-        />
-      </div>
-    </div>
-    <p class="heading-2">Amount *</p>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="weight-unit">Weight Unit *</label>
-        <select id="weight-unit" [(ngModel)]="product.weight_unit" name="weight_unit" class="form-control" required>
-          <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
-        </select>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="total-amount">Total Amount *</label>
-        <input
-          type="number"
-          min="0"
-          id="total-amount"
-          [(ngModel)]="product.total_weight"
-          name="total_weight"
-          (ngModelChange)="setAverageAmountPerPackage(); setPriceUnit()"
-          class="form-control"
-          placeholder="Ex. 100"
+          placeholder="Ex. Orange juice"
           required
         />
       </div>
@@ -75,27 +40,85 @@
           type="number"
           id="total-packages"
           [(ngModel)]="product.quantity"
+          (ngModelChange)="setTotalItemsAmount(); setPricePackage()"
           name="quantity"
-          (ngModelChange)="setAverageAmountPerPackage(); setPricePackage()"
+          class="form-control"
+          placeholder="Ex. 20"
+          required
+        />
+      </div>
+    </div>
+    <p class="heading-2">Item</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="items-per-package">Number of Items per Package *</label>
+        <input
+          type="number"
+          min="0"
+          id="items-per-package"
+          [(ngModel)]="product.items_per_package"
+          (ngModelChange)="setTotalItemsAmount()"
+          name="items_per_package"
           class="form-control"
           placeholder="Ex. 10"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="item-packing-type">Item Packing Type *</label>
+        <input
+          type="text"
+          id="item-packing-type"
+          [(ngModel)]="product.item_package_type"
+          name="item_package_type"
+          class="form-control"
+          placeholder="Ex. Bottle"
           required
         />
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="average-amount-packaged-product"
-          >Average Amount ({{ product.weight_unit | uppercase }}) per Packaged Product *</label
-        >
+        <label for="total-items-amount">Total Amount of Items *</label>
         <input
           type="number"
           min="0"
-          id="average-amount-packaged-product"
-          name="package_weight"
-          [(ngModel)]="product.package_weight"
+          id="total-items-amount"
+          [(ngModel)]="product.total_amount_items"
+          name="total_amount_items"
           class="form-control"
+          placeholder="Ex. 40"
           disabled
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="measurement-unit">Measurement Unit *</label>
+        <select
+          id="measurement-unit"
+          [(ngModel)]="product.item_measurement_unit"
+          name="item_measurement_unit"
+          class="form-control"
+          required
+        >
+          <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="itemMeasurementAmount"
+          >Amount of {{ product.item_measurement_unit | uppercase }} in individual
+          {{ product.item_package_type }} *</label
+        >
+        <input
+          min="0"
+          type="number"
+          [(ngModel)]="product.item_measurement_amount"
+          class="form-control"
+          name="item_measurement_amount"
+          placeholder="Ex. 5"
+          id="itemMeasurementAmount"
           required
         />
       </div>
@@ -103,15 +126,15 @@
     <p class="heading-2">Price</p>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="product-name">Price per {{ product.weight_unit | uppercase }} *</label>
+        <label for="package-price">Price per Package *</label>
         <input
           type="number"
-          id="price-per"
-          name="price_per_unit"
-          [(ngModel)]="product.price_per_unit"
-          (ngModelChange)="setPriceUnit()"
+          [(ngModel)]="product.package_price"
+          (ngModelChange)="setPricePackage()"
+          name="package_price"
           class="form-control"
-          placeholder="Ex. 20"
+          id="package-price"
+          placeholder="Ex. 15"
           required
         />
       </div>
@@ -122,8 +145,8 @@
           [(ngModel)]="currency"
           name="currency"
           class="form-control"
-          required
           [disabled]="data.currency"
+          required
         >
           <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
         </select>
@@ -131,27 +154,14 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="package-price">Price per Package *</label>
-        <input
-          type="number"
-          name="package_price"
-          [(ngModel)]="product.package_price"
-          (ngModelChange)="setPricePackage()"
-          class="form-control"
-          id="package-price"
-          readonly
-          required
-        />
-      </div>
-      <div class="form-group col-md-6">
         <label for="total-price">Total Price *</label>
         <input
           type="number"
           id="total-price"
-          name="total_price"
           [(ngModel)]="product.product_subtotal"
+          name="product_subtotal"
           class="form-control"
-          disabled
+          placeholder="Ex. 300"
           required
         />
       </div>

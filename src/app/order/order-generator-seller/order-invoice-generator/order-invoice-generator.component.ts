@@ -1,13 +1,10 @@
+import { AlertsService } from './../../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { Router } from '@angular/router';
 import { InvoiceService } from '@app/core/api/invoice.service';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
-// tslint:disable-next-line:max-line-length
-import { OrderAgriculturalProductComponent } from '../../order-generator/order-product-list/order-agricultural-product/order-agricultural-product.component';
-// tslint:disable-next-line:max-line-length
-import { OrderProcessedProductComponent } from '../../order-generator/order-product-list/order-processed-product/order-processed-product.component';
 import * as moment from 'moment';
 import { FormGroup } from '@angular/forms';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
@@ -25,9 +22,16 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   products: ProductInvoice[];
   @Output()
   newInvoiceEvent = new EventEmitter<Invoice>();
+  @Output()
+  newDraftInvoice = new EventEmitter();
 
-  constructor(private invoiceService: InvoiceService, private dialog: MatDialog, private router: Router) {
-    super();
+  constructor(
+    private invoiceService: InvoiceService,
+    public dialog: MatDialog,
+    private router: Router,
+    private alerts: AlertsService
+  ) {
+    super(dialog);
   }
 
   ngOnInit() {
@@ -75,70 +79,6 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
     );
   }
 
-  deleteProduct($event: number): void {
-    const index = $event;
-    this.updateTotalDue(-this.products[index].product_subtotal);
-    this.products.splice(index, 1);
-    if (this.products.length < 1) {
-      this.invoice['currency'].setValue(undefined);
-    }
-  }
-
-  updateProduct($event: number): void {
-    const index = $event;
-    if (this.products[index].product_type === 'processed') {
-      this.openDialogProcessed(index);
-    }
-    if (this.products[index].product_type === 'agricultural') {
-      this.openDialogAgricultural(index);
-    }
-  }
-
-  openDialogAgricultural(index?: number): void {
-    const data = {
-      productList: this.products,
-      index: index,
-      currency: this.invoice.currency.value
-    };
-
-    this.openDialog('770px', OrderAgriculturalProductComponent, data);
-  }
-
-  openDialogProcessed(index?: number): void {
-    const data = {
-      productList: this.products,
-      index: index,
-      currency: this.invoice.currency.value
-    };
-
-    this.openDialog('800px', OrderProcessedProductComponent, data);
-  }
-
-  openDialog(height: string, component: any, dialogData: any): void {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = height;
-    dialogConfig.width = '850px';
-    dialogConfig.data = dialogData;
-
-    const dialogRef = this.dialog.open(component, dialogConfig);
-    dialogRef.afterClosed().subscribe(data => {
-      if (data && data.event === 'submit') {
-        if (!this.invoice.currency.value) {
-          this.invoice['currency'].setValue(data.currency);
-        }
-        this.updateTotalDue(data.product.product_subtotal);
-        this.products.push(data.product);
-      }
-      if (data && data.event === 'update') {
-        this.updateTotalDue(-data.oldSubtotal);
-        this.updateTotalDue(data.product.product_subtotal);
-        this.products[data.index] = data.product;
-      }
-    });
-  }
-
   draftInvoice() {
     this.invoice['sign_by'].patchValue({
       date: moment(this.form['controls'].sign_by['controls'].date.value)
@@ -150,11 +90,13 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
         .subtract(1, 'months')
         .toJSON()
     });
+    this.newDraftInvoice.emit(true);
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
     this.invoiceService.draft(this.newInvoice).subscribe(() => {
+      this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
       this.router.navigateByUrl('/order/list');
     });
   }

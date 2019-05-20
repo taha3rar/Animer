@@ -1,53 +1,54 @@
 <p class="main-title margin-bottom">All Notifications</p>
-<div class="card notification-card">
-  <div>
-    <figure class="img-circular-sm" style="background-image: url('../../../assets/img/prof-img2.jpg')"></figure>
+
+<div class="row margin-none">
+  <div class="col-md-10">
+    <div
+      class="card notification-card"
+      *ngFor="let notification of (notifications | paginate: { itemsPerPage: itemsPerPage, currentPage: page })"
+      [ngClass]="{ 'unread-notification': notification.read === false }"
+    >
+      <div>
+        <figure
+          class="img-circular img-circular-sm"
+          [style.background-image]="'url(' + profilePicture(notification) + ')'"
+          (click)="open(notification)"
+        ></figure>
+      </div>
+      <div style="width: 90%" (click)="open(notification)">
+        <p *ngIf="notification.type === 'proforma-invoice'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
+          <strong>Proforma Invoice</strong>
+        </p>
+        <p *ngIf="notification.type === 'purchase-order'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
+          <strong>Purchase Order</strong>
+        </p>
+        <p *ngIf="notification.type === 'document'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has uploaded a
+          <strong>Necessary Document</strong>
+        </p>
+        <p *ngIf="notification.type === 'contract'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has uploaded a
+          <strong>Necessary Document</strong>
+        </p>
+        <p>{{ notification.date_created | date: 'dd/MM/yyyy hh:mm aaa' }}</p>
+      </div>
+      <div class="clear-notification">
+        <button class="clear-icon-btn" (click)="clearNotification(notification._id)">
+          <span ngbTooltip="Clear Notification" container="body" class="material-icons">clear</span>
+        </button>
+      </div>
+    </div>
   </div>
-  <div>
-    <p><strong>Tom Benn</strong> has sent a <strong>Proforma Invoice</strong></p>
-    <p>11/13/2018 10:16 AM</p>
-  </div>
-  <div>
-    <button class="round-button-red"><i class="material-icons">delete</i></button>
-  </div>
-</div>
-<div class="card notification-card">
-  <div>
-    <figure class="img-circular-sm" style="background-image: url('../../../assets/img/prof-img2.jpg')"></figure>
-  </div>
-  <div>
-    <p><strong>Tom Benn</strong> has sent a <strong>Proforma Invoice</strong></p>
-    <p>11/13/2018 10:16 AM</p>
-  </div>
-  <div>
-    <button class="round-button-red"><i class="material-icons">delete</i></button>
-  </div>
-</div>
-<div class="card notification-card">
-  <div>
-    <figure class="img-circular-sm" style="background-image: url('../../../assets/img/prof-img2.jpg')"></figure>
-  </div>
-  <div>
-    <p><strong>Tom Benn</strong> has sent a <strong>Proforma Invoice</strong></p>
-    <p>11/13/2018 10:16 AM</p>
-  </div>
-  <div>
-    <button class="round-button-red"><i class="material-icons">delete</i></button>
-  </div>
-</div>
-<div class="card notification-card">
-  <div>
-    <figure class="img-circular-sm" style="background-image: url('../../../assets/img/prof-img2.jpg')"></figure>
-  </div>
-  <div>
-    <p><strong>Tom Benn</strong> has sent a <strong>Proforma Invoice</strong></p>
-    <p>11/13/2018 10:16 AM</p>
-  </div>
-  <div>
-    <button class="round-button-red"><i class="material-icons">delete</i></button>
+  <div class="col-md-2">
+    <div class="card notification-settings-card">
+      <div>Would you like to manage your notifications?</div>
+      <div>
+        <p>View notification settings</p>
+        <a routerLink="/profile">here</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<pagination-controls class="my-pagination"
-(pageChange)="page = $event"
-></pagination-controls>
+<pagination-controls class="my-pagination" (pageChange)="page = $event"></pagination-controls>

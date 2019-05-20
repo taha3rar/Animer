@@ -1,9 +1,10 @@
+import { AlertsService } from './../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { Router } from '@angular/router';
 import { InvoiceService } from '@app/core/api/invoice.service';
 import { saveAs as importedSaveAs } from 'file-saver';
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-order-invoice',
   templateUrl: './order-invoice.component.html',
@@ -16,13 +17,14 @@ export class OrderInvoiceComponent implements OnInit {
   generateInvoice: false;
   @Output() formSubmitted = new EventEmitter();
 
-  constructor(private invoiceService: InvoiceService, private router: Router) {}
+  constructor(private invoiceService: InvoiceService, private router: Router, private alerts: AlertsService) {}
 
   ngOnInit() {}
 
   saveInvoice(): void {
     this.formSubmitted.emit(true);
     this.invoiceService.create(this.invoice).subscribe(data => {
+      this.alerts.showAlert('Your proforma invoice has been sent!');
       this.router.navigateByUrl('/order/list');
     });
   }

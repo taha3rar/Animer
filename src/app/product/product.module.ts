@@ -1,3 +1,4 @@
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { BaseProduct } from './product-generator/base-product';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -56,6 +57,7 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
+    ProgressbarModule.forRoot(),
     SharedModule,
     TutorialsModule
   ],

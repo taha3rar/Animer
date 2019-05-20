@@ -5,10 +5,10 @@
   <div *ngIf="invoice || generateInvoice" id="pdfContent">
     <div class="border-box">
       <h2>
-        PROFORMA INVOICE <span *ngIf="invoice._id"> #{{ invoice?.numericId }}</span>
+        PROFORMA INVOICE <span *ngIf="invoice?._id"> #{{ invoice?.numericId }}</span>
       </h2>
       <table>
-        <tr *ngIf="invoice.personal_po_id">
+        <tr *ngIf="invoice?.personal_po_id">
           <td class="heading-4-blue">PO REFERENCE</td>
           <td>#{{ invoice?.personal_po_id }}</td>
         </tr>

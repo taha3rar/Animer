@@ -1,3 +1,4 @@
+import { AlertsService } from './../../core/alerts.service';
 import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
@@ -9,6 +10,7 @@ import { Ecosystem } from '@app/core/models/ecosystem';
 import { User } from '@app/core/models/user/user';
 import { StepperService } from '@app/core/stepper.service';
 import swal from 'sweetalert';
+declare const $: any;
 
 @Component({
   selector: 'app-ecosystem-generator',
@@ -31,7 +33,8 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
     private router: Router,
     private route: ActivatedRoute,
     private ecosystemService: EcosystemService,
-    private stepperService: StepperService
+    private stepperService: StepperService,
+    private alerts: AlertsService
   ) {
     super();
   }
@@ -74,6 +77,7 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
     this.newEcosystem.type = this.ecosystemf.ecosystemType.value;
     this.newEcosystem.description = this.ecosystemf.description.value;
     this.ecosystemService.create(this.newEcosystem).subscribe(data => {
+      this.alerts.showAlert('New ecosystem has been created');
       this.closeModal.nativeElement.click();
       this.router.navigate([this.router.url]);
     });

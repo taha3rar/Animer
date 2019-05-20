@@ -1,73 +1,30 @@
 .img-circular {
-  width: 130px;
-  height: 130px;
-  background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  @include coverCenterBackground;
   display: block;
-  border-radius: 65px;
-  -webkit-border-radius: 65px;
-  -moz-border-radius: 65px;
-  box-shadow: 0px 5px 1rem rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  box-shadow: 0px 4px 1rem rgba(0, 0, 0, 0.1);
+
+  &-lg {
+    width: 130px;
+    height: 130px;
+  }
 
   &-md {
     width: 80px;
     height: 80px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    display: block;
-    border-radius: 40px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    box-shadow: 0px 5px 1rem rgba(0, 0, 0, 0.2);
   }
 
   &-sm {
     width: 50px;
     height: 50px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    display: block;
-    border-radius: 40px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    box-shadow: 0px 5px 1rem rgba(0, 0, 0, 0.2);
   }
 
   &-xs {
     width: 30px;
     height: 30px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    display: block;
-    border-radius: 40px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    box-shadow: 0px 5px 1rem rgba(0, 0, 0, 0.2);
   }
-}
-
-.img-shape {
-  width: 3rem;
-  height: 3rem;
-  -webkit-shape-outsite: circle(50% at 50% 50%);
-  shape-outside: circle(50% at 50% 50%);
-  clip-path: circle(50% at 50% 50%);
-  margin-bottom: 6px;
 }
 
 .user-img {

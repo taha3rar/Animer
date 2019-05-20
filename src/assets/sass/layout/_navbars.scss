@@ -81,7 +81,16 @@
       .see-all {
         text-align: center;
       }
+
+      li:hover {
+        background-color: rgb(243, 249, 250);
+      }
     }
+  }
+
+  .dropdown-item.active,
+  .dropdown-item:active {
+    color: #16181b;
   }
 
   .sidebar-wrapper {

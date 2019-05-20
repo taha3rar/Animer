@@ -1158,3 +1158,11 @@ select.custom-select {
   font-size: 1.7rem;
   padding: 1rem;
 }
+
+.clear-icon-btn {
+  background: transparent;
+  border: none;
+  span {
+    font-size: 1.6rem;
+  }
+}

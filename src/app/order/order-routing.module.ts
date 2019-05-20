@@ -17,6 +17,8 @@ import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
 import { CurrentUserResolver } from '@app/profile/resolvers/currentUser.resolver';
+import { OrderGuard } from '../shared/guards/order.guard';
+import { InvoiceGuard } from '../shared/guards/invoice.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -44,6 +46,7 @@ const routes: Routes = [
     {
       path: 'order/generator/:id',
       component: OrderGeneratorComponent,
+      canActivate: [OrderGuard],
       resolve: {
         order: OrderPoResolver
       }
@@ -59,6 +62,7 @@ const routes: Routes = [
     {
       path: 'order/invoice/generator/draft/:id',
       component: OrderGeneratorSellerComponent,
+      canActivate: [InvoiceGuard],
       resolve: {
         invoice: OrderInvoiceResolver
       }
@@ -66,6 +70,7 @@ const routes: Routes = [
     {
       path: 'order/:id',
       component: OrderComponent,
+      canActivate: [OrderGuard],
       resolve: {
         order: OrderPoResolver,
         documents: OrderDocumentsResolver
@@ -78,6 +83,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ConfirmationGuard]
+  providers: [OrderGuard, ConfirmationGuard, InvoiceGuard]
 })
 export class OrderRoutingModule {}

@@ -25,7 +25,6 @@ export class InvoiceInventoryComponent extends BaseNavigationComponent implement
     this.noCurrency = true;
     this.products = JSON.parse(JSON.stringify(this.data.products));
     this.products.forEach((product: Product) => {
-      console.log(product);
       product['quantityMax'] = product.quantity;
       product.quantity = 0;
     });

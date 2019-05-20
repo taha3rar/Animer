@@ -1,3 +1,4 @@
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,9 +8,22 @@ import { SharedModule } from '@app/shared/shared.module';
 import { ProfileComponent } from './profile/profile.component';
 import { from } from 'rxjs';
 import { ProfilePasswordComponent } from './profile-password/profile-password.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatTooltipModule } from '@angular/material';
+import { ProfileNotificationsComponent } from './profile-notifications/profile-notifications.component';
 
 @NgModule({
-  declarations: [ProfileComponent, ProfilePasswordComponent],
-  imports: [CommonModule, TranslateModule, ProfileRoutingModule, FormsModule, ReactiveFormsModule, SharedModule]
+  declarations: [ProfileComponent, ProfilePasswordComponent, ProfileNotificationsComponent],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    ProfileRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ProgressbarModule.forRoot(),
+    SharedModule,
+    NgbModule,
+    MatTooltipModule
+  ]
 })
 export class ProfileModule {}

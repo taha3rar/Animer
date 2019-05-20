@@ -1,5 +1,5 @@
 import { InvoiceGeneratorComponent } from './invoice-generator/invoice-generator.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { extract } from '@app/core';
@@ -14,6 +14,7 @@ import { ProductCurrentUserResolver } from './resolvers/products-currentUser.res
 import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
 import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.resolver';
 import { ConfirmationGuard } from '@app/shared/guards/confirmation.guard';
+import { InvoiceGuard } from '../shared/guards/invoice.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -32,7 +33,7 @@ const routes: Routes = [
       path: 'invoice/generator',
       component: InvoiceGeneratorComponent,
       resolve: {
-        clients: InvoiceBuyersResolver,
+        buyers: InvoiceBuyersResolver,
         seller: InvoiceSellerResolver,
         products: ProductCurrentUserResolver
       },
@@ -41,6 +42,7 @@ const routes: Routes = [
     {
       path: 'invoice/generator/:id',
       component: InvoiceGeneratorComponent,
+      canActivate: [InvoiceGuard],
       resolve: {
         invoice: InvoiceResolver,
         products: ProductCurrentUserResolver
@@ -49,6 +51,7 @@ const routes: Routes = [
     {
       path: 'invoice/:id',
       component: InvoiceComponent,
+      canActivate: [InvoiceGuard],
       resolve: {
         invoice: InvoiceResolver
       }
@@ -59,6 +62,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ConfirmationGuard]
+  providers: [InvoiceGuard, ConfirmationGuard]
 })
 export class InvoiceRoutingModule {}

@@ -19,6 +19,10 @@ export class UserService extends BaseService {
     return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
   }
 
+  getBuyersByUser(id: string): Observable<Client[]> {
+    return this.apiService.get(`${this.path}/${id}/buyer`).pipe(map(data => data));
+  }
+
   getSuppliersByUser(id: string): Observable<Client[]> {
     return this.apiService.get(`${this.path}/${id}/supplier`).pipe(map(data => data));
   }
@@ -50,5 +54,9 @@ export class UserService extends BaseService {
 
   changePassword(id: string, passwords: Passwords): Observable<User> {
     return this.apiService.put(`/user/${id}/password`, passwords).pipe(map(data => data));
+  }
+
+  updateNotifications(id: string, notifications: string[]): Observable<User> {
+    return this.apiService.put(`/user/${id}`, { notifications: notifications }).pipe(map(data => data));
   }
 }

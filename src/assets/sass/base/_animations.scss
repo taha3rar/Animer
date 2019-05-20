@@ -44,3 +44,13 @@
     opacity: 1;
   }
 }
+
+@keyframes enter-top {
+  0% {
+    top: -30px;
+  }
+
+  100% {
+    top: 20px;
+  }
+}

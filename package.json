@@ -57,6 +57,7 @@
     "lodash": "^4.17.10",
     "mathjs": "^5.4.1",
     "moment": "^2.23.0",
+    "ngx-bootstrap": "^4.0.0",
     "ngx-pagination": "^3.2.1",
     "ngx-permissions": "^6.0.4",
     "ngx-spinner": "^6.1.2",

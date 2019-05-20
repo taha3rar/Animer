@@ -31,7 +31,7 @@
         </div>
 
         <div class="tab-pane" id="purchaseOrder">
-          <app-order-generator-po></app-order-generator-po>
+          <app-order-generator-po (newDraftPO)="draft = $event"></app-order-generator-po>
         </div>
 
         <div class="tab-pane" id="review">

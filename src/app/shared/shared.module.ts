@@ -20,9 +20,12 @@ import { UserDocumentComponent } from './components/document-list/user-document-
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
 import { DocumentGeneratorComponent } from './components/document-generator/document-generator.component';
 import { TutorialControlComponent } from './components/tutorial-control/tutorial-control.component';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UnauthorizedPageComponent } from './components/unauthorized-page/unauthorized-page.component';
 
 @NgModule({
-  imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, MatTooltipModule],
+  imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, ProgressbarModule.forRoot(), MatTooltipModule],
   declarations: [
     LoaderComponent,
     RoundUpPipe,
@@ -38,7 +41,9 @@ import { TutorialControlComponent } from './components/tutorial-control/tutorial
     GooglePlacesDirective,
     UploadPictureComponent,
     DocumentGeneratorComponent,
-    TutorialControlComponent
+    TutorialControlComponent,
+    NotFoundComponent,
+    UnauthorizedPageComponent
   ],
   exports: [
     LoaderComponent,

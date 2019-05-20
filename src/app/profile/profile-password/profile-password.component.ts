@@ -1,3 +1,4 @@
+import { AlertsService } from '@app/core/alerts.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { UserService, AuthenticationService } from '@app/core';
@@ -16,7 +17,8 @@ export class ProfilePasswordComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private alerts: AlertsService
   ) {}
 
   ngOnInit() {
@@ -56,21 +58,7 @@ export class ProfilePasswordComponent implements OnInit {
       this.userService.changePassword(this.authService.currentUserId, passwords).subscribe(
         () => {
           this.changePasswordForm.reset();
-          $.notify(
-            {
-              icon: 'notifications',
-              message: 'Changes saved!'
-            },
-            {
-              type: 'success',
-              timer: 5000,
-              placement: {
-                from: 'top',
-                align: 'right'
-              },
-              offset: 78
-            }
-          );
+          this.alerts.showAlert('Your password has been updated!');
         },
         err => {
           $.notify(
