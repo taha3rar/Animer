@@ -141,3 +141,29 @@
   text-align: center;
   padding: 5rem;
 }
+
+.status {
+  width: 19rem;
+  height: 2.4rem;
+  border-radius: 12rem;
+  background-color: red;
+  text-align: center;
+  font-weight: 600;
+  padding-top: 3px;
+  font-size: 1.3rem;
+
+  &-sent {
+    background-color: #e5f7f9;
+    color: #33c1ce;
+  }
+
+  &-received {
+    background-color: rgb(253, 241, 224);
+    color: #fbad38;
+  }
+
+  &-saved {
+    background-color: #f6e5ff;
+    color: #7c31fe;
+  }
+}

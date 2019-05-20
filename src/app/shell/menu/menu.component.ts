@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
@@ -23,6 +24,12 @@ export const ROUTES: RouteInfo[] = [
     title: 'Orders',
     type: 'link',
     icontype: 'fa-exchange-alt'
+  },
+  {
+    path: '/quote-request/list',
+    title: 'Quote Requests',
+    type: 'link',
+    icontype: 'fa-tags'
   },
   {
     path: '/invoice/list',

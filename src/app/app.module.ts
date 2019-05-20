@@ -1,3 +1,4 @@
+import { QuoteRequestModule } from './quote-request/quote-request.module';
 import { ProfileModule } from './profile/profile.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -44,6 +45,7 @@ import { RouterModule } from '@angular/router';
     DashboardModule,
     ProfileModule,
     EcosystemModule,
+    QuoteRequestModule,
     NotificationsModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     NgxPermissionsModule.forRoot(),
