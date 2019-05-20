@@ -16,11 +16,11 @@ export class InvoiceAgriculturalProductComponent extends BaseProductInvoice {
     super(dialogRef, data, 'agricultural');
   }
 
-  setAverageAmountPerPackage() {
-    if (this.product.total_weight && this.product.quantity) {
-      this.product.package_weight = Number((this.product.total_weight / this.product.quantity).toFixed(2));
+  setPackageAmount() {
+    if (this.product.total_weight && this.product.package_weight) {
+      this.product.quantity = Math.ceil(Number(this.product.total_weight / this.product.package_weight));
     } else {
-      this.product.package_weight = undefined;
+      this.product.quantity = undefined;
       this.product.package_price = undefined;
     }
   }
