@@ -18,13 +18,6 @@ export const ROUTES: RouteInfo[] = [
     type: 'link',
     icontype: 'dashboard'
   },
-  // {
-  //   path: '/transaction/list',
-  //   title: 'Transactions',
-  //   type: 'link',
-  //   icontype: 'compare_arrows',
-  //   neededPermission: 'list-transactions'
-  // },
   {
     path: '/order/list',
     title: 'Orders',

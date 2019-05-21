@@ -19,14 +19,9 @@ import { UserService } from './api/user.service';
 import { ApiService } from './api/api.service';
 import { JwtService } from './authentication/jwt.service';
 import { EcosystemService } from './api/ecosystem.service';
-import { TransactionService } from './api/transaction.service';
 import { OrderService } from './api/order.service';
 import { InvoiceService } from './api/invoice.service';
 import { ProductService } from './api/product.service';
-import { ProformaInvoiceService } from './api/proforma-invoice.service';
-import { ChatService } from './api/chat.service';
-import { QuoteRequestService } from './api/quote-request.service';
-import { PurchaseOrderService } from './api/purchase-order.service';
 import { AlertsService } from './alerts.service';
 
 @NgModule({
@@ -45,15 +40,10 @@ import { AlertsService } from './alerts.service';
     ApiService,
     UserService,
     EcosystemService,
-    TransactionService,
     OrderService,
     InvoiceService,
     ProductService,
-    QuoteRequestService,
     AlertsService,
-    ProformaInvoiceService,
-    PurchaseOrderService,
-    ChatService,
     StepperService,
     {
       provide: HttpClient,

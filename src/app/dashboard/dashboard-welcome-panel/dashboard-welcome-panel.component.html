@@ -32,7 +32,6 @@
           <li class="step" *ngIf="currentUser.roles[0] === 'seller'">
             <a data-toggle="tab" class="label" href="#receive-po">Orders</a>
           </li>
-          <!-- <li class="step" *ngxPermissionsOnly="['list-transactions']"><a data-toggle="tab" class="label" href="#make-transaction">Make Transaction</a></li> -->
         </ul>
       </div>
       <div class="panel-right">
@@ -136,15 +135,6 @@
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/order/list">Go to Orders</button>
           </div>
-          <!-- <div class="tab-pane" id="make-transaction" *ngxPermissionsOnly="['list-transactions']">
-            <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
-            <p class="panel-title">Create a transaction!</p>
-            <p class="normal-text-bold">
-              Create a digital and dependable transaction process from the first quote request until the transaction
-              is complete for the purchase and sale of agricultural produce.
-            </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/transaction/list">Create Transaction</button>
-          </div> -->
         </div>
       </div>
     </div>

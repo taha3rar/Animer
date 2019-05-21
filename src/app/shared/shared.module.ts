@@ -8,7 +8,6 @@ import { RoundUpPipe } from './pipes/roundup.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderListComponent } from './components/order-list/order-list.component';
-import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
 import { BaseListComponent } from './components/base-list/base-list.component';
@@ -31,7 +30,6 @@ import { UnauthorizedPageComponent } from './components/unauthorized-page/unauth
     RoundUpPipe,
     InvoiceListComponent,
     OrderListComponent,
-    TransactionsListComponent,
     TransactionDocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
@@ -50,7 +48,6 @@ import { UnauthorizedPageComponent } from './components/unauthorized-page/unauth
     RoundUpPipe,
     InvoiceListComponent,
     OrderListComponent,
-    TransactionsListComponent,
     TransactionDocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,

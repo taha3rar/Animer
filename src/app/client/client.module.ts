@@ -10,7 +10,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClientGeneratorComponent } from './client-generator/client-generator.component';
 import { ClientComponent } from './client/client.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
-import { ClientTransactionsComponent } from './client-transactions/client-transactions.component';
 import { ClientOrdersComponent } from './client-orders/client-orders.component';
 import { ClientInvoicesComponent } from './client-invoices/client-invoices.component';
 import { ClientDocumentsComponent } from './client-documents/client-documents.component';
@@ -19,7 +18,6 @@ import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
-import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 import { CurrentUserResolver } from './resolvers/current-user.resolver';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -44,7 +42,6 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     ClientGeneratorComponent,
     ClientComponent,
     ClientProfileComponent,
-    ClientTransactionsComponent,
     ClientOrdersComponent,
     ClientInvoicesComponent,
     ClientDocumentsComponent
@@ -56,7 +53,6 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     EcosystemListResolver,
     OrderListResolver,
     InvoiceListResolver,
-    TransactionListResolver,
     UserDocumentListResolver
   ]
 })
