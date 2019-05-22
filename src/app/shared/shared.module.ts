@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
+import { QuoteRequestListComponent } from './components/quote-request-list/quote-request-list.component';
 import { BaseListComponent } from './components/base-list/base-list.component';
 import { GooglePlacesDirective } from './directives/google-places.directive';
 import { BaseNavigationComponent } from './components/base-navigation/base-navigation.component';
@@ -30,6 +31,7 @@ import { UnauthorizedPageComponent } from './components/unauthorized-page/unauth
     RoundUpPipe,
     InvoiceListComponent,
     OrderListComponent,
+    QuoteRequestListComponent,
     TransactionDocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
@@ -48,6 +50,7 @@ import { UnauthorizedPageComponent } from './components/unauthorized-page/unauth
     RoundUpPipe,
     InvoiceListComponent,
     OrderListComponent,
+    QuoteRequestListComponent,
     TransactionDocumentListComponent,
     UserDataComponent,
     UserDocumentComponent,
