@@ -19,6 +19,7 @@ import { QrAgriculturalProductComponent } from './quote-request-generator/quote-
 import { QrProcessedProductComponent } from './quote-request-generator/quote-request-generator-form/qr-processed-product/qr-processed-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { QuotationViewComponent } from './quotation-view/quotation-view.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     QuoteRequestGeneratorReviewComponent,
     QuoteRequestGeneratorSuppliersComponent,
     QrAgriculturalProductComponent,
-    QrProcessedProductComponent
+    QrProcessedProductComponent,
+    QuotationViewComponent
   ],
 
   entryComponents: [QrAgriculturalProductComponent, QrProcessedProductComponent],

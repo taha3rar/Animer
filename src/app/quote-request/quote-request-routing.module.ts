@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
 import { QuoteRequestsListComponent } from './quote-requests-list/quote-requests-list.component';
+import { QuotationViewComponent } from './quotation-view/quotation-view.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -14,6 +15,10 @@ const routes: Routes = [
     {
       path: 'quote-request/generator',
       component: QuoteRequestGeneratorComponent
+    },
+    {
+      path: 'quote-request/quotation/:id',
+      component: QuotationViewComponent
     }
   ])
 ];
