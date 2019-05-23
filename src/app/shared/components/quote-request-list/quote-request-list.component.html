@@ -31,7 +31,10 @@
       <td *ngIf="isBuyer">
         4
       </td>
-      <td><div class="status status-sent">Quote Request Sent</div></td>
+      <td>
+        <div *ngIf="isBuyer" class="status status-orange">Quote Request Sent</div>
+        <div *ngIf="!isBuyer" class="status status-orange">Quote Request Received</div>
+      </td>
       <td class="text-right">
         <button class="round-button-primary">
           <i class="material-icons">remove_red_eye</i>
@@ -59,7 +62,10 @@
       <td *ngIf="isBuyer">
         4
       </td>
-      <td><div class="status status-received">Quote Request Received</div></td>
+      <td>
+        <div *ngIf="isBuyer" class="status status-blue">Quotation Received</div>
+        <div *ngIf="!isBuyer" class="status status-blue">Quotation Sent</div>
+      </td>
       <td class="text-right">
         <button class="round-button-primary">
           <i class="material-icons">remove_red_eye</i>
@@ -83,7 +89,10 @@
       <td *ngIf="isBuyer">
         4
       </td>
-      <td><div class="status status-saved">Quote Request Saved</div></td>
+      <td>
+        <div *ngIf="isBuyer" class="status status-purple">Quote Request Saved</div>
+        <div *ngIf="!isBuyer" class="status status-purple">Quotation Saved</div>
+      </td>
       <td class="text-right">
         <button class="round-button-primary">
           <i class="material-icons">remove_red_eye</i>
