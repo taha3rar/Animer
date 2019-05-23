@@ -1,9 +1,12 @@
+import { SharedModule } from '@app/shared';
+// tslint:disable-next-line:max-line-length
+import { QuotationGeneratorQuotationComponent } from './quotation-generator/quotation-generator-quotation/quotation-generator-quotation.component';
+import { QuotationGeneratorComponent } from './quotation-generator/quotation-generator.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { QuoteRequestRoutingModule } from './quote-request-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '@app/shared';
 import { QuoteRequestsListComponent } from './quote-requests-list/quote-requests-list.component';
 import { QuoteRequestGeneratorComponent } from './quote-request-generator/quote-request-generator.component';
 // tslint:disable-next-line:max-line-length
@@ -31,6 +34,8 @@ import { QuotationViewComponent } from './quotation-view/quotation-view.componen
     QrAgriculturalProductComponent,
     QrProcessedProductComponent,
     QuotationViewComponent
+    QuotationGeneratorComponent,
+    QuotationGeneratorQuotationComponent
   ],
 
   entryComponents: [QrAgriculturalProductComponent, QrProcessedProductComponent],
