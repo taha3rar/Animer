@@ -18,6 +18,7 @@ import { QrAgriculturalProductComponent } from './quote-request-generator/quote-
 // tslint:disable-next-line:max-line-length
 import { QrProcessedProductComponent } from './quote-request-generator/quote-request-generator-form/qr-processed-product/qr-processed-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     QuoteRequestRoutingModule,
     RouterModule,
+    NgxPermissionsModule.forRoot(),
     FormsModule
   ]
 })
