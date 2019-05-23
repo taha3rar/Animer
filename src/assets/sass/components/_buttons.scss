@@ -1166,3 +1166,20 @@ select.custom-select {
     font-size: 1.6rem;
   }
 }
+
+.remove {
+  background-color: transparent;
+  border: 1px solid $red-color;
+  color: $red-color;
+  margin-right: 1rem;
+}
+
+.edit {
+  background-color: transparent;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+
+  i {
+    font-size: 1.6rem;
+  }
+}

@@ -1,0 +1,94 @@
+<div class="panel panel-tab">
+  <div class="panel-body">
+    <div class="panel-header">
+      <div><p>Choose suppliers from</p></div>
+      <div class="center-c pull-left mt-3 mb-2">
+        <button
+          class="btn-primary-transp ml-0 active"
+          (click)="toggleTable('clients')"
+          [class.active]="toggledTable === 'clients'"
+        >
+          Clients
+        </button>
+        <p class="ml-2 mr-2">OR</p>
+        <button
+          class="btn-primary-transp"
+          (click)="toggleTable('ecosystems')"
+          [class.active]="toggledTable === 'ecosystems'"
+        >
+          Ecosystems
+        </button>
+      </div>
+    </div>
+    <div class="mt-4 ml-4">
+      <p class="heading-2">Clients list</p>
+      <table class="table table-borderless" id="clients-table" [hidden]="toggledTable === 'ecosystems'">
+        <thead>
+          <tr>
+            <th>Choose Client</th>
+            <th>ID</th>
+            <th>Company</th>
+            <th>Contact Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="checkbox" class="checkbox" id="2" /><label class="checkbox_label" for="2"
+                ><span class="form_checkbox_btn"></span
+              ></label>
+            </td>
+            <td>ID</td>
+            <td>Company</td>
+            <td>Contact Name</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" class="checkbox" id="3" /><label class="checkbox_label" for="3"
+                ><span class="form_checkbox_btn"></span
+              ></label>
+            </td>
+            <td>ID</td>
+            <td>Company</td>
+            <td>Contact Name</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-borderless" id="ecosystems-table" [hidden]="toggledTable === 'clients'">
+        <thead>
+          <tr>
+            <th>Choose Ecosystem</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Members</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="radio" class="form_radio" id="11" name="seller" />
+              <label for="11" class="form_radio_label">
+                <span class="form_radio_btn"></span>
+              </label>
+            </td>
+            <td>ID</td>
+            <td>Company</td>
+            <td>Contact Name</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="radio" class="form_radio" id="22" name="seller" />
+              <label for="22" class="form_radio_label">
+                <span class="form_radio_btn"></span>
+              </label>
+            </td>
+            <td>ID</td>
+            <td>Company</td>
+            <td>Contact Name</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<button class="bttn-primary pull right next-step">Next Step &rarr;</button>

@@ -1,3 +1,4 @@
+import { QuoteRequestGeneratorComponent } from './quote-request-generator/quote-request-generator.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,6 +10,10 @@ const routes: Routes = [
     {
       path: 'quote-request/list',
       component: QuoteRequestsListComponent
+    },
+    {
+      path: 'quote-request/generator',
+      component: QuoteRequestGeneratorComponent
     }
   ])
 ];

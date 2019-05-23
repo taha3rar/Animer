@@ -1,0 +1,34 @@
+@import "../../../../assets/sass/abstracts/variables";
+
+.panel-header {
+  display: flex;
+  flex-direction: column;
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
+  padding: 1rem 2.5rem;
+  margin-top: -1.5rem;
+
+  p:nth-child(2) {
+    font-size: 1.35rem;
+  }
+
+  button {
+    width: 16.3rem;
+  }
+
+  button.active {
+    background-color: $primary-color;
+    color: white;
+  }
+}
+
+.panel-header::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.center-c {
+  display: flex;
+  align-items: center;
+}

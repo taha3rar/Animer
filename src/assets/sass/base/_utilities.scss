@@ -167,3 +167,13 @@
     color: #7c31fe;
   }
 }
+
+.fl-c {
+  display: flex;
+  flex-direction: column;
+}
+
+.center-c {
+  display: flex;
+  align-items: center;
+}

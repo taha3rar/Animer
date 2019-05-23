@@ -1,0 +1,127 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="info">
+      <p class="heading-2">PRODUCTS</p>
+      <div>
+        <table class="table-blue">
+          <thead>
+            <tr>
+              <th>PRODUCT</th>
+              <th>PACKAGES</th>
+              <th>TOTAL AMOUNT</th>
+              <th>SPECIFICATIONS</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Green Coffee</td>
+              <td>1 (Box / 30.00 KG)</td>
+              <td>243,000 kg</td>
+              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</td>
+              <td class="text-center">
+                <button class="btn-circle remove"><i class="material-icons">remove</i></button>
+                <button class="btn-circle edit"><i class="material-icons">edit</i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="dropdown">
+          <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            Add New Product
+          </button>
+          <ul class="dropdown-menu">
+            <li><a (click)="openDialogAgricultural()">New Agricultural Product</a></li>
+            <li><a (click)="openDialogProcessed()">New Processed Product</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <div class="info">
+          <p class="heading-2 mb-3">COMMENTS</p>
+          <textarea
+            class="form-control"
+            name="comments"
+            id="comments"
+            rows="6"
+            placeholder="Type your comments here..."
+          ></textarea>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="info">
+          <p class="heading-2 mb-3">OTHER DETAILS</p>
+          <label for="currency">Receive quotation in- *</label>
+          <select id="currency" name="currency" class="form-control mb-3" required>
+            <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
+          </select>
+          <label for="validBy">Quote request is valid by</label>
+          <div class="input-group">
+            <input
+              id="valide_by"
+              class="form-control"
+              placeholder="dd/mm/yyyy"
+              name="ddp"
+              ngbDatepicker
+              #dp3="ngbDatepicker"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn glyphicon glyphicon-calendar"
+                style="position:0;"
+                (click)="dp3.toggle()"
+                type="button"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="info">
+      <p class="heading-2">TRADE PARTIES</p>
+      <div>
+        <p class="heading-3-blue">Buyer</p>
+        <div class="center-c mt-4">
+          <figure
+            class="img-circular img-circular-sm"
+            [style.background-image]="'url(../../../../assets/img/prof-img2.jpg)'"
+          ></figure>
+          <div class="fl-c ml-4">
+            <p class="normal-text-bold margin-none">User full name</p>
+            <p class="normal-text-bold margin-none">Company Name</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="heading-3-blue mt-5">Sellers</p>
+        <table class="table table-borderless">
+          <thead>
+            <tr>
+              <th>Contact Name</th>
+              <th>Company Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Justine Mutwou</td>
+              <td>Company A</td>
+            </tr>
+            <tr>
+              <td>Justine Mutwou</td>
+              <td>Company A</td>
+            </tr>
+            <tr>
+              <td>Justine Mutwou</td>
+              <td>Company A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="bttn-primary pull right next-step">Next Step &rarr;</button>

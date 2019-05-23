@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <h1 class="main-title btn-main margin-bottom-2"><a class="material-icons">keyboard_backspace</a> Quote Requests</h1>
+  <!-- Main Generator -->
+  <div *ngIf="!isDraft" class="stepper-wrapper">
+    <div class="stepper">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a data-toggle="tab" class="label" href="#suppliers"> <span class="round-tab">1</span>Choose suppliers</a>
+        </li>
+        <li class="disabled">
+          <a data-toggle="tab" class="label" href="#quoteRequest"><span class="round-tab">2</span>Fill quote request</a>
+        </li>
+        <li class="disabled">
+          <a data-toggle="tab" class="label" href="#review"> <span class="round-tab">3</span> Review and Confirm </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="suppliers">
+          <app-quote-request-generator-suppliers></app-quote-request-generator-suppliers>
+        </div>
+        <div class="tab-pane" id="quoteRequest">
+          <app-quote-request-generator-form></app-quote-request-generator-form>
+        </div>
+        <div class="tab-pane" id="review">
+          <app-quote-request-generator-review></app-quote-request-generator-review>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
