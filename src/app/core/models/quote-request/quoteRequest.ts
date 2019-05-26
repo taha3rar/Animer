@@ -11,6 +11,7 @@ export class QuoteRequest {
     city: String;
     zipcode: String;
     country: String;
+    numericId: Number;
   };
   sellers: [
     {
@@ -25,10 +26,11 @@ export class QuoteRequest {
       city: String;
       zipcode: String;
       country: String;
+      numericId: Number;
     }
   ];
   currency: String;
-  comments: String;
+  buyer_comments: String;
   valid_by: Date;
   draft: Boolean;
   products: [
@@ -55,17 +57,10 @@ export class QuoteRequest {
   document_weight_unit: String;
   total_packages: Number;
   total_weight: Number;
-  quotations: [
-    {
-      _id: String;
-      total_price: Number;
-      user_id: String;
-      date_created: Date;
-      status: {
-        buyer: String;
-        seller: String;
-      };
-    }
-  ];
+  quotations: {
+    amount: Number;
+    best_offer: Number;
+  };
   status: String;
+  date_created: Date;
 }
