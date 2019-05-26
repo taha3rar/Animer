@@ -1,7 +1,9 @@
 <div class="panel panel-tab">
   <div class="panel-body">
     <div class="panel-header">
-      <div><p>Choose suppliers from</p></div>
+      <div>
+        <p>Choose suppliers from</p>
+      </div>
       <div class="center-c pull-left mt-3 mb-2">
         <button
           class="btn-primary-transp ml-0 active"
@@ -32,25 +34,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let seller of buyer_sellers; let i = index">
             <td>
               <input type="checkbox" class="checkbox" id="2" /><label class="checkbox_label" for="2"
                 ><span class="form_checkbox_btn"></span
               ></label>
             </td>
-            <td>ID</td>
-            <td>Company</td>
-            <td>Contact Name</td>
-          </tr>
-          <tr>
-            <td>
-              <input type="checkbox" class="checkbox" id="3" /><label class="checkbox_label" for="3"
-                ><span class="form_checkbox_btn"></span
-              ></label>
-            </td>
-            <td>ID</td>
-            <td>Company</td>
-            <td>Contact Name</td>
+            <td>{{ seller.numericId }}</td>
+            <td>{{ seller.company_name || 'N/A' }}</td>
+            <td>{{ seller.first_name }} {{ seller.last_name }}</td>
           </tr>
         </tbody>
       </table>
@@ -64,27 +56,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let ecosystem of buyer_ecosystems; let i = index">
             <td>
               <input type="radio" class="form_radio" id="11" name="seller" />
               <label for="11" class="form_radio_label">
                 <span class="form_radio_btn"></span>
               </label>
             </td>
-            <td>ID</td>
-            <td>Company</td>
-            <td>Contact Name</td>
-          </tr>
-          <tr>
-            <td>
-              <input type="radio" class="form_radio" id="22" name="seller" />
-              <label for="22" class="form_radio_label">
-                <span class="form_radio_btn"></span>
-              </label>
-            </td>
-            <td>ID</td>
-            <td>Company</td>
-            <td>Contact Name</td>
+            <td>{{ ecosystem.numericId }}</td>
+            <td>{{ ecosystem.name }}</td>
+            <td>{{ ecosystem.participants.length }}</td>
           </tr>
         </tbody>
       </table>

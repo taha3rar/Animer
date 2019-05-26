@@ -24,6 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
 import { QuotationQuoteRequestComponent } from './quotation-generator/quotation-quote-request/quotation-quote-request.component';
+import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
+import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { QuotationQuoteRequestComponent } from './quotation-generator/quotation-
     RouterModule,
     NgxPermissionsModule.forRoot(),
     FormsModule
-  ]
+  ],
+  providers: [QuoteRequestClientsResolver, QuoteRequestEcosystemsResolver]
 })
 export class QuoteRequestModule {}
