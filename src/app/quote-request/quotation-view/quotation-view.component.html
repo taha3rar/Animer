@@ -1,4 +1,4 @@
-<h1 class="main-title btn-main margin-bottom-2" (click)="back()">
+<h1 *ngIf="!isGenerator" class="main-title btn-main margin-bottom-2" (click)="back()">
   <a class="material-icons">keyboard_backspace</a> Quote Requests
 </h1>
 <div class="panel panel-tab">
@@ -103,3 +103,6 @@
     </div>
   </div>
 </div>
+<button *ngIf="isGenerator" class="bttn-primary pull-right next-step">
+  Submit
+</button>

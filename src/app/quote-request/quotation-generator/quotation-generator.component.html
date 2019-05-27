@@ -6,7 +6,7 @@
       <ul class="nav nav-tabs">
         <li class="active">
           <a data-toggle="tab" class="label" href="#quoteRequest">
-            <span class="round-tab">1</span>Review quote request</a
+            <span class="round-tab">1</span>Quote request received</a
           >
         </li>
         <li class="disabled">
@@ -24,7 +24,9 @@
         <div class="tab-pane" id="quotation">
           <app-quotation-generator-quotation></app-quotation-generator-quotation>
         </div>
-        <div class="tab-pane" id="review"></div>
+        <div class="tab-pane" id="review">
+          <app-quotation-view [isGenerator]="true"></app-quotation-view>
+        </div>
       </div>
     </div>
   </div>

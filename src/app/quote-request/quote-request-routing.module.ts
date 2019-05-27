@@ -18,13 +18,12 @@ const routes: Routes = [
       component: QuoteRequestGeneratorComponent
     },
     {
-<<<<<<< HEAD
       path: 'quote-request/quotation/:id',
       component: QuotationViewComponent
-=======
+    },
+    {
       path: 'quote-request/quotation-generator',
       component: QuotationGeneratorComponent
->>>>>>> Quotation generator 1st and 2nd steps
     }
   ])
 ];

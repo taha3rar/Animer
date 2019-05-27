@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./quotation-view.component.scss']
 })
 export class QuotationViewComponent implements OnInit {
+  @Input() isGenerator = false;
+
   constructor(private location: Location) {}
 
   ngOnInit() {}

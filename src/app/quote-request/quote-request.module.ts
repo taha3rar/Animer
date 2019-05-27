@@ -34,7 +34,7 @@ import { QuotationQuoteRequestComponent } from './quotation-generator/quotation-
     QuoteRequestGeneratorSuppliersComponent,
     QrAgriculturalProductComponent,
     QrProcessedProductComponent,
-    QuotationViewComponent
+    QuotationViewComponent,
     QuotationGeneratorComponent,
     QuotationGeneratorQuotationComponent,
     QuotationQuoteRequestComponent
