@@ -1,8 +1,12 @@
 import { QrProcessedProductComponent } from './qr-processed-product/qr-processed-product.component';
 import { QrAgriculturalProductComponent } from './qr-agricultural-product/qr-agricultural-product.component';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { currencies } from '@app/shared/helpers/currencies';
 import { MatDialogConfig, MatDialog } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '@app/core/models/user/user';
+import { FormGroup } from '@angular/forms';
+import { QuoteRequestDataService } from '../quote-request-data.service';
 
 @Component({
   selector: 'app-quote-request-generator-form',
@@ -10,11 +14,23 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
   styleUrls: ['./quote-request-generator-form.component.scss']
 })
 export class QuoteRequestGeneratorFormComponent implements OnInit {
+  @Input() quoteRequestForm: FormGroup;
   currencies = currencies;
+  buyer: User;
+  targeted_sellers: any[];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private quoteRequestDataService: QuoteRequestDataService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.quoteRequestDataService.currentTargeted_sellers.subscribe(targeted_sellers => {
+      this.targeted_sellers = targeted_sellers;
+    });
+    this.buyer = this.route.snapshot.data['buyer'];
+  }
 
   openDialogAgricultural(index?: number): void {
     const data = {

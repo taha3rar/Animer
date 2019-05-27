@@ -19,12 +19,10 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="suppliers">
-          <app-quote-request-generator-suppliers
-            (messageEvent)="receiveSellersList($event)"
-          ></app-quote-request-generator-suppliers>
+          <app-quote-request-generator-suppliers></app-quote-request-generator-suppliers>
         </div>
         <div class="tab-pane" id="quoteRequest">
-          <app-quote-request-generator-form></app-quote-request-generator-form>
+          <app-quote-request-generator-form [quoteRequestForm]="quoteRequestForm"></app-quote-request-generator-form>
         </div>
         <div class="tab-pane" id="review">
           <app-quote-request-generator-review></app-quote-request-generator-review>

@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Route, ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { Ecosystem } from '@app/core/models/ecosystem';
 import { User } from '@app/core/models/user/user';
+import { QuoteRequestDataService } from '../quote-request-data.service';
 
 @Component({
   selector: 'app-quote-request-generator-suppliers',
@@ -15,9 +16,8 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
   buyer_ecosystems: Ecosystem[];
   targeted_sellers: any[] = [];
   targeted_ecosystem = new Ecosystem();
-  @Output() messageEvent = new EventEmitter<any[]>();
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private quoteRequestDataService: QuoteRequestDataService) {}
 
   ngOnInit() {
     this.buyer_ecosystems = this.route.snapshot.data['ecosystems'];
@@ -37,7 +37,7 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
       const index = this.targeted_sellers.findIndex(x => x._id === seller._id);
       this.targeted_sellers.splice(index, 1);
     }
-    this.validateSellerList();
+    this.quoteRequestDataService.setTargetedSellers(this.targeted_sellers);
   }
 
   pickEcosystem(ecosystem: Ecosystem): void {
@@ -66,10 +66,6 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
 
   disablingChoice(seller: User): Boolean {
     return this.isTargeted(seller) && this.targeted_sellers.length === 1;
-  }
-
-  validateSellerList(): void {
-    this.messageEvent.emit(this.targeted_sellers);
   }
 
   toggleTable(table: string): void {

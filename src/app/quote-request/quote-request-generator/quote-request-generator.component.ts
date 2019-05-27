@@ -18,7 +18,6 @@ export class QuoteRequestGeneratorComponent implements OnInit {
   quoteRequestForm: FormGroup;
   draftQuoteRequest: QuoteRequest;
   buyer: User;
-  targeted_sellers: any[];
 
   constructor(
     private stepperService: StepperService,
@@ -29,6 +28,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
 
   ngOnInit() {
     this.stepperService.stepperInit();
+    console.log(this.route.snapshot.data['buyer']);
     this.buyer = this.getSmallBuyer(this.route.snapshot.data['buyer']);
     this.quoteRequestForm = this.formBuilder.group({
       _id: Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest._id,
@@ -96,10 +96,6 @@ export class QuoteRequestGeneratorComponent implements OnInit {
         return false;
       }
     });
-  }
-
-  receiveSellersList($event: any[]) {
-    this.targeted_sellers = $event;
   }
 
   back() {

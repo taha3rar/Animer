@@ -88,11 +88,13 @@
         <div class="center-c mt-4">
           <figure
             class="img-circular img-circular-sm"
-            [style.background-image]="'url(../../../../assets/img/prof-img2.jpg)'"
+            [ngStyle]="{ 'background-image': 'url(' + buyer.personal_information.profile_picture + ')' }"
           ></figure>
           <div class="fl-c ml-4">
-            <p class="normal-text-bold margin-none">User full name</p>
-            <p class="normal-text-bold margin-none">Company Name</p>
+            <p class="normal-text-bold margin-none">
+              {{ buyer.personal_information.first_name }} {{ buyer.personal_information.last_name }}
+            </p>
+            <p class="normal-text-bold margin-none">{{ buyer.company_information.company_name }}</p>
           </div>
         </div>
       </div>
@@ -106,17 +108,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Justine Mutwou</td>
-              <td>Company A</td>
-            </tr>
-            <tr>
-              <td>Justine Mutwou</td>
-              <td>Company A</td>
-            </tr>
-            <tr>
-              <td>Justine Mutwou</td>
-              <td>Company A</td>
+            <tr *ngFor="let seller of targeted_sellers; let i = index">
+              <td>{{ seller.first_name }} {{ seller.last_name }}</td>
+              <td>{{ seller.company_name }}</td>
             </tr>
           </tbody>
         </table>

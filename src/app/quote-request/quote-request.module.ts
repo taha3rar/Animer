@@ -27,6 +27,7 @@ import { QuotationQuoteRequestComponent } from './quotation-generator/quotation-
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
 import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resolver';
+import { QuoteRequestDataService } from './quote-request-generator/quote-request-data.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,11 @@ import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resol
     NgxPermissionsModule.forRoot(),
     FormsModule
   ],
-  providers: [QuoteRequestClientsResolver, QuoteRequestEcosystemsResolver, QuoteRequestBuyerResolver]
+  providers: [
+    QuoteRequestClientsResolver,
+    QuoteRequestEcosystemsResolver,
+    QuoteRequestBuyerResolver,
+    QuoteRequestDataService
+  ]
 })
 export class QuoteRequestModule {}
