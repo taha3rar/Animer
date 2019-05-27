@@ -1,3 +1,4 @@
+import { QuotationGeneratorComponent } from './quotation-generator/quotation-generator.component';
 import { QuoteRequestGeneratorComponent } from './quote-request-generator/quote-request-generator.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,8 +18,13 @@ const routes: Routes = [
       component: QuoteRequestGeneratorComponent
     },
     {
+<<<<<<< HEAD
       path: 'quote-request/quotation/:id',
       component: QuotationViewComponent
+=======
+      path: 'quote-request/quotation-generator',
+      component: QuotationGeneratorComponent
+>>>>>>> Quotation generator 1st and 2nd steps
     }
   ])
 ];

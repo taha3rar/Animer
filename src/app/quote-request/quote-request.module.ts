@@ -23,6 +23,7 @@ import { QrProcessedProductComponent } from './quote-request-generator/quote-req
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
+import { QuotationQuoteRequestComponent } from './quotation-generator/quotation-quote-request/quotation-quote-request.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { QuotationViewComponent } from './quotation-view/quotation-view.componen
     QrProcessedProductComponent,
     QuotationViewComponent
     QuotationGeneratorComponent,
-    QuotationGeneratorQuotationComponent
+    QuotationGeneratorQuotationComponent,
+    QuotationQuoteRequestComponent
   ],
 
   entryComponents: [QrAgriculturalProductComponent, QrProcessedProductComponent],

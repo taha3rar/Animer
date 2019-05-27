@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StepperService } from '@app/core/forms/stepper.service';
 
 @Component({
   selector: 'app-quotation-generator',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quotation-generator.component.scss']
 })
 export class QuotationGeneratorComponent implements OnInit {
-  constructor() {}
+  constructor(private stepperService: StepperService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.stepperService.stepperInit();
+  }
 }
