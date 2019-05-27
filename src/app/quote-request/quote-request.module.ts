@@ -26,6 +26,7 @@ import { QuotationViewComponent } from './quotation-view/quotation-view.componen
 import { QuotationQuoteRequestComponent } from './quotation-generator/quotation-quote-request/quotation-quote-request.component';
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
+import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resolver';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,6 @@ import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosys
     NgxPermissionsModule.forRoot(),
     FormsModule
   ],
-  providers: [QuoteRequestClientsResolver, QuoteRequestEcosystemsResolver]
+  providers: [QuoteRequestClientsResolver, QuoteRequestEcosystemsResolver, QuoteRequestBuyerResolver]
 })
 export class QuoteRequestModule {}

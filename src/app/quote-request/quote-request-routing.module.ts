@@ -9,7 +9,7 @@ import { QuoteRequestsListComponent } from './quote-requests-list/quote-requests
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
-
+import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resolver';
 const routes: Routes = [
   Shell.childRoutes([
     {
@@ -20,6 +20,7 @@ const routes: Routes = [
       path: 'quote-request/generator',
       component: QuoteRequestGeneratorComponent,
       resolve: {
+        buyer: QuoteRequestBuyerResolver,
         clients: QuoteRequestClientsResolver,
         ecosystems: QuoteRequestEcosystemsResolver
       },
