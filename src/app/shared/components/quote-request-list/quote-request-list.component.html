@@ -13,88 +13,36 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr *ngFor="let quoteRequest of (quoteRequests | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
       <td class="text-center">
-        111
+        {{ quoteRequest.numericId }}
       </td>
-      <td>20/05/2019</td>
-      <td>Stephen Suter</td>
+      <td>{{ quoteRequest.date_created | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ quoteRequest.buyer.first_name }} {{ quoteRequest.buyer.last_name }}</td>
       <td>
-        <span class="icon-text">
-          Multiple <i class="material-icons" matTooltip="Green Coffee, Wheat">help_outline</i></span
+        <span *ngIf="quoteRequest.products.length > 1" class="icon-text"
+          >Multiple <i class="material-icons" matTooltip="Many products">help_outline</i></span
         >
+        <span *ngIf="quoteRequest.products.length == 1"> {{ quoteRequest.products[0].produce }} </span>
       </td>
-      <td>10,000.00 KG</td>
+      <td>Amount not implemented yet</td>
       <td *ngIf="isBuyer">
-        20
+        {{ quoteRequest.sellers.length }}
       </td>
       <td *ngIf="isBuyer">
-        4
+        Quotes not implemented yet
       </td>
       <td>
-        <div *ngIf="isBuyer" class="status status-orange">Quote Request Sent</div>
-        <div *ngIf="!isBuyer" class="status status-orange">Quote Request Received</div>
+        <div *ngIf="isBuyer" class="status status-orange">{{ quoteRequest.status }}</div>
+        <div *ngIf="!isBuyer" class="status status-orange">{{ quoteRequest.status }}</div>
       </td>
       <td class="text-right">
-        <button class="round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">
-        222
-      </td>
-      <td>20/05/2019</td>
-      <td>Stephen Suter</td>
-      <td>
-        <span class="icon-text">
-          Multiple <i class="material-icons" matTooltip="Green Coffee, Wheat">help_outline</i></span
+        <button
+          *ngIf="userId == quoteRequest.buyer._id && quoteRequest.draft"
+          class="round-button-primary"
+          data-toggle="stepper"
+          [routerLink]="['/quote-request/generator', order._id]"
         >
-      </td>
-      <td>10,000.00 KG</td>
-      <td *ngIf="isBuyer">
-        20
-      </td>
-      <td *ngIf="isBuyer">
-        4
-      </td>
-      <td>
-        <div *ngIf="isBuyer" class="status status-blue">Quotation Received</div>
-        <div *ngIf="!isBuyer" class="status status-blue">Quotation Sent</div>
-      </td>
-      <td class="text-right">
-        <button class="round-button-primary">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-        <button class="round-button-red">
-          <i class="material-icons">delete</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center">
-        333
-      </td>
-      <td>20/05/2019</td>
-      <td>Stephen Suter</td>
-      <td>Green Coffee</td>
-      <td>10,000.00 KG</td>
-      <td *ngIf="isBuyer">
-        20
-      </td>
-      <td *ngIf="isBuyer">
-        4
-      </td>
-      <td>
-        <div *ngIf="isBuyer" class="status status-purple">Quote Request Saved</div>
-        <div *ngIf="!isBuyer" class="status status-purple">Quotation Saved</div>
-      </td>
-      <td class="text-right">
-        <button class="round-button-primary">
           <i class="material-icons">remove_red_eye</i>
         </button>
         <button class="round-button-red">
@@ -104,3 +52,5 @@
     </tr>
   </tbody>
 </table>
+
+<pagination-controls (pageChange)="page = $event"></pagination-controls>

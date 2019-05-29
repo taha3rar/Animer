@@ -3,6 +3,7 @@ import { BaseService } from '@app/core/api/base.service';
 import { Router } from '@angular/router';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { AuthenticationService } from '@app/core';
+import swal from 'sweetalert';
 
 export class ListOptions {
   deleteText: string;

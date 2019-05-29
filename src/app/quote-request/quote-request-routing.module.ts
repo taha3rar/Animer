@@ -10,11 +10,16 @@ import { QuotationViewComponent } from './quotation-view/quotation-view.componen
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
 import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resolver';
+import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
+
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'quote-request/list',
-      component: QuoteRequestsListComponent
+      component: QuoteRequestsListComponent,
+      resolve: {
+        quoteRequests: QuoteRequestListResolver
+      }
     },
     {
       path: 'quote-request/generator',

@@ -27,6 +27,7 @@ import { QuotationQuoteRequestComponent } from './quotation-generator/quotation-
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
 import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resolver';
+import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestDataService } from './quote-request-generator/quote-request-data.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -63,7 +64,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     QuoteRequestClientsResolver,
     QuoteRequestEcosystemsResolver,
     QuoteRequestBuyerResolver,
-    QuoteRequestDataService
+    QuoteRequestDataService,
+    QuoteRequestListResolver
   ]
 })
 export class QuoteRequestModule {}

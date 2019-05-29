@@ -11,7 +11,6 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quoteRequest';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { SellerQuoteRequest } from '@app/core/models/quote-request/seller-quoteRequest';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-quote-request-generator-form',
