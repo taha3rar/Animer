@@ -3,7 +3,7 @@
   <h2 translate class="modal-title">Add Agricultural Product</h2>
 </div>
 <div class="padding-all">
-  <form (keydown.enter)="$event.preventDefault()">
+  <form>
     <p class="heading-2">Product</p>
 
     <div class="form-row">
@@ -12,7 +12,6 @@
         <input
           type="text"
           id="product-name"
-          [(ngModel)]="productForm.produce"
           class="form-control"
           name="name"
           placeholder="Ex. Green coffee beans"
@@ -21,22 +20,14 @@
       </div>
       <div class="form-group col-md-6">
         <label for="variety">Variety *</label>
-        <input
-          type="text"
-          id="variety"
-          [(ngModel)]="productForm.variety"
-          class="form-control"
-          name="variety"
-          placeholder="Ex. Kona"
-          required
-        />
+        <input type="text" id="variety" class="form-control" name="variety" placeholder="Ex. Kona" required />
       </div>
     </div>
     <p class="heading-2">Amount</p>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="weight-unit">Weight Unit *</label>
-        <select id="weight-unit" [(ngModel)]="product.weight_unit" name="weight_unit" class="form-control" required>
+        <select id="weight-unit" name="weight_unit" class="form-control" required>
           <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
         </select>
       </div>
@@ -46,7 +37,6 @@
           type="number"
           min="0"
           id="total-amount"
-          [(ngModel)]="productForm.total_weight"
           name="total_weight"
           (ngModelChange)="setPackageAmount()"
           class="form-control"
@@ -62,7 +52,6 @@
         <input
           type="text"
           id="package-type"
-          [(ngModel)]="productForm.type_of_package"
           name="type_of_package"
           class="form-control"
           placeholder="Ex. Box"
@@ -76,7 +65,6 @@
           min="0"
           id="average-amount-packaged-product"
           name="package_weight"
-          [(ngModel)]="productForm.package_weight"
           class="form-control"
           (ngModelChange)="setPackageAmount()"
           placeholder="Ex. 2.5"
@@ -87,15 +75,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="variety">Total Number of Packages *</label>
-        <input
-          type="number"
-          id="total-packages"
-          [(ngModel)]="productForm.quantity"
-          name="quantity"
-          class="form-control"
-          required
-          disabled
-        />
+        <input type="number" id="total-packages" name="quantity" class="form-control" required disabled />
       </div>
     </div>
     <p class="heading-2">Specifications</p>
@@ -112,11 +92,8 @@
         ></textarea>
       </div>
     </div>
-    <button type="submit" *ngIf="!update" class="bttn-primary pull-right">
+    <button type="submit" class="bttn-primary pull-right">
       Add Product
-    </button>
-    <button type="submit" *ngIf="update" class="bttn-primary pull-right">
-      Update Product
     </button>
   </form>
 </div>
