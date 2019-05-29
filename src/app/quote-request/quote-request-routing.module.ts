@@ -1,4 +1,5 @@
 import { QuotationGeneratorComponent } from './quotation-generator/quotation-generator.component';
+import { QuoteRequestViewComponent } from './quote-request-view/quote-request-view.component';
 import { QuoteRequestGeneratorComponent } from './quote-request-generator/quote-request-generator.component';
 import { ConfirmationGuard } from './../shared/guards/confirmation.guard';
 import { NgModule } from '@angular/core';
@@ -50,6 +51,10 @@ const routes: Routes = [
     {
       path: 'quote-request/quotation-generator',
       component: QuotationGeneratorComponent
+    },
+    {
+      path: 'quote-request/:id',
+      component: QuoteRequestViewComponent
     }
   ])
 ];

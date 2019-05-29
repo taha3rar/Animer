@@ -31,6 +31,7 @@ import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolve
 import { QuoteRequestDataService } from './quote-request-generator/quote-request-data.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
+import { QuoteRequestViewComponent } from './quote-request-view/quote-request-view.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
     QuotationViewComponent,
     QuotationGeneratorComponent,
     QuotationGeneratorQuotationComponent,
-    QuotationQuoteRequestComponent
+    QuotationQuoteRequestComponent,
+    QuoteRequestViewComponent
   ],
 
   entryComponents: [QrAgriculturalProductComponent, QrProcessedProductComponent],
