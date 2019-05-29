@@ -22,6 +22,7 @@ import { EcosystemService } from './api/ecosystem.service';
 import { OrderService } from './api/order.service';
 import { InvoiceService } from './api/invoice.service';
 import { ProductService } from './api/product.service';
+import { QuoteRequestService } from './api/quote-request.service';
 import { AlertsService } from './alerts.service';
 
 @NgModule({
@@ -43,6 +44,7 @@ import { AlertsService } from './alerts.service';
     OrderService,
     InvoiceService,
     ProductService,
+    QuoteRequestService,
     AlertsService,
     StepperService,
     {

@@ -56,7 +56,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
       buyer_comments: [
         Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.buyer_comments
       ],
-      valid_buy: [
+      valid_by: [
         Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.valid_by,
         Validators.required
       ],
@@ -86,7 +86,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
   }
 
   confirm() {
-    if (!this.quoteRequestForm.dirty && (!this.quoteRequest.products && !this.quoteRequest.sellers)) {
+    if (this.quoteRequestForm.valid && this.quoteRequest.products && this.quoteRequest.sellers) {
       return true;
     }
     return swal({

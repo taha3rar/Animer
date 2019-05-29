@@ -11,6 +11,7 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quoteRequest';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { SellerQuoteRequest } from '@app/core/models/quote-request/seller-quoteRequest';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-quote-request-generator-form',
@@ -101,6 +102,9 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
 
   toReview() {
     this.quoteRequest = this.quoteRequestForm.value;
+    this.quoteRequest.buyer.contact_by = this.quoteRequestForm.value.buyer.contact_by.value;
+    this.quoteRequest.products = this.products;
+    this.quoteRequest.sellers = this.targeted_sellers;
     this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
   }
 }

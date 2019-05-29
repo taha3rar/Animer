@@ -100,14 +100,14 @@
                 <p>This field is required</p>
               </div>
             </div>
-            <div [ngClass]="showFieldStyle('valid_buy')">
+            <div [ngClass]="showFieldStyle('valid_by')">
               <label for="validBy">Quote request is valid by</label>
               <div class="input-group">
                 <input
                   id="valid_by"
                   class="form-control"
                   placeholder="dd/mm/yyyy"
-                  formControlName="valid_buy"
+                  formControlName="valid_by"
                   name="ddp"
                   ngbDatepicker
                   #dp3="ngbDatepicker"
@@ -121,7 +121,7 @@
                   ></button>
                 </div>
               </div>
-              <div class="help-block" *ngIf="isFieldInvalid('valid_buy')">
+              <div class="help-block" *ngIf="isFieldInvalid('valid_by')">
                 <p>This field is required</p>
               </div>
             </div>
@@ -169,14 +169,22 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls *ngIf="targeted_sellers?.length > 2" (pageChange)="page = $event"></pagination-controls>
+        <pagination-controls *ngIf="targeted_sellers?.length > 5" (pageChange)="page = $event"></pagination-controls>
       </div>
     </div>
   </div>
 </div>
-<button *ngIf="quoteRequestForm.valid" class="bttn-primary pull right next-step" (click)="toReview()">
+<button
+  [hidden]="!quoteRequestForm.valid || products.length <= 0"
+  class="bttn-primary pull right next-step"
+  (click)="toReview()"
+>
   Next Step &rarr;
 </button>
-<button *ngIf="!quoteRequestForm.valid" class="bttn-primary pull right" (click)="onSubmit(quoteRequestForm)">
+<button
+  [hidden]="quoteRequestForm.valid && products.length > 0"
+  class="bttn-primary pull right"
+  (click)="onSubmit(quoteRequestForm)"
+>
   Next Step &rarr;
 </button>

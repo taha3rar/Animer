@@ -2,26 +2,29 @@
   <div class="panel-body">
     <div class="padding-all">
       <div class="border-box">
-        <h2>QUOTE REQUEST <span> #324</span></h2>
+        <h2>QUOTE REQUEST</h2>
         <table>
           <tr>
             <td class="heading-4-blue">ISSUE DATE</td>
-            <td>22/05/2019</td>
+            <td>{{ quoteRequest?.date_created | date: 'dd/MM/yyyy' }}</td>
           </tr>
           <tr>
             <td class="heading-4-blue">VALID BY</td>
-            <td>22/06/2019</td>
+            <td>{{ quoteRequest?.valid_by | date: 'dd/MM/yyyy' }}</td>
           </tr>
         </table>
       </div>
       <div class="row" style="padding-top: 5rem;">
         <div class="col-md-9">
           <p class="heading-4-blue">ISSUED BY</p>
-          <p class="heading-4">Tony Stark</p>
-          <p class="heading-4">Homestead Farms</p>
-          <p class="heading-4">Patrick@agrium.com</p>
-          <p class="heading-4">Sugarland Road, Canada 25081</p>
-          <p class="heading-4">+972546233918</p>
+          <p class="heading-4">{{ quoteRequest?.buyer?.first_name }} {{ quoteRequest?.buyer?.last_name }}</p>
+          <p class="heading-4">{{ quoteRequest?.buyer?.company_name }}</p>
+          <p class="heading-4">{{ quoteRequest?.buyer?.email }}</p>
+          <p class="heading-4">
+            {{ quoteRequest?.buyer?.address }}, {{ quoteRequest?.buyer?.city }}, {{ quoteRequest?.buyer?.zipcode }},
+            {{ quoteRequest?.buyer?.country }}
+          </p>
+          <p class="heading-4">{{ quoteRequest?.buyer?.phone_number }}</p>
 
           <div style="padding-top: 2rem;">
             <p class="heading-2">PRODUCTS</p>
@@ -35,26 +38,42 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngFor="let product of quoteRequest?.products; let i = index">
                   <td>
-                    <span>
-                      Green Coffee/kona
+                    <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
+                      {{ product.produce }} / {{ product.variety }}
+                    </span>
+                    <span *ngIf="product.product_type == 'processed' && product.item_package_type">
+                      {{ product.produce }} / {{ product.item_measurement_amount | number: '1.2-2' }}
+                      {{ product.item_measurement_unit | uppercase }} / {{ product.item_package_type }}
+                    </span>
+                    <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
+                      {{ product.produce }}
                     </span>
                   </td>
                   <td>
-                    <span>
-                      100 (Box/ 30 kg)
+                    <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
+                      {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+                      {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
+                    </span>
+                    <span *ngIf="product.product_type == 'processed' && product.item_package_type">
+                      {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+                      {{ product.items_per_package | number: '1.0'
+                      }}<span *ngIf="product.items_per_package > 1"> items)</span
+                      ><span *ngIf="product.items_per_package == 0"> item)</span>
+                    </span>
+                    <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
+                      {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }})
                     </span>
                   </td>
                   <td>
-                    <span>
-                      5000 KG
-                    </span>
+                    <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
+                      >{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }}</span
+                    >
+                    <span *ngIf="product.product_type == 'processed'">N/A</span>
                   </td>
                   <td>
-                    <span>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
-                    </span>
+                    <span id="specification">{{ product.specification || 'N/A' }}</span>
                   </td>
                 </tr>
               </tbody>
@@ -65,13 +84,13 @@
               <div class="col-md-9">
                 <p class="heading-2">COMMENTS</p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                  {{ quoteRequest?.buyer_comments }}
                 </p>
               </div>
               <div class="col-md-3">
                 <div class="border-box center-items pull-right">
                   <p class="heading-2">CURRENCY</p>
-                  <p class="heading-4-blue">KES</p>
+                  <p class="heading-4-blue">{{ quoteRequest?.currency }}</p>
                 </div>
               </div>
             </div>
@@ -87,27 +106,28 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Justine Mutwou</td>
-                <td>Company A</td>
-              </tr>
-              <tr>
-                <td>Justine Mutwou</td>
-                <td>Company A</td>
-              </tr>
-              <tr>
-                <td>Justine Mutwou</td>
-                <td>Company A</td>
+              <tr
+                *ngFor="
+                  let seller of (quoteRequest.sellers | paginate: { itemsPerPage: 5, currentPage: page });
+                  let i = index
+                "
+              >
+                <td>{{ seller.first_name }} {{ seller.last_name }}</td>
+                <td>{{ seller.company_name || 'N/A' }}</td>
               </tr>
             </tbody>
           </table>
+          <pagination-controls
+            *ngIf="quoteRequest.sellers?.length > 5"
+            (pageChange)="page = $event"
+          ></pagination-controls>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div>
-  <button class="bttn-primary pull-right">
+  <button class="bttn-primary pull-right" (click)="submitQuoteRequest()" [disabled]="!quoteRequest.products">
     Send Quote Request
   </button>
 </div>

@@ -7,7 +7,7 @@ import { QuoteRequest } from '../models/quote-request/quoteRequest';
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService extends BaseService {
+export class QuoteRequestService extends BaseService {
   constructor(protected apiService: ApiService) {
     super(apiService, '/quote-request');
   }

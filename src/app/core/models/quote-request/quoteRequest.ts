@@ -21,7 +21,7 @@ export class QuoteRequest {
   sellers: SellerQuoteRequest[];
   currency: String;
   buyer_comments: String;
-  valid_by: Date;
+  valid_by: string;
   draft: Boolean;
   products: ProductQuoteRequest[];
   document_weight_unit: String;
@@ -32,5 +32,5 @@ export class QuoteRequest {
     best_offer: Number;
   };
   status: String;
-  date_created: Date;
+  date_created: string;
 }
