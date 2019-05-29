@@ -1,42 +1,38 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { currencies } from '@app/shared/helpers/currencies';
 import { measureUnits } from '@app/shared/helpers/measure';
+import { BaseProductQuoteRequest } from '../../base-product-quote-request';
 
 @Component({
   selector: 'app-qr-agricultural-product',
   templateUrl: './qr-agricultural-product.component.html',
   styleUrls: ['./qr-agricultural-product.component.scss']
 })
-export class QrAgriculturalProductComponent implements OnInit {
-  productForm: FormGroup;
+export class QrAgriculturalProductComponent extends BaseProductQuoteRequest implements OnInit {
   currencies = currencies;
   units = measureUnits;
   onUpdate: boolean;
+  productForm: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<QrAgriculturalProductComponent>,
-    private formBuilder: FormBuilder
-  ) {}
+    public formBuilder: FormBuilder
+  ) {
+    super(dialogRef, data, 'agricultural', formBuilder);
+  }
 
   ngOnInit() {
-    const product = this.data.product;
-    this.onUpdate = false;
-    if (this.data.product) {
-      this.onUpdate = true;
-    }
-    this.productForm = this.formBuilder.group({
-      product_type: ['agricultural', Validators.required],
-      produce: [product ? product.produce : undefined, Validators.required],
-      type_of_package: [product ? product.type_of_package : undefined, Validators.required],
-      quantity: [product ? product.quantity : 0, Validators.required],
-      variety: [product ? product.variety : undefined, Validators.required],
-      package_weight: [product ? product.package_weight : undefined, Validators.required],
-      weight_unit: [product ? product.weight_unit : undefined, Validators.required],
-      total_weight: [product ? product.total_weight : undefined, Validators.required]
-    });
+    this.productForm = super.getProductForm();
+    this.productForm.controls['item_package_type'].disable();
+    this.productForm.controls['item_measurement_amount'].disable();
+    this.productForm.controls['item_measurement_unit'].disable();
+    this.productForm.controls['items_per_package'].disable();
+    this.productForm.controls['total_amount_items'].disable();
+    this.onChanges();
+    this.formInput = this.productForm;
   }
 
   get product() {
@@ -60,9 +56,5 @@ export class QrAgriculturalProductComponent implements OnInit {
     } else {
       this.productForm.patchValue({ quantity: 0 });
     }
-  }
-
-  onExit() {
-    this.dialogRef.close();
   }
 }

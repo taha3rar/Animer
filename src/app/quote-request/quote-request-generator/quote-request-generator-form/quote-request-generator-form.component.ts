@@ -7,34 +7,51 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '@app/core/models/user/user';
 import { FormGroup } from '@angular/forms';
 import { QuoteRequestDataService } from '../quote-request-data.service';
+import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
+import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quoteRequest';
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
+import { SellerQuoteRequest } from '@app/core/models/quote-request/seller-quoteRequest';
 
 @Component({
   selector: 'app-quote-request-generator-form',
   templateUrl: './quote-request-generator-form.component.html',
   styleUrls: ['./quote-request-generator-form.component.scss']
 })
-export class QuoteRequestGeneratorFormComponent implements OnInit {
+export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent implements OnInit {
   @Input() quoteRequestForm: FormGroup;
   currencies = currencies;
   buyer: User;
-  targeted_sellers: any[];
+  targeted_sellers: SellerQuoteRequest[];
+  products: ProductQuoteRequest[] = [];
+  quoteRequest: QuoteRequest;
+  page = 1;
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private quoteRequestDataService: QuoteRequestDataService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
-    this.quoteRequestDataService.currentTargeted_sellers.subscribe(targeted_sellers => {
-      this.targeted_sellers = targeted_sellers;
+    this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
+      this.targeted_sellers = quoteRequest.sellers;
     });
     this.buyer = this.route.snapshot.data['buyer'];
+    this.formInput = this.quoteRequestForm;
+  }
+
+  openUpdateDialog(index: number) {
+    this.products[index].product_type === 'agricultural'
+      ? this.openDialogAgricultural(index)
+      : this.openDialogProcessed(index);
   }
 
   openDialogAgricultural(index?: number): void {
     const data = {
-      index: index
+      index: index,
+      product: this.products[index]
     };
 
     this.openDialog('720px', QrAgriculturalProductComponent, data);
@@ -42,7 +59,8 @@ export class QuoteRequestGeneratorFormComponent implements OnInit {
 
   openDialogProcessed(index?: number): void {
     const data = {
-      index: index
+      index: index,
+      product: this.products[index]
     };
 
     this.openDialog('765px', QrProcessedProductComponent, data);
@@ -57,6 +75,32 @@ export class QuoteRequestGeneratorFormComponent implements OnInit {
     dialogConfig.data = dialogData;
 
     const dialogRef = this.dialog.open(component, dialogConfig);
-    dialogRef.afterClosed().subscribe(data => {});
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        data.index >= 0 ? this.updateProduct(data.product, data.index) : this.addProduct(data.product);
+      }
+    });
+  }
+
+  addProduct(product: ProductQuoteRequest) {
+    this.products.push(product);
+  }
+
+  updateProduct(product: ProductQuoteRequest, index: number) {
+    this.products[index] = product;
+  }
+
+  deleteProduct(index: number) {
+    this.products.splice(index, 1);
+  }
+
+  uploadQuoteRequest() {
+    this.quoteRequest.products = this.products;
+    this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
+  }
+
+  toReview() {
+    this.quoteRequest = this.quoteRequestForm.value;
+    this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
   }
 }

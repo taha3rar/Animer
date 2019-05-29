@@ -14,14 +14,50 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Green Coffee</td>
-              <td>1 (Box / 30.00 KG)</td>
-              <td>243,000 kg</td>
-              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</td>
+            <tr *ngFor="let product of products; let i = index">
+              <td>
+                <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
+                  {{ product.produce }} / {{ product.variety }}
+                </span>
+                <span *ngIf="product.product_type == 'processed' && product.item_package_type">
+                  {{ product.produce }} / {{ product.item_measurement_amount | number: '1.2-2' }}
+                  {{ product.item_measurement_unit | uppercase }} / {{ product.item_package_type }}
+                </span>
+                <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
+                  {{ product.produce }}
+                </span>
+              </td>
+              <td>
+                <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
+                  {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+                  {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
+                </span>
+                <span *ngIf="product.product_type == 'processed' && product.item_package_type">
+                  {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+                  {{ product.items_per_package | number: '1.0'
+                  }}<span *ngIf="product.items_per_package > 1"> items)</span
+                  ><span *ngIf="product.items_per_package == 0"> item)</span>
+                </span>
+                <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
+                  {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }})
+                </span>
+              </td>
+              <td>
+                <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
+                  >{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }}</span
+                >
+                <span *ngIf="product.product_type == 'processed'">N/A</span>
+              </td>
+              <td>
+                <span id="specification">{{ product.specification || 'N/A' }}</span>
+              </td>
               <td class="text-center">
-                <button class="btn-circle remove"><i class="material-icons">remove</i></button>
-                <button class="btn-circle edit"><i class="material-icons">edit</i></button>
+                <button class="btn-circle remove" (click)="deleteProduct(i)">
+                  <i class="material-icons">remove</i>
+                </button>
+                <button class="btn-circle edit" (click)="openUpdateDialog(i)">
+                  <i class="material-icons">edit</i>
+                </button>
               </td>
             </tr>
           </tbody>
@@ -37,48 +73,62 @@
         </div>
       </div>
     </div>
-    <div class="row mt-5">
-      <div class="col-md-6">
-        <div class="info">
-          <p class="heading-2 mb-3">COMMENTS</p>
-          <textarea
-            class="form-control"
-            name="comments"
-            id="comments"
-            rows="6"
-            placeholder="Type your comments here..."
-          ></textarea>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="info">
-          <p class="heading-2 mb-3">OTHER DETAILS</p>
-          <label for="currency">Receive quotation in- *</label>
-          <select id="currency" name="currency" class="form-control mb-3" required>
-            <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
-          </select>
-          <label for="validBy">Quote request is valid by</label>
-          <div class="input-group">
-            <input
-              id="valide_by"
+    <form *ngIf="quoteRequestForm" [formGroup]="quoteRequestForm" (keydown.enter)="$event.preventDefault()">
+      <div class="row mt-5">
+        <div class="col-md-6">
+          <div class="info">
+            <p class="heading-2 mb-3">COMMENTS</p>
+            <textarea
               class="form-control"
-              placeholder="dd/mm/yyyy"
-              name="ddp"
-              ngbDatepicker
-              #dp3="ngbDatepicker"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn glyphicon glyphicon-calendar"
-                style="position:0;"
-                (click)="dp3.toggle()"
-                type="button"
-              ></button>
+              name="comments"
+              id="comments"
+              rows="6"
+              formControlName="buyer_comments"
+              placeholder="Type your comments here..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info">
+            <p class="heading-2 mb-3">OTHER DETAILS</p>
+            <div [ngClass]="showFieldStyle('currency')">
+              <label for="currency">Receive quotation in- *</label>
+              <select id="currency" name="currency" class="form-control mb-3" formControlName="currency">
+                <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
+              </select>
+              <div class="help-block" *ngIf="isFieldInvalid('currency')">
+                <p>This field is required</p>
+              </div>
+            </div>
+            <div [ngClass]="showFieldStyle('valid_buy')">
+              <label for="validBy">Quote request is valid by</label>
+              <div class="input-group">
+                <input
+                  id="valid_by"
+                  class="form-control"
+                  placeholder="dd/mm/yyyy"
+                  formControlName="valid_buy"
+                  name="ddp"
+                  ngbDatepicker
+                  #dp3="ngbDatepicker"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn glyphicon glyphicon-calendar"
+                    style="position:0;"
+                    (click)="dp3.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+              <div class="help-block" *ngIf="isFieldInvalid('valid_buy')">
+                <p>This field is required</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
   <div class="col-md-4">
     <div class="info">
@@ -108,14 +158,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let seller of targeted_sellers; let i = index">
+            <tr
+              *ngFor="
+                let seller of (targeted_sellers | paginate: { itemsPerPage: 5, currentPage: page });
+                let i = index
+              "
+            >
               <td>{{ seller.first_name }} {{ seller.last_name }}</td>
-              <td>{{ seller.company_name }}</td>
+              <td>{{ seller.company_name || 'N/A' }}</td>
             </tr>
           </tbody>
         </table>
+        <pagination-controls *ngIf="targeted_sellers?.length > 2" (pageChange)="page = $event"></pagination-controls>
       </div>
     </div>
   </div>
 </div>
-<button class="bttn-primary pull right next-step">Next Step &rarr;</button>
+<button *ngIf="quoteRequestForm.valid" class="bttn-primary pull right next-step" (click)="toReview()">
+  Next Step &rarr;
+</button>
+<button *ngIf="!quoteRequestForm.valid" class="bttn-primary pull right" (click)="onSubmit(quoteRequestForm)">
+  Next Step &rarr;
+</button>

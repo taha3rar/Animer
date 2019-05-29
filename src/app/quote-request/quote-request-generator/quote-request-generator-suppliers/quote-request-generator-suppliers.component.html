@@ -34,7 +34,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let seller of buyer_sellers; let i = index">
+          <tr
+            *ngFor="
+              let seller of (buyer_sellers | paginate: { itemsPerPage: 10, currentPage: pageClients, id: 'clients' });
+              let i = index
+            "
+          >
             <td>
               <input
                 type="checkbox"
@@ -61,7 +66,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let ecosystem of buyer_ecosystems; let i = index">
+          <tr
+            *ngFor="
+              let ecosystem of (buyer_ecosystems
+                | paginate: { itemsPerPage: 10, currentPage: pageEcosystems, id: 'ecosystems' });
+              let i = index
+            "
+          >
             <td>
               <input
                 type="radio"
@@ -81,6 +92,16 @@
           </tr>
         </tbody>
       </table>
+      <pagination-controls
+        *ngIf="toggledTable === 'ecosystems'"
+        (pageChange)="pageEcosystems = $event"
+        id="ecosystems"
+      ></pagination-controls>
+      <pagination-controls
+        *ngIf="toggledTable === 'clients'"
+        (pageChange)="pageClients = $event"
+        id="clients"
+      ></pagination-controls>
     </div>
   </div>
 </div>

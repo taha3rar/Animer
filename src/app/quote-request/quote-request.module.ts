@@ -28,6 +28,7 @@ import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.r
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
 import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resolver';
 import { QuoteRequestDataService } from './quote-request-generator/quote-request-data.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { QuoteRequestDataService } from './quote-request-generator/quote-request
     QuoteRequestRoutingModule,
     RouterModule,
     NgxPermissionsModule.forRoot(),
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [
     QuoteRequestClientsResolver,

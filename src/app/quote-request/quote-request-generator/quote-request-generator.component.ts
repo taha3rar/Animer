@@ -8,6 +8,7 @@ import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert';
+import { QuoteRequestDataService } from './quote-request-data.service';
 
 @Component({
   selector: 'app-quote-request-generator',
@@ -16,6 +17,7 @@ import swal from 'sweetalert';
 })
 export class QuoteRequestGeneratorComponent implements OnInit {
   quoteRequestForm: FormGroup;
+  quoteRequest: QuoteRequest;
   draftQuoteRequest: QuoteRequest;
   buyer: User;
 
@@ -23,12 +25,12 @@ export class QuoteRequestGeneratorComponent implements OnInit {
     private stepperService: StepperService,
     private location: Location,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private quoteRequestDataService: QuoteRequestDataService
   ) {}
 
   ngOnInit() {
     this.stepperService.stepperInit();
-    console.log(this.route.snapshot.data['buyer']);
     this.buyer = this.getSmallBuyer(this.route.snapshot.data['buyer']);
     this.quoteRequestForm = this.formBuilder.group({
       _id: Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest._id,
@@ -52,14 +54,16 @@ export class QuoteRequestGeneratorComponent implements OnInit {
         Validators.required
       ],
       buyer_comments: [
-        Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.buyer_comments,
-        Validators.required
+        Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.buyer_comments
       ],
       valid_buy: [
         Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.valid_by,
         Validators.required
       ],
       date_created: [Date.now(), Validators.required]
+    });
+    this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
+      this.quoteRequest = quoteRequest;
     });
   }
 
@@ -82,7 +86,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
   }
 
   confirm() {
-    if (!this.quoteRequestForm.dirty || this.quoteRequestForm || this.draftQuoteRequest) {
+    if (!this.quoteRequestForm.dirty && (!this.quoteRequest.products && !this.quoteRequest.sellers)) {
       return true;
     }
     return swal({

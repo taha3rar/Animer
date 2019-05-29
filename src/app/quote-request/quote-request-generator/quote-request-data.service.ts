@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { SellerQuoteRequest } from '@app/core/models/quote-request/seller-quoteRequest';
+import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 
 @Injectable()
 export class QuoteRequestDataService {
-  targeted_sellers = new BehaviorSubject(undefined);
-  currentTargeted_sellers = this.targeted_sellers.asObservable();
+  quoteRequest = new BehaviorSubject(<QuoteRequest>new QuoteRequest());
+  currentQuoteRequest = this.quoteRequest.asObservable();
 
   constructor() {}
 
-  setTargetedSellers(targeted_sellers: any[]) {
-    this.targeted_sellers.next(targeted_sellers);
+  setQuoteRequest(quoteRequest: QuoteRequest) {
+    this.quoteRequest.next(quoteRequest);
   }
 }

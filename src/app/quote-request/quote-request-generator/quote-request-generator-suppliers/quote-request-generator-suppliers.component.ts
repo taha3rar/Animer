@@ -4,6 +4,8 @@ import { Client } from '@app/core/models/user/client';
 import { Ecosystem } from '@app/core/models/ecosystem';
 import { User } from '@app/core/models/user/user';
 import { QuoteRequestDataService } from '../quote-request-data.service';
+import { SellerQuoteRequest } from '@app/core/models/quote-request/seller-quoteRequest';
+import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 
 @Component({
   selector: 'app-quote-request-generator-suppliers',
@@ -14,8 +16,11 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
   toggledTable = 'clients';
   buyer_sellers: Client[];
   buyer_ecosystems: Ecosystem[];
-  targeted_sellers: any[] = [];
+  targeted_sellers: SellerQuoteRequest[] = [];
   targeted_ecosystem = new Ecosystem();
+  quoteRequest: QuoteRequest = new QuoteRequest();
+  pageClients = 1;
+  pageEcosystems = 1;
 
   constructor(private route: ActivatedRoute, private quoteRequestDataService: QuoteRequestDataService) {}
 
@@ -27,17 +32,24 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     });
   }
 
-  targetSeller(seller: any, isChecked: Boolean, single: Boolean): void {
-    if (this.targeted_ecosystem && single) {
+  targetSeller(seller: any, isChecked: Boolean, singleSeller: Boolean): void {
+    if (this.targeted_ecosystem && singleSeller) {
       this.targeted_ecosystem = undefined;
     }
     if (isChecked) {
-      this.targeted_sellers.push(seller);
+      this.targeted_sellers.push({
+        _id: seller._id,
+        numericId: seller.numericId,
+        first_name: seller.first_name,
+        last_name: seller.last_name,
+        company_name: seller.company_name
+      });
     } else {
       const index = this.targeted_sellers.findIndex(x => x._id === seller._id);
       this.targeted_sellers.splice(index, 1);
     }
-    this.quoteRequestDataService.setTargetedSellers(this.targeted_sellers);
+    this.quoteRequest.sellers = this.targeted_sellers;
+    this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
   }
 
   pickEcosystem(ecosystem: Ecosystem): void {
