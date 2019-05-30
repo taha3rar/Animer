@@ -21,7 +21,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
     protected router: Router
   ) {
     super(quoteRequestService, router, {
-      deleteText: 'Once deleted, you will not be able to recover this quoteRequest!'
+      deleteText: 'Once deleted, you will not be able to recover this Quote Request!'
     });
   }
 

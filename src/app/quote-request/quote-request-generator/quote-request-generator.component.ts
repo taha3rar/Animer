@@ -36,36 +36,26 @@ export class QuoteRequestGeneratorComponent implements OnInit {
     this.buyer = this.getSmallBuyer(this.route.snapshot.data['buyer']);
     this.draftQuoteRequest = this.route.snapshot.data['quoteRequest'];
     this.quoteRequestForm = this.formBuilder.group({
-      _id: Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest._id,
-      numericId: Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.numericId,
+      _id: this.draftQuoteRequest ? this.draftQuoteRequest._id : undefined,
+      numericId: this.draftQuoteRequest ? this.draftQuoteRequest.numericId : undefined,
       buyer: this.formBuilder.group({
-        _id: Object.is(this.buyer, undefined) ? undefined : this.buyer._id,
-        numericId: [this.buyer.numericId || undefined],
-        first_name: [this.buyer.first_name || undefined, Validators.required],
-        last_name: [this.buyer.last_name || undefined, Validators.required],
-        email: [this.buyer.email || undefined, [Validators.required, Validators.email]],
-        company_name: [this.buyer.company_name || undefined, Validators.required],
-        address: [this.buyer.address || undefined, Validators.required],
-        city: [this.buyer.city || undefined, Validators.required],
-        zipcode: [this.buyer.zipcode || undefined, Validators.required],
-        country: [this.buyer.country || undefined, Validators.required],
-        phone_number: [this.buyer.phone_number || undefined, Validators.required],
+        _id: this.buyer ? this.buyer._id : undefined,
+        numericId: this.buyer ? this.buyer.numericId : undefined,
+        first_name: [this.buyer ? this.buyer.first_name : undefined, Validators.required],
+        last_name: [this.buyer ? this.buyer.last_name : undefined, Validators.required],
+        email: [this.buyer ? this.buyer.email : undefined, [Validators.required, Validators.email]],
+        company_name: [this.buyer ? this.buyer.company_name : undefined, Validators.required],
+        address: [this.buyer ? this.buyer.address : undefined, Validators.required],
+        city: [this.buyer ? this.buyer.city : undefined, Validators.required],
+        zipcode: [this.buyer ? this.buyer.zipcode : undefined, Validators.required],
+        country: [this.buyer ? this.buyer.country : undefined, Validators.required],
+        phone_number: [this.buyer ? this.buyer.phone_number : undefined, Validators.required],
         contact_by: [this.formBuilder.array(this.buyer.contact_by || [], Validators.required)]
       }),
-      document_weight_unit: [
-        Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.document_weight_unit
-      ],
-      currency: [
-        Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.currency,
-        Validators.required
-      ],
-      buyer_comments: [
-        Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.buyer_comments
-      ],
-      valid_by: [
-        Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.valid_by,
-        Validators.required
-      ],
+      document_weight_unit: [this.draftQuoteRequest ? this.draftQuoteRequest.document_weight_unit : undefined],
+      currency: [this.draftQuoteRequest ? this.draftQuoteRequest.currency : undefined, Validators.required],
+      buyer_comments: [this.draftQuoteRequest ? this.draftQuoteRequest.buyer_comments : undefined],
+      valid_by: [this.draftQuoteRequest ? this.draftQuoteRequest.valid_by : undefined, Validators.required],
       date_created: [moment(Date.now()).toJSON(), Validators.required]
     });
     this.quoteRequest = this.quoteRequestForm.value;
