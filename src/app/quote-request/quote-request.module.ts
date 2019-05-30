@@ -29,9 +29,11 @@ import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosys
 import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestDataService } from './quote-request-generator/quote-request-data.service';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { QuoteRequestViewComponent } from './quote-request-view/quote-request-view.component';
+import { QuotationsListComponent } from './quote-request-view/quotations-list/quotations-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { QuoteRequestComponent } from './quote-request.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { QuoteRequestViewComponent } from './quote-request-view/quote-request-vi
     QuotationGeneratorComponent,
     QuotationGeneratorQuotationComponent,
     QuotationQuoteRequestComponent,
-    QuoteRequestViewComponent
+    QuoteRequestViewComponent,
+    QuotationsListComponent,
+    QuoteRequestComponent
   ],
 
   entryComponents: [QrAgriculturalProductComponent, QrProcessedProductComponent],
@@ -54,6 +58,7 @@ import { QuoteRequestViewComponent } from './quote-request-view/quote-request-vi
   imports: [
     SharedModule,
     CommonModule,
+    NgxPaginationModule,
     MatTooltipModule,
     NgbModule,
     ReactiveFormsModule,

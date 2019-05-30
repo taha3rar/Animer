@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 })
 export class QuotationViewComponent implements OnInit {
   @Input() isGenerator = false;
+  @Input() isView = false;
 
   constructor(private location: Location) {}
 

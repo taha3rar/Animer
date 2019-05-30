@@ -27,11 +27,16 @@
 
 <div class="col-md-12">
   <div class="two-btns">
-    <button>
+    <button (click)="viewAs('quoteRequest')" [class.active]="viewQuoteRequest">
       Quote Request Details
     </button>
-    <button>
-      Quote Requests Received
+    <button (click)="viewAs('quotations')" [class.active]="viewQuotations">
+      Quotations Received
     </button>
   </div>
+</div>
+
+<div class="col-md-12 mt-4">
+  <app-quotations-list *ngIf="viewQuotations"></app-quotations-list>
+  <app-quote-request *ngIf="viewQuoteRequest"></app-quote-request>
 </div>

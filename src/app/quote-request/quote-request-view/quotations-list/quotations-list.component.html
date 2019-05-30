@@ -1,0 +1,85 @@
+<table class="table main-table">
+  <thead>
+    <tr>
+      <th translate>Company</th>
+      <th translate>Contact name</th>
+      <th translate>Status</th>
+      <th translate>Total Price</th>
+      <th translate class="text-right">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Homestead Farms</td>
+      <td>Tony Stark</td>
+      <td><div class="status status-blue">Quotation Received</div></td>
+      <td>500,000 KES</td>
+      <td class="text-right">
+        <button class="round-button-primary" data-toggle="wizard" data-target="#quotationModal">
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>Homestead Farms</td>
+      <td>Tony Stark</td>
+      <td><div class="status status-blue">Quotation Received</div></td>
+      <td>500,000 KES</td>
+      <td class="text-right">
+        <button class="round-button-primary" data-toggle="wizard" data-target="#quotationModal">
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>Homestead Farms</td>
+      <td>Tony Stark</td>
+      <td><div class="status status-blue">Quotation Received</div></td>
+      <td>500,000 KES</td>
+      <td class="text-right">
+        <button class="round-button-primary" data-toggle="wizard" data-target="#quotationModal">
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>Homestead Farms</td>
+      <td>Tony Stark</td>
+      <td><div class="status status-blue">Quotation Received</div></td>
+      <td>500,000 KES</td>
+      <td class="text-right">
+        <button class="round-button-primary" data-toggle="wizard" data-target="#quotationModal">
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>Homestead Farms</td>
+      <td>Tony Stark</td>
+      <td><div class="status status-orange">Awaiting Quotation</div></td>
+      <td>500,000 KES</td>
+      <td class="text-right">
+        <button
+          class="round-button-primary disabled"
+          data-toggle="wizard"
+          data-target="#quotationModal"
+          [attr.disabled]="true"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal-box" id="quotationModal">
+  <div class="modal-box-content-sm" style="width: 50%;">
+    <div class="modal-box-heading">
+      <i class="material-icons pull-right" data-dismiss="modal">close</i>
+      <p translate class="modal-title">Quotation</p>
+    </div>
+    <app-quotation-view [isView]="true"></app-quotation-view>
+  </div>
+</div>
+
+<pagination-controls (pageChange)="page = $event"></pagination-controls>
