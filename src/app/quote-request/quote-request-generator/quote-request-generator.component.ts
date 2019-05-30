@@ -52,6 +52,9 @@ export class QuoteRequestGeneratorComponent implements OnInit {
         phone_number: [this.buyer.phone_number || undefined, Validators.required],
         contact_by: [this.formBuilder.array(this.buyer.contact_by || [], Validators.required)]
       }),
+      document_weight_unit: [
+        Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.document_weight_unit
+      ],
       currency: [
         Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.currency,
         Validators.required

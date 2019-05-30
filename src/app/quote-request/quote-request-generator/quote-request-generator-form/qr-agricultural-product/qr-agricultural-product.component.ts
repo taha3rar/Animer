@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { currencies } from '@app/shared/helpers/currencies';
 import { measureUnits } from '@app/shared/helpers/measure';
 import { BaseProductQuoteRequest } from '../../base-product-quote-request';
+import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quoteRequest';
 
 @Component({
   selector: 'app-qr-agricultural-product',

@@ -38,7 +38,7 @@ export class BaseProductQuoteRequest extends BaseValidationComponent implements 
         Validators.required
       ],
       items_per_package: [this.data.product ? this.data.product.items_per_package : undefined, Validators.required],
-      total_amount_items: [this.data.product ? this.data.product.items_per_package : undefined, Validators.required],
+      total_amount_items: [this.data.product ? this.data.product.total_amount_items : undefined, Validators.required],
       specification: [this.data.product ? this.data.product.specification : undefined]
     });
   }

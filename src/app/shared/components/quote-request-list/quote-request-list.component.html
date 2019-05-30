@@ -26,7 +26,15 @@
         <span *ngIf="quoteRequest.products.length == 1"> {{ quoteRequest.products[0].produce }} </span>
         <span *ngIf="quoteRequest.products.length < 1"> N/A </span>
       </td>
-      <td>Amount not implemented yet</td>
+      <td>
+        <span *ngIf="quoteRequest.document_weight_unit"
+          >{{ quoteRequest.total_weight }} {{ quoteRequest.document_weight_unit }}</span
+        >
+        <span *ngIf="!quoteRequest.document_weight_unit" class="icon-text"
+          >Multiple
+          <i class="material-icons" matTooltip="Many weight unit or only processed products">help_outline</i></span
+        >
+      </td>
       <td *ngIf="isBuyer">
         {{ quoteRequest.sellers.length }}
       </td>
