@@ -160,7 +160,7 @@
           <tbody>
             <tr
               *ngFor="
-                let seller of (targeted_sellers | paginate: { itemsPerPage: 5, currentPage: page });
+                let seller of (targeted_sellers | paginate: { itemsPerPage: 5, currentPage: page, id: 'sellersList' });
                 let i = index
               "
             >
@@ -169,16 +169,16 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls *ngIf="targeted_sellers?.length > 5" (pageChange)="page = $event"></pagination-controls>
+        <pagination-controls
+          id="sellersList"
+          *ngIf="targeted_sellers?.length > 5"
+          (pageChange)="page = $event"
+        ></pagination-controls>
       </div>
     </div>
   </div>
 </div>
-<button
-  [hidden]="!quoteRequestForm.valid || products.length <= 0"
-  class="bttn-primary pull right next-step"
-  (click)="toReview()"
->
+<button [hidden]="!quoteRequestForm.valid || products.length <= 0" class="bttn-primary pull right next-step">
   Next Step &rarr;
 </button>
 <button
@@ -188,3 +188,4 @@
 >
   Next Step &rarr;
 </button>
+<button class="btn-primary-transp pull-right btn-draft" (click)="draftQuoterequest()">Save Quote request</button>

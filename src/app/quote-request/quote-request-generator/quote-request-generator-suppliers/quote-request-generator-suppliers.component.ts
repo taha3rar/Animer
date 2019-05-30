@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Route, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { Ecosystem } from '@app/core/models/ecosystem';
 import { User } from '@app/core/models/user/user';
 import { QuoteRequestDataService } from '../quote-request-data.service';
 import { SellerQuoteRequest } from '@app/core/models/quote-request/seller-quoteRequest';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
+import { QuoteRequestService } from '@app/core';
+import { AlertsService } from '@app/core/alerts.service';
 
 @Component({
   selector: 'app-quote-request-generator-suppliers',
@@ -13,22 +15,33 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
   styleUrls: ['./quote-request-generator-suppliers.component.scss']
 })
 export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
+  @Output() validQuoteRequest = new EventEmitter<Boolean>();
   toggledTable = 'clients';
   buyer_sellers: Client[];
   buyer_ecosystems: Ecosystem[];
-  targeted_sellers: SellerQuoteRequest[] = [];
+  targeted_sellers: SellerQuoteRequest[];
   targeted_ecosystem = new Ecosystem();
   quoteRequest: QuoteRequest = new QuoteRequest();
   pageClients = 1;
   pageEcosystems = 1;
 
-  constructor(private route: ActivatedRoute, private quoteRequestDataService: QuoteRequestDataService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private quoteRequestDataService: QuoteRequestDataService,
+    private quoteRequestService: QuoteRequestService,
+    private alerts: AlertsService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.buyer_ecosystems = this.route.snapshot.data['ecosystems'];
     const buyer_clients = this.route.snapshot.data['clients'];
     this.buyer_sellers = buyer_clients.filter(function(buyer_client: Client) {
       return buyer_client.role !== 'buyer';
+    });
+    this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
+      this.quoteRequest = quoteRequest;
+      this.quoteRequest.sellers ? (this.targeted_sellers = this.quoteRequest.sellers) : (this.targeted_sellers = []);
     });
   }
 
@@ -82,5 +95,13 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
 
   toggleTable(table: string): void {
     this.toggledTable = table;
+  }
+
+  draftQuoterequest() {
+    this.validQuoteRequest.emit(true);
+    this.quoteRequestService.draft(this.quoteRequest).subscribe(quoteRequest => {
+      this.alerts.showAlert('Your quote request has been saved');
+      this.router.navigateByUrl('/quote-request/list');
+    });
   }
 }

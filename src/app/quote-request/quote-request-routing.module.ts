@@ -11,6 +11,7 @@ import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.r
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
 import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
+import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -26,6 +27,17 @@ const routes: Routes = [
       component: QuoteRequestGeneratorComponent,
       resolve: {
         buyer: QuoteRequestBuyerResolver,
+        clients: QuoteRequestClientsResolver,
+        ecosystems: QuoteRequestEcosystemsResolver
+      },
+      canDeactivate: [ConfirmationGuard]
+    },
+    {
+      path: 'quote-request/generator/:id',
+      component: QuoteRequestGeneratorComponent,
+      resolve: {
+        buyer: QuoteRequestBuyerResolver,
+        quoteRequest: QuoteRequestResolver,
         clients: QuoteRequestClientsResolver,
         ecosystems: QuoteRequestEcosystemsResolver
       },

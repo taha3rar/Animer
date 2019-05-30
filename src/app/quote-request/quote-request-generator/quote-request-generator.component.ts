@@ -9,6 +9,7 @@ import * as SmallUser from '@app/core/models/order/user';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert';
 import { QuoteRequestDataService } from './quote-request-data.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-quote-request-generator',
@@ -17,9 +18,10 @@ import { QuoteRequestDataService } from './quote-request-data.service';
 })
 export class QuoteRequestGeneratorComponent implements OnInit {
   quoteRequestForm: FormGroup;
-  quoteRequest: QuoteRequest;
+  quoteRequest: QuoteRequest = new QuoteRequest();
   draftQuoteRequest: QuoteRequest;
   buyer: User;
+  isValid: Boolean;
 
   constructor(
     private stepperService: StepperService,
@@ -32,6 +34,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
   ngOnInit() {
     this.stepperService.stepperInit();
     this.buyer = this.getSmallBuyer(this.route.snapshot.data['buyer']);
+    this.draftQuoteRequest = this.route.snapshot.data['quoteRequest'];
     this.quoteRequestForm = this.formBuilder.group({
       _id: Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest._id,
       numericId: Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.numericId,
@@ -60,8 +63,15 @@ export class QuoteRequestGeneratorComponent implements OnInit {
         Object.is(this.draftQuoteRequest, undefined) ? undefined : this.draftQuoteRequest.valid_by,
         Validators.required
       ],
-      date_created: [Date.now(), Validators.required]
+      date_created: [moment(Date.now()).toJSON(), Validators.required]
     });
+    this.quoteRequest = this.quoteRequestForm.value;
+    this.quoteRequest.buyer.contact_by = this.quoteRequestForm.value.buyer.contact_by.value;
+    if (this.draftQuoteRequest) {
+      this.quoteRequest.sellers = this.draftQuoteRequest.sellers;
+      this.quoteRequest.products = this.draftQuoteRequest.products;
+    }
+    this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
     this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
       this.quoteRequest = quoteRequest;
     });
@@ -86,7 +96,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
   }
 
   confirm() {
-    if (this.quoteRequestForm.valid && this.quoteRequest.products && this.quoteRequest.sellers) {
+    if (this.isValid) {
       return true;
     }
     return swal({
@@ -104,5 +114,9 @@ export class QuoteRequestGeneratorComponent implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  validQuoteRequest(receivedValue: Boolean) {
+    this.isValid = receivedValue;
   }
 }

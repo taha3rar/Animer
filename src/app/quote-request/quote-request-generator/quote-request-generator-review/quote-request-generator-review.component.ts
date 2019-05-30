@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { QuoteRequestDataService } from '../quote-request-data.service';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { QuoteRequestService } from '@app/core/api/quote-request.service';
@@ -12,8 +12,10 @@ import * as moment from 'moment';
   styleUrls: ['./quote-request-generator-review.component.scss']
 })
 export class QuoteRequestGeneratorReviewComponent implements OnInit {
+  @Output() validQuoteRequest = new EventEmitter<Boolean>();
   quoteRequest: QuoteRequest;
   page = 1;
+  valid_by: string;
 
   constructor(
     private quoteRequestDataService: QuoteRequestDataService,
@@ -25,14 +27,12 @@ export class QuoteRequestGeneratorReviewComponent implements OnInit {
   ngOnInit() {
     this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
       this.quoteRequest = quoteRequest;
-      this.quoteRequest.valid_by = moment(this.quoteRequest.valid_by)
-        .subtract(1, 'months')
-        .toJSON();
-      this.quoteRequest.date_created = moment(this.quoteRequest.date_created).toJSON();
+      this.valid_by = this.quoteRequest.valid_by;
     });
   }
 
   submitQuoteRequest() {
+    this.validQuoteRequest.emit(true);
     this.quoteRequestService.create(this.quoteRequest).subscribe(quoteRequest => {
       this.alerts.showAlert('Your quote request has been sent');
       this.router.navigateByUrl('/quote-request/list');

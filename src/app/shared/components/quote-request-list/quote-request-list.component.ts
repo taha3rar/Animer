@@ -13,6 +13,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   @Input() quoteRequests: QuoteRequest[];
   isBuyer: Boolean;
   page = 1;
+  userId: String;
 
   constructor(
     protected authService: AuthenticationService,
@@ -26,5 +27,6 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
 
   ngOnInit() {
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
+    this.userId = this.authService.currentUserId;
   }
 }

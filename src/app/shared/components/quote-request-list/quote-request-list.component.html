@@ -24,6 +24,7 @@
           >Multiple <i class="material-icons" matTooltip="Many products">help_outline</i></span
         >
         <span *ngIf="quoteRequest.products.length == 1"> {{ quoteRequest.products[0].produce }} </span>
+        <span *ngIf="quoteRequest.products.length < 1"> N/A </span>
       </td>
       <td>Amount not implemented yet</td>
       <td *ngIf="isBuyer">
@@ -41,7 +42,7 @@
           *ngIf="userId == quoteRequest.buyer._id && quoteRequest.draft"
           class="round-button-primary"
           data-toggle="stepper"
-          [routerLink]="['/quote-request/generator', order._id]"
+          [routerLink]="['/quote-request/generator', quoteRequest._id]"
         >
           <i class="material-icons">remove_red_eye</i>
         </button>

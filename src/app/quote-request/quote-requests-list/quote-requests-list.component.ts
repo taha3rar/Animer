@@ -17,6 +17,5 @@ export class QuoteRequestsListComponent implements OnInit {
   ngOnInit() {
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
     this.quoteRequests = this.route.snapshot.data['quoteRequests'];
-    console.log(this.quoteRequests);
   }
 }

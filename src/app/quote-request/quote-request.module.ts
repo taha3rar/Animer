@@ -30,6 +30,7 @@ import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resol
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestDataService } from './quote-request-generator/quote-request-data.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     QuoteRequestEcosystemsResolver,
     QuoteRequestBuyerResolver,
     QuoteRequestDataService,
-    QuoteRequestListResolver
+    QuoteRequestListResolver,
+    QuoteRequestResolver
   ]
 })
 export class QuoteRequestModule {}

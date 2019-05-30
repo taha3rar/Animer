@@ -10,7 +10,7 @@
           </tr>
           <tr>
             <td class="heading-4-blue">VALID BY</td>
-            <td>{{ quoteRequest?.valid_by | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ valid_by | date: 'dd/MM/yyyy' }}</td>
           </tr>
         </table>
       </div>
@@ -84,7 +84,7 @@
               <div class="col-md-9">
                 <p class="heading-2">COMMENTS</p>
                 <p>
-                  {{ quoteRequest?.buyer_comments }}
+                  {{ quoteRequest?.buyer_comments || 'N/A' }}
                 </p>
               </div>
               <div class="col-md-3">
