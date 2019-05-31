@@ -14,8 +14,8 @@ export class BaseProductQuoteRequest extends BaseValidationComponent implements 
   constructor(
     public dialog: MatDialogRef<any>,
     public data: ProductSetupQuoteRequest,
-    private productType: string,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private productType: String
   ) {
     super();
     this.data.product ? (this.update = true) : (this.update = false);

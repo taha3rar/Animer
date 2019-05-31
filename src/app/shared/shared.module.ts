@@ -15,7 +15,6 @@ import { BaseListComponent } from './components/base-list/base-list.component';
 import { GooglePlacesDirective } from './directives/google-places.directive';
 import { BaseNavigationComponent } from './components/base-navigation/base-navigation.component';
 import { UploadPictureComponent } from './components/upload-picture/upload-picture.component';
-import { BaseValidationComponent } from './components/base-validation/base-validation.component';
 import { UserDocumentComponent } from './components/document-list/user-document-list/user-document-list.component';
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
 import { DocumentGeneratorComponent } from './components/document-generator/document-generator.component';
@@ -36,7 +35,6 @@ import { UnauthorizedPageComponent } from './components/unauthorized-page/unauth
     UserDataComponent,
     UserDocumentComponent,
     BaseNavigationComponent,
-    BaseValidationComponent,
     BaseListComponent,
     GooglePlacesDirective,
     UploadPictureComponent,

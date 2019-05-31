@@ -40,8 +40,6 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     ProductReviewProcessedComponent,
     ProductDetailsComponent,
     ProductReviewAgriculturalComponent,
-    BaseProduct,
-    BaseProductReview,
     AgriculturalProductGeneratorComponent,
     ProcessedProductGeneratorComponent
   ],

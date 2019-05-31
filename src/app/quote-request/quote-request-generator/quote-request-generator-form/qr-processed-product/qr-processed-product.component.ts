@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { measureUnits } from '@app/shared/helpers/measure';
-import { currencies } from '@app/shared/helpers/currencies';
 import { BaseProductQuoteRequest } from '../../base-product-quote-request';
 
 @Component({
@@ -19,7 +18,7 @@ export class QrProcessedProductComponent extends BaseProductQuoteRequest impleme
     public dialogRef: MatDialogRef<QrProcessedProductComponent>,
     public formBuilder: FormBuilder
   ) {
-    super(dialogRef, data, 'processed', formBuilder);
+    super(dialogRef, data, formBuilder, 'processed');
   }
 
   ngOnInit() {

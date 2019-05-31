@@ -1,10 +1,5 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import { Component } from '@angular/core';
 
-@Component({
-  selector: 'app-base-validation',
-  template: ''
-})
 export class BaseValidationComponent {
   formInput: FormGroup;
 

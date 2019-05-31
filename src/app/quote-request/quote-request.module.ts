@@ -34,6 +34,7 @@ import { QuoteRequestViewComponent } from './quote-request-view/quote-request-vi
 import { QuotationsListComponent } from './quote-request-view/quotations-list/quotations-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { QuoteRequestComponent } from './quote-request.component';
+import { BaseProductQuoteRequest } from './quote-request-generator/base-product-quote-request';
 
 @NgModule({
   declarations: [
