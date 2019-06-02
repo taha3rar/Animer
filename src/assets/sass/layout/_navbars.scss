@@ -109,7 +109,7 @@
     }
 
     .nav {
-      padding-top: 6rem;
+      padding-top: 4rem;
       display: block;
       font-size: 1.2rem;
       font-weight: 550;
@@ -119,21 +119,19 @@
         text-align: center;
         position: relative;
         text-transform: uppercase;
-
         a,
         a:active,
         a:visited,
         a:focus {
-          padding-top: 1.7rem;
-          padding-bottom: 1.7rem;
+          padding-top: 1.3rem;
+          padding-bottom: 1.3rem;
           background-color: white;
           text-decoration: none;
           color: rgb(165, 178, 190);
         }
 
         i {
-          margin-bottom: 1.1rem;
-          font-size: 2.7rem;
+          font-size: 5rem;
         }
 
         &.active a p {
@@ -143,7 +141,7 @@
 
         &.active a i {
           color: $primary-color;
-          text-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+          text-shadow: 0px 5px 11px rgba(158, 158, 172, 0.08);
           transition: text-shadow 0.3s;
           animation: slide-in 0.35s;
         }
@@ -159,12 +157,6 @@
             height: 100%;
           }
         }
-      }
-
-      &-item:last-child i,
-      &-item:first-child i {
-        font-size: 3.7rem;
-        border-radius: 50px;
       }
     }
   }
