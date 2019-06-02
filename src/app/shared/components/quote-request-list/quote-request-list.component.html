@@ -42,8 +42,13 @@
         Quotes not implemented yet
       </td>
       <td>
-        <div *ngIf="isBuyer" class="status status-orange">{{ quoteRequest.status }}</div>
-        <div *ngIf="!isBuyer" class="status status-orange">{{ quoteRequest.status }}</div>
+        <div *ngIf="quoteRequest.status === qrSent || quoteRequest.status === qrReceived" class="status status-orange">
+          {{ quoteRequest.status }}
+        </div>
+        <div *ngIf="quoteRequest.status === qSent || quoteRequest.status === qReceived" class="status status-blue">
+          {{ quoteRequest.status }}
+        </div>
+        <div *ngIf="quoteRequest.draft" class="status status-purple">{{ quoteRequest.status }}</div>
       </td>
       <td class="text-right">
         <button

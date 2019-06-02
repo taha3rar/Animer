@@ -14,6 +14,10 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   isBuyer: Boolean;
   page = 1;
   userId: String;
+  qrReceived = 'QUOTE REQUEST RECEIVED';
+  qrSent = 'QUOTE REQUEST SENT';
+  qSent = 'QUOTATION SENT';
+  qReceived = 'QUOTATION RECEIVED';
 
   constructor(
     protected authService: AuthenticationService,
