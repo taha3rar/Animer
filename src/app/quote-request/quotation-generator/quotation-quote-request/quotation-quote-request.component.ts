@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-quotation-quote-request',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quotation-quote-request.component.scss']
 })
 export class QuotationQuoteRequestComponent implements OnInit {
+  @Input() isGenerator = true;
   constructor() {}
-
   ngOnInit() {}
 }

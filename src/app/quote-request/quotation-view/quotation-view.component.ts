@@ -8,9 +8,6 @@ import swal from 'sweetalert';
   styleUrls: ['./quotation-view.component.scss']
 })
 export class QuotationViewComponent implements OnInit {
-  @Input() isGenerator = false;
-  @Input() isView = false;
-
   constructor(private location: Location) {}
 
   ngOnInit() {}

@@ -1,108 +1,25 @@
-<h1 *ngIf="!isGenerator && !isView" class="main-title btn-main margin-bottom-2" (click)="back()">
+<h1 class="main-title btn-main margin-bottom-2" (click)="back()">
   <a class="material-icons">keyboard_backspace</a> Quote Requests
 </h1>
-<div class="panel panel-tab">
-  <div class="panel-body">
-    <div class="padding-all">
-      <div class="border-box">
-        <h2>QUOTATION <span> #324</span></h2>
-        <table>
-          <tr>
-            <td class="heading-4-blue">ISSUE DATE</td>
-            <td>22/05/2019</td>
-          </tr>
-          <tr>
-            <td class="heading-4-blue">VALID BY</td>
-            <td>22/07/2019</td>
-          </tr>
-        </table>
+
+<div class="col-md-12">
+  <div class="panel">
+    <div class="panel-body">
+      <div class="col-md-3">
+        <p class="heading-3">QUOTE REQUEST NUMBER</p>
+        <p class="normal-text-bold">351</p>
       </div>
-      <div class="row" style="padding-top: 5rem;">
-        <div class="col-md-6">
-          <p class="heading-4-blue">ISSUED BY</p>
-          <p class="heading-4">Tony Stark</p>
-          <p class="heading-4">Homestead Farms</p>
-          <p class="heading-4">Tony@stark.com</p>
-          <p class="heading-4">+972546233918</p>
-          <p class="heading-4">Sugarland Road, Canada 25081</p>
-        </div>
-        <div class="col-md-3 col-md-offset-3">
-          <p class="heading-4-blue">ISSUED FOR</p>
-          <p class="heading-4">Patrick Mutow</p>
-          <p class="heading-4">Agrium</p>
-          <p class="heading-4">Patrick@agrium.com</p>
-          <p class="heading-4">+972546233918</p>
-          <p class="heading-4">1st Avenue South, Canada</p>
-        </div>
+      <div class="col-md-3">
+        <p class="heading-3">CONTACT NAME</p>
+        <p class="normal-text-bold">Patrick Mutow</p>
       </div>
-      <div style="padding-top: 2rem;">
-        <p class="heading-2">PRODUCTS</p>
-        <table class="products-table">
-          <thead>
-            <tr>
-              <th>PRODUCT NAME</th>
-              <th>PACKAGES</th>
-              <th>AMOUNT</th>
-              <th>SPECIFICATIONS</th>
-              <th>RATE</th>
-              <th>PRICE</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <span>
-                  Green Coffee/kona
-                </span>
-              </td>
-              <td>
-                <span>
-                  100 (Box/ 30 kg)
-                </span>
-              </td>
-              <td>
-                <span>
-                  5000 KG
-                </span>
-              </td>
-              <td>
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                </span>
-              </td>
-              <td>
-                <span>
-                  20.00 KES / KG
-                </span>
-              </td>
-              <td>
-                <span>
-                  100,000 KES
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-3">
+        <p class="heading-3">SUBMITTED ON</p>
+        <p class="normal-text-bold">23/05/2019</p>
       </div>
-      <div style="padding-top: 2rem;">
-        <div class="row">
-          <div class="col-md-9">
-            <p class="heading-2">QUOTE REQUEST COMMENTS</p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
-            </p>
-            <p class="heading-2">QUOTATION COMMENTS</p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
-            </p>
-          </div>
-          <div class="col-md-3">
-            <div class="border-box center-items pull-left">
-              <p class="heading-2">TOTAL PRICE</p>
-              <p class="heading-4-blue">10,000 KES</p>
-            </div>
-          </div>
-        </div>
+      <div class="col-md-3">
+        <p class="heading-3">TOTAL PRICE OFFERED</p>
+        <p class="normal-text-bold">50,000 KES</p>
       </div>
       <button class="btn-primary-transp pull-right mt-5" (click)="downloadPopup()">
         Download PDF
@@ -110,6 +27,20 @@
     </div>
   </div>
 </div>
-<button *ngIf="isGenerator || !isView" class="bttn-primary pull-right next-step">
-  Submit
-</button>
+
+<div class="col-md-12">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a data-toggle="tab" href="#quoteRequest">Quote Request</a>
+    </li>
+    <li><a data-toggle="tab" href="#quotation">Quotation</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="quoteRequest">
+      <app-quotation-quote-request [isGenerator]="false"></app-quotation-quote-request>
+    </div>
+    <div class="tab-pane" id="quotation">
+      <app-quotation></app-quotation>
+    </div>
+  </div>
+</div>
