@@ -18,3 +18,4 @@ export * from './api/order.service';
 export * from './api/ecosystem.service';
 export * from './api/api.service';
 export * from './api/quote-request.service';
+export * from './api/quotation.service';
