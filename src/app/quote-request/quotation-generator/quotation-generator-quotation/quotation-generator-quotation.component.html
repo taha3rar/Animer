@@ -2,87 +2,13 @@
   <div class="col-md-6">
     <div class="info">
       <p class="heading-2">ISSUED BY</p>
-      <div class="row">
-        <div class="col-md-4">
-          <p>Issuer name</p>
-          <p>Patrick Mutow</p>
-        </div>
-        <div class="col-md-4">
-          <p>Company name</p>
-          <p>Agrium</p>
-        </div>
-        <div class="col-md-4">
-          <p>Email address</p>
-          <p>Patrick@agrium.com</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <p>City</p>
-          <p>Toronto</p>
-        </div>
-        <div class="col-md-4">
-          <p>Street address</p>
-          <p>1st Avenue South</p>
-        </div>
-        <div class="col-md-4">
-          <p>Zip code</p>
-          <p>1253</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <p>Country</p>
-          <p>Canada</p>
-        </div>
-        <div class="col-md-4">
-          <p>Phone number</p>
-          <p>(855) 569-9444</p>
-        </div>
-      </div>
+      <app-user-data [user]="seller" [issued_by]="true"></app-user-data>
     </div>
   </div>
   <div class="col-md-6">
     <div class="info">
       <p class="heading-2">ISSUED FOR</p>
-      <div class="row">
-        <div class="col-md-4">
-          <p>Issuer name</p>
-          <p>Tony Stark</p>
-        </div>
-        <div class="col-md-4">
-          <p>Company name</p>
-          <p>Homestead Farms</p>
-        </div>
-        <div class="col-md-4">
-          <p>Email address</p>
-          <p>Patrick@agrium.com</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <p>City</p>
-          <p>Toronto</p>
-        </div>
-        <div class="col-md-4">
-          <p>Street address</p>
-          <p>1st Avenue South</p>
-        </div>
-        <div class="col-md-4">
-          <p>Zip code</p>
-          <p>1253</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <p>Country</p>
-          <p>Canada</p>
-        </div>
-        <div class="col-md-4">
-          <p>Phone number</p>
-          <p>(855) 569-9444</p>
-        </div>
-      </div>
+      <app-user-data [user]="buyer" [issued_for]="true"></app-user-data>
     </div>
   </div>
 </div>
@@ -100,16 +26,68 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Green Coffee</td>
-          <td>1 (Box / 30.00 KG)</td>
-          <td>243,000 kg</td>
-          <td>Lorem ipsum dolor sit do.</td>
+        <tr *ngFor="let product of products; let i = index">
           <td>
-            <label for="price">Price per KG (in KES)</label>
-            <input id="price" type="text" class="form-control" placeholder="Add price here" />
+            <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
+              {{ product.produce }} / {{ product.variety }}
+            </span>
+            <span *ngIf="product.product_type == 'processed' && product.item_package_type">
+              {{ product.produce }} / {{ product.item_measurement_amount | number: '1.2-2' }}
+              {{ product.item_measurement_unit | uppercase }} / {{ product.item_package_type }}
+            </span>
+            <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
+              {{ product.produce }}
+            </span>
           </td>
-          <td>0.00 KES</td>
+          <td>
+            <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
+              {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+              {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
+            </span>
+            <span *ngIf="product.product_type == 'processed' && product.item_package_type">
+              {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+              {{ product.items_per_package | number: '1.0' }}<span *ngIf="product.items_per_package > 1"> items)</span
+              ><span *ngIf="product.items_per_package == 0"> item)</span>
+            </span>
+            <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
+              {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }})
+            </span>
+          </td>
+          <td>
+            <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
+              >{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }}</span
+            >
+            <span *ngIf="product.product_type == 'processed'">N/A</span>
+          </td>
+          <td>
+            <span id="specification">{{ product.specification || 'N/A' }}</span>
+          </td>
+          <td>
+            <label for="price"
+              >Price per {{ product.weight_unit || product.type_of_package }} (in {{ quotation?.currency }})</label
+            >
+            <input
+              *ngIf="product.product_type == 'agricultural'"
+              id="price"
+              min="0"
+              type="number"
+              class="form-control"
+              [(ngModel)]="product.price_per_unit"
+              (ngModelChange)="setProductSubtotal(i)"
+              placeholder="Add price here"
+            />
+            <input
+              *ngIf="product.product_type != 'agricultural'"
+              id="price"
+              min="0"
+              type="number"
+              class="form-control"
+              [(ngModel)]="product.price_per_package"
+              (ngModelChange)="setProductSubtotal(i)"
+              placeholder="Add price here"
+            />
+          </td>
+          <td>{{ product.subtotal || 0.0 | number: '1.2-2' }} {{ quotation?.currency }}</td>
         </tr>
       </tbody>
     </table>
@@ -118,39 +96,32 @@
 
 <div class="row">
   <div class="col-md-6">
-    <div class="info">
-      <p class="heading-2">OTHER DETAILS</p>
-      <p class="heading-2 mt-4">Comments</p>
-      <textarea
-        class="form-control"
-        name="comments"
-        id="comments"
-        rows="5"
-        placeholder="Type your comments here..."
-      ></textarea>
-      <label for="validBy" class="mt-4">Quote request is valid by</label>
-      <div class="input-group">
-        <input
-          id="validBy"
+    <form [formGroup]="quotationForm">
+      <div class="info">
+        <p class="heading-2 mb-3">COMMENTS</p>
+        <textarea
           class="form-control"
-          placeholder="dd/mm/yyyy"
-          name="ddp"
-          ngbDatepicker
-          #dp3="ngbDatepicker"
-        />
-        <div class="input-group-append">
-          <button class="btn glyphicon glyphicon-calendar" (click)="dp3.toggle()" type="button"></button>
-        </div>
+          name="comments"
+          id="comments"
+          formControlName="seller_comments"
+          rows="5"
+          placeholder="Type your comments here..."
+        ></textarea>
       </div>
-    </div>
+    </form>
   </div>
   <div class="col-md-2 col-md-offset-4">
     <div class="subtotal-price pull-right">
       <p class="heading-2">SUBTOTAL</p>
-      <p class="heading-4-blue">5000 KES</p>
+      <p class="heading-4-blue">
+        {{ quotationForm.value.total_price || 0.0 | number: '1.2-2' }} {{ quotation.currency }}
+      </p>
     </div>
   </div>
 </div>
-<button class="bttn-primary pull-right next-step">
+<button [hidden]="!quotationForm.valid" class="bttn-primary pull right next-step">
+  Next Step &rarr;
+</button>
+<button [hidden]="quotationForm.valid" class="bttn-primary pull right">
   Next Step &rarr;
 </button>

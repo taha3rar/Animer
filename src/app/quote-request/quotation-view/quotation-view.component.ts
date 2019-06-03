@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import swal from 'sweetalert';
+import { Quotation } from '@app/core/models/quotation/quotation';
+import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 
 @Component({
   selector: 'app-quotation-view',
@@ -8,6 +10,11 @@ import swal from 'sweetalert';
   styleUrls: ['./quotation-view.component.scss']
 })
 export class QuotationViewComponent implements OnInit {
+  @Input() isGenerator = false;
+  @Input() isView = false;
+  @Input() quotation: Quotation;
+  @Input() quoteRequest: QuoteRequest;
+
   constructor(private location: Location) {}
 
   ngOnInit() {}

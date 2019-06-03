@@ -15,8 +15,5 @@ export class QuotationQuoteRequestComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.quoteRequest);
-    console.log(this.seller);
-  }
+  ngOnInit() {}
 }

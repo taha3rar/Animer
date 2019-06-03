@@ -8,6 +8,7 @@ import { User } from '@app/core/models/order/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
+import { Quotation } from '@app/core/models/quotation/quotation';
 
 @Component({
   selector: 'app-quotation-generator',
@@ -15,8 +16,9 @@ import * as moment from 'moment';
   styleUrls: ['./quotation-generator.component.scss']
 })
 export class QuotationGeneratorComponent implements OnInit {
-  quotationtForm: FormGroup;
+  quotationForm: FormGroup;
   quoteRequest: QuoteRequest;
+  quotation: Quotation;
   buyer: any;
   seller: User;
 
@@ -32,7 +34,7 @@ export class QuotationGeneratorComponent implements OnInit {
     this.seller = this.getSmallSeller(this.route.snapshot.data['seller']);
     this.quoteRequest = this.route.snapshot.data['quoteRequest'];
     this.buyer = this.quoteRequest.buyer;
-    this.quotationtForm = this.formBuilder.group({
+    this.quotationForm = this.formBuilder.group({
       buyer: this.formBuilder.group({
         _id: this.buyer ? this.buyer._id : undefined,
         numericId: this.buyer ? this.buyer.numericId : undefined,
@@ -63,11 +65,12 @@ export class QuotationGeneratorComponent implements OnInit {
       }),
       quoteRequest: [this.quoteRequest._id, Validators.required],
       seller_comments: [undefined],
-      subtotal: [undefined, Validators.required],
+      total_price: [undefined, Validators.required],
       currency: [this.quoteRequest.currency, Validators.required],
       due_date: [this.quoteRequest.valid_by],
       date_created: [moment(Date.now()).toJSON(), Validators.required]
     });
+    this.quotation = this.quotationForm.value;
   }
 
   getSmallSeller(seller: BigUser.User): SmallUser.User {
@@ -86,6 +89,10 @@ export class QuotationGeneratorComponent implements OnInit {
       phone_number: seller.personal_information.phone_number,
       contact_by: seller.contact_by
     };
+  }
+
+  receiveQuotation(quotation: Quotation) {
+    this.quotation = quotation;
   }
 
   back() {
