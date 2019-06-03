@@ -70,21 +70,21 @@ export class QuoteRequestGeneratorComponent implements OnInit {
     });
   }
 
-  getSmallBuyer(seller: BigUser.User): SmallUser.User {
+  getSmallBuyer(buyer: BigUser.User): SmallUser.User {
     return {
-      _id: seller._id,
-      numericId: seller.numericId,
-      first_name: seller.personal_information.first_name,
-      last_name: seller.personal_information.last_name,
-      email: seller.email,
-      company_name: seller.company_information.company_name,
-      company_number: seller.company_information.company_registered_number,
-      address: seller.company_information.street,
-      city: seller.company_information.city,
-      country: seller.company_information.country,
-      zipcode: seller.company_information.zipcode,
-      phone_number: seller.personal_information.phone_number,
-      contact_by: seller.contact_by
+      _id: buyer._id,
+      numericId: buyer.numericId,
+      first_name: buyer.personal_information.first_name,
+      last_name: buyer.personal_information.last_name,
+      email: buyer.email,
+      company_name: buyer.company_information.company_name,
+      company_number: buyer.company_information.company_registered_number,
+      address: buyer.company_information.street,
+      city: buyer.company_information.city,
+      country: buyer.company_information.country,
+      zipcode: buyer.company_information.zipcode,
+      phone_number: buyer.personal_information.phone_number,
+      contact_by: buyer.contact_by
     };
   }
 

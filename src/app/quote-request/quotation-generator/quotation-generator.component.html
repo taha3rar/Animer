@@ -19,7 +19,7 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="quoteRequest">
-          <app-quotation-quote-request></app-quotation-quote-request>
+          <app-quotation-quote-request [quoteRequest]="quoteRequest" [seller]="seller"></app-quotation-quote-request>
         </div>
         <div class="tab-pane" id="quotation">
           <app-quotation-generator-quotation></app-quotation-generator-quotation>

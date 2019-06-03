@@ -26,7 +26,7 @@ import { QuotationViewComponent } from './quotation-view/quotation-view.componen
 import { QuotationQuoteRequestComponent } from './quotation-generator/quotation-quote-request/quotation-quote-request.component';
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
-import { QuoteRequestBuyerResolver } from './resolvers/quote-request-buyer.resolver';
+import { QuoteRequestUserResolver } from './resolvers/quote-request-user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestDataService } from './quote-request-generator/quote-request-data.service';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
@@ -73,7 +73,7 @@ import { QuotationComponent } from './quotation/quotation.component';
   providers: [
     QuoteRequestClientsResolver,
     QuoteRequestEcosystemsResolver,
-    QuoteRequestBuyerResolver,
+    QuoteRequestUserResolver,
     QuoteRequestDataService,
     QuoteRequestListResolver,
     QuoteRequestResolver

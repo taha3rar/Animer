@@ -59,7 +59,15 @@
         >
           <i class="material-icons">remove_red_eye</i>
         </button>
-        <button class="round-button-red">
+        <button
+          *ngIf="userId != quoteRequest.buyer._id && !quoteRequest.draft"
+          class="round-button-primary"
+          data-toggle="stepper"
+          [routerLink]="['/quote-request/quotation-generator', quoteRequest._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button *ngIf="false" class="round-button-red">
           <i class="material-icons">delete</i>
         </button>
       </td>

@@ -6,7 +6,7 @@ import { Resolve, Router } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 
 @Injectable()
-export class QuoteRequestBuyerResolver implements Resolve<Client[]> {
+export class QuoteRequestUserResolver implements Resolve<Client[]> {
   constructor(private authService: AuthenticationService, private userService: UserService, private router: Router) {}
 
   resolve(): Observable<Client[]> {
