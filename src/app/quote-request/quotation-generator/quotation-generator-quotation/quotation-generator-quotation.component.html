@@ -119,7 +119,8 @@
 <div class="row">
   <div class="col-md-6">
     <div class="info">
-      <p class="heading-2 mb-3">COMMENTS</p>
+      <p class="heading-2">OTHER DETAILS</p>
+      <p class="heading-2 mt-4">Comments</p>
       <textarea
         class="form-control"
         name="comments"
@@ -127,6 +128,20 @@
         rows="5"
         placeholder="Type your comments here..."
       ></textarea>
+      <label for="validBy" class="mt-4">Quote request is valid by</label>
+      <div class="input-group">
+        <input
+          id="validBy"
+          class="form-control"
+          placeholder="dd/mm/yyyy"
+          name="ddp"
+          ngbDatepicker
+          #dp3="ngbDatepicker"
+        />
+        <div class="input-group-append">
+          <button class="btn glyphicon glyphicon-calendar" (click)="dp1.toggle()" type="button"></button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="col-md-2 col-md-offset-4">
