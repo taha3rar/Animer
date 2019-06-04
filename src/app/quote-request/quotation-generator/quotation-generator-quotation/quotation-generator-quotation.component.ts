@@ -44,11 +44,11 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
 
   setProductSubtotal(index: number): void {
     if (this.products[index].product_type === 'agricultural') {
-      this.products[index].subtotal = Number(
+      this.products[index].product_subtotal = Number(
         (this.products[index].total_weight * this.products[index].price_per_unit).toFixed(2)
       );
     } else {
-      this.products[index].subtotal = Number(
+      this.products[index].product_subtotal = Number(
         (this.products[index].quantity * this.products[index].price_per_package).toFixed(2)
       );
     }
@@ -58,8 +58,8 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
   setTotalPrice() {
     let total_price = 0;
     this.products.forEach(function(product: ProductQuotation) {
-      if (product.subtotal) {
-        total_price += product.subtotal;
+      if (product.product_subtotal) {
+        total_price += product.product_subtotal;
       }
     });
     this.quotationForm.patchValue({

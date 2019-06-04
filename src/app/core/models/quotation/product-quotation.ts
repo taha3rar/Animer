@@ -15,5 +15,5 @@ export class ProductQuotation {
   quantity: number;
   price_per_unit: number;
   price_per_package: number;
-  subtotal: number;
+  product_subtotal: number;
 }
