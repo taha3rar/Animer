@@ -32,8 +32,12 @@ export class Quotation {
     numericId: Number;
   };
   currency: String;
+  buyer_comments: String;
   seller_comments: String;
-  due_date: Date;
+  quote_request: {
+    _id: String;
+  };
+  valid_by: Date;
   draft: Boolean;
   products: ProductQuotation[];
   status: String;

@@ -18,7 +18,7 @@ import { Quotation } from '@app/core/models/quotation/quotation';
 export class QuotationGeneratorComponent implements OnInit {
   quotationForm: FormGroup;
   quoteRequest: QuoteRequest;
-  quotation: Quotation;
+  quotation: Quotation = new Quotation();
   buyer: any;
   seller: User;
 
@@ -63,14 +63,19 @@ export class QuotationGeneratorComponent implements OnInit {
         phone_number: [this.seller ? this.seller.phone_number : undefined],
         contact_by: [this.formBuilder.array(this.seller.contact_by || [])]
       }),
-      quoteRequest: [this.quoteRequest._id, Validators.required],
+      quote_request: this.formBuilder.group({
+        _id: [this.quoteRequest._id, Validators.required]
+      }),
+      buyer_comments: [this.quoteRequest.buyer_comments],
       seller_comments: [undefined],
       total_price: [undefined, Validators.required],
       currency: [this.quoteRequest.currency, Validators.required],
-      due_date: [this.quoteRequest.valid_by],
+      valid_by: [this.quoteRequest.valid_by],
       date_created: [moment(Date.now()).toJSON(), Validators.required]
     });
     this.quotation = this.quotationForm.value;
+    this.quotation.buyer.contact_by = this.quotationForm.value.buyer.contact_by.value;
+    this.quotation.seller.contact_by = this.quotationForm.value.seller.contact_by.value;
   }
 
   getSmallSeller(seller: BigUser.User): SmallUser.User {

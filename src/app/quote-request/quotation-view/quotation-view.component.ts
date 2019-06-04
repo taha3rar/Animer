@@ -3,6 +3,9 @@ import { Location } from '@angular/common';
 import swal from 'sweetalert';
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
+import { QuotationService } from '@app/core';
+import { AlertsService } from '@app/core/alerts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quotation-view',
@@ -15,7 +18,12 @@ export class QuotationViewComponent implements OnInit {
   @Input() quotation: Quotation;
   @Input() quoteRequest: QuoteRequest;
 
-  constructor(private location: Location) {}
+  constructor(
+    private location: Location,
+    private quotationService: QuotationService,
+    private alerts: AlertsService,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -36,6 +44,13 @@ export class QuotationViewComponent implements OnInit {
       if (value === 'original') {
       } else {
       }
+    });
+  }
+
+  submitQuotation() {
+    this.quotationService.create(this.quotation).subscribe(quotation => {
+      this.alerts.showAlert('Your quotation has been sent');
+      this.router.navigateByUrl('/quote-request/list');
     });
   }
 }

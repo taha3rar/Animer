@@ -125,26 +125,12 @@
           </div>
         </div>
       </div>
-      <button class="btn-primary-transp pull-right mt-5" (click)="downloadPopup()">
+      <button *ngIf="isView" class="btn-primary-transp pull-right mt-5" (click)="downloadPopup()">
         Download PDF
       </button>
     </div>
   </div>
 </div>
-
-<div class="col-md-12">
-  <ul class="nav nav-tabs">
-    <li class="active">
-      <a data-toggle="tab" href="#quoteRequest">Quote Request</a>
-    </li>
-    <li><a data-toggle="tab" href="#quotation">Quotation</a></li>
-  </ul>
-  <div class="tab-content">
-    <div class="tab-pane active" id="quoteRequest">
-      <app-quotation-quote-request [isGenerator]="false"></app-quotation-quote-request>
-    </div>
-    <div class="tab-pane" id="quotation">
-      <app-quotation></app-quotation>
-    </div>
-  </div>
-</div>
+<button *ngIf="isGenerator" class="bttn-primary pull-right next-step" (click)="submitQuotation()">
+  Submit
+</button>

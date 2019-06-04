@@ -125,7 +125,6 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
   }
 
   pushProducts() {
-    console.log(this.quoteRequest.document_weight_unit);
     this.quoteRequest.products = this.products;
     this.measurementUnitConflict(this.products);
     this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
