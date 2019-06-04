@@ -1,21 +1,21 @@
-.icon-new-platform-icons---pi {
+.icon-pi {
   *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe800;&nbsp;');
 }
-.icon-new-platform-icons---orders {
+.icon-orders {
   *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe801;&nbsp;');
 }
-.icon-new-platform-icons---clients {
+.icon-clients {
   *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe802;&nbsp;');
 }
-.icon-new-platform-icons---dashboard {
+.icon-dashboard {
   *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe803;&nbsp;');
 }
-.icon-new-platform-icons---ecosystems {
+.icon-ecosystems {
   *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe804;&nbsp;');
 }
-.icon-new-platform-icons---qr {
+.icon-qr {
   *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe805;&nbsp;');
 }
-.icon-new-platform-icons---products {
+.icon-products {
   *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe806;&nbsp;');
 }

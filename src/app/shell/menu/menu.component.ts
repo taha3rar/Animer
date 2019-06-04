@@ -17,45 +17,45 @@ export const ROUTES: RouteInfo[] = [
     path: '/dashboard',
     title: 'Dashboard',
     type: 'link',
-    icontype: 'icon-new-platform-icons---dashboard'
+    icontype: 'icon-dashboard'
   },
   {
     path: '/order/list',
     title: 'Orders',
     type: 'link',
-    icontype: 'icon-new-platform-icons---orders'
+    icontype: 'icon-orders'
   },
   {
     path: '/quote-request/list',
     title: 'Quote Requests',
     type: 'link',
-    icontype: 'icon-new-platform-icons---qr'
+    icontype: 'icon-qr'
   },
   {
     path: '/invoice/list',
     title: 'Proforma Invoices',
     type: 'link',
-    icontype: 'icon-new-platform-icons---pi'
+    icontype: 'icon-pi'
   },
   {
     path: '/product/list',
     title: 'Products',
     type: 'link',
-    icontype: 'icon-new-platform-icons---products',
+    icontype: 'icon-products',
     neededPermission: 'list-products'
   },
   {
     path: '/client/list',
     title: 'Clients',
     type: 'link',
-    icontype: 'icon-new-platform-icons---clients',
+    icontype: 'icon-clients',
     neededPermission: 'list-clients'
   },
   {
     path: '/ecosystem/list',
     title: 'Ecosystems',
     type: 'link',
-    icontype: 'icon-new-platform-icons---ecosystems',
+    icontype: 'icon-ecosystems',
     neededPermission: 'list-ecosystems'
   }
 ];

@@ -55,24 +55,24 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-new-platform-icons---pi:before {
+.icon-pi:before {
   content: '\e800';
 } /* '' */
-.icon-new-platform-icons---orders:before {
+.icon-orders:before {
   content: '\e801';
 } /* '' */
-.icon-new-platform-icons---clients:before {
+.icon-clients:before {
   content: '\e802';
 } /* '' */
-.icon-new-platform-icons---dashboard:before {
+.icon-dashboard:before {
   content: '\e803';
 } /* '' */
-.icon-new-platform-icons---ecosystems:before {
+.icon-ecosystems:before {
   content: '\e804';
 } /* '' */
-.icon-new-platform-icons---qr:before {
+.icon-qr:before {
   content: '\e805';
 } /* '' */
-.icon-new-platform-icons---products:before {
+.icon-products:before {
   content: '\e806';
 } /* '' */
