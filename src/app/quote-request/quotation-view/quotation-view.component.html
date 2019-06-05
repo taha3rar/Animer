@@ -48,10 +48,10 @@
             <tr>
               <th>PRODUCT NAME</th>
               <th>PACKAGES</th>
-              <th>AMOUNT</th>
               <th>SPECIFICATIONS</th>
+              <th>AMOUNT REQUESTED</th>
+              <th>AMOUNT OFFERED</th>
               <th>RATE</th>
-              <th>PRICE</th>
             </tr>
           </thead>
           <tbody>
@@ -84,22 +84,20 @@
                 </span>
               </td>
               <td>
+                <span id="specification">{{ product.specification || 'N/A' }}</span>
+              </td>
+              <td>
                 <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
                   >{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }}</span
                 >
                 <span *ngIf="product.product_type == 'processed'">N/A</span>
               </td>
-              <td>
-                <span id="specification">{{ product.specification || 'N/A' }}</span>
-              </td>
+              <td>Amount offered</td>
               <td>
                 <span>
                   {{ product.price_per_unit || product.price_per_package || 0.0 | number: '1.2-2' }}
                   {{ quotation?.currency }} / {{ product.weight_unit || product.type_of_package }}
                 </span>
-              </td>
-              <td>
-                <span> {{ product.subtotal || 0.0 | number: '1.2-2' }} {{ quotation?.currency }} </span>
               </td>
             </tr>
           </tbody>
@@ -110,7 +108,7 @@
           <div class="col-md-9">
             <p class="heading-2">QUOTE REQUEST COMMENTS</p>
             <p>
-              {{ quoteRequest?.buyer_comments || 'N/A' }}
+              {{ quotation?.buyer_comments || 'N/A' }}
             </p>
             <p class="heading-2">QUOTATION COMMENTS</p>
             <p>
