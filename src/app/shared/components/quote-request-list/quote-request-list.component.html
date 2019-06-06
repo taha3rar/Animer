@@ -20,19 +20,15 @@
       <td>{{ quoteRequest?.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>{{ quoteRequest?.buyer.first_name }} {{ quoteRequest?.buyer.last_name }}</td>
       <td>
-        <span *ngIf="quoteRequest?.products?.length > 1" class="icon-text"
-          >Multiple <i class="material-icons" matTooltip="Many products">help_outline</i></span
-        >
-        <span *ngIf="quoteRequest?.products?.length == 1"> {{ (quoteRequest?.products)[0].produce }} </span>
-        <span *ngIf="quoteRequest?.products?.length < 1"> N/A </span>
+        <span *ngIf="quoteRequest.product"> {{ quoteRequest.product.produce }} </span>
+        <span *ngIf="!quoteRequest.product"> N/A </span>
       </td>
       <td>
-        <span *ngIf="quoteRequest?.document_weight_unit"
-          >{{ quoteRequest?.total_weight }} {{ quoteRequest?.document_weight_unit }}</span
+        <span *ngIf="quoteRequest.product.product_type == 'agricultural'"
+          >{{ quoteRequest.product.total_weight | number: '1.2-2' }} {{ quoteRequest.product.weight_unit }}</span
         >
-        <span *ngIf="!quoteRequest?.document_weight_unit" class="icon-text"
-          >Multiple
-          <i class="material-icons" matTooltip="Many weight unit or only processed products">help_outline</i></span
+        <span *ngIf="quoteRequest.product.product_type != 'agricultural'"
+          >{{ quoteRequest.product.amount_requested }} packages</span
         >
       </td>
       <td *ngIf="isBuyer">
