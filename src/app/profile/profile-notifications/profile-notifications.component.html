@@ -20,12 +20,25 @@
           <table class="notifications-table">
             <tr>
               <td>
-                <p>Receiving documents (Proforma invoices and purchase orders)</p>
+                <p>Receiving documents (Proforma Invoices and Purchase Orders)</p>
                 <p *ngIf="poPiNotification == 'true'">Turned on</p>
                 <p *ngIf="poPiNotification == 'false'">Turned off</p>
               </td>
               <td>
                 <select class="form-control" formControlName="poPi">
+                  <option [value]="true">On</option>
+                  <option [value]="false">Off</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Receiving Quote Requests and Quotations</p>
+                <p *ngIf="qrNotification == 'true'">Turned on</p>
+                <p *ngIf="qrNotification == 'false'">Turned off</p>
+              </td>
+              <td>
+                <select class="form-control" formControlName="qr">
                   <option [value]="true">On</option>
                   <option [value]="false">Off</option>
                 </select>

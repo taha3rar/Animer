@@ -31,6 +31,14 @@
           <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has uploaded a
           <strong>Necessary Document</strong>
         </p>
+        <p *ngIf="notification.type === 'quote-request'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
+          <strong>Quote Request</strong>
+        </p>
+        <p *ngIf="notification.type === 'quotation'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
+          <strong>Quotation</strong>
+        </p>
         <p>{{ notification.date_created | date: 'dd/MM/yyyy hh:mm aaa' }}</p>
       </div>
       <div class="clear-notification">
