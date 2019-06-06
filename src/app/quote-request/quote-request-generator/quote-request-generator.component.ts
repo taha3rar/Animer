@@ -40,11 +40,11 @@ export class QuoteRequestGeneratorComponent implements OnInit {
       numericId: this.draftQuoteRequest ? this.draftQuoteRequest.numericId : undefined,
       buyer: this.formBuilder.group({
         _id: this.buyer ? this.buyer._id : undefined,
-        numericId: this.buyer ? this.buyer.numericId : undefined,
         first_name: [this.buyer ? this.buyer.first_name : undefined, Validators.required],
         last_name: [this.buyer ? this.buyer.last_name : undefined, Validators.required],
         email: [this.buyer ? this.buyer.email : undefined, [Validators.required]],
         company_name: [this.buyer ? this.buyer.company_name : undefined],
+        company_number: [this.buyer ? this.buyer.company_number : undefined],
         address: [this.buyer ? this.buyer.address : undefined],
         city: [this.buyer ? this.buyer.city : undefined],
         zipcode: [this.buyer ? this.buyer.zipcode : undefined],
@@ -62,7 +62,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
     this.quoteRequest.buyer.contact_by = this.quoteRequestForm.value.buyer.contact_by.value;
     if (this.draftQuoteRequest) {
       this.quoteRequest.sellers = this.draftQuoteRequest.sellers;
-      this.quoteRequest.products = this.draftQuoteRequest.products;
+      this.quoteRequest.product = this.draftQuoteRequest.product;
     }
     this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
     this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
@@ -109,7 +109,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
     this.location.back();
   }
 
-  validQuoteRequest(receivedValue: Boolean) {
-    this.isValid = receivedValue;
+  validQuoteRequest(QuoteRequestValid: Boolean) {
+    this.isValid = QuoteRequestValid;
   }
 }

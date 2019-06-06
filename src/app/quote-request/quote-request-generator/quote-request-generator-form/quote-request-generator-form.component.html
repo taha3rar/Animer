@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let product of products; let i = index">
+            <tr *ngIf="product">
               <td>
                 <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
                   {{ product.produce }} / {{ product.variety }}
@@ -29,17 +29,17 @@
               </td>
               <td>
                 <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-                  {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+                  {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
                   {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
                 </span>
                 <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-                  {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+                  {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
                   {{ product.items_per_package | number: '1.0'
                   }}<span *ngIf="product.items_per_package > 1"> items)</span
                   ><span *ngIf="product.items_per_package == 0"> item)</span>
                 </span>
                 <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-                  {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }})
+                  {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }})
                 </span>
               </td>
               <td>
@@ -52,10 +52,10 @@
                 <span id="specification">{{ product.specification || 'N/A' }}</span>
               </td>
               <td class="text-center">
-                <button class="btn-circle remove" (click)="deleteProduct(i)">
+                <button class="btn-circle remove" (click)="deleteProduct()">
                   <i class="material-icons">remove</i>
                 </button>
-                <button class="btn-circle edit" (click)="openUpdateDialog(i)">
+                <button class="btn-circle edit" (click)="openUpdateDialog()">
                   <i class="material-icons">edit</i>
                 </button>
               </td>
@@ -63,7 +63,7 @@
           </tbody>
         </table>
         <div class="dropdown">
-          <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          <button [disabled]="product" class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">
             Add New Product
           </button>
           <ul class="dropdown-menu">
@@ -178,11 +178,11 @@
     </div>
   </div>
 </div>
-<button [hidden]="!quoteRequestForm.valid || products.length <= 0" class="bttn-primary pull right next-step">
+<button [hidden]="!quoteRequestForm.valid || !product" class="bttn-primary pull right next-step">
   Next Step &rarr;
 </button>
 <button
-  [hidden]="quoteRequestForm.valid && products.length > 0"
+  [hidden]="quoteRequestForm.valid && product"
   class="bttn-primary pull right"
   (click)="onSubmit(quoteRequestForm)"
 >

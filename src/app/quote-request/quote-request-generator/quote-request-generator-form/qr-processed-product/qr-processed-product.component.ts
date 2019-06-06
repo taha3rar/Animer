@@ -39,15 +39,15 @@ export class QrProcessedProductComponent extends BaseProductQuoteRequest impleme
     this.productForm.get('items_per_package').valueChanges.subscribe(val => {
       this.setTotalItems();
     });
-    this.productForm.get('quantity').valueChanges.subscribe(val => {
+    this.productForm.get('amount_requested').valueChanges.subscribe(val => {
       this.setTotalItems();
     });
   }
 
   setTotalItems(): void {
-    if (this.product.quantity.value && this.product.items_per_package.value) {
+    if (this.product.amount_requested.value && this.product.items_per_package.value) {
       this.productForm.patchValue({
-        total_amount_items: this.product.items_per_package.value * this.product.quantity.value
+        total_amount_items: this.product.items_per_package.value * this.product.amount_requested.value
       });
     } else {
       this.productForm.patchValue({ package_weight: undefined });

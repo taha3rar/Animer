@@ -54,10 +54,17 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     if (isChecked) {
       this.targeted_sellers.push({
         _id: seller._id,
-        numericId: seller.numericId,
         first_name: seller.first_name,
         last_name: seller.last_name,
-        company_name: seller.company_name
+        company_name: seller.company_name,
+        company_number: seller.company_number,
+        phone_number: seller.phone_number,
+        email: seller.email,
+        address: seller.address,
+        city: seller.city,
+        country: seller.country,
+        zipcode: seller.zipcode,
+        contact_by: seller.contact_by
       });
     } else {
       const index = this.targeted_sellers.findIndex(x => x._id === seller._id);

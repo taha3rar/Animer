@@ -23,7 +23,7 @@ export class BaseProductQuoteRequest extends BaseValidationComponent implements 
       product_type: [this.productType, Validators.required],
       produce: [this.data.product ? this.data.product.produce : undefined, Validators.required],
       type_of_package: [this.data.product ? this.data.product.type_of_package : undefined, Validators.required],
-      quantity: [this.data.product ? this.data.product.quantity : undefined, Validators.required],
+      amount_requested: [this.data.product ? this.data.product.amount_requested : undefined, Validators.required],
       variety: [this.data.product ? this.data.product.variety : undefined, Validators.required],
       package_weight: [this.data.product ? this.data.product.package_weight : undefined, Validators.required],
       weight_unit: [this.data.product ? this.data.product.weight_unit : undefined, Validators.required],

@@ -51,10 +51,10 @@ export class QrAgriculturalProductComponent extends BaseProductQuoteRequest impl
   setPackageAmount(): void {
     if (this.product.package_weight.value && this.product.total_weight.value) {
       this.productForm.patchValue({
-        quantity: Math.ceil(this.product.total_weight.value / this.product.package_weight.value)
+        amount_requested: Math.ceil(this.product.total_weight.value / this.product.package_weight.value)
       });
     } else {
-      this.productForm.patchValue({ quantity: 0 });
+      this.productForm.patchValue({ amount_requested: 0 });
     }
   }
 }

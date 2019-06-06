@@ -55,7 +55,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let product of quoteRequest?.products; let i = index">
+                <tr *ngIf="quoteRequest?.product">
                   <td>
                     <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
                       {{ product.produce }} / {{ product.variety }}

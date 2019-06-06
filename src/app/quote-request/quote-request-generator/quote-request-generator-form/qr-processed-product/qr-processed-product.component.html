@@ -38,18 +38,18 @@
           <p>This field is required</p>
         </div>
       </div>
-      <div class="form-group col-md-6" [ngClass]="showFieldStyle('quantity')">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('amount_requested')">
         <label for="variety">Total Number of Packages *</label>
         <input
           type="number"
           id="total-packages"
-          formControlName="quantity"
-          name="quantity"
+          formControlName="amount_requested"
+          name="amount_requested"
           class="form-control"
           placeholder="Ex. 20"
           required
         />
-        <div class="help-block" *ngIf="isFieldInvalid('quantity')">
+        <div class="help-block" *ngIf="isFieldInvalid('amount_requested')">
           <p>This field is required</p>
         </div>
       </div>

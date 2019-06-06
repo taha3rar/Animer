@@ -26,7 +26,7 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
   currencies = currencies;
   buyer: User;
   targeted_sellers: SellerQuoteRequest[];
-  products: ProductQuoteRequest[];
+  product: ProductQuoteRequest;
   quoteRequest: QuoteRequest;
   page = 1;
 
@@ -45,7 +45,7 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
     this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
       this.quoteRequest = quoteRequest;
       this.targeted_sellers = this.quoteRequest.sellers;
-      this.quoteRequest.products ? (this.products = this.quoteRequest.products) : (this.products = []);
+      this.quoteRequest.product ? (this.product = this.quoteRequest.product) : (this.product = undefined);
     });
     this.buyer = this.route.snapshot.data['buyer'];
     this.formInput = this.quoteRequestForm;
@@ -69,25 +69,21 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
     });
   }
 
-  openUpdateDialog(index: number) {
-    this.products[index].product_type === 'agricultural'
-      ? this.openDialogAgricultural(index)
-      : this.openDialogProcessed(index);
+  openUpdateDialog() {
+    this.product.product_type === 'agricultural' ? this.openDialogAgricultural() : this.openDialogProcessed();
   }
 
-  openDialogAgricultural(index?: number): void {
+  openDialogAgricultural(): void {
     const data = {
-      index: index,
-      product: this.products[index]
+      product: this.product
     };
 
     this.openDialog('720px', QrAgriculturalProductComponent, data);
   }
 
-  openDialogProcessed(index?: number): void {
+  openDialogProcessed(): void {
     const data = {
-      index: index,
-      product: this.products[index]
+      product: this.product
     };
 
     this.openDialog('765px', QrProcessedProductComponent, data);
@@ -104,47 +100,41 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
     const dialogRef = this.dialog.open(component, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
-        data.index >= 0 ? this.updateProduct(data.product, data.index) : this.addProduct(data.product);
+        this.updateProduct(data.product, data.index);
       }
     });
   }
 
-  addProduct(product: ProductQuoteRequest) {
-    this.products.push(product);
-    this.pushProducts();
-  }
-
   updateProduct(product: ProductQuoteRequest, index: number) {
-    this.products[index] = product;
+    this.product = product;
     this.pushProducts();
   }
 
-  deleteProduct(index: number) {
-    this.products.splice(index, 1);
+  deleteProduct() {
+    this.product = undefined;
     this.pushProducts();
   }
 
   pushProducts() {
-    this.quoteRequest.products = this.products;
-    this.measurementUnitConflict(this.products);
+    this.quoteRequest.product = this.product;
     this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
   }
 
-  measurementUnitConflict(products: ProductQuoteRequest[]): String {
-    let baseMeasurementUnit: String;
-    for (let i = 0; i < products.length; i++) {
-      if (products[i].product_type === 'agricultural') {
-        if (!baseMeasurementUnit) {
-          baseMeasurementUnit = products[i].weight_unit;
-        } else {
-          if (baseMeasurementUnit !== products[i].weight_unit) {
-            return undefined;
-          }
-        }
-      }
-    }
-    return baseMeasurementUnit;
-  }
+  // measurementUnitConflict(products: ProductQuoteRequest[]): String {
+  //   let baseMeasurementUnit: String;
+  //   for (let i = 0; i < products.length; i++) {
+  //     if (products[i].product_type === 'agricultural') {
+  //       if (!baseMeasurementUnit) {
+  //         baseMeasurementUnit = products[i].weight_unit;
+  //       } else {
+  //         if (baseMeasurementUnit !== products[i].weight_unit) {
+  //           return undefined;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return baseMeasurementUnit;
+  // }
 
   draftQuoterequest() {
     this.validQuoteRequest.emit(true);

@@ -23,7 +23,7 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
 
   ngOnInit() {
     this.quotation = this.quotationForm.value;
-    this.products = <ProductQuotation[]>this.quoteRequest.products;
+    // this.product = <ProductQuotation>this.quoteRequest.product;
     this.onChanges();
   }
 

@@ -12,5 +12,5 @@ export class ProductQuoteRequest {
   item_measurement_unit: String;
   items_per_package: String;
   total_amount_items: Number;
-  quantity: Number;
+  amount_requested: Number;
 }

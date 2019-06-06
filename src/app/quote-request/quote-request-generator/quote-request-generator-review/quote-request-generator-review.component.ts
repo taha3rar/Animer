@@ -4,7 +4,7 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { QuoteRequestService } from '@app/core/api/quote-request.service';
 import { AlertsService } from '@app/core/alerts.service';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
+import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quoteRequest';
 
 @Component({
   selector: 'app-quote-request-generator-review',
@@ -15,7 +15,7 @@ export class QuoteRequestGeneratorReviewComponent implements OnInit {
   @Output() validQuoteRequest = new EventEmitter<Boolean>();
   quoteRequest: QuoteRequest;
   page = 1;
-  valid_by: string;
+  product: ProductQuoteRequest;
 
   constructor(
     private quoteRequestDataService: QuoteRequestDataService,
@@ -27,7 +27,7 @@ export class QuoteRequestGeneratorReviewComponent implements OnInit {
   ngOnInit() {
     this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
       this.quoteRequest = quoteRequest;
-      this.valid_by = this.quoteRequest.valid_by;
+      this.product = this.quoteRequest.product;
     });
   }
 
