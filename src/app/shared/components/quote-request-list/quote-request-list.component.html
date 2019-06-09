@@ -36,7 +36,7 @@
         {{ quoteRequest?.sellers?.length }}
       </td>
       <td *ngIf="isBuyer">
-        Quotes not implemented yet
+        {{ quoteRequest.quotations.count }}
       </td>
       <td>
         <div *ngIf="quoteRequest.status === qrSent || quoteRequest.status === qrReceived" class="status status-orange">
