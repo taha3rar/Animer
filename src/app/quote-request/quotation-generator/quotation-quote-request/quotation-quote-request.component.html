@@ -55,7 +55,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngIf="quoteRequest?.product">
+                <tr *ngIf="product">
                   <td>
                     <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
                       {{ product.produce }} / {{ product.variety }}
@@ -70,17 +70,17 @@
                   </td>
                   <td>
                     <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-                      {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+                      {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
                       {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
                     </span>
                     <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-                      {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+                      {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
                       {{ product.items_per_package | number: '1.0'
                       }}<span *ngIf="product.items_per_package > 1"> items)</span
                       ><span *ngIf="product.items_per_package == 0"> item)</span>
                     </span>
                     <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-                      {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }})
+                      {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }})
                     </span>
                   </td>
                   <td>

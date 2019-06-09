@@ -6,11 +6,11 @@ export class ProductQuoteRequest {
   type_of_package: String;
   package_weight: Number;
   weight_unit: String;
-  total_weight: Number;
+  total_weight_requested: Number;
   item_package_type: String;
   item_measurement_amount: Number;
   item_measurement_unit: String;
   items_per_package: String;
   total_amount_items: Number;
-  amount_requested: Number;
+  quantity_requested: Number;
 }

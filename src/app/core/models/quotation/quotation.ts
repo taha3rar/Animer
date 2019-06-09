@@ -39,7 +39,7 @@ export class Quotation {
   };
   valid_by: Date;
   draft: Boolean;
-  products: ProductQuotation[];
+  product: ProductQuotation;
   status: String;
   date_created: Date;
   total_price: Number;

@@ -26,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products; let i = index">
+        <tr *ngIf="product">
           <td>
             <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
               {{ product.produce }} / {{ product.variety }}
@@ -41,25 +41,32 @@
           </td>
           <td>
             <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-              {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+              {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
               {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
             </span>
             <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-              {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
+              {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
               {{ product.items_per_package | number: '1.0' }}<span *ngIf="product.items_per_package > 1"> items)</span
               ><span *ngIf="product.items_per_package == 0"> item)</span>
             </span>
             <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-              {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }})
+              {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }})
             </span>
           </td>
           <td>
             <span id="specification">{{ product.specification || 'N/A' }}</span>
           </td>
-          <td>{{ product.total_weight }} {{ product.weight_unit }}</td>
+          <td>{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit }}</td>
           <td>
             <label for="amount">Offered amount (in {{ product.weight_unit }})</label>
-            <input id="amount" min="0" max="492" type="number" class="form-control" placeholder="Add amount here" />
+            <input
+              id="amount"
+              [(ngModel)]="product.amount_offered"
+              min="0"
+              type="number"
+              class="form-control"
+              placeholder="Add amount here"
+            />
           </td>
           <td>
             <label for="price"

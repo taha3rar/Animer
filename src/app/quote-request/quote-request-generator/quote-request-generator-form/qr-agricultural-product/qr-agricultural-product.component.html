@@ -47,18 +47,18 @@
           <p>This field is required</p>
         </div>
       </div>
-      <div class="form-group col-md-6" [ngClass]="showFieldStyle('total_weight')">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('total_weight_requested')">
         <label for="total-amount">Total Amount *</label>
         <input
           type="number"
           min="0"
           id="total-amount"
-          formControlName="total_weight"
-          name="total_weight"
+          formControlName="total_weight_requested"
+          name="total_weight_requested"
           class="form-control"
           placeholder="Ex. 100"
         />
-        <div class="help-block" *ngIf="isFieldInvalid('total_weight')">
+        <div class="help-block" *ngIf="isFieldInvalid('total_weight_requested')">
           <p>This field is required</p>
         </div>
       </div>
@@ -103,8 +103,8 @@
         <input
           type="number"
           id="total-packages"
-          formControlName="amount_requested"
-          name="amount_requested"
+          formControlName="quantity_requested"
+          name="quantity_requested"
           class="form-control"
           readonly
         />

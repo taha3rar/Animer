@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { User } from '@app/core/models/order/user';
+import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quoteRequest';
 
 @Component({
   selector: 'app-quotation-quote-request',
@@ -12,8 +13,11 @@ export class QuotationQuoteRequestComponent implements OnInit {
   quoteRequest: QuoteRequest;
   @Input()
   seller: User;
+  product: ProductQuoteRequest;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.product = this.quoteRequest.product;
+  }
 }

@@ -25,10 +25,11 @@
       </td>
       <td>
         <span *ngIf="quoteRequest.product.product_type == 'agricultural'"
-          >{{ quoteRequest.product.total_weight | number: '1.2-2' }} {{ quoteRequest.product.weight_unit }}</span
+          >{{ quoteRequest.product.total_weight_requested | number: '1.2-2' }}
+          {{ quoteRequest.product.weight_unit }}</span
         >
         <span *ngIf="quoteRequest.product.product_type != 'agricultural'"
-          >{{ quoteRequest.product.amount_requested }} packages</span
+          >{{ quoteRequest.product.quantity_requested }} packages</span
         >
       </td>
       <td *ngIf="isBuyer">

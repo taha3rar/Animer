@@ -31,8 +31,8 @@ export class QrAgriculturalProductComponent extends BaseProductQuoteRequest impl
     this.productForm.controls['item_measurement_unit'].disable();
     this.productForm.controls['items_per_package'].disable();
     this.productForm.controls['total_amount_items'].disable();
-    this.onChanges();
     this.formInput = this.productForm;
+    this.onChanges();
   }
 
   get product() {
@@ -43,18 +43,18 @@ export class QrAgriculturalProductComponent extends BaseProductQuoteRequest impl
     this.productForm.get('package_weight').valueChanges.subscribe(val => {
       this.setPackageAmount();
     });
-    this.productForm.get('total_weight').valueChanges.subscribe(val => {
+    this.productForm.get('total_weight_requested').valueChanges.subscribe(val => {
       this.setPackageAmount();
     });
   }
 
   setPackageAmount(): void {
-    if (this.product.package_weight.value && this.product.total_weight.value) {
+    if (this.product.package_weight.value && this.product.total_weight_requested.value) {
       this.productForm.patchValue({
-        amount_requested: Math.ceil(this.product.total_weight.value / this.product.package_weight.value)
+        quantity_requested: Math.ceil(this.product.total_weight_requested.value / this.product.package_weight.value)
       });
     } else {
-      this.productForm.patchValue({ amount_requested: 0 });
+      this.productForm.patchValue({ quantity_requested: 0 });
     }
   }
 }

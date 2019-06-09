@@ -15,7 +15,7 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
   @Input()
   quoteRequest: QuoteRequest;
   quotation: Quotation;
-  products: ProductQuotation[] = [];
+  product: ProductQuotation;
   @Output()
   quotationEvent = new EventEmitter<Quotation>();
 
@@ -23,7 +23,8 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
 
   ngOnInit() {
     this.quotation = this.quotationForm.value;
-    // this.product = <ProductQuotation>this.quoteRequest.product;
+    this.product = <ProductQuotation>this.quoteRequest.product;
+    this.product.quantity_requested = this.product.quantity_requested;
     this.onChanges();
   }
 
@@ -43,29 +44,21 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
   }
 
   setProductSubtotal(index: number): void {
-    if (this.products[index].product_type === 'agricultural') {
-      this.products[index].product_subtotal = Number(
-        (this.products[index].total_weight * this.products[index].price_per_unit).toFixed(2)
+    if (this.product.product_type === 'agricultural') {
+      this.product.product_subtotal = Number(
+        (this.product.total_weight_offered * this.product.price_per_unit).toFixed(2)
       );
     } else {
-      this.products[index].product_subtotal = Number(
-        (this.products[index].quantity * this.products[index].price_per_package).toFixed(2)
-      );
+      this.product.product_subtotal = Number((this.product.quantity_offered * this.product.package_price).toFixed(2));
     }
     this.setTotalPrice();
   }
 
   setTotalPrice() {
-    let total_price = 0;
-    this.products.forEach(function(product: ProductQuotation) {
-      if (product.product_subtotal) {
-        total_price += product.product_subtotal;
-      }
-    });
     this.quotationForm.patchValue({
-      total_price: total_price || undefined
+      total_price: this.product.product_subtotal || undefined
     });
-    this.quotation.products = this.products;
+    this.quotation.product = this.product;
     this.quotation.total_price = this.quotationForm.value.total_price;
     this.quotationEvent.emit(this.quotation);
   }
