@@ -16,27 +16,57 @@
         </div>
       </div>
       <div class="info">
-        <span class="pull-right"
-          ><span class="heading-4">Best Offer </span><span class="heading-2"> 100,000 KES</span></span
-        >
-        <span class="heading-2">5</span><span class="heading-4"> Quotes Received</span>
+        <div class="col-md-3">
+          <p class="heading-3">PRODUCT</p>
+          <p class="normal-text-bold">Green Coffee/Kona</p>
+        </div>
+        <div class="col-md-3">
+          <p class="heading-3">QUOTES RECEIVED</p>
+          <p class="normal-text-bold">4</p>
+        </div>
+        <div class="col-md-3">
+          <p class="heading-3">TOTAL AMOUNT REQUESTED</p>
+          <p class="normal-text-bold">5000KG</p>
+        </div>
+        <div class="col-md-3">
+          <p class="heading-3">AMOUNT ACCEPTED</p>
+          <p class="normal-text-bold">2000KG</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <div class="col-md-12">
-  <div class="two-btns">
-    <button (click)="viewAs('quoteRequest')" [class.active]="viewQuoteRequest">
-      Quote Request Details
-    </button>
-    <button (click)="viewAs('quotations')" [class.active]="viewQuotations">
-      Quotations Received
-    </button>
-  </div>
-</div>
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a data-toggle="tab" href="#qr">Quote Request Details</a>
+    </li>
+    <li><a data-toggle="tab" href="#quotationsReceived">Quotations Received</a></li>
+    <li><a data-toggle="tab" href="#quotationsAccepted">Quotations Accepted</a></li>
+  </ul>
 
-<div class="col-md-12 mt-4">
-  <app-quotations-list *ngIf="viewQuotations"></app-quotations-list>
-  <app-quote-request *ngIf="viewQuoteRequest"></app-quote-request>
+  <div class="tab-content">
+    <div class="tab-pane active" id="qr">
+      <div class="panel panel-tab">
+        <div class="panel-body">
+          <app-quote-request></app-quote-request>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="quotationsReceived">
+      <div class="panel panel-tab">
+        <div class="panel-body">
+          <app-quotations-list></app-quotations-list>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="quotationsAccepted">
+      <div class="panel panel-tab">
+        <div class="panel-body">
+          <app-quotations-list></app-quotations-list>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

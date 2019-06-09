@@ -7,23 +7,11 @@ import { Location } from '@angular/common';
   styleUrls: ['./quote-request-view.component.scss']
 })
 export class QuoteRequestViewComponent implements OnInit {
-  viewQuotations = false;
-  viewQuoteRequest = true;
   constructor(private location: Location) {}
 
   ngOnInit() {}
 
   back() {
     this.location.back();
-  }
-
-  viewAs(section: any) {
-    this.viewQuotations = false;
-    this.viewQuoteRequest = false;
-    if (section === 'quotations') {
-      this.viewQuotations = true;
-    } else {
-      this.viewQuoteRequest = true;
-    }
   }
 }

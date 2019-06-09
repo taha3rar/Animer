@@ -39,7 +39,8 @@
             <tr>
               <th>PRODUCT NAME</th>
               <th>PACKAGES</th>
-              <th>AMOUNT</th>
+              <th>REQUESTED AMOUNT</th>
+              <th>OFFERED AMOUNT</th>
               <th>SPECIFICATIONS</th>
               <th>RATE</th>
               <th>PRICE</th>
@@ -60,6 +61,11 @@
               <td>
                 <span>
                   5000 KG
+                </span>
+              </td>
+              <td>
+                <span>
+                  2000 KG
                 </span>
               </td>
               <td>
@@ -101,6 +107,7 @@
           </div>
         </div>
       </div>
+      <button *ngIf="!quotationAccepted" class="bttn-success pull-right mt-5">Accept Quotation</button>
     </div>
   </div>
 </div>
