@@ -24,6 +24,8 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
   quoteRequest: QuoteRequest = new QuoteRequest();
   pageClients = 1;
   pageEcosystems = 1;
+  pageEcosystemSellers = 1;
+  sellersSecOpened = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -71,6 +73,7 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     for (let i = 0; i < ecosystem.participants.length; i++) {
       this.targetSeller(ecosystem.participants[i], true, false);
     }
+    this.displayEcosystemSellers();
   }
 
   isPicked(ecosystem: Ecosystem): Boolean {
@@ -94,6 +97,11 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
   }
 
   toggleTable(table: string): void {
+    if (table === 'clients' && this.sellersSecOpened) {
+      $('#ecosystem-sellers').hide();
+      $('#suppliers-list').toggleClass('col-md-8 col-md-12');
+      this.sellersSecOpened = false;
+    }
     this.toggledTable = table;
   }
 
@@ -103,5 +111,26 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
       this.alerts.showAlert('Your quote request has been saved');
       this.router.navigateByUrl('/quote-request/list');
     });
+  }
+
+  displayEcosystemSellers() {
+    if (this.sellersSecOpened) {
+      $('#ecosystem-sellers').hide();
+      $('#suppliers-list').toggleClass('col-md-8 col-md-12');
+
+      setTimeout(function() {
+        $('#suppliers-list').toggleClass('col-md-8 col-md-12');
+      }, 300);
+
+      setTimeout(function() {
+        $('#ecosystem-sellers').show();
+      }, 600);
+    } else {
+      $('#suppliers-list').toggleClass('col-md-12 col-md-8');
+      setTimeout(function() {
+        $('#ecosystem-sellers').show();
+      }, 300);
+    }
+    this.sellersSecOpened = true;
   }
 }

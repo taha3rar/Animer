@@ -15,40 +15,40 @@
   <tbody>
     <tr *ngFor="let quoteRequest of (quoteRequests | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
       <td class="text-center">
-        {{ quoteRequest.numericId }}
+        {{ quoteRequest?.numericId }}
       </td>
-      <td>{{ quoteRequest.date_created | date: 'dd/MM/yyyy' }}</td>
-      <td>{{ quoteRequest.buyer.first_name }} {{ quoteRequest.buyer.last_name }}</td>
+      <td>{{ quoteRequest?.date_created | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ quoteRequest?.buyer.first_name }} {{ quoteRequest?.buyer.last_name }}</td>
       <td>
-        <span *ngIf="quoteRequest.products.length > 1" class="icon-text"
+        <span *ngIf="quoteRequest?.products?.length > 1" class="icon-text"
           >Multiple <i class="material-icons" matTooltip="Many products">help_outline</i></span
         >
-        <span *ngIf="quoteRequest.products.length == 1"> {{ quoteRequest.products[0].produce }} </span>
-        <span *ngIf="quoteRequest.products.length < 1"> N/A </span>
+        <span *ngIf="quoteRequest?.products?.length == 1"> {{ (quoteRequest?.products)[0].produce }} </span>
+        <span *ngIf="quoteRequest?.products?.length < 1"> N/A </span>
       </td>
       <td>
-        <span *ngIf="quoteRequest.document_weight_unit"
-          >{{ quoteRequest.total_weight }} {{ quoteRequest.document_weight_unit }}</span
+        <span *ngIf="quoteRequest?.document_weight_unit"
+          >{{ quoteRequest?.total_weight }} {{ quoteRequest?.document_weight_unit }}</span
         >
-        <span *ngIf="!quoteRequest.document_weight_unit" class="icon-text"
+        <span *ngIf="!quoteRequest?.document_weight_unit" class="icon-text"
           >Multiple
           <i class="material-icons" matTooltip="Many weight unit or only processed products">help_outline</i></span
         >
       </td>
       <td *ngIf="isBuyer">
-        {{ quoteRequest.sellers.length }}
+        {{ quoteRequest?.sellers?.length }}
       </td>
       <td *ngIf="isBuyer">
         Quotes not implemented yet
       </td>
       <td>
         <div *ngIf="quoteRequest.status === qrSent || quoteRequest.status === qrReceived" class="status status-orange">
-          {{ quoteRequest.status }}
+          {{ quoteRequest?.status }}
         </div>
         <div *ngIf="quoteRequest.status === qSent || quoteRequest.status === qReceived" class="status status-blue">
-          {{ quoteRequest.status }}
+          {{ quoteRequest?.status }}
         </div>
-        <div *ngIf="quoteRequest.draft" class="status status-purple">{{ quoteRequest.status }}</div>
+        <div *ngIf="quoteRequest.draft" class="status status-purple">{{ quoteRequest?.status }}</div>
       </td>
       <td class="text-right">
         <button

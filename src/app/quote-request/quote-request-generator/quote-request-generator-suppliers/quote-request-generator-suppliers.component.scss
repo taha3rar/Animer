@@ -32,3 +32,17 @@
   display: flex;
   align-items: center;
 }
+
+.col-md-8 {
+  padding-left: 0px;
+  padding-right: 5.5px;
+}
+
+.col-md-4 {
+  padding-right: 5.5px;
+}
+
+div#suppliers-list,
+div#ecosystem-sellers {
+  transition: all 0.25s;
+}
