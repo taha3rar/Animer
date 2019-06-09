@@ -4,7 +4,7 @@ export class ProductQuotation {
   produce: String;
   variety: String;
   type_of_package: String;
-  package_weight: Number;
+  package_weight: number;
   weight_unit: String;
   total_weight_requested: number;
   total_weight_offered: number;

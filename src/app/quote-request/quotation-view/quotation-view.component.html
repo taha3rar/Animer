@@ -57,46 +57,57 @@
           <tbody>
             <tr *ngIf="quotation.product">
               <td>
-                <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-                  {{ product.produce }} / {{ product.variety }}
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.produce }} / {{ quotation.product.variety }}
                 </span>
-                <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-                  {{ product.produce }} / {{ product.item_measurement_amount | number: '1.2-2' }}
-                  {{ product.item_measurement_unit | uppercase }} / {{ product.item_package_type }}
+                <span *ngIf="quotation.product.product_type == 'processed' && quotation.product.item_package_type">
+                  {{ quotation.product.produce }} / {{ quotation.product.item_measurement_amount | number: '1.2-2' }}
+                  {{ quotation.product.item_measurement_unit | uppercase }} / {{ quotation.product.item_package_type }}
                 </span>
-                <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-                  {{ product.produce }}
-                </span>
-              </td>
-              <td>
-                <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-                  {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
-                  {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
-                </span>
-                <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-                  {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
-                  {{ product.items_per_package | number: '1.0'
-                  }}<span *ngIf="product.items_per_package > 1"> items)</span
-                  ><span *ngIf="product.items_per_package == 0"> item)</span>
-                </span>
-                <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-                  {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }})
+                <span *ngIf="quotation.product.product_type == 'processed' && !quotation.product.item_package_type">
+                  {{ quotation.product.produce }}
                 </span>
               </td>
               <td>
-                <span id="specification">{{ product.specification || 'N/A' }}</span>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }} /
+                  {{ quotation.product.package_weight | number: '1.2-2' }}
+                  {{ quotation.product.weight_unit | uppercase }})
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && quotation.product.item_package_type">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }} /
+                  {{ quotation.product.items_per_package | number: '1.0'
+                  }}<span *ngIf="quotation.product.items_per_package > 1"> items)</span
+                  ><span *ngIf="quotation.product.items_per_package == 0"> item)</span>
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && !quotation.product.item_package_type">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }})
+                </span>
               </td>
               <td>
-                <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
-                  >{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }}</span
+                <span id="specification">{{ quotation.product.specification || 'N/A' }}</span>
+              </td>
+              <td>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'"
+                  >{{ quotation.product.total_weight_requested | number: '1.2-2' }}
+                  {{ quotation.product.weight_unit | uppercase }}</span
                 >
-                <span *ngIf="product.product_type == 'processed'">N/A</span>
+                <span *ngIf="quotation.product.product_type != 'agricultural'"
+                  >{{ quotation.product.quantity_requested }} packages</span
+                >
               </td>
-              <td>Amount offered</td>
+              <td>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.total_weight_offered | number: '1.2-2' }} {{ quotation.product.weight_unit }}
+                </span>
+                <span *ngIf="quotation.product.product_type != 'agricultural'">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} {{ quotation.product.type_of_package }}
+                </span>
+              </td>
               <td>
                 <span>
-                  {{ product.price_per_unit || product.price_per_package || 0.0 | number: '1.2-2' }}
-                  {{ quotation?.currency }} / {{ product.weight_unit || product.type_of_package }}
+                  {{ quotation.product.price_per_unit || quotation.product.package_price || 0.0 | number: '1.2-2' }}
+                  {{ quotation?.currency }} / {{ quotation.product.weight_unit || quotation.product.type_of_package }}
                 </span>
               </td>
             </tr>
@@ -129,6 +140,13 @@
     </div>
   </div>
 </div>
-<button *ngIf="isGenerator" class="bttn-primary pull-right next-step" (click)="submitQuotation()">
+<button
+  *ngIf="isGenerator && quotation.total_price"
+  class="bttn-primary pull-right next-step"
+  (click)="submitQuotation()"
+>
+  Submit
+</button>
+<button *ngIf="isGenerator && !quotation.total_price" class="bttn-primary pull-right next-step">
   Submit
 </button>

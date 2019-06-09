@@ -13,7 +13,7 @@
           <tr>
             <td class="heading-4-blue">VALID BY</td>
             <td *ngIf="quoteRequest?.valid_by">{{ quoteRequest?.valid_by | date: 'dd/MM/yyyy' }}</td>
-            <td *ngIf="!quoteRequest?.valid_by">'N/A'</td>
+            <td *ngIf="!quoteRequest?.valid_by">N/A</td>
           </tr>
         </table>
       </div>
@@ -70,24 +70,27 @@
                   </td>
                   <td>
                     <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-                      {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
+                      {{ product.quantity_requested | number: '1.0' }} ({{ product.type_of_package }} /
                       {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
                     </span>
                     <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-                      {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
+                      {{ product.quantity_requested | number: '1.0' }} ({{ product.type_of_package }} /
                       {{ product.items_per_package | number: '1.0'
                       }}<span *ngIf="product.items_per_package > 1"> items)</span
                       ><span *ngIf="product.items_per_package == 0"> item)</span>
                     </span>
                     <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-                      {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }})
+                      {{ product.quantity_requested | number: '1.0' }} ({{ product.type_of_package }})
                     </span>
                   </td>
                   <td>
-                    <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
-                      >{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }}</span
+                    <span *ngIf="quoteRequest.product.product_type == 'agricultural'"
+                      >{{ quoteRequest.product.total_weight_requested | number: '1.2-2' }}
+                      {{ quoteRequest.product.weight_unit }}</span
                     >
-                    <span *ngIf="product.product_type == 'processed'">N/A</span>
+                    <span *ngIf="quoteRequest.product.product_type != 'agricultural'"
+                      >{{ quoteRequest.product.quantity_requested }} packages</span
+                    >
                   </td>
                   <td>
                     <span id="specification">{{ product.specification || 'N/A' }}</span>

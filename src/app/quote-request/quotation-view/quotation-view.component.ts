@@ -6,6 +6,7 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { QuotationService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
 import { Router } from '@angular/router';
+import { ProductQuotation } from '@app/core/models/quotation/product-quotation';
 
 @Component({
   selector: 'app-quotation-view',
@@ -17,6 +18,7 @@ export class QuotationViewComponent implements OnInit {
   @Input() isView = false;
   @Input() quotation: Quotation;
   @Input() quoteRequest: QuoteRequest;
+  product: ProductQuotation;
 
   constructor(
     private location: Location,

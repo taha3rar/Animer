@@ -24,7 +24,8 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
   ngOnInit() {
     this.quotation = this.quotationForm.value;
     this.product = <ProductQuotation>this.quoteRequest.product;
-    this.product.quantity_requested = this.product.quantity_requested;
+    this.product.quantity_offered = this.product.quantity_requested;
+    this.product.total_weight_offered = this.product.total_weight_requested;
     this.onChanges();
   }
 
@@ -36,25 +37,26 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
     return this.quotationForm.controls.seller.value;
   }
 
-  onChanges() {
+  onChanges(): void {
     this.quotationForm.get('seller_comments').valueChanges.subscribe(seller_comments => {
       this.quotation.seller_comments = seller_comments;
       this.quotationEvent.emit(this.quotation);
     });
   }
 
-  setProductSubtotal(index: number): void {
+  setProductSubtotal(): void {
     if (this.product.product_type === 'agricultural') {
       this.product.product_subtotal = Number(
         (this.product.total_weight_offered * this.product.price_per_unit).toFixed(2)
       );
+      this.product.quantity_offered = Math.ceil(this.product.total_weight_offered / this.product.package_weight);
     } else {
       this.product.product_subtotal = Number((this.product.quantity_offered * this.product.package_price).toFixed(2));
     }
     this.setTotalPrice();
   }
 
-  setTotalPrice() {
+  setTotalPrice(): void {
     this.quotationForm.patchValue({
       total_price: this.product.product_subtotal || undefined
     });

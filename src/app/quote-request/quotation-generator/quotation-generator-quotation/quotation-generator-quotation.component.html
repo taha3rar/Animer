@@ -41,32 +41,55 @@
           </td>
           <td>
             <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-              {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
+              {{ product.quantity_offered || 0 | number: '1.0' }} ({{ product.type_of_package }} /
               {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
             </span>
             <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-              {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }} /
+              {{ product.quantity_offered || 0 | number: '1.0' }} ({{ product.type_of_package }} /
               {{ product.items_per_package | number: '1.0' }}<span *ngIf="product.items_per_package > 1"> items)</span
               ><span *ngIf="product.items_per_package == 0"> item)</span>
             </span>
             <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-              {{ product.amount_requested | number: '1.0' }} ({{ product.type_of_package }})
+              {{ product.quantity_offered || 0 | number: '1.0' }} ({{ product.type_of_package }})
             </span>
           </td>
           <td>
             <span id="specification">{{ product.specification || 'N/A' }}</span>
           </td>
-          <td>{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit }}</td>
           <td>
-            <label for="amount">Offered amount (in {{ product.weight_unit }})</label>
-            <input
-              id="amount"
-              [(ngModel)]="product.amount_offered"
-              min="0"
-              type="number"
-              class="form-control"
-              placeholder="Add amount here"
-            />
+            <span *ngIf="quoteRequest.product.product_type == 'agricultural'"
+              >{{ quoteRequest.product.total_weight_requested | number: '1.2-2' }}
+              {{ quoteRequest.product.weight_unit }}</span
+            >
+            <span *ngIf="quoteRequest.product.product_type != 'agricultural'"
+              >{{ quoteRequest.product.quantity_requested }} packages</span
+            >
+          </td>
+          <td>
+            <span *ngIf="quoteRequest.product.product_type == 'agricultural'">
+              <label for="total_weight_offered">Offered amount (in {{ product.weight_unit }})</label>
+              <input
+                id="total_weight_offered"
+                [(ngModel)]="product.total_weight_offered"
+                min="0"
+                type="number"
+                class="form-control"
+                (ngModelChange)="setProductSubtotal()"
+                placeholder="Add weight here"
+              />
+            </span>
+            <span *ngIf="quoteRequest.product.product_type != 'agricultural'">
+              <label for="quantity_offered">Offered amount ({{ product.type_of_package }})</label>
+              <input
+                id="quantity_offered"
+                [(ngModel)]="product.quantity_offered"
+                min="0"
+                type="number"
+                class="form-control"
+                (ngModelChange)="setProductSubtotal()"
+                placeholder="Add quantity here"
+              />
+            </span>
           </td>
           <td>
             <label for="price"
@@ -79,7 +102,7 @@
               type="number"
               class="form-control"
               [(ngModel)]="product.price_per_unit"
-              (ngModelChange)="setProductSubtotal(i)"
+              (ngModelChange)="setProductSubtotal()"
               placeholder="Add price here"
             />
             <input
@@ -88,8 +111,8 @@
               min="0"
               type="number"
               class="form-control"
-              [(ngModel)]="product.price_per_package"
-              (ngModelChange)="setProductSubtotal(i)"
+              [(ngModel)]="product.package_price"
+              (ngModelChange)="setProductSubtotal()"
               placeholder="Add price here"
             />
           </td>
