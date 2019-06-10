@@ -4,80 +4,39 @@
       <th translate>Company</th>
       <th translate>Contact name</th>
       <th translate>Status</th>
-      <th translate>Amount</th>
+      <th translate>Amount Offered</th>
       <th translate>Rate</th>
       <th translate>Price</th>
       <th translate class="text-right">Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Homestead Farms</td>
-      <td>Tony Stark</td>
-      <td><div class="status status-blue">Quotation Received</div></td>
-      <td>1000 KG</td>
-      <td>50/KG</td>
-      <td>50,000 KES</td>
-
+    <tr *ngFor="let quotation of (quotations | paginate: { itemsPerPage: 7, currentPage: page }); let i = index">
+      <td>{{ quotation.seller.company_name }}</td>
+      <td>{{ quotation.seller.first_name }} {{ quotation.seller.last_name }}</td>
+      <td>
+        <div class="status status-blue">{{ quotation.status }}</div>
+      </td>
+      <td>
+        <span *ngIf="quotation.product.product_type === 'agricultural'">
+          {{ quotation.product.total_weight_offered | number: '1.2-2' }} {{ quotation.product.weight_unit }}
+        </span>
+        <span *ngIf="quotation.product.product_type != 'agricultural'">
+          {{ quotation.product.quantity_offered }} {{ quotation.product.type_of_package }}
+        </span>
+      </td>
+      <td>
+        <span *ngIf="quotation.product.product_type === 'agricultural'">
+          {{ quotation.product.price_per_unit | number: '1.2-2' }} {{ quotation.currency }} /
+          {{ quotation.product.weight_unit }}
+        </span>
+        <span *ngIf="quotation.product.product_type != 'agricultural'">
+          {{ quotation.product.package_price | number: '1.2-2' }} {{ quotation.currency }} / Package
+        </span>
+      </td>
+      <td>{{ quotation.product.product_subtotal }} {{ quotation.currency }}</td>
       <td class="text-right">
         <button class="round-button-primary" data-toggle="wizard" data-target="#quotationModal">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>Homestead Farms</td>
-      <td>Tony Stark</td>
-      <td><div class="status status-blue">Quotation Received</div></td>
-      <td>1000 KG</td>
-      <td>50/KG</td>
-      <td>50,000 KES</td>
-      <td class="text-right">
-        <button class="round-button-primary" data-toggle="wizard" data-target="#quotationModal">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>Homestead Farms</td>
-      <td>Tony Stark</td>
-      <td><div class="status status-blue">Quotation Received</div></td>
-      <td>1000 KG</td>
-      <td>50/KG</td>
-      <td>50,000 KES</td>
-      <td class="text-right">
-        <button class="round-button-primary" data-toggle="wizard" data-target="#quotationModal">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>Homestead Farms</td>
-      <td>Tony Stark</td>
-      <td><div class="status status-blue">Quotation Received</div></td>
-      <td>1000 KG</td>
-      <td>50/KG</td>
-      <td>50,000 KES</td>
-      <td class="text-right">
-        <button class="round-button-primary" data-toggle="wizard" data-target="#quotationModal">
-          <i class="material-icons">remove_red_eye</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>Homestead Farms</td>
-      <td>Tony Stark</td>
-      <td><div class="status status-orange">Awaiting Quotation</div></td>
-      <td>1000 KG</td>
-      <td>50/KG</td>
-      <td>50,000 KES</td>
-      <td class="text-right">
-        <button
-          class="round-button-primary disabled"
-          data-toggle="wizard"
-          data-target="#quotationModal"
-          [attr.disabled]="true"
-        >
           <i class="material-icons">remove_red_eye</i>
         </button>
       </td>

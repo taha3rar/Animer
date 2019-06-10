@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
+import { Quotation } from '@app/core/models/quotation/quotation';
+import { QuotationService } from '@app/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quotations-list',
@@ -7,8 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuotationsListComponent implements OnInit {
   page = 1;
+  quoteRequest: QuoteRequest;
+  quotations: Quotation[];
 
-  constructor() {}
+  constructor(private quotationService: QuotationService, private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.quoteRequest = this.route.snapshot.data['quoteRequest'];
+    this.quotationService.getByQuoteRequest(this.quoteRequest._id).subscribe(quotations => {
+      this.quotations = quotations;
+      console.log(this.quotations);
+    });
+  }
 }

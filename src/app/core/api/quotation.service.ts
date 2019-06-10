@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Quotation } from '../models/quotation/quotation';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class QuotationService extends BaseService {
     super(apiService, '/quotation');
   }
 
-  draft(quotation: Quotation) {
-    return this.apiService.post(`/quotation/draft`, quotation).pipe(map(data => data));
+  getByQuoteRequest(quoteRequestId: string): Observable<Quotation[]> {
+    return this.apiService.get(`${this.path}/quote-request/${quoteRequestId}`).pipe(map(data => data));
   }
 }

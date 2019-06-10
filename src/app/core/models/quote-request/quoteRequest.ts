@@ -2,7 +2,7 @@ import { ProductQuoteRequest } from '../quote-request/product-quoteRequest';
 import { SellerQuoteRequest } from './seller-quoteRequest';
 
 export class QuoteRequest {
-  _id: String;
+  _id: string;
   numericId: Number;
   buyer: {
     _id: String;

@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { QuoteRequestDataService } from '../quote-request-data.service';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { QuoteRequestService } from '@app/core/api/quote-request.service';
 import { AlertsService } from '@app/core/alerts.service';
 import { Router } from '@angular/router';
 import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quoteRequest';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-quote-request-generator-review',
@@ -13,7 +14,8 @@ import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quot
 })
 export class QuoteRequestGeneratorReviewComponent implements OnInit {
   @Output() validQuoteRequest = new EventEmitter<Boolean>();
-  quoteRequest: QuoteRequest;
+  @Input() isGenerator = false;
+  @Input() quoteRequest: QuoteRequest;
   page = 1;
   product: ProductQuoteRequest;
 
@@ -25,9 +27,29 @@ export class QuoteRequestGeneratorReviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
-      this.quoteRequest = quoteRequest;
+    if (this.isGenerator) {
+      this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
+        this.quoteRequest = quoteRequest;
+        this.product = this.quoteRequest.product;
+      });
+    } else {
       this.product = this.quoteRequest.product;
+    }
+  }
+
+  downloadPopup() {
+    swal({
+      title: 'Download as PDF',
+      className: 'swal-pdf',
+      text: 'Please choose the type of quote request document you would like to download:',
+      buttons: {
+        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o', closeModal: false },
+        copyDoc: { text: 'Copy Document', value: 'copy', closeModal: false }
+      }
+    }).then(value => {
+      if (value === 'original') {
+      } else {
+      }
     });
   }
 

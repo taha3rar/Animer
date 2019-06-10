@@ -45,7 +45,7 @@
         <div class="col-md-3">
           <p class="heading-3">TOTAL AMOUNT REQUESTED</p>
           <p *ngIf="quoteRequest.product.product_type === 'agricultural'" class="normal-text-bold">
-            {{ quoteRequest.product.total_weight_requested }} {{ quoteRequest.product.weight_unit }}
+            {{ quoteRequest.product.total_weight_requested | number: '1.2-2' }} {{ quoteRequest.product.weight_unit }}
           </p>
           <p *ngIf="quoteRequest.product.product_type != 'agricultural'" class="normal-text-bold">
             {{ quoteRequest.product.quantity_requested }} {{ quoteRequest.product.type_of_package }}
@@ -73,7 +73,7 @@
     <div class="tab-pane active" id="qr">
       <div class="panel panel-tab">
         <div class="panel-body">
-          <app-quote-request></app-quote-request>
+          <app-quote-request-generator-review [quoteRequest]="quoteRequest"></app-quote-request-generator-review>
         </div>
       </div>
     </div>

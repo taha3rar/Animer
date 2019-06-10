@@ -10,7 +10,8 @@
           </tr>
           <tr>
             <td class="heading-4-blue">VALID BY</td>
-            <td>{{ quoteRequest?.valid_by | date: 'dd/MM/yyyy' }}</td>
+            <td *ngIf="quoteRequest.valid_by">{{ quoteRequest?.valid_by | date: 'dd/MM/yyyy' }}</td>
+            <td *ngIf="!quoteRequest.valid_by">N/A</td>
           </tr>
         </table>
       </div>
@@ -128,7 +129,15 @@
   </div>
 </div>
 <div>
-  <button class="bttn-primary pull-right" (click)="submitQuoteRequest()" [disabled]="!quoteRequest.product">
+  <button
+    *ngIf="isGenerator"
+    class="bttn-primary pull-right"
+    (click)="submitQuoteRequest()"
+    [disabled]="!quoteRequest.product"
+  >
     Send Quote Request
+  </button>
+  <button *ngIf="!isGenerator" class="btn-primary-transp pull-right" (click)="downloadPopup()">
+    Download PDF
   </button>
 </div>
