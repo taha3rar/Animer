@@ -120,22 +120,6 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
     this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
   }
 
-  // measurementUnitConflict(products: ProductQuoteRequest[]): String {
-  //   let baseMeasurementUnit: String;
-  //   for (let i = 0; i < products.length; i++) {
-  //     if (products[i].product_type === 'agricultural') {
-  //       if (!baseMeasurementUnit) {
-  //         baseMeasurementUnit = products[i].weight_unit;
-  //       } else {
-  //         if (baseMeasurementUnit !== products[i].weight_unit) {
-  //           return undefined;
-  //         }
-  //       }
-  //     }
-  //   }
-  //   return baseMeasurementUnit;
-  // }
-
   draftQuoterequest() {
     this.validQuoteRequest.emit(true);
     this.quoteRequestService.draft(this.quoteRequest).subscribe(quoteRequest => {

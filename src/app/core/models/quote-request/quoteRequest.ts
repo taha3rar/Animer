@@ -6,6 +6,7 @@ export class QuoteRequest {
   numericId: Number;
   buyer: {
     _id: String;
+    numericId: string;
     first_name: String;
     last_name: String;
     email: String;
