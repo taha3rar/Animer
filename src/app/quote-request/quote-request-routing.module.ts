@@ -58,7 +58,10 @@ const routes: Routes = [
     },
     {
       path: 'quote-request/:id',
-      component: QuoteRequestViewComponent
+      component: QuoteRequestViewComponent,
+      resolve: {
+        quoteRequest: QuoteRequestResolver
+      }
     }
   ])
 ];

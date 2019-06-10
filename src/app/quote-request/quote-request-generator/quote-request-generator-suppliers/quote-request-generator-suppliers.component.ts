@@ -53,7 +53,7 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     let target_description: string;
     table === 'clients' ? (target_description = 'one or more single users') : (target_description = 'an ecosystem');
     swal({
-      title: "You're about to send a Quote Request to " + target_description,
+      title: 'You are about to send a Quote Request to ' + target_description,
       text: 'All of your pevious chosen clients will be deleted from the suppliers list',
       icon: 'info',
       buttons: {
@@ -91,8 +91,7 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
       const index = this.targeted_sellers.findIndex(x => x._id === seller._id);
       this.targeted_sellers.splice(index, 1);
     }
-    this.quoteRequest.sellers = this.targeted_sellers;
-    this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
+    this.updateQuoteRequest();
   }
 
   pickEcosystem(ecosystem: Ecosystem): void {
@@ -127,6 +126,7 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
   toggleTable(table: string): void {
     this.targeted_sellers = [];
     this.targeted_ecosystem = undefined;
+    this.updateQuoteRequest();
     if (table === 'clients' && this.sellersSecOpened) {
       $('#ecosystem-sellers').hide();
       $('#suppliers-list').toggleClass('col-md-8 col-md-12');
@@ -162,5 +162,10 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
       }, 300);
     }
     this.sellersSecOpened = true;
+  }
+
+  updateQuoteRequest() {
+    this.quoteRequest.sellers = this.targeted_sellers;
+    this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
   }
 }

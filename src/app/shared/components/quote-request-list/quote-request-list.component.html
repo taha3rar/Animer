@@ -57,6 +57,14 @@
           <i class="material-icons">remove_red_eye</i>
         </button>
         <button
+          *ngIf="userId == quoteRequest.buyer._id && !quoteRequest.draft"
+          class="round-button-primary"
+          data-toggle="stepper"
+          [routerLink]="['/quote-request', quoteRequest._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button
           *ngIf="userId != quoteRequest.buyer._id && !quoteRequest.draft"
           class="round-button-primary"
           data-toggle="stepper"

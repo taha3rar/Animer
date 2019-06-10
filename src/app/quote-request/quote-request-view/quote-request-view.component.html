@@ -5,32 +5,55 @@
     <div class="panel-body">
       <div class="info info-top">
         <div class="status status-blue pull-right">
-          Quote Request Sent
+          {{ quoteRequest.status }}
         </div>
         <div>
-          <p class="heading-2">Quote Request #321</p>
+          <p class="heading-2">Quote Request #{{ quoteRequest.numericId }}</p>
           <div class="timing-section">
-            <span><i class="material-icons">calendar_today</i><span class="time-text">Issued on 06/05/2019</span></span>
-            <span><i class="material-icons timer">timer</i><span class="time-text">Due to 06/06/2019</span></span>
+            <span
+              ><i class="material-icons">calendar_today</i
+              ><span class="time-text">Issued on {{ quoteRequest.date_created | date: 'dd/MM/yyyy' }}</span></span
+            >
+            <span *ngIf="quoteRequest.valid_by"
+              ><i class="material-icons timer">timer</i>
+              <span class="time-text">Due on {{ quoteRequest.valid_by | date: 'dd/MM/yyyy' }}</span>
+            </span>
           </div>
         </div>
       </div>
       <div class="info">
         <div class="col-md-3">
           <p class="heading-3">PRODUCT</p>
-          <p class="normal-text-bold">Green Coffee/Kona</p>
+          <p class="normal-text-bold">
+            <span *ngIf="!quoteRequest.product.product_type || quoteRequest.product.product_type == 'agricultural'">
+              {{ quoteRequest.product.produce }} / {{ quoteRequest.product.variety }}
+            </span>
+            <span *ngIf="quoteRequest.product.product_type == 'processed' && quoteRequest.product.item_package_type">
+              {{ quoteRequest.product.produce }} / {{ quoteRequest.product.item_measurement_amount | number: '1.2-2' }}
+              {{ quoteRequest.product.item_measurement_unit | uppercase }} /
+              {{ quoteRequest.product.item_package_type }}
+            </span>
+            <span *ngIf="quoteRequest.product.product_type == 'processed' && !quoteRequest.product.item_package_type">
+              {{ quoteRequest.product.produce }}
+            </span>
+          </p>
         </div>
         <div class="col-md-3">
           <p class="heading-3">QUOTES RECEIVED</p>
-          <p class="normal-text-bold">4</p>
+          <p class="normal-text-bold">{{ quoteRequest.quotations.count }}</p>
         </div>
         <div class="col-md-3">
           <p class="heading-3">TOTAL AMOUNT REQUESTED</p>
-          <p class="normal-text-bold">5000KG</p>
+          <p *ngIf="quoteRequest.product.product_type === 'agricultural'" class="normal-text-bold">
+            {{ quoteRequest.product.total_weight_requested }} {{ quoteRequest.product.weight_unit }}
+          </p>
+          <p *ngIf="quoteRequest.product.product_type != 'agricultural'" class="normal-text-bold">
+            {{ quoteRequest.product.quantity_requested }} {{ quoteRequest.product.type_of_package }}
+          </p>
         </div>
         <div class="col-md-3">
           <p class="heading-3">AMOUNT ACCEPTED</p>
-          <p class="normal-text-bold">2000KG</p>
+          <p class="normal-text-bold">TO IMPLEMENT</p>
         </div>
       </div>
     </div>
