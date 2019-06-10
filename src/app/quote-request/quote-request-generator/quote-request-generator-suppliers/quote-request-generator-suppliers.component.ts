@@ -54,6 +54,7 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     if (isChecked) {
       this.targeted_sellers.push({
         _id: seller._id,
+        numericId: seller.numericId,
         first_name: seller.first_name,
         last_name: seller.last_name,
         company_name: seller.company_name,

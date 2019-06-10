@@ -21,7 +21,7 @@ export class QrAgriculturalProductComponent extends BaseProductQuoteRequest impl
     public dialogRef: MatDialogRef<QrAgriculturalProductComponent>,
     public formBuilder: FormBuilder
   ) {
-    super(dialogRef, data, formBuilder, 'agricultural');
+    super(dialogRef, data.product, formBuilder, 'agricultural');
   }
 
   ngOnInit() {

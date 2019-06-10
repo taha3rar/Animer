@@ -151,4 +151,10 @@
 </div>
 
 <button class="bttn-primary pull right next-step" [disabled]="targeted_sellers.length < 1">Next Step &rarr;</button>
-<button class="btn-primary-transp pull-right btn-draft" (click)="draftQuoterequest()">Save Quote request</button>
+<button
+  [disabled]="targeted_sellers?.length <= 0"
+  class="btn-primary-transp pull-right btn-draft"
+  (click)="draftQuoterequest()"
+>
+  Save Quote request
+</button>

@@ -188,4 +188,10 @@
 >
   Next Step &rarr;
 </button>
-<button class="btn-primary-transp pull-right btn-draft" (click)="draftQuoterequest()">Save Quote request</button>
+<button
+  [disabled]="targeted_sellers?.length <= 0"
+  class="btn-primary-transp pull-right btn-draft"
+  (click)="draftQuoterequest()"
+>
+  Save Quote request
+</button>

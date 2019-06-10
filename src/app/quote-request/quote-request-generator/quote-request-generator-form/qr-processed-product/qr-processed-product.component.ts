@@ -18,7 +18,7 @@ export class QrProcessedProductComponent extends BaseProductQuoteRequest impleme
     public dialogRef: MatDialogRef<QrProcessedProductComponent>,
     public formBuilder: FormBuilder
   ) {
-    super(dialogRef, data, formBuilder, 'processed');
+    super(dialogRef, data.product, formBuilder, 'processed');
   }
 
   ngOnInit() {
