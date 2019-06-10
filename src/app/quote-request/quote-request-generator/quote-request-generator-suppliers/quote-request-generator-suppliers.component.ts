@@ -8,6 +8,7 @@ import { SellerQuoteRequest } from '@app/core/models/quote-request/seller-quoteR
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { QuoteRequestService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-quote-request-generator-suppliers',
@@ -44,6 +45,25 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
       this.quoteRequest = quoteRequest;
       this.quoteRequest.sellers ? (this.targeted_sellers = this.quoteRequest.sellers) : (this.targeted_sellers = []);
+    });
+  }
+
+  toggleAlert(table: string): void {
+    const thisClass = this;
+    let target_description: string;
+    table === 'clients' ? (target_description = 'one or more single users') : (target_description = 'an ecosystem');
+    swal({
+      title: "You're about to send a Quote Request to " + target_description,
+      text: 'All of your pevious chosen clients will be deleted from the suppliers list',
+      icon: 'info',
+      buttons: {
+        cancel: true,
+        confirm: true
+      }
+    }).then(function(isConfirm: boolean) {
+      if (isConfirm) {
+        thisClass.toggleTable(table);
+      }
     });
   }
 
@@ -105,6 +125,8 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
   }
 
   toggleTable(table: string): void {
+    this.targeted_sellers = [];
+    this.targeted_ecosystem = undefined;
     if (table === 'clients' && this.sellersSecOpened) {
       $('#ecosystem-sellers').hide();
       $('#suppliers-list').toggleClass('col-md-8 col-md-12');

@@ -9,16 +9,18 @@
           <div class="center-c pull-left mt-3 mb-2">
             <button
               class="btn-primary-transp ml-0 active"
-              (click)="toggleTable('clients')"
+              (click)="toggleAlert('clients')"
               [class.active]="toggledTable === 'clients'"
+              [disabled]="toggledTable === 'clients'"
             >
               Clients
             </button>
             <p class="ml-2 mr-2">OR</p>
             <button
               class="btn-primary-transp"
-              (click)="toggleTable('ecosystems')"
+              (click)="toggleAlert('ecosystems')"
               [class.active]="toggledTable === 'ecosystems'"
+              [disabled]="toggledTable == 'ecosystems'"
             >
               Ecosystems
             </button>
