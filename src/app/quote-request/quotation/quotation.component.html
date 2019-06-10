@@ -6,30 +6,36 @@
         <table>
           <tr>
             <td class="heading-4-blue">ISSUE DATE</td>
-            <td>22/05/2019</td>
+            <td>{{ quotation?.date_created | date: 'dd/MM/yyyy' }}</td>
           </tr>
           <tr>
             <td class="heading-4-blue">VALID BY</td>
-            <td>21/06/2019</td>
+            <td>22/07/2019</td>
           </tr>
         </table>
       </div>
       <div class="row" style="padding-top: 5rem;">
-        <div class="col-md-6">
+        <div class="col-md-9">
           <p class="heading-4-blue">ISSUED BY</p>
-          <p class="heading-4">Tony Stark</p>
-          <p class="heading-4">Homestead Farms</p>
-          <p class="heading-4">Tony@stark.com</p>
-          <p class="heading-4">+972546233918</p>
-          <p class="heading-4">Sugarland Road, Canada 25081</p>
+          <p class="heading-4">{{ quotation?.buyer?.first_name }} {{ quotation?.buyer?.last_name }}</p>
+          <p class="heading-4">{{ quotation?.buyer?.company_name }}</p>
+          <p class="heading-4">{{ quotation?.buyer?.email }}</p>
+          <p class="heading-4">
+            {{ quotation?.buyer?.address }}, {{ quotation?.buyer?.city }}, {{ quotation?.buyer?.zipcode }},
+            {{ quotation?.buyer?.country }}
+          </p>
+          <p class="heading-4">{{ quotation?.buyer?.phone_number }}</p>
         </div>
-        <div class="col-md-3 col-md-offset-3">
+        <div class="col-md-3">
           <p class="heading-4-blue">ISSUED FOR</p>
-          <p class="heading-4">Patrick Mutow</p>
-          <p class="heading-4">Agrium</p>
-          <p class="heading-4">Patrick@agrium.com</p>
-          <p class="heading-4">+972546233918</p>
-          <p class="heading-4">1st Avenue South, Canada</p>
+          <p class="heading-4">{{ quotation?.seller?.first_name }} {{ quotation?.seller?.last_name }}</p>
+          <p class="heading-4">{{ quotation?.seller?.company_name }}</p>
+          <p class="heading-4">{{ quotation?.seller?.email }}</p>
+          <p class="heading-4">
+            {{ quotation?.seller?.address }}, {{ quotation?.seller?.city }}, {{ quotation?.seller?.zipcode }},
+            {{ quotation?.seller?.country }}
+          </p>
+          <p class="heading-4">{{ quotation?.seller?.phone_number }}</p>
         </div>
       </div>
       <div style="padding-top: 2rem;">
@@ -39,48 +45,66 @@
             <tr>
               <th>PRODUCT NAME</th>
               <th>PACKAGES</th>
-              <th>REQUESTED AMOUNT</th>
-              <th>OFFERED AMOUNT</th>
               <th>SPECIFICATIONS</th>
+              <th>AMOUNT REQUESTED</th>
+              <th>AMOUNT OFFERED</th>
               <th>RATE</th>
-              <th>PRICE</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngIf="quotation.product">
               <td>
-                <span>
-                  Green Coffee/kona
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.produce }} / {{ quotation.product.variety }}
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && quotation.product.item_package_type">
+                  {{ quotation.product.produce }} / {{ quotation.product.item_measurement_amount | number: '1.2-2' }}
+                  {{ quotation.product.item_measurement_unit | uppercase }} / {{ quotation.product.item_package_type }}
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && !quotation.product.item_package_type">
+                  {{ quotation.product.produce }}
+                </span>
+              </td>
+              <td>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }} /
+                  {{ quotation.product.package_weight | number: '1.2-2' }}
+                  {{ quotation.product.weight_unit | uppercase }})
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && quotation.product.item_package_type">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }} /
+                  {{ quotation.product.items_per_package | number: '1.0'
+                  }}<span *ngIf="quotation.product.items_per_package > 1"> items)</span
+                  ><span *ngIf="quotation.product.items_per_package == 0"> item)</span>
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && !quotation.product.item_package_type">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }})
+                </span>
+              </td>
+              <td>
+                <span id="specification">{{ quotation.product.specification || 'N/A' }}</span>
+              </td>
+              <td>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'"
+                  >{{ quotation.product.total_weight_requested | number: '1.2-2' }}
+                  {{ quotation.product.weight_unit | uppercase }}</span
+                >
+                <span *ngIf="quotation.product.product_type != 'agricultural'"
+                  >{{ quotation.product.quantity_requested }} packages</span
+                >
+              </td>
+              <td>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.total_weight_offered | number: '1.2-2' }} {{ quotation.product.weight_unit }}
+                </span>
+                <span *ngIf="quotation.product.product_type != 'agricultural'">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} {{ quotation.product.type_of_package }}
                 </span>
               </td>
               <td>
                 <span>
-                  100 (Box/ 30 kg)
-                </span>
-              </td>
-              <td>
-                <span>
-                  5000 KG
-                </span>
-              </td>
-              <td>
-                <span>
-                  2000 KG
-                </span>
-              </td>
-              <td>
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                </span>
-              </td>
-              <td>
-                <span>
-                  20.00 KES / KG
-                </span>
-              </td>
-              <td>
-                <span>
-                  100,000 KES
+                  {{ quotation.product.price_per_unit || quotation.product.package_price || 0.0 | number: '1.2-2' }}
+                  {{ quotation?.currency }} / {{ quotation.product.weight_unit || quotation.product.type_of_package }}
                 </span>
               </td>
             </tr>
@@ -92,23 +116,35 @@
           <div class="col-md-9">
             <p class="heading-2">QUOTE REQUEST COMMENTS</p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              {{ quotation?.buyer_comments || 'N/A' }}
             </p>
             <p class="heading-2">QUOTATION COMMENTS</p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              {{ quotation?.seller_comments || 'N/A' }}
             </p>
           </div>
           <div class="col-md-3">
             <div class="border-box center-items pull-left">
               <p class="heading-2">TOTAL PRICE</p>
-              <p class="heading-4-blue">10,000 KES</p>
+              <p class="heading-4-blue">{{ quotation?.total_price | number: '1.2-2' }} {{ quotation?.currency }}</p>
             </div>
           </div>
         </div>
       </div>
       <button *ngIf="!quotationAccepted" class="bttn-success pull-right mt-5">Accept Quotation</button>
+      <button class="btn-primary-transp pull-right mt-5" (click)="downloadPopup()">
+        Download PDF
+      </button>
     </div>
   </div>
 </div>
-<button [hidden]="!isGenerator" class="bttn-primary pull-right">Submit</button>
+<button
+  *ngIf="isGenerator && quotation.total_price"
+  class="bttn-primary pull-right next-step"
+  (click)="submitQuotation()"
+>
+  Submit
+</button>
+<button *ngIf="isGenerator && !quotation.total_price" class="bttn-primary pull-right next-step">
+  Submit
+</button>
