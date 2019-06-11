@@ -36,23 +36,12 @@
       </td>
       <td>{{ quotation.product.product_subtotal | number: '1.2-2' }} {{ quotation.currency }}</td>
       <td class="text-right">
-        <button class="round-button-primary" data-toggle="wizard" data-target="#quotationModal">
+        <button class="round-button-primary" (click)="openQuotationView(i)">
           <i class="material-icons">remove_red_eye</i>
         </button>
       </td>
     </tr>
   </tbody>
 </table>
-<span *ngIf="quotations?.length <= 0">You did not grant any quotation yet.</span>
-
-<div class="modal-box" id="quotationModal">
-  <div class="modal-box-content-sm" style="width: 75%;">
-    <div class="modal-box-heading">
-      <i class="material-icons pull-right" data-dismiss="modal">close</i>
-      <p translate class="modal-title">Quotation</p>
-    </div>
-    <app-quotation></app-quotation>
-  </div>
-</div>
-
 <pagination-controls *ngIf="quotations?.length > 0" (pageChange)="page = $event"></pagination-controls>
+<span *ngIf="quotations?.length <= 0">You did not grant any quotation yet.</span>

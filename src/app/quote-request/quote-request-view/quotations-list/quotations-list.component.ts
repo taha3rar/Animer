@@ -5,6 +5,7 @@ import { QuotationService } from '@app/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductQuotation } from '@app/core/models/quotation/product-quotation';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { QuotationComponent } from '../../quotation/quotation.component';
 
 @Component({
   selector: 'app-quotations-list',
@@ -32,19 +33,18 @@ export class QuotationsListComponent implements OnInit {
     });
   }
 
-  // openQuotationView(index: number): void {
-  //   const dialogConfig = new MatDialogConfig();
+  openQuotationView(index: number): void {
+    const dialogConfig = new MatDialogConfig();
 
-  //   dialogConfig.autoFocus = true;
-  //   // dialogConfig.height = height;
-  //   // dialogConfig.width = '850px';
-  //   dialogConfig.data = {quotation : this.quotations[index]};
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '70%';
+    dialogConfig.data = { quotation: this.quotations[index] };
 
-  //   const dialogRef = this.dialog.open(component, dialogConfig);
-  //   // dialogRef.afterClosed().subscribe(data => {
-  //   //   if (data) {
-  //   //     this.updateProduct(data.product, data.index);
-  //   //   }
-  //   // });
-  // }
+    this.dialog.open(QuotationComponent, dialogConfig);
+    // dialogRef.afterClosed().subscribe(data => {
+    //   if (data) {
+    //     this.updateProduct(data.product, data.index);
+    //   }
+    // });
+  }
 }

@@ -1,8 +1,11 @@
+<a *ngIf="isModal" (click)="onExit()"><i class="material-icons pull-right" style="cursor: pointer;">close</i></a>
 <div class="panel panel-tab">
   <div class="panel-body">
     <div class="padding-all">
       <div class="border-box">
-        <h2>QUOTATION <span> #324</span></h2>
+        <h2>
+          QUOTATION <span *ngIf="!isGenerator"> #{{ quotation?.numericId }}</span>
+        </h2>
         <table>
           <tr>
             <td class="heading-4-blue">ISSUE DATE</td>
@@ -10,7 +13,8 @@
           </tr>
           <tr>
             <td class="heading-4-blue">VALID BY</td>
-            <td>22/07/2019</td>
+            <td *ngIf="quotation.valid_by">{{ quotation.valid_by | date: 'dd/MM/yyyy' }}</td>
+            <td *ngIf="!quotation.valid_by">N/A</td>
           </tr>
         </table>
       </div>

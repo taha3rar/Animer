@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject, Optional } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Quotation } from '@app/core/models/quotation/quotation';
-import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { QuotationService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
 import { Router } from '@angular/router';
@@ -12,13 +12,26 @@ import swal from 'sweetalert';
 })
 export class QuotationComponent implements OnInit {
   @Input() quotation: Quotation;
-  @Input() quoteRequest: QuoteRequest;
   @Input() isGenerator = false;
   quotationAccepted = false;
+  isModal = true;
 
-  constructor(private quotationService: QuotationService, private alerts: AlertsService, private router: Router) {}
+  constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private quotationService: QuotationService,
+    private alerts: AlertsService,
+    private router: Router,
+    public dialogRef: MatDialogRef<QuotationComponent>
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.isGenerator) {
+      this.quotation = this.data.quotation;
+    }
+    if (this.data) {
+      this.isModal = true;
+    }
+  }
 
   submitQuotation() {
     this.quotationService.create(this.quotation).subscribe(quotation => {
@@ -41,5 +54,9 @@ export class QuotationComponent implements OnInit {
       } else {
       }
     });
+  }
+
+  onExit(): void {
+    this.dialogRef.close();
   }
 }

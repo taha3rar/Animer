@@ -55,7 +55,7 @@ import { QuotationComponent } from './quotation/quotation.component';
     QuotationComponent
   ],
 
-  entryComponents: [QrAgriculturalProductComponent, QrProcessedProductComponent],
+  entryComponents: [QrAgriculturalProductComponent, QrProcessedProductComponent, QuotationComponent],
 
   imports: [
     SharedModule,
