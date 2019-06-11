@@ -7,19 +7,19 @@
     <div class="panel-body">
       <div class="col-md-3">
         <p class="heading-3">QUOTE REQUEST NUMBER</p>
-        <p class="normal-text-bold">351</p>
+        <p class="normal-text-bold">{{ quoteRequest?.numericId }}</p>
       </div>
       <div class="col-md-3">
         <p class="heading-3">CONTACT NAME</p>
-        <p class="normal-text-bold">Patrick Mutow</p>
+        <p class="normal-text-bold">{{ quoteRequest?.buyer.first_name }} {{ quoteRequest?.buyer.last_name }}</p>
       </div>
       <div class="col-md-3">
         <p class="heading-3">SUBMITTED ON</p>
-        <p class="normal-text-bold">23/05/2019</p>
+        <p class="normal-text-bold">{{ quotation?.date_created | date: 'dd/MM/yyyy' }}</p>
       </div>
       <div class="col-md-3">
         <p class="heading-3">PRICE OFFERED</p>
-        <p class="normal-text-bold">50,000 KES</p>
+        <p class="normal-text-bold">{{ quotation?.total_price | number: '1.2-2' }} {{ quotation?.currency }}</p>
       </div>
     </div>
   </div>
@@ -33,10 +33,10 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="quoteRequest">
-      <app-quote-request></app-quote-request>
+      <app-quote-request-generator-review [quoteRequest]="quoteRequest"></app-quote-request-generator-review>
     </div>
     <div class="tab-pane" id="quotation">
-      <app-quotation></app-quotation>
+      <app-quotation [quotation]="quotation"></app-quotation>
     </div>
   </div>
 </div>

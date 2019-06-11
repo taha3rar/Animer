@@ -1,5 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
+import { QuotationService } from '@app/core';
+import { Quotation } from '@app/core/models/quotation/quotation';
 
 @Component({
   selector: 'app-quotation-view',
@@ -7,9 +11,19 @@ import { Location } from '@angular/common';
   styleUrls: ['./quotation-view.component.scss']
 })
 export class QuotationViewComponent implements OnInit {
-  constructor(private location: Location) {}
+  quoteRequest: QuoteRequest;
+  quotations: Quotation[];
+  quotation: Quotation;
 
-  ngOnInit() {}
+  constructor(private quotationService: QuotationService, private location: Location, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.quoteRequest = this.route.snapshot.data['quoteRequest'];
+    this.quotations = this.route.snapshot.data['quotations'];
+    this.quotation = this.quotations.find(quote => {
+      return quote.quote_request._id === this.quoteRequest._id;
+    });
+  }
 
   back() {
     this.location.back();

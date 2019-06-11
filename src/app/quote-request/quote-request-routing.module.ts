@@ -13,6 +13,7 @@ import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosys
 import { QuoteRequestUserResolver } from './resolvers/quote-request-user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
+import { QuoteRequestQuotationsResolver } from './resolvers/quote-request-quotation.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -46,7 +47,11 @@ const routes: Routes = [
     },
     {
       path: 'quote-request/quotation/:id',
-      component: QuotationViewComponent
+      component: QuotationViewComponent,
+      resolve: {
+        quoteRequest: QuoteRequestResolver,
+        quotations: QuoteRequestQuotationsResolver
+      }
     },
     {
       path: 'quote-request/quotation-generator/:id',

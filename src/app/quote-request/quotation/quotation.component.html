@@ -13,8 +13,8 @@
           </tr>
           <tr>
             <td class="heading-4-blue">VALID BY</td>
-            <td *ngIf="quotation.valid_by">{{ quotation.valid_by | date: 'dd/MM/yyyy' }}</td>
-            <td *ngIf="!quotation.valid_by">N/A</td>
+            <td *ngIf="quotation?.valid_by">{{ quotation.valid_by | date: 'dd/MM/yyyy' }}</td>
+            <td *ngIf="!quotation?.valid_by">N/A</td>
           </tr>
         </table>
       </div>
@@ -56,7 +56,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngIf="quotation.product">
+            <tr *ngIf="quotation?.product">
               <td>
                 <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
                   {{ quotation.product.produce }} / {{ quotation.product.variety }}
@@ -135,7 +135,7 @@
           </div>
         </div>
       </div>
-      <button *ngIf="!quotationAccepted" class="bttn-success pull-right mt-5">Accept Quotation</button>
+      <button *ngIf="!quotationAccepted && isModal" class="bttn-success pull-right mt-5">Accept Quotation</button>
       <button class="btn-primary-transp pull-right mt-5" (click)="downloadPopup()">
         Download PDF
       </button>

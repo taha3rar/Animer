@@ -13,23 +13,22 @@ import swal from 'sweetalert';
 export class QuotationComponent implements OnInit {
   @Input() quotation: Quotation;
   @Input() isGenerator = false;
+  @Input() isView = false;
   quotationAccepted = false;
-  isModal = true;
+  isModal = false;
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private quotationService: QuotationService,
     private alerts: AlertsService,
     private router: Router,
-    public dialogRef: MatDialogRef<QuotationComponent>
+    @Optional() public dialogRef: MatDialogRef<QuotationComponent>
   ) {}
 
   ngOnInit() {
-    if (!this.isGenerator) {
-      this.quotation = this.data.quotation;
-    }
     if (this.data) {
       this.isModal = true;
+      this.quotation = this.data.quotation;
     }
   }
 

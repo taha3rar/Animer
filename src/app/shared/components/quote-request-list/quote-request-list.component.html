@@ -13,7 +13,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let quoteRequest of (quoteRequests | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
+    <tr
+      *ngFor="
+        let quoteRequest of (quoteRequests | paginate: { itemsPerPage: itemsPerPage, currentPage: page });
+        let i = index
+      "
+    >
       <td class="text-center">
         {{ quoteRequest?.numericId }}
       </td>
@@ -48,6 +53,7 @@
         <div *ngIf="quoteRequest.draft" class="status status-purple">{{ quoteRequest?.status }}</div>
       </td>
       <td class="text-right">
+        <!-- QR Gen Draft -->
         <button
           *ngIf="userId == quoteRequest.buyer._id && quoteRequest.draft"
           class="round-button-primary"
@@ -56,6 +62,7 @@
         >
           <i class="material-icons">remove_red_eye</i>
         </button>
+        <!-- QR Buyer view -->
         <button
           *ngIf="userId == quoteRequest.buyer._id && !quoteRequest.draft"
           class="round-button-primary"
@@ -64,11 +71,21 @@
         >
           <i class="material-icons">remove_red_eye</i>
         </button>
+        <!-- Quotation Gen -->
         <button
-          *ngIf="userId != quoteRequest.buyer._id && !quoteRequest.draft"
+          *ngIf="userId != quoteRequest.buyer._id && !quoteRequest.draft && !quotationSent(i)"
           class="round-button-primary"
           data-toggle="stepper"
           [routerLink]="['/quote-request/quotation-generator', quoteRequest._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <!-- TODO -->
+        <button
+          *ngIf="userId != quoteRequest.buyer._id && !quoteRequest.draft && quotationSent(i)"
+          class="round-button-primary"
+          data-toggle="stepper"
+          [routerLink]="['/quote-request/quotation', quoteRequest._id]"
         >
           <i class="material-icons">remove_red_eye</i>
         </button>
@@ -79,5 +96,4 @@
     </tr>
   </tbody>
 </table>
-
 <pagination-controls (pageChange)="page = $event"></pagination-controls>

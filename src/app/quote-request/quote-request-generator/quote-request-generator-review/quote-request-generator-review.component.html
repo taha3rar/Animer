@@ -2,7 +2,9 @@
   <div class="panel-body">
     <div class="padding-all">
       <div class="border-box">
-        <h2>QUOTE REQUEST</h2>
+        <h2>
+          QUOTE REQUEST<span *ngIf="!isGenerator"> #{{ quoteRequest?.numericId }}</span>
+        </h2>
         <table>
           <tr>
             <td class="heading-4-blue">ISSUE DATE</td>

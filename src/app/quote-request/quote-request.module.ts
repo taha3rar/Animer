@@ -35,6 +35,7 @@ import { QuotationsListComponent } from './quote-request-view/quotations-list/qu
 import { NgxPaginationModule } from 'ngx-pagination';
 import { QuoteRequestComponent } from './quote-request.component';
 import { QuotationComponent } from './quotation/quotation.component';
+import { QuoteRequestQuotationsResolver } from './resolvers/quote-request-quotation.resolver';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { QuotationComponent } from './quotation/quotation.component';
     QuoteRequestUserResolver,
     QuoteRequestDataService,
     QuoteRequestListResolver,
-    QuoteRequestResolver
+    QuoteRequestResolver,
+    QuoteRequestQuotationsResolver
   ]
 })
 export class QuoteRequestModule {}
