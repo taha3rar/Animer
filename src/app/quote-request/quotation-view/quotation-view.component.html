@@ -33,7 +33,10 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="quoteRequest">
-      <app-quote-request-generator-review [quoteRequest]="quoteRequest"></app-quote-request-generator-review>
+      <app-quote-request-generator-review
+        [isSeller]="true"
+        [quoteRequest]="quoteRequest"
+      ></app-quote-request-generator-review>
     </div>
     <div class="tab-pane" id="quotation">
       <app-quotation [quotation]="quotation"></app-quotation>

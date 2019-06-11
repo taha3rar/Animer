@@ -16,6 +16,7 @@ export class QuoteRequestGeneratorReviewComponent implements OnInit {
   @Output() validQuoteRequest = new EventEmitter<Boolean>();
   @Input() isGenerator = false;
   @Input() quoteRequest: QuoteRequest;
+  @Input() isSeller = false;
   page = 1;
   product: ProductQuoteRequest;
 

@@ -21,17 +21,6 @@
       <div class="row" style="padding-top: 5rem;">
         <div class="col-md-9">
           <p class="heading-4-blue">ISSUED BY</p>
-          <p class="heading-4">{{ quotation?.buyer?.first_name }} {{ quotation?.buyer?.last_name }}</p>
-          <p class="heading-4">{{ quotation?.buyer?.company_name }}</p>
-          <p class="heading-4">{{ quotation?.buyer?.email }}</p>
-          <p class="heading-4">
-            {{ quotation?.buyer?.address }}, {{ quotation?.buyer?.city }}, {{ quotation?.buyer?.zipcode }},
-            {{ quotation?.buyer?.country }}
-          </p>
-          <p class="heading-4">{{ quotation?.buyer?.phone_number }}</p>
-        </div>
-        <div class="col-md-3">
-          <p class="heading-4-blue">ISSUED FOR</p>
           <p class="heading-4">{{ quotation?.seller?.first_name }} {{ quotation?.seller?.last_name }}</p>
           <p class="heading-4">{{ quotation?.seller?.company_name }}</p>
           <p class="heading-4">{{ quotation?.seller?.email }}</p>
@@ -40,6 +29,17 @@
             {{ quotation?.seller?.country }}
           </p>
           <p class="heading-4">{{ quotation?.seller?.phone_number }}</p>
+        </div>
+        <div class="col-md-3">
+          <p class="heading-4-blue">ISSUED FOR</p>
+          <p class="heading-4">{{ quotation?.buyer?.first_name }} {{ quotation?.buyer?.last_name }}</p>
+          <p class="heading-4">{{ quotation?.buyer?.company_name }}</p>
+          <p class="heading-4">{{ quotation?.buyer?.email }}</p>
+          <p class="heading-4">
+            {{ quotation?.buyer?.address }}, {{ quotation?.buyer?.city }}, {{ quotation?.buyer?.zipcode }},
+            {{ quotation?.buyer?.country }}
+          </p>
+          <p class="heading-4">{{ quotation?.buyer?.phone_number }}</p>
         </div>
       </div>
       <div style="padding-top: 2rem;">
