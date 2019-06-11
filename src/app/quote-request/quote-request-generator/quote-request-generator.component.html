@@ -30,10 +30,7 @@
           ></app-quote-request-generator-form>
         </div>
         <div class="tab-pane" id="review">
-          <app-quote-request-generator-review
-            (validQuoteRequest)="validQuoteRequest($event)"
-            [isGenerator]="true"
-          ></app-quote-request-generator-review>
+          <app-quote-request (validQuoteRequest)="validQuoteRequest($event)" [isGenerator]="true"></app-quote-request>
         </div>
       </div>
     </div>

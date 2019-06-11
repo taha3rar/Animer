@@ -12,7 +12,7 @@ import { QuoteRequestGeneratorComponent } from './quote-request-generator/quote-
 // tslint:disable-next-line:max-line-length
 import { QuoteRequestGeneratorFormComponent } from './quote-request-generator/quote-request-generator-form/quote-request-generator-form.component';
 // tslint:disable-next-line:max-line-length
-import { QuoteRequestGeneratorReviewComponent } from './quote-request-generator/quote-request-generator-review/quote-request-generator-review.component';
+import { QuoteRequestComponent } from './quote-request/quote-request.component';
 // tslint:disable-next-line:max-line-length
 import { QuoteRequestGeneratorSuppliersComponent } from './quote-request-generator/quote-request-generator-suppliers/quote-request-generator-suppliers.component';
 import { RouterModule } from '@angular/router';
@@ -33,7 +33,6 @@ import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { QuoteRequestViewComponent } from './quote-request-view/quote-request-view.component';
 import { QuotationsListComponent } from './quote-request-view/quotations-list/quotations-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { QuoteRequestComponent } from './quote-request.component';
 import { QuotationComponent } from './quotation/quotation.component';
 import { QuoteRequestQuotationsResolver } from './resolvers/quote-request-quotation.resolver';
 
@@ -42,7 +41,6 @@ import { QuoteRequestQuotationsResolver } from './resolvers/quote-request-quotat
     QuoteRequestsListComponent,
     QuoteRequestGeneratorComponent,
     QuoteRequestGeneratorFormComponent,
-    QuoteRequestGeneratorReviewComponent,
     QuoteRequestGeneratorSuppliersComponent,
     QrAgriculturalProductComponent,
     QrProcessedProductComponent,

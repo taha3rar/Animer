@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { QuoteRequestDataService } from '../quote-request-data.service';
+import { QuoteRequestDataService } from '../quote-request-generator/quote-request-data.service';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { QuoteRequestService } from '@app/core/api/quote-request.service';
 import { AlertsService } from '@app/core/alerts.service';
@@ -8,11 +8,11 @@ import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quot
 import swal from 'sweetalert';
 
 @Component({
-  selector: 'app-quote-request-generator-review',
-  templateUrl: './quote-request-generator-review.component.html',
-  styleUrls: ['./quote-request-generator-review.component.scss']
+  selector: 'app-quote-request',
+  templateUrl: './quote-request.component.html',
+  styleUrls: ['./quote-request.component.scss']
 })
-export class QuoteRequestGeneratorReviewComponent implements OnInit {
+export class QuoteRequestComponent implements OnInit {
   @Output() validQuoteRequest = new EventEmitter<Boolean>();
   @Input() isGenerator = false;
   @Input() quoteRequest: QuoteRequest;
