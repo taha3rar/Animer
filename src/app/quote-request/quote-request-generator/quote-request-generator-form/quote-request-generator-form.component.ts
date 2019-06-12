@@ -96,6 +96,7 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
     dialogConfig.height = height;
     dialogConfig.width = '850px';
     dialogConfig.data = dialogData;
+    dialogConfig.autoFocus = false;
 
     const dialogRef = this.dialog.open(component, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {

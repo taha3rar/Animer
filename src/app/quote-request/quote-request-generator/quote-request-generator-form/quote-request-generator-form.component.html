@@ -100,29 +100,24 @@
                 <p>This field is required</p>
               </div>
             </div>
-            <div [ngClass]="showFieldStyle('valid_by')">
-              <label for="validBy">Quote request is valid by</label>
-              <div class="input-group">
-                <input
-                  id="valid_by"
-                  class="form-control"
-                  placeholder="dd/mm/yyyy"
-                  formControlName="valid_by"
-                  name="ddp"
-                  ngbDatepicker
-                  #dp3="ngbDatepicker"
-                />
-                <div class="input-group-append">
-                  <button
-                    class="btn glyphicon glyphicon-calendar"
-                    style="position:0;"
-                    (click)="dp3.toggle()"
-                    type="button"
-                  ></button>
-                </div>
-              </div>
-              <div class="help-block" *ngIf="isFieldInvalid('valid_by')">
-                <p>This field is required</p>
+            <label for="validBy">Quote request is valid by</label>
+            <div class="input-group">
+              <input
+                id="valid_by"
+                class="form-control"
+                placeholder="dd/mm/yyyy"
+                formControlName="valid_by"
+                name="ddp"
+                ngbDatepicker
+                #dp3="ngbDatepicker"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn glyphicon glyphicon-calendar"
+                  style="position:0;"
+                  (click)="dp3.toggle()"
+                  type="button"
+                ></button>
               </div>
             </div>
           </div>
@@ -169,11 +164,8 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls
-          id="sellersList"
-          *ngIf="targeted_sellers?.length > 5"
-          (pageChange)="page = $event"
-        ></pagination-controls>
+        <pagination-controls id="sellersList" *ngIf="targeted_sellers?.length > 5" (pageChange)="page = $event">
+        </pagination-controls>
       </div>
     </div>
   </div>

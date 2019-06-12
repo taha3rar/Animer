@@ -55,7 +55,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
       document_weight_unit: [this.draftQuoteRequest ? this.draftQuoteRequest.document_weight_unit : undefined],
       currency: [this.draftQuoteRequest ? this.draftQuoteRequest.currency : undefined, Validators.required],
       buyer_comments: [this.draftQuoteRequest ? this.draftQuoteRequest.buyer_comments : undefined],
-      valid_by: [this.draftQuoteRequest ? this.draftQuoteRequest.valid_by : undefined, Validators.required],
+      valid_by: [this.draftQuoteRequest ? this.draftQuoteRequest.valid_by : undefined],
       date_created: [moment(Date.now()).toJSON(), Validators.required]
     });
     this.quoteRequest = this.quoteRequestForm.value;
