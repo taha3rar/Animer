@@ -23,7 +23,6 @@ import { QrProcessedProductComponent } from './quote-request-generator/quote-req
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
-import { QuotationQuoteRequestComponent } from './quotation-generator/quotation-quote-request/quotation-quote-request.component';
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
 import { QuoteRequestUserResolver } from './resolvers/quote-request-user.resolver';
@@ -47,7 +46,6 @@ import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotati
     QuotationViewComponent,
     QuotationGeneratorComponent,
     QuotationGeneratorQuotationComponent,
-    QuotationQuoteRequestComponent,
     QuoteRequestViewComponent,
     QuotationsListComponent,
     QuoteRequestComponent,

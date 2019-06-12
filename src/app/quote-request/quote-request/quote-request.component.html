@@ -121,10 +121,30 @@
               </tr>
             </tbody>
           </table>
-          <pagination-controls
-            *ngIf="quoteRequest.sellers?.length > 5"
-            (pageChange)="page = $event"
-          ></pagination-controls>
+          <pagination-controls *ngIf="quoteRequest.sellers?.length > 5" (pageChange)="page = $event">
+          </pagination-controls>
+        </div>
+        <div *ngIf="isSeller && quotation && !seller" class="col-md-3">
+          <p class="heading-4-blue">ISSUED FOR</p>
+          <p class="heading-4">{{ quotation?.seller?.first_name }} {{ quotation?.seller?.last_name }}</p>
+          <p class="heading-4">{{ quotation?.seller?.company_name }}</p>
+          <p class="heading-4">{{ quotation?.seller?.email }}</p>
+          <p class="heading-4">
+            {{ quotation?.seller?.address }}, {{ quotation?.seller?.city }}, {{ quotation?.seller?.zipcode }},
+            {{ quotation?.seller?.country }}
+          </p>
+          <p class="heading-4">{{ quotation?.seller?.phone_number }}</p>
+        </div>
+        <div *ngIf="isSeller && !quotation && seller" class="col-md-3">
+          <p class="heading-4-blue">ISSUED FOR</p>
+          <p class="heading-4">{{ seller?.first_name }} {{ seller?.last_name }}</p>
+          <p class="heading-4">{{ seller?.company_name }}</p>
+          <p class="heading-4">{{ seller?.email }}</p>
+          <p class="heading-4">
+            {{ seller?.address }}, {{ seller?.city }}, {{ seller?.zipcode }},
+            {{ seller?.country }}
+          </p>
+          <p class="heading-4">{{ seller?.phone_number }}</p>
         </div>
       </div>
     </div>
@@ -134,6 +154,7 @@
   <button *ngIf="isGenerator" class="bttn-primary pull-right" (click)="submitQuoteRequest()">
     Send Quote Request
   </button>
+  <button *ngIf="seller" class="bttn-primary pull-right next-step">Generate quotation &rarr;</button>
   <button *ngIf="!isGenerator" class="btn-primary-transp pull-right" (click)="downloadPopup()">
     Download PDF
   </button>

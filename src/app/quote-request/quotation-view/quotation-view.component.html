@@ -33,10 +33,18 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="quoteRequest">
-      <app-quote-request [isSeller]="true" [quoteRequest]="quoteRequest"></app-quote-request>
+      <div class="panel panel-tab">
+        <div class="panel-body">
+          <app-quote-request
+            [isSeller]="true"
+            [quotation]="quotation"
+            [quoteRequest]="quoteRequest"
+          ></app-quote-request>
+        </div>
+      </div>
     </div>
     <div class="tab-pane" id="quotation">
-      <app-quotation [quotation]="quotation"></app-quotation>
+      <app-quotation [isView]="true" [quotation]="quotation"></app-quotation>
     </div>
   </div>
 </div>
