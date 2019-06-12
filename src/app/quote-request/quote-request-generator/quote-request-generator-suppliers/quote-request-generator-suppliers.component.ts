@@ -22,7 +22,6 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
   buyer_ecosystems: Ecosystem[];
   targeted_sellers: SellerQuoteRequest[];
   targeted_ecosytem_sellers: any[];
-  targeted_ecosystem = new Ecosystem();
   quoteRequest: QuoteRequest = new QuoteRequest();
   pageClients = 1;
   pageEcosystems = 1;
@@ -45,8 +44,18 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     });
     this.quoteRequestDataService.currentQuoteRequest.subscribe(quoteRequest => {
       this.quoteRequest = quoteRequest;
+      if (this.quoteRequest.ecosystem_id) {
+        this.toggledTable = 'ecosystems';
+        const ecosystem_targeted = this.buyer_ecosystems.filter(ecosystems => {
+          return ecosystems._id === this.quoteRequest.ecosystem_id;
+        });
+        this.pickEcosystem(ecosystem_targeted[0], true);
+      }
       this.quoteRequest.sellers ? (this.targeted_sellers = this.quoteRequest.sellers) : (this.targeted_sellers = []);
     });
+    if (this.toggledTable === 'ecosystems') {
+      this.displayEcosystemSellers();
+    }
   }
 
   toggleAlert(table: string): void {
@@ -66,6 +75,26 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
         thisClass.toggleTable(table);
       }
     });
+  }
+
+  pickEcosystem(ecosystem: Ecosystem, noUpdate?: boolean): void {
+    this.quoteRequest.ecosystem_id = ecosystem._id;
+    this.targeted_ecosytem_sellers = [];
+    this.targeted_sellers = [];
+    for (let i = 0; i < ecosystem.participants.length; i++) {
+      this.targeted_ecosytem_sellers.push({
+        _id: ecosystem.participants[i]._id,
+        first_name: ecosystem.participants[i].first_name,
+        last_name: ecosystem.participants[i].last_name,
+        company_name: ecosystem.participants[i].company_name
+      });
+      if (!noUpdate) {
+        this.targetSeller(ecosystem.participants[i], true);
+      }
+    }
+    if (!noUpdate) {
+      this.displayEcosystemSellers();
+    }
   }
 
   targetSeller(seller: any, isChecked: Boolean): void {
@@ -92,25 +121,9 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     this.updateQuoteRequest();
   }
 
-  pickEcosystem(ecosystem: Ecosystem): void {
-    this.targeted_ecosystem = ecosystem;
-    this.targeted_ecosytem_sellers = [];
-    this.targeted_sellers = [];
-    for (let i = 0; i < ecosystem.participants.length; i++) {
-      this.targeted_ecosytem_sellers.push({
-        _id: ecosystem.participants[i]._id,
-        first_name: ecosystem.participants[i].first_name,
-        last_name: ecosystem.participants[i].last_name,
-        company_name: ecosystem.participants[i].company_name
-      });
-      this.targetSeller(ecosystem.participants[i], true);
-    }
-    this.displayEcosystemSellers();
-  }
-
   isPicked(ecosystem: Ecosystem): Boolean {
-    if (this.targeted_ecosystem) {
-      return ecosystem._id === this.targeted_ecosystem._id;
+    if (this.quoteRequest.ecosystem_id) {
+      return ecosystem._id === this.quoteRequest.ecosystem_id;
     } else {
       return false;
     }
@@ -130,7 +143,7 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
 
   toggleTable(table: string): void {
     this.targeted_sellers = [];
-    this.targeted_ecosystem = undefined;
+    this.quoteRequest.ecosystem_id = null;
     this.updateQuoteRequest();
     if (table === 'clients' && this.sellersSecOpened) {
       $('#ecosystem-sellers').hide();

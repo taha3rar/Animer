@@ -19,6 +19,7 @@ export class QuoteRequest {
     zipcode: String;
     country: String;
   };
+  ecosystem_id: string;
   sellers: SellerQuoteRequest[];
   currency: String;
   buyer_comments: String;

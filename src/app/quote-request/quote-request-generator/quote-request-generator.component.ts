@@ -62,6 +62,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
     this.quoteRequest.buyer.contact_by = this.quoteRequestForm.value.buyer.contact_by.value;
     if (this.draftQuoteRequest) {
       this.quoteRequest.sellers = this.draftQuoteRequest.sellers;
+      this.quoteRequest.ecosystem_id = this.draftQuoteRequest.ecosystem_id;
       this.quoteRequest.product = this.draftQuoteRequest.product;
     }
     this.quoteRequestDataService.setQuoteRequest(this.quoteRequest);
