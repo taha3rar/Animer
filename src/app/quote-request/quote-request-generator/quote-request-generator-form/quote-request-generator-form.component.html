@@ -178,18 +178,21 @@
     </div>
   </div>
 </div>
-<button [hidden]="!quoteRequestForm.valid || !product" class="bttn-primary pull right next-step">
+<button
+  [hidden]="!quoteRequestForm.valid || !product || quoteRequest.sellers.length <= 0"
+  class="bttn-primary pull right next-step"
+>
   Next Step &rarr;
 </button>
 <button
-  [hidden]="quoteRequestForm.valid && product"
+  [hidden]="quoteRequestForm.valid && product && quoteRequest.sellers.length > 0"
   class="bttn-primary pull right"
   (click)="onSubmit(quoteRequestForm)"
 >
   Next Step &rarr;
 </button>
 <button
-  [disabled]="targeted_sellers?.length <= 0"
+  [disabled]="targeted_sellers?.length <= 0 && !quoteRequest.product"
   class="btn-primary-transp pull-right btn-draft"
   (click)="draftQuoterequest()"
 >

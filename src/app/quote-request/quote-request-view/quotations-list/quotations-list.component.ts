@@ -53,7 +53,7 @@ export class QuotationsListComponent implements OnInit {
     const dialogRef = this.dialog.open(QuotationComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
       if (data && data.refresh) {
-        this.router.navigate(['/quote-request/list']);
+        this.router.navigate([this.router.url]);
       }
     });
   }

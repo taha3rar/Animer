@@ -131,12 +131,7 @@
   </div>
 </div>
 <div>
-  <button
-    *ngIf="isGenerator"
-    class="bttn-primary pull-right"
-    (click)="submitQuoteRequest()"
-    [disabled]="!quoteRequest.product"
-  >
+  <button *ngIf="isGenerator" class="bttn-primary pull-right" (click)="submitQuoteRequest()">
     Send Quote Request
   </button>
   <button *ngIf="!isGenerator" class="btn-primary-transp pull-right" (click)="downloadPopup()">

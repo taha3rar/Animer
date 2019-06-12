@@ -55,10 +55,14 @@ export class QuoteRequestComponent implements OnInit {
   }
 
   submitQuoteRequest() {
-    this.validQuoteRequest.emit(true);
-    this.quoteRequestService.create(this.quoteRequest).subscribe(quoteRequest => {
-      this.alerts.showAlert('Your quote request has been sent');
-      this.router.navigateByUrl('/quote-request/list');
-    });
+    if (this.quoteRequest.product && this.quoteRequest.sellers.length > 0) {
+      this.validQuoteRequest.emit(true);
+      this.quoteRequestService.create(this.quoteRequest).subscribe(quoteRequest => {
+        this.alerts.showAlert('Your quote request has been sent');
+        this.router.navigateByUrl('/quote-request/list');
+      });
+    } else {
+      this.alerts.showAlert('Please fill in all the necessary informations in order to send the Quotation');
+    }
   }
 }

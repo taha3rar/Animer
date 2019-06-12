@@ -18,25 +18,36 @@
         <div class="status status-blue">{{ quotation.status }}</div>
       </td>
       <td>
-        <span *ngIf="quotation.product.product_type === 'agricultural'">
-          {{ quotation.product.total_weight_offered | number: '1.2-2' }} {{ quotation.product.weight_unit }}
+        <span *ngIf="quotation.product && quotation.product?.product_type === 'agricultural'">
+          {{ quotation.product?.total_weight_offered | number: '1.2-2' }} {{ quotation.product?.weight_unit }}
         </span>
-        <span *ngIf="quotation.product.product_type != 'agricultural'">
-          {{ quotation.product.quantity_offered }} {{ quotation.product.type_of_package }}
+        <span *ngIf="quotation.product && quotation.product?.product_type != 'agricultural'">
+          {{ quotation.product?.quantity_offered }} {{ quotation.product?.type_of_package }}
+        </span>
+        <span *ngIf="!quotation.product">
+          N/A
         </span>
       </td>
       <td>
-        <span *ngIf="quotation.product.product_type === 'agricultural'">
-          {{ quotation.product.price_per_unit | number: '1.2-2' }} {{ quotation.currency }} /
-          {{ quotation.product.weight_unit }}
+        <span *ngIf="quotation.product && quotation.product?.product_type === 'agricultural'">
+          {{ quotation.product?.price_per_unit | number: '1.2-2' }} {{ quotation.currency }} /
+          {{ quotation.product?.weight_unit }}
         </span>
-        <span *ngIf="quotation.product.product_type != 'agricultural'">
-          {{ quotation.product.package_price | number: '1.2-2' }} {{ quotation.currency }} / Package
+        <span *ngIf="quotation.product && quotation.product?.product_type != 'agricultural'">
+          {{ quotation.product?.package_price | number: '1.2-2' }} {{ quotation.currency }} / Package
+        </span>
+        <span *ngIf="!quotation.product">
+          N/A
         </span>
       </td>
-      <td>{{ quotation.product.product_subtotal | number: '1.2-2' }} {{ quotation.currency }}</td>
+      <td>
+        <span *ngIf="quotation.product"
+          >{{ quotation.product?.product_subtotal | number: '1.2-2' }} {{ quotation.currency }}</span
+        >
+        <span *ngIf="!quotation.product">N/A</span>
+      </td>
       <td class="text-right">
-        <button class="round-button-primary" (click)="openQuotationView(i)">
+        <button class="round-button-primary" (click)="openQuotationView(i)" [disabled]="!quotation.product">
           <i class="material-icons">remove_red_eye</i>
         </button>
       </td>

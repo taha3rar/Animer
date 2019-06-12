@@ -22,7 +22,8 @@ const routes: Routes = [
       component: QuoteRequestsListComponent,
       resolve: {
         quoteRequests: QuoteRequestListResolver
-      }
+      },
+      runGuardsAndResolvers: 'always'
     },
     {
       path: 'quote-request/generator',
