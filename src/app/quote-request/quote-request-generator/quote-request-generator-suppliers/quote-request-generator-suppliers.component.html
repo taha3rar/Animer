@@ -50,7 +50,7 @@
                     type="checkbox"
                     class="checkbox"
                     [id]="seller._id"
-                    (change)="targetSeller(seller, $event.target.checked, true)"
+                    (change)="targetSeller(seller, $event.target.checked)"
                     [checked]="isTargeted(seller)"
                     [disabled]="disablingChoice(seller)"
                   /><label class="checkbox_label" [for]="seller._id"><span class="form_checkbox_btn"></span></label>
@@ -130,16 +130,20 @@
           <tbody>
             <tr
               *ngFor="
-                let seller of (targeted_sellers
+                let seller of (targeted_ecosytem_sellers
                   | paginate: { itemsPerPage: 10, currentPage: pageEcosystemSellers, id: 'ecosystemSellers' })
               "
             >
               <td>
-                <input type="checkbox" class="checkbox" [id]="seller.numericId" checked /><label
-                  class="checkbox_label"
-                  [for]="seller.numericId"
-                  ><span class="form_checkbox_btn"></span
-                ></label>
+                <input
+                  type="checkbox"
+                  class="checkbox"
+                  [id]="seller._id"
+                  (change)="targetSeller(seller, $event.target.checked)"
+                  [checked]="isTargeted(seller)"
+                  [disabled]="disablingChoice(seller)"
+                />
+                <label class="checkbox_label" [for]="seller._id"><span class="form_checkbox_btn"></span></label>
               </td>
               <td>{{ seller.company_name }}</td>
               <td>{{ seller.first_name }} {{ seller.last_name }}</td>

@@ -21,6 +21,7 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
   buyer_sellers: Client[];
   buyer_ecosystems: Ecosystem[];
   targeted_sellers: SellerQuoteRequest[];
+  targeted_ecosytem_sellers: any[];
   targeted_ecosystem = new Ecosystem();
   quoteRequest: QuoteRequest = new QuoteRequest();
   pageClients = 1;
@@ -67,10 +68,7 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     });
   }
 
-  targetSeller(seller: any, isChecked: Boolean, singleSeller: Boolean): void {
-    if (this.targeted_ecosystem && singleSeller) {
-      this.targeted_ecosystem = undefined;
-    }
+  targetSeller(seller: any, isChecked: Boolean): void {
     if (isChecked) {
       this.targeted_sellers.push({
         _id: seller._id,
@@ -96,9 +94,16 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
 
   pickEcosystem(ecosystem: Ecosystem): void {
     this.targeted_ecosystem = ecosystem;
+    this.targeted_ecosytem_sellers = [];
     this.targeted_sellers = [];
     for (let i = 0; i < ecosystem.participants.length; i++) {
-      this.targetSeller(ecosystem.participants[i], true, false);
+      this.targeted_ecosytem_sellers.push({
+        _id: ecosystem.participants[i]._id,
+        first_name: ecosystem.participants[i].first_name,
+        last_name: ecosystem.participants[i].last_name,
+        company_name: ecosystem.participants[i].company_name
+      });
+      this.targetSeller(ecosystem.participants[i], true);
     }
     this.displayEcosystemSellers();
   }

@@ -8,6 +8,7 @@ export class Ecosystem {
       email: string;
       phone_number: string;
       profile_picture: string;
+      company_name: string;
     }
   ];
   owner_role: string;
