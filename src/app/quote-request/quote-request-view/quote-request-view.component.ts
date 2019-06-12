@@ -15,7 +15,6 @@ export class QuoteRequestViewComponent implements OnInit {
 
   ngOnInit() {
     this.quoteRequest = this.route.snapshot.data['quoteRequest'];
-    console.log(this.quoteRequest);
   }
 
   back() {
