@@ -13,7 +13,7 @@ import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosys
 import { QuoteRequestUserResolver } from './resolvers/quote-request-user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
-import { QuoteRequestQuotationsResolver } from './resolvers/quote-request-quotation.resolver';
+import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotation.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -50,7 +50,7 @@ const routes: Routes = [
       component: QuotationViewComponent,
       resolve: {
         quoteRequest: QuoteRequestResolver,
-        quotations: QuoteRequestQuotationsResolver
+        quotation: QuoteRequestQuotationResolver
       }
     },
     {
@@ -66,7 +66,8 @@ const routes: Routes = [
       component: QuoteRequestViewComponent,
       resolve: {
         quoteRequest: QuoteRequestResolver
-      }
+      },
+      runGuardsAndResolvers: 'always'
     }
   ])
 ];

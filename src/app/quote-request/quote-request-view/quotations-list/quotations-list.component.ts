@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { QuotationService } from '@app/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductQuotation } from '@app/core/models/quotation/product-quotation';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { QuotationComponent } from '../../quotation/quotation.component';
@@ -19,18 +19,28 @@ export class QuotationsListComponent implements OnInit {
   quotations: Quotation[];
   viewProduct: ProductQuotation;
 
-  constructor(private quotationService: QuotationService, private route: ActivatedRoute, public dialog: MatDialog) {}
+  constructor(
+    private quotationService: QuotationService,
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.quoteRequest = this.route.snapshot.data['quoteRequest'];
-    this.quotationService.getByQuoteRequest(this.quoteRequest._id).subscribe(quotations => {
-      if (this.acceptedQuotations) {
-        this.quotations = quotations.filter(quotation => quotation.status === 'QUOTATION ACCEPTED');
-      } else {
+    this.fetchQuotations();
+  }
+
+  fetchQuotations() {
+    if (this.acceptedQuotations) {
+      this.quotationService.getAccepted(this.quoteRequest._id).subscribe(acceptedQuotations => {
+        this.quotations = acceptedQuotations;
+      });
+    } else {
+      this.quotationService.getByQuoteRequest(this.quoteRequest._id).subscribe(quotations => {
         this.quotations = quotations;
-      }
-      console.log(this.quotations);
-    });
+      });
+    }
   }
 
   openQuotationView(index: number): void {
@@ -40,11 +50,11 @@ export class QuotationsListComponent implements OnInit {
     dialogConfig.width = '70%';
     dialogConfig.data = { quotation: this.quotations[index] };
 
-    this.dialog.open(QuotationComponent, dialogConfig);
-    // dialogRef.afterClosed().subscribe(data => {
-    //   if (data) {
-    //     this.updateProduct(data.product, data.index);
-    //   }
-    // });
+    const dialogRef = this.dialog.open(QuotationComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data => {
+      if (data && data.refresh) {
+        this.router.navigate(['/quote-request/list']);
+      }
+    });
   }
 }

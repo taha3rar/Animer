@@ -16,4 +16,18 @@ export class QuotationService extends BaseService {
   getByQuoteRequest(quoteRequestId: string): Observable<Quotation[]> {
     return this.apiService.get(`${this.path}/quote-request/${quoteRequestId}`).pipe(map(data => data));
   }
+
+  getByQuoteRequestSeller(quoteRequestId: string, sellerId: string): Observable<Quotation> {
+    return this.apiService
+      .get(`${this.path}/quote-request/${quoteRequestId}/seller/${sellerId}`)
+      .pipe(map(data => data));
+  }
+
+  acceptQuotation(quotationId: string): Observable<any> {
+    return this.apiService.put(`${this.path}/${quotationId}/accept`).pipe(map(data => data));
+  }
+
+  getAccepted(quoteRequestId: string): Observable<Quotation[]> {
+    return this.apiService.get(`${this.path}/quote-request/${quoteRequestId}/accepted`).pipe(map(data => data));
+  }
 }

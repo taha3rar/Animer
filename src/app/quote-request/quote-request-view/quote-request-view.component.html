@@ -42,18 +42,29 @@
           <p class="heading-3">QUOTES RECEIVED</p>
           <p class="normal-text-bold">{{ quoteRequest.quotations.count }}</p>
         </div>
-        <div class="col-md-3">
-          <p class="heading-3">TOTAL AMOUNT REQUESTED</p>
-          <p *ngIf="quoteRequest.product.product_type === 'agricultural'" class="normal-text-bold">
+        <div *ngIf="quoteRequest.product.product_type === 'agricultural'" class="col-md-3">
+          <p class="heading-3">TOTAL WEIGHT REQUESTED</p>
+          <p class="normal-text-bold">
             {{ quoteRequest.product.total_weight_requested | number: '1.2-2' }} {{ quoteRequest.product.weight_unit }}
           </p>
-          <p *ngIf="quoteRequest.product.product_type != 'agricultural'" class="normal-text-bold">
+        </div>
+        <div *ngIf="quoteRequest.product.product_type != 'agricultural'" class="col-md-3">
+          <p class="heading-3">TOTAL QUANTITY REQUESTED</p>
+          <p class="normal-text-bold">
             {{ quoteRequest.product.quantity_requested }} {{ quoteRequest.product.type_of_package }}
           </p>
         </div>
-        <div class="col-md-3">
-          <p class="heading-3">AMOUNT ACCEPTED</p>
-          <p class="normal-text-bold">TO IMPLEMENT</p>
+        <div *ngIf="quoteRequest.product.product_type === 'agricultural'" class="col-md-3">
+          <p class="heading-3">WEIGHT ACCEPTED</p>
+          <p class="normal-text-bold">
+            {{ quoteRequest.quotations.total_weight_accepted | number: '1.2-2' }} {{ quoteRequest.product.weight_unit }}
+          </p>
+        </div>
+        <div *ngIf="quoteRequest.product.product_type != 'agricultural'" class="col-md-3">
+          <p class="heading-3">QUANTITY ACCEPTED</p>
+          <p class="normal-text-bold">
+            {{ quoteRequest.quotations.quantity_accepted }} {{ quoteRequest.product.type_of_package }}
+          </p>
         </div>
       </div>
     </div>

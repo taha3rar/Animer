@@ -29,8 +29,9 @@ export class QuoteRequest {
   total_packages: Number;
   total_weight: Number;
   quotations: {
-    count: Number;
-    best_offer: Number;
+    count: number;
+    total_weight_accepted: number;
+    quantity_accepted: number;
   };
   status: String;
   date_created: string;

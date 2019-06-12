@@ -18,6 +18,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   qrSent = 'QUOTE REQUEST SENT';
   qSent = 'QUOTATION SENT';
   qReceived = 'QUOTATION RECEIVED';
+  qAccepted = 'QUOTATION ACCEPTED';
 
   constructor(
     protected authService: AuthenticationService,
@@ -36,6 +37,8 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   }
 
   quotationSent(index: number) {
-    return this.quoteRequests[index].status === 'QUOTATION SENT';
+    return (
+      this.quoteRequests[index].status === 'QUOTATION SENT' || this.quoteRequests[index].status === 'QUOTATION ACCEPTED'
+    );
   }
 }

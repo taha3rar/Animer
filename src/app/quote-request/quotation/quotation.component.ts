@@ -14,7 +14,6 @@ export class QuotationComponent implements OnInit {
   @Input() quotation: Quotation;
   @Input() isGenerator = false;
   @Input() isView = false;
-  quotationAccepted = false;
   isModal = false;
 
   constructor(
@@ -55,7 +54,24 @@ export class QuotationComponent implements OnInit {
     });
   }
 
-  onExit(): void {
-    this.dialogRef.close();
+  acceptQuotation() {
+    this.quotationService.acceptQuotation(this.quotation._id).subscribe(data => {
+      this.alerts.showAlert('The quotation has been successfully accepted');
+      this.onExit(true);
+    });
+  }
+
+  isAccepted() {
+    return this.quotation.status === 'QUOTATION ACCEPTED';
+  }
+
+  onExit(refresh?: boolean): void {
+    if (refresh) {
+      this.dialogRef.close({
+        refresh: true
+      });
+    } else {
+      this.dialogRef.close();
+    }
   }
 }

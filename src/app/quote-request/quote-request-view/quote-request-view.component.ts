@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 
 @Component({
@@ -11,7 +11,7 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 export class QuoteRequestViewComponent implements OnInit {
   quoteRequest: QuoteRequest;
 
-  constructor(private location: Location, private route: ActivatedRoute) {}
+  constructor(private location: Location, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.quoteRequest = this.route.snapshot.data['quoteRequest'];

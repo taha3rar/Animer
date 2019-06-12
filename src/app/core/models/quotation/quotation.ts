@@ -1,7 +1,7 @@
 import { ProductQuotation } from './product-quotation';
 
 export class Quotation {
-  _id: String;
+  _id: string;
   numericId: Number;
   buyer: {
     _id: String;

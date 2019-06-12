@@ -135,7 +135,9 @@
           </div>
         </div>
       </div>
-      <button *ngIf="!quotationAccepted && isModal" class="bttn-success pull-right mt-5">Accept Quotation</button>
+      <button (click)="acceptQuotation()" *ngIf="!isAccepted() && isModal" class="bttn-success pull-right mt-5">
+        Accept Quotation
+      </button>
       <button class="btn-primary-transp pull-right mt-5" (click)="downloadPopup()">
         Download PDF
       </button>

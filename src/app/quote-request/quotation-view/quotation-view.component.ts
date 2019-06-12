@@ -12,17 +12,13 @@ import { Quotation } from '@app/core/models/quotation/quotation';
 })
 export class QuotationViewComponent implements OnInit {
   quoteRequest: QuoteRequest;
-  quotations: Quotation[];
   quotation: Quotation;
 
   constructor(private quotationService: QuotationService, private location: Location, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.quoteRequest = this.route.snapshot.data['quoteRequest'];
-    this.quotations = this.route.snapshot.data['quotations'];
-    this.quotation = this.quotations.find(quote => {
-      return quote.quote_request._id === this.quoteRequest._id;
-    });
+    this.quotation = this.route.snapshot.data['quotation'];
   }
 
   back() {
