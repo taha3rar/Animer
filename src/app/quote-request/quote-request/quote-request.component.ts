@@ -31,7 +31,7 @@ export class QuoteRequestComponent extends DocumentDownloadComponent implements 
     private alerts: AlertsService,
     private router: Router
   ) {
-    super();
+    super(quoteRequestService, 'quote-request', 'Quote Request');
   }
 
   ngOnInit() {
@@ -43,10 +43,7 @@ export class QuoteRequestComponent extends DocumentDownloadComponent implements 
     } else {
       this.product = this.quoteRequest.product;
     }
-    this.documentName = 'Quote Requset';
-    this.service = this.quoteRequestService;
-    this.transaction = this.quoteRequest;
-    this.transactionRoute = 'quote-request';
+    super.setTransaction(this.quoteRequest);
   }
 
   submitQuoteRequest() {

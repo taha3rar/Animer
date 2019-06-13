@@ -18,7 +18,7 @@ export class OrderPoComponent extends DocumentDownloadComponent implements OnIni
   generateOrder: boolean;
 
   constructor(private authService: AuthenticationService, private orderService: OrderService) {
-    super();
+    super(orderService, 'purchase-order', 'Purchase Order');
   }
 
   ngOnInit() {
@@ -27,9 +27,6 @@ export class OrderPoComponent extends DocumentDownloadComponent implements OnIni
     if (this.order && this.user_id === this.order.buyer._id) {
       this.buyer = true;
     }
-    this.transaction = this.order;
-    this.transactionRoute = 'purchase-order';
-    this.service = this.orderService;
-    this.documentName = 'Proforma Invoice';
+    super.setTransaction(this.order);
   }
 }

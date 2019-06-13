@@ -31,7 +31,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
     private router: Router,
     private alertsService: AlertsService
   ) {
-    super();
+    super(invoiceService, 'proforma-invoice', 'Proforma Invoice');
   }
 
   ngOnInit() {
@@ -41,10 +41,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
         this.invoice = invoice;
       });
     }
-    this.transaction = this.invoice;
-    this.transactionRoute = 'proforma-invoice';
-    this.service = this.invoiceService;
-    this.documentName = 'Proforma Invoice';
+    super.setTransaction(this.invoice);
   }
 
   back() {

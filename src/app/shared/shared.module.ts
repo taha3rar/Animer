@@ -42,8 +42,7 @@ import { DocumentDownloadComponent } from './components/document-download/docume
     DocumentGeneratorComponent,
     TutorialControlComponent,
     NotFoundComponent,
-    UnauthorizedPageComponent,
-    DocumentDownloadComponent
+    UnauthorizedPageComponent
   ],
   exports: [
     LoaderComponent,
@@ -56,8 +55,7 @@ import { DocumentDownloadComponent } from './components/document-download/docume
     UserDocumentComponent,
     UploadPictureComponent,
     DocumentGeneratorComponent,
-    TutorialControlComponent,
-    DocumentDownloadComponent
+    TutorialControlComponent
   ],
   providers: [CsvService, DatePipe]
 })

@@ -24,7 +24,7 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
     private router: Router,
     @Optional() public dialogRef: MatDialogRef<QuotationComponent>
   ) {
-    super();
+    super(quotationService, 'quotation', 'Quotation');
   }
 
   ngOnInit() {
@@ -33,9 +33,7 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
       this.quotation = this.data.quotation;
     }
     this.transaction = this.quotation;
-    this.service = this.quotationService;
-    this.documentName = 'Quotation';
-    this.transactionRoute = 'quotation';
+    super.setTransaction(this.quotation);
   }
 
   submitQuotation() {

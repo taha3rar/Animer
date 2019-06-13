@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import swal from 'sweetalert';
 import { saveAs as importedSaveAs } from 'file-saver';
 
-@Component({
-  selector: 'app-document-download',
-  template: ''
-})
-export class DocumentDownloadComponent implements OnInit {
-  service: any;
+export class DocumentDownloadComponent {
   transaction: any;
-  transactionRoute: any;
-  documentName: string;
 
-  constructor() {}
+  constructor(private service: any, private transactionRoute: any, private documentName: string) {}
 
-  ngOnInit() {}
+  setTransaction(transaction: any) {
+    this.transaction = transaction;
+  }
 
   downloadPopup() {
     swal({
