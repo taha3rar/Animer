@@ -5,12 +5,13 @@ import { QuotationService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import { DocumentDownloadComponent } from '@app/shared/components/document-download/document-download.component';
 
 @Component({
   selector: 'app-quotation',
   templateUrl: './quotation.component.html'
 })
-export class QuotationComponent implements OnInit {
+export class QuotationComponent extends DocumentDownloadComponent implements OnInit {
   @Input() quotation: Quotation;
   @Input() isGenerator = false;
   @Input() isView = false;
@@ -22,35 +23,25 @@ export class QuotationComponent implements OnInit {
     private alerts: AlertsService,
     private router: Router,
     @Optional() public dialogRef: MatDialogRef<QuotationComponent>
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     if (this.data) {
       this.isModal = true;
       this.quotation = this.data.quotation;
     }
+    this.transaction = this.quotation;
+    this.service = this.quotationService;
+    this.documentName = 'Quotation';
+    this.transactionRoute = 'quotation';
   }
 
   submitQuotation() {
     this.quotationService.create(this.quotation).subscribe(quotation => {
       this.alerts.showAlert('Your quotation has been sent');
       this.router.navigateByUrl('/quote-request/list');
-    });
-  }
-
-  downloadPopup() {
-    swal({
-      title: 'Download as PDF',
-      className: 'swal-pdf',
-      text: 'Please choose the type of quotation document you would like to download:',
-      buttons: {
-        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o', closeModal: false },
-        copyDoc: { text: 'Copy Document', value: 'copy', closeModal: false }
-      }
-    }).then(value => {
-      if (value === 'original') {
-      } else {
-      }
     });
   }
 

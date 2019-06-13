@@ -1,3 +1,4 @@
+import { DocumentDownloadComponent } from './../../shared/components/document-download/document-download.component';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { QuoteRequestDataService } from '../quote-request-generator/quote-request-data.service';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
@@ -14,7 +15,7 @@ import { User } from '@app/core/models/order/user';
   templateUrl: './quote-request.component.html',
   styleUrls: ['./quote-request.component.scss']
 })
-export class QuoteRequestComponent implements OnInit {
+export class QuoteRequestComponent extends DocumentDownloadComponent implements OnInit {
   @Output() validQuoteRequest = new EventEmitter<Boolean>();
   @Input() isGenerator = false;
   @Input() quoteRequest: QuoteRequest;
@@ -29,7 +30,9 @@ export class QuoteRequestComponent implements OnInit {
     private quoteRequestService: QuoteRequestService,
     private alerts: AlertsService,
     private router: Router
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     if (this.isGenerator) {
@@ -40,22 +43,10 @@ export class QuoteRequestComponent implements OnInit {
     } else {
       this.product = this.quoteRequest.product;
     }
-  }
-
-  downloadPopup() {
-    swal({
-      title: 'Download as PDF',
-      className: 'swal-pdf',
-      text: 'Please choose the type of quote request document you would like to download:',
-      buttons: {
-        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o', closeModal: false },
-        copyDoc: { text: 'Copy Document', value: 'copy', closeModal: false }
-      }
-    }).then(value => {
-      if (value === 'original') {
-      } else {
-      }
-    });
+    this.documentName = 'Quote Requset';
+    this.service = this.quoteRequestService;
+    this.transaction = this.quoteRequest;
+    this.transactionRoute = 'quote-request';
   }
 
   submitQuoteRequest() {
