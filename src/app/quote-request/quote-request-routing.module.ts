@@ -14,6 +14,7 @@ import { QuoteRequestUserResolver } from './resolvers/quote-request-user.resolve
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotation.resolver';
+import { extract } from '@app/core';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -23,6 +24,7 @@ const routes: Routes = [
       resolve: {
         quoteRequests: QuoteRequestListResolver
       },
+      data: { title: extract('Quote Requests') },
       runGuardsAndResolvers: 'always'
     },
     {
