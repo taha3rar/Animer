@@ -60,21 +60,25 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
 
   toggleAlert(table: string): void {
     const thisClass = this;
-    let target_description: string;
-    table === 'clients' ? (target_description = 'one or more single users') : (target_description = 'an ecosystem');
-    swal({
-      title: 'You are about to send a Quote Request to ' + target_description,
-      text: 'All of your pevious chosen clients will be deleted from the suppliers list',
-      icon: 'info',
-      buttons: {
-        cancel: true,
-        confirm: true
-      }
-    }).then(function(isConfirm: boolean) {
-      if (isConfirm) {
-        thisClass.toggleTable(table);
-      }
-    });
+    if (this.targeted_sellers.length > 0) {
+      let target_description: string;
+      table === 'clients' ? (target_description = 'one or more single users') : (target_description = 'an ecosystem');
+      swal({
+        title: 'You are about to send a Quote Request to ' + target_description,
+        text: 'All of your pevious chosen clients will be deleted from the suppliers list',
+        icon: 'info',
+        buttons: {
+          cancel: true,
+          confirm: true
+        }
+      }).then(function(isConfirm: boolean) {
+        if (isConfirm) {
+          thisClass.toggleTable(table);
+        }
+      });
+    } else {
+      thisClass.toggleTable(table);
+    }
   }
 
   pickEcosystem(ecosystem: Ecosystem, noUpdate?: boolean): void {

@@ -63,7 +63,7 @@
           </tbody>
         </table>
         <div class="dropdown">
-          <button [disabled]="product" class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          <button *ngIf="!product" class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">
             Add New Product
           </button>
           <ul class="dropdown-menu">
@@ -92,7 +92,7 @@
           <div class="info">
             <p class="heading-2 mb-3">OTHER DETAILS</p>
             <div [ngClass]="showFieldStyle('currency')">
-              <label for="currency">Receive quotation in- *</label>
+              <label for="currency">Choose currency *</label>
               <select id="currency" name="currency" class="form-control mb-3" formControlName="currency">
                 <option *ngFor="let currency of currencies" [value]="currency.value"> {{ currency.viewValue }}</option>
               </select>
