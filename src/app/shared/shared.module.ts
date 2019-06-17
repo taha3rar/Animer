@@ -24,9 +24,9 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UnauthorizedPageComponent } from './components/unauthorized-page/unauthorized-page.component';
 // tslint:disable-next-line:max-line-length
-import { ModalAgriculturalShortProductComponent } from './components/products/modal-agricultural-short-product/modal-agricultural-short-product.component';
+import { ModalAgriculturalProductComponent } from './components/products/modal-agricultural-product/modal-agricultural-product.component';
 // tslint:disable-next-line:max-line-length
-import { ModalProcessedShortProductComponent } from './components/products/modal-processed-short-product/modal-processed-short-product.component';
+import { ModalProcessedProductComponent } from './components/products/modal-processed-product/modal-processed-product.component';
 import { DocumentDownloadComponent } from './components/document-download/document-download.component';
 
 @NgModule({
@@ -56,10 +56,10 @@ import { DocumentDownloadComponent } from './components/document-download/docume
     TutorialControlComponent,
     NotFoundComponent,
     UnauthorizedPageComponent,
-    ModalAgriculturalShortProductComponent,
-    ModalProcessedShortProductComponent
+    ModalAgriculturalProductComponent,
+    ModalProcessedProductComponent
   ],
-  entryComponents: [ModalAgriculturalShortProductComponent, ModalProcessedShortProductComponent],
+  entryComponents: [ModalAgriculturalProductComponent, ModalProcessedProductComponent],
   exports: [
     LoaderComponent,
     RoundUpPipe,

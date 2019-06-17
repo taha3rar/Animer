@@ -4,14 +4,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BaseProductOrder } from '../../../../order/order-generator/order-product-list/base-product-order';
 
 @Component({
-  selector: 'app-modal-processed-short-product',
-  templateUrl: './modal-processed-short-product.component.html',
-  styleUrls: ['./modal-processed-short-product.component.scss']
+  selector: 'app-modal-processed-product',
+  templateUrl: './modal-processed-product.component.html',
+  styleUrls: ['./modal-processed-product.component.scss']
 })
-export class ModalProcessedShortProductComponent extends BaseProductOrder implements OnInit {
+export class ModalProcessedProductComponent extends BaseProductOrder implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
-    public dialogRef: MatDialogRef<ModalProcessedShortProductComponent>
+    public dialogRef: MatDialogRef<ModalProcessedProductComponent>
   ) {
     super(dialogRef, data, 'processed');
   }

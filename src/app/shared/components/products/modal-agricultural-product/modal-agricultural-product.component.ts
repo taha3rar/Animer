@@ -4,14 +4,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BaseProductOrder } from '../../../../order/order-generator/order-product-list/base-product-order';
 
 @Component({
-  selector: 'app-modal-agricultural-short-product',
-  templateUrl: './modal-agricultural-short-product.component.html',
-  styleUrls: ['./modal-agricultural-short-product.component.scss']
+  selector: 'app-modal-agricultural-product',
+  templateUrl: './modal-agricultural-product.component.html',
+  styleUrls: ['./modal-agricultural-product.component.scss']
 })
-export class ModalAgriculturalShortProductComponent extends BaseProductOrder {
+export class ModalAgriculturalProductComponent extends BaseProductOrder {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
-    public dialogRef: MatDialogRef<ModalAgriculturalShortProductComponent>
+    public dialogRef: MatDialogRef<ModalAgriculturalProductComponent>
   ) {
     super(dialogRef, data, 'agricultural');
   }
