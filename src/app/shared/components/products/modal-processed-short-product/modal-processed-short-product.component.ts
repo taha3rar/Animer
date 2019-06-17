@@ -1,17 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { BaseProductOrder } from '../../order-product-list/base-product-order';
+import { BaseProductOrder } from '../../../../order/order-generator/order-product-list/base-product-order';
 
 @Component({
-  selector: 'app-order-processed-product',
-  templateUrl: './order-processed-product.component.html',
-  styleUrls: ['./order-processed-product.component.scss']
+  selector: 'app-modal-processed-short-product',
+  templateUrl: './modal-processed-short-product.component.html',
+  styleUrls: ['./modal-processed-short-product.component.scss']
 })
-export class OrderProcessedProductComponent extends BaseProductOrder implements OnInit {
+export class ModalProcessedShortProductComponent extends BaseProductOrder implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
-    public dialogRef: MatDialogRef<OrderProcessedProductComponent>
+    public dialogRef: MatDialogRef<ModalProcessedShortProductComponent>
   ) {
     super(dialogRef, data, 'processed');
   }

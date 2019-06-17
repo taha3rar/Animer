@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 // tslint:disable-next-line:max-line-length
-import { OrderAgriculturalProductComponent } from '@app/order/order-generator/order-generator-po/order-agricultural-product/order-agricultural-product.component';
+import { ModalAgriculturalShortProductComponent } from '@app/shared/components/products/modal-agricultural-short-product/modal-agricultural-short-product.component';
 // tslint:disable-next-line:max-line-length
-import { OrderProcessedProductComponent } from '@app/order/order-generator/order-generator-po/order-processed-product/order-processed-product.component';
+import { ModalProcessedShortProductComponent } from '@app/shared/components/products/modal-processed-short-product/modal-processed-short-product.component';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { OrderDataService } from '@app/order/order-generator/order-data.service';
@@ -85,7 +85,7 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
       currency: this.document.currency.value
     };
 
-    this.openDialog('720px', OrderAgriculturalProductComponent, data);
+    this.openDialog('720px', ModalAgriculturalShortProductComponent, data);
   }
 
   openDialogProcessed(index?: number): void {
@@ -95,7 +95,7 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
       currency: this.document.currency.value
     };
 
-    this.openDialog('780px', OrderProcessedProductComponent, data);
+    this.openDialog('780px', ModalProcessedShortProductComponent, data);
   }
 
   openDialog(height: string, component: any, dialogData: any): void {

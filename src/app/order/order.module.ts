@@ -26,10 +26,6 @@ import { OrderInvoiceGeneratorComponent } from './order-generator-seller/order-i
 import { OrderGeneratorSellerComponent } from './order-generator-seller/order-generator-seller.component';
 import { OrderProductListComponent } from './order-generator/order-product-list/order-product-list.component';
 // tslint:disable-next-line:max-line-length
-import { OrderAgriculturalProductComponent } from './order-generator/order-generator-po/order-agricultural-product/order-agricultural-product.component';
-// tslint:disable-next-line:max-line-length
-import { OrderProcessedProductComponent } from './order-generator/order-generator-po/order-processed-product/order-processed-product.component';
-// tslint:disable-next-line:max-line-length
 import { OrderInvoiceProductListComponent } from './order-generator-seller/order-invoice-generator/order-invoice-product-list/order-invoice-product-list.component';
 import { OrderDataService } from './order-generator/order-data.service';
 import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
@@ -58,8 +54,6 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     OrderGeneratorSellerComponent,
     OrderInvoiceGeneratorComponent,
     OrderProductListComponent,
-    OrderAgriculturalProductComponent,
-    OrderProcessedProductComponent,
     OrderInvoiceProductListComponent
   ],
   imports: [
@@ -76,7 +70,6 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     TutorialsModule,
     NgxPermissionsModule.forRoot()
   ],
-  entryComponents: [OrderAgriculturalProductComponent, OrderProcessedProductComponent],
   providers: [
     OrderListResolver,
     OrderListAsBuyerResolver,

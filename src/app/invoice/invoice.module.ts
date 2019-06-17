@@ -15,10 +15,6 @@ import { InvoiceGeneratorComponent } from './invoice-generator/invoice-generator
 import { InvoiceGeneratorBuyersComponent } from './invoice-generator/invoice-generator-buyers/invoice-generator-buyers.component';
 import { InvoiceGeneratorInvoiceComponent } from './invoice-generator/invoice-generator-invoice/invoice-generator-invoice.component';
 import { InvoiceInventoryComponent } from './invoice-generator/invoice-generator-invoice/invoice-inventory/invoice-inventory.component';
-// tslint:disable-next-line:max-line-length
-import { InvoiceAgriculturalProductComponent } from './invoice-generator/invoice-generator-invoice/invoice-agricultural-product/invoice-agricultural-product.component';
-// tslint:disable-next-line:max-line-length
-import { InvoiceProcessedProductComponent } from './invoice-generator/invoice-generator-invoice/invoice-processed-product/invoice-processed-product.component';
 import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,8 +36,6 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     InvoiceGeneratorBuyersComponent,
     InvoiceGeneratorInvoiceComponent,
     InvoiceInventoryComponent,
-    InvoiceAgriculturalProductComponent,
-    InvoiceProcessedProductComponent,
     InvoiceProductListComponent
   ],
   imports: [
@@ -59,7 +53,7 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     MatButtonModule,
     NgxPermissionsModule.forRoot()
   ],
-  entryComponents: [InvoiceInventoryComponent, InvoiceAgriculturalProductComponent, InvoiceProcessedProductComponent],
+  entryComponents: [InvoiceInventoryComponent],
   providers: [
     InvoiceListResolver,
     InvoiceListAsBuyerResolver,

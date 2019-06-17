@@ -1,4 +1,5 @@
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { CsvService } from './services/csv.service';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -22,10 +23,22 @@ import { TutorialControlComponent } from './components/tutorial-control/tutorial
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UnauthorizedPageComponent } from './components/unauthorized-page/unauthorized-page.component';
+// tslint:disable-next-line:max-line-length
+import { ModalAgriculturalShortProductComponent } from './components/products/modal-agricultural-short-product/modal-agricultural-short-product.component';
+// tslint:disable-next-line:max-line-length
+import { ModalProcessedShortProductComponent } from './components/products/modal-processed-short-product/modal-processed-short-product.component';
 import { DocumentDownloadComponent } from './components/document-download/document-download.component';
 
 @NgModule({
-  imports: [CommonModule, NgxPaginationModule, NgbModule, RouterModule, ProgressbarModule.forRoot(), MatTooltipModule],
+  imports: [
+    CommonModule,
+    NgxPaginationModule,
+    NgbModule,
+    RouterModule,
+    ProgressbarModule.forRoot(),
+    MatTooltipModule,
+    FormsModule
+  ],
   declarations: [
     LoaderComponent,
     RoundUpPipe,
@@ -42,8 +55,11 @@ import { DocumentDownloadComponent } from './components/document-download/docume
     DocumentGeneratorComponent,
     TutorialControlComponent,
     NotFoundComponent,
-    UnauthorizedPageComponent
+    UnauthorizedPageComponent,
+    ModalAgriculturalShortProductComponent,
+    ModalProcessedShortProductComponent
   ],
+  entryComponents: [ModalAgriculturalShortProductComponent, ModalProcessedShortProductComponent],
   exports: [
     LoaderComponent,
     RoundUpPipe,
