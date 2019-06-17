@@ -147,6 +147,9 @@
           <p class="heading-4">{{ seller?.phone_number }}</p>
         </div>
       </div>
+      <button *ngIf="!isGenerator" class="btn-primary-transp pull-right" (click)="downloadPopup()">
+        Download PDF
+      </button>
     </div>
   </div>
 </div>
@@ -155,7 +158,4 @@
     Send Quote Request
   </button>
   <button *ngIf="seller" class="bttn-primary pull-right next-step">Generate quotation &rarr;</button>
-  <button *ngIf="!isGenerator" class="btn-primary-transp pull-right" (click)="downloadPopup()">
-    Download PDF
-  </button>
 </div>
