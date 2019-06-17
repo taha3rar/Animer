@@ -40,4 +40,14 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
       this.quoteRequests[index].status === 'QUOTATION SENT' || this.quoteRequests[index].status === 'QUOTATION ACCEPTED'
     );
   }
+
+  participants(index: number): string {
+    let list = '';
+
+    this.quoteRequests[index].sellers.forEach((seller: any) => {
+      list += '• ' + seller.first_name + ' ' + seller.last_name + '\n';
+    });
+
+    return list;
+  }
 }

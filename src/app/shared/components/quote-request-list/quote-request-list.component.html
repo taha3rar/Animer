@@ -3,7 +3,7 @@
     <tr>
       <th translate class="text-center">ID</th>
       <th translate>Date</th>
-      <th translate>Contact</th>
+      <th *ngIf="!isBuyer" translate>Contact</th>
       <th translate>Product</th>
       <th translate>Amount</th>
       <th *ngIf="isBuyer" translate>Participants</th>
@@ -23,7 +23,7 @@
         {{ quoteRequest?.numericId }}
       </td>
       <td>{{ quoteRequest?.date_created | date: 'dd/MM/yyyy' }}</td>
-      <td>{{ quoteRequest?.buyer.first_name }} {{ quoteRequest?.buyer.last_name }}</td>
+      <td *ngIf="!isBuyer">{{ quoteRequest?.buyer.first_name }} {{ quoteRequest?.buyer.last_name }}</td>
       <td>
         <span *ngIf="quoteRequest.product"> {{ quoteRequest.product.produce }} </span>
         <span *ngIf="!quoteRequest.product"> N/A </span>
@@ -42,11 +42,18 @@
           N/A
         </div>
       </td>
-      <td *ngIf="isBuyer">
-        {{ quoteRequest?.sellers?.length }}
+      <td
+        *ngIf="isBuyer"
+        [matTooltip]="participants(i)"
+        matTooltipClass="tooltip-return tooltip-table"
+        matTooltipPosition="right"
+      >
+        <span>
+          {{ quoteRequest?.sellers?.length | number: '1.0-2' }}
+        </span>
       </td>
       <td *ngIf="isBuyer">
-        {{ quoteRequest.quotations.count }}
+        {{ quoteRequest.quotations.count | number: '1.0-2' }}
       </td>
       <td>
         <div *ngIf="quoteRequest.status === qrSent || quoteRequest.status === qrReceived" class="status status-orange">

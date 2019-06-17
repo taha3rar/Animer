@@ -31,10 +31,20 @@
           ></span
         >
         <span *ngIf="order.total_weight && !order.document_weight_unit">
-          <i class="material-icons pull-left" matTooltip="{{ measurementUnitConflictMessage }}">help_outline</i>
+          <i
+            class="material-icons pull-left"
+            matTooltip="{{ measurementUnitConflictMessage }}"
+            matTooltipClass="tooltip-table"
+            >help_outline</i
+          >
         </span>
         <span *ngIf="!order.total_weight && order.products.length > 0"
-          ><i class="material-icons pull-left" matTooltip="{{ processedProductConflictMessage }}">help_outline</i></span
+          ><i
+            class="material-icons pull-left"
+            matTooltip="{{ processedProductConflictMessage }}"
+            matTooltipClass="tooltip-table"
+            >help_outline</i
+          ></span
         >
         <span *ngIf="order.products.length < 1">N/A</span>
       </td>
