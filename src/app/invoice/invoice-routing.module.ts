@@ -10,7 +10,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
 import { UserResolver } from '../shared/resolvers/user.resolver';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
-import { ProductCurrentUserResolver } from './resolvers/products-currentUser.resolver';
+import { UserProductsResolver } from '@app/shared/resolvers/user-products.resolver';
 import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
 import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.resolver';
 import { ConfirmationGuard } from '@app/shared/guards/confirmation.guard';
@@ -35,7 +35,7 @@ const routes: Routes = [
       resolve: {
         buyers: InvoiceBuyersResolver,
         seller: UserResolver,
-        products: ProductCurrentUserResolver
+        products: UserProductsResolver
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -45,7 +45,7 @@ const routes: Routes = [
       canActivate: [InvoiceGuard],
       resolve: {
         invoice: InvoiceResolver,
-        products: ProductCurrentUserResolver
+        products: UserProductsResolver
       }
     },
     {

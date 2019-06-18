@@ -3,7 +3,7 @@ import { BaseProduct } from './product-generator/base-product';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsListComponent } from './products-list/products-list.component';
-import { ProductListResolver } from './resolvers/product-list.resolver';
+import { UserProductsResolver } from '@app/shared/resolvers/user-products.resolver';
 import { ProductResolver } from './resolvers/product.resolver';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductRoutingModule } from './product-routing.module';
@@ -59,6 +59,6 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     SharedModule,
     TutorialsModule
   ],
-  providers: [ProductListResolver, ProductResolver, ProductDataService]
+  providers: [UserProductsResolver, ProductResolver, ProductDataService]
 })
 export class ProductModule {}
