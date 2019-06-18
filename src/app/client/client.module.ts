@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientRoutingModule } from './client-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClientListComponent } from './client-list/client-list.component';
-import { ClientListResolver } from './resolvers/client-list.resolver';
+import { UserClientsResolver } from '@app/shared/resolvers/user-clients.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClientGeneratorComponent } from './client-generator/client-generator.component';
@@ -15,11 +15,11 @@ import { ClientInvoicesComponent } from './client-invoices/client-invoices.compo
 import { ClientDocumentsComponent } from './client-documents/client-documents.component';
 import { SharedModule } from '@app/shared';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
-import { UserResolver } from './resolvers/user.resolver';
+import { ClientResolver } from './resolvers/client.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
-import { CurrentUserResolver } from './resolvers/current-user.resolver';
+import { UserResolver } from '@app/shared/resolvers/user.resolver';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
 
@@ -47,9 +47,9 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     ClientDocumentsComponent
   ],
   providers: [
-    ClientListResolver,
+    UserClientsResolver,
+    ClientResolver,
     UserResolver,
-    CurrentUserResolver,
     EcosystemListResolver,
     OrderListResolver,
     InvoiceListResolver,

@@ -12,7 +12,7 @@ export class QuoteRequestClientsResolver implements Resolve<Client[] | boolean> 
   resolve(): Observable<Client[] | boolean> {
     const currentUserId = this.authService.currentUserId;
 
-    return this.userService.getClientsByUser(currentUserId).pipe(
+    return this.userService.getSuppliersByUser(currentUserId).pipe(
       catchError(err => {
         console.error(err);
         return this.router.navigateByUrl('/not-found');

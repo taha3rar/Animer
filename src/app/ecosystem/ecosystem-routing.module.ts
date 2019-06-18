@@ -5,7 +5,7 @@ import { Shell } from '@app/shell/shell.service';
 import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.component';
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
-import { UserClientListResolver } from './resolvers/user-client-list.resolver';
+import { UserClientsResolver } from '@app/shared/resolvers/user-clients.resolver';
 import { UserResolver } from '../shared/resolvers/user.resolver';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
 import { EcosystemGuard } from '../shared/guards/ecosystem.guard';
@@ -19,7 +19,7 @@ const routes: Routes = [
       resolve: {
         ecosystems: EcosystemListResolver,
         user: UserResolver,
-        userClients: UserClientListResolver
+        userClients: UserClientsResolver
       },
       runGuardsAndResolvers: 'always'
     },
@@ -29,7 +29,7 @@ const routes: Routes = [
       canActivate: [EcosystemGuard],
       resolve: {
         ecosystem: EcosystemResolver,
-        userClients: UserClientListResolver
+        userClients: UserClientsResolver
       },
       runGuardsAndResolvers: 'always'
     }
