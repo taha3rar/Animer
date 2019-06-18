@@ -6,7 +6,7 @@ import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.compo
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
 import { UserClientListResolver } from './resolvers/user-client-list.resolver';
-import { UserResolver } from './resolvers/user.resolver';
+import { UserResolver } from '../shared/resolvers/user.resolver';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
 import { EcosystemGuard } from '../shared/guards/ecosystem.guard';
 

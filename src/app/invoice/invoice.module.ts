@@ -18,7 +18,7 @@ import { InvoiceInventoryComponent } from './invoice-generator/invoice-generator
 import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
+import { UserResolver } from '../shared/resolvers/user.resolver';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
 import { ProductCurrentUserResolver } from './resolvers/products-currentUser.resolver';
 // tslint:disable-next-line:max-line-length
@@ -59,7 +59,7 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     InvoiceListAsBuyerResolver,
     InvoiceListAsSellerResolver,
     InvoiceBuyersResolver,
-    InvoiceSellerResolver,
+    UserResolver,
     InvoiceResolver,
     ProductCurrentUserResolver,
     DecimalPipe,

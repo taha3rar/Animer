@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
 import { ProfileComponent } from './profile/profile.component';
-import { CurrentUserResolver } from './resolvers/currentUser.resolver';
+import { UserResolver } from '@app/shared/resolvers/user.resolver';
 import { extract } from '@app/core';
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
       component: ProfileComponent,
       data: { title: extract('Profile') },
       resolve: {
-        currentUser: CurrentUserResolver
+        currentUser: UserResolver
       }
     }
   ])
@@ -22,6 +22,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [CurrentUserResolver]
+  providers: [UserResolver]
 })
 export class ProfileRoutingModule {}

@@ -10,7 +10,7 @@ import { QuoteRequestsListComponent } from './quote-requests-list/quote-requests
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
-import { QuoteRequestUserResolver } from './resolvers/quote-request-user.resolver';
+import { UserResolver } from '../shared/resolvers/user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotation.resolver';
@@ -31,7 +31,7 @@ const routes: Routes = [
       path: 'quote-request/generator',
       component: QuoteRequestGeneratorComponent,
       resolve: {
-        buyer: QuoteRequestUserResolver,
+        buyer: UserResolver,
         clients: QuoteRequestClientsResolver,
         ecosystems: QuoteRequestEcosystemsResolver
       },
@@ -41,7 +41,7 @@ const routes: Routes = [
       path: 'quote-request/generator/:id',
       component: QuoteRequestGeneratorComponent,
       resolve: {
-        buyer: QuoteRequestUserResolver,
+        buyer: UserResolver,
         quoteRequest: QuoteRequestResolver,
         clients: QuoteRequestClientsResolver,
         ecosystems: QuoteRequestEcosystemsResolver
@@ -60,7 +60,7 @@ const routes: Routes = [
       path: 'quote-request/quotation-generator/:id',
       component: QuotationGeneratorComponent,
       resolve: {
-        seller: QuoteRequestUserResolver,
+        seller: UserResolver,
         quoteRequest: QuoteRequestResolver
       }
     },

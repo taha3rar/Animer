@@ -9,14 +9,13 @@ import { OrderListResolver } from './resolvers/order-list.resolver';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { OrderGeneratorComponent } from './order-generator/order-generator.component';
 import { OrderGeneratorSellerComponent } from './order-generator-seller/order-generator-seller.component';
-import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
+import { UserResolver } from '../shared/resolvers/user.resolver';
 import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
-import { CurrentUserResolver } from '@app/profile/resolvers/currentUser.resolver';
 import { OrderGuard } from '../shared/guards/order.guard';
 import { InvoiceGuard } from '../shared/guards/invoice.guard';
 
@@ -29,7 +28,7 @@ const routes: Routes = [
         orders: OrderListResolver,
         ordersAsBuyer: OrderListAsBuyerResolver,
         ordersAsSeller: OrderListAsSellerResolver,
-        currentUser: CurrentUserResolver
+        currentUser: UserResolver
       },
       data: { title: extract('Orders') },
       runGuardsAndResolvers: 'always'
@@ -38,7 +37,7 @@ const routes: Routes = [
       path: 'order/generator',
       component: OrderGeneratorComponent,
       resolve: {
-        buyer: OrderBuyerResolver,
+        buyer: UserResolver,
         sellers: OrderSellersResolver
       },
       canDeactivate: [ConfirmationGuard]

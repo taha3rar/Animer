@@ -29,7 +29,7 @@ import { OrderProductListComponent } from './order-generator/order-product-list/
 import { OrderInvoiceProductListComponent } from './order-generator-seller/order-invoice-generator/order-invoice-product-list/order-invoice-product-list.component';
 import { OrderDataService } from './order-generator/order-data.service';
 import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
-import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
+import { UserResolver } from '../shared/resolvers/user.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
@@ -75,7 +75,7 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     OrderListAsBuyerResolver,
     OrderListAsSellerResolver,
     OrderSellersResolver,
-    OrderBuyerResolver,
+    UserResolver,
     OrderDataService,
     OrderPoResolver,
     OrderInvoiceResolver,

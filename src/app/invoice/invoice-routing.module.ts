@@ -8,7 +8,7 @@ import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
-import { InvoiceSellerResolver } from './resolvers/invoice-seller.resolver';
+import { UserResolver } from '../shared/resolvers/user.resolver';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
 import { ProductCurrentUserResolver } from './resolvers/products-currentUser.resolver';
 import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
@@ -34,7 +34,7 @@ const routes: Routes = [
       component: InvoiceGeneratorComponent,
       resolve: {
         buyers: InvoiceBuyersResolver,
-        seller: InvoiceSellerResolver,
+        seller: UserResolver,
         products: ProductCurrentUserResolver
       },
       canDeactivate: [ConfirmationGuard]

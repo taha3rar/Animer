@@ -25,7 +25,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
 import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
-import { QuoteRequestUserResolver } from './resolvers/quote-request-user.resolver';
+import { UserResolver } from '../shared/resolvers/user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestDataService } from './quote-request-generator/quote-request-data.service';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
@@ -70,7 +70,7 @@ import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotati
   providers: [
     QuoteRequestClientsResolver,
     QuoteRequestEcosystemsResolver,
-    QuoteRequestUserResolver,
+    UserResolver,
     QuoteRequestDataService,
     QuoteRequestListResolver,
     QuoteRequestResolver,

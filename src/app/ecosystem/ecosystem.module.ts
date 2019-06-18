@@ -7,7 +7,7 @@ import { EcosystemRoutingModule } from './ecosystem-routing.module';
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
 import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
 import { UserClientListResolver } from './resolvers/user-client-list.resolver';
-import { UserResolver } from './resolvers/user.resolver';
+import { UserResolver } from '../shared/resolvers/user.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EcosystemAddClientComponent } from './ecosystem-add-client/ecosystem-add-client.component';
