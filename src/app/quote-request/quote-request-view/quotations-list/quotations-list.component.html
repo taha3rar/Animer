@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th translate>Company</th>
-      <th translate>Contact name</th>
+      <th translate>Contact</th>
       <th translate>Status</th>
       <th translate>Amount Offered</th>
       <th translate>Rate</th>
@@ -47,7 +47,12 @@
         <span *ngIf="!quotation.product">N/A</span>
       </td>
       <td class="text-right">
-        <button class="round-button-primary" (click)="openQuotationView(i)" [disabled]="!quotation.product">
+        <button
+          class="round-button-primary"
+          (click)="openQuotationView(i)"
+          [class.disabled]="!quotation.product"
+          [disabled]="!quotation.product"
+        >
           <i class="material-icons">remove_red_eye</i>
         </button>
       </td>

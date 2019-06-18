@@ -4,8 +4,11 @@
   <div class="panel">
     <div class="panel-body">
       <div class="info info-top">
-        <div class="status status-blue pull-right">
+        <div *ngIf="quoteRequest.status === 'QUOTATION RECEIVED'" class="status status-blue pull-right">
           {{ quoteRequest.status }}
+        </div>
+        <div *ngIf="quoteRequest.status === 'QUOTE REQUEST SENT'" class="status status-orange pull-right">
+          {{ quoteRequest?.status }}
         </div>
         <div>
           <p class="heading-2">Quote Request #{{ quoteRequest.numericId }}</p>
@@ -74,10 +77,10 @@
 <div class="col-md-12">
   <ul class="nav nav-tabs">
     <li class="active">
-      <a data-toggle="tab" href="#qr">Quote Request Details</a>
+      <a data-toggle="tab" href="#qr">Quote Request</a>
     </li>
-    <li><a data-toggle="tab" href="#quotationsReceived">Quotations Received</a></li>
-    <li><a data-toggle="tab" href="#quotationsAccepted">Quotations Accepted</a></li>
+    <li><a data-toggle="tab" href="#quotationsReceived">Quotations</a></li>
+    <li><a data-toggle="tab" href="#quotationsAccepted">Accepted Quotations</a></li>
   </ul>
 
   <div class="tab-content">
