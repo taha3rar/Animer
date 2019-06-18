@@ -14,7 +14,7 @@ import { ClientOrdersComponent } from './client-orders/client-orders.component';
 import { ClientInvoicesComponent } from './client-invoices/client-invoices.component';
 import { ClientDocumentsComponent } from './client-documents/client-documents.component';
 import { SharedModule } from '@app/shared';
-import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
+import { UserEcosystemsResolver } from '@app/shared/resolvers/user-ecosystems.resolver';
 import { ClientResolver } from './resolvers/client.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
@@ -50,7 +50,7 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     UserClientsResolver,
     ClientResolver,
     UserResolver,
-    EcosystemListResolver,
+    UserEcosystemsResolver,
     OrderListResolver,
     InvoiceListResolver,
     UserDocumentListResolver

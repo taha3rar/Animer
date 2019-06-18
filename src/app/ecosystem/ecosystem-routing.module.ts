@@ -4,7 +4,7 @@ import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.component';
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
-import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
+import { UserEcosystemsResolver } from '@app/shared/resolvers/user-ecosystems.resolver';
 import { UserClientsResolver } from '@app/shared/resolvers/user-clients.resolver';
 import { UserResolver } from '../shared/resolvers/user.resolver';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
@@ -17,7 +17,7 @@ const routes: Routes = [
       component: EcosystemsListComponent,
       data: { title: extract('Ecosystems') },
       resolve: {
-        ecosystems: EcosystemListResolver,
+        ecosystems: UserEcosystemsResolver,
         user: UserResolver,
         userClients: UserClientsResolver
       },

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.component';
 import { EcosystemRoutingModule } from './ecosystem-routing.module';
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
-import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
+import { UserEcosystemsResolver } from '@app/shared/resolvers/user-ecosystems.resolver';
 import { UserClientsResolver } from '@app/shared/resolvers/user-clients.resolver';
 import { UserResolver } from '../shared/resolvers/user.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -25,6 +25,6 @@ import { EcosystemResolver } from './resolvers/ecosystem.resolver';
     ReactiveFormsModule,
     TutorialsModule
   ],
-  providers: [EcosystemListResolver, UserClientsResolver, UserResolver, EcosystemResolver]
+  providers: [UserEcosystemsResolver, UserClientsResolver, UserResolver, EcosystemResolver]
 })
 export class EcosystemModule {}

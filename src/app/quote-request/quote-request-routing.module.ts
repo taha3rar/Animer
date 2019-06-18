@@ -9,7 +9,7 @@ import { Shell } from '@app/shell/shell.service';
 import { QuoteRequestsListComponent } from './quote-requests-list/quote-requests-list.component';
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
 import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
-import { QuoteRequestEcosystemsResolver } from './resolvers/quote-request-ecosystems.resolver';
+import { UserEcosystemsResolver } from '@app/shared/resolvers/user-ecosystems.resolver';
 import { UserResolver } from '../shared/resolvers/user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
@@ -33,7 +33,7 @@ const routes: Routes = [
       resolve: {
         buyer: UserResolver,
         clients: QuoteRequestClientsResolver,
-        ecosystems: QuoteRequestEcosystemsResolver
+        ecosystems: UserEcosystemsResolver
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -44,7 +44,7 @@ const routes: Routes = [
         buyer: UserResolver,
         quoteRequest: QuoteRequestResolver,
         clients: QuoteRequestClientsResolver,
-        ecosystems: QuoteRequestEcosystemsResolver
+        ecosystems: UserEcosystemsResolver
       },
       canDeactivate: [ConfirmationGuard]
     },

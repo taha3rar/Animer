@@ -5,7 +5,7 @@ import { extract } from '@app/core';
 import { ClientListComponent } from './client-list/client-list.component';
 import { Shell } from '@app/shell/shell.service';
 import { UserClientsResolver } from '@app/shared/resolvers/user-clients.resolver';
-import { EcosystemListResolver } from '@app/ecosystem/resolvers/ecosystem-list.resolver';
+import { UserEcosystemsResolver } from '@app/shared/resolvers/user-ecosystems.resolver';
 import { ClientResolver } from './resolvers/client.resolver';
 import { UserResolver } from '@app/shared/resolvers/user.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
@@ -21,7 +21,7 @@ const routes: Routes = [
       resolve: {
         currentUser: UserResolver,
         clients: UserClientsResolver,
-        ecosystems: EcosystemListResolver
+        ecosystems: UserEcosystemsResolver
       },
       data: { title: extract('Clients') },
       runGuardsAndResolvers: 'always'
