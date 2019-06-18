@@ -15,6 +15,8 @@ import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolve
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotation.resolver';
 import { extract } from '@app/core';
+import { QuoteRequestGuard } from '@app/shared/guards/quoteRequest.guard';
+import { QuotationGuard } from '@app/shared/guards/quotation.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -46,6 +48,7 @@ const routes: Routes = [
         clients: CurrentUserSuppliersResolver,
         ecosystems: CurrentUserEcosystemsResolver
       },
+      canActivate: [QuoteRequestGuard],
       canDeactivate: [ConfirmationGuard]
     },
     {
@@ -54,7 +57,8 @@ const routes: Routes = [
       resolve: {
         quoteRequest: QuoteRequestResolver,
         quotation: QuoteRequestQuotationResolver
-      }
+      },
+      canActivate: [QuotationGuard]
     },
     {
       path: 'quote-request/quotation-generator/:id',
@@ -62,7 +66,8 @@ const routes: Routes = [
       resolve: {
         seller: CurrentUserResolver,
         quoteRequest: QuoteRequestResolver
-      }
+      },
+      canActivate: [QuotationGuard]
     },
     {
       path: 'quote-request/:id',
@@ -70,6 +75,7 @@ const routes: Routes = [
       resolve: {
         quoteRequest: QuoteRequestResolver
       },
+      canActivate: [QuoteRequestGuard],
       runGuardsAndResolvers: 'always'
     }
   ])
@@ -78,6 +84,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [CommonModule, RouterModule.forChild(routes)],
-  providers: [ConfirmationGuard]
+  providers: [ConfirmationGuard, QuoteRequestGuard, QuotationGuard]
 })
 export class QuoteRequestRoutingModule {}
