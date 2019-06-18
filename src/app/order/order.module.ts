@@ -28,7 +28,7 @@ import { OrderProductListComponent } from './order-generator/order-product-list/
 // tslint:disable-next-line:max-line-length
 import { OrderInvoiceProductListComponent } from './order-generator-seller/order-invoice-generator/order-invoice-product-list/order-invoice-product-list.component';
 import { OrderDataService } from './order-generator/order-data.service';
-import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
+import { UserSuppliersResolver } from '@app/shared/resolvers/user-suppliers.resolver';
 import { UserResolver } from '../shared/resolvers/user.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
@@ -74,7 +74,7 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     OrderListResolver,
     OrderListAsBuyerResolver,
     OrderListAsSellerResolver,
-    OrderSellersResolver,
+    UserSuppliersResolver,
     UserResolver,
     OrderDataService,
     OrderPoResolver,

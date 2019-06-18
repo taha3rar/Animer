@@ -10,7 +10,7 @@ import { OrdersListComponent } from './orders-list/orders-list.component';
 import { OrderGeneratorComponent } from './order-generator/order-generator.component';
 import { OrderGeneratorSellerComponent } from './order-generator-seller/order-generator-seller.component';
 import { UserResolver } from '../shared/resolvers/user.resolver';
-import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
+import { UserSuppliersResolver } from '@app/shared/resolvers/user-suppliers.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
@@ -38,7 +38,7 @@ const routes: Routes = [
       component: OrderGeneratorComponent,
       resolve: {
         buyer: UserResolver,
-        sellers: OrderSellersResolver
+        sellers: UserSuppliersResolver
       },
       canDeactivate: [ConfirmationGuard]
     },

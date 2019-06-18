@@ -8,7 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
 import { QuoteRequestsListComponent } from './quote-requests-list/quote-requests-list.component';
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
-import { QuoteRequestClientsResolver } from './resolvers/quote-request-clients.resolver';
+import { UserSuppliersResolver } from '@app/shared/resolvers/user-suppliers.resolver';
 import { UserEcosystemsResolver } from '@app/shared/resolvers/user-ecosystems.resolver';
 import { UserResolver } from '../shared/resolvers/user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
@@ -32,7 +32,7 @@ const routes: Routes = [
       component: QuoteRequestGeneratorComponent,
       resolve: {
         buyer: UserResolver,
-        clients: QuoteRequestClientsResolver,
+        clients: UserSuppliersResolver,
         ecosystems: UserEcosystemsResolver
       },
       canDeactivate: [ConfirmationGuard]
@@ -43,7 +43,7 @@ const routes: Routes = [
       resolve: {
         buyer: UserResolver,
         quoteRequest: QuoteRequestResolver,
-        clients: QuoteRequestClientsResolver,
+        clients: UserSuppliersResolver,
         ecosystems: UserEcosystemsResolver
       },
       canDeactivate: [ConfirmationGuard]
