@@ -22,7 +22,10 @@ export class OrderGuard implements CanActivate {
 
     return this.orderService.get(route.params.id).pipe(
       map((order: Order) => {
-        if (userId === order.buyer._id || (userId === order.seller._id && !order.draft)) {
+        if (
+          userId === order.buyer._id ||
+          (userId === order.seller._id && !order.draft && order.invoice && !order.invoice.draft)
+        ) {
           return true;
         } else {
           this.router.navigate(['/unauthorized']);

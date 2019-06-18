@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StepperService } from '@app/core/forms/stepper.service';
-import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { User } from '@app/core/models/order/user';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert';
 import { QuoteRequestDataService } from './quote-request-data.service';
 import * as moment from 'moment';
@@ -25,7 +24,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
 
   constructor(
     private stepperService: StepperService,
-    private location: Location,
+    private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private quoteRequestDataService: QuoteRequestDataService
@@ -107,7 +106,7 @@ export class QuoteRequestGeneratorComponent implements OnInit {
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/quote-request/list');
   }
 
   validQuoteRequest(QuoteRequestValid: Boolean) {

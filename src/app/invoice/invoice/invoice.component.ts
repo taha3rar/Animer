@@ -1,7 +1,6 @@
 import { DocumentDownloadComponent } from './../../shared/components/document-download/document-download.component';
 import { AlertsService } from './../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Location } from '@angular/common';
 import swal from 'sweetalert';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '@app/core/models/invoice/invoice';
@@ -26,7 +25,6 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
   constructor(
     private invoiceService: InvoiceService,
     private productService: ProductService,
-    private location: Location,
     private route: ActivatedRoute,
     private router: Router,
     private alertsService: AlertsService
@@ -45,7 +43,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/invoice/list');
   }
 
   disclaimerPopup() {

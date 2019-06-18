@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StepperService } from '@app/core/forms/stepper.service';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { User } from '@app/core/models/order/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { Quotation } from '@app/core/models/quotation/quotation';
 
@@ -26,7 +25,7 @@ export class QuotationGeneratorComponent implements OnInit {
     private stepperService: StepperService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private location: Location
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -101,6 +100,6 @@ export class QuotationGeneratorComponent implements OnInit {
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/quote-request/list');
   }
 }

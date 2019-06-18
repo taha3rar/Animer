@@ -1,6 +1,5 @@
 import { Quotation } from './../../core/models/quotation/quotation';
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 
@@ -13,7 +12,7 @@ export class QuoteRequestViewComponent implements OnInit {
   quoteRequest: QuoteRequest;
   quotation: Quotation;
 
-  constructor(private location: Location, private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.quoteRequest = this.route.snapshot.data['quoteRequest'];
@@ -21,6 +20,6 @@ export class QuoteRequestViewComponent implements OnInit {
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/quote-request/list');
   }
 }

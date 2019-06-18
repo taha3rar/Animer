@@ -1,10 +1,9 @@
 import { StepperService } from './../../core/forms/stepper.service';
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { OrderDataService } from './order-data.service';
 import swal from 'sweetalert';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { Order } from '@app/core/models/order/order';
@@ -24,7 +23,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   draftProducts: ProductInvoice[] = [];
   formSubmitted: boolean;
   constructor(
-    private location: Location,
+    private router: Router,
     private formBuilder: FormBuilder,
     private orderDataService: OrderDataService,
     private route: ActivatedRoute,
@@ -141,7 +140,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/order/list');
   }
 
   changeValue(recievedValue: any) {

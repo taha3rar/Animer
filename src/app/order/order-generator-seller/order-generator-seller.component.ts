@@ -1,7 +1,6 @@
 import { StepperService } from '@app/core/stepper.service';
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
@@ -25,7 +24,7 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
   formSubmitted: any;
 
   constructor(
-    private location: Location,
+    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private stepperService: StepperService
@@ -121,7 +120,7 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/order/list');
   }
 
   confirm() {
