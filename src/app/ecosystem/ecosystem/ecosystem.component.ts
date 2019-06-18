@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ecosystem } from '@app/core/models/ecosystem';
 import { defaultValues } from '@app/shared/helpers/default_values';
@@ -17,12 +16,7 @@ export class EcosystemComponent extends BaseListComponent implements OnInit {
   userClients: Client[];
   potentialClients: Client[];
 
-  constructor(
-    private location: Location,
-    private route: ActivatedRoute,
-    private ecosystemService: EcosystemService,
-    protected router: Router
-  ) {
+  constructor(private route: ActivatedRoute, private ecosystemService: EcosystemService, protected router: Router) {
     super(ecosystemService, router, {
       deleteText: 'Once deleted, you will need to add the user again to this ecosystem!'
     });
@@ -42,7 +36,7 @@ export class EcosystemComponent extends BaseListComponent implements OnInit {
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/ecosystem/list');
   }
 
   get ownedBy() {
