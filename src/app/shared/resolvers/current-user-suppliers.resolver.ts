@@ -6,7 +6,7 @@ import { Resolve, Router } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 
 @Injectable()
-export class UserSuppliersResolver implements Resolve<Client[] | boolean> {
+export class CurrentUserSuppliersResolver implements Resolve<Client[] | boolean> {
   constructor(private authService: AuthenticationService, private userService: UserService, private router: Router) {}
 
   resolve(): Observable<Client[] | boolean> {

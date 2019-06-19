@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Ecosystem } from '@app/core/models/ecosystem';
 
 @Injectable()
-export class UserEcosystemsResolver implements Resolve<Ecosystem[]> {
+export class CurrentUserEcosystemsResolver implements Resolve<Ecosystem[]> {
   constructor(private authService: AuthenticationService, private ecosystemService: EcosystemService) {}
 
   resolve(): Observable<Ecosystem[]> {

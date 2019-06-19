@@ -9,8 +9,8 @@ import { OrderListResolver } from './resolvers/order-list.resolver';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { OrderGeneratorComponent } from './order-generator/order-generator.component';
 import { OrderGeneratorSellerComponent } from './order-generator-seller/order-generator-seller.component';
-import { UserResolver } from '../shared/resolvers/user.resolver';
-import { UserSuppliersResolver } from '@app/shared/resolvers/user-suppliers.resolver';
+import { CurrentUserResolver } from '../shared/resolvers/current-user.resolver';
+import { CurrentUserSuppliersResolver } from '@app/shared/resolvers/current-user-suppliers.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
@@ -28,7 +28,7 @@ const routes: Routes = [
         orders: OrderListResolver,
         ordersAsBuyer: OrderListAsBuyerResolver,
         ordersAsSeller: OrderListAsSellerResolver,
-        currentUser: UserResolver
+        currentUser: CurrentUserResolver
       },
       data: { title: extract('Orders') },
       runGuardsAndResolvers: 'always'
@@ -37,8 +37,8 @@ const routes: Routes = [
       path: 'order/generator',
       component: OrderGeneratorComponent,
       resolve: {
-        buyer: UserResolver,
-        sellers: UserSuppliersResolver
+        buyer: CurrentUserResolver,
+        sellers: CurrentUserSuppliersResolver
       },
       canDeactivate: [ConfirmationGuard]
     },

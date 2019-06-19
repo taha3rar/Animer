@@ -4,10 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { extract } from '@app/core';
 import { ClientListComponent } from './client-list/client-list.component';
 import { Shell } from '@app/shell/shell.service';
-import { UserClientsResolver } from '@app/shared/resolvers/user-clients.resolver';
-import { UserEcosystemsResolver } from '@app/shared/resolvers/user-ecosystems.resolver';
+import { CurrentUserClientsResolver } from '@app/shared/resolvers/current-user-clients.resolver';
+import { CurrentUserEcosystemsResolver } from '@app/shared/resolvers/current-user-ecosystems.resolver';
 import { ClientResolver } from './resolvers/client.resolver';
-import { UserResolver } from '@app/shared/resolvers/user.resolver';
+import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
@@ -19,9 +19,9 @@ const routes: Routes = [
       path: 'client/list',
       component: ClientListComponent,
       resolve: {
-        currentUser: UserResolver,
-        clients: UserClientsResolver,
-        ecosystems: UserEcosystemsResolver
+        currentUser: CurrentUserResolver,
+        clients: CurrentUserClientsResolver,
+        ecosystems: CurrentUserEcosystemsResolver
       },
       data: { title: extract('Clients') },
       runGuardsAndResolvers: 'always'

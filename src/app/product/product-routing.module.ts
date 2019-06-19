@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { ProductsListComponent } from './products-list/products-list.component';
-import { UserProductsResolver } from '@app/shared/resolvers/user-products.resolver';
+import { CurrentUserProductsResolver } from '@app/shared/resolvers/current-user-products.resolver';
 import { ProductResolver } from './resolvers/product.resolver';
 import { ProductGeneratorComponent } from './product-generator/product-generator.component';
 
@@ -13,7 +13,7 @@ const routes: Routes = [
     {
       path: 'product/list',
       component: ProductsListComponent,
-      resolve: { products: UserProductsResolver },
+      resolve: { products: CurrentUserProductsResolver },
       data: { title: extract('Products') },
       runGuardsAndResolvers: 'always'
     },

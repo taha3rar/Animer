@@ -23,9 +23,9 @@ import { QrProcessedProductComponent } from './quote-request-generator/quote-req
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
-import { UserSuppliersResolver } from '@app/shared/resolvers/user-suppliers.resolver';
-import { UserEcosystemsResolver } from '@app/shared/resolvers/user-ecosystems.resolver';
-import { UserResolver } from '../shared/resolvers/user.resolver';
+import { CurrentUserSuppliersResolver } from '@app/shared/resolvers/current-user-suppliers.resolver';
+import { CurrentUserEcosystemsResolver } from '@app/shared/resolvers/current-user-ecosystems.resolver';
+import { CurrentUserResolver } from '../shared/resolvers/current-user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestDataService } from './quote-request-generator/quote-request-data.service';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
@@ -68,9 +68,9 @@ import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotati
     NgxPaginationModule
   ],
   providers: [
-    UserSuppliersResolver,
-    UserEcosystemsResolver,
-    UserResolver,
+    CurrentUserSuppliersResolver,
+    CurrentUserEcosystemsResolver,
+    CurrentUserResolver,
     QuoteRequestDataService,
     QuoteRequestListResolver,
     QuoteRequestResolver,

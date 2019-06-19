@@ -8,9 +8,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
 import { QuoteRequestsListComponent } from './quote-requests-list/quote-requests-list.component';
 import { QuotationViewComponent } from './quotation-view/quotation-view.component';
-import { UserSuppliersResolver } from '@app/shared/resolvers/user-suppliers.resolver';
-import { UserEcosystemsResolver } from '@app/shared/resolvers/user-ecosystems.resolver';
-import { UserResolver } from '../shared/resolvers/user.resolver';
+import { CurrentUserSuppliersResolver } from '@app/shared/resolvers/current-user-suppliers.resolver';
+import { CurrentUserEcosystemsResolver } from '@app/shared/resolvers/current-user-ecosystems.resolver';
+import { CurrentUserResolver } from '../shared/resolvers/current-user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
 import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotation.resolver';
@@ -31,9 +31,9 @@ const routes: Routes = [
       path: 'quote-request/generator',
       component: QuoteRequestGeneratorComponent,
       resolve: {
-        buyer: UserResolver,
-        clients: UserSuppliersResolver,
-        ecosystems: UserEcosystemsResolver
+        buyer: CurrentUserResolver,
+        clients: CurrentUserSuppliersResolver,
+        ecosystems: CurrentUserEcosystemsResolver
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -41,10 +41,10 @@ const routes: Routes = [
       path: 'quote-request/generator/:id',
       component: QuoteRequestGeneratorComponent,
       resolve: {
-        buyer: UserResolver,
+        buyer: CurrentUserResolver,
         quoteRequest: QuoteRequestResolver,
-        clients: UserSuppliersResolver,
-        ecosystems: UserEcosystemsResolver
+        clients: CurrentUserSuppliersResolver,
+        ecosystems: CurrentUserEcosystemsResolver
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -60,7 +60,7 @@ const routes: Routes = [
       path: 'quote-request/quotation-generator/:id',
       component: QuotationGeneratorComponent,
       resolve: {
-        seller: UserResolver,
+        seller: CurrentUserResolver,
         quoteRequest: QuoteRequestResolver
       }
     },

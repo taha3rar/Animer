@@ -6,7 +6,7 @@ import { Resolve } from '@angular/router';
 import { Product } from '@app/core/models/product';
 
 @Injectable()
-export class UserProductsResolver implements Resolve<Product[]> {
+export class CurrentUserProductsResolver implements Resolve<Product[]> {
   constructor(private authService: AuthenticationService, private productService: ProductService) {}
 
   resolve(): Observable<Product[]> {

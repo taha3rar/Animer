@@ -18,9 +18,9 @@ import { InvoiceInventoryComponent } from './invoice-generator/invoice-generator
 import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserResolver } from '../shared/resolvers/user.resolver';
+import { CurrentUserResolver } from '../shared/resolvers/current-user.resolver';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
-import { UserProductsResolver } from '@app/shared/resolvers/user-products.resolver';
+import { CurrentUserProductsResolver } from '@app/shared/resolvers/current-user-products.resolver';
 // tslint:disable-next-line:max-line-length
 import { InvoiceProductListComponent } from './invoice-generator/invoice-generator-invoice/invoice-product-list/invoice-product-list.component';
 import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
@@ -59,9 +59,9 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     InvoiceListAsBuyerResolver,
     InvoiceListAsSellerResolver,
     InvoiceBuyersResolver,
-    UserResolver,
+    CurrentUserResolver,
     InvoiceResolver,
-    UserProductsResolver,
+    CurrentUserProductsResolver,
     DecimalPipe,
     DatePipe,
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }

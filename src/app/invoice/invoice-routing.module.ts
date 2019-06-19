@@ -8,9 +8,9 @@ import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
-import { UserResolver } from '../shared/resolvers/user.resolver';
+import { CurrentUserResolver } from '../shared/resolvers/current-user.resolver';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
-import { UserProductsResolver } from '@app/shared/resolvers/user-products.resolver';
+import { CurrentUserProductsResolver } from '@app/shared/resolvers/current-user-products.resolver';
 import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.resolver';
 import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.resolver';
 import { ConfirmationGuard } from '@app/shared/guards/confirmation.guard';
@@ -34,8 +34,8 @@ const routes: Routes = [
       component: InvoiceGeneratorComponent,
       resolve: {
         buyers: InvoiceBuyersResolver,
-        seller: UserResolver,
-        products: UserProductsResolver
+        seller: CurrentUserResolver,
+        products: CurrentUserProductsResolver
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -45,7 +45,7 @@ const routes: Routes = [
       canActivate: [InvoiceGuard],
       resolve: {
         invoice: InvoiceResolver,
-        products: UserProductsResolver
+        products: CurrentUserProductsResolver
       }
     },
     {
