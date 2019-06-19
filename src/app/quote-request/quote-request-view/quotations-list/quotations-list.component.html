@@ -15,7 +15,11 @@
       <td>{{ quotation.seller.company_name }}</td>
       <td>{{ quotation.seller.first_name }} {{ quotation.seller.last_name }}</td>
       <td>
-        <div class="status status-blue">{{ quotation.status }}</div>
+        <div class="status status-orange" *ngIf="quotation.status === 'AWAITING QUOTATION'">{{ quotation.status }}</div>
+        <div class="status status-blue" *ngIf="quotation.status === 'QUOTATION RECEIVED'">{{ quotation.status }}</div>
+        <div {{ class="status status-dark-blue" *ngIf="quotation.status === 'QUOTATION ACCEPTED'">
+          {{ quotation.status }}
+        </div>
       </td>
       <td>
         <span *ngIf="quotation.product && quotation.product?.product_type === 'agricultural'">

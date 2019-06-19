@@ -4,12 +4,6 @@
   <div class="panel">
     <div class="panel-body">
       <div class="info info-top">
-        <div *ngIf="quoteRequest.status === 'QUOTATION RECEIVED'" class="status status-blue pull-right">
-          {{ quoteRequest.status }}
-        </div>
-        <div *ngIf="quoteRequest.status === 'QUOTE REQUEST SENT'" class="status status-orange pull-right">
-          {{ quoteRequest?.status }}
-        </div>
         <div>
           <p class="heading-2">Quote Request #{{ quoteRequest.numericId }}</p>
           <div class="timing-section">
