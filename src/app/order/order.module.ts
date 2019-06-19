@@ -37,6 +37,7 @@ import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolv
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
 import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
+import { QuotationResolver } from './resolvers/quotation.resolver';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     OrderPoResolver,
     OrderInvoiceResolver,
     OrderDocumentsResolver,
+    QuotationResolver,
     RoundUpPipe,
     DecimalPipe,
     DatePipe,

@@ -138,6 +138,9 @@
       <button (click)="acceptQuotation()" *ngIf="!isAccepted() && isModal" class="bttn-primary pull-right mt-5">
         Accept Quotation
       </button>
+      <button (click)="generatePurchaseOrder()" *ngIf="isAccepted() && isModal" class="bttn-primary pull-right mt-5">
+        Generate Purchase Order
+      </button>
       <button *ngIf="isView || isModal" class="btn-primary-transp pull-right mt-5" (click)="downloadPopup()">
         Download PDF
       </button>

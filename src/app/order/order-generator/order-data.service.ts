@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { Product } from '@app/core/models/product';
 import { Order } from '@app/core/models/order/order';
 
 @Injectable()

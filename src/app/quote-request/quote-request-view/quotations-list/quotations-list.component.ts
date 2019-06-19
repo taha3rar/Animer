@@ -33,11 +33,11 @@ export class QuotationsListComponent implements OnInit {
 
   fetchQuotations() {
     if (this.acceptedQuotations) {
-      this.quotationService.getAccepted(this.quoteRequest._id).subscribe(acceptedQuotations => {
+      this.quotationService.getAccepted(this.quoteRequest._id).subscribe((acceptedQuotations: Quotation[]) => {
         this.quotations = acceptedQuotations;
       });
     } else {
-      this.quotationService.getByQuoteRequest(this.quoteRequest._id).subscribe(quotations => {
+      this.quotationService.getByQuoteRequest(this.quoteRequest._id).subscribe((quotations: Quotation[]) => {
         this.quotations = quotations;
       });
     }

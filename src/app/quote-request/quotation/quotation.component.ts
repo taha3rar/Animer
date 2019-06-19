@@ -19,10 +19,10 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    @Optional() public dialogRef: MatDialogRef<QuotationComponent>,
     private quotationService: QuotationService,
     private alerts: AlertsService,
-    private router: Router,
-    @Optional() public dialogRef: MatDialogRef<QuotationComponent>
+    private router: Router
   ) {
     super(quotationService, 'quotation', 'Quotation');
   }
@@ -48,6 +48,11 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
       this.alerts.showAlert('The quotation has been successfully accepted');
       this.onExit(true);
     });
+  }
+
+  generatePurchaseOrder() {
+    this.router.navigateByUrl(`/order/generator/quotation/${this.quotation._id}`);
+    this.onExit(false);
   }
 
   isAccepted() {

@@ -25,6 +25,7 @@ export class ProductInvoice {
   price_details: boolean;
   out_of_inventory: boolean;
   to_inventory: boolean;
+  fromQuotation: true;
 
   toProduct(invoice: Invoice): Product {
     const product = new Product();

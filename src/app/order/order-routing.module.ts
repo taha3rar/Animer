@@ -18,6 +18,7 @@ import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolv
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
 import { OrderGuard } from '../shared/guards/order.guard';
 import { InvoiceGuard } from '../shared/guards/invoice.guard';
+import { QuotationResolver } from './resolvers/quotation.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -49,6 +50,14 @@ const routes: Routes = [
       resolve: {
         order: OrderPoResolver
       }
+    },
+    {
+      path: 'order/generator/quotation/:id',
+      component: OrderGeneratorComponent,
+      resolve: {
+        quotation: QuotationResolver
+      },
+      canDeactivate: [ConfirmationGuard]
     },
     {
       path: 'order/invoice/generator/:id',
