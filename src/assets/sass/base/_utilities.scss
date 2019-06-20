@@ -143,33 +143,41 @@
 }
 
 .status {
-  width: 19rem;
-  height: 2.4rem;
+  max-width: 21rem;
   border-radius: 12rem;
-  background-color: red;
   text-align: center;
   font-weight: 600;
-  padding-top: 3px;
+  padding: 3px 0px;
   font-size: 1.3rem;
 
   &-blue {
-    background-color: #e5f7f9;
+    background-color: #e9fafc;
     color: #33c1ce;
   }
 
+  &-yellow {
+    background-color: rgb(255, 248, 232);
+    color: rgb(255, 189, 8);
+  }
+
   &-orange {
-    background-color: rgb(253, 241, 224);
-    color: #fbad38;
+    background-color: #fff2ec;
+    color: rgb(255, 126, 27);
   }
 
   &-purple {
-    background-color: #f6e5ff;
-    color: #7c31fe;
+    background-color: rgb(242, 241, 255);
+    color: #836ffb;
+  }
+
+  &-green {
+    background-color: #e9fff2;
+    color: #2acf82;
   }
 
   &-dark-blue {
     background-color: #eef8ff;
-    color: #00a1e4;
+    color: hsl(204, 86%, 53%);
   }
 }
 
