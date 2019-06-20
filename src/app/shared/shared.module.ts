@@ -28,6 +28,7 @@ import { ModalAgriculturalProductComponent } from './components/products/modal-a
 // tslint:disable-next-line:max-line-length
 import { ModalProcessedProductComponent } from './components/products/modal-processed-product/modal-processed-product.component';
 import { DocumentDownloadComponent } from './components/document-download/document-download.component';
+import { ModalInventoryComponent } from './components/products/modal-inventory/modal-inventory.component';
 
 @NgModule({
   imports: [
@@ -57,9 +58,10 @@ import { DocumentDownloadComponent } from './components/document-download/docume
     NotFoundComponent,
     UnauthorizedPageComponent,
     ModalAgriculturalProductComponent,
-    ModalProcessedProductComponent
+    ModalProcessedProductComponent,
+    ModalInventoryComponent
   ],
-  entryComponents: [ModalAgriculturalProductComponent, ModalProcessedProductComponent],
+  entryComponents: [ModalAgriculturalProductComponent, ModalProcessedProductComponent, ModalInventoryComponent],
   exports: [
     LoaderComponent,
     RoundUpPipe,
@@ -71,7 +73,8 @@ import { DocumentDownloadComponent } from './components/document-download/docume
     UserDocumentComponent,
     UploadPictureComponent,
     DocumentGeneratorComponent,
-    TutorialControlComponent
+    TutorialControlComponent,
+    ModalInventoryComponent
   ],
   providers: [CsvService, DatePipe]
 })

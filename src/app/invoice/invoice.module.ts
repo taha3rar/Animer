@@ -14,7 +14,6 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { InvoiceGeneratorComponent } from './invoice-generator/invoice-generator.component';
 import { InvoiceGeneratorBuyersComponent } from './invoice-generator/invoice-generator-buyers/invoice-generator-buyers.component';
 import { InvoiceGeneratorInvoiceComponent } from './invoice-generator/invoice-generator-invoice/invoice-generator-invoice.component';
-import { InvoiceInventoryComponent } from './invoice-generator/invoice-generator-invoice/invoice-inventory/invoice-inventory.component';
 import { InvoiceBuyersResolver } from './resolvers/invoice-buyers.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,7 +34,6 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     InvoiceGeneratorComponent,
     InvoiceGeneratorBuyersComponent,
     InvoiceGeneratorInvoiceComponent,
-    InvoiceInventoryComponent,
     InvoiceProductListComponent
   ],
   imports: [
@@ -53,7 +51,6 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     MatButtonModule,
     NgxPermissionsModule.forRoot()
   ],
-  entryComponents: [InvoiceInventoryComponent],
   providers: [
     InvoiceListResolver,
     InvoiceListAsBuyerResolver,

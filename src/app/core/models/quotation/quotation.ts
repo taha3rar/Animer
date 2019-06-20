@@ -31,7 +31,7 @@ export class Quotation {
     country: String;
     numericId: Number;
   };
-  currency: String;
+  currency: string;
   buyer_comments: String;
   seller_comments: String;
   quote_request: {

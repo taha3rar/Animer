@@ -6,7 +6,7 @@ import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { FormGroup } from '@angular/forms';
 import { InvoiceService } from '@app/core/api/invoice.service';
-import { InvoiceInventoryComponent } from './invoice-inventory/invoice-inventory.component';
+import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import * as moment from 'moment';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 
@@ -102,7 +102,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
       currency: this.invoice.currency.value
     };
 
-    const dialogRef = this.dialog.open(InvoiceInventoryComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ModalInventoryComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(newProducts => {
       if (newProducts) {
         newProducts.forEach((newProduct: any) => {

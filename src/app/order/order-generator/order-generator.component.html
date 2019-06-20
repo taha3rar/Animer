@@ -67,8 +67,11 @@
       </ul>
 
       <div class="tab-content">
-        <div class="tab-pane active" id="purchaseOrder">
-          <app-order-generator-po></app-order-generator-po>
+        <div *ngIf="isDraft" class="tab-pane active" id="purchaseOrder">
+          <app-order-generator-po (newDraftPO)="draft = $event"></app-order-generator-po>
+        </div>
+        <div *ngIf="fromQuotation" class="tab-pane active" id="purchaseOrder">
+          <app-order-generator-po [fromQuotation]="true" (newDraftPO)="draft = $event"></app-order-generator-po>
         </div>
         <div class="tab-pane" id="review">
           <div class="panel panel-tab">

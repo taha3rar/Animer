@@ -5,11 +5,11 @@ import { defaultValues } from '@app/shared/helpers/default_values';
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
 
 @Component({
-  selector: 'app-invoice-inventory',
-  templateUrl: './invoice-inventory.component.html',
-  styleUrls: ['./invoice-inventory.component.scss']
+  selector: 'app-modal-inventory',
+  templateUrl: './modal-inventory.component.html',
+  styleUrls: ['./modal-inventory.component.scss']
 })
-export class InvoiceInventoryComponent extends BaseNavigationComponent implements OnInit {
+export class ModalInventoryComponent extends BaseNavigationComponent implements OnInit {
   products: Product[];
   agriculturalProducts: Product[];
   processedProducts: Product[];
@@ -17,7 +17,7 @@ export class InvoiceInventoryComponent extends BaseNavigationComponent implement
   currency: string = undefined;
   noCurrency: boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<InvoiceInventoryComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<ModalInventoryComponent>) {
     super();
   }
 

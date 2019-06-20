@@ -18,7 +18,9 @@
       <div class="card card-agricultural">
         <div class="card-inner-price">
           <p class="pull-right margin-none">
-            {{ product.price_per_unit }} {{ product.currency }}/<small>{{ product.weight_unit | uppercase }}</small>
+            {{ product.price_per_unit | number: '1.2-2' }} {{ product.currency }}/<small>{{
+              product.weight_unit | uppercase
+            }}</small>
           </p>
         </div>
         <div class="product-details">
@@ -85,7 +87,9 @@
         <div class="card card-processed">
           <div class="card-inner-price">
             <p class="pull-right margin-none">
-              {{ product.package_price }} {{ product.currency }}/<small>{{ product.type_of_package }}</small>
+              {{ product.package_price | number: '1.2-2' }} {{ product.currency }}/<small>{{
+                product.type_of_package
+              }}</small>
             </p>
           </div>
           <div class="product-details">

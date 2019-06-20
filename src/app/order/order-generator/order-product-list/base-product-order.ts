@@ -27,7 +27,6 @@ export class BaseProductOrder implements OnInit {
     } else {
       this.product = new ProductInvoice();
     }
-
     this.product.product_type = this.productType;
   }
 
