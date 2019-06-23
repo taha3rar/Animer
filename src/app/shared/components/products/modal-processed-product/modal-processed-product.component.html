@@ -4,7 +4,7 @@
 </div>
 <div class="padding-all">
   <form #modalForm="ngForm" (keydown.enter)="$event.preventDefault()">
-    <fieldset [disabled]="product.fromQuotation">
+    <fieldset [disabled]="product.quotation_id">
       <p class="heading-2">Product</p>
       <div class="form-row">
         <div class="form-group col">

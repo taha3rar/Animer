@@ -47,7 +47,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         (this.quotation.product.product_subtotal / this.quotation.product.quantity_offered).toFixed(2)
       );
       product.currency = this.quotation.currency;
-      product.fromQuotation = true;
+      product.quotation_id = this.quotation._id;
       this.products.push(product);
       this.orderDataService.setProductList(this.products);
       this.fromQuotation = true;
@@ -172,7 +172,6 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
 
   changeValue(recievedValue: any) {
     this.formSubmitted = recievedValue;
-    console.log(this.formSubmitted);
   }
 
   confirm() {
