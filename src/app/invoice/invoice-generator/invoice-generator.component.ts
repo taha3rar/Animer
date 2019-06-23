@@ -111,7 +111,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
           Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.expected_delivery_date
         ]
       }),
-      date_created: [Date.now(), Validators.required]
+      date_created: [undefined, Validators.required]
     });
 
     if (!this.draftInvoice) {

@@ -113,7 +113,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         phone: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.phone, Validators.required],
         expected_delivery_date: [Object.is(this.deliver_to, undefined) ? null : this.deliver_to.expected_delivery_date]
       }),
-      date_created: [Date.now(), Validators.required]
+      date_created: [undefined, Validators.required]
     });
     if (!this.isDraft && !this.fromQuotation) {
       this.route.data.subscribe(({ buyer }) => {

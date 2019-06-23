@@ -6,9 +6,7 @@ import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
-import * as moment from 'moment';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { Product } from '@app/core/models/order/product';
 import { ProductService, QuotationService } from '@app/core';
 import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import { Quotation } from '@app/core/models/quotation/quotation';
@@ -129,21 +127,18 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   }
 
   draftOrder() {
-    this.order['sign_by'].patchValue({
-      date: moment(this.form['controls'].sign_by['controls'].date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.order['deliver_to'].patchValue({
-      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.form.patchValue({
-      date_created: moment(this.form['controls'].date_created.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
+    let _date = this.form.value.sign_by.date;
+    if (_date) {
+      this.order['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
+    }
+    _date = this.form.value.deliver_to.expected_delivery_date;
+    if (_date) {
+      this.order['deliver_to'].patchValue({ expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day) });
+    }
+    _date = this.form.value.date_created;
+    _date
+      ? this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) })
+      : this.form.patchValue({ date_created: Date.now() });
     this.newDraftPO.emit(true);
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
@@ -157,21 +152,14 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   }
 
   toReview() {
-    this.order['sign_by'].patchValue({
-      date: moment(this.form['controls'].sign_by['controls'].date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.order['deliver_to'].patchValue({
-      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.form.patchValue({
-      date_created: moment(this.form['controls'].date_created.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
+    let _date = this.form.value.sign_by.date;
+    this.order['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
+    _date = this.form.value.deliver_to.expected_delivery_date;
+    if (_date) {
+      this.order['deliver_to'].patchValue({ expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day) });
+    }
+    _date = this.form.value.date_created;
+    this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) });
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
