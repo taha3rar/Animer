@@ -26,8 +26,8 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   productsValid = true;
   @Output() newDraftPO = new EventEmitter();
   @Input() fromQuotation = false;
-  inventoryProducts: Product[];
-  quotedProducts: Product[] = [];
+  inventoryProducts: ProductInvoice[];
+  quotedProducts: ProductInvoice[] = [];
 
   constructor(
     public orderDataService: OrderDataService,
@@ -49,19 +49,20 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.orderDataService.currentProductList.subscribe(data => {
       if (data) {
         this.products = data;
+        this.products.forEach((product: ProductInvoice) => {});
       }
     });
     this.formInput = this.form;
     if (this.fromQuotation) {
       this.productService.getByUser(this.seller._id).subscribe(products => {
-        this.inventoryProducts = products;
+        this.inventoryProducts = <ProductInvoice[]>(<unknown>products);
       });
       this.quotationService.getAcceptedQuotations(this.seller._id, this.buyer._id).subscribe(quotations => {
-        quotations.forEach(quotation => {
-          let quotedProduct: Product;
-          quotedProduct = <Product>(<unknown>quotation.product);
+        quotations.forEach((quotation: Quotation) => {
+          let quotedProduct: ProductInvoice;
+          quotedProduct = <ProductInvoice>(<unknown>quotation.product);
           quotedProduct.quantity = quotation.product.quantity_offered;
-          quotedProduct.total_weight = quotation.product.total_weight_offered;
+          quotedProduct.total_weight = quotation.product.total_weight_offered || undefined;
           quotedProduct.package_price = Number(
             (quotation.product.product_subtotal / quotation.product.quantity_offered).toFixed(2)
           );
@@ -96,8 +97,10 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     dialogConfig.height = '900px';
     dialogConfig.width = '980px';
     dialogConfig.data = {
-      products: quoted ? this.quotedProducts : this.inventoryProducts,
-      currency: this.form.value.currency
+      inventoryProducts: quoted ? this.quotedProducts : this.inventoryProducts,
+      currency: this.form.value.currency,
+      fromQuotation: quoted ? true : false,
+      chosenProducts: this.products
     };
 
     const dialogRef = this.dialog.open(ModalInventoryComponent, dialogConfig);
@@ -105,7 +108,18 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
       if (newProducts) {
         newProducts.forEach((newProduct: any) => {
           if (!this.form.value.currency) {
-            this.form['currency'].setValue(newProduct.currency);
+            this.form.controls['currency'].setValue(newProduct.currency);
+          }
+          for (let i = 0; i < this.products.length; i++) {
+            if (
+              JSON.stringify(this.products[i]) === JSON.stringify(newProduct) ||
+              this.products[i]._id === newProduct._id
+            ) {
+              super.deleteProduct(i);
+              if (!this.form.value.currency) {
+                this.form.controls['currency'].setValue(newProduct.currency);
+              }
+            }
           }
           super.updateTotalDue(newProduct.product_subtotal);
         });

@@ -46,6 +46,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
       product.package_price = Number(
         (this.quotation.product.product_subtotal / this.quotation.product.quantity_offered).toFixed(2)
       );
+      product.currency = this.quotation.currency;
       product.fromQuotation = true;
       this.products.push(product);
       this.orderDataService.setProductList(this.products);

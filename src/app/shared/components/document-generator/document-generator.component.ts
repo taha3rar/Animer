@@ -65,6 +65,7 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
     this.products.splice(index, 1);
     if (this.products.length < 1) {
       this.document['currency'].setValue(undefined);
+      this.products = [];
     }
   }
 

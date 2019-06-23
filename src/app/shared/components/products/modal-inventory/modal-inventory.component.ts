@@ -3,6 +3,7 @@ import { Product } from '@app/core/models/product';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
+import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 
 @Component({
   selector: 'app-modal-inventory',
@@ -10,12 +11,14 @@ import { BaseNavigationComponent } from '@app/shared/components/base-navigation/
   styleUrls: ['./modal-inventory.component.scss']
 })
 export class ModalInventoryComponent extends BaseNavigationComponent implements OnInit {
-  products: Product[];
-  agriculturalProducts: Product[];
-  processedProducts: Product[];
-  newProducts: Product[] = [];
+  inventoryProducts: ProductInvoice[];
+  agriculturalProducts: ProductInvoice[];
+  processedProducts: ProductInvoice[];
+  newProducts: ProductInvoice[] = [];
   currency: string = undefined;
   noCurrency: boolean;
+  fromQuotation: boolean;
+  chosenProducts: ProductInvoice[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<ModalInventoryComponent>) {
     super();
@@ -23,17 +26,21 @@ export class ModalInventoryComponent extends BaseNavigationComponent implements 
 
   ngOnInit() {
     this.noCurrency = true;
-    this.products = JSON.parse(JSON.stringify(this.data.products));
-    this.products.forEach((product: Product) => {
-      product['quantityMax'] = product.quantity;
-      product.quantity = 0;
-    });
+    this.fromQuotation = this.data.fromQuotation;
+    this.chosenProducts = JSON.parse(JSON.stringify(this.data.chosenProducts));
+    this.inventoryProducts = JSON.parse(JSON.stringify(this.data.inventoryProducts));
+    if (!this.fromQuotation) {
+      this.inventoryProducts.forEach((product: ProductInvoice) => {
+        product['quantityMax'] = product.quantity;
+        product.quantity = 0;
+      });
+    }
     this.currency = this.data.currency;
     if (this.currency) {
       this.noCurrency = false;
     }
-    this.agriculturalProducts = this.products.filter(p => p.product_type === 'agricultural');
-    this.processedProducts = this.products.filter(p => p.product_type === 'processed');
+    this.agriculturalProducts = this.inventoryProducts.filter(p => p.product_type === 'agricultural');
+    this.processedProducts = this.inventoryProducts.filter(p => p.product_type === 'processed');
   }
 
   onExit() {
@@ -70,7 +77,7 @@ export class ModalInventoryComponent extends BaseNavigationComponent implements 
 
   productsValidation(submit: boolean) {
     let subtotal = 0;
-    this.products.forEach(product => {
+    this.inventoryProducts.forEach(product => {
       if (product.quantity > 0) {
         if (!this.currency) {
           this.currency = product.currency;
@@ -94,6 +101,27 @@ export class ModalInventoryComponent extends BaseNavigationComponent implements 
     if (submit) {
       this.dialogRef.close(this.newProducts);
     }
+  }
+
+  addProduct(product: ProductInvoice, isChecked: boolean) {
+    if (isChecked) {
+      this.chosenProducts.push(product);
+    } else {
+      const index = this.chosenProducts.findIndex(x => x === product);
+      this.chosenProducts.splice(index, 1);
+    }
+  }
+
+  isAdded(product: ProductInvoice) {
+    if (this.chosenProducts.length > 0) {
+      return this.chosenProducts.findIndex(x => JSON.stringify(x) === JSON.stringify(product)) >= 0;
+    } else {
+      return false;
+    }
+  }
+
+  addQuotedProducts() {
+    this.dialogRef.close(this.chosenProducts);
   }
 
   product_image(product: Product) {
