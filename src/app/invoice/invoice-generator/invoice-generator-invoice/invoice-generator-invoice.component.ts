@@ -98,8 +98,9 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     dialogConfig.height = '900px';
     dialogConfig.width = '980px';
     dialogConfig.data = {
-      products: this.route.snapshot.data['products'],
-      currency: this.invoice.currency.value
+      inventoryProducts: this.route.snapshot.data['products'],
+      currency: this.invoice.currency.value,
+      chosenProducts: this.products
     };
 
     const dialogRef = this.dialog.open(ModalInventoryComponent, dialogConfig);
@@ -108,6 +109,14 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
         newProducts.forEach((newProduct: any) => {
           if (!this.invoice.currency.value) {
             this.invoice['currency'].setValue(newProduct.currency);
+          }
+          for (let i = 0; i < this.products.length; i++) {
+            if (this.products[i]._id === newProduct._id) {
+              super.deleteProduct(i);
+              if (!this.form.value.currency) {
+                this.form.controls['currency'].setValue(newProduct.currency);
+              }
+            }
           }
           this.updateTotalDue(newProduct.product_subtotal);
         });
