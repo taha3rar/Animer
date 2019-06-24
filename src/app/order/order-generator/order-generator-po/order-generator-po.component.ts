@@ -54,7 +54,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
       this.productService.getByUser(this.seller._id).subscribe(products => {
         this.inventoryProducts = <ProductInvoice[]>(<unknown>products);
       });
-      this.quotationService.getAcceptedQuotations(this.seller._id, this.buyer._id).subscribe(quotations => {
+      this.quotationService.getAcceptedPerParticipants(this.seller._id, this.buyer._id).subscribe(quotations => {
         quotations.forEach((quotation: Quotation) => {
           let quotedProduct: ProductInvoice;
           quotedProduct = <ProductInvoice>(<unknown>quotation.product);

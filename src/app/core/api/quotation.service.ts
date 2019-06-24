@@ -23,7 +23,7 @@ export class QuotationService extends BaseService {
       .pipe(map(data => data));
   }
 
-  getAcceptedQuotations(seller_id: string, buyer_id: string): Observable<Quotation[]> {
+  getAcceptedPerParticipants(seller_id: string, buyer_id: string): Observable<Quotation[]> {
     return this.apiService.get(`${this.path}/seller/${seller_id}/buyer/${buyer_id}/accepted`).pipe(map(data => data));
   }
 
@@ -31,7 +31,7 @@ export class QuotationService extends BaseService {
     return this.apiService.put(`${this.path}/${quotationId}/accept`).pipe(map(data => data));
   }
 
-  getAccepted(quoteRequestId: string): Observable<Quotation[]> {
+  getAcceptedPerQuoteRequest(quoteRequestId: string): Observable<Quotation[]> {
     return this.apiService.get(`${this.path}/quote-request/${quoteRequestId}/accepted`).pipe(map(data => data));
   }
 
