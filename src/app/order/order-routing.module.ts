@@ -19,6 +19,7 @@ import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.reso
 import { OrderGuard } from '../shared/guards/order.guard';
 import { InvoiceGuard } from '../shared/guards/invoice.guard';
 import { QuotationResolver } from './resolvers/quotation.resolver';
+import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -40,6 +41,10 @@ const routes: Routes = [
       resolve: {
         buyer: CurrentUserResolver,
         sellers: CurrentUserSuppliersResolver
+      },
+      canActivate: [PermissionGuard],
+      data: {
+        permission: 'create-order'
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -64,6 +69,10 @@ const routes: Routes = [
       component: OrderGeneratorSellerComponent,
       resolve: {
         order: OrderPoResolver
+      },
+      canActivate: [PermissionGuard],
+      data: {
+        permission: 'create-invoice'
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -91,6 +100,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [OrderGuard, ConfirmationGuard, InvoiceGuard]
+  providers: [OrderGuard, ConfirmationGuard, InvoiceGuard, PermissionGuard]
 })
 export class OrderRoutingModule {}
