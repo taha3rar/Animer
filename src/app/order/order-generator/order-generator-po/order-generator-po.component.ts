@@ -47,7 +47,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.orderDataService.currentProductList.subscribe(data => {
       if (data) {
         this.products = data;
-        this.products.forEach((product: ProductInvoice) => {});
       }
     });
     this.formInput = this.form;
