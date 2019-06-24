@@ -16,16 +16,16 @@ const routes: Routes = [
       resolve: { products: CurrentUserProductsResolver },
       data: { title: extract('Products') },
       runGuardsAndResolvers: 'always'
-    },
-    {
-      path: 'product/generator',
-      component: ProductGeneratorComponent
-    },
-    {
-      path: 'product/edit/:id',
-      component: ProductGeneratorComponent,
-      resolve: { product: ProductResolver }
     }
+    // {
+    //   path: 'product/generator',
+    //   component: ProductGeneratorComponent
+    // },
+    // {
+    //   path: 'product/edit/:id',
+    //   component: ProductGeneratorComponent,
+    //   resolve: { product: ProductResolver }
+    // }
   ])
 ];
 

@@ -17,6 +17,7 @@ import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotati
 import { extract } from '@app/core';
 import { QuoteRequestGuard } from '@app/shared/guards/quoteRequest.guard';
 import { QuotationGuard } from '@app/shared/guards/quotation.guard';
+import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -36,6 +37,10 @@ const routes: Routes = [
         buyer: CurrentUserResolver,
         clients: CurrentUserSuppliersResolver,
         ecosystems: CurrentUserEcosystemsResolver
+      },
+      canActivate: [PermissionGuard],
+      data: {
+        permission: 'create-qr'
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -84,6 +89,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [CommonModule, RouterModule.forChild(routes)],
-  providers: [ConfirmationGuard, QuoteRequestGuard, QuotationGuard]
+  providers: [ConfirmationGuard, QuoteRequestGuard, QuotationGuard, PermissionGuard]
 })
 export class QuoteRequestRoutingModule {}

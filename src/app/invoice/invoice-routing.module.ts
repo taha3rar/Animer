@@ -15,6 +15,7 @@ import { InvoiceListAsBuyerResolver } from './resolvers/invoice-list-as-buyer.re
 import { InvoiceListAsSellerResolver } from './resolvers/invoice-list-as-seller.resolver';
 import { ConfirmationGuard } from '@app/shared/guards/confirmation.guard';
 import { InvoiceGuard } from '../shared/guards/invoice.guard';
+import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -36,6 +37,10 @@ const routes: Routes = [
         buyers: InvoiceBuyersResolver,
         seller: CurrentUserResolver,
         products: CurrentUserProductsResolver
+      },
+      canActivate: [PermissionGuard],
+      data: {
+        permission: 'create-invoice'
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -62,6 +67,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [InvoiceGuard, ConfirmationGuard]
+  providers: [InvoiceGuard, ConfirmationGuard, PermissionGuard]
 })
 export class InvoiceRoutingModule {}
