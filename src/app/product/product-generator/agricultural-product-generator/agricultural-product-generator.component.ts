@@ -9,7 +9,6 @@ import { measureUnits } from '@app/shared/helpers/measure';
 import { Product } from '@app/core/models/order/product';
 import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
-import { ProductDataService } from '../product-data.service';
 import swal from 'sweetalert';
 
 @Component({
