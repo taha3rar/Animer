@@ -19,6 +19,7 @@ export class ModalInventoryComponent extends BaseNavigationComponent implements 
   noCurrency: boolean;
   fromQuotation: boolean;
   chosenProducts: ProductInvoice[];
+  initialList: ProductInvoice[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<ModalInventoryComponent>) {
     super();
@@ -28,10 +29,12 @@ export class ModalInventoryComponent extends BaseNavigationComponent implements 
     this.noCurrency = true;
     this.fromQuotation = this.data.fromQuotation;
     this.chosenProducts = JSON.parse(JSON.stringify(this.data.chosenProducts));
+    this.initialList = JSON.parse(JSON.stringify(this.data.chosenProducts));
     this.inventoryProducts = JSON.parse(JSON.stringify(this.data.inventoryProducts));
     if (!this.fromQuotation) {
       this.inventoryProducts.forEach((product: ProductInvoice) => {
         product['quantityMax'] = product.quantity;
+        product['totalWeightMax'] = product.total_weight;
         product.quantity = 0;
       });
     }
@@ -115,6 +118,14 @@ export class ModalInventoryComponent extends BaseNavigationComponent implements 
   isAdded(product: ProductInvoice) {
     if (this.chosenProducts.length > 0) {
       return this.chosenProducts.findIndex(x => JSON.stringify(x) === JSON.stringify(product)) >= 0;
+    } else {
+      return false;
+    }
+  }
+
+  isListed(product: ProductInvoice) {
+    if (this.initialList.length > 0) {
+      return this.initialList.findIndex(x => JSON.stringify(x) === JSON.stringify(product)) >= 0;
     } else {
       return false;
     }

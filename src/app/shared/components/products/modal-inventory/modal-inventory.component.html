@@ -12,6 +12,9 @@
     <p class="normal-text-bold">Agricultural Products</p>
   </div>
   <div class="row clearfix">
+    <div *ngIf="agriculturalProducts.length < 1" class="col-md-4">
+      No agricultural product
+    </div>
     <div
       *ngFor="let product of (agriculturalProducts | paginate: { itemsPerPage: 3, currentPage: page }); let i = index"
       class="col-md-4"
@@ -50,7 +53,7 @@
             </tr>
             <tr>
               <td>Total available</td>
-              <td>{{ product.total_weight }} {{ product.weight_unit | uppercase }}</td>
+              <td>{{ product.totalWeightMax }} {{ product.weight_unit | uppercase }}</td>
             </tr>
           </table>
         </div>
@@ -68,15 +71,19 @@
           <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
         </div>
         <div *ngIf="(!currency || product.currency === currency) && fromQuotation" class="quantity">
-          <p class="normal-text-bold">Add to purchase order</p>
+          <p *ngIf="isListed(product)" class="normal-text-bold">The product is a part of the order</p>
+          <p *ngIf="!isListed(product)" class="normal-text-bold">Add to purchase order</p>
           <input
+            *ngIf="!isListed(product)"
             type="checkbox"
             class="checkbox"
             [id]="i"
             [name]="i"
             (change)="addProduct(product, $event.target.checked)"
             [checked]="isAdded(product)"
-          /><label class="checkbox_label" [for]="i"><span class="form_checkbox_btn"></span></label>
+          /><label *ngIf="!isListed(product)" class="checkbox_label" [for]="i"
+            ><span class="form_checkbox_btn"></span
+          ></label>
         </div>
         <div *ngIf="currency && product.currency != currency" class="quantity">
           <strong style="font-size :11px;">Choose products with the same currency</strong>
@@ -94,6 +101,9 @@
     <p class="normal-text-bold">Processed Products</p>
   </div>
   <div class="row clearfix">
+    <div *ngIf="processedProducts.length < 1" class="col-md-4">
+      No processed product
+    </div>
     <ng-container
       *ngFor="let product of (processedProducts | paginate: { itemsPerPage: 3, currentPage: page2 }); let i = index"
     >
@@ -156,15 +166,19 @@
             <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
           </div>
           <div *ngIf="(!currency || product.currency === currency) && fromQuotation" class="quantity">
-            <p class="normal-text-bold">Add to purchase order</p>
+            <p *ngIf="isListed(product)" class="normal-text-bold">The product is a part of the order</p>
+            <p *ngIf="!isListed(product)" class="normal-text-bold">Add to purchase order</p>
             <input
+              *ngIf="!isListed(product)"
               type="checkbox"
               class="checkbox"
               [id]="'p' + i"
               [name]="i"
               (change)="addProduct(product, $event.target.checked)"
               [checked]="isAdded(product)"
-            /><label class="checkbox_label" [for]="'p' + i"><span class="form_checkbox_btn"></span></label>
+            /><label *ngIf="!isListed(product)" class="checkbox_label" [for]="'p' + i"
+              ><span class="form_checkbox_btn"></span
+            ></label>
           </div>
           <div *ngIf="currency && product.currency != currency" class="quantity">
             <strong style="font-size :11px;">Choose products with the same currency</strong>
