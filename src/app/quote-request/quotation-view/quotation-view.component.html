@@ -12,11 +12,13 @@
         <div class="timing-section">
           <span
             ><i class="material-icons">calendar_today</i>
-            <span class="time-text">Issued on {{ quoteRequest.date_created | date: 'dd/MM/yyyy' }}</span></span
+            <span class="time-text"
+              >Quote Request Issued on {{ quoteRequest.date_created | date: 'dd/MM/yyyy' }}</span
+            ></span
           >
           <span
             ><i class="material-icons timer">calendar_today</i>
-            <span class="time-text">Quotation submitted on {{ quotation.date_created | date: 'dd/MM/yyyy' }}</span>
+            <span class="time-text">Quotation Issued on {{ quotation.date_created | date: 'dd/MM/yyyy' }}</span>
           </span>
         </div>
       </div>
