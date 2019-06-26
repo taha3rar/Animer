@@ -86,7 +86,7 @@
         </button>
         <!-- Quotation Gen -->
         <button
-          *ngIf="userId != quoteRequest.buyer._id && !quoteRequest.draft && !quotationSent(i)"
+          *ngIf="userId != quoteRequest.buyer._id && !quoteRequest.draft && !quotationSent(quoteRequest)"
           class="round-button-primary"
           data-toggle="stepper"
           [routerLink]="['/quote-request/quotation-generator', quoteRequest._id]"
@@ -95,7 +95,7 @@
         </button>
         <!-- QR Seller view -->
         <button
-          *ngIf="userId != quoteRequest.buyer._id && !quoteRequest.draft && quotationSent(i)"
+          *ngIf="userId != quoteRequest.buyer._id && !quoteRequest.draft && quotationSent(quoteRequest)"
           class="round-button-primary"
           data-toggle="stepper"
           [routerLink]="['/quote-request/quotation', quoteRequest._id]"

@@ -36,10 +36,8 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
     this.userId = this.authService.currentUserId;
   }
 
-  quotationSent(index: number) {
-    return (
-      this.quoteRequests[index].status === 'QUOTATION SENT' || this.quoteRequests[index].status === 'QUOTATION ACCEPTED'
-    );
+  quotationSent(quoteRequest: QuoteRequest) {
+    return quoteRequest.status === 'QUOTATION SENT' || quoteRequest.status === 'QUOTATION ACCEPTED';
   }
 
   participants(index: number): string {
