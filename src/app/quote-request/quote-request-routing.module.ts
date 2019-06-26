@@ -27,7 +27,11 @@ const routes: Routes = [
       resolve: {
         quoteRequests: QuoteRequestListResolver
       },
-      data: { title: extract('Quote Requests') },
+      // canActivate: [PermissionGuard],
+      data: {
+        title: extract('Quote Requests'),
+        permission: 'list-qrs'
+      },
       runGuardsAndResolvers: 'always'
     },
     {

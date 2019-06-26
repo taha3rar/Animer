@@ -1,7 +1,6 @@
 import { InvoiceGeneratorComponent } from './invoice-generator/invoice-generator.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
@@ -27,7 +26,11 @@ const routes: Routes = [
         invoicesAsBuyer: InvoiceListAsBuyerResolver,
         invoicesAsSeller: InvoiceListAsSellerResolver
       },
-      data: { title: extract('Invoices') },
+      // canActivate: [PermissionGuard],
+      data: {
+        title: extract('Invoices'),
+        permission: 'list-invoices'
+      },
       runGuardsAndResolvers: 'always'
     },
     {

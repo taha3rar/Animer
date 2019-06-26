@@ -9,18 +9,23 @@ import { CurrentUserClientsResolver } from '@app/shared/resolvers/current-user-c
 import { CurrentUserResolver } from '../shared/resolvers/current-user.resolver';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
 import { EcosystemGuard } from '../shared/guards/ecosystem.guard';
+import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'ecosystem/list',
       component: EcosystemsListComponent,
-      data: { title: extract('Ecosystems') },
+      data: {
+        title: extract('Ecosystems'),
+        permission: 'list-ecosystems'
+      },
       resolve: {
         ecosystems: CurrentUserEcosystemsResolver,
         user: CurrentUserResolver,
         userClients: CurrentUserClientsResolver
       },
+      canActivate: [PermissionGuard],
       runGuardsAndResolvers: 'always'
     },
     {
@@ -39,6 +44,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [EcosystemGuard]
+  providers: [EcosystemGuard, PermissionGuard]
 })
 export class EcosystemRoutingModule {}

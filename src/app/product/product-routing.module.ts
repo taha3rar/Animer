@@ -5,6 +5,7 @@ import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { CurrentUserProductsResolver } from '@app/shared/resolvers/current-user-products.resolver';
+import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -12,7 +13,11 @@ const routes: Routes = [
       path: 'product/list',
       component: ProductsListComponent,
       resolve: { products: CurrentUserProductsResolver },
-      data: { title: extract('Products') },
+      canActivate: [PermissionGuard],
+      data: {
+        title: extract('Products'),
+        permission: 'list-products'
+      },
       runGuardsAndResolvers: 'always'
     }
   ])
@@ -21,6 +26,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [PermissionGuard]
 })
 export class ProductRoutingModule {}

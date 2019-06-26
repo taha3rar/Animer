@@ -12,6 +12,7 @@ import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 import { ClientGuard } from '../shared/guards/client.guard';
+import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -23,7 +24,11 @@ const routes: Routes = [
         clients: CurrentUserClientsResolver,
         ecosystems: CurrentUserEcosystemsResolver
       },
-      data: { title: extract('Clients') },
+      canActivate: [PermissionGuard],
+      data: {
+        title: extract('Clients'),
+        permission: 'list-clients'
+      },
       runGuardsAndResolvers: 'always'
     },
     {
@@ -44,6 +49,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ClientGuard]
+  providers: [ClientGuard, PermissionGuard]
 })
 export class ClientRoutingModule {}

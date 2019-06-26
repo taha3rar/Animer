@@ -32,7 +32,11 @@ const routes: Routes = [
         ordersAsSeller: OrderListAsSellerResolver,
         currentUser: CurrentUserResolver
       },
-      data: { title: extract('Orders') },
+      // canActivate: [PermissionGuard],
+      data: {
+        title: extract('Orders'),
+        permission: 'list-orders'
+      },
       runGuardsAndResolvers: 'always'
     },
     {
