@@ -26,7 +26,7 @@ const routes: Routes = [
         invoicesAsBuyer: InvoiceListAsBuyerResolver,
         invoicesAsSeller: InvoiceListAsSellerResolver
       },
-      // canActivate: [PermissionGuard],
+      canActivate: [PermissionGuard],
       data: {
         title: extract('Invoices'),
         permission: 'list-invoices'
