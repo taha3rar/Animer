@@ -19,7 +19,7 @@
       *ngFor="let product of (agriculturalProducts | paginate: { itemsPerPage: 3, currentPage: page }); let i = index"
       class="col-md-4"
     >
-      <div class="card card-agricultural">
+      <div class="card card-agricultural" [class.product-active]="isListed(product) && fromQuotation">
         <div class="card-inner-price">
           <p class="pull-right margin-none">
             {{ product.price_per_unit | number: '1.2-2' }} {{ product.currency }}/<small>{{
@@ -108,7 +108,7 @@
       *ngFor="let product of (processedProducts | paginate: { itemsPerPage: 3, currentPage: page2 }); let i = index"
     >
       <div class="col-md-4">
-        <div class="card card-processed">
+        <div class="card card-processed" [class.product-active]="isListed(product) && fromQuotation" s>
           <div class="card-inner-price">
             <p class="pull-right margin-none">
               {{ product.package_price | number: '1.2-2' }} {{ product.currency }}/<small>{{
