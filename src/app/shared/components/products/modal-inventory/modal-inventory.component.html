@@ -12,9 +12,9 @@
     <p class="normal-text-bold">Agricultural Products</p>
   </div>
   <div class="row clearfix">
-    <div *ngIf="agriculturalProducts.length < 1" class="col-md-4 add-supplier-box">
+    <div *ngIf="agriculturalProducts.length < 1" class="col-md-4 empty-inventory">
       <img src="../../../../../assets/img/default/basket.png" height="260" width="260" />
-      <p class="heading-4 ">No agricultural products available</p>
+      <p class="heading-2">No agricultural products available</p>
     </div>
     <div
       *ngFor="let product of (agriculturalProducts | paginate: { itemsPerPage: 3, currentPage: page }); let i = index"
@@ -104,7 +104,7 @@
   <div class="row clearfix">
     <div *ngIf="processedProducts.length < 1" class="col-md-4 empty-inventory">
       <img src="../../../../../assets/img/default/basket.png" height="260" width="260" />
-      <p class="heading-4">No processed products available</p>
+      <p class="heading-2">No processed products available</p>
     </div>
     <ng-container
       *ngFor="let product of (processedProducts | paginate: { itemsPerPage: 3, currentPage: page2 }); let i = index"
