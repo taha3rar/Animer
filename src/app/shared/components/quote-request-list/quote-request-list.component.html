@@ -64,7 +64,13 @@
         <div *ngIf="quoteRequest.status === qrSent || quoteRequest.status === qrReceived" class="status status-orange">
           {{ quoteRequest?.status }}
         </div>
-        <div *ngIf="quoteRequest.status === qAccepted && !isBuyer" class="status status-blue">
+        <div
+          *ngIf="quoteRequest.status === qAccepted && !isBuyer"
+          class="status status-blue"
+          matTooltipClass="tooltip-table"
+          [matTooltip]="qAcceptedInfo"
+          matTooltipPosition="below"
+        >
           {{ quoteRequest?.status }}
         </div>
         <div *ngIf="quoteRequest.status === oReceived && !isBuyer" class="status status-green">

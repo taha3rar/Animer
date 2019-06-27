@@ -21,6 +21,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   qReceived = 'QUOTATION RECEIVED';
   qAccepted = 'QUOTATION ACCEPTED';
   oReceived = 'ORDER RECEIVED';
+  qAcceptedInfo = 'Please notice that an accepted Quotation is not a finalized order, please wait for a purchase order';
 
   constructor(
     protected authService: AuthenticationService,
