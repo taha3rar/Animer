@@ -32,6 +32,7 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
       this.isModal = true;
       this.quotation = this.data.quotation;
     }
+    console.log(this.quotation);
     this.transaction = this.quotation;
     super.setTransaction(this.quotation);
   }
@@ -57,6 +58,10 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
 
   isAccepted() {
     return this.quotation.status === 'QUOTATION ACCEPTED';
+  }
+
+  orderGenerated() {
+    return this.quotation.status === 'ORDER SENT';
   }
 
   onExit(refresh?: boolean): void {

@@ -135,7 +135,11 @@
           </div>
         </div>
       </div>
-      <button (click)="acceptQuotation()" *ngIf="!isAccepted() && isModal" class="bttn-primary pull-right mt-5">
+      <button
+        (click)="acceptQuotation()"
+        *ngIf="!isAccepted() && !orderGenerated() && isModal"
+        class="bttn-primary pull-right mt-5"
+      >
         Accept Quotation
       </button>
       <button (click)="generatePurchaseOrder()" *ngIf="isAccepted() && isModal" class="bttn-primary pull-right mt-5">

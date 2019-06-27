@@ -20,6 +20,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   qSent = 'QUOTATION SENT';
   qReceived = 'QUOTATION RECEIVED';
   qAccepted = 'QUOTATION ACCEPTED';
+  oReceived = 'ORDER RECEIVED';
 
   constructor(
     protected authService: AuthenticationService,
@@ -37,7 +38,10 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   }
 
   quotationSent(quoteRequest: QuoteRequest) {
-    return quoteRequest.status === 'QUOTATION SENT' || quoteRequest.status === 'QUOTATION ACCEPTED';
+    const qStatus = quoteRequest.status;
+    return (
+      qStatus === this.qSent || qStatus === this.qReceived || qStatus === this.qAccepted || qStatus === this.oReceived
+    );
   }
 
   participants(index: number): string {
