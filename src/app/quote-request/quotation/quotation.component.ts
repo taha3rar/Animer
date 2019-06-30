@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { QuotationService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { DocumentDownloadComponent } from '@app/shared/components/document-download/document-download.component';
 
 @Component({

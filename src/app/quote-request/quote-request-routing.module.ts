@@ -19,7 +19,6 @@ import { extract } from '@app/core';
 import { QuoteRequestGuard } from '@app/shared/guards/quoteRequest.guard';
 import { QuotationGuard } from '@app/shared/guards/quotation.guard';
 import { PermissionGuard } from '../shared/guards/permission.guard';
-import { from } from 'rxjs';
 import { QuotationsAcceptedQuoteRequestResolver } from './resolvers/quotations-accepted-quote-request.resolver';
 
 const routes: Routes = [
