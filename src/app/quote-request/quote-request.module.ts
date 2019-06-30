@@ -33,7 +33,9 @@ import { QuoteRequestViewComponent } from './quote-request-view/quote-request-vi
 import { QuotationsListComponent } from './quote-request-view/quotations-list/quotations-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { QuotationComponent } from './quotation/quotation.component';
-import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotation.resolver';
+import { QuotationSellerResolver } from './resolvers/quotation-seller-quote-request.resolver';
+import { QuotationsQuoteRequestResolver } from './resolvers/quotations-quote-request.resolver';
+import { QuotationsAcceptedQuoteRequestResolver } from './resolvers/quotations-accepted-quote-request.resolver';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotati
     QuoteRequestDataService,
     QuoteRequestListResolver,
     QuoteRequestResolver,
-    QuoteRequestQuotationResolver
+    QuotationSellerResolver,
+    QuotationsQuoteRequestResolver,
+    QuotationsAcceptedQuoteRequestResolver
   ]
 })
 export class QuoteRequestModule {}

@@ -13,11 +13,14 @@ import { CurrentUserEcosystemsResolver } from '@app/shared/resolvers/current-use
 import { CurrentUserResolver } from '../shared/resolvers/current-user.resolver';
 import { QuoteRequestListResolver } from './resolvers/quote-request-list.resolver';
 import { QuoteRequestResolver } from './resolvers/quote-request.resolver';
-import { QuoteRequestQuotationResolver } from './resolvers/quote-request-quotation.resolver';
+import { QuotationSellerResolver } from './resolvers/quotation-seller-quote-request.resolver';
+import { QuotationsQuoteRequestResolver } from './resolvers/quotations-quote-request.resolver';
 import { extract } from '@app/core';
 import { QuoteRequestGuard } from '@app/shared/guards/quoteRequest.guard';
 import { QuotationGuard } from '@app/shared/guards/quotation.guard';
 import { PermissionGuard } from '../shared/guards/permission.guard';
+import { from } from 'rxjs';
+import { QuotationsAcceptedQuoteRequestResolver } from './resolvers/quotations-accepted-quote-request.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -65,7 +68,7 @@ const routes: Routes = [
       component: QuotationViewComponent,
       resolve: {
         quoteRequest: QuoteRequestResolver,
-        quotation: QuoteRequestQuotationResolver
+        quotation: QuotationSellerResolver
       },
       canActivate: [QuotationGuard]
     },
@@ -82,7 +85,9 @@ const routes: Routes = [
       path: 'quote-request/:id',
       component: QuoteRequestViewComponent,
       resolve: {
-        quoteRequest: QuoteRequestResolver
+        quoteRequest: QuoteRequestResolver,
+        quotations: QuotationsQuoteRequestResolver,
+        acceptedQuotations: QuotationsAcceptedQuoteRequestResolver
       },
       canActivate: [QuoteRequestGuard],
       runGuardsAndResolvers: 'always'

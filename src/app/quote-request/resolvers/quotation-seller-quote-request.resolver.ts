@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Quotation } from '@app/core/models/quotation/quotation';
 
 @Injectable()
-export class QuoteRequestQuotationResolver implements Resolve<boolean | Quotation> {
+export class QuotationSellerResolver implements Resolve<boolean | Quotation> {
   constructor(
     private quotationService: QuotationService,
     private router: Router,

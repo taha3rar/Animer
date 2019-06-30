@@ -11,7 +11,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let quotation of (quotations | paginate: { itemsPerPage: 7, currentPage: page }); let i = index">
+    <tr
+      *ngFor="
+        let quotation of (quotations | paginate: { itemsPerPage: 7, currentPage: page, id: acceptedQuotations });
+        let i = index
+      "
+    >
       <td>{{ quotation.seller.company_name }}</td>
       <td>{{ quotation.seller.first_name }} {{ quotation.seller.last_name }}</td>
       <td>
@@ -56,7 +61,7 @@
       <td class="text-right">
         <button
           class="round-button-primary"
-          (click)="openQuotationView(i)"
+          (click)="openQuotationView(quotation)"
           [class.disabled]="!quotation.product"
           [disabled]="!quotation.product"
         >
@@ -66,5 +71,9 @@
     </tr>
   </tbody>
 </table>
-<pagination-controls *ngIf="quotations?.length > 0" (pageChange)="page = $event"></pagination-controls>
+<pagination-controls
+  *ngIf="quotations?.length > 0"
+  (pageChange)="page = $event"
+  [id]="acceptedQuotations"
+></pagination-controls>
 <span *ngIf="quotations?.length <= 0">You did not grant any quotation yet.</span>

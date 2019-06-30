@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { QuotationService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import swal from 'sweetalert';
 import { DocumentDownloadComponent } from '@app/shared/components/document-download/document-download.component';
 
@@ -22,7 +22,8 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
     @Optional() public dialogRef: MatDialogRef<QuotationComponent>,
     private quotationService: QuotationService,
     private alerts: AlertsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     super(quotationService, 'quotation', 'Quotation');
   }
@@ -46,7 +47,8 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
   acceptQuotation() {
     this.quotationService.acceptQuotation(this.quotation._id).subscribe(data => {
       this.alerts.showAlert('The quotation has been successfully accepted');
-      this.onExit(true);
+      this.onExit(false);
+      this.router.navigate([this.router.url]);
     });
   }
 
