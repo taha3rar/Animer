@@ -84,14 +84,14 @@
     <div class="tab-pane" id="quotationsReceived">
       <div class="panel panel-tab">
         <div class="panel-body">
-          <app-quotations-list></app-quotations-list>
+          <app-quotations-list [quotations]="quotations" paginationId="p1"></app-quotations-list>
         </div>
       </div>
     </div>
     <div class="tab-pane" id="quotationsAccepted">
       <div class="panel panel-tab">
         <div class="panel-body">
-          <app-quotations-list [acceptedQuotations]="true"></app-quotations-list>
+          <app-quotations-list [quotations]="acceptedQuotations" paginationId="p2"></app-quotations-list>
         </div>
       </div>
     </div>

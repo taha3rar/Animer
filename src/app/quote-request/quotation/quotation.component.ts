@@ -4,7 +4,6 @@ import { Quotation } from '@app/core/models/quotation/quotation';
 import { QuotationService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import swal from 'sweetalert';
 import { DocumentDownloadComponent } from '@app/shared/components/document-download/document-download.component';
 
 @Component({
@@ -22,8 +21,7 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
     @Optional() public dialogRef: MatDialogRef<QuotationComponent>,
     private quotationService: QuotationService,
     private alerts: AlertsService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {
     super(quotationService, 'quotation', 'Quotation');
   }
@@ -47,14 +45,14 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
   acceptQuotation() {
     this.quotationService.acceptQuotation(this.quotation._id).subscribe(data => {
       this.alerts.showAlert('The quotation has been successfully accepted');
-      this.onExit(false);
+      this.onExit();
       this.router.navigate([this.router.url]);
     });
   }
 
   generatePurchaseOrder() {
+    this.onExit();
     this.router.navigateByUrl(`/order/generator/quotation/${this.quotation._id}`);
-    this.onExit(false);
   }
 
   isAccepted() {
@@ -65,13 +63,7 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
     return this.quotation.status === 'ORDER SENT';
   }
 
-  onExit(refresh?: boolean): void {
-    if (refresh) {
-      this.dialogRef.close({
-        refresh: true
-      });
-    } else {
-      this.dialogRef.close();
-    }
+  onExit(): void {
+    this.dialogRef.close();
   }
 }

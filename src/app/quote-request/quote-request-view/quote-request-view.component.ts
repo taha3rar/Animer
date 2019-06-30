@@ -1,6 +1,6 @@
 import { Quotation } from './../../core/models/quotation/quotation';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 
 @Component({
@@ -12,21 +12,17 @@ export class QuoteRequestViewComponent implements OnInit {
   quoteRequest: QuoteRequest;
   quotation: Quotation;
   quotations: Quotation[];
+  acceptedQuotations: Quotation[];
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    // this.router.events.subscribe(event => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.ngOnInit();
-    //   }
-    // });
-  }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.quoteRequest = this.route.snapshot.data['quoteRequest'];
     this.quotation = this.route.snapshot.data['quotation'];
-    this.quoteRequest = this.route.snapshot.data['quoteRequest'];
-    this.quotations = this.route.snapshot.data['acceptedQuotations'];
-    console.log(this.quotations);
+    this.route.data.subscribe(({ quoteRequest, quotations, acceptedQuotations }) => {
+      this.quoteRequest = quoteRequest;
+      this.acceptedQuotations = acceptedQuotations;
+      this.quotations = quotations;
+    });
   }
 
   back() {

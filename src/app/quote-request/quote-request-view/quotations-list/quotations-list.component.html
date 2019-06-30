@@ -13,7 +13,7 @@
   <tbody>
     <tr
       *ngFor="
-        let quotation of (quotations | paginate: { itemsPerPage: 7, currentPage: page, id: acceptedQuotations });
+        let quotation of (quotations | paginate: { itemsPerPage: 7, currentPage: page, id: paginationId });
         let i = index
       "
     >
@@ -74,6 +74,6 @@
 <pagination-controls
   *ngIf="quotations?.length > 0"
   (pageChange)="page = $event"
-  [id]="acceptedQuotations"
+  [id]="paginationId"
 ></pagination-controls>
 <span *ngIf="quotations?.length <= 0">You did not grant any quotation yet.</span>
