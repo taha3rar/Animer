@@ -32,7 +32,6 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
       this.isModal = true;
       this.quotation = this.data.quotation;
     }
-    console.log(this.quotation);
     this.transaction = this.quotation;
     super.setTransaction(this.quotation);
   }

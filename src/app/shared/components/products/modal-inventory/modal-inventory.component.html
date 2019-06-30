@@ -54,7 +54,10 @@
             </tr>
             <tr>
               <td>Total available</td>
-              <td>{{ product.totalWeightMax }} {{ product.weight_unit | uppercase }}</td>
+              <td>
+                {{ fromQuotation ? product.total_weight : product.totalWeightMax }}
+                {{ product.weight_unit | uppercase }}
+              </td>
             </tr>
           </table>
         </div>

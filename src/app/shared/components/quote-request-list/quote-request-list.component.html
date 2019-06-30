@@ -25,7 +25,12 @@
       <td>{{ quoteRequest?.date_created | date: 'dd/MM/yyyy' }}</td>
       <td *ngIf="!isBuyer">{{ quoteRequest?.buyer.first_name }} {{ quoteRequest?.buyer.last_name }}</td>
       <td>
-        <span *ngIf="quoteRequest.product"> {{ quoteRequest.product.produce }} </span>
+        <span *ngIf="quoteRequest.product && quoteRequest.product.product_type == 'agricultural'">
+          {{ quoteRequest.product.produce }} / {{ quoteRequest.product.variety }}
+        </span>
+        <span *ngIf="quoteRequest.product && quoteRequest.product.product_type != 'agricultural'">
+          {{ quoteRequest.product.produce }}
+        </span>
         <span *ngIf="!quoteRequest.product"> N/A </span>
       </td>
       <td>
