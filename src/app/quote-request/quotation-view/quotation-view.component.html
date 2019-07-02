@@ -1,0 +1,83 @@
+<h1 class="main-title btn-main margin-bottom-2" (click)="back()">
+  <a class="material-icons">keyboard_backspace</a> Quote Requests
+</h1>
+
+<div class="col-md-12">
+  <div class="panel">
+    <div class="panel-body">
+      <div class="info info-top">
+        <div>
+          <p class="heading-2">Quote Request #{{ quoteRequest?.numericId }}</p>
+        </div>
+        <div class="timing-section">
+          <span
+            ><i class="material-icons">calendar_today</i>
+            <span class="time-text"
+              >Quote Request Issued on {{ quoteRequest.date_created | date: 'dd/MM/yyyy' }}</span
+            ></span
+          >
+          <span
+            ><i class="material-icons timer">calendar_today</i>
+            <span class="time-text">Quotation Issued on {{ quotation.date_created | date: 'dd/MM/yyyy' }}</span>
+          </span>
+        </div>
+      </div>
+      <div class="info">
+        <div class="col-md-2">
+          <p class="heading-3">CONTACT NAME</p>
+          <p class="normal-text-bold">{{ quoteRequest?.buyer.first_name }} {{ quoteRequest?.buyer.last_name }}</p>
+        </div>
+        <div class="col-md-2">
+          <p class="heading-3">AMOUNT REQUESTED</p>
+          <p class="normal-text-bold">
+            <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'"
+              >{{ quotation.product.total_weight_requested | number: '1.2-2' }}
+              {{ quotation.product.weight_unit | uppercase }}</span
+            >
+            <span *ngIf="quotation.product.product_type != 'agricultural'"
+              >{{ quotation.product.quantity_requested }} packages</span
+            >
+          </p>
+        </div>
+        <div class="col-md-2">
+          <p class="heading-3">AMOUNT OFFERED</p>
+          <p class="normal-text-bold">
+            <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+              {{ quotation.product.total_weight_offered | number: '1.2-2' }} {{ quotation.product.weight_unit }}
+            </span>
+            <span *ngIf="quotation.product.product_type != 'agricultural'">
+              {{ quotation.product.quantity_offered | number: '1.0' }} {{ quotation.product.type_of_package }}
+            </span>
+          </p>
+        </div>
+        <div class="col-md-2">
+          <p class="heading-3">RATE</p>
+          <p class="normal-text-bold">
+            {{ quotation.product.price_per_unit || quotation.product.package_price || 0.0 | number: '1.2-2' }}
+            {{ quotation?.currency }} / {{ quotation.product.weight_unit || quotation.product.type_of_package }}
+          </p>
+        </div>
+        <div class="col-md-2">
+          <p class="heading-3">TOTAL PRICE</p>
+          <p class="normal-text-bold">{{ quotation?.total_price | number: '1.2-2' }} {{ quotation?.currency }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a data-toggle="tab" href="#quoteRequest">Quote Request</a>
+    </li>
+    <li><a data-toggle="tab" href="#quotation">Quotation</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="quoteRequest">
+      <app-quote-request [isSeller]="true" [quotation]="quotation" [quoteRequest]="quoteRequest"></app-quote-request>
+    </div>
+    <div class="tab-pane" id="quotation">
+      <app-quotation [isView]="true" [quotation]="quotation"></app-quotation>
+    </div>
+  </div>
+</div>

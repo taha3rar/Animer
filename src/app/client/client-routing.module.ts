@@ -1,19 +1,18 @@
 import { ClientComponent } from './client/client.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { extract } from '@app/core';
 import { ClientListComponent } from './client-list/client-list.component';
 import { Shell } from '@app/shell/shell.service';
-import { ClientListResolver } from './resolvers/client-list.resolver';
-import { EcosystemListResolver } from '@app/ecosystem/resolvers/ecosystem-list.resolver';
-import { UserResolver } from './resolvers/user.resolver';
-import { CurrentUserResolver } from './resolvers/current-user.resolver';
-// import { TransactionListResolver } from './resolvers/transaction-list.resolver';
+import { CurrentUserClientsResolver } from '@app/shared/resolvers/current-user-clients.resolver';
+import { CurrentUserEcosystemsResolver } from '@app/shared/resolvers/current-user-ecosystems.resolver';
+import { ClientResolver } from './resolvers/client.resolver';
+import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 import { ClientGuard } from '../shared/guards/client.guard';
+import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -22,10 +21,14 @@ const routes: Routes = [
       component: ClientListComponent,
       resolve: {
         currentUser: CurrentUserResolver,
-        clients: ClientListResolver,
-        ecosystems: EcosystemListResolver
+        clients: CurrentUserClientsResolver,
+        ecosystems: CurrentUserEcosystemsResolver
       },
-      data: { title: extract('Clients') },
+      canActivate: [PermissionGuard],
+      data: {
+        title: extract('Clients'),
+        permission: 'list-clients'
+      },
       runGuardsAndResolvers: 'always'
     },
     {
@@ -33,8 +36,7 @@ const routes: Routes = [
       component: ClientComponent,
       canActivate: [ClientGuard],
       resolve: {
-        user: UserResolver,
-        // transactions: TransactionListResolver,
+        user: ClientResolver,
         orders: OrderListResolver,
         invoices: InvoiceListResolver,
         documents: UserDocumentListResolver
@@ -47,6 +49,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ClientGuard]
+  providers: [ClientGuard, PermissionGuard]
 })
 export class ClientRoutingModule {}

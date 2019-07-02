@@ -1,11 +1,10 @@
+import { DocumentDownloadComponent } from './../../shared/components/document-download/document-download.component';
 import { AlertsService } from './../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Location } from '@angular/common';
 import swal from 'sweetalert';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { InvoiceService } from '@app/core/api/invoice.service';
-import { saveAs as importedSaveAs } from 'file-saver';
 import { ProductService } from '@app/core';
 
 @Component({
@@ -13,7 +12,7 @@ import { ProductService } from '@app/core';
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss']
 })
-export class InvoiceComponent implements OnInit {
+export class InvoiceComponent extends DocumentDownloadComponent implements OnInit {
   disclaimerAccepted: boolean;
   @Input()
   generateInvoice = false;
@@ -26,11 +25,12 @@ export class InvoiceComponent implements OnInit {
   constructor(
     private invoiceService: InvoiceService,
     private productService: ProductService,
-    private location: Location,
     private route: ActivatedRoute,
     private router: Router,
     private alertsService: AlertsService
-  ) {}
+  ) {
+    super(invoiceService, 'proforma-invoice', 'Proforma Invoice');
+  }
 
   ngOnInit() {
     this.disclaimerAccepted = false;
@@ -39,10 +39,11 @@ export class InvoiceComponent implements OnInit {
         this.invoice = invoice;
       });
     }
+    super.setTransaction(this.invoice);
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/invoice/list');
   }
 
   disclaimerPopup() {
@@ -68,24 +69,6 @@ export class InvoiceComponent implements OnInit {
     });
   }
 
-  downloadPopup() {
-    swal({
-      title: 'Download as PDF',
-      className: 'swal-pdf',
-      text: 'Please choose the type of proforma invoice document you would like to download:',
-      buttons: {
-        originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o', closeModal: false },
-        copyDoc: { text: 'Copy Document', value: 'copy', closeModal: false }
-      }
-    }).then(value => {
-      if (value === 'original') {
-        this.download('original');
-      } else {
-        this.download('copy');
-      }
-    });
-  }
-
   get issuer() {
     return this.invoice.seller;
   }
@@ -100,14 +83,6 @@ export class InvoiceComponent implements OnInit {
 
   get deliver_to() {
     return this.invoice.deliver_to;
-  }
-
-  download(version: string): void {
-    this.invoiceService.getPdf(this.invoice._id, version).subscribe(data => {
-      const blob = new Blob([data], { type: 'application/pdf' });
-      importedSaveAs(blob, `proforma-invoice-${this.invoice.numericId}-${version}`);
-      swal.close();
-    });
   }
 
   saveInvoice(): void {

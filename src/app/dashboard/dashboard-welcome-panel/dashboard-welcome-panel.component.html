@@ -17,6 +17,9 @@
           <li class="step" *ngIf="currentUser.roles[0] === 'agribusiness'">
             <a data-toggle="tab" class="label" href="#rec-iss-po">Orders</a>
           </li>
+          <li class="step">
+            <a data-toggle="tab" class="label" href="#quote-request">Quote Requests</a>
+          </li>
           <li class="step" *ngxPermissionsOnly="['create-client']">
             <a data-toggle="tab" class="label" href="#add-clients">Clients</a>
           </li>
@@ -32,7 +35,6 @@
           <li class="step" *ngIf="currentUser.roles[0] === 'seller'">
             <a data-toggle="tab" class="label" href="#receive-po">Orders</a>
           </li>
-          <!-- <li class="step" *ngxPermissionsOnly="['list-transactions']"><a data-toggle="tab" class="label" href="#make-transaction">Make Transaction</a></li> -->
         </ul>
       </div>
       <div class="panel-right">
@@ -62,6 +64,25 @@
               necessary documents, and manage the entire trade process in one place.
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/order/list">Go to Orders</button>
+          </div>
+          <div class="tab-pane" id="quote-request" *ngxPermissionsOnly="['create-qr']">
+            <figure><img src="../../assets/img/dashboard-imgs/quote-request.png" class="vector-tutorial" /></figure>
+            <p class="panel-title">Easily send quote requests to your suppliers</p>
+            <p class="normal-text-bold">
+              Generate quote requests to your sellers, receive quotations, and choose the best offer to proceed with a
+              purchase order.
+            </p>
+            <button class="btn-primary-shadow pull-right" routerLink="/quote-request/list">Go to Quote Requests</button>
+          </div>
+          <div class="tab-pane" id="quote-request" *ngIf="currentUser.roles[0] === 'seller'">
+            <figure><img src="../../assets/img/dashboard-imgs/quote-request.png" class="vector-tutorial" /></figure>
+            <p class="panel-title">Receive Quotations directly from clients</p>
+            <p class="normal-text-bold">
+              The Quote Request section is where you can recieve quote requests from your clients, and reply with
+              customized Quotations. You can enter customized quantities and comments per quotation, and send it to your
+              buyers with the ability to download it as PDF.
+            </p>
+            <button class="btn-primary-shadow pull-right" routerLink="/quote-request/list">Go to Quote Requests</button>
           </div>
           <div class="tab-pane" id="create-ecosystem" *ngxPermissionsOnly="['create-ecosystem']">
             <figure *ngIf="currentUser.roles[0] === 'seller'">
@@ -136,15 +157,6 @@
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/order/list">Go to Orders</button>
           </div>
-          <!-- <div class="tab-pane" id="make-transaction" *ngxPermissionsOnly="['list-transactions']">
-            <figure><img src="../../assets/img/vector.png" class="vector-tutorial" /></figure>
-            <p class="panel-title">Create a transaction!</p>
-            <p class="normal-text-bold">
-              Create a digital and dependable transaction process from the first quote request until the transaction
-              is complete for the purchase and sale of agricultural produce.
-            </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/transaction/list">Create Transaction</button>
-          </div> -->
         </div>
       </div>
     </div>

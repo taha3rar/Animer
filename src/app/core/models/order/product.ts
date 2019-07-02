@@ -41,4 +41,5 @@ export class Product {
   availability: boolean;
   date_created: Date;
   date_modified: Date;
+  fromQuotation: boolean; // Used only on the front-end to pass ProductQuotation product to Product
 }

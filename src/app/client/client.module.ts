@@ -4,24 +4,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientRoutingModule } from './client-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClientListComponent } from './client-list/client-list.component';
-import { ClientListResolver } from './resolvers/client-list.resolver';
+import { CurrentUserClientsResolver } from '@app/shared/resolvers/current-user-clients.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClientGeneratorComponent } from './client-generator/client-generator.component';
 import { ClientComponent } from './client/client.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
-import { ClientTransactionsComponent } from './client-transactions/client-transactions.component';
 import { ClientOrdersComponent } from './client-orders/client-orders.component';
 import { ClientInvoicesComponent } from './client-invoices/client-invoices.component';
 import { ClientDocumentsComponent } from './client-documents/client-documents.component';
 import { SharedModule } from '@app/shared';
-import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
-import { UserResolver } from './resolvers/user.resolver';
+import { CurrentUserEcosystemsResolver } from '@app/shared/resolvers/current-user-ecosystems.resolver';
+import { ClientResolver } from './resolvers/client.resolver';
 import { OrderListResolver } from './resolvers/order-list.resolver';
 import { InvoiceListResolver } from './resolvers/invoice-list.resolver';
-import { TransactionListResolver } from './resolvers/transaction-list.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
-import { CurrentUserResolver } from './resolvers/current-user.resolver';
+import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
 
@@ -38,25 +36,22 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     TutorialsModule,
     NgxPermissionsModule.forRoot()
   ],
-  // tslint:disable-next-line:max-line-length
   declarations: [
     ClientListComponent,
     ClientGeneratorComponent,
     ClientComponent,
     ClientProfileComponent,
-    ClientTransactionsComponent,
     ClientOrdersComponent,
     ClientInvoicesComponent,
     ClientDocumentsComponent
   ],
   providers: [
-    ClientListResolver,
-    UserResolver,
+    CurrentUserClientsResolver,
+    ClientResolver,
     CurrentUserResolver,
-    EcosystemListResolver,
+    CurrentUserEcosystemsResolver,
     OrderListResolver,
     InvoiceListResolver,
-    TransactionListResolver,
     UserDocumentListResolver
   ]
 })

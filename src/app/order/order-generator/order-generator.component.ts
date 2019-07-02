@@ -1,15 +1,16 @@
 import { StepperService } from './../../core/forms/stepper.service';
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { OrderDataService } from './order-data.service';
 import swal from 'sweetalert';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { CanComponentDeactivate } from '../../shared/guards/confirmation.guard';
+import { Quotation } from '@app/core/models/quotation/quotation';
+
 @Component({
   selector: 'app-order-generator',
   templateUrl: './order-generator.component.html',
@@ -19,12 +20,14 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   term: any;
   orderForm: FormGroup;
   draftOrder: Order;
+  quotation: Quotation;
   isDraft: Boolean;
+  fromQuotation = false;
   draft: any;
-  draftProducts: ProductInvoice[] = [];
+  products: ProductInvoice[] = [];
   formSubmitted: boolean;
   constructor(
-    private location: Location,
+    private router: Router,
     private formBuilder: FormBuilder,
     private orderDataService: OrderDataService,
     private route: ActivatedRoute,
@@ -34,11 +37,26 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   ngOnInit() {
     this.stepperService.stepperInit();
     this.isDraft = false;
+
+    this.quotation = this.route.snapshot.data['quotation'];
+    if (this.quotation) {
+      const product: ProductInvoice = <ProductInvoice>(<unknown>this.quotation.product);
+      product.quantity = this.quotation.product.quantity_offered;
+      product.total_weight = this.quotation.product.total_weight_offered;
+      product.package_price = Number(
+        (this.quotation.product.product_subtotal / this.quotation.product.quantity_offered).toFixed(2)
+      );
+      product.currency = this.quotation.currency;
+      product.quotation_id = this.quotation._id;
+      this.products.push(product);
+      this.orderDataService.setProductList(this.products);
+      this.fromQuotation = true;
+    }
     this.draftOrder = this.route.snapshot.data['order'];
     if (this.draftOrder) {
       this.isDraft = true;
-      this.draftProducts = this.draftOrder.products;
-      this.orderDataService.setProductList(this.draftProducts);
+      this.products = this.draftOrder.products;
+      this.orderDataService.setProductList(this.products);
     } else {
       this.draftOrder = new Order();
     }
@@ -95,16 +113,24 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         phone: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.phone, Validators.required],
         expected_delivery_date: [Object.is(this.deliver_to, undefined) ? null : this.deliver_to.expected_delivery_date]
       }),
-      date_created: [Date.now(), Validators.required]
+      date_created: [undefined, Validators.required]
     });
-    if (!this.isDraft) {
+    if (!this.isDraft && !this.fromQuotation) {
       this.route.data.subscribe(({ buyer }) => {
         this.orderForm.controls.buyer.setValue(this.getSmallBuyer(buyer));
         this.orderDataService.setForm(this.orderForm);
       });
-    } else {
+    }
+    if (this.isDraft) {
       this.orderForm.controls.buyer.setValue(this.draftOrder.buyer);
       this.orderForm.controls.seller.setValue(this.draftOrder.seller);
+      this.orderDataService.setForm(this.orderForm);
+    }
+    if (this.fromQuotation) {
+      this.orderForm.controls.buyer.setValue(this.quotation.buyer);
+      this.orderForm.controls.seller.setValue(this.quotation.seller);
+      this.orderForm.controls.currency.setValue(this.quotation.currency);
+      this.orderForm.controls.subtotal.setValue(this.products[0].product_subtotal);
       this.orderDataService.setForm(this.orderForm);
     }
   }
@@ -141,7 +167,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/order/list');
   }
 
   changeValue(recievedValue: any) {

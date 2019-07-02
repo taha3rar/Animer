@@ -1,8 +1,7 @@
 import { StepperService } from '@app/core/stepper.service';
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Location } from '@angular/common';
 import { Invoice } from '@app/core/models/invoice/invoice';
-import { ActivatedRoute, CanDeactivate } from '@angular/router';
+import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
@@ -26,7 +25,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
   isDraft: boolean;
 
   constructor(
-    private location: Location,
+    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private stepperService: StepperService
@@ -112,7 +111,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
           Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.expected_delivery_date
         ]
       }),
-      date_created: [Date.now(), Validators.required]
+      date_created: [undefined, Validators.required]
     });
 
     if (!this.draftInvoice) {
@@ -177,7 +176,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/invoice/list');
   }
 
   newDraftInvoice(recievedValue: any) {

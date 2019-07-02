@@ -3,7 +3,7 @@
     <a class="material-icons">keyboard_backspace</a> Orders
   </h1>
   <!-- Main Generator -->
-  <div *ngIf="!isDraft" class="stepper-wrapper">
+  <div *ngIf="!isDraft && !fromQuotation" class="stepper-wrapper">
     <div class="stepper">
       <ul class="nav nav-tabs">
         <li class="active">
@@ -50,12 +50,15 @@
   </div>
 
   <!-- draftGenerator -->
-  <div *ngIf="isDraft" class="stepper-wrapper">
+  <div *ngIf="isDraft || fromQuotation" class="stepper-wrapper">
     <div class="stepper">
       <ul class="nav nav-tabs draft">
         <li class="active">
-          <a data-toggle="tab" class="label" href="#purchaseOrder">
+          <a *ngIf="isDraft" data-toggle="tab" class="label" href="#purchaseOrder">
             <span class="round-tab">1</span> Edit purchase order
+          </a>
+          <a *ngIf="fromQuotation" data-toggle="tab" class="label" href="#purchaseOrder">
+            <span class="round-tab">1</span> Create purchase order
           </a>
         </li>
         <li class="disabled">
@@ -64,14 +67,19 @@
       </ul>
 
       <div class="tab-content">
-        <div class="tab-pane active" id="purchaseOrder">
-          <app-order-generator-po></app-order-generator-po>
+        <div *ngIf="isDraft" class="tab-pane active" id="purchaseOrder">
+          <app-order-generator-po (newDraftPO)="draft = $event"></app-order-generator-po>
+        </div>
+        <div *ngIf="fromQuotation" class="tab-pane active" id="purchaseOrder">
+          <app-order-generator-po [fromQuotation]="true" (newDraftPO)="draft = $event"></app-order-generator-po>
         </div>
         <div class="tab-pane" id="review">
           <div class="panel panel-tab">
             <div class="panel-body">
               <div class="padding-all-2">
-                <app-order-generator-review-order></app-order-generator-review-order>
+                <app-order-generator-review-order
+                  (formSubmitted)="changeValue($event)"
+                ></app-order-generator-review-order>
               </div>
             </div>
           </div>

@@ -25,6 +25,8 @@ export class ProductInvoice {
   price_details: boolean;
   out_of_inventory: boolean;
   to_inventory: boolean;
+  quotation_id: string;
+  currency: string; // Used to pass quotation currency to product when generating a PO from a quotation
 
   toProduct(invoice: Invoice): Product {
     const product = new Product();

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
@@ -16,46 +17,45 @@ export const ROUTES: RouteInfo[] = [
     path: '/dashboard',
     title: 'Dashboard',
     type: 'link',
-    icontype: 'dashboard'
+    icontype: 'icon-dashboard'
   },
-  // {
-  //   path: '/transaction/list',
-  //   title: 'Transactions',
-  //   type: 'link',
-  //   icontype: 'compare_arrows',
-  //   neededPermission: 'list-transactions'
-  // },
   {
     path: '/order/list',
     title: 'Orders',
     type: 'link',
-    icontype: 'fa-exchange-alt'
+    icontype: 'icon-orders'
+  },
+  {
+    path: '/quote-request/list',
+    title: 'Quote Requests',
+    type: 'link',
+    icontype: 'icon-qr'
   },
   {
     path: '/invoice/list',
     title: 'Proforma Invoices',
     type: 'link',
-    icontype: 'fa-file-invoice-dollar'
+    icontype: 'icon-pi'
   },
   {
     path: '/product/list',
     title: 'Products',
     type: 'link',
-    icontype: 'fa-seedling',
+    icontype: 'icon-products',
     neededPermission: 'list-products'
   },
   {
     path: '/client/list',
     title: 'Clients',
     type: 'link',
-    icontype: 'fa-user-friends',
+    icontype: 'icon-clients',
     neededPermission: 'list-clients'
   },
   {
     path: '/ecosystem/list',
     title: 'Ecosystems',
     type: 'link',
-    icontype: 'group_work',
+    icontype: 'icon-ecosystems',
     neededPermission: 'list-ecosystems'
   }
 ];

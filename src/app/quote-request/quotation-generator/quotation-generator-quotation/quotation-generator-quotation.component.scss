@@ -1,0 +1,52 @@
+.info {
+  padding: 2rem 3rem;
+  background-color: white;
+  box-shadow: 0px 2px 0.8rem rgba(0, 0, 0, 0.045);
+  border-radius: 5px;
+  margin-top: 1rem;
+
+  .row div p:first-child {
+    font-size: 1.2rem;
+    color: #7b7b7b;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .row div p:nth-child(2) {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .row:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  div p:first-child {
+    font-size: 1.2rem;
+    color: #7b7b7b;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  div p:nth-child(2) {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .row:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.subtotal-price {
+  margin-top: 2rem;
+  width: 100%;
+  min-height: 16.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .heading-4-blue {
+    font-size: 2.3rem;
+  }
+}

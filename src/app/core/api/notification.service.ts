@@ -50,6 +50,9 @@ export class NotificationService extends BaseService {
           return `/order/${notification.object_id}`;
         case 'contract':
           return `client/${notification.emitter._id}`;
+        case 'quote-request':
+        case 'quotation':
+          return `quote-request/${notification.object_id}`;
         default:
           return undefined;
       }

@@ -1,0 +1,99 @@
+<h1 class="main-title btn-main" (click)="back()"><a class="material-icons">keyboard_backspace</a> Quote Requests</h1>
+
+<div class="col-md-12">
+  <div class="panel">
+    <div class="panel-body">
+      <div class="info info-top">
+        <div>
+          <p class="heading-2">Quote Request #{{ quoteRequest.numericId }}</p>
+          <div class="timing-section">
+            <span
+              ><i class="material-icons">calendar_today</i
+              ><span class="time-text">Issued on {{ quoteRequest.date_created | date: 'dd/MM/yyyy' }}</span></span
+            >
+            <span *ngIf="quoteRequest.valid_by"
+              ><i class="material-icons timer">timer</i>
+              <span class="time-text">Due on {{ quoteRequest.valid_by | date: 'dd/MM/yyyy' }}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="col-md-3">
+          <p class="heading-3">PRODUCT</p>
+          <p class="normal-text-bold">
+            <span *ngIf="!quoteRequest.product.product_type || quoteRequest.product.product_type == 'agricultural'">
+              {{ quoteRequest.product.produce }} / {{ quoteRequest.product.variety }}
+            </span>
+            <span *ngIf="quoteRequest.product.product_type == 'processed' && quoteRequest.product.item_package_type">
+              {{ quoteRequest.product.produce }} / {{ quoteRequest.product.item_measurement_amount | number: '1.2-2' }}
+              {{ quoteRequest.product.item_measurement_unit | uppercase }} /
+              {{ quoteRequest.product.item_package_type }}
+            </span>
+            <span *ngIf="quoteRequest.product.product_type == 'processed' && !quoteRequest.product.item_package_type">
+              {{ quoteRequest.product.produce }}
+            </span>
+          </p>
+        </div>
+        <div class="col-md-3">
+          <p class="heading-3">QUOTES RECEIVED</p>
+          <p class="normal-text-bold">{{ quoteRequest.quotations.count }}</p>
+        </div>
+        <div *ngIf="quoteRequest.product.product_type === 'agricultural'" class="col-md-3">
+          <p class="heading-3">TOTAL WEIGHT REQUESTED</p>
+          <p class="normal-text-bold">
+            {{ quoteRequest.product.total_weight_requested | number: '1.2-2' }} {{ quoteRequest.product.weight_unit }}
+          </p>
+        </div>
+        <div *ngIf="quoteRequest.product.product_type != 'agricultural'" class="col-md-3">
+          <p class="heading-3">TOTAL QUANTITY REQUESTED</p>
+          <p class="normal-text-bold">
+            {{ quoteRequest.product.quantity_requested }} {{ quoteRequest.product.type_of_package }}
+          </p>
+        </div>
+        <div *ngIf="quoteRequest.product.product_type === 'agricultural'" class="col-md-3">
+          <p class="heading-3">WEIGHT ACCEPTED</p>
+          <p class="normal-text-bold">
+            {{ quoteRequest.quotations.total_weight_accepted | number: '1.2-2' }} {{ quoteRequest.product.weight_unit }}
+          </p>
+        </div>
+        <div *ngIf="quoteRequest.product.product_type != 'agricultural'" class="col-md-3">
+          <p class="heading-3">QUANTITY ACCEPTED</p>
+          <p class="normal-text-bold">
+            {{ quoteRequest.quotations.quantity_accepted }} {{ quoteRequest.product.type_of_package }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a data-toggle="tab" href="#qr">Quote Request</a>
+    </li>
+    <li><a data-toggle="tab" href="#quotationsReceived">Quotations</a></li>
+    <li><a data-toggle="tab" href="#quotationsAccepted">Accepted Quotations</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="qr">
+      <app-quote-request [quoteRequest]="quoteRequest"></app-quote-request>
+    </div>
+    <div class="tab-pane" id="quotationsReceived">
+      <div class="panel panel-tab">
+        <div class="panel-body">
+          <app-quotations-list [quotations]="quotations" paginationId="p1"></app-quotations-list>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="quotationsAccepted">
+      <div class="panel panel-tab">
+        <div class="panel-body">
+          <app-quotations-list [quotations]="acceptedQuotations" paginationId="p2"></app-quotations-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

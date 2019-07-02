@@ -6,8 +6,7 @@ import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { FormGroup } from '@angular/forms';
 import { InvoiceService } from '@app/core/api/invoice.service';
-import { InvoiceInventoryComponent } from './invoice-inventory/invoice-inventory.component';
-import * as moment from 'moment';
+import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 
 @Component({
@@ -98,16 +97,25 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     dialogConfig.height = '900px';
     dialogConfig.width = '980px';
     dialogConfig.data = {
-      products: this.route.snapshot.data['products'],
-      currency: this.invoice.currency.value
+      inventoryProducts: this.route.snapshot.data['products'],
+      currency: this.invoice.currency.value,
+      chosenProducts: this.products
     };
 
-    const dialogRef = this.dialog.open(InvoiceInventoryComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ModalInventoryComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(newProducts => {
       if (newProducts) {
         newProducts.forEach((newProduct: any) => {
           if (!this.invoice.currency.value) {
             this.invoice['currency'].setValue(newProduct.currency);
+          }
+          for (let i = 0; i < this.products.length; i++) {
+            if (this.products[i]._id === newProduct._id) {
+              super.deleteProduct(i);
+              if (!this.form.value.currency) {
+                this.form.controls['currency'].setValue(newProduct.currency);
+              }
+            }
           }
           this.updateTotalDue(newProduct.product_subtotal);
         });
@@ -117,21 +125,20 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   }
 
   draftInvoice() {
-    this.invoice['sign_by'].patchValue({
-      date: moment(this.form['controls'].sign_by['controls'].date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.invoice['deliver_to'].patchValue({
-      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.form.patchValue({
-      date_created: moment(this.form['controls'].date_created.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
+    let _date = this.form.value.sign_by.date;
+    if (_date) {
+      this.invoice['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
+    }
+    _date = this.form.value.deliver_to.expected_delivery_date;
+    if (_date) {
+      this.invoice['deliver_to'].patchValue({
+        expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day)
+      });
+    }
+    _date = this.form.value.date_created;
+    _date
+      ? this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) })
+      : this.form.patchValue({ date_created: Date.now() });
     this.savedAsDraft.emit(true);
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
@@ -151,21 +158,16 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   }
 
   toReview() {
-    this.invoice['sign_by'].patchValue({
-      date: moment(this.form['controls'].sign_by['controls'].date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.invoice['deliver_to'].patchValue({
-      expected_delivery_date: moment(this.form['controls'].deliver_to['controls'].expected_delivery_date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.form.patchValue({
-      date_created: moment(this.form['controls'].date_created.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
+    let _date = this.form.value.sign_by.date;
+    this.invoice['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
+    _date = this.form.value.deliver_to.expected_delivery_date;
+    if (_date) {
+      this.invoice['deliver_to'].patchValue({
+        expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day)
+      });
+    }
+    _date = this.form.value.date_created;
+    this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);

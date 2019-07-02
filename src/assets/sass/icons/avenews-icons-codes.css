@@ -1,0 +1,21 @@
+.icon-pi:before {
+  content: '\e800';
+} /* '' */
+.icon-orders:before {
+  content: '\e801';
+} /* '' */
+.icon-clients:before {
+  content: '\e802';
+} /* '' */
+.icon-dashboard:before {
+  content: '\e803';
+} /* '' */
+.icon-ecosystems:before {
+  content: '\e804';
+} /* '' */
+.icon-qr:before {
+  content: '\e805';
+} /* '' */
+.icon-products:before {
+  content: '\e806';
+} /* '' */

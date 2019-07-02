@@ -46,6 +46,7 @@
 .icon-text {
   display: flex;
   align-items: center;
+  font-family: inherit;
 
   i {
     margin-right: 0.8rem;
@@ -140,4 +141,53 @@
   align-items: center;
   text-align: center;
   padding: 5rem;
+}
+
+.status {
+  max-width: 21rem;
+  border-radius: 12rem;
+  text-align: center;
+  font-weight: 600;
+  padding: 3px 0px;
+  font-size: 1.3rem;
+
+  &-blue {
+    background-color: #e9fafc;
+    color: #33c1ce;
+  }
+
+  &-yellow {
+    background-color: rgb(255, 248, 232);
+    color: rgb(255, 189, 8);
+  }
+
+  &-orange {
+    background-color: #fff2ec;
+    color: rgb(255, 126, 27);
+  }
+
+  &-purple {
+    background-color: rgb(242, 241, 255);
+    color: #836ffb;
+  }
+
+  &-green {
+    background-color: #e9fff2;
+    color: #2acf82;
+  }
+
+  &-dark-blue {
+    background-color: #eef8ff;
+    color: hsl(204, 86%, 53%);
+  }
+}
+
+.fl-c {
+  display: flex;
+  flex-direction: column;
+}
+
+.center-c {
+  display: flex;
+  align-items: center;
 }

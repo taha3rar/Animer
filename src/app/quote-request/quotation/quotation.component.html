@@ -1,0 +1,163 @@
+<a *ngIf="isModal" (click)="onExit()"><i class="material-icons pull-right" style="cursor: pointer;">close</i></a>
+<div class="panel panel-tab">
+  <div class="panel-body">
+    <div class="padding-all">
+      <div class="border-box">
+        <h2>
+          QUOTATION <span *ngIf="!isGenerator"> #{{ quotation?.numericId }}</span>
+        </h2>
+        <table>
+          <tr>
+            <td class="heading-4-blue">ISSUE DATE</td>
+            <td>{{ quotation?.date_created | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+          <tr>
+            <td class="heading-4-blue">VALID BY</td>
+            <td *ngIf="quotation?.valid_by">{{ quotation.valid_by | date: 'dd/MM/yyyy' }}</td>
+            <td *ngIf="!quotation?.valid_by">N/A</td>
+          </tr>
+        </table>
+      </div>
+      <div class="row" style="padding-top: 5rem;">
+        <div class="col-md-9">
+          <p class="heading-4-blue">ISSUED BY</p>
+          <p class="heading-4">{{ quotation?.seller?.first_name }} {{ quotation?.seller?.last_name }}</p>
+          <p class="heading-4">{{ quotation?.seller?.company_name }}</p>
+          <p class="heading-4">{{ quotation?.seller?.email }}</p>
+          <p class="heading-4">
+            {{ quotation?.seller?.address }}, {{ quotation?.seller?.city }}, {{ quotation?.seller?.zipcode }},
+            {{ quotation?.seller?.country }}
+          </p>
+          <p class="heading-4">{{ quotation?.seller?.phone_number }}</p>
+        </div>
+        <div class="col-md-3">
+          <p class="heading-4-blue">ISSUED FOR</p>
+          <p class="heading-4">{{ quotation?.buyer?.first_name }} {{ quotation?.buyer?.last_name }}</p>
+          <p class="heading-4">{{ quotation?.buyer?.company_name }}</p>
+          <p class="heading-4">{{ quotation?.buyer?.email }}</p>
+          <p class="heading-4">
+            {{ quotation?.buyer?.address }}, {{ quotation?.buyer?.city }}, {{ quotation?.buyer?.zipcode }},
+            {{ quotation?.buyer?.country }}
+          </p>
+          <p class="heading-4">{{ quotation?.buyer?.phone_number }}</p>
+        </div>
+      </div>
+      <div style="padding-top: 2rem;">
+        <p class="heading-2">PRODUCTS</p>
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th>PRODUCT</th>
+              <th>PACKAGES</th>
+              <th>SPECIFICATIONS</th>
+              <th>AMOUNT REQUESTED</th>
+              <th>AMOUNT OFFERED</th>
+              <th>RATE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="quotation?.product">
+              <td>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.produce }} / {{ quotation.product.variety }}
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && quotation.product.item_package_type">
+                  {{ quotation.product.produce }} / {{ quotation.product.item_measurement_amount | number: '1.2-2' }}
+                  {{ quotation.product.item_measurement_unit | uppercase }} / {{ quotation.product.item_package_type }}
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && !quotation.product.item_package_type">
+                  {{ quotation.product.produce }}
+                </span>
+              </td>
+              <td>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }} /
+                  {{ quotation.product.package_weight | number: '1.2-2' }}
+                  {{ quotation.product.weight_unit | uppercase }})
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && quotation.product.item_package_type">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }} /
+                  {{ quotation.product.items_per_package | number: '1.0'
+                  }}<span *ngIf="quotation.product.items_per_package > 1"> items)</span
+                  ><span *ngIf="quotation.product.items_per_package == 0"> item)</span>
+                </span>
+                <span *ngIf="quotation.product.product_type == 'processed' && !quotation.product.item_package_type">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }})
+                </span>
+              </td>
+              <td>
+                <span id="specification">{{ quotation.product.specification || 'N/A' }}</span>
+              </td>
+              <td>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'"
+                  >{{ quotation.product.total_weight_requested | number: '1.2-2' }}
+                  {{ quotation.product.weight_unit | uppercase }}</span
+                >
+                <span *ngIf="quotation.product.product_type != 'agricultural'"
+                  >{{ quotation.product.quantity_requested }} packages</span
+                >
+              </td>
+              <td>
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.total_weight_offered | number: '1.2-2' }} {{ quotation.product.weight_unit }}
+                </span>
+                <span *ngIf="quotation.product.product_type != 'agricultural'">
+                  {{ quotation.product.quantity_offered | number: '1.0' }} {{ quotation.product.type_of_package }}
+                </span>
+              </td>
+              <td>
+                <span>
+                  {{ quotation.product.price_per_unit || quotation.product.package_price || 0.0 | number: '1.2-2' }}
+                  {{ quotation?.currency }} / {{ quotation.product.weight_unit || quotation.product.type_of_package }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding-top: 2rem;">
+        <div class="row">
+          <div class="col-md-9">
+            <p class="heading-2">QUOTE REQUEST COMMENTS</p>
+            <p>
+              {{ quotation?.buyer_comments || 'N/A' }}
+            </p>
+            <p class="heading-2">QUOTATION COMMENTS</p>
+            <p>
+              {{ quotation?.seller_comments || 'N/A' }}
+            </p>
+          </div>
+          <div class="col-md-3">
+            <div class="border-box center-items pull-left">
+              <p class="heading-2">TOTAL PRICE</p>
+              <p class="heading-4-blue">{{ quotation?.total_price | number: '1.2-2' }} {{ quotation?.currency }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        (click)="acceptQuotation()"
+        *ngIf="!isAccepted() && !orderGenerated() && isModal"
+        class="bttn-primary pull-right mt-5"
+      >
+        Accept Quotation
+      </button>
+      <button (click)="generatePurchaseOrder()" *ngIf="isAccepted() && isModal" class="bttn-primary pull-right mt-5">
+        Generate Purchase Order
+      </button>
+      <button *ngIf="isView || isModal" class="btn-primary-transp pull-right mt-5" (click)="downloadPopup()">
+        Download PDF
+      </button>
+    </div>
+  </div>
+</div>
+<button
+  *ngIf="isGenerator && quotation.total_price"
+  class="bttn-primary pull-right next-step"
+  (click)="submitQuotation()"
+>
+  Submit
+</button>
+<button *ngIf="isGenerator && !quotation.total_price" class="bttn-primary pull-right next-step">
+  Submit
+</button>

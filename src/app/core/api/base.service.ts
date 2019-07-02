@@ -28,8 +28,4 @@ export abstract class BaseService {
   delete(id: string): Observable<any> {
     return this.apiService.delete(`${this.path}/${id}`).pipe(map(data => data));
   }
-
-  getByTransaction(transactionId: string): Observable<any> {
-    return this.apiService.get(`${this.path}/transaction/${transactionId}`).pipe(map(data => data));
-  }
 }

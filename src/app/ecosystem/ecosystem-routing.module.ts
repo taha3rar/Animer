@@ -4,23 +4,28 @@ import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
 import { EcosystemsListComponent } from './ecosystems-list/ecosystems-list.component';
 import { EcosystemComponent } from './ecosystem/ecosystem.component';
-import { EcosystemListResolver } from './resolvers/ecosystem-list.resolver';
-import { UserClientListResolver } from './resolvers/user-client-list.resolver';
-import { UserResolver } from './resolvers/user.resolver';
+import { CurrentUserEcosystemsResolver } from '@app/shared/resolvers/current-user-ecosystems.resolver';
+import { CurrentUserClientsResolver } from '@app/shared/resolvers/current-user-clients.resolver';
+import { CurrentUserResolver } from '../shared/resolvers/current-user.resolver';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
 import { EcosystemGuard } from '../shared/guards/ecosystem.guard';
+import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'ecosystem/list',
       component: EcosystemsListComponent,
-      data: { title: extract('Ecosystems') },
-      resolve: {
-        ecosystems: EcosystemListResolver,
-        user: UserResolver,
-        userClients: UserClientListResolver
+      data: {
+        title: extract('Ecosystems'),
+        permission: 'list-ecosystems'
       },
+      resolve: {
+        ecosystems: CurrentUserEcosystemsResolver,
+        user: CurrentUserResolver,
+        userClients: CurrentUserClientsResolver
+      },
+      canActivate: [PermissionGuard],
       runGuardsAndResolvers: 'always'
     },
     {
@@ -29,7 +34,7 @@ const routes: Routes = [
       canActivate: [EcosystemGuard],
       resolve: {
         ecosystem: EcosystemResolver,
-        userClients: UserClientListResolver
+        userClients: CurrentUserClientsResolver
       },
       runGuardsAndResolvers: 'always'
     }
@@ -39,6 +44,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [EcosystemGuard]
+  providers: [EcosystemGuard, PermissionGuard]
 })
 export class EcosystemRoutingModule {}

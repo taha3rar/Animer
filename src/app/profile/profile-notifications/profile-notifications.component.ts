@@ -33,10 +33,14 @@ export class ProfileNotificationsComponent implements OnInit {
       const documentsNotifications =
         !this.user.notifications ||
         (this.user.notifications.includes('document') && this.user.notifications.includes('contract'));
+      const qrNotifications =
+        !this.user.notifications ||
+        (this.user.notifications.includes('quote-request') && this.user.notifications.includes('quotation'));
 
       this.notificationsSettingsForm = this.formBuilder.group({
         poPi: [poPiNotifications.toString()],
-        documents: [documentsNotifications.toString()]
+        documents: [documentsNotifications.toString()],
+        qr: [qrNotifications.toString()]
       });
     });
   }
@@ -49,9 +53,14 @@ export class ProfileNotificationsComponent implements OnInit {
     return this.notificationsSettingsForm.value.documents;
   }
 
+  get qrNotification() {
+    return this.notificationsSettingsForm.value.qr;
+  }
+
   onSubmit() {
     const poPiNotification = this.notificationsSettingsForm.value.poPi;
     const documentNotification = this.notificationsSettingsForm.value.documents;
+    const qrNotification = this.notificationsSettingsForm.value.qr;
 
     const notifications = [];
 
@@ -63,6 +72,11 @@ export class ProfileNotificationsComponent implements OnInit {
     if (documentNotification === 'true') {
       notifications.push('document');
       notifications.push('contract');
+    }
+
+    if (qrNotification === 'true') {
+      notifications.push('quote-request');
+      notifications.push('quotation');
     }
 
     this.userService.updateNotifications(this.user._id, notifications).subscribe(

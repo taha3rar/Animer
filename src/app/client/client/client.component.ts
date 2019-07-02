@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@app/core/models/user/user';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { Invoice } from '@app/core/models/invoice/invoice';
@@ -25,7 +24,7 @@ export class ClientComponent implements OnInit {
   counter: Counter = new Counter();
   @ViewChildren('tabs')
   tabs: ElementRef;
-  constructor(private location: Location, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data.subscribe(({ user, orders, invoices, documents }) => {
@@ -47,6 +46,6 @@ export class ClientComponent implements OnInit {
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/client/list');
   }
 }

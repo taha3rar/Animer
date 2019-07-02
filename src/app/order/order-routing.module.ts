@@ -9,16 +9,17 @@ import { OrderListResolver } from './resolvers/order-list.resolver';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { OrderGeneratorComponent } from './order-generator/order-generator.component';
 import { OrderGeneratorSellerComponent } from './order-generator-seller/order-generator-seller.component';
-import { OrderBuyerResolver } from './resolvers/order-buyer.resolver';
-import { OrderSellersResolver } from './resolvers/order-sellers.resolver';
+import { CurrentUserResolver } from '../shared/resolvers/current-user.resolver';
+import { CurrentUserSuppliersResolver } from '@app/shared/resolvers/current-user-suppliers.resolver';
 import { OrderPoResolver } from './resolvers/order-po.resolver';
 import { OrderInvoiceResolver } from './resolvers/order-invoice.resolver';
 import { OrderDocumentsResolver } from './resolvers/order-documents.resolver';
 import { OrderListAsBuyerResolver } from './resolvers/order-list-as-buyer.resolver';
 import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.resolver';
-import { CurrentUserResolver } from '@app/profile/resolvers/currentUser.resolver';
 import { OrderGuard } from '../shared/guards/order.guard';
 import { InvoiceGuard } from '../shared/guards/invoice.guard';
+import { QuotationResolver } from './resolvers/quotation.resolver';
+import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -31,15 +32,23 @@ const routes: Routes = [
         ordersAsSeller: OrderListAsSellerResolver,
         currentUser: CurrentUserResolver
       },
-      data: { title: extract('Orders') },
+      canActivate: [PermissionGuard],
+      data: {
+        title: extract('Orders'),
+        permission: 'list-orders'
+      },
       runGuardsAndResolvers: 'always'
     },
     {
       path: 'order/generator',
       component: OrderGeneratorComponent,
       resolve: {
-        buyer: OrderBuyerResolver,
-        sellers: OrderSellersResolver
+        buyer: CurrentUserResolver,
+        sellers: CurrentUserSuppliersResolver
+      },
+      canActivate: [PermissionGuard],
+      data: {
+        permission: 'create-order'
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -52,10 +61,22 @@ const routes: Routes = [
       }
     },
     {
+      path: 'order/generator/quotation/:id',
+      component: OrderGeneratorComponent,
+      resolve: {
+        quotation: QuotationResolver
+      },
+      canDeactivate: [ConfirmationGuard]
+    },
+    {
       path: 'order/invoice/generator/:id',
       component: OrderGeneratorSellerComponent,
       resolve: {
         order: OrderPoResolver
+      },
+      canActivate: [PermissionGuard],
+      data: {
+        permission: 'create-invoice'
       },
       canDeactivate: [ConfirmationGuard]
     },
@@ -83,6 +104,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [OrderGuard, ConfirmationGuard, InvoiceGuard]
+  providers: [OrderGuard, ConfirmationGuard, InvoiceGuard, PermissionGuard]
 })
 export class OrderRoutingModule {}

@@ -21,6 +21,7 @@
     "prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,scss}\"",
     "postinstall": "npm run prettier -s",
     "precommit": "ng lint && pretty-quick --staged",
+    "prepush": "npm run build-staging",
     "generate": "ng generate"
   },
   "dependencies": {

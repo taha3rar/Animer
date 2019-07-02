@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 // tslint:disable-next-line:max-line-length
-import { OrderAgriculturalProductComponent } from '@app/order/order-generator/order-generator-po/order-agricultural-product/order-agricultural-product.component';
+import { ModalAgriculturalProductComponent } from '@app/shared/components/products/modal-agricultural-product/modal-agricultural-product.component';
 // tslint:disable-next-line:max-line-length
-import { OrderProcessedProductComponent } from '@app/order/order-generator/order-generator-po/order-processed-product/order-processed-product.component';
+import { ModalProcessedProductComponent } from '@app/shared/components/products/modal-processed-product/modal-processed-product.component';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { OrderDataService } from '@app/order/order-generator/order-data.service';
@@ -65,6 +65,7 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
     this.products.splice(index, 1);
     if (this.products.length < 1) {
       this.document['currency'].setValue(undefined);
+      this.products = [];
     }
   }
 
@@ -85,7 +86,7 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
       currency: this.document.currency.value
     };
 
-    this.openDialog('720px', OrderAgriculturalProductComponent, data);
+    this.openDialog('720px', ModalAgriculturalProductComponent, data);
   }
 
   openDialogProcessed(index?: number): void {
@@ -95,7 +96,7 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
       currency: this.document.currency.value
     };
 
-    this.openDialog('780px', OrderProcessedProductComponent, data);
+    this.openDialog('780px', ModalProcessedProductComponent, data);
   }
 
   openDialog(height: string, component: any, dialogData: any): void {

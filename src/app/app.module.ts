@@ -1,3 +1,4 @@
+import { QuoteRequestModule } from './quote-request/quote-request.module';
 import { ProfileModule } from './profile/profile.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,6 @@ import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ClientModule } from './client/client.module';
-import { TransactionModule } from './transaction/transaction.module';
 import { OrderModule } from './order/order.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ProductModule } from './product/product.module';
@@ -39,13 +39,13 @@ import { RouterModule } from '@angular/router';
     DashboardModule,
     LoginModule,
     ClientModule,
-    TransactionModule,
     OrderModule,
     InvoiceModule,
     ProductModule,
     DashboardModule,
     ProfileModule,
     EcosystemModule,
+    QuoteRequestModule,
     NotificationsModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     NgxPermissionsModule.forRoot(),

@@ -1,4 +1,4 @@
-import { CurrentUserResolver } from './../profile/resolvers/currentUser.resolver';
+import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
@@ -28,6 +28,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [CurrentUserResolver]
 })
 export class DashboardRoutingModule {}

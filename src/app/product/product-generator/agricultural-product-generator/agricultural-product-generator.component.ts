@@ -9,7 +9,6 @@ import { measureUnits } from '@app/shared/helpers/measure';
 import { Product } from '@app/core/models/order/product';
 import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
-import { ProductDataService } from '../product-data.service';
 import swal from 'sweetalert';
 
 @Component({
@@ -48,12 +47,12 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
       produce: [product ? product.produce : undefined, Validators.required],
       sku: [product ? product.sku : undefined],
       type_of_package: [product ? product.type_of_package : undefined, Validators.required],
-      quantity: [product ? product.quantity : undefined, Validators.required],
+      quantity: [product ? product.quantity : 0, Validators.required],
       package_price: [product ? product.package_price : undefined, Validators.required],
       total_price: [product ? product.total_price : 0, Validators.required],
       currency: [product ? product.currency : undefined, Validators.required],
       variety: [product ? product.variety : undefined, Validators.required],
-      package_weight: [product ? product.package_weight : 0, Validators.required],
+      package_weight: [product ? product.package_weight : undefined, Validators.required],
       weight_unit: [product ? product.weight_unit : undefined, Validators.required],
       total_weight: [product ? product.total_weight : undefined, Validators.required],
       price_per_unit: [product ? product.price_per_unit : undefined, Validators.required]
@@ -67,12 +66,12 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
   }
 
   onChanges(): void {
-    this.productForm.get('quantity').valueChanges.subscribe(val => {
-      this.setPackageWeight();
+    this.productForm.get('package_weight').valueChanges.subscribe(val => {
+      this.setPackageAmount();
       this.setPrice('unit');
     });
     this.productForm.get('total_weight').valueChanges.subscribe(val => {
-      this.setPackageWeight();
+      this.setPackageAmount();
       this.setPrice('unit');
     });
     this.productForm.get('package_price').valueChanges.subscribe(val => {
@@ -83,13 +82,13 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
     });
   }
 
-  setPackageWeight(): void {
-    if (this.product.quantity.value && this.product.total_weight.value) {
+  setPackageAmount(): void {
+    if (this.product.package_weight.value && this.product.total_weight.value) {
       this.productForm.patchValue({
-        package_weight: (this.product.total_weight.value / this.product.quantity.value).toFixed(2)
+        quantity: Math.ceil(this.product.total_weight.value / this.product.package_weight.value)
       });
     } else {
-      this.productForm.patchValue({ package_weight: 0 });
+      this.productForm.patchValue({ quantity: 0 });
     }
   }
 

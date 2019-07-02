@@ -176,3 +176,13 @@ table {
     text-align: right;
   }
 }
+
+.table-borderless {
+  tbody > tr > td,
+  thead > tr > th {
+    border: none;
+  }
+  tbody > tr > td:first-child {
+    width: 50%;
+  }
+}

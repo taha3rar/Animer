@@ -20,6 +20,10 @@ body {
   font-size: 1.4rem;
 }
 
+.ngx-pagination {
+  font-size: 1.2rem;
+}
+
 .tooltip {
   font-size: 1.3rem;
   font-weight: bold;
@@ -31,4 +35,16 @@ body {
 .tooltip-inner {
   padding: 0.5rem 0.8rem;
   border-radius: 0.5rem;
+}
+
+.mat-tooltip.tooltip-return {
+  white-space: pre-line;
+  left: -70%;
+  position: relative;
+  width: 10em;
+}
+
+.mat-tooltip.tooltip-table {
+  white-space: pre-line;
+  font-size: 13px;
 }
