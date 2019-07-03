@@ -79,21 +79,23 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
     }
   }
 
-  openDialogAgricultural(index?: number): void {
+  openDialogAgricultural(index?: number, transactionType?: string): void {
     const data = {
       productList: this.products,
       index: index,
-      currency: this.document.currency.value
+      currency: this.document.currency.value,
+      transactionType: transactionType
     };
 
     this.openDialog('720px', ModalAgriculturalProductComponent, data);
   }
 
-  openDialogProcessed(index?: number): void {
+  openDialogProcessed(index?: number, transactionType?: string): void {
     const data = {
       productList: this.products,
       index: index,
-      currency: this.document.currency.value
+      currency: this.document.currency.value,
+      transactionType: transactionType
     };
 
     this.openDialog('780px', ModalProcessedProductComponent, data);
