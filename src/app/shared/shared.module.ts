@@ -29,6 +29,7 @@ import { ModalAgriculturalProductComponent } from './components/products/modal-a
 import { ModalProcessedProductComponent } from './components/products/modal-processed-product/modal-processed-product.component';
 import { DocumentDownloadComponent } from './components/document-download/document-download.component';
 import { ModalInventoryComponent } from './components/products/modal-inventory/modal-inventory.component';
+import { MatSortModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { ModalInventoryComponent } from './components/products/modal-inventory/m
     RouterModule,
     ProgressbarModule.forRoot(),
     MatTooltipModule,
-    FormsModule
+    FormsModule,
+    MatSortModule
   ],
   declarations: [
     LoaderComponent,

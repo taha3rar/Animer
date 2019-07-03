@@ -1,4 +1,4 @@
-<table class="table main-table">
+<table class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>
       <th *ngIf="exportInit" class="text-center">
@@ -10,22 +10,20 @@
           [checked]="checkedAll"
         /><label class="checkbox_label" for="checkedAll"><span class="form_checkbox_btn"></span></label>
       </th>
-      <th translate class="text-center">ID</th>
-      <th translate>Issued on</th>
-      <th translate>
-        <span *ngIf="viewAsSeller">Issued for</span>
-        <span *ngIf="!viewAsSeller">Issued by</span>
-      </th>
-      <th translate>Signed by</th>
+      <th mat-sort-header="id" translate class="text-center">ID</th>
+      <th mat-sort-header="issuedOn" translate>Issued on</th>
+      <th mat-sort-header="issuedFor" *ngIf="viewAsSeller">Issued for</th>
+      <th mat-sort-header="issueBy" *ngIf="!viewAsSeller">Issued by</th>
+      <th mat-sort-header="signedBy" translate>Signed by</th>
       <th translate>Product</th>
-      <th translate>Amount</th>
-      <th translate>Total due</th>
-      <th translate>Status</th>
+      <th mat-sort-header="amount" translate>Amount</th>
+      <th mat-sort-header="totalDue" translate>Total due</th>
+      <th mat-sort-header="status" translate>Status</th>
       <th translate class="text-right">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let invoice of (invoices | paginate: { itemsPerPage: 7, currentPage: page }); let i = index">
+    <tr *ngFor="let invoice of (sortedInvoices | paginate: { itemsPerPage: 7, currentPage: page }); let i = index">
       <td *ngIf="exportInit" class="text-center">
         <input
           type="checkbox"
@@ -42,7 +40,10 @@
         <span *ngIf="!viewAsSeller">{{ invoice.seller.company_name }}</span>
       </td>
       <td>
-        <span>{{ invoice.sign_by.first_name }} {{ invoice.sign_by.last_name }}</span>
+        <span *ngIf="invoice.sign_by.first_name && invoice.sign_by.last_name"
+          >{{ invoice.sign_by.first_name }} {{ invoice.sign_by.last_name }}</span
+        >
+        <span *ngIf="!invoice.sign_by.first_name || !invoice.sign_by.last_name">N/A</span>
       </td>
       <td>
         <span *ngIf="invoice.products.length < 1">N/A</span>
@@ -79,7 +80,10 @@
         >
         <span *ngIf="invoice.products.length < 1">N/A</span>
       </td>
-      <td>{{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}</td>
+      <td>
+        <span *ngIf="invoice.total_due">{{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}</span>
+        <span *ngIf="!invoice.total_due">N/A</span>
+      </td>
       <td>{{ invoice.status }}</td>
       <td class="text-right">
         <button *ngIf="invoice.draft == false" class="round-button-primary" [routerLink]="['/invoice', invoice._id]">

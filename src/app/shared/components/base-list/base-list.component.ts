@@ -44,4 +44,16 @@ export class BaseListComponent implements OnInit {
       }
     });
   }
+
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    if (!a) {
+      return 1;
+    } else if (!b) {
+      return -1;
+    } else {
+      return typeof a === 'number' && typeof b === 'number'
+        ? (a < b ? -1 : 1) * (isAsc ? 1 : -1)
+        : (a.toString().toLowerCase() < b.toString().toLowerCase() ? -1 : 1) * (isAsc ? 1 : -1);
+    }
+  }
 }
