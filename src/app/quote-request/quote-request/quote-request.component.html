@@ -154,7 +154,7 @@
   </div>
 </div>
 <div>
-  <button *ngIf="isGenerator" class="bttn-primary pull-right" (click)="submitQuoteRequest()">
+  <button #submitButton *ngIf="isGenerator" class="bttn-primary pull-right" (click)="submitQuoteRequest()">
     Send Quote Request
   </button>
   <button *ngIf="seller" class="bttn-primary pull-right next-step">Generate quotation &rarr;</button>

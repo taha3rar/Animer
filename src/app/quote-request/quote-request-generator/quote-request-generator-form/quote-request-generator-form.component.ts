@@ -122,10 +122,16 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
   }
 
   draftQuoterequest() {
+    this.disableSubmitButton(true);
     this.validQuoteRequest.emit(true);
-    this.quoteRequestService.draft(this.quoteRequest).subscribe(quoteRequest => {
-      this.alerts.showAlert('Your quote request has been saved');
-      this.router.navigateByUrl('/quote-request/list');
-    });
+    this.quoteRequestService.draft(this.quoteRequest).subscribe(
+      quoteRequest => {
+        this.alerts.showAlert('Your quote request has been saved');
+        this.router.navigateByUrl('/quote-request/list');
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 }

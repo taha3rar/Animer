@@ -1,11 +1,14 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import swal from 'sweetalert';
 import { saveAs as importedSaveAs } from 'file-saver';
+import { BaseValidationComponent } from '../base-validation/base-validation.component';
 
-export class DocumentDownloadComponent {
+export class DocumentDownloadComponent extends BaseValidationComponent {
   transaction: any;
 
-  constructor(private service: any, private transactionRoute: any, private documentName: string) {}
+  constructor(private service: any, private transactionRoute: any, private documentName: string) {
+    super();
+  }
 
   setTransaction(transaction: any) {
     this.transaction = transaction;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { Ecosystem } from '@app/core/models/ecosystem';
@@ -9,13 +9,15 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { QuoteRequestService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
 import swal from 'sweetalert';
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-quote-request-generator-suppliers',
   templateUrl: './quote-request-generator-suppliers.component.html',
   styleUrls: ['./quote-request-generator-suppliers.component.scss']
 })
-export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
+export class QuoteRequestGeneratorSuppliersComponent extends BaseValidationComponent implements OnInit {
   @Output() validQuoteRequest = new EventEmitter<Boolean>();
   toggledTable = 'clients';
   buyer_sellers: Client[];
@@ -34,7 +36,9 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
     private quoteRequestService: QuoteRequestService,
     private alerts: AlertsService,
     private router: Router
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.buyer_ecosystems = this.route.snapshot.data['ecosystems'];
@@ -158,11 +162,17 @@ export class QuoteRequestGeneratorSuppliersComponent implements OnInit {
   }
 
   draftQuoterequest() {
+    this.disableSubmitButton(true);
     this.validQuoteRequest.emit(true);
-    this.quoteRequestService.draft(this.quoteRequest).subscribe(quoteRequest => {
-      this.alerts.showAlert('Your quote request has been saved');
-      this.router.navigateByUrl('/quote-request/list');
-    });
+    this.quoteRequestService.draft(this.quoteRequest).subscribe(
+      quoteRequest => {
+        this.alerts.showAlert('Your quote request has been saved');
+        this.router.navigateByUrl('/quote-request/list');
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 
   displayEcosystemSellers() {

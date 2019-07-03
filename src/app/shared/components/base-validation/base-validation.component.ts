@@ -1,7 +1,13 @@
 import { FormControl, FormGroup } from '@angular/forms';
+import { ViewChild, ElementRef } from '@angular/core';
 
 export class BaseValidationComponent {
   formInput: FormGroup;
+  @ViewChild('submitButton') submitButton: ElementRef;
+
+  disableSubmitButton(status: boolean) {
+    this.submitButton.nativeElement.disabled = status;
+  }
 
   isFieldInvalid(field: string) {
     return this.formInput.get(field).invalid && this.formInput.get(field).touched;
