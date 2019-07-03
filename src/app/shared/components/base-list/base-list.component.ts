@@ -46,6 +46,10 @@ export class BaseListComponent implements OnInit {
   }
 
   compare(a: number | string, b: number | string, isAsc: boolean) {
+    console.log(a);
+    console.log(typeof a);
+    console.log(b);
+    console.log(typeof b);
     if (!a) {
       return 1;
     } else if (!b) {

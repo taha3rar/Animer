@@ -19,14 +19,14 @@
   </button>
 </div>
 
-<table class="table main-table">
+<table class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>
-      <th translate class="text-center">ID</th>
-      <th translate>Product</th>
-      <th translate>SKU</th>
-      <th translate>Package Type</th>
-      <th translate>Total Available</th>
+      <th mat-sort-header="id" translate class="text-center">ID</th>
+      <th mat-sort-header="product" translate>Product</th>
+      <th mat-sort-header="sku" translate>SKU</th>
+      <th mat-sort-header="packageType" translate>Package Type</th>
+      <th mat-sort-header="availability" translate>Total Available</th>
       <th translate class="text-right">Actions</th>
     </tr>
   </thead>
