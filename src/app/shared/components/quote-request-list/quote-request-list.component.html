@@ -1,21 +1,21 @@
-<table class="table main-table">
+<table class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>
-      <th translate class="text-center">ID</th>
-      <th translate>Date</th>
-      <th *ngIf="!isBuyer" translate>Contact</th>
-      <th translate>Product</th>
-      <th translate>Amount</th>
-      <th *ngIf="isBuyer" translate>Participants</th>
-      <th *ngIf="isBuyer" translate>Quotations</th>
-      <th translate>Status</th>
+      <th mat-sort-header="id" translate class="text-center">ID</th>
+      <th mat-sort-header="date" translate>Date</th>
+      <th mat-sort-header="contact" *ngIf="!isBuyer" translate>Contact</th>
+      <th mat-sort-header="product" translate>Product</th>
+      <th mat-sort-header="amount" translate>Amount</th>
+      <th mat-sort-header="participants" *ngIf="isBuyer" translate>Participants</th>
+      <th mat-sort-header="quotations" *ngIf="isBuyer" translate>Quotations</th>
+      <th mat-sort-header="status" translate>Status</th>
       <th translate class="text-right">Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr
       *ngFor="
-        let quoteRequest of (quoteRequests | paginate: { itemsPerPage: itemsPerPage, currentPage: page });
+        let quoteRequest of (sortedQuoteRequests | paginate: { itemsPerPage: itemsPerPage, currentPage: page });
         let i = index
       "
     >

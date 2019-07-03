@@ -3,12 +3,12 @@ import { SellerQuoteRequest } from './seller-quoteRequest';
 
 export class QuoteRequest {
   _id: string;
-  numericId: Number;
+  numericId: number;
   buyer: {
     _id: String;
     numericId: string;
-    first_name: String;
-    last_name: String;
+    first_name: string;
+    last_name: string;
     email: String;
     phone_number: String;
     contact_by: [String];
@@ -28,12 +28,12 @@ export class QuoteRequest {
   product: ProductQuoteRequest;
   document_weight_unit: String;
   total_packages: Number;
-  total_weight: Number;
+  total_weight: number;
   quotations: {
     count: number;
     total_weight_accepted: number;
     quantity_accepted: number;
   };
-  status: String;
+  status: string;
   date_created: string;
 }
