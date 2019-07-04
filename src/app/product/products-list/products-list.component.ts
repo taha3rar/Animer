@@ -66,8 +66,6 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
     dialogConfig.height = height;
     dialogConfig.width = '800px';
     dialogConfig.data = dialogData;
-    dialogConfig.disableClose = true;
-
-    const dialogRef = this.dialog.open(component, dialogConfig);
+    this.dialog.open(component, dialogConfig);
   }
 }

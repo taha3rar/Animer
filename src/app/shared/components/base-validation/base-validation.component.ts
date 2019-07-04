@@ -4,9 +4,14 @@ import { ViewChild, ElementRef } from '@angular/core';
 export class BaseValidationComponent {
   formInput: FormGroup;
   @ViewChild('submitButton') submitButton: ElementRef;
+  @ViewChild('draftButton') draftButton: ElementRef;
 
   disableSubmitButton(status: boolean) {
     this.submitButton.nativeElement.disabled = status;
+  }
+
+  disableDraftButton(status: boolean) {
+    this.draftButton.nativeElement.disabled = status;
   }
 
   isFieldInvalid(field: string) {
