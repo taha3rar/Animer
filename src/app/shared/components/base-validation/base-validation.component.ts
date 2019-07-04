@@ -1,18 +1,19 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import { ViewChild, ElementRef } from '@angular/core';
+import { ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 export class BaseValidationComponent {
   formInput: FormGroup;
-  @ViewChild('submitButton') submitButton: ElementRef;
-  @ViewChild('draftButton') draftButton: ElementRef;
+  @ViewChildren('submitButton') submitButtons: QueryList<any>;
 
   disableSubmitButton(status: boolean) {
-    this.submitButton.nativeElement.disabled = status;
+    this.submitButtons.forEach(button => {
+      button.nativeElement.disabled = status;
+    });
   }
 
-  disableDraftButton(status: boolean) {
-    this.draftButton.nativeElement.disabled = status;
-  }
+  // disableDraftButton(status: boolean) {
+  //   this.draftButton.nativeElement.disabled = status;
+  // }
 
   isFieldInvalid(field: string) {
     return this.formInput.get(field).invalid && this.formInput.get(field).touched;

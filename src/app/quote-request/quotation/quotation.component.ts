@@ -49,11 +49,17 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
   }
 
   acceptQuotation() {
-    this.quotationService.acceptQuotation(this.quotation._id).subscribe(data => {
-      this.alerts.showAlert('The quotation has been successfully accepted');
-      this.onExit();
-      this.router.navigate([this.router.url]);
-    });
+    this.disableSubmitButton(true);
+    this.quotationService.acceptQuotation(this.quotation._id).subscribe(
+      data => {
+        this.alerts.showAlert('The quotation has been successfully accepted');
+        this.onExit();
+        this.router.navigate([this.router.url]);
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 
   generatePurchaseOrder() {
