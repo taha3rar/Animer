@@ -261,6 +261,6 @@
     <button class="bttn-primary pull-right" [hidden]="form.valid && products.length > 0">
       Next Step &rarr;
     </button>
-    <button class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
+    <button #submitButton class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
   </div>
 </form>

@@ -126,6 +126,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   }
 
   draftOrder() {
+    this.disableSubmitButton(true);
     let _date = this.form.value.sign_by.date;
     if (_date) {
       this.order['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
@@ -144,10 +145,15 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.draft = true;
-    this.orderService.draft(this.newOrder).subscribe(() => {
-      this.alerts.showAlert('Your purchase order has been saved as a draft!');
-      this.router.navigateByUrl('/order/list');
-    });
+    this.orderService.draft(this.newOrder).subscribe(
+      () => {
+        this.alerts.showAlert('Your purchase order has been saved as a draft!');
+        this.router.navigateByUrl('/order/list');
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 
   toReview() {
