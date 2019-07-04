@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject, Optional } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { QuotationService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
@@ -36,10 +36,16 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
   }
 
   submitQuotation() {
-    this.quotationService.create(this.quotation).subscribe(quotation => {
-      this.alerts.showAlert('Your quotation has been sent');
-      this.router.navigateByUrl('/quote-request/list');
-    });
+    this.disableSubmitButton(true);
+    this.quotationService.create(this.quotation).subscribe(
+      quotation => {
+        this.alerts.showAlert('Your quotation has been sent');
+        this.router.navigateByUrl('/quote-request/list');
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 
   acceptQuotation() {
