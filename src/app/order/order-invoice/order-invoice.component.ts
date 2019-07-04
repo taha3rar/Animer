@@ -5,28 +5,37 @@ import { Router } from '@angular/router';
 import { InvoiceService } from '@app/core/api/invoice.service';
 import { saveAs as importedSaveAs } from 'file-saver';
 import swal from 'sweetalert';
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 @Component({
   selector: 'app-order-invoice',
   templateUrl: './order-invoice.component.html',
   styleUrls: ['./order-invoice.component.scss']
 })
-export class OrderInvoiceComponent implements OnInit {
+export class OrderInvoiceComponent extends BaseValidationComponent implements OnInit {
   @Input()
   invoice: Invoice;
   @Input()
   generateInvoice: false;
   @Output() formSubmitted = new EventEmitter();
 
-  constructor(private invoiceService: InvoiceService, private router: Router, private alerts: AlertsService) {}
+  constructor(private invoiceService: InvoiceService, private router: Router, private alerts: AlertsService) {
+    super();
+  }
 
   ngOnInit() {}
 
   saveInvoice(): void {
+    this.disableSubmitButton(true);
     this.formSubmitted.emit(true);
-    this.invoiceService.create(this.invoice).subscribe(data => {
-      this.alerts.showAlert('Your proforma invoice has been sent!');
-      this.router.navigateByUrl('/order/list');
-    });
+    this.invoiceService.create(this.invoice).subscribe(
+      data => {
+        this.alerts.showAlert('Your proforma invoice has been sent!');
+        this.router.navigateByUrl('/order/list');
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 
   download(version: string): void {

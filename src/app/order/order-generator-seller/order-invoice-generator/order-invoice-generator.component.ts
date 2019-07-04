@@ -80,6 +80,7 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   }
 
   draftInvoice() {
+    this.disableSubmitButton(true);
     this.invoice['sign_by'].patchValue({
       date: moment(this.form['controls'].sign_by['controls'].date.value)
         .subtract(1, 'months')
@@ -95,10 +96,15 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
-    this.invoiceService.draft(this.newInvoice).subscribe(() => {
-      this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
-      this.router.navigateByUrl('/order/list');
-    });
+    this.invoiceService.draft(this.newInvoice).subscribe(
+      () => {
+        this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
+        this.router.navigateByUrl('/order/list');
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 
   toReview() {
