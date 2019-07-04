@@ -125,6 +125,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   }
 
   draftInvoice() {
+    this.disableSubmitButton(true);
     let _date = this.form.value.sign_by.date;
     if (_date) {
       this.invoice['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
@@ -145,15 +146,25 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
     if (!this.draft) {
-      this.invoiceService.draft(this.newInvoice).subscribe(() => {
-        this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
-        this.router.navigateByUrl('/invoice/list');
-      });
+      this.invoiceService.draft(this.newInvoice).subscribe(
+        () => {
+          this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
+          this.router.navigateByUrl('/invoice/list');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
     } else {
-      this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(() => {
-        this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
-        this.router.navigateByUrl('/invoice/list');
-      });
+      this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(
+        () => {
+          this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
+          this.router.navigateByUrl('/invoice/list');
+        },
+        err => {
+          this.disableSubmitButton(true);
+        }
+      );
     }
   }
 
