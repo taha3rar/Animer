@@ -1,12 +1,12 @@
-<table *ngIf="quotations?.length > 0" class="table main-table">
+<table *ngIf="quotations.length > 0" class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>
-      <th translate>Company</th>
-      <th translate>Contact</th>
-      <th translate>Status</th>
-      <th translate>Amount Offered</th>
-      <th translate>Rate</th>
-      <th translate>Price</th>
+      <th mat-sort-header="company" translate>Company</th>
+      <th mat-sort-header="contact" translate>Contact</th>
+      <th mat-sort-header="status" translate>Status</th>
+      <th mat-sort-header="offer" translate>Amount Offered</th>
+      <th mat-sort-header="rate" translate>Rate</th>
+      <th mat-sort-header="price" translate>Price</th>
       <th translate class="text-right">Action</th>
     </tr>
   </thead>

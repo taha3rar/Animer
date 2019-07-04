@@ -36,6 +36,7 @@ import { QuotationComponent } from './quotation/quotation.component';
 import { QuotationSellerResolver } from './resolvers/quotation-seller-quote-request.resolver';
 import { QuotationsQuoteRequestResolver } from './resolvers/quotations-quote-request.resolver';
 import { QuotationsAcceptedQuoteRequestResolver } from './resolvers/quotations-accepted-quote-request.resolver';
+import { MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { QuotationsAcceptedQuoteRequestResolver } from './resolvers/quotations-a
     RouterModule,
     NgxPermissionsModule.forRoot(),
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatSortModule
   ],
   providers: [
     CurrentUserSuppliersResolver,

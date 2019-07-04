@@ -17,7 +17,7 @@ export class BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
   usersWhiteList = ['bendemoseller@gmail.com', 'ishai@avenews-gt.com', 'javier@avenews-gt.com'];
 
-  constructor(private service: BaseService, protected router: Router, private options?: ListOptions) {}
+  constructor(private service?: BaseService, protected router?: Router, private options?: ListOptions) {}
 
   ngOnInit() {}
 

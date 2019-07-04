@@ -21,7 +21,7 @@ export class QuoteRequestViewComponent implements OnInit {
     this.route.data.subscribe(({ quoteRequest, quotations, acceptedQuotations }) => {
       this.quoteRequest = quoteRequest;
       this.acceptedQuotations = acceptedQuotations;
-      this.quotations = quotations;
+      this.quotations = quotations.slice();
     });
   }
 
