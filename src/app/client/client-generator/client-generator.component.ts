@@ -12,6 +12,7 @@ import { Client } from '@app/core/models/user/client';
 import { EcosystemService } from '@app/core';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
+import swal from 'sweetalert';
 
 declare const $: any;
 
@@ -170,6 +171,7 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
   }
 
   onGeneralSubmit() {
+    this.disableSubmitButton(true);
     this.invitedClient.personal_information.first_name = this.clientf.firstName.value;
     this.invitedClient.personal_information.last_name = this.clientf.lastName.value;
     this.invitedClient.email = this.clientf.email.value;
@@ -202,6 +204,7 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
         }
       },
       err => {
+        this.disableSubmitButton(false);
         $.notify(
           {
             icon: 'notifications',

@@ -468,6 +468,7 @@
               </div>
             </div>
             <button
+              #submitButton
               [disabled]="!companyDetailsForm.valid || !clientDetailsForm.valid"
               (click)="onGeneralSubmit()"
               class="btn-next pull-right"
