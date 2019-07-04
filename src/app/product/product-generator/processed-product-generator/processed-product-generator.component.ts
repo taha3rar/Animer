@@ -167,7 +167,7 @@ export class ProcessedProductGeneratorComponent extends BaseValidationComponent
         );
       }
     } else {
-      this.disableDraftButton(true);
+      this.disableSubmitButton(true);
       this.newProduct._id = this.data.product._id;
       this.productService.update(this.newProduct._id, this.newProduct).subscribe(
         () => {
@@ -176,7 +176,7 @@ export class ProcessedProductGeneratorComponent extends BaseValidationComponent
           this.router.navigateByUrl('/product/list');
         },
         err => {
-          this.disableDraftButton(false);
+          this.disableSubmitButton(false);
         }
       );
     }

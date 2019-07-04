@@ -190,7 +190,7 @@ export class AgriculturalProductGeneratorComponent extends BaseValidationCompone
         );
       }
     } else {
-      this.disableDraftButton(true);
+      this.disableSubmitButton(true);
       this.newProduct._id = this.data.product._id;
       this.productService.update(this.newProduct._id, this.newProduct).subscribe(
         () => {
@@ -199,7 +199,7 @@ export class AgriculturalProductGeneratorComponent extends BaseValidationCompone
           this.router.navigateByUrl('/product/list');
         },
         err => {
-          this.disableDraftButton(false);
+          this.disableSubmitButton(false);
         }
       );
     }

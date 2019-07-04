@@ -11,10 +11,6 @@ export class BaseValidationComponent {
     });
   }
 
-  // disableDraftButton(status: boolean) {
-  //   this.draftButton.nativeElement.disabled = status;
-  // }
-
   isFieldInvalid(field: string) {
     return this.formInput.get(field).invalid && this.formInput.get(field).touched;
   }
