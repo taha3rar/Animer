@@ -72,15 +72,21 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
   }
 
   submitEcosystem() {
+    this.disableSubmitButton(true);
     this.formSubmitted = true;
     this.newEcosystem.name = this.ecosystemf.name.value;
     this.newEcosystem.type = this.ecosystemf.ecosystemType.value;
     this.newEcosystem.description = this.ecosystemf.description.value;
-    this.ecosystemService.create(this.newEcosystem).subscribe(data => {
-      this.alerts.showAlert('New ecosystem has been created');
-      this.closeModal.nativeElement.click();
-      this.router.navigate([this.router.url]);
-    });
+    this.ecosystemService.create(this.newEcosystem).subscribe(
+      data => {
+        this.alerts.showAlert('New ecosystem has been created');
+        this.closeModal.nativeElement.click();
+        this.router.navigate([this.router.url]);
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 
   closeAndRefresh(): any {

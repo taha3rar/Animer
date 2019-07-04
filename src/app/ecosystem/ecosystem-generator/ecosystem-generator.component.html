@@ -133,7 +133,12 @@
               </table>
               <pagination-controls (pageChange)="page = $event"></pagination-controls>
             </div>
-            <button class="bttn-primary pull-right" [disabled]="!newEcosystemForm.valid" (click)="submitEcosystem()">
+            <button
+              #submitButton
+              class="bttn-primary pull-right"
+              [disabled]="!newEcosystemForm.valid"
+              (click)="submitEcosystem()"
+            >
               Create Ecosystem
             </button>
           </div>
