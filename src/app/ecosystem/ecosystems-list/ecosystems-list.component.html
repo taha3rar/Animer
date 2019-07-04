@@ -12,18 +12,22 @@
   </button>
 </div>
 
-<table class="table main-table">
+<table class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>
-      <th class="text-center">ID</th>
-      <th>Title</th>
-      <th>Type</th>
-      <th>Number of clients</th>
+      <th mat-sort-header="id" class="text-center">ID</th>
+      <th mat-sort-header="title">Title</th>
+      <th mat-sort-header="type">Type</th>
+      <th mat-sort-header="clientsNumber">Number of clients</th>
       <th class="text-right">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let ecosystem of (ecosystems | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
+    <tr
+      *ngFor="
+        let ecosystem of (ecosystems | paginate: { itemsPerPage: itemsPerPage, currentPage: page, id: 'ecosystems' })
+      "
+    >
       <td class="text-center">{{ ecosystem.numericId }}</td>
       <td>{{ ecosystem.name }}</td>
       <td style="text-transform: capitalize;">{{ ecosystem.type }}</td>
@@ -40,7 +44,7 @@
   </tbody>
 </table>
 
-<pagination-controls (pageChange)="page = $event"></pagination-controls>
+<pagination-controls id="ecosystems" (pageChange)="page = $event"></pagination-controls>
 
 <app-ecosystem-generator></app-ecosystem-generator>
 <app-ecosystem-tutorials></app-ecosystem-tutorials>

@@ -17,7 +17,7 @@ export class BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
   usersWhiteList = ['bendemoseller@gmail.com', 'ishai@avenews-gt.com', 'javier@avenews-gt.com'];
 
-  constructor(private service: BaseService, protected router: Router, private options: ListOptions) {}
+  constructor(private service: BaseService, protected router: Router, private options?: ListOptions) {}
 
   ngOnInit() {}
 
@@ -46,10 +46,6 @@ export class BaseListComponent implements OnInit {
   }
 
   compare(a: number | string, b: number | string, isAsc: boolean) {
-    console.log(a);
-    console.log(typeof a);
-    console.log(b);
-    console.log(typeof b);
     if (!a) {
       return 1;
     } else if (!b) {
