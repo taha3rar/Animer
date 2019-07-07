@@ -6,6 +6,14 @@
 </div>
 
 <h1 translate class="main-title">Proforma Invoices List</h1>
+<input
+  type="text"
+  id="searchBar"
+  class="form-rounded"
+  [(ngModel)]="searchTerm"
+  type="text"
+  placeholder="Search invoices..."
+/>
 <div class="clearfix margin-top">
   <button class="btn-primary-transp pull-right" (click)="exportAll()">
     <i class="material-icons">arrow_upward</i>
@@ -51,6 +59,7 @@
   </div>
 </div>
 <app-invoice-list
+  [searchTerm]="searchTerm"
   [viewAsSeller]="viewAsSeller"
   [exportInit]="exportInit"
   (invoicesList)="invoicesToExport = $event"

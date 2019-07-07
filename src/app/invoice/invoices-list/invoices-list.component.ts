@@ -25,6 +25,7 @@ export class InvoicesListComponent implements OnInit {
   exportInit = false;
   agribusinessUser: boolean;
   sellerUser: boolean;
+  searchTerm: string;
 
   constructor(
     private route: ActivatedRoute,

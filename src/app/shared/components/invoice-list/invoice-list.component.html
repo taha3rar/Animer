@@ -23,7 +23,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let invoice of (sortedInvoices | paginate: { itemsPerPage: 7, currentPage: page }); let i = index">
+    <tr
+      *ngFor="
+        let invoice of (sortedInvoices | filter: searchTerm | paginate: { itemsPerPage: 7, currentPage: page });
+        let i = index
+      "
+    >
       <td *ngIf="exportInit" class="text-center">
         <input
           type="checkbox"
