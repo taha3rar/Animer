@@ -14,6 +14,7 @@ import { EcosystemAddClientComponent } from './ecosystem-add-client/ecosystem-ad
 import { EcosystemGeneratorComponent } from './ecosystem-generator/ecosystem-generator.component';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
 import { MatSortModule } from '@angular/material';
+import { SharedModule } from '@app/shared';
 
 @NgModule({
   declarations: [EcosystemsListComponent, EcosystemComponent, EcosystemGeneratorComponent, EcosystemAddClientComponent],
@@ -25,7 +26,8 @@ import { MatSortModule } from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     TutorialsModule,
-    MatSortModule
+    MatSortModule,
+    SharedModule
   ],
   providers: [CurrentUserEcosystemsResolver, CurrentUserClientsResolver, CurrentUserResolver, EcosystemResolver]
 })

@@ -6,6 +6,14 @@
   <p>Here you can review existing ecosystems and create new ones!</p>
 </div>
 <h1 class="main-title">Ecosystems List</h1>
+<input
+  type="text"
+  id="searchBar"
+  class="form-rounded"
+  [(ngModel)]="searchTerm"
+  type="text"
+  placeholder="Search ecosystems..."
+/>
 <div class="clearfix margin-top">
   <button class="bttn-primary bttn-add pull-right" data-toggle="wizard" data-target="#newEcosystem">
     <span>New Ecosystem</span>
@@ -25,7 +33,9 @@
   <tbody>
     <tr
       *ngFor="
-        let ecosystem of (ecosystems | paginate: { itemsPerPage: itemsPerPage, currentPage: page, id: 'ecosystems' })
+        let ecosystem of (ecosystems
+          | filter: searchTerm
+          | paginate: { itemsPerPage: itemsPerPage, currentPage: page, id: 'ecoList' })
       "
     >
       <td class="text-center">{{ ecosystem.numericId }}</td>
@@ -44,7 +54,7 @@
   </tbody>
 </table>
 
-<pagination-controls id="ecosystems" (pageChange)="page = $event"></pagination-controls>
+<pagination-controls id="ecoList" (pageChange)="page = $event"></pagination-controls>
 
 <app-ecosystem-generator></app-ecosystem-generator>
 <app-ecosystem-tutorials></app-ecosystem-tutorials>
