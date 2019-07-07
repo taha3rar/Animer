@@ -7,6 +7,14 @@
 </div>
 
 <h1 translate class="main-title">Orders List</h1>
+<input
+  type="text"
+  id="searchBar"
+  class="form-rounded"
+  [(ngModel)]="searchTerm"
+  type="text"
+  placeholder="Search invoices..."
+/>
 
 <div class="clearfix margin-top">
   <button class="btn-primary-transp pull-right" (click)="exportAll()">
@@ -32,5 +40,5 @@
   </div>
 </div>
 
-<app-order-list [orders]="orders"></app-order-list>
+<app-order-list [searchTerm]="searchTerm" [orders]="orders"></app-order-list>
 <app-orders-tutorials></app-orders-tutorials>

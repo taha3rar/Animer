@@ -16,6 +16,7 @@ export class OrdersListComponent implements OnInit {
   allOrders: Order[];
   buyerOrders: Order[];
   sellerOrders: Order[];
+  searchTerm: string;
   page = 1;
   agribusinessUser: boolean;
   viewAsSeller = false;

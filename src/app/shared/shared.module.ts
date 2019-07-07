@@ -30,6 +30,7 @@ import { ModalProcessedProductComponent } from './components/products/modal-proc
 import { DocumentDownloadComponent } from './components/document-download/document-download.component';
 import { ModalInventoryComponent } from './components/products/modal-inventory/modal-inventory.component';
 import { MatSortModule } from '@angular/material';
+import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
 @NgModule({
   imports: [
@@ -61,7 +62,8 @@ import { MatSortModule } from '@angular/material';
     UnauthorizedPageComponent,
     ModalAgriculturalProductComponent,
     ModalProcessedProductComponent,
-    ModalInventoryComponent
+    ModalInventoryComponent,
+    FilterPipe
   ],
   entryComponents: [ModalAgriculturalProductComponent, ModalProcessedProductComponent, ModalInventoryComponent],
   exports: [
@@ -76,7 +78,8 @@ import { MatSortModule } from '@angular/material';
     UploadPictureComponent,
     DocumentGeneratorComponent,
     TutorialControlComponent,
-    ModalInventoryComponent
+    ModalInventoryComponent,
+    FilterPipe
   ],
   providers: [CsvService, DatePipe]
 })
