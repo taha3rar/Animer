@@ -53,7 +53,7 @@
           rows="4"
           id="po_comments"
           placeholder="Type comments here..."
-          formControlName="order_comments"
+          formControlName="invoice_comment"
         ></textarea>
       </div>
     </div>
@@ -157,7 +157,8 @@
                 name="ddpp"
                 ngbDatepicker
                 #dp1="ngbDatepicker"
-                formControlName="date"
+                [(ngModel)]="validBy"
+                [ngModelOptions]="{ standalone: true }"
               />
               <div class="input-group-append">
                 <button class="btn glyphicon glyphicon-calendar" (click)="dp1.toggle()" type="button"></button>
@@ -178,7 +179,8 @@
               name="ddpp2"
               ngbDatepicker
               #dp2="ngbDatepicker"
-              formControlName="date_created"
+              [(ngModel)]="issuedOn"
+              [ngModelOptions]="{ standalone: true }"
             />
             <div class="input-group-append">
               <button class="btn glyphicon glyphicon-calendar" (click)="dp2.toggle()" type="button"></button>

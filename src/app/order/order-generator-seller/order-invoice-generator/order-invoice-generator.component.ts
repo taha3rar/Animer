@@ -8,6 +8,7 @@ import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import * as moment from 'moment';
 import { FormGroup } from '@angular/forms';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order-invoice-generator',
@@ -24,6 +25,8 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   newInvoiceEvent = new EventEmitter<Invoice>();
   @Output()
   newDraftInvoice = new EventEmitter();
+  validBy: NgbDateStruct;
+  issuedOn: NgbDateStruct;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -37,6 +40,8 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   ngOnInit() {
     this.onChanges();
     this.formInput = this.form;
+    this.validBy = this.formInput.value.sign_by.date;
+    this.issuedOn = this.formInput.value.date_created;
   }
 
   onChanges(): void {
@@ -81,16 +86,14 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
 
   draftInvoice() {
     this.disableSubmitButton(true);
-    this.invoice['sign_by'].patchValue({
-      date: moment(this.form['controls'].sign_by['controls'].date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.form.patchValue({
-      date_created: moment(this.form['controls'].date_created.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
+    if (this.validBy) {
+      this.invoice['sign_by'].patchValue({
+        date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day)
+      });
+    }
+    this.issuedOn
+      ? this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) })
+      : this.form.patchValue({ date_created: Date.now() });
     this.newDraftInvoice.emit(true);
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
@@ -108,16 +111,14 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   }
 
   toReview() {
-    this.invoice['sign_by'].patchValue({
-      date: moment(this.form['controls'].sign_by['controls'].date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.form.patchValue({
-      date_created: moment(this.form['controls'].date_created.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
+    if (this.validBy) {
+      this.invoice['sign_by'].patchValue({
+        date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day)
+      });
+    }
+    this.issuedOn
+      ? this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) })
+      : this.form.patchValue({ date_created: Date.now() });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
