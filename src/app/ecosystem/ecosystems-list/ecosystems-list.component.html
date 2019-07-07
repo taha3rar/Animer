@@ -6,20 +6,21 @@
   <p>Here you can review existing ecosystems and create new ones!</p>
 </div>
 <h1 class="main-title">Ecosystems List</h1>
-<input
-  type="text"
-  id="searchBar"
-  class="form-rounded"
-  [(ngModel)]="searchTerm"
-  type="text"
-  placeholder="Search ecosystems..."
-/>
+
 <div class="clearfix margin-top">
   <button class="bttn-primary bttn-add pull-right" data-toggle="wizard" data-target="#newEcosystem">
     <span>New Ecosystem</span>
   </button>
 </div>
 
+<input
+  type="text"
+  id="searchBar"
+  class="search-bar"
+  [(ngModel)]="searchTerm"
+  type="text"
+  placeholder="Search ecosystems..."
+/>
 <table class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>

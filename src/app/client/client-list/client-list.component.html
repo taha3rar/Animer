@@ -9,14 +9,6 @@
   </p>
 </div>
 <h1 class="main-title">Clients List</h1>
-<input
-  type="text"
-  id="searchBar"
-  class="form-rounded"
-  [(ngModel)]="searchTerm"
-  type="text"
-  placeholder="Search clients..."
-/>
 
 <div class="clearfix margin-top">
   <button
@@ -28,6 +20,15 @@
     <span>Add Client</span>
   </button>
 </div>
+
+<input
+  type="text"
+  id="searchBar"
+  class="search-bar"
+  [(ngModel)]="searchTerm"
+  type="text"
+  placeholder="Search clients..."
+/>
 
 <table class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
