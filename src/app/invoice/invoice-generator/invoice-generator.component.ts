@@ -144,7 +144,6 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
       this.invoiceForm.controls.seller.setValue(this.draftInvoice.seller);
     }
     this.stepperService.stepperInit();
-    console.log(this.invoiceForm.value);
   }
 
   @HostListener('window:beforeunload')

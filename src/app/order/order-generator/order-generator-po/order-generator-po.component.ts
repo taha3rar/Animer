@@ -10,6 +10,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ProductService, QuotationService } from '@app/core';
 import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import { Quotation } from '@app/core/models/quotation/quotation';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order-generator-po',
@@ -26,6 +27,9 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   @Input() fromQuotation = false;
   inventoryProducts: ProductInvoice[];
   quotedProducts: ProductInvoice[] = [];
+  validBy: NgbDateStruct;
+  issuedOn: NgbDateStruct;
+  deliveryOn: NgbDateStruct;
 
   constructor(
     public orderDataService: OrderDataService,
@@ -50,6 +54,9 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
       }
     });
     this.formInput = this.form;
+    this.validBy = this.formInput.value.sign_by.date;
+    this.issuedOn = this.formInput.value.date_created;
+    this.deliveryOn = this.formInput.value.deliver_to.expected_delivery_date;
     if (this.fromQuotation) {
       this.productService.getByUser(this.seller._id).subscribe(products => {
         this.inventoryProducts = <ProductInvoice[]>(<unknown>products);
@@ -127,17 +134,16 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
 
   draftOrder() {
     this.disableSubmitButton(true);
-    let _date = this.form.value.sign_by.date;
-    if (_date) {
-      this.order['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
+    if (this.validBy) {
+      this.order['sign_by'].patchValue({ date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day) });
     }
-    _date = this.form.value.deliver_to.expected_delivery_date;
-    if (_date) {
-      this.order['deliver_to'].patchValue({ expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day) });
+    if (this.deliveryOn) {
+      this.order['deliver_to'].patchValue({
+        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day)
+      });
     }
-    _date = this.form.value.date_created;
-    _date
-      ? this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) })
+    this.issuedOn
+      ? this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) })
       : this.form.patchValue({ date_created: Date.now() });
     this.newDraftPO.emit(true);
     this.newOrder = this.form.value;
@@ -157,14 +163,15 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   }
 
   toReview() {
-    let _date = this.form.value.sign_by.date;
-    this.order['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
-    _date = this.form.value.deliver_to.expected_delivery_date;
-    if (_date) {
-      this.order['deliver_to'].patchValue({ expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day) });
+    this.order['sign_by'].patchValue({
+      date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day)
+    });
+    if (this.deliveryOn) {
+      this.order['deliver_to'].patchValue({
+        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day)
+      });
     }
-    _date = this.form.value.date_created;
-    this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) });
+    this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) });
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);

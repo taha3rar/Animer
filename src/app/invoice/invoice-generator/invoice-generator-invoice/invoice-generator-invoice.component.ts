@@ -175,16 +175,13 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   }
 
   toReview() {
-    let _date = this.form.value.sign_by.date;
-    this.invoice['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
-    _date = this.form.value.deliver_to.expected_delivery_date;
-    if (_date) {
+    this.invoice['sign_by'].patchValue({ date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day) });
+    if (this.deliveryOn) {
       this.invoice['deliver_to'].patchValue({
-        expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day)
+        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day)
       });
     }
-    _date = this.form.value.date_created;
-    this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) });
+    this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);

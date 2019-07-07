@@ -129,7 +129,8 @@
                 name="ddpp"
                 ngbDatepicker
                 #dp1="ngbDatepicker"
-                formControlName="date"
+                [(ngModel)]="validBy"
+                [ngModelOptions]="{ standalone: true }"
               />
               <div class="input-group-append">
                 <button class="btn glyphicon glyphicon-calendar" (click)="dp1.toggle()" type="button"></button>
@@ -150,7 +151,8 @@
               name="ddpp2"
               ngbDatepicker
               #dp2="ngbDatepicker"
-              formControlName="date_created"
+              [(ngModel)]="issuedOn"
+              [ngModelOptions]="{ standalone: true }"
             />
             <div class="input-group-append">
               <button class="btn glyphicon glyphicon-calendar" (click)="dp2.toggle()" type="button"></button>
@@ -234,7 +236,8 @@
                 name="ddp"
                 ngbDatepicker
                 #dp3="ngbDatepicker"
-                formControlName="expected_delivery_date"
+                [(ngModel)]="deliveryOn"
+                [ngModelOptions]="{ standalone: true }"
               />
               <div class="input-group-append">
                 <button
