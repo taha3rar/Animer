@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 import { InvoiceService } from '@app/core/api/invoice.service';
 import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-invoice-generator-invoice',
@@ -27,6 +28,9 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   invoiceProducts: ProductInvoice[];
   productsValid = true;
   @Output() savedAsDraft = new EventEmitter();
+  validBy: NgbDateStruct;
+  issuedOn: NgbDateStruct;
+  deliveryOn: NgbDateStruct;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -44,6 +48,9 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     }
     this.onChanges();
     this.formInput = this.form;
+    this.validBy = this.formInput.value.sign_by.date;
+    this.issuedOn = this.formInput.value.date_created;
+    this.deliveryOn = this.formInput.value.deliver_to.expected_delivery_date;
   }
 
   onChanges(): void {
@@ -126,19 +133,18 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
 
   draftInvoice() {
     this.disableSubmitButton(true);
-    let _date = this.form.value.sign_by.date;
-    if (_date) {
-      this.invoice['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
-    }
-    _date = this.form.value.deliver_to.expected_delivery_date;
-    if (_date) {
-      this.invoice['deliver_to'].patchValue({
-        expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day)
+    if (this.validBy) {
+      this.invoice['sign_by'].patchValue({
+        date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day)
       });
     }
-    _date = this.form.value.date_created;
-    _date
-      ? this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) })
+    if (this.deliveryOn) {
+      this.invoice['deliver_to'].patchValue({
+        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day)
+      });
+    }
+    this.issuedOn
+      ? this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) })
       : this.form.patchValue({ date_created: Date.now() });
     this.savedAsDraft.emit(true);
     this.newInvoice = this.form.value;
