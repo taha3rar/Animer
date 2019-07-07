@@ -6,11 +6,13 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { QuotationComponent } from '../../quotation/quotation.component';
 import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
 import { Sort } from '@angular/material/sort';
+import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-quotations-list',
   templateUrl: './quotations-list.component.html',
-  styleUrls: ['./quotations-list.component.scss']
+  styleUrls: ['./quotations-list.component.scss'],
+  providers: [FilterPipe]
 })
 export class QuotationsListComponent extends BaseListComponent {
   @Input() quotations: Quotation[];
@@ -18,6 +20,7 @@ export class QuotationsListComponent extends BaseListComponent {
   page = 1;
   quoteRequest: QuoteRequest;
   viewProduct: ProductQuotation;
+  searchTerm: string;
 
   constructor(public dialog: MatDialog) {
     super();

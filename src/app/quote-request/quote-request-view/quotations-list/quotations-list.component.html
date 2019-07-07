@@ -1,3 +1,12 @@
+<input
+  type="text"
+  id="searchBar"
+  class="form-rounded col-md-2"
+  [(ngModel)]="searchTerm"
+  type="text"
+  placeholder="Search quotations..."
+/>
+
 <table *ngIf="quotations.length > 0" class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>
@@ -13,7 +22,7 @@
   <tbody>
     <tr
       *ngFor="
-        let quotation of (quotations | paginate: { itemsPerPage: 7, currentPage: page, id: paginationId });
+        let quotation of (quotations | filter: searchTerm | paginate: { itemsPerPage: 7, currentPage: page });
         let i = index
       "
     >
