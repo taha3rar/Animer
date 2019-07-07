@@ -5,16 +5,19 @@ import { defaultValues } from '@app/shared/helpers/default_values';
 import { AuthenticationService, UserService } from '@app/core';
 import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
 import { Sort } from '@angular/material/sort';
+import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
-  styleUrls: ['./client-list.component.scss']
+  styleUrls: ['./client-list.component.scss'],
+  providers: [FilterPipe]
 })
 export class ClientListComponent extends BaseListComponent implements OnInit {
   clients: Client[];
   page = 1;
   itemsPerPage = defaultValues.items_per_page;
+  searchTerm: string;
 
   constructor(
     private route: ActivatedRoute,
