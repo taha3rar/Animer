@@ -15,7 +15,6 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
   @Input()
   orders: Order[];
   page = 1;
-  // sortedOrders: Order[];
   usersWhiteList = ['bendemoseller@gmail.com', 'ishai@avenews-gt.com', 'javier@avenews-gt.com'];
   processedProductConflictMessage: String =
     // tslint:disable-next-line:max-line-length

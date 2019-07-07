@@ -22,9 +22,7 @@ export class ClientListComponent extends BaseListComponent implements OnInit {
     protected userService: UserService,
     protected router: Router
   ) {
-    super(userService, router, {
-      deleteText: 'Once deleted, this client will not be available anymore'
-    });
+    super();
   }
 
   ngOnInit() {
