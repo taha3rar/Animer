@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { AuthenticationService } from '@app/core';
 import swal from 'sweetalert';
+import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
 export class ListOptions {
   deleteText: string;
@@ -11,7 +12,8 @@ export class ListOptions {
 
 @Component({
   selector: 'app-base-list',
-  template: ''
+  template: '',
+  providers: [FilterPipe]
 })
 export class BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;

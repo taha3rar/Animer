@@ -5,13 +5,11 @@ import { BaseListComponent } from '../base-list/base-list.component';
 import { Router } from '@angular/router';
 import 'hammerjs';
 import { Sort } from '@angular/material/sort';
-import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.scss'],
-  providers: [FilterPipe]
+  styleUrls: ['./order-list.component.scss']
 })
 export class OrderListComponent extends BaseListComponent implements OnInit {
   @Input() orders: Order[];
