@@ -9,6 +9,14 @@
   </p>
 </div>
 <h1 translate class="main-title">Products List</h1>
+<input
+  type="text"
+  id="searchBar"
+  class="form-rounded"
+  [(ngModel)]="searchTerm"
+  type="text"
+  placeholder="Search products..."
+/>
 
 <div class="clearfix margin-top">
   <button class="bttn-primary bttn-add pull-right" (click)="openDialogProcessed(undefined)">
@@ -31,7 +39,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of (products | paginate: { itemsPerPage: itemsPerPage, currentPage: page }); let i = index">
+    <tr
+      *ngFor="
+        let product of (products | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: page });
+        let i = index
+      "
+    >
       <td class="text-center">{{ product.numericId }}</td>
       <td *ngIf="product.product_type != 'processed'">{{ product.produce }} / {{ product.variety }}</td>
       <td *ngIf="product.product_type == 'processed'">{{ product.produce }}</td>

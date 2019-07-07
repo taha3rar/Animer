@@ -8,16 +8,19 @@ import { ProductService } from '@app/core';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ProcessedProductGeneratorComponent } from '../product-generator/processed-product-generator/processed-product-generator.component';
 import { Sort } from '@angular/material/sort';
+import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.scss']
+  styleUrls: ['./products-list.component.scss'],
+  providers: [FilterPipe]
 })
 export class ProductsListComponent extends BaseListComponent implements OnInit {
   products: Product[];
   selectedProduct: Product;
   page = 1;
+  searchTerm: string;
 
   constructor(
     private route: ActivatedRoute,
