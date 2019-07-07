@@ -11,6 +11,7 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 export class QuoteRequestsListComponent implements OnInit {
   isBuyer: Boolean;
   quoteRequests: QuoteRequest;
+  searchTerm: string;
 
   constructor(private authService: AuthenticationService, private route: ActivatedRoute) {}
 

@@ -14,6 +14,7 @@ import { Sort } from '@angular/material/sort';
 export class QuoteRequestListComponent extends BaseListComponent implements OnInit {
   @Input() quoteRequests: QuoteRequest[];
   sortedQuoteRequests: QuoteRequest[];
+  @Input() searchTerm: string;
   isBuyer: Boolean;
   page = 1;
   userId: String;
