@@ -59,13 +59,45 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
         case 'contact':
           return super.compare(a.buyer.first_name + a.buyer.last_name, b.buyer.first_name + b.buyer.last_name, isAsc);
         case 'product':
-          return super.compare(a.product.produce, b.product.produce, isAsc);
+          if (a.product && b.product) {
+            return super.compare(a.product.produce, b.product.produce, isAsc);
+          } else if (a.product && !b.product) {
+            return super.compare(a.product.produce, undefined, isAsc);
+          } else if (!a.product && b.product) {
+            return super.compare(undefined, b.product.produce, isAsc);
+          } else {
+            return -1;
+          }
         case 'amount':
-          return super.compare(
-            a.product.product_type !== 'agricultural' ? a.product.quantity_requested : a.product.total_weight_requested,
-            b.product.product_type !== 'agricultural' ? b.product.quantity_requested : b.product.total_weight_requested,
-            isAsc
-          );
+          if (a.product && b.product) {
+            return super.compare(
+              a.product.product_type !== 'agricultural'
+                ? a.product.quantity_requested
+                : a.product.total_weight_requested,
+              b.product.product_type !== 'agricultural'
+                ? b.product.quantity_requested
+                : b.product.total_weight_requested,
+              isAsc
+            );
+          } else if (a.product && !b.product) {
+            return super.compare(
+              a.product.product_type !== 'agricultural'
+                ? a.product.quantity_requested
+                : a.product.total_weight_requested,
+              undefined,
+              isAsc
+            );
+          } else if (!a.product && b.product) {
+            return super.compare(
+              undefined,
+              b.product.product_type !== 'agricultural'
+                ? b.product.quantity_requested
+                : b.product.total_weight_requested,
+              isAsc
+            );
+          } else {
+            return -1;
+          }
         case 'participants':
           return super.compare(a.sellers.length, b.sellers.length, isAsc);
         case 'quotations':
