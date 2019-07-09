@@ -22,6 +22,10 @@
     font-size: 1.35rem !important;
   }
 
+  th:first-child {
+    display: flex;
+    justify-content: center;
+  }
   tr td:last-child,
   tr th:last-child {
     border-top-right-radius: 1rem;
@@ -185,4 +189,17 @@ table {
   tbody > tr > td:first-child {
     width: 50%;
   }
+}
+.mat-sort-header-stem {
+  background: none;
+  display: none !important;
+}
+
+.mat-sort-header-pointer-middle {
+  background: none;
+  display: none !important;
+}
+
+.mat-sort-header-indicator {
+  min-height: 7px !important;
 }
