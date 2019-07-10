@@ -16,7 +16,6 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   sortedQuoteRequests: QuoteRequest[];
   @Input() searchTerm: string;
   isBuyer: Boolean;
-  page = 1;
   userId: String;
   qrReceived = 'QUOTE REQUEST RECEIVED';
   qrSent = 'QUOTE REQUEST SENT';
@@ -32,7 +31,8 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
     protected router: Router
   ) {
     super(quoteRequestService, router, {
-      deleteText: 'Once deleted, you will not be able to recover this Quote Request!'
+      deleteText: 'Once deleted, you will not be able to recover this Quote Request!',
+      pageName: 'quotes-requests'
     });
   }
 

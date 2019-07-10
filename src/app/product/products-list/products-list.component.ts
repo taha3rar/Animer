@@ -19,7 +19,6 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 export class ProductsListComponent extends BaseListComponent implements OnInit {
   products: Product[];
   selectedProduct: Product;
-  page = 1;
   searchTerm: string;
 
   constructor(
@@ -29,7 +28,8 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
     protected router: Router
   ) {
     super(productService, router, {
-      deleteText: 'Once deleted, you will not be able to recover this product!'
+      deleteText: 'Once deleted, you will not be able to recover this product!',
+      pageName: 'products'
     });
     this.selectedProduct = new Product();
   }
@@ -45,7 +45,7 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
       productList: this.products,
       index: index
     };
-    index = (this.page - 1) * this.itemsPerPage + index;
+    index = (this.currentPage - 1) * this.itemsPerPage + index;
     this.selectedProduct = this.products[index];
   }
 

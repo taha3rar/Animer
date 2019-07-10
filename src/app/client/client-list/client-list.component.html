@@ -43,7 +43,9 @@
   <tbody>
     <tr
       *ngFor="
-        let client of (clients | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: page })
+        let client of (clients
+          | filter: searchTerm
+          | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage })
       "
     >
       <td class="text-center">{{ client.numericId }}</td>
@@ -59,7 +61,7 @@
   </tbody>
 </table>
 
-<pagination-controls (pageChange)="page = $event"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
 
 <app-client-generator></app-client-generator>
 <app-client-tutorials></app-client-tutorials>

@@ -40,7 +40,8 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     private csv: CsvService
   ) {
     super(invoiceService, router, {
-      deleteText: 'Once deleted, you will not be able to recover this invoice!'
+      deleteText: 'Once deleted, you will not be able to recover this invoice!',
+      pageName: 'invoices'
     });
   }
 

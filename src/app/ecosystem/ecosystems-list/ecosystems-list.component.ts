@@ -12,12 +12,12 @@ import { Sort } from '@angular/material/sort';
 })
 export class EcosystemsListComponent extends BaseListComponent implements OnInit {
   ecosystems: Ecosystem[];
-  page = 1;
   searchTerm: string;
 
   constructor(private route: ActivatedRoute, private ecosystemService: EcosystemService, protected router: Router) {
     super(ecosystemService, router, {
-      deleteText: 'Once deleted, you will not be able to recover this ecosystem!'
+      deleteText: 'Once deleted, you will not be able to recover this ecosystem!',
+      pageName: 'ecosystems'
     });
   }
 

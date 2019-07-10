@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { BaseService } from '@app/core/api/base.service';
 import { Router } from '@angular/router';
 import { defaultValues } from '@app/shared/helpers/default_values';
@@ -7,7 +7,8 @@ import swal from 'sweetalert';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
 export class ListOptions {
-  deleteText: string;
+  deleteText?: string;
+  pageName?: string;
 }
 
 @Component({
@@ -17,9 +18,14 @@ export class ListOptions {
 })
 export class BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
+  currentPage = 1;
+  pageName: string;
   usersWhiteList = ['bendemoseller@gmail.com', 'ishai@avenews-gt.com', 'javier@avenews-gt.com'];
 
-  constructor(private service?: BaseService, protected router?: Router, private options?: ListOptions) {}
+  constructor(private service?: BaseService, protected router?: Router, private options?: ListOptions) {
+    this.pageName = options ? options.pageName : '';
+    this.currentPage = this.getCurrentPage(this.pageName);
+  }
 
   ngOnInit() {}
 
@@ -57,5 +63,20 @@ export class BaseListComponent implements OnInit {
         ? (a < b ? -1 : 1) * (isAsc ? 1 : -1)
         : (a.toString().toLowerCase() < b.toString().toLowerCase() ? -1 : 1) * (isAsc ? 1 : -1);
     }
+  }
+
+  getCurrentPage(pageName: string): number {
+    const actualPage = localStorage.getItem(`${this.pageName}-current-page`);
+
+    if (actualPage) {
+      return parseInt(actualPage, 10);
+    }
+
+    return 1;
+  }
+
+  pageChanged(page: number) {
+    this.currentPage = page;
+    localStorage.setItem(`${this.pageName}-current-page`, page.toString());
   }
 }

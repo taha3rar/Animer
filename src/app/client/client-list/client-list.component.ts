@@ -15,7 +15,6 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 })
 export class ClientListComponent extends BaseListComponent implements OnInit {
   clients: Client[];
-  page = 1;
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
 
@@ -25,7 +24,9 @@ export class ClientListComponent extends BaseListComponent implements OnInit {
     protected userService: UserService,
     protected router: Router
   ) {
-    super();
+    super(undefined, undefined, {
+      pageName: 'clients'
+    });
   }
 
   ngOnInit() {

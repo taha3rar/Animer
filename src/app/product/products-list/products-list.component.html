@@ -41,7 +41,9 @@
   <tbody>
     <tr
       *ngFor="
-        let product of (products | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: page });
+        let product of (products
+          | filter: searchTerm
+          | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage });
         let i = index
       "
     >
@@ -83,7 +85,7 @@
   </tbody>
 </table>
 
-<pagination-controls (pageChange)="page = $event"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
 
 <div class="modal-box" id="productProfileWizard">
   <div class="modal-box-content-sm" style="width: 30%">

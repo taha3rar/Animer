@@ -13,7 +13,9 @@
   </thead>
   <tbody>
     <tr
-      *ngFor="let order of (orders | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: page })"
+      *ngFor="
+        let order of (orders | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage })
+      "
     >
       <td class="text-center">{{ order.numericId }}</td>
       <td>{{ order.date_created | date: 'dd/MM/yyyy' }}</td>
@@ -104,4 +106,4 @@
   </tbody>
 </table>
 
-<pagination-controls (pageChange)="page = $event"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

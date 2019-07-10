@@ -14,7 +14,6 @@ import { Sort } from '@angular/material/sort';
 export class OrderListComponent extends BaseListComponent implements OnInit {
   @Input() orders: Order[];
   @Input() searchTerm: string;
-  page = 1;
   usersWhiteList = ['bendemoseller@gmail.com', 'ishai@avenews-gt.com', 'javier@avenews-gt.com'];
   processedProductConflictMessage: String =
     // tslint:disable-next-line:max-line-length
@@ -29,7 +28,8 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
     protected router: Router
   ) {
     super(orderService, router, {
-      deleteText: 'Once deleted, you will not be able to recover this order!'
+      deleteText: 'Once deleted, you will not be able to recover this order!',
+      pageName: 'orders'
     });
   }
 
