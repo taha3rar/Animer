@@ -11,13 +11,13 @@
         /><label class="checkbox_label" for="checkedAll"><span class="form_checkbox_btn"></span></label>
       </th>
       <th mat-sort-header="id" translate class="text-center">ID</th>
-      <th mat-sort-header="issuedOn" translate>Issued on</th>
+      <th mat-sort-header="issuedOn" translate>Date</th>
       <th mat-sort-header="issuedFor" *ngIf="viewAsSeller">Issued for</th>
       <th mat-sort-header="issueBy" *ngIf="!viewAsSeller">Issued by</th>
       <th mat-sort-header="signedBy" translate>Signed by</th>
       <th translate>Product</th>
       <th mat-sort-header="amount" translate>Amount</th>
-      <th mat-sort-header="totalDue" translate>Total due</th>
+      <th mat-sort-header="totalDue" translate>Price</th>
       <th mat-sort-header="status" translate>Status</th>
       <th translate class="text-right">Actions</th>
     </tr>
