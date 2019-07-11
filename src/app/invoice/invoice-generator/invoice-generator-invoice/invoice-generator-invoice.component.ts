@@ -141,32 +141,42 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
             [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
           });
     } else {
-      dateForm
-        ? this.invoice[dateForm].patchValue({ [dateName]: undefined })
-        : this.form.patchValue({ [dateName]: undefined });
+      dateForm ? this.invoice[dateForm].patchValue({ [dateName]: null }) : this.form.patchValue({ [dateName]: null });
     }
+  }
+
+  preSubmit() {
+    if (this.validBy) {
+      this.invoice['sign_by'].patchValue({
+        date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day).toJSON()
+      });
+    } else {
+      this.invoice['sign_by'].patchValue({ date: null });
+    }
+    if (this.deliveryOn) {
+      this.invoice['deliver_to'].patchValue({
+        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day).toJSON()
+      });
+    } else {
+      this.invoice['deliver_to'].patchValue({ expected_delivery_date: null });
+    }
+    this.issuedOn
+      ? this.form.patchValue({
+          date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
+        })
+      : this.form.patchValue({ date_created: new Date().toJSON() });
   }
 
   draftInvoice() {
     this.disableSubmitButton(true);
-    if (this.validBy) {
-      this.invoice['sign_by'].patchValue({
-        date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day)
-      });
-    }
-    if (this.deliveryOn) {
-      this.invoice['deliver_to'].patchValue({
-        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day)
-      });
-    }
-    this.issuedOn
-      ? this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) })
-      : this.form.patchValue({ date_created: Date.now() });
+    this.preSubmit();
     this.savedAsDraft.emit(true);
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
+    this.disableSubmitButton(true);
+    console.log(this.newInvoice);
     if (!this.draft) {
       this.invoiceService.draft(this.newInvoice).subscribe(
         () => {
@@ -184,13 +194,14 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
           this.router.navigateByUrl('/invoice/list');
         },
         err => {
-          this.disableSubmitButton(true);
+          this.disableSubmitButton(false);
         }
       );
     }
   }
 
   toReview() {
+    this.preSubmit();
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);

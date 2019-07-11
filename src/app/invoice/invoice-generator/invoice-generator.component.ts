@@ -88,13 +88,13 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
       order_comments: Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.order_comments,
       sign_by: this.formBuilder.group({
         date: [
-          Object.is(this.draftInvoice, undefined)
-            ? undefined
-            : {
+          this.draftInvoice.sign_by.date
+            ? {
                 day: moment(this.draftInvoice.sign_by.date).date(),
                 month: moment(this.draftInvoice.sign_by.date).month() + 1,
                 year: moment(this.draftInvoice.sign_by.date).year()
-              },
+              }
+            : null,
           Validators.required
         ],
         first_name: [
@@ -114,23 +114,23 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
         zip_code: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.zip_code],
         phone_number: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.phone_number],
         expected_delivery_date: [
-          Object.is(this.draftInvoice, undefined)
-            ? undefined
-            : {
+          this.draftInvoice.deliver_to.expected_delivery_date
+            ? {
                 day: moment(this.draftInvoice.deliver_to.expected_delivery_date).date(),
                 month: moment(this.draftInvoice.deliver_to.expected_delivery_date).month() + 1,
                 year: moment(this.draftInvoice.deliver_to.expected_delivery_date).year()
               }
+            : null
         ]
       }),
       date_created: [
-        Object.is(this.draftInvoice, undefined)
-          ? undefined
-          : {
+        this.draftInvoice.date_created
+          ? {
               day: moment(this.draftInvoice.date_created).date(),
               month: moment(this.draftInvoice.date_created).month() + 1,
               year: moment(this.draftInvoice.date_created).year()
-            },
+            }
+          : null,
         Validators.required
       ]
     });
