@@ -131,6 +131,22 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     });
   }
 
+  dateUpdate(dateName: string, dateUpdated: NgbDateStruct, dateForm?: string) {
+    if (dateUpdated) {
+      dateForm
+        ? this.invoice[dateForm].patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          })
+        : this.form.patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          });
+    } else {
+      dateForm
+        ? this.invoice[dateForm].patchValue({ [dateName]: undefined })
+        : this.form.patchValue({ [dateName]: undefined });
+    }
+  }
+
   draftInvoice() {
     this.disableSubmitButton(true);
     if (this.validBy) {
@@ -179,22 +195,6 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoiceEvent.emit(this.newInvoice);
-  }
-
-  dateUpdate(dateName: string, dateUpdated: NgbDateStruct, dateForm?: string) {
-    if (dateUpdated) {
-      dateForm
-        ? this.invoice[dateForm].patchValue({
-            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
-          })
-        : this.form.patchValue({
-            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
-          });
-    } else {
-      dateForm
-        ? this.invoice[dateForm].patchValue({ [dateName]: undefined })
-        : this.form.patchValue({ [dateName]: undefined });
-    }
   }
 
   checkProducts() {

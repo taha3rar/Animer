@@ -105,7 +105,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
           Object.is(this.sign_by, undefined)
             ? ''
             : {
-                day: moment(this.sign_by.date).day(),
+                day: moment(this.sign_by.date).date(),
                 month: moment(this.sign_by.date).month() + 1,
                 year: moment(this.sign_by.date).year()
               },
@@ -125,7 +125,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
           Object.is(this.deliver_to, undefined)
             ? null
             : {
-                day: moment(this.deliver_to.expected_delivery_date).day(),
+                day: moment(this.deliver_to.expected_delivery_date).date(),
                 month: moment(this.deliver_to.expected_delivery_date).month() + 1,
                 year: moment(this.deliver_to.expected_delivery_date).year()
               }
@@ -135,7 +135,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         Object.is(this.draftOrder, undefined)
           ? undefined
           : {
-              day: moment(this.draftOrder.date_created).day(),
+              day: moment(this.draftOrder.date_created).date(),
               month: moment(this.draftOrder.date_created).month() + 1,
               year: moment(this.draftOrder.date_created).year()
             },

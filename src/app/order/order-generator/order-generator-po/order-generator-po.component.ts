@@ -132,6 +132,22 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     });
   }
 
+  dateUpdate(dateName: string, dateUpdated: NgbDateStruct, dateForm?: string) {
+    if (dateUpdated) {
+      dateForm
+        ? this.order[dateForm].patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          })
+        : this.form.patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          });
+    } else {
+      dateForm
+        ? this.order[dateForm].patchValue({ [dateName]: undefined })
+        : this.form.patchValue({ [dateName]: undefined });
+    }
+  }
+
   draftOrder() {
     this.disableSubmitButton(true);
     if (this.validBy) {
