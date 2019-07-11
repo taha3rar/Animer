@@ -91,7 +91,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
           Object.is(this.draftInvoice, undefined)
             ? undefined
             : {
-                day: moment(this.draftInvoice.sign_by.date).day(),
+                day: moment(this.draftInvoice.sign_by.date).date(),
                 month: moment(this.draftInvoice.sign_by.date).month() + 1,
                 year: moment(this.draftInvoice.sign_by.date).year()
               },
@@ -117,7 +117,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
           Object.is(this.draftInvoice, undefined)
             ? undefined
             : {
-                day: moment(this.draftInvoice.deliver_to.expected_delivery_date).day(),
+                day: moment(this.draftInvoice.deliver_to.expected_delivery_date).date(),
                 month: moment(this.draftInvoice.deliver_to.expected_delivery_date).month() + 1,
                 year: moment(this.draftInvoice.deliver_to.expected_delivery_date).year()
               }
@@ -127,7 +127,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
         Object.is(this.draftInvoice, undefined)
           ? undefined
           : {
-              day: moment(this.draftInvoice.date_created).day(),
+              day: moment(this.draftInvoice.date_created).date(),
               month: moment(this.draftInvoice.date_created).month() + 1,
               year: moment(this.draftInvoice.date_created).year()
             },

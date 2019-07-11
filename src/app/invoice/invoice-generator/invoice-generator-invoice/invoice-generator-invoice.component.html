@@ -170,6 +170,7 @@
                 ngbDatepicker
                 #dp1="ngbDatepicker"
                 [(ngModel)]="validBy"
+                (ngModelChange)="dateUpdate('date', validBy, 'sign_by')"
                 [ngModelOptions]="{ standalone: true }"
               />
               <div class="input-group-append">
@@ -191,6 +192,7 @@
               ngbDatepicker
               #dp2="ngbDatepicker"
               [(ngModel)]="issuedOn"
+              (ngModelChange)="dateUpdate('date_created', issuedOn)"
               [ngModelOptions]="{ standalone: true }"
             />
             <div class="input-group-append">
@@ -279,6 +281,7 @@
                 ngbDatepicker
                 #dp3="ngbDatepicker"
                 [(ngModel)]="deliveryOn"
+                (ngModelChange)="dateUpdate('expected_delivery_date', deliveryOn, 'deliver_to')"
                 [ngModelOptions]="{ standalone: true }"
               />
               <div class="input-group-append">

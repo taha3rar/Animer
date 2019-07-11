@@ -175,17 +175,26 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   }
 
   toReview() {
-    this.invoice['sign_by'].patchValue({ date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day) });
-    if (this.deliveryOn) {
-      this.invoice['deliver_to'].patchValue({
-        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day)
-      });
-    }
-    this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) });
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoiceEvent.emit(this.newInvoice);
+  }
+
+  dateUpdate(dateName: string, dateUpdated: NgbDateStruct, dateForm?: string) {
+    if (dateUpdated) {
+      dateForm
+        ? this.invoice[dateForm].patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          })
+        : this.form.patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          });
+    } else {
+      dateForm
+        ? this.invoice[dateForm].patchValue({ [dateName]: undefined })
+        : this.form.patchValue({ [dateName]: undefined });
+    }
   }
 
   checkProducts() {
