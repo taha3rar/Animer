@@ -142,31 +142,42 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
             [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
           });
     } else {
-      dateForm
-        ? this.order[dateForm].patchValue({ [dateName]: undefined })
-        : this.form.patchValue({ [dateName]: undefined });
+      dateForm ? this.order[dateForm].patchValue({ [dateName]: null }) : this.form.patchValue({ [dateName]: null });
     }
+  }
+
+  preSubmit() {
+    if (this.validBy) {
+      this.order['sign_by'].patchValue({
+        date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day).toJSON()
+      });
+    } else {
+      this.order['sign_by'].patchValue({ date: null });
+    }
+    if (this.deliveryOn) {
+      this.order['deliver_to'].patchValue({
+        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day).toJSON()
+      });
+    } else {
+      this.order['deliver_to'].patchValue({ expected_delivery_date: null });
+    }
+    this.issuedOn
+      ? this.form.patchValue({
+          date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
+        })
+      : this.form.patchValue({ date_created: new Date().toJSON() });
   }
 
   draftOrder() {
     this.disableSubmitButton(true);
-    if (this.validBy) {
-      this.order['sign_by'].patchValue({ date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day) });
-    }
-    if (this.deliveryOn) {
-      this.order['deliver_to'].patchValue({
-        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day)
-      });
-    }
-    this.issuedOn
-      ? this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) })
-      : this.form.patchValue({ date_created: Date.now() });
+    this.preSubmit();
     this.newDraftPO.emit(true);
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.draft = true;
+    console.log(this.newOrder);
     this.orderService.draft(this.newOrder).subscribe(
       () => {
         this.alerts.showAlert('Your purchase order has been saved as a draft!');
@@ -179,15 +190,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   }
 
   toReview() {
-    this.order['sign_by'].patchValue({
-      date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day)
-    });
-    if (this.deliveryOn) {
-      this.order['deliver_to'].patchValue({
-        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day)
-      });
-    }
-    this.form.patchValue({ date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day) });
+    this.preSubmit();
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);

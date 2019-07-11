@@ -176,7 +176,6 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
     this.disableSubmitButton(true);
-    console.log(this.newInvoice);
     if (!this.draft) {
       this.invoiceService.draft(this.newInvoice).subscribe(
         () => {
