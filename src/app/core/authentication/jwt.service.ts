@@ -48,7 +48,7 @@ export class JwtService {
       storage.setItem(credentialsKey, JSON.stringify(credentials));
     } else {
       sessionStorage.removeItem(credentialsKey);
-      localStorage.removeItem(credentialsKey);
+      localStorage.clear(); // removes everything, it includes the currentPage in the different lists
     }
   }
 }
