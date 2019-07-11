@@ -42,6 +42,7 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
     if (this.invoice) {
       this.isDraft = true;
       this.document = this.invoice;
+      console.log('invoice', this.invoice);
     }
     this.products = this.document.products;
     this.invoiceForm = this.formBuilder.group({
@@ -92,13 +93,13 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
       invoice_comment: this.isDraft ? this.invoice.invoice_comment : undefined,
       sign_by: this.formBuilder.group({
         date: [
-          this.isDraft
+          this.invoice && this.invoice.sign_by && this.invoice.sign_by.date
             ? {
-                day: moment(this.invoice.sign_by.date).day(),
+                day: moment(this.invoice.sign_by.date).date(),
                 month: moment(this.invoice.sign_by.date).month() + 1,
                 year: moment(this.invoice.sign_by.date).year()
               }
-            : undefined,
+            : null,
           Validators.required
         ],
         first_name: [this.isDraft ? this.invoice.sign_by.first_name : undefined, Validators.required],
@@ -117,13 +118,13 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
         expected_delivery_date: [this.document.deliver_to.expected_delivery_date]
       }),
       date_created: [
-        this.isDraft
+        this.invoice && this.invoice.date_created
           ? {
-              day: moment(this.invoice.date_created).day(),
+              day: moment(this.invoice.date_created).date(),
               month: moment(this.invoice.date_created).month() + 1,
               year: moment(this.invoice.date_created).year()
             }
-          : undefined,
+          : null,
         Validators.required
       ]
     });

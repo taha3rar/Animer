@@ -102,13 +102,13 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
       order_comments: this.draftOrder.order_comments,
       sign_by: this.formBuilder.group({
         date: [
-          Object.is(this.sign_by, undefined)
-            ? ''
-            : {
+          this.draftOrder && this.draftOrder.sign_by && this.draftOrder.sign_by.date
+            ? {
                 day: moment(this.sign_by.date).date(),
                 month: moment(this.sign_by.date).month() + 1,
                 year: moment(this.sign_by.date).year()
-              },
+              }
+            : null,
           Validators.required
         ],
         first_name: [Object.is(this.sign_by, undefined) ? '' : this.sign_by.first_name, Validators.required],
@@ -122,23 +122,23 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         zip_code: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.zip_code],
         phone: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.phone, Validators.required],
         expected_delivery_date: [
-          Object.is(this.deliver_to, undefined)
-            ? null
-            : {
+          this.draftOrder && this.draftOrder.deliver_to && this.draftOrder.deliver_to.expected_delivery_date
+            ? {
                 day: moment(this.deliver_to.expected_delivery_date).date(),
                 month: moment(this.deliver_to.expected_delivery_date).month() + 1,
                 year: moment(this.deliver_to.expected_delivery_date).year()
               }
+            : null
         ]
       }),
       date_created: [
-        Object.is(this.draftOrder, undefined)
-          ? undefined
-          : {
+        this.draftOrder && this.draftOrder.date_created
+          ? {
               day: moment(this.draftOrder.date_created).date(),
               month: moment(this.draftOrder.date_created).month() + 1,
               year: moment(this.draftOrder.date_created).year()
-            },
+            }
+          : null,
         Validators.required
       ]
     });

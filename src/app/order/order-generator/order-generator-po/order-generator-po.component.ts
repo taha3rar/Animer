@@ -177,7 +177,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.draft = true;
-    console.log(this.newOrder);
     this.orderService.draft(this.newOrder).subscribe(
       () => {
         this.alerts.showAlert('Your purchase order has been saved as a draft!');

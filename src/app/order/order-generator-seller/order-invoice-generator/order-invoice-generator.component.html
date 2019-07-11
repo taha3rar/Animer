@@ -158,6 +158,7 @@
                 ngbDatepicker
                 #dp1="ngbDatepicker"
                 [(ngModel)]="validBy"
+                (ngModelChange)="dateUpdate('date', validBy, 'sign_by')"
                 [ngModelOptions]="{ standalone: true }"
               />
               <div class="input-group-append">
@@ -180,6 +181,7 @@
               ngbDatepicker
               #dp2="ngbDatepicker"
               [(ngModel)]="issuedOn"
+              (ngModelChange)="dateUpdate('date_created', issuedOn)"
               [ngModelOptions]="{ standalone: true }"
             />
             <div class="input-group-append">
@@ -231,7 +233,7 @@
   <button class="bttn-primary pull-right next-step" (click)="toReview()" [hidden]="!form.valid || products.length < 1">
     Next Step &rarr;
   </button>
-  <button class="bttn-primary pull-right" [hidden]="form.valid && products.length > 0">
+  <button class="bttn-primary pull-right" (click)="onSubmit(form)" [hidden]="form.valid && products.length > 0">
     Next Step &rarr;
   </button>
   <button #submitButton class="btn-primary-transp pull-right btn-draft" (click)="draftInvoice()">Save Draft</button>

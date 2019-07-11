@@ -88,7 +88,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
       order_comments: Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.order_comments,
       sign_by: this.formBuilder.group({
         date: [
-          this.draftInvoice.sign_by.date
+          this.draftInvoice && this.draftInvoice.sign_by && this.draftInvoice.sign_by.date
             ? {
                 day: moment(this.draftInvoice.sign_by.date).date(),
                 month: moment(this.draftInvoice.sign_by.date).month() + 1,
@@ -114,7 +114,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
         zip_code: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.zip_code],
         phone_number: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.phone_number],
         expected_delivery_date: [
-          this.draftInvoice.deliver_to.expected_delivery_date
+          this.draftInvoice && this.draftInvoice.deliver_to && this.draftInvoice.deliver_to.expected_delivery_date
             ? {
                 day: moment(this.draftInvoice.deliver_to.expected_delivery_date).date(),
                 month: moment(this.draftInvoice.deliver_to.expected_delivery_date).month() + 1,
@@ -124,7 +124,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
         ]
       }),
       date_created: [
-        this.draftInvoice.date_created
+        this.draftInvoice && this.draftInvoice.date_created
           ? {
               day: moment(this.draftInvoice.date_created).date(),
               month: moment(this.draftInvoice.date_created).month() + 1,
