@@ -42,7 +42,6 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
     if (this.invoice) {
       this.isDraft = true;
       this.document = this.invoice;
-      console.log('invoice', this.invoice);
     }
     this.products = this.document.products;
     this.invoiceForm = this.formBuilder.group({

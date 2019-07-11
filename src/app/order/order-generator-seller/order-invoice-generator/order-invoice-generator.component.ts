@@ -40,7 +40,6 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   ngOnInit() {
     this.onChanges();
     this.formInput = this.form;
-    console.log(this.form.value);
     this.validBy = this.formInput.value.sign_by.date;
     this.issuedOn = this.formInput.value.date_created;
   }
@@ -115,7 +114,6 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   }
 
   draftInvoice() {
-    console.log('avant', this.form);
     this.disableSubmitButton(true);
     this.preSubmit();
     this.newDraftInvoice.emit(true);
@@ -123,7 +121,6 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
-    console.log(this.newInvoice);
     this.invoiceService.draft(this.newInvoice).subscribe(
       () => {
         this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
@@ -136,7 +133,6 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   }
 
   toReview() {
-    console.log(this.form);
     this.preSubmit();
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
