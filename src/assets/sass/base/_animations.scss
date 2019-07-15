@@ -15,14 +15,14 @@
 @keyframes open-modal {
   0% {
     opacity: 0;
-    transform: translate(-50%, -100%);
+    transform: translateY(-100%);
   }
   8% {
     opacity: 0;
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translateY(0);
   }
 }
 

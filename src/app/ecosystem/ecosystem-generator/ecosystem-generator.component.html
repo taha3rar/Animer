@@ -1,146 +1,148 @@
 <div class="modal-box" id="newEcosystem">
-  <div class="modal-box-content">
-    <div class="stepper">
-      <div class="modal-box-heading">
-        <i class="material-icons pull-right" (click)="onModalClose()" #closeModal>close</i>
-        <h2 translate class="modal-title">Create Ecosystem</h2>
-      </div>
-      <div class="modal-box-left">
-        <ul class="nav nav-tabs">
-          <li class="active">
-            <a href="#ecosystem-details" data-toggle="tab"
-              ><span class="step-number">1</span> <span translate>Ecosystem details</span></a
-            >
-          </li>
-          <li class="disabled">
-            <a href="#ecosystem-clients" data-toggle="tab">
-              <div class="step-number">2</div>
-              <span translate>Ecosystem clients</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+  <div class="modal-box-content-wrapper">
+    <div class="modal-box-content">
+      <div class="stepper">
+        <div class="modal-box-heading">
+          <i class="material-icons pull-right" (click)="onModalClose()" #closeModal>close</i>
+          <h2 translate class="modal-title">Create Ecosystem</h2>
+        </div>
+        <div class="modal-box-left">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#ecosystem-details" data-toggle="tab"
+                ><span class="step-number">1</span> <span translate>Ecosystem details</span></a
+              >
+            </li>
+            <li class="disabled">
+              <a href="#ecosystem-clients" data-toggle="tab">
+                <div class="step-number">2</div>
+                <span translate>Ecosystem clients</span>
+              </a>
+            </li>
+          </ul>
+        </div>
 
-      <div class="modal-box-right">
-        <div class="tab-content">
-          <div class="tab-pane active" id="ecosystem-details">
-            <form [formGroup]="newEcosystemForm">
-              <div class="row margin-bottom">
-                <div class="col-md-12" [ngClass]="showFieldStyle('name')">
-                  <div class="form-group">
-                    <label for="ecosystem-name">Ecosystem Name *</label>
-                    <input
-                      id="ecosystem-name"
-                      type="text"
-                      formControlName="name"
-                      class="form-control"
-                      placeholder="Type ecosystem name here..."
-                    />
-                    <div *ngIf="isFieldInvalid('name')" class="help-block"><p>This field is required</p></div>
-                  </div>
-                </div>
-              </div>
-              <div class="row margin-bottom">
-                <div class="col-md-12">
-                  <label>Ecosystem Type *</label>
-                  <div *ngIf="user.roles[0] == 'buyer' || user.roles[0] == 'agribusiness'">
-                    <input
-                      type="radio"
-                      formControlName="ecosystemType"
-                      class="form_radio"
-                      id="agriSeller"
-                      value="seller"
-                      name="ecosystemType"
-                    />
-                    <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                    <label for="agriSeller" style="font-weight:100;">Sellers</label>
-                  </div>
-                  <div *ngIf="user.roles[0] == 'seller' || user.roles[0] == 'agribusiness'">
-                    <input
-                      type="radio"
-                      formControlName="ecosystemType"
-                      class="form_radio"
-                      id="agriBuyer"
-                      value="buyer"
-                      name="ecosystemType"
-                    />
-                    <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                    <label for="agriBuyer" style="font-weight:100;">Buyers</label>
-                  </div>
-                  <div *ngIf="isFieldInvalid('ecosystemType')" class="help-block">
-                    <p style="color:#a94442;">This field is required</p>
-                  </div>
-                </div>
-              </div>
-              <div class="row margin-bottom">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="ecosystem-desc">Ecosystem Description</label>
-                    <textarea
-                      id="ecosystem-desc"
-                      formControlName="description"
-                      class="form-control"
-                      type="text"
-                      rows="4"
-                      placeholder="Type ecosystem name here..."
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
-              <button class="bttn-primary pull-right next-step" [hidden]="!newEcosystemForm.valid">
-                Next Step &rarr;
-              </button>
-              <button class="bttn-primary pull-right" (click)="onSubmit(formInput)" [hidden]="newEcosystemForm.valid">
-                Next Step &rarr;
-              </button>
-            </form>
-          </div>
-          <div class="tab-pane" id="ecosystem-clients">
-            <p class="heading-2">My clients list</p>
-            <div style="margin: 0 auto;">
-              <table class="table main-table">
-                <thead>
-                  <tr>
-                    <th>Add to Ecosystem</th>
-                    <th>ID</th>
-                    <th>Company</th>
-                    <th>Contact</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    *ngFor="
-                      let userClient of (userClients | paginate: { itemsPerPage: 5, currentPage: page });
-                      let i = index
-                    "
-                  >
-                    <td>
+        <div class="modal-box-right">
+          <div class="tab-content">
+            <div class="tab-pane active" id="ecosystem-details">
+              <form [formGroup]="newEcosystemForm">
+                <div class="row margin-bottom">
+                  <div class="col-md-12" [ngClass]="showFieldStyle('name')">
+                    <div class="form-group">
+                      <label for="ecosystem-name">Ecosystem Name *</label>
                       <input
-                        type="checkbox"
-                        class="checkbox"
-                        id="checkbox{{ i }}"
-                        [checked]="existClient(userClient)"
-                        (click)="toggleAddClient(userClient)"
-                      /><label class="checkbox_label" for="checkbox{{ i }}"
-                        ><span class="form_checkbox_btn"></span
-                      ></label>
-                    </td>
-                    <td>{{ userClient.numericId }}</td>
-                    <td>{{ userClient.company_name }}</td>
-                    <td>{{ userClient.first_name }} {{ userClient.last_name }}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                        id="ecosystem-name"
+                        type="text"
+                        formControlName="name"
+                        class="form-control"
+                        placeholder="Type ecosystem name here..."
+                      />
+                      <div *ngIf="isFieldInvalid('name')" class="help-block"><p>This field is required</p></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row margin-bottom">
+                  <div class="col-md-12">
+                    <label>Ecosystem Type *</label>
+                    <div *ngIf="user.roles[0] == 'buyer' || user.roles[0] == 'agribusiness'">
+                      <input
+                        type="radio"
+                        formControlName="ecosystemType"
+                        class="form_radio"
+                        id="agriSeller"
+                        value="seller"
+                        name="ecosystemType"
+                      />
+                      <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
+                      <label for="agriSeller" style="font-weight:100;">Sellers</label>
+                    </div>
+                    <div *ngIf="user.roles[0] == 'seller' || user.roles[0] == 'agribusiness'">
+                      <input
+                        type="radio"
+                        formControlName="ecosystemType"
+                        class="form_radio"
+                        id="agriBuyer"
+                        value="buyer"
+                        name="ecosystemType"
+                      />
+                      <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
+                      <label for="agriBuyer" style="font-weight:100;">Buyers</label>
+                    </div>
+                    <div *ngIf="isFieldInvalid('ecosystemType')" class="help-block">
+                      <p style="color:#a94442;">This field is required</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row margin-bottom">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="ecosystem-desc">Ecosystem Description</label>
+                      <textarea
+                        id="ecosystem-desc"
+                        formControlName="description"
+                        class="form-control"
+                        type="text"
+                        rows="4"
+                        placeholder="Type ecosystem name here..."
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+                <button class="bttn-primary pull-right next-step" [hidden]="!newEcosystemForm.valid">
+                  Next Step &rarr;
+                </button>
+                <button class="bttn-primary pull-right" (click)="onSubmit(formInput)" [hidden]="newEcosystemForm.valid">
+                  Next Step &rarr;
+                </button>
+              </form>
             </div>
-            <button
-              #submitButton
-              class="bttn-primary pull-right"
-              [disabled]="!newEcosystemForm.valid"
-              (click)="submitEcosystem()"
-            >
-              Create Ecosystem
-            </button>
+            <div class="tab-pane" id="ecosystem-clients">
+              <p class="heading-2">My clients list</p>
+              <div style="margin: 0 auto;">
+                <table class="table main-table">
+                  <thead>
+                    <tr>
+                      <th>Add to Ecosystem</th>
+                      <th>ID</th>
+                      <th>Company</th>
+                      <th>Contact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="
+                        let userClient of (userClients | paginate: { itemsPerPage: 5, currentPage: page });
+                        let i = index
+                      "
+                    >
+                      <td>
+                        <input
+                          type="checkbox"
+                          class="checkbox"
+                          id="checkbox{{ i }}"
+                          [checked]="existClient(userClient)"
+                          (click)="toggleAddClient(userClient)"
+                        /><label class="checkbox_label" for="checkbox{{ i }}"
+                          ><span class="form_checkbox_btn"></span
+                        ></label>
+                      </td>
+                      <td>{{ userClient.numericId }}</td>
+                      <td>{{ userClient.company_name }}</td>
+                      <td>{{ userClient.first_name }} {{ userClient.last_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+              </div>
+              <button
+                #submitButton
+                class="bttn-primary pull-right"
+                [disabled]="!newEcosystemForm.valid"
+                (click)="submitEcosystem()"
+              >
+                Create Ecosystem
+              </button>
+            </div>
           </div>
         </div>
       </div>

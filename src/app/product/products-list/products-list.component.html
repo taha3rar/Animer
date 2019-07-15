@@ -88,12 +88,14 @@
 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
 
 <div class="modal-box" id="productProfileWizard">
-  <div class="modal-box-content-sm" style="width: 30%">
-    <div class="modal-box-heading">
-      <i class="material-icons pull-right" data-dismiss="modal">close</i>
-      <p translate class="modal-title">Product Overview</p>
+  <div class="modal-box-content-wrapper">
+    <div class="modal-box-content-sm" style="width: 30%">
+      <div class="modal-box-heading">
+        <i class="material-icons pull-right" data-dismiss="modal">close</i>
+        <p translate class="modal-title">Product Overview</p>
+      </div>
+      <app-product-profile [product]="selectedProduct"></app-product-profile>
     </div>
-    <app-product-profile [product]="selectedProduct"></app-product-profile>
   </div>
 </div>
 <app-product-tutorials></app-product-tutorials>
