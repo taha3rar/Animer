@@ -28,7 +28,7 @@
         </div>
         <div class="mt-4 ml-4">
           <p class="heading-2">Clients list</p>
-          <table class="table table-borderless" id="clients-table" [hidden]="toggledTable === 'ecosystems'">
+          <table class="table table-borderless ftd-small" id="clients-table" [hidden]="toggledTable === 'ecosystems'">
             <thead>
               <tr>
                 <th>Choose Client</th>
@@ -61,7 +61,7 @@
               </tr>
             </tbody>
           </table>
-          <table class="table table-borderless" id="ecosystems-table" [hidden]="toggledTable === 'clients'">
+          <table class="table table-borderless ftd-small" id="ecosystems-table" [hidden]="toggledTable === 'clients'">
             <thead>
               <tr>
                 <th>Choose Ecosystem</th>
@@ -78,7 +78,7 @@
                   let i = index
                 "
               >
-                <td>
+                <td style="width:10%;">
                   <input
                     type="radio"
                     class="form_radio"

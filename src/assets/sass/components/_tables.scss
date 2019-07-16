@@ -186,10 +186,14 @@ table {
   thead > tr > th {
     border: none;
   }
+}
+
+.ftd-small {
   tbody > tr > td:first-child {
-    width: 50%;
+    width: 10%;
   }
 }
+
 .mat-sort-header-stem {
   background: none;
   display: none !important;
