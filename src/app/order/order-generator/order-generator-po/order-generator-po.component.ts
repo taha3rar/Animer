@@ -11,6 +11,7 @@ import { ProductService, QuotationService } from '@app/core';
 import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Product } from '@app/core/models/order/product';
 
 @Component({
   selector: 'app-order-generator-po',
@@ -25,11 +26,15 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   productsValid = true;
   @Output() newDraftPO = new EventEmitter();
   @Input() fromQuotation = false;
-  inventoryProducts: ProductInvoice[];
+  inventoryProducts: any[];
   quotedProducts: ProductInvoice[] = [];
   validBy: NgbDateStruct;
   issuedOn: NgbDateStruct;
   deliveryOn: NgbDateStruct;
+  agriculturalProducts: Product[];
+  processedProducts: Product[];
+  addedProducts: ProductInvoice[] = [];
+  noInventory: boolean;
 
   constructor(
     public orderDataService: OrderDataService,
@@ -46,6 +51,11 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   ngOnInit() {
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
+      if (this.seller._id) {
+        this.productService.getByUser(this.seller._id).subscribe(products => {
+          this.inventoryProducts = <ProductInvoice[]>(<unknown>products);
+        });
+      }
       this.currency = this.form.value.currency;
     });
     this.orderDataService.currentProductList.subscribe(data => {
@@ -53,14 +63,13 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
         this.products = data;
       }
     });
+
     this.formInput = this.form;
     this.validBy = this.formInput.value.sign_by.date;
     this.issuedOn = this.formInput.value.date_created;
     this.deliveryOn = this.formInput.value.deliver_to.expected_delivery_date;
+
     if (this.fromQuotation) {
-      this.productService.getByUser(this.seller._id).subscribe(products => {
-        this.inventoryProducts = <ProductInvoice[]>(<unknown>products);
-      });
       this.quotationService.getAcceptedPerParticipants(this.seller._id, this.buyer._id).subscribe(quotations => {
         quotations.forEach((quotation: Quotation) => {
           let quotedProduct: ProductInvoice;
