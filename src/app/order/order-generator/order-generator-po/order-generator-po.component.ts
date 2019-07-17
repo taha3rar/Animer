@@ -103,10 +103,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     return this.form.controls.date_created.value;
   }
 
-  // aa() {
-  //   this.productsPristine = false;
-  // }
-
   openDialogInventory(quoted: boolean): void {
     const dialogConfig = new MatDialogConfig();
 
