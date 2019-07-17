@@ -23,7 +23,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   selectedProducts: any[];
   currency: string;
   products: ProductInvoice[] = [];
-  productsValid = true;
+  productsPristine = true;
   @Output() newDraftPO = new EventEmitter();
   @Input() fromQuotation = false;
   inventoryProducts: any[];
@@ -102,6 +102,10 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   get date_created() {
     return this.form.controls.date_created.value;
   }
+
+  // aa() {
+  //   this.productsPristine = false;
+  // }
 
   openDialogInventory(quoted: boolean): void {
     const dialogConfig = new MatDialogConfig();

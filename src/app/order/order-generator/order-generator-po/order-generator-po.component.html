@@ -37,7 +37,7 @@
       </button> -->
     </div>
   </div>
-  <div class="alert alert-danger" role="alert" [hidden]="products.length != 0 || productsValid">
+  <div class="alert alert-danger" role="alert" [hidden]="products.length != 0 || productsPristine">
     Please choose product!
   </div>
   <div class="row">
@@ -264,7 +264,12 @@
     >
       Next Step &rarr;
     </button>
-    <button class="bttn-primary pull-right" (click)="onSubmit(form)" [hidden]="form.valid && products.length > 0">
+    <button
+      class="bttn-primary pull-right"
+      (click)="onSubmit(form)"
+      (click)="this.productsPristine = false"
+      [hidden]="form.valid && products.length > 0"
+    >
       Next Step &rarr;
     </button>
     <button #submitButton class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
