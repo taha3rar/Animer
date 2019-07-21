@@ -63,7 +63,7 @@
         </div>
         <div *ngIf="(!currency || product.currency === currency) && !fromQuotation" class="quantity">
           <p class="normal-text-bold">Quantity</p>
-          <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
+          <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
           <input
             type="number"
             min="0"
@@ -72,7 +72,7 @@
             [(ngModel)]="product.quantity"
             (ngModelChange)="checkProductInput(product)"
           />
-          <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
+          <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
         </div>
         <div *ngIf="(!currency || product.currency === currency) && fromQuotation" class="quantity">
           <p *ngIf="isListed(product)" class="normal-text-bold">The product is a part of the order</p>
@@ -159,7 +159,9 @@
 
           <div *ngIf="(!currency || product.currency === currency) && !fromQuotation" class="quantity">
             <p class="normal-text-bold">Quantity</p>
-            <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
+            <!-- decrese button -->
+            <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
+            <!-- quantity -->
             <input
               type="number"
               min="0"
@@ -168,7 +170,8 @@
               [(ngModel)]="product.quantity"
               (ngModelChange)="checkProductInput(product)"
             />
-            <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
+            <!-- add button -->
+            <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
           </div>
           <div *ngIf="(!currency || product.currency === currency) && fromQuotation" class="quantity">
             <p *ngIf="isListed(product)" class="normal-text-bold">The product is a part of the order</p>
@@ -181,7 +184,8 @@
               [name]="i"
               (change)="addProduct(product, $event.target.checked)"
               [checked]="isAdded(product)"
-            /><label *ngIf="!isListed(product)" class="checkbox_label" [for]="'p' + i"
+            />
+            <label *ngIf="!isListed(product)" class="checkbox_label" [for]="'p' + i"
               ><span class="form_checkbox_btn"></span
             ></label>
           </div>
