@@ -32,6 +32,7 @@
                   id="{{ client.numericId }}"
                   [value]="client"
                   formControlName="seller"
+                  (ngModelChange)="resetForm()"
                 />
                 <label for="{{ client.numericId }}" class="form_radio_label">
                   <span class="form_radio_btn"></span>
