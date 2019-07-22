@@ -20,19 +20,19 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'icon-dashboard'
   },
   {
-    path: '/order/list',
+    path: '/order',
     title: 'Orders',
     type: 'link',
     icontype: 'icon-orders'
   },
   {
-    path: '/quote-request/list',
+    path: '/quote-request',
     title: 'Quote Requests',
     type: 'link',
     icontype: 'icon-qr'
   },
   {
-    path: '/invoice/list',
+    path: '/invoice',
     title: 'Proforma Invoices',
     type: 'link',
     icontype: 'icon-pi'
@@ -45,14 +45,14 @@ export const ROUTES: RouteInfo[] = [
     neededPermission: 'list-products'
   },
   {
-    path: '/client/list',
+    path: '/client',
     title: 'Clients',
     type: 'link',
     icontype: 'icon-clients',
     neededPermission: 'list-clients'
   },
   {
-    path: '/ecosystem/list',
+    path: '/ecosystem',
     title: 'Ecosystems',
     type: 'link',
     icontype: 'icon-ecosystems',

@@ -37,7 +37,7 @@ export class OrderGeneratorReviewOrderComponent extends BaseValidationComponent 
     this.orderService.create(this.order).subscribe(
       (order: Order) => {
         this.alerts.showAlert('Your purchase order has been sent');
-        this.router.navigateByUrl('/order/list');
+        this.router.navigateByUrl('/order');
       },
       err => {
         this.disableSubmitButton(false);

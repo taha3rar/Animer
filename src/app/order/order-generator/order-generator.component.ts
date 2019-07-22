@@ -194,7 +194,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   }
 
   back() {
-    this.router.navigateByUrl('/order/list');
+    this.router.navigateByUrl('/order');
   }
 
   changeValue(recievedValue: any) {

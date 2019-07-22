@@ -52,7 +52,7 @@ export class QuoteRequestComponent extends DocumentDownloadComponent implements 
       this.quoteRequestService.create(this.quoteRequest).subscribe(
         quoteRequest => {
           this.alerts.showAlert('Your quote request has been sent');
-          this.router.navigateByUrl('/quote-request/list');
+          this.router.navigateByUrl('/quote-request');
         },
         err => {
           this.disableSubmitButton(false);

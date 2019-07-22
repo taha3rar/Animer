@@ -24,7 +24,7 @@ import { QuotationsAcceptedQuoteRequestResolver } from './resolvers/quotations-a
 const routes: Routes = [
   Shell.childRoutes([
     {
-      path: 'quote-request/list',
+      path: 'quote-request',
       component: QuoteRequestsListComponent,
       resolve: {
         quoteRequests: QuoteRequestListResolver

@@ -14,7 +14,7 @@ import { PermissionGuard } from '../shared/guards/permission.guard';
 const routes: Routes = [
   Shell.childRoutes([
     {
-      path: 'ecosystem/list',
+      path: 'ecosystem',
       component: EcosystemsListComponent,
       data: {
         title: extract('Ecosystems'),

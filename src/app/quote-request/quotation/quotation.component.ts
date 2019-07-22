@@ -40,7 +40,7 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
     this.quotationService.create(this.quotation).subscribe(
       quotation => {
         this.alerts.showAlert('Your quotation has been sent');
-        this.router.navigateByUrl('/quote-request/list');
+        this.router.navigateByUrl('/quote-request');
       },
       err => {
         this.disableSubmitButton(false);

@@ -124,7 +124,7 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
     this.invoiceService.draft(this.newInvoice).subscribe(
       () => {
         this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
-        this.router.navigateByUrl('/order/list');
+        this.router.navigateByUrl('/order');
       },
       err => {
         this.disableSubmitButton(false);

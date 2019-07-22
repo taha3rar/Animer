@@ -46,6 +46,6 @@ export class ClientComponent implements OnInit {
   }
 
   back() {
-    this.router.navigateByUrl('/client/list');
+    this.router.navigateByUrl('/client');
   }
 }

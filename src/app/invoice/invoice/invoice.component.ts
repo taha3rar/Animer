@@ -43,7 +43,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
   }
 
   back() {
-    this.router.navigateByUrl('/invoice/list');
+    this.router.navigateByUrl('/invoice');
   }
 
   disclaimerPopup() {
@@ -100,7 +100,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
             }
           }
           this.alertsService.showAlert('Your proforma invoice has been sent');
-          this.router.navigateByUrl('/invoice/list');
+          this.router.navigateByUrl('/invoice');
         },
         err => {
           this.disableSubmitButton(false);

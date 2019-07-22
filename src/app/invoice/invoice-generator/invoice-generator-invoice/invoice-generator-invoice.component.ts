@@ -180,7 +180,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
       this.invoiceService.draft(this.newInvoice).subscribe(
         () => {
           this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
-          this.router.navigateByUrl('/invoice/list');
+          this.router.navigateByUrl('/invoice');
         },
         err => {
           this.disableSubmitButton(false);
@@ -190,7 +190,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
       this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(
         () => {
           this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
-          this.router.navigateByUrl('/invoice/list');
+          this.router.navigateByUrl('/invoice');
         },
         err => {
           this.disableSubmitButton(false);

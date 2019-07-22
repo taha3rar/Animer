@@ -189,7 +189,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.orderService.draft(this.newOrder).subscribe(
       () => {
         this.alerts.showAlert('Your purchase order has been saved as a draft!');
-        this.router.navigateByUrl('/order/list');
+        this.router.navigateByUrl('/order');
       },
       err => {
         this.disableSubmitButton(false);

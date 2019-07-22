@@ -139,7 +139,7 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
   }
 
   back() {
-    this.router.navigateByUrl('/order/list');
+    this.router.navigateByUrl('/order');
   }
 
   confirm() {

@@ -30,7 +30,7 @@ export class OrderInvoiceComponent extends BaseValidationComponent implements On
     this.invoiceService.create(this.invoice).subscribe(
       data => {
         this.alerts.showAlert('Your proforma invoice has been sent!');
-        this.router.navigateByUrl('/order/list');
+        this.router.navigateByUrl('/order');
       },
       err => {
         this.disableSubmitButton(false);

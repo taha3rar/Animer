@@ -197,7 +197,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
   }
 
   back() {
-    this.router.navigateByUrl('/invoice/list');
+    this.router.navigateByUrl('/invoice');
   }
 
   newDraftInvoice(recievedValue: any) {

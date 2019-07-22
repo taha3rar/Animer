@@ -167,7 +167,7 @@ export class QuoteRequestGeneratorSuppliersComponent extends BaseValidationCompo
     this.quoteRequestService.draft(this.quoteRequest).subscribe(
       quoteRequest => {
         this.alerts.showAlert('Your quote request has been saved');
-        this.router.navigateByUrl('/quote-request/list');
+        this.router.navigateByUrl('/quote-request');
       },
       err => {
         this.disableSubmitButton(false);
