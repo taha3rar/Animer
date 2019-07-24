@@ -14,21 +14,26 @@
 
 <h1 translate class="main-title">Quote Requests List</h1>
 
-<div class="clearfix">
-  <button
-    class="bttn-primary bttn-add pull-right mr-0"
-    *ngxPermissionsOnly="['create-qr']"
-    routerLink="/quote-request/generator"
-  >
-    <span translate>New Quote Request</span>
-  </button>
+<div class="actions-section clearfix">
+  <div>
+    <input
+      type="text"
+      id="searchBar"
+      class="search-bar"
+      [(ngModel)]="searchTerm"
+      type="text"
+      placeholder="Search quote requests..."
+    />
+  </div>
+
+  <div class="flex-pr">
+    <button
+      class="bttn-primary bttn-add mr-0"
+      *ngxPermissionsOnly="['create-qr']"
+      routerLink="/quote-request/generator"
+    >
+      <span translate>New Quote Request</span>
+    </button>
+  </div>
 </div>
-<input
-  type="text"
-  id="searchBar"
-  class="search-bar mt-3"
-  [(ngModel)]="searchTerm"
-  type="text"
-  placeholder="Search quote requests..."
-/>
 <app-quote-request-list [searchTerm]="searchTerm" [quoteRequests]="quoteRequests"></app-quote-request-list>

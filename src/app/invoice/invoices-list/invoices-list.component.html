@@ -7,18 +7,34 @@
 
 <h1 translate class="main-title">Proforma Invoices List</h1>
 
-<div class="clearfix margin-top">
-  <button class="btn-primary-transp pull-right" (click)="exportAll()">
-    <i class="material-icons">arrow_upward</i>
-    <span translate>Export All Proforma Invoices</span>
-  </button>
-  <button
-    *ngxPermissionsOnly="['create-invoice']"
-    class="bttn-primary bttn-add pull-right"
-    routerLink="/invoice/generator"
-  >
-    <span translate>New Profoma Invoice</span>
-  </button>
+<div class="clearfix mt-1" class="actions-section">
+  <div>
+    <input
+      type="text"
+      id="searchBar"
+      class="search-bar mr-3"
+      [(ngModel)]="searchTerm"
+      type="text"
+      placeholder="Search invoices..."
+    />
+  </div>
+
+  <div class="flex-pr">
+    <button class="btn-primary-transp pull-right" (click)="exportAll()">
+      <i class="material-icons">arrow_upward</i>
+      <span translate>Export All Proforma Invoices</span>
+    </button>
+    <button
+      *ngxPermissionsOnly="['create-invoice']"
+      class="bttn-primary bttn-add pull-right"
+      routerLink="/invoice/generator"
+    >
+      <span translate>New Profoma Invoice</span>
+    </button>
+  </div>
+</div>
+
+<div class="actions-section">
   <div class="two-btns" *ngIf="agribusinessUser">
     <p class="heading-2">View records as:</p>
     <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
@@ -27,21 +43,9 @@
     <button (click)="viewAs('buyer')" [class.active]="this.viewAsBuyer">
       Buyer
     </button>
-    <!-- <button (click)="viewAs('agri')" [class.active]="this.viewAsAgri" class="bttn-primary-sm">
-      All
-    </button> -->
   </div>
-</div>
-<div class="center-c mt-4">
-  <input
-    type="text"
-    id="searchBar"
-    class="search-bar mr-3"
-    [(ngModel)]="searchTerm"
-    type="text"
-    placeholder="Search invoices..."
-  />
-  <div>
+
+  <div class="mt-4 ml-3">
     <div class="dropdown">
       <button class="bttn-white dropdown-toggle" type="button" data-toggle="dropdown"><span>Actions</span></button>
       <ul class="dropdown-menu">
@@ -58,6 +62,10 @@
       <i class="material-icons">arrow_downward</i>
     </button>
   </div>
+
+  <!-- <button (click)="viewAs('agri')" [class.active]="this.viewAsAgri" class="bttn-primary-sm">
+      All
+    </button> -->
 </div>
 
 <app-invoice-list

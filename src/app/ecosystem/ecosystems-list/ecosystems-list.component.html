@@ -7,20 +7,23 @@
 </div>
 <h1 class="main-title">Ecosystems List</h1>
 
-<div class="clearfix margin-top">
-  <button class="bttn-primary bttn-add pull-right" data-toggle="wizard" data-target="#newEcosystem">
-    <span>New Ecosystem</span>
-  </button>
+<div class="mt-1 actions-section clearfix">
+  <input
+    type="text"
+    id="searchBar"
+    class="search-bar"
+    [(ngModel)]="searchTerm"
+    type="text"
+    placeholder="Search ecosystems..."
+  />
+
+  <div class="flex-pr">
+    <button class="bttn-primary bttn-add pull-right" data-toggle="wizard" data-target="#newEcosystem">
+      <span>New Ecosystem</span>
+    </button>
+  </div>
 </div>
 
-<input
-  type="text"
-  id="searchBar"
-  class="search-bar"
-  [(ngModel)]="searchTerm"
-  type="text"
-  placeholder="Search ecosystems..."
-/>
 <table class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>
