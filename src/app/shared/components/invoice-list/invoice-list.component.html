@@ -89,7 +89,10 @@
         <span *ngIf="invoice.total_due">{{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}</span>
         <span *ngIf="!invoice.total_due">N/A</span>
       </td>
-      <td>{{ invoice.status }}</td>
+      <td>
+        <div *ngIf="invoice.status === 'INVOICE SENT'" class="status status-green">{{ invoice.status }}</div>
+        <div *ngIf="invoice.status === 'INVOICE SAVED'" class="status status-yellow">{{ invoice.status }}</div>
+      </td>
       <td class="text-right">
         <button *ngIf="invoice.draft == false" class="round-button-primary" [routerLink]="['/invoice', invoice._id]">
           <i class="material-icons">remove_red_eye</i>

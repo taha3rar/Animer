@@ -56,7 +56,13 @@
         <span *ngIf="order.total_due">{{ totalDue(order) | number: '1.2-2' }} {{ order.currency }}</span>
         <span *ngIf="!order.total_due">N/A</span>
       </td>
-      <td>{{ order.status }}</td>
+      <td>
+        <div *ngIf="order.status === 'INVOICE RECEIVED'" class="status status-green">{{ order.status }}</div>
+        <div *ngIf="order.status === 'ORDER SENT'" class="status status-orange">{{ order.status }}</div>
+        <div *ngIf="order.status === 'ORDER SAVED'" class="status status-yellow">{{ order.status }}</div>
+        <div *ngIf="order.status === 'INVOICE SENT'" class="status status-green">{{ order.status }}</div>
+        <div *ngIf="order.status === 'ORDER RECEIVED'" class="status status-orange">{{ order.status }}</div>
+      </td>
       <td class="text-right">
         <button
           *ngIf="userId == order.buyer._id && !order.draft"
