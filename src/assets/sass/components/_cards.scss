@@ -143,6 +143,7 @@
   div:nth-child(2) {
     align-self: center;
     text-align: center;
+    height: 70%;
     p:last-child {
       margin-bottom: 2rem;
       color: $light-gray;
@@ -156,11 +157,12 @@
 
   div:nth-child(3) {
     background-color: $light-gray-3;
-    margin: -0.8rem;
+    margin: -0.75rem;
     padding: 1rem 1rem;
     border-top: 1px solid $light-gray-2;
     color: $light-gray;
     font-size: 1.45rem;
+    height: 30%;
 
     i {
       font-size: 1.5rem;
