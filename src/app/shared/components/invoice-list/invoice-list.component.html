@@ -92,6 +92,7 @@
       <td>
         <div *ngIf="invoice.status === 'INVOICE SENT'" class="status status-green">{{ invoice.status }}</div>
         <div *ngIf="invoice.status === 'INVOICE SAVED'" class="status status-yellow">{{ invoice.status }}</div>
+        <div *ngIf="invoice.status === 'INVOICE RECEIVED'" class="status status-orange">{{ invoice.status }}</div>
       </td>
       <td class="text-right">
         <button *ngIf="invoice.draft == false" class="round-button-primary" [routerLink]="['/invoice', invoice._id]">
