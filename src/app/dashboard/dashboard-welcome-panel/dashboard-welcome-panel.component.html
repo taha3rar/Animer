@@ -4,14 +4,8 @@
     <div class="flex">
       <div class="panel-left">
         <ul>
-          <li class="step" *ngIf="currentUser.roles[0] === 'seller'">
-            <a data-toggle="tab" class="label" href="#receive-po">Orders</a>
-          </li>
-          <li class="step" [class.active]="currentUser.roles[0] === 'buyer'" *ngIf="currentUser.roles[0] === 'buyer'">
+          <li class="step" [class.active]="currentUser.roles[0] === 'buyer'">
             <a data-toggle="tab" class="label" href="#place-order">Orders</a>
-          </li>
-          <li class="step" *ngIf="currentUser.roles[0] === 'agribusiness'">
-            <a data-toggle="tab" class="label" href="#rec-iss-po">Orders</a>
           </li>
           <li class="step">
             <a data-toggle="tab" class="label" href="#quote-request">Quote Requests</a>
@@ -21,7 +15,7 @@
             [class.active]="currentUser.roles[0] === 'seller' || currentUser.roles[0] === 'agribusiness'"
             *ngxPermissionsOnly="['create-pi']"
           >
-            <a data-toggle="tab" class="label" href="#create-pi">Proforma Invoice</a>
+            <a data-toggle="tab" class="label" href="#create-pi">Proforma Invoices</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-product']">
             <a data-toggle="tab" class="label" href="#create-product">Products</a>
@@ -36,12 +30,6 @@
           <li class="step" *ngIf="currentUser.roles[0] === 'buyer'">
             <a data-toggle="tab" class="label" href="#review-pi">Proforma Invoices</a>
           </li>
-
-          <!-- <li 
-            class="step" 
-            *ngIf="currentUser.roles[0] === 'seller'">
-            <a data-toggle="tab" class="label" href="#receive-po">Orders</a>
-          </li> -->
         </ul>
       </div>
       <div class="panel-right">
