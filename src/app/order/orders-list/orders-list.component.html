@@ -40,9 +40,6 @@
   <button (click)="viewAs('buyer')" [class.active]="this.viewAsBuyer">
     Buyer
   </button>
-  <button (click)="viewAs('agri')" [class.active]="this.viewAsAgri" class="bttn-primary-sm">
-    All
-  </button>
 </div>
 
 <app-order-list [searchTerm]="searchTerm" [orders]="orders"></app-order-list>

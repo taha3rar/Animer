@@ -14,7 +14,7 @@
       <th mat-sort-header="issuedOn" translate>Date</th>
       <th mat-sort-header="issuedFor" *ngIf="viewAsSeller">Issued for</th>
       <th mat-sort-header="issueBy" *ngIf="!viewAsSeller">Issued by</th>
-      <th mat-sort-header="signedBy" translate>Signed by</th>
+      <!-- <th mat-sort-header="signedBy" translate>Signed by</th> -->
       <th translate>Product</th>
       <th mat-sort-header="amount" translate>Amount</th>
       <th mat-sort-header="totalDue" translate>Price</th>
@@ -40,13 +40,14 @@
       </td>
       <td class="text-center">{{ invoice.numericId }}</td>
       <td>{{ invoice.date_created | date: 'dd/MM/yyyy' }}</td>
+
       <td>
-        <span *ngIf="viewAsSeller">{{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }}</span>
-        <span *ngIf="!viewAsSeller">{{ invoice.seller.company_name }}</span>
-      </td>
-      <td>
-        <span *ngIf="invoice.sign_by.first_name && invoice.sign_by.last_name"
-          >{{ invoice.sign_by.first_name }} {{ invoice.sign_by.last_name }}</span
+        <span *ngIf="viewAsSeller"
+          >{{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }} / {{ invoice.sign_by.first_name }}
+          {{ invoice.sign_by.last_name }}</span
+        >
+        <span *ngIf="!viewAsSeller"
+          >{{ invoice.seller.company_name }} / {{ invoice.sign_by.first_name }} {{ invoice.sign_by.last_name }}</span
         >
         <span *ngIf="!invoice.sign_by.first_name || !invoice.sign_by.last_name">N/A</span>
       </td>

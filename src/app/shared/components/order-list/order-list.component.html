@@ -4,7 +4,6 @@
       <th mat-sort-header="id" translate class="text-center">ID</th>
       <th mat-sort-header="date" translate>Date</th>
       <th mat-sort-header="company" translate>Company</th>
-      <th mat-sort-header="contact" translate>Contact</th>
       <th mat-sort-header="amount" translate>Amount</th>
       <th mat-sort-header="price" translate>Price</th>
       <th mat-sort-header="status" translate>Status</th>
@@ -20,12 +19,12 @@
       <td class="text-center">{{ order.numericId }}</td>
       <td>{{ order.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>
-        <span *ngIf="userId == order.seller._id">{{ order.buyer.company_name }}</span>
-        <span *ngIf="userId == order.buyer._id">{{ order.seller.company_name }}</span>
-      </td>
-      <td>
-        <span *ngIf="userId == order.seller._id">{{ order.buyer.first_name }} {{ order.buyer.last_name }}</span>
-        <span *ngIf="userId == order.buyer._id">{{ order.seller.first_name }} {{ order.seller.last_name }}</span>
+        <span *ngIf="userId == order.seller._id"
+          >{{ order.buyer.company_name }} / {{ order.buyer.first_name }} {{ order.buyer.last_name }}</span
+        >
+        <span *ngIf="userId == order.buyer._id"
+          >{{ order.seller.company_name }} / {{ order.seller.first_name }} {{ order.seller.last_name }}</span
+        >
       </td>
       <td>
         <span *ngIf="order.total_weight && order.document_weight_unit"
