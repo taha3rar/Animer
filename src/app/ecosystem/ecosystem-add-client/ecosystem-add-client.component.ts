@@ -2,13 +2,14 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Client } from '@app/core/models/user/client';
 import { EcosystemService } from '@app/core';
 import { Router } from '@angular/router';
+import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
 
 @Component({
   selector: 'app-ecosystem-add-client',
   templateUrl: './ecosystem-add-client.component.html',
   styleUrls: ['./ecosystem-add-client.component.scss']
 })
-export class EcosystemAddClientComponent implements OnInit {
+export class EcosystemAddClientComponent extends BaseListComponent implements OnInit {
   @Input()
   clients: Client[];
 
@@ -20,7 +21,8 @@ export class EcosystemAddClientComponent implements OnInit {
 
   newParticipants: Client[];
 
-  constructor(private ecosystemService: EcosystemService, private router: Router) {
+  constructor(private ecosystemService: EcosystemService, protected router: Router) {
+    super();
     this.newParticipants = [];
   }
 

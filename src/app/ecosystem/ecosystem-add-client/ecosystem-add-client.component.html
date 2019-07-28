@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let client of clients">
+            <tr *ngFor="let client of (clients | paginate: { itemsPerPage: 7, currentPage: currentPage })">
               <td>
                 <input type="checkbox" class="checkbox" [id]="client.numericId" (change)="pushClient(client)" /><label
                   class="checkbox_label"
@@ -32,7 +32,7 @@
           </tbody>
         </table>
       </div>
-
+      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
       <button class="bttn-primary pull right" (click)="save()">Save Changes</button>
     </div>
   </div>
