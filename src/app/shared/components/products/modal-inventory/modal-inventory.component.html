@@ -29,14 +29,18 @@
           </p>
         </div>
         <div class="product-details">
-          <figure
-            class="img-circular img-circular-sm"
-            [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
-          ></figure>
-          <p class="heading-2">
-            {{ product.produce }} <br />
-            {{ product.variety }}
-          </p>
+          <div>
+            <figure
+              class="img-circular img-circular-sm"
+              [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
+            ></figure>
+          </div>
+          <div>
+            <p class="heading-2">
+              {{ product.produce }} <br />
+              {{ product.variety }}
+            </p>
+          </div>
         </div>
         <div class="package-details">
           <table>
