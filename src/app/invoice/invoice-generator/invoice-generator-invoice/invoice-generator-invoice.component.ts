@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 import { InvoiceService } from '@app/core/api/invoice.service';
 import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-invoice-generator-invoice',
@@ -27,6 +28,9 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   invoiceProducts: ProductInvoice[];
   productsValid = true;
   @Output() savedAsDraft = new EventEmitter();
+  validBy: NgbDateStruct;
+  issuedOn: NgbDateStruct;
+  deliveryOn: NgbDateStruct;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -44,6 +48,9 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     }
     this.onChanges();
     this.formInput = this.form;
+    this.validBy = this.formInput.value.sign_by.date;
+    this.issuedOn = this.formInput.value.date_created;
+    this.deliveryOn = this.formInput.value.deliver_to.expected_delivery_date;
   }
 
   onChanges(): void {
@@ -124,50 +131,76 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     });
   }
 
-  draftInvoice() {
-    let _date = this.form.value.sign_by.date;
-    if (_date) {
-      this.invoice['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
+  dateUpdate(dateName: string, dateUpdated: NgbDateStruct, dateForm?: string) {
+    if (dateUpdated) {
+      dateForm
+        ? this.invoice[dateForm].patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          })
+        : this.form.patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          });
+    } else {
+      dateForm ? this.invoice[dateForm].patchValue({ [dateName]: null }) : this.form.patchValue({ [dateName]: null });
     }
-    _date = this.form.value.deliver_to.expected_delivery_date;
-    if (_date) {
-      this.invoice['deliver_to'].patchValue({
-        expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day)
+  }
+
+  preSubmit() {
+    if (this.validBy) {
+      this.invoice['sign_by'].patchValue({
+        date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day).toJSON()
       });
+    } else {
+      this.invoice['sign_by'].patchValue({ date: null });
     }
-    _date = this.form.value.date_created;
-    _date
-      ? this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) })
-      : this.form.patchValue({ date_created: Date.now() });
+    if (this.deliveryOn) {
+      this.invoice['deliver_to'].patchValue({
+        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day).toJSON()
+      });
+    } else {
+      this.invoice['deliver_to'].patchValue({ expected_delivery_date: null });
+    }
+    this.issuedOn
+      ? this.form.patchValue({
+          date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
+        })
+      : this.form.patchValue({ date_created: new Date().toJSON() });
+  }
+
+  draftInvoice() {
+    this.disableSubmitButton(true);
+    this.preSubmit();
     this.savedAsDraft.emit(true);
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
+    this.disableSubmitButton(true);
     if (!this.draft) {
-      this.invoiceService.draft(this.newInvoice).subscribe(() => {
-        this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
-        this.router.navigateByUrl('/invoice/list');
-      });
+      this.invoiceService.draft(this.newInvoice).subscribe(
+        () => {
+          this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
+          this.router.navigateByUrl('/invoice');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
     } else {
-      this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(() => {
-        this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
-        this.router.navigateByUrl('/invoice/list');
-      });
+      this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(
+        () => {
+          this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
+          this.router.navigateByUrl('/invoice');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
     }
   }
 
   toReview() {
-    let _date = this.form.value.sign_by.date;
-    this.invoice['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
-    _date = this.form.value.deliver_to.expected_delivery_date;
-    if (_date) {
-      this.invoice['deliver_to'].patchValue({
-        expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day)
-      });
-    }
-    _date = this.form.value.date_created;
-    this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) });
+    this.preSubmit();
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);

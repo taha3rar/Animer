@@ -17,7 +17,7 @@ import { PermissionGuard } from '../shared/guards/permission.guard';
 const routes: Routes = [
   Shell.childRoutes([
     {
-      path: 'client/list',
+      path: 'client',
       component: ClientListComponent,
       resolve: {
         currentUser: CurrentUserResolver,

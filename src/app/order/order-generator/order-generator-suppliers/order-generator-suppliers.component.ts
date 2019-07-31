@@ -40,11 +40,21 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     }
   }
 
-  validateSeller() {
+  get order() {
+    return this.form.controls;
+  }
+
+  resetForm() {
+    this.orderDataService.setProductList([]);
+    this.order['subtotal'].setValue(0);
+    this.order['currency'].setValue(undefined);
     this.orderDataService.setForm(this.form);
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
     });
+  }
+
+  validateSeller() {
     this.nextBtnClicked = true;
   }
 }

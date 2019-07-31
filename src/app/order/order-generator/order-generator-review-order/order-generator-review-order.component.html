@@ -139,7 +139,7 @@
       <p class="heading-4">
         Expected delivery date: {{ order?.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}
       </p>
-      <button class="bttn-primary pull-right" (click)="saveOrder()">Submit</button>
+      <button #submitButton class="bttn-primary pull-right" (click)="saveOrder()">Submit</button>
     </div>
   </div>
 </div>

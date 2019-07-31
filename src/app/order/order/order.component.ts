@@ -31,6 +31,6 @@ export class OrderComponent implements OnInit {
   }
 
   back() {
-    this.router.navigateByUrl('/order/list');
+    this.router.navigateByUrl('/order');
   }
 }

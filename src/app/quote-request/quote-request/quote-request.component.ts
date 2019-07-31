@@ -6,7 +6,6 @@ import { QuoteRequestService } from '@app/core/api/quote-request.service';
 import { AlertsService } from '@app/core/alerts.service';
 import { Router } from '@angular/router';
 import { ProductQuoteRequest } from '@app/core/models/quote-request/product-quoteRequest';
-import swal from 'sweetalert';
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { User } from '@app/core/models/order/user';
 
@@ -47,12 +46,18 @@ export class QuoteRequestComponent extends DocumentDownloadComponent implements 
   }
 
   submitQuoteRequest() {
+    this.disableSubmitButton(true);
     if (this.quoteRequest.product && this.quoteRequest.sellers.length > 0) {
       this.validQuoteRequest.emit(true);
-      this.quoteRequestService.create(this.quoteRequest).subscribe(quoteRequest => {
-        this.alerts.showAlert('Your quote request has been sent');
-        this.router.navigateByUrl('/quote-request/list');
-      });
+      this.quoteRequestService.create(this.quoteRequest).subscribe(
+        quoteRequest => {
+          this.alerts.showAlert('Your quote request has been sent');
+          this.router.navigateByUrl('/quote-request');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
     } else {
       this.alerts.showAlert('Please fill in all the necessary informations in order to send the Quotation');
     }

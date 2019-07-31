@@ -10,6 +10,7 @@ import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { CanComponentDeactivate } from '../../shared/guards/confirmation.guard';
 import { Quotation } from '@app/core/models/quotation/quotation';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-order-generator',
@@ -100,7 +101,16 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
       payment_comments: this.draftOrder.payment_comments,
       order_comments: this.draftOrder.order_comments,
       sign_by: this.formBuilder.group({
-        date: [Object.is(this.sign_by, undefined) ? '' : this.sign_by.date, Validators.required],
+        date: [
+          this.draftOrder && this.draftOrder.sign_by && this.draftOrder.sign_by.date
+            ? {
+                day: moment(this.sign_by.date).date(),
+                month: moment(this.sign_by.date).month() + 1,
+                year: moment(this.sign_by.date).year()
+              }
+            : null,
+          Validators.required
+        ],
         first_name: [Object.is(this.sign_by, undefined) ? '' : this.sign_by.first_name, Validators.required],
         last_name: [Object.is(this.sign_by, undefined) ? '' : this.sign_by.last_name, Validators.required],
         company_name: [Object.is(this.sign_by, undefined) ? '' : this.sign_by.company_name, Validators.required]
@@ -111,9 +121,26 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         city: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.city, Validators.required],
         zip_code: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.zip_code],
         phone: [Object.is(this.deliver_to, undefined) ? '' : this.deliver_to.phone, Validators.required],
-        expected_delivery_date: [Object.is(this.deliver_to, undefined) ? null : this.deliver_to.expected_delivery_date]
+        expected_delivery_date: [
+          this.draftOrder && this.draftOrder.deliver_to && this.draftOrder.deliver_to.expected_delivery_date
+            ? {
+                day: moment(this.deliver_to.expected_delivery_date).date(),
+                month: moment(this.deliver_to.expected_delivery_date).month() + 1,
+                year: moment(this.deliver_to.expected_delivery_date).year()
+              }
+            : null
+        ]
       }),
-      date_created: [undefined, Validators.required]
+      date_created: [
+        this.draftOrder && this.draftOrder.date_created
+          ? {
+              day: moment(this.draftOrder.date_created).date(),
+              month: moment(this.draftOrder.date_created).month() + 1,
+              year: moment(this.draftOrder.date_created).year()
+            }
+          : null,
+        Validators.required
+      ]
     });
     if (!this.isDraft && !this.fromQuotation) {
       this.route.data.subscribe(({ buyer }) => {
@@ -167,7 +194,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   }
 
   back() {
-    this.router.navigateByUrl('/order/list');
+    this.router.navigateByUrl('/order');
   }
 
   changeValue(recievedValue: any) {

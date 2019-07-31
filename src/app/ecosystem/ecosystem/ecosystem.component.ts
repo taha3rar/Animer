@@ -36,7 +36,7 @@ export class EcosystemComponent extends BaseListComponent implements OnInit {
   }
 
   back() {
-    this.router.navigateByUrl('/ecosystem/list');
+    this.router.navigateByUrl('/ecosystem');
   }
 
   get ownedBy() {

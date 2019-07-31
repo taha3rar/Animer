@@ -7,4 +7,5 @@ export class ProductSetupInvoice {
   productList: ProductInvoice[];
   index: string;
   currency: string;
+  transactionType: string;
 }

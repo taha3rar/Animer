@@ -1,14 +1,14 @@
 import { StepperService } from '@app/core/stepper.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
-import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as BigUser from '@app/core/models/user/user';
 import * as SmallUser from '@app/core/models/order/user';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Product } from '@app/core/models/order/product';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
 import swal from 'sweetalert';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-invoice-generator',
@@ -88,7 +88,13 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
       order_comments: Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.order_comments,
       sign_by: this.formBuilder.group({
         date: [
-          Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.sign_by.date,
+          this.draftInvoice && this.draftInvoice.sign_by && this.draftInvoice.sign_by.date
+            ? {
+                day: moment(this.draftInvoice.sign_by.date).date(),
+                month: moment(this.draftInvoice.sign_by.date).month() + 1,
+                year: moment(this.draftInvoice.sign_by.date).year()
+              }
+            : null,
           Validators.required
         ],
         first_name: [
@@ -108,10 +114,25 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
         zip_code: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.zip_code],
         phone_number: [Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.phone_number],
         expected_delivery_date: [
-          Object.is(this.draftInvoice, undefined) ? undefined : this.draftInvoice.deliver_to.expected_delivery_date
+          this.draftInvoice && this.draftInvoice.deliver_to && this.draftInvoice.deliver_to.expected_delivery_date
+            ? {
+                day: moment(this.draftInvoice.deliver_to.expected_delivery_date).date(),
+                month: moment(this.draftInvoice.deliver_to.expected_delivery_date).month() + 1,
+                year: moment(this.draftInvoice.deliver_to.expected_delivery_date).year()
+              }
+            : null
         ]
       }),
-      date_created: [undefined, Validators.required]
+      date_created: [
+        this.draftInvoice && this.draftInvoice.date_created
+          ? {
+              day: moment(this.draftInvoice.date_created).date(),
+              month: moment(this.draftInvoice.date_created).month() + 1,
+              year: moment(this.draftInvoice.date_created).year()
+            }
+          : null,
+        Validators.required
+      ]
     });
 
     if (!this.draftInvoice) {
@@ -176,7 +197,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
   }
 
   back() {
-    this.router.navigateByUrl('/invoice/list');
+    this.router.navigateByUrl('/invoice');
   }
 
   newDraftInvoice(recievedValue: any) {

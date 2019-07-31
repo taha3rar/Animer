@@ -10,7 +10,7 @@ export class Quotation {
     email: String;
     phone_number: String;
     contact_by: [String];
-    company_name: String;
+    company_name: string;
     address: String;
     city: String;
     zipcode: String;
@@ -19,12 +19,12 @@ export class Quotation {
   };
   seller: {
     _id: String;
-    first_name: String;
-    last_name: String;
+    first_name: string;
+    last_name: string;
     email: String;
     phone_number: String;
     contact_by: [String];
-    company_name: String;
+    company_name: string;
     address: String;
     city: String;
     zipcode: String;
@@ -40,7 +40,7 @@ export class Quotation {
   valid_by: Date;
   draft: Boolean;
   product: ProductQuotation;
-  status: String;
+  status: string;
   date_created: Date;
   total_price: Number;
 }

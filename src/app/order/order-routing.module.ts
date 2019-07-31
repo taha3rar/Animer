@@ -24,7 +24,7 @@ import { PermissionGuard } from '../shared/guards/permission.guard';
 const routes: Routes = [
   Shell.childRoutes([
     {
-      path: 'order/list',
+      path: 'order',
       component: OrdersListComponent,
       resolve: {
         orders: OrderListResolver,

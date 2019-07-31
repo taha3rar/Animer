@@ -8,29 +8,39 @@
 
 <h1 translate class="main-title">Orders List</h1>
 
-<div class="clearfix margin-top">
-  <button class="btn-primary-transp pull-right" (click)="exportAll()">
-    <i class="material-icons">arrow_upward</i>
-    <span translate>Export All Orders</span>
-  </button>
+<div class="clearfix mt-1 actions-section">
+  <div>
+    <input
+      type="text"
+      id="searchBar"
+      class="search-bar"
+      [(ngModel)]="searchTerm"
+      type="text"
+      placeholder="Search orders..."
+    />
+  </div>
 
-  <button *ngxPermissionsOnly="['create-order']" class="bttn-primary bttn-add pull-right" routerLink="/order/generator">
-    <span translate>Place Order </span>
-  </button>
+  <div class="flex-pr">
+    <button class="btn-primary-transp" (click)="exportAll()">
+      <i class="material-icons">arrow_upward</i>
+      <span translate>Export All Orders</span>
+    </button>
 
-  <div class="pull-left two-btns" *ngIf="agribusinessUser">
-    <p class="heading-2">View records as:</p>
-    <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
-      Seller
-    </button>
-    <button (click)="viewAs('buyer')" [class.active]="this.viewAsBuyer">
-      Buyer
-    </button>
-    <button (click)="viewAs('agri')" [class.active]="this.viewAsAgri" class="bttn-primary-sm">
-      All
+    <button *ngxPermissionsOnly="['create-order']" class="bttn-primary bttn-add" routerLink="/order/generator">
+      <span translate>Place Order </span>
     </button>
   </div>
 </div>
 
-<app-order-list [orders]="orders"></app-order-list>
+<div class="two-btns" *ngIf="agribusinessUser">
+  <p class="heading-2">View records as:</p>
+  <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
+    Seller
+  </button>
+  <button (click)="viewAs('buyer')" [class.active]="this.viewAsBuyer">
+    Buyer
+  </button>
+</div>
+
+<app-order-list [searchTerm]="searchTerm" [orders]="orders"></app-order-list>
 <app-orders-tutorials></app-orders-tutorials>

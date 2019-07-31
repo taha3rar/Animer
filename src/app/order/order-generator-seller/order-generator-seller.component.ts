@@ -7,6 +7,7 @@ import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
 import swal from 'sweetalert';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-order-generator-seller',
@@ -87,13 +88,22 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
         Validators.required
       ],
       currency: [this.document.currency, Validators.required],
-      payment_comments: undefined,
-      order_comments: undefined,
+      payment_comments: this.invoice ? this.invoice.payment_comments : undefined,
+      invoice_comment: this.isDraft ? this.invoice.invoice_comment : undefined,
       sign_by: this.formBuilder.group({
-        date: [undefined, Validators.required],
-        first_name: [undefined, Validators.required],
-        last_name: [undefined, Validators.required],
-        company_name: [undefined]
+        date: [
+          this.invoice && this.invoice.sign_by && this.invoice.sign_by.date
+            ? {
+                day: moment(this.invoice.sign_by.date).date(),
+                month: moment(this.invoice.sign_by.date).month() + 1,
+                year: moment(this.invoice.sign_by.date).year()
+              }
+            : null,
+          Validators.required
+        ],
+        first_name: [this.isDraft ? this.invoice.sign_by.first_name : undefined, Validators.required],
+        last_name: [this.isDraft ? this.invoice.sign_by.last_name : undefined, Validators.required],
+        company_name: [this.isDraft ? this.invoice.sign_by.company_name : undefined]
       }),
       deliver_to: this.formBuilder.group({
         contact_name: [this.document.deliver_to.contact_name, Validators.required],
@@ -106,7 +116,16 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
         ],
         expected_delivery_date: [this.document.deliver_to.expected_delivery_date]
       }),
-      date_created: [this.document.date_created, Validators.required]
+      date_created: [
+        this.invoice && this.invoice.date_created
+          ? {
+              day: moment(this.invoice.date_created).date(),
+              month: moment(this.invoice.date_created).month() + 1,
+              year: moment(this.invoice.date_created).year()
+            }
+          : null,
+        Validators.required
+      ]
     });
 
     this.invoiceForm.controls.seller.setValue(this.document.seller);
@@ -120,7 +139,7 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
   }
 
   back() {
-    this.router.navigateByUrl('/order/list');
+    this.router.navigateByUrl('/order');
   }
 
   confirm() {

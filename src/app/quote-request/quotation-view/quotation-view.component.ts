@@ -20,6 +20,6 @@ export class QuotationViewComponent implements OnInit {
   }
 
   back() {
-    this.router.navigateByUrl('/quote-request/list');
+    this.router.navigateByUrl('/quote-request');
   }
 }

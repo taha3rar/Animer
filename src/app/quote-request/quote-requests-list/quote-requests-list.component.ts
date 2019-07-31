@@ -11,11 +11,14 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 export class QuoteRequestsListComponent implements OnInit {
   isBuyer: Boolean;
   quoteRequests: QuoteRequest;
+  searchTerm: string;
 
   constructor(private authService: AuthenticationService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
-    this.quoteRequests = this.route.snapshot.data['quoteRequests'];
+    this.route.data.subscribe(({ quoteRequests }) => {
+      this.quoteRequests = quoteRequests;
+    });
   }
 }

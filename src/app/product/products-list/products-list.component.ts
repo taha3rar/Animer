@@ -7,16 +7,19 @@ import { BaseListComponent } from '@app/shared/components/base-list/base-list.co
 import { ProductService } from '@app/core';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ProcessedProductGeneratorComponent } from '../product-generator/processed-product-generator/processed-product-generator.component';
+import { Sort } from '@angular/material/sort';
+import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.scss']
+  styleUrls: ['./products-list.component.scss'],
+  providers: [FilterPipe]
 })
 export class ProductsListComponent extends BaseListComponent implements OnInit {
   products: Product[];
   selectedProduct: Product;
-  page = 1;
+  searchTerm: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,14 +28,15 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
     protected router: Router
   ) {
     super(productService, router, {
-      deleteText: 'Once deleted, you will not be able to recover this product!'
+      deleteText: 'Once deleted, you will not be able to recover this product!',
+      pageName: 'products'
     });
     this.selectedProduct = new Product();
   }
 
   ngOnInit() {
     this.route.data.subscribe(({ products }) => {
-      this.products = products;
+      this.products = products.slice();
     });
   }
 
@@ -41,7 +45,7 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
       productList: this.products,
       index: index
     };
-    index = (this.page - 1) * this.itemsPerPage + index;
+    index = (this.currentPage - 1) * this.itemsPerPage + index;
     this.selectedProduct = this.products[index];
   }
 
@@ -66,8 +70,36 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
     dialogConfig.height = height;
     dialogConfig.width = '800px';
     dialogConfig.data = dialogData;
-    dialogConfig.disableClose = true;
+    this.dialog.open(component, dialogConfig);
+  }
 
-    const dialogRef = this.dialog.open(component, dialogConfig);
+  sortData(sort: Sort) {
+    const data = this.products.slice();
+    if (!sort.active || sort.direction === '') {
+      this.products = data;
+      return;
+    }
+
+    this.products = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id':
+          return super.compare(a.numericId, b.numericId, isAsc);
+        case 'product':
+          return super.compare(a.produce, b.produce, isAsc);
+        case 'sku':
+          return super.compare(a.sku, b.sku, isAsc);
+        case 'packageType':
+          return super.compare(a.type_of_package, b.type_of_package, isAsc);
+        case 'availability':
+          return super.compare(
+            a.product_type !== 'agricultural' ? Number(a.quantity) : Number(a.total_weight),
+            b.product_type !== 'agricultural' ? Number(b.quantity) : Number(b.total_weight),
+            isAsc
+          );
+        default:
+          return 0;
+      }
+    });
   }
 }

@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EcosystemAddClientComponent } from './ecosystem-add-client/ecosystem-add-client.component';
 import { EcosystemGeneratorComponent } from './ecosystem-generator/ecosystem-generator.component';
 import { EcosystemResolver } from './resolvers/ecosystem.resolver';
+import { MatSortModule } from '@angular/material';
+import { SharedModule } from '@app/shared';
 
 @NgModule({
   declarations: [EcosystemsListComponent, EcosystemComponent, EcosystemGeneratorComponent, EcosystemAddClientComponent],
@@ -23,7 +25,9 @@ import { EcosystemResolver } from './resolvers/ecosystem.resolver';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    TutorialsModule
+    TutorialsModule,
+    MatSortModule,
+    SharedModule
   ],
   providers: [CurrentUserEcosystemsResolver, CurrentUserClientsResolver, CurrentUserResolver, EcosystemResolver]
 })

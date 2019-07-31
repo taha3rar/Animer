@@ -32,6 +32,7 @@
                   id="{{ client.numericId }}"
                   [value]="client"
                   formControlName="seller"
+                  (ngModelChange)="resetForm()"
                 />
                 <label for="{{ client.numericId }}" class="form_radio_label">
                   <span class="form_radio_btn"></span>
@@ -55,7 +56,7 @@
       <div class="add-supplier-box" *ngIf="clients.length == 0">
         <img src="../../../../assets/img/default/pi-po/noClient.png" width="285" height="183" />
         <p>You have no clients yet! Please go to the clients page to add your clients.</p>
-        <button class="bttn-primary" [routerLink]="['/client/list']">
+        <button class="bttn-primary" [routerLink]="['/client']">
           Go to clients
         </button>
       </div>

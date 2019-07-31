@@ -1,27 +1,30 @@
-<table class="table main-table">
+<table class="table main-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr>
-      <th translate class="text-center">ID</th>
-      <th translate>Date</th>
-      <th translate>Company</th>
-      <th translate>Contact</th>
-      <th translate>Amount</th>
-      <th translate>Price</th>
-      <th translate>Status</th>
+      <th mat-sort-header="id" translate class="text-center">ID</th>
+      <th mat-sort-header="date" translate>Date</th>
+      <th mat-sort-header="company" translate>Company</th>
+      <th mat-sort-header="amount" translate>Amount</th>
+      <th mat-sort-header="price" translate>Price</th>
+      <th mat-sort-header="status" translate>Status</th>
       <th translate class="text-right">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of (orders | paginate: { itemsPerPage: itemsPerPage, currentPage: page })">
+    <tr
+      *ngFor="
+        let order of (orders | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage })
+      "
+    >
       <td class="text-center">{{ order.numericId }}</td>
       <td>{{ order.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>
-        <span *ngIf="userId == order.seller._id">{{ order.buyer.company_name }}</span>
-        <span *ngIf="userId == order.buyer._id">{{ order.seller.company_name }}</span>
-      </td>
-      <td>
-        <span *ngIf="userId == order.seller._id">{{ order.buyer.first_name }} {{ order.buyer.last_name }}</span>
-        <span *ngIf="userId == order.buyer._id">{{ order.seller.first_name }} {{ order.seller.last_name }}</span>
+        <span *ngIf="userId == order.seller._id"
+          >{{ order.buyer.company_name }} / {{ order.buyer.first_name }} {{ order.buyer.last_name }}</span
+        >
+        <span *ngIf="userId == order.buyer._id"
+          >{{ order.seller.company_name }} / {{ order.seller.first_name }} {{ order.seller.last_name }}</span
+        >
       </td>
       <td>
         <span *ngIf="order.total_weight && order.document_weight_unit"
@@ -52,7 +55,13 @@
         <span *ngIf="order.total_due">{{ totalDue(order) | number: '1.2-2' }} {{ order.currency }}</span>
         <span *ngIf="!order.total_due">N/A</span>
       </td>
-      <td>{{ order.status }}</td>
+      <td>
+        <div *ngIf="order.status === 'INVOICE RECEIVED'" class="status status-green">{{ order.status }}</div>
+        <div *ngIf="order.status === 'ORDER SENT'" class="status status-orange">{{ order.status }}</div>
+        <div *ngIf="order.status === 'ORDER SAVED'" class="status status-yellow">{{ order.status }}</div>
+        <div *ngIf="order.status === 'INVOICE SENT'" class="status status-green">{{ order.status }}</div>
+        <div *ngIf="order.status === 'ORDER RECEIVED'" class="status status-orange">{{ order.status }}</div>
+      </td>
       <td class="text-right">
         <button
           *ngIf="userId == order.buyer._id && !order.draft"
@@ -102,4 +111,4 @@
   </tbody>
 </table>
 
-<pagination-controls (pageChange)="page = $event"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

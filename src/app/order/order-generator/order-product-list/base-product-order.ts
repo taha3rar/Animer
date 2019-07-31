@@ -12,11 +12,15 @@ export class BaseProductOrder implements OnInit {
   update: boolean;
   currencies = currencies;
   units = measureUnits;
+  transactionType: string;
 
   constructor(private dialog: MatDialogRef<any>, public data: ProductSetupInvoice, private productType: string) {}
 
   ngOnInit() {
     this.update = false;
+    if (this.data.transactionType) {
+      this.transactionType = this.data.transactionType;
+    }
     if (this.data.currency) {
       this.currency = this.data.currency;
     }

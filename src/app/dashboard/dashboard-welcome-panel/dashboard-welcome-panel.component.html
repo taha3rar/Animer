@@ -4,22 +4,23 @@
     <div class="flex">
       <div class="panel-left">
         <ul>
+          <li class="step" [class.active]="currentUser.roles[0] === 'buyer'">
+            <a data-toggle="tab" class="label" href="#place-order">Orders</a>
+          </li>
+          <li class="step">
+            <a data-toggle="tab" class="label" href="#quote-request">Quote Requests</a>
+          </li>
           <li
             class="step"
             [class.active]="currentUser.roles[0] === 'seller' || currentUser.roles[0] === 'agribusiness'"
             *ngxPermissionsOnly="['create-pi']"
           >
-            <a data-toggle="tab" class="label" href="#create-pi">Proforma Invoice</a>
+            <a data-toggle="tab" class="label" href="#create-pi">Proforma Invoices</a>
           </li>
-          <li class="step" [class.active]="currentUser.roles[0] === 'buyer'" *ngIf="currentUser.roles[0] === 'buyer'">
-            <a data-toggle="tab" class="label" href="#place-order">Orders</a>
+          <li class="step" *ngxPermissionsOnly="['create-product']">
+            <a data-toggle="tab" class="label" href="#create-product">Products</a>
           </li>
-          <li class="step" *ngIf="currentUser.roles[0] === 'agribusiness'">
-            <a data-toggle="tab" class="label" href="#rec-iss-po">Orders</a>
-          </li>
-          <li class="step">
-            <a data-toggle="tab" class="label" href="#quote-request">Quote Requests</a>
-          </li>
+
           <li class="step" *ngxPermissionsOnly="['create-client']">
             <a data-toggle="tab" class="label" href="#add-clients">Clients</a>
           </li>
@@ -28,12 +29,6 @@
           </li>
           <li class="step" *ngIf="currentUser.roles[0] === 'buyer'">
             <a data-toggle="tab" class="label" href="#review-pi">Proforma Invoices</a>
-          </li>
-          <li class="step" *ngxPermissionsOnly="['create-product']">
-            <a data-toggle="tab" class="label" href="#create-product">Products</a>
-          </li>
-          <li class="step" *ngIf="currentUser.roles[0] === 'seller'">
-            <a data-toggle="tab" class="label" href="#receive-po">Orders</a>
           </li>
         </ul>
       </div>
@@ -49,7 +44,7 @@
               clients to your network, centrally manage your existing clients, and review the transactions you have with
               them.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/client/list">Go to Clients</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/client">Go to Clients</button>
           </div>
           <div
             class="tab-pane"
@@ -63,7 +58,7 @@
               Create and distribute purchase orders to your sellers, review their proforma invoices, upload your own
               necessary documents, and manage the entire trade process in one place.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/order/list">Go to Orders</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/order">Go to Orders</button>
           </div>
           <div class="tab-pane" id="quote-request" *ngxPermissionsOnly="['create-qr']">
             <figure><img src="../../assets/img/dashboard-imgs/quote-request.png" class="vector-tutorial" /></figure>
@@ -72,7 +67,7 @@
               Generate quote requests to your sellers, receive quotations, and choose the best offer to proceed with a
               purchase order.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/quote-request/list">Go to Quote Requests</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/quote-request">Go to Quote Requests</button>
           </div>
           <div class="tab-pane" id="quote-request" *ngIf="currentUser.roles[0] === 'seller'">
             <figure><img src="../../assets/img/dashboard-imgs/quote-request.png" class="vector-tutorial" /></figure>
@@ -82,7 +77,7 @@
               customized Quotations. You can enter customized quantities and comments per quotation, and send it to your
               buyers with the ability to download it as PDF.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/quote-request/list">Go to Quote Requests</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/quote-request">Go to Quote Requests</button>
           </div>
           <div class="tab-pane" id="create-ecosystem" *ngxPermissionsOnly="['create-ecosystem']">
             <figure *ngIf="currentUser.roles[0] === 'seller'">
@@ -96,7 +91,7 @@
               Have a lot of clients? The Ecosystems feature is where you can create customized groups of clients with
               common characteristics, such as location, product type, operation type and more.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/ecosystem/list">Go to Ecosystems</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/ecosystem">Go to Ecosystems</button>
           </div>
           <div
             class="tab-pane"
@@ -110,7 +105,7 @@
               submitted by your sellers in one place. Don’t worry about staying updated - once a proforma invoice has
               been received, you will be informed with live notifications.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/invoice/list">Go to Proforma Invoice</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/invoice">Go to Proforma Invoice</button>
           </div>
           <div
             class="tab-pane"
@@ -125,7 +120,7 @@
               are proforma invoices that are not connected directly to a purchase order you received from a buyer on the
               platform.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/invoice/list">Go to Proforma Invoices</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/invoice">Go to Proforma Invoices</button>
           </div>
           <div class="tab-pane" id="create-product" *ngxPermissionsOnly="['create-product']">
             <figure><img src="../../assets/img/dashboard-imgs/products.png" class="vector-tutorial" /></figure>
@@ -145,7 +140,7 @@
               one place. Once a purchase order has been received, you will be notified and then all you need to do is
               reply with a proforma invoice.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/order/list">Go to Orders</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/order">Go to Orders</button>
           </div>
           <div class="tab-pane" id="rec-iss-po" *ngIf="currentUser.roles[0] === 'agribusiness'">
             <figure><img src="../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" /></figure>
@@ -155,7 +150,7 @@
               orders from your buyers, reply to them with customized proforma invoices, upload your own necessary
               documents, and manage the entire trade process in one place.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/order/list">Go to Orders</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/order">Go to Orders</button>
           </div>
         </div>
       </div>

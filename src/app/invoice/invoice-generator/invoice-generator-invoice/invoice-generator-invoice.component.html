@@ -42,8 +42,8 @@
         <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
         <ul class="dropdown-menu">
           <li><a (click)="openDialogInventory()">From Inventory</a></li>
-          <li><a (click)="openDialogAgricultural()">New Agricultural Product</a></li>
-          <li><a (click)="openDialogProcessed()">New Processed Product</a></li>
+          <li><a (click)="openDialogAgricultural(undefined, 'invoice')">New Agricultural Product</a></li>
+          <li><a (click)="openDialogProcessed(undefined, 'invoice')">New Processed Product</a></li>
         </ul>
       </div>
       <!-- <button class="btn-primary-transp">
@@ -169,7 +169,9 @@
                 name="ddpp"
                 ngbDatepicker
                 #dp1="ngbDatepicker"
-                formControlName="date"
+                [(ngModel)]="validBy"
+                (ngModelChange)="dateUpdate('date', validBy, 'sign_by')"
+                [ngModelOptions]="{ standalone: true }"
               />
               <div class="input-group-append">
                 <button class="btn glyphicon glyphicon-calendar" (click)="dp1.toggle()" type="button"></button>
@@ -189,7 +191,9 @@
               placeholder="dd/mm/yyyy"
               ngbDatepicker
               #dp2="ngbDatepicker"
-              formControlName="date_created"
+              [(ngModel)]="issuedOn"
+              (ngModelChange)="dateUpdate('date_created', issuedOn)"
+              [ngModelOptions]="{ standalone: true }"
             />
             <div class="input-group-append">
               <button class="btn glyphicon glyphicon-calendar" (click)="dp2.toggle()" type="button"></button>
@@ -276,7 +280,9 @@
                 name="ddp"
                 ngbDatepicker
                 #dp3="ngbDatepicker"
-                formControlName="expected_delivery_date"
+                [(ngModel)]="deliveryOn"
+                (ngModelChange)="dateUpdate('expected_delivery_date', deliveryOn, 'deliver_to')"
+                [ngModelOptions]="{ standalone: true }"
               />
               <div class="input-group-append">
                 <button
@@ -311,6 +317,6 @@
     >
       Next Step &rarr;
     </button>
-    <button class="btn-primary-transp pull-right btn-draft" (click)="draftInvoice()">Save Draft</button>
+    <button #submitButton class="btn-primary-transp pull-right btn-draft" (click)="draftInvoice()">Save Draft</button>
   </div>
 </form>

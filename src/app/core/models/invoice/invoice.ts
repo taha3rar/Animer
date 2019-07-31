@@ -39,7 +39,7 @@ export class Invoice {
   status: string;
   draft: boolean;
   total_packages: Number;
-  total_weight: Number;
+  total_weight: number;
 
   constructor() {
     const date = Date.now();

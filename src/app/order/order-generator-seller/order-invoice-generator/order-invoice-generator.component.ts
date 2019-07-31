@@ -8,6 +8,7 @@ import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import * as moment from 'moment';
 import { FormGroup } from '@angular/forms';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order-invoice-generator',
@@ -24,6 +25,8 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   newInvoiceEvent = new EventEmitter<Invoice>();
   @Output()
   newDraftInvoice = new EventEmitter();
+  validBy: NgbDateStruct;
+  issuedOn: NgbDateStruct;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -37,6 +40,8 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
   ngOnInit() {
     this.onChanges();
     this.formInput = this.form;
+    this.validBy = this.formInput.value.sign_by.date;
+    this.issuedOn = this.formInput.value.date_created;
   }
 
   onChanges(): void {
@@ -79,39 +84,56 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
     );
   }
 
+  dateUpdate(dateName: string, dateUpdated: NgbDateStruct, dateForm?: string) {
+    if (dateUpdated) {
+      dateForm
+        ? this.invoice[dateForm].patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          })
+        : this.form.patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          });
+    } else {
+      dateForm ? this.invoice[dateForm].patchValue({ [dateName]: null }) : this.form.patchValue({ [dateName]: null });
+    }
+  }
+
+  preSubmit() {
+    if (this.validBy) {
+      this.invoice['sign_by'].patchValue({
+        date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day).toJSON()
+      });
+    } else {
+      this.invoice['sign_by'].patchValue({ date: null });
+    }
+    this.issuedOn
+      ? this.form.patchValue({
+          date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
+        })
+      : this.form.patchValue({ date_created: new Date().toJSON() });
+  }
+
   draftInvoice() {
-    this.invoice['sign_by'].patchValue({
-      date: moment(this.form['controls'].sign_by['controls'].date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.form.patchValue({
-      date_created: moment(this.form['controls'].date_created.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
+    this.disableSubmitButton(true);
+    this.preSubmit();
     this.newDraftInvoice.emit(true);
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newInvoice.draft = true;
-    this.invoiceService.draft(this.newInvoice).subscribe(() => {
-      this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
-      this.router.navigateByUrl('/order/list');
-    });
+    this.invoiceService.draft(this.newInvoice).subscribe(
+      () => {
+        this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
+        this.router.navigateByUrl('/order');
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 
   toReview() {
-    this.invoice['sign_by'].patchValue({
-      date: moment(this.form['controls'].sign_by['controls'].date.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
-    this.form.patchValue({
-      date_created: moment(this.form['controls'].date_created.value)
-        .subtract(1, 'months')
-        .toJSON()
-    });
+    this.preSubmit();
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
     this.newInvoice.document_weight_unit = this.measurementUnitConflict(this.products);

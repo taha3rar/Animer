@@ -10,13 +10,15 @@ import { Product } from '@app/core/models/order/product';
 import { ProductService } from '@app/core';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 
 @Component({
   selector: 'app-agricultural-product-generator',
   templateUrl: './agricultural-product-generator.component.html',
   styleUrls: ['./agricultural-product-generator.component.scss']
 })
-export class AgriculturalProductGeneratorComponent implements OnInit, CanComponentDeactivate {
+export class AgriculturalProductGeneratorComponent extends BaseValidationComponent
+  implements OnInit, CanComponentDeactivate {
   newProduct: Product;
   productImage = defaultValues.agri_picture;
   productForm: FormGroup;
@@ -31,7 +33,9 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
     private productService: ProductService,
     private router: Router,
     private alerts: AlertsService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.onUpdate = false;
@@ -172,20 +176,32 @@ export class AgriculturalProductGeneratorComponent implements OnInit, CanCompone
     this.newProduct = this.productForm.value;
     this.newProduct.image = this.productImage;
     if (!this.onUpdate) {
+      this.disableSubmitButton(true);
       if (this.productForm.valid) {
-        this.productService.create(this.newProduct).subscribe(() => {
-          this.alerts.showAlert('New product profile has been created!');
-          this.dialog.close();
-          this.router.navigateByUrl('/product/list');
-        });
+        this.productService.create(this.newProduct).subscribe(
+          () => {
+            this.alerts.showAlert('New product profile has been created!');
+            this.dialog.close();
+            this.router.navigateByUrl('/product/list');
+          },
+          err => {
+            this.disableSubmitButton(false);
+          }
+        );
       }
     } else {
+      this.disableSubmitButton(true);
       this.newProduct._id = this.data.product._id;
-      this.productService.update(this.newProduct._id, this.newProduct).subscribe(() => {
-        this.alerts.showAlert('The product has been updated!');
-        this.dialog.close();
-        this.router.navigateByUrl('/product/list');
-      });
+      this.productService.update(this.newProduct._id, this.newProduct).subscribe(
+        () => {
+          this.alerts.showAlert('The product has been updated!');
+          this.dialog.close();
+          this.router.navigateByUrl('/product/list');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
     }
   }
 }

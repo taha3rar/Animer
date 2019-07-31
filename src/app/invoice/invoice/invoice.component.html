@@ -172,7 +172,7 @@
         </div>
       </div>
       <div>
-        <button *ngIf="generateInvoice" class="bttn-primary pull-right" (click)="saveInvoice()">
+        <button #submitButton *ngIf="generateInvoice" class="bttn-primary pull-right" (click)="saveInvoice()">
           Send Proforma Invoice
         </button>
         <button

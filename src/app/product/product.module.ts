@@ -16,6 +16,7 @@ import { SharedModule } from '@app/shared';
 import { AgriculturalProductGeneratorComponent } from './product-generator/agricultural-product-generator/agricultural-product-generator.component';
 import { ProcessedProductGeneratorComponent } from './product-generator/processed-product-generator/processed-product-generator.component';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
+import { MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     FormsModule,
     ProgressbarModule.forRoot(),
     SharedModule,
-    TutorialsModule
+    TutorialsModule,
+    MatSortModule
   ],
   providers: [CurrentUserProductsResolver, ProductResolver]
 })

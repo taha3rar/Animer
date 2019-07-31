@@ -22,6 +22,7 @@ import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
+import { MatSortModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     FormsModule,
     ReactiveFormsModule,
     TutorialsModule,
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
+    MatSortModule
   ],
   declarations: [
     ClientListComponent,

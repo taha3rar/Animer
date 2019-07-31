@@ -188,10 +188,22 @@
         />
       </div>
     </div>
-    <button type="button" (click)="submit()" [hidden]="!productForm.valid || onUpdate" class="bttn-primary pull-right">
+    <button
+      #submitButton
+      type="button"
+      (click)="submit()"
+      [hidden]="!productForm.valid || onUpdate"
+      class="bttn-primary pull-right"
+    >
       Add Product
     </button>
-    <button type="button" (click)="submit()" [hidden]="!productForm.valid || !onUpdate" class="bttn-primary pull-right">
+    <button
+      #submitButton
+      type="button"
+      (click)="submit()"
+      [hidden]="!productForm.valid || !onUpdate"
+      class="bttn-primary pull-right"
+    >
       Update Product
     </button>
     <button

@@ -1,189 +1,334 @@
 <div class="modal-box" id="addClientWizard">
-  <div class="modal-box-content">
-    <div class="stepper">
-      <div class="modal-box-heading">
-        <i class="material-icons pull-right" (click)="onModalClose()" #closeModal>close</i>
-        <h2 translate class="modal-title">Create Client</h2>
-      </div>
-      <div class="modal-box-left">
-        <ul class="nav nav-tabs">
-          <li class="active">
-            <a href="#client-details" data-toggle="tab"
-              ><span class="step-number">1</span> <span translate>Add contact details</span></a
-            >
-          </li>
-          <li class="disabled">
-            <a href="#company-details" data-toggle="tab">
-              <div class="step-number">2</div>
-              <span translate>Add company details</span>
-            </a>
-          </li>
-          <li class="disabled">
-            <a href="#ecosystem" data-toggle="tab">
-              <div class="step-number">3</div>
-              <span translate>Choose ecosystem</span>
-            </a>
-          </li>
-          <li class="disabled">
-            <a href="#review" data-toggle="tab">
-              <div class="step-number">4</div>
-              <span translate>Review and confirm</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="modal-box-right">
-        <div class="tab-content">
-          <div class="row tab-pane active margin-none" id="client-details">
-            <form [formGroup]="clientDetailsForm">
-              <div class="col-md-12">
-                <div class="form-row">
-                  <div class="form-group col-md-6" [ngClass]="showFieldStyle('firstName')">
-                    <label for="first_name">First Name *</label>
-                    <input
-                      type="text"
-                      formControlName="firstName"
-                      class="form-control"
-                      id="first_name"
-                      placeholder="Type first name here..."
-                    />
-                    <div class="help-block" *ngIf="isFieldInvalid('firstName')">
-                      <p>This field is required</p>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6" [ngClass]="showFieldStyle('lastName')">
-                    <label for="last_name">Last Name *</label>
-                    <input
-                      type="text"
-                      formControlName="lastName"
-                      class="form-control"
-                      id="last_name"
-                      placeholder="Type last name here..."
-                      required
-                    />
-                    <div class="help-block" *ngIf="isFieldInvalid('lastName')">
-                      <p>This field is required</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6" [ngClass]="showFieldStyle('email')">
-                    <label for="Email">Email Address<span *ngIf="isRequired(clientf.email) === true"> *</span></label>
-                    <input
-                      type="email"
-                      formControlName="email"
-                      class="form-control"
-                      id="Email"
-                      placeholder="Type email here..."
-                    />
-                    <div class="help-block" *ngIf="isFieldInvalid('email') && isRequired(clientf.email) === true">
-                      <p>This field is required</p>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="region_code"
-                      >Phone Number<span *ngIf="isRequired(clientf.phoneNumber) === true"> *</span></label
-                    >
-                    <div class="input-group" [ngClass]="showFieldStyle('phoneNumber')">
-                      <div class="input-group-prepend">
-                        <select
-                          data-width="65px"
-                          id="region_code"
-                          data-live-search="true"
-                          placeholder="Choose measurment unit"
-                          class="selectpicker"
-                          data-size="7"
-                          [(ngModel)]="regionCode"
-                          [ngModelOptions]="{ standalone: true }"
-                          (change)="changeRegionCode()"
-                        >
-                          <option
-                            *ngFor="let country of countries"
-                            [value]="country.value"
-                            [attr.data-content]="generateLink(country.value, country.viewValue)"
-                          ></option>
-                        </select>
-                      </div>
+  <div class="modal-box-content-wrapper">
+    <div class="modal-box-content">
+      <div class="stepper">
+        <div class="modal-box-heading">
+          <i class="material-icons pull-right" (click)="onModalClose()" #closeModal>close</i>
+          <h2 translate class="modal-title">Create Client</h2>
+        </div>
+        <div class="modal-box-left">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#client-details" data-toggle="tab"
+                ><span class="step-number">1</span> <span translate>Add contact details</span></a
+              >
+            </li>
+            <li class="disabled">
+              <a href="#company-details" data-toggle="tab">
+                <div class="step-number">2</div>
+                <span translate>Add company details</span>
+              </a>
+            </li>
+            <li class="disabled">
+              <a href="#ecosystem" data-toggle="tab">
+                <div class="step-number">3</div>
+                <span translate>Choose ecosystem</span>
+              </a>
+            </li>
+            <li class="disabled">
+              <a href="#review" data-toggle="tab">
+                <div class="step-number">4</div>
+                <span translate>Review and confirm</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-box-right">
+          <div class="tab-content">
+            <div class="row tab-pane active margin-none" id="client-details">
+              <form [formGroup]="clientDetailsForm">
+                <div class="col-md-12">
+                  <div class="form-row">
+                    <div class="form-group col-md-6" [ngClass]="showFieldStyle('firstName')">
+                      <label for="first_name">First Name *</label>
                       <input
-                        type="tel"
+                        type="text"
+                        formControlName="firstName"
                         class="form-control"
-                        id="phone"
-                        placeholder="Type phone number here..."
-                        [(ngModel)]="partialPhoneNumber"
+                        id="first_name"
+                        placeholder="Type first name here..."
+                      />
+                      <div class="help-block" *ngIf="isFieldInvalid('firstName')">
+                        <p>This field is required</p>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6" [ngClass]="showFieldStyle('lastName')">
+                      <label for="last_name">Last Name *</label>
+                      <input
+                        type="text"
+                        formControlName="lastName"
+                        class="form-control"
+                        id="last_name"
+                        placeholder="Type last name here..."
+                        required
+                      />
+                      <div class="help-block" *ngIf="isFieldInvalid('lastName')">
+                        <p>This field is required</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6" [ngClass]="showFieldStyle('email')">
+                      <label for="Email">Email Address<span *ngIf="isRequired(clientf.email) === true"> *</span></label>
+                      <input
+                        type="email"
+                        formControlName="email"
+                        class="form-control"
+                        id="Email"
+                        placeholder="Type email here..."
+                      />
+                      <div class="help-block" *ngIf="isFieldInvalid('email') && isRequired(clientf.email) === true">
+                        <p>This field is required</p>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="region_code"
+                        >Phone Number<span *ngIf="isRequired(clientf.phoneNumber) === true"> *</span></label
+                      >
+                      <div class="input-group" [ngClass]="showFieldStyle('phoneNumber')">
+                        <div class="input-group-prepend">
+                          <select
+                            data-width="65px"
+                            id="region_code"
+                            data-live-search="true"
+                            placeholder="Choose measurment unit"
+                            class="selectpicker"
+                            data-size="7"
+                            [(ngModel)]="regionCode"
+                            [ngModelOptions]="{ standalone: true }"
+                            (change)="changeRegionCode()"
+                          >
+                            <option
+                              *ngFor="let country of countries"
+                              [value]="country.value"
+                              [attr.data-content]="generateLink(country.value, country.viewValue)"
+                            ></option>
+                          </select>
+                        </div>
+                        <input
+                          type="tel"
+                          class="form-control"
+                          id="phone"
+                          placeholder="Type phone number here..."
+                          [(ngModel)]="partialPhoneNumber"
+                          [ngModelOptions]="{ standalone: true }"
+                          (ngModelChange)="changeRegionCode()"
+                          (click)="markAsTouched('phoneNumber')"
+                        />
+                      </div>
+                      <div
+                        style="color:#a94442"
+                        class="help-block"
+                        *ngIf="isFieldInvalid('phoneNumber') && isRequired(clientf.phoneNumber) === true"
+                      >
+                        <p>This field is required</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="job_tile">Job Title</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="jobTitle"
+                        placeholder="Type job title here..."
+                        id="job_tile"
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="id_number">Identification Number (ID)</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="user_personal_id"
+                        id="id_number"
+                        placeholder="Type Identification Number (ID) here..."
+                      />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>Profile Type</label>
+                      <div
+                        *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'buyer'"
+                        class="margin-bottom"
+                      >
+                        <input
+                          type="radio"
+                          class="form_radio"
+                          id="agriSeller"
+                          name="profileType"
+                          (change)="onChangeProfileType('seller', $event.target.checked)"
+                        />
+                        <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
+                        <label style="font-weight:400;">Seller of agricultural products </label>
+                      </div>
+                      <div *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'seller'">
+                        <input
+                          type="radio"
+                          class="form_radio"
+                          id="agriBuyer"
+                          name="profileType"
+                          (change)="onChangeProfileType('buyer', $event.target.checked)"
+                        />
+                        <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
+                        <label style="font-weight:400;">Buyer of agricultural products </label>
+                      </div>
+                      <div
+                        style="color:#a94442"
+                        class="help-block"
+                        *ngIf="clientDetailsForm.controls.profileType.invalid"
+                      >
+                        <p>This field is required</p>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="additional_details">Additional details</label>
+                      <textarea
+                        type="text"
+                        class="form-control"
+                        id="additional_details"
+                        rows="2"
+                        placeholder="Type additional details here..."
                         [ngModelOptions]="{ standalone: true }"
-                        (ngModelChange)="changeRegionCode()"
-                        (click)="markAsTouched('phoneNumber')"
-                      />
+                        [(ngModel)]="invitedClient.personal_information.bio"
+                      ></textarea>
                     </div>
-                    <div
-                      style="color:#a94442"
-                      class="help-block"
-                      *ngIf="isFieldInvalid('phoneNumber') && isRequired(clientf.phoneNumber) === true"
-                    >
-                      <p>This field is required</p>
+                  </div>
+                  <div class="form-row" style="margin-bottom:2rem;">
+                    <div class="col">
+                      <label>Send invitation by</label><br />
+                      <div>
+                        <input
+                          type="checkbox"
+                          class="checkbox"
+                          name="contact_type"
+                          id="checkbox_sms"
+                          (change)="onChangeContactType('email', $event.target.checked)"
+                        /><label class="checkbox_label" for="checkbox_sms"
+                          ><span class="form_checkbox_btn"></span
+                        ></label>
+                        <label for="checkbox_sms" style="font-weight:400;">EMAIL</label>
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          class="checkbox"
+                          name="contact_type"
+                          id="checkbox_phone"
+                          (change)="onChangeContactType('sms', $event.target.checked)"
+                        /><label class="checkbox_label" for="checkbox_phone"
+                          ><span class="form_checkbox_btn"></span
+                        ></label>
+                        <label for="checkbox_sms" style="font-weight:400;">SMS</label>
+                      </div>
+                      <div
+                        style="color:#a94442"
+                        class="help-block"
+                        *ngIf="clientDetailsForm.controls.contactTypes.invalid"
+                      >
+                        <p>Please choose at least one option</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="job_tile">Job Title</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      formControlName="jobTitle"
-                      placeholder="Type job title here..."
-                      id="job_tile"
-                    />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="id_number">Identification Number (ID)</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      formControlName="user_personal_id"
-                      id="id_number"
-                      placeholder="Type Identification Number (ID) here..."
-                    />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label>Profile Type</label>
-                    <div
-                      *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'buyer'"
-                      class="margin-bottom"
-                    >
+                <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
+                  Next &rarr;
+                </button>
+                <button
+                  [hidden]="clientDetailsForm.valid"
+                  class="btn-next pull-right"
+                  (click)="onSubmit(clientDetailsForm)"
+                >
+                  Next &rarr;
+                </button>
+              </form>
+            </div>
+            <div class="row tab-pane margin-none" id="company-details">
+              <form [formGroup]="companyDetailsForm">
+                <div class="col-md-12">
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="company_name">Company Name</label>
                       <input
-                        type="radio"
-                        class="form_radio"
-                        id="agriSeller"
-                        name="profileType"
-                        (change)="onChangeProfileType('seller', $event.target.checked)"
+                        type="text"
+                        formControlName="companyName"
+                        class="form-control"
+                        id="company_name"
+                        placeholder="Type company name here..."
                       />
-                      <label for="agriSeller" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                      <label style="font-weight:400;">Seller of agricultural products </label>
                     </div>
-                    <div *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'seller'">
+                    <div class="form-group col-md-6">
+                      <label for="company_number">Company Number</label>
                       <input
-                        type="radio"
-                        class="form_radio"
-                        id="agriBuyer"
-                        name="profileType"
-                        (change)="onChangeProfileType('buyer', $event.target.checked)"
+                        type="text"
+                        class="form-control"
+                        id="company_number"
+                        placeholder="Type company number here..."
+                        [ngModelOptions]="{ standalone: true }"
+                        [(ngModel)]="invitedClient.company_information.company_registered_number"
                       />
-                      <label for="agriBuyer" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-                      <label style="font-weight:400;">Buyer of agricultural products </label>
-                    </div>
-                    <div
-                      style="color:#a94442"
-                      class="help-block"
-                      *ngIf="clientDetailsForm.controls.profileType.invalid"
-                    >
-                      <p>This field is required</p>
                     </div>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="additional_details">Additional details</label>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="cstreet_address">Street address</label>
+                      <input
+                        type="text"
+                        formControlName="address"
+                        class="form-control"
+                        id="cstreet_address"
+                        placeholder="Type street address here..."
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="city">City</label>
+                      <input
+                        type="text"
+                        formControlName="city"
+                        class="form-control"
+                        id="city"
+                        placeholder="Type city here..."
+                      />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4" [ngClass]="showFieldStyleComp('country')">
+                      <label for="country">Country *</label>
+                      <select id="country" name="country" class="form-control" formControlName="country">
+                        <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
+                          country.viewValue
+                        }}</option>
+                      </select>
+                      <div class="help-block" *ngIf="isFieldInvalidComp('country')">
+                        <p>This field is required</p>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="state">State/province/region</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="state"
+                        placeholder="Type state/province/region here..."
+                        [(ngModel)]="invitedClient.company_information.state_province_region"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="zip_code">Zip Code</label>
+                      <input
+                        type="text"
+                        formControlName="zipcode"
+                        class="form-control"
+                        id="zip_code"
+                        placeholder="Type zip code here..."
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="additional_details">Additional Details</label>
                     <textarea
                       type="text"
                       class="form-control"
@@ -191,289 +336,149 @@
                       rows="2"
                       placeholder="Type additional details here..."
                       [ngModelOptions]="{ standalone: true }"
-                      [(ngModel)]="invitedClient.personal_information.bio"
+                      [(ngModel)]="invitedClient.company_information.bio"
                     ></textarea>
                   </div>
                 </div>
-                <div class="form-row" style="margin-bottom:2rem;">
-                  <div class="col">
-                    <label>Send invitation by</label><br />
-                    <div>
-                      <input
-                        type="checkbox"
-                        class="checkbox"
-                        name="contact_type"
-                        id="checkbox_sms"
-                        (change)="onChangeContactType('email', $event.target.checked)"
-                      /><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
-                      <label for="checkbox_sms" style="font-weight:400;">EMAIL</label>
-                    </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        class="checkbox"
-                        name="contact_type"
-                        id="checkbox_phone"
-                        (change)="onChangeContactType('sms', $event.target.checked)"
-                      /><label class="checkbox_label" for="checkbox_phone"
-                        ><span class="form_checkbox_btn"></span
-                      ></label>
-                      <label for="checkbox_sms" style="font-weight:400;">SMS</label>
-                    </div>
-                    <div
-                      style="color:#a94442"
-                      class="help-block"
-                      *ngIf="clientDetailsForm.controls.contactTypes.invalid"
-                    >
-                      <p>Please choose at least one option</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
-                Next &rarr;
-              </button>
-              <button
-                [hidden]="clientDetailsForm.valid"
-                class="btn-next pull-right"
-                (click)="onSubmit(clientDetailsForm)"
-              >
-                Next &rarr;
-              </button>
-            </form>
-          </div>
-          <div class="row tab-pane margin-none" id="company-details">
-            <form [formGroup]="companyDetailsForm">
+                <button [hidden]="!companyDetailsForm.valid" class="btn-next next-step pull-right">Next &rarr;</button>
+                <button
+                  [hidden]="companyDetailsForm.valid"
+                  class="btn-next pull-right"
+                  (click)="onSubmit(companyDetailsForm)"
+                >
+                  Next &rarr;
+                </button>
+              </form>
+            </div>
+            <div class="row tab-pane margin-none" id="ecosystem">
               <div class="col-md-12">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="company_name">Company Name</label>
-                    <input
-                      type="text"
-                      formControlName="companyName"
-                      class="form-control"
-                      id="company_name"
-                      placeholder="Type company name here..."
-                    />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="company_number">Company Number</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="company_number"
-                      placeholder="Type company number here..."
-                      [ngModelOptions]="{ standalone: true }"
-                      [(ngModel)]="invitedClient.company_information.company_registered_number"
-                    />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="cstreet_address">Street address</label>
-                    <input
-                      type="text"
-                      formControlName="address"
-                      class="form-control"
-                      id="cstreet_address"
-                      placeholder="Type street address here..."
-                    />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="city">City</label>
-                    <input
-                      type="text"
-                      formControlName="city"
-                      class="form-control"
-                      id="city"
-                      placeholder="Type city here..."
-                    />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-4" [ngClass]="showFieldStyleComp('country')">
-                    <label for="country">Country *</label>
-                    <select id="country" name="country" class="form-control" formControlName="country">
-                      <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
-                        country.viewValue
-                      }}</option>
-                    </select>
-                    <div class="help-block" *ngIf="isFieldInvalidComp('country')">
-                      <p>This field is required</p>
+                <p class="heading-2">Your Ecosystems List</p>
+
+                <table class="table main-table">
+                  <thead>
+                    <tr>
+                      <th>Add to Ecosystem</th>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Members</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let ecosystem of ecosystems">
+                      <td>
+                        <input
+                          type="checkbox"
+                          class="checkbox"
+                          [id]="ecosystem.numericId"
+                          (change)="pushEcosystem(ecosystem)"
+                        /><label class="checkbox_label" [for]="ecosystem.numericId"
+                          ><span class="form_checkbox_btn"></span
+                        ></label>
+                      </td>
+                      <td>{{ ecosystem.numericId }}</td>
+                      <td>{{ ecosystem.name }}</td>
+                      <td style="text-transform: capitalize;">{{ ecosystem.type }}</td>
+                      <td>{{ ecosystem.participants.length }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <button class="btn-next next-step pull-right">Next &rarr;</button>
+            </div>
+            <div class="row tab-pane" id="review">
+              <div class="col-md-12">
+                <button class="btn-icons  pull-right" (click)="targetStep('client-details')">
+                  <i class="material-icons">edit</i>
+                </button>
+                <div class="row margin-none">
+                  <div class="col-md-4">
+                    <div class="icon-text">
+                      <i class="material-icons">person</i> <span class="heading-2"> Client Details</span>
                     </div>
                   </div>
-                  <div class="form-group col-md-4">
-                    <label for="state">State/province/region</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="state"
-                      placeholder="Type state/province/region here..."
-                      [(ngModel)]="invitedClient.company_information.state_province_region"
-                      [ngModelOptions]="{ standalone: true }"
-                    />
+                  <div class="col-md-4">
+                    <div>
+                      <p class="label-2">Contact Name</p>
+                      <p class="normal-text-light">{{ clientf.firstName.value }} {{ clientf.lastName.value }}</p>
+                    </div>
+                    <div>
+                      <p class="label-2">Email Address</p>
+                      <p class="normal-text-light">{{ clientf.email.value }}</p>
+                    </div>
+                    <div>
+                      <p class="label-2">Additional details</p>
+                      <p class="normal-text-light">{{ invitedClient.personal_information.bio }}</p>
+                    </div>
                   </div>
-                  <div class="form-group col-md-4">
-                    <label for="zip_code">Zip Code</label>
-                    <input
-                      type="text"
-                      formControlName="zipcode"
-                      class="form-control"
-                      id="zip_code"
-                      placeholder="Type zip code here..."
-                    />
+                  <div class="col-md-4">
+                    <div>
+                      <p class="label-2">Contact ID</p>
+                      <p class="normal-text-light">{{ clientf.user_personal_id.value }}</p>
+                    </div>
+                    <div>
+                      <p class="label-2">Phone Number</p>
+                      <p class="normal-text-light">{{ clientf.phoneNumber.value }}</p>
+                    </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="additional_details">Additional Details</label>
-                  <textarea
-                    type="text"
-                    class="form-control"
-                    id="additional_details"
-                    rows="2"
-                    placeholder="Type additional details here..."
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="invitedClient.company_information.bio"
-                  ></textarea>
+                <hr />
+                <button class="btn-icons pull-right" (click)="targetStep('company-details')">
+                  <i class="material-icons">edit</i>
+                </button>
+                <div class="row margin-none">
+                  <div class="col-md-4">
+                    <div class="icon-text">
+                      <i class="material-icons">business</i> <span class="heading-2"> Company Details</span>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div>
+                      <p class="label-2">Company name</p>
+                      <p class="normal-text-light">{{ companyf.companyName.value }}</p>
+                    </div>
+                    <div>
+                      <p class="label-2">Street</p>
+                      <p class="normal-text-light">{{ companyf.address.value }}</p>
+                    </div>
+                    <div>
+                      <p class="label-2">Country</p>
+                      <p class="normal-text-light">{{ companyf.country.value }}</p>
+                    </div>
+                    <div>
+                      <p class="label-2">Additional details</p>
+                      <p class="normal-text-light">{{ invitedClient.company_information.bio }}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div>
+                      <p class="label-2">Company number</p>
+                      <p class="normal-text-light">{{ invitedClient.company_information.company_registered_number }}</p>
+                    </div>
+                    <div>
+                      <p class="label-2">Zip code</p>
+                      <p class="normal-text-light">{{ companyf.zipcode.value }}</p>
+                    </div>
+                    <div>
+                      <p class="label-2">City</p>
+                      <p class="normal-text-light">{{ companyf.city.value }}</p>
+                    </div>
+                    <div>
+                      <p class="label-2">State/province/region</p>
+                      <p class="normal-text-light">{{ invitedClient.company_information.state_province_region }}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <button [hidden]="!companyDetailsForm.valid" class="btn-next next-step pull-right">Next &rarr;</button>
               <button
-                [hidden]="companyDetailsForm.valid"
+                #submitButton
+                [disabled]="!companyDetailsForm.valid || !clientDetailsForm.valid"
+                (click)="onGeneralSubmit()"
                 class="btn-next pull-right"
-                (click)="onSubmit(companyDetailsForm)"
               >
-                Next &rarr;
+                Submit
               </button>
-            </form>
-          </div>
-          <div class="row tab-pane margin-none" id="ecosystem">
-            <div class="col-md-12">
-              <p class="heading-2">You Ecosystems List</p>
-
-              <table class="table main-table">
-                <thead>
-                  <tr>
-                    <th>Add to Ecosystem</th>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Members</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let ecosystem of ecosystems">
-                    <td>
-                      <input
-                        type="checkbox"
-                        class="checkbox"
-                        [id]="ecosystem.numericId"
-                        (change)="pushEcosystem(ecosystem)"
-                      /><label class="checkbox_label" [for]="ecosystem.numericId"
-                        ><span class="form_checkbox_btn"></span
-                      ></label>
-                    </td>
-                    <td>{{ ecosystem.numericId }}</td>
-                    <td>{{ ecosystem.name }}</td>
-                    <td style="text-transform: capitalize;">{{ ecosystem.type }}</td>
-                    <td>{{ ecosystem.participants.length }}</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
-            <button class="btn-next next-step pull-right">Next &rarr;</button>
-          </div>
-          <div class="row tab-pane" id="review">
-            <div class="col-md-12">
-              <button class="btn-icons  pull-right" (click)="targetStep('client-details')">
-                <i class="material-icons">edit</i>
-              </button>
-              <div class="row margin-none">
-                <div class="col-md-4">
-                  <div class="icon-text">
-                    <i class="material-icons">person</i> <span class="heading-2"> Client Details</span>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div>
-                    <p class="label-2">Contact Name</p>
-                    <p class="normal-text-light">{{ clientf.firstName.value }} {{ clientf.lastName.value }}</p>
-                  </div>
-                  <div>
-                    <p class="label-2">Email Address</p>
-                    <p class="normal-text-light">{{ clientf.email.value }}</p>
-                  </div>
-                  <div>
-                    <p class="label-2">Additional details</p>
-                    <p class="normal-text-light">{{ invitedClient.personal_information.bio }}</p>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div>
-                    <p class="label-2">Contact ID</p>
-                    <p class="normal-text-light">{{ clientf.user_personal_id.value }}</p>
-                  </div>
-                  <div>
-                    <p class="label-2">Phone Number</p>
-                    <p class="normal-text-light">{{ clientf.phoneNumber.value }}</p>
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <button class="btn-icons pull-right" (click)="targetStep('company-details')">
-                <i class="material-icons">edit</i>
-              </button>
-              <div class="row margin-none">
-                <div class="col-md-4">
-                  <div class="icon-text">
-                    <i class="material-icons">business</i> <span class="heading-2"> Company Details</span>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div>
-                    <p class="label-2">Company name</p>
-                    <p class="normal-text-light">{{ companyf.companyName.value }}</p>
-                  </div>
-                  <div>
-                    <p class="label-2">Street</p>
-                    <p class="normal-text-light">{{ companyf.address.value }}</p>
-                  </div>
-                  <div>
-                    <p class="label-2">Country</p>
-                    <p class="normal-text-light">{{ companyf.country.value }}</p>
-                  </div>
-                  <div>
-                    <p class="label-2">Additional details</p>
-                    <p class="normal-text-light">{{ invitedClient.company_information.bio }}</p>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div>
-                    <p class="label-2">Company number</p>
-                    <p class="normal-text-light">{{ invitedClient.company_information.company_registered_number }}</p>
-                  </div>
-                  <div>
-                    <p class="label-2">Zip code</p>
-                    <p class="normal-text-light">{{ companyf.zipcode.value }}</p>
-                  </div>
-                  <div>
-                    <p class="label-2">City</p>
-                    <p class="normal-text-light">{{ companyf.city.value }}</p>
-                  </div>
-                  <div>
-                    <p class="label-2">State/province/region</p>
-                    <p class="normal-text-light">{{ invitedClient.company_information.state_province_region }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button
-              [disabled]="!companyDetailsForm.valid || !clientDetailsForm.valid"
-              (click)="onGeneralSubmit()"
-              class="btn-next pull-right"
-            >
-              Submit
-            </button>
           </div>
         </div>
       </div>

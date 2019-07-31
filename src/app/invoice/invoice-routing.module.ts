@@ -19,7 +19,7 @@ import { PermissionGuard } from '../shared/guards/permission.guard';
 const routes: Routes = [
   Shell.childRoutes([
     {
-      path: 'invoice/list',
+      path: 'invoice',
       component: InvoicesListComponent,
       resolve: {
         invoices: InvoiceListResolver,

@@ -43,7 +43,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
   }
 
   back() {
-    this.router.navigateByUrl('/invoice/list');
+    this.router.navigateByUrl('/invoice');
   }
 
   disclaimerPopup() {
@@ -90,16 +90,22 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
     if (this.disclaimerAccepted === false) {
       this.disclaimerPopup();
     } else {
-      this.invoiceService.create(this.invoice).subscribe((invoice: Invoice) => {
-        for (let i = 0; i < this.invoice.products.length; i++) {
-          if (this.invoice.products[i].to_inventory) {
-            const product = this.invoice.products[i].toProduct(invoice);
-            this.productService.create(product).subscribe();
+      this.disableSubmitButton(true);
+      this.invoiceService.create(this.invoice).subscribe(
+        (invoice: Invoice) => {
+          for (let i = 0; i < this.invoice.products.length; i++) {
+            if (this.invoice.products[i].to_inventory) {
+              const product = this.invoice.products[i].toProduct(invoice);
+              this.productService.create(product).subscribe();
+            }
           }
+          this.alertsService.showAlert('Your proforma invoice has been sent');
+          this.router.navigateByUrl('/invoice');
+        },
+        err => {
+          this.disableSubmitButton(false);
         }
-        this.alertsService.showAlert('Your proforma invoice has been sent');
-        this.router.navigateByUrl('/invoice/list');
-      });
+      );
     }
   }
 }

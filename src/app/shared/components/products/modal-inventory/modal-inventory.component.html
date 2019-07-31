@@ -29,14 +29,18 @@
           </p>
         </div>
         <div class="product-details">
-          <figure
-            class="img-circular img-circular-sm"
-            [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
-          ></figure>
-          <p class="heading-2">
-            {{ product.produce }} <br />
-            {{ product.variety }}
-          </p>
+          <div>
+            <figure
+              class="img-circular img-circular-sm"
+              [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
+            ></figure>
+          </div>
+          <div>
+            <p class="heading-2">
+              {{ product.produce }} <br />
+              {{ product.variety }}
+            </p>
+          </div>
         </div>
         <div class="package-details">
           <table>
@@ -63,7 +67,7 @@
         </div>
         <div *ngIf="(!currency || product.currency === currency) && !fromQuotation" class="quantity">
           <p class="normal-text-bold">Quantity</p>
-          <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
+          <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
           <input
             type="number"
             min="0"
@@ -72,7 +76,7 @@
             [(ngModel)]="product.quantity"
             (ngModelChange)="checkProductInput(product)"
           />
-          <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
+          <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
         </div>
         <div *ngIf="(!currency || product.currency === currency) && fromQuotation" class="quantity">
           <p *ngIf="isListed(product)" class="normal-text-bold">The product is a part of the order</p>
@@ -122,10 +126,12 @@
             </p>
           </div>
           <div class="product-details">
-            <figure
-              class="img-circular img-circular-sm"
-              [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
-            ></figure>
+            <div>
+              <figure
+                class="img-circular img-circular-sm"
+                [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
+              ></figure>
+            </div>
             <p class="heading-2">{{ product.produce }} <br /></p>
           </div>
           <div class="package-details">
@@ -159,7 +165,9 @@
 
           <div *ngIf="(!currency || product.currency === currency) && !fromQuotation" class="quantity">
             <p class="normal-text-bold">Quantity</p>
-            <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
+            <!-- decrese button -->
+            <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
+            <!-- quantity -->
             <input
               type="number"
               min="0"
@@ -168,7 +176,8 @@
               [(ngModel)]="product.quantity"
               (ngModelChange)="checkProductInput(product)"
             />
-            <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
+            <!-- add button -->
+            <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
           </div>
           <div *ngIf="(!currency || product.currency === currency) && fromQuotation" class="quantity">
             <p *ngIf="isListed(product)" class="normal-text-bold">The product is a part of the order</p>
@@ -181,7 +190,8 @@
               [name]="i"
               (change)="addProduct(product, $event.target.checked)"
               [checked]="isAdded(product)"
-            /><label *ngIf="!isListed(product)" class="checkbox_label" [for]="'p' + i"
+            />
+            <label *ngIf="!isListed(product)" class="checkbox_label" [for]="'p' + i"
               ><span class="form_checkbox_btn"></span
             ></label>
           </div>

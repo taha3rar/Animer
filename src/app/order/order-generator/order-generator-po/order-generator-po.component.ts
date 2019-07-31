@@ -10,6 +10,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ProductService, QuotationService } from '@app/core';
 import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import { Quotation } from '@app/core/models/quotation/quotation';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Product } from '@app/core/models/order/product';
 
 @Component({
   selector: 'app-order-generator-po',
@@ -21,11 +23,18 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   selectedProducts: any[];
   currency: string;
   products: ProductInvoice[] = [];
-  productsValid = true;
+  productsPristine = true;
   @Output() newDraftPO = new EventEmitter();
   @Input() fromQuotation = false;
-  inventoryProducts: ProductInvoice[];
+  inventoryProducts: any[];
   quotedProducts: ProductInvoice[] = [];
+  validBy: NgbDateStruct;
+  issuedOn: NgbDateStruct;
+  deliveryOn: NgbDateStruct;
+  agriculturalProducts: Product[];
+  processedProducts: Product[];
+  addedProducts: ProductInvoice[] = [];
+  noInventory: boolean;
 
   constructor(
     public orderDataService: OrderDataService,
@@ -42,6 +51,11 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   ngOnInit() {
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
+      if (this.seller._id) {
+        this.productService.getByUser(this.seller._id).subscribe(products => {
+          this.inventoryProducts = <ProductInvoice[]>(<unknown>products);
+        });
+      }
       this.currency = this.form.value.currency;
     });
     this.orderDataService.currentProductList.subscribe(data => {
@@ -49,11 +63,13 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
         this.products = data;
       }
     });
+
     this.formInput = this.form;
+    this.validBy = this.formInput.value.sign_by.date;
+    this.issuedOn = this.formInput.value.date_created;
+    this.deliveryOn = this.formInput.value.deliver_to.expected_delivery_date;
+
     if (this.fromQuotation) {
-      this.productService.getByUser(this.seller._id).subscribe(products => {
-        this.inventoryProducts = <ProductInvoice[]>(<unknown>products);
-      });
       this.quotationService.getAcceptedPerParticipants(this.seller._id, this.buyer._id).subscribe(quotations => {
         quotations.forEach((quotation: Quotation) => {
           let quotedProduct: ProductInvoice;
@@ -125,40 +141,64 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     });
   }
 
+  dateUpdate(dateName: string, dateUpdated: NgbDateStruct, dateForm?: string) {
+    if (dateUpdated) {
+      dateForm
+        ? this.order[dateForm].patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          })
+        : this.form.patchValue({
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          });
+    } else {
+      dateForm ? this.order[dateForm].patchValue({ [dateName]: null }) : this.form.patchValue({ [dateName]: null });
+    }
+  }
+
+  preSubmit() {
+    if (this.validBy) {
+      this.order['sign_by'].patchValue({
+        date: new Date(this.validBy.year, this.validBy.month - 1, this.validBy.day).toJSON()
+      });
+    } else {
+      this.order['sign_by'].patchValue({ date: null });
+    }
+    if (this.deliveryOn) {
+      this.order['deliver_to'].patchValue({
+        expected_delivery_date: new Date(this.deliveryOn.year, this.deliveryOn.month - 1, this.deliveryOn.day).toJSON()
+      });
+    } else {
+      this.order['deliver_to'].patchValue({ expected_delivery_date: null });
+    }
+    this.issuedOn
+      ? this.form.patchValue({
+          date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
+        })
+      : this.form.patchValue({ date_created: new Date().toJSON() });
+  }
+
   draftOrder() {
-    let _date = this.form.value.sign_by.date;
-    if (_date) {
-      this.order['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
-    }
-    _date = this.form.value.deliver_to.expected_delivery_date;
-    if (_date) {
-      this.order['deliver_to'].patchValue({ expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day) });
-    }
-    _date = this.form.value.date_created;
-    _date
-      ? this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) })
-      : this.form.patchValue({ date_created: Date.now() });
+    this.disableSubmitButton(true);
+    this.preSubmit();
     this.newDraftPO.emit(true);
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.newOrder.draft = true;
-    this.orderService.draft(this.newOrder).subscribe(() => {
-      this.alerts.showAlert('Your purchase order has been saved as a draft!');
-      this.router.navigateByUrl('/order/list');
-    });
+    this.orderService.draft(this.newOrder).subscribe(
+      () => {
+        this.alerts.showAlert('Your purchase order has been saved as a draft!');
+        this.router.navigateByUrl('/order');
+      },
+      err => {
+        this.disableSubmitButton(false);
+      }
+    );
   }
 
   toReview() {
-    let _date = this.form.value.sign_by.date;
-    this.order['sign_by'].patchValue({ date: new Date(_date.year, _date.month - 1, _date.day) });
-    _date = this.form.value.deliver_to.expected_delivery_date;
-    if (_date) {
-      this.order['deliver_to'].patchValue({ expected_delivery_date: new Date(_date.year, _date.month - 1, _date.day) });
-    }
-    _date = this.form.value.date_created;
-    this.form.patchValue({ date_created: new Date(_date.year, _date.month - 1, _date.day) });
+    this.preSubmit();
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
