@@ -17,18 +17,17 @@
           >
             <a data-toggle="tab" class="label" href="#create-pi">Proforma Invoices</a>
           </li>
+          <li class="step" *ngIf="currentUser.roles[0] === 'buyer'">
+            <a data-toggle="tab" class="label" href="#review-pi">Proforma Invoices</a>
+          </li>
           <li class="step" *ngxPermissionsOnly="['create-product']">
             <a data-toggle="tab" class="label" href="#create-product">Products</a>
           </li>
-
           <li class="step" *ngxPermissionsOnly="['create-client']">
             <a data-toggle="tab" class="label" href="#add-clients">Clients</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-ecosystem']">
             <a data-toggle="tab" class="label" href="#create-ecosystem">Ecosystems</a>
-          </li>
-          <li class="step" *ngIf="currentUser.roles[0] === 'buyer'">
-            <a data-toggle="tab" class="label" href="#review-pi">Proforma Invoices</a>
           </li>
         </ul>
       </div>
