@@ -1,3 +1,4 @@
+import { UserService } from '@app/core/api/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,18 +19,31 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   closeResult: string;
   forgotPassword = false;
+  userValidated = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private userService: UserService,
     private i18nService: I18nService,
     private authenticationService: AuthenticationService
   ) {
     this.createForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.route.snapshot.params.id) {
+      this.userValidated = true;
+      const id = this.route.snapshot.params.id;
+      this.userService.updateUserValidation(id).subscribe(
+        data => {},
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
 
   login() {
     this.isLoading = true;

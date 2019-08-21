@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import {
   Router,
   NavigationEnd,
@@ -14,11 +14,12 @@ import { AuthenticationService } from './core/authentication/authentication.serv
 import { merge } from 'rxjs';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
-
+import { Location } from '@angular/common';
 import { environment } from '@env/environment';
 import { Logger, I18nService } from '@app/core';
 
 const log = new Logger('App');
+declare const $: any;
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
+    private location: Location,
     private translateService: TranslateService,
     private authenticationService: AuthenticationService,
     // do not remove the analytics injection, even if the call in ngOnInit() is removed
@@ -51,6 +53,12 @@ export class AppComponent implements OnInit {
         this.showLoading = false;
       }
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    const windowSize = event.target.innerWidth;
+    this.responsive(windowSize);
   }
 
   ngOnInit() {
@@ -89,5 +97,27 @@ export class AppComponent implements OnInit {
       });
     // Set permissions on every refresh
     this.authenticationService.setCurrentPermissions();
+
+    this.responsive(window.innerWidth);
+
+    this.router.events.subscribe(event => {
+      this.responsive(window.innerWidth);
+    });
+  }
+
+  responsive(windowSize: any) {
+    if (windowSize <= 650 && !window.location.href.includes('registration') && !window.location.href.includes('home')) {
+      $('.compatibility-msg-content').css({ display: 'block' });
+      $('.compatibility-msg').css({ display: 'block' });
+      $('.navbar-compatibilty-content-img').css({ display: 'block' });
+      $('.navbar-compatibilty').css({ display: 'block' });
+      $('.router-outlet').css({ visibility: 'hidden' });
+    } else {
+      $('.compatibility-msg-content').css({ display: 'none' });
+      $('.compatibility-msg').css({ display: 'none' });
+      $('.navbar-compatibilty-content-img').css({ display: 'none' });
+      $('.navbar-compatibilty').css({ display: 'none' });
+      $('.router-outlet').css({ visibility: 'visible' });
+    }
   }
 }

@@ -3,18 +3,18 @@
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="/#/dashboard">Avenews-GT</a>
-      </div>
-      <div class="pull-right pt-3">
-        <button class="bttn-transparent">Sign in</button>
-        <button class="bttn-transparent" routerLink="/registration">Sign up</button>
+        <div class="pull-right pt-3">
+          <button class="bttn-transparent">Sign in</button>
+          <button class="bttn-transparent" routerLink="/registration">Sign up</button>
+        </div>
       </div>
     </div>
   </nav>
   <div class="login-box">
     <div class="container login-wrapper">
-      <div class="card col-md-10 col-md-offset-1">
+      <div class="card col-lg-10 offset-lg-1 col-md-12 col-sm-12">
         <div class="card-body login" [hidden]="forgotPassword">
-          <div class="col-md-5 col-sm-12 cl-l">
+          <div class="col-md-5 col-sm-12 col-lg-5 cl-l">
             <div class="cl-l-wrapper">
               <h1 class="heading-1">Step into the future of agricultural trade</h1>
               <p class="pt-5">
@@ -26,8 +26,14 @@
               </div>
             </div>
           </div>
-          <div class="col-md-7 col-sm-12 cl-r">
+          <div class="col-md-7 col-lg-7 col-sm-12 cl-r">
             <div class="cl-r-wrapper">
+              <div class="validated-user" *ngIf="userValidated">
+                <div class="validated-user-header">
+                  <i class="material-icons">check_circle_outline</i><strong>Congratulations! You're Varified.</strong>
+                </div>
+                <p>You have successfully validated your email address.</p>
+              </div>
               <h1>Sign in</h1>
               <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate class="mt-5">
                 <div class="alert alert-danger" [hidden]="!error || isLoading" translate>

@@ -3,82 +3,219 @@
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="/#/dashboard">Avenews-GT</a>
-      </div>
-      <div class="pull-right pt-3">
-        <button class="bttn-transparent" routerLink="/login">Sign in</button>
-        <button class="bttn-transparent">Sign up</button>
+        <div class="pull-right pt-3">
+          <button class="bttn-transparent" routerLink="/login">Sign in</button>
+          <button class="bttn-transparent">Sign up</button>
+        </div>
       </div>
     </div>
   </nav>
   <div class="login-box">
     <div class="container login-wrapper">
-      <div class="card col-md-10 col-md-offset-1">
+      <div class="card col-lg-10 offset-lg-1 col-md-12 offset-md-0 col-sm-12">
         <div class="card-body">
-          <div class="col-md-5 col-sm-12 cl-l">
+          <div class="col-md-5 col-sm-12 col-lg-5 cl-l">
             <div class="cl-l-wrapper">
               <h1 class="heading-1">Step into the future of agricultural trade</h1>
               <p class="pt-5">
                 Manage your transactions, orders, invoices, inventory, and clients in a complete ecosystem for
                 agricultural trade.
               </p>
-              <div class="img-wrapper">
-                <img src="../../assets/img/landing-imgs/Logo-avenews.png" />
-              </div>
+            </div>
+            <div class="img-wrapper">
+              <img src="../../assets/img/landing-imgs/Logo-avenews.png" />
             </div>
           </div>
-          <div class="col-md-7 col-sm-12 cl-r">
+          <div class="col-md-7 col-lg-7 col-sm-12 cl-r">
             <div class="cl-r-wrapper">
-              <h1>Sign up</h1>
-              <form class="mt-5">
+              <form [formGroup]="userRegistrationForm">
                 <div id="p1">
+                  <h1 class="mb-4">Sign up</h1>
+                  <div class="error-block" *ngIf="showEmailPhoneError()">
+                    <p>Please fill in the Phone Number or Email Address!</p>
+                  </div>
                   <div class="row form-group">
-                    <div class="col">
+                    <div class="col" [ngClass]="showFieldStyle('firstName')">
                       <label for="firstName">First Name</label>
-                      <input type="text" class="form-control" id="firstName" placeholder="First name" />
+                      <input
+                        type="text"
+                        formControlName="firstName"
+                        class="form-control"
+                        id="firstName"
+                        placeholder="First name"
+                      />
+                      <div class="help-block" *ngIf="isFieldInvalid('firstName')">
+                        <p>First name is required</p>
+                      </div>
                     </div>
-                    <div class="col">
+                    <div class="col" [ngClass]="showFieldStyle('lastName')">
                       <label for="lastName">Last Name</label>
-                      <input type="text" class="form-control" placeholder="Last name" id="lastName" />
+                      <input
+                        type="text"
+                        formControlName="lastName"
+                        class="form-control"
+                        placeholder="Last name"
+                        id="lastName"
+                      />
+                      <div class="help-block" *ngIf="isFieldInvalid('lastName')">
+                        <p>Last name is required</p>
+                      </div>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" [ngClass]="showFieldStyle('email')">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" placeholder="Email address" id="email" />
+                    <input
+                      type="email"
+                      class="form-control"
+                      formControlName="email"
+                      placeholder="Email address"
+                      id="email"
+                    />
+                    <div class="help-block" *ngIf="isFieldInvalid('email')">
+                      <p>Email address is required</p>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" class="form-control" placeholder="Phone number" id="phone" />
+                  <div class="row form-group">
+                    <div class="col-lg-6 col-md-6 col-sm-12 phone-input">
+                      <label for="phone">Phone Number</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <select
+                            data-width="65px"
+                            id="region_code"
+                            data-live-search="true"
+                            placeholder="Choose measurment unit"
+                            class="selectpicker"
+                            data-size="7"
+                            [(ngModel)]="regionCode"
+                            (change)="changeRegionCode()"
+                            [ngModelOptions]="{ standalone: true }"
+                          >
+                            <option
+                              *ngFor="let country of countries"
+                              [value]="country.value"
+                              [attr.data-content]="generateLink(country.value, country.viewValue)"
+                            ></option>
+                          </select>
+                        </div>
+                        <input
+                          type="tel"
+                          class="form-control"
+                          id="phone"
+                          placeholder="Type phone number here..."
+                          [(ngModel)]="partialPhoneNumber"
+                          [ngModelOptions]="{ standalone: true }"
+                          (ngModelChange)="changeRegionCode()"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <label for="country">Country</label>
+                      <select
+                        data-live-search="true"
+                        data-size="7"
+                        type="text"
+                        formControlName="country"
+                        [ngClass]="showFieldStyle('country')"
+                        class="selectpicker form-control"
+                        id="country"
+                      >
+                        <option *ngFor="let country of countries" [value]="country.value">{{
+                          country.viewValue
+                        }}</option>
+                      </select>
+                      <div class="help-block" *ngIf="isFieldInvalid('country')">
+                        <p>Country is required</p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" [ngClass]="showFieldStyle('password')">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="Password" id="password" />
+                    <input
+                      type="password"
+                      class="form-control"
+                      formControlName="password"
+                      placeholder="Password"
+                      id="password"
+                    />
+                    <div class="help-block" *ngIf="isFieldInvalid('password')">
+                      <p>Password is required</p>
+                    </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" id="confirmPass" [ngClass]="showFieldStyle('confirmPassword')">
                     <label for="c-password">Confirm Password</label>
-                    <input type="password" class="form-control" placeholder="Re-type password" id="c-password" />
+                    <input
+                      type="password"
+                      class="form-control"
+                      formControlName="confirmPassword"
+                      placeholder="Re-type password"
+                      id="c-password"
+                    />
                   </div>
-                  <button class="pull-right bttn-primary action-bttn" (click)="changeDiv()">Next</button>
+                  <div class="help-block" *ngIf="passwordsNotMatch()">
+                    <p>Passwords doesn't match</p>
+                  </div>
+                  <div class="f-bttns-wrapper">
+                    <button
+                      class="bttn-primary action-bttn"
+                      [hidden]="userRegistrationForm.valid"
+                      (click)="onSubmit(userRegistrationForm)"
+                    >
+                      Next
+                    </button>
+                    <button
+                      class="bttn-primary action-bttn"
+                      [hidden]="!userRegistrationForm.valid"
+                      (click)="changeDiv()"
+                    >
+                      Next
+                    </button>
+                  </div>
                 </div>
                 <div id="p2" style="display: none;">
+                  <h1 class="mb-4">Sign up</h1>
                   <h3>Join Avenews-gt as a/an</h3>
                   <div class="bttns-line">
-                    <button class="active" id="sellerBtn" (click)="onActiveBtn('sellerBtn')">Seller</button>
-                    <button (click)="onActiveBtn('buyerBtn')" id="buyerBtn">Buyer</button>
-                    <button (click)="onActiveBtn('agriBtn')" id="agriBtn">Agribusiness</button>
+                    <button [ngClass]="{ active: userType === 'seller' }" (click)="onActiveBtn('seller')">
+                      Seller
+                    </button>
+                    <button [ngClass]="{ active: userType === 'buyer' }" (click)="onActiveBtn('buyer')">Buyer</button>
+                    <button [ngClass]="{ active: userType === 'agribusiness' }" (click)="onActiveBtn('agribusiness')">
+                      Agribusiness
+                    </button>
                   </div>
 
                   <div class="form-group mt-5">
-                    <label for="company">Company Name</label>
-                    <input type="text" class="form-control" placeholder="Company Name" id="company" />
+                    <label for="company">Company Name</label><span>&nbsp; – Optional</span>
+                    <input
+                      type="text"
+                      formControlName="companyName"
+                      class="form-control"
+                      placeholder="Company Name"
+                      id="company"
+                    />
                   </div>
-                  <a class="icon-text" (click)="onBack()"><i class="material-icons">keyboard_backspace</i> Go Back</a>
+
                   <p class="heading-4">
-                    By signing up to Avenews-gt, you agree to our <a href="">Terms of use</a> and
-                    <a href="">Privacy Policy</a>.
+                    By clicking on the create account button, you agree to Avenews-gt
+                    <a routerLink="/terms-of-use" target="_blank">Terms of use</a> and
+                    <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
                   </p>
-                  <button class="pull-right bttn-primary action-bttn">Create Account</button>
+                  <div class="f-bttns-wrapper">
+                    <a class="icon-text" (click)="onBack()"><i class="material-icons">keyboard_backspace</i> Go Back</a>
+                    <button class="pull-right bttn-primary action-bttn" (click)="onGeneralSubmit()">
+                      Create Account
+                    </button>
+                  </div>
                 </div>
               </form>
+              <div id="p3" style="display: none">
+                <h1 class="mb-4">Check your email!</h1>
+                <p class="success-content">
+                  We've emailed a special link to <strong>{{ newUser?.email }}</strong
+                  >. Click the link to confirm your email address and get started.
+                </p>
+              </div>
             </div>
           </div>
         </div>

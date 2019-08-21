@@ -4,8 +4,8 @@
       <img src="../../assets/img/logo-20cm-grey.png" width="174" height="35" alt="" />
     </div>
     <div class="pull-right">
-      <button class="bttn-transparent">Sign in</button>
-      <button class="bttn-primary">Sign up</button>
+      <button class="bttn-transparent" [routerLink]="['/login']">Sign in</button>
+      <button class="bttn-primary" [routerLink]="['/registration']">Sign up</button>
     </div>
   </div>
 </nav>
@@ -23,13 +23,13 @@
       <h2>Get started for free</h2>
       <h3>I am a -</h3>
       <div class="register-btns-wrapper">
-        <button class="bttn-primary">Seller</button>
-        <button class="bttn-primary">Buyer</button>
-        <button class="bttn-primary">Agribusiness</button>
+        <button class="bttn-primary" [routerLink]="['/registration', 'seller']">Seller</button>
+        <button class="bttn-primary" [routerLink]="['/registration', 'buyer']">Buyer</button>
+        <button class="bttn-primary" [routerLink]="['/registration', 'agribusiness']">Agribusiness</button>
       </div>
     </div>
 
-    <p class="normal-text mt-4">Already using Avenews-gt? <a href="">Sign in</a>.</p>
+    <p class="normal-text mt-4">Already using Avenews-gt? <a [routerLink]="['/login']">Sign in</a>.</p>
   </div>
   <lottie-animation-view
     id="lottie"
@@ -185,9 +185,9 @@
   <img src="../../assets/img/landing-imgs/Logo-avenews.png" alt="" />
   <h1>Step into the Future of Agricultural Trade</h1>
   <div class="register-btns-wrapper">
-    <button class="bttn-white">Sellers, start here</button>
-    <button class="bttn-white">Buyers, start here</button>
-    <button class="bttn-white">Agribusiness, start here</button>
+    <button class="bttn-white" [routerLink]="['/registration', 'seller']">Sellers, start here</button>
+    <button class="bttn-white" [routerLink]="['/registration', 'buyer']">Buyers, start here</button>
+    <button class="bttn-white" [routerLink]="['/registration', 'agribusiness']">Agribusiness, start here</button>
   </div>
 </section>
 

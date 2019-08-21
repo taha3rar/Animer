@@ -9,6 +9,19 @@ p {
   color: #5a6c7b;
 }
 
+.navbar-header {
+  width: 100%;
+  margin-left: 0px;
+}
+
+div.help-block p {
+  color: $red-color;
+}
+
+#confirmPass {
+  margin-bottom: 0px;
+}
+
 label {
   font-size: 1.5rem;
   font-weight: normal;
@@ -17,11 +30,7 @@ label {
 }
 
 .login-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  min-height: 100vh;
 }
 
 .login-box {
@@ -31,10 +40,6 @@ label {
   align-items: center;
   width: 100%;
   min-height: 100%;
-}
-
-.ng-invalid.ng-touched:not(form) {
-  border-left: 4px solid theme-color("danger");
 }
 
 @include media-breakpoint-down(xs) {
@@ -50,12 +55,9 @@ label {
 
 .full-page-background {
   box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
-  position: absolute;
   height: 100%;
   width: 100%;
   display: block;
-  top: 0;
-  left: 0;
   background-size: cover;
   background-position: center center;
   background-image: url("../../assets/img/rsz_login_background_2.png");
@@ -114,6 +116,7 @@ footer ul {
 .login-wrapper .card {
   animation: slide-in 0.5s;
   transition: all 0.3s linear;
+  height: 100%;
 }
 
 .card-title {
@@ -121,7 +124,7 @@ footer ul {
 }
 
 .form-group {
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.4rem !important;
 }
 
 .bttn-transparent {
@@ -147,25 +150,7 @@ footer ul {
   background-color: #1e3753;
   min-height: 60rem;
   border-radius: 7px 0px 0px 7px;
-}
-
-.cl-r {
-  min-height: 60rem;
-  background-color: white;
-  border-radius: 0px 7px 7px 0px;
-}
-
-.cl-l-wrapper {
-  min-height: 60rem;
-  padding-top: 5rem;
-  padding-left: 2rem;
-  height: 100%;
   position: relative;
-
-  p {
-    color: white;
-    font-size: 1.6rem;
-  }
 
   .img-wrapper {
     width: 23.5rem;
@@ -178,6 +163,22 @@ footer ul {
       opacity: 0.018;
       height: auto;
     }
+  }
+}
+
+.cl-r {
+  min-height: 60rem;
+  background-color: white;
+  border-radius: 0px 7px 7px 0px;
+}
+
+.cl-l-wrapper {
+  padding-top: 5rem;
+  padding-left: 2rem;
+
+  p {
+    color: white;
+    font-size: 1.6rem;
   }
 }
 
@@ -210,10 +211,14 @@ footer ul {
   font-size: 3.6rem;
 }
 
-.action-bttn {
-  position: absolute;
-  right: 15px;
-  bottom: 4.5rem;
+.f-bttns-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3.5rem;
+
+  button {
+    margin-right: 0px;
+  }
 }
 
 a.icon-text {
@@ -221,13 +226,38 @@ a.icon-text {
   font-size: 1.6rem;
   width: 20rem;
   font-weight: 600;
-  position: absolute;
-  left: 15px;
-  bottom: 4.5rem;
   cursor: pointer;
+  margin-right: auto;
 }
 
 a.icon-text:hover {
   text-decoration: none;
   color: #37c1ce;
+}
+
+.success-content {
+  font-size: 1.5rem;
+  width: 90%;
+}
+
+label ~ span {
+  font-size: 1.4rem;
+  color: #a3aab1;
+}
+
+.error-block {
+  background-color: rgb(255, 170, 170);
+  font-size: 1.4rem;
+  padding: 0.8rem 1.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: 3px;
+  p {
+    margin-bottom: 0px;
+    color: #6e0202 !important;
+  }
+}
+
+.col:first-child,
+.phone-input {
+  padding-right: 3px;
 }

@@ -16,6 +16,11 @@ label {
   color: #5a6c7b;
 }
 
+.navbar-header {
+  width: 100%;
+  margin-left: 0px;
+}
+
 .login-container {
   position: absolute;
   top: 0;
@@ -230,4 +235,34 @@ a.icon-text {
 a.icon-text:hover {
   text-decoration: none;
   color: #37c1ce;
+}
+
+.validated-user {
+  background-color: #d8eacc;
+  border: 1px solid #74965e;
+  padding: 1rem 1.8rem;
+  font-size: 1.4rem;
+  border-radius: 3px;
+  margin-bottom: 1.8rem;
+  p {
+    color: #241c15 !important;
+    padding-left: 4px;
+    margin-bottom: 0px;
+  }
+
+  &-header {
+    display: flex;
+    color: #241c15 !important;
+    align-items: center;
+    line-height: 0;
+    margin-bottom: 5px;
+    i {
+      font-size: 21px;
+    }
+    strong {
+      padding-left: 0.5rem;
+      padding-top: 0.4rem;
+      font-size: 1.5rem;
+    }
+  }
 }

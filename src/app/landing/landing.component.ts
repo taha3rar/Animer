@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterViewChecked, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-landing',
@@ -8,7 +8,6 @@ import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/cor
 export class LandingComponent implements OnInit {
   public lottieConfig: Object;
   private anim: any;
-  private animationSpeed = 1;
 
   constructor() {
     this.lottieConfig = {
@@ -26,21 +25,5 @@ export class LandingComponent implements OnInit {
     this.anim = anim;
   }
 
-  stop() {
-    this.anim.stop();
-  }
-
-  play() {
-    this.anim.play();
-  }
-
-  pause() {
-    this.anim.pause();
-  }
-
-  setSpeed(speed: number) {
-    this.animationSpeed = speed;
-    this.anim.setSpeed(speed);
-  }
   ngOnInit() {}
 }
