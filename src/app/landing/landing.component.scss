@@ -2,7 +2,6 @@ h1 {
   margin: 0 auto;
   max-width: 50rem;
   min-width: 40rem;
-  height: 110px;
   font-size: 4rem;
   font-weight: 600;
   line-height: 1.19;
@@ -239,4 +238,96 @@ footer {
 .fa-instagram {
   background: #125688;
   color: white;
+}
+
+#signupBtnMobile {
+  display: none;
+}
+
+@media only screen and (max-width: 777px) {
+  .signinBtn,
+  #signupBtn {
+    display: none;
+  }
+
+  .vp-content {
+    width: 84%;
+    top: 11rem;
+  }
+
+  #signupBtnMobile {
+    display: block;
+  }
+
+  h1 {
+    min-width: 100%;
+    font-size: 3.5rem;
+  }
+
+  .register-btns-wrapper {
+    flex-direction: column;
+  }
+
+  #how-it-works {
+    margin-top: 52rem;
+  }
+
+  lottie-animation-view {
+    display: none;
+  }
+
+  .how-it-works-content {
+    padding: 2rem 2rem;
+  }
+
+  .content-row-l,
+  .content-row-r {
+    width: 100%;
+  }
+
+  .content-row {
+    flex-direction: column;
+    margin-bottom: 7rem;
+  }
+
+  .content-row-l:nth-child(2) {
+    padding-left: 0px;
+  }
+
+  .nav-item.user-type img {
+    width: 98%;
+  }
+
+  .includes-txt {
+    order: 2;
+  }
+  .includes-img {
+    order: 1;
+  }
+
+  .register-btns-wrapper {
+    flex-direction: column;
+    justify-content: space-between;
+
+    button:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  #get-started {
+    margin-top: 3rem;
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+      padding-top: 6%;
+    }
+    img {
+      width: 25rem;
+    }
+  }
+
+  .social-footer {
+    margin: 1.2rem 0px;
+  }
 }

@@ -4,42 +4,43 @@
       <img src="../../assets/img/logo-20cm-grey.png" width="174" height="35" alt="" />
     </div>
     <div class="pull-right">
-      <button class="bttn-transparent" [routerLink]="['/login']">Sign in</button>
-      <button class="bttn-primary" [routerLink]="['/registration']">Sign up</button>
+      <button class="bttn-transparent signinBtn" [routerLink]="['/login']">Sign in</button>
+      <button class="bttn-primary" id="signupBtn" [routerLink]="['/registration']">Sign up</button>
+      <button class="bttn-transparent pt-3" id="signupBtnMobile">Sign up</button>
     </div>
   </div>
 </nav>
+<div class="container">
+  <div class="fullscreen-video-wrapp pt-5">
+    <lottie-animation-view
+      id="lottie"
+      [options]="lottieConfig"
+      (animCreated)="handleAnimation($event)"
+      style="position: absolute; top:6.5%; left:0; right: 0; z-index: 1;"
+    >
+    </lottie-animation-view>
+    <div class="vp-content">
+      <h1 class="pb-4">Step into the Future of Agricultural Trade</h1>
 
-<div class="fullscreen-video-wrapp pt-5">
-  <div class="vp-content">
-    <h1>Step into the Future of Agricultural Trade</h1>
+      <p class="heading-3">
+        Avenews-GT provides you with the business tools to conduct your entire agricultural trade process online, in a
+        secure environment in a few easy steps.
+      </p>
 
-    <p class="heading-3">
-      Avenews-GT provides you with the business tools to conduct your entire agricultural trade process online, in a
-      secure environment in a few easy steps.
-    </p>
+      <div class="get-started-wrapper">
+        <h2>Get started for free</h2>
+        <h3>I am a -</h3>
+        <div class="register-btns-wrapper">
+          <button class="bttn-primary" [routerLink]="['/registration', 'seller']">Seller</button>
+          <button class="bttn-primary" [routerLink]="['/registration', 'buyer']">Buyer</button>
+          <button class="bttn-primary" [routerLink]="['/registration', 'agribusiness']">Agribusiness</button>
+        </div>
 
-    <div class="get-started-wrapper">
-      <h2>Get started for free</h2>
-      <h3>I am a -</h3>
-      <div class="register-btns-wrapper">
-        <button class="bttn-primary" [routerLink]="['/registration', 'seller']">Seller</button>
-        <button class="bttn-primary" [routerLink]="['/registration', 'buyer']">Buyer</button>
-        <button class="bttn-primary" [routerLink]="['/registration', 'agribusiness']">Agribusiness</button>
+        <p class="normal-text mt-4 signinBtn">Already using Avenews-gt? <a [routerLink]="['/login']">Sign in</a>.</p>
       </div>
     </div>
-
-    <p class="normal-text mt-4">Already using Avenews-gt? <a [routerLink]="['/login']">Sign in</a>.</p>
   </div>
-  <lottie-animation-view
-    id="lottie"
-    [options]="lottieConfig"
-    (animCreated)="handleAnimation($event)"
-    style="position: absolute; top:6.5%; left:0; right: 0;"
-  >
-  </lottie-animation-view>
 </div>
-
 <section id="how-it-works" class="container">
   <h1>
     Here's how it works
@@ -69,7 +70,7 @@
   <div class="how-it-works-content tab-content">
     <div class="tab-pane active" id="seller-sec" role="tabpanel">
       <div class="content-row">
-        <div class="content-row-l">
+        <div class="content-row-l includes-txt">
           <p class="step-txt">Step 1</p>
           <p class="step-title">Add your Buyers</p>
           <p class="step-content">
@@ -77,15 +78,15 @@
             digital platform.
           </p>
         </div>
-        <div class="content-row-r">
+        <div class="content-row-r includes-img">
           <img src="../../assets/img/landing-imgs/add-client.png" alt="" />
         </div>
       </div>
       <div class="content-row">
-        <div class="content-row-r">
+        <div class="content-row-r includes-img">
           <img src="../../assets/img/landing-imgs/add-product.png" alt="" />
         </div>
-        <div class="content-row-l">
+        <div class="content-row-l includes-txt">
           <p class="step-txt">Step 2</p>
           <p class="step-title">Add your Products</p>
           <p class="step-content">
@@ -95,7 +96,7 @@
         </div>
       </div>
       <div class="content-row">
-        <div class="content-row-l">
+        <div class="content-row-l includes-txt">
           <p class="step-txt">Step 3</p>
           <p class="step-title">Trade Directly with your Buyers</p>
           <p class="step-content">
@@ -103,14 +104,14 @@
             buyers know exactly what they are buying and order directly from your inventory.
           </p>
         </div>
-        <div class="content-row-r">
+        <div class="content-row-r includes-img">
           <img src="../../assets/img/landing-imgs/transactions.png" alt="" />
         </div>
       </div>
     </div>
     <div class="tab-pane" id="buyer-sec" role="tabpanel">
       <div class="content-row">
-        <div class="content-row-l">
+        <div class="content-row-l includes-txt">
           <p class="step-txt">Step 1</p>
           <p class="step-title">Add your Sellers</p>
           <p class="step-content">
@@ -118,12 +119,12 @@
             the supply chain, and ensures full transparency of quotation and pricing data.
           </p>
         </div>
-        <div class="content-row-r">
+        <div class="content-row-r includes-img">
           <img src="../../assets/img/landing-imgs/add-client.png" alt="" />
         </div>
       </div>
       <div class="content-row">
-        <div class="content-row-l">
+        <div class="content-row-l includes-txt">
           <p class="step-txt">Step 2</p>
           <p class="step-title">Trade Directly with your Sellers</p>
           <p class="step-content">
@@ -132,14 +133,14 @@
             inventory.
           </p>
         </div>
-        <div class="content-row-r">
-          <img src="../../assets/img/landing-imgs/transactions.png" alt="" />
+        <div class="content-row-r includes-img">
+          <img src="../../assets/img/landing-imgs/transactions.png" />
         </div>
       </div>
     </div>
     <div class="tab-pane" id="agribusiness-sec" role="tabpanel">
       <div class="content-row">
-        <div class="content-row-l">
+        <div class="content-row-l includes-txt">
           <p class="step-txt">Step 1</p>
           <p class="step-title">Add your Sellers and Buyers</p>
           <p class="step-content">
@@ -147,15 +148,15 @@
             agricultural produce by digitizing your business.
           </p>
         </div>
-        <div class="content-row-r">
-          <img src="../../assets/img/landing-imgs/add-client.png" alt="" />
+        <div class="content-row-r includes-img">
+          <img src="../../assets/img/landing-imgs/add-client.png" />
         </div>
       </div>
       <div class="content-row">
-        <div class="content-row-r">
-          <img src="../../assets/img/landing-imgs/add-product.png" alt="" />
+        <div class="content-row-r includes-img">
+          <img src="../../assets/img/landing-imgs/add-product.png" />
         </div>
-        <div class="content-row-l">
+        <div class="content-row-l includes-txt">
           <p class="step-txt">Step 2</p>
           <p class="step-title">Add your products</p>
           <p class="step-content">
@@ -165,7 +166,7 @@
         </div>
       </div>
       <div class="content-row">
-        <div class="content-row-l">
+        <div class="content-row-l includes-txt">
           <p class="step-txt">Step 3</p>
           <p class="step-title">Trade Directly with your Buyers</p>
           <p class="step-content">
@@ -173,7 +174,7 @@
             buyers know exactly what they are buying and order directly from your inventory.
           </p>
         </div>
-        <div class="content-row-r">
+        <div class="content-row-r includes-img">
           <img src="../../assets/img/landing-imgs/transactions.png" alt="" />
         </div>
       </div>
