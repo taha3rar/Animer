@@ -65,7 +65,7 @@ export class UserService extends BaseService {
     return this.apiService.put(`/user/${id}`, { notifications: notifications }).pipe(map(data => data));
   }
 
-  updateUserValidation(id: string): Observable<User> {
+  updateUserValidation(id: string): Observable<any> {
     return this.apiService.post(`/user/validate/${id}`).pipe(map(data => data));
   }
 }
