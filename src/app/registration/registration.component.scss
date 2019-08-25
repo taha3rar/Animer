@@ -184,6 +184,8 @@ footer ul {
 
 .bttns-line {
   border: 1px solid #37c1ce;
+  display: flex;
+  justify-content: space-between;
   button {
     width: 33.3%;
     padding: 0.8rem 2.5rem;
