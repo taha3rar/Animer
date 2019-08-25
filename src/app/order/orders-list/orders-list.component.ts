@@ -20,8 +20,7 @@ export class OrdersListComponent implements OnInit {
   page = 1;
   agribusinessUser: boolean;
   viewAsSeller = false;
-  viewAsBuyer = false;
-  viewAsAgri = true;
+  viewAsBuyer = true;
   currentUser: any;
   constructor(
     private route: ActivatedRoute,
@@ -35,27 +34,27 @@ export class OrdersListComponent implements OnInit {
   ngOnInit() {
     this.agribusinessUser = this.authService.isAgribusiness;
     this.route.data.subscribe(({ orders, ordersAsBuyer, ordersAsSeller, currentUser }) => {
-      this.orders = orders;
-      this.allOrders = orders;
+      this.orders = ordersAsBuyer;
       this.buyerOrders = ordersAsBuyer;
       this.sellerOrders = ordersAsSeller;
       this.currentUser = currentUser;
+      if (this.agribusinessUser) {
+        this.orders = ordersAsBuyer;
+      } else {
+        this.orders = orders;
+      }
     });
   }
 
   viewAs(profileType: any) {
     this.viewAsSeller = false;
     this.viewAsBuyer = false;
-    this.viewAsAgri = false;
     if (profileType === 'seller') {
       this.orders = this.sellerOrders;
       this.viewAsSeller = true;
-    } else if (profileType === 'buyer') {
+    } else {
       this.orders = this.buyerOrders;
       this.viewAsBuyer = true;
-    } else {
-      this.orders = this.allOrders;
-      this.viewAsAgri = true;
     }
   }
 
