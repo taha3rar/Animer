@@ -107,6 +107,9 @@
                           [ngModelOptions]="{ standalone: true }"
                           (ngModelChange)="changeRegionCode()"
                         />
+                        <div class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
+                          <p>This phone number is invalid</p>
+                        </div>
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -209,12 +212,27 @@
                   </div>
                 </div>
               </form>
-              <div id="p3" style="display: none">
-                <h1 class="mb-4">Check your email!</h1>
-                <p class="success-content">
+              <div id="p3" style="display: none;">
+                <img src="../../assets/img/Success-icon.png" />
+                <h1 class="mb-4" *ngIf="userRegistrationForm.get('email').value">Check your email!</h1>
+                <h1
+                  class="mb-4"
+                  *ngIf="userRegistrationForm.get('phoneNumber').value && userRegistrationForm.get('email').value == ''"
+                >
+                  Check your phone number!
+                </h1>
+
+                <p class="success-content" *ngIf="userRegistrationForm.get('email').value; else elseBlock">
                   We've emailed a special link to <strong>{{ newUser?.email }}</strong
                   >. Click the link to confirm your email address and get started.
                 </p>
+                <ng-template #elseBlock>
+                  <p class="success-content">
+                    We've sent you a special link to
+                    <strong>{{ newUser?.phone_number }}.</strong> Click the link to confirm your phone number and get
+                    started.
+                  </p>
+                </ng-template>
               </div>
             </div>
           </div>
@@ -225,7 +243,7 @@
       <div class="container">
         <nav class="pull-left">
           <ul>
-              <li><a class="btn-link" routerLink="/privacy-policy" target="_blank">PRIVACY POLICY</a></li>
+            <li><a class="btn-link" routerLink="/privacy-policy" target="_blank">PRIVACY POLICY</a></li>
           </ul>
         </nav>
         <p class="copyright pull-right">&copy; <a href="https://www.avenews-gt.com" target="_blank">Avenews-GT</a></p>

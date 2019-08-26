@@ -263,3 +263,13 @@ label ~ span {
 .phone-input {
   padding-right: 3px;
 }
+
+#p3 {
+  flex-direction: column;
+
+  img {
+    width: 45%;
+    margin: 0 auto;
+    margin-bottom: 3.5rem;
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
 import { UserService } from '@app/core';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -72,6 +72,15 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     }
   }
 
+  phoneValidator(phoneNumber: any): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      if (!this.phoneUtil.isValidNumber(phoneNumber)) {
+        return { phoneError: true };
+      }
+      return null;
+    };
+  }
+
   showEmailPhoneError() {
     return (
       this.clientf.email.touched &&
@@ -104,6 +113,9 @@ export class RegistrationComponent extends BaseValidationComponent implements On
       return;
     }
     this.userRegistrationForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
+    if (!this.phoneUtil.isValidNumber(phoneNumber)) {
+      this.clientf.phoneNumber.setErrors({ notValid: true });
+    }
   }
 
   passwordsNotMatch() {
@@ -128,7 +140,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
         if (data._id) {
           $('#p1').css({ display: 'none' });
           $('#p2').css({ display: 'none' });
-          $('#p3').css({ display: 'block' });
+          $('#p3').css({ display: 'flex' });
         } else {
           return;
         }
