@@ -41,7 +41,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
         email: [undefined, Validators.email],
         phoneNumber: [undefined],
         country: [undefined, Validators.required],
-        password: [undefined, Validators.required],
+        password: [undefined, [Validators.required, Validators.minLength(8)]],
         confirmPassword: [undefined, Validators.required],
         companyName: [undefined]
       },
