@@ -28,6 +28,7 @@ declare const $: any;
 })
 export class AppComponent implements OnInit {
   showLoading = true;
+  userValidation = false;
 
   constructor(
     private router: Router,
@@ -103,10 +104,19 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(event => {
       this.responsive(window.innerWidth);
     });
+
+    if (window.location.href.includes('validation')) {
+      this.userValidation = true;
+    }
   }
 
   responsive(windowSize: any) {
-    if (windowSize <= 650 && !window.location.href.includes('registration') && !window.location.href.includes('home')) {
+    if (
+      windowSize <= 650 &&
+      !window.location.href.includes('registration') &&
+      !window.location.href.includes('home') &&
+      !window.location.href.includes('not-found')
+    ) {
       $('.compatibility-msg-content').css({ display: 'block' });
       $('.compatibility-msg').css({ display: 'block' });
       $('.navbar-compatibilty-content-img').css({ display: 'block' });

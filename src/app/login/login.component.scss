@@ -266,3 +266,25 @@ a.icon-text:hover {
     }
   }
 }
+
+h5 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  line-height: 0.1em;
+  margin: 1.5rem 0 1.5rem;
+}
+
+h5 span {
+  background: #fff;
+  padding: 0 1rem;
+}
+
+.email-phone-wrapper {
+  padding: 1.8rem 2rem;
+  border: 1px solid #ddd;
+}
+
+.password-wrapper {
+  padding: 0px 2rem;
+}
