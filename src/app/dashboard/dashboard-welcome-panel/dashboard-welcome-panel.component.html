@@ -4,17 +4,20 @@
     <div class="flex">
       <div class="panel-left">
         <ul>
-          <li class="step" [class.active]="currentUser.roles[0] === 'buyer'">
+          <li
+            class="step"
+            *ngxPermissionsOnly="['create-order']"
+            [class.active]="currentUser.roles[0] === 'buyer' || currentUser.roles[0] === 'agribusiness'"
+          >
             <a data-toggle="tab" class="label" href="#place-order">Orders</a>
+          </li>
+          <li class="step" *ngIf="currentUser.roles[0] === 'seller'" [class.active]="currentUser.roles[0] === 'seller'">
+            <a data-toggle="tab" class="label" href="#receive-po">Orders</a>
           </li>
           <li class="step">
             <a data-toggle="tab" class="label" href="#quote-request">Quote Requests</a>
           </li>
-          <li
-            class="step"
-            [class.active]="currentUser.roles[0] === 'seller' || currentUser.roles[0] === 'agribusiness'"
-            *ngxPermissionsOnly="['create-pi']"
-          >
+          <li class="step" *ngxPermissionsOnly="['create-pi']">
             <a data-toggle="tab" class="label" href="#create-pi">Proforma Invoices</a>
           </li>
           <li class="step" *ngIf="currentUser.roles[0] === 'buyer'">
@@ -46,9 +49,9 @@
             <button class="btn-primary-shadow pull-right" routerLink="/client">Go to Clients</button>
           </div>
           <div
-            class="tab-pane"
+            class="tab-pane active"
             id="place-order"
-            [class.active]="currentUser.roles[0] === 'buyer'"
+            [class.active]="currentUser.roles[0] === 'buyer' || currentUser.roles[0] === 'agribusiness'"
             *ngxPermissionsOnly="['create-order']"
           >
             <figure><img src="../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" /></figure>
@@ -106,12 +109,7 @@
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/invoice">Go to Proforma Invoice</button>
           </div>
-          <div
-            class="tab-pane"
-            [class.active]="currentUser.roles[0] === 'seller' || currentUser.roles[0] === 'agribusiness'"
-            id="create-pi"
-            *ngxPermissionsOnly="['create-pi']"
-          >
+          <div class="tab-pane" id="create-pi" *ngxPermissionsOnly="['create-pi']">
             <figure><img src="../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Easily distribute Proforma Invoices directly to your clients</p>
             <p class="normal-text-bold">
@@ -130,7 +128,12 @@
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/product/list">Go to Products</button>
           </div>
-          <div class="tab-pane" id="receive-po" *ngIf="currentUser.roles[0] === 'seller'">
+          <div
+            class="tab-pane"
+            [class.active]="currentUser.roles[0] === 'seller'"
+            id="receive-po"
+            *ngIf="currentUser.roles[0] === 'seller'"
+          >
             <figure><img src="../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Receive and reply to purchase orders</p>
             <p class="normal-text-bold">
