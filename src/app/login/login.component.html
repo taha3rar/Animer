@@ -124,8 +124,18 @@
                     <button class="bttn-primary w-100 mb-2" type="submit" [disabled]="isLoading" (click)="onSubmit()">
                       <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i> <span translate>Login</span>
                     </button>
-                    <a class="t-bold t-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
+
+                    <a class="heading-4-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
                   </div>
+                  <button class="bttn-primary w-100 mb-2" type="submit" [disabled]="loginForm.invalid || isLoading">
+                    <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i> <span translate>Sign in</span>
+                  </button>
+                  <a class="heading-4-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
+                </form>
+                <div class="f-bttns-wrapper">
+                  <a class="icon-text" (click)="changeDiv('p0')"
+                    ><i class="material-icons">keyboard_backspace</i> Go Back</a
+                  >
                 </div>
               </form>
             </div>

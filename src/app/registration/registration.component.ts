@@ -138,7 +138,6 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     this.userService.saveNewUser(this.newUser).subscribe(
       data => {
         if (data._id) {
-          $('#p1').css({ display: 'none' });
           $('#p2').css({ display: 'none' });
           $('#p3').css({ display: 'flex' });
         } else {
@@ -169,17 +168,24 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     return this.userRegistrationForm.controls;
   }
 
-  changeDiv() {
+  changeDiv(showDiv: string) {
+    $('#p0').css({ display: 'none' });
     $('#p1').css({ display: 'none' });
-    $('#p2').css({ display: 'block' });
+    $('#p2').css({ display: 'none' });
+    $('#p3').css({ display: 'none' });
+
+    if (showDiv === 'p0') {
+      $('#p0').css({ display: 'block' });
+    } else if (showDiv === 'p1') {
+      $('#p1').css({ display: 'block' });
+    } else if (showDiv === 'p2') {
+      $('#p2').css({ display: 'block' });
+    } else {
+      $('#p3').css({ display: 'block' });
+    }
   }
 
   onActiveBtn(btnType: string) {
     this.userType = btnType;
-  }
-
-  onBack() {
-    $('#p2').css({ display: 'none' });
-    $('#p1').css({ display: 'block' });
   }
 }

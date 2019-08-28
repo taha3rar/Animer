@@ -28,7 +28,24 @@
           <div class="col-md-7 col-lg-7 col-sm-12 cl-r">
             <div class="cl-r-wrapper">
               <form [formGroup]="userRegistrationForm">
-                <div id="p1">
+                <div id="p0">
+                  <h3>Create your Avenews-gt account</h3>
+                  <div class="bttns-wrapper">
+                    <button class="bttn bttn-facebook">
+                      <i class="fab fa-facebook"></i>
+                      <p>Create account with Facebook</p>
+                    </button>
+                    <button class="bttn bttn-google">
+                      <i class="fab fa-google"></i>
+                      <p>Create account with Google</p>
+                    </button>
+                    <button class="bttn bttn-email" (click)="changeDiv('p1')">
+                      <i class="far fa-envelope"></i>
+                      <p>Create account with Email Address</p>
+                    </button>
+                  </div>
+                </div>
+                <div id="p1" style="display: none;">
                   <h1 class="mb-4">Sign up</h1>
                   <div class="error-block" *ngIf="showEmailPhoneError()">
                     <p>Please fill in the Phone Number or Email Address!</p>
@@ -164,6 +181,9 @@
                     <p>Passwords doesn't match</p>
                   </div>
                   <div class="f-bttns-wrapper">
+                    <a class="icon-text" (click)="changeDiv('p0')"
+                      ><i class="material-icons">keyboard_backspace</i> Go Back</a
+                    >
                     <button
                       class="bttn-primary action-bttn"
                       [hidden]="userRegistrationForm.valid"
@@ -174,7 +194,7 @@
                     <button
                       class="bttn-primary action-bttn"
                       [hidden]="!userRegistrationForm.valid"
-                      (click)="changeDiv()"
+                      (click)="changeDiv('p2')"
                     >
                       Next
                     </button>
@@ -210,7 +230,9 @@
                     <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
                   </p>
                   <div class="f-bttns-wrapper">
-                    <a class="icon-text" (click)="onBack()"><i class="material-icons">keyboard_backspace</i> Go Back</a>
+                    <a class="icon-text" (click)="changeDiv('p1')"
+                      ><i class="material-icons">keyboard_backspace</i> Go Back</a
+                    >
                     <button class="pull-right bttn-primary action-bttn" (click)="onGeneralSubmit()">
                       Create Account
                     </button>

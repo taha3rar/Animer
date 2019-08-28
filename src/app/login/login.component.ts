@@ -145,6 +145,17 @@ export class LoginComponent implements OnInit {
     this.phoneNumber = this.phoneUtil.format(phoneNumber, PNF.E164);
   }
 
+  changeDiv(showDiv: string) {
+    $('#p0').css({ display: 'none' });
+    $('#p1').css({ display: 'none' });
+
+    if (showDiv === 'p0') {
+      $('#p0').css({ display: 'block' });
+    } else {
+      $('#p1').css({ display: 'block' });
+    }
+  }
+
   private createForm() {
     this.loginForm = this.formBuilder.group({
       username: [''],
