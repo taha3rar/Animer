@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm.value);
     this.isLoading = true;
     this.error = '';
     this.authenticationService
@@ -96,8 +95,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.filledPhoneEmail = false;
-    console.log(this.email.nativeElement.value);
-    console.log(this.phoneNumber);
     if (this.email.nativeElement.value && this.phoneNumber === undefined) {
       this.loginForm.controls.username.setValue(this.email.nativeElement.value);
     } else if (this.phoneNumber !== undefined && this.email.nativeElement.value === '') {
