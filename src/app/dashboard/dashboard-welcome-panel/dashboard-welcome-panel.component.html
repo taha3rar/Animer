@@ -49,7 +49,7 @@
             <button class="btn-primary-shadow pull-right" routerLink="/client">Go to Clients</button>
           </div>
           <div
-            class="tab-pane active"
+            class="tab-pane"
             id="place-order"
             [class.active]="currentUser.roles[0] === 'buyer' || currentUser.roles[0] === 'agribusiness'"
             *ngxPermissionsOnly="['create-order']"
