@@ -21,6 +21,10 @@ const config = new AuthServiceConfig([
   }
 ]);
 
+export function provideConfig() {
+  return config;
+}
+
 @NgModule({
   declarations: [RegistrationComponent, TermsOfUseComponent, PrivacyPolicyComponent],
   imports: [
@@ -31,8 +35,14 @@ const config = new AuthServiceConfig([
     FormsModule,
     SharedModule,
     NgbModule,
-    SocialLoginModule.initialize(config),
+    SocialLoginModule,
     MatSortModule
+  ],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ]
 })
 export class RegistrationModule {}
