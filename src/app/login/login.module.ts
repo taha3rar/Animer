@@ -21,6 +21,10 @@ const config = new AuthServiceConfig([
   }
 ]);
 
+export function provideConfig() {
+  return config;
+}
+
 @NgModule({
   imports: [
     ReactiveFormsModule,
@@ -30,10 +34,16 @@ const config = new AuthServiceConfig([
     LoginRoutingModule,
     RouterModule,
     CommonModule,
-    SocialLoginModule.initialize(config),
+    SocialLoginModule,
     NgxPermissionsModule.forRoot()
   ],
   declarations: [LoginComponent, ForgotPasswordComponent, ResetPasswordComponent],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   entryComponents: [LoginComponent]
 })
 export class LoginModule {}
