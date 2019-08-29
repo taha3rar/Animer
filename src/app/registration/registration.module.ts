@@ -9,6 +9,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSortModule } from '@angular/material';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
+
+// Client id for the facebook oauth. This is used for validation of our application to facebook.
+// https://developers.facebook.com/
+const facebook_oauth_client_id = '2144166195710655';
+const config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider(facebook_oauth_client_id)
+  }
+]);
 
 @NgModule({
   declarations: [RegistrationComponent, TermsOfUseComponent, PrivacyPolicyComponent],
@@ -20,6 +31,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     FormsModule,
     SharedModule,
     NgbModule,
+    SocialLoginModule.initialize(config),
     MatSortModule
   ]
 })

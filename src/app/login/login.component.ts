@@ -7,6 +7,8 @@ import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
+import { AuthService as SocialAuthService, FacebookLoginProvider } from 'angularx-social-login';
+
 const log = new Logger('Login');
 declare var $: any;
 
@@ -31,6 +33,8 @@ export class LoginComponent implements OnInit {
   partialPhoneNumber: string;
   phoneNumber: string;
   @ViewChild('email') email: ElementRef;
+  title = 'Login with FACEBOOK';
+  user: any;
 
   constructor(
     private router: Router,
@@ -38,7 +42,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private i18nService: I18nService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private socialAuthentificationService: SocialAuthService
   ) {
     this.createForm();
   }
@@ -114,6 +119,25 @@ export class LoginComponent implements OnInit {
     } else if (this.phoneNumber !== undefined && this.email.nativeElement.value !== '') {
       this.filledPhoneEmail = true;
     }
+  }
+  // Method to sign in with facebook.
+  signIn(platform: string): void {
+    platform = FacebookLoginProvider.PROVIDER_ID;
+    this.socialAuthentificationService.signIn(platform, { scope: 'groups_access_member_info' }).then(
+      response => {
+        console.log(platform + ' logged in user data is= ', response);
+        this.user = response;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  signOut(): void {
+    this.socialAuthentificationService.signOut();
+    this.user = null;
+    console.log('User signed out.');
   }
 
   changeCard() {

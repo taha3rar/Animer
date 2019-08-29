@@ -46,6 +46,62 @@
                   </div>
                 </div>
                 <div id="p1" style="display: none;">
+              <p>
+                {{ title }}
+              </p>
+
+              <button (click)="signIn('Facebook')">Sign in with Facebook</button><br /><br />
+              <button (click)="signOut()">Sign out</button><br /><br />
+
+              <form *ngIf="user" [formGroup]="userRegistrationForm">
+                <h1 class="mb-4">Welcome {{ user?.name }} !</h1>
+                <h3 class="mb-4">We have few more info that we need from you.</h3>
+                <div *ngIf="!user.email" class="form-group" [ngClass]="showFieldStyle('email')">
+                  <label for="email">Email Address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email"
+                    placeholder="Email address"
+                    id="email"
+                  />
+                  <div class="help-block" *ngIf="isFieldInvalid('email')">
+                    <p>Email address is required</p>
+                  </div>
+                </div>
+
+                <label for="country">Country</label>
+                <select
+                  data-live-search="true"
+                  type="text"
+                  formControlName="country"
+                  [ngClass]="showFieldStyle('country')"
+                  class="form-control selectpicker"
+                  id="country"
+                >
+                  <option *ngFor="let country of countries" [value]="country.value">{{ country.viewValue }}</option>
+                </select>
+                <div class="help-block" *ngIf="isFieldInvalid('country')">
+                  <p>Country is required</p>
+                </div>
+
+                <label for="bttns-line">Join Avenews-GT as</label>
+                <div class="bttns-line">
+                  <button [ngClass]="{ active: userType === 'seller' }" (click)="onActiveBtn('seller')">
+                    Seller
+                  </button>
+                  <button [ngClass]="{ active: userType === 'buyer' }" (click)="onActiveBtn('buyer')">Buyer</button>
+                  <button [ngClass]="{ active: userType === 'agribusiness' }" (click)="onActiveBtn('agribusiness')">
+                    Agribusiness
+                  </button>
+                </div>
+                <button class="pull-right bttn-primary action-bttn">
+                  Create Account with Facebook
+                </button>
+              </form>
+
+              <form *ngIf="!user" [formGroup]="userRegistrationForm">
+                <div id="p1">
                   <h1 class="mb-4">Sign up</h1>
                   <div class="error-block" *ngIf="showEmailPhoneError()">
                     <p>Please fill in the Phone Number or Email Address!</p>

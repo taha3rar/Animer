@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
 import { UserRegistration } from '@app/core/models/user/user-registration';
+import { AuthService as SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
 declare const $: any;
 
@@ -24,8 +25,15 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   phoneCode: string;
   partialPhoneNumber: string;
   emailPhoneError = false;
+  title = 'Login with FACEBOOK';
+  user: SocialUser;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private socialAuthentificationService: SocialAuthService
+  ) {
     super();
   }
 
@@ -55,6 +63,32 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     setTimeout(function() {
       $('.selectpicker').selectpicker();
     }, 200);
+  }
+
+  // Method to sign in with facebook.
+  signIn(platform: string): void {
+    platform = FacebookLoginProvider.PROVIDER_ID;
+    this.socialAuthentificationService.signIn(platform, { scope: 'groups_access_member_info' }).then(
+      response => {
+        console.log(platform + ' logged in user data is= ', response);
+        this.user = response;
+        setTimeout(function() {
+          $('.selectpicker').selectpicker();
+        }, 200);
+        if (!this.user.email) {
+          this.userRegistrationForm.controls['email'].setValidators([Validators.required]);
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  signOut(): void {
+    this.socialAuthentificationService.signOut();
+    this.user = null;
+    console.log('User signed out.');
   }
 
   equalPasswordsValidator(group: FormGroup) {

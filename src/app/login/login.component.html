@@ -141,6 +141,20 @@
                   </p>
                 </div>
               </footer>
+              </form>
+
+              <p>
+                {{ title }}
+              </p>
+
+              <button (click)="signIn('Facebook')">Sign in with Facebook</button><br /><br />
+              <button (click)="signOut()">Sign out</button><br /><br />
+
+              <div *ngIf="user">
+                <img src="{{ user.photoUrl }}" />
+                <h4>{{ user.name }}</h4>
+                <p>{{ user.email }}</p>
+              </div>
             </div>
           </div>
         </div>

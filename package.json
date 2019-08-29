@@ -44,6 +44,7 @@
     "@types/mathjs": "^4.4.5",
     "@types/socket.io-client": "^1.4.32",
     "angulartics2": "^6.0.0",
+    "angularx-social-login": "^1.2.7",
     "aws-sdk": "^2.377.0",
     "bootstrap": "^4.1.1",
     "bootstrap-notify": "3.1.3",
