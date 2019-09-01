@@ -76,45 +76,34 @@
                             [(ngModel)]="regionCode"
                             (change)="changeRegionCode()"
                             [ngModelOptions]="{ standalone: true }"
-                          >
-                            <option
-                              *ngFor="let country of countries"
-                              [value]="country.value"
-                              [attr.data-content]="generateLink(country.value, country.viewValue)"
-                            ></option>
-                          </select>
+                            (ngModelChange)="changeRegionCode()"
+                          />
                         </div>
-                        <input
-                          type="tel"
-                          class="form-control"
-                          placeholder="Phone Number"
-                          [(ngModel)]="partialPhoneNumber"
-                          [ngModelOptions]="{ standalone: true }"
-                          (ngModelChange)="changeRegionCode()"
-                        />
-                      </div>
-                      <span hidden translate>Phone Number</span>
-                    </label>
+                        <span hidden translate>Phone Number</span>
+                      </label>
+                    </div>
                   </div>
                   <div class="password-wrapper">
-                    <label class="d-block mt-4" style="margin-bottom: 0.5rem;">
-                      <input
-                        type="password"
-                        class="form-control"
-                        formControlName="password"
-                        autocomplete="current-password"
-                        [placeholder]="'Password' | translate"
-                        required
-                      />
-                      <span hidden translate>Password</span>
-                      <small
-                        [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"
-                        class="text-danger"
-                        translate
-                      >
-                        Password is required
-                      </small>
-                    </label>
+                    <div class="form-group">
+                      <label class="d-block mt-4" style="margin-bottom: 0.5rem;">
+                        <input
+                          type="password"
+                          class="form-control"
+                          formControlName="password"
+                          autocomplete="current-password"
+                          [placeholder]="'Password' | translate"
+                          required
+                        />
+                        <span hidden translate>Password</span>
+                        <small
+                          [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"
+                          class="text-danger"
+                          translate
+                        >
+                          Password is required
+                        </small>
+                      </label>
+                    </div>
                     <div class="form-check">
                       <label class="form-check-label mb-3">
                         <input type="checkbox" class="form-check-input" formControlName="remember" />
@@ -127,10 +116,11 @@
 
                     <a class="heading-4-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
                   </div>
-                  <button class="bttn-primary w-100 mb-2" type="submit" [disabled]="loginForm.invalid || isLoading">
-                    <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i> <span translate>Sign in</span>
-                  </button>
-                  <a class="heading-4-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
+                  <div class="f-bttns-wrapper">
+                    <a class="icon-text" (click)="changeDiv('p0')"
+                      ><i class="material-icons">keyboard_backspace</i> Go Back</a
+                    >
+                  </div>
                 </form>
                 <div class="f-bttns-wrapper">
                   <a class="icon-text" (click)="changeDiv('p0')"
@@ -138,20 +128,23 @@
                   >
                 </div>
               </form>
+              </div>
+              <footer>
+                <div class="container">
+                  <nav class="pull-left">
+                    <ul>
+                      <li><a class="btn-link" routerLink="/privacy-policy" target="_blank">PRIVACY POLICY</a></li>
+                    </ul>
+                  </nav>
+                  <p class="copyright pull-right">
+                    &copy; <a href="https://www.avenews-gt.com" target="_blank">Avenews-GT</a>
+                  </p>
+                </div>
+              </footer>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <footer>
-      <div class="container">
-        <nav class="pull-left">
-          <ul>
-            <li><a class="btn-link" routerLink="/privacy-policy" target="_blank">PRIVACY POLICY</a></li>
-          </ul>
-        </nav>
-        <p class="copyright pull-right">&copy; <a href="https://www.avenews-gt.com" target="_blank">Avenews-GT</a></p>
-      </div>
-    </footer>
   </div>
 </div>
