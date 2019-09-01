@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
-    this.regionCode = 'IL';
+    this.regionCode = 'US';
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
 
     if (this.route.snapshot.params.id) {

@@ -52,3 +52,7 @@ body {
 .svgClass {
   height: 58.5rem !important;
 }
+
+div[data-notify="container"] {
+  width: 88% !important;
+}

@@ -158,7 +158,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
               from: 'top',
               align: 'right'
             },
-            offset: 78
+            offset: 20
           }
         );
       }
