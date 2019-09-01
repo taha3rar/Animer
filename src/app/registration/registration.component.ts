@@ -6,7 +6,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
 import { UserRegistration } from '@app/core/models/user/user-registration';
-import { AuthService as SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
+import {
+  AuthService as SocialAuthService,
+  FacebookLoginProvider,
+  SocialUser,
+  GoogleLoginProvider
+} from 'angularx-social-login';
 
 declare const $: any;
 
@@ -25,7 +30,6 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   phoneCode: string;
   partialPhoneNumber: string;
   emailPhoneError = false;
-  title = 'Login with FACEBOOK';
   user: SocialUser;
 
   constructor(
@@ -67,10 +71,15 @@ export class RegistrationComponent extends BaseValidationComponent implements On
 
   // Method to sign in with facebook.
   signIn(platform: string): void {
-    platform = FacebookLoginProvider.PROVIDER_ID;
-    this.socialAuthentificationService.signIn(platform, { scope: 'groups_access_member_info' }).then(
+    if (platform === 'Facebook') {
+      platform = FacebookLoginProvider.PROVIDER_ID;
+    } else {
+      platform = GoogleLoginProvider.PROVIDER_ID;
+    }
+    this.socialAuthentificationService.signIn(platform).then(
       response => {
         console.log(platform + ' logged in user data is= ', response);
+        this.changeDiv('complement');
         this.user = response;
         setTimeout(function() {
           $('.selectpicker').selectpicker();
@@ -86,9 +95,16 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   }
 
   signOut(): void {
-    this.socialAuthentificationService.signOut();
-    this.user = null;
-    console.log('User signed out.');
+    this.socialAuthentificationService.signOut().then(
+      response => {
+        console.log('User logged out');
+        this.user = null;
+        this.changeDiv('registrationType');
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   equalPasswordsValidator(group: FormGroup) {
@@ -172,8 +188,8 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     this.userService.saveNewUser(this.newUser).subscribe(
       data => {
         if (data._id) {
-          $('#p2').css({ display: 'none' });
-          $('#p3').css({ display: 'flex' });
+          $('#standardRegistration2').css({ display: 'none' });
+          $('#confirmation').css({ display: 'flex' });
         } else {
           return;
         }
@@ -203,20 +219,12 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   }
 
   changeDiv(showDiv: string) {
-    $('#p0').css({ display: 'none' });
-    $('#p1').css({ display: 'none' });
-    $('#p2').css({ display: 'none' });
-    $('#p3').css({ display: 'none' });
-
-    if (showDiv === 'p0') {
-      $('#p0').css({ display: 'block' });
-    } else if (showDiv === 'p1') {
-      $('#p1').css({ display: 'block' });
-    } else if (showDiv === 'p2') {
-      $('#p2').css({ display: 'block' });
-    } else {
-      $('#p3').css({ display: 'block' });
-    }
+    $('#registrationType').css({ display: 'none' });
+    $('#standardRegistration').css({ display: 'none' });
+    $('#standardRegistration2').css({ display: 'none' });
+    $('#complement').css({ display: 'none' });
+    $('#confirmation').css({ display: 'none' });
+    $('#' + showDiv).css({ display: 'block' });
   }
 
   onActiveBtn(btnType: string) {

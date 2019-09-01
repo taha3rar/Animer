@@ -27,43 +27,35 @@
           </div>
           <div class="col-md-7 col-lg-7 col-sm-12 cl-r">
             <div class="cl-r-wrapper">
-              <form [formGroup]="userRegistrationForm">
-                <div id="p0">
-                  <h3>Create your Avenews-gt account</h3>
-                  <div class="bttns-wrapper">
-                    <button class="bttn bttn-facebook">
-                      <i class="fab fa-facebook"></i>
-                      <p>Create account with Facebook</p>
-                    </button>
-                    <button class="bttn bttn-google">
-                      <i class="fab fa-google"></i>
-                      <p>Create account with Google</p>
-                    </button>
-                    <button class="bttn bttn-email" (click)="changeDiv('p1')">
-                      <i class="far fa-envelope"></i>
-                      <p>Create account with Email Address</p>
-                    </button>
-                  </div>
+              <div id="registrationType">
+                <h3>Create your Avenews-gt account</h3>
+                <div class="bttns-wrapper">
+                  <button (click)="signIn('Facebook')" class="bttn bttn-facebook">
+                    <i class="fab fa-facebook"></i>
+                    <p>Create account with Facebook</p>
+                  </button>
+                  <!-- <button (click)="signOut()">Facebook Sign Out</button> -->
+                  <button (click)="signIn('Google')" class="bttn bttn-google">
+                    <i class="fab fa-google"></i>
+                    <p>Create account with Google</p>
+                  </button>
+                  <button class="bttn bttn-email" (click)="changeDiv('standardRegistration')">
+                    <i class="far fa-envelope"></i>
+                    <p>Create account with Email Address</p>
+                  </button>
                 </div>
-                <div id="p1" style="display: none;">
-              <p>
-                {{ title }}
-              </p>
-
-              <button (click)="signIn('Facebook')">Sign in with Facebook</button><br /><br />
-              <button (click)="signOut()">Sign out</button><br /><br />
-
-              <form *ngIf="user" [formGroup]="userRegistrationForm">
+              </div>
+              <form id="complement" style="display: none" [formGroup]="userRegistrationForm">
                 <h1 class="mb-4">Welcome {{ user?.name }} !</h1>
                 <h3 class="mb-4">We have few more info that we need from you.</h3>
-                <div *ngIf="!user.email" class="form-group" [ngClass]="showFieldStyle('email')">
+                <div *ngIf="!user?.email" class="form-group" [ngClass]="showFieldStyle('email')">
                   <label for="email">Email Address</label>
                   <input
                     type="email"
                     class="form-control"
                     formControlName="email"
                     placeholder="Email address"
-                    id="email"
+                    id="email1"
                   />
                   <div class="help-block" *ngIf="isFieldInvalid('email')">
                     <p>Email address is required</p>
@@ -77,7 +69,7 @@
                   formControlName="country"
                   [ngClass]="showFieldStyle('country')"
                   class="form-control selectpicker"
-                  id="country"
+                  id="country1"
                 >
                   <option *ngFor="let country of countries" [value]="country.value">{{ country.viewValue }}</option>
                 </select>
@@ -95,13 +87,16 @@
                     Agribusiness
                   </button>
                 </div>
-                <button class="pull-right bttn-primary action-bttn">
-                  Create Account with Facebook
-                </button>
+                <div class="f-bttns-wrapper">
+                  <a class="icon-text" (click)="signOut()"><i class="material-icons">keyboard_backspace</i> Go Back</a>
+                  <button class="pull-right bttn-primary action-bttn">
+                    Create Account with Facebook
+                  </button>
+                </div>
               </form>
 
-              <form *ngIf="!user" [formGroup]="userRegistrationForm">
-                <div id="p1">
+              <form id="standardRegistration" style="display: none" [formGroup]="userRegistrationForm">
+                <div>
                   <h1 class="mb-4">Sign up</h1>
                   <div class="error-block" *ngIf="showEmailPhoneError()">
                     <p>Please fill in the Phone Number or Email Address!</p>
@@ -141,7 +136,7 @@
                       class="form-control"
                       formControlName="email"
                       placeholder="Email address"
-                      id="email"
+                      id="email2"
                     />
                     <div class="help-block" *ngIf="isFieldInvalid('email')">
                       <p>Email address is required</p>
@@ -195,7 +190,7 @@
                         formControlName="country"
                         [ngClass]="showFieldStyle('country')"
                         class="form-control selectpicker"
-                        id="country"
+                        id="country2"
                       >
                         <option value="" disabled [attr.selected]="true">Select country</option>
                         <option *ngFor="let country of countries" [value]="country.value">{{
@@ -237,7 +232,7 @@
                     <p>Passwords doesn't match</p>
                   </div>
                   <div class="f-bttns-wrapper">
-                    <a class="icon-text" (click)="changeDiv('p0')"
+                    <a class="icon-text" (click)="changeDiv('registrationType')"
                       ><i class="material-icons">keyboard_backspace</i> Go Back</a
                     >
                     <button
@@ -250,13 +245,13 @@
                     <button
                       class="bttn-primary action-bttn"
                       [hidden]="!userRegistrationForm.valid"
-                      (click)="changeDiv('p2')"
+                      (click)="changeDiv('standardRegistration2')"
                     >
                       Next
                     </button>
                   </div>
                 </div>
-                <div id="p2" style="display: none;">
+                <div id="standardRegistration2" style="display: none;">
                   <h1 class="mb-4">Sign up</h1>
                   <h3>Join Avenews-gt as</h3>
                   <div class="bttns-line">
@@ -295,7 +290,7 @@
                   </div>
                 </div>
               </form>
-              <div id="p3" style="display: none;">
+              <div id="confirmation" style="display: none;">
                 <img src="../../assets/img/Success-icon.png" />
                 <h1 class="mb-4" *ngIf="userRegistrationForm.get('email').value">Check your email!</h1>
                 <h1
