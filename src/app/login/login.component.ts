@@ -7,7 +7,7 @@ import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
-import { AuthService as SocialAuthService, FacebookLoginProvider } from 'angularx-social-login';
+import { AuthService as SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 
 const log = new Logger('Login');
 declare var $: any;
@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
   partialPhoneNumber: string;
   phoneNumber: string;
   @ViewChild('email') email: ElementRef;
-  title = 'Login with FACEBOOK';
   user: any;
 
   constructor(
@@ -120,10 +119,14 @@ export class LoginComponent implements OnInit {
       this.filledPhoneEmail = true;
     }
   }
-  // Method to sign in with facebook.
+  // Method to sign in with social networks.
   signIn(platform: string): void {
-    platform = FacebookLoginProvider.PROVIDER_ID;
-    this.socialAuthentificationService.signIn(platform, { scope: 'groups_access_member_info' }).then(
+    if (platform === 'Facebook') {
+      platform = FacebookLoginProvider.PROVIDER_ID;
+    } else {
+      platform = GoogleLoginProvider.PROVIDER_ID;
+    }
+    this.socialAuthentificationService.signIn(platform).then(
       response => {
         console.log(platform + ' logged in user data is= ', response);
         this.user = response;
@@ -170,14 +173,9 @@ export class LoginComponent implements OnInit {
   }
 
   changeDiv(showDiv: string) {
-    $('#p0').css({ display: 'none' });
-    $('#p1').css({ display: 'none' });
-
-    if (showDiv === 'p0') {
-      $('#p0').css({ display: 'block' });
-    } else {
-      $('#p1').css({ display: 'block' });
-    }
+    $('#loginType').css({ display: 'none' });
+    $('#standardLogin').css({ display: 'none' });
+    $('#' + showDiv).css({ display: 'block' });
   }
 
   private createForm() {

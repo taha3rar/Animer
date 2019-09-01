@@ -16,8 +16,7 @@ import {
   GoogleLoginProvider
 } from 'angularx-social-login';
 
-// Client id for the facebook oauth. This is used for validation of our application to facebook.
-// https://developers.facebook.com/
+// Client id for the social networks oauth. This is used for validation of the AGT application to facebook or google.
 const facebook_oauth_client_id = '2144166195710655';
 const google_oauth_client_id = '497849531719-0n3ksh04e1ackgktbifu5gvddi6rmqso.apps.googleusercontent.com';
 const config = new AuthServiceConfig([

@@ -35,14 +35,30 @@
                 <p>You have successfully validated your email address.</p>
               </div>
               <h1>Sign in</h1>
-              <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate class="mt-5">
-                <div class="alert alert-danger" [hidden]="!error || filledPhoneEmail || isLoading" translate>
-                  Email address/phone number or password incorrect.
+              <div id="loginType">
+                <div class="bttns-wrapper">
+                  <button (click)="signIn('Facebook')" class="bttn bttn-facebook">
+                    <i class="fab fa-facebook"></i>
+                    <p>Sign in with Facebook</p>
+                  </button>
+                  <button (click)="signIn('Google')" class="bttn bttn-google">
+                    <i class="fab fa-google"></i>
+                    <p>Sign in with Google</p>
+                  </button>
+                  <button class="bttn bttn-email" (click)="changeDiv('standardLogin')">
+                    <i class="far fa-envelope"></i>
+                    <p>Sign in with Email Address</p>
+                  </button>
                 </div>
-                <div class="alert alert-danger" [hidden]="!filledPhoneEmail">
-                  Please fill either a phone number or email address.
-                </div>
-                <div class="form-group">
+              </div>
+              <div id="standardLogin" style="display: none;">
+                <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate class="mt-5">
+                  <div class="alert alert-danger" [hidden]="!error || filledPhoneEmail || isLoading" translate>
+                    Email address/phone number or password incorrect.
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!filledPhoneEmail">
+                    Please fill either a phone number or email address.
+                  </div>
                   <div class="email-phone-wrapper">
                     <label class="d-block">
                       <input
@@ -117,7 +133,7 @@
                     <a class="heading-4-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
                   </div>
                   <div class="f-bttns-wrapper">
-                    <a class="icon-text" (click)="changeDiv('p0')"
+                    <a class="icon-text" (click)="changeDiv('loginType')"
                       ><i class="material-icons">keyboard_backspace</i> Go Back</a
                     >
                   </div>
