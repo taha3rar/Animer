@@ -31,7 +31,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
 
   ngOnInit() {
     this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
-    this.regionCode = 'US';
+    this.regionCode = 'KE';
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
 
     this.userRegistrationForm = this.formBuilder.group(
