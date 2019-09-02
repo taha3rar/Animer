@@ -137,7 +137,12 @@
   padding: 0.8rem;
 
   .delete {
+    cursor: pointer;
     color: $light-gray;
+  }
+
+  .delete:hover {
+    color: $red-color;
   }
 
   div:nth-child(2) {

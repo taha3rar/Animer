@@ -10,7 +10,16 @@
 
     <div class="contacts-section">
       <div class="contact-card" *ngFor="let user of ecosystem.participants">
-        <div class="delete"><span class="pull-right material-icons" (click)="warning(user._id)">delete</span></div>
+        <div class="delete">
+          <span
+            class="pull-right material-icons"
+            (click)="warning(user._id)"
+            ngbTooltip="Delete"
+            placement="top"
+            data-container="body"
+            >delete</span
+          >
+        </div>
         <div>
           <figure
             class="img-circular img-circular-md"

@@ -1,80 +1,135 @@
 <div class="login-container full-page-background">
   <nav class="navbar navbar-primary navbar-transparent navbar-fixed-top">
     <div class="container">
-      <div class="navbar-header"><a class="navbar-brand" href="/#/dashboard">Avenews-GT</a></div>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="https://www.avenews-gt.com">Avenews-GT</a>
+        <div class="pull-right pt-3">
+          <button class="bttn-transparent">Sign in</button>
+          <a class="bttn-transparent" href="https://www.avenews-gt.com/apply">Apply now</a>
+        </div>
+      </div>
     </div>
   </nav>
   <div class="login-box">
-    <!--<div>
-        <h6 class="d-inline-block">v{{version}}</h6>
-        <div class="d-inline-block ml-3" ngbDropdown>
-          <button id="language-dropdown" class="btn btn-sm btn-secondary" ngbDropdownToggle>
-            {{currentLanguage}}
-          </button>
-          <div ngbDropdownMenu aria-labelledby="language-dropdown">
-            <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">
-              {{language}}
-            </button>
-          </div>
-        </div>
-      </div> -->
     <div class="container login-wrapper">
-      <div class="card col-md-6 col-md-offset-3">
+      <div class="card col-lg-10 offset-lg-1 col-md-12 col-sm-12">
         <div class="card-body login" [hidden]="forgotPassword">
-          <h4 class="card-title text-center"><i class="far fa-3x fa-user-circle text-muted"></i></h4>
-          <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-            <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
-              Username or password incorrect.
-            </div>
-            <div class="form-group">
-              <label class="d-block">
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="username"
-                  autocomplete="username"
-                  [placeholder]="'Username' | translate"
-                />
-
-                <span hidden translate>Username</span>
-                <small
-                  [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"
-                  class="text-danger"
-                  translate
-                >
-                  Username is required
-                </small>
-              </label>
-              <label class="d-block">
-                <input
-                  type="password"
-                  class="form-control"
-                  formControlName="password"
-                  autocomplete="current-password"
-                  [placeholder]="'Password' | translate"
-                  required
-                />
-                <span hidden translate>Password</span>
-                <small
-                  [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"
-                  class="text-danger"
-                  translate
-                >
-                  Password is required
-                </small>
-              </label>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" formControlName="remember" />
-                  <span translate>Remember me</span>
-                </label>
+          <div class="col-md-5 col-sm-12 col-lg-5 cl-l">
+            <div class="cl-l-wrapper">
+              <h1 class="heading-1">Step into the future of agricultural trade</h1>
+              <p class="pt-5">
+                Manage your transactions, orders, invoices, inventory, and clients in a complete ecosystem for
+                agricultural trade.
+              </p>
+              <div class="img-wrapper">
+                <img src="../../assets/img/landing-imgs/Logo-avenews.png" />
               </div>
             </div>
-            <button class="btn btn-primary w-100 mb-2" type="submit" [disabled]="loginForm.invalid || isLoading">
-              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i> <span translate>Login</span>
-            </button>
-            <a class="heading-4-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
-          </form>
+          </div>
+          <div class="col-md-7 col-lg-7 col-sm-12 cl-r">
+            <div class="cl-r-wrapper">
+              <div class="validated-user" *ngIf="userValidated">
+                <div class="validated-user-header">
+                  <i class="material-icons">check_circle_outline</i><strong>Congratulations! You're Verified.</strong>
+                </div>
+                <p>You have successfully validated your email address.</p>
+              </div>
+              <h1>Sign in</h1>
+              <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate class="mt-5">
+                <div class="alert alert-danger" [hidden]="!error || filledPhoneEmail || isLoading" translate>
+                  Email address/phone number or password incorrect.
+                </div>
+                <div class="alert alert-danger" [hidden]="!filledPhoneEmail">
+                  Please fill either a phone number or email address.
+                </div>
+                <div class="form-group">
+                  <div class="email-phone-wrapper">
+                    <label class="d-block">
+                      <input
+                        type="text"
+                        class="form-control"
+                        autocomplete="username"
+                        [placeholder]="'Email Address' | translate"
+                        #email
+                      />
+
+                      <span hidden translate>Email Address</span>
+                      <small
+                        [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"
+                        class="text-danger"
+                        translate
+                      >
+                        Email address is required
+                      </small>
+                      <h5><span>OR</span></h5>
+                    </label>
+                    <label class="d-block">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <select
+                            data-width="65px"
+                            id="region_code"
+                            data-live-search="true"
+                            placeholder="Choose measurment unit"
+                            class="selectpicker"
+                            data-size="7"
+                            [(ngModel)]="regionCode"
+                            (change)="changeRegionCode()"
+                            [ngModelOptions]="{ standalone: true }"
+                          >
+                            <option
+                              *ngFor="let country of countries"
+                              [value]="country.value"
+                              [attr.data-content]="generateLink(country.value, country.viewValue)"
+                            ></option>
+                          </select>
+                        </div>
+                        <input
+                          type="tel"
+                          class="form-control"
+                          placeholder="Phone Number"
+                          [(ngModel)]="partialPhoneNumber"
+                          [ngModelOptions]="{ standalone: true }"
+                          (ngModelChange)="changeRegionCode()"
+                        />
+                      </div>
+                      <span hidden translate>Phone Number</span>
+                    </label>
+                  </div>
+                  <div class="password-wrapper">
+                    <label class="d-block mt-4" style="margin-bottom: 0.5rem;">
+                      <input
+                        type="password"
+                        class="form-control"
+                        formControlName="password"
+                        autocomplete="current-password"
+                        [placeholder]="'Password' | translate"
+                        required
+                      />
+                      <span hidden translate>Password</span>
+                      <small
+                        [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"
+                        class="text-danger"
+                        translate
+                      >
+                        Password is required
+                      </small>
+                    </label>
+                    <div class="form-check">
+                      <label class="form-check-label mb-3">
+                        <input type="checkbox" class="form-check-input" formControlName="remember" />
+                        <span translate>Remember me</span>
+                      </label>
+                    </div>
+                    <button class="bttn-primary w-100 mb-2" type="submit" [disabled]="isLoading" (click)="onSubmit()">
+                      <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i> <span translate>Login</span>
+                    </button>
+                    <a class="heading-4-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -82,7 +137,7 @@
       <div class="container">
         <nav class="pull-left">
           <ul>
-            <li><button class="btn-link">PRIVACY POLICY</button></li>
+            <li><a class="btn-link" routerLink="/privacy-policy" target="_blank">PRIVACY POLICY</a></li>
           </ul>
         </nav>
         <p class="copyright pull-right">&copy; <a href="https://www.avenews-gt.com" target="_blank">Avenews-GT</a></p>

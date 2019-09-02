@@ -8,7 +8,7 @@
   textarea {
     font-size: 1.3rem;
     padding: 1.5rem;
-    border-radius: 0.8rem;
+    border-radius: 0.4rem;
   }
 }
 
@@ -20,7 +20,7 @@
   input {
     font-size: 1.3rem;
     padding: 1.5rem;
-    border-radius: 0.8rem;
+    border-radius: 0.4rem;
   }
 
   .glyphicon {
@@ -129,7 +129,7 @@ label {
   font-size: 1.4rem;
   padding-top: 0.5rem;
   padding-left: 1.5rem;
-  border-radius: 0.8rem;
+  border-radius: 0.4rem !important;
   position: relative;
   width: 100%;
   z-index: 1;
@@ -167,4 +167,8 @@ select {
   padding: 0.7rem 1rem 0.8rem 2rem;
   border-radius: 2.5rem;
   border: 1px solid #ced4da;
+}
+
+div.filter-option-inner-inner {
+  color: black !important;
 }

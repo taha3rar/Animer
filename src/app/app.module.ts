@@ -24,6 +24,8 @@ import { EcosystemModule } from './ecosystem/ecosystem.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { RouterModule } from '@angular/router';
+import { LandingModule } from './landing/landing.module';
+import { RegistrationModule } from './registration/registration.module';
 
 @NgModule({
   imports: [
@@ -47,6 +49,8 @@ import { RouterModule } from '@angular/router';
     EcosystemModule,
     QuoteRequestModule,
     NotificationsModule,
+    LandingModule,
+    RegistrationModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     NgxPermissionsModule.forRoot(),
     AppRoutingModule // must be imported as the last module as it contains the fallback route

@@ -3,6 +3,24 @@
 @import "../../assets/sass/abstracts/variables";
 @import "../../assets/sass/base/animations";
 
+h1,
+h3,
+p {
+  color: #5a6c7b;
+}
+
+label {
+  font-size: 1.5rem;
+  font-weight: normal;
+  line-height: 1.31;
+  color: #5a6c7b;
+}
+
+.navbar-header {
+  width: 100%;
+  margin-left: 0px;
+}
+
 .login-container {
   position: absolute;
   top: 0;
@@ -31,8 +49,8 @@
 }
 
 .login-wrapper {
-  padding-top: 18vh !important;
-  min-height: calc(100vh - 70px);
+  padding-top: 15vh !important;
+  min-height: calc(100vh - 40px);
 }
 
 .full-page-background {
@@ -109,4 +127,164 @@ footer ul {
 
 .form-group {
   margin-bottom: 1.8rem;
+}
+
+.bttn-transparent {
+  background-color: transparent;
+  border: none;
+  margin-right: 2.5rem;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 600;
+}
+
+.card {
+  border: none;
+  background-color: transparent !important;
+}
+
+.card-body {
+  padding: 0px;
+  min-height: 60rem;
+}
+
+.cl-l {
+  background-color: #1e3753;
+  min-height: 60rem;
+  border-radius: 7px 0px 0px 7px;
+}
+
+.cl-r {
+  min-height: 60rem;
+  background-color: white;
+  border-radius: 0px 7px 7px 0px;
+}
+
+.cl-l-wrapper {
+  min-height: 60rem;
+  padding-top: 5rem;
+  padding-left: 2rem;
+  height: 100%;
+  position: relative;
+
+  p {
+    color: white;
+    font-size: 1.6rem;
+  }
+
+  .img-wrapper {
+    width: 23.5rem;
+    height: 28rem;
+    position: absolute;
+    bottom: 0;
+    left: -1.5rem;
+    img {
+      width: 100%;
+      opacity: 0.018;
+      height: auto;
+    }
+  }
+}
+
+.bttns-line {
+  border: 1px solid #37c1ce;
+  button {
+    width: 33.3%;
+    padding: 0.8rem 2.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #5a6c7b;
+    border: none;
+    background: transparent;
+  }
+  button.active {
+    background-color: #37c1ce;
+    color: white;
+  }
+}
+
+.cl-r-wrapper {
+  min-height: 60rem;
+  padding: 5rem 2rem 0rem 2rem;
+  height: 100%;
+  position: relative;
+}
+
+.heading-1 {
+  color: white;
+  font-size: 3.6rem;
+}
+
+.action-bttn {
+  position: absolute;
+  right: 15px;
+  bottom: 4.5rem;
+}
+
+a.icon-text {
+  color: #37c1ce;
+  font-size: 1.6rem;
+  width: 20rem;
+  font-weight: 600;
+  position: absolute;
+  left: 15px;
+  bottom: 4.5rem;
+  cursor: pointer;
+}
+
+a.icon-text:hover {
+  text-decoration: none;
+  color: #37c1ce;
+}
+
+.validated-user {
+  background-color: #d8eacc;
+  border: 1px solid #74965e;
+  padding: 1rem 1.8rem;
+  font-size: 1.4rem;
+  border-radius: 3px;
+  margin-bottom: 1.8rem;
+  p {
+    color: #241c15 !important;
+    padding-left: 4px;
+    margin-bottom: 0px;
+  }
+
+  &-header {
+    display: flex;
+    color: #241c15 !important;
+    align-items: center;
+    line-height: 0;
+    margin-bottom: 5px;
+    i {
+      font-size: 21px;
+    }
+    strong {
+      padding-left: 0.5rem;
+      padding-top: 0.4rem;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+h5 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  line-height: 0.1em;
+  margin: 1.5rem 0 1.5rem;
+}
+
+h5 span {
+  background: #fff;
+  padding: 0 1rem;
+}
+
+.email-phone-wrapper {
+  padding: 1.8rem 2rem;
+  border: 1px solid #ddd;
+}
+
+.password-wrapper {
+  padding: 0px 2rem;
 }

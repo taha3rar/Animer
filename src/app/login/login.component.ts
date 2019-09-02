@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { UserService } from '@app/core/api/user.service';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
+import { countries } from '@app/shared/helpers/countries';
+import * as libphonenumber from 'google-libphonenumber';
 const log = new Logger('Login');
+declare var $: any;
 
 @Component({
   selector: 'app-login',
@@ -18,21 +22,55 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   closeResult: string;
   forgotPassword = false;
+  userValidated = false;
+  countries = countries;
+  filledPhoneEmail = false;
+  phoneUtil: any;
+  regionCode: string;
+  phoneCode: string;
+  partialPhoneNumber: string;
+  phoneNumber: string;
+  @ViewChild('email') email: ElementRef;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private userService: UserService,
     private i18nService: I18nService,
     private authenticationService: AuthenticationService
   ) {
     this.createForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+    this.regionCode = 'KE';
+    this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
+
+    if (this.route.snapshot.params.id) {
+      this.userValidated = true;
+      const id = this.route.snapshot.params.id;
+      this.userService.updateUserValidation(id).subscribe(
+        data => {},
+        err => {
+          console.log(err);
+        }
+      );
+    }
+
+    setTimeout(function() {
+      $('.selectpicker').selectpicker();
+    }, 200);
+  }
+
+  generateLink(code: any, country: any) {
+    return `<img src='../../assets/img/flags/${code}.png' height='19' height='27'><span>\xa0\xa0${country}</span>`;
+  }
 
   login() {
     this.isLoading = true;
+    this.error = '';
     this.authenticationService
       .login(this.loginForm.value)
       .pipe(
@@ -55,6 +93,17 @@ export class LoginComponent implements OnInit {
       );
   }
 
+  onSubmit() {
+    this.filledPhoneEmail = false;
+    if (this.email.nativeElement.value && this.phoneNumber === undefined) {
+      this.loginForm.controls.username.setValue(this.email.nativeElement.value);
+    } else if (this.phoneNumber !== undefined && this.email.nativeElement.value === '') {
+      this.loginForm.controls.username.setValue(this.phoneNumber);
+    } else if (this.phoneNumber !== undefined && this.email.nativeElement.value !== '') {
+      this.filledPhoneEmail = true;
+    }
+  }
+
   changeCard() {
     this.forgotPassword = true;
   }
@@ -71,9 +120,22 @@ export class LoginComponent implements OnInit {
     return this.i18nService.supportedLanguages;
   }
 
+  changeRegionCode() {
+    this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
+    const PNF = libphonenumber.PhoneNumberFormat;
+    let phoneNumber;
+    try {
+      phoneNumber = this.phoneUtil.parse(this.partialPhoneNumber, this.regionCode);
+    } catch (error) {
+      this.phoneNumber = undefined;
+      return;
+    }
+    this.phoneNumber = this.phoneUtil.format(phoneNumber, PNF.E164);
+  }
+
   private createForm() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      username: [''],
       password: ['', Validators.required],
       remember: true
     });

@@ -1,0 +1,35 @@
+div {
+  font-size: 1.4rem;
+}
+
+.navbar > .container {
+  display: block !important;
+}
+
+.navbar {
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.navbar > .container > .navbar-header > a {
+  color: #37c1ce;
+  padding: 1rem 1.5rem;
+  font-size: 1.7rem;
+}
+
+.navbar.navbar-primary {
+  padding: 1rem 0;
+  margin-bottom: -71px;
+}
+
+.content-container {
+  padding-top: 13vh !important;
+}
+
+.bttn-transparent {
+  background-color: transparent;
+  border: none;
+  margin-right: 2.5rem;
+  font-size: 1.5rem;
+  color: #37c1ce;
+  font-weight: 600;
+}

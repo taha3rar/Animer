@@ -1,7 +1,7 @@
 import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginRoutingModule } from './login-routing.module';
@@ -12,12 +12,13 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     TranslateModule,
+    FormsModule,
     NgbModule,
     LoginRoutingModule,
     RouterModule,
+    CommonModule,
     NgxPermissionsModule.forRoot()
   ],
   declarations: [LoginComponent, ForgotPasswordComponent, ResetPasswordComponent],

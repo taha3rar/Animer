@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
 import { Passwords } from '../models/user/passwords';
 import { Client } from '../models/user/client';
+import { UserRegistration } from '../models/user/user-registration';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class UserService extends BaseService {
 
   saveInvitedClient(client: User): Observable<any> {
     return this.apiService.post('/user/client', client).pipe(map(data => data));
+  }
+
+  saveNewUser(client: UserRegistration): Observable<User> {
+    return this.apiService.post('/user/registration', client).pipe(map(data => data));
   }
 
   // TODO: Type return object properly, not use any. Check in the backend. Also move this method to another service
@@ -58,5 +63,9 @@ export class UserService extends BaseService {
 
   updateNotifications(id: string, notifications: string[]): Observable<User> {
     return this.apiService.put(`/user/${id}`, { notifications: notifications }).pipe(map(data => data));
+  }
+
+  updateUserValidation(id: string): Observable<any> {
+    return this.apiService.post(`/user/validate/${id}`).pipe(map(data => data));
   }
 }

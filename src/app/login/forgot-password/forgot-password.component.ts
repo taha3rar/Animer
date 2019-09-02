@@ -1,7 +1,10 @@
+import { countries } from '@app/shared/helpers/countries';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@app/core';
+import * as libphonenumber from 'google-libphonenumber';
+declare const $: any;
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,10 +19,19 @@ export class ForgotPasswordComponent implements OnInit {
   resetLinkStatus = 0;
   username: string;
   forgotPasswordForm: FormGroup;
+  countries = countries;
+  phoneUtil: any;
+  regionCode: string;
+  phoneCode: string;
+  partialPhoneNumber: string;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthenticationService) {}
 
   ngOnInit() {
+    this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+    this.regionCode = 'KE';
+    this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
+
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required]
@@ -40,6 +52,23 @@ export class ForgotPasswordComponent implements OnInit {
         this.forgotPasswordForm.get('phone').setValidators([Validators.required]);
       }
     });
+
+    setTimeout(function() {
+      $('.selectpicker').selectpicker();
+    }, 200);
+  }
+
+  changeRegionCode() {
+    this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
+    const PNF = libphonenumber.PhoneNumberFormat;
+    let phone;
+    try {
+      phone = this.phoneUtil.parse(this.partialPhoneNumber, this.regionCode);
+    } catch (error) {
+      phone = undefined;
+      return;
+    }
+    this.forgotPasswordForm.patchValue({ phone: this.phoneUtil.format(phone, PNF.E164) });
   }
 
   recoverPassword() {
@@ -53,5 +82,9 @@ export class ForgotPasswordComponent implements OnInit {
         }
       );
     }
+  }
+
+  generateLink(code: any, country: any) {
+    return `<img src='../../assets/img/flags/${code}.png' height='19' height='27'><span>\xa0\xa0${country}</span>`;
   }
 }

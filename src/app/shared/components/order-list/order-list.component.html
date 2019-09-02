@@ -19,6 +19,7 @@
       <td class="text-center">{{ order.numericId }}</td>
       <td>{{ order.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>
+        <span *ngIf="!order.seller.company_name || !order.buyer.company_name">N/A </span>
         <span *ngIf="userId == order.seller._id"
           >{{ order.buyer.company_name }} / {{ order.buyer.first_name }} {{ order.buyer.last_name }}</span
         >

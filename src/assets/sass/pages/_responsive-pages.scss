@@ -1,0 +1,61 @@
+@media only screen and (max-width: 767px) {
+  nav.navbar .container {
+    border-bottom: 1px solid $primary-color;
+
+    button {
+      display: none;
+    }
+  }
+
+  .container {
+    max-width: 100% !important;
+  }
+
+  div.full-page-background {
+    background-color: #1e3753;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+
+  div.cl-l-wrapper {
+    min-height: 100% !important;
+    padding: 0px 1rem 0px 1.5rem !important;
+  }
+
+  div.cl-l {
+    min-height: 100% !important;
+    padding-bottom: 1.5rem;
+  }
+
+  div.cl-r-wrapper {
+    padding: 3rem !important;
+    min-height: 100% !important;
+  }
+
+  .container.login-wrapper {
+    padding: 0px !important;
+  }
+
+  .cl-r {
+    min-height: 37rem !important;
+    padding: 0px 0px !important;
+    border-radius: 0px !important;
+  }
+
+  .col:first-child {
+    padding-right: 0px !important;
+  }
+
+  .bttns-line button {
+    padding: 0.8rem 0.5rem !important;
+  }
+
+  #intercom-container {
+    display: none !important;
+  }
+
+  .phone-input {
+    padding-right: 15px !important;
+    margin-bottom: 1.3rem !important;
+  }
+}

@@ -11,8 +11,14 @@ export class BaseValidationComponent {
     });
   }
 
-  isFieldInvalid(field: string) {
-    return this.formInput.get(field).invalid && this.formInput.get(field).touched;
+  isFieldInvalid(field: string, errorType?: string) {
+    if (field === 'password' && errorType === 'minlength') {
+      return this.formInput.get(field).hasError('minlength') && this.formInput.get(field).touched;
+    } else if (field === 'password' && errorType === 'required') {
+      return this.formInput.get(field).hasError('required') && this.formInput.get(field).touched;
+    } else {
+      return this.formInput.get(field).invalid && this.formInput.get(field).touched;
+    }
   }
 
   showFieldStyle(field: string) {
