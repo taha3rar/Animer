@@ -6,9 +6,22 @@
   box-sizing: border-box;
 }
 
+// 16px is the default (browser) font-size
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; // 1rem = 10px -> 10/16 = 0.625
   background-color: $bg-color;
+
+  @include respond(tab-land) {
+    font-size: 56.25%; // 1rem = 9 -> 9/16px
+  }
+
+  @include respond(tab-port) {
+    font-size: 53.125%; // 1rem = 8.5 -> 8/16px
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; // 1rem = 12 -> 12/16px
+  }
 }
 
 body {

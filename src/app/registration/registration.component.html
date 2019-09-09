@@ -83,6 +83,7 @@
                             data-width="65px"
                             id="region_code"
                             data-live-search="true"
+                            data-live-search-placeholder="Type country here..."
                             placeholder="Choose measurment unit"
                             class="selectpicker"
                             data-size="7"
@@ -114,8 +115,10 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <label for="country">Country</label>
                       <select
+                        data-live-search-placeholder="Type country here..."
                         data-live-search="true"
                         type="text"
+                        data-size="7"
                         formControlName="country"
                         [ngClass]="showFieldStyle('country')"
                         class="form-control selectpicker"
