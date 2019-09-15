@@ -7,6 +7,7 @@ import { BaseService } from './base.service';
 import { Passwords } from '../models/user/passwords';
 import { Client } from '../models/user/client';
 import { UserRegistration } from '../models/user/user-registration';
+import { SocialUser } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class UserService extends BaseService {
 
   saveNewUser(client: UserRegistration): Observable<User> {
     return this.apiService.post('/user/registration', client).pipe(map(data => data));
+  }
+
+  FacebookOauth(accessToken: any): Observable<any> {
+    return this.apiService.post('/user/oauth/registration/facebook', accessToken).pipe(map(data => data));
   }
 
   // TODO: Type return object properly, not use any. Check in the backend. Also move this method to another service

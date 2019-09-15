@@ -77,34 +77,43 @@ export class RegistrationComponent extends BaseValidationComponent implements On
       platform = GoogleLoginProvider.PROVIDER_ID;
     }
     this.socialAuthentificationService.signIn(platform).then(
-      response => {
-        console.log(platform + ' logged in user data is= ', response);
-        this.changeDiv('complement');
-        this.user = response;
-        setTimeout(function() {
-          $('.selectpicker').selectpicker();
-        }, 200);
-        if (!this.user.email) {
-          this.userRegistrationForm.controls['email'].setValidators([Validators.required]);
-        }
+      (response: SocialUser) => {
+        this.userService.FacebookOauth({ access_token: response.authToken }).subscribe(
+          data => {
+            console.log('answer', data);
+            console.log(platform + ' logged in user data is= ', response);
+            this.changeDiv('complement');
+            this.user = response;
+            setTimeout(function() {
+              $('.selectpicker').selectpicker();
+            }, 200);
+            if (!this.user.email) {
+              this.userRegistrationForm.controls['email'].setValidators([Validators.required]);
+            }
+          },
+          err => {
+            console.log('err', err);
+          }
+        );
       },
       err => {
-        console.log(err);
+        console.log('err', err);
       }
     );
   }
 
   signOut(): void {
-    this.socialAuthentificationService.signOut().then(
-      response => {
-        console.log('User logged out');
-        this.user = null;
-        this.changeDiv('registrationType');
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    // this.socialAuthentificationService.signOut().then(
+    //   response => {
+    //     console.log('User logged out');
+    //     this.user = null;
+    //     this.changeDiv('registrationType');
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
+    this.changeDiv('registrationType');
   }
 
   equalPasswordsValidator(group: FormGroup) {
