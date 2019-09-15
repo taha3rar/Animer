@@ -81,7 +81,18 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         credentials => {
+          console.log(credentials);
           log.debug(`${credentials.user.email} successfully logged in`);
+          console.log('boot');
+          (<any>window).Intercom('update', {
+            app_id: 'zjpiv02o',
+            name:
+              credentials.user.personal_information.first_name + ' ' + credentials.user.personal_information.last_name,
+            email: credentials.user.email,
+            phone: credentials.user.personal_information.phone_number,
+            user_id: credentials.user._id,
+            role: credentials.user.roles[0]
+          });
           this.route.queryParams.subscribe(params =>
             this.router.navigate([params.redirect || '/'], { replaceUrl: true })
           );

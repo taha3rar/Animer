@@ -4,6 +4,9 @@
     <label class="checkbox-toggle" for="toggle">&#9776;</label>
     <input type="checkbox" id="toggle" />
     <ul class="navigation-right">
+      <li [routerLink]="['/dashboard']" [queryParams]="{ product_tour_id: '67783' }">
+        Take a tour !
+      </li>
       <li>
         <app-notification-list></app-notification-list>
       </li>
