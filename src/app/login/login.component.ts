@@ -91,7 +91,8 @@ export class LoginComponent implements OnInit {
             email: credentials.user.email,
             phone: credentials.user.personal_information.phone_number,
             user_id: credentials.user._id,
-            role: credentials.user.roles[0]
+            role: credentials.user.roles[0],
+            client: credentials.user.roles.includes('client')
           });
           this.route.queryParams.subscribe(params =>
             this.router.navigate([params.redirect || '/'], { replaceUrl: true })
