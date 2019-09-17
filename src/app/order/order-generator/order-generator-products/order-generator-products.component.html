@@ -26,7 +26,7 @@
         <button class="btn-icons pull-right" (click)="onBackPage()">
           <i class="material-icons">keyboard_arrow_left</i>
         </button>
-        <p class="normal-text-bold">Agricultural Products</p>
+        <p class="heading-3">Agricultural Products</p>
       </div>
       <div class="row clearfix">
         <div
@@ -46,7 +46,7 @@
                   [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
                 ></figure>
               </div>
-              <p class="heading-2">
+              <p class="heading-3">
                 {{ product.produce }} <br />
                 {{ product.variety }}
               </p>
@@ -73,7 +73,7 @@
             </div>
 
             <div *ngIf="!order.currency.value || product.currency === order.currency.value" class="quantity">
-              <p class="normal-text-bold">Quantity</p>
+              <p class="t-bold">Quantity</p>
               <button class="btn-circle" (click)="decrementQuantity(product)">
                 <i class="material-icons">remove</i>
               </button>
@@ -102,7 +102,7 @@
         <button class="btn-icons pull-right" (click)="onBackPage2()">
           <i class="material-icons">keyboard_arrow_left</i>
         </button>
-        <p class="normal-text-bold">Processed Products</p>
+        <p class="heading-3">Processed Products</p>
       </div>
       <div class="row clearfix">
         <ng-container *ngFor="let product of (processedProducts | paginate: { itemsPerPage: 4, currentPage: page2 })">
@@ -120,7 +120,7 @@
                     [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
                   ></figure>
                 </div>
-                <p class="heading-2">{{ product.produce }} <br /></p>
+                <p class="heading-3">{{ product.produce }} <br /></p>
               </div>
               <div class="package-details">
                 <table>
@@ -152,7 +152,7 @@
               </div>
 
               <div *ngIf="!order.currency.value || product.currency === order.currency.value" class="quantity">
-                <p class="normal-text-bold">Quantity</p>
+                <p class="t-bold">Quantity</p>
                 <button class="btn-circle" (click)="decrementQuantity(product)">
                   <i class="material-icons">remove</i>
                 </button>

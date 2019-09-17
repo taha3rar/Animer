@@ -7,7 +7,7 @@
   color: $light-gray;
   border-radius: 2px;
   border: 1px solid #ebebeb;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 
   p {
     padding-left: 1.3rem;
@@ -155,7 +155,7 @@
   }
 
   .label {
-    font-size: 1.6rem;
+    font-size: 1.45rem;
     color: $dark-gray-2;
     font-weight: 600;
     padding: 0;
@@ -197,7 +197,7 @@
   .panel-header {
     border-bottom: 1px solid $light-gray-2;
     padding: 2rem;
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     color: $dark-gray-2;
     font-weight: 600;
 
@@ -324,11 +324,11 @@
 .panel-header {
   border-bottom: 1px solid $light-gray-2;
   padding: 2rem;
-  font-size: 1.7rem;
   color: $dark-gray-2;
   font-weight: 600;
   p {
     margin-bottom: 0px !important;
+    font-size: 1.5rem;
   }
 }
 
@@ -372,7 +372,7 @@
     p.stats-label {
       text-align: center;
       font-weight: 700;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       padding-top: 2rem;
     }
     a,

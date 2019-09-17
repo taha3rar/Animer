@@ -13,15 +13,15 @@
             >
             <span *ngIf="quoteRequest.valid_by"
               ><i class="material-icons timer">timer</i>
-              <span class="time-text">Due on {{ quoteRequest.valid_by | date: 'dd/MM/yyyy' }}</span>
+              <span class="time-text">Due to {{ quoteRequest.valid_by | date: 'dd/MM/yyyy' }}</span>
             </span>
           </div>
         </div>
       </div>
       <div class="info">
         <div class="col-md-3">
-          <p class="heading-3">PRODUCT</p>
-          <p class="normal-text-bold">
+          <p class="t-light-gray">PRODUCT</p>
+          <p class="t-bold">
             <span *ngIf="!quoteRequest.product.product_type || quoteRequest.product.product_type == 'agricultural'">
               {{ quoteRequest.product.produce }} / {{ quoteRequest.product.variety }}
             </span>
@@ -36,30 +36,28 @@
           </p>
         </div>
         <div class="col-md-3">
-          <p class="heading-3">QUOTES RECEIVED</p>
-          <p class="normal-text-bold">{{ quoteRequest.quotations.count }}</p>
+          <p class="t-light-gray">QUOTES RECEIVED</p>
+          <p class="t-bold">{{ quoteRequest.quotations.count }}</p>
         </div>
         <div *ngIf="quoteRequest.product.product_type === 'agricultural'" class="col-md-3">
-          <p class="heading-3">TOTAL WEIGHT REQUESTED</p>
-          <p class="normal-text-bold">
+          <p class="t-light-gray">TOTAL WEIGHT REQUESTED</p>
+          <p class="t-bold">
             {{ quoteRequest.product.total_weight_requested | number: '1.2-2' }} {{ quoteRequest.product.weight_unit }}
           </p>
         </div>
         <div *ngIf="quoteRequest.product.product_type != 'agricultural'" class="col-md-3">
-          <p class="heading-3">TOTAL QUANTITY REQUESTED</p>
-          <p class="normal-text-bold">
-            {{ quoteRequest.product.quantity_requested }} {{ quoteRequest.product.type_of_package }}
-          </p>
+          <p class="t-light-gray">TOTAL QUANTITY REQUESTED</p>
+          <p class="t-bold">{{ quoteRequest.product.quantity_requested }} {{ quoteRequest.product.type_of_package }}</p>
         </div>
         <div *ngIf="quoteRequest.product.product_type === 'agricultural'" class="col-md-3">
-          <p class="heading-3">WEIGHT ACCEPTED</p>
-          <p class="normal-text-bold">
+          <p class="t-light-gray">WEIGHT ACCEPTED</p>
+          <p class="t-bold">
             {{ quoteRequest.quotations.total_weight_accepted | number: '1.2-2' }} {{ quoteRequest.product.weight_unit }}
           </p>
         </div>
         <div *ngIf="quoteRequest.product.product_type != 'agricultural'" class="col-md-3">
-          <p class="heading-3">QUANTITY ACCEPTED</p>
-          <p class="normal-text-bold">
+          <p class="t-light-gray">QUANTITY ACCEPTED</p>
+          <p class="t-bold">
             {{ quoteRequest.quotations.quantity_accepted }} {{ quoteRequest.product.type_of_package }}
           </p>
         </div>

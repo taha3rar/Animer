@@ -2,13 +2,13 @@
   <div class="row">
     <div class="col-md-6">
       <div class="info">
-        <p class="heading-2">ISSUED BY</p>
+        <p class="heading-3">ISSUED BY</p>
         <app-user-data [user]="seller" [issued_by]="true"></app-user-data>
       </div>
     </div>
     <div class="col-md-6">
       <div class="info">
-        <p class="heading-2">ISSUED FOR</p>
+        <p class="heading-3">ISSUED FOR</p>
         <app-user-data [user]="buyer" [issued_for]="true"></app-user-data>
       </div>
     </div>
@@ -61,9 +61,9 @@
       <div class="price-box pull-right">
         <div class="price-wrapper">
           <div>
-            <p class="heading-4-blue">Subtotal</p>
+            <p class="heading-3">Subtotal</p>
             <div class="display-inline">
-              <p class="heading-4-blue">VAT %</p>
+              <p class="heading-3">VAT %</p>
               <input
                 formControlName="vat_percentage"
                 class="form-control"
@@ -74,7 +74,7 @@
               />
             </div>
             <div class="display-inline">
-              <p class="heading-4-blue">Discount %</p>
+              <p class="heading-3">Discount %</p>
               <input
                 formControlName="discount_percentage"
                 class="form-control"
@@ -86,14 +86,18 @@
             </div>
           </div>
           <div class="subtotals">
-            <p class="heading-2">{{ invoice.subtotal.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
-            <p class="heading-2">{{ invoice.vat_amount.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
-            <p class="heading-2">{{ invoice.discount_amount.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
+            <p class="heading-3 t-blue">{{ invoice.subtotal.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
+            <p class="heading-3 t-blue">
+              {{ invoice.vat_amount.value | number: '1.2-2' }} {{ invoice.currency.value }}
+            </p>
+            <p class="heading-3 t-blue">
+              {{ invoice.discount_amount.value | number: '1.2-2' }} {{ invoice.currency.value }}
+            </p>
           </div>
         </div>
         <div class="total">
-          <p class="heading-4-blue">Total</p>
-          <p class="heading-2">{{ invoice.total_due.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
+          <p class="heading-3">Total</p>
+          <p class="heading-3 t-blue">{{ invoice.total_due.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
         </div>
       </div>
     </div>
@@ -101,7 +105,7 @@
 
   <div class="row">
     <div class="col-md-6 info">
-      <p class="heading-2">SIGNED BY</p>
+      <p class="heading-3">SIGNED BY</p>
       <div formGroupName="sign_by">
         <div class="form-row">
           <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('sign_by', 'first_name')">
@@ -196,33 +200,33 @@
     </div>
     <div class="col-md-6">
       <div formGroupName="deliver_to" class="info">
-        <p class="heading-2">DELIVER TO</p>
+        <p class="heading-3">DELIVER TO</p>
         <div class="form-row">
           <div class="form-group col-md-4">
             <label for="contact_name">Contact Name</label>
-            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.contact_name }}</p>
+            <p>{{ form.value.deliver_to.contact_name }}</p>
           </div>
           <div class="form-group col-md-4">
             <label for="contact_name">Street Adress</label>
-            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.address }}</p>
+            <p>{{ form.value.deliver_to.address }}</p>
           </div>
           <div class="form-group col-md-4">
             <label for="contact_name">City</label>
-            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.city }}</p>
+            <p>{{ form.value.deliver_to.city }}</p>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-md-4">
             <label for="contact_name">Zipcode</label>
-            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.zip_code }}</p>
+            <p>{{ form.value.deliver_to.zip_code }}</p>
           </div>
           <div class="form-group col-md-4">
             <label for="contact_name">Phone Number</label>
-            <p class="normal-text-light" style="color:black">{{ form.value.deliver_to.phone_number }}</p>
+            <p>{{ form.value.deliver_to.phone_number }}</p>
           </div>
           <div class="form-group col-md-4">
             <label for="contact_name">Expected Delivery Date</label>
-            <p class="normal-text-light" style="color:black">
+            <p>
               {{ form.value.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}
             </p>
           </div>

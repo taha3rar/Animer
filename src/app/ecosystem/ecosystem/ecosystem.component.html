@@ -5,8 +5,8 @@
     <button class="bttn-primary pull-right clearfix" data-toggle="wizard" data-target="#addClienEcoModal">
       <i class="material-icons">add</i> <span>Add Client</span>
     </button>
-    <p class="heading-2">{{ ecosystem.name }} Members</p>
-    <p class="heading-3">Owned by {{ ownedBy }}</p>
+    <p class="heading-3">{{ ecosystem.name }} Members</p>
+    <p class="t-light-gray">Owned by {{ ownedBy }}</p>
 
     <div class="contacts-section">
       <div class="contact-card" *ngFor="let user of ecosystem.participants">
@@ -25,7 +25,7 @@
             class="img-circular img-circular-md"
             [style.background-image]="'url(' + getProfilePicture(user.profile_picture) + ')'"
           ></figure>
-          <p class="normal-text-bold">{{ user.first_name }} {{ user.last_name }}</p>
+          <p class="t-bold">{{ user.first_name }} {{ user.last_name }}</p>
           <p>{{ user.company_name }}</p>
         </div>
         <div>

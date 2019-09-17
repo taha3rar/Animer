@@ -8,27 +8,27 @@
       <div class="panel-body user-details">
         <div id="profile-image">
           <app-upload-picture [picture]="profilePicture" [type]="'profile'" [user]="user"></app-upload-picture>
-          <p class="heading-2">{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
-          <p class="normal-text-bold">{{ userRole | titlecase }}</p>
+          <p class="heading-3">{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
+          <p class="heading-3 t-light-gray">{{ userRole | titlecase }}</p>
         </div>
         <div id="profile-contact-info">
-          <p class="heading-2">Contact Information</p>
-          <p class="heading-3">Email Address</p>
-          <p class="heading-4">{{ user.email }}</p>
-          <p class="heading-3">Phone Number</p>
-          <p class="heading-4">{{ user.personal_information.phone_number }}</p>
+          <p class="heading-3">Contact Information</p>
+          <p class="t-light-gray">Email Address</p>
+          <p>{{ user.email }}</p>
+          <p class="t-light-gray">Phone Number</p>
+          <p>{{ user.personal_information.phone_number }}</p>
         </div>
         <div id="profile-company-info">
-          <p class="heading-2">Company Information</p>
-          <p class="heading-3">Company Name</p>
-          <p class="heading-4">{{ user.company_information.company_name }}</p>
-          <p class="heading-3">Company Email</p>
-          <p class="heading-4">{{ user.company_information.company_email }}</p>
-          <p class="heading-3">Location</p>
-          <p class="heading-4">{{ user.company_information.city }}, {{ user.company_information.country }}</p>
-          <p class="heading-4">{{ user.company_information.street }}</p>
-          <p class="heading-4">{{ user.company_information.zipcode }}</p>
-          <p class="heading-4">{{ user.company_information.state_province_region }}</p>
+          <p class="heading-3">Company Information</p>
+          <p class="t-light-gray">Company Name</p>
+          <p>{{ user.company_information.company_name }}</p>
+          <p class="t-light-gray">Company Email</p>
+          <p>{{ user.company_information.company_email }}</p>
+          <p class="t-light-gray">Location</p>
+          <p>{{ user.company_information.city }}, {{ user.company_information.country }}</p>
+          <p>{{ user.company_information.street }}</p>
+          <p>{{ user.company_information.zipcode }}</p>
+          <p>{{ user.company_information.state_province_region }}</p>
         </div>
       </div>
     </div>
@@ -37,7 +37,9 @@
     <div class="panel user-settings">
       <div class="panel-body">
         <div class="panel-header">
-          <div class="icon-text"><i class="material-icons">settings</i> <span> Account Settings</span></div>
+          <div class="icon-text">
+            <i class="material-icons">settings</i> <span class="heading-2"> Account Settings</span>
+          </div>
           <div class="show-hide">
             <button
               class="show-hide-btn"
@@ -53,7 +55,7 @@
         <div class="collapse in" id="personalCompanySection">
           <div class="col-md-6 contact-info-section">
             <div class="icon-text">
-              <i class="material-icons">person</i><span class="heading-2"> CONTACT INFORMATION</span>
+              <i class="material-icons">person</i><span class="heading-3"> CONTACT INFORMATION</span>
             </div>
             <form [formGroup]="clientDetailsForm" (ngSubmit)="onSubmitClientDetails()" id="contact-info-form">
               <div class="form-row">
@@ -103,7 +105,7 @@
           </div>
           <div class="col-md-6 company-info-section">
             <div class="icon-text">
-              <i class="material-icons">business</i><span class="heading-2"> COMPANY INFORMATION</span>
+              <i class="material-icons">business</i><span class="heading-3"> COMPANY INFORMATION</span>
             </div>
             <form [formGroup]="companyDetailsForm" (ngSubmit)="onSubmitCompanyDetails()" id="company-info-form">
               <div class="form-row">

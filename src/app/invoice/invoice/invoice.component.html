@@ -7,44 +7,44 @@
       <div class="padding-all">
         <div class="border-box">
           <h2>
-            PROFORMA INVOICE <span *ngIf="invoice._id"> #{{ invoice.numericId }}</span>
+            PROFORMA INVOICE <span style="font-size: 1.9rem;" *ngIf="invoice._id"> #{{ invoice.numericId }}</span>
           </h2>
           <table>
             <tr *ngIf="invoice.personal_po_id">
-              <td class="heading-4-blue">PO Reference</td>
+              <td class="t-bold t-blue">PO Reference</td>
               <td>#{{ invoice.personal_po_id }}</td>
             </tr>
             <tr>
-              <td class="heading-4-blue">ISSUE DATE</td>
+              <td class="t-bold t-blue">ISSUE DATE</td>
               <td>{{ invoice?.date_created | date: 'dd/MM/yyyy' }}</td>
             </tr>
             <tr>
-              <td class="heading-4-blue">VALID BY</td>
+              <td class="t-bold t-blue">VALID BY</td>
               <td>{{ sign_by?.date | date: 'dd/MM/yyyy' }}</td>
             </tr>
           </table>
         </div>
         <div class="row" style="padding-top: 5rem;">
           <div class="col-md-6">
-            <p class="heading-4-blue">ISSUED BY</p>
-            <p class="heading-4">{{ issuer.first_name }} {{ issuer.last_name }}</p>
-            <p class="heading-4">{{ issuer.company_name }}</p>
-            <p class="heading-4">{{ issuer.email }}</p>
-            <p class="heading-4">{{ issuer.address }}, {{ issuer.city }} {{ issuer.zipcode }}</p>
-            <p class="heading-4">{{ issuer.phone_number }}</p>
+            <p class="t-bold t-blue">ISSUED BY</p>
+            <p>{{ issuer.first_name }} {{ issuer.last_name }}</p>
+            <p>{{ issuer.company_name }}</p>
+            <p>{{ issuer.email }}</p>
+            <p>{{ issuer.address }}, {{ issuer.city }} {{ issuer.zipcode }}</p>
+            <p>{{ issuer.phone_number }}</p>
           </div>
           <div class="col-md-3 col-md-offset-3">
-            <p class="heading-4-blue">ISSUED FOR</p>
-            <p class="heading-4">{{ buyer.first_name }} {{ buyer.last_name }}</p>
-            <p class="heading-4">{{ buyer.company_name }}</p>
-            <p class="heading-4">{{ buyer.email }}</p>
-            <p class="heading-4">{{ buyer.address }}, {{ buyer.city }} {{ buyer.zipcode }}</p>
-            <p class="heading-4">{{ buyer.phone_number }}</p>
+            <p class="t-bold t-blue">ISSUED FOR</p>
+            <p>{{ buyer.first_name }} {{ buyer.last_name }}</p>
+            <p>{{ buyer.company_name }}</p>
+            <p>{{ buyer.email }}</p>
+            <p>{{ buyer.address }}, {{ buyer.city }} {{ buyer.zipcode }}</p>
+            <p>{{ buyer.phone_number }}</p>
           </div>
         </div>
 
         <div style="padding-top: 2rem;">
-          <p class="heading-2">PRODUCTS</p>
+          <p class="heading-3">PRODUCTS</p>
           <table class="products-table">
             <thead>
               <tr>
@@ -107,15 +107,15 @@
         <div style="padding-top: 2rem;">
           <div class="row">
             <div class="col-md-9">
-              <p class="heading-2">NOTES</p>
+              <p class="heading-3">NOTES</p>
               <div>
-                <p class="heading-4-blue">PAYMENT NOTES</p>
+                <p class="t-bold t-blue">PAYMENT NOTES</p>
                 <p>
                   {{ invoice.order_comments || 'None' }}
                 </p>
               </div>
               <div>
-                <p class="heading-4-blue">PROFORMA INVOICE NOTES</p>
+                <p class="t-bold t-blue">PROFORMA INVOICE NOTES</p>
                 <p>
                   {{ invoice.payment_comments || 'None' }}
                 </p>
@@ -125,22 +125,22 @@
               <div class="border-box pull-left">
                 <table>
                   <tr>
-                    <td class="heading-2">Subtotal</td>
+                    <td class="heading-3">Subtotal</td>
                     <td>{{ invoice.subtotal | number: '1.2-2' }} {{ invoice.currency }}</td>
                   </tr>
                   <tr>
-                    <td class="heading-2">Vat%</td>
+                    <td class="heading-3">Vat%</td>
                     <td>{{ invoice.vat_amount | number: '1.2-2' }} {{ invoice.currency }}</td>
                   </tr>
                   <tr>
-                    <td class="heading-2" style="padding-bottom:1rem;">Discount%</td>
+                    <td class="heading-3" style="padding-bottom:1rem;">Discount%</td>
                     <td style="padding-bottom:1rem;">
                       {{ invoice.discount_amount | number: '1.2-2' }} {{ invoice.currency }}
                     </td>
                   </tr>
                   <tr>
-                    <td class="heading-2" style="border-top:1px solid #e1e1e1; padding-top:1rem;">TOTAL</td>
-                    <td class="heading-4-blue" style="border-top:1px solid #e1e1e1; padding-top:1rem;">
+                    <td class="heading-3" style="border-top:1px solid #e1e1e1; padding-top:1rem;">TOTAL</td>
+                    <td class="t-bold t-blue" style="border-top:1px solid #e1e1e1; padding-top:1rem;">
                       {{ invoice.total_due | number: '1.2-2' }} {{ invoice.currency }}
                     </td>
                   </tr>
@@ -152,22 +152,20 @@
 
         <div class="row" style="padding-top: 5rem;">
           <div class="col-md-6">
-            <p class="heading-4-blue">SIGNED BY</p>
+            <p class="t-bold t-blue">SIGNED BY</p>
             <div class="row">
               <div class="col-md-9">
-                <p class="heading-4">{{ sign_by.first_name }} {{ sign_by.last_name }}</p>
-                <p class="heading-4">{{ sign_by.company_name }}</p>
+                <p>{{ sign_by.first_name }} {{ sign_by.last_name }}</p>
+                <p>{{ sign_by.company_name }}</p>
               </div>
             </div>
           </div>
           <div class="col-md-3 col-md-offset-3">
-            <p class="heading-4-blue">DELIVER TO</p>
-            <p class="heading-4">{{ deliver_to.contact_name }}</p>
-            <p class="heading-4">{{ deliver_to.address }}, {{ deliver_to.city }} {{ deliver_to.zip_code }}</p>
-            <p class="heading-4">{{ deliver_to.phone_number }}</p>
-            <p class="heading-4">
-              Expected delivery date: {{ deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}
-            </p>
+            <p class="t-bold t-blue">DELIVER TO</p>
+            <p>{{ deliver_to.contact_name }}</p>
+            <p>{{ deliver_to.address }}, {{ deliver_to.city }} {{ deliver_to.zip_code }}</p>
+            <p>{{ deliver_to.phone_number }}</p>
+            <p>Expected delivery date: {{ deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}</p>
           </div>
         </div>
       </div>

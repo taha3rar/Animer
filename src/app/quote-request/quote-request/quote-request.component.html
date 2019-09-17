@@ -3,15 +3,15 @@
     <div class="padding-all">
       <div class="border-box">
         <h2>
-          QUOTE REQUEST<span *ngIf="!isGenerator"> #{{ quoteRequest?.numericId }}</span>
+          QUOTE REQUEST<span *ngIf="!isGenerator" style="font-size: 1.9rem;"> #{{ quoteRequest?.numericId }}</span>
         </h2>
         <table>
           <tr>
-            <td class="heading-4-blue">ISSUE DATE</td>
+            <td class="t-blue t-bold">ISSUE DATE</td>
             <td>{{ quoteRequest?.date_created | date: 'dd/MM/yyyy' }}</td>
           </tr>
           <tr>
-            <td class="heading-4-blue">VALID BY</td>
+            <td class="t-blue t-bold">VALID BY</td>
             <td *ngIf="quoteRequest.valid_by">{{ quoteRequest?.valid_by | date: 'dd/MM/yyyy' }}</td>
             <td *ngIf="!quoteRequest.valid_by">N/A</td>
           </tr>
@@ -19,18 +19,18 @@
       </div>
       <div class="row" style="padding-top: 5rem;">
         <div class="col-md-9">
-          <p class="heading-4-blue">ISSUED BY</p>
-          <p class="heading-4">{{ quoteRequest?.buyer?.first_name }} {{ quoteRequest?.buyer?.last_name }}</p>
-          <p class="heading-4">{{ quoteRequest?.buyer?.company_name }}</p>
-          <p class="heading-4">{{ quoteRequest?.buyer?.email }}</p>
-          <p class="heading-4">
+          <p class="t-blue t-bold">ISSUED BY</p>
+          <p>{{ quoteRequest?.buyer?.first_name }} {{ quoteRequest?.buyer?.last_name }}</p>
+          <p>{{ quoteRequest?.buyer?.company_name }}</p>
+          <p>{{ quoteRequest?.buyer?.email }}</p>
+          <p>
             {{ quoteRequest?.buyer?.address }}, {{ quoteRequest?.buyer?.city }}, {{ quoteRequest?.buyer?.zipcode }},
             {{ quoteRequest?.buyer?.country }}
           </p>
-          <p class="heading-4">{{ quoteRequest?.buyer?.phone_number }}</p>
+          <p>{{ quoteRequest?.buyer?.phone_number }}</p>
 
           <div style="padding-top: 2rem;">
-            <p class="heading-2">PRODUCTS</p>
+            <p class="heading-3">PRODUCTS</p>
             <table class="products-table">
               <thead>
                 <tr>
@@ -86,22 +86,22 @@
           <div style="padding-top: 2rem;">
             <div class="row">
               <div class="col-md-9">
-                <p class="heading-2">COMMENTS</p>
+                <p class="heading-3">COMMENTS</p>
                 <p>
                   {{ quoteRequest?.buyer_comments || 'N/A' }}
                 </p>
               </div>
               <div class="col-md-3">
                 <div class="border-box center-items pull-right">
-                  <p class="heading-2">CURRENCY</p>
-                  <p class="heading-4-blue">{{ quoteRequest?.currency }}</p>
+                  <p class="heading-3">CURRENCY</p>
+                  <p class="t-blue t-bold">{{ quoteRequest?.currency }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div *ngIf="!isSeller" class="col-md-3">
-          <p class="heading-4-blue">ISSUED FOR</p>
+          <p class="t-blue t-bold">ISSUED FOR</p>
           <table class="table table-borderless">
             <thead>
               <tr>
@@ -125,26 +125,26 @@
           </pagination-controls>
         </div>
         <div *ngIf="isSeller && quotation && !seller" class="col-md-3">
-          <p class="heading-4-blue">ISSUED FOR</p>
-          <p class="heading-4">{{ quotation?.seller?.first_name }} {{ quotation?.seller?.last_name }}</p>
-          <p class="heading-4">{{ quotation?.seller?.company_name }}</p>
-          <p class="heading-4">{{ quotation?.seller?.email }}</p>
-          <p class="heading-4">
+          <p class="t-blue t-bold">ISSUED FOR</p>
+          <p>{{ quotation?.seller?.first_name }} {{ quotation?.seller?.last_name }}</p>
+          <p>{{ quotation?.seller?.company_name }}</p>
+          <p>{{ quotation?.seller?.email }}</p>
+          <p>
             {{ quotation?.seller?.address }}, {{ quotation?.seller?.city }}, {{ quotation?.seller?.zipcode }},
             {{ quotation?.seller?.country }}
           </p>
-          <p class="heading-4">{{ quotation?.seller?.phone_number }}</p>
+          <p>{{ quotation?.seller?.phone_number }}</p>
         </div>
         <div *ngIf="isSeller && !quotation && seller" class="col-md-3">
-          <p class="heading-4-blue">ISSUED FOR</p>
-          <p class="heading-4">{{ seller?.first_name }} {{ seller?.last_name }}</p>
-          <p class="heading-4">{{ seller?.company_name }}</p>
-          <p class="heading-4">{{ seller?.email }}</p>
-          <p class="heading-4">
+          <p class="t-blue t-bold">ISSUED FOR</p>
+          <p>{{ seller?.first_name }} {{ seller?.last_name }}</p>
+          <p>{{ seller?.company_name }}</p>
+          <p>{{ seller?.email }}</p>
+          <p>
             {{ seller?.address }}, {{ seller?.city }}, {{ seller?.zipcode }},
             {{ seller?.country }}
           </p>
-          <p class="heading-4">{{ seller?.phone_number }}</p>
+          <p>{{ seller?.phone_number }}</p>
         </div>
       </div>
       <button *ngIf="!isGenerator" class="btn-primary-transp pull-right" (click)="downloadPopup()">
