@@ -7,50 +7,6 @@
   padding: 2rem;
 }
 
-.compatibility-msg-content,
-.navbar-compatibilty,
-.navbar-compatibilty-content-img {
-  display: none;
-}
-
-.compatibility-msg {
-  display: none;
-  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background-size: cover;
-  background-position: center center;
-  background-image: url("assets/img/rsz_login_background_2.png");
-
-  &-content {
-    position: absolute;
-    top: 15%;
-    display: none;
-    p {
-      font-size: 1.5rem;
-    }
-
-    &-img {
-      display: block;
-      margin: 0 auto;
-      margin-bottom: 4rem;
-    }
-  }
-
-  .navbar > .container > .navbar-header > a {
-    color: white;
-    padding: 1rem 1.5rem;
-    font-size: 1.7rem;
-  }
-
-  .navbar-compatibilty {
-    display: none;
-  }
-}
-
 .actions-section {
   display: flex;
 }
