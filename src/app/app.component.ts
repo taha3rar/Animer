@@ -56,6 +56,12 @@ export class AppComponent implements OnInit {
     });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    const windowSize = event.target.innerWidth;
+    this.responsive(windowSize);
+  }
+
   ngOnInit() {
     // Setup logger
     if (environment.production) {
@@ -92,5 +98,31 @@ export class AppComponent implements OnInit {
       });
     // Set permissions on every refresh
     this.authenticationService.setCurrentPermissions();
+    this.responsive(window.innerWidth);
+
+    this.router.events.subscribe(event => {
+      this.responsive(window.innerWidth);
+    });
+  }
+
+  responsive(windowSize: any) {
+    if (
+      windowSize <= 600 &&
+      !window.location.href.includes('registration') &&
+      !window.location.href.includes('home') &&
+      !window.location.href.includes('not-found')
+    ) {
+      $('.compatibility-msg-content').css({ display: 'block' });
+      $('.compatibility-msg').css({ display: 'block' });
+      $('.navbar-compatibilty-content-img').css({ display: 'block' });
+      $('.navbar-compatibilty').css({ display: 'block' });
+      $('.router-outlet').css({ visibility: 'hidden' });
+    } else {
+      $('.compatibility-msg-content').css({ display: 'none' });
+      $('.compatibility-msg').css({ display: 'none' });
+      $('.navbar-compatibilty-content-img').css({ display: 'none' });
+      $('.navbar-compatibilty').css({ display: 'none' });
+      $('.router-outlet').css({ visibility: 'visible' });
+    }
   }
 }
