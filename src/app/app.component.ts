@@ -106,23 +106,16 @@ export class AppComponent implements OnInit {
   }
 
   responsive(windowSize: any) {
-    if (
-      windowSize <= 600 &&
-      !window.location.href.includes('registration') &&
-      !window.location.href.includes('home') &&
-      !window.location.href.includes('not-found')
-    ) {
-      $('.compatibility-msg-content').css({ display: 'block' });
-      $('.compatibility-msg').css({ display: 'block' });
-      $('.navbar-compatibilty-content-img').css({ display: 'block' });
-      $('.navbar-compatibilty').css({ display: 'block' });
-      $('.router-outlet').css({ visibility: 'hidden' });
-    } else {
-      $('.compatibility-msg-content').css({ display: 'none' });
-      $('.compatibility-msg').css({ display: 'none' });
-      $('.navbar-compatibilty-content-img').css({ display: 'none' });
-      $('.navbar-compatibilty').css({ display: 'none' });
-      $('.router-outlet').css({ visibility: 'visible' });
+    if (windowSize <= 600) {
+      const currentUrl = window.location.href;
+
+      if (currentUrl.indexOf('staging')) {
+        window.location.href = 'https://mobile-staging.agt-platform.com';
+      } else if (currentUrl.indexOf('demo')) {
+        window.location.href = 'https://mobile-demo.agt-platform.com';
+      } else {
+        window.location.href = 'https://mobile.agt-platform.com';
+      }
     }
   }
 }
