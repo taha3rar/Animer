@@ -37,23 +37,12 @@
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
   }
-}
 
-.panel-table {
-  width: 100%;
-
-  th {
-    background-color: $primary-color;
-    color: white;
-    padding: 0.2rem !important;
-    width: 16.5%;
-    font-size: 0.62vw;
-  }
-
-  td {
-    width: 16.5%;
-    padding: 0.2rem !important;
-    font-size: 1.25rem;
+  @include respond(small-desktop) {
+    th,
+    td {
+      padding: 0.8rem !important;
+    }
   }
 }
 
@@ -92,6 +81,10 @@ table {
 
     td:last-child {
       border-radius: 0 5px 5px 0;
+
+      @include respond(small-desktop) {
+        padding-right: 5px;
+      }
     }
   }
 
@@ -101,6 +94,14 @@ table {
     border: none !important;
     padding: 0.8rem 1.8rem;
     vertical-align: middle !important;
+  }
+}
+
+.table-wrapper {
+  @include respond(tab-land) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 
