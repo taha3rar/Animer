@@ -1,4 +1,5 @@
 @import "../../../../assets/sass/abstracts/variables";
+@import "../../../../assets/sass/abstracts/mixins";
 
 .card .product-details {
   padding-left: 0.8rem;
@@ -65,11 +66,18 @@ input.search-bar-rounded {
 .products-col {
   float: left;
   width: 74.6%;
+  @include respond(small-desktop) {
+    width: 100%;
+  }
 }
 
 .summary-col {
   width: 24%;
   float: right;
+
+  @include respond(small-desktop) {
+    display: none;
+  }
 }
 
 .search-box {

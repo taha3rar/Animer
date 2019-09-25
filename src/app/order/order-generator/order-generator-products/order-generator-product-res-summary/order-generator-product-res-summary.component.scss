@@ -1,0 +1,42 @@
+@import "../../../../../assets/sass/abstracts/mixins";
+
+.sm-vp-summary {
+  display: none;
+}
+
+@include respond(small-desktop) {
+  .sm-vp-summary {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #e9eaec;
+    height: 5rem;
+    background: #f9f9f9;
+    padding: 1rem 2rem;
+    box-shadow: 0px 18px 8px rgba(0, 0, 0, 0.07);
+    width: 40%;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    -webkit-transition: height 0.2s ease-in-out 0s;
+    transition: height 0.2s ease-in-out 0s;
+    cursor: pointer;
+    span {
+      margin-left: auto;
+    }
+  }
+
+  .vp-summary-main {
+    display: flex;
+  }
+
+  .sm-vp-summary.opened-summary {
+    height: 20rem;
+    overflow-y: scroll;
+  }
+
+  .sm-vp-summary.closed-summary {
+    height: 5rem;
+  }
+}

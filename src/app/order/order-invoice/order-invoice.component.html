@@ -3,7 +3,7 @@
     Your purchase order has been sent to the seller, please wait for his Proforma Invoice
   </div>
   <div *ngIf="invoice || generateInvoice" id="pdfContent">
-    <div class="border-box">
+    <div class="border-box display-ib">
       <h2>
         PROFORMA INVOICE <span style="font-size: 1.9rem;" *ngIf="invoice?._id"> #{{ invoice?.numericId }}</span>
       </h2>

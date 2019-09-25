@@ -21,6 +21,7 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   processedProducts: Product[];
   addedProducts: ProductInvoice[] = [];
   noInventory: boolean;
+  packagesSum = 0;
 
   constructor(private productService: ProductService, private orderDataService: OrderDataService) {
     super();
@@ -63,6 +64,7 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   incrementQuantity(product: any) {
     if (product.quantity < product.quantityMax) {
       product.quantity += 1;
+      this.packagesSum++;
     } else {
       product.quantity = product.quantityMax;
     }
@@ -71,6 +73,7 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   decrementQuantity(product: any) {
     if (product.quantity > 0) {
       product.quantity -= 1;
+      this.packagesSum--;
     } else {
       product.quantity = 0;
     }

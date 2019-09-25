@@ -130,10 +130,9 @@ table {
 }
 
 .border-box {
-  padding: 3rem 3.5rem;
+  padding: 2rem 2.5rem;
   border: 1px solid #e1e1e1;
   word-wrap: break-word;
-  display: inline-block;
   max-width: 100%;
 
   h2 {
@@ -146,6 +145,7 @@ table {
 
   table {
     margin-bottom: 0px !important;
+    width: 100%;
   }
 }
 
