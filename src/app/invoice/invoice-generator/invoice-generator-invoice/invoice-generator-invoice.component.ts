@@ -101,8 +101,8 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '900px';
-    dialogConfig.width = '980px';
+    dialogConfig.height = '92vh';
+    dialogConfig.width = '1200px';
     dialogConfig.data = {
       inventoryProducts: this.route.snapshot.data['products'],
       currency: this.invoice.currency.value,
