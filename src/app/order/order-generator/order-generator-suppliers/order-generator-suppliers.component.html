@@ -3,7 +3,7 @@
     <div class="panel-body">
       <div class="panel-header">
         <div><p>My Suppliers</p></div>
-        <div class="pull-right">
+        <div class="pull-right" *ngIf="clients.length > 1">
           <button class="bttn-primary" [hidden]="validSeller" (click)="validateSeller()">
             Next Step &rarr;
           </button>
