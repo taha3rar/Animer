@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper collapse navbar-collapse" (click)="hideSidebar()" id="navbarSupportedContent">
   <div class="sidebar">
     <div class="logo-wrapper">
-      <img src="../../../assets/img/logo.png" alt="logo" class="brand-img" />
+      <a routerLink="/dashboard"><img src="../../../assets/img/logo.png" alt="logo" class="brand-img"/></a>
     </div>
     <ul class="nav">
       <li *ngFor="let menuitem of menuItems" class="nav-item">
