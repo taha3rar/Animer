@@ -21,7 +21,9 @@ import {
 const facebook_oauth_client_id = '2144166195710655';
 const google_oauth_client_id = '497849531719-0n3ksh04e1ackgktbifu5gvddi6rmqso.apps.googleusercontent.com';
 const fbLoginOptions: LoginOpt = {
-  scope: 'email'
+  auth_type: 'rerequest',
+  scope: 'email',
+  return_scopes: true
 };
 const config = new AuthServiceConfig([
   {

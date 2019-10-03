@@ -40,14 +40,11 @@
                   <button (click)="signIn('Facebook')" class="bttn bttn-facebook">
                     <i class="fab fa-facebook"></i>
                     <p>Sign in with Facebook</p>
-                  </button>
-                  <button (click)="signIn('Google')" class="bttn bttn-google">
-                    <i class="fab fa-google"></i>
-                    <p>Sign in with Google</p>
+                    <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
                   </button>
                   <button class="bttn bttn-email" (click)="changeDiv('standardLogin')">
                     <i class="far fa-envelope"></i>
-                    <p>Sign in with Email Address</p>
+                    <p>Sign in with Email Address or Phone Number</p>
                   </button>
                 </div>
               </div>

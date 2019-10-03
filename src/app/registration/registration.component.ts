@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
-import { UserService } from '@app/core';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { UserService, AuthenticationService } from '@app/core';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
-import { Router, ActivatedRoute } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
 import { UserRegistration } from '@app/core/models/user/user-registration';
@@ -12,6 +13,7 @@ import {
   SocialUser,
   GoogleLoginProvider
 } from 'angularx-social-login';
+import { FacebookLoginContext } from '@app/core/models/user/login-models';
 
 declare const $: any;
 
@@ -24,6 +26,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   userRegistrationForm: FormGroup;
   newUser: UserRegistration = new UserRegistration();
   userType = 'seller';
+  countrySocialUser: string;
   countries = countries;
   phoneUtil: any;
   regionCode: string;
@@ -31,12 +34,16 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   partialPhoneNumber: string;
   emailPhoneError = false;
   user: SocialUser;
+  accessToken: string;
+  isLoading = false;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private userService: UserService,
-    private socialAuthentificationService: SocialAuthService
+    private socialAuthentificationService: SocialAuthService,
+    private authenticationService: AuthenticationService
   ) {
     super();
   }
@@ -70,50 +77,95 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   }
 
   // Method to sign in with facebook.
-  signIn(platform: string): void {
+  preSignUp(platform: string): void {
     if (platform === 'Facebook') {
       platform = FacebookLoginProvider.PROVIDER_ID;
     } else {
       platform = GoogleLoginProvider.PROVIDER_ID;
     }
-    this.socialAuthentificationService.signIn(platform).then(
-      (response: SocialUser) => {
-        this.userService.FacebookOauth({ access_token: response.authToken }).subscribe(
-          data => {
-            console.log('answer', data);
-            console.log(platform + ' logged in user data is= ', response);
-            this.changeDiv('complement');
-            this.user = response;
-            setTimeout(function() {
-              $('.selectpicker').selectpicker();
-            }, 200);
-            if (!this.user.email) {
-              this.userRegistrationForm.controls['email'].setValidators([Validators.required]);
-            }
+    this.socialAuthentificationService.signIn(platform).then((response: SocialUser) => {
+      if (!response.email) {
+        $.notify(
+          {
+            icon: 'notifications',
+            message: 'Please, provide your email address'
           },
-          err => {
-            console.log('err', err);
+          {
+            type: 'danger',
+            timer: 5000,
+            placement: {
+              from: 'top',
+              align: 'right'
+            },
+            offset: 20
           }
         );
+      } else {
+        this.accessToken = response.authToken;
+        this.userType = undefined;
+        this.changeDiv('complement');
+        this.user = response;
+        setTimeout(function() {
+          $('.selectpicker').selectpicker();
+        }, 200);
+      }
+    });
+  }
+
+  facebookSignUp() {
+    this.isLoading = true;
+    const socialuserInfo = {
+      access_token: this.accessToken,
+      country: this.countrySocialUser,
+      role: this.userType
+    };
+    this.userService.FacebookOauth(socialuserInfo).subscribe(
+      response => {
+        const context: FacebookLoginContext = {
+          email: response.email,
+          facebook_id: response.facebook.facebook_id,
+          access_token: this.accessToken
+        };
+        this.authenticationService
+          .facebookLogin(context)
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+            })
+          )
+          .subscribe(credentials => {
+            this.route.queryParams.subscribe(params =>
+              this.router.navigate([params.redirect || '/'], { replaceUrl: true })
+            );
+            this.user = response;
+          });
       },
       err => {
-        console.log('err', err);
+        this.isLoading = false;
+        $.notify(
+          {
+            icon: 'notifications',
+            message: err.error.message
+          },
+          {
+            type: 'danger',
+            timer: 5000,
+            placement: {
+              from: 'top',
+              align: 'right'
+            },
+            offset: 20
+          }
+        );
       }
     );
   }
 
-  signOut(): void {
-    // this.socialAuthentificationService.signOut().then(
-    //   response => {
-    //     console.log('User logged out');
-    //     this.user = null;
-    //     this.changeDiv('registrationType');
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   }
-    // );
-    this.changeDiv('registrationType');
+  cancelSocialLogin(): void {
+    this.socialAuthentificationService.signOut().then(response => {
+      this.user = null;
+      this.changeDiv('registrationType');
+    });
   }
 
   equalPasswordsValidator(group: FormGroup) {
@@ -153,7 +205,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     if (userRole) {
       this.userType = userRole;
     } else {
-      return;
+      this.userType = 'seller';
     }
   }
 

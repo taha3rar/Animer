@@ -8,6 +8,7 @@ import { Logger, I18nService, AuthenticationService } from '@app/core';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
 import { AuthService as SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+import { FacebookLoginContext } from '@app/core/models/user/login-models';
 
 const log = new Logger('Login');
 declare var $: any;
@@ -103,6 +104,7 @@ export class LoginComponent implements OnInit {
           );
         },
         error => {
+          this.isLoading = false;
           log.debug(`Login error: ${error}`);
           this.error = error;
         }
@@ -121,26 +123,58 @@ export class LoginComponent implements OnInit {
   }
   // Method to sign in with social networks.
   signIn(platform: string): void {
+    this.isLoading = true;
     if (platform === 'Facebook') {
       platform = FacebookLoginProvider.PROVIDER_ID;
     } else {
       platform = GoogleLoginProvider.PROVIDER_ID;
     }
-    this.socialAuthentificationService.signIn(platform).then(
-      response => {
-        console.log(platform + ' logged in user data is= ', response);
-        this.user = response;
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    this.socialAuthentificationService.signIn(platform).then(response => {
+      const context: FacebookLoginContext = {
+        email: response.email,
+        facebook_id: response.id,
+        access_token: response.authToken
+      };
+      this.error = '';
+      this.authenticationService
+        .facebookLogin(context)
+        .pipe(
+          finalize(() => {
+            this.isLoading = false;
+          })
+        )
+        .subscribe(
+          credentials => {
+            log.debug(`${credentials.user.email} successfully logged in`);
+            this.route.queryParams.subscribe(params =>
+              this.router.navigate([params.redirect || '/'], { replaceUrl: true })
+            );
+            this.user = response;
+          },
+          error => {
+            $.notify(
+              {
+                icon: 'notifications',
+                message: 'Please, sign up before signing in'
+              },
+              {
+                type: 'danger',
+                timer: 5000,
+                placement: {
+                  from: 'top',
+                  align: 'right'
+                },
+                offset: 20
+              }
+            );
+          }
+        );
+    });
   }
 
   signOut(): void {
     this.socialAuthentificationService.signOut();
     this.user = null;
-    console.log('User signed out.');
   }
 
   changeCard() {

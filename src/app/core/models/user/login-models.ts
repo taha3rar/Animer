@@ -16,3 +16,10 @@ export interface LoginContext {
   password: string;
   remember?: boolean;
 }
+
+export interface FacebookLoginContext {
+  email: string;
+  facebook_id: string;
+  access_token: string;
+  remember?: boolean;
+}

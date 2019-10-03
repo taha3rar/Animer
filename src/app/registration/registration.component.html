@@ -30,53 +30,36 @@
               <div id="registrationType">
                 <h3>Create your Avenews-gt account</h3>
                 <div class="bttns-wrapper">
-                  <button (click)="signIn('Facebook')" class="bttn bttn-facebook">
+                  <button (click)="preSignUp('Facebook')" class="bttn bttn-facebook">
                     <i class="fab fa-facebook"></i>
                     <p>Create account with Facebook</p>
                   </button>
-                  <button (click)="signIn('Google')" class="bttn bttn-google">
-                    <i class="fab fa-google"></i>
-                    <p>Create account with Google</p>
-                  </button>
                   <button class="bttn bttn-email" (click)="changeDiv('standardRegistration')">
                     <i class="far fa-envelope"></i>
-                    <p>Create account with Email Address</p>
+                    <p>Create account with Email Address or Phone Number</p>
                   </button>
                 </div>
               </div>
-              <form id="complement" style="display: none" [formGroup]="userRegistrationForm">
+              <form id="complement" style="display: none">
                 <h1 class="mb-4">Welcome {{ user?.name }} !</h1>
                 <h3 class="mb-4">We have few more info that we need from you.</h3>
-                <div *ngIf="!user?.email" class="form-group" [ngClass]="showFieldStyle('email')">
-                  <label for="email">Email Address</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    formControlName="email"
-                    placeholder="Email address"
-                    id="email1"
-                  />
-                  <div class="help-block" *ngIf="isFieldInvalid('email')">
-                    <p>Email address is required</p>
-                  </div>
-                </div>
-
                 <label for="country">Country</label>
                 <select
                   data-live-search="true"
                   type="text"
-                  formControlName="country"
+                  [(ngModel)]="countrySocialUser"
+                  [ngModelOptions]="{ standalone: true }"
                   [ngClass]="showFieldStyle('country')"
                   class="form-control selectpicker"
                   id="country1"
                 >
-                  <option *ngFor="let country of countries" [value]="country.value">{{ country.viewValue }}</option>
+                  <option *ngFor="let country of countries" [value]="country.viewValue">{{ country.viewValue }}</option>
                 </select>
                 <div class="help-block" *ngIf="isFieldInvalid('country')">
                   <p>Country is required</p>
                 </div>
 
-                <label for="bttns-line">Join Avenews-GT as</label>
+                <label for="bttns-line" class="mt-5">Join Avenews-GT as</label>
                 <div class="bttns-line">
                   <button [ngClass]="{ active: userType === 'seller' }" (click)="onActiveBtn('seller')">
                     Seller
@@ -87,9 +70,12 @@
                   </button>
                 </div>
                 <div class="f-bttns-wrapper">
-                  <a class="icon-text" (click)="signOut()"><i class="material-icons">keyboard_backspace</i> Go Back</a>
-                  <button class="pull-right bttn-primary action-bttn">
-                    Create Account with Facebook
+                  <a class="icon-text" (click)="cancelSocialLogin()"
+                    ><i class="material-icons">keyboard_backspace</i> Go Back</a
+                  >
+                  <button (click)="facebookSignUp()" class="pull-right bttn-primary action-bttn" style="width: 35rem">
+                    <span>Create Account with Facebook</span>
+                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading"></i>
                   </button>
                 </div>
               </form>
@@ -192,7 +178,7 @@
                         id="country2"
                       >
                         <option value="" disabled [attr.selected]="true">Select country</option>
-                        <option *ngFor="let country of countries" [value]="country.value">{{
+                        <option *ngFor="let country of countries" [value]="country.viewValue">{{
                           country.viewValue
                         }}</option>
                       </select>
