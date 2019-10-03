@@ -40,11 +40,11 @@
                   <button (click)="signIn('Facebook')" class="bttn bttn-facebook">
                     <i class="fab fa-facebook"></i>
                     <p>Sign in with Facebook</p>
-                    <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading"></i>
                   </button>
                   <button class="bttn bttn-email" (click)="changeDiv('standardLogin')">
                     <i class="far fa-envelope"></i>
-                    <p>Sign in with Email Address or Phone Number</p>
+                    <p>Sign in with Email Address</p>
                   </button>
                 </div>
               </div>
@@ -57,37 +57,52 @@
                     Please fill either a phone number or email address.
                   </div>
                   <div class="email-phone-wrapper">
-                    <label class="d-block">
-                      <input
-                        type="text"
-                        class="form-control"
-                        autocomplete="username"
-                        [placeholder]="'Email Address' | translate"
-                        #email
-                      />
+                    <div class="form-group">
+                      <label class="d-block">
+                        <input
+                          type="text"
+                          class="form-control"
+                          autocomplete="username"
+                          [placeholder]="'Email Address' | translate"
+                          #email
+                        />
 
-                      <span hidden translate>Email Address</span>
-                      <small
-                        [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"
-                        class="text-danger"
-                        translate
-                      >
-                        Email address is required
-                      </small>
-                      <h5><span>OR</span></h5>
-                    </label>
-                    <label class="d-block">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <select
-                            data-width="65px"
-                            id="region_code"
-                            data-live-search="true"
-                            placeholder="Choose measurment unit"
-                            class="selectpicker"
-                            data-size="7"
-                            [(ngModel)]="regionCode"
-                            (change)="changeRegionCode()"
+                        <span hidden translate>Email Address</span>
+                        <small
+                          [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"
+                          class="text-danger"
+                          translate
+                        >
+                          Email address is required
+                        </small>
+                        <h5><span>OR</span></h5>
+                      </label>
+                      <label class="d-block">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <select
+                              data-width="65px"
+                              id="region_code"
+                              data-live-search="true"
+                              placeholder="Choose measurment unit"
+                              class="selectpicker"
+                              data-size="7"
+                              [(ngModel)]="regionCode"
+                              (change)="changeRegionCode()"
+                              [ngModelOptions]="{ standalone: true }"
+                            >
+                              <option
+                                *ngFor="let country of countries"
+                                [value]="country.value"
+                                [attr.data-content]="generateLink(country.value, country.viewValue)"
+                              ></option>
+                            </select>
+                          </div>
+                          <input
+                            type="tel"
+                            class="form-control"
+                            placeholder="Phone Number"
+                            [(ngModel)]="partialPhoneNumber"
                             [ngModelOptions]="{ standalone: true }"
                             (ngModelChange)="changeRegionCode()"
                           />
@@ -126,7 +141,6 @@
                     <button class="bttn-primary w-100 mb-2" type="submit" [disabled]="isLoading" (click)="onSubmit()">
                       <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i> <span translate>Login</span>
                     </button>
-
                     <a class="heading-4-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
                   </div>
                   <div class="f-bttns-wrapper">
@@ -135,12 +149,6 @@
                     >
                   </div>
                 </form>
-                <div class="f-bttns-wrapper">
-                  <a class="icon-text" (click)="changeDiv('p0')"
-                    ><i class="material-icons">keyboard_backspace</i> Go Back</a
-                  >
-                </div>
-              </form>
               </div>
               <footer>
                 <div class="container">
