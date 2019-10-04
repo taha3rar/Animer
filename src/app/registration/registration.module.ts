@@ -1,5 +1,6 @@
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { NgModule } from '@angular/core';
+import { environment } from 'environments/environment';
 import { CommonModule } from '@angular/common';
 import { RegistrationComponent } from './registration.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -17,9 +18,6 @@ import {
   LoginOpt
 } from 'angularx-social-login';
 
-// Client id for the social networks oauth. This is used for validation of the AGT application to facebook or google.
-const facebook_oauth_client_id = '2144166195710655';
-const google_oauth_client_id = '497849531719-0n3ksh04e1ackgktbifu5gvddi6rmqso.apps.googleusercontent.com';
 const fbLoginOptions: LoginOpt = {
   auth_type: 'rerequest',
   scope: 'email',
@@ -28,11 +26,11 @@ const fbLoginOptions: LoginOpt = {
 const config = new AuthServiceConfig([
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider(facebook_oauth_client_id, fbLoginOptions)
+    provider: new FacebookLoginProvider(environment.oauthClientIds.facebook, fbLoginOptions)
   },
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider(google_oauth_client_id)
+    provider: new GoogleLoginProvider(environment.oauthClientIds.google)
   }
 ]);
 
