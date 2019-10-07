@@ -115,7 +115,11 @@ export class AppComponent implements OnInit {
           window.location.href = 'https://mobile-staging.agt-platform.com';
         }
       } else if (currentUrl.indexOf('demo')) {
-        window.location.href = 'https://mobile-demo.agt-platform.com';
+        if (currentUrl.includes('validation')) {
+          window.location.href = 'https://mobile-demo.agt-platform.com/validation';
+        } else {
+          window.location.href = 'https://mobile-demo.agt-platform.com';
+        }
       } else {
         if (currentUrl.includes('validation')) {
           window.location.href = 'https://mobile.agt-platform.com/validation';
