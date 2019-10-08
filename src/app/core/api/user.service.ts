@@ -37,8 +37,13 @@ export class UserService extends BaseService {
     return this.apiService.post('/user/registration', client).pipe(map(data => data));
   }
 
-  FacebookOauth(socialUserInfo: any): Observable<any> {
-    return this.apiService.post('/user/oauth/registration/facebook', socialUserInfo).pipe(map(data => data));
+  oAuthRegistration(socialUserInfo: any, network: string): Observable<any> {
+    if (network === 'facebook') {
+      return this.apiService.post('/user/oauth/registration/facebook', socialUserInfo).pipe(map(data => data));
+    }
+    if (network === 'google') {
+      return this.apiService.post('/user/oauth/registration/google', socialUserInfo).pipe(map(data => data));
+    }
   }
 
   // TODO: Type return object properly, not use any. Check in the backend. Also move this method to another service

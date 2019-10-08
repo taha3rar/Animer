@@ -17,9 +17,9 @@ export interface LoginContext {
   remember?: boolean;
 }
 
-export interface FacebookLoginContext {
+export interface OAuthLoginContext {
   email: string;
-  facebook_id: string;
+  personal_network_id: string;
   access_token: string;
   remember?: boolean;
 }

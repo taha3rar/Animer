@@ -37,9 +37,14 @@
               <h1>Sign in</h1>
               <div id="loginType">
                 <div class="bttns-wrapper">
-                  <button (click)="signIn('Facebook')" class="bttn bttn-facebook">
+                  <button (click)="signIn('facebook')" class="bttn bttn-facebook">
                     <i class="fab fa-facebook"></i>
                     <p>Sign in with Facebook</p>
+                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+                  </button>
+                  <button (click)="signIn('google')" class="bttn bttn-google">
+                    <i class="fab fa-google"></i>
+                    <p>Sign in with Google</p>
                     <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading"></i>
                   </button>
                   <button class="bttn bttn-email" (click)="changeDiv('standardLogin')">

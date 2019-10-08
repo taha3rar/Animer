@@ -13,7 +13,7 @@ import {
   SocialUser,
   GoogleLoginProvider
 } from 'angularx-social-login';
-import { FacebookLoginContext } from '@app/core/models/user/login-models';
+import { OAuthLoginContext } from '@app/core/models/user/login-models';
 
 declare const $: any;
 
@@ -36,6 +36,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   user: SocialUser;
   accessToken: string;
   isLoading = false;
+  network: string;
 
   constructor(
     private router: Router,
@@ -77,10 +78,13 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   }
 
   // Method to sign in with facebook.
-  preSignUp(platform: string): void {
-    if (platform === 'Facebook') {
+  preSignUp(network: string): void {
+    this.network = network;
+    let platform: string;
+    if (network === 'facebook') {
       platform = FacebookLoginProvider.PROVIDER_ID;
-    } else {
+    }
+    if (network === 'google') {
       platform = GoogleLoginProvider.PROVIDER_ID;
     }
     this.socialAuthentificationService.signIn(platform).then((response: SocialUser) => {
@@ -112,22 +116,22 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     });
   }
 
-  facebookSignUp() {
+  oAuthSignUp() {
     this.isLoading = true;
     const socialuserInfo = {
       access_token: this.accessToken,
       country: this.countrySocialUser,
       role: this.userType
     };
-    this.userService.FacebookOauth(socialuserInfo).subscribe(
+    this.userService.oAuthRegistration(socialuserInfo, this.network).subscribe(
       response => {
-        const context: FacebookLoginContext = {
+        const context: OAuthLoginContext = {
           email: response.email,
-          facebook_id: response.facebook.facebook_id,
+          personal_network_id: response[this.network][this.network + '_id'],
           access_token: this.accessToken
         };
         this.authenticationService
-          .facebookLogin(context)
+          .oAuthLogin(context, this.network)
           .pipe(
             finalize(() => {
               this.isLoading = false;

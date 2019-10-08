@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { map } from 'rxjs/operators';
-import { Credentials, LoginContext, FacebookLoginContext } from '../models/user/login-models';
+import { Credentials, LoginContext, oAuthLoginContext } from '../models/user/login-models';
 import { JwtService } from './jwt.service';
 import { NgxPermissionsService, NgxPermissionsObject } from 'ngx-permissions';
 
@@ -38,8 +38,8 @@ export class AuthenticationService {
     );
   }
 
-  facebookLogin(context: FacebookLoginContext): Observable<Credentials> {
-    return this.apiService.post('/user/login/facebook', context).pipe(
+  oAuthLogin(context: oAuthLoginContext, network: string): Observable<Credentials> {
+    return this.apiService.post(`/user/login/${network}`, context).pipe(
       map((user: Credentials) => {
         this.jwtService.setCredentials(user, context.remember);
         this.setPermissions(user);
