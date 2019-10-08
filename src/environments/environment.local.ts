@@ -10,7 +10,7 @@ export const environment = {
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'af-SA'],
   oauthClientIds: {
-    facebook: '2144166195710655',
+    facebook: '2391381727766923',
     google: '497849531719-0n3ksh04e1ackgktbifu5gvddi6rmqso.apps.googleusercontent.com'
   }
 };
