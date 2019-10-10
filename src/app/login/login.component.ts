@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   phoneCode: string;
   partialPhoneNumber: string;
   phoneNumber: string;
+  network: string;
   @ViewChild('email') email: ElementRef;
   user: any;
 
@@ -114,6 +115,7 @@ export class LoginComponent implements OnInit {
   }
   // Method to sign in with social networks.
   signIn(network: string): void {
+    this.network = network;
     let platform: string;
     this.isLoading = true;
     if (network === 'facebook') {
@@ -149,7 +151,7 @@ export class LoginComponent implements OnInit {
             $.notify(
               {
                 icon: 'notifications',
-                message: 'Please, sign up before signing in'
+                message: error.message
               },
               {
                 type: 'danger',
@@ -158,12 +160,16 @@ export class LoginComponent implements OnInit {
                   from: 'top',
                   align: 'right'
                 },
-                offset: 20
-              }
-            );
-          }
-        );
-    });
+                  offset: 20
+                }
+              );
+            }
+          );
+      },
+      err => {
+        this.isLoading = false;
+      }
+    );
   }
 
   changeCard() {

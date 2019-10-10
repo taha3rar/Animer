@@ -40,12 +40,12 @@
                   <button (click)="signIn('facebook')" class="bttn bttn-facebook">
                     <i class="fab fa-facebook"></i>
                     <p>Sign in with Facebook</p>
-                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading || network != 'facebook'"></i>
                   </button>
                   <button (click)="signIn('google')" class="bttn bttn-google">
                     <i class="fab fa-google"></i>
                     <p>Sign in with Google</p>
-                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading || network != 'google'"></i>
                   </button>
                   <button class="bttn bttn-email" (click)="changeDiv('standardLogin')">
                     <i class="far fa-envelope"></i>
