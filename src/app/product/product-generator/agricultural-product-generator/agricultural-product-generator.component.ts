@@ -115,7 +115,7 @@ export class AgriculturalProductGeneratorComponent extends BaseValidationCompone
         });
         this.productForm.patchValue(
           {
-            package_price: (this.product.total_price.value / this.product.quantity.value).toFixed(2)
+            package_price: (this.product.price_per_unit.value * this.product.package_weight.value).toFixed(2)
           },
           { emitEvent: false }
         );
