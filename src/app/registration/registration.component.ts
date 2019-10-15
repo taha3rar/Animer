@@ -141,6 +141,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
             this.route.queryParams.subscribe(params =>
               this.router.navigate([params.redirect || '/'], { replaceUrl: true })
             );
+            this.intercomLogin(credentials);
             this.user = response;
           });
       },
@@ -294,5 +295,17 @@ export class RegistrationComponent extends BaseValidationComponent implements On
 
   onActiveBtn(btnType: string) {
     this.userType = btnType;
+  }
+
+  intercomLogin(credentials: any) {
+    (<any>window).Intercom('update', {
+      app_id: 'zjpiv02o',
+      name: credentials.user.personal_information.first_name + ' ' + credentials.user.personal_information.last_name,
+      email: credentials.user.email,
+      phone: credentials.user.personal_information.phone_number,
+      user_id: credentials.user._id,
+      role: credentials.user.roles[0],
+      client: credentials.user.roles.includes('client')
+    });
   }
 }

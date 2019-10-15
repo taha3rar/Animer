@@ -86,19 +86,8 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         credentials => {
-          console.log(credentials);
           log.debug(`${credentials.user.email} successfully logged in`);
-          console.log('boot');
-          (<any>window).Intercom('update', {
-            app_id: 'zjpiv02o',
-            name:
-              credentials.user.personal_information.first_name + ' ' + credentials.user.personal_information.last_name,
-            email: credentials.user.email,
-            phone: credentials.user.personal_information.phone_number,
-            user_id: credentials.user._id,
-            role: credentials.user.roles[0],
-            client: credentials.user.roles.includes('client')
-          });
+          this.intercomLogin(credentials);
           this.route.queryParams.subscribe(params =>
             this.router.navigate([params.redirect || '/'], { replaceUrl: true })
           );
@@ -148,6 +137,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
           credentials => {
             log.debug(`${credentials.user.email} successfully logged in`);
+            this.intercomLogin(credentials);
             this.route.queryParams.subscribe(params =>
               this.router.navigate([params.redirect || '/'], { replaceUrl: true })
             );
@@ -207,6 +197,18 @@ export class LoginComponent implements OnInit {
     $('#loginType').css({ display: 'none' });
     $('#standardLogin').css({ display: 'none' });
     $('#' + showDiv).css({ display: 'block' });
+  }
+
+  intercomLogin(credentials: any) {
+    (<any>window).Intercom('update', {
+      app_id: 'zjpiv02o',
+      name: credentials.user.personal_information.first_name + ' ' + credentials.user.personal_information.last_name,
+      email: credentials.user.email,
+      phone: credentials.user.personal_information.phone_number,
+      user_id: credentials.user._id,
+      role: credentials.user.roles[0],
+      client: credentials.user.roles.includes('client')
+    });
   }
 
   private createForm() {
