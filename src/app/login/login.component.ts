@@ -9,6 +9,7 @@ import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
 import { AuthService as SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { OAuthLoginContext } from '@app/core/models/user/login-models';
+import { Intercom } from 'ng-intercom';
 
 const log = new Logger('Login');
 declare var $: any;
@@ -43,7 +44,8 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private i18nService: I18nService,
     private authenticationService: AuthenticationService,
-    private socialAuthentificationService: SocialAuthService
+    private socialAuthentificationService: SocialAuthService,
+    public intercom: Intercom
   ) {
     this.createForm();
   }
@@ -200,14 +202,17 @@ export class LoginComponent implements OnInit {
   }
 
   intercomLogin(credentials: any) {
-    (<any>window).Intercom('update', {
-      app_id: 'zjpiv02o',
+    this.intercom.update({
+      app_id: environment.intercom.app_id,
       name: credentials.user.personal_information.first_name + ' ' + credentials.user.personal_information.last_name,
       email: credentials.user.email,
       phone: credentials.user.personal_information.phone_number,
       user_id: credentials.user._id,
       role: credentials.user.roles[0],
-      client: credentials.user.roles.includes('client')
+      client: credentials.user.roles.includes('client'),
+      widget: {
+        activator: '#intercom$'
+      }
     });
   }
 

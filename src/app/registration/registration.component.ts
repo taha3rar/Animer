@@ -14,6 +14,8 @@ import {
   GoogleLoginProvider
 } from 'angularx-social-login';
 import { OAuthLoginContext } from '@app/core/models/user/login-models';
+import { environment } from '@env/environment';
+import { Intercom } from 'ng-intercom';
 
 declare const $: any;
 
@@ -44,7 +46,8 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     private route: ActivatedRoute,
     private userService: UserService,
     private socialAuthentificationService: SocialAuthService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public intercom: Intercom
   ) {
     super();
   }
@@ -298,14 +301,17 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   }
 
   intercomLogin(credentials: any) {
-    (<any>window).Intercom('update', {
-      app_id: 'zjpiv02o',
+    this.intercom.update({
+      app_id: environment.intercom.app_id,
       name: credentials.user.personal_information.first_name + ' ' + credentials.user.personal_information.last_name,
       email: credentials.user.email,
       phone: credentials.user.personal_information.phone_number,
       user_id: credentials.user._id,
       role: credentials.user.roles[0],
-      client: credentials.user.roles.includes('client')
+      client: credentials.user.roles.includes('client'),
+      widget: {
+        activator: '#intercom'
+      }
     });
   }
 }

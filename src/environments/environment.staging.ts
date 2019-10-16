@@ -12,5 +12,8 @@ export const environment = {
   oauthClientIds: {
     facebook: '2144166195710655',
     google: '497849531719-0n3ksh04e1ackgktbifu5gvddi6rmqso.apps.googleusercontent.com'
+  },
+  intercom: {
+    app_id: 'gtrazr5b'
   }
 };
