@@ -124,42 +124,43 @@ export class LoginComponent implements OnInit {
     if (network === 'google') {
       platform = GoogleLoginProvider.PROVIDER_ID;
     }
-    this.socialAuthentificationService.signIn(platform).then(response => {
-      const context: OAuthLoginContext = {
-        email: response.email,
-        personal_network_id: response.id,
-        access_token: response.authToken
-      };
-      this.error = '';
-      this.authenticationService
-        .oAuthLogin(context, network)
-        .pipe(
-          finalize(() => {
-            this.isLoading = false;
-          })
-        )
-        .subscribe(
-          credentials => {
-            log.debug(`${credentials.user.email} successfully logged in`);
-            this.intercomLogin(credentials);
-            this.route.queryParams.subscribe(params =>
-              this.router.navigate([params.redirect || '/'], { replaceUrl: true })
-            );
-            this.user = response;
-          },
-          error => {
-            $.notify(
-              {
-                icon: 'notifications',
-                message: error.message
-              },
-              {
-                type: 'danger',
-                timer: 5000,
-                placement: {
-                  from: 'top',
-                  align: 'right'
+    this.socialAuthentificationService.signIn(platform).then(
+      response => {
+        const context: OAuthLoginContext = {
+          email: response.email,
+          personal_network_id: response.id,
+          access_token: response.authToken
+        };
+        this.error = '';
+        this.authenticationService
+          .oAuthLogin(context, network)
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+            })
+          )
+          .subscribe(
+            credentials => {
+              log.debug(`${credentials.user.email} successfully logged in`);
+              this.intercomLogin(credentials);
+              this.route.queryParams.subscribe(params =>
+                this.router.navigate([params.redirect || '/'], { replaceUrl: true })
+              );
+              this.user = response;
+            },
+            error => {
+              $.notify(
+                {
+                  icon: 'notifications',
+                  message: 'Please, signe up before signing in'
                 },
+                {
+                  type: 'danger',
+                  timer: 5000,
+                  placement: {
+                    from: 'top',
+                    align: 'right'
+                  },
                   offset: 20
                 }
               );
