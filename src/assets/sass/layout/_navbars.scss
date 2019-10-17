@@ -46,7 +46,7 @@
 
       .dropdown-item {
         margin-right: 0 !important;
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 1.6rem;
         min-width: 15rem;
 
         i {
@@ -71,9 +71,6 @@
 
     .dropdown-menu.notifications {
       width: 30rem;
-      .col-md-10 {
-        padding-left: 0px !important;
-      }
       p {
         color: #919191;
       }
@@ -84,6 +81,10 @@
 
       li:hover {
         background-color: rgb(243, 249, 250);
+      }
+      .col-md-10 {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
       }
     }
   }

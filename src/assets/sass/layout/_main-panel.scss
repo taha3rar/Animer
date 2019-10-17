@@ -14,3 +14,8 @@
 .actions-section input {
   margin: 0.5rem;
 }
+
+.row:before,
+.row:after {
+  display: none !important;
+}
