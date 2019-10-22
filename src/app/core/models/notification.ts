@@ -18,5 +18,16 @@ export class Notification {
     profile_picture: String;
     email: String;
   };
-  object_id: string;
+  topic: {
+    _id: string;
+    numericId: number;
+    name: string;
+    date_created: string;
+    subtopic: {
+      _id: string;
+      numericId: number;
+      name: string;
+      date_created: string;
+    };
+  };
 }

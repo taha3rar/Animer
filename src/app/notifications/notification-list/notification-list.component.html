@@ -15,28 +15,32 @@
         ></figure>
       </div>
       <div style="width: 90%" (click)="open(notification)">
-        <p *ngIf="notification.type === 'proforma-invoice'">
+        <p *ngIf="notification.topic.name === 'new-invoice-receiver'">
           <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
           <strong>Proforma Invoice</strong>
         </p>
-        <p *ngIf="notification.type === 'purchase-order'">
+        <p *ngIf="notification.topic.name === 'new-order-receiver'">
           <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
           <strong>Purchase Order</strong>
         </p>
-        <p *ngIf="notification.type === 'document'">
+        <p *ngIf="notification.topic.name === 'new-document'">
           <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has uploaded a
           <strong>Necessary Document</strong>
         </p>
-        <p *ngIf="notification.type === 'contract'">
+        <p *ngIf="notification.topic.name === 'new-contract'">
           <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has uploaded a
           <strong>Necessary Document</strong>
         </p>
-        <p *ngIf="notification.type === 'quote-request'">
+        <p *ngIf="notification.topic.name === 'new-quote-request'">
           <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
           <strong>Quote Request</strong>
         </p>
-        <p *ngIf="notification.type === 'quotation'">
+        <p *ngIf="notification.topic.name === 'new-quotation'">
           <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> has sent you a
+          <strong>Quotation</strong>
+        </p>
+        <p *ngIf="notification.topic.name === 'quotation-accepted'">
+          <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> accepted your
           <strong>Quotation</strong>
         </p>
         <p>{{ notification.date_created | date: 'dd/MM/yyyy hh:mm aaa' }}</p>
