@@ -152,7 +152,7 @@ export class LoginComponent implements OnInit {
               $.notify(
                 {
                   icon: 'notifications',
-                  message: 'Please, signe up before signing in'
+                  message: 'Please, sign up before signing in'
                 },
                 {
                   type: 'danger',
