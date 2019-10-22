@@ -40,6 +40,7 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
 import { QuotationResolver } from './resolvers/quotation.resolver';
 // tslint:disable-next-line:max-line-length
 import { OrderGeneratorProductResSummaryComponent } from './order-generator/order-generator-products/order-generator-product-res-summary/order-generator-product-res-summary.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { OrderGeneratorProductResSummaryComponent } from './order-generator/orde
     ReactiveFormsModule,
     NgxPaginationModule,
     TutorialsModule,
+    MatTooltipModule,
     NgxPermissionsModule.forRoot()
   ],
   providers: [

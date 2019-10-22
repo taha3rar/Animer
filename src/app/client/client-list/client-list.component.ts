@@ -6,6 +6,7 @@ import { AuthenticationService, UserService } from '@app/core';
 import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
 import { Sort } from '@angular/material/sort';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-client-list',
@@ -17,6 +18,7 @@ export class ClientListComponent extends BaseListComponent implements OnInit {
   clients: Client[];
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
+  tooltips = tooltips.clients.clients_list;
 
   constructor(
     private route: ActivatedRoute,

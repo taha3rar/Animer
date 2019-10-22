@@ -6,6 +6,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { CsvService } from '@app/shared/services/csv.service';
 import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
 import { OrderDataService } from '../order-generator/order-data.service';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-orders-list',
@@ -23,6 +24,7 @@ export class OrdersListComponent implements OnInit {
   viewAsSeller = false;
   viewAsBuyer = true;
   currentUser: any;
+  tooltips = tooltips.orders.orders_list;
   constructor(
     private route: ActivatedRoute,
     private authService: AuthenticationService,

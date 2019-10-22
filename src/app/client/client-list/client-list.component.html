@@ -23,13 +23,14 @@
   </div>
   <div class="flex-pr">
     <button
-      class="bttn-primary bttn-add pull-right"
+      class="bttn-primary bttn-add"
       data-toggle="wizard"
       *ngxPermissionsOnly="['create-client']"
       data-target="#addClientWizard"
     >
       <span>Add Client</span>
     </button>
+    <i class="fas fa-info-circle fa-2x i" style="vertical-align: middle;" matTooltip="{{ tooltips.add_client }}"></i>
   </div>
 </div>
 

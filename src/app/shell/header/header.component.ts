@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 import { AuthenticationService, I18nService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
   credentials: Credentials;
   currentUser: User;
   userProgress = {};
+  tooltips = tooltips.dashboard;
 
   constructor(
     private router: Router,

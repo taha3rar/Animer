@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ShellComponent } from './shell/shell.component';
 import { HeaderComponent } from './header/header.component';
@@ -15,7 +16,11 @@ import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver
 import { CurrentUserProgressResolver } from '@app/shared/resolvers/current-user-progress.resolver';
 
 @NgModule({
+<<<<<<< HEAD
   imports: [CommonModule, SharedModule, TranslateModule, NgbModule, RouterModule, NgxPermissionsModule.forRoot()],
+=======
+  imports: [CommonModule, TranslateModule, NgbModule, RouterModule, MatTooltipModule, NgxPermissionsModule.forRoot()],
+>>>>>>> Few tooltips
   declarations: [HeaderComponent, ShellComponent, MenuComponent, NotificationListComponent],
   providers: [NotificationListResolver, CurrentUserResolver, CurrentUserProgressResolver]
 })
