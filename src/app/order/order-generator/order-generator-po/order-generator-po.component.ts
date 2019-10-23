@@ -12,6 +12,8 @@ import { ModalInventoryComponent } from '@app/shared/components/products/modal-i
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from '@app/core/models/order/product';
+import { FormGroup } from '@angular/forms';
+import { User } from '@app/core/models/order/user';
 
 @Component({
   selector: 'app-order-generator-po',
@@ -26,6 +28,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   productsPristine = true;
   @Output() newDraftPO = new EventEmitter();
   @Input() fromQuotation = false;
+  @Input() openOrder = false;
   inventoryProducts: any[];
   quotedProducts: ProductInvoice[] = [];
   validBy: NgbDateStruct;
@@ -175,6 +178,22 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
           date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
         })
       : this.form.patchValue({ date_created: new Date().toJSON() });
+  }
+
+  updateSeller(newUser: User) {
+    this.form.controls['seller'].patchValue({
+      first_name: newUser.first_name,
+      last_name: newUser.last_name,
+      email: newUser.email,
+      company_name: newUser.company_name,
+      company_number: newUser.company_number,
+      address: newUser.address,
+      city: newUser.city,
+      country: newUser.country,
+      zipcode: newUser.zipcode,
+      phone_number: newUser.phone_number
+    });
+    console.log(this.seller);
   }
 
   draftOrder() {

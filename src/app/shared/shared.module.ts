@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CsvService } from './services/csv.service';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -41,6 +41,7 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
     ProgressbarModule.forRoot(),
     MatTooltipModule,
     FormsModule,
+    ReactiveFormsModule,
     MatSortModule
   ],
   declarations: [

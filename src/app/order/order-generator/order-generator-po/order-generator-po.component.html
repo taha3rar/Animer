@@ -9,7 +9,12 @@
     <div class="col-md-6">
       <div class="info">
         <p class="heading-3">ISSUED FOR</p>
-        <app-user-data [user]="seller" [issued_for]="true"></app-user-data>
+        <app-user-data
+          [openDocument]="openOrder"
+          [user]="seller"
+          [issued_for]="true"
+          (updateSeller)="updateSeller($event)"
+        ></app-user-data>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<div *ngIf="user">
+<div *ngIf="user && !openDocument">
   <div class="row">
     <div class="col-md-4">
       <p *ngIf="issued_by">Issuer name</p>
@@ -36,6 +36,108 @@
     <div class="col-md-4">
       <p>Phone number</p>
       <p>{{ user.phone_number ? user.phone_number : 'N/A' }}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="user && openDocument">
+  <div class="row">
+    <div class="col-md-4">
+      <p *ngIf="issued_by">Issuer first name</p>
+      <p *ngIf="issued_for">Recipient first name</p>
+      <input
+        name="firstName"
+        [(ngModel)]="newUser.first_name"
+        class="form-control"
+        placeholder="Contact First Name"
+        (ngModelChange)="sellerUpdate()"
+      />
+    </div>
+    <div class="col-md-4">
+      <p *ngIf="issued_by">Issuer last name</p>
+      <p *ngIf="issued_for">Recipient last name</p>
+      <input
+        name="lastName"
+        [(ngModel)]="newUser.last_name"
+        class="form-control"
+        placeholder="Contact Last Name"
+        (ngModelChange)="sellerUpdate()"
+      />
+    </div>
+    <div class="col-md-4">
+      <p>Company name</p>
+      <input
+        name="companyName"
+        [(ngModel)]="newUser.company_name"
+        class="form-control"
+        placeholder="Contact Cmpany Name"
+        (ngModelChange)="sellerUpdate()"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <p>Email address</p>
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="newUser.email"
+        class="form-control"
+        placeholder="Contact email address"
+        (ngModelChange)="sellerUpdate()"
+      />
+    </div>
+    <div class="col-md-4">
+      <p>City</p>
+      <input
+        name="city"
+        [(ngModel)]="newUser.city"
+        class="form-control"
+        placeholder="Contact city"
+        (ngModelChange)="sellerUpdate()"
+      />
+    </div>
+    <div class="col-md-4">
+      <p>Street address</p>
+      <input
+        name="address"
+        [(ngModel)]="newUser.address"
+        class="form-control"
+        placeholder="Contact address"
+        (ngModelChange)="sellerUpdate()"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <p>Zip code</p>
+      <input
+        name="zipcode"
+        [(ngModel)]="newUser.zipcode"
+        class="form-control"
+        placeholder="Contact zipcode"
+        (ngModelChange)="sellerUpdate()"
+      />
+    </div>
+    <div class="col-md-4">
+      <p>Country</p>
+      <input
+        name="country"
+        [(ngModel)]="newUser.country"
+        class="form-control"
+        placeholder="Contact country"
+        (ngModelChange)="sellerUpdate()"
+      />
+    </div>
+    <div class="col-md-4">
+      <p>Phone number</p>
+      <input
+        name="phone"
+        [(ngModel)]="newUser.phone_number"
+        class="form-control"
+        placeholder="Contact phone number"
+        (ngModelChange)="sellerUpdate()"
+      />
     </div>
   </div>
 </div>

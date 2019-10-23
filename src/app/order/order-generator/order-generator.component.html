@@ -3,7 +3,7 @@
     <a class="material-icons">keyboard_backspace</a> Orders
   </h1>
   <!-- Main Generator -->
-  <div *ngIf="!isDraft && !fromQuotation" class="stepper-wrapper">
+  <div *ngIf="!isDraft && !fromQuotation && !openOrder" class="stepper-wrapper">
     <div class="stepper">
       <ul class="nav nav-tabs">
         <li class="active">
@@ -52,14 +52,14 @@
   </div>
 
   <!-- draftGenerator -->
-  <div *ngIf="isDraft || fromQuotation" class="stepper-wrapper">
+  <div *ngIf="isDraft || fromQuotation || openOrder" class="stepper-wrapper">
     <div class="stepper">
       <ul class="nav nav-tabs draft">
         <li class="active">
           <a *ngIf="isDraft" data-toggle="tab" class="label" href="#purchaseOrder">
             <span class="round-tab">1</span> Edit purchase order
           </a>
-          <a *ngIf="fromQuotation" data-toggle="tab" class="label" href="#purchaseOrder">
+          <a *ngIf="fromQuotation || openOrder" data-toggle="tab" class="label" href="#purchaseOrder">
             <span class="round-tab">1</span> Create purchase order
           </a>
         </li>
@@ -74,6 +74,9 @@
         </div>
         <div *ngIf="fromQuotation" class="tab-pane active" id="purchaseOrder">
           <app-order-generator-po [fromQuotation]="true" (newDraftPO)="draft = $event"></app-order-generator-po>
+        </div>
+        <div *ngIf="openOrder" class="tab-pane active" id="purchaseOrder">
+          <app-order-generator-po [openOrder]="true" (newDraftPO)="draft = $event"></app-order-generator-po>
         </div>
         <div class="tab-pane" id="review">
           <div class="panel panel-tab">

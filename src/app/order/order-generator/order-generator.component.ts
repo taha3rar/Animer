@@ -27,6 +27,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   draft: any;
   products: ProductInvoice[] = [];
   formSubmitted: boolean;
+  openOrder: boolean;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -36,9 +37,9 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   ) {}
 
   ngOnInit() {
+    this.openOrder = this.route.snapshot.data['openOrder'];
     this.stepperService.stepperInit();
     this.isDraft = false;
-
     this.quotation = this.route.snapshot.data['quotation'];
     if (this.quotation) {
       const product: ProductInvoice = <ProductInvoice>(<unknown>this.quotation.product);
@@ -75,6 +76,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
           company_number: [undefined, Validators.required],
           address: [undefined, Validators.required],
           city: [undefined, Validators.required],
+          country: [undefined, Validators.required],
           zipcode: [undefined, Validators.required],
           phone_number: [undefined, Validators.required],
           contact_by: [this.formBuilder.array([], Validators.required)]
@@ -91,6 +93,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
           company_number: [undefined, Validators.required],
           address: [undefined, Validators.required],
           city: [undefined, Validators.required],
+          country: [undefined, Validators.required],
           zipcode: [undefined, Validators.required],
           phone_number: [undefined, Validators.required],
           contact_by: [this.formBuilder.array([], Validators.required)]
