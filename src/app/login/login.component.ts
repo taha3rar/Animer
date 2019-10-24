@@ -218,7 +218,7 @@ export class LoginComponent implements OnInit {
       role: credentials.user.roles[0],
       client: credentials.user.roles.includes('client'),
       widget: {
-        activator: '#intercom$'
+        activator: '#intercom'
       }
     });
   }

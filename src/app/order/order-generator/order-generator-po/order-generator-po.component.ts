@@ -12,7 +12,6 @@ import { ModalInventoryComponent } from '@app/shared/components/products/modal-i
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from '@app/core/models/order/product';
-import { FormGroup } from '@angular/forms';
 import { User } from '@app/core/models/order/user';
 
 @Component({
@@ -193,7 +192,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
       zipcode: newUser.zipcode,
       phone_number: newUser.phone_number
     });
-    console.log(this.seller);
   }
 
   draftOrder() {
