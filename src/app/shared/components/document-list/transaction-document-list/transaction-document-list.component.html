@@ -2,7 +2,7 @@
   <div class="margin-all">
     <p class="label-2">{{ uploadingFileName }}</p>
     <p style="font-size:1.4rem;"><ngb-progressbar type="info" [value]="dynamic" [striped]="true"></ngb-progressbar></p>
-    <span class="heading-3">Uploading {{ dynamic }}%</span>
+    <span class="t-light-gray">Uploading {{ dynamic }}%</span>
   </div>
 </div>
 
@@ -55,11 +55,11 @@
           <span class="material-icons bttn-view">pageview</span> <span>View</span>
         </a>
       </div>
-      <p class="normal-text-bold">{{ document.file_name }}</p>
-      <p class="heading-3">Uploaded by {{ document.uploaded_by.first_name }} {{ document.uploaded_by.last_name }}</p>
+      <p class="t-bold">{{ document.file_name }}</p>
+      <p class="t-light-gray">Uploaded by {{ document.uploaded_by.first_name }} {{ document.uploaded_by.last_name }}</p>
     </div>
     <div>
-      <p class="heading-3">{{ document.date_created | date: 'dd/MM/yyyy' }}</p>
+      <p class="t-light-gray">{{ document.date_created | date: 'dd/MM/yyyy' }}</p>
     </div>
   </div>
 </div>

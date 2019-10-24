@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Credentials } from '@app/core/models/user/login-models';
 
 @Component({
   selector: 'app-shell',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shell.component.scss']
 })
 export class ShellComponent implements OnInit {
+  credentials: Credentials;
   constructor() {}
 
   ngOnInit() {}

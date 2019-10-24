@@ -35,86 +35,108 @@
                 <p>You have successfully validated your email address.</p>
               </div>
               <h1>Sign in</h1>
-              <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate class="mt-5">
-                <div class="alert alert-danger" [hidden]="!error || filledPhoneEmail || isLoading" translate>
-                  Email address/phone number or password incorrect.
+              <div id="loginType">
+                <div class="bttns-wrapper">
+                  <button (click)="signIn('facebook')" class="bttn bttn-facebook">
+                    <i class="fab fa-facebook"></i>
+                    <p>Sign in with Facebook</p>
+                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading || network != 'facebook'"></i>
+                  </button>
+                  <button (click)="signIn('google')" class="bttn bttn-google">
+                    <i class="fab fa-google"></i>
+                    <p>Sign in with Google</p>
+                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading || network != 'google'"></i>
+                  </button>
+                  <button class="bttn bttn-email" (click)="changeDiv('standardLogin')">
+                    <i class="far fa-envelope"></i>
+                    <p>Sign in with Email Address</p>
+                  </button>
                 </div>
-                <div class="alert alert-danger" [hidden]="!filledPhoneEmail">
-                  Please fill either a phone number or email address.
-                </div>
-                <div class="form-group">
+              </div>
+              <div id="standardLogin" style="display: none;">
+                <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate class="mt-5">
+                  <div class="alert alert-danger" [hidden]="!error || filledPhoneEmail || isLoading" translate>
+                    Email address/phone number or password incorrect.
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!filledPhoneEmail">
+                    Please fill either a phone number or email address.
+                  </div>
                   <div class="email-phone-wrapper">
-                    <label class="d-block">
-                      <input
-                        type="text"
-                        class="form-control"
-                        autocomplete="username"
-                        [placeholder]="'Email Address' | translate"
-                        #email
-                      />
-
-                      <span hidden translate>Email Address</span>
-                      <small
-                        [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"
-                        class="text-danger"
-                        translate
-                      >
-                        Email address is required
-                      </small>
-                      <h5><span>OR</span></h5>
-                    </label>
-                    <label class="d-block">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <select
-                            data-width="65px"
-                            id="region_code"
-                            data-live-search="true"
-                            placeholder="Choose measurment unit"
-                            class="selectpicker"
-                            data-size="7"
-                            [(ngModel)]="regionCode"
-                            (change)="changeRegionCode()"
-                            [ngModelOptions]="{ standalone: true }"
-                          >
-                            <option
-                              *ngFor="let country of countries"
-                              [value]="country.value"
-                              [attr.data-content]="generateLink(country.value, country.viewValue)"
-                            ></option>
-                          </select>
-                        </div>
+                    <div class="form-group">
+                      <label class="d-block">
                         <input
-                          type="tel"
+                          type="text"
                           class="form-control"
-                          placeholder="Phone Number"
-                          [(ngModel)]="partialPhoneNumber"
-                          [ngModelOptions]="{ standalone: true }"
-                          (ngModelChange)="changeRegionCode()"
+                          autocomplete="username"
+                          [placeholder]="'Email Address' | translate"
+                          #email
                         />
-                      </div>
-                      <span hidden translate>Phone Number</span>
-                    </label>
+
+                        <span hidden translate>Email Address</span>
+                        <small
+                          [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"
+                          class="text-danger"
+                          translate
+                        >
+                          Email address is required
+                        </small>
+                        <h5><span>OR</span></h5>
+                      </label>
+                      <label class="d-block">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <select
+                              data-width="65px"
+                              id="region_code"
+                              data-live-search="true"
+                              placeholder="Choose measurment unit"
+                              class="selectpicker"
+                              data-size="7"
+                              [(ngModel)]="regionCode"
+                              (change)="changeRegionCode()"
+                              [ngModelOptions]="{ standalone: true }"
+                            >
+                              <option
+                                *ngFor="let country of countries"
+                                [value]="country.value"
+                                [attr.data-content]="generateLink(country.value, country.viewValue)"
+                              ></option>
+                            </select>
+                          </div>
+                          <input
+                            type="tel"
+                            class="form-control"
+                            placeholder="Phone Number"
+                            [(ngModel)]="partialPhoneNumber"
+                            [ngModelOptions]="{ standalone: true }"
+                            (ngModelChange)="changeRegionCode()"
+                          />
+                        </div>
+                        <span hidden translate>Phone Number</span>
+                      </label>
+                    </div>
                   </div>
                   <div class="password-wrapper">
-                    <label class="d-block mt-4" style="margin-bottom: 0.5rem;">
-                      <input
-                        type="password"
-                        class="form-control"
-                        formControlName="password"
-                        autocomplete="current-password"
-                        [placeholder]="'Password' | translate"
-                        required
-                      />
-                      <span hidden translate>Password</span>
-                      <small
-                        [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"
-                        class="text-danger"
-                        translate
-                      >
-                        Password is required
-                      </small>
-                    </label>
+                    <div class="form-group">
+                      <label class="d-block mt-4" style="margin-bottom: 0.5rem;">
+                        <input
+                          type="password"
+                          class="form-control"
+                          formControlName="password"
+                          autocomplete="current-password"
+                          [placeholder]="'Password' | translate"
+                          required
+                        />
+                        <span hidden translate>Password</span>
+                        <small
+                          [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"
+                          class="text-danger"
+                          translate
+                        >
+                          Password is required
+                        </small>
+                      </label>
+                    </div>
                     <div class="form-check">
                       <label class="form-check-label mb-3">
                         <input type="checkbox" class="form-check-input" formControlName="remember" />
@@ -126,22 +148,29 @@
                     </button>
                     <a class="heading-4-blue fp-btn" [routerLink]="['/forgot-password']">Forgot password?</a>
                   </div>
+                  <div class="f-bttns-wrapper">
+                    <a class="icon-text" (click)="changeDiv('loginType')"
+                      ><i class="material-icons">keyboard_backspace</i> Go Back</a
+                    >
+                  </div>
+                </form>
+              </div>
+              <footer>
+                <div class="container">
+                  <nav class="pull-left">
+                    <ul>
+                      <li><a class="btn-link" routerLink="/privacy-policy" target="_blank">PRIVACY POLICY</a></li>
+                    </ul>
+                  </nav>
+                  <p class="copyright pull-right">
+                    &copy; <a href="https://www.avenews-gt.com" target="_blank">Avenews-GT</a>
+                  </p>
                 </div>
-              </form>
+              </footer>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <footer>
-      <div class="container">
-        <nav class="pull-left">
-          <ul>
-            <li><a class="btn-link" routerLink="/privacy-policy" target="_blank">PRIVACY POLICY</a></li>
-          </ul>
-        </nav>
-        <p class="copyright pull-right">&copy; <a href="https://www.avenews-gt.com" target="_blank">Avenews-GT</a></p>
-      </div>
-    </footer>
   </div>
 </div>

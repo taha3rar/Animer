@@ -16,3 +16,10 @@ export interface LoginContext {
   password: string;
   remember?: boolean;
 }
+
+export interface OAuthLoginContext {
+  email: string;
+  personal_network_id: string;
+  access_token: string;
+  remember?: boolean;
+}

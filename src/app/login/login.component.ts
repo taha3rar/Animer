@@ -7,6 +7,10 @@ import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
+import { AuthService as SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+import { OAuthLoginContext } from '@app/core/models/user/login-models';
+import { Intercom } from 'ng-intercom';
+
 const log = new Logger('Login');
 declare var $: any;
 
@@ -30,7 +34,9 @@ export class LoginComponent implements OnInit {
   phoneCode: string;
   partialPhoneNumber: string;
   phoneNumber: string;
+  network: string;
   @ViewChild('email') email: ElementRef;
+  user: any;
 
   constructor(
     private router: Router,
@@ -38,7 +44,9 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private i18nService: I18nService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private socialAuthentificationService: SocialAuthService,
+    public intercom: Intercom
   ) {
     this.createForm();
   }
@@ -82,11 +90,13 @@ export class LoginComponent implements OnInit {
       .subscribe(
         credentials => {
           log.debug(`${credentials.user.email} successfully logged in`);
+          this.intercomLogin(credentials);
           this.route.queryParams.subscribe(params =>
             this.router.navigate([params.redirect || '/'], { replaceUrl: true })
           );
         },
         error => {
+          this.isLoading = false;
           log.debug(`Login error: ${error}`);
           this.error = error;
         }
@@ -102,6 +112,65 @@ export class LoginComponent implements OnInit {
     } else if (this.phoneNumber !== undefined && this.email.nativeElement.value !== '') {
       this.filledPhoneEmail = true;
     }
+  }
+  // Method to sign in with social networks.
+  signIn(network: string): void {
+    this.network = network;
+    let platform: string;
+    this.isLoading = true;
+    if (network === 'facebook') {
+      platform = FacebookLoginProvider.PROVIDER_ID;
+    }
+    if (network === 'google') {
+      platform = GoogleLoginProvider.PROVIDER_ID;
+    }
+    this.socialAuthentificationService.signIn(platform).then(
+      response => {
+        const context: OAuthLoginContext = {
+          email: response.email,
+          personal_network_id: response.id,
+          access_token: response.authToken
+        };
+        this.error = '';
+        this.authenticationService
+          .oAuthLogin(context, network)
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+            })
+          )
+          .subscribe(
+            credentials => {
+              log.debug(`${credentials.user.email} successfully logged in`);
+              this.intercomLogin(credentials);
+              this.route.queryParams.subscribe(params =>
+                this.router.navigate([params.redirect || '/'], { replaceUrl: true })
+              );
+              this.user = response;
+            },
+            error => {
+              $.notify(
+                {
+                  icon: 'notifications',
+                  message: 'Please, sign up before signing in'
+                },
+                {
+                  type: 'danger',
+                  timer: 5000,
+                  placement: {
+                    from: 'top',
+                    align: 'right'
+                  },
+                  offset: 20
+                }
+              );
+            }
+          );
+      },
+      err => {
+        this.isLoading = false;
+      }
+    );
   }
 
   changeCard() {
@@ -131,6 +200,27 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.phoneNumber = this.phoneUtil.format(phoneNumber, PNF.E164);
+  }
+
+  changeDiv(showDiv: string) {
+    $('#loginType').css({ display: 'none' });
+    $('#standardLogin').css({ display: 'none' });
+    $('#' + showDiv).css({ display: 'block' });
+  }
+
+  intercomLogin(credentials: any) {
+    this.intercom.update({
+      app_id: environment.intercom.app_id,
+      name: credentials.user.personal_information.first_name + ' ' + credentials.user.personal_information.last_name,
+      email: credentials.user.email,
+      phone: credentials.user.personal_information.phone_number,
+      user_id: credentials.user._id,
+      role: credentials.user.roles[0],
+      client: credentials.user.roles.includes('client'),
+      widget: {
+        activator: '#intercom$'
+      }
+    });
   }
 
   private createForm() {

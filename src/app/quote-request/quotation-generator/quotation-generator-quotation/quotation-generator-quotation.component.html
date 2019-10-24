@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-md-6">
     <div class="info">
-      <p class="heading-2">ISSUED BY</p>
+      <p class="heading-3">ISSUED BY</p>
       <app-user-data [user]="seller" [issued_by]="true"></app-user-data>
     </div>
   </div>
   <div class="col-md-6">
     <div class="info">
-      <p class="heading-2">ISSUED FOR</p>
+      <p class="heading-3">ISSUED FOR</p>
       <app-user-data [user]="buyer" [issued_for]="true"></app-user-data>
     </div>
   </div>
@@ -128,7 +128,7 @@
   <div class="col-md-6">
     <form [formGroup]="quotationForm">
       <div class="info">
-        <p class="heading-2 mb-3">COMMENTS</p>
+        <p class="heading-3 mb-3">COMMENTS</p>
         <textarea
           class="form-control"
           name="comments"
@@ -143,7 +143,7 @@
   <div class="col-md-2 col-md-offset-4">
     <div class="subtotal-price pull-right">
       <p class="heading-2">SUBTOTAL</p>
-      <p class="heading-4-blue">
+      <p class="heading-2 t-blue">
         {{ quotationForm.value.total_price || 0.0 | number: '1.2-2' }} {{ quotation.currency }}
       </p>
     </div>

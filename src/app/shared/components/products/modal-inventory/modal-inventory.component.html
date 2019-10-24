@@ -9,16 +9,15 @@
       <i class="material-icons">arrow_forward_ios</i>
     </button>
     <button class="btn-icons pull-right" (click)="onBackPage()"><i class="material-icons">arrow_back_ios</i></button>
-    <p class="normal-text-bold">Agricultural Products</p>
+    <p class="heading-3">Agricultural Products</p>
   </div>
   <div class="row clearfix">
     <div *ngIf="agriculturalProducts.length < 1" class="col-md-4 empty-inventory">
       <img src="../../../../../assets/img/default/basket.png" height="260" width="260" />
-      <p class="heading-2">No agricultural products available</p>
+      <p class="heading-3">No agricultural products available</p>
     </div>
-    <div
-      *ngFor="let product of (agriculturalProducts | paginate: { itemsPerPage: 3, currentPage: page }); let i = index"
-      class="col-md-4"
+    <ng-container
+      *ngFor="let product of (agriculturalProducts | paginate: { itemsPerPage: 4, currentPage: page }); let i = index"
     >
       <div class="card card-agricultural" [class.product-active]="isListed(product) && fromQuotation">
         <div class="card-inner-price">
@@ -36,7 +35,7 @@
             ></figure>
           </div>
           <div>
-            <p class="heading-2">
+            <p class="heading-3">
               {{ product.produce }} <br />
               {{ product.variety }}
             </p>
@@ -66,7 +65,7 @@
           </table>
         </div>
         <div *ngIf="(!currency || product.currency === currency) && !fromQuotation" class="quantity">
-          <p class="normal-text-bold">Quantity</p>
+          <p class="t-bold">Quantity</p>
           <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
           <input
             type="number"
@@ -79,8 +78,8 @@
           <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
         </div>
         <div *ngIf="(!currency || product.currency === currency) && fromQuotation" class="quantity">
-          <p *ngIf="isListed(product)" class="normal-text-bold">The product is a part of the order</p>
-          <p *ngIf="!isListed(product)" class="normal-text-bold">Add to purchase order</p>
+          <p *ngIf="isListed(product)" class="t-bold">The product is a part of the order</p>
+          <p *ngIf="!isListed(product)" class="t-bold">Add to purchase order</p>
           <input
             *ngIf="!isListed(product)"
             type="checkbox"
@@ -94,10 +93,10 @@
           ></label>
         </div>
         <div *ngIf="currency && product.currency != currency" class="quantity">
-          <strong style="font-size :11px;">Choose products with the same currency</strong>
+          <strong class="t-small">Choose products with the same currency</strong>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 
   <!--Processed Products-->
@@ -106,98 +105,96 @@
       <i class="material-icons">arrow_forward_ios</i>
     </button>
     <button class="btn-icons pull-right" (click)="onBackPage2()"><i class="material-icons">arrow_back_ios</i></button>
-    <p class="normal-text-bold">Processed Products</p>
+    <p class="heading-3">Processed Products</p>
   </div>
   <div class="row clearfix">
     <div *ngIf="processedProducts.length < 1" class="col-md-4 empty-inventory">
       <img src="../../../../../assets/img/default/basket.png" height="260" width="260" />
-      <p class="heading-2">No processed products available</p>
+      <p class="heading-3">No processed products available</p>
     </div>
     <ng-container
       *ngFor="let product of (processedProducts | paginate: { itemsPerPage: 3, currentPage: page2 }); let i = index"
     >
-      <div class="col-md-4">
-        <div class="card card-processed" [class.product-active]="isListed(product) && fromQuotation" s>
-          <div class="card-inner-price">
-            <p class="pull-right margin-none">
-              {{ product.package_price | number: '1.2-2' }} {{ product.currency }}/<small>{{
-                product.type_of_package
-              }}</small>
-            </p>
+      <div class="card card-processed" [class.product-active]="isListed(product) && fromQuotation" s>
+        <div class="card-inner-price">
+          <p class="pull-right margin-none">
+            {{ product.package_price | number: '1.2-2' }} {{ product.currency }}/<small>{{
+              product.type_of_package
+            }}</small>
+          </p>
+        </div>
+        <div class="product-details">
+          <div>
+            <figure
+              class="img-circular img-circular-sm"
+              [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
+            ></figure>
           </div>
-          <div class="product-details">
-            <div>
-              <figure
-                class="img-circular img-circular-sm"
-                [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
-              ></figure>
-            </div>
-            <p class="heading-2">{{ product.produce }} <br /></p>
-          </div>
-          <div class="package-details">
-            <table>
-              <tr>
-                <td>Packages available</td>
-                <td>{{ fromQuotation ? product.quantity : product.quantityMax }}</td>
-              </tr>
-              <tr>
-                <td>Type of package</td>
-                <td>{{ product.type_of_package }}</td>
-              </tr>
-              <tr *ngIf="product.item_measurement_amount">
-                <td>Item packing type</td>
-                <td>{{ product.item_package_type }}</td>
-              </tr>
-              <tr *ngIf="product.item_measurement_amount">
-                <td>Items per package</td>
-                <td>{{ product.items_per_package }}</td>
-              </tr>
-              <tr *ngIf="product.item_measurement_amount">
-                <td>Amount</td>
-                <td>
-                  {{ product.item_measurement_amount }} {{ product.item_measurement_unit }}/{{
-                    product.item_package_type
-                  }}
-                </td>
-              </tr>
-            </table>
-          </div>
+          <p class="heading-3">{{ product.produce }} <br /></p>
+        </div>
+        <div class="package-details">
+          <table>
+            <tr>
+              <td>Packages available</td>
+              <td>{{ fromQuotation ? product.quantity : product.quantityMax }}</td>
+            </tr>
+            <tr>
+              <td>Type of package</td>
+              <td>{{ product.type_of_package }}</td>
+            </tr>
+            <tr *ngIf="product.item_measurement_amount">
+              <td>Item packing type</td>
+              <td>{{ product.item_package_type }}</td>
+            </tr>
+            <tr *ngIf="product.item_measurement_amount">
+              <td>Items per package</td>
+              <td>{{ product.items_per_package }}</td>
+            </tr>
+            <tr *ngIf="product.item_measurement_amount">
+              <td>Amount</td>
+              <td>
+                {{ product.item_measurement_amount }} {{ product.item_measurement_unit }}/{{
+                  product.item_package_type
+                }}
+              </td>
+            </tr>
+          </table>
+        </div>
 
-          <div *ngIf="(!currency || product.currency === currency) && !fromQuotation" class="quantity">
-            <p class="normal-text-bold">Quantity</p>
-            <!-- decrese button -->
-            <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
-            <!-- quantity -->
-            <input
-              type="number"
-              min="0"
-              max="{{ product.quantityMax }}"
-              value="0"
-              [(ngModel)]="product.quantity"
-              (ngModelChange)="checkProductInput(product)"
-            />
-            <!-- add button -->
-            <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
-          </div>
-          <div *ngIf="(!currency || product.currency === currency) && fromQuotation" class="quantity">
-            <p *ngIf="isListed(product)" class="normal-text-bold">The product is a part of the order</p>
-            <p *ngIf="!isListed(product)" class="normal-text-bold">Add to purchase order</p>
-            <input
-              *ngIf="!isListed(product)"
-              type="checkbox"
-              class="checkbox"
-              [id]="'p' + i"
-              [name]="i"
-              (change)="addProduct(product, $event.target.checked)"
-              [checked]="isAdded(product)"
-            />
-            <label *ngIf="!isListed(product)" class="checkbox_label" [for]="'p' + i"
-              ><span class="form_checkbox_btn"></span
-            ></label>
-          </div>
-          <div *ngIf="currency && product.currency != currency" class="quantity">
-            <strong style="font-size :11px;">Choose products with the same currency</strong>
-          </div>
+        <div *ngIf="(!currency || product.currency === currency) && !fromQuotation" class="quantity">
+          <p class="t-bold">Quantity</p>
+          <!-- decrese button -->
+          <button class="btn-circle" (click)="decrementQ(product)"><i class="material-icons">remove</i></button>
+          <!-- quantity -->
+          <input
+            type="number"
+            min="0"
+            max="{{ product.quantityMax }}"
+            value="0"
+            [(ngModel)]="product.quantity"
+            (ngModelChange)="checkProductInput(product)"
+          />
+          <!-- add button -->
+          <button class="btn-circle" (click)="incrementQ(product)"><i class="material-icons">add</i></button>
+        </div>
+        <div *ngIf="(!currency || product.currency === currency) && fromQuotation" class="quantity">
+          <p *ngIf="isListed(product)" class="t-bold">The product is a part of the order</p>
+          <p *ngIf="!isListed(product)" class="t-bold">Add to purchase order</p>
+          <input
+            *ngIf="!isListed(product)"
+            type="checkbox"
+            class="checkbox"
+            [id]="'p' + i"
+            [name]="i"
+            (change)="addProduct(product, $event.target.checked)"
+            [checked]="isAdded(product)"
+          />
+          <label *ngIf="!isListed(product)" class="checkbox_label" [for]="'p' + i"
+            ><span class="form_checkbox_btn"></span
+          ></label>
+        </div>
+        <div *ngIf="currency && product.currency != currency" class="quantity">
+          <strong class="t-small">Choose products with the same currency</strong>
         </div>
       </div>
     </ng-container>

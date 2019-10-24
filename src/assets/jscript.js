@@ -1,23 +1,5 @@
 $(function() {
   $(document).ready(function() {
-    $('#toggle').change(function() {
-      if ($(this).is(':checked')) {
-        $('.sidebar-wrapper').animate({
-          width: 'toggle'
-        });
-      } else {
-        $('.sidebar-wrapper').animate({
-          width: 'hide'
-        });
-      }
-    });
-
-    $(window).resize(function() {
-      if ($(window).width() > 580) {
-        $('.sidebar-wrapper').show();
-      }
-    });
-
     function triggerClick(elem) {
       $(elem).click();
     }

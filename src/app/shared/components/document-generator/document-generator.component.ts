@@ -87,7 +87,7 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
       transactionType: transactionType
     };
 
-    this.openDialog('720px', ModalAgriculturalProductComponent, data);
+    this.openDialog('92vh', ModalAgriculturalProductComponent, data);
   }
 
   openDialogProcessed(index?: number, transactionType?: string): void {
@@ -98,7 +98,7 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
       transactionType: transactionType
     };
 
-    this.openDialog('780px', ModalProcessedProductComponent, data);
+    this.openDialog('92vh', ModalProcessedProductComponent, data);
   }
 
   openDialog(height: string, component: any, dialogData: any): void {

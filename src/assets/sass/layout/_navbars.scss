@@ -46,7 +46,7 @@
 
       .dropdown-item {
         margin-right: 0 !important;
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 1.6rem;
         min-width: 15rem;
 
         i {
@@ -71,9 +71,6 @@
 
     .dropdown-menu.notifications {
       width: 30rem;
-      .col-md-10 {
-        padding-left: 0px !important;
-      }
       p {
         color: #919191;
       }
@@ -85,6 +82,10 @@
       li:hover {
         background-color: rgb(243, 249, 250);
       }
+      .col-md-10 {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+      }
     }
   }
 
@@ -94,19 +95,22 @@
   }
 
   .sidebar-wrapper {
-    height: 100%;
+    background-color: rgba(0, 0, 0, 0.07);
+    height: 100% !important;
     position: fixed;
     z-index: 1000;
     top: 0;
-    left: 0;
-    overflow-x: hidden;
-    width: 17rem;
-    background-image: linear-gradient(#fff, #f7f7f7);
-    border-right: 1px solid #e5e5e5;
-
+    bottom: 0;
     .sidebar {
-      position: relative;
-      min-height: 92%;
+      height: 100% !important;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      overflow-x: hidden;
+      width: 17rem;
+      background-image: linear-gradient(#fff, #f7f7f7);
+      border-right: 1px solid #e5e5e5;
     }
 
     .nav {
@@ -124,14 +128,18 @@
         a:active,
         a:visited,
         a:focus {
-          padding-top: 1rem;
+          padding-top: 0.8rem;
           padding-bottom: 1rem;
           text-decoration: none;
           color: rgb(165, 178, 190);
         }
 
+        p {
+          font-size: 1.23rem;
+        }
+
         i {
-          font-size: 4.8rem;
+          font-size: 4.7rem;
         }
 
         &.active a p {
@@ -194,33 +202,6 @@
   display: none;
 }
 
-@media screen and (max-width: 580px) {
-  .sidebar-wrapper {
-    display: none;
-  }
-  .main-panel {
-    width: 100% !important;
-  }
-  .navbar-wrapper {
-    width: 100% !important;
-  }
-
-  .navigation-right {
-    right: 1rem !important;
-  }
-  .checkbox-toggle {
-    font-size: 2rem;
-    display: inline-block;
-    width: 2rem;
-    margin: 0;
-  }
-
-  .brand-img,
-  .navigation-right li:first-child {
-    display: none !important;
-  }
-}
-
 #toggle {
   display: none;
 }
@@ -236,4 +217,58 @@
   width: 12.8rem;
   margin-top: 1rem;
   height: 2.7rem;
+}
+
+.navbar-toggler {
+  display: none;
+}
+
+.navbar-collapse {
+  padding: 0px !important;
+}
+
+@include respond(tab-port) {
+  .main-panel {
+    width: 100% !important;
+  }
+  .navbar-wrapper {
+    width: 100% !important;
+  }
+
+  .sidebar {
+    box-shadow: 1px 5px 20px 5px rgba(0, 0, 0, 0.03);
+  }
+
+  .navbar-toggler {
+    display: block;
+  }
+
+  .navbar-header {
+    float: none;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+  .navbar-collapse {
+    width: 100%;
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  .navbar-collapse.collapse {
+    display: none !important;
+  }
+  .navbar-collapse.collapse.in {
+    display: block !important;
+  }
+  .navbar-nav {
+    float: none !important;
+    margin: 7.5px -15px;
+  }
+  .navbar-nav > li {
+    float: none;
+  }
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }

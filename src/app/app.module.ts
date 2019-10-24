@@ -26,6 +26,8 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { RouterModule } from '@angular/router';
 import { LandingModule } from './landing/landing.module';
 import { RegistrationModule } from './registration/registration.module';
+import { IntercomModule } from 'ng-intercom';
+import { environment } from '@env/environment.local';
 
 @NgModule({
   imports: [
@@ -51,6 +53,10 @@ import { RegistrationModule } from './registration/registration.module';
     NotificationsModule,
     LandingModule,
     RegistrationModule,
+    IntercomModule.forRoot({
+      appId: environment.intercom.app_id,
+      updateOnRouterChange: true // will automatically run `update` on router event changes. Default: `false`
+    }),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     NgxPermissionsModule.forRoot(),
     AppRoutingModule // must be imported as the last module as it contains the fallback route

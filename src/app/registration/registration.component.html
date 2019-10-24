@@ -27,194 +27,257 @@
           </div>
           <div class="col-md-7 col-lg-7 col-sm-12 cl-r">
             <div class="cl-r-wrapper">
-              <form [formGroup]="userRegistrationForm">
-                <div id="p1">
-                  <h1 class="mb-4">Sign up</h1>
-                  <div class="error-block" *ngIf="showEmailPhoneError()">
-                    <p>Please fill in the Phone Number or Email Address!</p>
-                  </div>
-                  <div class="row form-group">
-                    <div class="col" [ngClass]="showFieldStyle('firstName')">
-                      <label for="firstName">First Name</label>
-                      <input
-                        type="text"
-                        formControlName="firstName"
-                        class="form-control"
-                        id="firstName"
-                        placeholder="First name"
-                      />
-                      <div class="help-block" *ngIf="isFieldInvalid('firstName')">
-                        <p>First name is required</p>
-                      </div>
-                    </div>
-                    <div class="col" [ngClass]="showFieldStyle('lastName')">
-                      <label for="lastName">Last Name</label>
-                      <input
-                        type="text"
-                        formControlName="lastName"
-                        class="form-control"
-                        placeholder="Last name"
-                        id="lastName"
-                      />
-                      <div class="help-block" *ngIf="isFieldInvalid('lastName')">
-                        <p>Last name is required</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" [ngClass]="showFieldStyle('email')">
-                    <label for="email">Email Address</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      formControlName="email"
-                      placeholder="Email address"
-                      id="email"
-                    />
-                    <div class="help-block" *ngIf="isFieldInvalid('email')">
-                      <p>Email address is required</p>
-                    </div>
-                  </div>
-                  <div class="row form-group">
-                    <div class="col-lg-6 col-md-6 col-sm-12 phone-input">
-                      <label for="phone">Phone Number</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <select
-                            data-width="65px"
-                            id="region_code"
-                            data-live-search="true"
-                            placeholder="Choose measurment unit"
-                            class="selectpicker"
-                            data-size="7"
-                            [(ngModel)]="regionCode"
-                            (change)="changeRegionCode()"
-                            [ngModelOptions]="{ standalone: true }"
-                          >
-                            <option
-                              *ngFor="let country of countries"
-                              [value]="country.value"
-                              [attr.data-content]="generateLink(country.value, country.viewValue)"
-                            ></option>
-                          </select>
-                        </div>
-                        <input
-                          type="tel"
-                          class="form-control"
-                          id="phone"
-                          placeholder="Type phone number here..."
-                          [(ngModel)]="partialPhoneNumber"
-                          [ngModelOptions]="{ standalone: true }"
-                          (ngModelChange)="changeRegionCode()"
-                        />
-                        <div class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
-                          <p>This phone number is invalid</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                      <label for="country">Country</label>
-                      <select
-                        data-live-search="true"
-                        type="text"
-                        formControlName="country"
-                        [ngClass]="showFieldStyle('country')"
-                        class="form-control selectpicker"
-                        id="country"
-                      >
-                        <option value="" disabled [attr.selected]="true">Select country</option>
-                        <option *ngFor="let country of countries" [value]="country.value">{{
-                          country.viewValue
-                        }}</option>
-                      </select>
-                      <div class="help-block" *ngIf="isFieldInvalid('country')">
-                        <p>Country is required</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" [ngClass]="showFieldStyle('password')">
-                    <label for="password">Password</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      formControlName="password"
-                      placeholder="Password"
-                      id="password"
-                    />
-                    <div class="help-block" *ngIf="isFieldInvalid('password', 'required')">
-                      <p>Password is required</p>
-                    </div>
-                    <div class="help-block" *ngIf="isFieldInvalid('password', 'minlength')">
-                      <p>Password must be at least 8 characters</p>
-                    </div>
-                  </div>
-                  <div class="form-group" id="confirmPass" [ngClass]="showFieldStyle('confirmPassword')">
-                    <label for="c-password">Confirm Password</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      formControlName="confirmPassword"
-                      placeholder="Re-type password"
-                      id="c-password"
-                    />
-                  </div>
-                  <div class="help-block" *ngIf="passwordsNotMatch()">
-                    <p>Passwords doesn't match</p>
-                  </div>
-                  <div class="f-bttns-wrapper">
-                    <button
-                      class="bttn-primary action-bttn"
-                      [hidden]="userRegistrationForm.valid"
-                      (click)="onSubmit(userRegistrationForm)"
-                    >
-                      Next
-                    </button>
-                    <button
-                      class="bttn-primary action-bttn"
-                      [hidden]="!userRegistrationForm.valid"
-                      (click)="changeDiv()"
-                    >
-                      Next
-                    </button>
-                  </div>
+              <div id="registrationType">
+                <h3>Create your Avenews-gt account</h3>
+                <div class="bttns-wrapper">
+                  <button (click)="preSignUp('facebook')" class="bttn bttn-facebook">
+                    <i class="fab fa-facebook"></i>
+                    <p>Create an account with Facebook</p>
+                  </button>
+                  <button (click)="preSignUp('google')" class="bttn bttn-google">
+                    <i class="fab fa-google"></i>
+                    <p>Create an account with Google</p>
+                  </button>
+                  <button class="bttn bttn-email" (click)="changeDiv('standardRegistration')">
+                    <i class="far fa-envelope"></i>
+                    <p>Create an account with your Email Address or Phone Number</p>
+                  </button>
                 </div>
-                <div id="p2" style="display: none;">
-                  <h1 class="mb-4">Sign up</h1>
-                  <h3>Join Avenews-gt as</h3>
-                  <div class="bttns-line">
-                    <button [ngClass]="{ active: userType === 'seller' }" (click)="onActiveBtn('seller')">
-                      Seller
-                    </button>
-                    <button [ngClass]="{ active: userType === 'buyer' }" (click)="onActiveBtn('buyer')">Buyer</button>
-                    <button [ngClass]="{ active: userType === 'agribusiness' }" (click)="onActiveBtn('agribusiness')">
-                      Agribusiness
-                    </button>
-                  </div>
+              </div>
+              <form id="complement" style="display: none">
+                <h1 class="mb-4">Welcome {{ user?.name }} !</h1>
+                <h3 class="mb-4">We have few more info that we need from you.</h3>
+                <label for="country">Country</label>
+                <select
+                  data-live-search="true"
+                  type="text"
+                  [(ngModel)]="countrySocialUser"
+                  [ngModelOptions]="{ standalone: true }"
+                  [ngClass]="showFieldStyle('country')"
+                  class="form-control selectpicker"
+                  id="country1"
+                >
+                  <option *ngFor="let country of countries" [value]="country.viewValue">{{ country.viewValue }}</option>
+                </select>
+                <div class="help-block" *ngIf="isFieldInvalid('country')">
+                  <p>Country is required</p>
+                </div>
 
-                  <div class="form-group mt-5">
-                    <label for="company">Company Name</label><span>&nbsp; – Optional</span>
-                    <input
-                      type="text"
-                      formControlName="companyName"
-                      class="form-control"
-                      placeholder="Company Name"
-                      id="company"
-                    />
-                  </div>
-
-                  <p class="heading-4">
-                    By clicking on the create account button, you agree to Avenews-gt
-                    <a routerLink="/terms-of-use" target="_blank">Terms of use</a> and
-                    <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
-                  </p>
-                  <div class="f-bttns-wrapper">
-                    <a class="icon-text" (click)="onBack()"><i class="material-icons">keyboard_backspace</i> Go Back</a>
-                    <button class="pull-right bttn-primary action-bttn" (click)="onGeneralSubmit()">
-                      Create Account
-                    </button>
-                  </div>
+                <label for="bttns-line" class="mt-5">Join Avenews-GT as</label>
+                <div class="bttns-line">
+                  <button [ngClass]="{ active: userType === 'seller' }" (click)="onActiveBtn('seller')">
+                    Seller
+                  </button>
+                  <button [ngClass]="{ active: userType === 'buyer' }" (click)="onActiveBtn('buyer')">Buyer</button>
+                  <button [ngClass]="{ active: userType === 'agribusiness' }" (click)="onActiveBtn('agribusiness')">
+                    Agribusiness
+                  </button>
+                </div>
+                <div class="f-bttns-wrapper">
+                  <a class="icon-text" (click)="cancelSocialLogin()"
+                    ><i class="material-icons">keyboard_backspace</i> Go Back</a
+                  >
+                  <button (click)="oAuthSignUp()" class="pull-right bttn-primary action-bttn" style="width: 35rem">
+                    <span>Create Account with {{ network | titlecase }}</span>
+                    <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+                  </button>
                 </div>
               </form>
-              <div id="p3" style="display: none;">
+
+              <form id="standardRegistration" style="display: none" [formGroup]="userRegistrationForm">
+                <h1 class="mb-4">Sign up</h1>
+                <div class="error-block" *ngIf="showEmailPhoneError()">
+                  <p>Please fill in the Phone Number or Email Address!</p>
+                </div>
+                <div class="row form-group">
+                  <div class="col" [ngClass]="showFieldStyle('firstName')">
+                    <label for="firstName">First Name</label>
+                    <input
+                      type="text"
+                      formControlName="firstName"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="First name"
+                    />
+                    <div class="help-block" *ngIf="isFieldInvalid('firstName')">
+                      <p>First name is required</p>
+                    </div>
+                  </div>
+                  <div class="col" [ngClass]="showFieldStyle('lastName')">
+                    <label for="lastName">Last Name</label>
+                    <input
+                      type="text"
+                      formControlName="lastName"
+                      class="form-control"
+                      placeholder="Last name"
+                      id="lastName"
+                    />
+                    <div class="help-block" *ngIf="isFieldInvalid('lastName')">
+                      <p>Last name is required</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('email')">
+                  <label for="email">Email Address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email"
+                    placeholder="Email address"
+                    id="email2"
+                  />
+                  <div class="help-block" *ngIf="isFieldInvalid('email')">
+                    <p>Email address is required</p>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-lg-6 col-md-6 col-sm-12 phone-input">
+                    <label for="phone">Phone Number</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <select
+                          data-width="65px"
+                          id="region_code"
+                          data-live-search="true"
+                          data-live-search-placeholder="Type country here..."
+                          placeholder="Choose measurment unit"
+                          class="selectpicker"
+                          data-size="7"
+                          [(ngModel)]="regionCode"
+                          (change)="changeRegionCode()"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <option
+                            *ngFor="let country of countries"
+                            [value]="country.value"
+                            [attr.data-content]="generateLink(country.value, country.viewValue)"
+                          ></option>
+                        </select>
+                      </div>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        placeholder="Type phone number here..."
+                        [(ngModel)]="partialPhoneNumber"
+                        [ngModelOptions]="{ standalone: true }"
+                        (ngModelChange)="changeRegionCode()"
+                      />
+                      <div class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
+                        <p>This phone number is invalid</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <label for="country">Country</label>
+                    <select
+                      data-live-search-placeholder="Type country here..."
+                      data-live-search="true"
+                      type="text"
+                      data-size="7"
+                      formControlName="country"
+                      [ngClass]="showFieldStyle('country')"
+                      class="form-control selectpicker"
+                      id="country2"
+                    >
+                      <option value="" disabled [attr.selected]="true">Select country</option>
+                      <option *ngFor="let country of countries" [value]="country.viewValue">{{
+                        country.viewValue
+                      }}</option>
+                    </select>
+                    <div class="help-block" *ngIf="isFieldInvalid('country')">
+                      <p>Country is required</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('password')">
+                  <label for="password">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                    placeholder="Password"
+                    id="password"
+                  />
+                  <div class="help-block" *ngIf="isFieldInvalid('password', 'required')">
+                    <p>Password is required</p>
+                  </div>
+                  <div class="help-block" *ngIf="isFieldInvalid('password', 'minlength')">
+                    <p>Password must be at least 8 characters</p>
+                  </div>
+                </div>
+                <div class="form-group" id="confirmPass" [ngClass]="showFieldStyle('confirmPassword')">
+                  <label for="c-password">Confirm Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="confirmPassword"
+                    placeholder="Re-type password"
+                    id="c-password"
+                  />
+                </div>
+                <div class="help-block" *ngIf="passwordsNotMatch()">
+                  <p>Passwords doesn't match</p>
+                </div>
+                <div class="f-bttns-wrapper">
+                  <a class="icon-text" (click)="changeDiv('registrationType')"
+                    ><i class="material-icons">keyboard_backspace</i> Go Back</a
+                  >
+                  <button
+                    class="bttn-primary action-bttn"
+                    [hidden]="userRegistrationForm.valid"
+                    (click)="onSubmit(userRegistrationForm)"
+                  >
+                    Next
+                  </button>
+                  <button
+                    class="bttn-primary action-bttn"
+                    [hidden]="!userRegistrationForm.valid"
+                    (click)="changeDiv('standardRegistration2')"
+                  >
+                    Next
+                  </button>
+                </div>
+              </form>
+              <form id="standardRegistration2" style="display: none" [formGroup]="userRegistrationForm">
+                <h1 class="mb-4">Sign up</h1>
+                <h3>Join Avenews-gt as</h3>
+                <div class="bttns-line">
+                  <button [ngClass]="{ active: userType === 'seller' }" (click)="onActiveBtn('seller')">
+                    Seller
+                  </button>
+                  <button [ngClass]="{ active: userType === 'buyer' }" (click)="onActiveBtn('buyer')">Buyer</button>
+                  <button [ngClass]="{ active: userType === 'agribusiness' }" (click)="onActiveBtn('agribusiness')">
+                    Agribusiness
+                  </button>
+                </div>
+
+                <div class="form-group mt-5">
+                  <label for="company">Company Name</label><span>&nbsp; – Optional</span>
+                  <input
+                    type="text"
+                    formControlName="companyName"
+                    class="form-control"
+                    placeholder="Company Name"
+                    id="company"
+                  />
+                </div>
+
+                <p>
+                  By clicking on the create account button, you agree to Avenews-gt
+                  <a routerLink="/terms-of-use" target="_blank">Terms of use</a> and
+                  <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
+                </p>
+                <div class="f-bttns-wrapper">
+                  <a class="icon-text" (click)="changeDiv('p1')"
+                    ><i class="material-icons">keyboard_backspace</i> Go Back</a
+                  >
+                  <button class="pull-right bttn-primary action-bttn" (click)="onGeneralSubmit()">
+                    Create Account
+                  </button>
+                </div>
+              </form>
+              <div id="confirmation" style="display: none;">
                 <img src="../../assets/img/Success-icon.png" />
                 <h1 class="mb-4" *ngIf="userRegistrationForm.get('email').value">Check your email!</h1>
                 <h1

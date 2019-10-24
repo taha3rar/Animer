@@ -7,7 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
-  { path: 'registration', component: RegistrationComponent, data: { title: extract('registration') } },
+  { path: 'registration', component: RegistrationComponent, data: { title: extract('Registration') } },
   { path: 'registration/:userRole', component: RegistrationComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'terms-of-use', component: TermsOfUseComponent }

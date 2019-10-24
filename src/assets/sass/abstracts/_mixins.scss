@@ -40,3 +40,35 @@
   -ms-transform: translate3d(0, $value, 0);
   transform: translate3d(0, $value, 0);
 }
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-port {
+    @media (max-width: 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-land {
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == small-desktop {
+    @media (max-width: 85.375em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desktop {
+    @media (min-width: 120.01em) {
+      @content;
+    }
+  }
+}

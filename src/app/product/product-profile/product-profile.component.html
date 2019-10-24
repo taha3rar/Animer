@@ -2,10 +2,10 @@
   <div>
     <figure class="img-circular img-circular-lg" [style.background-image]="'url(' + product_image() + ')'"></figure>
     <p class="heading-2">{{ product.produce }}</p>
-    <p class="normal-text-bold" *ngIf="product.sku">SKU {{ product.sku }}</p>
+    <p class="t-bold" *ngIf="product.sku">SKU {{ product.sku }}</p>
   </div>
   <div class="availability-block">
-    <p class="heading-4-blue">Availability</p>
+    <p class="heading-2 t-blue">Availability</p>
     <div class="col-md-7">
       <p>Amount of packages available</p>
       <p>Type of package</p>
@@ -26,10 +26,10 @@
     </div>
   </div>
   <div class="pricing">
-    <p class="heading-4-blue" *ngIf="agricultural_product">
+    <p class="heading-2 t-blue" *ngIf="agricultural_product">
       {{ product.currency }} {{ product.price_per_unit | number: '1.2-2' }}/{{ product.weight_unit }}
     </p>
-    <p class="heading-4-blue" *ngIf="processed_product">
+    <p class="heading-2 t-blue" *ngIf="processed_product">
       {{ product.currency }} {{ product.package_price | number: '1.2-2' }}/{{ product.type_of_package }}
     </p>
   </div>

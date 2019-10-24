@@ -30,31 +30,35 @@
   }
 
   &-content-lg {
-    height: 750px;
-    width: 1200px;
+    height: 85vh;
+    width: 75vw;
     background-color: white;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
     border-radius: 3px;
-    overflow: hidden;
+    overflow-y: scroll;
     position: static;
     .upper-part {
       width: 100%;
-      height: 47%;
-
+      height: auto;
+      padding-bottom: 2rem;
       .tutoral-image-wrapper {
-        margin-top: 4.5rem !important;
+        margin-top: 4rem !important;
         width: 80%;
-        height: 85%;
+        height: 100%;
         margin: 0 auto;
+      }
+      img {
+        width: 100%;
+        height: auto;
       }
     }
     .bottom-part {
       width: 100%;
       background-color: #00b7cf;
-      height: 53%;
+      height: 55%;
       color: white;
       font-size: 1.65rem;
-      padding: 3.5rem 10rem 5rem 14rem;
+      padding: 3.5rem 10rem 4rem 14rem;
 
       h1 {
         font-weight: 700;
@@ -186,7 +190,7 @@
 }
 
 .bootstrap-select > .dropdown-toggle {
-  height: 32px !important;
+  height: 3.2rem !important;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   border: 1px solid #ced4da;
   font-size: 1.4rem;
@@ -263,7 +267,7 @@ ul.tutorial-list li {
 
 .nav-circles {
   position: absolute;
-  bottom: 6%;
+  bottom: 3%;
   left: 50%;
   transform: translateX(-50%);
 

@@ -2,21 +2,31 @@
   <div class="row">
     <div class="col-md-6 col-sm-12">
       <div class="counter-box">
-        <div class="circle">
-          <a [routerLink]="['/order']">
-            <p>{{ counter.orders }}</p>
-          </a>
-        </div>
+        <a [routerLink]="['/order']">
+          <div class="outer">
+            <svg viewBox="0 0 150 150" preserveAspectRatio="xMinYMin meet">
+              <g>
+                <circle r="47%" cx="50%" cy="50%" />
+                <text x="50%" y="50%" text-anchor="middle" dy="0.3em">{{ counter.orders }}</text>
+              </g>
+            </svg>
+          </div>
+        </a>
         <p class="stats-label">Purchase Orders</p>
       </div>
     </div>
     <div class="col-md-6 col-sm-12">
       <div class="counter-box">
-        <div class="circle">
-          <a [routerLink]="['/invoice']">
-            <p>{{ counter.invoices }}</p>
-          </a>
-        </div>
+        <a [routerLink]="['/invoice']">
+          <div class="outer">
+            <svg viewBox="0 0 150 150" preserveAspectRatio="xMinYMin meet">
+              <g>
+                <circle r="47%" cx="50%" cy="50%" />
+                <text x="50%" y="50%" text-anchor="middle" dy="0.3em">{{ counter.invoices }}</text>
+              </g>
+            </svg>
+          </div>
+        </a>
         <p class="stats-label">Proforma Invoices</p>
       </div>
     </div>
@@ -24,21 +34,31 @@
   <div class="row">
     <div class="col-md-6 col-sm-12" *ngxPermissionsOnly="['list-products']">
       <div class="counter-box">
-        <div class="circle">
-          <a [routerLink]="['/product/list']">
-            <p>{{ counter.products }}</p>
-          </a>
-        </div>
+        <a [routerLink]="['/product/list']">
+          <div class="outer">
+            <svg viewBox="0 0 150 150" preserveAspectRatio="xMinYMin meet">
+              <g>
+                <circle r="47%" cx="50%" cy="50%" />
+                <text x="50%" y="50%" text-anchor="middle" dy="0.3em">{{ counter.products }}</text>
+              </g>
+            </svg>
+          </div>
+        </a>
         <p class="stats-label">Products</p>
       </div>
     </div>
     <div class="col-md-6 col-sm-12">
       <div class="counter-box">
-        <div class="circle">
-          <a [routerLink]="['/client']">
-            <p>{{ counter.clients }}</p>
-          </a>
-        </div>
+        <a [routerLink]="['/client']">
+          <div class="outer">
+            <svg viewBox="0 0 150 150" preserveAspectRatio="xMinYMin meet">
+              <g>
+                <circle r="47%" cx="50%" cy="50%" />
+                <text x="50%" y="50%" text-anchor="middle" dy="0.3em">{{ counter.clients }}</text>
+              </g>
+            </svg>
+          </div>
+        </a>
         <p class="stats-label">Clients</p>
       </div>
     </div>

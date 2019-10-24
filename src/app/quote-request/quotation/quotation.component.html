@@ -2,17 +2,17 @@
 <div class="panel panel-tab">
   <div class="panel-body">
     <div class="padding-all">
-      <div class="border-box">
+      <div class="border-box display-ib ">
         <h2>
-          QUOTATION <span *ngIf="!isGenerator"> #{{ quotation?.numericId }}</span>
+          QUOTATION <span style="font-size: 1.9rem;" *ngIf="!isGenerator"> #{{ quotation?.numericId }}</span>
         </h2>
         <table>
           <tr>
-            <td class="heading-4-blue">ISSUE DATE</td>
+            <td class="t-bold t-blue">ISSUE DATE</td>
             <td>{{ quotation?.date_created | date: 'dd/MM/yyyy' }}</td>
           </tr>
           <tr>
-            <td class="heading-4-blue">VALID BY</td>
+            <td class="t-bold t-blue">VALID BY</td>
             <td *ngIf="quotation?.valid_by">{{ quotation.valid_by | date: 'dd/MM/yyyy' }}</td>
             <td *ngIf="!quotation?.valid_by">N/A</td>
           </tr>
@@ -20,30 +20,30 @@
       </div>
       <div class="row" style="padding-top: 5rem;">
         <div class="col-md-9">
-          <p class="heading-4-blue">ISSUED BY</p>
-          <p class="heading-4">{{ quotation?.seller?.first_name }} {{ quotation?.seller?.last_name }}</p>
-          <p class="heading-4">{{ quotation?.seller?.company_name }}</p>
-          <p class="heading-4">{{ quotation?.seller?.email }}</p>
-          <p class="heading-4">
+          <p class="t-bold t-blue">ISSUED BY</p>
+          <p>{{ quotation?.seller?.first_name }} {{ quotation?.seller?.last_name }}</p>
+          <p>{{ quotation?.seller?.company_name }}</p>
+          <p>{{ quotation?.seller?.email }}</p>
+          <p>
             {{ quotation?.seller?.address }}, {{ quotation?.seller?.city }}, {{ quotation?.seller?.zipcode }},
             {{ quotation?.seller?.country }}
           </p>
-          <p class="heading-4">{{ quotation?.seller?.phone_number }}</p>
+          <p>{{ quotation?.seller?.phone_number }}</p>
         </div>
         <div class="col-md-3">
-          <p class="heading-4-blue">ISSUED FOR</p>
-          <p class="heading-4">{{ quotation?.buyer?.first_name }} {{ quotation?.buyer?.last_name }}</p>
-          <p class="heading-4">{{ quotation?.buyer?.company_name }}</p>
-          <p class="heading-4">{{ quotation?.buyer?.email }}</p>
-          <p class="heading-4">
+          <p class="t-bold t-blue">ISSUED FOR</p>
+          <p>{{ quotation?.buyer?.first_name }} {{ quotation?.buyer?.last_name }}</p>
+          <p>{{ quotation?.buyer?.company_name }}</p>
+          <p>{{ quotation?.buyer?.email }}</p>
+          <p>
             {{ quotation?.buyer?.address }}, {{ quotation?.buyer?.city }}, {{ quotation?.buyer?.zipcode }},
             {{ quotation?.buyer?.country }}
           </p>
-          <p class="heading-4">{{ quotation?.buyer?.phone_number }}</p>
+          <p>{{ quotation?.buyer?.phone_number }}</p>
         </div>
       </div>
       <div style="padding-top: 2rem;">
-        <p class="heading-2">PRODUCTS</p>
+        <p class="heading-3">PRODUCTS</p>
         <table class="products-table">
           <thead>
             <tr>
@@ -118,19 +118,19 @@
       <div style="padding-top: 2rem;">
         <div class="row">
           <div class="col-md-9">
-            <p class="heading-2">QUOTE REQUEST COMMENTS</p>
+            <p class="heading-3">QUOTE REQUEST COMMENTS</p>
             <p>
               {{ quotation?.buyer_comments || 'N/A' }}
             </p>
-            <p class="heading-2">QUOTATION COMMENTS</p>
+            <p class="heading-3">QUOTATION COMMENTS</p>
             <p>
               {{ quotation?.seller_comments || 'N/A' }}
             </p>
           </div>
           <div class="col-md-3">
             <div class="border-box center-items pull-left">
-              <p class="heading-2">TOTAL PRICE</p>
-              <p class="heading-4-blue">{{ quotation?.total_price | number: '1.2-2' }} {{ quotation?.currency }}</p>
+              <p class="heading-3">TOTAL PRICE</p>
+              <p class="heading-2 t-blue">{{ quotation?.total_price | number: '1.2-2' }} {{ quotation?.currency }}</p>
             </div>
           </div>
         </div>

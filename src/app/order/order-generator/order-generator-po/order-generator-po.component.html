@@ -2,13 +2,13 @@
   <div class="row">
     <div class="col-md-6">
       <div class="info">
-        <p class="heading-2">ISSUED BY</p>
+        <p class="heading-3">ISSUED BY</p>
         <app-user-data [user]="buyer" [issued_by]="true"></app-user-data>
       </div>
     </div>
     <div class="col-md-6">
       <div class="info">
-        <p class="heading-2">ISSUED FOR</p>
+        <p class="heading-3">ISSUED FOR</p>
         <app-user-data [user]="seller" [issued_for]="true"></app-user-data>
       </div>
     </div>
@@ -66,14 +66,14 @@
     <div class="col-md-2">
       <div class="subtotal-price pull-right">
         <p class="heading-2">SUBTOTAL</p>
-        <p class="heading-4-blue">{{ order.subtotal.value | number: '1.2-2' }} {{ order.currency.value }}</p>
+        <p class="heading-2 t-blue">{{ order.subtotal.value | number: '1.2-2' }} {{ order.currency.value }}</p>
       </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 info">
-      <p class="heading-2">SIGNED BY</p>
+      <p class="heading-3">SIGNED BY</p>
       <div formGroupName="sign_by">
         <div class="form-row">
           <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('sign_by', 'first_name')">
@@ -168,7 +168,7 @@
     </div>
     <div class="col-md-6">
       <div formGroupName="deliver_to" class="info">
-        <p class="heading-2">DELIVER TO</p>
+        <p class="heading-3">DELIVER TO</p>
         <div class="form-row">
           <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'contact_name')">
             <label for="contact_name">Contact Name *</label>

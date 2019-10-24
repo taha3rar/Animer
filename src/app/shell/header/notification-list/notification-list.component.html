@@ -17,30 +17,34 @@
           ></figure>
         </div>
         <div class="col-md-10 notificationText">
-          <span *ngIf="notification.type === 'proforma-invoice'"
+          <span *ngIf="notification.topic.name === 'new-invoice-receiver'"
             ><b>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</b> sent you a
             <b>Proforma Invoice</b></span
           >
-          <span *ngIf="notification.type === 'purchase-order'"
+          <span *ngIf="notification.topic.name === 'new-order-receiver'"
             ><b>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</b> sent you a
             <b>Purchase Order</b></span
           >
-          <span *ngIf="notification.type === 'document'"
+          <span *ngIf="notification.topic.name === 'new-document'"
             ><b>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</b> uploaded a
             <b>Necessary Document</b></span
           >
-          <span *ngIf="notification.type === 'contract'"
+          <span *ngIf="notification.topic.name === 'new-contract'"
             ><b>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</b> uploaded a
             <b>Necessary Document</b></span
           >
-          <p *ngIf="notification.type === 'quote-request'">
-            <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> sent you a
-            <strong>Quote Request</strong>
-          </p>
-          <p *ngIf="notification.type === 'quotation'">
-            <strong>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</strong> sent you a
-            <strong>Quotation</strong>
-          </p>
+          <span *ngIf="notification.topic.name === 'new-quote-request'">
+            <b>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</b> sent you a
+            <b>Quote Request</b>
+          </span>
+          <span *ngIf="notification.topic.name === 'new-quotation'">
+            <b>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</b> sent you a
+            <b>Quotation</b>
+          </span>
+          <span *ngIf="notification.topic.name === 'quotation-accepted'">
+            <b>{{ notification.emitter.first_name }} {{ notification.emitter.last_name }}</b> accepted your
+            <b>Quotation</b>
+          </span>
           <p>{{ notification.date_created | date: 'dd/MM/yyyy hh:mm aaa' }}</p>
         </div>
       </div>

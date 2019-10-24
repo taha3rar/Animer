@@ -29,7 +29,7 @@ export class ModalAgriculturalProductComponent extends BaseProductOrder {
     if (this.product.total_weight && this.product.price_per_unit) {
       this.product.product_subtotal = Number((this.product.price_per_unit * this.product.total_weight).toFixed(2));
       if (this.product.quantity) {
-        this.product.package_price = Number((this.product.product_subtotal / this.product.quantity).toFixed(2));
+        this.product.package_price = Number((this.product.price_per_unit * this.product.package_weight).toFixed(2));
       } else {
         this.product.package_price = undefined;
       }
@@ -41,7 +41,7 @@ export class ModalAgriculturalProductComponent extends BaseProductOrder {
 
   setPricePackage() {
     if (this.product.quantity && this.product.product_subtotal) {
-      this.product.package_price = Number((this.product.product_subtotal / this.product.quantity).toFixed(2));
+      this.product.package_price = Number((this.product.price_per_unit * this.product.package_weight).toFixed(2));
     } else {
       this.product.package_price = undefined;
     }

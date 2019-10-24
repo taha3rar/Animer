@@ -35,7 +35,11 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+    this.authenticationService.logout().subscribe(() => {
+      this.router.navigate(['/login'], { replaceUrl: true });
+      // reset intercom
+      (<any>window).Intercom('shutdown');
+    });
   }
 
   get currentLanguage(): string {

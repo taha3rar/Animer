@@ -78,7 +78,7 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
       product: this.product
     };
 
-    this.openDialog('720px', QrAgriculturalProductComponent, data);
+    this.openDialog('92vh', QrAgriculturalProductComponent, data);
   }
 
   openDialogProcessed(): void {
@@ -86,7 +86,7 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
       product: this.product
     };
 
-    this.openDialog('765px', QrProcessedProductComponent, data);
+    this.openDialog('92vh', QrProcessedProductComponent, data);
   }
 
   openDialog(height: string, component: any, dialogData: any): void {

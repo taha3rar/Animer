@@ -38,6 +38,8 @@ import { OrderListAsSellerResolver } from './resolvers/order-list-as-seller.reso
 import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
 import { QuotationResolver } from './resolvers/quotation.resolver';
+// tslint:disable-next-line:max-line-length
+import { OrderGeneratorProductResSummaryComponent } from './order-generator/order-generator-products/order-generator-product-res-summary/order-generator-product-res-summary.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { QuotationResolver } from './resolvers/quotation.resolver';
     OrderGeneratorSellerComponent,
     OrderInvoiceGeneratorComponent,
     OrderProductListComponent,
-    OrderInvoiceProductListComponent
+    OrderInvoiceProductListComponent,
+    OrderGeneratorProductResSummaryComponent
   ],
   imports: [
     SharedModule,

@@ -53,14 +53,14 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
     const data = {
       product: product
     };
-    this.openDialog('915px', AgriculturalProductGeneratorComponent, data);
+    this.openDialog('92vh', AgriculturalProductGeneratorComponent, data);
   }
 
   openDialogProcessed(product: Product): void {
     const data = {
       product: product
     };
-    this.openDialog('905px', ProcessedProductGeneratorComponent, data);
+    this.openDialog('92vh', ProcessedProductGeneratorComponent, data);
   }
 
   openDialog(height: string, component: any, dialogData: any): void {

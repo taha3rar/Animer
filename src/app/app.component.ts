@@ -17,6 +17,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Location } from '@angular/common';
 import { environment } from '@env/environment';
 import { Logger, I18nService } from '@app/core';
+import { Intercom } from 'ng-intercom';
 
 const log = new Logger('App');
 declare const $: any;
@@ -40,7 +41,8 @@ export class AppComponent implements OnInit {
     // do not remove the analytics injection, even if the call in ngOnInit() is removed
     // this injection initializes page tracking through the router
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-    private i18nService: I18nService
+    private i18nService: I18nService,
+    public intercom: Intercom
   ) {
     this.router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
@@ -72,6 +74,31 @@ export class AppComponent implements OnInit {
 
     this.angulartics2GoogleAnalytics.eventTrack(environment.version, { category: 'App initialized' });
 
+    if (this.authenticationService.credentials) {
+      this.intercom.boot({
+        app_id: environment.intercom.app_id,
+        name:
+          this.authenticationService.credentials.user.personal_information.first_name +
+          ' ' +
+          this.authenticationService.credentials.user.personal_information.last_name,
+        email: this.authenticationService.credentials.user.email,
+        phone: this.authenticationService.credentials.user.personal_information.phone_number,
+        user_id: this.authenticationService.credentials.user._id,
+        role: this.authenticationService.credentials.user.roles[0],
+        client: this.authenticationService.credentials.user.roles.includes('client'),
+        widget: {
+          activator: '#intercom'
+        }
+      });
+    } else {
+      this.intercom.boot({
+        app_id: environment.intercom.app_id,
+        widget: {
+          activator: '#intercom'
+        }
+      });
+    }
+
     // Setup translations
     this.i18nService.init(environment.defaultLanguage, environment.supportedLanguages);
 
@@ -98,36 +125,35 @@ export class AppComponent implements OnInit {
       });
     // Set permissions on every refresh
     this.authenticationService.setCurrentPermissions();
-
     this.responsive(window.innerWidth);
 
     this.router.events.subscribe(event => {
       this.responsive(window.innerWidth);
     });
-
-    if (window.location.href.includes('validation')) {
-      this.userValidation = true;
-    }
   }
 
   responsive(windowSize: any) {
-    if (
-      windowSize <= 650 &&
-      !window.location.href.includes('registration') &&
-      !window.location.href.includes('home') &&
-      !window.location.href.includes('not-found')
-    ) {
-      $('.compatibility-msg-content').css({ display: 'block' });
-      $('.compatibility-msg').css({ display: 'block' });
-      $('.navbar-compatibilty-content-img').css({ display: 'block' });
-      $('.navbar-compatibilty').css({ display: 'block' });
-      $('.router-outlet').css({ visibility: 'hidden' });
-    } else {
-      $('.compatibility-msg-content').css({ display: 'none' });
-      $('.compatibility-msg').css({ display: 'none' });
-      $('.navbar-compatibilty-content-img').css({ display: 'none' });
-      $('.navbar-compatibilty').css({ display: 'none' });
-      $('.router-outlet').css({ visibility: 'visible' });
+    const currentUrl = window.location.href;
+    if (windowSize <= 600 && !currentUrl.includes('home') && !currentUrl.includes('registration')) {
+      if (currentUrl.indexOf('staging')) {
+        if (currentUrl.includes('validation')) {
+          window.location.href = 'https://mobile-staging.agt-platform.com/validation';
+        } else {
+          window.location.href = 'https://mobile-staging.agt-platform.com';
+        }
+      } else if (currentUrl.indexOf('demo')) {
+        if (currentUrl.includes('validation')) {
+          window.location.href = 'https://mobile-demo.agt-platform.com/validation';
+        } else {
+          window.location.href = 'https://mobile-demo.agt-platform.com';
+        }
+      } else {
+        if (currentUrl.includes('validation')) {
+          window.location.href = 'https://mobile.agt-platform.com/validation';
+        } else {
+          window.location.href = 'https://mobile.agt-platform.com';
+        }
+      }
     }
   }
 }

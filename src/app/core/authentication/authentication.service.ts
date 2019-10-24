@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { map } from 'rxjs/operators';
-import { Credentials, LoginContext } from '../models/user/login-models';
+import { Credentials, LoginContext, OAuthLoginContext } from '../models/user/login-models';
 import { JwtService } from './jwt.service';
 import { NgxPermissionsService, NgxPermissionsObject } from 'ngx-permissions';
 
@@ -30,6 +30,16 @@ export class AuthenticationService {
     };
 
     return this.apiService.post('/user/login', data).pipe(
+      map((user: Credentials) => {
+        this.jwtService.setCredentials(user, context.remember);
+        this.setPermissions(user);
+        return user;
+      })
+    );
+  }
+
+  oAuthLogin(context: OAuthLoginContext, network: string): Observable<Credentials> {
+    return this.apiService.post(`/user/login/${network}`, context).pipe(
       map((user: Credentials) => {
         this.jwtService.setCredentials(user, context.remember);
         this.setPermissions(user);

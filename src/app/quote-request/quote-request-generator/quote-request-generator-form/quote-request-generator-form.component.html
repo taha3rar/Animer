@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-8">
     <div class="info">
-      <p class="heading-2">PRODUCTS</p>
-      <div>
+      <p class="heading-3">PRODUCTS</p>
+      <div class="table-wrapper">
         <table class="table-blue">
           <thead>
             <tr>
@@ -62,22 +62,22 @@
             </tr>
           </tbody>
         </table>
-        <div class="dropdown">
-          <button *ngIf="!product" class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-            Add New Product
-          </button>
-          <ul class="dropdown-menu">
-            <li><a (click)="openDialogAgricultural()">New Agricultural Product</a></li>
-            <li><a (click)="openDialogProcessed()">New Processed Product</a></li>
-          </ul>
-        </div>
+      </div>
+      <div class="dropdown">
+        <button *ngIf="!product" class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          Add New Product
+        </button>
+        <ul class="dropdown-menu">
+          <li><a (click)="openDialogAgricultural()">New Agricultural Product</a></li>
+          <li><a (click)="openDialogProcessed()">New Processed Product</a></li>
+        </ul>
       </div>
     </div>
     <form *ngIf="quoteRequestForm" [formGroup]="quoteRequestForm" (keydown.enter)="$event.preventDefault()">
       <div class="row mt-5">
         <div class="col-md-6">
           <div class="info">
-            <p class="heading-2 mb-3">COMMENTS</p>
+            <p class="heading32 mb-3">COMMENTS</p>
             <textarea
               class="form-control"
               name="comments"
@@ -90,7 +90,7 @@
         </div>
         <div class="col-md-6">
           <div class="info">
-            <p class="heading-2 mb-3">OTHER DETAILS</p>
+            <p class="heading-3 mb-3">OTHER DETAILS</p>
             <div [ngClass]="showFieldStyle('currency')">
               <label for="currency">Choose currency *</label>
               <select id="currency" name="currency" class="form-control mb-3" formControlName="currency">
@@ -127,24 +127,24 @@
   </div>
   <div class="col-md-4">
     <div class="info">
-      <p class="heading-2">TRADE PARTIES</p>
+      <p class="heading-3">TRADE PARTIES</p>
       <div>
-        <p class="heading-3-blue">Buyer</p>
+        <p class="heading-3 t-blue">Buyer</p>
         <div class="center-c mt-4">
           <figure
             class="img-circular img-circular-sm"
             [ngStyle]="{ 'background-image': 'url(' + buyer.personal_information.profile_picture + ')' }"
           ></figure>
           <div class="fl-c ml-4">
-            <p class="normal-text-bold margin-none">
+            <p class="t-bold margin-none">
               {{ buyer.personal_information.first_name }} {{ buyer.personal_information.last_name }}
             </p>
-            <p class="normal-text-bold margin-none">{{ buyer.company_information.company_name }}</p>
+            <p class="t-bold margin-none">{{ buyer.company_information.company_name }}</p>
           </div>
         </div>
       </div>
       <div>
-        <p class="heading-3-blue mt-5">Sellers</p>
+        <p class="heading-3 t-blue mt-5">Sellers</p>
         <table class="table table-borderless">
           <thead>
             <tr>

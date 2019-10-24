@@ -6,6 +6,7 @@
   box-shadow: 0px 2px 0.8rem rgba(0, 0, 0, 0.045);
   border-radius: 5px;
   margin-top: 1rem;
+  word-break: break-all;
 
   .row div p:first-child {
     font-size: 1.2rem;
@@ -189,4 +190,9 @@ input[type="number"] {
 .alert {
   margin-top: 1rem;
   font-size: 1.3rem;
+}
+
+.col-md-12.form-group {
+  padding-right: 5px !important;
+  padding-left: 5px !important;
 }

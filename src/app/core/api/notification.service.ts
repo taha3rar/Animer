@@ -25,12 +25,12 @@ export class NotificationService extends BaseService {
 
       // if its a PO, we need to send the user to the PI generator
       // but if PI was already created, the user should be redirected to the PI view
-      if (notification.type === 'purchase-order') {
-        this.orderService.get(notification.object_id).subscribe((order: Order) => {
+      if (notification.topic.name === 'new-order-receiver') {
+        this.orderService.get(notification.topic._id).subscribe((order: Order) => {
           if (order.invoice && order.invoice._id) {
-            notification.link = `order/${notification.object_id}`;
+            notification.link = `order/${notification.topic._id}`;
           } else {
-            notification.link = `order/invoice/generator/${notification.object_id}`;
+            notification.link = `order/invoice/generator/${notification.topic._id}`;
           }
         });
       }
@@ -41,18 +41,21 @@ export class NotificationService extends BaseService {
     if (notification.link) {
       return notification.link;
     } else {
-      switch (notification.type) {
-        case 'proforma-invoice':
-          return `/invoice/${notification.object_id}`;
-        case 'purchase-order':
-          return `order/invoice/generator/${notification.object_id}`;
-        case 'document':
-          return `/order/${notification.object_id}`;
-        case 'contract':
+      switch (notification.topic.name) {
+        case 'new-invoice-receiver':
+          return `/invoice/${notification.topic._id}`;
+        case 'new-order-receiver':
+          return `order/invoice/generator/${notification.topic._id}`;
+        case 'new-document':
+          return `/order/${notification.topic._id}`;
+        case 'new-contract':
           return `client/${notification.emitter._id}`;
-        case 'quote-request':
-        case 'quotation':
-          return `quote-request/${notification.object_id}`;
+        case 'new-quote-request':
+          return `quote-request/quotation-generator/${notification.topic._id}`;
+        case 'new-quotation':
+          return `quote-request/${notification.topic.subtopic._id}`;
+        case 'quotation-accepted':
+          return `quote-request/quotation/${notification.topic.subtopic._id}`;
         default:
           return undefined;
       }
