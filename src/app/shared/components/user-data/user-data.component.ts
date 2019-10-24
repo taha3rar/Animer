@@ -27,4 +27,16 @@ export class UserDataComponent implements OnInit {
   sellerUpdate(): void {
     this.updateSeller.emit(this.newUser);
   }
+
+  onChangeContactType(contactType: string, isChecked: boolean) {
+    console.log(contactType);
+    console.log(isChecked);
+    if (isChecked) {
+      this.newUser.contact_by.push(contactType);
+    } else {
+      console.log(this.newUser.contact_by.indexOf(contactType));
+      this.newUser.contact_by.splice(this.newUser.contact_by.indexOf[contactType], 1);
+    }
+    console.log(this.newUser.contact_by);
+  }
 }

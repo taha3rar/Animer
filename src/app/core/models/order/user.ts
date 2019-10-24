@@ -12,4 +12,8 @@ export class User {
   zipcode: string;
   phone_number: string;
   contact_by: string[];
+
+  constructor() {
+    this.contact_by = [];
+  }
 }
