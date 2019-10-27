@@ -10,10 +10,11 @@
       <div class="info">
         <p class="heading-3">ISSUED FOR</p>
         <app-user-data
+          #sellerData
           [openDocument]="openOrder"
           [user]="seller"
+          [formInput]="seller"
           [issued_for]="true"
-          (updateSeller)="updateSeller($event)"
         ></app-user-data>
       </div>
     </div>
@@ -265,15 +266,16 @@
     <button
       class="bttn-primary pull-right next-step"
       (click)="toReview()"
-      [hidden]="!form.valid || products.length < 1"
+      [hidden]="!form.valid || products.length < 1 || !sellerData.formInput.valid"
     >
       Next Step &rarr;
     </button>
     <button
       class="bttn-primary pull-right"
       (click)="onSubmit(form)"
+      (click)="sellerData.onSubmit(sellerData.formInput)"
       (click)="this.productsPristine = false"
-      [hidden]="form.valid && products.length > 0"
+      [hidden]="form.valid && products.length > 0 && sellerData.formInput.valid"
     >
       Next Step &rarr;
     </button>

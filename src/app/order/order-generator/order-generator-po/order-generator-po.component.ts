@@ -1,5 +1,5 @@
 import { AlertsService } from './../../../core/alerts.service';
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
@@ -13,6 +13,7 @@ import { Quotation } from '@app/core/models/quotation/quotation';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from '@app/core/models/order/product';
 import { User } from '@app/core/models/order/user';
+import { UserDataComponent } from '@app/shared/components/user-data/user-data.component';
 
 @Component({
   selector: 'app-order-generator-po',
@@ -28,6 +29,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   @Output() newDraftPO = new EventEmitter();
   @Input() fromQuotation = false;
   @Input() openOrder = false;
+  @ViewChild('sellerData') sellerData: UserDataComponent;
   inventoryProducts: any[];
   quotedProducts: ProductInvoice[] = [];
   validBy: NgbDateStruct;
@@ -179,21 +181,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
       : this.form.patchValue({ date_created: new Date().toJSON() });
   }
 
-  updateSeller(newUser: User) {
-    this.form.controls['seller'].patchValue({
-      first_name: newUser.first_name,
-      last_name: newUser.last_name,
-      email: newUser.email,
-      company_name: newUser.company_name,
-      company_number: newUser.company_number,
-      address: newUser.address,
-      city: newUser.city,
-      country: newUser.country,
-      zipcode: newUser.zipcode,
-      phone_number: newUser.phone_number
-    });
-  }
-
   draftOrder() {
     this.disableSubmitButton(true);
     this.preSubmit();
@@ -217,6 +204,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   toReview() {
     this.preSubmit();
     this.newOrder = this.form.value;
+    this.newOrder.seller = this.form.value.seller.value;
     this.newOrder.products = this.products;
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;

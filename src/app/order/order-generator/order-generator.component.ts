@@ -84,19 +84,19 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
       ],
       seller: [
         this.formBuilder.group({
-          _id: [undefined, Validators.required],
-          numericId: [undefined, Validators.required],
+          _id: [undefined],
+          numericId: [undefined],
           first_name: [undefined, Validators.required],
           last_name: [undefined, Validators.required],
-          email: [undefined, [Validators.required, Validators.email]],
-          company_name: [undefined, Validators.required],
-          company_number: [undefined, Validators.required],
-          address: [undefined, Validators.required],
-          city: [undefined, Validators.required],
+          email: [undefined],
+          company_name: [undefined],
+          company_number: [undefined],
+          address: [undefined],
+          city: [undefined],
           country: [undefined, Validators.required],
-          zipcode: [undefined, Validators.required],
-          phone_number: [undefined, Validators.required],
-          contact_by: [this.formBuilder.array([], Validators.required)]
+          zipcode: [undefined],
+          phone_number: [undefined],
+          contact_by: this.formBuilder.array([], Validators.required)
         })
       ],
       subtotal: [Object.is(this.draftOrder, undefined) ? 0 : this.draftOrder.subtotal, Validators.required],

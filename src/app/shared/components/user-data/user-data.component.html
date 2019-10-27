@@ -41,140 +41,104 @@
 </div>
 
 <div *ngIf="user && openDocument">
-  <div class="row">
-    <div class="col-md-4">
-      <p *ngIf="issued_by">Issuer first name</p>
-      <p *ngIf="issued_for">Recipient first name</p>
-      <input
-        name="firstName"
-        [(ngModel)]="newUser.first_name"
-        class="form-control"
-        placeholder="Contact First Name"
-        (ngModelChange)="sellerUpdate()"
-        required
-      />
-    </div>
-    <div class="col-md-4">
-      <p *ngIf="issued_by">Issuer last name</p>
-      <p *ngIf="issued_for">Recipient last name</p>
-      <input
-        name="lastName"
-        [(ngModel)]="newUser.last_name"
-        class="form-control"
-        placeholder="Contact Last Name"
-        (ngModelChange)="sellerUpdate()"
-        required
-      />
-    </div>
-    <div class="col-md-4">
-      <p>Company name</p>
-      <input
-        name="companyName"
-        [(ngModel)]="newUser.company_name"
-        class="form-control"
-        placeholder="Contact Cmpany Name"
-        (ngModelChange)="sellerUpdate()"
-        required
-      />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <p>Email address</p>
-      <input
-        type="email"
-        name="email"
-        [(ngModel)]="newUser.email"
-        class="form-control"
-        placeholder="Contact email address"
-        (ngModelChange)="sellerUpdate()"
-        required
-      />
-    </div>
-    <div class="col-md-4">
-      <p>City</p>
-      <input
-        name="city"
-        [(ngModel)]="newUser.city"
-        class="form-control"
-        placeholder="Contact city"
-        (ngModelChange)="sellerUpdate()"
-        required
-      />
-    </div>
-    <div class="col-md-4">
-      <p>Street address</p>
-      <input
-        name="address"
-        [(ngModel)]="newUser.address"
-        class="form-control"
-        placeholder="Contact address"
-        (ngModelChange)="sellerUpdate()"
-        required
-      />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <p>Zip code</p>
-      <input
-        name="zipcode"
-        [(ngModel)]="newUser.zipcode"
-        class="form-control"
-        placeholder="Contact zipcode"
-        (ngModelChange)="sellerUpdate()"
-        required
-      />
-    </div>
-    <div class="col-md-4">
-      <p>Country</p>
-      <input
-        name="country"
-        [(ngModel)]="newUser.country"
-        class="form-control"
-        placeholder="Contact country"
-        (ngModelChange)="sellerUpdate()"
-        required
-      />
-    </div>
-    <div class="col-md-4">
-      <p>Phone number</p>
-      <input
-        name="phone"
-        [(ngModel)]="newUser.phone_number"
-        class="form-control"
-        placeholder="Contact phone number"
-        (ngModelChange)="sellerUpdate()"
-        required
-      />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <p>Send Purchase Order by *</p>
-      <div>
+  <form [formGroup]="formInput" (keydown.enter)="$event.preventDefault()">
+    <div class="row">
+      <div class="col-md-4" [ngClass]="showFieldStyle('first_name')">
+        <p *ngIf="issued_by">Issuer first name *</p>
+        <p *ngIf="issued_for">Recipient first name *</p>
+        <input name="firstName" formControlName="first_name" class="form-control" placeholder="Contact First Name" />
+        <div class="help-block">
+          <p *ngIf="isFieldInvalid('first_name')">This field is required</p>
+        </div>
+      </div>
+      <div class="col-md-4" [ngClass]="showFieldStyle('last_name')">
+        <p *ngIf="issued_by">Issuer last name *</p>
+        <p *ngIf="issued_for">Recipient last name *</p>
+        <input name="lastName" formControlName="last_name" class="form-control" placeholder="Contact Last Name" />
+        <div class="help-block">
+          <p *ngIf="isFieldInvalid('last_name')">This field is required</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <p>Company name</p>
         <input
-          type="checkbox"
-          class="checkbox"
-          name="contact_type"
-          id="checkbox_sms"
-          (change)="onChangeContactType('email', $event.target.checked)"
-        /><label class="checkbox_label" for="checkbox_sms"><span class="form_checkbox_btn"></span></label>
-        <label for="checkbox_sms" style="font-weight:400;">EMAIL</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          class="checkbox"
-          name="contact_type"
-          id="checkbox_phone"
-          (change)="onChangeContactType('sms', $event.target.checked)"
-        /><label class="checkbox_label" for="checkbox_phone"><span class="form_checkbox_btn"></span></label>
-        <label for="checkbox_sms" style="font-weight:400;">SMS</label>
-      </div>
-      <div class="help-block" *ngIf="true">
-        <p style="color:#cf2421">Please choose at least one option</p>
+          name="companyName"
+          formControlName="company_name"
+          class="form-control"
+          placeholder="Contact Company Name"
+        />
       </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="col-md-4" [ngClass]="showFieldStyle('email')">
+        <p>Email address<span *ngIf="isRequired(formInput.controls.email)"> *</span></p>
+        <input
+          type="email"
+          name="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Contact email address"
+        />
+        <div class="help-block">
+          <p *ngIf="isFieldInvalid('email')">This field is required</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <p>City</p>
+        <input name="city" formControlName="city" class="form-control" placeholder="Contact city" />
+      </div>
+      <div class="col-md-4">
+        <p>Street address</p>
+        <input name="address" formControlName="address" class="form-control" placeholder="Contact address" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <p>Zip code</p>
+        <input name="zipcode" formControlName="zipcode" class="form-control" placeholder="Contact zipcode" />
+      </div>
+      <div class="col-md-4" [ngClass]="showFieldStyle('country')">
+        <p>Country *</p>
+        <input name="country" formControlName="country" class="form-control" placeholder="Contact country" />
+        <div class="help-block">
+          <p *ngIf="isFieldInvalid('country')">This field is required</p>
+        </div>
+      </div>
+      <div class="col-md-4" [ngClass]="showFieldStyle('phone_number')">
+        <p>Phone number<span *ngIf="isRequired(formInput.controls.phone_number)"> *</span></p>
+        <input name="phone" formControlName="phone_number" class="form-control" placeholder="Contact phone number" />
+        <div class="help-block">
+          <p *ngIf="isFieldInvalid('phone_number')">This field is required</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <p>Send Purchase Order by *</p>
+        <div>
+          <input
+            type="checkbox"
+            class="checkbox"
+            name="contact_type"
+            id="checkbox_email"
+            (change)="onChangeContactType('email', $event.target.checked)"
+          /><label class="checkbox_label" for="checkbox_email"><span class="form_checkbox_btn"></span></label>
+          <label for="checkbox_email" style="font-weight:400;">EMAIL</label>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            class="checkbox"
+            name="contact_type"
+            id="checkbox_phone"
+            (change)="onChangeContactType('sms', $event.target.checked)"
+          /><label class="checkbox_label" for="checkbox_phone"><span class="form_checkbox_btn"></span></label>
+          <label for="checkbox_phone" style="font-weight:400;">SMS</label>
+        </div>
+        <div class="help-block" *ngIf="formInput.value.contact_by.length < 1">
+          <p style="color:#cf2421">Please choose at least one option</p>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>

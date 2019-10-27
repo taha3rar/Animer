@@ -1,13 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '@app/core/models/order/user';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { FormGroup, Validators, FormArray, FormControl, AbstractControl } from '@angular/forms';
+import { BaseValidationComponent } from '../base-validation/base-validation.component';
 
 @Component({
   selector: 'app-user-data',
   templateUrl: './user-data.component.html',
   styleUrls: ['./user-data.component.scss']
 })
-export class UserDataComponent implements OnInit {
+export class UserDataComponent extends BaseValidationComponent implements OnInit {
   @Input()
   issued_by: Boolean;
   @Input()
@@ -16,27 +17,55 @@ export class UserDataComponent implements OnInit {
   user: User;
   @Input()
   openDocument: Boolean;
-  @Output()
-  updateSeller = new EventEmitter<User>();
-  newUser: User = new User();
+  @Input()
+  formInput: FormGroup;
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {}
 
-  sellerUpdate(): void {
-    this.updateSeller.emit(this.newUser);
+  onChangeContactType(contactType: string, isChecked: boolean) {
+    const contactTypesFormArray = <FormArray>this.formInput.controls.contact_by;
+    if (isChecked) {
+      contactTypesFormArray.push(new FormControl(contactType));
+      if (contactType === 'email') {
+        this.formInput.controls.email.setValidators([Validators.required, Validators.email]);
+        this.formInput.controls.email.updateValueAndValidity();
+      } else {
+        this.formInput.controls.phone_number.setValidators([Validators.required]);
+        this.formInput.controls.phone_number.updateValueAndValidity();
+      }
+    } else {
+      const index = contactTypesFormArray.controls.findIndex(x => x.value === contactType);
+      contactTypesFormArray.removeAt(index);
+      if (contactType === 'email') {
+        this.formInput.controls.email.setValidators([Validators.email]);
+        this.formInput.controls.email.updateValueAndValidity();
+      } else {
+        this.formInput.controls.phone_number.setValidators([]);
+        this.formInput.controls.phone_number.updateValueAndValidity();
+      }
+    }
   }
 
-  onChangeContactType(contactType: string, isChecked: boolean) {
-    console.log(contactType);
-    console.log(isChecked);
-    if (isChecked) {
-      this.newUser.contact_by.push(contactType);
-    } else {
-      console.log(this.newUser.contact_by.indexOf(contactType));
-      this.newUser.contact_by.splice(this.newUser.contact_by.indexOf[contactType], 1);
+  isRequired(abstractControl: AbstractControl) {
+    if (abstractControl.validator) {
+      const validator = abstractControl.validator({} as AbstractControl);
+      if (validator && validator.required) {
+        return true;
+      }
     }
-    console.log(this.newUser.contact_by);
+    if (abstractControl['controls']) {
+      for (const controlName in abstractControl['controls']) {
+        if (abstractControl['controls'][controlName]) {
+          if (this.isRequired(abstractControl['controls'][controlName])) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 }
