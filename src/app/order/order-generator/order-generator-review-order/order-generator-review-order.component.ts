@@ -5,6 +5,7 @@ import { OrderService } from '@app/core/api/order.service';
 import { Order } from '@app/core/models/order/order';
 import { AlertsService } from '@app/core/alerts.service';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
+import { thisExpression } from 'babel-types';
 
 @Component({
   selector: 'app-order-generator-review-order',
@@ -43,5 +44,21 @@ export class OrderGeneratorReviewOrderComponent extends BaseValidationComponent 
         this.disableSubmitButton(false);
       }
     );
+  }
+
+  sellerContactSms(): boolean {
+    if (this.order) {
+      return this.order.seller.contact_by.includes('sms');
+    } else {
+      return false;
+    }
+  }
+
+  sellerContactEmail(): boolean {
+    if (this.order) {
+      return this.order.seller.contact_by.includes('email');
+    } else {
+      return false;
+    }
   }
 }

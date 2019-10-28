@@ -99,14 +99,48 @@
       </div>
       <div class="col-md-4" [ngClass]="showFieldStyle('country')">
         <p>Country *</p>
-        <input name="country" formControlName="country" class="form-control" placeholder="Contact country" />
+        <select id="country" name="country" class="form-control" formControlName="country">
+          <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
+            country.viewValue
+          }}</option>
+        </select>
         <div class="help-block">
           <p *ngIf="isFieldInvalid('country')">This field is required</p>
         </div>
       </div>
-      <div class="col-md-4" [ngClass]="showFieldStyle('phone_number')">
+      <div class="col-md-4">
         <p>Phone number<span *ngIf="isRequired(formInput.controls.phone_number)"> *</span></p>
-        <input name="phone" formControlName="phone_number" class="form-control" placeholder="Contact phone number" />
+        <div class="input-group" [ngClass]="showFieldStyle('phone_number')">
+          <div class="input-group-prepend">
+            <select
+              data-width="65px"
+              id="region_code"
+              data-live-search="true"
+              placeholder="Choose measurment unit"
+              class="selectpicker"
+              data-size="7"
+              [(ngModel)]="regionCode"
+              [ngModelOptions]="{ standalone: true }"
+              (change)="changeRegionCode()"
+            >
+              <option
+                *ngFor="let country of countries"
+                [value]="country.value"
+                [attr.data-content]="generateLink(country.value, country.viewValue)"
+              ></option>
+            </select>
+          </div>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            placeholder="Phone number"
+            [(ngModel)]="partialPhoneNumber"
+            [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="changeRegionCode()"
+            (click)="markAsTouched('phone_number')"
+          />
+        </div>
         <div class="help-block">
           <p *ngIf="isFieldInvalid('phone_number')">This field is required</p>
         </div>
