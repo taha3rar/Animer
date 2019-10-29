@@ -1,0 +1,146 @@
+@import "../../../assets/sass/abstracts/mixins";
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  p {
+    display: inline-block;
+  }
+
+  p:first-child {
+    font-size: 1.7rem;
+  }
+  div.progress {
+    margin-left: auto;
+    margin-top: 0.7rem;
+    display: inline-block;
+    width: 13%;
+    margin-right: 1rem;
+    margin-bottom: 0px;
+    border-radius: 1.5rem;
+  }
+}
+
+.progress-bar {
+  background-color: #37c1ce;
+}
+
+.starting-guide {
+  display: flex;
+  height: 89%;
+
+  &--left {
+    padding: 1.5rem 0px 1.5rem 0px;
+    width: 43%;
+    border-right: 1px solid #f1f1f1;
+    height: 100%;
+  }
+
+  &--right {
+    padding: 1.5rem 2rem;
+    width: 57%;
+    height: 100%;
+
+    p {
+      font-size: 1.4rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  .account-img {
+    width: 32%;
+  }
+
+  .product-img {
+    width: 39%;
+  }
+
+  .product-btns-wrapper {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 1605px) {
+      justify-content: center;
+      span {
+        margin: 0.6rem 0rem;
+      }
+      button {
+        width: 99%;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    padding: 1rem 2rem 1rem 3rem;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s background ease;
+  }
+
+  li:hover {
+    background: rgba(137, 169, 187, 0.2);
+  }
+}
+
+.nav {
+  flex-direction: column;
+}
+
+.circle-wrapper {
+  width: 6%;
+  margin-top: 7px;
+}
+
+.step-title {
+  width: 94%;
+  font-size: 1.5rem;
+  margin-top: 8px;
+  margin-left: 1.5rem;
+  display: inline-block;
+}
+
+ul li span.circle {
+  display: inline-block;
+  padding: 0 !important;
+  line-height: 20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  border: 1px solid #c0c3e0;
+  position: relative;
+}
+
+ul li.nav-item.completed span.circle {
+  border: none;
+  color: white;
+  background: #00c78c;
+}
+
+ul li.nav-item.completed div.step-title {
+  color: #00c78c;
+}
+
+ul li.nav-item.completed .circle::before {
+  content: "\f00c";
+  font-family: FontAwesome;
+  position: absolute;
+  font-weight: 100;
+  color: white;
+  top: 52.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ul li.nav-item.active div {
+  font-weight: 700;
+}
+
+.header-wrapper {
+  display: flex;
+}

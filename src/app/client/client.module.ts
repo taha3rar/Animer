@@ -7,7 +7,6 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { CurrentUserClientsResolver } from '@app/shared/resolvers/current-user-clients.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ClientGeneratorComponent } from './client-generator/client-generator.component';
 import { ClientComponent } from './client/client.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { ClientOrdersComponent } from './client-orders/client-orders.component';
@@ -40,7 +39,6 @@ import { MatSortModule } from '@angular/material';
   ],
   declarations: [
     ClientListComponent,
-    ClientGeneratorComponent,
     ClientComponent,
     ClientProfileComponent,
     ClientOrdersComponent,

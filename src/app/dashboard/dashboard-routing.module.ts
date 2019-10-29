@@ -18,7 +18,7 @@ const routes: Routes = [
       component: DashboardMainComponent,
       resolve: {
         counter: DashboardCounterResolver,
-        user: CurrentUserResolver
+        currentUser: CurrentUserResolver
       },
       data: { title: extract('Dashboard') }
     }

@@ -1,0 +1,102 @@
+<div class="panel welcome-panel">
+  <div class="panel-body">
+    <div class="panel-header">
+      <p>Starting Guide</p>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemax="100"></div>
+      </div>
+      <p>{{ progressValue }} Ready</p>
+    </div>
+    <div class="starting-guide">
+      <div class="starting-guide--left">
+        <ul class="nav nav-tabs" role="tablist" id="startingGuideTab">
+          <li class="nav-item completed active" data-toggle="tab" href="#account" role="tab" aria-selected="true">
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Create an account</div>
+          </li>
+          <li class="nav-item" data-toggle="tab" href="#po" role="tab" aria-selected="true">
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Create your first Purchase Order</div>
+          </li>
+          <li class="nav-item" data-toggle="tab" href="#product" role="tab" aria-selected="true">
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Add your first Product</div>
+          </li>
+          <li class="nav-item" data-toggle="tab" href="#contact" role="tab" aria-selected="true">
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Add your first Contact</div>
+          </li>
+          <li class="nav-item" data-toggle="tab" href="#pi" role="tab" aria-selected="true">
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Create your first Proforma Invoice</div>
+          </li>
+        </ul>
+      </div>
+      <div class="starting-guide--right tab-content">
+        <div class="tab-pane active" id="account" role="tabpanel">
+          <img src="../../../assets/img/dashboard-imgs/account.png" class="vector-tutorial account-img" alt="" />
+          <h2>Done</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo
+            adipisci est, natus vero veritatis tenetur esse corporis quis iure ullam neque similique. Odit, dolore
+            explicabo!
+          </p>
+        </div>
+        <div class="tab-pane" id="po" role="tabpanel">
+          <img src="../../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" alt="" />
+          <h2>Send Your First Purchase Order</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo
+            adipisci est
+          </p>
+          <button class="btn btn-primary"><strong>Create an Open Purchase Order</strong></button>
+        </div>
+        <div class="tab-pane" id="product" role="tabpanel">
+          <img src="../../../assets/img/dashboard-imgs/inventory.svg" class="vector-tutorial product-img" alt="" />
+          <h2>Add the First Product to your Inventory</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo.
+          </p>
+          <div class="product-btns-wrapper">
+            <button class="btn btn-primary" (click)="openDialogAgricultural(undefined)">
+              <strong>Add Agricultural Product</strong>
+            </button>
+            <span class="mr-3 ml-3">OR</span>
+            <button class="btn btn-primary" (click)="openDialogProcessed(undefined)">
+              <strong>Add Processed Product</strong>
+            </button>
+          </div>
+        </div>
+        <div class="tab-pane" id="contact" role="tabpanel">
+          <img src="../../../assets/img/dashboard-imgs/clients.png" class="vector-tutorial" alt="" />
+          <h2>Done</h2>
+          <p>
+            adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo ipsum dolor sit amet consecteturo oluptate
+            amet mollitia.
+          </p>
+          <button
+            class="btn btn-primary"
+            data-toggle="wizard"
+            *ngxPermissionsOnly="['create-client']"
+            data-target="#addClientWizard"
+          >
+            <strong>Add a Client</strong>
+          </button>
+        </div>
+        <div class="tab-pane" id="pi" role="tabpanel">
+          <img src="../../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" alt="" />
+          <h2>Done</h2>
+          <p>
+            Lorem ipsum dolor sit amet consecteturo, ipsum dolor sit amet consecteturo ipsum dolor sit amet
+            consecteturo.
+          </p>
+          <button class="btn btn-primary" routerLink="/invoice/generator">
+            <strong>Create a Proforma Invoice</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-contact-generator></app-contact-generator>
