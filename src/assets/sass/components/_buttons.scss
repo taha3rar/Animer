@@ -550,3 +550,18 @@ select.custom-select {
     background-color: #5a6c7b;
   }
 }
+
+.btn-outline {
+  margin-left: 1rem;
+  color: #37c1ce;
+  font-size: 1.4rem;
+  background: none;
+  border: 1px solid #37c1ce;
+  padding: 0.6rem;
+  font-weight: 100;
+}
+
+.btn-outline:hover {
+  color: #1f98a3;
+  border: 1px solid #1f98a3;
+}

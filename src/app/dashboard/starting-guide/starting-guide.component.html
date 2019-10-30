@@ -69,6 +69,7 @@
             adipisci est, natus vero veritatis tenetur esse corporis quis iure ullam neque similique. Odit, dolore
             explicabo!
           </p>
+          <button class="btn btn-primary" (click)="nextStep('po')">NEXT STEP</button>
         </div>
         <div class="tab-pane" id="po" role="tabpanel" *ngxPermissionsOnly="['create-order']">
           <img src="../../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" alt="" />
@@ -77,7 +78,9 @@
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo
             adipisci est
           </p>
-          <button class="btn btn-primary"><strong>Create an Open Purchase Order</strong></button>
+          <button class="btn btn-primary" (click)="openOrderModal()">ISSUE PRUCHASE ORDER</button>
+          <button class="btn btn-outline">WATCH VIDEO</button>
+          <a class="skip-btn" (click)="nextStep('product')">Skip Step</a>
         </div>
         <div class="tab-pane" id="product" role="tabpanel" *ngxPermissionsOnly="['create-product']">
           <img src="../../../assets/img/dashboard-imgs/inventory.svg" class="vector-tutorial product-img" alt="" />
@@ -86,13 +89,9 @@
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo.
           </p>
           <div class="product-btns-wrapper">
-            <button class="btn btn-primary" (click)="openDialogAgricultural(undefined)">
-              <strong>Add Agricultural Product</strong>
-            </button>
-            <span class="mr-3 ml-3">OR</span>
-            <button class="btn btn-primary" (click)="openDialogProcessed(undefined)">
-              <strong>Add Processed Product</strong>
-            </button>
+            <button class="btn btn-primary" (click)="openProductModal()">ADD PRODUCT</button>
+            <button class="btn btn-outline">WATCH VIDEO</button>
+            <a class="skip-btn" (click)="nextStep('contact')">Skip Step</a>
           </div>
         </div>
         <div class="tab-pane" id="contact" role="tabpanel" *ngxPermissionsOnly="['create-client']">
@@ -108,8 +107,10 @@
             *ngxPermissionsOnly="['create-client']"
             data-target="#addClientWizard"
           >
-            <strong>Add a Client</strong>
+            ADD CONTACT
           </button>
+          <button class="btn btn-outline">WATCH VIDEO</button>
+          <a class="skip-btn" (click)="nextStep('pi')">Skip Step</a>
         </div>
         <div class="tab-pane" id="pi" role="tabpanel" *ngxPermissionsOnly="['create-pi']">
           <img src="../../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" alt="" />
@@ -119,8 +120,9 @@
             consecteturo.
           </p>
           <button class="btn btn-primary" routerLink="/invoice/generator">
-            <strong>Create a Proforma Invoice</strong>
+            ISSUE PROFORMA INVOICE
           </button>
+          <button class="btn btn-outline">WATCH VIDEO</button>
         </div>
       </div>
     </div>

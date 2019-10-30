@@ -5,7 +5,8 @@ import { AgriculturalProductGeneratorComponent } from './../../product/product-g
 import { Component, OnInit } from '@angular/core';
 import { Product } from '@app/core/models/order/product';
 import { MatDialogConfig, MatDialog } from '@angular/material';
-import { Client } from '@app/core/models/user/client';
+import swal from 'sweetalert';
+import { Router } from '@angular/router';
 
 declare const $: any;
 
@@ -18,7 +19,7 @@ export class StartingGuideComponent implements OnInit {
   progressValue = '20%';
   products: Product[];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private router: Router) {}
 
   ngOnInit() {
     $('#startingGuideTab li').on('click', function(e: any) {
@@ -49,5 +50,61 @@ export class StartingGuideComponent implements OnInit {
     dialogConfig.width = '800px';
     dialogConfig.data = dialogData;
     this.dialog.open(component, dialogConfig);
+  }
+
+  nextStep(tabName: string) {
+    $('#startingGuideTab li[href="#' + tabName + '"]').tab('show');
+  }
+
+  openProductModal() {
+    swal({
+      title: 'Which product would you like to add?',
+      text: 'There are two types of Products, an Agricultural Product (like wheat) or a Processed Product (like flour)',
+      className: 'swal-starting',
+      buttons: {
+        agri: { text: 'Agricultural Product', value: 'agri', className: 'swal-button-primary', closeModal: true },
+        processed: { text: 'Processed Product', value: 'processed', className: 'swal-button-primary', closeModal: true }
+      }
+    }).then(value => {
+      if (value === 'agri') {
+        this.openDialogAgricultural(undefined);
+      } else if (value === 'processed') {
+        this.openDialogProcessed(undefined);
+      } else {
+        return false;
+      }
+    });
+  }
+
+  openOrderModal() {
+    swal({
+      title: 'Which purchase order works for you?',
+      text:
+        'There are two types of Purchase Orders, an Open Purchase Order lets you send an order to ' +
+        'one of your contacts on Avenews-GT and an External Purchase Order is a quick order to any of your suppliers. ',
+      className: 'swal-starting',
+      buttons: {
+        internal: {
+          text: 'Internal Purchase Order',
+          value: 'internal',
+          className: 'swal-button-primary',
+          closeModal: true
+        },
+        external: {
+          text: 'External Purchase Order',
+          value: 'external',
+          className: 'swal-button-primary',
+          closeModal: true
+        }
+      }
+    }).then(value => {
+      if (value === 'external') {
+        this.router.navigateByUrl('/order/generator/open');
+      } else if (value === 'internal') {
+        this.router.navigateByUrl('/order/generator/standard');
+      } else {
+        return false;
+      }
+    });
   }
 }

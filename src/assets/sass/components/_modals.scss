@@ -251,6 +251,21 @@
   }
 }
 
+.swal-starting {
+  .swal-footer {
+    display: flex;
+    justify-content: center;
+  }
+  .swal-button-primary {
+    background-color: $primary-color;
+    border-radius: 2.5px;
+  }
+
+  .swal-button-primary:hover {
+    background-color: #00b7cf;
+  }
+}
+
 ul.tutorial-list {
   list-style-type: none;
   list-style-position: inside;

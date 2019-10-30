@@ -40,6 +40,7 @@
     padding: 1.5rem 2rem;
     width: 57%;
     height: 100%;
+    position: relative;
 
     p {
       font-size: 1.4rem;
@@ -143,4 +144,21 @@ ul li.nav-item.active div {
 
 .header-wrapper {
   display: flex;
+}
+
+.skip-btn {
+  position: absolute;
+  bottom: 3.5rem;
+  right: 3rem;
+  font-size: 1.4rem;
+  color: #37c1ce !important;
+  cursor: pointer;
+}
+
+.skip-btn:hover {
+  text-decoration-line: underline !important;
+}
+
+button.swal-button-o {
+  background: #37c1ce;
 }
