@@ -14,19 +14,47 @@
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Create an account</div>
           </li>
-          <li class="nav-item" data-toggle="tab" href="#po" role="tab" aria-selected="true">
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#po"
+            role="tab"
+            aria-selected="true"
+            *ngxPermissionsOnly="['create-order']"
+          >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Create your first Purchase Order</div>
           </li>
-          <li class="nav-item" data-toggle="tab" href="#product" role="tab" aria-selected="true">
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#product"
+            role="tab"
+            aria-selected="true"
+            *ngxPermissionsOnly="['create-product']"
+          >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Add your first Product</div>
           </li>
-          <li class="nav-item" data-toggle="tab" href="#contact" role="tab" aria-selected="true">
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#contact"
+            role="tab"
+            aria-selected="true"
+            *ngxPermissionsOnly="['create-client']"
+          >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Add your first Contact</div>
           </li>
-          <li class="nav-item" data-toggle="tab" href="#pi" role="tab" aria-selected="true">
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#pi"
+            role="tab"
+            aria-selected="true"
+            *ngxPermissionsOnly="['create-pi']"
+          >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Create your first Proforma Invoice</div>
           </li>
@@ -42,7 +70,7 @@
             explicabo!
           </p>
         </div>
-        <div class="tab-pane" id="po" role="tabpanel">
+        <div class="tab-pane" id="po" role="tabpanel" *ngxPermissionsOnly="['create-order']">
           <img src="../../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" alt="" />
           <h2>Send Your First Purchase Order</h2>
           <p>
@@ -51,7 +79,7 @@
           </p>
           <button class="btn btn-primary"><strong>Create an Open Purchase Order</strong></button>
         </div>
-        <div class="tab-pane" id="product" role="tabpanel">
+        <div class="tab-pane" id="product" role="tabpanel" *ngxPermissionsOnly="['create-product']">
           <img src="../../../assets/img/dashboard-imgs/inventory.svg" class="vector-tutorial product-img" alt="" />
           <h2>Add the First Product to your Inventory</h2>
           <p>
@@ -67,7 +95,7 @@
             </button>
           </div>
         </div>
-        <div class="tab-pane" id="contact" role="tabpanel">
+        <div class="tab-pane" id="contact" role="tabpanel" *ngxPermissionsOnly="['create-client']">
           <img src="../../../assets/img/dashboard-imgs/clients.png" class="vector-tutorial" alt="" />
           <h2>Done</h2>
           <p>
@@ -83,7 +111,7 @@
             <strong>Add a Client</strong>
           </button>
         </div>
-        <div class="tab-pane" id="pi" role="tabpanel">
+        <div class="tab-pane" id="pi" role="tabpanel" *ngxPermissionsOnly="['create-pi']">
           <img src="../../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" alt="" />
           <h2>Done</h2>
           <p>
