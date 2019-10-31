@@ -21,9 +21,10 @@
             role="tab"
             aria-selected="true"
             *ngxPermissionsOnly="['create-order']"
+            [class.completed]="stepCompleted"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title">Create your first Purchase Order</div>
+            <div class="step-title">Try out your first purchase order</div>
           </li>
           <li
             class="nav-item"
@@ -32,6 +33,7 @@
             role="tab"
             aria-selected="true"
             *ngxPermissionsOnly="['create-product']"
+            [class.completed]="stepCompleted"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Add your first Product</div>
@@ -43,6 +45,7 @@
             role="tab"
             aria-selected="true"
             *ngxPermissionsOnly="['create-client']"
+            [class.completed]="stepCompleted"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Add your first Contact</div>
@@ -54,75 +57,115 @@
             role="tab"
             aria-selected="true"
             *ngxPermissionsOnly="['create-pi']"
+            [class.completed]="stepCompleted"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title">Create your first Proforma Invoice</div>
+            <div class="step-title">Issue your first Proforma Invoice</div>
           </li>
         </ul>
       </div>
       <div class="starting-guide--right tab-content">
         <div class="tab-pane active" id="account" role="tabpanel">
           <img src="../../../assets/img/dashboard-imgs/account.png" class="vector-tutorial account-img" alt="" />
-          <h2>Done</h2>
+          <h2>Well Done! You created your account.</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo
-            adipisci est, natus vero veritatis tenetur esse corporis quis iure ullam neque similique. Odit, dolore
-            explicabo!
+            Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.
           </p>
           <button class="btn btn-primary" (click)="nextStep('po')">NEXT STEP</button>
         </div>
         <div class="tab-pane" id="po" role="tabpanel" *ngxPermissionsOnly="['create-order']">
           <img src="../../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" alt="" />
-          <h2>Send Your First Purchase Order</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo
-            adipisci est
-          </p>
-          <button class="btn btn-primary" (click)="openOrderModal()">ISSUE PRUCHASE ORDER</button>
-          <button class="btn btn-outline">WATCH VIDEO</button>
-          <a class="skip-btn" (click)="nextStep('product')">Skip Step</a>
+          <div [hidden]="stepCompleted">
+            <h2>Try out your first purchase order.</h2>
+            <p>
+              Add the products you would like to purchase, the details of your seller and any special instructions you
+              need for the order.
+            </p>
+            <button class="btn btn-primary" (click)="openOrderModal()">ISSUE PRUCHASE ORDER</button>
+            <button class="btn btn-outline">WATCH VIDEO</button>
+            <a class="skip-btn" (click)="nextStep('product')">Skip Step</a>
+          </div>
+          <div [hidden]="!stepCompleted">
+            <h2>Well done! You issued your first purchase order.</h2>
+            <p>
+              To do this again, click the Orders button on the left side menu. Now you’re ready for the next step.
+            </p>
+            <button class="btn btn-primary"><strong>Next Step</strong></button>
+          </div>
         </div>
         <div class="tab-pane" id="product" role="tabpanel" *ngxPermissionsOnly="['create-product']">
           <img src="../../../assets/img/dashboard-imgs/inventory.svg" class="vector-tutorial product-img" alt="" />
-          <h2>Add the First Product to your Inventory</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo.
-          </p>
-          <div class="product-btns-wrapper">
+          <div [hidden]="stepCompleted">
+            <h2>Add your first product</h2>
+            <p>
+              Include details like name and variety, amount, packaging, price and a picture.
+            </p>
             <button class="btn btn-primary" (click)="openProductModal()">ADD PRODUCT</button>
             <button class="btn btn-outline">WATCH VIDEO</button>
             <a class="skip-btn" (click)="nextStep('contact')">Skip Step</a>
           </div>
+          <div [hidden]="!stepCompleted">
+            <h2>Well done! You added your first product.</h2>
+            <p>
+              To do this again, click the Products button on the left side menu. Now you’re ready for the next step.
+            </p>
+            <button class="btn btn-primary">
+              <strong>Next Step</strong>
+            </button>
+          </div>
         </div>
         <div class="tab-pane" id="contact" role="tabpanel" *ngxPermissionsOnly="['create-client']">
           <img src="../../../assets/img/dashboard-imgs/clients.png" class="vector-tutorial" alt="" />
-          <h2>Done</h2>
-          <p>
-            adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo ipsum dolor sit amet consecteturo oluptate
-            amet mollitia.
-          </p>
-          <button
-            class="btn btn-primary"
-            data-toggle="wizard"
-            *ngxPermissionsOnly="['create-client']"
-            data-target="#addClientWizard"
-          >
-            ADD CONTACT
-          </button>
-          <button class="btn btn-outline">WATCH VIDEO</button>
-          <a class="skip-btn" (click)="nextStep('pi')">Skip Step</a>
+
+          <div [hidden]="stepCompleted">
+            <h2>Add your first contact</h2>
+            <p>
+              Add the names, emails, telephone numbers and addresses of the people you do business with.
+            </p>
+            <button
+              class="btn btn-primary"
+              data-toggle="wizard"
+              *ngxPermissionsOnly="['create-client']"
+              data-target="#addClientWizard"
+            >
+              ADD CONTACT
+            </button>
+            <button class="btn btn-outline">WATCH VIDEO</button>
+            <a class="skip-btn" (click)="nextStep('pi')">Skip Step</a>
+          </div>
+          <div [hidden]="!stepCompleted">
+            <h2>Well done! You added your first contact</h2>
+            <p>
+              To do this again, click the Contacts button on the left side menu. Now you’re ready for the next step.
+            </p>
+            <button class="btn btn-primary">
+              Next Step
+            </button>
+          </div>
         </div>
         <div class="tab-pane" id="pi" role="tabpanel" *ngxPermissionsOnly="['create-pi']">
           <img src="../../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" alt="" />
-          <h2>Done</h2>
-          <p>
-            Lorem ipsum dolor sit amet consecteturo, ipsum dolor sit amet consecteturo ipsum dolor sit amet
-            consecteturo.
-          </p>
-          <button class="btn btn-primary" routerLink="/invoice/generator">
-            ISSUE PROFORMA INVOICE
-          </button>
-          <button class="btn btn-outline">WATCH VIDEO</button>
+          <div [hidden]="stepCompleted">
+            <h2>Issue your first Proforma Invoice</h2>
+            <p>
+              Add the product you are selling, the details of your buyer and any special instructions you need for the
+              invoice.
+            </p>
+            <button class="btn btn-primary" routerLink="/invoice/generator">
+              ISSUE PROFORMA INVOICE
+            </button>
+            <button class="btn btn-outline">WATCH VIDEO</button>
+          </div>
+          <div [hidden]="!stepCompleted">
+            <h2>Well done! You issued your first Proforma Invoice</h2>
+            <p>
+              To do this again, click the Proforma Invoices button on the left side menu. Now you’re ready for the next
+              step
+            </p>
+            <button class="btn btn-primary">
+              <strong>Next Step</strong>
+            </button>
+          </div>
         </div>
       </div>
     </div>

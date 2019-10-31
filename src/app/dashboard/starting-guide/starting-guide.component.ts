@@ -18,6 +18,7 @@ declare const $: any;
 export class StartingGuideComponent implements OnInit {
   progressValue = '20%';
   products: Product[];
+  stepCompleted = false; // temporary
 
   constructor(public dialog: MatDialog, private router: Router) {}
 
