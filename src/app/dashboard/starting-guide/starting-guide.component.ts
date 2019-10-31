@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 // tslint:disable-next-line:max-line-length
 import { ProcessedProductGeneratorComponent } from './../../product/product-generator/processed-product-generator/processed-product-generator.component';
 // tslint:disable-next-line:max-line-length
@@ -7,6 +8,8 @@ import { Product } from '@app/core/models/order/product';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
+import { Client } from '@app/core/models/user/client';
+import { ActivatedRoute } from '@angular/router';
 
 declare const $: any;
 
@@ -19,14 +22,23 @@ export class StartingGuideComponent implements OnInit {
   progressValue = '20%';
   products: Product[];
   stepCompleted = false; // temporary
+  userProgress: any;
+  calculatedUserProgress = 20;
 
-  constructor(public dialog: MatDialog, private router: Router) {}
+
+  constructor(public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     $('#startingGuideTab li').on('click', function(e: any) {
       e.preventDefault();
       $(this).addClass('active');
     });
+
+    this.route.data.subscribe(({ userProgress }) => {
+      this.userProgress = userProgress;
+    });
+
+    this.calculateUserProgress();
   }
 
   openDialogAgricultural(product: Product): void {
@@ -107,5 +119,12 @@ export class StartingGuideComponent implements OnInit {
         return false;
       }
     });
+  }
+
+  calculateUserProgress() {
+    const noOfCompleted = this.userProgress.filter(Boolean).length;
+    const totalSteps = Object.keys(this.userProgress).length;
+
+    this.calculatedUserProgress = Math.round((noOfCompleted / totalSteps) * 100);
   }
 }

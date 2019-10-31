@@ -28,6 +28,10 @@ export class UserService extends BaseService {
     return this.apiService.get(`${this.path}/${id}/supplier`).pipe(map(data => data));
   }
 
+  getUserProgress(id: string): Observable<any> {
+    return this.apiService.get(`${this.path}/${id}/progress`).pipe(map(data => data));
+  }
+
   saveInvitedClient(client: User): Observable<any> {
     return this.apiService.post('/user/client', client).pipe(map(data => data));
   }

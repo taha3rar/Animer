@@ -1,3 +1,4 @@
+import { UserProgressResolver } from './resolvers/user-progress.resolver';
 import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,7 +19,8 @@ const routes: Routes = [
       component: DashboardMainComponent,
       resolve: {
         counter: DashboardCounterResolver,
-        currentUser: CurrentUserResolver
+        currentUser: CurrentUserResolver,
+        progress: UserProgressResolver
       },
       data: { title: extract('Dashboard') }
     }

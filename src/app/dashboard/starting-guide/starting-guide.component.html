@@ -3,9 +3,15 @@
     <div class="panel-header">
       <p>Starting Guide</p>
       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemax="100"></div>
+        <div
+          class="progress-bar"
+          [style.width.px]="calculatedUserProgress"
+          role="progressbar"
+          aria-valuenow="20"
+          aria-valuemax="100"
+        ></div>
       </div>
-      <p>{{ progressValue }} Ready</p>
+      <p>{{ calculatedUserProgress }}% Ready</p>
     </div>
     <div class="starting-guide">
       <div class="starting-guide--left">
@@ -20,6 +26,7 @@
             href="#po"
             role="tab"
             aria-selected="true"
+            [class.completed]="userProgress.first_po"
             *ngxPermissionsOnly="['create-order']"
             [class.completed]="stepCompleted"
           >
@@ -32,6 +39,7 @@
             href="#product"
             role="tab"
             aria-selected="true"
+            [class.completed]="userProgress.first_product"
             *ngxPermissionsOnly="['create-product']"
             [class.completed]="stepCompleted"
           >
@@ -44,6 +52,7 @@
             href="#contact"
             role="tab"
             aria-selected="true"
+            [class.completed]="userProgress.first_contact"
             *ngxPermissionsOnly="['create-client']"
             [class.completed]="stepCompleted"
           >
@@ -56,6 +65,7 @@
             href="#pi"
             role="tab"
             aria-selected="true"
+            [class.completed]="userProgress.first_pi"
             *ngxPermissionsOnly="['create-pi']"
             [class.completed]="stepCompleted"
           >
