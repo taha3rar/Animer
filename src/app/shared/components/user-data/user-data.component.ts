@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormArray, FormControl, AbstractControl } from '
 import { BaseValidationComponent } from '../base-validation/base-validation.component';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
+import { OrderDataService } from '@app/order/order-generator/order-data.service';
 
 declare const $: any;
 
@@ -29,7 +30,7 @@ export class UserDataComponent extends BaseValidationComponent implements OnInit
   phoneCode: string;
   partialPhoneNumber: string;
 
-  constructor() {
+  constructor(private orderDataService: OrderDataService) {
     super();
   }
 
@@ -38,34 +39,38 @@ export class UserDataComponent extends BaseValidationComponent implements OnInit
       this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
       this.regionCode = 'US';
       this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
+      setTimeout(function() {
+        $('.selectpicker').selectpicker();
+      }, 200);
     }
-    setTimeout(function() {
-      $('.selectpicker').selectpicker();
-    }, 200);
   }
 
   onChangeContactType(contactType: string, isChecked: boolean) {
-    const contactTypesFormArray = <FormArray>this.formInput.controls.contact_by;
+    const contactTypesFormArray = <FormArray>this.sellerControls.contact_by;
     if (isChecked) {
       contactTypesFormArray.push(new FormControl(contactType));
       if (contactType === 'email') {
-        this.formInput.controls.email.setValidators([Validators.required, Validators.email]);
-        this.formInput.controls.email.updateValueAndValidity();
+        this.sellerControls.email.setValidators([Validators.required, Validators.email]);
+        this.sellerControls.email.updateValueAndValidity();
       } else {
-        this.formInput.controls.phone_number.setValidators([Validators.required]);
-        this.formInput.controls.phone_number.updateValueAndValidity();
+        this.sellerControls.phone_number.setValidators([Validators.required]);
+        this.sellerControls.phone_number.updateValueAndValidity();
       }
     } else {
       const index = contactTypesFormArray.controls.findIndex(x => x.value === contactType);
       contactTypesFormArray.removeAt(index);
       if (contactType === 'email') {
-        this.formInput.controls.email.setValidators([Validators.email]);
-        this.formInput.controls.email.updateValueAndValidity();
+        this.sellerControls.email.setValidators([Validators.email]);
+        this.sellerControls.email.updateValueAndValidity();
       } else {
-        this.formInput.controls.phone_number.setValidators([]);
-        this.formInput.controls.phone_number.updateValueAndValidity();
+        this.sellerControls.phone_number.setValidators([]);
+        this.sellerControls.phone_number.updateValueAndValidity();
       }
     }
+  }
+
+  get sellerControls() {
+    return this.formInput['controls'].seller['controls'];
   }
 
   isRequired(abstractControl: AbstractControl) {
@@ -94,10 +99,10 @@ export class UserDataComponent extends BaseValidationComponent implements OnInit
     try {
       phoneNumber = this.phoneUtil.parse(this.partialPhoneNumber, this.regionCode);
     } catch (error) {
-      this.formInput.patchValue({ phone_number: undefined });
+      this.formInput.controls['seller'].patchValue({ phone_number: undefined });
       return;
     }
-    this.formInput.patchValue({ phone_number: this.phoneUtil.format(phoneNumber, PNF.E164) });
+    this.formInput.controls['seller'].patchValue({ phone_number: this.phoneUtil.format(phoneNumber, PNF.E164) });
   }
 
   generateLink(code: any, country: any) {
@@ -105,6 +110,6 @@ export class UserDataComponent extends BaseValidationComponent implements OnInit
   }
 
   markAsTouched(formControl: string) {
-    this.formInput.get(formControl).markAsTouched();
+    this.sellerControls[formControl].markAsTouched();
   }
 }

@@ -44,7 +44,10 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     return this.form.controls;
   }
 
-  resetForm() {
+  resetForm(client: Client) {
+    this.form.patchValue({
+      seller: client
+    });
     this.orderDataService.setProductList([]);
     this.order['subtotal'].setValue(0);
     this.order['currency'].setValue(undefined);

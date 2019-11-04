@@ -13,7 +13,7 @@
           #sellerData
           [openDocument]="openOrder"
           [user]="seller"
-          [formInput]="seller"
+          [formInput]="form"
           [issued_for]="true"
         ></app-user-data>
       </div>
@@ -265,7 +265,6 @@
   <div class="margin-top margin-bottom-2 clearfix">
     <button
       class="bttn-primary pull-right next-step"
-      (click)="toReview()"
       [hidden]="!form.valid || products.length < 1 || !sellerData.formInput.valid"
     >
       Next Step &rarr;

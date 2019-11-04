@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderDataService } from '../order-data.service';
 import { OrderService } from '@app/core/api/order.service';
@@ -14,6 +14,8 @@ import { thisExpression } from 'babel-types';
 })
 export class OrderGeneratorReviewOrderComponent extends BaseValidationComponent implements OnInit {
   order: Order;
+  @Input()
+  openOrder: boolean;
   @Output() formSubmitted = new EventEmitter();
   constructor(
     private orderDataService: OrderDataService,

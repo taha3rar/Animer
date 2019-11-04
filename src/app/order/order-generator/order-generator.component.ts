@@ -82,23 +82,21 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
           contact_by: [this.formBuilder.array([], Validators.required)]
         })
       ],
-      seller: [
-        this.formBuilder.group({
-          _id: [undefined],
-          numericId: [undefined],
-          first_name: [undefined, Validators.required],
-          last_name: [undefined, Validators.required],
-          email: [undefined],
-          company_name: [undefined],
-          company_number: [undefined],
-          address: [undefined],
-          city: [undefined],
-          country: [undefined, Validators.required],
-          zipcode: [undefined],
-          phone_number: [undefined],
-          contact_by: this.formBuilder.array([], Validators.required)
-        })
-      ],
+      seller: this.formBuilder.group({
+        _id: [undefined],
+        numericId: [undefined],
+        first_name: [undefined, Validators.required],
+        last_name: [undefined, Validators.required],
+        email: [undefined],
+        company_name: [undefined],
+        company_number: [undefined],
+        address: [undefined],
+        city: [undefined],
+        country: ['', Validators.required],
+        zipcode: [undefined],
+        phone_number: [undefined],
+        contact_by: this.formBuilder.array([])
+      }),
       subtotal: [Object.is(this.draftOrder, undefined) ? 0 : this.draftOrder.subtotal, Validators.required],
       currency: [Object.is(this.draftOrder, undefined) ? undefined : this.draftOrder.currency, Validators.required],
       payment_comments: this.draftOrder.payment_comments,
@@ -162,6 +160,9 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
       this.orderForm.controls.currency.setValue(this.quotation.currency);
       this.orderForm.controls.subtotal.setValue(this.products[0].product_subtotal);
       this.orderDataService.setForm(this.orderForm);
+    }
+    if (this.openOrder) {
+      this.orderForm['controls'].seller['controls'].contact_by.setValidators(Validators.required);
     }
   }
 

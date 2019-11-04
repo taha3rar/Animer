@@ -25,16 +25,15 @@
         <div class="row margin-top clearfix">
           <div
             class="card supplier-card"
-            *ngFor="let client of (clients | paginate: { itemsPerPage: 12, currentPage: page })"
+            *ngFor="let client of clients | paginate: { itemsPerPage: 12, currentPage: page }"
           >
             <div>
               <input
                 type="radio"
+                name="client_radio"
                 class="form_radio"
                 id="{{ client.numericId }}"
-                [value]="client"
-                formControlName="seller"
-                (ngModelChange)="resetForm()"
+                (change)="resetForm(client)"
               />
               <label for="{{ client.numericId }}" class="form_radio_label">
                 <span class="form_radio_btn"></span>

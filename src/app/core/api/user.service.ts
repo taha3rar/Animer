@@ -7,7 +7,6 @@ import { BaseService } from './base.service';
 import { Passwords } from '../models/user/passwords';
 import { Client } from '../models/user/client';
 import { UserRegistration } from '../models/user/user-registration';
-import { SocialUser } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
