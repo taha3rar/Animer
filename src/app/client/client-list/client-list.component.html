@@ -46,15 +46,14 @@
   <tbody>
     <tr
       *ngFor="
-        let client of (clients
-          | filter: searchTerm
-          | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage })
+        let client of clients | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }
       "
     >
       <td class="text-center">{{ client.numericId }}</td>
       <td>{{ client.company_name }}</td>
       <td>{{ client.first_name }} {{ client.last_name }}</td>
-      <td style="text-transform: capitalize;">{{ client.role }}</td>
+      <td *ngIf="client.role != 'external_user'" style="text-transform: capitalize;">{{ client.role }}</td>
+      <td *ngIf="client.role === 'external_user'">External Contact</td>
       <td class="text-right">
         <button class="round-button-primary" [routerLink]="['/client', client._id]">
           <i class="material-icons">remove_red_eye</i>

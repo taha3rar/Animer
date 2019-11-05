@@ -59,7 +59,7 @@
           <a *ngIf="isDraft" data-toggle="tab" class="label" href="#purchaseOrder">
             <span class="round-tab">1</span> Edit purchase order
           </a>
-          <a *ngIf="fromQuotation || openOrder" data-toggle="tab" class="label" href="#purchaseOrder">
+          <a *ngIf="(fromQuotation || openOrder) && !isDraft" data-toggle="tab" class="label" href="#purchaseOrder">
             <span class="round-tab">1</span> Create purchase order
           </a>
         </li>
@@ -69,13 +69,16 @@
       </ul>
 
       <div class="tab-content">
-        <div *ngIf="isDraft" class="tab-pane active" id="purchaseOrder">
+        <div *ngIf="isDraft && !openOrder" class="tab-pane active" id="purchaseOrder">
           <app-order-generator-po (newDraftPO)="draft = $event"></app-order-generator-po>
         </div>
         <div *ngIf="fromQuotation" class="tab-pane active" id="purchaseOrder">
           <app-order-generator-po [fromQuotation]="true" (newDraftPO)="draft = $event"></app-order-generator-po>
         </div>
-        <div *ngIf="openOrder" class="tab-pane active" id="purchaseOrder">
+        <div *ngIf="openOrder && !isDraft" class="tab-pane active" id="purchaseOrder">
+          <app-order-generator-po [openOrder]="true" (newDraftPO)="draft = $event"></app-order-generator-po>
+        </div>
+        <div *ngIf="isDraft && openOrder" class="tab-pane active" id="purchaseOrder">
           <app-order-generator-po [openOrder]="true" (newDraftPO)="draft = $event"></app-order-generator-po>
         </div>
         <div class="tab-pane" id="review">

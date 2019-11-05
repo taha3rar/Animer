@@ -193,15 +193,27 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.disableSubmitButton(true);
     this.newDraftPO.emit(true);
     this.preSubmit();
-    this.orderService.draft(this.newOrder).subscribe(
-      () => {
-        this.alerts.showAlert('Your purchase order has been saved as a draft!');
-        this.router.navigateByUrl('/order');
-      },
-      err => {
-        this.disableSubmitButton(false);
-      }
-    );
+    if (this.openOrder) {
+      this.orderService.draftOpen(this.newOrder).subscribe(
+        () => {
+          this.alerts.showAlert('Your purchase order has been saved as a draft!');
+          this.router.navigateByUrl('/order');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
+    } else {
+      this.orderService.draft(this.newOrder).subscribe(
+        () => {
+          this.alerts.showAlert('Your purchase order has been saved as a draft!');
+          this.router.navigateByUrl('/order');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
+    }
   }
 
   updateOrder() {

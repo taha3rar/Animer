@@ -15,6 +15,18 @@
     </table>
   </div>
 
+  <div *ngIf="order.external_order" class="alert alert-info pull-right shadow p-4 mb-5 rounded">
+    <h4 class="alert-heading">
+      This Purchase Order has been sent to {{ order?.seller.first_name }} {{ order?.seller.last_name }} on
+    </h4>
+    <p *ngIf="sellerContactEmail()">
+      <i class="material-icons" style="vertical-align:middle">email</i> {{ order?.seller.email }}
+    </p>
+    <p *ngIf="sellerContactSms()">
+      <i class="material-icons" style="vertical-align:middle">smartphone</i> {{ order?.seller.phone_number }}
+    </p>
+  </div>
+
   <div class="row" style="padding-top: 5rem;">
     <div class="col-md-6">
       <p class="t-bold t-blue">ISSUED BY</p>

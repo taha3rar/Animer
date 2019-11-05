@@ -4,7 +4,6 @@ import { FormGroup, Validators, FormArray, FormControl, AbstractControl } from '
 import { BaseValidationComponent } from '../base-validation/base-validation.component';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
-import { OrderDataService } from '@app/order/order-generator/order-data.service';
 
 declare const $: any;
 
@@ -30,7 +29,7 @@ export class UserDataComponent extends BaseValidationComponent implements OnInit
   phoneCode: string;
   partialPhoneNumber: string;
 
-  constructor(private orderDataService: OrderDataService) {
+  constructor() {
     super();
   }
 
@@ -39,6 +38,9 @@ export class UserDataComponent extends BaseValidationComponent implements OnInit
       this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
       this.regionCode = 'US';
       this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
+      for (let i = 0; i < this.formInput.value.seller.contact_by.length; i++) {
+        this.setContactTypeValidators(this.formInput.value.seller.contact_by[i]);
+      }
       setTimeout(function() {
         $('.selectpicker').selectpicker();
       }, 200);
@@ -49,13 +51,7 @@ export class UserDataComponent extends BaseValidationComponent implements OnInit
     const contactTypesFormArray = <FormArray>this.sellerControls.contact_by;
     if (isChecked) {
       contactTypesFormArray.push(new FormControl(contactType));
-      if (contactType === 'email') {
-        this.sellerControls.email.setValidators([Validators.required, Validators.email]);
-        this.sellerControls.email.updateValueAndValidity();
-      } else {
-        this.sellerControls.phone_number.setValidators([Validators.required]);
-        this.sellerControls.phone_number.updateValueAndValidity();
-      }
+      this.setContactTypeValidators(contactType);
     } else {
       const index = contactTypesFormArray.controls.findIndex(x => x.value === contactType);
       contactTypesFormArray.removeAt(index);
@@ -66,6 +62,21 @@ export class UserDataComponent extends BaseValidationComponent implements OnInit
         this.sellerControls.phone_number.setValidators([]);
         this.sellerControls.phone_number.updateValueAndValidity();
       }
+    }
+  }
+
+  contactType(type: string): boolean {
+    return this.formInput.value.seller.contact_by.includes(type);
+  }
+
+  setContactTypeValidators(type: string): void {
+    if (type === 'email') {
+      this.sellerControls.email.setValidators([Validators.required, Validators.email]);
+      this.sellerControls.email.updateValueAndValidity();
+    }
+    if (type === 'sms') {
+      this.sellerControls.phone_number.setValidators([Validators.required]);
+      this.sellerControls.phone_number.updateValueAndValidity();
     }
   }
 

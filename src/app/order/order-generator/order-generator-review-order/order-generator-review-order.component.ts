@@ -37,15 +37,28 @@ export class OrderGeneratorReviewOrderComponent extends BaseValidationComponent 
   saveOrder(): void {
     this.disableSubmitButton(true);
     this.formSubmitted.emit(true);
-    this.orderService.create(this.order).subscribe(
-      (order: Order) => {
-        this.alerts.showAlert('Your purchase order has been sent');
-        this.router.navigateByUrl('/order');
-      },
-      err => {
-        this.disableSubmitButton(false);
-      }
-    );
+    if (this.openOrder) {
+      this.orderService.createOpen(this.order).subscribe(
+        (order: Order) => {
+          this.alerts.showAlert('Your purchase order has been sent');
+          this.router.navigateByUrl('/order');
+        },
+        err => {
+          this.disableSubmitButton(false);
+          this.alerts.showAlertDanger(err.error.message);
+        }
+      );
+    } else {
+      this.orderService.create(this.order).subscribe(
+        (order: Order) => {
+          this.alerts.showAlert('Your purchase order has been sent');
+          this.router.navigateByUrl('/order');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
+    }
   }
 
   sellerContactSms(): boolean {

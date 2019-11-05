@@ -37,6 +37,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   ) {}
 
   ngOnInit() {
+    this.orderDataService.setProductList(undefined);
     this.openOrder = this.route.snapshot.data['openOrder'];
     this.stepperService.stepperInit();
     this.isDraft = false;
@@ -83,19 +84,35 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         })
       ],
       seller: this.formBuilder.group({
-        _id: [undefined],
-        numericId: [undefined],
-        first_name: [undefined, Validators.required],
-        last_name: [undefined, Validators.required],
-        email: [undefined],
-        company_name: [undefined],
-        company_number: [undefined],
-        address: [undefined],
-        city: [undefined],
-        country: ['', Validators.required],
-        zipcode: [undefined],
+        _id: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller._id],
+        numericId: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.numericId],
+        first_name: [
+          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.first_name,
+          Validators.required
+        ],
+        last_name: [
+          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.last_name,
+          Validators.required
+        ],
+        email: [
+          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.email,
+          Validators.email
+        ],
+        company_name: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.company_name],
+        company_number: [
+          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.company_number
+        ],
+        address: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.address],
+        city: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.city],
+        country: [
+          Object.is(this.draftOrder.seller, undefined) ? '' : this.draftOrder.seller.country,
+          Validators.required
+        ],
+        zipcode: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.zipcode],
         phone_number: [undefined],
-        contact_by: this.formBuilder.array([])
+        contact_by: this.formBuilder.array(
+          Object.is(this.draftOrder.seller, undefined) ? [] : this.draftOrder.seller.contact_by
+        )
       }),
       subtotal: [Object.is(this.draftOrder, undefined) ? 0 : this.draftOrder.subtotal, Validators.required],
       currency: [Object.is(this.draftOrder, undefined) ? undefined : this.draftOrder.currency, Validators.required],
@@ -151,8 +168,8 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
     }
     if (this.isDraft) {
       this.orderForm.controls.buyer.setValue(this.draftOrder.buyer);
-      this.orderForm.controls.seller.setValue(this.draftOrder.seller);
       this.orderDataService.setForm(this.orderForm);
+      this.orderDataService.setNewOrder(this.draftOrder);
     }
     if (this.fromQuotation) {
       this.orderForm.controls.buyer.setValue(this.quotation.buyer);

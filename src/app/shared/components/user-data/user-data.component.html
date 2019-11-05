@@ -157,6 +157,7 @@
               name="contact_type"
               id="checkbox_email"
               (change)="onChangeContactType('email', $event.target.checked)"
+              [checked]="contactType('email')"
             /><label class="checkbox_label" for="checkbox_email"><span class="form_checkbox_btn"></span></label>
             <label for="checkbox_email" style="font-weight:400;">EMAIL</label>
           </div>
@@ -167,6 +168,7 @@
               name="contact_type"
               id="checkbox_phone"
               (change)="onChangeContactType('sms', $event.target.checked)"
+              [checked]="contactType('sms')"
             /><label class="checkbox_label" for="checkbox_phone"><span class="form_checkbox_btn"></span></label>
             <label for="checkbox_phone" style="font-weight:400;">SMS</label>
           </div>

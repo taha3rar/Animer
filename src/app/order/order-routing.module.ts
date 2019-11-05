@@ -72,6 +72,20 @@ const routes: Routes = [
       canActivate: [OrderGuard],
       resolve: {
         order: OrderPoResolver
+      },
+      data: {
+        openOrder: false
+      }
+    },
+    {
+      path: 'order/generator/open/:id',
+      component: OrderGeneratorComponent,
+      canActivate: [OrderGuard],
+      resolve: {
+        order: OrderPoResolver
+      },
+      data: {
+        openOrder: true
       }
     },
     {
