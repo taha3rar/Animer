@@ -25,7 +25,6 @@ export class StartingGuideComponent implements OnInit {
   currentUser: any;
   calculatedUserProgress = 0;
 
-
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
@@ -127,7 +126,7 @@ export class StartingGuideComponent implements OnInit {
     const noOfCompleted = stepsArr.filter(Boolean).length;
 
     if (
-      this.currentUser.roles[0] === 'buyer' ||
+      (this.currentUser.roles[0] === 'buyer' && !this.currentUser.referrer) ||
       (this.currentUser.referrer && this.currentUser.roles[0] === 'seller')
     ) {
       totalSteps = 3;
