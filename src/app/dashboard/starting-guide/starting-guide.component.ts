@@ -7,7 +7,7 @@ import { AgriculturalProductGeneratorComponent } from './../../product/product-g
 import { Component, OnInit } from '@angular/core';
 import { Product } from '@app/core/models/order/product';
 import { MatDialogConfig, MatDialog } from '@angular/material';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { ActivatedRoute } from '@angular/router';
@@ -24,6 +24,14 @@ export class StartingGuideComponent implements OnInit {
   userProgress = {};
   currentUser: any;
   calculatedUserProgress = 0;
+
+  swalWithStyledButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-primary',
+      cancelButton: 'btn btn-primary'
+    },
+    buttonsStyling: false
+  });
 
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {}
 
@@ -69,55 +77,48 @@ export class StartingGuideComponent implements OnInit {
   }
 
   openProductModal() {
-    swal({
-      title: 'Which product would you like to add?',
-      text: 'There are two types of Products, an Agricultural Product (like wheat) or a Processed Product (like flour)',
-      className: 'swal-starting',
-      buttons: {
-        agri: { text: 'Agricultural Product', value: 'agri', className: 'swal-button-primary', closeModal: true },
-        processed: { text: 'Processed Product', value: 'processed', className: 'swal-button-primary', closeModal: true }
-      }
-    }).then(value => {
-      if (value === 'agri') {
-        this.openDialogAgricultural(undefined);
-      } else if (value === 'processed') {
-        this.openDialogProcessed(undefined);
-      } else {
-        return false;
-      }
-    });
+    this.swalWithStyledButtons
+      .fire({
+        title: 'Which product would you like to add?',
+        html:
+          '<p>There are two types of Products</p> <ul><li>Agricultural Product (like wheat)</li>' +
+          '<li>Processed Product (like flour)</li></ul>',
+        confirmButtonText: 'Agricultural Product',
+        cancelButtonText: 'Processed Product',
+        showCancelButton: true
+      })
+      .then(result => {
+        if (result.value) {
+          this.openDialogAgricultural(undefined);
+        } else if (result.dismiss === Swal.DismissReason.backdrop) {
+          return false;
+        } else if (!result.value) {
+          this.openDialogProcessed(undefined);
+        }
+      });
   }
 
   openOrderModal() {
-    swal({
-      title: 'Which purchase order works for you?',
-      text:
-        'There are two types of Purchase Orders, an Open Purchase Order lets you send an order to ' +
-        'one of your contacts on Avenews-GT and an External Purchase Order is a quick order to any of your suppliers. ',
-      className: 'swal-starting',
-      buttons: {
-        internal: {
-          text: 'Internal Purchase Order',
-          value: 'internal',
-          className: 'swal-button-primary',
-          closeModal: true
-        },
-        external: {
-          text: 'External Purchase Order',
-          value: 'external',
-          className: 'swal-button-primary',
-          closeModal: true
+    this.swalWithStyledButtons
+      .fire({
+        title: 'Which purchase order works for you?',
+        html:
+          '<p>There are two types of Purchase Orders</p><ul><li>Internal Purchase Order lets you send an order to' +
+          ' one of your contacts on Avenews-GT </li>' +
+          '<li>External Purchase Order is a quick order to any of your suppliers.</li></ul> ',
+        confirmButtonText: 'Internal Purchase Order',
+        cancelButtonText: 'External Purchase Order',
+        showCancelButton: true
+      })
+      .then(result => {
+        if (result.value) {
+          this.router.navigateByUrl('/order/generator/standard');
+        } else if (result.dismiss === Swal.DismissReason.backdrop) {
+          return false;
+        } else if (!result.value) {
+          this.router.navigateByUrl('/order/generator/open');
         }
-      }
-    }).then(value => {
-      if (value === 'external') {
-        this.router.navigateByUrl('/order/generator/open');
-      } else if (value === 'internal') {
-        this.router.navigateByUrl('/order/generator/standard');
-      } else {
-        return false;
-      }
-    });
+      });
   }
 
   calculateUserProgress() {

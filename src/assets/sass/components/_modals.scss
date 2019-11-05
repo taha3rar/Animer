@@ -332,3 +332,38 @@ ul.tutorial-list li {
   animation: open-modal 0.4s;
   animation-timing-function: ease-out;
 }
+
+.swal2-popup {
+  width: 54em !important;
+  padding: 2.5em 3em !important;
+
+  h2 {
+    font-size: 2.6em;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+
+  ul {
+    list-style-position: inside !important;
+    list-style: decimal;
+
+    li {
+      font-size: 1.6rem !important;
+      padding-bottom: 8px;
+    }
+  }
+
+  .swal2-content {
+    font-size: 1.6rem;
+    text-align: left !important;
+  }
+
+  button:not(:last-child) {
+    margin-right: 1.6rem;
+  }
+}
