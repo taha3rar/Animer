@@ -98,20 +98,16 @@
 }
 
 .welcome-panel {
-  margin-top: 2rem;
-  min-height: 60rem;
+  min-height: 43rem;
   [class^="col"] {
     padding: 0px !important;
   }
 
-  .tab-content {
-    margin-top: 1rem;
-  }
-
   .panel-body {
     padding: 0px;
-    height: 60rem;
+    min-height: auto;
     width: 100%;
+    height: 43rem;
   }
 
   .row {
@@ -178,12 +174,13 @@
 }
 
 .vector-tutorial {
-  width: 47%;
-  height: 100%;
-  margin: auto;
+  width: 34%;
+  height: auto;
   display: block;
   margin-top: 1rem;
-  margin-bottom: 3rem;
+  position: absolute;
+  right: 4rem;
+  bottom: 6rem;
 }
 
 .panel-right {

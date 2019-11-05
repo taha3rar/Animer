@@ -28,48 +28,54 @@
 
 .starting-guide {
   display: flex;
-  height: 89%;
+  height: 83.7%;
 
   &--left {
-    padding: 1.5rem 0px 1.5rem 0px;
-    width: 43%;
+    padding: 1.5rem 0px 2rem 0px;
+    width: 35%;
     border-right: 1px solid #f1f1f1;
     height: 100%;
   }
 
   &--right {
-    padding: 1.5rem 2rem;
-    width: 57%;
+    padding: 3rem 3.5rem;
+    width: 65%;
     height: 100%;
     position: relative;
 
     p {
-      font-size: 1.4rem;
+      font-size: 1.55rem;
       margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-weight: 600;
+      margin-bottom: 2rem;
     }
   }
 
   .account-img {
-    width: 32%;
+    width: 24%;
   }
 
   .product-img {
-    width: 39%;
+    width: 28%;
   }
 
-  .product-btns-wrapper {
-    align-items: center;
+  .tab-wrapper {
     display: flex;
-    flex-wrap: wrap;
 
-    @media (max-width: 1605px) {
-      justify-content: center;
-      span {
-        margin: 0.6rem 0rem;
-      }
-      button {
-        width: 99%;
-      }
+    div {
+      margin-right: 2.5rem;
+    }
+  }
+
+  @media (max-width: 1803px) {
+    .btn-outline.po,
+    .btn-outline.pi {
+      display: block;
+      margin-left: 0px;
+      margin-top: 0.8rem;
     }
   }
 
@@ -85,8 +91,20 @@
     transition: 0.2s background ease;
   }
 
-  li:hover {
-    background: rgba(137, 169, 187, 0.2);
+  li:hover,
+  li.active {
+    background: #37c1ce12;
+  }
+
+  li:not(:last-of-type):before {
+    position: absolute;
+    z-index: 1;
+    content: "";
+    left: 4rem;
+    bottom: -2rem;
+    width: 1px;
+    height: 100%;
+    background-color: #d1e7ee;
   }
 }
 
@@ -102,7 +120,7 @@
 .step-title {
   width: 94%;
   font-size: 1.5rem;
-  margin-top: 8px;
+  margin-top: 7px;
   margin-left: 1.5rem;
   display: inline-block;
 }
@@ -110,10 +128,12 @@
 ul li span.circle {
   display: inline-block;
   padding: 0 !important;
+  z-index: 100;
   line-height: 20px;
   width: 20px;
   height: 20px;
   border-radius: 20px;
+  background: white;
   border: 1px solid #c0c3e0;
   position: relative;
 }
@@ -149,7 +169,7 @@ ul li.nav-item.active div {
 
 .skip-btn {
   position: absolute;
-  bottom: 3.5rem;
+  bottom: 1.5rem;
   right: 3rem;
   font-size: 1.4rem;
   color: #37c1ce !important;
