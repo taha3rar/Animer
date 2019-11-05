@@ -1,3 +1,4 @@
+import { includes } from 'lodash';
 import { filter } from 'rxjs/operators';
 // tslint:disable-next-line:max-line-length
 import { ProcessedProductGeneratorComponent } from './../../product/product-generator/processed-product-generator/processed-product-generator.component';
@@ -19,11 +20,10 @@ declare const $: any;
   styleUrls: ['./starting-guide.component.scss']
 })
 export class StartingGuideComponent implements OnInit {
-  progressValue = '20%';
   products: Product[];
-  stepCompleted = false; // temporary
-  userProgress: any;
-  calculatedUserProgress = 20;
+  userProgress = {};
+  currentUser: any;
+  calculatedUserProgress = 0;
 
 
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {}
@@ -34,9 +34,9 @@ export class StartingGuideComponent implements OnInit {
       $(this).addClass('active');
     });
 
-    this.route.data.subscribe(({ userProgress }) => {
-      this.userProgress = userProgress;
-    });
+    this.userProgress = this.route.snapshot.data['progress'];
+
+    this.currentUser = this.route.snapshot.data['currentUser'];
 
     this.calculateUserProgress();
   }
@@ -122,9 +122,22 @@ export class StartingGuideComponent implements OnInit {
   }
 
   calculateUserProgress() {
-    const noOfCompleted = this.userProgress.filter(Boolean).length;
-    const totalSteps = Object.keys(this.userProgress).length;
+    let totalSteps = 0;
+    const stepsArr = Object.keys(this.userProgress).map(i => this.userProgress[i]);
+    const noOfCompleted = stepsArr.filter(Boolean).length;
 
+    if (
+      this.currentUser.roles[0] === 'buyer' ||
+      (this.currentUser.referrer && this.currentUser.roles[0] === 'seller')
+    ) {
+      totalSteps = 3;
+    } else if (this.currentUser.roles[0] === 'seller') {
+      totalSteps = 4;
+    } else if (this.currentUser.roles[0] === 'buyer' && this.currentUser.referrer) {
+      totalSteps = 2;
+    } else {
+      totalSteps = 5;
+    }
     this.calculatedUserProgress = Math.round((noOfCompleted / totalSteps) * 100);
   }
 }

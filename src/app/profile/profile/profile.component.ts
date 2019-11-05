@@ -67,6 +67,8 @@ export class ProfileComponent implements OnInit {
           .removeClass('glyphicon-minus')
           .addClass('glyphicon-plus');
       });
+
+    this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
   }
 
   // Easier acces to form values

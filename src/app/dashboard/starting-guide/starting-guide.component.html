@@ -16,9 +16,28 @@
     <div class="starting-guide">
       <div class="starting-guide--left">
         <ul class="nav nav-tabs" role="tablist" id="startingGuideTab">
-          <li class="nav-item completed active" data-toggle="tab" href="#account" role="tab" aria-selected="true">
+          <li
+            class="nav-item completed active"
+            *ngIf="!currentUser.referrer"
+            data-toggle="tab"
+            href="#account"
+            role="tab"
+            aria-selected="true"
+          >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Create an account</div>
+          </li>
+          <li
+            class="nav-item active"
+            [class.completed]="userProgress.account_reviewed"
+            *ngIf="currentUser.referrer"
+            data-toggle="tab"
+            href="#review-account"
+            role="tab"
+            aria-selected="true"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Review your account</div>
           </li>
           <li
             class="nav-item"
@@ -75,13 +94,23 @@
         </ul>
       </div>
       <div class="starting-guide--right tab-content">
-        <div class="tab-pane active" id="account" role="tabpanel">
+        <div class="tab-pane active" id="account" role="tabpanel" *ngIf="!currentUser.referrer">
           <img src="../../../assets/img/dashboard-imgs/account.png" class="vector-tutorial account-img" alt="" />
           <h2>Well Done! You created your account.</h2>
           <p>
             Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.
           </p>
           <button class="btn btn-primary" (click)="nextStep('po')">NEXT STEP</button>
+        </div>
+        <div class="tab-pane active" id="review-account" *ngIf="currentUser.referrer" role="tabpanel">
+          <img src="../../../assets/img/dashboard-imgs/review-account.png" class="vector-tutorial account-img" alt="" />
+          <h2>Review your account</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo
+            adipisci est, natus vero veritatis tenetur esse corporis quis iure ullam neque similique. Odit, dolore
+            explicabo!
+          </p>
+          <button class="btn btn-primary">Review Account</button>
         </div>
         <div class="tab-pane" id="po" role="tabpanel" *ngxPermissionsOnly="['create-order']">
           <img src="../../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" alt="" />
