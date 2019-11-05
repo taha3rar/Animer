@@ -120,14 +120,27 @@
             </p>
             <button class="btn btn-primary" (click)="openOrderModal()">ISSUE PRUCHASE ORDER</button>
             <button class="btn btn-outline">WATCH VIDEO</button>
-            <a class="skip-btn" *ngIf="!currentUser.referrer" (click)="nextStep('product')">Skip Step</a>
+            <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">Skip Step</a>
+            <a
+              class="skip-btn"
+              *ngIf="currentUser.roles[0] == 'buyer' && !currentUser.referrer"
+              (click)="nextStep('contact')"
+              >Skip Step</a
+            >
           </div>
           <div [hidden]="!userProgress.first_po">
             <h2>Well done! You issued your first purchase order.</h2>
             <p>
               To do this again, click the Orders button on the left side menu. Now you’re ready for the next step.
             </p>
-            <button class="btn btn-primary" *ngIf="!currentUser.referrer" (click)="nextStep('product')">
+            <button class="btn btn-primary" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">
+              NEXT STEP
+            </button>
+            <button
+              class="btn btn-primary"
+              *ngIf="currentUser.roles[0] == 'buyer' && !currentUser.referrer"
+              (click)="nextStep('contact')"
+            >
               NEXT STEP
             </button>
           </div>
