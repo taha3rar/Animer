@@ -32,6 +32,7 @@ import { ModalInventoryComponent } from './components/products/modal-inventory/m
 import { MatSortModule } from '@angular/material';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 import { ContactGeneratorComponent } from './components/contact-generator/contact-generator.component';
+import { UserProgressComponent } from './components/user-progress/user-progress.component';
 
 @NgModule({
   imports: [
@@ -67,7 +68,8 @@ import { ContactGeneratorComponent } from './components/contact-generator/contac
     ModalProcessedProductComponent,
     ModalInventoryComponent,
     FilterPipe,
-    ContactGeneratorComponent
+    ContactGeneratorComponent,
+    UserProgressComponent
   ],
   entryComponents: [ModalAgriculturalProductComponent, ModalProcessedProductComponent, ModalInventoryComponent],
   exports: [
@@ -84,6 +86,7 @@ import { ContactGeneratorComponent } from './components/contact-generator/contac
     TutorialControlComponent,
     ModalInventoryComponent,
     ContactGeneratorComponent,
+    UserProgressComponent,
     FilterPipe
   ],
   providers: [CsvService, DatePipe]

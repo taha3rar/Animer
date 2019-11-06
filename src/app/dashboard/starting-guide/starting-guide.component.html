@@ -2,16 +2,11 @@
   <div class="panel-body">
     <div class="panel-header">
       <p>Starting Guide</p>
-      <div class="progress">
-        <div
-          class="progress-bar"
-          [style.width.px]="calculatedUserProgress"
-          role="progressbar"
-          aria-valuenow="20"
-          aria-valuemax="100"
-        ></div>
-      </div>
-      <p>{{ calculatedUserProgress }}% Ready</p>
+      <app-user-progress
+        [userProgress]="userProgress"
+        [currentUser]="currentUser"
+        style="margin-left: auto;"
+      ></app-user-progress>
     </div>
     <div class="starting-guide">
       <div class="starting-guide--left">

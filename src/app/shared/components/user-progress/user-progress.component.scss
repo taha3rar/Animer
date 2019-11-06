@@ -1,0 +1,33 @@
+span.progress {
+  margin-left: auto;
+  margin-top: 0.87rem;
+  display: inline-block;
+  width: 100px;
+  margin-right: 1rem;
+  margin-bottom: 0px;
+  border-radius: 1.5rem;
+}
+
+.progress-bar {
+  background-color: #37c1ce;
+  transition: all 0.7s ease-in-out;
+}
+
+p {
+  display: inline-block;
+}
+
+button {
+  display: inline-flex;
+  padding: 0px 3px 0px 7px;
+  p {
+    font-weight: bold;
+  }
+  i {
+    margin-top: 2px;
+  }
+}
+
+.btn-outline:active {
+  color: #37c1ce !important;
+}

@@ -1,4 +1,3 @@
-import { UserProgressResolver } from './resolvers/user-progress.resolver';
 // tslint:disable-next-line:max-line-length
 import { ProcessedProductGeneratorComponent } from './../product/product-generator/processed-product-generator/processed-product-generator.component';
 // tslint:disable-next-line:max-line-length
@@ -16,6 +15,7 @@ import { DashboardCounterResolver } from './resolvers/dashboard-counter.resolver
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { StartingGuideComponent } from './starting-guide/starting-guide.component';
 import { SharedModule } from '@app/shared';
+import { CurrentUserProgressResolver } from '@app/shared/resolvers/current-user-progress.resolver';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,6 @@ import { SharedModule } from '@app/shared';
   ],
   entryComponents: [AgriculturalProductGeneratorComponent, ProcessedProductGeneratorComponent],
   imports: [SharedModule, CommonModule, TranslateModule, DashboardRoutingModule, NgxPermissionsModule.forRoot()],
-  providers: [DashboardCounterResolver, UserProgressResolver]
+  providers: [DashboardCounterResolver, CurrentUserProgressResolver]
 })
 export class DashboardModule {}

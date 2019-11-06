@@ -5,7 +5,7 @@ import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class UserProgressResolver implements Resolve<any> {
+export class CurrentUserProgressResolver implements Resolve<any> {
   constructor(private authService: AuthenticationService, private userService: UserService) {}
 
   resolve(): Observable<any> {

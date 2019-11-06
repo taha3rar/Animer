@@ -1,0 +1,26 @@
+<button *ngIf="currentComponent === 'general'" class="btn-outline" routerLink="/dashboard">
+  <span class="progress">
+    <span
+      class="progress-bar"
+      [style.width.px]="calculatedUserProgress"
+      role="progressbar"
+      aria-valuenow="20"
+      aria-valuemax="100"
+    ></span>
+  </span>
+  <p>{{ calculatedUserProgress }}% Ready</p>
+  <i class="material-icons">keyboard_arrow_right</i>
+</button>
+
+<span *ngIf="currentComponent != 'general'">
+  <span class="progress" *ngIf="currentComponent != 'general'">
+    <span
+      class="progress-bar"
+      [style.width.px]="calculatedUserProgress"
+      role="progressbar"
+      aria-valuenow="20"
+      aria-valuemax="100"
+    ></span>
+  </span>
+  <p>{{ calculatedUserProgress }}% Ready</p>
+</span>

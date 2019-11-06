@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService, I18nService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
+import { User } from '@app/core/models/user/user';
 
 declare const $: any;
 
@@ -15,15 +16,20 @@ declare const $: any;
 export class HeaderComponent implements OnInit {
   menuHidden = true;
   credentials: Credentials;
+  currentUser: User;
+  userProgress = {};
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
     private i18nService: I18nService
   ) {}
 
   ngOnInit() {
     this.credentials = this.authenticationService.credentials;
+    this.userProgress = this.route.snapshot.data['progress'];
+    this.currentUser = this.route.snapshot.data['currentUser'];
   }
 
   toggleMenu() {

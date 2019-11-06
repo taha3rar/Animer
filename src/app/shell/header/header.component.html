@@ -13,6 +13,12 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+      <app-user-progress
+        [userProgress]="userProgress"
+        [currentUser]="currentUser"
+        [currentComponent]="'general'"
+        style="margin-left: 1.5rem;"
+      ></app-user-progress>
       <ul class="navigation-right">
         <li>
           <app-notification-list></app-notification-list>
