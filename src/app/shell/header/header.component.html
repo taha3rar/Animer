@@ -41,14 +41,15 @@
             </div>
             <div ngbDropdownMenu aria-labelledby="user-dropdown">
               <ul>
-                <li class="dropdown-item" routerLink="/profile">
+                <li
+                  class="dropdown-item"
+                  routerLink="/profile"
+                  matTooltip="{{ tooltips.personal_information }}"
+                  matTooltipPosition="left"
+                >
                   <i class="material-icons pull-left">settings</i>
                   <span>
-                    Settings<i
-                      class="fas fa-info-circle fa-2x i ml-5"
-                      style="vertical-align: middle;"
-                      matTooltip="{{ tooltips.personal_information }}"
-                    ></i>
+                    Settings
                   </span>
                 </li>
                 <li (click)="logout()" class="dropdown-item">

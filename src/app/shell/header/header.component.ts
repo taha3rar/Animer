@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
-
 import { AuthenticationService, I18nService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
@@ -63,9 +62,7 @@ export class HeaderComponent implements OnInit {
 
   get username(): string | null {
     if (this.credentials) {
-      return `${this.credentials.user.personal_information.first_name} ${
-        this.credentials.user.personal_information.last_name
-      }`;
+      return `${this.credentials.user.personal_information.first_name} ${this.credentials.user.personal_information.last_name}`;
     }
 
     return null;

@@ -148,7 +148,9 @@
       <p>{{ order?.deliver_to.address }}, {{ order?.deliver_to.city }} {{ order?.deliver_to.zip_code }}</p>
       <p>{{ order?.deliver_to.phone }}</p>
       <p>Expected delivery date: {{ order?.deliver_to.expected_delivery_date | date: 'dd/MM/yyyy' }}</p>
-      <button #submitButton class="bttn-primary pull-right" (click)="saveOrder()">Submit</button>
+      <button #submitButton class="bttn-primary pull-right" (click)="saveOrder()" matTooltip="{{ tooltips.submit }}">
+        Submit
+      </button>
     </div>
   </div>
 </div>

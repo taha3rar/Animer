@@ -5,7 +5,6 @@ import { AuthenticationService } from '@app/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { CsvService } from '@app/shared/services/csv.service';
 import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
-import { OrderDataService } from '../order-generator/order-data.service';
 import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({

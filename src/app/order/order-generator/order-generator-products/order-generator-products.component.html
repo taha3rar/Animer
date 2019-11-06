@@ -31,7 +31,7 @@
       <div class="row clearfix">
         <div
           class="card card-agricultural"
-          *ngFor="let product of (agriculturalProducts | paginate: { itemsPerPage: 4, currentPage: page })"
+          *ngFor="let product of agriculturalProducts | paginate: { itemsPerPage: 4, currentPage: page }"
         >
           <div>
             <p class="pull-right margin-none">
@@ -103,7 +103,7 @@
         <p class="heading-3">Processed Products</p>
       </div>
       <div class="row clearfix">
-        <ng-container *ngFor="let product of (processedProducts | paginate: { itemsPerPage: 4, currentPage: page2 })">
+        <ng-container *ngFor="let product of processedProducts | paginate: { itemsPerPage: 4, currentPage: page2 }">
           <div class="card card-processed">
             <div>
               <p class="pull-right margin-none">
@@ -168,6 +168,7 @@
     <div class="add-supplier-box" [hidden]="!noInventory">
       <img src="../../../../assets/img/default/pi-po/noProducts.png" />
       <p>{{ seller.first_name | titlecase }} {{ seller.last_name | titlecase }} has no inventory.</p>
+      <p>No worries. You will be able to add products to your order in the next step.</p>
       <button class="bttn-primary next-step">
         Next Step &rarr;
       </button>

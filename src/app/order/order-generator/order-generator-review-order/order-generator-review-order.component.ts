@@ -5,7 +5,7 @@ import { OrderService } from '@app/core/api/order.service';
 import { Order } from '@app/core/models/order/order';
 import { AlertsService } from '@app/core/alerts.service';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
-import { thisExpression } from 'babel-types';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-order-generator-review-order',
@@ -13,6 +13,7 @@ import { thisExpression } from 'babel-types';
   styleUrls: ['./order-generator-review-order.component.scss']
 })
 export class OrderGeneratorReviewOrderComponent extends BaseValidationComponent implements OnInit {
+  tooltips = tooltips.orders.order_generator;
   order: Order;
   @Input()
   openOrder: boolean;
