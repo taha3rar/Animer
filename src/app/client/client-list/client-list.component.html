@@ -27,10 +27,11 @@
       data-toggle="wizard"
       *ngxPermissionsOnly="['create-client']"
       data-target="#addClientWizard"
+      matTooltip="{{ tooltips.add_client }}"
+      matTooltipPosition="above"
     >
       <span>Add Client</span>
     </button>
-    <i class="fas fa-info-circle fa-2x i" style="vertical-align: middle;" matTooltip="{{ tooltips.add_client }}"></i>
   </div>
 </div>
 
@@ -47,7 +48,9 @@
   <tbody>
     <tr
       *ngFor="
-        let client of clients | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }
+        let client of (clients
+          | filter: searchTerm
+          | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage })
       "
     >
       <td class="text-center">{{ client.numericId }}</td>
