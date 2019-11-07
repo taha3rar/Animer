@@ -95,16 +95,26 @@
         </div>
 
         <div class="tab-pane active" id="review-account" *ngIf="currentUser.referrer" role="tabpanel">
-          <h2>Review your Account</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate amet mollitia fugiat fugit explicabo
-            adipisci est, natus vero veritatis tenetur esse corporis quis iure ullam neque similique. Odit, dolore
-            explicabo!
-          </p>
-          <button class="btn btn-primary" routerLink="/profile">REVIEW ACCOUNT</button>
+          <div [hidden]="userProgress.account_reviewed">
+            <h2>Welcome! Please review your account details</h2>
+            <p>
+              Confirm your details are correct, then you can start trading.
+            </p>
+            <button class="btn btn-primary" routerLink="/profile">REVIEW ACCOUNT</button>
+            <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">Skip Step</a>
+            <a class="skip-btn" *ngIf="currentUser.roles[0] == 'buyer'" (click)="nextStep('po')">Skip Step</a>
+          </div>
+          <div [hidden]="!userProgress.account_reviewed">
+            <h2>Well Done! You have reviewed your account.</h2>
+            <p>Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.</p>
+            <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'buyer'" (click)="nextStep('po')">
+              NEXT STEP
+            </button>
+            <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">
+              NEXT STEP
+            </button>
+          </div>
           <img src="../../../assets/img/dashboard-imgs/review-account.png" class="vector-tutorial account-img" alt="" />
-          <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">Skip Step</a>
-          <a class="skip-btn" *ngIf="currentUser.roles[0] == 'buyer'" (click)="nextStep('po')">Skip Step</a>
         </div>
         <div class="tab-pane" id="po" role="tabpanel" *ngxPermissionsOnly="['create-order']">
           <div [hidden]="userProgress.first_po">
