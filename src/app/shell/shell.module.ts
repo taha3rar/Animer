@@ -16,11 +16,15 @@ import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver
 import { CurrentUserProgressResolver } from '@app/shared/resolvers/current-user-progress.resolver';
 
 @NgModule({
-<<<<<<< HEAD
-  imports: [CommonModule, SharedModule, TranslateModule, NgbModule, RouterModule, NgxPermissionsModule.forRoot()],
-=======
-  imports: [CommonModule, TranslateModule, NgbModule, RouterModule, MatTooltipModule, NgxPermissionsModule.forRoot()],
->>>>>>> Few tooltips
+  imports: [
+    CommonModule,
+    MatTooltipModule,
+    SharedModule,
+    TranslateModule,
+    NgbModule,
+    RouterModule,
+    NgxPermissionsModule.forRoot()
+  ],
   declarations: [HeaderComponent, ShellComponent, MenuComponent, NotificationListComponent],
   providers: [NotificationListResolver, CurrentUserResolver, CurrentUserProgressResolver]
 })
