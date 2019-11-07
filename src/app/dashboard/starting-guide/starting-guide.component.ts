@@ -4,7 +4,7 @@ import { filter } from 'rxjs/operators';
 import { ProcessedProductGeneratorComponent } from './../../product/product-generator/processed-product-generator/processed-product-generator.component';
 // tslint:disable-next-line:max-line-length
 import { AgriculturalProductGeneratorComponent } from './../../product/product-generator/agricultural-product-generator/agricultural-product-generator.component';
-import { Component, OnInit, AfterViewInit, AfterViewChecked, OnChanges, AfterContentChecked, DoCheck } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Product } from '@app/core/models/order/product';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import Swal from 'sweetalert2';
@@ -36,11 +36,6 @@ export class StartingGuideComponent implements OnInit, AfterContentChecked {
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    $('#startingGuideTab li').on('click', function(e: any) {
-      e.preventDefault();
-      $(this).addClass('active');
-    });
-
     this.route.data.subscribe(({ currentUser, progress }) => {
       this.userProgress = progress;
       this.currentUser = currentUser;
@@ -48,12 +43,22 @@ export class StartingGuideComponent implements OnInit, AfterContentChecked {
   }
 
   ngAfterContentChecked() {
-    $('#startingGuideTab').find('.current-step').removeClass('current-step');
+    $('#startingGuideTab')
+      .find('.current-step')
+      .removeClass('current-step');
     $('#startingGuideTab li').each(function() {
-      if ( $(this).hasClass('completed') && !$(this).next().hasClass('completed')
+      if (
+        $(this).hasClass('completed') &&
+        !$(this)
+          .next()
+          .hasClass('completed')
       ) {
-        $(this).next().addClass('current-step');
-        $(this).next().click();
+        $(this)
+          .next()
+          .addClass('current-step');
+        $(this)
+          .next()
+          .click();
         return false;
       }
     });

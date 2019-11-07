@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './user-progress.component.html',
   styleUrls: ['./user-progress.component.scss']
 })
-export class UserProgressComponent implements OnInit, AfterContentChecked{
+export class UserProgressComponent implements OnInit, AfterContentChecked {
   @Input() userProgress = {};
   @Input() currentUser: User;
   @Input() currentComponent: string;
@@ -34,16 +34,16 @@ export class UserProgressComponent implements OnInit, AfterContentChecked{
       (this.currentUser.referrer && this.currentUser.roles[0] === 'seller')
     ) {
       totalSteps = 3;
-      this.completedProgress.emit((noOfCompleted === 3) ? true : false);
+      this.completedProgress.emit(noOfCompleted === 3 ? true : false);
     } else if (this.currentUser.roles[0] === 'seller') {
       totalSteps = 4;
-      this.completedProgress.emit((noOfCompleted === 4) ? true : false);
+      this.completedProgress.emit(noOfCompleted === 4 ? true : false);
     } else if (this.currentUser.roles[0] === 'buyer' && this.currentUser.referrer) {
       totalSteps = 2;
-      this.completedProgress.emit((noOfCompleted === 2) ? true : false);
+      this.completedProgress.emit(noOfCompleted === 2 ? true : false);
     } else {
       totalSteps = 5;
-      this.completedProgress.emit((noOfCompleted === 5) ? true : false);
+      this.completedProgress.emit(noOfCompleted === 5 ? true : false);
     }
     this.calculatedUserProgress = Math.round((noOfCompleted / totalSteps) * 100);
   }
