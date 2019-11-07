@@ -6,13 +6,14 @@
         [userProgress]="userProgress"
         [currentUser]="currentUser"
         style="margin-left: auto;"
+        (completedProgress)="progressCompleted = $event"
       ></app-user-progress>
     </div>
     <div class="starting-guide">
       <div class="starting-guide--left">
         <ul class="nav nav-tabs" role="tablist" id="startingGuideTab">
           <li
-            class="nav-item completed active"
+            class="nav-item completed"
             *ngIf="!currentUser.referrer"
             data-toggle="tab"
             href="#account"
@@ -47,12 +48,14 @@
             <div class="step-title">Try out your first Purchase Order</div>
           </li>
           <li
-            class="nav-item"
+            [ngClass]="{
+              'completed': userProgress.first_product == true
+            }"
             data-toggle="tab"
+            class="nav-item"
             href="#product"
             role="tab"
             aria-selected="true"
-            [class.completed]="userProgress.first_product"
             *ngxPermissionsOnly="['create-product']"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
@@ -81,6 +84,18 @@
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Issue your first Proforma Invoice</div>
+          </li>
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#business"
+            role="tab"
+            aria-selected="true"
+            *ngIf="progressCompleted"
+            [class.current-step]="progressCompleted"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Now you're in Business!</div>
           </li>
         </ul>
       </div>
@@ -229,6 +244,15 @@
               </p>
             </div>
             <img src="../../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" alt="" />
+          </div>
+        </div>
+        <div class="tab-pane" id="business" role="tabpanel" [hidden]="!progressCompleted">
+          <div>
+            <h2>Now you're in business!</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa natus quod ipsum saepe molestiae facere
+            </p>
+            <img src="../../../assets/img/dashboard-imgs/business.svg" class="vector-tutorial" alt="" />
           </div>
         </div>
       </div>

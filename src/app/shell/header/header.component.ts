@@ -28,8 +28,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.credentials = this.authenticationService.credentials;
-    this.userProgress = this.route.snapshot.data['progress'];
-    this.currentUser = this.route.snapshot.data['currentUser'];
+
+    this.route.data.subscribe(({ currentUser, progress }) => {
+      this.userProgress = progress;
+      this.currentUser = currentUser;
+    });
   }
 
   toggleMenu() {

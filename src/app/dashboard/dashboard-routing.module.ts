@@ -22,7 +22,8 @@ const routes: Routes = [
         currentUser: CurrentUserResolver,
         progress: CurrentUserProgressResolver
       },
-      data: { title: extract('Dashboard') }
+      data: { title: extract('Dashboard') },
+      runGuardsAndResolvers: 'always'
     }
   ])
 ];

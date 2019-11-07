@@ -131,7 +131,6 @@ ul li span.circle {
 
 ul li.nav-item.completed span.circle {
   border: none;
-  color: white;
   background: #00c78c;
 }
 
@@ -141,6 +140,27 @@ ul li.nav-item.completed div.step-title {
 
 ul li.nav-item.completed .circle::before {
   content: "\f00c";
+  font-family: FontAwesome;
+  position: absolute;
+  font-weight: 100;
+  color: white;
+  top: 52.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ul li.nav-item.current-step span.circle {
+  background: #f6b400;
+  color: white;
+  border: none;
+}
+
+ul li.nav-item.current-step div.step-title {
+  color: #212529;
+}
+
+ul li.nav-item.current-step .circle::before {
+  content: "\f005";
   font-family: FontAwesome;
   position: absolute;
   font-weight: 100;

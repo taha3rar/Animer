@@ -4,7 +4,7 @@ import { filter } from 'rxjs/operators';
 import { ProcessedProductGeneratorComponent } from './../../product/product-generator/processed-product-generator/processed-product-generator.component';
 // tslint:disable-next-line:max-line-length
 import { AgriculturalProductGeneratorComponent } from './../../product/product-generator/agricultural-product-generator/agricultural-product-generator.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterViewChecked, OnChanges, AfterContentChecked, DoCheck } from '@angular/core';
 import { Product } from '@app/core/models/order/product';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import Swal from 'sweetalert2';
@@ -19,11 +19,10 @@ declare const $: any;
   templateUrl: './starting-guide.component.html',
   styleUrls: ['./starting-guide.component.scss']
 })
-export class StartingGuideComponent implements OnInit {
+export class StartingGuideComponent implements OnInit, AfterContentChecked {
   products: Product[];
   userProgress = {};
   currentUser: any;
-  calculatedUserProgress = 0;
 
   swalWithStyledButtons = Swal.mixin({
     customClass: {
@@ -33,6 +32,7 @@ export class StartingGuideComponent implements OnInit {
     buttonsStyling: false
   });
 
+  progressCompleted = false;
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
@@ -41,9 +41,22 @@ export class StartingGuideComponent implements OnInit {
       $(this).addClass('active');
     });
 
-    this.userProgress = this.route.snapshot.data['progress'];
+    this.route.data.subscribe(({ currentUser, progress }) => {
+      this.userProgress = progress;
+      this.currentUser = currentUser;
+    });
+  }
 
-    this.currentUser = this.route.snapshot.data['currentUser'];
+  ngAfterContentChecked() {
+    $('#startingGuideTab').find('.current-step').removeClass('current-step');
+    $('#startingGuideTab li').each(function() {
+      if ( $(this).hasClass('completed') && !$(this).next().hasClass('completed')
+      ) {
+        $(this).next().addClass('current-step');
+        $(this).next().click();
+        return false;
+      }
+    });
   }
 
   openDialogAgricultural(product: Product): void {
