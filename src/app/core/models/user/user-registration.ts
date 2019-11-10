@@ -7,4 +7,5 @@ export class UserRegistration {
   company_name: string;
   phone_number: string;
   role: string;
+  marketing_campaign?: boolean;
 }

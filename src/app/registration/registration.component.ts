@@ -39,6 +39,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   accessToken: string;
   isLoading = false;
   network: string;
+  marketing_campaign: boolean;
 
   constructor(
     private router: Router,
@@ -53,6 +54,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   }
 
   ngOnInit() {
+    this.marketing_campaign = this.route.snapshot.queryParamMap.get('m') !== '1';
     this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
     this.regionCode = 'KE';
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
@@ -124,6 +126,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     const socialuserInfo = {
       access_token: this.accessToken,
       country: this.countrySocialUser,
+      marketing_campaign: this.marketing_campaign,
       role: this.userType
     };
     this.userService.oAuthRegistration(socialuserInfo, this.network).subscribe(
@@ -253,6 +256,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     this.newUser.phone_number = this.clientf.phoneNumber.value;
     this.newUser.role = this.userType;
     this.newUser.company_name = this.clientf.companyName.value;
+    this.newUser.marketing_campaign = this.marketing_campaign;
 
     this.userService.saveNewUser(this.newUser).subscribe(
       data => {
