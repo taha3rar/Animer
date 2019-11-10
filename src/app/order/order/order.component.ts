@@ -20,7 +20,6 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(({ order, documents }) => {
       this.order = order;
-      console.log(this.order);
       this.documents = documents;
 
       if (this.order.invoice && !this.order.invoice.draft) {
