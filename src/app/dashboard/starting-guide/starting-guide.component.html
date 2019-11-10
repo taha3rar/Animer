@@ -105,7 +105,13 @@
           <p>
             Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.
           </p>
-          <button class="btn btn-primary" (click)="nextStep('po')">NEXT STEP</button>
+          <button class="btn btn-primary" *ngxPermissionsOnly="['create-order']" (click)="nextStep('po')">
+            NEXT STEP
+          </button>
+          <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">
+            NEXT STEP
+          </button>
+
           <img src="../../../assets/img/dashboard-imgs/account.png" class="vector-tutorial account-img" alt="" />
         </div>
 

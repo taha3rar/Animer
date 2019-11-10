@@ -4,7 +4,7 @@ import { filter } from 'rxjs/operators';
 import { ProcessedProductGeneratorComponent } from './../../product/product-generator/processed-product-generator/processed-product-generator.component';
 // tslint:disable-next-line:max-line-length
 import { AgriculturalProductGeneratorComponent } from './../../product/product-generator/agricultural-product-generator/agricultural-product-generator.component';
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterContentInit, Renderer2, ElementRef } from '@angular/core';
 import { Product } from '@app/core/models/order/product';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import Swal from 'sweetalert2';
@@ -19,7 +19,7 @@ declare const $: any;
   templateUrl: './starting-guide.component.html',
   styleUrls: ['./starting-guide.component.scss']
 })
-export class StartingGuideComponent implements OnInit, AfterContentChecked {
+export class StartingGuideComponent implements OnInit {
   products: Product[];
   userProgress = {};
   currentUser: any;
@@ -39,28 +39,31 @@ export class StartingGuideComponent implements OnInit, AfterContentChecked {
     this.route.data.subscribe(({ currentUser, progress }) => {
       this.userProgress = progress;
       this.currentUser = currentUser;
+      this.checkCurrentStep();
     });
   }
 
-  ngAfterContentChecked() {
-    $('#startingGuideTab')
-      .find('.current-step')
-      .removeClass('current-step');
-    $('#startingGuideTab li').each(function() {
-      if (
-        $(this).hasClass('completed') &&
-        !$(this)
-          .next()
-          .hasClass('completed')
-      ) {
-        $(this)
-          .next()
-          .addClass('current-step');
-        $(this)
-          .next()
-          .click();
-        return false;
-      }
+  checkCurrentStep() {
+    $(function() {
+      $('#startingGuideTab')
+        .find('.current-step')
+        .removeClass('current-step');
+      $('#startingGuideTab li').each(function() {
+        if (
+          $(this).hasClass('completed') &&
+          !$(this)
+            .next()
+            .hasClass('completed')
+        ) {
+          $(this)
+            .next()
+            .addClass('current-step');
+          $(this)
+            .next()
+            .trigger('click');
+          return false;
+        }
+      });
     });
   }
 
