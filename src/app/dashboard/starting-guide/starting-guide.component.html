@@ -71,7 +71,9 @@
             *ngxPermissionsOnly="['create-client']"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title">Add your first Contact</div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'agribusiness'">Add your first Contact</div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'buyer'">Add your first Seller Contact</div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'seller'">Add your first Buyer Contact</div>
           </li>
           <li
             class="nav-item"
@@ -218,7 +220,9 @@
               <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('pi')">Skip Step</a>
             </div>
             <div [hidden]="!userProgress.first_contact">
-              <h2>Well done! You added your first Contact.</h2>
+              <h2 *ngIf="currentUser.roles[0] == 'agribusiness'">Well done! You added your first Contact.</h2>
+              <h2 *ngIf="currentUser.roles[0] == 'buyer'">Well done! You added your first Seller Contact.</h2>
+              <h2 *ngIf="currentUser.roles[0] == 'seller'">Well done! You added your first Buyer Contact.</h2>
               <p>
                 To do this again, click the Contacts button on the left side menu. Now you’re ready for the next step.
               </p>
