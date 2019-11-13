@@ -1,5 +1,5 @@
 import { AlertsService } from './../../../core/alerts.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
@@ -9,6 +9,7 @@ import { InvoiceService } from '@app/core/api/invoice.service';
 import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-invoice-generator-invoice',
@@ -31,6 +32,15 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   validBy: NgbDateStruct;
   issuedOn: NgbDateStruct;
   deliveryOn: NgbDateStruct;
+  @ViewChild('checkbox') checkbox: ElementRef;
+
+  swalWithStyledButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn dpo',
+      cancelButton: 'btn btn-outline dpo'
+    },
+    buttonsStyling: false
+  });
 
   constructor(
     private invoiceService: InvoiceService,
@@ -209,5 +219,30 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
 
   checkProducts() {
     this.productsValid = false;
+  }
+
+  openDpoDialog(isChecked: boolean) {
+    if (isChecked) {
+      this.swalWithStyledButtons
+        .fire({
+          html:
+            '<img src="../../../../assets/img/dpo-logo.png" style="margin: 0 auto; display: block;' +
+            'margin-bottom: 3.8rem;" width="100" height="60"/>' +
+            '<p>Log in or create account in DPO</p>',
+          confirmButtonText: 'Log in',
+          cancelButtonText: 'Create Account',
+          showCancelButton: true
+        })
+        .then(result => {
+          if (result.value) {
+            // Do something
+          } else if (result.dismiss === Swal.DismissReason.backdrop) {
+            this.checkbox.nativeElement.checked = false;
+            return false;
+          } else if (!result.value) {
+            // Do something
+          }
+        });
+    }
   }
 }

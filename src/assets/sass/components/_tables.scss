@@ -208,3 +208,36 @@ table {
 .mat-sort-header-indicator {
   min-height: 7px !important;
 }
+
+.total-table-wrapper {
+  border-right: 1px solid #d8dee4;
+  width: 50%;
+}
+
+table.total-table {
+  margin: 0px 2.5rem 0px 0px;
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+table.total-table td:nth-child(odd) {
+  width: 58%;
+}
+
+table.total-table td {
+  padding: 4px;
+}
+
+table.total-table tr:last-child {
+  border-top: 1px solid #d8dee4;
+  font-size: 1.7rem !important;
+}
+
+table.total-table td:nth-child(even) {
+  width: 42%;
+  text-align: right;
+}
+
+#last-data-cell {
+  padding-bottom: 2rem;
+}

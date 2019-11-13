@@ -35,7 +35,7 @@
 .comments {
   margin-top: 2rem;
   background-color: white;
-  padding: 2rem 3rem;
+  padding: 2rem 2rem;
   box-shadow: 0px 2px 0.8rem rgba(0, 0, 0, 0.045);
   border-radius: 5px;
 
@@ -68,50 +68,18 @@
 
 .price-box {
   border: 1px dashed black;
-  padding: 1.6rem 2.5rem;
+  padding: 1.2rem 2rem;
   margin: 2.5rem 0px;
   margin-top: 2rem;
   width: 100%;
-  min-height: 16.5rem;
-
-  .total {
-    display: flex;
-    width: 100%;
-    border-top: 1px solid #dddddd;
-
-    p {
-      font-size: 1.8rem;
-    }
-
-    p:last-child {
-      margin-left: auto;
-    }
-  }
-
-  .subtotals {
-    margin-left: auto;
-    p:not(:last-child) {
-      margin-bottom: 8px;
-    }
-  }
-}
-
-.price-wrapper {
   display: flex;
-
-  div:first-child {
-    width: 60%;
-  }
+  min-height: 16.5rem;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-input[type="number"] {
-  font-size: 1.35rem !important;
 }
 
 .info {
@@ -156,6 +124,8 @@ input[type="number"] {
 
 input[type="number"] {
   font-size: 1.4rem;
+  display: inline-block;
+  width: 34%;
 }
 
 .dropdown {
@@ -195,4 +165,47 @@ input[type="number"] {
 .col-md-12.form-group {
   padding-right: 5px !important;
   padding-left: 5px !important;
+}
+
+.payment-wrapper {
+  width: 50%;
+  padding-left: 2.5rem;
+  padding-top: 7px;
+}
+
+.gateway-status {
+  display: flex;
+  margin: 1.3rem 0px;
+  color: #1074bb;
+
+  i {
+    font-size: 24px;
+    margin-right: 5px;
+  }
+
+  img {
+    width: 4.5rem;
+    height: 2.5rem;
+    background: white;
+    border-radius: 4px;
+    margin-left: auto;
+    box-shadow: 0px 4px 1rem rgba(116, 116, 116, 0.07);
+  }
+}
+
+.payment-info {
+  display: flex;
+  padding: 6px;
+  font-size: 1.25rem;
+  border: 1px solid #37c1ce;
+  background: #ddf7fb;
+  color: #37c1ce;
+
+  i {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  p {
+    margin: 0px;
+  }
 }

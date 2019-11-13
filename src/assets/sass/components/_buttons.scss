@@ -569,3 +569,29 @@ select.custom-select {
 .mat-tooltip {
   font-size: 15px !important;
 }
+
+button.btn.dpo {
+  background-color: #1074bb !important;
+  color: white;
+}
+
+.dpo {
+  display: block !important;
+  margin-left: 0px !important;
+  width: 100%;
+  font-size: 1.45rem;
+  font-weight: bold;
+  padding: 6px;
+}
+
+button.btn-outline.dpo {
+  color: #1074bb;
+  border: 1px solid #1074bb;
+  font-size: 1.45rem;
+  background-color: transparent !important;
+  margin-top: 2rem;
+}
+
+div.swal2-popup div.swal2-actions {
+  display: block !important;
+}

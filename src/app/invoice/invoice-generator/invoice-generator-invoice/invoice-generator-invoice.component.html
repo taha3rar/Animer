@@ -55,7 +55,7 @@
     Please choose product!
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="comments">
         <label for="payment_comments">Comments or special instructions for payment</label>
         <textarea
@@ -66,7 +66,7 @@
         ></textarea>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="comments">
         <label for="po_comments">Comments or special instructions for Proforma Invoice</label>
         <textarea
@@ -77,35 +77,53 @@
         ></textarea>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="price-box pull-right">
-        <div class="price-wrapper">
-          <div>
-            <p class="heading-3">Subtotal</p>
-            <div class="display-inline">
-              <p class="heading-3">VAT %</p>
-              <input formControlName="vat_percentage" class="form-control" style="width:23%;" type="number" value="0" />
-            </div>
-            <div class="display-inline">
-              <p class="heading-3">Discount %</p>
-              <input
-                formControlName="discount_percentage"
-                class="form-control"
-                style="width:23%;"
-                type="number"
-                value="0"
-              />
-            </div>
-          </div>
-          <div class="subtotals">
-            <p class="heading-3">{{ invoice.subtotal.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
-            <p class="heading-3">{{ invoice.vat_amount.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
-            <p class="heading-3">{{ invoice.discount_amount.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
-          </div>
+    <div class="col-md-6 price-box">
+      <div class="total-table-wrapper">
+        <table class="total-table">
+          <tr>
+            <td>Subtotal</td>
+            <td>{{ invoice.subtotal.value | number: '1.2-2' }} {{ invoice.currency.value }}</td>
+          </tr>
+          <tr>
+            <td>
+              VAT % <input formControlName="vat_percentage" class="form-control" type="number" value="0" min="0" />
+            </td>
+            <td>{{ invoice.vat_amount.value | number: '1.2-2' }} {{ invoice.currency.value }}</td>
+          </tr>
+          <tr>
+            <td>
+              Discount %
+              <input formControlName="discount_percentage" class="form-control" type="number" value="0" min="0" />
+            </td>
+            <td id="last-data-cell">
+              {{ invoice.discount_amount.value | number: '1.2-2' }} {{ invoice.currency.value }}
+            </td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td>{{ invoice.total_due.value | number: '1.2-2' }} {{ invoice.currency.value }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="payment-wrapper">
+        <div>
+          <input
+            type="checkbox"
+            (change)="openDpoDialog($event.target.checked)"
+            class="checkbox"
+            id="payment-checkbox"
+            #checkbox
+          /><label class="checkbox_label" for="payment-checkbox"><span class="form_checkbox_btn"></span></label>
+          <span>Receive payment for this invoice</span>
         </div>
-        <div class="total">
-          <p class="t-bold t-blue">Total</p>
-          <p class="heading-3">{{ invoice.total_due.value | number: '1.2-2' }} {{ invoice.currency.value }}</p>
+        <div class="gateway-status">
+          <i class="material-icons">check_circle</i>
+          <p>You're logged into DPO</p>
+          <img src="../../../../assets/img/dpo-logo.png" alt="" />
+        </div>
+        <div class="payment-info">
+          <i class="material-icons">info</i>
+          <p>To receive payments securely you'll need to have an account in DPO</p>
         </div>
       </div>
     </div>
