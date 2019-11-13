@@ -147,7 +147,6 @@
               need for the order.
             </p>
             <button class="btn btn-primary" (click)="openOrderModal()">ISSUE PRUCHASE ORDER</button>
-            <button class="btn btn-outline po">WATCH VIDEO</button>
             <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">Skip Step</a>
             <a
               class="skip-btn"
@@ -182,7 +181,6 @@
                 Include details like name and variety, amount, packaging, price and a picture.
               </p>
               <button class="btn btn-primary" (click)="openProductModal()">ADD PRODUCT</button>
-              <button class="btn btn-outline">WATCH VIDEO</button>
               <a class="skip-btn" *ngIf="!currentUser.referrer" (click)="nextStep('contact')">Skip Step</a>
               <a class="skip-btn" *ngIf="currentUser.referrer" (click)="nextStep('pi')">Skip Step</a>
             </div>
@@ -216,7 +214,6 @@
               >
                 ADD CONTACT
               </button>
-              <button class="btn btn-outline">WATCH VIDEO</button>
               <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('pi')">Skip Step</a>
             </div>
             <div [hidden]="!userProgress.first_contact">
@@ -244,7 +241,6 @@
               <button class="btn btn-primary" routerLink="/invoice/generator">
                 ISSUE PROFORMA INVOICE
               </button>
-              <button class="btn btn-outline po">WATCH VIDEO</button>
             </div>
             <div [hidden]="!userProgress.first_pi">
               <h2>Well done! You issued your first Proforma Invoice.</h2>
