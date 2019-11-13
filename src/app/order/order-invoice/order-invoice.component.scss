@@ -1,0 +1,12 @@
+.panel {
+  position: relative;
+}
+
+.payment-statement {
+  position: relative;
+  img {
+    position: absolute;
+    bottom: -14px;
+    right: 0;
+  }
+}

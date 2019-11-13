@@ -22,6 +22,10 @@
         </tr>
       </table>
     </div>
+    <div class="payable-invoice" *ngIf="payableInvoice">
+      <p>PAYABLE INVOICE</p>
+      <img src="../../../assets/img/payment-method.png" />
+    </div>
     <div class="row" style="padding-top: 5rem;">
       <div class="col-md-6">
         <p class="t-bold t-blue">ISSUED BY</p>
@@ -144,7 +148,16 @@
                 </td>
               </tr>
             </table>
+
+            <div class="payment-statement" *ngIf="payableInvoice">
+              <p class="mt-4">
+                This invoice has been marked as payable by the seller. Hit 'Pay Invoice' below to sign into DPO and
+                confirm your payment.
+              </p>
+              <img src="../../../assets/img/dpo-logo.png" width="50" height="30" />
+            </div>
           </div>
+          <button *ngIf="payableInvoice" class="bttn-primary mt-3" style="width: 100%;">PAY INVOICE</button>
         </div>
       </div>
     </div>

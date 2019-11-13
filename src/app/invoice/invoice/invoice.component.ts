@@ -16,6 +16,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
   disclaimerAccepted: boolean;
   @Input()
   generateInvoice = false;
+  payableInvoice = false;
 
   @Input()
   invoice: Invoice;

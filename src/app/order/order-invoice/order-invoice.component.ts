@@ -17,7 +17,7 @@ export class OrderInvoiceComponent extends BaseValidationComponent implements On
   @Input()
   generateInvoice: false;
   @Output() formSubmitted = new EventEmitter();
-
+  payableInvoice = false;
   constructor(private invoiceService: InvoiceService, private router: Router, private alerts: AlertsService) {
     super();
   }
