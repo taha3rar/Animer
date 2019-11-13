@@ -313,6 +313,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
       user_id: credentials.user._id,
       role: credentials.user.roles[0],
       client: credentials.user.roles.includes('client'),
+      marketing_campaign: this.marketing_campaign,
       widget: {
         activator: '#intercom'
       }
