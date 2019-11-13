@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
     });
     this.companyDetailsForm = this.formBuilder.group({
       companyName: [this.user.company_information.company_name],
-      companyNumber: [this.user.company_information.company_registered_number, [Validators.required]],
+      companyNumber: [this.user.company_information.company_registered_number],
       stateRegionProvince: [this.user.company_information.state_province_region],
       address: [this.user.company_information.street],
       city: [this.user.company_information.city],
