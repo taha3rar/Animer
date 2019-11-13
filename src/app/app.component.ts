@@ -135,9 +135,10 @@ export class AppComponent implements OnInit {
   responsive(windowSize: any) {
     const currentUrl = window.location.href;
     if (windowSize <= 600 && !currentUrl.includes('home') && !currentUrl.includes('registration')) {
-      if (currentUrl.includes('staging')) {
+      if (currentUrl.includes('staging') || currentUrl.includes('localhost')) {
         if (currentUrl.includes('validation')) {
-          window.location.href = 'https://mobile-staging.agt-platform.com/validation';
+          const user_id = currentUrl.substr(currentUrl.length - 24);
+          window.location.href = `https://mobile-staging.agt-platform.com/validation/${user_id}`;
         } else {
           window.location.href = 'https://mobile-staging.agt-platform.com';
         }
