@@ -5,7 +5,9 @@ export const tooltips = {
   orders: {
     orders_list: {
       place_order:
-        'By clicking here, you will be able to create an order to a specific client chosen from you client list or not'
+        'By clicking here, you will be able to create an order to a specific client chosen from you client list or not',
+      external_po: 'An External Purchase Order is a quick order to any of your suppliers',
+      internal_po: 'Internal Purchase Order lets you send an order to one of your contacts on Avenews-GT'
     },
     order_generator: {
       submit: 'After submitting your order, you seller will receive a notification'
