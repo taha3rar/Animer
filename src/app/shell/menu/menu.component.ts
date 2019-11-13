@@ -48,7 +48,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/client',
-    title: 'Clients',
+    title: 'Contacts',
     type: 'link',
     icontype: 'icon-clients',
     neededPermission: 'list-clients'
