@@ -39,7 +39,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   accessToken: string;
   isLoading = false;
   network: string;
-  marketing_campaign: boolean;
+  marketing_campaign = true;
 
   constructor(
     private router: Router,
