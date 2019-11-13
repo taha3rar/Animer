@@ -137,7 +137,7 @@ export class AppComponent implements OnInit {
     if (windowSize <= 600 && !currentUrl.includes('home') && !currentUrl.includes('registration')) {
       if (currentUrl.includes('staging') || currentUrl.includes('localhost')) {
         if (currentUrl.includes('validation')) {
-          const user_id = currentUrl.substr(currentUrl.length - 24);
+          const user_id = currentUrl.substr(currentUrl.length - 24); // 24 is the length of a Mongo ObjectId
           window.location.href = `https://mobile-staging.agt-platform.com/validation/${user_id}`;
         } else {
           window.location.href = 'https://mobile-staging.agt-platform.com';
