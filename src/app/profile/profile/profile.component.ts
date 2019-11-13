@@ -67,7 +67,6 @@ export class ProfileComponent implements OnInit {
           .removeClass('glyphicon-minus')
           .addClass('glyphicon-plus');
       });
-
     this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
   }
 
@@ -123,6 +122,7 @@ export class ProfileComponent implements OnInit {
       credentialsToUpdate.user.personal_information = data.personal_information;
       credentialsToUpdate.user.email = data.email;
       this.authenticationService.setCredentials(credentialsToUpdate);
+      this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
       this.alerts.showAlert('Your profile has been updated!');
     });
   }
@@ -138,6 +138,7 @@ export class ProfileComponent implements OnInit {
     this.user.company_information.bio = this.companyf.bio.value;
     this.userService.update(this.currentUserId, this.user).subscribe(data => {
       this.alerts.showAlert('Changes saved!');
+      this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
     });
   }
 }
