@@ -27,7 +27,7 @@
             <a data-toggle="tab" class="label" href="#create-product">Products</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-client']">
-            <a data-toggle="tab" class="label" href="#add-clients">Clients</a>
+            <a data-toggle="tab" class="label" href="#add-clients">Contacts</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-ecosystem']">
             <a data-toggle="tab" class="label" href="#create-ecosystem">Ecosystems</a>
@@ -40,13 +40,13 @@
             <figure class="vector-container">
               <img src="../../../assets/img/dashboard-imgs/clients.png" class="vector-tutorial" />
             </figure>
-            <p class="panel-title">Go ahead and add your clients to your network on Avenews-GT</p>
+            <p class="panel-title">Go ahead and add your contacts to your network on Avenews-GT</p>
             <p class="t-bold t-light-gray">
-              Do you have clients that you usually do business with? The Clients feature is where you can invite new
-              clients to your network, centrally manage your existing clients, and review the transactions you have with
-              them.
+              Do you have contacts that you usually do business with? The Contacts feature is where you can invite new
+              contacts to your network, centrally manage your existing contacts, and review the transactions you have
+              with them.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/client">Go to Clients</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/client">Go to Contacts</button>
           </div>
           <div
             class="tab-pane"
@@ -73,9 +73,9 @@
           </div>
           <div class="tab-pane" id="quote-request" *ngIf="currentUser.roles[0] === 'seller'">
             <figure><img src="../../assets/img/dashboard-imgs/quote-request.png" class="vector-tutorial" /></figure>
-            <p class="panel-title">Receive Quotations directly from clients</p>
+            <p class="panel-title">Receive Quotations directly from contacts</p>
             <p class="t-bold t-light-gray">
-              The Quote Request section is where you can recieve quote requests from your clients, and reply with
+              The Quote Request section is where you can recieve quote requests from your contacts, and reply with
               customized Quotations. You can enter customized quantities and comments per quotation, and send it to your
               buyers with the ability to download it as PDF.
             </p>
@@ -88,9 +88,9 @@
             <figure *ngIf="currentUser.roles[0] === 'buyer' || currentUser.roles[0] === 'agribusiness'">
               <img src="../../assets/img/dashboard-imgs/buyer-ecosystems.png" class="vector-tutorial" />
             </figure>
-            <p class="panel-title">Create customized groups of clients</p>
+            <p class="panel-title">Create customized groups of contacts</p>
             <p class="t-bold t-light-gray">
-              Have a lot of clients? The Ecosystems feature is where you can create customized groups of clients with
+              Have a lot of contacts? The Ecosystems feature is where you can create customized groups of contacts with
               common characteristics, such as location, product type, operation type and more.
             </p>
             <button class="btn-primary-shadow pull-right" routerLink="/ecosystem">Go to Ecosystems</button>
@@ -101,7 +101,7 @@
             *ngIf="currentUser.roles[0] === 'agribusiness' || currentUser.roles[0] === 'buyer'"
           >
             <figure><img src="../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" /></figure>
-            <p class="panel-title">Receive Proforma Invoices directly from clients</p>
+            <p class="panel-title">Receive Proforma Invoices directly from contacts</p>
             <p class="t-bold t-light-gray">
               The Proforma Invoices section is where you can review, download, and manage all of the proforma invoices
               submitted by your sellers in one place. Don’t worry about staying updated - once a proforma invoice has
@@ -111,7 +111,7 @@
           </div>
           <div class="tab-pane" id="create-pi" *ngxPermissionsOnly="['create-pi']">
             <figure><img src="../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" /></figure>
-            <p class="panel-title">Easily distribute Proforma Invoices directly to your clients</p>
+            <p class="panel-title">Easily distribute Proforma Invoices directly to your contacts</p>
             <p class="t-bold t-light-gray">
               The Invoices feature is where you can generate, review and distribute stand-alone proforma invoices, which
               are proforma invoices that are not connected directly to a purchase order you received from a buyer on the
@@ -137,7 +137,7 @@
             <figure><img src="../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" /></figure>
             <p class="panel-title">Receive and reply to purchase orders</p>
             <p class="t-bold t-light-gray">
-              The Orders feature is where you can receive purchase orders from your client, reply to them with
+              The Orders feature is where you can receive purchase orders from your contact, reply to them with
               customized proforma invoices, upload your own necessary documents, and manage the entire trade process in
               one place. Once a purchase order has been received, you will be notified and then all you need to do is
               reply with a proforma invoice.
