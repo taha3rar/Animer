@@ -141,6 +141,9 @@ export class AuthenticationService {
   private setPermissions(credentials?: Credentials): Observable<NgxPermissionsObject> {
     if (credentials != null) {
       if (credentials.user != null) {
+        // flush existing permissions before
+        this.removePermissions();
+
         this.permissionsService.addPermission(credentials.user.permissions);
         return this.permissionsService.permissions$.pipe(permissions => {
           return permissions;

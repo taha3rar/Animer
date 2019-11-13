@@ -43,12 +43,13 @@ export class JwtService {
   setCredentials(credentials?: Credentials, remember?: boolean) {
     this._credentials = credentials || null;
 
+    // flush existing credentials in case exists
+    sessionStorage.removeItem(credentialsKey);
+    localStorage.clear(); // removes everything, it includes the currentPage in the different lists
+
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
-    } else {
-      sessionStorage.removeItem(credentialsKey);
-      localStorage.clear(); // removes everything, it includes the currentPage in the different lists
     }
   }
 }
