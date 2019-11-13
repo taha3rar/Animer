@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BaseProductOrder } from '../../../../order/order-generator/order-product-list/base-product-order';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-modal-agricultural-product',
@@ -9,6 +10,7 @@ import { BaseProductOrder } from '../../../../order/order-generator/order-produc
   styleUrls: ['./modal-agricultural-product.component.scss']
 })
 export class ModalAgriculturalProductComponent extends BaseProductOrder {
+  tooltips = tooltips.product_generator.agricultural;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
     public dialogRef: MatDialogRef<ModalAgriculturalProductComponent>

@@ -159,7 +159,7 @@ export class ProcessedProductGeneratorComponent extends BaseValidationComponent
           () => {
             this.alerts.showAlert('New product profile has been created!');
             this.dialog.close();
-            this.router.navigateByUrl('/product/list');
+            this.router.navigateByUrl(this.router.url);
           },
           err => {
             this.disableSubmitButton(false);

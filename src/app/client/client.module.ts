@@ -7,7 +7,6 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { CurrentUserClientsResolver } from '@app/shared/resolvers/current-user-clients.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ClientGeneratorComponent } from './client-generator/client-generator.component';
 import { ClientComponent } from './client/client.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { ClientOrdersComponent } from './client-orders/client-orders.component';
@@ -23,6 +22,7 @@ import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
 import { MatSortModule } from '@angular/material';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -36,11 +36,11 @@ import { MatSortModule } from '@angular/material';
     ReactiveFormsModule,
     TutorialsModule,
     NgxPermissionsModule.forRoot(),
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule
   ],
   declarations: [
     ClientListComponent,
-    ClientGeneratorComponent,
     ClientComponent,
     ClientProfileComponent,
     ClientOrdersComponent,

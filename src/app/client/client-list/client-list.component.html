@@ -1,14 +1,14 @@
 <a class="pull-right need-help" data-toggle="wizard" data-target="#clientTutorials">Need help?</a>
-<h1 class="main-title">Clients</h1>
+<h1 class="main-title">Contacts</h1>
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
-  <p *ngIf="isInvited">Review your work with the client who invited you to his network.</p>
+  <p *ngIf="isInvited">Review your work with the Contact who invited you to his network.</p>
   <p *ngIf="!isInvited">
-    Invite new clients to your network, centrally manage your existing clients, and review the transactions you have
+    Invite new Contacts to your network, centrally manage your existing >Contacts, and review the transactions you have
     with them.
   </p>
 </div>
-<h1 class="main-title">Clients List</h1>
+<h1 class="main-title">Contact List</h1>
 
 <div class="mt-1 actions-section clearfix">
   <div>
@@ -18,17 +18,19 @@
       class="search-bar"
       [(ngModel)]="searchTerm"
       type="text"
-      placeholder="Search clients..."
+      placeholder="Search contacts..."
     />
   </div>
   <div class="flex-pr">
     <button
-      class="bttn-primary bttn-add pull-right"
+      class="bttn-primary bttn-add"
       data-toggle="wizard"
       *ngxPermissionsOnly="['create-client']"
       data-target="#addClientWizard"
+      matTooltip="{{ tooltips.add_client }}"
+      matTooltipPosition="above"
     >
-      <span>Add Client</span>
+      <span>Add a Contact</span>
     </button>
   </div>
 </div>
@@ -38,7 +40,7 @@
     <tr>
       <th mat-sort-header="id" class="text-center">ID</th>
       <th mat-sort-header="company">Company</th>
-      <th mat-sort-header="contactName">Contact</th>
+      <th mat-sort-header="contactName">Contact Name</th>
       <th mat-sort-header="type">Type</th>
       <th class="text-right">Actions</th>
     </tr>
@@ -54,7 +56,8 @@
       <td class="text-center">{{ client.numericId }}</td>
       <td>{{ client.company_name }}</td>
       <td>{{ client.first_name }} {{ client.last_name }}</td>
-      <td style="text-transform: capitalize;">{{ client.role }}</td>
+      <td *ngIf="client.role != 'external_user'" style="text-transform: capitalize;">{{ client.role }}</td>
+      <td *ngIf="client.role === 'external_user'">External Contact</td>
       <td class="text-right">
         <button class="round-button-primary" [routerLink]="['/client', client._id]">
           <i class="material-icons">remove_red_eye</i>
@@ -66,5 +69,5 @@
 
 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
 
-<app-client-generator></app-client-generator>
+<app-contact-generator></app-contact-generator>
 <app-client-tutorials></app-client-tutorials>

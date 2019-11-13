@@ -1,17 +1,18 @@
-import { AlertsService } from './../../../core/alerts.service';
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
-import { OrderService } from '@app/core/api/order.service';
 import { DocumentGeneratorComponent } from '@app/shared/components/document-generator/document-generator.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { ProductService, QuotationService } from '@app/core';
+import { ProductService, QuotationService, OrderService } from '@app/core';
 import { ModalInventoryComponent } from '@app/shared/components/products/modal-inventory/modal-inventory.component';
 import { Quotation } from '@app/core/models/quotation/quotation';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from '@app/core/models/order/product';
+import { UserDataComponent } from '@app/shared/components/user-data/user-data.component';
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertsService } from '@app/core/alerts.service';
 
 @Component({
   selector: 'app-order-generator-po',
@@ -26,6 +27,9 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   productsPristine = true;
   @Output() newDraftPO = new EventEmitter();
   @Input() fromQuotation = false;
+  @Input() openOrder = false;
+  @ViewChild('sellerData') sellerData: UserDataComponent;
+  newSeller: FormGroup;
   inventoryProducts: any[];
   quotedProducts: ProductInvoice[] = [];
   validBy: NgbDateStruct;
@@ -39,11 +43,11 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   constructor(
     public orderDataService: OrderDataService,
     public dialog: MatDialog,
-    private orderService: OrderService,
-    private router: Router,
-    private alerts: AlertsService,
     private productService: ProductService,
-    private quotationService: QuotationService
+    private orderService: OrderService,
+    private quotationService: QuotationService,
+    private router: Router,
+    private alerts: AlertsService
   ) {
     super(dialog, orderDataService);
   }
@@ -85,6 +89,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
         });
       });
     }
+    this.onChanges();
   }
 
   get order() {
@@ -101,6 +106,13 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
 
   get date_created() {
     return this.form.controls.date_created.value;
+  }
+
+  onChanges(): void {
+    this.preSubmit();
+    this.form.valueChanges.subscribe(val => {
+      this.updateOrder();
+    });
   }
 
   openDialogInventory(quoted: boolean): void {
@@ -179,26 +191,32 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
 
   draftOrder() {
     this.disableSubmitButton(true);
-    this.preSubmit();
     this.newDraftPO.emit(true);
-    this.newOrder = this.form.value;
-    this.newOrder.products = this.products;
-    this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
-    this.newOrder.total_due = this.order.subtotal.value;
-    this.newOrder.draft = true;
-    this.orderService.draft(this.newOrder).subscribe(
-      () => {
-        this.alerts.showAlert('Your purchase order has been saved as a draft!');
-        this.router.navigateByUrl('/order');
-      },
-      err => {
-        this.disableSubmitButton(false);
-      }
-    );
+    this.preSubmit();
+    if (this.openOrder) {
+      this.orderService.draftOpen(this.newOrder).subscribe(
+        () => {
+          this.alerts.showAlert('Your purchase order has been saved as a draft!');
+          this.router.navigateByUrl('/order');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
+    } else {
+      this.orderService.draft(this.newOrder).subscribe(
+        () => {
+          this.alerts.showAlert('Your purchase order has been saved as a draft!');
+          this.router.navigateByUrl('/order');
+        },
+        err => {
+          this.disableSubmitButton(false);
+        }
+      );
+    }
   }
 
-  toReview() {
-    this.preSubmit();
+  updateOrder() {
     this.newOrder = this.form.value;
     this.newOrder.products = this.products;
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);

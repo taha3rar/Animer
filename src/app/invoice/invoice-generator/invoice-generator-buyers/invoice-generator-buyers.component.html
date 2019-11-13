@@ -20,7 +20,7 @@
       </div>
       <div class="padding-all-2" *ngIf="clients?.length >= 1">
         <div class="alert alert-danger" role="alert" [hidden]="validBuyer || !nextBtnClicked">
-          Please choose a client!
+          Please choose a contact!
         </div>
         <button class="btn-icons pull-right">
           <i class="material-icons" (click)="onNextPage(clients.length, 6)">keyboard_arrow_right</i>
@@ -61,9 +61,9 @@
       </div>
       <div class="add-supplier-box" [hidden]="clients?.length > 0">
         <img src="../../../../assets/img/default/pi-po/noClient.png" width="285" height="183" />
-        <p>You have no clients yet! Please go to the clients page to add your clients.</p>
+        <p>You have no buyers yet! Please go to the contacts page to add your first buyer contact.</p>
         <button class="bttn-primary" [routerLink]="['/client']">
-          <span>Go to clients</span>
+          <span>Go to Contacts</span>
         </button>
       </div>
     </div>

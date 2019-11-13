@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BaseProductOrder } from '../../../../order/order-generator/order-product-list/base-product-order';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-modal-processed-product',
@@ -9,6 +10,7 @@ import { BaseProductOrder } from '../../../../order/order-generator/order-produc
   styleUrls: ['./modal-processed-product.component.scss']
 })
 export class ModalProcessedProductComponent extends BaseProductOrder implements OnInit {
+  tooltips = tooltips.product_generator.processed;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
     public dialogRef: MatDialogRef<ModalProcessedProductComponent>

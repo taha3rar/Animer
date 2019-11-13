@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from '@app/core/models/order/order';
 import { AuthenticationService } from '@app/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { CsvService } from '@app/shared/services/csv.service';
 import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-orders-list',
@@ -22,6 +23,7 @@ export class OrdersListComponent implements OnInit {
   viewAsSeller = false;
   viewAsBuyer = true;
   currentUser: any;
+  tooltips = tooltips.orders.orders_list;
   constructor(
     private route: ActivatedRoute,
     private authService: AuthenticationService,

@@ -40,7 +40,20 @@ const routes: Routes = [
       runGuardsAndResolvers: 'always'
     },
     {
-      path: 'order/generator',
+      path: 'order/generator/open',
+      component: OrderGeneratorComponent,
+      resolve: {
+        buyer: CurrentUserResolver
+      },
+      canActivate: [PermissionGuard],
+      data: {
+        openOrder: true,
+        permission: 'create-order'
+      },
+      canDeactivate: [ConfirmationGuard]
+    },
+    {
+      path: 'order/generator/standard',
       component: OrderGeneratorComponent,
       resolve: {
         buyer: CurrentUserResolver,
@@ -48,6 +61,7 @@ const routes: Routes = [
       },
       canActivate: [PermissionGuard],
       data: {
+        openOrder: false,
         permission: 'create-order'
       },
       canDeactivate: [ConfirmationGuard]
@@ -58,6 +72,20 @@ const routes: Routes = [
       canActivate: [OrderGuard],
       resolve: {
         order: OrderPoResolver
+      },
+      data: {
+        openOrder: false
+      }
+    },
+    {
+      path: 'order/generator/open/:id',
+      component: OrderGeneratorComponent,
+      canActivate: [OrderGuard],
+      resolve: {
+        order: OrderPoResolver
+      },
+      data: {
+        openOrder: true
       }
     },
     {

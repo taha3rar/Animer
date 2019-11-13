@@ -1,0 +1,28 @@
+.panel {
+  height: 20rem;
+  background: #fbffff;
+  color: #5b6675;
+  margin-top: 2rem;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  p {
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+}
+
+.panel-body {
+  display: flex;
+}
+
+.welcome-img {
+  width: 14%;
+  right: 2rem;
+  margin-right: 2rem;
+  bottom: 2rem;
+}

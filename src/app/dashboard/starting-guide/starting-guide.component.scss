@@ -1,0 +1,196 @@
+@import "../../../assets/sass/abstracts/mixins";
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  p {
+    display: inline-block;
+  }
+
+  p:first-child {
+    font-size: 1.7rem;
+  }
+}
+
+.progress-bar {
+  background-color: #37c1ce;
+  transition: all 0.7s ease-in-out;
+}
+
+.starting-guide {
+  display: flex;
+  height: 83.7%;
+
+  &--left {
+    padding: 1.5rem 0px 2rem 0px;
+    width: 35%;
+    border-right: 1px solid #f1f1f1;
+    height: 100%;
+  }
+
+  &--right {
+    padding: 3rem 3.5rem;
+    width: 65%;
+    height: 100%;
+    position: relative;
+
+    p {
+      font-size: 1.55rem;
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .account-img {
+    width: 24%;
+  }
+
+  .product-img {
+    width: 28%;
+  }
+
+  .tab-wrapper {
+    display: flex;
+
+    div {
+      margin-right: 2.5rem;
+    }
+  }
+
+  @media (max-width: 1803px) {
+    .btn-outline.po,
+    .btn-outline.pi {
+      display: block;
+      margin-left: 0px;
+      margin-top: 0.8rem;
+    }
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    padding: 1rem 2rem 1rem 3rem;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s background ease;
+  }
+
+  li:hover,
+  li.active {
+    background: #37c1ce12;
+  }
+
+  li:not(:last-of-type):before {
+    position: absolute;
+    z-index: 1;
+    content: "";
+    left: 4rem;
+    bottom: -2rem;
+    width: 1px;
+    height: 100%;
+    background-color: #d1e7ee;
+  }
+}
+
+.nav {
+  flex-direction: column;
+}
+
+.circle-wrapper {
+  width: 6%;
+  margin-top: 7px;
+}
+
+.step-title {
+  width: 94%;
+  font-size: 1.5rem;
+  margin-top: 7px;
+  margin-left: 1.5rem;
+  display: inline-block;
+}
+
+ul li span.circle {
+  display: inline-block;
+  padding: 0 !important;
+  z-index: 100;
+  line-height: 20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: white;
+  border: 1px solid #d1e7ee;
+  position: relative;
+}
+
+ul li.nav-item.completed span.circle {
+  border: none;
+  background: #00c78c;
+}
+
+ul li.nav-item.completed div.step-title {
+  color: #00c78c;
+}
+
+ul li.nav-item.completed .circle::before {
+  content: "\f00c";
+  font-family: FontAwesome;
+  position: absolute;
+  font-weight: 100;
+  color: white;
+  top: 52.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ul li.nav-item.current-step span.circle {
+  background: #f6b400;
+  color: white;
+  border: none;
+}
+
+ul li.nav-item.current-step div.step-title {
+  color: #212529;
+}
+
+ul li.nav-item.current-step .circle::before {
+  content: "\f005";
+  font-family: FontAwesome;
+  position: absolute;
+  font-weight: 100;
+  color: white;
+  top: 52.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ul li.nav-item.active div {
+  font-weight: 700;
+}
+
+.header-wrapper {
+  display: flex;
+}
+
+.skip-btn {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 3rem;
+  font-size: 1.4rem;
+  color: #37c1ce !important;
+  cursor: pointer;
+}
+
+.skip-btn:hover {
+  text-decoration-line: underline !important;
+}
+
+button.swal-button-o {
+  background: #37c1ce;
+}

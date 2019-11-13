@@ -32,7 +32,7 @@
           />
         </div>
       </div>
-      <p class="heading-2">Amount *</p>
+      <p class="heading-2">Amount</p>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="weight-unit">Measurement Unit *</label>
@@ -89,6 +89,12 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="variety">Estimated Number of Packages *</label>
+          <i
+            class="material-icons ml-2 md-18"
+            style="vertical-align: middle;"
+            matTooltip="{{ tooltips.estimated_number_packages }}"
+            >info</i
+          >
           <input
             type="number"
             id="total-packages"
@@ -132,6 +138,9 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="package-price">Price per Package *</label>
+          <i class="material-icons ml-2 md-18" style="vertical-align: middle;" matTooltip="{{ tooltips.package_price }}"
+            >info</i
+          >
           <input
             type="number"
             name="package_price"
@@ -145,6 +154,9 @@
         </div>
         <div class="form-group col-md-6">
           <label for="total-price">Total Price *</label>
+          <i class="material-icons ml-2 md-18" style="vertical-align: middle;" matTooltip="{{ tooltips.total_price }}"
+            >info</i
+          >
           <input
             type="number"
             id="total-price"

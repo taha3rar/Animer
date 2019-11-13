@@ -26,9 +26,24 @@
       <span translate>Export All Orders</span>
     </button>
 
-    <button *ngxPermissionsOnly="['create-order']" class="bttn-primary bttn-add" routerLink="/order/generator">
-      <span translate>Place Order </span>
-    </button>
+    <div *ngxPermissionsOnly="['create-order']" class="dropdown">
+      <button
+        class="bttn-primary dropdown-toggle"
+        data-toggle="dropdown"
+        matTooltip="{{ tooltips.place_order }}"
+        matTooltipPosition="above"
+      >
+        <span translate>Place Order </span>
+      </button>
+      <ul class="dropdown-menu">
+        <li routerLink="/order/generator/standard" matTooltip="{{ tooltips.internal_po }}" matTooltipPosition="left">
+          <a>Internal Purchase Order</a>
+        </li>
+        <li routerLink="/order/generator/open" matTooltip="{{ tooltips.external_po }}" matTooltipPosition="left">
+          <a>External Purchase Order</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

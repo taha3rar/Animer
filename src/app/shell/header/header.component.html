@@ -13,6 +13,12 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+      <app-user-progress
+        [userProgress]="userProgress"
+        [currentUser]="currentUser"
+        [currentComponent]="'general'"
+        style="margin-left: 1.5rem;"
+      ></app-user-progress>
       <ul class="navigation-right">
         <li>
           <app-notification-list></app-notification-list>
@@ -35,9 +41,16 @@
             </div>
             <div ngbDropdownMenu aria-labelledby="user-dropdown">
               <ul>
-                <li class="dropdown-item" routerLink="/profile">
+                <li
+                  class="dropdown-item"
+                  routerLink="/profile"
+                  matTooltip="{{ tooltips.personal_information }}"
+                  matTooltipPosition="left"
+                >
                   <i class="material-icons pull-left">settings</i>
-                  <span>Settings</span>
+                  <span>
+                    Settings
+                  </span>
                 </li>
                 <li (click)="logout()" class="dropdown-item">
                   <i class="material-icons pull-left">power_settings_new</i>

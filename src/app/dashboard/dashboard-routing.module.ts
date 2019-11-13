@@ -5,6 +5,7 @@ import { Shell } from '@app/shell/shell.service';
 import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
 import { DashboardCounterResolver } from './resolvers/dashboard-counter.resolver';
 import { extract } from '@app/core';
+import { CurrentUserProgressResolver } from '@app/shared/resolvers/current-user-progress.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -18,9 +19,11 @@ const routes: Routes = [
       component: DashboardMainComponent,
       resolve: {
         counter: DashboardCounterResolver,
-        user: CurrentUserResolver
+        currentUser: CurrentUserResolver,
+        progress: CurrentUserProgressResolver
       },
-      data: { title: extract('Dashboard') }
+      data: { title: extract('Dashboard') },
+      runGuardsAndResolvers: 'always'
     }
   ])
 ];

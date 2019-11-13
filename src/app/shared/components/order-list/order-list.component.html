@@ -13,13 +13,19 @@
   <tbody>
     <tr
       *ngFor="
-        let order of (orders | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage })
+        let order of orders | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }
       "
     >
       <td class="text-center">{{ order.numericId }}</td>
       <td>{{ order.date_created | date: 'dd/MM/yyyy' }}</td>
       <td>
-        <span *ngIf="!order.seller.company_name || !order.buyer.company_name">N/A </span>
+        <span
+          *ngIf="
+            (userId == order.seller._id && !order.buyer.company_name) ||
+            (userId == order.buyer._id && !order.seller.company_name)
+          "
+          >N/A</span
+        >
         <span *ngIf="userId == order.seller._id"
           >{{ order.buyer.company_name }} / {{ order.buyer.first_name }} {{ order.buyer.last_name }}</span
         >
@@ -81,10 +87,18 @@
           <i class="material-icons">remove_red_eye</i>
         </button>
         <button
-          *ngIf="(order.invoice || userId == order.buyer._id) && order.draft"
+          *ngIf="(order.invoice || userId == order.buyer._id) && order.draft && !order.external_order"
           class="round-button-primary"
           data-toggle="stepper"
           [routerLink]="['/order/generator', order._id]"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button
+          *ngIf="(order.invoice || userId == order.buyer._id) && order.draft && order.external_order"
+          class="round-button-primary"
+          data-toggle="stepper"
+          [routerLink]="['/order/generator/open', order._id]"
         >
           <i class="material-icons">remove_red_eye</i>
         </button>

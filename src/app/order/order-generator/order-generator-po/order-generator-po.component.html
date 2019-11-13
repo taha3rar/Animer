@@ -9,7 +9,13 @@
     <div class="col-md-6">
       <div class="info">
         <p class="heading-3">ISSUED FOR</p>
-        <app-user-data [user]="seller" [issued_for]="true"></app-user-data>
+        <app-user-data
+          #sellerData
+          [openDocument]="openOrder"
+          [user]="seller"
+          [formInput]="form"
+          [issued_for]="true"
+        ></app-user-data>
       </div>
     </div>
   </div>
@@ -27,7 +33,7 @@
         <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
         <ul class="dropdown-menu">
           <li *ngIf="fromQuotation"><a (click)="openDialogInventory(true)">Quotation Products</a></li>
-          <li><a (click)="openDialogInventory(false)">From Inventory</a></li>
+          <li *ngIf="!openOrder"><a (click)="openDialogInventory(false)">From Inventory</a></li>
           <li><a (click)="openDialogAgricultural()">New Agricultural Product</a></li>
           <li><a (click)="openDialogProcessed()">New Processed Product</a></li>
         </ul>
@@ -259,16 +265,16 @@
   <div class="margin-top margin-bottom-2 clearfix">
     <button
       class="bttn-primary pull-right next-step"
-      (click)="toReview()"
-      [hidden]="!form.valid || products.length < 1"
+      [hidden]="!form.valid || products.length < 1 || !sellerData.formInput.valid"
     >
       Next Step &rarr;
     </button>
     <button
       class="bttn-primary pull-right"
       (click)="onSubmit(form)"
+      (click)="sellerData.onSubmit(sellerData.formInput)"
       (click)="this.productsPristine = false"
-      [hidden]="form.valid && products.length > 0"
+      [hidden]="form.valid && products.length > 0 && sellerData.formInput.valid"
     >
       Next Step &rarr;
     </button>

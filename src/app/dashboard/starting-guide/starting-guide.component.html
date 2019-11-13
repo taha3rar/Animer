@@ -1,0 +1,269 @@
+<div class="panel welcome-panel">
+  <div class="panel-body">
+    <div class="panel-header">
+      <p>Starting Guide</p>
+      <app-user-progress
+        [userProgress]="userProgress"
+        [currentUser]="currentUser"
+        style="margin-left: auto;"
+        (completedProgress)="progressCompleted = $event"
+      ></app-user-progress>
+    </div>
+    <div class="starting-guide">
+      <div class="starting-guide--left">
+        <ul class="nav nav-tabs" role="tablist" id="startingGuideTab">
+          <li
+            class="nav-item completed"
+            *ngIf="!currentUser.referrer"
+            data-toggle="tab"
+            href="#account"
+            role="tab"
+            aria-selected="true"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Create an Account</div>
+          </li>
+          <li
+            class="nav-item active"
+            [class.completed]="userProgress.account_reviewed"
+            *ngIf="currentUser.referrer"
+            data-toggle="tab"
+            href="#review-account"
+            role="tab"
+            aria-selected="true"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Review your Account</div>
+          </li>
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#po"
+            role="tab"
+            aria-selected="true"
+            [class.completed]="userProgress.first_po"
+            *ngxPermissionsOnly="['create-order']"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Try out your first Purchase Order</div>
+          </li>
+          <li
+            [ngClass]="{
+              completed: userProgress.first_product == true
+            }"
+            data-toggle="tab"
+            class="nav-item"
+            href="#product"
+            role="tab"
+            aria-selected="true"
+            *ngxPermissionsOnly="['create-product']"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Add your first Product</div>
+          </li>
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#contact"
+            role="tab"
+            aria-selected="true"
+            [class.completed]="userProgress.first_contact"
+            *ngxPermissionsOnly="['create-client']"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'agribusiness'">Add your first Contact</div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'buyer'">Add your first Seller Contact</div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'seller'">Add your first Buyer Contact</div>
+          </li>
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#pi"
+            role="tab"
+            aria-selected="true"
+            [class.completed]="userProgress.first_pi"
+            *ngxPermissionsOnly="['create-pi']"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Issue your first Proforma Invoice</div>
+          </li>
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#business"
+            role="tab"
+            aria-selected="true"
+            *ngIf="progressCompleted"
+            [class.current-step]="progressCompleted"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">Now you're in Business!</div>
+          </li>
+        </ul>
+      </div>
+      <div class="starting-guide--right tab-content">
+        <div class="tab-pane active" id="account" role="tabpanel" *ngIf="!currentUser.referrer">
+          <h2>Well Done! You created your Account.</h2>
+          <p>
+            Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.
+          </p>
+          <button class="btn btn-primary" *ngxPermissionsOnly="['create-order']" (click)="nextStep('po')">
+            NEXT STEP
+          </button>
+          <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">
+            NEXT STEP
+          </button>
+
+          <img src="../../../assets/img/dashboard-imgs/account.png" class="vector-tutorial account-img" alt="" />
+        </div>
+
+        <div class="tab-pane active" id="review-account" *ngIf="currentUser.referrer" role="tabpanel">
+          <div [hidden]="userProgress.account_reviewed">
+            <h2>Welcome! Please review your account details</h2>
+            <p>
+              Confirm your details are correct, then you can start trading.
+            </p>
+            <button class="btn btn-primary" routerLink="/profile">REVIEW ACCOUNT</button>
+            <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">Skip Step</a>
+            <a class="skip-btn" *ngIf="currentUser.roles[0] == 'buyer'" (click)="nextStep('po')">Skip Step</a>
+          </div>
+          <div [hidden]="!userProgress.account_reviewed">
+            <h2>Well Done! You have reviewed your account.</h2>
+            <p>Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.</p>
+            <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'buyer'" (click)="nextStep('po')">
+              NEXT STEP
+            </button>
+            <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">
+              NEXT STEP
+            </button>
+          </div>
+          <img src="../../../assets/img/dashboard-imgs/review-account.png" class="vector-tutorial account-img" alt="" />
+        </div>
+        <div class="tab-pane" id="po" role="tabpanel" *ngxPermissionsOnly="['create-order']">
+          <div [hidden]="userProgress.first_po">
+            <h2>Try out your first Purchase Order.</h2>
+            <p>
+              Add the products you would like to purchase, the details of your seller and any special instructions you
+              need for the order.
+            </p>
+            <button class="btn btn-primary" (click)="openOrderModal()">ISSUE PRUCHASE ORDER</button>
+            <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">Skip Step</a>
+            <a
+              class="skip-btn"
+              *ngIf="currentUser.roles[0] == 'buyer' && !currentUser.referrer"
+              (click)="nextStep('contact')"
+              >Skip Step</a
+            >
+          </div>
+          <div [hidden]="!userProgress.first_po">
+            <h2>Well done! You issued your first Purchase Order.</h2>
+            <p>
+              To do this again, click the Orders button on the left side menu. Now you’re ready for the next step.
+            </p>
+            <button class="btn btn-primary" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">
+              NEXT STEP
+            </button>
+            <button
+              class="btn btn-primary"
+              *ngIf="currentUser.roles[0] == 'buyer' && !currentUser.referrer"
+              (click)="nextStep('contact')"
+            >
+              NEXT STEP
+            </button>
+          </div>
+          <img src="../../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" alt="" />
+        </div>
+        <div class="tab-pane" id="product" role="tabpanel" *ngxPermissionsOnly="['create-product']">
+          <div class="tab-wrapper">
+            <div [hidden]="userProgress.first_product">
+              <h2>Add your first Product.</h2>
+              <p>
+                Include details like name and variety, amount, packaging, price and a picture.
+              </p>
+              <button class="btn btn-primary" (click)="openProductModal()">ADD PRODUCT</button>
+              <a class="skip-btn" *ngIf="!currentUser.referrer" (click)="nextStep('contact')">Skip Step</a>
+              <a class="skip-btn" *ngIf="currentUser.referrer" (click)="nextStep('pi')">Skip Step</a>
+            </div>
+            <div [hidden]="!userProgress.first_product">
+              <h2>Well done! You added your first Product.</h2>
+              <p>
+                To do this again, click the Products button on the left side menu. Now you’re ready for the next step.
+              </p>
+              <button class="btn btn-primary" *ngIf="currentUser.referrer" (click)="nextStep('pi')">
+                NEXT STEP
+              </button>
+              <button class="btn btn-primary" *ngIf="!currentUser.referrer" (click)="nextStep('contact')">
+                NEXT STEP
+              </button>
+            </div>
+            <img src="../../../assets/img/dashboard-imgs/inventory.svg" class="vector-tutorial product-img" alt="" />
+          </div>
+        </div>
+        <div class="tab-pane" id="contact" role="tabpanel" *ngxPermissionsOnly="['create-client']">
+          <div class="tab-wrapper">
+            <div [hidden]="userProgress.first_contact">
+              <h2>Add your first Contact.</h2>
+              <p>
+                Add the names, emails, telephone numbers and addresses of the people you do business with.
+              </p>
+              <button
+                class="btn btn-primary"
+                data-toggle="wizard"
+                *ngxPermissionsOnly="['create-client']"
+                data-target="#addClientWizard"
+              >
+                ADD CONTACT
+              </button>
+              <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('pi')">Skip Step</a>
+            </div>
+            <div [hidden]="!userProgress.first_contact">
+              <h2 *ngIf="currentUser.roles[0] == 'agribusiness'">Well done! You added your first Contact.</h2>
+              <h2 *ngIf="currentUser.roles[0] == 'buyer'">Well done! You added your first Seller Contact.</h2>
+              <h2 *ngIf="currentUser.roles[0] == 'seller'">Well done! You added your first Buyer Contact.</h2>
+              <p>
+                To do this again, click the Contacts button on the left side menu. Now you’re ready for the next step.
+              </p>
+              <button class="btn btn-primary" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('pi')">
+                NEXT STEP
+              </button>
+            </div>
+            <img src="../../../assets/img/dashboard-imgs/clients.png" class="vector-tutorial" alt="" />
+          </div>
+        </div>
+        <div class="tab-pane" id="pi" role="tabpanel" *ngxPermissionsOnly="['create-pi']">
+          <div class="tab-wrapper">
+            <div [hidden]="userProgress.first_pi">
+              <h2>Issue your first Proforma Invoice.</h2>
+              <p>
+                Add the product you are selling, the details of your buyer and any special instructions you need for the
+                invoice.
+              </p>
+              <button class="btn btn-primary" routerLink="/invoice/generator">
+                ISSUE PROFORMA INVOICE
+              </button>
+            </div>
+            <div [hidden]="!userProgress.first_pi">
+              <h2>Well done! You issued your first Proforma Invoice.</h2>
+              <p>
+                To do this again, click the Proforma Invoices button on the left side menu. Now you’re ready for the
+                next step
+              </p>
+            </div>
+            <img src="../../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" alt="" />
+          </div>
+        </div>
+        <div class="tab-pane" id="business" role="tabpanel" [hidden]="!progressCompleted">
+          <div>
+            <h2>Now you're in business!</h2>
+            <p>
+              You're ready to take your business to the next level.
+            </p>
+            <img src="../../../assets/img/dashboard-imgs/business.svg" class="vector-tutorial" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-contact-generator></app-contact-generator>

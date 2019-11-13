@@ -195,7 +195,7 @@
   border: 1px solid #ced4da;
   font-size: 1.4rem;
   padding-top: 0.5rem;
-  padding-left: 1.5rem;
+  padding-left: 1rem;
   border-radius: 0.8rem;
   position: relative;
   width: 100%;
@@ -248,6 +248,21 @@
   .swal-button {
     width: 100%;
     padding: 8px 24px;
+  }
+}
+
+.swal-starting {
+  .swal-footer {
+    display: flex;
+    justify-content: center;
+  }
+  .swal-button-primary {
+    background-color: $primary-color;
+    border-radius: 2.5px;
+  }
+
+  .swal-button-primary:hover {
+    background-color: #00b7cf;
   }
 }
 
@@ -316,4 +331,39 @@ ul.tutorial-list li {
 .cdk-overlay-pane {
   animation: open-modal 0.4s;
   animation-timing-function: ease-out;
+}
+
+.swal2-popup {
+  width: 54em !important;
+  padding: 2.5em 3em !important;
+
+  h2 {
+    font-size: 2.6em;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+
+  ul {
+    list-style-position: inside !important;
+    list-style: decimal;
+
+    li {
+      font-size: 1.6rem !important;
+      padding-bottom: 8px;
+    }
+  }
+
+  .swal2-content {
+    font-size: 1.6rem;
+    text-align: left !important;
+  }
+
+  button:not(:last-child) {
+    margin-right: 1.6rem;
+  }
 }

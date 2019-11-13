@@ -13,6 +13,6 @@ export class DashboardWelcomePanelComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.currentUser = this.route.snapshot.data['user'];
+    this.currentUser = this.route.snapshot.data['currentUser'];
   }
 }

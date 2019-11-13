@@ -128,7 +128,7 @@ label {
   border: 1px solid #ced4da;
   font-size: 1.4rem;
   padding-top: 0.5rem;
-  padding-left: 1.5rem;
+  padding-left: 1rem;
   border-radius: 0.4rem !important;
   position: relative;
   width: 100%;
@@ -171,4 +171,8 @@ select {
 
 div.filter-option-inner-inner {
   color: black !important;
+}
+
+.material-icons.md-18 {
+  font-size: 18px;
 }

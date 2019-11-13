@@ -29,4 +29,20 @@ export class OrderPoComponent extends DocumentDownloadComponent implements OnIni
     }
     super.setTransaction(this.order);
   }
+
+  sellerContactSms(): boolean {
+    if (this.order) {
+      return this.order.seller.contact_by.includes('sms');
+    } else {
+      return false;
+    }
+  }
+
+  sellerContactEmail(): boolean {
+    if (this.order) {
+      return this.order.seller.contact_by.includes('email');
+    } else {
+      return false;
+    }
+  }
 }

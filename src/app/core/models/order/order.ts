@@ -39,6 +39,7 @@ export class Order {
   valid_until: string;
   status: string;
   draft: boolean;
+  external_order: boolean;
   total_packages: number;
   total_weight: number;
 }

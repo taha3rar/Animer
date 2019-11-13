@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CsvService } from './services/csv.service';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -31,6 +31,8 @@ import { DocumentDownloadComponent } from './components/document-download/docume
 import { ModalInventoryComponent } from './components/products/modal-inventory/modal-inventory.component';
 import { MatSortModule } from '@angular/material';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
+import { ContactGeneratorComponent } from './components/contact-generator/contact-generator.component';
+import { UserProgressComponent } from './components/user-progress/user-progress.component';
 
 @NgModule({
   imports: [
@@ -38,9 +40,11 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
     NgxPaginationModule,
     NgbModule,
     RouterModule,
+    ReactiveFormsModule,
     ProgressbarModule.forRoot(),
     MatTooltipModule,
     FormsModule,
+    ReactiveFormsModule,
     MatSortModule
   ],
   declarations: [
@@ -63,7 +67,9 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
     ModalAgriculturalProductComponent,
     ModalProcessedProductComponent,
     ModalInventoryComponent,
-    FilterPipe
+    FilterPipe,
+    ContactGeneratorComponent,
+    UserProgressComponent
   ],
   entryComponents: [ModalAgriculturalProductComponent, ModalProcessedProductComponent, ModalInventoryComponent],
   exports: [
@@ -79,6 +85,8 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
     DocumentGeneratorComponent,
     TutorialControlComponent,
     ModalInventoryComponent,
+    ContactGeneratorComponent,
+    UserProgressComponent,
     FilterPipe
   ],
   providers: [CsvService, DatePipe]

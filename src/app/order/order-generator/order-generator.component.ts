@@ -27,6 +27,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   draft: any;
   products: ProductInvoice[] = [];
   formSubmitted: boolean;
+  openOrder: boolean;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -36,9 +37,10 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   ) {}
 
   ngOnInit() {
+    this.orderDataService.setProductList(undefined);
+    this.openOrder = this.route.snapshot.data['openOrder'];
     this.stepperService.stepperInit();
     this.isDraft = false;
-
     this.quotation = this.route.snapshot.data['quotation'];
     if (this.quotation) {
       const product: ProductInvoice = <ProductInvoice>(<unknown>this.quotation.product);
@@ -75,27 +77,43 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
           company_number: [undefined, Validators.required],
           address: [undefined, Validators.required],
           city: [undefined, Validators.required],
+          country: [undefined, Validators.required],
           zipcode: [undefined, Validators.required],
           phone_number: [undefined, Validators.required],
           contact_by: [this.formBuilder.array([], Validators.required)]
         })
       ],
-      seller: [
-        this.formBuilder.group({
-          _id: [undefined, Validators.required],
-          numericId: [undefined, Validators.required],
-          first_name: [undefined, Validators.required],
-          last_name: [undefined, Validators.required],
-          email: [undefined, [Validators.required, Validators.email]],
-          company_name: [undefined, Validators.required],
-          company_number: [undefined, Validators.required],
-          address: [undefined, Validators.required],
-          city: [undefined, Validators.required],
-          zipcode: [undefined, Validators.required],
-          phone_number: [undefined, Validators.required],
-          contact_by: [this.formBuilder.array([], Validators.required)]
-        })
-      ],
+      seller: this.formBuilder.group({
+        _id: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller._id],
+        numericId: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.numericId],
+        first_name: [
+          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.first_name,
+          Validators.required
+        ],
+        last_name: [
+          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.last_name,
+          Validators.required
+        ],
+        email: [
+          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.email,
+          Validators.email
+        ],
+        company_name: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.company_name],
+        company_number: [
+          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.company_number
+        ],
+        address: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.address],
+        city: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.city],
+        country: [
+          Object.is(this.draftOrder.seller, undefined) ? '' : this.draftOrder.seller.country,
+          Validators.required
+        ],
+        zipcode: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.zipcode],
+        phone_number: [undefined],
+        contact_by: this.formBuilder.array(
+          Object.is(this.draftOrder.seller, undefined) ? [] : this.draftOrder.seller.contact_by
+        )
+      }),
       subtotal: [Object.is(this.draftOrder, undefined) ? 0 : this.draftOrder.subtotal, Validators.required],
       currency: [Object.is(this.draftOrder, undefined) ? undefined : this.draftOrder.currency, Validators.required],
       payment_comments: this.draftOrder.payment_comments,
@@ -150,8 +168,8 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
     }
     if (this.isDraft) {
       this.orderForm.controls.buyer.setValue(this.draftOrder.buyer);
-      this.orderForm.controls.seller.setValue(this.draftOrder.seller);
       this.orderDataService.setForm(this.orderForm);
+      this.orderDataService.setNewOrder(this.draftOrder);
     }
     if (this.fromQuotation) {
       this.orderForm.controls.buyer.setValue(this.quotation.buyer);
@@ -159,6 +177,9 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
       this.orderForm.controls.currency.setValue(this.quotation.currency);
       this.orderForm.controls.subtotal.setValue(this.products[0].product_subtotal);
       this.orderDataService.setForm(this.orderForm);
+    }
+    if (this.openOrder) {
+      this.orderForm['controls'].seller['controls'].contact_by.setValidators(Validators.required);
     }
   }
 

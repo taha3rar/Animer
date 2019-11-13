@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
     });
     this.companyDetailsForm = this.formBuilder.group({
       companyName: [this.user.company_information.company_name],
-      companyNumber: [this.user.company_information.company_registered_number, [Validators.required]],
+      companyNumber: [this.user.company_information.company_registered_number],
       stateRegionProvince: [this.user.company_information.state_province_region],
       address: [this.user.company_information.street],
       city: [this.user.company_information.city],
@@ -67,6 +67,7 @@ export class ProfileComponent implements OnInit {
           .removeClass('glyphicon-minus')
           .addClass('glyphicon-plus');
       });
+    this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
   }
 
   // Easier acces to form values
@@ -121,6 +122,7 @@ export class ProfileComponent implements OnInit {
       credentialsToUpdate.user.personal_information = data.personal_information;
       credentialsToUpdate.user.email = data.email;
       this.authenticationService.setCredentials(credentialsToUpdate);
+      this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
       this.alerts.showAlert('Your profile has been updated!');
     });
   }
@@ -136,6 +138,7 @@ export class ProfileComponent implements OnInit {
     this.user.company_information.bio = this.companyf.bio.value;
     this.userService.update(this.currentUserId, this.user).subscribe(data => {
       this.alerts.showAlert('Changes saved!');
+      this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
     });
   }
 }

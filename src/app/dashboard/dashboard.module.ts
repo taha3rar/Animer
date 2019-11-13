@@ -1,3 +1,7 @@
+// tslint:disable-next-line:max-line-length
+import { ProcessedProductGeneratorComponent } from './../product/product-generator/processed-product-generator/processed-product-generator.component';
+// tslint:disable-next-line:max-line-length
+import { AgriculturalProductGeneratorComponent } from './../product/product-generator/agricultural-product-generator/agricultural-product-generator.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,6 +13,9 @@ import { DashboardActivityPanelComponent } from './dashboard-activity-panel/dash
 import { DashboardCounterPanelComponent } from './dashboard-counter-panel/dashboard-counter-panel.component';
 import { DashboardCounterResolver } from './resolvers/dashboard-counter.resolver';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { StartingGuideComponent } from './starting-guide/starting-guide.component';
+import { SharedModule } from '@app/shared';
+import { CurrentUserProgressResolver } from '@app/shared/resolvers/current-user-progress.resolver';
 
 @NgModule({
   declarations: [
@@ -16,9 +23,11 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     DashboardWelcomePanelComponent,
     DashboardTodoPanelComponent,
     DashboardActivityPanelComponent,
-    DashboardCounterPanelComponent
+    DashboardCounterPanelComponent,
+    StartingGuideComponent
   ],
-  imports: [CommonModule, TranslateModule, DashboardRoutingModule, NgxPermissionsModule.forRoot()],
-  providers: [DashboardCounterResolver]
+  entryComponents: [AgriculturalProductGeneratorComponent, ProcessedProductGeneratorComponent],
+  imports: [SharedModule, CommonModule, TranslateModule, DashboardRoutingModule, NgxPermissionsModule.forRoot()],
+  providers: [DashboardCounterResolver, CurrentUserProgressResolver]
 })
 export class DashboardModule {}

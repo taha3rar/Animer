@@ -1,27 +1,26 @@
-import { AlertsService } from './../../core/alerts.service';
-import { CanComponentDeactivate } from './../../shared/guards/confirmation.guard';
-import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
-import { StepperService } from '@app/core/stepper.service';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from '../../core/api/user.service';
-import { User } from '../../core/models/user/user';
+import { UserService } from './../../../core/api/user.service';
+import { User } from './../../../core/models/user/user';
 import { Ecosystem } from '@app/core/models/ecosystem';
 import { Client } from '@app/core/models/user/client';
 import { EcosystemService } from '@app/core';
+import { StepperService } from '@app/core/stepper.service';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
 import swal from 'sweetalert';
+import { AlertsService } from '@app/core/alerts.service';
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 
 declare const $: any;
 
 @Component({
-  selector: 'app-client-generator',
-  templateUrl: './client-generator.component.html',
-  styleUrls: ['./client-generator.component.scss']
+  selector: 'app-contact-generator',
+  templateUrl: './contact-generator.component.html',
+  styleUrls: ['./contact-generator.component.scss']
 })
-export class ClientGeneratorComponent extends BaseValidationComponent implements OnInit {
+export class ContactGeneratorComponent extends BaseValidationComponent implements OnInit {
   currentUser: User;
   invitedClient: User = new User();
   clientDetailsForm: FormGroup;
@@ -83,6 +82,14 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
     }, 200);
   }
 
+  get clientf() {
+    return this.clientDetailsForm.controls;
+  }
+
+  get companyf() {
+    return this.companyDetailsForm.controls;
+  }
+
   isRequired(abstractControl: AbstractControl) {
     if (abstractControl.validator) {
       const validator = abstractControl.validator({} as AbstractControl);
@@ -108,12 +115,6 @@ export class ClientGeneratorComponent extends BaseValidationComponent implements
   }
 
   // Easier acces to form values
-  get clientf() {
-    return this.clientDetailsForm.controls;
-  }
-  get companyf() {
-    return this.companyDetailsForm.controls;
-  }
 
   onChangeContactType(contactType: string, isChecked: boolean) {
     const contactTypesFormArray = <FormArray>this.clientDetailsForm.controls.contactTypes;

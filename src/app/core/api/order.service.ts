@@ -29,7 +29,15 @@ export class OrderService extends BaseService {
     return this.apiService.getPdf(`${this.path}/${orderId}/pdf/${version}`).pipe(map(data => data));
   }
 
+  createOpen(order: Order) {
+    return this.apiService.post(`/order/open`, order).pipe(map(data => data));
+  }
+
   draft(order: Order) {
     return this.apiService.post(`/order/draft`, order).pipe(map(data => data));
+  }
+
+  draftOpen(order: Order) {
+    return this.apiService.post(`/order/draft/open`, order).pipe(map(data => data));
   }
 }

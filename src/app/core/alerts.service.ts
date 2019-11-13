@@ -23,4 +23,22 @@ export class AlertsService {
       }
     );
   }
+
+  showAlertDanger($msg: string) {
+    $.notify(
+      {
+        icon: 'notifications',
+        message: $msg
+      },
+      {
+        type: 'danger',
+        timer: 5000,
+        placement: {
+          from: 'top',
+          align: 'right'
+        },
+        offset: 78
+      }
+    );
+  }
 }
