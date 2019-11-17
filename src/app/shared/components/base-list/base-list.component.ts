@@ -20,7 +20,14 @@ export class BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
   currentPage = 1;
   pageName: string;
-  usersWhiteList = ['bendemoseller@gmail.com', 'ishai@avenews-gt.com', 'javier@avenews-gt.com'];
+  // tslint:disable-next-line:max-line-length
+  usersWhiteList = [
+    'bendemoseller@gmail.com',
+    'ishai@avenews-gt.com',
+    'javier@avenews-gt.com',
+    'marcus.mika@gmail.com',
+    'mcsmicha@gmail.com'
+  ];
 
   constructor(private service?: BaseService, protected router?: Router, private options?: ListOptions) {
     this.pageName = options ? options.pageName : '';
