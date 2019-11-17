@@ -14,7 +14,14 @@ import { Sort } from '@angular/material/sort';
 export class OrderListComponent extends BaseListComponent implements OnInit {
   @Input() orders: Order[];
   @Input() searchTerm: string;
-  usersWhiteList = ['bendemoseller@gmail.com', 'ishai@avenews-gt.com', 'javier@avenews-gt.com'];
+  // tslint:disable-next-line:max-line-length
+  usersWhiteList = [
+    'bendemoseller@gmail.com',
+    'ishai@avenews-gt.com',
+    'javier@avenews-gt.com',
+    'marcus.mika@gmail.com',
+    'mcsmicha@gmail.com'
+  ];
   processedProductConflictMessage: String =
     // tslint:disable-next-line:max-line-length
     'This purchase order includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
