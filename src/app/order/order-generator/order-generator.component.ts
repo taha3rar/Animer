@@ -28,6 +28,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   products: ProductInvoice[] = [];
   formSubmitted: boolean;
   openOrder: boolean;
+  seller: SmallUser.User;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -43,6 +44,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
     this.isDraft = false;
     this.quotation = this.route.snapshot.data['quotation'];
     if (this.quotation) {
+      this.seller = <SmallUser.User>(<unknown>this.quotation.seller);
       const product: ProductInvoice = <ProductInvoice>(<unknown>this.quotation.product);
       product.quantity = this.quotation.product.quantity_offered;
       product.total_weight = this.quotation.product.total_weight_offered;
@@ -58,6 +60,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
     this.draftOrder = this.route.snapshot.data['order'];
     if (this.draftOrder) {
       this.isDraft = true;
+      this.seller = this.draftOrder.seller;
       this.products = this.draftOrder.products;
       this.orderDataService.setProductList(this.products);
     } else {
@@ -84,35 +87,19 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         })
       ],
       seller: this.formBuilder.group({
-        _id: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller._id],
-        numericId: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.numericId],
-        first_name: [
-          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.first_name,
-          Validators.required
-        ],
-        last_name: [
-          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.last_name,
-          Validators.required
-        ],
-        email: [
-          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.email,
-          Validators.email
-        ],
-        company_name: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.company_name],
-        company_number: [
-          Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.company_number
-        ],
-        address: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.address],
-        city: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.city],
-        country: [
-          Object.is(this.draftOrder.seller, undefined) ? '' : this.draftOrder.seller.country,
-          Validators.required
-        ],
-        zipcode: [Object.is(this.draftOrder.seller, undefined) ? undefined : this.draftOrder.seller.zipcode],
-        phone_number: [undefined],
-        contact_by: this.formBuilder.array(
-          Object.is(this.draftOrder.seller, undefined) ? [] : this.draftOrder.seller.contact_by
-        )
+        _id: [Object.is(this.seller, undefined) ? undefined : this.seller._id],
+        numericId: [Object.is(this.seller, undefined) ? undefined : this.seller.numericId],
+        first_name: [Object.is(this.seller, undefined) ? undefined : this.seller.first_name, Validators.required],
+        last_name: [Object.is(this.seller, undefined) ? undefined : this.seller.last_name, Validators.required],
+        email: [Object.is(this.seller, undefined) ? undefined : this.seller.email, Validators.email],
+        company_name: [Object.is(this.seller, undefined) ? undefined : this.seller.company_name],
+        company_number: [Object.is(this.seller, undefined) ? undefined : this.seller.company_number],
+        address: [Object.is(this.seller, undefined) ? undefined : this.seller.address],
+        city: [Object.is(this.seller, undefined) ? undefined : this.seller.city],
+        country: [Object.is(this.seller, undefined) ? '' : this.seller.country, Validators.required],
+        zipcode: [Object.is(this.seller, undefined) ? undefined : this.seller.zipcode],
+        phone_number: [Object.is(this.seller, undefined) ? undefined : this.seller.phone_number],
+        contact_by: this.formBuilder.array(Object.is(this.seller, undefined) ? [] : this.seller.contact_by)
       }),
       subtotal: [Object.is(this.draftOrder, undefined) ? 0 : this.draftOrder.subtotal, Validators.required],
       currency: [Object.is(this.draftOrder, undefined) ? undefined : this.draftOrder.currency, Validators.required],
@@ -173,7 +160,6 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
     }
     if (this.fromQuotation) {
       this.orderForm.controls.buyer.setValue(this.quotation.buyer);
-      this.orderForm.controls.seller.setValue(this.quotation.seller);
       this.orderForm.controls.currency.setValue(this.quotation.currency);
       this.orderForm.controls.subtotal.setValue(this.products[0].product_subtotal);
       this.orderDataService.setForm(this.orderForm);
