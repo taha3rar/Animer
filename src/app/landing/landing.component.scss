@@ -245,9 +245,14 @@ footer {
 }
 
 @media only screen and (max-width: 777px) {
-  .signinBtn,
-  #signupBtn {
+  #signupBtn,
+  #signinBtn {
     display: none;
+  }
+
+  .signinBtn,
+  .signinBtn a {
+    font-size: 1.5rem;
   }
 
   .vp-content {
