@@ -31,7 +31,7 @@ export class UploadPictureComponent implements OnInit {
   ngOnInit() {}
 
   previewPic() {
-    let file;
+    let file: any;
 
     file = this.picInput.nativeElement.files[0];
     if (file && this.validateFile(file)) {
@@ -68,6 +68,14 @@ export class UploadPictureComponent implements OnInit {
             this.imageEvent.emit(this.picture.toString());
             this.loaderVisible = false;
           });
+        }
+        if (this.type === 'client_id') {
+          const picturObj = {
+            img: picture,
+            imgBase64: base64File
+          };
+          this.imageEvent.emit(picturObj);
+          this.loaderVisible = false;
         }
       };
     } else {

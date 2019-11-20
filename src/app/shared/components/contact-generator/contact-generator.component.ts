@@ -12,6 +12,7 @@ import * as libphonenumber from 'google-libphonenumber';
 import swal from 'sweetalert';
 import { AlertsService } from '@app/core/alerts.service';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
+import { defaultValues } from '@app/shared/helpers/default_values';
 
 declare const $: any;
 
@@ -35,6 +36,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   @ViewChild('closeModal')
   closeModal: ElementRef;
   clientSubmitted = false;
+  IdPicture: any;
 
   constructor(
     private userService: UserService,
@@ -162,6 +164,17 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.clientDetailsForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
   }
 
+  get profilePicture(): string | null {
+    if (this.IdPicture) {
+      return this.IdPicture.img;
+    }
+    return defaultValues.profile_picture;
+  }
+
+  receiveId(IdPicture: any) {
+    this.IdPicture = IdPicture;
+  }
+
   pushEcosystem(ecosystem: Ecosystem) {
     const idx = this.ecosystemsToBeAdded.indexOf(ecosystem);
     if (idx > -1) {
@@ -187,42 +200,44 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.invitedClient.company_information.zipcode = this.companyf.zipcode.value;
     this.invitedClient.company_information.country = this.companyf.country.value;
     this.clientSubmitted = true;
-    this.userService.saveInvitedClient(this.invitedClient).subscribe(
-      data => {
-        if (data._id) {
-          const participant = new Client(data);
-          if (this.ecosystemsToBeAdded.length) {
-            this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
+    this.userService
+      .saveInvitedClient(this.invitedClient, this.IdPicture ? this.IdPicture.imgBase64 : undefined)
+      .subscribe(
+        data => {
+          if (data._id) {
+            const participant = new Client(data);
+            if (this.ecosystemsToBeAdded.length) {
+              this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
+                this.alerts.showAlert('New client profile has been created!');
+                this.closeAndRefresh();
+              });
+            } else {
               this.alerts.showAlert('New client profile has been created!');
               this.closeAndRefresh();
-            });
+            }
           } else {
-            this.alerts.showAlert('New client profile has been created!');
-            this.closeAndRefresh();
+            console.log(data); // TODO: Manage errors
           }
-        } else {
-          console.log(data); // TODO: Manage errors
-        }
-      },
-      err => {
-        this.disableSubmitButton(false);
-        $.notify(
-          {
-            icon: 'notifications',
-            message: err.error.message
-          },
-          {
-            type: 'danger',
-            timer: 5000,
-            placement: {
-              from: 'top',
-              align: 'right'
+        },
+        err => {
+          this.disableSubmitButton(false);
+          $.notify(
+            {
+              icon: 'notifications',
+              message: err.error.message
             },
-            offset: 78
-          }
-        );
-      }
-    );
+            {
+              type: 'danger',
+              timer: 5000,
+              placement: {
+                from: 'top',
+                align: 'right'
+              },
+              offset: 78
+            }
+          );
+        }
+      );
   }
 
   markAsTouched(formControl: string) {
@@ -232,6 +247,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   closeAndRefresh(): any {
     $('#addClientWizard').fadeOut('fast');
     this.resetForm();
+    this.IdPicture = undefined;
     this.router.navigate([this.router.url]);
   }
 

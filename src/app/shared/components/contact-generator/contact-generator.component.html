@@ -231,6 +231,16 @@
                         <p>Please choose at least one option</p>
                       </div>
                     </div>
+                    <div class="col">
+                      <label>Upload client ID for payment purpose</label><br />
+                      <app-upload-picture
+                        style="width: 20px;"
+                        (imageEvent)="receiveId($event)"
+                        [picture]="profilePicture"
+                        [type]="'client_id'"
+                        [user]="user"
+                      ></app-upload-picture>
+                    </div>
                   </div>
                 </div>
                 <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
