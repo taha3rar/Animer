@@ -37,6 +37,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   closeModal: ElementRef;
   clientSubmitted = false;
   IdPicture: any;
+  noEcosystem = false;
 
   constructor(
     private userService: UserService,
@@ -54,6 +55,9 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.currentUser = this.route.snapshot.data['currentUser'];
     this.route.data.subscribe(({ ecosystems }) => {
       this.ecosystems = ecosystems;
+      if (ecosystems.length < 1) {
+        this.noEcosystem = true;
+      }
     });
     this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
     this.regionCode = 'US';
@@ -164,7 +168,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.clientDetailsForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
   }
 
-  get profilePicture(): string | null {
+  get clientIdPicture(): string | null {
     if (this.IdPicture) {
       return this.IdPicture.img;
     }

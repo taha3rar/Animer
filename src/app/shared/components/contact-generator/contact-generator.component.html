@@ -19,7 +19,7 @@
                 <span translate>Add company details</span>
               </a>
             </li>
-            <li class="disabled">
+            <li *ngIf="!noEcosystem" class="disabled">
               <a href="#ecosystem" data-toggle="tab">
                 <div class="step-number">3</div>
                 <span translate>Choose ecosystem</span>
@@ -27,7 +27,8 @@
             </li>
             <li class="disabled">
               <a href="#review" data-toggle="tab">
-                <div class="step-number">4</div>
+                <div *ngIf="!noEcosystem" class="step-number">4</div>
+                <div *ngIf="noEcosystem" class="step-number">3</div>
                 <span translate>Review and confirm</span>
               </a>
             </li>
@@ -236,9 +237,8 @@
                       <app-upload-picture
                         style="width: 20px;"
                         (imageEvent)="receiveId($event)"
-                        [picture]="profilePicture"
+                        [picture]="clientIdPicture"
                         [type]="'client_id'"
-                        [user]="user"
                       ></app-upload-picture>
                     </div>
                   </div>
