@@ -36,8 +36,8 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   @ViewChild('closeModal')
   closeModal: ElementRef;
   clientSubmitted = false;
-  IdPicture: any;
-  noEcosystem = false;
+  idPicture: any;
+  hasEcosystem = true;
 
   constructor(
     private userService: UserService,
@@ -56,7 +56,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.route.data.subscribe(({ ecosystems }) => {
       this.ecosystems = ecosystems;
       if (ecosystems.length < 1) {
-        this.noEcosystem = true;
+        this.hasEcosystem = false;
       }
     });
     this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
@@ -169,14 +169,14 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   }
 
   get clientIdPicture(): string | null {
-    if (this.IdPicture) {
-      return this.IdPicture.img;
+    if (this.idPicture) {
+      return this.idPicture.img;
     }
     return defaultValues.profile_picture;
   }
 
   receiveId(IdPicture: any) {
-    this.IdPicture = IdPicture;
+    this.idPicture = IdPicture;
   }
 
   pushEcosystem(ecosystem: Ecosystem) {
@@ -205,7 +205,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.invitedClient.company_information.country = this.companyf.country.value;
     this.clientSubmitted = true;
     this.userService
-      .saveInvitedClient(this.invitedClient, this.IdPicture ? this.IdPicture.imgBase64 : undefined)
+      .saveInvitedClient(this.invitedClient, this.idPicture ? this.idPicture.imgBase64 : undefined)
       .subscribe(
         data => {
           if (data._id) {
@@ -251,7 +251,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   closeAndRefresh(): any {
     $('#addClientWizard').fadeOut('fast');
     this.resetForm();
-    this.IdPicture = undefined;
+    this.idPicture = undefined;
     this.router.navigate([this.router.url]);
   }
 

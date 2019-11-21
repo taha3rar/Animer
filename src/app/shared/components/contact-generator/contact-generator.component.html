@@ -19,7 +19,7 @@
                 <span translate>Add company details</span>
               </a>
             </li>
-            <li *ngIf="!noEcosystem" class="disabled">
+            <li *ngIf="hasEcosystem" class="disabled">
               <a href="#ecosystem" data-toggle="tab">
                 <div class="step-number">3</div>
                 <span translate>Choose ecosystem</span>
@@ -27,8 +27,8 @@
             </li>
             <li class="disabled">
               <a href="#review" data-toggle="tab">
-                <div *ngIf="!noEcosystem" class="step-number">4</div>
-                <div *ngIf="noEcosystem" class="step-number">3</div>
+                <div *ngIf="hasEcosystem" class="step-number">4</div>
+                <div *ngIf="!hasEcosystem" class="step-number">3</div>
                 <span translate>Review and confirm</span>
               </a>
             </li>

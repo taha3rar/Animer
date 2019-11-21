@@ -32,8 +32,8 @@ export class UserService extends BaseService {
     return this.apiService.get(`${this.path}/${id}/progress`).pipe(map(data => data));
   }
 
-  saveInvitedClient(client: User, IdPicture?: any): Observable<any> {
-    return this.apiService.post('/user/client', { client: client, IdPicture: IdPicture }).pipe(map(data => data));
+  saveInvitedClient(client: User, idPicture?: any): Observable<any> {
+    return this.apiService.post('/user/client', { client: client, idPicture: idPicture }).pipe(map(data => data));
   }
 
   saveNewUser(client: UserRegistration): Observable<User> {
