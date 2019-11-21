@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BaseProductOrder } from '../../../../order/order-generator/order-product-list/base-product-order';
 import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-agricultural-product',
@@ -11,6 +12,8 @@ import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 })
 export class ModalAgriculturalProductComponent extends BaseProductOrder {
   tooltips = tooltips.product_generator.agricultural;
+  @ViewChild('modalForm') form: any;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
     public dialogRef: MatDialogRef<ModalAgriculturalProductComponent>
@@ -47,5 +50,14 @@ export class ModalAgriculturalProductComponent extends BaseProductOrder {
     } else {
       this.product.package_price = undefined;
     }
+  }
+
+  onSubmit() {
+    Object.keys(this.form.form.controls).forEach(field => {
+      const control = this.form.form.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      }
+    });
   }
 }
