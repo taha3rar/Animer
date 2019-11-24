@@ -36,7 +36,7 @@
 
     p {
       font-size: 1.55rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     h2 {
@@ -53,20 +53,39 @@
     width: 28%;
   }
 
-  .tab-wrapper {
+  .contact-help-wrapper {
     display: flex;
+    position: absolute;
+    bottom: 4.3rem;
+    margin-right: 3rem !important;
 
-    div {
-      margin-right: 2.5rem;
+    #contact-help-text {
+      margin-right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      p:first-child {
+        font-weight: bold;
+        font-style: italic;
+        width: 88%;
+      }
+
+      p {
+        font-size: 1.4rem;
+        margin-bottom: 0px;
+      }
+
+      a {
+        font-size: 1.4rem;
+        color: #37c1ce;
+        text-decoration-line: underline;
+        font-weight: bold;
+      }
     }
-  }
-
-  @media (max-width: 1803px) {
-    .btn-outline.po,
-    .btn-outline.pi {
-      display: block;
-      margin-left: 0px;
-      margin-top: 0.8rem;
+    img {
+      width: 38%;
+      height: auto;
     }
   }
 
@@ -106,13 +125,13 @@
 .circle-wrapper {
   width: 6%;
   margin-top: 7px;
+  margin-right: 2rem;
 }
 
 .step-title {
   width: 94%;
   font-size: 1.5rem;
   margin-top: 7px;
-  margin-left: 1.5rem;
   display: inline-block;
 }
 
@@ -193,4 +212,27 @@ ul li.nav-item.active div {
 
 button.swal-button-o {
   background: #37c1ce;
+}
+
+@media (max-width: 1803px) {
+  .btn-outline.po,
+  .btn-outline.pi {
+    display: block;
+    margin-left: 0px;
+    margin-top: 0.8rem;
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 992px) {
+  .starting-guide--left {
+    width: 44%;
+  }
+
+  .starting-guide--right {
+    width: 56%;
+
+    img {
+      display: none;
+    }
+  }
 }

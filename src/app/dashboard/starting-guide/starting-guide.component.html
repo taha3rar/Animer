@@ -38,6 +38,20 @@
           <li
             class="nav-item"
             data-toggle="tab"
+            href="#contact"
+            role="tab"
+            aria-selected="true"
+            [class.completed]="userProgress.first_contact"
+            *ngxPermissionsOnly="['create-client']"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'agribusiness'">Add your first Contact</div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'buyer'">Add your first Seller Contact</div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'seller'">Add your first Buyer Contact</div>
+          </li>
+          <li
+            class="nav-item"
+            data-toggle="tab"
             href="#po"
             role="tab"
             aria-selected="true"
@@ -60,20 +74,6 @@
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">Add your first Product</div>
-          </li>
-          <li
-            class="nav-item"
-            data-toggle="tab"
-            href="#contact"
-            role="tab"
-            aria-selected="true"
-            [class.completed]="userProgress.first_contact"
-            *ngxPermissionsOnly="['create-client']"
-          >
-            <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title" *ngIf="currentUser.roles[0] == 'agribusiness'">Add your first Contact</div>
-            <div class="step-title" *ngIf="currentUser.roles[0] == 'buyer'">Add your first Seller Contact</div>
-            <div class="step-title" *ngIf="currentUser.roles[0] == 'seller'">Add your first Buyer Contact</div>
           </li>
           <li
             class="nav-item"
@@ -107,10 +107,21 @@
           <p>
             Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.
           </p>
-          <button class="btn btn-primary" *ngxPermissionsOnly="['create-order']" (click)="nextStep('po')">
+          <button
+            class="btn btn-primary"
+            *ngIf="currentUser.roles[0] == 'buyer' && currentUser.referrer"
+            (click)="nextStep('po')"
+          >
             NEXT STEP
           </button>
-          <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">
+          <button
+            class="btn btn-primary"
+            *ngIf="currentUser.roles[0] == 'seller' && currentUser.referrer"
+            (click)="nextStep('product')"
+          >
+            NEXT STEP
+          </button>
+          <button class="btn btn-primary" *ngxPermissionsOnly="['create-client']" (click)="nextStep('contact')">
             NEXT STEP
           </button>
 
@@ -130,10 +141,21 @@
           <div [hidden]="!userProgress.account_reviewed">
             <h2>Well Done! You have reviewed your account.</h2>
             <p>Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.</p>
-            <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'buyer'" (click)="nextStep('po')">
+            <button
+              class="btn btn-primary"
+              *ngIf="currentUser.roles[0] == 'buyer' && currentUser.referrer"
+              (click)="nextStep('po')"
+            >
               NEXT STEP
             </button>
-            <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">
+            <button
+              class="btn btn-primary"
+              *ngIf="currentUser.roles[0] == 'seller' && currentUser.referrer"
+              (click)="nextStep('product')"
+            >
+              NEXT STEP
+            </button>
+            <button class="btn btn-primary" *ngxPermissionsOnly="['create-client']" (click)="nextStep('contact')">
               NEXT STEP
             </button>
           </div>
@@ -148,26 +170,14 @@
             </p>
             <button class="btn btn-primary" (click)="openOrderModal()">ISSUE PRUCHASE ORDER</button>
             <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">Skip Step</a>
-            <a
-              class="skip-btn"
-              *ngIf="currentUser.roles[0] == 'buyer' && !currentUser.referrer"
-              (click)="nextStep('contact')"
-              >Skip Step</a
-            >
           </div>
+
           <div [hidden]="!userProgress.first_po">
             <h2>Well done! You issued your first Purchase Order.</h2>
             <p>
               To do this again, click the Orders button on the left side menu. Now you’re ready for the next step.
             </p>
             <button class="btn btn-primary" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">
-              NEXT STEP
-            </button>
-            <button
-              class="btn btn-primary"
-              *ngIf="currentUser.roles[0] == 'buyer' && !currentUser.referrer"
-              (click)="nextStep('contact')"
-            >
               NEXT STEP
             </button>
           </div>
@@ -189,10 +199,7 @@
               <p>
                 To do this again, click the Products button on the left side menu. Now you’re ready for the next step.
               </p>
-              <button class="btn btn-primary" *ngIf="currentUser.referrer" (click)="nextStep('pi')">
-                NEXT STEP
-              </button>
-              <button class="btn btn-primary" *ngIf="!currentUser.referrer" (click)="nextStep('contact')">
+              <button class="btn btn-primary" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('pi')">
                 NEXT STEP
               </button>
             </div>
@@ -214,7 +221,9 @@
               >
                 ADD CONTACT
               </button>
-              <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('pi')">Skip Step</a>
+
+              <a class="skip-btn" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">Skip Step</a>
+              <a class="skip-btn" *ngxPermissionsOnly="['create-order']" (click)="nextStep('po')">Skip Step</a>
             </div>
             <div [hidden]="!userProgress.first_contact">
               <h2 *ngIf="currentUser.roles[0] == 'agribusiness'">Well done! You added your first Contact.</h2>
@@ -223,11 +232,23 @@
               <p>
                 To do this again, click the Contacts button on the left side menu. Now you’re ready for the next step.
               </p>
-              <button class="btn btn-primary" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('pi')">
+              <button class="btn btn-primary" *ngxPermissionsOnly="['create-order']" (click)="nextStep('po')">
+                NEXT STEP
+              </button>
+              <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">
                 NEXT STEP
               </button>
             </div>
-            <img src="../../../assets/img/dashboard-imgs/clients.png" class="vector-tutorial" alt="" />
+            <div class="contact-help-wrapper">
+              <div id="contact-help-text">
+                <p>Would you like to get help with adding all of your contacts?</p>
+                <p *ngIf="!helpRequestSent"><a (click)="onHelpRequestSent()">Click here</a> to send us a request.</p>
+                <p *ngIf="helpRequestSent" style="color: #10ac84;">
+                  Your request has been sent to us. The Avenews-GT team will contact you soon.
+                </p>
+              </div>
+              <img src="../../../assets/img/dashboard-imgs/clients.png" alt="" />
+            </div>
           </div>
         </div>
         <div class="tab-pane" id="pi" role="tabpanel" *ngxPermissionsOnly="['create-pi']">
