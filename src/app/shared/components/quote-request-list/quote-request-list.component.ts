@@ -13,7 +13,6 @@ import { Sort } from '@angular/material/sort';
 })
 export class QuoteRequestListComponent extends BaseListComponent implements OnInit {
   @Input() quoteRequests: QuoteRequest[];
-  sortedQuoteRequests: QuoteRequest[];
   @Input() searchTerm: string;
   isBuyer: Boolean;
   userId: String;
@@ -37,7 +36,6 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   }
 
   ngOnInit() {
-    this.sortedQuoteRequests = this.quoteRequests.slice();
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
     this.userId = this.authService.currentUserId;
   }
@@ -45,11 +43,11 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   sortData(sort: Sort) {
     const data = this.quoteRequests.slice();
     if (!sort.active || sort.direction === '') {
-      this.sortedQuoteRequests = data;
+      this.quoteRequests = data;
       return;
     }
 
-    this.sortedQuoteRequests = data.sort((a, b) => {
+    this.quoteRequests = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'id':

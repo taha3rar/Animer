@@ -15,7 +15,7 @@
   <tbody>
     <tr
       *ngFor="
-        let quoteRequest of (sortedQuoteRequests
+        let quoteRequest of (quoteRequests
           | filter: searchTerm
           | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage });
         let i = index
