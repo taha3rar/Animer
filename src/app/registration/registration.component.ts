@@ -256,6 +256,19 @@ export class RegistrationComponent extends BaseValidationComponent implements On
         if (data._id) {
           $('#standardRegistration2').css({ display: 'none' });
           $('#confirmation').css({ display: 'flex' });
+          this.intercom.update({
+            app_id: environment.intercom.app_id,
+            name: data.personal_information.first_name + ' ' + data.personal_information.last_name,
+            anonymous_email: data.email,
+            phone: data.personal_information.phone_number,
+            role: data.roles[0],
+            client: data.roles.includes('client'),
+            marketing_campaign: this.marketing_campaign,
+            registered: true,
+            widget: {
+              activator: '#intercom'
+            }
+          });
         } else {
           return;
         }
