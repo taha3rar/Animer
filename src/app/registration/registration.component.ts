@@ -172,13 +172,6 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     );
   }
 
-  cancelSocialLogin(): void {
-    this.socialAuthentificationService.signOut().then(response => {
-      this.user = null;
-      this.changeDiv('registrationType');
-    });
-  }
-
   equalPasswordsValidator(group: FormGroup) {
     if (group.value.confirmPassword !== group.value.password) {
       return { passwordsNotMatch: true };
