@@ -10,6 +10,7 @@ import * as libphonenumber from 'google-libphonenumber';
 import { AuthService as SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { OAuthLoginContext } from '@app/core/models/user/login-models';
 import { Intercom } from 'ng-intercom';
+import { User } from '@app/core/models/user/user';
 
 const log = new Logger('Login');
 declare var $: any;
@@ -60,7 +61,10 @@ export class LoginComponent implements OnInit {
       this.userValidated = true;
       const id = this.route.snapshot.params.id;
       this.userService.updateUserValidation(id).subscribe(
-        data => {},
+        data => {
+          const validatedUser = JSON.parse(data);
+          this.intercomLogin(validatedUser, false);
+        },
         err => {
           console.log(err);
         }
@@ -90,7 +94,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         credentials => {
           log.debug(`${credentials.user.email} successfully logged in`);
-          this.intercomLogin(credentials);
+          this.intercomLogin(credentials.user, true);
           this.route.queryParams.subscribe(params =>
             this.router.navigate([params.redirect || '/'], { replaceUrl: true })
           );
@@ -142,7 +146,7 @@ export class LoginComponent implements OnInit {
           .subscribe(
             credentials => {
               log.debug(`${credentials.user.email} successfully logged in`);
-              this.intercomLogin(credentials);
+              this.intercomLogin(credentials.user, true);
               this.route.queryParams.subscribe(params =>
                 this.router.navigate([params.redirect || '/'], { replaceUrl: true })
               );
@@ -208,16 +212,17 @@ export class LoginComponent implements OnInit {
     $('#' + showDiv).css({ display: 'block' });
   }
 
-  intercomLogin(credentials: any) {
+  intercomLogin(user: any, logged_in: boolean) {
     this.intercom.update({
       app_id: environment.intercom.app_id,
-      name: credentials.user.personal_information.first_name + ' ' + credentials.user.personal_information.last_name,
-      email: credentials.user.email,
-      phone: credentials.user.personal_information.phone_number,
-      user_id: credentials.user._id,
-      role: credentials.user.roles[0],
-      client: credentials.user.roles.includes('client'),
+      name: user.personal_information.first_name + ' ' + user.personal_information.last_name,
+      email: user.email,
+      phone: user.personal_information.phone_number,
+      user_id: user._id,
+      role: user.roles[0],
+      client: user.roles.includes('client'),
       validated: true,
+      logged_in: logged_in,
       widget: {
         activator: '#intercom'
       }

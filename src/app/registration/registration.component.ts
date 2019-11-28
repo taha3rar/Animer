@@ -147,7 +147,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
             this.route.queryParams.subscribe(params =>
               this.router.navigate([params.redirect || '/'], { replaceUrl: true })
             );
-            this.intercomLogin(credentials);
+            this.intercomLogin(credentials.user, true);
             this.user = response;
           });
       },
@@ -256,19 +256,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
         if (data._id) {
           $('#standardRegistration2').css({ display: 'none' });
           $('#confirmation').css({ display: 'flex' });
-          this.intercom.update({
-            app_id: environment.intercom.app_id,
-            name: data.personal_information.first_name + ' ' + data.personal_information.last_name,
-            anonymous_email: data.email,
-            phone: data.personal_information.phone_number,
-            role: data.roles[0],
-            client: data.roles.includes('client'),
-            marketing_campaign: this.marketing_campaign,
-            registered: true,
-            widget: {
-              activator: '#intercom'
-            }
-          });
+          this.intercomLogin(data, false);
         } else {
           return;
         }
@@ -310,16 +298,19 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     this.userType = btnType;
   }
 
-  intercomLogin(credentials: any) {
+  intercomLogin(user: any, isOAuth: boolean) {
     this.intercom.update({
       app_id: environment.intercom.app_id,
-      name: credentials.user.personal_information.first_name + ' ' + credentials.user.personal_information.last_name,
-      email: credentials.user.email,
-      phone: credentials.user.personal_information.phone_number,
-      user_id: credentials.user._id,
-      role: credentials.user.roles[0],
-      client: credentials.user.roles.includes('client'),
+      name: user.personal_information.first_name + ' ' + user.personal_information.last_name,
+      email: user.email,
+      phone: user.personal_information.phone_number,
+      user_id: user._id,
+      role: user.roles[0],
+      client: user.roles.includes('client'),
       marketing_campaign: this.marketing_campaign,
+      registered: true,
+      validated: isOAuth,
+      logged_in: isOAuth,
       widget: {
         activator: '#intercom'
       }
