@@ -134,7 +134,12 @@ export class AppComponent implements OnInit {
 
   responsive(windowSize: any) {
     const currentUrl = window.location.href;
-    if (windowSize <= 600 && !currentUrl.includes('home') && !currentUrl.includes('registration')) {
+    if (
+      windowSize <= 600 &&
+      !currentUrl.includes('home') &&
+      !currentUrl.includes('registration') &&
+      !(currentUrl.includes('') && !this.authenticationService.isAuthenticated())
+    ) {
       const user_id = currentUrl.substr(currentUrl.length - 24); // 24 is the length of a Mongo ObjectId
       if (currentUrl.includes('staging')) {
         if (currentUrl.includes('validation')) {

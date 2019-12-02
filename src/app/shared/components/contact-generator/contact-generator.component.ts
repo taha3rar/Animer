@@ -55,7 +55,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.currentUser = this.route.snapshot.data['currentUser'];
     this.route.data.subscribe(({ ecosystems }) => {
       this.ecosystems = ecosystems;
-      if (ecosystems.length < 1) {
+      if (ecosystems && ecosystems.length < 1) {
         this.hasEcosystem = false;
       }
     });
