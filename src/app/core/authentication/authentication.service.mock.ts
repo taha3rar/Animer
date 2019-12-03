@@ -13,6 +13,7 @@ export class MockAuthenticationService {
         job_title: 'Captain',
         bio: 'Racing idol',
         profile_picture: 'an url',
+        id_picture: 'an url',
         phone_number: '123456'
       },
       permissions: ['test'],
@@ -32,6 +33,7 @@ export class MockAuthenticationService {
           job_title: 'Captain',
           bio: 'Racing idol',
           profile_picture: 'an url',
+          id_picture: 'an url',
           phone_number: '123456'
         },
         permissions: ['test'],
