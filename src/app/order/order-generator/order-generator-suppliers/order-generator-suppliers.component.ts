@@ -5,17 +5,20 @@ import { Client } from '@app/core/models/user/client';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormGroup } from '@angular/forms';
 import { OrderDataService } from '../order-data.service';
+import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-order-generator-suppliers',
   templateUrl: './order-generator-suppliers.component.html',
-  styleUrls: ['./order-generator-suppliers.component.scss']
+  styleUrls: ['./order-generator-suppliers.component.scss'],
+  providers: [FilterPipe]
 })
 export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit {
   form: FormGroup;
   clients: Client[];
   nextBtnClicked = false;
   page = 1;
+  searchTerm: string;
 
   constructor(private route: ActivatedRoute, private orderDataService: OrderDataService) {
     super();
