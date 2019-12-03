@@ -138,7 +138,7 @@ export class AppComponent implements OnInit {
       windowSize <= 600 &&
       !currentUrl.includes('home') &&
       !currentUrl.includes('registration') &&
-      !(currentUrl.includes('') && !this.authenticationService.isAuthenticated())
+      !(this.router.url === '/' && !this.authenticationService.isAuthenticated())
     ) {
       const user_id = currentUrl.substr(currentUrl.length - 24); // 24 is the length of a Mongo ObjectId
       if (currentUrl.includes('staging')) {
