@@ -33,7 +33,7 @@ export class UserService extends BaseService {
   }
 
   saveInvitedClient(client: User, idPicture?: any): Observable<any> {
-    return this.apiService.post('/user/client', { client: client, idPicture: idPicture }).pipe(map(data => data));
+    return this.apiService.post('/user/client', client).pipe(map(data => data));
   }
 
   saveNewUser(client: UserRegistration): Observable<User> {
@@ -63,6 +63,11 @@ export class UserService extends BaseService {
   saveCompanyImage(image: string): Observable<any> {
     const body = { image: image };
     return this.apiService.post('/image/company', body).pipe(map(data => data));
+  }
+
+  saveClientIdPicture(image: string): Observable<any> {
+    const body = { image: image };
+    return this.apiService.post('/image/client', body).pipe(map(data => data));
   }
 
   update(id: string, user: User): Observable<User> {

@@ -5,4 +5,5 @@ export class PersonalInformation {
   bio: string;
   profile_picture: string;
   phone_number: string;
+  id_picture: string;
 }

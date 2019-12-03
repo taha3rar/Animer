@@ -70,12 +70,11 @@ export class UploadPictureComponent implements OnInit {
           });
         }
         if (this.type === 'client_id') {
-          const picturObj = {
-            img: picture,
-            imgBase64: base64File
-          };
-          this.imageEvent.emit(picturObj);
-          this.loaderVisible = false;
+          this.userService.saveClientIdPicture(base64File).subscribe(res => {
+            this.picture = res.url;
+            this.imageEvent.emit(this.picture.toString());
+            this.loaderVisible = false;
+          });
         }
       };
     } else {

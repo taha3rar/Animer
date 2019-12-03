@@ -36,7 +36,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   @ViewChild('closeModal')
   closeModal: ElementRef;
   clientSubmitted = false;
-  idPicture: any;
+  idPicture = defaultValues.profile_picture;
   hasEcosystem = true;
 
   constructor(
@@ -169,14 +169,15 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   }
 
   get clientIdPicture(): string | null {
-    if (this.idPicture) {
-      return this.idPicture.img;
-    }
-    return defaultValues.profile_picture;
+    return this.idPicture || defaultValues.profile_picture;
   }
 
-  receiveId(IdPicture: any) {
-    this.idPicture = IdPicture;
+  receivePicture($event: any) {
+    this.receivePicture = $event;
+  }
+
+  receiveId(picture: any) {
+    this.idPicture = picture;
   }
 
   pushEcosystem(ecosystem: Ecosystem) {
@@ -204,44 +205,46 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.invitedClient.company_information.zipcode = this.companyf.zipcode.value;
     this.invitedClient.company_information.country = this.companyf.country.value;
     this.clientSubmitted = true;
-    this.userService
-      .saveInvitedClient(this.invitedClient, this.idPicture ? this.idPicture.imgBase64 : undefined)
-      .subscribe(
-        data => {
-          if (data._id) {
-            const participant = new Client(data);
-            if (this.ecosystemsToBeAdded.length) {
-              this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
-                this.alerts.showAlert('New client profile has been created!');
-                this.closeAndRefresh();
-              });
-            } else {
+
+    if (this.idPicture) {
+      this.invitedClient.personal_information.id_picture = this.idPicture;
+    }
+    this.userService.saveInvitedClient(this.invitedClient).subscribe(
+      data => {
+        if (data._id) {
+          const participant = new Client(data);
+          if (this.ecosystemsToBeAdded.length) {
+            this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
               this.alerts.showAlert('New client profile has been created!');
               this.closeAndRefresh();
-            }
+            });
           } else {
-            console.log(data); // TODO: Manage errors
+            this.alerts.showAlert('New client profile has been created!');
+            this.closeAndRefresh();
           }
-        },
-        err => {
-          this.disableSubmitButton(false);
-          $.notify(
-            {
-              icon: 'notifications',
-              message: err.error.message
-            },
-            {
-              type: 'danger',
-              timer: 5000,
-              placement: {
-                from: 'top',
-                align: 'right'
-              },
-              offset: 78
-            }
-          );
+        } else {
+          console.log(data); // TODO: Manage errors
         }
-      );
+      },
+      err => {
+        this.disableSubmitButton(false);
+        $.notify(
+          {
+            icon: 'notifications',
+            message: err.error.message
+          },
+          {
+            type: 'danger',
+            timer: 5000,
+            placement: {
+              from: 'top',
+              align: 'right'
+            },
+            offset: 78
+          }
+        );
+      }
+    );
   }
 
   markAsTouched(formControl: string) {
