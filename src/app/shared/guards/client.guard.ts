@@ -4,7 +4,7 @@ import { AuthenticationService } from '@app/core/authentication/authentication.s
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { UserService } from '@app/core';
-import { User } from '@app/core/models/user/user';
+import { Client } from '@app/core/models/user/client';
 
 @Injectable()
 export class ClientGuard implements CanActivate {
@@ -15,21 +15,19 @@ export class ClientGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Promise<boolean> | Observable<boolean> | boolean {
     const loggedUserId = this.authService.currentUserId;
+    const clientId = route.params.id;
 
-    return this.userService.get(route.params.id).pipe(
-      map((client: User) => {
+    return this.userService.getClientsByUser(loggedUserId).pipe(
+      map((clients: Client[]) => {
         // check if the logged user is a client of the client's profile he's intending to see
-        const isClient = client.clients.filter(u => u._id === loggedUserId).length > 0 ? true : false;
+        const isClient = clients.filter(u => u._id === clientId).length > 0 ? true : false;
 
-        // check if the logged users referred the client's profile he's intending to see
-        const isReferrer = client.referrer && client.referrer._id === loggedUserId;
-
-        if (isReferrer || isClient) {
+        if (isClient) {
           return true;
-        } else {
-          this.router.navigate(['/unauthorized']);
-          return false;
         }
+
+        this.router.navigate(['/unauthorized']);
+        return false;
       }),
       catchError(err => {
         this.router.navigate(['/not-found']);
