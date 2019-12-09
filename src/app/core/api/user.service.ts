@@ -32,7 +32,7 @@ export class UserService extends BaseService {
     return this.apiService.get(`${this.path}/${id}/progress`).pipe(map(data => data));
   }
 
-  saveInvitedClient(client: User, idPicture?: any): Observable<any> {
+  saveInvitedClient(client: User): Observable<any> {
     return this.apiService.post('/user/client', client).pipe(map(data => data));
   }
 
