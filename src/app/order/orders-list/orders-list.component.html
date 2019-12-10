@@ -28,11 +28,12 @@
 
     <div *ngxPermissionsOnly="['create-order']" class="dropdown">
       <button
-        class="bttn-primary dropdown-toggle"
-        data-toggle="dropdown"
-        matTooltip="{{ tooltips.place_order }}"
+        class="bttn-primary"
+        matTooltip="{{ tooltips.internal_po }}"
         matTooltipPosition="above"
+        routerLink="/order/generator/standard"
       >
+        <!-- matTooltip="{{ tooltips place_order }}" class="bttn-primary dropdown-toggle" data-toggle="dropdown" -->
         <span translate>Place Order </span>
       </button>
       <ul class="dropdown-menu">

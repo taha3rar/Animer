@@ -168,7 +168,8 @@
               Add the products you would like to purchase, the details of your seller and any special instructions you
               need for the order.
             </p>
-            <button class="btn btn-primary" (click)="openOrderModal()">ISSUE PRUCHASE ORDER</button>
+            <button class="btn btn-primary" routerLink="/order/generator/standard">ISSUE PURCHASE ORDER</button>
+            <!-- (click)="openOrderModal() -->
             <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">Skip Step</a>
           </div>
 
