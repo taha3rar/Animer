@@ -29,8 +29,8 @@ export class InvoiceService extends BaseService {
     return this.apiService.post(`/invoice/draft`, invoice).pipe(map(data => data));
   }
 
-  getPdf(invoiceId: string, version: string): Observable<Blob> {
-    return this.apiService.getPdf(`${this.path}/${invoiceId}/pdf/${version}`).pipe(map(data => data));
+  getPdf(invoiceId: string, version: string): Observable<Invoice> {
+    return this.apiService.get(`${this.path}/${invoiceId}/pdf/${version}`).pipe(map(data => data));
   }
 
   getByOrder(orderId: String): Observable<Invoice> {

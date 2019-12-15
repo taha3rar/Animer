@@ -26,7 +26,7 @@ export class OrderService extends BaseService {
   }
 
   getPdf(orderId: string, version: string): Observable<Order> {
-    return this.apiService.getPdf(`${this.path}/${orderId}/pdf/${version}`).pipe(map(data => data));
+    return this.apiService.get(`${this.path}/${orderId}/pdf/${version}`).pipe(map(data => data));
   }
 
   createOpen(order: Order) {

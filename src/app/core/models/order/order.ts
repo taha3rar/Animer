@@ -42,4 +42,8 @@ export class Order {
   external_order: boolean;
   total_packages: number;
   total_weight: number;
+  pdf_location: {
+    original: string;
+    copy: string;
+  };
 }

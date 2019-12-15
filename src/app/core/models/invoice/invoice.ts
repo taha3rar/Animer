@@ -42,6 +42,10 @@ export class Invoice {
   dpo_transaction_token: string;
   total_packages: Number;
   total_weight: number;
+  pdf_location: {
+    original: string;
+    copy: string;
+  };
 
   constructor() {
     const date = Date.now();
