@@ -77,6 +77,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       companyName: [undefined],
       address: [undefined],
       city: [undefined],
+      state_province_region: [undefined],
       zipcode: [undefined],
       country: [undefined, [Validators.required]]
     });
@@ -266,6 +267,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.clientDetailsForm.controls.email.setValidators([Validators.email]);
     this.clientDetailsForm.controls.contactTypes.setErrors({ incorrect: true });
     this.clientDetailsForm.controls.profileType.setErrors({ incorrect: true });
+    this.ecosystemsToBeAdded = [];
 
     $('.stepper')
       .find('li.completed:not(:first-child)')
