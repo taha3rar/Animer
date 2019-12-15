@@ -25,7 +25,7 @@ export class OrderService extends BaseService {
     return this.apiService.get(`${this.path}/user/${userId}/seller`).pipe(map(data => data));
   }
 
-  getPdf(orderId: string, version: string): Observable<Blob> {
+  getPdf(orderId: string, version: string): Observable<Order> {
     return this.apiService.getPdf(`${this.path}/${orderId}/pdf/${version}`).pipe(map(data => data));
   }
 

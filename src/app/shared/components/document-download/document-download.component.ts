@@ -25,9 +25,9 @@ export class DocumentDownloadComponent extends BaseValidationComponent {
       }
     }).then(value => {
       if (value === 'original') {
-        this.download('original');
+        this.newTab('original');
       } else {
-        this.download('copy');
+        this.newTab('copy');
       }
     });
   }
@@ -38,5 +38,20 @@ export class DocumentDownloadComponent extends BaseValidationComponent {
       importedSaveAs(blob, `${this.transactionRoute}-${this.transaction.numericId}-${version}`);
       swal.close();
     });
+  }
+
+  newTab(version: string): void {
+    if (this.transaction.pdf_location && this.transaction.pdf_location[version]) {
+      window.open(this.transaction.pdf_location[version]);
+      swal.close();
+    } else {
+      this.service.getPdf(this.transaction._id, version).subscribe((data: any) => {
+        console.log(data);
+        this.transaction.pdf_location = data.pdf_location || {};
+        this.transaction.pdf_location[version] = data.pdf_location[version];
+        window.open(this.transaction.pdf_location[version]);
+        swal.close();
+      });
+    }
   }
 }
