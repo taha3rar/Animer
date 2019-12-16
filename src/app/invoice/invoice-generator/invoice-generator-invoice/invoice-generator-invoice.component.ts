@@ -33,14 +33,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   issuedOn: NgbDateStruct;
   deliveryOn: NgbDateStruct;
   @ViewChild('checkbox') checkbox: ElementRef;
-
-  swalWithStyledButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn dpo',
-      cancelButton: 'btn btn-outline dpo'
-    },
-    buttonsStyling: false
-  });
+  hasDPOToken = true;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -145,11 +138,11 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     if (dateUpdated) {
       dateForm
         ? this.invoice[dateForm].patchValue({
-            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
-          })
+          [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+        })
         : this.form.patchValue({
-            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
-          });
+          [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+        });
     } else {
       dateForm ? this.invoice[dateForm].patchValue({ [dateName]: null }) : this.form.patchValue({ [dateName]: null });
     }
@@ -172,8 +165,8 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     }
     this.issuedOn
       ? this.form.patchValue({
-          date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
-        })
+        date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
+      })
       : this.form.patchValue({ date_created: new Date().toJSON() });
   }
 
@@ -210,6 +203,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   }
 
   toReview() {
+    console.log(this.form);
     this.preSubmit();
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
@@ -221,29 +215,13 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     this.productsValid = false;
   }
 
-  openDpoDialog(isChecked: boolean) {
+
+  checkPaymentRequest(isChecked: boolean) {
+    console.log(isChecked);
     if (isChecked) {
-      this.swalWithStyledButtons
-        .fire({
-          html:
-            '<img src="../../../../assets/img/dpo-logo.png" style="margin: 0 auto; display: block;' +
-            'margin-bottom: 3.8rem;" width="100" height="60"/>' +
-            '<p>Log in or create account in DPO</p>',
-          confirmButtonText: 'Log in',
-          cancelButtonText: 'Create Account',
-          showCancelButton: true
-        })
-        .then(result => {
-          if (result.value) {
-            this.invoice['payable'].setValue(true);
-            // Do something
-          } else if (result.dismiss === Swal.DismissReason.backdrop) {
-            this.checkbox.nativeElement.checked = false;
-            return false;
-          } else if (!result.value) {
-            // Do something
-          }
-        });
+      this.invoice['payable'].setValue(true);
+    } else {
+      this.invoice['payable'].setValue(false);
     }
   }
 }

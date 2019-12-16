@@ -17,6 +17,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
   @Input()
   generateInvoice = false;
   payableInvoice = false;
+  invoicePaid = false;
 
   @Input()
   invoice: Invoice;

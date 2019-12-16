@@ -149,16 +149,10 @@
                     </td>
                   </tr>
                 </table>
-
-                <div *ngIf="payableInvoice" class="payment-statement">
-                  <p class="mt-4">
-                    This invoice has been marked as payable by the seller. Hit 'Pay Invoice' below to sign into DPO and
-                    confirm your payment.
-                  </p>
-                  <img src="../../../assets/img/dpo-logo.png" width="50" height="30" />
-                </div>
               </div>
-              <button *ngIf="payableInvoice" class="bttn-primary mt-3" style="width: 100%;">PAY INVOICE</button>
+              <button *ngIf="payableInvoice && !invoicePaid" class="bttn-primary mt-3" style="width: 100%;">
+                PAY INVOICE
+              </button>
             </div>
           </div>
         </div>

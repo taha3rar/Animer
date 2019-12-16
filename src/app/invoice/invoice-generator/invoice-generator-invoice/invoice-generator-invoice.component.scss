@@ -168,28 +168,14 @@ input[type="number"] {
 }
 
 .payment-wrapper {
-  width: 50%;
   padding-left: 2.5rem;
   padding-top: 7px;
-}
-
-.gateway-status {
   display: flex;
-  margin: 1.3rem 0px;
-  color: #1074bb;
+  border-left: 1px solid #d8dee4;
+  margin-left: 2.5rem;
 
-  i {
-    font-size: 24px;
-    margin-right: 5px;
-  }
-
-  img {
-    width: 4.5rem;
-    height: 2.5rem;
-    background: white;
-    border-radius: 4px;
-    margin-left: auto;
-    box-shadow: 0px 4px 1rem rgba(116, 116, 116, 0.07);
+  div:first-child {
+    margin-top: 5px;
   }
 }
 
