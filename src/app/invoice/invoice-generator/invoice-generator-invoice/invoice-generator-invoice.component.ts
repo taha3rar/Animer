@@ -203,7 +203,6 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   }
 
   toReview() {
-    console.log(this.form);
     this.preSubmit();
     this.newInvoice = this.form.value;
     this.newInvoice.products = this.products;
@@ -214,6 +213,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   checkProducts() {
     this.productsValid = false;
   }
+<<<<<<< HEAD
 
 
   checkPaymentRequest(isChecked: boolean) {
@@ -224,4 +224,6 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
       this.invoice['payable'].setValue(false);
     }
   }
+=======
+>>>>>>> dpo ui changes
 }

@@ -107,13 +107,11 @@
       </div>
       <div class="payment-wrapper" *ngIf="hasDPOToken">
         <div>
-          <input
-            type="checkbox"
-            (change)="checkPaymentRequest($event.target.checked)"
-            class="checkbox"
-            id="payment-checkbox"
-            #checkbox
-          /><label class="checkbox_label" for="payment-checkbox"><span class="form_checkbox_btn"></span></label>
+          <input type="checkbox" class="checkbox" id="payment-checkbox" #checkbox /><label
+            class="checkbox_label"
+            for="payment-checkbox"
+            ><span class="form_checkbox_btn"></span
+          ></label>
         </div>
         <div>
           <span>Receive payment for this invoice</span>
