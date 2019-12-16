@@ -41,44 +41,4 @@ export class OrderInvoiceComponent extends DocumentDownloadComponent implements 
       }
     );
   }
-
-  // download(version: string): void {
-  //   this.invoiceService.getPdf(this.invoice._id, version).subscribe((data: any) => {
-  //     const blob = new Blob([data], { type: 'application/pdf' });
-  //     importedSaveAs(blob, `invoice-${this.invoice.numericId}-${version}`);
-  //     swal.close();
-  //   });
-  // }
-
-  // newTab(version: string): void {
-  //   if (this.invoice.pdf_location && this.invoice.pdf_location[version]) {
-  //     window.open(this.invoice.pdf_location[version]);
-  //     swal.close();
-  //   } else {
-  //     this.invoiceService.getPdf(this.invoice._id, version).subscribe((data: any) => {
-  //       this.invoice.pdf_location = data.pdf_location || {};
-  //       this.invoice.pdf_location[version] = data.pdf_location[version];
-  //       window.open(this.invoice.pdf_location[version]);
-  //       swal.close();
-  //     });
-  //   }
-  // }
-
-  // downloadPopup() {
-  //   swal({
-  //     title: 'Download as PDF',
-  //     className: 'swal-pdf',
-  //     text: 'Please choose the type of proforma invoice document you would like to download:',
-  //     buttons: {
-  //       originalDoc: { text: 'Original Document', value: 'original', className: 'swal-button-o', closeModal: false },
-  //       copyDoc: { text: 'Copy Document', value: 'copy', closeModal: false }
-  //     }
-  //   }).then(value => {
-  //     if (value === 'original') {
-  //       this.newTab('original');
-  //     } else {
-  //       this.newTab('copy');
-  //     }
-  //   });
-  // }
 }

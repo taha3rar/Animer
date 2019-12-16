@@ -34,6 +34,10 @@ export class QuoteRequest {
     total_weight_accepted: number;
     quantity_accepted: number;
   };
+  pdf_location: {
+    original: string;
+    copy: string;
+  };
   status: string;
   date_created: string;
 }
