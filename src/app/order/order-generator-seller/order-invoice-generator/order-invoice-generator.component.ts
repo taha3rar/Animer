@@ -164,7 +164,7 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
         })
         .then(result => {
           if (result.value) {
-            // Do something
+            this.invoice['payable'].setValue(true);
           } else if (result.dismiss === Swal.DismissReason.backdrop) {
             this.checkbox.nativeElement.checked = false;
             return false;

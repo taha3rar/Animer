@@ -125,7 +125,8 @@ export class OrderGeneratorSellerComponent implements OnInit, CanComponentDeacti
             }
           : null,
         Validators.required
-      ]
+      ],
+      payable: false
     });
 
     this.invoiceForm.controls.seller.setValue(this.document.seller);
