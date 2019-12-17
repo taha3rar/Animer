@@ -38,6 +38,8 @@ export class Invoice {
   valid_until: string;
   status: string;
   draft: boolean;
+  payable: boolean;
+  dpo_transaction_token: string;
   total_packages: Number;
   total_weight: number;
 
