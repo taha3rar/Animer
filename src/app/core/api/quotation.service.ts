@@ -35,7 +35,7 @@ export class QuotationService extends BaseService {
     return this.apiService.get(`${this.path}/quote-request/${quoteRequestId}/accepted`).pipe(map(data => data));
   }
 
-  getPdf(quotationId: string, version: string): Observable<Blob> {
-    return this.apiService.getPdf(`${this.path}/${quotationId}/pdf/${version}`).pipe(map(data => data));
+  getPdf(quotationId: string, version: string): Observable<Quotation> {
+    return this.apiService.get(`${this.path}/${quotationId}/pdf/${version}`).pipe(map(data => data));
   }
 }

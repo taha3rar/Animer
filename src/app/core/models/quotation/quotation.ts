@@ -43,4 +43,8 @@ export class Quotation {
   status: string;
   date_created: Date;
   total_price: Number;
+  pdf_location: {
+    original: string;
+    copy: string;
+  };
 }
