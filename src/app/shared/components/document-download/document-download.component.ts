@@ -46,6 +46,7 @@ export class DocumentDownloadComponent extends BaseValidationComponent {
       swal.close();
     } else {
       this.service.getPdf(this.transaction._id, version).subscribe((data: any) => {
+        console.log(data);
         this.transaction.pdf_location = data.pdf_location || {};
         this.transaction.pdf_location[version] = data.pdf_location[version];
         window.open(this.transaction.pdf_location[version]);
