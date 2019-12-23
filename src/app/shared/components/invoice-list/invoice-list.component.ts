@@ -25,7 +25,6 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
   invoicesToExport: any[] = [];
   @Output() invoicesList = new EventEmitter();
   checkedAll = false;
-  sortedInvoices: Invoice[];
   measurementUnitConflictMessage: String =
     // tslint:disable-next-line:max-line-length
     'This proforma invoice includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';
@@ -45,18 +44,16 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.sortedInvoices = this.invoices.slice();
-  }
+  ngOnInit() {}
 
   sortData(sort: Sort) {
     const data = this.invoices.slice();
     if (!sort.active || sort.direction === '') {
-      this.sortedInvoices = data;
+      this.invoices = data;
       return;
     }
 
-    this.sortedInvoices = data.sort((a, b) => {
+    this.invoices = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'id':
