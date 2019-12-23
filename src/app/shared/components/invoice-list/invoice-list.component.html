@@ -25,7 +25,7 @@
   <tbody>
     <tr
       *ngFor="
-        let invoice of (sortedInvoices | filter: searchTerm | paginate: { itemsPerPage: 7, currentPage: currentPage });
+        let invoice of (invoices | filter: searchTerm | paginate: { itemsPerPage: 7, currentPage: currentPage });
         let i = index
       "
     >
@@ -43,8 +43,7 @@
 
       <td>
         <span *ngIf="viewAsSeller"
-          >{{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }} / {{ invoice.sign_by.first_name }}
-          {{ invoice.sign_by.last_name }}</span
+          >{{ invoice.buyer.company_name }} / {{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }}</span
         >
         <span *ngIf="!viewAsSeller"
           >{{ invoice.seller.company_name }} / {{ invoice.sign_by.first_name }} {{ invoice.sign_by.last_name }}</span
