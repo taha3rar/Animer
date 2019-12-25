@@ -8,7 +8,7 @@
   }
 
   p:first-child {
-    font-size: 1.7rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -19,38 +19,47 @@
 
 .starting-guide {
   display: flex;
-  height: 83.7%;
+  height: 96.7%;
 
   &--left {
     padding: 1.5rem 0px 2rem 0px;
-    width: 35%;
+    width: 30%;
     border-right: 1px solid #f1f1f1;
     height: 100%;
   }
 
   &--right {
     padding: 3rem 3.5rem;
-    width: 65%;
+    width: 70%;
     height: 100%;
     position: relative;
 
     p {
-      font-size: 1.55rem;
+      font-size: 1.7rem;
       margin-bottom: 2rem;
     }
 
     h2 {
       font-weight: 600;
       margin-bottom: 2rem;
+      font-size: 2.3rem;
     }
-  }
 
-  .account-img {
-    width: 24%;
-  }
+    img {
+      width: 25rem;
+      height: auto;
+      position: absolute;
+      right: 4rem;
+      bottom: 4rem;
+    }
 
-  .product-img {
-    width: 28%;
+    #account-img {
+      width: 18.5rem;
+    }
+
+    #product-img {
+      width: 21rem;
+    }
   }
 
   .contact-help-wrapper {
@@ -68,12 +77,13 @@
       p:first-child {
         font-weight: bold;
         font-style: italic;
-        width: 88%;
+        width: 65%;
       }
 
       p {
         font-size: 1.4rem;
         margin-bottom: 0px;
+        width: 70%;
       }
 
       a {
@@ -84,10 +94,6 @@
         cursor: pointer;
       }
     }
-    img {
-      width: 38%;
-      height: auto;
-    }
   }
 
   ul {
@@ -96,7 +102,7 @@
 
   li {
     display: flex;
-    padding: 1rem 2rem 1rem 3rem;
+    padding: 1.1rem 1rem 1.2rem 3rem;
     cursor: pointer;
     width: 100%;
     transition: 0.2s background ease;
@@ -131,7 +137,7 @@
 
 .step-title {
   width: 94%;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   margin-top: 7px;
   display: inline-block;
 }
@@ -167,6 +173,10 @@ ul li.nav-item.completed .circle::before {
   top: 52.5%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+ul li.nav-item.completed p {
+  display: none;
 }
 
 ul li.nav-item.current-step span.circle {
@@ -224,16 +234,24 @@ button.swal-button-o {
   }
 }
 
-@media (max-width: 1280px) and (min-width: 992px) {
+@media (max-width: 1280px) {
   .starting-guide--left {
-    width: 44%;
+    width: 38%;
   }
 
   .starting-guide--right {
-    width: 56%;
-
-    img {
-      display: none;
-    }
+    width: 62%;
   }
+}
+
+@media (max-width: 1000px) {
+  img {
+    display: none;
+  }
+}
+
+p.small {
+  color: #a2aebf;
+  font-size: 1.25rem;
+  margin-top: 2px;
 }

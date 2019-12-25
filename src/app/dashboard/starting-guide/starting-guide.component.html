@@ -33,7 +33,10 @@
             aria-selected="true"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title">Review your Account</div>
+            <div class="step-title">
+              Review your Account
+              <p class="small">Estimated time: 1 min</p>
+            </div>
           </li>
           <li
             class="nav-item"
@@ -45,9 +48,18 @@
             *ngxPermissionsOnly="['create-client']"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title" *ngIf="currentUser.roles[0] == 'agribusiness'">Add your first Contact</div>
-            <div class="step-title" *ngIf="currentUser.roles[0] == 'buyer'">Add your first Seller Contact</div>
-            <div class="step-title" *ngIf="currentUser.roles[0] == 'seller'">Add your first Buyer Contact</div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'agribusiness'">
+              Add your first Contact
+              <p class="small">Estimated time: 2 min</p>
+            </div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'buyer'">
+              Add your first Seller Contact
+              <p class="small">Estimated time: 2 min</p>
+            </div>
+            <div class="step-title" *ngIf="currentUser.roles[0] == 'seller'">
+              Add your first Buyer Contact
+              <p class="small">Estimated time: 2 min</p>
+            </div>
           </li>
           <li
             class="nav-item"
@@ -59,7 +71,10 @@
             *ngxPermissionsOnly="['create-order']"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title">Try out your first Purchase Order</div>
+            <div class="step-title">
+              Try out your first Purchase Order
+              <p class="small">Estimated time: 3 min</p>
+            </div>
           </li>
           <li
             [ngClass]="{
@@ -73,7 +88,10 @@
             *ngxPermissionsOnly="['create-product']"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title">Add your first Product</div>
+            <div class="step-title">
+              Add your first Product
+              <p class="small">Estimated time: 1 min</p>
+            </div>
           </li>
           <li
             class="nav-item"
@@ -85,7 +103,10 @@
             *ngxPermissionsOnly="['create-pi']"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title">Issue your first Proforma Invoice</div>
+            <div class="step-title">
+              Issue your first Proforma Invoice
+              <p class="small">Estimated time: 3 min</p>
+            </div>
           </li>
           <li
             class="nav-item"
@@ -125,7 +146,7 @@
             NEXT STEP
           </button>
 
-          <img src="../../../assets/img/dashboard-imgs/account.png" class="vector-tutorial account-img" alt="" />
+          <img src="../../../assets/img/dashboard-imgs/account.png" id="account-img" alt="" />
         </div>
 
         <div class="tab-pane active" id="review-account" *ngIf="currentUser.referrer" role="tabpanel">
@@ -159,7 +180,7 @@
               NEXT STEP
             </button>
           </div>
-          <img src="../../../assets/img/dashboard-imgs/review-account.png" class="vector-tutorial account-img" alt="" />
+          <img src="../../../assets/img/dashboard-imgs/review-account.png" />
         </div>
         <div class="tab-pane" id="po" role="tabpanel" *ngxPermissionsOnly="['create-order']">
           <div [hidden]="userProgress.first_po">
@@ -182,7 +203,7 @@
               NEXT STEP
             </button>
           </div>
-          <img src="../../../assets/img/dashboard-imgs/orders.png" class="vector-tutorial" alt="" />
+          <img src="../../../assets/img/dashboard-imgs/orders.png" alt="" />
         </div>
         <div class="tab-pane" id="product" role="tabpanel" *ngxPermissionsOnly="['create-product']">
           <div class="tab-wrapper">
@@ -204,7 +225,7 @@
                 NEXT STEP
               </button>
             </div>
-            <img src="../../../assets/img/dashboard-imgs/inventory.svg" class="vector-tutorial product-img" alt="" />
+            <img src="../../../assets/img/dashboard-imgs/inventory.svg" id="product-img" />
           </div>
         </div>
         <div class="tab-pane" id="contact" role="tabpanel" *ngxPermissionsOnly="['create-client']">
@@ -248,8 +269,8 @@
                   Your request has been sent to us. The Avenews-GT team will contact you soon.
                 </p>
               </div>
-              <img src="../../../assets/img/dashboard-imgs/clients.png" alt="" />
             </div>
+            <img src="../../../assets/img/dashboard-imgs/clients.png" />
           </div>
         </div>
         <div class="tab-pane" id="pi" role="tabpanel" *ngxPermissionsOnly="['create-pi']">
@@ -271,7 +292,7 @@
                 next step
               </p>
             </div>
-            <img src="../../../assets/img/dashboard-imgs/proforma-invoices.png" class="vector-tutorial" alt="" />
+            <img src="../../../assets/img/dashboard-imgs/proforma-invoices.png" />
           </div>
         </div>
         <div class="tab-pane" id="business" role="tabpanel" [hidden]="!progressCompleted">
@@ -280,7 +301,7 @@
             <p>
               You're ready to take your business to the next level.
             </p>
-            <img src="../../../assets/img/dashboard-imgs/business.svg" class="vector-tutorial" alt="" />
+            <img src="../../../assets/img/dashboard-imgs/business.svg" />
           </div>
         </div>
       </div>

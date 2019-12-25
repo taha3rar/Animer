@@ -1,17 +1,19 @@
 .panel {
-  height: 20rem;
-  background: #fbffff;
+  background: transparent;
   color: #5b6675;
   margin-top: 2rem;
-  padding: 2rem;
-  margin-bottom: 1.5rem;
+  padding: 0px 2rem 0px 0px;
+  margin-bottom: 0.5rem;
   position: relative;
+  border-bottom: 0px;
+  box-shadow: unset;
+
   p {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 
   h1 {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-weight: 600;
   }
 }
@@ -20,9 +22,11 @@
   display: flex;
 }
 
-.welcome-img {
-  width: 14%;
-  right: 2rem;
-  margin-right: 2rem;
-  bottom: 2rem;
+.row {
+  padding: 0px 3rem;
+}
+
+.starting-guide-wrapper {
+  width: 1360px;
+  margin: 0 auto;
 }

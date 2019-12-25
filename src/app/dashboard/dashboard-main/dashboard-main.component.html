@@ -1,26 +1,15 @@
-<div class="row" style="padding-left:1.5rem;">
-  <div class="col-lg-7 col-md-12">
+<div class="row">
+  <div class="starting-guide-wrapper">
     <div class="panel">
       <div class="panel-body">
-        <img src="../../../assets/img/dashboard-imgs/Welcome.svg" class="welcome-img" />
         <div>
-          <h1>Welcome to Avenews-GT {{ username }}!</h1>
+          <h1>Welcome to Avenews-GT, {{ username }}!</h1>
           <p>
-            This is your dashboard, here you'll see general numbers of your completed transactions and see the next
-            steps you'll need to make.
+            Try the following steps to get started.
           </p>
         </div>
       </div>
     </div>
     <app-starting-guide></app-starting-guide>
-  </div>
-  <div class="col-lg-5">
-    <app-dashboard-counter-panel [counter]="counter"></app-dashboard-counter-panel>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <!-- <app-dashboard-todo-panel></app-dashboard-todo-panel> -->
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <!-- <app-dashboard-activity-panel></app-dashboard-activity-panel> -->
   </div>
 </div>

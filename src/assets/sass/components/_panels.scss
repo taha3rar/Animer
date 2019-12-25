@@ -98,7 +98,7 @@
 }
 
 .welcome-panel {
-  min-height: 43rem;
+  min-height: 49rem;
   [class^="col"] {
     padding: 0px !important;
   }
@@ -171,16 +171,6 @@
   .panel-right {
     height: 90%;
   }
-}
-
-.vector-tutorial {
-  width: 34%;
-  height: auto;
-  display: block;
-  margin-top: 1rem;
-  position: absolute;
-  right: 4rem;
-  bottom: 6rem;
 }
 
 .panel-right {
@@ -389,4 +379,8 @@ div[data-notify="container"] {
     height: 2.2rem;
     margin-top: 5px;
   }
+}
+
+.panel {
+  box-shadow: 0 1px 3px 0 rgba(0, 18, 71, 0.16);
 }
