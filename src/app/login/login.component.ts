@@ -100,9 +100,15 @@ export class LoginComponent implements OnInit {
           );
         },
         error => {
-          this.isLoading = false;
-          log.debug(`Login error: ${error}`);
-          this.error = error;
+          if (this.filledPhoneEmail) {
+            this.loginForm.controls.username.setValue(this.phoneNumber);
+            this.filledPhoneEmail = false;
+            this.login();
+          } else {
+            this.isLoading = false;
+            log.debug(`Login error: ${error}`);
+            this.error = error;
+          }
         }
       );
   }
@@ -114,6 +120,7 @@ export class LoginComponent implements OnInit {
     } else if (this.phoneNumber !== undefined && this.email.nativeElement.value === '') {
       this.loginForm.controls.username.setValue(this.phoneNumber);
     } else if (this.phoneNumber !== undefined && this.email.nativeElement.value !== '') {
+      this.loginForm.controls.username.setValue(this.email.nativeElement.value);
       this.filledPhoneEmail = true;
     }
   }
