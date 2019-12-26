@@ -18,6 +18,7 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 })
 export class ProductsListComponent extends BaseListComponent implements OnInit {
   products: Product[];
+  hasProducts: boolean;
   selectedProduct: Product;
   searchTerm: string;
 
@@ -36,6 +37,7 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(({ products }) => {
+      products.length > 0 ? (this.hasProducts = true) : (this.hasProducts = false);
       this.products = products.slice();
     });
   }

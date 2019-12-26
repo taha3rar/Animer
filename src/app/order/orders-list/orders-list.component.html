@@ -6,9 +6,9 @@
   <p>{{ helpLegend }}</p>
 </div>
 
-<h1 translate class="main-title">Orders List</h1>
+<h1 translate class="main-title" *ngIf="hasOrders">Orders List</h1>
 
-<div class="clearfix mt-1 actions-section" *ngIf="orders.length > 0">
+<div class="clearfix mt-1 actions-section" *ngIf="hasOrders">
   <div>
     <input
       type="text"
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-<div class="two-btns" *ngIf="agribusinessUser && orders.length > 0">
+<div class="two-btns" *ngIf="agribusinessUser && hasOrders">
   <p class="heading-3">View records as:</p>
   <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
     Seller

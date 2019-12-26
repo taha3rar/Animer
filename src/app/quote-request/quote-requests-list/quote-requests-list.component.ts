@@ -10,14 +10,16 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 })
 export class QuoteRequestsListComponent implements OnInit {
   isBuyer: Boolean;
-  quoteRequests: QuoteRequest;
+  quoteRequests: QuoteRequest[];
   searchTerm: string;
+  hasQuoteRequests: boolean;
 
   constructor(private authService: AuthenticationService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
     this.route.data.subscribe(({ quoteRequests }) => {
+      quoteRequests.lenght > 0 ? (this.hasQuoteRequests = true) : (this.hasQuoteRequests = false);
       this.quoteRequests = quoteRequests;
     });
   }

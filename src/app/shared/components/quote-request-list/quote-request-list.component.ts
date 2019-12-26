@@ -16,6 +16,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   @Input() searchTerm: string;
   isBuyer: Boolean;
   userId: String;
+  hasQuoteRequests: boolean;
   qrReceived = 'QUOTE REQUEST RECEIVED';
   qrSent = 'QUOTE REQUEST SENT';
   qSent = 'QUOTATION SENT';
@@ -36,6 +37,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   }
 
   ngOnInit() {
+    this.quoteRequests.length > 0 ? (this.hasQuoteRequests = true) : (this.hasQuoteRequests = false);
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
     this.userId = this.authService.currentUserId;
   }

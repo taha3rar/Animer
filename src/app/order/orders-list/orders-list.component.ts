@@ -4,7 +4,6 @@ import { Order } from '@app/core/models/order/order';
 import { AuthenticationService } from '@app/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { CsvService } from '@app/shared/services/csv.service';
-import { RoundUpPipe } from '@app/shared/pipes/roundup.pipe';
 import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
@@ -24,18 +23,19 @@ export class OrdersListComponent implements OnInit {
   viewAsBuyer = true;
   currentUser: any;
   tooltips = tooltips.orders.orders_list;
+  hasOrders: boolean;
   constructor(
     private route: ActivatedRoute,
     private authService: AuthenticationService,
     private datePipe: DatePipe,
     private decimalPipe: DecimalPipe,
-    private roundUpPipe: RoundUpPipe,
     private csvService: CsvService
   ) {}
 
   ngOnInit() {
     this.agribusinessUser = this.authService.isAgribusiness;
     this.route.data.subscribe(({ orders, ordersAsBuyer, ordersAsSeller, currentUser }) => {
+      orders.length > 0 ? (this.hasOrders = true) : (this.hasOrders = false);
       this.buyerOrders = ordersAsBuyer;
       this.sellerOrders = ordersAsSeller;
       this.currentUser = currentUser;

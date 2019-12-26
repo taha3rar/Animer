@@ -5,9 +5,9 @@
   <p>{{ helpLegend }}</p>
 </div>
 
-<h1 translate class="main-title">Proforma Invoices List</h1>
+<h1 translate class="main-title" *ngIf="hasInvoices">Proforma Invoices List</h1>
 
-<div class="clearfix mt-1" class="actions-section">
+<div class="clearfix mt-1" class="actions-section" *ngIf="hasInvoices">
   <div>
     <input
       type="text"
@@ -19,7 +19,7 @@
     />
   </div>
 
-  <div class="flex-pr">
+  <div class="flex-pr" *ngIf="hasInvoices">
     <button class="btn-primary-transp pull-right" (click)="exportAll()">
       <i class="material-icons">arrow_upward</i>
       <span translate>Export All Proforma Invoices</span>
@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<div class="actions-section">
+<div class="actions-section" *ngIf="hasInvoices">
   <div class="two-btns" *ngIf="agribusinessUser">
     <p class="heading-3">View records as:</p>
     <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">

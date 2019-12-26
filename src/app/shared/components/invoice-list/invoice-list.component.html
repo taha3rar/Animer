@@ -1,4 +1,4 @@
-<table class="table main-table" matSort (matSortChange)="sortData($event)">
+<table class="table main-table" matSort (matSortChange)="sortData($event)" *ngIf="hasInvoices">
   <thead>
     <tr>
       <th *ngIf="exportInit" class="text-center">
@@ -112,5 +112,16 @@
     </tr>
   </tbody>
 </table>
+<div style="background-color: white;" *ngxPermissionsOnly="['create-invoice']">
+  <div class="add-supplier-box panel" *ngIf="!hasInvoice">
+    <div class="panel-body">
+      <img src="../../../assets/img/dashboard-imgs/proforma-invoices.png" height="200" width="310" />
+      <p style="font-size: large;">Start trading digitally by creating your first Invoice.</p>
+      <button class="bttn-primary bttn-add" routerLink="/invoice/generator">
+        <span>Place your first Invoice</span>
+      </button>
+    </div>
+  </div>
+</div>
 
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)" *ngIf="hasOrders"></pagination-controls>

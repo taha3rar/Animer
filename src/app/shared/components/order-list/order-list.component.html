@@ -1,4 +1,4 @@
-<table class="table main-table" matSort (matSortChange)="sortData($event)">
+<table class="table main-table" matSort (matSortChange)="sortData($event)" *ngIf="hasOrders">
   <thead>
     <tr>
       <th mat-sort-header="id" translate class="text-center">ID</th>
@@ -127,15 +127,20 @@
   </tbody>
 </table>
 <div style="background-color: white;" *ngxPermissionsOnly="['create-order']">
-  <div class="add-supplier-box panel" *ngIf="orders.length == 0">
+  <div class="add-supplier-box panel" *ngIf="!hasOrders">
     <div class="panel-body">
       <img src="../../../assets/img/dashboard-imgs/orders.png" height="200" width="310" />
       <p style="font-size: large;">Start trading digitally by creating your first purchase Order.</p>
-      <button class="bttn-primary bttn-add">
+      <button
+        class="bttn-primary bttn-add"
+        routerLink="/order/generator/standard"
+        matTooltip="{{ tooltips.internal_po }}"
+        matTooltipPosition="below"
+      >
         <span>Place your first Order</span>
       </button>
     </div>
   </div>
 </div>
 
-<pagination-controls (pageChange)="pageChanged($event)" *ngIf="orders.length > 0"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)" *ngIf="hasOrders"></pagination-controls>

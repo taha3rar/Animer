@@ -16,6 +16,7 @@ import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 })
 export class ClientListComponent extends BaseListComponent implements OnInit {
   clients: Client[];
+  hasClients: boolean;
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
   tooltips = tooltips.clients.clients_list;
@@ -33,6 +34,7 @@ export class ClientListComponent extends BaseListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(({ clients }) => {
+      clients.length > 0 ? (this.hasClients = true) : (this.hasClients = false);
       this.clients = clients.slice();
     });
   }

@@ -6,6 +6,7 @@ import { Invoice } from '@app/core/models/invoice/invoice';
 import { CsvService } from '@app/shared/services/csv.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { Product } from '@app/core/models/product';
+import { HammerGestureConfig } from '@angular/platform-browser';
 declare const $: any;
 
 @Component({
@@ -26,6 +27,7 @@ export class InvoicesListComponent implements OnInit {
   agribusinessUser: boolean;
   sellerUser: boolean;
   searchTerm: string;
+  hasInvoices: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +42,7 @@ export class InvoicesListComponent implements OnInit {
     this.agribusinessUser = this.authService.isAgribusiness;
     this.sellerUser = this.authService.isSeller;
     this.route.data.subscribe(({ invoices, invoicesAsBuyer, invoicesAsSeller }) => {
+      invoices.length > 0 ? (this.hasInvoices = true) : (this.hasInvoices = false);
       this.invoices = invoices;
       this.allInvoices = invoices;
       this.buyerInvoices = invoicesAsBuyer;

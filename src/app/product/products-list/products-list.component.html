@@ -8,9 +8,9 @@
     certifications, packing options and more.
   </p>
 </div>
-<h1 translate class="main-title">Products List</h1>
+<h1 translate class="main-title" *ngIf="hasProducts">Products List</h1>
 
-<div class="actions-section clearfix" *ngIf="products.length > 0">
+<div class="actions-section clearfix" *ngIf="hasProducts">
   <div>
     <input
       type="text"
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<table class="table main-table" matSort (matSortChange)="sortData($event)">
+<table class="table main-table" matSort (matSortChange)="sortData($event)" *ngIf="hasProducts">
   <thead>
     <tr>
       <th mat-sort-header="id" translate class="text-center">ID</th>
@@ -42,7 +42,7 @@
       <th translate class="text-right">Actions</th>
     </tr>
   </thead>
-  <tbody *ngIf="products.length > 0">
+  <tbody *ngIf="hasProducts">
     <tr
       *ngFor="
         let product of (products
@@ -88,7 +88,7 @@
     </tr>
   </tbody>
 </table>
-<div class="add-supplier-box panel" *ngIf="products.length <= 0">
+<div class="add-supplier-box panel" *ngIf="!hasProducts">
   <div class="panel-body">
     <img src="../../../assets/img/default/pi-po/noProducts.png" />
     <p style="font-size: large;">Add your first product and start selling it.</p>
@@ -101,7 +101,7 @@
   </div>
 </div>
 
-<pagination-controls (pageChange)="pageChanged($event)" *ngIf="products.length > 0"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)" *ngIf="hasProducts"></pagination-controls>
 
 <div class="modal-box" id="productProfileWizard">
   <div class="modal-box-content-wrapper">

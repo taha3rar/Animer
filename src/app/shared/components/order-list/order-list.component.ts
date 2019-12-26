@@ -5,6 +5,7 @@ import { BaseListComponent } from '../base-list/base-list.component';
 import { Router } from '@angular/router';
 import 'hammerjs';
 import { Sort } from '@angular/material/sort';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-order-list',
@@ -14,6 +15,8 @@ import { Sort } from '@angular/material/sort';
 export class OrderListComponent extends BaseListComponent implements OnInit {
   @Input() orders: Order[];
   @Input() searchTerm: string;
+  hasOrders: boolean;
+  tooltips = tooltips.orders.orders_list;
   // tslint:disable-next-line:max-line-length
   usersWhiteList = [
     'bendemoseller@gmail.com',
@@ -41,6 +44,7 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.orders.length > 0 ? (this.hasOrders = true) : (this.hasOrders = false);
     this.orders = this.orders.slice();
   }
 

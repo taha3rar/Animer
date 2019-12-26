@@ -12,9 +12,9 @@
   </p>
 </div>
 
-<h1 translate class="main-title">Quote Requests List</h1>
+<h1 translate class="main-title" *ngIf="hasQuoteRequests">Quote Requests List</h1>
 
-<div class="actions-section clearfix">
+<div class="actions-section clearfix" *ngIf="hasQuoteRequests">
   <div>
     <input
       type="text"
@@ -26,7 +26,7 @@
     />
   </div>
 
-  <div class="flex-pr">
+  <div class="flex-pr" *ngIf="hasQuoteRequests">
     <button
       class="bttn-primary bttn-add mr-0"
       *ngxPermissionsOnly="['create-qr']"
