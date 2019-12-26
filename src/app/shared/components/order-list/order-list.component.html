@@ -13,7 +13,7 @@
   <tbody>
     <tr
       *ngFor="
-        let order of orders | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }
+        let order of (orders | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage })
       "
     >
       <td class="text-center">{{ order.numericId }}</td>
@@ -35,7 +35,8 @@
       </td>
       <td>
         <span *ngIf="order.total_weight && order.document_weight_unit"
-          >{{ order.total_weight | number: '1.2-2' }} {{ order.document_weight_unit }}
+          >{{ order.total_weight | number: '1.2-2' }}
+          {{ order.document_weight_unit }}
           <span *ngIf="hasProcessedProduct(order)" style="font-size :11px;color:gray"
             >Excluding processed products</span
           ></span
@@ -125,5 +126,16 @@
     </tr>
   </tbody>
 </table>
+<div style="background-color: white;" *ngxPermissionsOnly="['create-order']">
+  <div class="add-supplier-box panel" *ngIf="orders.length == 0">
+    <div class="panel-body">
+      <img src="../../../assets/img/dashboard-imgs/orders.png" height="200" width="310" />
+      <p style="font-size: large;">Start trading digitally by creating your first purchase Order.</p>
+      <button class="bttn-primary bttn-add">
+        <span>Place your first Order</span>
+      </button>
+    </div>
+  </div>
+</div>
 
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)" *ngIf="orders.length > 0"></pagination-controls>

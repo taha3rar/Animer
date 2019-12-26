@@ -10,7 +10,7 @@
 </div>
 <h1 translate class="main-title">Products List</h1>
 
-<div class="actions-section clearfix">
+<div class="actions-section clearfix" *ngIf="products.length > 0">
   <div>
     <input
       type="text"
@@ -42,7 +42,7 @@
       <th translate class="text-right">Actions</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngIf="products.length > 0">
     <tr
       *ngFor="
         let product of (products
@@ -88,8 +88,20 @@
     </tr>
   </tbody>
 </table>
+<div class="add-supplier-box panel" *ngIf="products.length <= 0">
+  <div class="panel-body">
+    <img src="../../../assets/img/default/pi-po/noProducts.png" />
+    <p style="font-size: large;">Add your first product and start selling it.</p>
+    <button class="bttn-primary bttn-add" (click)="openDialogProcessed(undefined)">
+      <span translate>New Processed Product</span>
+    </button>
+    <button class="bttn-primary bttn-add" (click)="openDialogAgricultural(undefined)">
+      <span translate>New Agricultural Product</span>
+    </button>
+  </div>
+</div>
 
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)" *ngIf="products.length > 0"></pagination-controls>
 
 <div class="modal-box" id="productProfileWizard">
   <div class="modal-box-content-wrapper">

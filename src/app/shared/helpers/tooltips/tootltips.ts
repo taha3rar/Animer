@@ -14,7 +14,7 @@ export const tooltips = {
   },
   clients: {
     clients_list: {
-      add_client: 'Adding a contact will let you manage all your future transactions with them'
+      add_client: 'Adding a contact will let you manage all your future transactions with him'
     }
   },
   product_generator: {

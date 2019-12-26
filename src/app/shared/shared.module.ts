@@ -33,6 +33,7 @@ import { MatSortModule } from '@angular/material';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 import { ContactGeneratorComponent } from './components/contact-generator/contact-generator.component';
 import { UserProgressComponent } from './components/user-progress/user-progress.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { UserProgressComponent } from './components/user-progress/user-progress.
     NgbModule,
     RouterModule,
     ReactiveFormsModule,
+    NgxPermissionsModule.forRoot(),
     ProgressbarModule.forRoot(),
     MatTooltipModule,
     FormsModule,

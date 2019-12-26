@@ -10,7 +10,7 @@
 </div>
 <h1 class="main-title">Contact List</h1>
 
-<div class="mt-1 actions-section clearfix">
+<div class="mt-1 actions-section clearfix" *ngIf="clients.length > 0">
   <div>
     <input
       type="text"
@@ -45,7 +45,7 @@
       <th class="text-right">Actions</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngIf="clients.length > 0">
     <tr
       *ngFor="
         let client of (clients
@@ -66,8 +66,26 @@
     </tr>
   </tbody>
 </table>
+<div style="background-color: white;">
+  <div class="add-supplier-box panel" *ngIf="clients.length == 0">
+    <div class="panel-body">
+      <img src="../../../assets/img/default/pi-po/noClient.png" width="375" height="225" />
+      <p style="font-size: large;">Add your first contact and begin trading with him.</p>
+      <button
+        class="bttn-primary bttn-add"
+        data-toggle="wizard"
+        *ngxPermissionsOnly="['create-client']"
+        data-target="#addClientWizard"
+        matTooltip="{{ tooltips.add_client }}"
+        matTooltipPosition="below"
+      >
+        <span>Add your first Contact</span>
+      </button>
+    </div>
+  </div>
+</div>
 
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)" *ngIf="clients.length > 0"></pagination-controls>
 
 <app-contact-generator></app-contact-generator>
 <app-client-tutorials></app-client-tutorials>
