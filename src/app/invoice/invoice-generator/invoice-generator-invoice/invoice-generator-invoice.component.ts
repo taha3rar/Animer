@@ -138,11 +138,11 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     if (dateUpdated) {
       dateForm
         ? this.invoice[dateForm].patchValue({
-          [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
-        })
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          })
         : this.form.patchValue({
-          [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
-        });
+            [dateName]: new Date(dateUpdated.year, dateUpdated.month - 1, dateUpdated.day).toJSON()
+          });
     } else {
       dateForm ? this.invoice[dateForm].patchValue({ [dateName]: null }) : this.form.patchValue({ [dateName]: null });
     }
@@ -165,8 +165,8 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     }
     this.issuedOn
       ? this.form.patchValue({
-        date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
-      })
+          date_created: new Date(this.issuedOn.year, this.issuedOn.month - 1, this.issuedOn.day).toJSON()
+        })
       : this.form.patchValue({ date_created: new Date().toJSON() });
   }
 
@@ -213,17 +213,12 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   checkProducts() {
     this.productsValid = false;
   }
-<<<<<<< HEAD
-
 
   checkPaymentRequest(isChecked: boolean) {
-    console.log(isChecked);
     if (isChecked) {
       this.invoice['payable'].setValue(true);
     } else {
       this.invoice['payable'].setValue(false);
     }
   }
-=======
->>>>>>> dpo ui changes
 }
