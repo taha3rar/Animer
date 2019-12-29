@@ -43,10 +43,12 @@
 
       <td>
         <span *ngIf="viewAsSeller"
-          >{{ invoice.buyer.company_name }} / {{ invoice.buyer.first_name }} {{ invoice.buyer.last_name }}</span
+          >{{ invoice.buyer.company_name || 'N/A' }} / {{ invoice.buyer.first_name }}
+          {{ invoice.buyer.last_name }}</span
         >
         <span *ngIf="!viewAsSeller"
-          >{{ invoice.seller.company_name }} / {{ invoice.sign_by.first_name }} {{ invoice.sign_by.last_name }}</span
+          >{{ invoice.seller.company_name || 'N/A' }} / {{ invoice.sign_by.first_name }}
+          {{ invoice.sign_by.last_name }}</span
         >
         <span *ngIf="!invoice.sign_by.first_name || !invoice.sign_by.last_name">N/A</span>
       </td>
