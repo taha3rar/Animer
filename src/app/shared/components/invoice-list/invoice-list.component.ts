@@ -46,7 +46,7 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.invoices.length > 0 ? (this.hasInvoices = true) : (this.hasInvoices = false);
+    this.hasInvoices = this.invoices.length > 0;
   }
 
   sortData(sort: Sort) {

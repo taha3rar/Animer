@@ -37,7 +37,7 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(({ products }) => {
-      products.length > 0 ? (this.hasProducts = true) : (this.hasProducts = false);
+      this.hasProducts = products.length > 0;
       this.products = products.slice();
     });
   }

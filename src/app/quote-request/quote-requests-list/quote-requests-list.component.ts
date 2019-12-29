@@ -19,7 +19,7 @@ export class QuoteRequestsListComponent implements OnInit {
   ngOnInit() {
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
     this.route.data.subscribe(({ quoteRequests }) => {
-      quoteRequests.lenght > 0 ? (this.hasQuoteRequests = true) : (this.hasQuoteRequests = false);
+      this.hasQuoteRequests = quoteRequests.length > 0;
       this.quoteRequests = quoteRequests;
     });
   }

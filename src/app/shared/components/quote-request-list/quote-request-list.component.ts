@@ -37,7 +37,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   }
 
   ngOnInit() {
-    this.quoteRequests.length > 0 ? (this.hasQuoteRequests = true) : (this.hasQuoteRequests = false);
+    this.hasQuoteRequests = this.quoteRequests.length > 0;
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
     this.userId = this.authService.currentUserId;
   }

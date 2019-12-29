@@ -35,7 +35,7 @@ export class OrdersListComponent implements OnInit {
   ngOnInit() {
     this.agribusinessUser = this.authService.isAgribusiness;
     this.route.data.subscribe(({ orders, ordersAsBuyer, ordersAsSeller, currentUser }) => {
-      orders.length > 0 ? (this.hasOrders = true) : (this.hasOrders = false);
+      this.hasOrders = orders.length > 0;
       this.buyerOrders = ordersAsBuyer;
       this.sellerOrders = ordersAsSeller;
       this.currentUser = currentUser;

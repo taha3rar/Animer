@@ -34,7 +34,7 @@ export class ClientListComponent extends BaseListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(({ clients }) => {
-      clients.length > 0 ? (this.hasClients = true) : (this.hasClients = false);
+      this.hasClients = clients.length > 0;
       this.clients = clients.slice();
     });
   }

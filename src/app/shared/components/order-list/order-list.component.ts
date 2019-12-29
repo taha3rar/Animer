@@ -44,7 +44,7 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orders.length > 0 ? (this.hasOrders = true) : (this.hasOrders = false);
+    this.hasOrders = this.orders.length > 0;
     this.orders = this.orders.slice();
   }
 

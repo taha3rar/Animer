@@ -42,7 +42,7 @@ export class InvoicesListComponent implements OnInit {
     this.agribusinessUser = this.authService.isAgribusiness;
     this.sellerUser = this.authService.isSeller;
     this.route.data.subscribe(({ invoices, invoicesAsBuyer, invoicesAsSeller }) => {
-      invoices.length > 0 ? (this.hasInvoices = true) : (this.hasInvoices = false);
+      this.hasInvoices = invoices.length > 0;
       this.invoices = invoices;
       this.allInvoices = invoices;
       this.buyerInvoices = invoicesAsBuyer;
