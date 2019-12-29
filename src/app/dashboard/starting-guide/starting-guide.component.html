@@ -213,8 +213,7 @@
                 Include details like name and variety, amount, packaging, price and a picture.
               </p>
               <button class="btn btn-primary" (click)="openProductModal()">ADD PRODUCT</button>
-              <a class="skip-btn" *ngIf="!currentUser.referrer" (click)="nextStep('contact')">Skip Step</a>
-              <a class="skip-btn" *ngIf="currentUser.referrer" (click)="nextStep('pi')">Skip Step</a>
+              <a class="skip-btn" (click)="nextStep('pi')">Skip Step</a>
             </div>
             <div [hidden]="!userProgress.first_product">
               <h2>Well done! You added your first Product.</h2>
