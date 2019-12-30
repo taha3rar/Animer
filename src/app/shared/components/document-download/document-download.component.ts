@@ -33,14 +33,6 @@ export class DocumentDownloadComponent extends BaseValidationComponent {
     });
   }
 
-  // download(version: string): void {
-  //   this.service.getPdf(this.transaction._id, version).subscribe((data: any) => {
-  //     const blob = new Blob([data], { type: 'application/pdf' });
-  //     importedSaveAs(blob, `${this.transactionRoute}-${this.transaction.numericId}-${version}`);
-  //     swal.close();
-  //   });
-  // }
-
   newTab(version: string): void {
     if (this.transaction.pdf_location && this.transaction.pdf_location[version]) {
       window.open(this.transaction.pdf_location[version]);

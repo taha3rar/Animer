@@ -18,6 +18,6 @@ export class QuoteRequestService extends BaseService {
   }
 
   getPdf(qrId: string, version: string): Observable<QuoteRequest> {
-    return this.apiService.post(`${this.path}/${qrId}/pdf/${version}`).pipe(map(data => data));
+    return this.apiService.get(`${this.path}/${qrId}/pdf/${version}`).pipe(map(data => data));
   }
 }
