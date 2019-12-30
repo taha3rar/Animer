@@ -3,7 +3,8 @@
     <tr>
       <th mat-sort-header="id" translate class="text-center">ID</th>
       <th mat-sort-header="date" translate>Date</th>
-      <th mat-sort-header="company" translate>Company</th>
+      <th mat-sort-header="company" translate>Issued for</th>
+      <th translate>Product</th>
       <th mat-sort-header="amount" translate>Amount</th>
       <th mat-sort-header="price" translate>Price</th>
       <th mat-sort-header="status" translate>Status</th>
@@ -32,6 +33,17 @@
         <span *ngIf="userId == order.buyer._id"
           >{{ order.seller.company_name }} / {{ order.seller.first_name }} {{ order.seller.last_name }}</span
         >
+      </td>
+      <td>
+        <span *ngIf="order.products.length > 1">
+          Mutltiple products
+        </span>
+        <ng-container *ngIf="order.products.length === 1">
+          <span *ngIf="order.products[0].product_type != 'processed'"
+            >{{ order.products[0].produce }} / {{ order.products[0].variety }}</span
+          >
+          <span *ngIf="order.products[0].product_type == 'processed'">{{ order.products[0].produce }}</span>
+        </ng-container>
       </td>
       <td>
         <span *ngIf="order.total_weight && order.document_weight_unit"
