@@ -24,7 +24,6 @@ export class StartingGuideComponent implements OnInit {
   products: Product[];
   userProgress = {};
   currentUser: any;
-  helpRequestSent = false;
 
   swalWithStyledButtons = Swal.mixin({
     customClass: {
@@ -140,14 +139,5 @@ export class StartingGuideComponent implements OnInit {
           this.router.navigateByUrl('/order/generator/open');
         }
       });
-  }
-
-  onHelpRequestSent() {
-    this.helpRequestSent = true;
-    return swal({
-      title: 'Your request has been sent!',
-      text: 'One of the Avenews-GT team will contact you soon.',
-      icon: 'success'
-    });
   }
 }
