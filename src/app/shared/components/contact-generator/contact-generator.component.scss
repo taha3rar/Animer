@@ -11,3 +11,42 @@
   max-height: 85vh;
   overflow: auto;
 }
+
+.contact-help-wrapper {
+  display: flex;
+  position: absolute;
+  bottom: 4.3rem;
+  margin-right: 3rem !important;
+  margin-left: 3rem;
+  margin-bottom: 5rem;
+
+  #contact-help-text {
+    margin-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    p:first-child {
+      font-weight: bold;
+      font-style: italic;
+      width: 65%;
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 1.4rem;
+      margin-bottom: 0px;
+      width: 70%;
+      font-size: 15px;
+    }
+
+    a {
+      font-size: 1.4rem;
+      color: #37c1ce;
+      text-decoration-line: underline;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+  }
+}

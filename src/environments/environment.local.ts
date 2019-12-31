@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://localhost:8880',
+  api_url: 'http://localhost',
   version: '2.0.0-dev',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'af-SA'],
