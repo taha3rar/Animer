@@ -12,13 +12,18 @@
   overflow: auto;
 }
 
+.stepper {
+  position: relative;
+  display: inline-block;
+}
+
 .contact-help-wrapper {
   display: flex;
   position: absolute;
-  bottom: 4.3rem;
+  bottom: 3rem;
   margin-right: 3rem !important;
   margin-left: 3rem;
-  margin-bottom: 5rem;
+  width: 30%;
 
   #contact-help-text {
     margin-right: 1.5rem;
@@ -29,14 +34,12 @@
     p:first-child {
       font-weight: bold;
       font-style: italic;
-      width: 65%;
       font-size: 16px;
     }
 
     p {
       font-size: 1.4rem;
       margin-bottom: 0px;
-      width: 70%;
       font-size: 15px;
     }
 
