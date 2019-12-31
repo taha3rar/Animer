@@ -143,14 +143,24 @@
     <div class="panel-body">
       <img src="../../../assets/img/dashboard-imgs/orders.png" height="200" width="310" />
       <p style="font-size: large;">Start trading digitally by creating your first purchase Order.</p>
-      <button
-        class="bttn-primary bttn-add"
-        routerLink="/order/generator/standard"
-        matTooltip="{{ tooltips.internal_po }}"
-        matTooltipPosition="below"
-      >
-        <span>Place your first Order</span>
-      </button>
+      <div class="dropdown">
+        <button
+          class="bttn-primary dropdown-toggle"
+          matTooltip="{{ tooltips.place_order }}"
+          data-toggle="dropdown"
+          matTooltipPosition="above"
+        >
+          <span translate>Place Order </span>
+        </button>
+        <ul class="dropdown-menu">
+          <li routerLink="/order/generator/standard" matTooltip="{{ tooltips.internal_po }}" matTooltipPosition="left">
+            <a>Internal Purchase Order</a>
+          </li>
+          <li routerLink="/order/generator/open" matTooltip="{{ tooltips.external_po }}" matTooltipPosition="left">
+            <a>External Purchase Order</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
