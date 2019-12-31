@@ -28,21 +28,20 @@
 
     <div *ngxPermissionsOnly="['create-order']" class="dropdown">
       <button
-        class="bttn-primary"
-        matTooltip="{{ tooltips.internal_po }}"
+        class="bttn-primary dropdown-toggle"
+        matTooltip="{{ tooltips.place_order }}"
+        data-toggle="dropdown"
         matTooltipPosition="above"
-        routerLink="/order/generator/standard"
       >
-        <!-- matTooltip="{{ tooltips place_order }}" class="bttn-primary dropdown-toggle" data-toggle="dropdown" -->
         <span translate>Place Order </span>
       </button>
       <ul class="dropdown-menu">
         <li routerLink="/order/generator/standard" matTooltip="{{ tooltips.internal_po }}" matTooltipPosition="left">
           <a>Internal Purchase Order</a>
         </li>
-        <!-- <li routerLink="/order/generator/open" matTooltip="{{ tooltips.external_po }}" matTooltipPosition="left">
+        <li routerLink="/order/generator/open" matTooltip="{{ tooltips.external_po }}" matTooltipPosition="left">
           <a>External Purchase Order</a>
-        </li> -->
+        </li>
       </ul>
     </div>
   </div>
