@@ -39,7 +39,7 @@
     <p class="heading-2">Amount</p>
     <div class="form-row">
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('weight_unit')">
-        <label for="weight-unit">Weight Unit *</label>
+        <label for="weight-unit">Measurement Unit *</label>
         <select id="weight-unit" formControlName="weight_unit" name="weight_unit" class="form-control">
           <option *ngFor="let unit of units" [value]="unit.value" selected="selected">{{ unit.viewValue }}</option>
         </select>
