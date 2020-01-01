@@ -23,6 +23,7 @@ export class ForgotPasswordComponent implements OnInit {
   phoneUtil: any;
   regionCode: string;
   phoneCode: string;
+  methodName: string;
   partialPhoneNumber: string;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthenticationService) {}
@@ -78,13 +79,21 @@ export class ForgotPasswordComponent implements OnInit {
         () => (this.resetLinkStatus = 1),
         err => {
           console.log(err);
-          this.resetLinkStatus = 2;
         }
       );
     }
+    this.checkMethod();
   }
 
   generateLink(code: any, country: any) {
     return `<img src='../../assets/img/flags/${code}.png' height='19' height='27'><span>\xa0\xa0${country}</span>`;
+  }
+
+  checkMethod() {
+    if (this.forgotPasswordForm.value.email) {
+      this.methodName = 'email';
+    } else {
+      this.methodName = 'phone';
+    }
   }
 }
