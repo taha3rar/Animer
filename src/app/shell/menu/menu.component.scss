@@ -19,3 +19,27 @@ a.active p {
   width: 3.5px;
   height: 100%;
 }
+
+.support-section {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-53%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+
+  p {
+    font-size: 1.4rem;
+    margin-top: 2px;
+  }
+
+  i {
+    color: #00bcd4;
+  }
+}
+
+.support-section:hover {
+  text-decoration-line: underline;
+}

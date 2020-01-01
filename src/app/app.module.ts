@@ -1,3 +1,4 @@
+import { HelpCenterModule } from './help-center/help-center.module';
 import { QuoteRequestModule } from './quote-request/quote-request.module';
 import { ProfileModule } from './profile/profile.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -53,6 +54,7 @@ import { environment } from '@env/environment.local';
     NotificationsModule,
     LandingModule,
     RegistrationModule,
+    HelpCenterModule,
     IntercomModule.forRoot({
       appId: environment.intercom.app_id,
       updateOnRouterChange: true // will automatically run `update` on router event changes. Default: `false`
