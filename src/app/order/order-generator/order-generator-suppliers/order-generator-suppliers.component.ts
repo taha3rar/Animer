@@ -19,6 +19,7 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
   nextBtnClicked = false;
   page = 1;
   searchTerm: string;
+  hasSeller = false;
 
   constructor(private route: ActivatedRoute, private orderDataService: OrderDataService) {
     super();
@@ -35,19 +36,12 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     return client.profile_picture || defaultValues.profile_picture;
   }
 
-  get validSeller() {
-    if (this.form.value.seller.controls) {
-      return this.form.value.seller.controls.valid;
-    } else {
-      return true;
-    }
-  }
-
   get order() {
     return this.form.controls;
   }
 
   resetForm(client: Client) {
+    this.hasSeller = true;
     this.form.patchValue({
       seller: client
     });
