@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Intercom } from 'ng-intercom';
 
 @Component({
   selector: 'app-help-center',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./help-center.component.scss']
 })
 export class HelpCenterComponent implements OnInit {
-  constructor() {}
+  constructor(private intercom: Intercom) {}
 
   ngOnInit() {}
+
+  openIntercom(): void {
+    this.intercom.show();
+  }
 }
