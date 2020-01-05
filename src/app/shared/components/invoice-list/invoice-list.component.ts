@@ -1,5 +1,5 @@
 import { CsvService } from './../../services/csv.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { AuthenticationService, InvoiceService } from '@app/core';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { Sort } from '@angular/material/sort';
   templateUrl: './invoice-list.component.html',
   styleUrls: ['./invoice-list.component.scss']
 })
-export class InvoiceListComponent extends BaseListComponent implements OnInit {
+export class InvoiceListComponent extends BaseListComponent implements OnInit, OnChanges {
   @Input()
   exportInit: boolean;
   @Input()
@@ -45,7 +45,9 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnChanges() {
     this.hasInvoices = this.invoices.length > 0;
   }
 
