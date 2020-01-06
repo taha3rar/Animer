@@ -47,7 +47,7 @@ export class InvoicesListComponent implements OnInit {
       this.allInvoices = invoices;
       this.buyerInvoices = invoicesAsBuyer;
       this.sellerInvoices = invoicesAsSeller;
-      if (this.agribusinessUser || this.sellerUser) {
+      if (this.sellerUser || (this.agribusinessUser && this.sellerInvoices.length > 0)) {
         this.viewAs('seller');
       } else {
         this.viewAs('buyer');

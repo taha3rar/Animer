@@ -50,7 +50,6 @@
           >{{ invoice.seller.company_name || 'N/A' }} / {{ invoice.sign_by.first_name }}
           {{ invoice.sign_by.last_name }}</span
         >
-        <span *ngIf="!invoice.sign_by.first_name || !invoice.sign_by.last_name">N/A</span>
       </td>
       <td>
         <span *ngIf="invoice.products.length < 1">N/A</span>

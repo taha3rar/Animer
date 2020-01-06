@@ -35,7 +35,7 @@
 </div>
 
 <div class="actions-section" *ngIf="hasInvoices">
-  <div class="two-btns" *ngIf="agribusinessUser">
+  <div class="two-btns" *ngIf="agribusinessUser && buyerInvoices.length > 0 && sellerInvoices.length > 0">
     <p class="heading-3">View records as:</p>
     <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
       Seller
