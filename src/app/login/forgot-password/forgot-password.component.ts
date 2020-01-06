@@ -78,6 +78,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.authService.forgotPassword(this.username).subscribe(
         () => (this.resetLinkStatus = 1),
         err => {
+          this.resetLinkStatus = 2;
           console.log(err);
         }
       );
