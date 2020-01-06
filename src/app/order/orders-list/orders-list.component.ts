@@ -19,6 +19,7 @@ export class OrdersListComponent implements OnInit {
   searchTerm: string;
   page = 1;
   agribusinessUser: boolean;
+  buyerUser: boolean;
   viewAsSeller = false;
   viewAsBuyer = true;
   currentUser: any;
@@ -34,15 +35,16 @@ export class OrdersListComponent implements OnInit {
 
   ngOnInit() {
     this.agribusinessUser = this.authService.isAgribusiness;
+    this.buyerUser = this.authService.isBuyer;
     this.route.data.subscribe(({ orders, ordersAsBuyer, ordersAsSeller, currentUser }) => {
       this.hasOrders = orders.length > 0;
       this.buyerOrders = ordersAsBuyer;
       this.sellerOrders = ordersAsSeller;
       this.currentUser = currentUser;
-      if (this.agribusinessUser) {
-        this.orders = ordersAsBuyer;
+      if (this.buyerUser || (this.agribusinessUser && this.buyerOrders.length > 0)) {
+        this.viewAs('buyer');
       } else {
-        this.orders = orders;
+        this.viewAs('seller');
       }
     });
   }
