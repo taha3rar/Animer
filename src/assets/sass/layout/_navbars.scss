@@ -104,6 +104,8 @@
     .sidebar {
       height: 100% !important;
       position: fixed;
+      display: flex;
+      flex-direction: column;
       z-index: 1000;
       top: 0;
       left: 0;
