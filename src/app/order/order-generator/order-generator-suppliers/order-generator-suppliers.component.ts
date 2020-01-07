@@ -1,11 +1,12 @@
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormGroup } from '@angular/forms';
 import { OrderDataService } from '../order-data.service';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
+import * as Driver from 'driver.js';
 
 @Component({
   selector: 'app-order-generator-suppliers',
@@ -13,7 +14,7 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
   styleUrls: ['./order-generator-suppliers.component.scss'],
   providers: [FilterPipe]
 })
-export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit {
+export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit, AfterViewInit {
   form: FormGroup;
   clients: Client[];
   nextBtnClicked = false;
@@ -30,6 +31,21 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
     });
+  }
+
+  ngAfterViewInit() {
+    const driver = new Driver({
+      opacity: 0.5
+    });
+    setTimeout(function() {
+      driver.highlight({
+        element: '#t1',
+        popover: {
+          title: 'Title for the Popover',
+          description: 'Description for it'
+        }
+      });
+    }, 1000);
   }
 
   profilePicture(client: Client) {

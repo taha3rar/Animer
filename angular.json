@@ -24,6 +24,7 @@
             "polyfills": "src/polyfills.ts",
             "assets": ["src/favicon.png", "src/robots.txt", "src/assets", "src/data"],
             "styles": [
+              "./node_modules/driver.js/dist/driver.min.css",
               "./node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
               "src/main.scss",
               {
