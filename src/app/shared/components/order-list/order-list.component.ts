@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Order } from '@app/core/models/order/order';
 import { AuthenticationService, OrderService } from '@app/core';
 import { BaseListComponent } from '../base-list/base-list.component';
@@ -12,9 +12,13 @@ import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss']
 })
-export class OrderListComponent extends BaseListComponent implements OnInit {
-  @Input() orders: Order[];
-  @Input() searchTerm: string;
+export class OrderListComponent extends BaseListComponent implements OnInit, OnChanges {
+  @Input()
+  orders: Order[];
+  @Input()
+  searchTerm: string;
+  @Input()
+  viewAsSeller: boolean;
   hasOrders: boolean;
   tooltips = tooltips.orders.orders_list;
   // tslint:disable-next-line:max-line-length
@@ -23,7 +27,8 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
     'ishai@avenews-gt.com',
     'javier@avenews-gt.com',
     'marcus.mika@gmail.com',
-    'mcsmicha@gmail.com'
+    'mcsmicha@gmail.com',
+    'michael@avenews-gt.com'
   ];
   processedProductConflictMessage: String =
     // tslint:disable-next-line:max-line-length
@@ -44,8 +49,12 @@ export class OrderListComponent extends BaseListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hasOrders = this.orders.length > 0;
     this.orders = this.orders.slice();
+    console.log('orders', this.orders);
+  }
+
+  ngOnChanges() {
+    this.hasOrders = this.orders.length > 0;
   }
 
   sortData(sort: Sort) {

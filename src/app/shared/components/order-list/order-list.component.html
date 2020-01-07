@@ -3,7 +3,8 @@
     <tr>
       <th mat-sort-header="id" translate class="text-center">ID</th>
       <th mat-sort-header="date" translate>Date</th>
-      <th mat-sort-header="company" translate>Issued for</th>
+      <th *ngIf="!viewAsSeller" mat-sort-header="company" translate>Issued for</th>
+      <th *ngIf="viewAsSeller" mat-sort-header="company" translate>Issued by</th>
       <th translate>Product</th>
       <th mat-sort-header="amount" translate>Amount</th>
       <th mat-sort-header="price" translate>Price</th>
