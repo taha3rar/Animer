@@ -50,7 +50,6 @@ export class OrdersListComponent implements OnInit {
   }
 
   viewAs(profileType: any) {
-    console.log(profileType);
     this.viewAsSeller = false;
     this.viewAsBuyer = false;
     if (profileType === 'seller') {

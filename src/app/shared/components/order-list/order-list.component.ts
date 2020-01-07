@@ -50,7 +50,6 @@ export class OrderListComponent extends BaseListComponent implements OnInit, OnC
 
   ngOnInit() {
     this.orders = this.orders.slice();
-    console.log('orders', this.orders);
   }
 
   ngOnChanges() {
