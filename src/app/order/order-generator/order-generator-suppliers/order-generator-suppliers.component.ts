@@ -57,4 +57,8 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
   validateSeller() {
     this.nextBtnClicked = true;
   }
+
+  selectCard(id: any) {
+    $('input[id="' + id + '"]').trigger('click');
+  }
 }

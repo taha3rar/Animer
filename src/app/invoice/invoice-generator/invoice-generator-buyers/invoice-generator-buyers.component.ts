@@ -32,4 +32,8 @@ export class InvoiceGeneratorBuyersComponent extends BaseNavigationComponent imp
   get validBuyer() {
     return this.form.controls.buyer.valid;
   }
+
+  selectCard(id: any) {
+    $('input[id="' + id + '"]').trigger('click');
+  }
 }

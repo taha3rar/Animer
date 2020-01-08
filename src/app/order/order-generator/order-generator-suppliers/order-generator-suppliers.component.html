@@ -34,6 +34,7 @@
         <div class="row margin-top clearfix">
           <div
             class="card supplier-card"
+            (click)="selectCard(client.numericId)"
             *ngFor="let client of (clients | filter: searchTerm | paginate: { itemsPerPage: 12, currentPage: page })"
           >
             <div>
