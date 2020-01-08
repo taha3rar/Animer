@@ -26,6 +26,7 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit, O
   @Output() invoicesList = new EventEmitter();
   checkedAll = false;
   hasInvoices: Boolean;
+
   measurementUnitConflictMessage: String =
     // tslint:disable-next-line:max-line-length
     'This proforma invoice includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';

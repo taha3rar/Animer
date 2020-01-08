@@ -12,6 +12,7 @@ import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss']
 })
+
 export class OrderListComponent extends BaseListComponent implements OnInit, OnChanges {
   @Input()
   orders: Order[];
