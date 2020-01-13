@@ -6,7 +6,6 @@ import { OrderDataService } from '../order-data.service';
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
-import * as Driver from 'driver.js';
 
 declare const $: any;
 @Component({
@@ -14,7 +13,7 @@ declare const $: any;
   templateUrl: './order-generator-products.component.html',
   styleUrls: ['./order-generator-products.component.scss']
 })
-export class OrderGeneratorProductsComponent extends BaseNavigationComponent implements OnInit, AfterViewChecked {
+export class OrderGeneratorProductsComponent extends BaseNavigationComponent implements OnInit {
   term: string;
   form: FormGroup;
   inventoryProducts: any[];
@@ -51,21 +50,6 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
         this.addedProducts = data;
       }
     });
-  }
-
-  ngAfterViewChecked() {
-    const driver2 = new Driver({
-      opacity: 0.5
-    });
-    setTimeout(function() {
-      driver2.highlight({
-        element: '#t2',
-        popover: {
-          title: 'Title for the Popover 2',
-          description: 'Description for it'
-        }
-      });
-    }, 1000);
   }
 
   get order() {

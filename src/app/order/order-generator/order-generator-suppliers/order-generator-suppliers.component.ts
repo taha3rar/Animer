@@ -6,7 +6,7 @@ import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormGroup } from '@angular/forms';
 import { OrderDataService } from '../order-data.service';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
-import * as Driver from 'driver.js';
+import * as introJs from 'intro.js';
 
 @Component({
   selector: 'app-order-generator-suppliers',
@@ -34,18 +34,21 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
   }
 
   ngAfterViewInit() {
-    const driver = new Driver({
-      opacity: 0.5
-    });
-    setTimeout(function() {
-      driver.highlight({
-        element: '#t1',
-        popover: {
-          title: 'Title for the Popover',
-          description: 'Description for it'
+    const intro = introJs();
+    intro.setOptions({
+      steps: [
+        {
+          element: '#t1',
+          intro: 'Step one description',
+          position: 'right'
+        },
+        {
+          element: '.next-step',
+          intro: 'Sep one description2',
+          position: 'right'
         }
-      });
-    }, 1000);
+      ]
+    });
   }
 
   profilePicture(client: Client) {
