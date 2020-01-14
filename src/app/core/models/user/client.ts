@@ -10,6 +10,7 @@ export class Client {
   role: string;
   _id: string;
   profile_picture: string;
+  country: string;
 
   constructor(private user: User = new User()) {
     this._id = user._id;
@@ -21,5 +22,6 @@ export class Client {
     this.phone_number = user.personal_information.phone_number;
     this.profile_picture = user.personal_information.profile_picture;
     this.role = user.roles[0];
+    this.country = user.company_information.country;
   }
 }

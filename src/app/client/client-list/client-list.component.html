@@ -39,8 +39,9 @@
   <thead>
     <tr>
       <th mat-sort-header="id" class="text-center">ID</th>
-      <th mat-sort-header="company">Company</th>
-      <th mat-sort-header="contactName">Contact Name</th>
+      <th mat-sort-header="contact">Contact</th>
+      <th mat-sort-header="details">Details</th>
+      <th mat-sort-header="country">Country</th>
       <th mat-sort-header="type">Type</th>
       <th class="text-right">Actions</th>
     </tr>
@@ -54,8 +55,19 @@
       "
     >
       <td class="text-center">{{ client.numericId }}</td>
-      <td>{{ client.company_name }}</td>
-      <td>{{ client.first_name }} {{ client.last_name }}</td>
+      <td>
+        {{ client.company_name }} <span *ngIf="client.company_name">/</span> {{ client.first_name }}
+        {{ client.last_name }}
+      </td>
+      <td>
+        <span *ngIf="client.email && client.phone_number">{{ client.email }} / {{ client.phone_number }}</span>
+        <span *ngIf="client.email && !client.phone_number">{{ client.email }}</span>
+        <span *ngIf="!client.email && client.phone_number">{{ client.phone_number }}</span>
+      </td>
+      <td>
+        {{ client.country }}
+        <span *ngIf="!client.country">N/A</span>
+      </td>
       <td *ngIf="client.role != 'external_user'" style="text-transform: capitalize;">{{ client.role }}</td>
       <td *ngIf="client.role === 'external_user'">External Contact</td>
       <td class="text-right">

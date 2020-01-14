@@ -51,10 +51,12 @@ export class ClientListComponent extends BaseListComponent implements OnInit {
       switch (sort.active) {
         case 'id':
           return super.compare(a.numericId, b.numericId, isAsc);
-        case 'company':
-          return super.compare(a.company_name, b.company_name, isAsc);
-        case 'contactName':
+        case 'contact':
           return super.compare(a.first_name + a.last_name, b.first_name + b.last_name, isAsc);
+        case 'details':
+          return super.compare(a.email, b.email, isAsc);
+        case 'country':
+          return super.compare(a.country, b.country, isAsc);
         case 'type':
           return super.compare(a.role, b.role, isAsc);
         default:
