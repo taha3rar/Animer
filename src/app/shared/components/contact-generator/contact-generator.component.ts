@@ -216,11 +216,11 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           const participant = new Client(data);
           if (this.ecosystemsToBeAdded.length) {
             this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
-              this.alerts.showAlert('New client profile has been created!');
+              this.alerts.showAlert('New contact profile has been created!');
               this.closeAndRefresh();
             });
           } else {
-            this.alerts.showAlert('New client profile has been created!');
+            this.alerts.showAlert('New contact profile has been created!');
             this.closeAndRefresh();
           }
         } else {
