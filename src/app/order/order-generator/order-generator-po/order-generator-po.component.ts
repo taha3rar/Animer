@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, SimpleChanges, OnChanges } from '@angular/core';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
@@ -13,13 +13,14 @@ import { UserDataComponent } from '@app/shared/components/user-data/user-data.co
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertsService } from '@app/core/alerts.service';
+import { Intercom } from 'ng-intercom';
 
 @Component({
   selector: 'app-order-generator-po',
   templateUrl: './order-generator-po.component.html',
   styleUrls: ['./order-generator-po.component.scss']
 })
-export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implements OnInit {
+export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implements OnInit, OnChanges {
   newOrder: Order;
   selectedProducts: any[];
   currency: string;
@@ -28,6 +29,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   @Output() newDraftPO = new EventEmitter();
   @Input() fromQuotation = false;
   @Input() openOrder = false;
+  @Input() tourName: string;
   @ViewChild('sellerData') sellerData: UserDataComponent;
   newSeller: FormGroup;
   inventoryProducts: any[];
@@ -47,7 +49,8 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     private orderService: OrderService,
     private quotationService: QuotationService,
     private router: Router,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    public intercom: Intercom
   ) {
     super(dialog, orderDataService);
   }
@@ -91,6 +94,16 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
       });
     }
     this.onChanges();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (
+      changes['tourName'].previousValue !== changes['tourName'].currentValue &&
+      changes['tourName'].currentValue === 'order'
+    ) {
+      console.log('start tour order');
+      this.intercom.startTour(95615);
+    }
   }
 
   get order() {

@@ -1,12 +1,12 @@
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormGroup } from '@angular/forms';
 import { OrderDataService } from '../order-data.service';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
-import * as introJs from 'intro.js';
+import { Intercom } from 'ng-intercom';
 
 @Component({
   selector: 'app-order-generator-suppliers',
@@ -14,15 +14,17 @@ import * as introJs from 'intro.js';
   styleUrls: ['./order-generator-suppliers.component.scss'],
   providers: [FilterPipe]
 })
-export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit, AfterViewInit {
+export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit {
   form: FormGroup;
   clients: Client[];
   nextBtnClicked = false;
   page = 1;
   searchTerm: string;
   hasSeller = false;
+  @Output() startTour = new EventEmitter<string>();
+  @Input() tourName: string;
 
-  constructor(private route: ActivatedRoute, private orderDataService: OrderDataService) {
+  constructor(private route: ActivatedRoute, private orderDataService: OrderDataService, public intercom: Intercom) {
     super();
   }
 
@@ -31,24 +33,9 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
     });
-  }
-
-  ngAfterViewInit() {
-    const intro = introJs();
-    intro.setOptions({
-      steps: [
-        {
-          element: '#t1',
-          intro: 'Step one description',
-          position: 'right'
-        },
-        {
-          element: '.next-step',
-          intro: 'Sep one description2',
-          position: 'right'
-        }
-      ]
-    });
+    if (this.tourName === 'suppliers') {
+      this.intercom.startTour(95289);
+    }
   }
 
   profilePicture(client: Client) {
@@ -75,6 +62,9 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
 
   validateSeller() {
     this.nextBtnClicked = true;
+    if (this.hasSeller) {
+      this.startTour.emit('products');
+    }
   }
 
   selectCard(id: any) {

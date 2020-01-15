@@ -15,10 +15,12 @@
           />
           <i class="material-icons">search</i>
         </div> -->
-        <button class="bttn-primary next-step" (click)="toOrderGenerator()">Next Step &rarr;</button>
+        <button id="tour_po_products_step2" class="bttn-primary next-step" (click)="toOrderGenerator()">
+          Next Step &rarr;
+        </button>
       </div>
     </div>
-    <div class="padding-all-2" *ngIf="inventoryProducts?.length >= 1">
+    <div id="tour_po_products_step1" class="padding-all-2" *ngIf="inventoryProducts?.length >= 1">
       <div class="margin-bottom">
         <button class="btn-icons pull-right" (click)="onNextPage(inventoryProducts?.length, 6)">
           <i class="material-icons">keyboard_arrow_right</i>

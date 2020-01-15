@@ -24,7 +24,6 @@
             "polyfills": "src/polyfills.ts",
             "assets": ["src/favicon.png", "src/robots.txt", "src/assets", "src/data"],
             "styles": [
-              "./node_modules/intro.js/introjs.css",
               "./node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
               "src/main.scss",
               {
@@ -32,7 +31,6 @@
               }
             ],
             "scripts": [
-              "./node_modules/intro.js/intro.js",
               "./node_modules/bootstrap-select/dist/js/bootstrap-select.min.js",
               "./node_modules/bootstrap-notify/bootstrap-notify.js"
             ]
