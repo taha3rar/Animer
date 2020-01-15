@@ -1,7 +1,7 @@
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe, DatePipe } from '@angular/common';
-import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule, MatButtonModule, MatTooltipModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -49,6 +49,7 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
+    MatTooltipModule,
     NgxPermissionsModule.forRoot()
   ],
   providers: [

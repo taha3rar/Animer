@@ -22,10 +22,18 @@
     />
   </div>
   <div class="flex-pr">
-    <button class="bttn-primary bttn-add pull-right" (click)="openDialogProcessed(undefined)">
+    <button
+      class="bttn-primary bttn-add pull-right"
+      (click)="openDialogProcessed(undefined)"
+      matTooltip="{{ tooltips.create_agri_product }}"
+    >
       <span translate>New Processed Product</span>
     </button>
-    <button class="bttn-primary bttn-add pull-right" (click)="openDialogAgricultural(undefined)">
+    <button
+      class="bttn-primary bttn-add pull-right"
+      (click)="openDialogAgricultural(undefined)"
+      matTooltip="{{ tooltips.create_processed_product }}"
+    >
       <span translate>New Agricultural Product</span>
     </button>
   </div>
@@ -92,10 +100,18 @@
   <div class="panel-body">
     <img src="../../../assets/img/default/pi-po/noProducts.png" />
     <p style="font-size: large;">Add your first product and begin selling.</p>
-    <button class="bttn-primary bttn-add" (click)="openDialogProcessed(undefined)">
+    <button
+      class="bttn-primary bttn-add"
+      (click)="openDialogProcessed(undefined)"
+      matTooltip="{{ tooltips.create_agri_product }}"
+    >
       <span translate>New Processed Product</span>
     </button>
-    <button class="bttn-primary bttn-add" (click)="openDialogAgricultural(undefined)">
+    <button
+      class="bttn-primary bttn-add"
+      (click)="openDialogAgricultural(undefined)"
+      matTooltip="{{ tooltips.create_processed_product }}"
+    >
       <span translate>New Agricultural Product</span>
     </button>
   </div>

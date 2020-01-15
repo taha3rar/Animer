@@ -1,12 +1,12 @@
 import { InvoiceTutorialsComponent } from './../../tutorials/invoice-tutorials/invoice-tutorials.component';
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { CsvService } from '@app/shared/services/csv.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { Product } from '@app/core/models/product';
-import { HammerGestureConfig } from '@angular/platform-browser';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
+
 declare const $: any;
 
 @Component({
@@ -28,6 +28,7 @@ export class InvoicesListComponent implements OnInit {
   sellerUser: boolean;
   searchTerm: string;
   hasInvoices: boolean;
+  tooltips = tooltips.invoices;
 
   constructor(
     private route: ActivatedRoute,

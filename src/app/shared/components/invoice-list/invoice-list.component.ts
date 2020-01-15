@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BaseListComponent } from '../base-list/base-list.component';
 import 'hammerjs';
 import { Sort } from '@angular/material/sort';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-invoice-list',
@@ -26,6 +27,7 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit, O
   @Output() invoicesList = new EventEmitter();
   checkedAll = false;
   hasInvoices: Boolean;
+  tooltips = tooltips.invoices;
 
   measurementUnitConflictMessage: String =
     // tslint:disable-next-line:max-line-length

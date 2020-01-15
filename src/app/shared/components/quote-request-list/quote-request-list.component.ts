@@ -4,6 +4,7 @@ import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
 import { BaseListComponent } from '../base-list/base-list.component';
 import { Router } from '@angular/router';
 import { Sort } from '@angular/material/sort';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-quote-request-list',
@@ -17,6 +18,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
   isBuyer: Boolean;
   userId: String;
   hasQuoteRequests: boolean;
+  tooltips = tooltips.quote_request;
   qrReceived = 'QUOTE REQUEST RECEIVED';
   qrSent = 'QUOTE REQUEST SENT';
   qSent = 'QUOTATION SENT';

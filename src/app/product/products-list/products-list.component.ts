@@ -9,6 +9,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ProcessedProductGeneratorComponent } from '../product-generator/processed-product-generator/processed-product-generator.component';
 import { Sort } from '@angular/material/sort';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-products-list',
@@ -21,6 +22,7 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
   hasProducts: boolean;
   selectedProduct: Product;
   searchTerm: string;
+  tooltips = tooltips.products;
 
   constructor(
     private route: ActivatedRoute,

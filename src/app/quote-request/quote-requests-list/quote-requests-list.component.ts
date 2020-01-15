@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuoteRequest } from '@app/core/models/quote-request/quoteRequest';
+import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
   selector: 'app-quote-requests-list',
@@ -13,6 +14,7 @@ export class QuoteRequestsListComponent implements OnInit {
   quoteRequests: QuoteRequest[];
   searchTerm: string;
   hasQuoteRequests: boolean;
+  tooltips = tooltips.quote_request;
 
   constructor(private authService: AuthenticationService, private route: ActivatedRoute) {}
 

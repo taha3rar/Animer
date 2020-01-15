@@ -11,7 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./modal-agricultural-product.component.scss']
 })
 export class ModalAgriculturalProductComponent extends BaseProductOrder {
-  tooltips = tooltips.product_generator.agricultural;
+  tooltips = tooltips.products.product_generator.agricultural;
   @ViewChild('modalForm') form: any;
 
   constructor(

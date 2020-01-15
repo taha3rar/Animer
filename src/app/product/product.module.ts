@@ -9,7 +9,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductProfileComponent } from './product-profile/product-profile.component';
-import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule, MatButtonModule, MatTooltipModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared';
 // tslint:disable-next-line:max-line-length
@@ -40,7 +40,8 @@ import { MatSortModule } from '@angular/material';
     ProgressbarModule.forRoot(),
     SharedModule,
     TutorialsModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule
   ],
   providers: [CurrentUserProductsResolver, ProductResolver]
 })

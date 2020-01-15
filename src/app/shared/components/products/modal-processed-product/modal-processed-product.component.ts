@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./modal-processed-product.component.scss']
 })
 export class ModalProcessedProductComponent extends BaseProductOrder {
-  tooltips = tooltips.product_generator.processed;
+  tooltips = tooltips.products.product_generator.processed;
   @ViewChild('modalForm') form: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice,
