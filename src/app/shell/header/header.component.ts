@@ -5,6 +5,8 @@ import { AuthenticationService, I18nService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { User } from '@app/core/models/user/user';
+import { Intercom } from 'ng-intercom';
+import { environment } from '@env/environment';
 
 declare const $: any;
 
@@ -24,7 +26,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
-    private i18nService: I18nService
+    private i18nService: I18nService,
+    public intercom: Intercom
   ) {}
 
   ngOnInit() {
@@ -47,8 +50,10 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authenticationService.logout().subscribe(() => {
       this.router.navigate(['/login'], { replaceUrl: true });
-      // reset intercom
-      (<any>window).Intercom('shutdown');
+      this.intercom.shutdown();
+      this.intercom.boot({
+        app_id: environment.intercom.app_id
+      });
     });
   }
 
