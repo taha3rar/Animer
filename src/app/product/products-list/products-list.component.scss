@@ -11,3 +11,35 @@
   margin-top: 0;
   padding-top: 50px;
 }
+
+.dropdown {
+  margin-left: auto;
+}
+
+.dropdown {
+  .dropdown-menu {
+    width: 96%;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+    li {
+      padding-right: 10px;
+      color: #666666;
+      padding-top: 5px;
+      border-left: 3px solid #37ce95;
+      padding-bottom: 5px;
+      a {
+        padding-left: 15px;
+        font-weight: bold;
+      }
+    }
+
+    li:nth-child(2) {
+      border-left: 3px solid #37c1ce;
+    }
+
+    li:not(:last-child) {
+      border-bottom: 1px solid #f2f2f2;
+    }
+  }
+}

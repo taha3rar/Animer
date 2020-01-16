@@ -21,24 +21,15 @@
       placeholder="Search products..."
     />
   </div>
-  <div class="flex-pr">
-    <button
-      class="bttn-primary bttn-add pull-right"
-      (click)="openDialogProcessed(undefined)"
-      matTooltip="{{ tooltips.create_agri_product }}"
-    >
-      <span translate>New Processed Product</span>
-    </button>
-    <button
-      class="bttn-primary bttn-add pull-right"
-      (click)="openDialogAgricultural(undefined)"
-      matTooltip="{{ tooltips.create_processed_product }}"
-    >
-      <span translate>New Agricultural Product</span>
-    </button>
+  <div class="dropdown">
+    <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
+    <ul class="dropdown-menu">
+      <li><a (click)="openDialogAgricultural(undefined)">Agricultural Product</a></li>
+      <li><a (click)="openDialogProcessed(undefined)">Processed Product</a></li>
+      <li><a>Input Product</a></li>
+    </ul>
   </div>
 </div>
-
 <table class="table main-table" matSort (matSortChange)="sortData($event)" *ngIf="hasProducts">
   <thead>
     <tr>

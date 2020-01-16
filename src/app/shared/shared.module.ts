@@ -34,6 +34,7 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 import { ContactGeneratorComponent } from './components/contact-generator/contact-generator.component';
 import { UserProgressComponent } from './components/user-progress/user-progress.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { InputProductComponent } from './components/products/input-product/input-product.component';
 
 @NgModule({
   imports: [
@@ -71,9 +72,15 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     ModalInventoryComponent,
     FilterPipe,
     ContactGeneratorComponent,
-    UserProgressComponent
+    UserProgressComponent,
+    InputProductComponent
   ],
-  entryComponents: [ModalAgriculturalProductComponent, ModalProcessedProductComponent, ModalInventoryComponent],
+  entryComponents: [
+    ModalAgriculturalProductComponent,
+    ModalProcessedProductComponent,
+    ModalInventoryComponent,
+    InputProductComponent
+  ],
   exports: [
     LoaderComponent,
     RoundUpPipe,

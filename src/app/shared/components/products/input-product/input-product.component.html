@@ -1,0 +1,107 @@
+<div class="modal-box-heading">
+  <a (click)="onExit()"><i class="material-icons pull-right">close</i></a>
+  <h2 translate class="modal-title">Add Input Product</h2>
+</div>
+
+<div class="padding-all">
+  <form #modalForm="ngForm" (keydown.enter)="$event.preventDefault()">
+    <p class="heading-2">Product</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="product-name">Product Name *</label>
+        <input
+          type="text"
+          id="product-name"
+          class="form-control"
+          name="name"
+          placeholder="Ex. Green Lawn Fertilizer"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="product-type">Product Type *</label>
+        <select id="product-type" name="product-type" class="form-control" required>
+          <option selected="selected" disabled>Choose a product type</option>
+          <option *ngFor="let type of product_types" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+    </div>
+    <p class="heading-2">Item</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="measurement-unit">Measurement Unit *</label>
+        <select id="measurement-unit" name="measurement-unit" class="form-control" required>
+          <option selected="selected" disabled>Choose a measurement unit</option>
+          <option *ngFor="let unit of units" [value]="unit.value">{{ unit.viewValue }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="amount-per-item"> Measurement unit per Item *</label>
+        <input
+          type="number"
+          min="0"
+          id="amount-per-item"
+          name="amount-per-item"
+          class="form-control"
+          placeholder="Ex. 100"
+          required
+        />
+      </div>
+    </div>
+    <p class="heading-2">Amount</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="total-amount"> Total Amount of Items *</label>
+        <input
+          type="number"
+          min="0"
+          id="total-amount"
+          name="total-amount"
+          class="form-control"
+          placeholder="Ex. 100"
+          required
+        />
+      </div>
+    </div>
+    <p class="heading-2">Price</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="price-per-item"> Price per Item *</label>
+        <input
+          type="number"
+          min="0"
+          id="price-per-item"
+          name="price-per-item"
+          class="form-control"
+          placeholder="Ex. 100"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="currency"> Currency *</label>
+        <select id="currency" name="currency" class="form-control" required>
+          <option *ngFor="let currency of currencies" [value]="currency" selected="selected">{{
+            currency.viewValue
+          }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="total-price"> Total Price</label>
+        <input
+          type="number"
+          min="0"
+          id="total-price"
+          name="total-price"
+          class="form-control"
+          placeholder="Ex. 100"
+          required
+        />
+      </div>
+    </div>
+  </form>
+  <button type="submit" class="bttn-primary pull-right">
+    Add Product
+  </button>
+</div>

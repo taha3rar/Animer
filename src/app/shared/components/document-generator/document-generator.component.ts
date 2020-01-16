@@ -1,3 +1,4 @@
+import { InputProductComponent } from './../products/input-product/input-product.component';
 import { Component, OnInit } from '@angular/core';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 // tslint:disable-next-line:max-line-length
@@ -88,6 +89,17 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
     };
 
     this.openDialog('80vh', ModalAgriculturalProductComponent, data);
+  }
+
+  openDialogInput(index?: number, transactionType?: string): void {
+    const data = {
+      productList: this.products,
+      index: index,
+      currency: this.document.currency.value,
+      transactionType: transactionType
+    };
+
+    this.openDialog('80vh', InputProductComponent, data);
   }
 
   openDialogProcessed(index?: number, transactionType?: string): void {
