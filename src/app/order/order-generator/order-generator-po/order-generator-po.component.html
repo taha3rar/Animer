@@ -30,7 +30,9 @@
   <div class="row">
     <div class="col">
       <div class="dropdown">
-        <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
+        <button tour-intercom-order="step_1" class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          Add New Product
+        </button>
         <ul class="dropdown-menu">
           <li *ngIf="fromQuotation"><a (click)="openDialogInventory(true)">Quotation Products</a></li>
           <li *ngIf="!openOrder"><a (click)="openDialogInventory(false)">From Inventory</a></li>
@@ -60,7 +62,7 @@
       </div>
     </div>
     <div class="col-md-5">
-      <div class="comments">
+      <div tour-intercom-order="step_2" class="comments">
         <label for="po_comments">Comments or special instructions for purchase order</label>
         <textarea
           rows="4"
@@ -79,7 +81,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 info">
+    <div tour-intercom-order="step_3" class="col-md-6 info">
       <p class="heading-3">SIGNED BY</p>
       <div formGroupName="sign_by">
         <div class="form-row">
@@ -174,7 +176,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div formGroupName="deliver_to" class="info">
+      <div tour-intercom-order="step_4" formGroupName="deliver_to" class="info">
         <p class="heading-3">DELIVER TO</p>
         <div class="form-row">
           <div class="form-group col-md-4" [ngClass]="showFieldStyleNested('deliver_to', 'contact_name')">
@@ -279,6 +281,13 @@
     >
       Next Step &rarr;
     </button>
-    <button #submitButton class="btn-primary-transp pull-right btn-draft" (click)="draftOrder()">Save Draft</button>
+    <button
+      #submitButton
+      tour-intercom-order="step_5"
+      class="btn-primary-transp pull-right btn-draft"
+      (click)="draftOrder()"
+    >
+      Save Draft
+    </button>
   </div>
 </form>

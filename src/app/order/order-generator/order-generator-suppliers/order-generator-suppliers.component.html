@@ -4,10 +4,15 @@
       <div class="panel-header">
         <div><p>My Suppliers</p></div>
         <div class="pull-right" *ngIf="clients.length >= 1">
-          <button class="bttn-primary" [hidden]="hasSeller" (click)="validateSeller()">
+          <button tour-intercom-suppliers="step_2" class="bttn-primary" [hidden]="hasSeller" (click)="validateSeller()">
             Next Step &rarr;
           </button>
-          <button class="bttn-primary next-step" [hidden]="!hasSeller" (click)="validateSeller()">
+          <button
+            data-intercom-suppliers="step_2"
+            class="bttn-primary next-step"
+            [hidden]="!hasSeller"
+            (click)="validateSeller()"
+          >
             Next Step &rarr;
           </button>
           <input
@@ -21,7 +26,7 @@
           />
         </div>
       </div>
-      <div class="padding-all-2" *ngIf="clients.length >= 1">
+      <div tour-intercom-suppliers="step_1" class="padding-all-2" *ngIf="clients.length >= 1">
         <div class="alert alert-danger" role="alert" [hidden]="hasSeller || !nextBtnClicked">
           Please choose a client!
         </div>

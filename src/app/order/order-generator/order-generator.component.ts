@@ -1,5 +1,5 @@
 import { StepperService } from './../../core/forms/stepper.service';
-import { Component, OnInit, HostListener, AfterViewInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { OrderDataService } from './order-data.service';
 import swal from 'sweetalert';
@@ -11,14 +11,13 @@ import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { CanComponentDeactivate } from '../../shared/guards/confirmation.guard';
 import { Quotation } from '@app/core/models/quotation/quotation';
 import * as moment from 'moment';
-import { Intercom } from 'ng-intercom';
 
 @Component({
   selector: 'app-order-generator',
   templateUrl: './order-generator.component.html',
   styleUrls: ['./order-generator.component.scss']
 })
-export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate, AfterContentInit {
+export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   term: any;
   orderForm: FormGroup;
   draftOrder: Order;
@@ -36,14 +35,14 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate, 
     private formBuilder: FormBuilder,
     private orderDataService: OrderDataService,
     private route: ActivatedRoute,
-    private stepperService: StepperService,
-    public intercom: Intercom
+    private stepperService: StepperService
   ) {}
 
   ngOnInit() {
     this.orderDataService.setProductList(undefined);
     this.openOrder = this.route.snapshot.data['openOrder'];
     this.stepperService.stepperInit();
+    this.orderDataService.setTourStep('suppliers');
     this.isDraft = false;
     this.quotation = this.route.snapshot.data['quotation'];
     if (this.quotation) {
@@ -173,10 +172,6 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate, 
     }
   }
 
-  ngAfterContentInit() {
-    this.startTour('suppliers');
-  }
-
   @HostListener('window:beforeunload')
   CanDeactivate(): boolean {
     return !this.orderForm.dirty;
@@ -231,9 +226,5 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate, 
         return false;
       }
     });
-  }
-
-  startTour(step: string): void {
-    this.tourName = step;
   }
 }

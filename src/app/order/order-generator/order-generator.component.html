@@ -26,29 +26,22 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="supplier">
-          <app-order-generator-suppliers
-            (startTour)="startTour($event)"
-            [tourName]="tourName"
-          ></app-order-generator-suppliers>
+          <app-order-generator-suppliers></app-order-generator-suppliers>
         </div>
         <div class="tab-pane" id="products">
-          <app-order-generator-products
-            (startTour)="startTour($event)"
-            [tourName]="tourName"
-          ></app-order-generator-products>
+          <app-order-generator-products></app-order-generator-products>
         </div>
 
         <div class="tab-pane" id="purchaseOrder">
-          <app-order-generator-po (newDraftPO)="draft = $event" [tourName]="tourName"></app-order-generator-po>
+          <app-order-generator-po (newDraftPO)="draft = $event"></app-order-generator-po>
         </div>
 
         <div class="tab-pane" id="review">
           <div class="panel panel-tab">
             <div class="panel-body">
               <div class="padding-all-2">
-                <app-order-generator-review-order
-                  (formSubmitted)="changeValue($event)"
-                ></app-order-generator-review-order>
+                <app-order-generator-review-order (formSubmitted)="changeValue($event)">
+                </app-order-generator-review-order>
               </div>
             </div>
           </div>
@@ -91,10 +84,8 @@
           <div class="panel panel-tab">
             <div class="panel-body">
               <div class="padding-all-2">
-                <app-order-generator-review-order
-                  (formSubmitted)="changeValue($event)"
-                  [openOrder]="openOrder"
-                ></app-order-generator-review-order>
+                <app-order-generator-review-order (formSubmitted)="changeValue($event)" [openOrder]="openOrder">
+                </app-order-generator-review-order>
               </div>
             </div>
           </div>

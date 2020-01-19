@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Product } from '@app/core/models/product';
 import { ProductService } from '@app/core/api/product.service';
@@ -7,6 +7,7 @@ import { BaseNavigationComponent } from '@app/shared/components/base-navigation/
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { Intercom } from 'ng-intercom';
+import { environment } from '@env/environment';
 
 declare const $: any;
 @Component({
@@ -14,7 +15,7 @@ declare const $: any;
   templateUrl: './order-generator-products.component.html',
   styleUrls: ['./order-generator-products.component.scss']
 })
-export class OrderGeneratorProductsComponent extends BaseNavigationComponent implements OnInit, OnChanges {
+export class OrderGeneratorProductsComponent extends BaseNavigationComponent implements OnInit, AfterViewInit {
   term: string;
   form: FormGroup;
   inventoryProducts: any[];
@@ -23,8 +24,7 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   addedProducts: ProductInvoice[] = [];
   noInventory: boolean;
   packagesSum = 0;
-  @Output() startTour = new EventEmitter<string>();
-  @Input() tourName: string;
+  tours = environment.intercom.tours;
 
   constructor(
     private productService: ProductService,
@@ -59,13 +59,12 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (
-      changes['tourName'].previousValue !== changes['tourName'].currentValue &&
-      changes['tourName'].currentValue === 'products'
-    ) {
-      this.intercom.startTour(95403);
-    }
+  ngAfterViewInit() {
+    this.orderDataService.currentTourStep.subscribe(step => {
+      if (step === 'products') {
+        this.intercom.startTour(this.tours.orders.generator.productsTour);
+      }
+    });
   }
 
   get order() {
@@ -170,6 +169,6 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
 
   toOrderGenerator() {
     this.orderDataService.setProductList(this.addedProducts);
-    this.startTour.emit('order');
+    this.orderDataService.setTourStep('order');
   }
 }

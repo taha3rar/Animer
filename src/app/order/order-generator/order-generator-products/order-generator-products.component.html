@@ -15,12 +15,12 @@
           />
           <i class="material-icons">search</i>
         </div> -->
-        <button id="tour_po_products_step2" class="bttn-primary next-step" (click)="toOrderGenerator()">
+        <button tour-intercom-products="step_3" class="bttn-primary next-step" (click)="toOrderGenerator()">
           Next Step &rarr;
         </button>
       </div>
     </div>
-    <div id="tour_po_products_step1" class="padding-all-2" *ngIf="inventoryProducts?.length >= 1">
+    <div tour-intercom-products="step_1" class="padding-all-2" *ngIf="inventoryProducts?.length >= 1">
       <div class="margin-bottom">
         <button class="btn-icons pull-right" (click)="onNextPage(inventoryProducts?.length, 6)">
           <i class="material-icons">keyboard_arrow_right</i>
@@ -157,6 +157,20 @@
       <button class="bttn-primary next-step">
         Next Step &rarr;
       </button>
+    </div>
+  </div>
+</div>
+<div tour-intercom-products="step_2" class="panel panel-tab summary-col">
+  <div class="panel-body">
+    <div class="panel-header">
+      <p>Add to Purchase Order</p>
+    </div>
+    <div class="padding-all-2">
+      <app-order-generator-summary
+        [productList]="addedProducts"
+        [currency]="order.currency.value"
+        [form]="form"
+      ></app-order-generator-summary>
     </div>
   </div>
 </div>

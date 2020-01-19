@@ -9,6 +9,15 @@ export const environment = {
     google: '497849531719-0n3ksh04e1ackgktbifu5gvddi6rmqso.apps.googleusercontent.com'
   },
   intercom: {
-    app_id: 'gtrazr5b'
+    app_id: 'gtrazr5b',
+    tours: {
+      orders: {
+        generator: {
+          suppliersTour: 95289,
+          productsTour: 95403,
+          orderTour: 95615
+        }
+      }
+    }
   }
 };

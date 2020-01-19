@@ -8,9 +8,11 @@ export class OrderDataService {
   formSource = new BehaviorSubject(undefined);
   productListSource = new BehaviorSubject(undefined);
   orderSource = new BehaviorSubject(undefined);
+  tourStepSource = new BehaviorSubject(undefined);
   currentForm = this.formSource.asObservable();
   currentProductList = this.productListSource.asObservable();
   newOrder = this.orderSource.asObservable();
+  currentTourStep = this.tourStepSource.asObservable();
 
   constructor() {}
 
@@ -24,5 +26,9 @@ export class OrderDataService {
 
   setNewOrder(order: Order) {
     this.orderSource.next(order);
+  }
+
+  setTourStep(step: string) {
+    this.tourStepSource.next(step);
   }
 }

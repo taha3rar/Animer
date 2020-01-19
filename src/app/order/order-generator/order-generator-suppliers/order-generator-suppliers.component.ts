@@ -1,5 +1,5 @@
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { defaultValues } from '@app/shared/helpers/default_values';
@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { OrderDataService } from '../order-data.service';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 import { Intercom } from 'ng-intercom';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-order-generator-suppliers',
@@ -14,15 +15,14 @@ import { Intercom } from 'ng-intercom';
   styleUrls: ['./order-generator-suppliers.component.scss'],
   providers: [FilterPipe]
 })
-export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit {
+export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit, AfterViewInit {
   form: FormGroup;
   clients: Client[];
   nextBtnClicked = false;
   page = 1;
   searchTerm: string;
+  tours = environment.intercom.tours;
   hasSeller = false;
-  @Output() startTour = new EventEmitter<string>();
-  @Input() tourName: string;
 
   constructor(private route: ActivatedRoute, private orderDataService: OrderDataService, public intercom: Intercom) {
     super();
@@ -33,9 +33,14 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
     });
-    if (this.tourName === 'suppliers') {
-      this.intercom.startTour(95289);
-    }
+  }
+
+  ngAfterViewInit() {
+    this.orderDataService.currentTourStep.subscribe(step => {
+      if (step === 'suppliers') {
+        this.intercom.startTour(this.tours.orders.generator.suppliersTour);
+      }
+    });
   }
 
   profilePicture(client: Client) {
@@ -62,9 +67,7 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
 
   validateSeller() {
     this.nextBtnClicked = true;
-    if (this.hasSeller) {
-      this.startTour.emit('products');
-    }
+    this.orderDataService.setTourStep('products');
   }
 
   selectCard(id: any) {

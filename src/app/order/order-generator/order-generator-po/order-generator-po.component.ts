@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
@@ -14,13 +14,14 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertsService } from '@app/core/alerts.service';
 import { Intercom } from 'ng-intercom';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-order-generator-po',
   templateUrl: './order-generator-po.component.html',
   styleUrls: ['./order-generator-po.component.scss']
 })
-export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implements OnInit, OnChanges {
+export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implements OnInit, AfterViewInit {
   newOrder: Order;
   selectedProducts: any[];
   currency: string;
@@ -29,7 +30,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   @Output() newDraftPO = new EventEmitter();
   @Input() fromQuotation = false;
   @Input() openOrder = false;
-  @Input() tourName: string;
   @ViewChild('sellerData') sellerData: UserDataComponent;
   newSeller: FormGroup;
   inventoryProducts: any[];
@@ -41,6 +41,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   processedProducts: Product[];
   addedProducts: ProductInvoice[] = [];
   noInventory: boolean;
+  tours = environment.intercom.tours;
 
   constructor(
     public orderDataService: OrderDataService,
@@ -96,14 +97,12 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.onChanges();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (
-      changes['tourName'].previousValue !== changes['tourName'].currentValue &&
-      changes['tourName'].currentValue === 'order'
-    ) {
-      console.log('start tour order');
-      this.intercom.startTour(95615);
-    }
+  ngAfterViewInit() {
+    this.orderDataService.currentTourStep.subscribe(step => {
+      if (step === 'order') {
+        this.intercom.startTour(this.tours.orders.generator.orderTour);
+      }
+    });
   }
 
   get order() {
