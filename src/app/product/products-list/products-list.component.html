@@ -45,7 +45,7 @@
       <th mat-sort-header="id" translate class="text-center">ID</th>
       <th mat-sort-header="product" translate>Product</th>
       <th mat-sort-header="sku" translate>SKU</th>
-      <th mat-sort-header="decription" translate>Description</th>
+      <th mat-sort-header="description" translate>Description</th>
       <th mat-sort-header="type" translate>Type</th>
       <th mat-sort-header="availability" translate>Amount</th>
       <th translate class="text-right">Actions</th>
@@ -84,7 +84,9 @@
         </span>
         <span *ngIf="product.product_type == 'input'">
           <span *ngIf="product.item_description">{{ product.item_description }}</span>
-          <span *ngIf="!product.item_description"> {{ product.quantity }} {{ product.weight_unit }} per item </span>
+          <span *ngIf="!product.item_description">
+            {{ product.item_measurement_amount }} {{ product.weight_unit }} per item
+          </span>
         </span>
       </td>
       <td>{{ product.product_type }}</td>

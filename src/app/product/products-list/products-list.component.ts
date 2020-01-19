@@ -93,12 +93,18 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
           return super.compare(a.produce, b.produce, isAsc);
         case 'sku':
           return super.compare(a.sku, b.sku, isAsc);
-        case 'packageType':
-          return super.compare(a.type_of_package, b.type_of_package, isAsc);
+        case 'description':
+          return super.compare(
+            a.product_type === 'input' ? Number(a.item_measurement_amount) : Number(a.quantity),
+            b.product_type === 'input' ? Number(b.item_measurement_amount) : Number(b.quantity),
+            isAsc
+          );
+        case 'type':
+          return super.compare(a.product_type, b.product_type, isAsc);
         case 'availability':
           return super.compare(
-            a.product_type !== 'agricultural' ? Number(a.quantity) : Number(a.total_weight),
-            b.product_type !== 'agricultural' ? Number(b.quantity) : Number(b.total_weight),
+            a.product_type === 'agricultural' ? Number(a.total_weight) : Number(a.total_amount_items),
+            b.product_type === 'agricultural' ? Number(b.total_weight) : Number(b.total_amount_items),
             isAsc
           );
         default:
