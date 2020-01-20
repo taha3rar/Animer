@@ -56,7 +56,7 @@
     >
       <td class="text-center">{{ client.numericId }}</td>
       <td>
-        {{ client.company_name }} <span *ngIf="client.company_name">/</span> {{ client.first_name }}
+        <span *ngIf="client.company_name">{{ client.company_name }} / </span>{{ client.first_name }}
         {{ client.last_name }}
       </td>
       <td>
