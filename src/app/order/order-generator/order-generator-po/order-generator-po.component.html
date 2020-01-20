@@ -9,13 +9,8 @@
     <div class="col-md-6">
       <div class="info">
         <p class="heading-3">ISSUED FOR</p>
-        <app-user-data
-          #sellerData
-          [openDocument]="openOrder"
-          [user]="seller"
-          [formInput]="form"
-          [issued_for]="true"
-        ></app-user-data>
+        <app-user-data #sellerData [openDocument]="openOrder" [user]="seller" [formInput]="form" [issued_for]="true">
+        </app-user-data>
       </div>
     </div>
   </div>
@@ -50,26 +45,28 @@
     Please choose product!
   </div>
   <div class="row">
-    <div class="col-md-5">
-      <div class="comments">
-        <label for="payment_comments">Comments or special instructions for payment</label>
-        <textarea
-          rows="4"
-          id="payment_comments"
-          placeholder="Type comments here..."
-          formControlName="payment_comments"
-        ></textarea>
+    <div tour-intercom-order="step_2">
+      <div class="col-md-6">
+        <div class="comments">
+          <label for="payment_comments">Comments or special instructions for payment</label>
+          <textarea
+            rows="4"
+            id="payment_comments"
+            placeholder="Type comments here..."
+            formControlName="payment_comments"
+          ></textarea>
+        </div>
       </div>
-    </div>
-    <div class="col-md-5">
-      <div tour-intercom-order="step_2" class="comments">
-        <label for="po_comments">Comments or special instructions for purchase order</label>
-        <textarea
-          rows="4"
-          id="po_comments"
-          placeholder="Type comments here..."
-          formControlName="order_comments"
-        ></textarea>
+      <div class="col-md-6">
+        <div class="comments">
+          <label for="po_comments">Comments or special instructions for purchase order</label>
+          <textarea
+            rows="4"
+            id="po_comments"
+            placeholder="Type comments here..."
+            formControlName="order_comments"
+          ></textarea>
+        </div>
       </div>
     </div>
     <div class="col-md-2">

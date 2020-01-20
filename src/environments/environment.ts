@@ -15,7 +15,8 @@ export const environment = {
         generator: {
           suppliersTour: 95289,
           productsTour: 95403,
-          orderTour: 95615
+          orderTour: 95615,
+          reviewTour: 96663
         }
       }
     }

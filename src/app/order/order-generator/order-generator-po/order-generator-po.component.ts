@@ -235,5 +235,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.orderDataService.setNewOrder(this.newOrder);
+    this.orderDataService.setTourStep('review');
   }
 }
