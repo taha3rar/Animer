@@ -4,10 +4,10 @@
       <thead>
         <tr>
           <th>PRODUCT</th>
-          <th>PACKAGES</th>
-          <th>TOTAL AMOUNT</th>
+          <th>DESCRIPTION</th>
+          <th>AMOUNT</th>
           <th>RATE</th>
-          <th>TOTAL PRICE</th>
+          <th>PRICE</th>
           <th></th>
         </tr>
       </thead>
@@ -26,26 +26,41 @@
               <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
                 {{ product.produce }}
               </span>
-            </td>
-            <td>
-              <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-                {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
-                {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
-              </span>
-              <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-                {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }} /
-                {{ product.items_per_package | number: '1.0' }}<span *ngIf="product.items_per_package > 1"> items)</span
-                ><span *ngIf="product.items_per_package == 1"> item)</span>
-              </span>
-              <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
-                {{ product.quantity | number: '1.0' }} ({{ product.type_of_package }})
+              <span *ngIf="product.product_type == 'input'"
+                >{{ product.produce }} / {{ product.input_produce_type }}
               </span>
             </td>
             <td>
-              <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
-                >{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }}</span
+              <span *ngIf="product.product_type == 'agricultural'">
+                {{ product.quantity | number: '1.0' }} <span *ngIf="product.quantity > 1"> packages </span>
+                <span *ngIf="product.quantity == 1">package</span> ({{ product.package_weight | number: '1.2-2' }}
+                {{ product.weight_unit }} per {{ product.type_of_package }})
+              </span>
+              <span *ngIf="product.product_type == 'processed'">
+                {{ product.quantity | number: '1.0' }}
+                <span *ngIf="product.quantity > 1"> packages </span>
+                <span *ngIf="product.quantity == 1"> package </span>
+                ({{ product.items_per_package | number: '1.0' }}
+                <span *ngIf="product.items_per_package == 1"> item </span>
+                <span *ngIf="product.items_per_package > 1"> items </span>
+                per {{ product.type_of_package }})
+              </span>
+              <span *ngIf="product.product_type == 'input'">
+                <span *ngIf="product.item_description">{{ product.item_description }}</span>
+                <span *ngIf="!product.item_description">
+                  {{ product.quantity }} {{ product.weight_unit }} per item
+                </span>
+              </span>
+            </td>
+            <td>
+              <span *ngIf="product.product_type == 'agricultural'"
+                >{{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit }}</span
               >
-              <span *ngIf="product.product_type == 'processed'">N/A</span>
+              <span *ngIf="product.product_type != 'agricultural'">
+                {{ product.total_amount_items | number: '1.0' }}
+                <span *ngIf="product.total_amount_items > 1">items</span>
+                <span *ngIf="product.total_amount_items == 1">item</span>
+              </span>
             </td>
             <td>
               <span *ngIf="!product.product_type || product.product_type == 'agricultural'"
