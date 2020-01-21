@@ -20,6 +20,7 @@ import { OrderGuard } from '../shared/guards/order.guard';
 import { InvoiceGuard } from '../shared/guards/invoice.guard';
 import { QuotationResolver } from './resolvers/quotation.resolver';
 import { PermissionGuard } from '../shared/guards/permission.guard';
+import { CurrentUserProgressResolver } from '@app/shared/resolvers/current-user-progress.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -56,6 +57,7 @@ const routes: Routes = [
       path: 'order/generator/standard',
       component: OrderGeneratorComponent,
       resolve: {
+        userProgress: CurrentUserProgressResolver,
         buyer: CurrentUserResolver,
         sellers: CurrentUserSuppliersResolver
       },

@@ -26,21 +26,21 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="supplier">
-          <app-order-generator-suppliers></app-order-generator-suppliers>
+          <app-order-generator-suppliers [tourEnabled]="tourEnabled"></app-order-generator-suppliers>
         </div>
         <div class="tab-pane" id="products">
-          <app-order-generator-products></app-order-generator-products>
+          <app-order-generator-products [tourEnabled]="tourEnabled"></app-order-generator-products>
         </div>
 
         <div class="tab-pane" id="purchaseOrder">
-          <app-order-generator-po (newDraftPO)="draft = $event"></app-order-generator-po>
+          <app-order-generator-po (newDraftPO)="draft = $event" [tourEnabled]="tourEnabled"></app-order-generator-po>
         </div>
 
         <div class="tab-pane" id="review">
           <div class="panel panel-tab">
             <div class="panel-body">
               <div class="padding-all-2">
-                <app-order-generator-review-order (formSubmitted)="changeValue($event)">
+                <app-order-generator-review-order (formSubmitted)="changeValue($event)" [tourEnabled]="tourEnabled">
                 </app-order-generator-review-order>
               </div>
             </div>

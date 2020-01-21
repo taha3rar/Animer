@@ -30,6 +30,9 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   openOrder: boolean;
   seller: SmallUser.User;
   tourName: string;
+  tourEnabled: boolean;
+  userProgress: any;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -39,10 +42,10 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   ) {}
 
   ngOnInit() {
+    this.initializeTour();
     this.orderDataService.setProductList(undefined);
     this.openOrder = this.route.snapshot.data['openOrder'];
     this.stepperService.stepperInit();
-    this.orderDataService.setTourStep('suppliers');
     this.isDraft = false;
     this.quotation = this.route.snapshot.data['quotation'];
     if (this.quotation) {
@@ -226,5 +229,14 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
         return false;
       }
     });
+  }
+
+  initializeTour() {
+    this.userProgress = this.route.snapshot.data['userProgress'];
+    if (this.userProgress.first_po) {
+      this.tourEnabled = false;
+    } else {
+      this.tourEnabled = true;
+    }
   }
 }

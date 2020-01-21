@@ -8,7 +8,7 @@ export class OrderDataService {
   formSource = new BehaviorSubject(undefined);
   productListSource = new BehaviorSubject(undefined);
   orderSource = new BehaviorSubject(undefined);
-  tourStepSource = new BehaviorSubject(undefined);
+  tourStepSource = new BehaviorSubject('suppliers');
   currentForm = this.formSource.asObservable();
   currentProductList = this.productListSource.asObservable();
   newOrder = this.orderSource.asObservable();

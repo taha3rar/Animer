@@ -20,6 +20,7 @@ export class OrderGeneratorReviewOrderComponent extends BaseValidationComponent 
   @Input()
   openOrder: boolean;
   @Output() formSubmitted = new EventEmitter();
+  @Input() tourEnabled: boolean;
   tours = environment.intercom.tours;
 
   constructor(
@@ -42,7 +43,8 @@ export class OrderGeneratorReviewOrderComponent extends BaseValidationComponent 
 
   ngAfterViewInit() {
     this.orderDataService.currentTourStep.subscribe(step => {
-      if (step === 'review') {
+      console.log('review tour : ', this.tourEnabled);
+      if (step === 'review' && this.tourEnabled) {
         this.intercom.startTour(this.tours.orders.generator.reviewTour);
       }
     });

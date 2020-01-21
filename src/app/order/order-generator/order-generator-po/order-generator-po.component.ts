@@ -41,6 +41,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   processedProducts: Product[];
   addedProducts: ProductInvoice[] = [];
   noInventory: boolean;
+  @Input() tourEnabled: boolean;
   tours = environment.intercom.tours;
 
   constructor(
@@ -99,7 +100,8 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
 
   ngAfterViewInit() {
     this.orderDataService.currentTourStep.subscribe(step => {
-      if (step === 'order') {
+      console.log('po tour : ', this.tourEnabled);
+      if (step === 'order' && this.tourEnabled) {
         this.intercom.startTour(this.tours.orders.generator.orderTour);
       }
     });

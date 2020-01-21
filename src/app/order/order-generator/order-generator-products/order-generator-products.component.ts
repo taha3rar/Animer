@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Product } from '@app/core/models/product';
 import { ProductService } from '@app/core/api/product.service';
@@ -24,6 +24,7 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   addedProducts: ProductInvoice[] = [];
   noInventory: boolean;
   packagesSum = 0;
+  @Input() tourEnabled: boolean;
   tours = environment.intercom.tours;
 
   constructor(
@@ -61,7 +62,8 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
 
   ngAfterViewInit() {
     this.orderDataService.currentTourStep.subscribe(step => {
-      if (step === 'products') {
+      console.log('products tour : ', this.tourEnabled);
+      if (step === 'products' && this.tourEnabled) {
         this.intercom.startTour(this.tours.orders.generator.productsTour);
       }
     });

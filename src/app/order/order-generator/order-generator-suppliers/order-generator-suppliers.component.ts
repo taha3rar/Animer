@@ -1,5 +1,5 @@
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { defaultValues } from '@app/shared/helpers/default_values';
@@ -23,6 +23,7 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
   searchTerm: string;
   tours = environment.intercom.tours;
   hasSeller = false;
+  @Input() tourEnabled: boolean;
 
   constructor(private route: ActivatedRoute, private orderDataService: OrderDataService, public intercom: Intercom) {
     super();
@@ -37,7 +38,8 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
 
   ngAfterViewInit() {
     this.orderDataService.currentTourStep.subscribe(step => {
-      if (step === 'suppliers') {
+      console.log('suppliers tour : ', this.tourEnabled);
+      if (step === 'suppliers' && this.tourEnabled) {
         this.intercom.startTour(this.tours.orders.generator.suppliersTour);
       }
     });
