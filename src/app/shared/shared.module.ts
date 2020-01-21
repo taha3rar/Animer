@@ -91,6 +91,7 @@ import { InputProductComponent } from './components/products/input-product/input
     UserDataComponent,
     UserDocumentComponent,
     UploadPictureComponent,
+    InputProductComponent,
     DocumentGeneratorComponent,
     TutorialControlComponent,
     ModalInventoryComponent,

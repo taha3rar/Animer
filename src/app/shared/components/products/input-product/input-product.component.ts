@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BaseProductOrder } from '@app/order/order-generator/order-product-list/base-product-order';
 import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoice';
+import { inputProductTypes } from '@app/shared/helpers/input_product_types';
 
 @Component({
   selector: 'app-input-product',
@@ -9,23 +10,14 @@ import { ProductSetupInvoice } from '@app/core/models/invoice/productSetup-invoi
   styleUrls: ['./input-product.component.scss']
 })
 export class InputProductComponent extends BaseProductOrder implements OnInit {
-  product_types = [
-    'Seeds',
-    'Fertilizer',
-    'Soil',
-    'Insecticide',
-    'Pesticide',
-    'Animal Feed',
-    'Insect Trap',
-    'Irrigation',
-    'Machinery'
-  ];
+  input_product_types = inputProductTypes;
+  @ViewChild('modalForm') form: any;
 
   constructor(
     public dialogRef: MatDialogRef<InputProductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductSetupInvoice
   ) {
-    super(dialogRef, data, 'processed');
+    super(dialogRef, data, 'input');
   }
 
   ngOnInit() {}

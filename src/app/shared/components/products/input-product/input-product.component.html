@@ -13,7 +13,9 @@
           type="text"
           id="product-name"
           class="form-control"
-          name="name"
+          name="produce"
+          #produce="ngModel"
+          [(ngModel)]="product.produce"
           placeholder="Ex. Green Lawn Fertilizer"
           required
         />
@@ -22,7 +24,7 @@
         <label for="product-type">Product Type *</label>
         <select id="product-type" name="product-type" class="form-control" required>
           <option selected="selected" disabled>Choose a product type</option>
-          <option *ngFor="let type of product_types" [value]="type">{{ type }}</option>
+          <option *ngFor="let type of input_product_types" [value]="type">{{ type }}</option>
         </select>
       </div>
     </div>

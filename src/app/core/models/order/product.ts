@@ -42,6 +42,6 @@ export class Product {
   date_created: Date;
   date_modified: Date;
   fromQuotation: boolean; // Used only on the front-end to pass ProductQuotation product to Product
-  input_produce_type: string;
   item_description: string;
+  input_produce_type: string;
 }
