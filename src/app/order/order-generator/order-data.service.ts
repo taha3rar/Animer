@@ -2,19 +2,30 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { Order } from '@app/core/models/order/order';
+import { Intercom } from 'ng-intercom';
+import { environment } from '@env/environment';
 
 @Injectable()
 export class OrderDataService {
   formSource = new BehaviorSubject(undefined);
   productListSource = new BehaviorSubject(undefined);
   orderSource = new BehaviorSubject(undefined);
-  tourStepSource = new BehaviorSubject('suppliers');
+  tourStepSource = new BehaviorSubject(undefined);
   currentForm = this.formSource.asObservable();
   currentProductList = this.productListSource.asObservable();
   newOrder = this.orderSource.asObservable();
   currentTourStep = this.tourStepSource.asObservable();
+  tours = environment.intercom.tours;
+  tourDictionary = {
+    suppliers: this.tours.orders.generator.suppliersTour,
+    products: this.tours.orders.generator.productsTour,
+    order: this.tours.orders.generator.orderTour,
+    review: this.tours.orders.generator.reviewTour
+  };
+  tourEnabled: boolean;
+  presentStep: string;
 
-  constructor() {}
+  constructor(public intercom: Intercom) {}
 
   setForm(form: FormGroup) {
     this.formSource.next(form);
@@ -28,7 +39,22 @@ export class OrderDataService {
     this.orderSource.next(order);
   }
 
-  setTourStep(step: string) {
-    this.tourStepSource.next(step);
+  setEnableTour(trigger: boolean) {
+    if (trigger === true) {
+      console.log('enabling tour');
+    }
+    this.tourEnabled = trigger;
+  }
+
+  setPresentStep(presentStep: string) {
+    this.presentStep = presentStep;
+  }
+
+  triggerTourStep(step?: string) {
+    if (this.tourEnabled) {
+      console.log('launch step : ', step);
+      console.log('tour enabled', this.tourEnabled);
+      this.intercom.startTour(this.tourDictionary[step || this.presentStep]);
+    }
   }
 }

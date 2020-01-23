@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Product } from '@app/core/models/product';
 import { ProductService } from '@app/core/api/product.service';
@@ -6,8 +6,6 @@ import { OrderDataService } from '../order-data.service';
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
-import { Intercom } from 'ng-intercom';
-import { environment } from '@env/environment';
 
 declare const $: any;
 @Component({
@@ -15,7 +13,7 @@ declare const $: any;
   templateUrl: './order-generator-products.component.html',
   styleUrls: ['./order-generator-products.component.scss']
 })
-export class OrderGeneratorProductsComponent extends BaseNavigationComponent implements OnInit, AfterViewInit {
+export class OrderGeneratorProductsComponent extends BaseNavigationComponent implements OnInit {
   term: string;
   form: FormGroup;
   inventoryProducts: any[];
@@ -24,14 +22,8 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
   addedProducts: ProductInvoice[] = [];
   noInventory: boolean;
   packagesSum = 0;
-  @Input() tourEnabled: boolean;
-  tours = environment.intercom.tours;
 
-  constructor(
-    private productService: ProductService,
-    private orderDataService: OrderDataService,
-    public intercom: Intercom
-  ) {
+  constructor(private productService: ProductService, private orderDataService: OrderDataService) {
     super();
   }
 
@@ -56,15 +48,6 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
     this.orderDataService.currentProductList.subscribe(data => {
       if (data) {
         this.addedProducts = data;
-      }
-    });
-  }
-
-  ngAfterViewInit() {
-    this.orderDataService.currentTourStep.subscribe(step => {
-      console.log('products tour : ', this.tourEnabled);
-      if (step === 'products' && this.tourEnabled) {
-        this.intercom.startTour(this.tours.orders.generator.productsTour);
       }
     });
   }
@@ -171,6 +154,6 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
 
   toOrderGenerator() {
     this.orderDataService.setProductList(this.addedProducts);
-    this.orderDataService.setTourStep('order');
+    this.orderDataService.triggerTourStep('order');
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
 import { OrderDataService } from '../order-data.service';
@@ -13,15 +13,13 @@ import { UserDataComponent } from '@app/shared/components/user-data/user-data.co
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertsService } from '@app/core/alerts.service';
-import { Intercom } from 'ng-intercom';
-import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-order-generator-po',
   templateUrl: './order-generator-po.component.html',
   styleUrls: ['./order-generator-po.component.scss']
 })
-export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implements OnInit, AfterViewInit {
+export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implements OnInit {
   newOrder: Order;
   selectedProducts: any[];
   currency: string;
@@ -41,8 +39,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   processedProducts: Product[];
   addedProducts: ProductInvoice[] = [];
   noInventory: boolean;
-  @Input() tourEnabled: boolean;
-  tours = environment.intercom.tours;
 
   constructor(
     public orderDataService: OrderDataService,
@@ -51,8 +47,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     private orderService: OrderService,
     private quotationService: QuotationService,
     private router: Router,
-    private alerts: AlertsService,
-    public intercom: Intercom
+    private alerts: AlertsService
   ) {
     super(dialog, orderDataService);
   }
@@ -96,15 +91,6 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
       });
     }
     this.onChanges();
-  }
-
-  ngAfterViewInit() {
-    this.orderDataService.currentTourStep.subscribe(step => {
-      console.log('po tour : ', this.tourEnabled);
-      if (step === 'order' && this.tourEnabled) {
-        this.intercom.startTour(this.tours.orders.generator.orderTour);
-      }
-    });
   }
 
   get order() {
@@ -237,6 +223,10 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     this.newOrder.document_weight_unit = this.measurementUnitConflict(this.products);
     this.newOrder.total_due = this.order.subtotal.value;
     this.orderDataService.setNewOrder(this.newOrder);
-    this.orderDataService.setTourStep('review');
+  }
+
+  nextStep() {
+    // this.orderDataService.setTourStep('review');
+    this.orderDataService.triggerTourStep('review');
   }
 }

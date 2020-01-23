@@ -2,45 +2,48 @@
   <h1 class="main-title btn-main margin-bottom-2" (click)="back()">
     <a class="material-icons">keyboard_backspace</a> Orders
   </h1>
+  <h1 class="main-title btn-main margin-bottom-2"><a class="material-icons">help_outline</a> Need help</h1>
   <!-- Main Generator -->
   <div *ngIf="!isDraft && !fromQuotation && !openOrder" class="stepper-wrapper">
     <div class="stepper">
       <ul class="nav nav-tabs">
         <li class="active">
           <span class="round-tab">1</span>
-          <a data-toggle="tab" class="label" href="#supplier">Choose a supplier </a>
+          <a data-toggle="tab" (click)="stepChange('suppliers')" class="label" href="#supplier">Choose a supplier </a>
         </li>
         <li class="disabled">
           <span class="round-tab">2</span>
-          <a data-toggle="tab" class="label" href="#products">Choose products </a>
+          <a data-toggle="tab" (click)="stepChange('products')" class="label" href="#products">Choose products </a>
         </li>
         <li class="disabled">
           <span class="round-tab">3</span>
-          <a data-toggle="tab" class="label" href="#purchaseOrder">Create purchase order</a>
+          <a data-toggle="tab" (click)="stepChange('order')" class="label" href="#purchaseOrder"
+            >Create purchase order</a
+          >
         </li>
         <li class="disabled">
           <span class="round-tab">4</span>
-          <a data-toggle="tab" class="label" href="#review">Review and confirm </a>
+          <a data-toggle="tab" (click)="stepChange('review')" class="label" href="#review">Review and confirm </a>
         </li>
       </ul>
 
       <div class="tab-content">
         <div class="tab-pane active" id="supplier">
-          <app-order-generator-suppliers [tourEnabled]="tourEnabled"></app-order-generator-suppliers>
+          <app-order-generator-suppliers></app-order-generator-suppliers>
         </div>
         <div class="tab-pane" id="products">
-          <app-order-generator-products [tourEnabled]="tourEnabled"></app-order-generator-products>
+          <app-order-generator-products></app-order-generator-products>
         </div>
 
         <div class="tab-pane" id="purchaseOrder">
-          <app-order-generator-po (newDraftPO)="draft = $event" [tourEnabled]="tourEnabled"></app-order-generator-po>
+          <app-order-generator-po (newDraftPO)="draft = $event"></app-order-generator-po>
         </div>
 
         <div class="tab-pane" id="review">
           <div class="panel panel-tab">
             <div class="panel-body">
               <div class="padding-all-2">
-                <app-order-generator-review-order (formSubmitted)="changeValue($event)" [tourEnabled]="tourEnabled">
+                <app-order-generator-review-order (formSubmitted)="changeValue($event)">
                 </app-order-generator-review-order>
               </div>
             </div>

@@ -29,8 +29,6 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   formSubmitted: boolean;
   openOrder: boolean;
   seller: SmallUser.User;
-  tourName: string;
-  tourEnabled: boolean;
   userProgress: any;
 
   constructor(
@@ -234,9 +232,15 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   initializeTour() {
     this.userProgress = this.route.snapshot.data['userProgress'];
     if (this.userProgress.first_po) {
-      this.tourEnabled = false;
+      this.orderDataService.setEnableTour(false);
     } else {
-      this.tourEnabled = true;
+      this.orderDataService.setEnableTour(true);
+      this.orderDataService.triggerTourStep('suppliers');
     }
+  }
+
+  stepChange(step: string) {
+    console.log('change step', step);
+    this.orderDataService.setPresentStep(step);
   }
 }

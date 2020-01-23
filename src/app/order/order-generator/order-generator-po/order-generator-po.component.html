@@ -265,6 +265,7 @@
   <div class="margin-top margin-bottom-2 clearfix">
     <button
       class="bttn-primary pull-right next-step"
+      (click)="nextStep()"
       [hidden]="!form.valid || products.length < 1 || !sellerData.formInput.valid"
     >
       Next Step &rarr;

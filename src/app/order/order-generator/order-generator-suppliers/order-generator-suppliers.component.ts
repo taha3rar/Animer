@@ -1,13 +1,11 @@
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { FormGroup } from '@angular/forms';
 import { OrderDataService } from '../order-data.service';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
-import { Intercom } from 'ng-intercom';
-import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-order-generator-suppliers',
@@ -15,17 +13,15 @@ import { environment } from '@env/environment';
   styleUrls: ['./order-generator-suppliers.component.scss'],
   providers: [FilterPipe]
 })
-export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit, AfterViewInit {
+export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent implements OnInit {
   form: FormGroup;
   clients: Client[];
   nextBtnClicked = false;
   page = 1;
   searchTerm: string;
-  tours = environment.intercom.tours;
   hasSeller = false;
-  @Input() tourEnabled: boolean;
 
-  constructor(private route: ActivatedRoute, private orderDataService: OrderDataService, public intercom: Intercom) {
+  constructor(private route: ActivatedRoute, private orderDataService: OrderDataService) {
     super();
   }
 
@@ -33,15 +29,6 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
     this.clients = this.route.snapshot.data['sellers'];
     this.orderDataService.currentForm.subscribe(form => {
       this.form = form;
-    });
-  }
-
-  ngAfterViewInit() {
-    this.orderDataService.currentTourStep.subscribe(step => {
-      console.log('suppliers tour : ', this.tourEnabled);
-      if (step === 'suppliers' && this.tourEnabled) {
-        this.intercom.startTour(this.tours.orders.generator.suppliersTour);
-      }
     });
   }
 
@@ -69,7 +56,7 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
 
   validateSeller() {
     this.nextBtnClicked = true;
-    this.orderDataService.setTourStep('products');
+    this.orderDataService.triggerTourStep('products');
   }
 
   selectCard(id: any) {
