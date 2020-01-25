@@ -1,3 +1,4 @@
+import { InputProductGeneratorComponent } from './../product-generator/input-product-generator/input-product-generator.component';
 // tslint:disable-next-line:max-line-length
 import { AgriculturalProductGeneratorComponent } from './../product-generator/agricultural-product-generator/agricultural-product-generator.component';
 import { Component, OnInit } from '@angular/core';
@@ -65,6 +66,13 @@ export class ProductsListComponent extends BaseListComponent implements OnInit {
       product: product
     };
     this.openDialog('92vh', ProcessedProductGeneratorComponent, data);
+  }
+
+  openDialogInput(product: Product): void {
+    const data = {
+      product: product
+    };
+    this.openDialog('92vh', InputProductGeneratorComponent, data);
   }
 
   openDialog(height: string, component: any, dialogData: any): void {

@@ -27,6 +27,7 @@ export class QrProcessedProductComponent extends BaseProductQuoteRequest impleme
     this.productForm.controls['package_weight'].disable();
     this.productForm.controls['weight_unit'].disable();
     this.productForm.controls['total_weight_requested'].disable();
+    this.productForm.controls['input_produce_type'].disable();
     this.onChanges();
     this.formInput = this.productForm;
   }

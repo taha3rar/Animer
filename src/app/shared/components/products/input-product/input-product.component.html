@@ -7,7 +7,7 @@
   <form #modalForm="ngForm" (keydown.enter)="$event.preventDefault()">
     <p class="heading-2">Product</p>
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col">
         <label for="product-name">Product Name *</label>
         <input
           type="text"
@@ -18,36 +18,91 @@
           [(ngModel)]="product.produce"
           placeholder="Ex. Green Lawn Fertilizer"
           required
+          [ngClass]="{ 'has-error': produce.invalid && produce.touched }"
         />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="product-type">Product Type *</label>
-        <select id="product-type" name="product-type" class="form-control" required>
-          <option selected="selected" disabled>Choose a product type</option>
-          <option *ngFor="let type of input_product_types" [value]="type">{{ type }}</option>
-        </select>
+        <div class="help-block" *ngIf="produce.invalid && produce.touched">
+          This field is required!
+        </div>
       </div>
     </div>
-    <p class="heading-2">Item</p>
     <div class="form-row">
       <div class="form-group col-md-6">
+        <label for="product-type">Product Type *</label>
+        <select
+          id="product-type"
+          name="input_produce_type"
+          #input_produce_type="ngModel"
+          [(ngModel)]="product.input_produce_type"
+          class="form-control"
+          (change)="checkInputType(product.input_produce_type)"
+          required
+          [ngClass]="{ 'has-error': input_produce_type.invalid && input_produce_type.touched }"
+        >
+          <option *ngFor="let type of input_product_types" [value]="type.value" selected="selected">
+            {{ type.value }}</option
+          >
+        </select>
+        <div class="help-block" *ngIf="input_produce_type.invalid && input_produce_type.touched">
+          This field is required!
+        </div>
+      </div>
+      <div class="form-group col-md-6" [hidden]="!otherTypeSelected">
+        <label for="c-product-type">Custom Product Type *</label>
+        <input class="form-control" id="c-product-type" placeholder="Enter custom product type..." />
+      </div>
+    </div>
+
+    <p class="heading-2" [style.display]="isItemVisible || isItemDescriptionVisible ? 'block' : 'none'">Item</p>
+    <div class="form-row" [style.display]="isItemVisible ? 'block' : 'none'">
+      <div class="form-group col-md-6">
         <label for="measurement-unit">Measurement Unit *</label>
-        <select id="measurement-unit" name="measurement-unit" class="form-control" required>
+        <select
+          id="measurement-unit"
+          [(ngModel)]="product.weight_unit"
+          name="weight_unit"
+          #weight_unit="ngModel"
+          class="form-control"
+          [ngClass]="{ 'has-error': weight_unit.invalid && weight_unit.touched }"
+        >
           <option selected="selected" disabled>Choose a measurement unit</option>
           <option *ngFor="let unit of units" [value]="unit.value">{{ unit.viewValue }}</option>
         </select>
+        <div class="help-block" *ngIf="weight_unit.invalid && weight_unit.touched">
+          This field is required!
+        </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="amount-per-item"> Measurement unit per Item *</label>
+        <label for="amount-per-item"> ({{ product.weight_unit | uppercase }}) per Item *</label>
         <input
           type="number"
           min="0"
-          id="amount-per-item"
-          name="amount-per-item"
+          [(ngModel)]="product.item_measurement_amount"
           class="form-control"
+          name="item_measurement_amount"
+          class="form-control"
+          #item_measurement_amount="ngModel"
           placeholder="Ex. 100"
-          required
+          [ngClass]="{ 'has-error': item_measurement_amount.invalid && item_measurement_amount.touched }"
         />
+        <div class="help-block" *ngIf="item_measurement_amount.invalid && item_measurement_amount.touched">
+          This field is required!
+        </div>
+      </div>
+    </div>
+    <div class="form-row" [style.display]="isItemDescriptionVisible ? 'block' : 'none'">
+      <div class="form-group col">
+        <label for="item-description">Item Description *</label>
+        <textarea
+          [(ngModel)]="product.item_description"
+          class="form-control"
+          name="item_description"
+          #item_description="ngModel"
+          [ngClass]="{ 'has-error': item_description.invalid && item_description.touched }"
+          rows="2"
+        ></textarea>
+        <div class="help-block" *ngIf="item_description.invalid && item_description.touched">
+          This field is required!
+        </div>
       </div>
     </div>
     <p class="heading-2">Amount</p>
@@ -58,11 +113,17 @@
           type="number"
           min="0"
           id="total-amount"
-          name="total-amount"
+          #quantity="ngModel"
+          name="quantity"
+          [(ngModel)]="product.quantity"
           class="form-control"
           placeholder="Ex. 100"
+          [ngClass]="{ 'has-error': quantity.invalid && quantity.touched }"
           required
         />
+        <div class="help-block" *ngIf="quantity.invalid && quantity.touched">
+          This field is required!
+        </div>
       </div>
     </div>
     <p class="heading-2">Price</p>
@@ -72,20 +133,39 @@
         <input
           type="number"
           min="0"
+          name="price_per_unit"
+          #price_per_unit="ngModel"
+          [(ngModel)]="product.price_per_unit"
+          (ngModelChange)="setPriceUnit()"
           id="price-per-item"
-          name="price-per-item"
           class="form-control"
+          [ngClass]="{ 'has-error': price_per_unit.invalid && price_per_unit.touched }"
           placeholder="Ex. 100"
           required
         />
+        <div class="help-block" *ngIf="price_per_unit.invalid && price_per_unit.touched">
+          This field is required!
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="currency"> Currency *</label>
-        <select id="currency" name="currency" class="form-control" required>
-          <option *ngFor="let currency of currencies" [value]="currency" selected="selected">{{
+        <select
+          id="currency"
+          [(ngModel)]="currency"
+          [disabled]="data.currency"
+          name="currency"
+          #curr="ngModel"
+          class="form-control"
+          [ngClass]="{ 'has-error': curr.invalid && curr.touched }"
+          required
+        >
+          <option *ngFor="let currency of currencies" [value]="currency.value" selected="selected">{{
             currency.viewValue
           }}</option>
         </select>
+        <div class="help-block" *ngIf="curr.invalid && curr.touched">
+          This field is required!
+        </div>
       </div>
     </div>
     <div class="form-row">
@@ -94,16 +174,37 @@
         <input
           type="number"
           min="0"
+          name="total_price"
+          [(ngModel)]="product.product_subtotal"
+          #total_price="ngModel"
           id="total-price"
-          name="total-price"
           class="form-control"
           placeholder="Ex. 100"
+          disabled
           required
         />
       </div>
     </div>
   </form>
-  <button type="submit" class="bttn-primary pull-right">
+  <button
+    type="submit"
+    [hidden]="modalForm.invalid"
+    *ngIf="!update"
+    (click)="addProduct()"
+    class="bttn-primary pull-right"
+  >
     Add Product
+  </button>
+  <button type="submit" [hidden]="modalForm.valid" *ngIf="!update" (click)="onSubmit()" class="bttn-primary pull-right">
+    Add Product
+  </button>
+  <button
+    type="submit"
+    *ngIf="update"
+    [disabled]="!modalForm.form.valid"
+    (click)="updateProduct()"
+    class="bttn-primary pull-right"
+  >
+    Update Product
   </button>
 </div>

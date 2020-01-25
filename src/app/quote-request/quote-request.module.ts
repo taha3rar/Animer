@@ -39,6 +39,8 @@ import { QuotationSellerResolver } from './resolvers/quotation-seller-quote-requ
 import { QuotationsQuoteRequestResolver } from './resolvers/quotations-quote-request.resolver';
 import { QuotationsAcceptedQuoteRequestResolver } from './resolvers/quotations-accepted-quote-request.resolver';
 import { MatSortModule } from '@angular/material';
+// tslint:disable-next-line:max-line-length
+import { QrInputProductComponent } from './quote-request-generator/quote-request-generator-form/qr-input-product/qr-input-product.component';
 
 @NgModule({
   declarations: [
@@ -54,10 +56,16 @@ import { MatSortModule } from '@angular/material';
     QuoteRequestViewComponent,
     QuotationsListComponent,
     QuoteRequestComponent,
-    QuotationComponent
+    QuotationComponent,
+    QrInputProductComponent
   ],
 
-  entryComponents: [QrAgriculturalProductComponent, QrProcessedProductComponent, QuotationComponent],
+  entryComponents: [
+    QrAgriculturalProductComponent,
+    QrProcessedProductComponent,
+    QrInputProductComponent,
+    QuotationComponent
+  ],
 
   imports: [
     SharedModule,

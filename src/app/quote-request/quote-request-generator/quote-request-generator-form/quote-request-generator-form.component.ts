@@ -1,3 +1,4 @@
+import { QrInputProductComponent } from './qr-input-product/qr-input-product.component';
 import { QrProcessedProductComponent } from './qr-processed-product/qr-processed-product.component';
 import { QrAgriculturalProductComponent } from './qr-agricultural-product/qr-agricultural-product.component';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -70,7 +71,13 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
   }
 
   openUpdateDialog() {
-    this.product.product_type === 'agricultural' ? this.openDialogAgricultural() : this.openDialogProcessed();
+    if (this.product.product_type === 'agricultural') {
+      this.openDialogAgricultural();
+    } else if (this.product.product_type === 'processed') {
+      this.openDialogProcessed();
+    } else {
+      this.openDialogInput();
+    }
   }
 
   openDialogAgricultural(): void {
@@ -87,6 +94,14 @@ export class QuoteRequestGeneratorFormComponent extends BaseValidationComponent 
     };
 
     this.openDialog('92vh', QrProcessedProductComponent, data);
+  }
+
+  openDialogInput(): void {
+    const data = {
+      product: this.product
+    };
+
+    this.openDialog('92vh', QrInputProductComponent, data);
   }
 
   openDialog(height: string, component: any, dialogData: any): void {

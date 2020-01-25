@@ -1,0 +1,197 @@
+<div class="modal-box-heading">
+  <a (click)="onExit()"><i class="material-icons pull-right">close</i></a>
+  <h2 *ngIf="!onUpdate" translate class="modal-title">Add Input Product</h2>
+  <h2 *ngIf="onUpdate" translate class="modal-title">Edit Product</h2>
+</div>
+<div class="padding-all">
+  <form [formGroup]="productForm" (keydown.enter)="$event.preventDefault()">
+    <div class="product-placeholder-box">
+      <app-upload-picture [picture]="productImage" [type]="'product'" (imageEvent)="receiveImage($event)">
+      </app-upload-picture>
+      <p class="heading-2 ">Product Image</p>
+    </div>
+    <div class="form-row">
+      <div class="form-group col" [ngClass]="showFieldStyle('produce')">
+        <label for="produce">Product Name *</label>
+        <input
+          type="text"
+          id="produce"
+          class="form-control"
+          name="name"
+          placeholder="Ex. Green Lawn Fertilizer"
+          formControlName="produce"
+        />
+        <div class="help-block" *ngIf="isFieldInvalid('produce')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('input_produce_type')">
+        <label for="product-type">Product Type *</label>
+        <select
+          id="product-type"
+          name="input_produce_type"
+          [formControl]="product.input_produce_type"
+          class="form-control"
+          (change)="checkInputType(product.input_produce_type.value)"
+          required
+        >
+          <option *ngFor="let type of input_product_types" [value]="type.value" selected="selected">
+            {{ type.value }}</option
+          >
+        </select>
+        <div class="help-block" *ngIf="isFieldInvalid('input_produce_type')">
+          <p>This field is required</p>
+        </div>
+      </div>
+      <div class="form-group col-md-6" [hidden]="!otherTypeSelected">
+        <label for="c-product-type">Custom Product Type *</label>
+        <input
+          class="form-control"
+          id="c-product-type"
+          [formControl]="product.input_produce_type"
+          placeholder="Enter custom product type..."
+        />
+      </div>
+    </div>
+    <p class="heading-2" [style.display]="isItemVisible || isItemDescriptionVisible ? 'block' : 'none'">Item</p>
+    <div class="form-row" [style.display]="isItemVisible ? 'block' : 'none'">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('weight_unit')">
+        <label for="measurement-unit">Measurement Unit *</label>
+        <select id="measurement-unit" name="weight_unit" formControlName="weight_unit" class="form-control">
+          <option selected="selected" disabled>Choose a measurement unit</option>
+          <option *ngFor="let unit of units" [value]="unit.value">{{ unit.viewValue }}</option>
+        </select>
+        <div class="help-block" *ngIf="isFieldInvalid('weight_unit')">
+          <p>This field is required</p>
+        </div>
+      </div>
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('item_measurement_amount')">
+        <label for="amount-per-item"> ({{ productForm.value.weight_unit | uppercase }}) per Item *</label>
+        <input
+          type="number"
+          min="0"
+          class="form-control"
+          name="item_measurement_amount"
+          class="form-control"
+          formControlName="item_measurement_amount"
+          placeholder="Ex. 100"
+        />
+        <div class="help-block" *ngIf="isFieldInvalid('item_measurement_amount')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <div class="form-row" [style.display]="isItemDescriptionVisible ? 'block' : 'none'">
+      <div class="form-group col" [ngClass]="showFieldStyle('item_description')">
+        <label for="item-description">Item Description *</label>
+        <textarea class="form-control" name="item_description" formControlName="item_description" rows="2"></textarea>
+        <div class="help-block" *ngIf="isFieldInvalid('item_description')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <p class="heading-2">Amount</p>
+    <div class="form-row">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('quantity')">
+        <label for="total-amount"> Total Amount of Items *</label>
+        <input
+          type="number"
+          min="0"
+          id="total-amount"
+          name="quantity"
+          formControlName="quantity"
+          class="form-control"
+          placeholder="Ex. 100"
+          required
+        />
+        <div class="help-block" *ngIf="isFieldInvalid('quantity')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <p class="heading-2">Price</p>
+    <div class="form-row">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('price_per_unit')">
+        <label for="price-per-item"> Price per Item *</label>
+        <input
+          type="number"
+          min="0"
+          name="price_per_unit"
+          formControlName="price_per_unit"
+          (ngModelChange)="setPriceUnit()"
+          id="price-per-item"
+          name="price_per_unit"
+          class="form-control"
+          placeholder="Ex. 100"
+          required
+        />
+        <div class="help-block" *ngIf="isFieldInvalid('price_per_unit')">
+          <p>This field is required</p>
+        </div>
+      </div>
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('currency')">
+        <label for="currency"> Currency *</label>
+        <select id="currency" name="currency" formControlName="currency" class="form-control" required>
+          <option *ngFor="let currency of currencies" [value]="currency.value" selected="selected">{{
+            currency.viewValue
+          }}</option>
+        </select>
+        <div class="help-block" *ngIf="isFieldInvalid('currency')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="total-price"> Total Price</label>
+        <input
+          type="number"
+          min="0"
+          name="total_price"
+          formControlName="total_price"
+          id="total-price"
+          class="form-control"
+          placeholder="Ex. 100"
+          disabled
+          required
+        />
+      </div>
+    </div>
+    <button
+      #submitButton
+      type="button"
+      (click)="submit()"
+      [hidden]="!productForm.valid || onUpdate"
+      class="bttn-primary pull-right"
+    >
+      Add Product
+    </button>
+    <button
+      #submitButton
+      type="button"
+      (click)="submit()"
+      [hidden]="!productForm.valid || !onUpdate"
+      class="bttn-primary pull-right"
+    >
+      Update Product
+    </button>
+    <button
+      type="button"
+      (click)="checkForm(productForm)"
+      [hidden]="productForm.valid || onUpdate"
+      class="bttn-primary pull-right"
+    >
+      Add Product
+    </button>
+    <button
+      type="button"
+      (click)="checkForm(productForm)"
+      [hidden]="productForm.valid || !onUpdate"
+      class="bttn-primary pull-right"
+    >
+      Update Product
+    </button>
+  </form>
+</div>

@@ -1,0 +1,127 @@
+<div class="modal-box-heading">
+  <a (click)="onExit()"><i class="material-icons pull-right">close</i></a>
+  <h2 translate class="modal-title">Add Input Product</h2>
+</div>
+<div class="padding-all">
+  <form *ngIf="productForm" [formGroup]="productForm" (keydown.enter)="$event.preventDefault()">
+    <p class="heading-2">Product</p>
+    <div class="form-row">
+      <div class="form-group col" [ngClass]="showFieldStyle('produce')">
+        <label for="product-name">Product Name *</label>
+        <input
+          type="text"
+          id="product-name"
+          formControlName="produce"
+          class="form-control"
+          name="name"
+          placeholder="Ex. Green Lawn Fertilizer"
+        />
+        <div class="help-block" *ngIf="isFieldInvalid('produce')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('input_produce_type')">
+        <label for="product-type">Product Type *</label>
+        <select
+          id="product-type"
+          name="input_produce_type"
+          formControlName="input_produce_type"
+          class="form-control"
+          (change)="checkInputType(productForm.value.input_produce_type)"
+          required
+        >
+          <option *ngFor="let type of input_product_types" [value]="type.value" selected="selected">
+            {{ type.value }}</option
+          >
+        </select>
+        <div class="help-block" *ngIf="isFieldInvalid('input_produce_type')">
+          <p>This field is required</p>
+        </div>
+      </div>
+      <div class="form-group col-md-6" [hidden]="!otherTypeSelected">
+        <label for="c-product-type">Custom Product Type *</label>
+        <input class="form-control" id="c-product-type" placeholder="Enter custom product type..." />
+      </div>
+    </div>
+    <p class="heading-2" [style.display]="isItemVisible || isItemDescriptionVisible ? 'block' : 'none'">Item</p>
+    <div class="form-row" [style.display]="isItemVisible ? 'block' : 'none'">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('weight_unit')">
+        <label for="measurement-unit">Measurement Unit *</label>
+        <select id="measurement-unit" name="weight_unit" formControlName="weight_unit" class="form-control">
+          <option selected="selected" disabled>Choose a measurement unit</option>
+          <option *ngFor="let unit of units" [value]="unit.value">{{ unit.viewValue }}</option>
+        </select>
+        <div class="help-block" *ngIf="isFieldInvalid('weight_unit')">
+          <p>This field is required</p>
+        </div>
+      </div>
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('item_measurement_amount')">
+        <label for="amount-per-item"> ({{ productForm.value.weight_unit }}) per Item *</label>
+        <input
+          type="number"
+          min="0"
+          class="form-control"
+          name="item_measurement_amount"
+          class="form-control"
+          formControlName="item_measurement_amount"
+          placeholder="Ex. 100"
+        />
+        <div class="help-block" *ngIf="isFieldInvalid('item_measurement_amount')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <div class="form-row" [style.display]="isItemDescriptionVisible ? 'block' : 'none'">
+      <div class="form-group col" [ngClass]="showFieldStyle('item_description')">
+        <label for="item-description">Item Description *</label>
+        <textarea class="form-control" name="item_description" formControlName="item_description" rows="2"></textarea>
+        <div class="help-block" *ngIf="isFieldInvalid('item_description')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <p class="heading-2">Amount</p>
+    <div class="form-row">
+      <div class="form-group col-md-6" [ngClass]="showFieldStyle('quantity_requested')">
+        <label for="total-amount"> Total Amount of Items *</label>
+        <input
+          type="number"
+          min="0"
+          id="total-amount"
+          name="quantity_requested"
+          formControlName="quantity_requested"
+          class="form-control"
+          placeholder="Ex. 100"
+          required
+        />
+        <div class="help-block" *ngIf="isFieldInvalid('quantity_requested')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <button type="submit" *ngIf="!update && productForm.valid" (click)="addProduct()" class="bttn-primary pull-right">
+      Add Product
+    </button>
+    <button
+      type="submit"
+      *ngIf="!update && !productForm.valid"
+      (click)="onSubmit(productForm)"
+      class="bttn-primary pull-right"
+    >
+      Add Product
+    </button>
+    <button type="submit" *ngIf="update && productForm.valid" (click)="updateProduct()" class="bttn-primary pull-right">
+      Update Product
+    </button>
+    <button
+      type="submit"
+      *ngIf="update && !productForm.valid"
+      (click)="onSubmit(productForm)"
+      class="bttn-primary pull-right"
+    >
+      Update Product
+    </button>
+  </form>
+</div>

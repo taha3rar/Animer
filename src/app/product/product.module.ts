@@ -17,15 +17,21 @@ import { AgriculturalProductGeneratorComponent } from './product-generator/agric
 import { ProcessedProductGeneratorComponent } from './product-generator/processed-product-generator/processed-product-generator.component';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
 import { MatSortModule } from '@angular/material';
+import { InputProductGeneratorComponent } from './product-generator/input-product-generator/input-product-generator.component';
 
 @NgModule({
   declarations: [
     ProductsListComponent,
     ProductProfileComponent,
     AgriculturalProductGeneratorComponent,
-    ProcessedProductGeneratorComponent
+    ProcessedProductGeneratorComponent,
+    InputProductGeneratorComponent
   ],
-  entryComponents: [AgriculturalProductGeneratorComponent, ProcessedProductGeneratorComponent],
+  entryComponents: [
+    AgriculturalProductGeneratorComponent,
+    ProcessedProductGeneratorComponent,
+    InputProductGeneratorComponent
+  ],
 
   imports: [
     CommonModule,

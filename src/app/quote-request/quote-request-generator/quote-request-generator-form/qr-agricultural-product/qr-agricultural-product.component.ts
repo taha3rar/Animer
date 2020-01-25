@@ -31,6 +31,7 @@ export class QrAgriculturalProductComponent extends BaseProductQuoteRequest impl
     this.productForm.controls['item_measurement_unit'].disable();
     this.productForm.controls['items_per_package'].disable();
     this.productForm.controls['total_amount_items'].disable();
+    this.productForm.controls['input_produce_type'].disable();
     this.formInput = this.productForm;
     this.onChanges();
   }
