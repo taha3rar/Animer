@@ -69,7 +69,11 @@
             <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
               {{ row.produce }}
             </span>
-            <span *ngIf="row.product_type == 'input'">{{ row.produce }} / {{ row.input_produce_type }} </span>
+            <span *ngIf="row.product_type == 'input'"
+              >{{ row.produce }} /
+              <span *ngIf="row.other_input_type">{{ row.other_input_type }}</span>
+              <span *ngIf="!row.other_input_type">{{ row.input_produce_type }}</span>
+            </span>
           </td>
           <td>
             <span *ngIf="row.product_type == 'agricultural'">

@@ -21,4 +21,5 @@ export class ProductQuotation {
   product_subtotal: number;
   item_description: string;
   input_produce_type: string;
+  other_input_type: string;
 }

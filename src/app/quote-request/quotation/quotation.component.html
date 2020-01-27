@@ -69,7 +69,9 @@
                   {{ quotation.product.produce }}
                 </span>
                 <span *ngIf="quotation.product.product_type == 'input'">
-                  {{ quotation.product.produce }}/ {{ quotation.product.input_produce_type }}
+                  {{ quotation.product.produce }}/
+                  <span *ngIf="quotation.product.other_input_type">{{ quotation.product.other_input_type }}</span>
+                  <span *ngIf="!quotation.product.other_input_type">{{ quotation.product.input_produce_type }}</span>
                 </span>
               </td>
               <td>

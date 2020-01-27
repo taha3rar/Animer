@@ -54,7 +54,9 @@
                       {{ product.produce }}
                     </span>
                     <span *ngIf="product.product_type == 'input'"
-                      >{{ product.produce }} / {{ product.input_produce_type }}
+                      >{{ product.produce }} /
+                      <span *ngIf="product.other_input_type">{{ product.other_input_type }}</span>
+                      <span *ngIf="!product.other_input_type">{{ product.input_produce_type }}</span>
                     </span>
                   </td>
                   <td>
