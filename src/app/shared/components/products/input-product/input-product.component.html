@@ -46,14 +46,31 @@
           This field is required!
         </div>
       </div>
-      <div class="form-group col-md-6" [hidden]="!otherTypeSelected">
+      <div class="form-group col-md-6" *ngIf="otherTypeSelected || product.other_input_type">
         <label for="c-product-type">Custom Product Type *</label>
-        <input class="form-control" id="c-product-type" placeholder="Enter custom product type..." />
+        <input
+          class="form-control"
+          name="other_input_type"
+          id="c-product-type"
+          #other_input_type="ngModel"
+          [required]="otherTypeSelected"
+          [(ngModel)]="product.other_input_type"
+          placeholder="Enter custom product type..."
+          [ngClass]="{ 'has-error': other_input_type.invalid && other_input_type.touched }"
+        />
+        <div class="help-block" *ngIf="other_input_type.invalid && other_input_type.touched">
+          This field is required!
+        </div>
       </div>
     </div>
 
-    <p class="heading-2" [style.display]="isItemVisible || isItemDescriptionVisible ? 'block' : 'none'">Item</p>
-    <div class="form-row" [style.display]="isItemVisible ? 'block' : 'none'">
+    <p
+      class="heading-2"
+      *ngIf="product.item_description || product.weight_unit || isItemVisible || isItemDescriptionVisible"
+    >
+      Item
+    </p>
+    <div class="form-row" *ngIf="product.weight_unit || isItemVisible">
       <div class="form-group col-md-6">
         <label for="measurement-unit">Measurement Unit *</label>
         <select
@@ -61,6 +78,7 @@
           [(ngModel)]="product.weight_unit"
           name="weight_unit"
           #weight_unit="ngModel"
+          [required]="isItemVisible"
           class="form-control"
           [ngClass]="{ 'has-error': weight_unit.invalid && weight_unit.touched }"
         >
@@ -79,6 +97,7 @@
           [(ngModel)]="product.item_measurement_amount"
           class="form-control"
           name="item_measurement_amount"
+          [required]="isItemVisible"
           class="form-control"
           #item_measurement_amount="ngModel"
           placeholder="Ex. 100"
@@ -89,12 +108,13 @@
         </div>
       </div>
     </div>
-    <div class="form-row" [style.display]="isItemDescriptionVisible ? 'block' : 'none'">
+    <div class="form-row" *ngIf="isItemDescriptionVisible || product.input_produce_type == 'Other'">
       <div class="form-group col">
         <label for="item-description">Item Description *</label>
         <textarea
           [(ngModel)]="product.item_description"
           class="form-control"
+          [required]="isItemDescriptionVisible"
           name="item_description"
           #item_description="ngModel"
           [ngClass]="{ 'has-error': item_description.invalid && item_description.touched }"

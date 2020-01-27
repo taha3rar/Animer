@@ -46,25 +46,24 @@ export class InputProductComponent extends BaseProductOrder {
     this.input_product_types.forEach(item => {
       if (item.value === obj_value) {
         item.type === 'consumable' ? (this.isItemVisible = true) : (this.isItemDescriptionVisible = true);
-        this.setRequiredFields(item.type);
       }
     });
     if (obj_value === 'Other') {
       this.otherTypeSelected = true;
     }
+    this.clearInput();
   }
 
-  setRequiredFields(obj_type: string) {
-    this.itemFields.forEach(item => {
-      this.form.form.get(item.field).setValidators([]);
-      this.form.form.get(item.field).updateValueAndValidity();
-    });
-    this.itemFields.forEach(item => {
-      if (item.for === obj_type) {
-        this.form.form.get(item.field).setValidators([Validators.required]);
-        this.form.form.get(item.field).updateValueAndValidity();
-      }
-    });
+  clearInput() {
+    if (this.form.controls['weight_unit']) {
+      this.form.controls['weight_unit'].setValue(undefined);
+    }
+    if (this.form.controls['other_input_type']) {
+      this.form.controls['other_input_type'].setValue(undefined);
+    }
+    if (this.form.controls['item_measurement_amount']) {
+      this.form.controls['item_measurement_amount'].setValue(undefined);
+    }
   }
 
   onSubmit() {

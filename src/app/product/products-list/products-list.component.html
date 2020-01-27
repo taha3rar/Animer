@@ -105,10 +105,13 @@
           <i class="material-icons">edit</i>
         </button>
         <button
-          *ngIf="product.product_type != 'processed'"
+          *ngIf="product.product_type == 'agricultural'"
           class="round-button-primary"
           (click)="openDialogAgricultural(product)"
         >
+          <i class="material-icons">edit</i>
+        </button>
+        <button *ngIf="product.product_type == 'input'" class="round-button-primary" (click)="openDialogInput(product)">
           <i class="material-icons">edit</i>
         </button>
         <button

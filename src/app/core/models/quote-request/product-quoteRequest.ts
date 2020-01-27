@@ -15,4 +15,5 @@ export class ProductQuoteRequest {
   quantity_requested: number;
   item_description: string;
   input_produce_type: string;
+  other_input_type: string;
 }

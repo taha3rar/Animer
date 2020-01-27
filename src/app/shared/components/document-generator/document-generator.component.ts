@@ -78,6 +78,9 @@ export class DocumentGeneratorComponent extends BaseValidationComponent implemen
     if (this.products[index].product_type === 'agricultural') {
       this.openDialogAgricultural(index);
     }
+    if (this.products[index].product_type === 'input') {
+      this.openDialogInput(index);
+    }
   }
 
   openDialogAgricultural(index?: number, transactionType?: string): void {

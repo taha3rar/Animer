@@ -44,4 +44,5 @@ export class Product {
   fromQuotation: boolean; // Used only on the front-end to pass ProductQuotation product to Product
   item_description: string;
   input_produce_type: string;
+  other_input_type: string;
 }

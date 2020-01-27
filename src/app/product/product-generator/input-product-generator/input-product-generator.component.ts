@@ -64,7 +64,8 @@ export class InputProductGeneratorComponent extends BaseValidationComponent impl
       item_description: [product ? product.item_description : undefined],
       quantity: [product ? product.quantity : undefined],
       weight_unit: [product ? product.weight_unit : undefined],
-      price_per_unit: [product ? product.price_per_unit : undefined, Validators.required]
+      price_per_unit: [product ? product.price_per_unit : undefined, Validators.required],
+      other_input_type: [product ? product.other_input_type : undefined]
     });
   }
 
@@ -109,21 +110,32 @@ export class InputProductGeneratorComponent extends BaseValidationComponent impl
     });
     if (obj_value === 'Other') {
       this.otherTypeSelected = true;
+      this.setRequiredFields('Capital', 'Other');
     }
   }
 
-  setRequiredFields(obj_type: string) {
-    this.itemFields.forEach(item => {
-      this.product[item.field].setValidators([]);
-      this.product[item.field].updateValueAndValidity();
-    });
+  setRequiredFields(obj_type: string, obj_val?: string) {
+    this.productForm.controls['other_input_type'].setValue(undefined);
+    this.productForm.controls['other_input_type'].setValidators([]);
+    this.productForm.controls['other_input_type'].updateValueAndValidity();
+    this.productForm.controls['item_description'].setValidators([]);
+    this.productForm.controls['item_description'].updateValueAndValidity();
+    this.productForm.controls['item_description'].setValue(undefined);
     this.itemFields.forEach(item => {
       if (item.for === obj_type) {
-        this.product[item.field].setValidators([Validators.required]);
-        this.product[item.field].updateValueAndValidity();
+        this.productForm.controls[item.field].setValidators([Validators.required]);
+      } else {
+        this.productForm.controls[item.field].setValidators([]);
+        this.productForm.controls[item.field].setValue(undefined);
       }
+      this.productForm.controls[item.field].updateValueAndValidity();
     });
-    console.log(this.product);
+    if (obj_val === 'Other') {
+      this.productForm.controls['other_input_type'].setValidators([Validators.required]);
+      this.productForm.controls['other_input_type'].updateValueAndValidity();
+      this.productForm.controls['item_description'].setValidators([Validators.required]);
+      this.productForm.controls['item_description'].updateValueAndValidity();
+    }
   }
 
   checkForm(form: FormGroup) {

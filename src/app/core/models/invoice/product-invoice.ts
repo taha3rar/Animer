@@ -29,6 +29,7 @@ export class ProductInvoice {
   currency: string; // Used to pass quotation currency to product when generating a PO from a quotation
   item_description: string;
   input_produce_type: string;
+  other_input_type: string;
 
   toProduct(invoice: Invoice): Product {
     const product = new Product();
@@ -50,13 +51,10 @@ export class ProductInvoice {
     product.package_price = this.package_price;
     product.price_per_unit = this.price_per_unit;
     product.quantity = this.quantity;
-<<<<<<< HEAD
-    product.input_produce_type = this.input_produce_type;
-    product.item_description = this.item_description;
-=======
+    product.other_input_type = this.other_input_type;
     product.item_description = this.item_description;
     product.input_produce_type = this.input_produce_type;
->>>>>>> input product form
+
     return product;
   }
 }

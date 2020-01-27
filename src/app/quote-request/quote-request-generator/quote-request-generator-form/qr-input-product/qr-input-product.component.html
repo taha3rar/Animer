@@ -40,13 +40,32 @@
           <p>This field is required</p>
         </div>
       </div>
-      <div class="form-group col-md-6" [hidden]="!otherTypeSelected">
+      <div
+        class="form-group col-md-6"
+        *ngIf="otherTypeSelected || productForm.value.other_input_type"
+        [ngClass]="showFieldStyle('other_input_type')"
+      >
         <label for="c-product-type">Custom Product Type *</label>
-        <input class="form-control" id="c-product-type" placeholder="Enter custom product type..." />
+        <input
+          class="form-control"
+          id="c-product-type"
+          formControlName="other_input_type"
+          placeholder="Enter custom product type..."
+        />
+        <div class="help-block" *ngIf="isFieldInvalid('other_input_type')">
+          <p>This field is required</p>
+        </div>
       </div>
     </div>
-    <p class="heading-2" [style.display]="isItemVisible || isItemDescriptionVisible ? 'block' : 'none'">Item</p>
-    <div class="form-row" [style.display]="isItemVisible ? 'block' : 'none'">
+    <p
+      class="heading-2"
+      *ngIf="
+        productForm.value.item_description || productForm.value.weight_unit || isItemVisible || isItemDescriptionVisible
+      "
+    >
+      Item
+    </p>
+    <div class="form-row" *ngIf="productForm.value.weight_unit || isItemVisible">
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('weight_unit')">
         <label for="measurement-unit">Measurement Unit *</label>
         <select id="measurement-unit" name="weight_unit" formControlName="weight_unit" class="form-control">
@@ -73,7 +92,7 @@
         </div>
       </div>
     </div>
-    <div class="form-row" [style.display]="isItemDescriptionVisible ? 'block' : 'none'">
+    <div class="form-row" *ngIf="isItemDescriptionVisible || productForm.value.input_produce_type == 'Other'">
       <div class="form-group col" [ngClass]="showFieldStyle('item_description')">
         <label for="item-description">Item Description *</label>
         <textarea class="form-control" name="item_description" formControlName="item_description" rows="2"></textarea>
