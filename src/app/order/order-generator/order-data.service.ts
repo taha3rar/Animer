@@ -40,21 +40,16 @@ export class OrderDataService {
   }
 
   setEnableTour(trigger: boolean) {
-    if (trigger === true) {
-      console.log('enabling tour');
-    }
     this.tourEnabled = trigger;
   }
 
-  setPresentStep(presentStep: string) {
-    this.presentStep = presentStep;
+  setGeneratorStep(step: string) {
+    this.presentStep = step;
   }
 
-  triggerTourStep(step?: string) {
-    if (this.tourEnabled) {
-      console.log('launch step : ', step);
-      console.log('tour enabled', this.tourEnabled);
-      this.intercom.startTour(this.tourDictionary[step || this.presentStep]);
+  triggerTourStep(manualTrigger?: boolean) {
+    if (this.tourEnabled || manualTrigger) {
+      this.intercom.startTour(this.tourDictionary[this.presentStep]);
     }
   }
 }

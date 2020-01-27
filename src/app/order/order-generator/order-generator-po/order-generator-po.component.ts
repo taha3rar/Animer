@@ -226,7 +226,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   }
 
   nextStep() {
-    // this.orderDataService.setTourStep('review');
-    this.orderDataService.triggerTourStep('review');
+    this.orderDataService.setGeneratorStep('review');
+    this.orderDataService.triggerTourStep();
   }
 }

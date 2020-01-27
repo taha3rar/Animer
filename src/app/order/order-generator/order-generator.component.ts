@@ -40,7 +40,6 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   ) {}
 
   ngOnInit() {
-    this.initializeTour();
     this.orderDataService.setProductList(undefined);
     this.openOrder = this.route.snapshot.data['openOrder'];
     this.stepperService.stepperInit();
@@ -70,6 +69,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
     } else {
       this.draftOrder = new Order();
     }
+    this.initializeTour();
     this.orderForm = this.formBuilder.group({
       _id: Object.is(this.draftOrder, undefined) ? undefined : this.draftOrder._id,
       numericId: Object.is(this.draftOrder, undefined) ? undefined : this.draftOrder.numericId,
@@ -230,17 +230,23 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
   }
 
   initializeTour() {
+    this.isDraft || this.quotation
+      ? this.orderDataService.setGeneratorStep('order')
+      : this.orderDataService.setGeneratorStep('suppliers');
     this.userProgress = this.route.snapshot.data['userProgress'];
     if (this.userProgress.first_po) {
       this.orderDataService.setEnableTour(false);
     } else {
       this.orderDataService.setEnableTour(true);
-      this.orderDataService.triggerTourStep('suppliers');
+      this.orderDataService.triggerTourStep();
     }
   }
 
   stepChange(step: string) {
-    console.log('change step', step);
-    this.orderDataService.setPresentStep(step);
+    this.orderDataService.setGeneratorStep(step);
+  }
+
+  triggerTour() {
+    this.orderDataService.triggerTourStep(true);
   }
 }

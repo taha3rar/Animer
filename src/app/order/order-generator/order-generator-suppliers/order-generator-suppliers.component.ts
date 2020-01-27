@@ -1,5 +1,5 @@
 import { BaseNavigationComponent } from '@app/shared/components/base-navigation/base-navigation.component';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
 import { defaultValues } from '@app/shared/helpers/default_values';
@@ -56,7 +56,8 @@ export class OrderGeneratorSuppliersComponent extends BaseNavigationComponent im
 
   validateSeller() {
     this.nextBtnClicked = true;
-    this.orderDataService.triggerTourStep('products');
+    this.orderDataService.setGeneratorStep('products');
+    this.orderDataService.triggerTourStep();
   }
 
   selectCard(id: any) {

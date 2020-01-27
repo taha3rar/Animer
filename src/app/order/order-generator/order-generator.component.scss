@@ -40,3 +40,15 @@
 ul.nav > li > a {
   white-space: pre-wrap !important;
 }
+
+.need-help {
+  color: $primary-color !important;
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding-top: 4px;
+  cursor: pointer;
+}
+
+i {
+  vertical-align: bottom;
+}

@@ -154,6 +154,7 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
 
   toOrderGenerator() {
     this.orderDataService.setProductList(this.addedProducts);
-    this.orderDataService.triggerTourStep('order');
+    this.orderDataService.setGeneratorStep('order');
+    this.orderDataService.triggerTourStep();
   }
 }

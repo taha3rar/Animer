@@ -73,6 +73,7 @@ const routes: Routes = [
       component: OrderGeneratorComponent,
       canActivate: [OrderGuard],
       resolve: {
+        userProgress: CurrentUserProgressResolver,
         order: OrderPoResolver
       },
       data: {
