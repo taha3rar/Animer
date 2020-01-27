@@ -47,8 +47,28 @@
         </div>
         <div *ngIf="quoteRequest.product.product_type != 'agricultural'" class="col-md-3">
           <p class="t-light-gray">TOTAL QUANTITY REQUESTED</p>
-          <p class="t-bold">{{ quoteRequest.product.quantity_requested }} {{ quoteRequest.product.type_of_package }}</p>
+          <p class="t-bold">
+            <span *ngIf="quoteRequest.product.product_type == 'processed'">
+              {{ quoteRequest.product.quantity_requested }}
+              <span *ngIf="quoteRequest.product.quantity_requested > 1">
+                packages
+              </span>
+              <span *ngIf="quoteRequest.product.quantity_requested == 1">
+                package
+              </span>
+            </span>
+            <span *ngIf="quoteRequest.product.product_type == 'input'">
+              {{ quoteRequest.product.quantity_requested }}
+              <span *ngIf="quoteRequest.product.quantity_requested > 1">
+                units
+              </span>
+              <span *ngIf="quoteRequest.product.quantity_requested == 1">
+                unit
+              </span>
+            </span>
+          </p>
         </div>
+
         <div *ngIf="quoteRequest.product.product_type === 'agricultural'" class="col-md-3">
           <p class="t-light-gray">WEIGHT ACCEPTED</p>
           <p class="t-bold">

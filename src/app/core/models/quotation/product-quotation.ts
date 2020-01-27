@@ -11,11 +11,14 @@ export class ProductQuotation {
   item_package_type: String;
   item_measurement_amount: Number;
   item_measurement_unit: String;
-  items_per_package: String;
+  items_per_package: number;
   total_amount_items: Number;
   quantity_requested: number;
   quantity_offered: number;
+  total_items_offered: number;
   price_per_unit: number;
   package_price: number;
   product_subtotal: number;
+  item_description: string;
+  input_produce_type: string;
 }

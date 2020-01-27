@@ -42,8 +42,24 @@
         <span *ngIf="quotation.product && quotation.product?.product_type === 'agricultural'">
           {{ quotation.product?.total_weight_offered | number: '1.2-2' }} {{ quotation.product?.weight_unit }}
         </span>
-        <span *ngIf="quotation.product && quotation.product?.product_type != 'agricultural'">
-          {{ quotation.product?.quantity_offered }} {{ quotation.product?.type_of_package }}
+        <span *ngIf="quotation.product && quotation.product?.product_type === 'processed'">
+          {{ quotation.product?.quantity_offered }}
+          <span *ngIf="quotation.product?.quantity_offered > 1">
+            packages
+          </span>
+          <span *ngIf="quotation.product?.quantity_offered == 1">
+            package
+          </span>
+          ({{ quotation.product?.total_items_offered }}
+          <span *ngIf="quotation.product?.total_items_offered > 1"> units</span>
+          <span *ngIf="quotation.product?.total_items_offered == 1">
+            unit </span
+          >)
+        </span>
+        <span *ngIf="quotation.product && quotation.product?.product_type === 'input'">
+          {{ quotation.product?.quantity_offered }}
+          <span *ngIf="quotation.product?.quantity_offered > 1">units</span>
+          <span *ngIf="quotation.product?.quantity_offered == 1">unit</span>
         </span>
         <span *ngIf="!quotation.product">
           N/A

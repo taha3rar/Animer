@@ -62,6 +62,10 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
     this.setTotalPrice();
   }
 
+  setUnitsNumber(): void {
+    this.product.total_items_offered = Math.ceil(this.product.quantity_offered * this.product.items_per_package);
+  }
+
   setTotalPrice(): void {
     this.quotationForm.patchValue({
       total_price: this.product.product_subtotal || undefined

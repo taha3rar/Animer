@@ -84,6 +84,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
             (quotation.product.product_subtotal / quotation.product.quantity_offered).toFixed(2)
           );
           quotedProduct.currency = quotation.currency;
+          quotedProduct.total_amount_items = quotation.product.total_items_offered;
           quotedProduct.quotation_id = quotation._id;
           this.quotedProducts.push(quotedProduct);
         });

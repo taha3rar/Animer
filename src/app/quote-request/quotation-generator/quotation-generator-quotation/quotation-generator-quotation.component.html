@@ -18,7 +18,7 @@
       <thead>
         <tr>
           <th>PRODUCT</th>
-          <th>PACKAGES</th>
+          <th>DESCRIPTION</th>
           <th>SPECIFICATIONS</th>
           <th>AMOUNT REQUESTED</th>
           <th>AMOUNT OFFERED</th>
@@ -38,19 +38,28 @@
             <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
               {{ product.produce }}
             </span>
+            <span *ngIf="product.product_type == 'input'"
+              >{{ product.produce }} / {{ product.input_produce_type }}
+            </span>
           </td>
           <td>
             <span *ngIf="!product.product_type || product.product_type == 'agricultural'">
-              {{ product.quantity_offered || 0 | number: '1.0' }} ({{ product.type_of_package }} /
-              {{ product.package_weight | number: '1.2-2' }} {{ product.weight_unit | uppercase }})
+              {{ product.package_weight | number: '1.2-2' }} per package ({{ product.type_of_package }})
             </span>
             <span *ngIf="product.product_type == 'processed' && product.item_package_type">
-              {{ product.quantity_offered || 0 | number: '1.0' }} ({{ product.type_of_package }} /
-              {{ product.items_per_package | number: '1.0' }}<span *ngIf="product.items_per_package > 1"> items)</span
-              ><span *ngIf="product.items_per_package == 0"> item)</span>
+              {{ product.items_per_package | number: '1.0' }}
+              <span *ngIf="product.items_per_package > 1"> units</span>
+              <span *ngIf="product.items_per_package == 0"> unit</span>
+              per package ({{ product.type_of_package }})
             </span>
             <span *ngIf="product.product_type == 'processed' && !product.item_package_type">
               {{ product.quantity_offered || 0 | number: '1.0' }} ({{ product.type_of_package }})
+            </span>
+            <span *ngIf="product.product_type == 'input'">
+              <span *ngIf="product.item_description">{{ product.item_description }}</span>
+              <span *ngIf="!product.item_description">
+                {{ product.item_measurement_amount }} {{ product.weight_unit }} per unit
+              </span>
             </span>
           </td>
           <td>
@@ -59,11 +68,21 @@
           <td>
             <span *ngIf="quoteRequest.product.product_type == 'agricultural'"
               >{{ quoteRequest.product.total_weight_requested | number: '1.2-2' }}
-              {{ quoteRequest.product.weight_unit }}</span
+              {{ quoteRequest.product.weight_unit }}({{ quoteRequest.product.quantity_requested }}
+              <span *ngIf="quoteRequest.product.quantity_requested > 1">packages</span>
+              <span *ngIf="quoteRequest.product.quantity_requested == 1">package</span>
+              <small> Estimated</small>)
+            </span>
+            <span *ngIf="quoteRequest.product.product_type == 'processed'"
+              >{{ quoteRequest.product.quantity_requested }} packages ({{ quoteRequest.product.total_amount_items }}
+              <span *ngIf="quoteRequest.product.total_amount_items > 1">units</span>
+              <span *ngIf="quoteRequest.product.total_amount_items == 1">unit</span>)</span
             >
-            <span *ngIf="quoteRequest.product.product_type != 'agricultural'"
-              >{{ quoteRequest.product.quantity_requested }} packages</span
-            >
+            <span *ngIf="quoteRequest.product.product_type == 'input'">
+              {{ quoteRequest.product.quantity_requested }}
+              <span *ngIf="product.quantity_requested > 1">units</span>
+              <span *ngIf="product.quantity_requested == 1">unit</span>
+            </span>
           </td>
           <td>
             <span *ngIf="quoteRequest.product.product_type == 'agricultural'">
@@ -80,7 +99,11 @@
               />
             </span>
             <span *ngIf="quoteRequest.product.product_type != 'agricultural'">
-              <label for="quantity_offered">Offered amount ({{ product.type_of_package }})</label>
+              <label for="quantity_offered"
+                >Offered amount
+                <span *ngIf="quoteRequest.product.product_type == 'processed'">({{ product.type_of_package }})</span>
+                <span *ngIf="quoteRequest.product.product_type == 'input'">(Unit)</span>
+              </label>
               <input
                 id="quantity_offered"
                 [(ngModel)]="product.quantity_offered"
@@ -88,7 +111,7 @@
                 [max]="product.quantity_requested"
                 type="number"
                 class="form-control"
-                (ngModelChange)="setProductSubtotal()"
+                (ngModelChange)="setProductSubtotal(); setUnitsNumber()"
                 placeholder="Add quantity here"
               />
             </span>

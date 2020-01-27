@@ -71,35 +71,47 @@
             <span *ngIf="row.product_type == 'processed' && !row.item_package_type">
               {{ row.produce }}
             </span>
+            <span *ngIf="row.product_type == 'input' && !row.item_package_type">
+              {{ row.produce }} / {{ row.input_produce_type }}
+            </span>
           </td>
           <td>
             <span *ngIf="row.product_type == 'agricultural'">
-              {{ row.quantity | number: '1.0' }} <span *ngIf="row.quantity > 1"> packages </span>
-              <span *ngIf="row.quantity == 1">package</span> ({{ row.package_weight | number: '1.2-2' }}
-              {{ row.weight_unit }} per {{ row.type_of_package }})
+              {{ row.package_weight | number: '1.2-2' }}
+              {{ row.weight_unit }} per package ({{ row.type_of_package }})
             </span>
             <span *ngIf="row.product_type == 'processed'">
-              {{ row.quantity | number: '1.0' }}
-              <span *ngIf="row.quantity > 1"> packages </span>
-              <span *ngIf="row.quantity == 1"> package </span>
-              ({{ row.items_per_package | number: '1.0' }}
-              <span *ngIf="row.items_per_package == 1"> item </span>
-              <span *ngIf="row.items_per_package > 1"> items </span>
-              per {{ row.type_of_package }})
+              {{ row.items_per_package | number: '1.0' }}
+              <span *ngIf="row.items_per_package == 1"> unit </span>
+              <span *ngIf="row.items_per_package > 1"> units </span>
+              per package ({{ row.type_of_package }})
             </span>
             <span *ngIf="row.product_type == 'input'">
               <span *ngIf="row.item_description">{{ row.item_description }}</span>
-              <span *ngIf="!row.item_description"> {{ row.quantity }} {{ row.weight_unit }} per item </span>
+              <span *ngIf="!row.item_description">
+                {{ row.item_measurement_amount }} {{ row.weight_unit }} per unit
+              </span>
             </span>
           </td>
           <td>
             <span *ngIf="row.product_type == 'agricultural'"
-              >{{ row.total_weight | number: '1.2-2' }} {{ row.weight_unit }}</span
-            >
-            <span *ngIf="row.product_type != 'agricultural'">
-              {{ row.total_amount_items | number: '1.0' }}
-              <span *ngIf="row.total_amount_items > 1">items</span>
-              <span *ngIf="row.total_amount_items == 1">item</span>
+              >{{ row.total_weight | number: '1.2-2' }} {{ row.weight_unit }} ({{ row.quantity }}
+              <span *ngIf="row.quantity > 1"> packages</span>
+              <span *ngIf="row.quantity == 1"> package</span>
+              <small> Estimated</small>)
+            </span>
+            <span *ngIf="row.product_type == 'processed'">
+              {{ row.quantity | number: '1.0' }}
+              <span *ngIf="row.quantity > 1"> packages</span>
+              <span *ngIf="row.quantity == 1"> package</span>
+              ({{ row.total_amount_items | number: '1.0' }}
+              <span *ngIf="row.total_amount_items > 1">units</span>
+              <span *ngIf="row.total_amount_items == 1"> unit</span>)
+            </span>
+            <span *ngIf="row.product_type == 'input'">
+              {{ row.quantity | number: '1.0' }}
+              <span *ngIf="row.quantity > 1">units</span>
+              <span *ngIf="row.quantity == 1">unit</span>
             </span>
           </td>
           <td>
@@ -107,8 +119,11 @@
               >{{ row.price_per_unit | number: '1.2-2' }} {{ order.currency }} / {{ row.weight_unit }}</span
             >
             <span *ngIf="row.product_type == 'processed'"
-              >{{ row.package_price | number: '1.2-2' }} {{ order.currency }} / {{ row.type_of_package }}</span
+              >{{ row.package_price | number: '1.2-2' }} {{ order.currency }} / package</span
             >
+            <span *ngIf="row.product_type == 'input'">
+              {{ row.price_per_unit | number: '1.2-2' }} {{ row.currency }} / item
+            </span>
           </td>
           <td>
             <span id="total">{{ row.product_subtotal | number: '1.2-2' }} {{ order.currency }}</span>

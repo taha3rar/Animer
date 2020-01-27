@@ -48,7 +48,7 @@
           <thead>
             <tr>
               <th>PRODUCT</th>
-              <th>PACKAGES</th>
+              <th>DESCRIPTION</th>
               <th>SPECIFICATIONS</th>
               <th>AMOUNT REQUESTED</th>
               <th>AMOUNT OFFERED</th>
@@ -68,41 +68,71 @@
                 <span *ngIf="quotation.product.product_type == 'processed' && !quotation.product.item_package_type">
                   {{ quotation.product.produce }}
                 </span>
+                <span *ngIf="quotation.product.product_type == 'input'">
+                  {{ quotation.product.produce }}/ {{ quotation.product.input_produce_type }}
+                </span>
               </td>
               <td>
                 <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
-                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }} /
-                  {{ quotation.product.package_weight | number: '1.2-2' }}
-                  {{ quotation.product.weight_unit | uppercase }})
+                  {{ quotation.product.package_weight | number: '1.2-2' }} {{ quotation.product.weight_unit }} per
+                  package ({{ quotation.product.type_of_package | uppercase }})
                 </span>
                 <span *ngIf="quotation.product.product_type == 'processed' && quotation.product.item_package_type">
-                  {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }} /
                   {{ quotation.product.items_per_package | number: '1.0'
-                  }}<span *ngIf="quotation.product.items_per_package > 1"> items)</span
-                  ><span *ngIf="quotation.product.items_per_package == 0"> item)</span>
+                  }}<span *ngIf="quotation.product.items_per_package > 1"> units</span
+                  ><span *ngIf="quotation.product.items_per_package == 0"> unit</span> per package ({{
+                    quotation.product.type_of_package
+                  }})
                 </span>
                 <span *ngIf="quotation.product.product_type == 'processed' && !quotation.product.item_package_type">
                   {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }})
+                </span>
+                <span *ngIf="quotation.product.product_type == 'input'">
+                  <span *ngIf="quotation.product.item_description">quotation.product.item_description</span>
+                  <span *ngIf="!quotation.product.item_description">
+                    {{ quotation.product.item_measurement_amount }} per unit</span
+                  >
                 </span>
               </td>
               <td>
                 <span id="specification">{{ quotation.product.specification || 'N/A' }}</span>
               </td>
               <td>
-                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'"
-                  >{{ quotation.product.total_weight_requested | number: '1.2-2' }}
-                  {{ quotation.product.weight_unit | uppercase }}</span
+                <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
+                  {{ quotation.product.total_weight_requested | number: '1.2-2' }}
+                  {{ quotation.product.weight_unit }} ( {{ quotation.product.quantity_requested }}
+                  <span *ngIf="quotation.product.quantity_requested > 1">packages</span>
+                  <span *ngIf="quotation.product.quantity_requested == 1">package</span>
+                  <small> Estimated</small>)</span
                 >
-                <span *ngIf="quotation.product.product_type != 'agricultural'"
-                  >{{ quotation.product.quantity_requested }} packages</span
+                <span *ngIf="quotation.product.product_type == 'processed'"
+                  >{{ quotation.product.quantity_requested }} packages ({{ quotation.product.total_amount_items }}
+                  <span *ngIf="quotation.product.total_amount_items > 1">units</span>
+                  <span *ngIf="quotation.product.total_amount_items == 1">unit</span>)</span
                 >
+                <span *ngIf="quotation.product.product_type == 'input'">
+                  {{ quotation.product.quantity_requested }}
+                  <span *ngIf="quotation.product.quantity_requested > 1">units</span>
+                  <span *ngIf="quotation.product.quantity_requested == 1">unit</span>
+                </span>
               </td>
               <td>
                 <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
-                  {{ quotation.product.total_weight_offered | number: '1.2-2' }} {{ quotation.product.weight_unit }}
+                  {{ quotation.product.total_weight_offered | number: '1.2-2' }} {{ quotation.product.weight_unit }} ({{
+                    quotation.product.quantity_offered
+                  }}
+                  <span *ngIf="quotation.product.quantity_offered > 1">packages</span>
+                  <span *ngIf="quotation.product.quantity_offered == 1">package</span> <small> Estimated</small>)
                 </span>
-                <span *ngIf="quotation.product.product_type != 'agricultural'">
-                  {{ quotation.product.quantity_offered | number: '1.0' }} {{ quotation.product.type_of_package }}
+                <span *ngIf="quotation.product.product_type == 'processed'"
+                  >{{ quotation.product.quantity_offered }} packages ({{ quotation.product.total_items_offered }}
+                  <span *ngIf="quotation.product.total_items_offered > 1">units</span>
+                  <span *ngIf="quotation.product.total_items_offered == 1">unit</span>)</span
+                >
+                <span *ngIf="quotation.product.product_type == 'input'">
+                  {{ quotation.product.quantity_offered }}
+                  <span *ngIf="quotation.product.quantity_offered > 1">units</span>
+                  <span *ngIf="quotation.product.quantity_offered == 1">unit</span>
                 </span>
               </td>
               <td>

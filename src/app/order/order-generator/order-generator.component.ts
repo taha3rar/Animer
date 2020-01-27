@@ -48,6 +48,7 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
       const product: ProductInvoice = <ProductInvoice>(<unknown>this.quotation.product);
       product.quantity = this.quotation.product.quantity_offered;
       product.total_weight = this.quotation.product.total_weight_offered;
+      product.total_amount_items = this.quotation.product.total_items_offered;
       product.package_price = Number(
         (this.quotation.product.product_subtotal / this.quotation.product.quantity_offered).toFixed(2)
       );

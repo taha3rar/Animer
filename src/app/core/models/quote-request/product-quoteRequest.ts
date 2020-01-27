@@ -13,4 +13,6 @@ export class ProductQuoteRequest {
   items_per_package: String;
   total_amount_items: Number;
   quantity_requested: number;
+  input_produce_type: string;
+  item_description: string;
 }

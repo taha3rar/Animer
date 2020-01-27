@@ -39,7 +39,8 @@ export class BaseProductQuoteRequest extends BaseValidationComponent implements 
       item_measurement_unit: [this.newProduct ? this.newProduct.item_measurement_unit : undefined, Validators.required],
       items_per_package: [this.newProduct ? this.newProduct.items_per_package : undefined, Validators.required],
       total_amount_items: [this.newProduct ? this.newProduct.total_amount_items : undefined, Validators.required],
-      specification: [this.newProduct ? this.newProduct.specification : undefined]
+      specification: [this.newProduct ? this.newProduct.specification : undefined],
+      input_produce_type: [this.newProduct ? this.newProduct.input_produce_type : undefined]
     });
   }
 

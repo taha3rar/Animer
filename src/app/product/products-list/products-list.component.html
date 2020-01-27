@@ -90,12 +90,20 @@
         </span>
       </td>
       <td>{{ product.product_type }}</td>
-      <td *ngIf="product.product_type == 'agricultural'">
-        {{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit }}
-      </td>
-      <td *ngIf="product.product_type != 'agricultural'">
-        {{ product.total_amount_items | number: '1.0' }} <span *ngIf="product.total_amount_items > 1">items</span>
-        <span *ngIf="product.total_amount_items == 1">item</span>
+      <td>
+        <span *ngIf="product.product_type == 'agricultural'">
+          {{ product.total_weight | number: '1.2-2' }} {{ product.weight_unit }}
+        </span>
+        <span *ngIf="product.product_type == 'processed'">
+          {{ product.total_amount_items | number: '1.0' }}
+          <span *ngIf="product.total_amount_items > 1">items</span>
+          <span *ngIf="product.total_amount_items == 1"> item</span>
+        </span>
+        <span *ngIf="product.product_type == 'input'">
+          {{ product.quantity | number: '1.0' }}
+          <span *ngIf="product.quantity > 1">items</span>
+          <span *ngIf="product.quantity == 1">item</span>
+        </span>
       </td>
       <td class="text-right">
         <button
