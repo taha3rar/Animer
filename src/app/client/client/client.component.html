@@ -22,7 +22,7 @@
     <div class="tab-pane" id="orders"><app-client-orders [orders]="orders"></app-client-orders></div>
     <div class="tab-pane" id="invoices"><app-client-invoices [invoices]="invoices"></app-client-invoices></div>
     <div class="tab-pane" id="documents">
-      <app-client-documents [documents]="documents" [client_id]="user._id"></app-client-documents>
+      <app-client-documents [documents]="documents" [client_id]="user._id" [user]="user"></app-client-documents>
     </div>
   </div>
 </div>

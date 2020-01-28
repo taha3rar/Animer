@@ -4,6 +4,7 @@ import { BaseListComponent } from '../../base-list/base-list.component';
 import { UserDocumentService } from '@app/core/api/user-document.service';
 import { Router } from '@angular/router';
 import { UserDocument } from '@app/core/models/user/document';
+import { User } from '@app/core/models/user/user';
 declare const $: any;
 
 @Component({
@@ -16,6 +17,8 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
   documents: UserDocument[];
   @Input()
   client_id: string;
+  @Input()
+  user: User;
   page = 1;
   uploadingFileName: string;
   dynamic = 0;

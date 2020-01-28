@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserDocument } from '@app/core/models/user/document';
+import { User } from '@app/core/models/user/user';
 
 @Component({
   selector: 'app-client-documents',
@@ -11,6 +12,8 @@ export class ClientDocumentsComponent implements OnInit {
   documents: UserDocument[];
   @Input()
   client_id: string;
+  @Input()
+  user: User;
 
   constructor() {}
 

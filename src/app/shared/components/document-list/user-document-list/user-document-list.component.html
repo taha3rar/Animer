@@ -21,6 +21,26 @@
         <p>Upload Document</p>
       </div>
     </div>
+    <div *ngIf="user.personal_information.id_picture" class="doc-card clearfix">
+      <div>
+        <span class="pull-left">Contact Identity</span>
+        <a href="{{ user.personal_information.id_picture }}" download="iddPic" target="_blank"
+          ><span class="pull-right material-icons download" placement="top" ngbTooltip="Download"
+            >cloud_download</span
+          ></a
+        >
+      </div>
+      <div style="width:22rem;">
+        <div class="file-image-wrapper">
+          <img src="../../../assets/img/ID.png" />
+          <a href="{{ user.personal_information.id_picture }}" target="_blank">
+            <span class="material-icons bttn-view">pageview</span> <span>View</span>
+          </a>
+        </div>
+        <p class="t-bold">Identity Information</p>
+        <p class="t-light-gray">{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
+      </div>
+    </div>
     <div
       *ngFor="let document of (documents | paginate: { itemsPerPage: 5, currentPage: page })"
       class="doc-card clearfix"
