@@ -16,11 +16,15 @@ export class ProductProfileComponent implements OnInit {
   ngOnInit() {}
 
   get agricultural_product() {
-    return this.product.product_type !== 'processed' || !this.product.product_type;
+    return this.product.product_type === 'agricultural' || !this.product.product_type;
   }
 
   get processed_product() {
     return this.product.product_type === 'processed';
+  }
+
+  get input_product() {
+    return this.product.product_type === 'input';
   }
 
   product_image() {

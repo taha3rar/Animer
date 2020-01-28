@@ -41,4 +41,7 @@ export class Product {
   availability: boolean;
   date_created: Date;
   date_modified: Date;
+  other_input_type: string;
+  input_produce_type: string;
+  item_description: string;
 }
