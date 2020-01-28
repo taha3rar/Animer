@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<div class="two-btns" *ngIf="isAgribusiness">
+<div class="two-btns" *ngIf="isAgribusiness && sellerQRs.length > 0 && buyerQRs.length > 0">
   <p class="heading-3">View records as:</p>
   <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
     Seller
