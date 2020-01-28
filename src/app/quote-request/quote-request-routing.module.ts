@@ -1,3 +1,5 @@
+import { QuoteRequestAsBuyer } from './resolvers/quote-request-as-buyer.resolver';
+import { QuoteRequestAsSeller } from './resolvers/quote-request-as-seller.resolver';
 import { QuotationGeneratorComponent } from './quotation-generator/quotation-generator.component';
 import { QuoteRequestViewComponent } from './quote-request-view/quote-request-view.component';
 import { QuoteRequestGeneratorComponent } from './quote-request-generator/quote-request-generator.component';
@@ -27,7 +29,9 @@ const routes: Routes = [
       path: 'quote-request',
       component: QuoteRequestsListComponent,
       resolve: {
-        quoteRequests: QuoteRequestListResolver
+        quoteRequests: QuoteRequestListResolver,
+        quoteRequestsAsSeller: QuoteRequestAsSeller,
+        quoteRequestsAsBuyer: QuoteRequestAsBuyer
       },
       canActivate: [PermissionGuard],
       data: {

@@ -15,14 +15,39 @@ export class QuoteRequestsListComponent implements OnInit {
   searchTerm: string;
   hasQuoteRequests: boolean;
   tooltips = tooltips.quote_request;
+  sellerQRs: QuoteRequest[];
+  buyerQRs: QuoteRequest[];
+  viewAsSeller = false;
+  viewAsBuyer = false;
+  isAgribusiness: boolean;
 
   constructor(private authService: AuthenticationService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
-    this.route.data.subscribe(({ quoteRequests }) => {
+    this.isAgribusiness = this.authService.isAgribusiness;
+    this.route.data.subscribe(({ quoteRequests, quoteRequestsAsSeller, quoteRequestsAsBuyer }) => {
       this.hasQuoteRequests = quoteRequests.length > 0;
       this.quoteRequests = quoteRequests;
+      this.sellerQRs = quoteRequestsAsSeller;
+      this.buyerQRs = quoteRequestsAsBuyer;
     });
+    if (this.isBuyer || (this.isAgribusiness && this.buyerQRs.length > 0)) {
+      this.viewAs('buyer');
+    } else {
+      this.viewAs('seller');
+    }
+  }
+
+  viewAs(profileType: any) {
+    this.viewAsSeller = false;
+    this.viewAsBuyer = false;
+    if (profileType === 'seller') {
+      this.quoteRequests = this.sellerQRs;
+      this.viewAsSeller = true;
+    } else {
+      this.quoteRequests = this.buyerQRs;
+      this.viewAsBuyer = true;
+    }
   }
 }

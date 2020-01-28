@@ -20,4 +20,12 @@ export class QuoteRequestService extends BaseService {
   getPdf(qrId: string, version: string): Observable<QuoteRequest> {
     return this.apiService.get(`${this.path}/${qrId}/pdf/${version}`).pipe(map(data => data));
   }
+
+  getByUserAsBuyer(userId: string): Observable<QuoteRequest[]> {
+    return this.apiService.get(`${this.path}/user/${userId}/buyer`).pipe(map(data => data));
+  }
+
+  getByUserAsSeller(userId: string): Observable<QuoteRequest[]> {
+    return this.apiService.get(`${this.path}/user/${userId}/seller`).pipe(map(data => data));
+  }
 }

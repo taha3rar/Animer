@@ -3,11 +3,11 @@
     <tr>
       <th mat-sort-header="id" translate class="text-center">ID</th>
       <th mat-sort-header="date" translate>Date</th>
-      <th mat-sort-header="contact" *ngIf="!isBuyer" translate>Contact</th>
+      <th mat-sort-header="contact" translate *ngIf="viewAsSeller">Contact</th>
       <th mat-sort-header="product" translate>Product</th>
       <th mat-sort-header="amount" translate>Amount</th>
-      <th mat-sort-header="participants" *ngIf="isBuyer" translate>Participants</th>
-      <th mat-sort-header="quotations" *ngIf="isBuyer" translate>Quotations</th>
+      <th mat-sort-header="participants" *ngIf="!viewAsSeller" translate>Participants</th>
+      <th mat-sort-header="quotations" *ngIf="!viewAsSeller" translate>Quotations</th>
       <th mat-sort-header="status" translate>Status</th>
       <th translate class="text-right">Actions</th>
     </tr>
@@ -25,7 +25,7 @@
         {{ quoteRequest?.numericId }}
       </td>
       <td>{{ quoteRequest?.date_created | date: 'dd/MM/yyyy' }}</td>
-      <td *ngIf="!isBuyer">{{ quoteRequest?.buyer.first_name }} {{ quoteRequest?.buyer.last_name }}</td>
+      <td *ngIf="viewAsSeller">{{ quoteRequest?.buyer.first_name }} {{ quoteRequest?.buyer.last_name }}</td>
       <td>
         <span *ngIf="quoteRequest.product && quoteRequest.product.product_type == 'agricultural'">
           {{ quoteRequest.product.produce }} / {{ quoteRequest.product.variety }}
@@ -50,7 +50,7 @@
         </div>
       </td>
       <td
-        *ngIf="isBuyer"
+        *ngIf="!viewAsSeller"
         [matTooltip]="participants(i)"
         matTooltipClass="tooltip-return tooltip-table"
         matTooltipPosition="right"
@@ -59,7 +59,7 @@
           {{ quoteRequest?.sellers?.length | number: '1.0-2' }}
         </span>
       </td>
-      <td *ngIf="isBuyer">
+      <td *ngIf="!viewAsSeller">
         {{ quoteRequest.quotations.count | number: '1.0-2' }}
       </td>
       <td>

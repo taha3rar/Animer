@@ -1,3 +1,5 @@
+import { QuoteRequestAsSeller } from './resolvers/quote-request-as-seller.resolver';
+import { QuoteRequestAsBuyer } from './resolvers/quote-request-as-buyer.resolver';
 import { SharedModule } from '@app/shared';
 // tslint:disable-next-line:max-line-length
 import { QuotationGeneratorQuotationComponent } from './quotation-generator/quotation-generator-quotation/quotation-generator-quotation.component';
@@ -80,7 +82,9 @@ import { MatSortModule } from '@angular/material';
     QuoteRequestResolver,
     QuotationSellerResolver,
     QuotationsQuoteRequestResolver,
-    QuotationsAcceptedQuoteRequestResolver
+    QuotationsAcceptedQuoteRequestResolver,
+    QuoteRequestAsBuyer,
+    QuoteRequestAsSeller
   ]
 })
 export class QuoteRequestModule {}

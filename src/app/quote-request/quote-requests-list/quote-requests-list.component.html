@@ -36,4 +36,18 @@
     </button>
   </div>
 </div>
-<app-quote-request-list [searchTerm]="searchTerm" [quoteRequests]="quoteRequests"></app-quote-request-list>
+
+<div class="two-btns" *ngIf="isAgribusiness">
+  <p class="heading-3">View records as:</p>
+  <button (click)="viewAs('seller')" [class.active]="this.viewAsSeller">
+    Seller
+  </button>
+  <button (click)="viewAs('buyer')" [class.active]="this.viewAsBuyer">
+    Buyer
+  </button>
+</div>
+<app-quote-request-list
+  [searchTerm]="searchTerm"
+  [viewAsSeller]="viewAsSeller"
+  [quoteRequests]="quoteRequests"
+></app-quote-request-list>

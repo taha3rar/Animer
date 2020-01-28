@@ -15,9 +15,11 @@ import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 export class QuoteRequestListComponent extends BaseListComponent implements OnInit {
   @Input() quoteRequests: QuoteRequest[];
   @Input() searchTerm: string;
+  @Input() viewAsSeller: boolean;
   isBuyer: Boolean;
   userId: String;
   hasQuoteRequests: boolean;
+  isAgribusiness: boolean;
   tooltips = tooltips.quote_request;
   qrReceived = 'QUOTE REQUEST RECEIVED';
   qrSent = 'QUOTE REQUEST SENT';
@@ -40,6 +42,7 @@ export class QuoteRequestListComponent extends BaseListComponent implements OnIn
 
   ngOnInit() {
     this.hasQuoteRequests = this.quoteRequests.length > 0;
+    this.isAgribusiness = this.authService.isAgribusiness;
     this.authService.isSeller ? (this.isBuyer = false) : (this.isBuyer = true);
     this.userId = this.authService.currentUserId;
   }
