@@ -9,8 +9,8 @@
   <div class="availability-block">
     <p class="heading-2 t-blue">Availability</p>
     <div class="col-md-7">
-      <p *ngIf="agricultural_product || processed_product">Number of packages available</p>
-      <p *ngIf="agricultural_product || processed_product">Type of package</p>
+      <p *ngIf="!input_product">Number of packages available</p>
+      <p *ngIf="!input_product">Type of package</p>
       <p *ngIf="agricultural_product">Amount per package</p>
       <p *ngIf="processed_product">Number of units per package</p>
       <p *ngIf="agricultural_product">Total amount available</p>
@@ -22,8 +22,8 @@
       <p *ngIf="input_product && product.item_description">Item description</p>
     </div>
     <div class="col-md-5">
-      <p *ngIf="agricultural_product || processed_product">{{ product.quantity | number: '1.0' }} packages</p>
-      <p *ngIf="agricultural_product || processed_product">{{ product.type_of_package }}</p>
+      <p *ngIf="!input_product">{{ product.quantity | number: '1.0' }} packages</p>
+      <p *ngIf="!input_product">{{ product.type_of_package }}</p>
       <p *ngIf="agricultural_product">{{ product.package_weight | number: '1.2-2' }}/{{ product.weight_unit }}</p>
       <p *ngIf="processed_product">{{ product.items_per_package | number: '1.0' }} units</p>
       <p *ngIf="agricultural_product">{{ product.total_weight | number: '1.2-2' }}/{{ product.weight_unit }}</p>
