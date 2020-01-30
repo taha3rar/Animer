@@ -90,7 +90,7 @@
                   {{ quotation.product.quantity_offered | number: '1.0' }} ({{ quotation.product.type_of_package }})
                 </span>
                 <span *ngIf="quotation.product.product_type == 'input'">
-                  <span *ngIf="quotation.product.item_description">quotation.product.item_description</span>
+                  <span *ngIf="quotation.product.item_description"> {{ quotation.product.item_description }}</span>
                   <span *ngIf="!quotation.product.item_description">
                     {{ quotation.product.item_measurement_amount }} per unit</span
                   >
