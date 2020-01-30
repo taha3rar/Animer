@@ -20,150 +20,132 @@
     </div>
     <div class="padding-all-2" *ngIf="inventoryProducts?.length >= 1">
       <div class="margin-bottom">
-        <button class="btn-icons pull-right" (click)="onNextPage(agriculturalProducts.length, 4)">
+        <button class="btn-icons pull-right" (click)="onNextPage(inventoryProducts?.length, 6)">
           <i class="material-icons">keyboard_arrow_right</i>
         </button>
         <button class="btn-icons pull-right" (click)="onBackPage()">
           <i class="material-icons">keyboard_arrow_left</i>
         </button>
-        <p class="heading-3">Agricultural Products</p>
-      </div>
-      <div class="row clearfix">
-        <div
-          class="card card-agricultural"
-          *ngFor="let product of agriculturalProducts | paginate: { itemsPerPage: 4, currentPage: page }"
-        >
-          <div>
-            <p class="pull-right margin-none">
-              {{ product.price_per_unit }} {{ product.currency }}/<small>{{ product.weight_unit | uppercase }}</small>
-            </p>
-          </div>
-          <div class="product-details">
-            <div>
-              <figure
-                class="img-circular img-circular-sm"
-                [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
-              ></figure>
-            </div>
-            <p class="heading-3">
-              {{ product.produce }} <br />
-              {{ product.variety }}
-            </p>
-          </div>
-          <div class="package-details">
-            <table>
-              <tr>
-                <td>Packages available</td>
-                <td>{{ product.quantityMax }}</td>
-              </tr>
-              <tr>
-                <td>Type of package</td>
-                <td>{{ product.type_of_package }}</td>
-              </tr>
-              <tr>
-                <td>Package</td>
-                <td>{{ product.package_weight }}/{{ product.weight_unit | uppercase }}</td>
-              </tr>
-              <tr>
-                <td>Total available</td>
-                <td>{{ product.package_weight * product.quantityMax }} {{ product.weight_unit | uppercase }}</td>
-              </tr>
-            </table>
-          </div>
-
-          <div *ngIf="!order.currency.value || product.currency === order.currency.value" class="quantity">
-            <p class="t-bold">Quantity</p>
-            <button class="btn-circle" (click)="decrementQuantity(product)">
-              <i class="material-icons">remove</i>
-            </button>
-            <input
-              type="number"
-              min="0"
-              max="{{ product.quantityMax }}"
-              value="0"
-              [(ngModel)]="product.quantity"
-              (ngModelChange)="checkProductInput(product)"
-            />
-            <button class="btn-circle" (click)="incrementQuantity(product)"><i class="material-icons">add</i></button>
-          </div>
-          <div *ngIf="order.currency.value && product.currency != order.currency.value" class="quantity">
-            <strong style="font-size :11px;">Choose products with the same currency</strong>
-          </div>
-        </div>
       </div>
 
-      <!--Processed Products-->
-      <div class="margin-bottom margin-top" *ngIf="processedProducts?.length !== 0">
-        <button class="btn-icons pull-right" (click)="onNextPage2(processedProducts.length, 4)">
-          <i class="material-icons">keyboard_arrow_right</i>
-        </button>
-        <button class="btn-icons pull-right" (click)="onBackPage2()">
-          <i class="material-icons">keyboard_arrow_left</i>
-        </button>
-        <p class="heading-3">Processed Products</p>
-      </div>
-      <div class="row clearfix">
-        <ng-container *ngFor="let product of processedProducts | paginate: { itemsPerPage: 4, currentPage: page2 }">
-          <div class="card card-processed">
-            <div>
-              <p class="pull-right margin-none">
-                {{ product.package_price }} {{ product.currency }}/<small>{{ product.type_of_package }}</small>
-              </p>
-            </div>
-            <div class="product-details">
-              <div>
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Amount Available</th>
+            <th>Rate</th>
+            <th>Product Type</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of (inventoryProducts | paginate: { itemsPerPage: 6, currentPage: page })">
+            <td>
+              <div style="display: flex;">
                 <figure
+                  style="margin-right: 1rem;"
                   class="img-circular img-circular-sm"
                   [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
                 ></figure>
+                <p class="heading-3">
+                  {{ product.produce }} <br />
+                  <span *ngIf="product.product_type == 'agricultural'">{{ product.variety }}</span>
+                  <span *ngIf="product.product_type == 'input'">
+                    <span *ngIf="!product.other_input_type">{{ product.input_produce_type }}</span>
+                    {{ product.other_input_type }}</span
+                  >
+                  <span *ngIf="product.product_type == 'processed'"
+                    >{{ product.item_measurement_amount }}{{ product.item_measurement_unit }} /
+                    {{ product.item_package_type }}</span
+                  >
+                </p>
               </div>
-              <p class="heading-3">{{ product.produce }} <br /></p>
-            </div>
-            <div class="package-details">
-              <table>
-                <tr>
-                  <td>Packages available</td>
-                  <td>{{ product.quantityMax }}</td>
-                </tr>
-                <tr>
-                  <td>Type of package</td>
-                  <td>{{ product.type_of_package }}</td>
-                </tr>
-                <tr *ngIf="product.item_measurement_amount">
-                  <td>Item packing type</td>
-                  <td>{{ product.item_package_type }}</td>
-                </tr>
-                <tr *ngIf="product.item_measurement_amount">
-                  <td>Items per package</td>
-                  <td>{{ product.items_per_package }}</td>
-                </tr>
-                <tr *ngIf="product.item_measurement_amount">
-                  <td>Amount</td>
-                  <td>
-                    {{ product.item_measurement_amount }} {{ product.item_measurement_unit }}/{{
-                      product.item_package_type
-                    }}
-                  </td>
-                </tr>
-              </table>
-            </div>
-
-            <div *ngIf="!order.currency.value || product.currency === order.currency.value" class="quantity">
-              <p class="t-bold">Quantity</p>
-              <button class="btn-circle" (click)="decrementQuantity(product)">
-                <i class="material-icons">remove</i>
-              </button>
-              <input type="number" min="0" max="{{ product.quantityMax }}" value="0" [(ngModel)]="product.quantity" />
-              <button class="btn-circle" (click)="incrementQuantity(product)">
-                <i class="material-icons">add</i>
-              </button>
-            </div>
-            <div *ngIf="order.currency.value && product.currency != order.currency.value" class="quantity">
-              <strong style="font-size :11px;">Choose products with the same currency</strong>
-            </div>
-          </div>
-        </ng-container>
-      </div>
+            </td>
+            <td>
+              <span *ngIf="product.product_type == 'agricultural'">
+                {{ product.package_weight }} {{ product.weight_unit | uppercase }} per package ({{
+                  product.type_of_package
+                }})
+              </span>
+              <span *ngIf="product.product_type == 'input'">
+                <span *ngIf="product.item_description">{{ product.item_description }}</span>
+                <span *ngIf="!product.item_description">
+                  {{ product.item_measurement_amount }} {{ product.weight_unit }} per unit
+                </span>
+              </span>
+              <span *ngIf="product.product_type == 'processed'">
+                {{ product.items_per_package | number: '1.0' }}
+                <span *ngIf="product.items_per_package == 1"> unit </span>
+                <span *ngIf="product.items_per_package > 1"> units </span>
+                per package ({{ product.type_of_package }})
+              </span>
+            </td>
+            <td>
+              <span *ngIf="product.product_type == 'agricultural'">
+                {{ product.package_weight * product.quantityMax }} {{ product.weight_unit | uppercase }} ({{
+                  product.quantityMax
+                }}
+                <span *ngIf="product.quantityMax > 1"> packages</span>
+                <span *ngIf="product.quantityMax == 1"> package</span>)
+              </span>
+              <span *ngIf="product.product_type == 'input'">
+                {{ product.quantityMax }}
+                <span *ngIf="product.quantityMax > 1"> units</span>
+                <span *ngIf="product.quantityMax == 1"> unit</span>
+              </span>
+              <span *ngIf="product.product_type == 'processed'">
+                {{ product.quantityMax | number: '1.0' }}
+                <span *ngIf="product.quantityMax > 1"> packages</span>
+                <span *ngIf="product.quantityMax == 1"> package</span>
+                ({{ product.total_amount_items | number: '1.0' }}
+                <span *ngIf="product.total_amount_items > 1">units</span>
+                <span *ngIf="product.total_amount_items == 1"> unit</span>)
+              </span>
+            </td>
+            <td>
+              <span *ngIf="product.product_type == 'agricultural'">
+                {{ product.price_per_unit }} {{ product.currency }}/ {{ product.weight_unit | uppercase }}
+              </span>
+              <span *ngIf="product.product_type == 'input'">
+                {{ product.price_per_unit }} {{ product.currency | uppercase }}/ unit
+              </span>
+              <span *ngIf="product.product_type == 'processed'">
+                {{ product.package_price }} {{ product.currency | uppercase }}/ package
+              </span>
+            </td>
+            <td>{{ product.product_type }}</td>
+            <td style="width: 17%;">
+              <div
+                style="float: right;"
+                *ngIf="!order.currency.value || product.currency === order.currency.value"
+                class="quantity"
+              >
+                <button class="btn-circle" (click)="decrementQuantity(product)">
+                  <i class="material-icons">remove</i>
+                </button>
+                <input
+                  type="number"
+                  min="0"
+                  max="{{ product.quantityMax }}"
+                  value="0"
+                  [(ngModel)]="product.quantity"
+                  (ngModelChange)="checkProductInput(product)"
+                />
+                <button class="btn-circle" (click)="incrementQuantity(product)">
+                  <i class="material-icons">add</i>
+                </button>
+              </div>
+              <div
+                style="font-size :11px; text-align: right;"
+                *ngIf="order.currency.value && product.currency != order.currency.value"
+              >
+                <strong>Choose products with the same currency</strong>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="add-supplier-box" [hidden]="!noInventory">
       <img src="../../../../assets/img/default/pi-po/noProducts.png" />
@@ -172,20 +154,6 @@
       <button class="bttn-primary next-step">
         Next Step &rarr;
       </button>
-    </div>
-  </div>
-</div>
-<div class="panel panel-tab summary-col">
-  <div class="panel-body">
-    <div class="panel-header">
-      <p>Add to Purchase Order</p>
-    </div>
-    <div class="padding-all-2">
-      <app-order-generator-summary
-        [productList]="addedProducts"
-        [currency]="order.currency.value"
-        [form]="form"
-      ></app-order-generator-summary>
     </div>
   </div>
 </div>

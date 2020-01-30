@@ -133,6 +133,9 @@ export class OrderGeneratorProductsComponent extends BaseNavigationComponent imp
     if (product.product_type === 'processed') {
       product['product_subtotal'] = product.package_price * product.quantity;
     }
+    if (product.product_type === 'input') {
+      product['product_subtotal'] = product.price_per_unit * product.quantity;
+    }
     this.order['subtotal'].setValue(this.order.subtotal.value + product['product_subtotal']);
   }
 

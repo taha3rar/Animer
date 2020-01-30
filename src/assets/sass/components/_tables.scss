@@ -189,6 +189,12 @@ table {
   }
 }
 
+.table-borderless {
+  tr:hover td {
+    background: #33c1ce10;
+  }
+}
+
 .ftd-small {
   tbody > tr > td:first-child {
     width: 10%;

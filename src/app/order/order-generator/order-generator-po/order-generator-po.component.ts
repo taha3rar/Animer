@@ -120,8 +120,8 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '92vh';
-    dialogConfig.width = '1200px';
+    dialogConfig.height = '84vh';
+    dialogConfig.width = '1400px';
     dialogConfig.data = {
       inventoryProducts: quoted ? this.quotedProducts : this.inventoryProducts,
       currency: this.form.value.currency,

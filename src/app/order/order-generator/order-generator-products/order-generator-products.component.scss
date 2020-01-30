@@ -65,18 +65,9 @@ input.search-bar-rounded {
 
 .products-col {
   float: left;
-  width: 74.6%;
+  width: 100%;
   @include respond(small-desktop) {
     width: 100%;
-  }
-}
-
-.summary-col {
-  width: 24%;
-  float: right;
-
-  @include respond(small-desktop) {
-    display: none;
   }
 }
 

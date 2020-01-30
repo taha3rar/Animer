@@ -7,13 +7,23 @@
         [ngStyle]="{ 'background-image': 'url(' + product_image(product) + ')' }"
       ></figure>
       <div>
-        <p>{{ product.produce }} {{ product.variety }}</p>
+        <p>
+          {{ product.produce }} <br />
+          <span *ngIf="product.product_type == 'agricultural'">{{ product.variety }}</span>
+          <span *ngIf="product.product_type == 'input'">
+            <span *ngIf="!product.other_input_type">{{ product.input_produce_type }}</span>
+            {{ product.other_input_type }}</span
+          >
+          <span *ngIf="product.product_type == 'processed'"
+            >{{ product.item_measurement_amount }}{{ product.item_measurement_unit }} /
+            {{ product.item_package_type }}</span
+          >
+        </p>
         <p *ngIf="product.product_type === 'agricultural'">
           {{ product.price_per_unit }} {{ product.currency }}/{{ product.weight_unit }}
         </p>
-        <p *ngIf="product.product_type === 'processed'">
-          {{ product.package_price }} {{ product.currency }}/{{ product.type_of_package }}
-        </p>
+        <p *ngIf="product.product_type === 'processed'">{{ product.package_price }} {{ product.currency }}/ Package</p>
+        <p *ngIf="product.product_type === 'input'">{{ product.price_per_unit }} {{ product.currency }}/ Unit</p>
       </div>
       <p class="quantity">x{{ product.quantity }}</p>
     </div>

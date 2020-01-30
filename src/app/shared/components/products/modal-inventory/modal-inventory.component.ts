@@ -35,7 +35,6 @@ export class ModalInventoryComponent extends BaseNavigationComponent implements 
       this.inventoryProducts.forEach((product: ProductInvoice) => {
         product['quantityMax'] = product.quantity;
         product['totalWeightMax'] = product.total_weight;
-        product.quantity = 0;
       });
     }
     this.currency = this.data.currency;
@@ -91,6 +90,9 @@ export class ModalInventoryComponent extends BaseNavigationComponent implements 
         }
         if (product.product_type === 'processed') {
           product['product_subtotal'] = product.package_price * product.quantity;
+        }
+        if (product.product_type === 'input') {
+          product['product_subtotal'] = product.price_per_unit * product.quantity;
         }
         subtotal = subtotal + product['product_subtotal'];
         if (submit) {

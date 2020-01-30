@@ -16,6 +16,13 @@
   }
 }
 
+.padding-all {
+  position: relative !important;
+  display: flex;
+  flex-direction: column;
+  height: 94%;
+}
+
 .card-inner-price {
   font-size: 1.4rem;
 }
@@ -52,7 +59,8 @@ button:focus {
 }
 
 .bttn-primary {
-  margin-bottom: 2rem;
+  margin-top: auto;
+  margin-left: auto;
 }
 
 .modal-box-heading {
@@ -65,4 +73,8 @@ button:focus {
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
+}
+
+table {
+  font-size: 1.45rem;
 }
