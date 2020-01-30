@@ -63,10 +63,10 @@
           </div>
         </div>
       </div>
-      <p class="heading-2">Item</p>
+      <p class="heading-2">Unit</p>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="items-per-package">Number of Items per Package *</label>
+          <label for="items-per-package">Number of Units per Package *</label>
           <input
             type="number"
             min="0"
@@ -85,7 +85,7 @@
           </div>
         </div>
         <div class="form-group col-md-6">
-          <label for="item-packing-type">Item Packing Type *</label>
+          <label for="item-packing-type">Unit Packing Type *</label>
           <input
             type="text"
             id="item-packing-type"
@@ -104,7 +104,7 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="total-items-amount">Total Amount of Items *</label>
+          <label for="total-items-amount">Total Amount of Units *</label>
           <i class="material-icons ml-2 md-18" style="vertical-align: middle;" matTooltip="{{ tooltips.amount_items }}"
             >info</i
           >
@@ -121,7 +121,7 @@
           />
         </div>
         <div class="form-group col-md-6">
-          <label for="measurement-unit">Measurement Unit *</label>
+          <label for="measurement-unit">Measurement *</label>
           <select
             id="measurement-unit"
             [(ngModel)]="product.item_measurement_unit"

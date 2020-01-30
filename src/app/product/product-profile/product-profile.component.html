@@ -19,7 +19,7 @@
       </p>
       <p *ngIf="input_product">Number of units availabe</p>
       <p *ngIf="input_product && product.item_measurement_amount">Amount per unit</p>
-      <p *ngIf="input_product && product.item_description">Item description</p>
+      <p *ngIf="input_product && product.item_description">Unit description</p>
     </div>
     <div class="col-md-5">
       <p *ngIf="!input_product">{{ product.quantity | number: '1.0' }} packages</p>

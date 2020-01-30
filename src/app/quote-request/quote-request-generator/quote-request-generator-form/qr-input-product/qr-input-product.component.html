@@ -63,11 +63,11 @@
         productForm.value.item_description || productForm.value.weight_unit || isItemVisible || isItemDescriptionVisible
       "
     >
-      Item
+      Unit
     </p>
     <div class="form-row" *ngIf="productForm.value.weight_unit || isItemVisible">
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('weight_unit')">
-        <label for="measurement-unit">Measurement Unit *</label>
+        <label for="measurement-unit">Measurement *</label>
         <select id="measurement-unit" name="weight_unit" formControlName="weight_unit" class="form-control">
           <option selected="selected" disabled>Choose a measurement unit</option>
           <option *ngFor="let unit of units" [value]="unit.value">{{ unit.viewValue }}</option>
@@ -77,7 +77,7 @@
         </div>
       </div>
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('item_measurement_amount')">
-        <label for="amount-per-item"> ({{ productForm.value.weight_unit }}) per Item *</label>
+        <label for="amount-per-item"> ({{ productForm.value.weight_unit }}) per Unit *</label>
         <input
           type="number"
           min="0"
@@ -94,7 +94,7 @@
     </div>
     <div class="form-row" *ngIf="isItemDescriptionVisible || productForm.value.input_produce_type == 'Other'">
       <div class="form-group col" [ngClass]="showFieldStyle('item_description')">
-        <label for="item-description">Item Description *</label>
+        <label for="item-description">Unit Description *</label>
         <textarea class="form-control" name="item_description" formControlName="item_description" rows="2"></textarea>
         <div class="help-block" *ngIf="isFieldInvalid('item_description')">
           <p>This field is required</p>
@@ -104,7 +104,7 @@
     <p class="heading-2">Amount</p>
     <div class="form-row">
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('quantity_requested')">
-        <label for="total-amount"> Total Amount of Items *</label>
+        <label for="total-amount"> Total Amount of Units *</label>
         <input
           type="number"
           min="0"
