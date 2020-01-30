@@ -34,9 +34,16 @@
               >{{ quotation.product.total_weight_requested | number: '1.2-2' }}
               {{ quotation.product.weight_unit | uppercase }}</span
             >
-            <span *ngIf="quotation.product.product_type != 'agricultural'"
-              >{{ quotation.product.quantity_requested }} packages</span
+            <span *ngIf="quotation.product.product_type == 'processed'"
+              >{{ quotation.product.quantity_requested }} packages ({{ quotation.product.total_amount_items }}
+              <span *ngIf="quotation.product.total_amount_items > 1">units</span>
+              <span *ngIf="quotation.product.total_amount_items == 1">unit</span>)</span
             >
+            <span *ngIf="quotation.product.product_type == 'input'">
+              {{ quotation.product.quantity_requested }}
+              <span *ngIf="quotation.product.quantity_requested > 1">units</span>
+              <span *ngIf="quotation.product.quantity_requested == 1">unit</span>
+            </span>
           </p>
         </div>
         <div class="col-md-2">
@@ -45,8 +52,15 @@
             <span *ngIf="!quotation.product.product_type || quotation.product.product_type == 'agricultural'">
               {{ quotation.product.total_weight_offered | number: '1.2-2' }} {{ quotation.product.weight_unit }}
             </span>
-            <span *ngIf="quotation.product.product_type != 'agricultural'">
-              {{ quotation.product.quantity_offered | number: '1.0' }} {{ quotation.product.type_of_package }}
+            <span *ngIf="quotation.product.product_type == 'processed'"
+              >{{ quotation.product.quantity_offered }} packages ({{ quotation.product.total_items_offered }}
+              <span *ngIf="quotation.product.total_items_offered > 1">units</span>
+              <span *ngIf="quotation.product.total_items_offered == 1">unit</span>)</span
+            >
+            <span *ngIf="quotation.product.product_type == 'input'">
+              {{ quotation.product.quantity_offered }}
+              <span *ngIf="quotation.product.quantity_offered > 1">units</span>
+              <span *ngIf="quotation.product.quantity_offered == 1">unit</span>
             </span>
           </p>
         </div>
@@ -54,7 +68,10 @@
           <p class="t-light-gray">RATE</p>
           <p class="t-bold">
             {{ quotation.product.price_per_unit || quotation.product.package_price || 0.0 | number: '1.2-2' }}
-            {{ quotation?.currency }} / {{ quotation.product.weight_unit || quotation.product.type_of_package }}
+            {{ quotation?.currency }} /
+            <span *ngIf="quotation.product.product_type == 'agricultural'"> {{ quotation.product.weight_unit }}</span>
+            <span *ngIf="quotation.product.product_type == 'processed'"> package</span>
+            <span *ngIf="quotation.product.product_type == 'input'"> unit</span>
           </p>
         </div>
         <div class="col-md-2">

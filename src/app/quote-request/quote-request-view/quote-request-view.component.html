@@ -33,6 +33,11 @@
             <span *ngIf="quoteRequest.product.product_type == 'processed' && !quoteRequest.product.item_package_type">
               {{ quoteRequest.product.produce }}
             </span>
+            <span *ngIf="quoteRequest.product.product_type == 'input'">
+              {{ quoteRequest.product.produce }}/
+              <span *ngIf="quoteRequest.product.other_input_type">{{ quoteRequest.product.other_input_type }}</span>
+              <span *ngIf="!quoteRequest.product.other_input_type">{{ quoteRequest.product.input_produce_type }}</span>
+            </span>
           </p>
         </div>
         <div class="col-md-3">
@@ -78,7 +83,9 @@
         <div *ngIf="quoteRequest.product.product_type != 'agricultural'" class="col-md-3">
           <p class="t-light-gray">QUANTITY ACCEPTED</p>
           <p class="t-bold">
-            {{ quoteRequest.quotations.quantity_accepted }} {{ quoteRequest.product.type_of_package }}
+            {{ quoteRequest.quotations.quantity_accepted }}
+            <span *ngIf="quoteRequest.product.product_type == 'input'"> units</span>
+            <span *ngIf="quoteRequest.product.product_type != 'input'"> packages</span>
           </p>
         </div>
       </div>

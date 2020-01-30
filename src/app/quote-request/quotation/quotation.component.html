@@ -140,7 +140,12 @@
               <td>
                 <span>
                   {{ quotation.product.price_per_unit || quotation.product.package_price || 0.0 | number: '1.2-2' }}
-                  {{ quotation?.currency }} / {{ quotation.product.weight_unit || quotation.product.type_of_package }}
+                  {{ quotation?.currency }} /
+                  <span *ngIf="quotation.product.product_type == 'agricultural'">
+                    {{ quotation.product.weight_unit }}</span
+                  >
+                  <span *ngIf="quotation.product.product_type == 'processed'"> package</span>
+                  <span *ngIf="quotation.product.product_type == 'input'"> unit</span>
                 </span>
               </td>
             </tr>

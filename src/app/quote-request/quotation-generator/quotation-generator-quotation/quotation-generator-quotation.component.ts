@@ -26,6 +26,7 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
     this.product = <ProductQuotation>(<unknown>this.quoteRequest.product);
     this.product.quantity_offered = this.product.quantity_requested;
     this.product.total_weight_offered = this.product.total_weight_requested;
+    this.product.total_items_offered = Math.ceil(this.product.quantity_offered * this.product.items_per_package);
     this.onChanges();
   }
 
