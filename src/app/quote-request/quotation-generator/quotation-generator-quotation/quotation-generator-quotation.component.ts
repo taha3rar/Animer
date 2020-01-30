@@ -54,11 +54,16 @@ export class QuotationGeneratorQuotationComponent implements OnInit {
         (this.product.total_weight_offered * this.product.price_per_unit).toFixed(2)
       );
       this.product.quantity_offered = Math.ceil(this.product.total_weight_offered / this.product.package_weight);
-    } else {
+    } else if (this.product.product_type === 'processed') {
       if (this.product.quantity_offered > this.product.quantity_requested) {
         this.product.quantity_offered = undefined;
       }
       this.product.product_subtotal = Number((this.product.quantity_offered * this.product.package_price).toFixed(2));
+    } else {
+      if (this.product.quantity_offered > this.product.quantity_requested) {
+        this.product.quantity_offered = undefined;
+      }
+      this.product.product_subtotal = Number((this.product.quantity_offered * this.product.price_per_unit).toFixed(2));
     }
     this.setTotalPrice();
   }
