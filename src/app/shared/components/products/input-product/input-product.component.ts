@@ -56,13 +56,16 @@ export class InputProductComponent extends BaseProductOrder {
 
   clearInput() {
     if (this.form.controls['weight_unit']) {
-      this.form.controls['weight_unit'].setValue(undefined);
+      this.form.controls['weight_unit'].reset();
     }
     if (this.form.controls['other_input_type']) {
-      this.form.controls['other_input_type'].setValue(undefined);
+      this.form.controls['other_input_type'].reset();
     }
     if (this.form.controls['item_measurement_amount']) {
-      this.form.controls['item_measurement_amount'].setValue(undefined);
+      this.form.controls['item_measurement_amount'].reset();
+    }
+    if (this.form.controls['item_description']) {
+      this.form.controls['item_description'].reset();
     }
   }
 

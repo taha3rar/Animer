@@ -65,130 +65,130 @@
         </div>
       </div>
 
-    <p
-      class="heading-2"
-      *ngIf="product.item_description || product.weight_unit || isItemVisible || isItemDescriptionVisible"
-    >
-      Unit
-    </p>
-    <div class="form-row" *ngIf="product.weight_unit || isItemVisible">
-      <div class="form-group col-md-6">
-        <label for="measurement-unit">Measurement *</label>
-        <select
-          id="measurement-unit"
-          [(ngModel)]="product.weight_unit"
-          name="weight_unit"
-          #weight_unit="ngModel"
-          [required]="isItemVisible"
-          class="form-control"
-          [ngClass]="{ 'has-error': weight_unit.invalid && weight_unit.touched }"
-        >
-          <option selected="selected" disabled>Choose a measurement unit</option>
-          <option *ngFor="let unit of units" [value]="unit.value">{{ unit.viewValue }}</option>
-        </select>
-        <div class="help-block" *ngIf="weight_unit.invalid && weight_unit.touched">
-          This field is required!
-        </div>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="amount-per-item"> ({{ product.weight_unit | uppercase }}) per Unit *</label>
-        <input
-          type="number"
-          min="0"
-          [(ngModel)]="product.item_measurement_amount"
-          class="form-control"
-          name="item_measurement_amount"
-          [required]="isItemVisible"
-          class="form-control"
-          #item_measurement_amount="ngModel"
-          placeholder="Ex. 100"
-          [ngClass]="{ 'has-error': item_measurement_amount.invalid && item_measurement_amount.touched }"
-        />
-        <div class="help-block" *ngIf="item_measurement_amount.invalid && item_measurement_amount.touched">
-          This field is required!
-        </div>
-      </div>
-    </div>
-    <div class="form-row" *ngIf="isItemDescriptionVisible || product.input_produce_type == 'Other'">
-      <div class="form-group col">
-        <label for="item-description">Unit Description *</label>
-        <textarea
-          [(ngModel)]="product.item_description"
-          class="form-control"
-          [required]="isItemDescriptionVisible"
-          name="item_description"
-          #item_description="ngModel"
-          [ngClass]="{ 'has-error': item_description.invalid && item_description.touched }"
-          rows="2"
-        ></textarea>
-        <div class="help-block" *ngIf="item_description.invalid && item_description.touched">
-          This field is required!
-        </div>
-      </div>
-    </div>
-    <p class="heading-2">Amount</p>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="total-amount"> Total Amount of Units *</label>
-        <input
-          type="number"
-          min="0"
-          id="total-amount"
-          #quantity="ngModel"
-          name="quantity"
-          [(ngModel)]="product.quantity"
-          class="form-control"
-          placeholder="Ex. 100"
-          [ngClass]="{ 'has-error': quantity.invalid && quantity.touched }"
-          required
-        />
-        <div class="help-block" *ngIf="quantity.invalid && quantity.touched">
-          This field is required!
-        </div>
-      </div>
-    </div>
-    <p class="heading-2">Price</p>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="price-per-item"> Price per Unit *</label>
-        <input
-          type="number"
-          min="0"
-          name="price_per_unit"
-          #price_per_unit="ngModel"
-          [(ngModel)]="product.price_per_unit"
-          (ngModelChange)="setPriceUnit()"
-          id="price-per-item"
-          class="form-control"
-          [ngClass]="{ 'has-error': price_per_unit.invalid && price_per_unit.touched }"
-          placeholder="Ex. 100"
-          required
-        />
-        <div class="help-block" *ngIf="price_per_unit.invalid && price_per_unit.touched">
-          This field is required!
+      <p
+        class="heading-2"
+        *ngIf="product.item_description || product.weight_unit || isItemVisible || isItemDescriptionVisible"
+      >
+        Unit
+      </p>
+      <div class="form-row" *ngIf="product.weight_unit || isItemVisible">
+        <div class="form-group col-md-6">
+          <label for="measurement-unit">Measurement *</label>
+          <select
+            id="measurement-unit"
+            [(ngModel)]="product.weight_unit"
+            name="weight_unit"
+            #weight_unit="ngModel"
+            [required]="isItemVisible"
+            class="form-control"
+            [ngClass]="{ 'has-error': weight_unit.invalid && weight_unit.touched }"
+          >
+            <option selected="selected" disabled>Choose a measurement unit</option>
+            <option *ngFor="let unit of units" [value]="unit.value">{{ unit.viewValue }}</option>
+          </select>
+          <div class="help-block" *ngIf="weight_unit.invalid && weight_unit.touched">
+            This field is required!
+          </div>
         </div>
         <div class="form-group col-md-6">
-          <label for="currency"> Currency *</label>
-          <select
-            id="currency"
-            [(ngModel)]="currency"
-            [disabled]="data.currency"
-            name="currency"
-            #curr="ngModel"
+          <label for="amount-per-item"> ({{ product.weight_unit | uppercase }}) per Unit *</label>
+          <input
+            type="number"
+            min="0"
+            [(ngModel)]="product.item_measurement_amount"
             class="form-control"
-            [ngClass]="{ 'has-error': curr.invalid && curr.touched }"
-            required
-          >
-            <option *ngFor="let currency of currencies" [value]="currency.value" selected="selected">{{
-              currency.viewValue
-            }}</option>
-          </select>
-          <div class="help-block" *ngIf="curr.invalid && curr.touched">
+            name="item_measurement_amount"
+            [required]="isItemVisible"
+            class="form-control"
+            #item_measurement_amount="ngModel"
+            placeholder="Ex. 100"
+            [ngClass]="{ 'has-error': item_measurement_amount.invalid && item_measurement_amount.touched }"
+          />
+          <div class="help-block" *ngIf="item_measurement_amount.invalid && item_measurement_amount.touched">
             This field is required!
           </div>
         </div>
       </div>
-    </div>
+      <div class="form-row" *ngIf="isItemDescriptionVisible || product.item_description">
+        <div class="form-group col">
+          <label for="item-description">Unit Description *</label>
+          <textarea
+            [(ngModel)]="product.item_description"
+            class="form-control"
+            [required]="isItemDescriptionVisible"
+            name="item_description"
+            #item_description="ngModel"
+            [ngClass]="{ 'has-error': item_description.invalid && item_description.touched }"
+            rows="2"
+          ></textarea>
+          <div class="help-block" *ngIf="item_description.invalid && item_description.touched">
+            This field is required!
+          </div>
+        </div>
+      </div>
+      <p class="heading-2">Amount</p>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="total-amount"> Total Amount of Units *</label>
+          <input
+            type="number"
+            min="0"
+            id="total-amount"
+            #quantity="ngModel"
+            name="quantity"
+            [(ngModel)]="product.quantity"
+            class="form-control"
+            placeholder="Ex. 100"
+            [ngClass]="{ 'has-error': quantity.invalid && quantity.touched }"
+            required
+          />
+          <div class="help-block" *ngIf="quantity.invalid && quantity.touched">
+            This field is required!
+          </div>
+        </div>
+      </div>
+      <p class="heading-2">Price</p>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="price-per-item"> Price per Unit *</label>
+          <input
+            type="number"
+            min="0"
+            name="price_per_unit"
+            #price_per_unit="ngModel"
+            [(ngModel)]="product.price_per_unit"
+            (ngModelChange)="setPriceUnit()"
+            id="price-per-item"
+            class="form-control"
+            [ngClass]="{ 'has-error': price_per_unit.invalid && price_per_unit.touched }"
+            placeholder="Ex. 100"
+            required
+          />
+          <div class="help-block" *ngIf="price_per_unit.invalid && price_per_unit.touched">
+            This field is required!
+          </div>
+          <div class="form-group col-md-6">
+            <label for="currency"> Currency *</label>
+            <select
+              id="currency"
+              [(ngModel)]="currency"
+              [disabled]="data.currency"
+              name="currency"
+              #curr="ngModel"
+              class="form-control"
+              [ngClass]="{ 'has-error': curr.invalid && curr.touched }"
+              required
+            >
+              <option *ngFor="let currency of currencies" [value]="currency.value" selected="selected">{{
+                currency.viewValue
+              }}</option>
+            </select>
+            <div class="help-block" *ngIf="curr.invalid && curr.touched">
+              This field is required!
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="total-price"> Total Price</label>

@@ -92,7 +92,7 @@
         </div>
       </div>
     </div>
-    <div class="form-row" *ngIf="isItemDescriptionVisible || productForm.value.input_produce_type == 'Other'">
+    <div class="form-row" *ngIf="isItemDescriptionVisible || productForm.value.item_description">
       <div class="form-group col" [ngClass]="showFieldStyle('item_description')">
         <label for="item-description">Unit Description *</label>
         <textarea class="form-control" name="item_description" formControlName="item_description" rows="2"></textarea>

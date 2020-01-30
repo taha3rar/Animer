@@ -75,18 +75,18 @@ export class QrInputProductComponent extends BaseProductQuoteRequest implements 
   }
 
   setRequiredFields(obj_type: string, obj_val?: string) {
-    this.productForm.controls['other_input_type'].setValue(undefined);
+    this.productForm.controls['other_input_type'].reset();
     this.productForm.controls['other_input_type'].setValidators([]);
     this.productForm.controls['other_input_type'].updateValueAndValidity();
     this.productForm.controls['item_description'].setValidators([]);
     this.productForm.controls['item_description'].updateValueAndValidity();
-    this.productForm.controls['item_description'].setValue(undefined);
+    this.productForm.controls['item_description'].reset();
     this.itemFields.forEach(item => {
       if (item.for === obj_type) {
         this.productForm.controls[item.field].setValidators([Validators.required]);
       } else {
         this.productForm.controls[item.field].setValidators([]);
-        this.productForm.controls[item.field].setValue(undefined);
+        this.productForm.controls[item.field].reset();
       }
       this.productForm.controls[item.field].updateValueAndValidity();
     });
