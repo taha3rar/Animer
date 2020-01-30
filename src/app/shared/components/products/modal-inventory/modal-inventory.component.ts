@@ -35,6 +35,7 @@ export class ModalInventoryComponent extends BaseNavigationComponent implements 
       this.inventoryProducts.forEach((product: ProductInvoice) => {
         product['quantityMax'] = product.quantity;
         product['totalWeightMax'] = product.total_weight;
+        product.quantity = 0;
       });
     }
     this.currency = this.data.currency;

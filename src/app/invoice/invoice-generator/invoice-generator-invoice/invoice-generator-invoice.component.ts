@@ -104,7 +104,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '80vh';
+    dialogConfig.height = '84vh';
     dialogConfig.width = '1400px';
     dialogConfig.data = {
       inventoryProducts: this.route.snapshot.data['products'],
