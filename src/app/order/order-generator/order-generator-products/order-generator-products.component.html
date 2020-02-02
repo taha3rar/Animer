@@ -160,20 +160,6 @@
     </div>
   </div>
 </div>
-<div tour-intercom-products="step_2" class="panel panel-tab summary-col">
-  <div class="panel-body">
-    <div class="panel-header">
-      <p>Add to Purchase Order</p>
-    </div>
-    <div class="padding-all-2">
-      <app-order-generator-summary
-        [productList]="addedProducts"
-        [currency]="order.currency.value"
-        [form]="form"
-      ></app-order-generator-summary>
-    </div>
-  </div>
-</div>
 
 <app-order-generator-product-res-summary
   [productList]="addedProducts"
