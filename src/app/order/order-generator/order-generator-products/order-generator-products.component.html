@@ -154,7 +154,7 @@
       <img src="../../../../assets/img/default/pi-po/noProducts.png" />
       <p>{{ seller.first_name | titlecase }} {{ seller.last_name | titlecase }} has no inventory.</p>
       <p>No worries. You will be able to add products to your order in the next step.</p>
-      <button class="bttn-primary next-step">
+      <button class="bttn-primary next-step" (click)="toOrderGenerator()">
         Next Step &rarr;
       </button>
     </div>
