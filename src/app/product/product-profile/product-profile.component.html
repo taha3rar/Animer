@@ -24,9 +24,9 @@
     <div class="col-md-5">
       <p *ngIf="!input_product">{{ product.quantity | number: '1.0' }} packages</p>
       <p *ngIf="!input_product">{{ product.type_of_package }}</p>
-      <p *ngIf="agricultural_product">{{ product.package_weight | number: '1.2-2' }}/{{ product.weight_unit }}</p>
+      <p *ngIf="agricultural_product">{{ product.package_weight | number: '1.2-2' }} / {{ product.weight_unit }}</p>
       <p *ngIf="processed_product">{{ product.items_per_package | number: '1.0' }} units</p>
-      <p *ngIf="agricultural_product">{{ product.total_weight | number: '1.2-2' }}/{{ product.weight_unit }}</p>
+      <p *ngIf="agricultural_product">{{ product.total_weight | number: '1.2-2' }} / {{ product.weight_unit }}</p>
       <p *ngIf="processed_product && product.item_package_type">{{ product.item_measurement_amount }}</p>
       <p *ngIf="input_product">{{ product.quantity }} units</p>
       <p *ngIf="input_product && product.item_measurement_amount">
@@ -37,13 +37,13 @@
   </div>
   <div class="pricing">
     <p class="heading-2 t-blue" *ngIf="agricultural_product">
-      {{ product.currency }} {{ product.price_per_unit | number: '1.2-2' }}/{{ product.weight_unit }}
+      {{ product.currency }} {{ product.price_per_unit | number: '1.2-2' }} / {{ product.weight_unit }}
     </p>
     <p class="heading-2 t-blue" *ngIf="processed_product">
-      {{ product.currency }} {{ product.package_price | number: '1.2-2' }}/ Package
+      {{ product.currency }} {{ product.package_price | number: '1.2-2' }} / Package
     </p>
     <p class="heading-2 t-blue" *ngIf="input_product">
-      {{ product.currency }} {{ product.price_per_unit | number: '1.2-2' }}/ Unit
+      {{ product.currency }} {{ product.price_per_unit | number: '1.2-2' }} / Unit
     </p>
   </div>
 </div>

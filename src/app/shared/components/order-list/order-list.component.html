@@ -40,10 +40,15 @@
           Mutltiple products
         </span>
         <ng-container *ngIf="order.products.length === 1">
-          <span *ngIf="order.products[0].product_type != 'processed'"
+          <span *ngIf="order.products[0].product_type == 'agricultural'"
             >{{ order.products[0].produce }} / {{ order.products[0].variety }}</span
           >
           <span *ngIf="order.products[0].product_type == 'processed'">{{ order.products[0].produce }}</span>
+          <span *ngIf="order.products[0].product_type == 'input'"
+            >{{ order.products[0].produce }} /
+            <span *ngIf="order.products[0].other_input_type">{{ order.products[0].other_input_type }}</span>
+            <span *ngIf="!order.products[0].other_input_type">{{ order.products[0].input_produce_type }}</span>
+          </span>
         </ng-container>
       </td>
       <td>

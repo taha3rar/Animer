@@ -34,7 +34,7 @@ export class InvoiceListComponent extends BaseListComponent implements OnInit, O
     'This proforma invoice includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';
   processedProductConflictMessage: String =
     // tslint:disable-next-line:max-line-length
-    'This proforma invoice includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
+    'This proforma invoice includes processed or input products, for more information please click on the blue VIEW button on the right side of the row';
 
   constructor(
     protected authService: AuthenticationService,

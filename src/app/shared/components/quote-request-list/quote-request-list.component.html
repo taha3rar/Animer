@@ -30,8 +30,13 @@
         <span *ngIf="quoteRequest.product && quoteRequest.product.product_type == 'agricultural'">
           {{ quoteRequest.product.produce }} / {{ quoteRequest.product.variety }}
         </span>
-        <span *ngIf="quoteRequest.product && quoteRequest.product.product_type != 'agricultural'">
+        <span *ngIf="quoteRequest.product && quoteRequest.product.product_type == 'processed'">
           {{ quoteRequest.product.produce }}
+        </span>
+        <span *ngIf="quoteRequest.product && quoteRequest.product.product_type == 'input'">
+          {{ quoteRequest.product.produce }} /
+          <span *ngIf="quoteRequest.product.other_input_type">{{ quoteRequest.product.other_input_type }}</span>
+          <span *ngIf="!quoteRequest.product.other_input_type">{{ quoteRequest.product.input_produce_type }}</span>
         </span>
         <span *ngIf="!quoteRequest.product"> N/A </span>
       </td>
@@ -41,8 +46,11 @@
             >{{ quoteRequest.product.total_weight_requested | number: '1.2-2' }}
             {{ quoteRequest.product.weight_unit }}</span
           >
-          <span *ngIf="quoteRequest.product.product_type != 'agricultural'"
+          <span *ngIf="quoteRequest.product.product_type == 'processed'"
             >{{ quoteRequest.product.quantity_requested }} packages</span
+          >
+          <span *ngIf="quoteRequest.product.product_type == 'input'"
+            >{{ quoteRequest.product.quantity_requested }} units</span
           >
         </div>
         <div *ngIf="!quoteRequest.product">

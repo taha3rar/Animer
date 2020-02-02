@@ -58,7 +58,7 @@
           <span *ngIf="product.quantity > 1"> packages</span>
           <span *ngIf="product.quantity == 1"> package</span>
           ({{ product.total_amount_items | number: '1.0' }}
-          <span *ngIf="product.total_amount_items > 1">units</span>
+          <span *ngIf="product.total_amount_items > 1"> units</span>
           <span *ngIf="product.total_amount_items == 1"> unit</span>)
         </span>
         <span *ngIf="product.product_type == 'input'">

@@ -12,7 +12,6 @@ import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss']
 })
-
 export class OrderListComponent extends BaseListComponent implements OnInit, OnChanges {
   @Input()
   orders: Order[];
@@ -33,7 +32,7 @@ export class OrderListComponent extends BaseListComponent implements OnInit, OnC
   ];
   processedProductConflictMessage: String =
     // tslint:disable-next-line:max-line-length
-    'This purchase order includes only processed products, for more information please click on the blue VIEW button on the right side of the row';
+    'This purchase order includes only processed or input products, for more information please click on the blue VIEW button on the right side of the row';
   measurementUnitConflictMessage: String =
     // tslint:disable-next-line:max-line-length
     'This purchase order includes products with more than one measurement unit, for more information please click on the blue VIEW button on the right side of the row';

@@ -54,10 +54,15 @@
       <td>
         <span *ngIf="invoice.products.length < 1">N/A</span>
         <ng-container *ngIf="invoice.products.length == 1">
-          <span *ngIf="invoice.products[0].product_type != 'processed'"
+          <span *ngIf="invoice.products[0].product_type == 'agricultural'"
             >{{ invoice.products[0].produce }} / {{ invoice.products[0].variety }}</span
           >
           <span *ngIf="invoice.products[0].product_type == 'processed'">{{ invoice.products[0].produce }}</span>
+          <span *ngIf="invoice.products[0].product_type == 'input'"
+            >{{ invoice.products[0].produce }} /
+            <span *ngIf="invoice.products[0].other_input_type">{{ invoice.products[0].other_input_type }}</span>
+            <span *ngIf="!invoice.products[0].other_input_type">{{ invoice.products[0].input_produce_type }}</span>
+          </span>
         </ng-container>
         <span *ngIf="invoice.products.length > 1">Multiple Products</span>
       </td>
