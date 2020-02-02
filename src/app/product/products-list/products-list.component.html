@@ -137,20 +137,35 @@
   <div class="panel-body">
     <img src="../../../assets/img/default/pi-po/noProducts.png" />
     <p style="font-size: large;">Add your first product and begin selling.</p>
-    <button
-      class="bttn-primary bttn-add"
-      (click)="openDialogProcessed(undefined)"
-      matTooltip="{{ tooltips.create_agri_product }}"
-    >
-      <span translate>New Processed Product</span>
-    </button>
-    <button
-      class="bttn-primary bttn-add"
-      (click)="openDialogAgricultural(undefined)"
-      matTooltip="{{ tooltips.create_processed_product }}"
-    >
-      <span translate>New Agricultural Product</span>
-    </button>
+    <div class="dropdown" style="display:inline-flex;">
+      <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
+      <ul class="dropdown-menu">
+        <li>
+          <a
+            matTooltip="{{ tooltips.create_agri_product }}"
+            matTooltipPosition="left"
+            (click)="openDialogAgricultural(undefined)"
+            >Agricultural Product</a
+          >
+        </li>
+        <li>
+          <a
+            matTooltip="{{ tooltips.create_processed_product }}"
+            matTooltipPosition="left"
+            (click)="openDialogProcessed(undefined)"
+            >Processed Product</a
+          >
+        </li>
+        <li>
+          <a
+            matTooltip="{{ tooltips.create_input_product }}"
+            matTooltipPosition="left"
+            (click)="openDialogInput(undefined)"
+            >Input Product</a
+          >
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

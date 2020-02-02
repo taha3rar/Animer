@@ -26,6 +26,7 @@ export const tooltips = {
   products: {
     create_agri_product: 'Create an agricultural product and start trading',
     create_processed_product: 'Create a processed product and start trading',
+    create_input_product: 'Create an input product and start trading',
     product_generator: {
       agricultural: {
         estimated_number_packages: 'Calculated based on Total Amount and Amount per Packaged Product fields',
