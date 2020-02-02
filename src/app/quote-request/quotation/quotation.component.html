@@ -92,7 +92,9 @@
                 <span *ngIf="quotation.product.product_type == 'input'">
                   <span *ngIf="quotation.product.item_description"> {{ quotation.product.item_description }}</span>
                   <span *ngIf="!quotation.product.item_description">
-                    {{ quotation.product.item_measurement_amount }} per unit</span
+                    {{ quotation.product.item_measurement_amount | number: '1.2-2' }}
+                    {{ quotation.product.weight_unit }}
+                    per unit</span
                   >
                 </span>
               </td>

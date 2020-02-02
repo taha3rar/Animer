@@ -89,7 +89,7 @@
             <span *ngIf="row.product_type == 'input'">
               <span *ngIf="row.item_description">{{ row.item_description }}</span>
               <span *ngIf="!row.item_description">
-                {{ row.item_measurement_amount }} {{ row.weight_unit }} per unit
+                {{ row.item_measurement_amount | number: '1.2-2' }} {{ row.weight_unit }} per unit
               </span>
             </span>
           </td>
