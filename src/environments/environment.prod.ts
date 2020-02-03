@@ -14,6 +14,16 @@ export const environment = {
     google: '497849531719-0n3ksh04e1ackgktbifu5gvddi6rmqso.apps.googleusercontent.com'
   },
   intercom: {
-    app_id: 'zjpiv02o'
+    app_id: 'zjpiv02o',
+    tours: {
+      orders: {
+        generator: {
+          suppliersTour: 100043,
+          productsTour: 100045,
+          orderTour: 100046,
+          reviewTour: 100048
+        }
+      }
+    }
   }
 };
