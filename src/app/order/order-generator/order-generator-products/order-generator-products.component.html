@@ -105,13 +105,14 @@
             </td>
             <td>
               <span *ngIf="product.product_type == 'agricultural'">
-                {{ product.price_per_unit }} {{ product.currency }}/ {{ product.weight_unit | uppercase }}
+                {{ product.price_per_unit | number: '1.2-2' }} {{ product.currency }} /
+                {{ product.weight_unit | uppercase }}
               </span>
               <span *ngIf="product.product_type == 'input'">
-                {{ product.price_per_unit }} {{ product.currency | uppercase }}/ unit
+                {{ product.price_per_unit | number: '1.2-2' }} {{ product.currency | uppercase }} / unit
               </span>
               <span *ngIf="product.product_type == 'processed'">
-                {{ product.package_price }} {{ product.currency | uppercase }}/ package
+                {{ product.package_price | number: '1.2-2' }} {{ product.currency | uppercase }} / package
               </span>
             </td>
             <td>{{ product.product_type }}</td>
