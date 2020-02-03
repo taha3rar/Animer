@@ -69,7 +69,7 @@
           <td>
             <span *ngIf="quoteRequest.product.product_type == 'agricultural'"
               >{{ quoteRequest.product.total_weight_requested | number: '1.2-2' }}
-              {{ quoteRequest.product.weight_unit }}({{ quoteRequest.product.quantity_requested }}
+              {{ quoteRequest.product.weight_unit }} ({{ quoteRequest.product.quantity_requested }}
               <span *ngIf="quoteRequest.product.quantity_requested > 1">packages</span>
               <span *ngIf="quoteRequest.product.quantity_requested == 1">package</span>
               <small> Estimated</small>)

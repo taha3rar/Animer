@@ -80,11 +80,11 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
           quotedProduct = <ProductInvoice>(<unknown>quotation.product);
           quotedProduct.quantity = quotation.product.quantity_offered;
           quotedProduct.total_weight = quotation.product.total_weight_offered || undefined;
+          quotedProduct.total_amount_items = quotation.product.total_items_offered;
           quotedProduct.package_price = Number(
             (quotation.product.product_subtotal / quotation.product.quantity_offered).toFixed(2)
           );
           quotedProduct.currency = quotation.currency;
-          quotedProduct.total_amount_items = quotation.product.total_items_offered;
           quotedProduct.quotation_id = quotation._id;
           this.quotedProducts.push(quotedProduct);
         });

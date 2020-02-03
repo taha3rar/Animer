@@ -4,7 +4,7 @@
   <h2 *ngIf="fromQuotation" translate class="modal-title">Product from quotations</h2>
 </div>
 <div class="padding-all">
-  <div class="margin-bottom">
+  <div class="margin-bottom" *ngIf="inventoryProducts.length > 0">
     <button class="btn-icons pull-right" (click)="onNextPage(inventoryProducts.length, 6)">
       <i class="material-icons">arrow_forward_ios</i>
     </button>
@@ -16,7 +16,7 @@
       <p class="heading-3">No products available</p>
     </div>
 
-    <table class="table table-borderless">
+    <table class="table table-borderless" *ngIf="inventoryProducts.length > 0">
       <thead>
         <tr>
           <th>Product</th>
@@ -95,13 +95,13 @@
           </td>
           <td>
             <span *ngIf="product.product_type == 'agricultural'">
-              {{ product.price_per_unit }} {{ product.currency }}/ {{ product.weight_unit | uppercase }}
+              {{ product.price_per_unit }} {{ product.currency }} / {{ product.weight_unit | uppercase }}
             </span>
             <span *ngIf="product.product_type == 'input'">
-              {{ product.price_per_unit }} {{ product.currency | uppercase }}/ unit
+              {{ product.price_per_unit }} {{ product.currency | uppercase }} / unit
             </span>
             <span *ngIf="product.product_type == 'processed'">
-              {{ product.package_price }} {{ product.currency | uppercase }}/ package
+              {{ product.package_price }} {{ product.currency | uppercase }} / package
             </span>
           </td>
           <td>{{ product.product_type }}</td>

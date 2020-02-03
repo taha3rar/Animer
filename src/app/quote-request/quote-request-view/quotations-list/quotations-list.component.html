@@ -52,9 +52,7 @@
           </span>
           ({{ quotation.product?.total_items_offered }}
           <span *ngIf="quotation.product?.total_items_offered > 1"> units</span>
-          <span *ngIf="quotation.product?.total_items_offered == 1">
-            unit </span
-          >)
+          <span *ngIf="quotation.product?.total_items_offered == 1"> unit </span>)
         </span>
         <span *ngIf="quotation.product && quotation.product?.product_type === 'input'">
           {{ quotation.product?.quantity_offered }}
@@ -70,8 +68,11 @@
           {{ quotation.product?.price_per_unit | number: '1.2-2' }} {{ quotation.currency }} /
           {{ quotation.product?.weight_unit }}
         </span>
-        <span *ngIf="quotation.product && quotation.product?.product_type != 'agricultural'">
+        <span *ngIf="quotation.product && quotation.product?.product_type == 'processed'">
           {{ quotation.product?.package_price | number: '1.2-2' }} {{ quotation.currency }} / Package
+        </span>
+        <span *ngIf="quotation.product && quotation.product?.product_type == 'input'">
+          {{ quotation.product?.price_per_unit | number: '1.2-2' }} {{ quotation.currency }} / Unit
         </span>
         <span *ngIf="!quotation.product">
           N/A
