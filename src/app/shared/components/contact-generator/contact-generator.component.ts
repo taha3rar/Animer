@@ -207,7 +207,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.invitedClient.company_information.country = this.companyf.country.value;
     this.clientSubmitted = true;
 
-    if (this.idPicture) {
+    if (this.idPicture !== defaultValues.profile_picture) {
       this.invitedClient.personal_information.id_picture = this.idPicture;
     }
     this.userService.saveInvitedClient(this.invitedClient).subscribe(
