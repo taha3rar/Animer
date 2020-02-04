@@ -137,6 +137,7 @@
             #quantity="ngModel"
             name="quantity"
             [(ngModel)]="product.quantity"
+            (ngModelChange)="setPriceUnit()"
             class="form-control"
             placeholder="Ex. 100"
             [ngClass]="{ 'has-error': quantity.invalid && quantity.touched }"
