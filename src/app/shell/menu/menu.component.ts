@@ -59,6 +59,12 @@ export const ROUTES: RouteInfo[] = [
     type: 'link',
     icontype: 'icon-ecosystems',
     neededPermission: 'list-ecosystems'
+  },
+  {
+    path: '/finance',
+    title: 'Finance',
+    type: 'link',
+    icontype: 'icon-finance'
   }
 ];
 

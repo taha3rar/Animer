@@ -24,6 +24,7 @@ import { ProductModule } from './product/product.module';
 import { EcosystemModule } from './ecosystem/ecosystem.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { FinanceModule } from './finance/finance.module';
 import { RouterModule } from '@angular/router';
 import { LandingModule } from './landing/landing.module';
 import { RegistrationModule } from './registration/registration.module';
@@ -52,6 +53,7 @@ import { environment } from '@env/environment.local';
     EcosystemModule,
     QuoteRequestModule,
     NotificationsModule,
+    FinanceModule,
     LandingModule,
     RegistrationModule,
     HelpCenterModule,
