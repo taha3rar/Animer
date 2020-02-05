@@ -69,7 +69,6 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
     } else {
       this.draftOrder = new Order();
     }
-    this.initializeTour();
     this.orderForm = this.formBuilder.group({
       _id: Object.is(this.draftOrder, undefined) ? undefined : this.draftOrder._id,
       numericId: Object.is(this.draftOrder, undefined) ? undefined : this.draftOrder.numericId,
@@ -170,6 +169,8 @@ export class OrderGeneratorComponent implements OnInit, CanComponentDeactivate {
     }
     if (this.openOrder) {
       this.orderForm['controls'].seller['controls'].contact_by.setValidators(Validators.required);
+    } else {
+      this.initializeTour();
     }
   }
 
