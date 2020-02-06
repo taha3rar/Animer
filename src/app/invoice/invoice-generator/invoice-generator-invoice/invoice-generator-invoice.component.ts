@@ -214,11 +214,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     this.productsValid = false;
   }
 
-  checkPaymentRequest(isChecked: boolean) {
-    if (isChecked) {
-      this.invoice['payable'].setValue(true);
-    } else {
-      this.invoice['payable'].setValue(false);
-    }
+  markPayableInvoice(isChecked: boolean) {
+    isChecked ? this.invoice['payable'].setValue(true) : this.invoice['payable'].setValue(false);
   }
 }

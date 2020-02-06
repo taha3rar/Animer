@@ -85,27 +85,18 @@
           </tr>
         </table>
       </div>
-      <!-- <div class="payment-wrapper">
+      <div class="payment-wrapper">
         <div>
           <input
             type="checkbox"
-            (change)="openDpoDialog($event.target.checked)"
+            (change)="markPayableInvoice($event.target.checked)"
             class="checkbox"
             id="payment-checkbox"
             #checkbox
           /><label class="checkbox_label" for="payment-checkbox"><span class="form_checkbox_btn"></span></label>
-          <span>Receive payment for this invoice</span>
         </div>
-        <div class="gateway-status">
-          <i class="material-icons">check_circle</i>
-          <p>You're logged into DPO</p>
-          <img src="../../../../assets/img/dpo-logo.png" alt="" />
-        </div>
-        <div class="payment-info">
-          <i class="material-icons">info</i>
-          <p>To receive payments securely you'll need to have an account in DPO</p>
-        </div>
-      </div> -->
+        <span>Receive payment for this invoice</span>
+      </div>
     </div>
   </div>
 

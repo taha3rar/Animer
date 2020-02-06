@@ -150,28 +150,7 @@ export class OrderInvoiceGeneratorComponent extends DocumentGeneratorComponent i
     this.newInvoiceEvent.emit(this.newInvoice);
   }
 
-  openDpoDialog(isChecked: boolean) {
-    if (isChecked) {
-      this.swalWithStyledButtons
-        .fire({
-          html:
-            '<img src="../../../../assets/img/dpo-logo.png" style="margin: 0 auto; display: block;' +
-            'margin-bottom: 3.8rem;" width="100" height="60"/>' +
-            '<p>Log in or create account in DPO</p>',
-          confirmButtonText: 'Log in',
-          cancelButtonText: 'Create Account',
-          showCancelButton: true
-        })
-        .then(result => {
-          if (result.value) {
-            this.invoice['payable'].setValue(true);
-          } else if (result.dismiss === Swal.DismissReason.backdrop) {
-            this.checkbox.nativeElement.checked = false;
-            return false;
-          } else if (!result.value) {
-            // Do something
-          }
-        });
-    }
+  markPayableInvoice(isChecked: boolean) {
+    isChecked ? this.invoice['payable'].setValue(true) : this.invoice['payable'].setValue(false);
   }
 }
