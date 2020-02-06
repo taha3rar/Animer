@@ -24,7 +24,7 @@ export class WBLoan {
     country_of_operation: String;
     business_premises: String;
     business_insurance: String;
-    isBusinessInsured: Boolean;
+    is_business_insured: Boolean;
     operation_time: Number;
   };
   applicant_details: [
