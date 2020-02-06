@@ -6,7 +6,7 @@ export class WBLoan {
   business_details: {
     business_name: String;
     ownership_type: String;
-    registration_nnumber: String;
+    registration_number: String;
     incorporation_date: Date;
     vat_number: Number;
     employees_amount: Number;
