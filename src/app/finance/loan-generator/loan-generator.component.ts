@@ -7,21 +7,21 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./loan-generator.component.scss']
 })
 export class LoanGeneratorComponent implements OnInit {
-  loanForm: FormGroup;
+  loan_form: FormGroup;
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.loanForm = this.formBuilder.group({
+    this.loan_form = this.formBuilder.group({
       // STEP 1
       loan_details: this.formBuilder.group({
-        loan_amount: String,
+        loan_amount: Number,
         loan_purpose: String
       }),
       // STEP 2
       business_details: this.formBuilder.group({
         business_name: String,
         ownership_type: String,
-        registration_nnumber: String,
+        registration_number: String,
         incorporation_date: Date,
         vat_number: Number,
         employees_amount: Number,
@@ -39,7 +39,7 @@ export class LoanGeneratorComponent implements OnInit {
         country_of_operation: String,
         business_premises: String,
         business_insurance: String,
-        isBusinessInsured: Boolean,
+        is_business_insured: Boolean,
         operation_time: Number
       }),
       // STEP 3 can be up to 5 applicants
@@ -63,14 +63,14 @@ export class LoanGeneratorComponent implements OnInit {
           residential_address: this.formBuilder.group({
             physical_address: String,
             city: String,
-            Province: String,
+            province: String,
             years_of_residency: Number
           }),
           postal_address: this.formBuilder.group({
             po_box: Number,
             postal_code: Number,
             city: String,
-            Province: String
+            province: String
           }),
           contact_details: this.formBuilder.group({
             mobile_phone_number: Number,
@@ -108,7 +108,7 @@ export class LoanGeneratorComponent implements OnInit {
             bank_name: String,
             bank_branch: String,
             account_number: Number,
-            AnyLoanInBank: Boolean,
+            any_loan_in_bank: Boolean,
             loan_type: String,
             loan_currency: String,
             loan_amount: String,

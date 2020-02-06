@@ -1,6 +1,6 @@
 export class WBLoan {
   loan_details: {
-    loan_amount: String;
+    loan_amount: Number;
     loan_purpose: String;
   };
   business_details: {
@@ -47,14 +47,14 @@ export class WBLoan {
       residential_address: {
         physical_address: String;
         city: String;
-        Province: String;
+        province: String;
         years_of_residency: Number;
       };
       postal_address: {
         po_box: Number;
         postal_code: Number;
         city: String;
-        Province: String;
+        province: String;
       };
       contact_details: {
         mobile_phone_number: Number;
@@ -90,7 +90,7 @@ export class WBLoan {
         bank_name: String;
         bank_branch: String;
         account_number: Number;
-        AnyLoanInBank: Boolean;
+        any_loan_in_bank: Boolean;
         loan_type: String;
         loan_currency: String;
         loan_amount: String;
