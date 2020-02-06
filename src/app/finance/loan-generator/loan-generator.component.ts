@@ -12,13 +12,13 @@ export class LoanGeneratorComponent implements OnInit {
 
   ngOnInit() {
     this.loanForm = this.formBuilder.group({
+      // STEP 1
       loan_details: this.formBuilder.group({
-        // STEP 1
         loan_amount: String,
         loan_purpose: String
       }),
+      // STEP 2
       business_details: this.formBuilder.group({
-        // STEP 2
         business_name: String,
         ownership_type: String,
         registration_nnumber: String,
@@ -42,8 +42,8 @@ export class LoanGeneratorComponent implements OnInit {
         isBusinessInsured: Boolean,
         operation_time: Number
       }),
+      // STEP 3 can be up to 5 applicants
       applicant_details: [
-        // STEP 3 can be up to 5 applicants
         this.formBuilder.group({
           first_name: String,
           middle_name: String,
@@ -89,8 +89,8 @@ export class LoanGeneratorComponent implements OnInit {
           signature_date: Date
         })
       ],
+      // STEP 4 can be up to 2 referees
       referee_details: [
-        // STEP 4 can be up to 2 referees
         this.formBuilder.group({
           full_name: String,
           applicant_relationship: String,
@@ -101,8 +101,8 @@ export class LoanGeneratorComponent implements OnInit {
           country: String
         })
       ],
+      // STEP 5
       business_banking_details: this.formBuilder.group({
-        // STEP 5
         bank_details: [
           this.formBuilder.group({
             bank_name: String,
@@ -118,8 +118,8 @@ export class LoanGeneratorComponent implements OnInit {
             term: String
           })
         ],
+        // Check the number of cards
         applicant_card_details: [
-          // Check the number of cards
           this.formBuilder.group({
             applicant_name: String,
             card_issuer: String,
