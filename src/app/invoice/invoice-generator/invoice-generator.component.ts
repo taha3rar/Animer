@@ -133,7 +133,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
           : null,
         Validators.required
       ],
-      payable: false
+      payable: this.draftInvoice ? this.draftInvoice.payable : false
     });
 
     if (!this.draftInvoice) {
