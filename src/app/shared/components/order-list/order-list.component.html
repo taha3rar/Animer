@@ -83,10 +83,11 @@
       </td>
       <td>
         <div *ngIf="order.status === 'INVOICE RECEIVED'" class="status status-green">{{ order.status }}</div>
-        <div *ngIf="order.status === 'ORDER SENT'" class="status status-orange">{{ order.status }}</div>
+        <div *ngIf="order.status === 'ORDER SENT'" class="status status-blue">{{ order.status }}</div>
         <div *ngIf="order.status === 'ORDER SAVED'" class="status status-yellow">{{ order.status }}</div>
         <div *ngIf="order.status === 'INVOICE SENT'" class="status status-green">{{ order.status }}</div>
-        <div *ngIf="order.status === 'ORDER RECEIVED'" class="status status-orange">{{ order.status }}</div>
+        <div *ngIf="order.status === 'ORDER RECEIVED'" class="status status-blue">{{ order.status }}</div>
+        <div *ngIf="order.status === 'PENDING PAYMENT'" class="status status-orange">{{ order.status }}</div>
       </td>
       <td class="text-right">
         <button
