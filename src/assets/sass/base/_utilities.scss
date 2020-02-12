@@ -164,7 +164,12 @@
 
   &-orange {
     background-color: #fff2ec;
-    color: rgb(255, 126, 27);
+    color: #fab56a;
+  }
+
+  &-bg-orange {
+    background-color: #fab56a;
+    color: #fff2ec;
   }
 
   &-purple {
@@ -174,7 +179,12 @@
 
   &-green {
     background-color: #e9fff2;
-    color: #2acf82;
+    color: #6ddd91;
+  }
+
+  &-bg-green {
+    background-color: #6ddd91;
+    color: #e9fff2;
   }
 
   &-dark-blue {
