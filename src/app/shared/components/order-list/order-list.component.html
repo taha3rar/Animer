@@ -88,7 +88,7 @@
         <div *ngIf="order.status === 'INVOICE SENT'" class="status status-green">{{ order.status }}</div>
         <div *ngIf="order.status === 'ORDER RECEIVED'" class="status status-orange">{{ order.status }}</div>
         <div *ngIf="order.status === 'PENDING PAYMENT'" class="status status-bg-orange">{{ order.status }}</div>
-        <div *ngIf="order.status === 'PAYMENT PAID'" class="status status-bg-green">{{ order.status }}</div>
+        <div *ngIf="order.status === 'INVOICE PAID'" class="status status-bg-green">{{ order.status }}</div>
       </td>
       <td class="text-right">
         <button
