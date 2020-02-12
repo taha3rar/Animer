@@ -1,3 +1,4 @@
+import { Intercom } from 'ng-intercom';
 import { BaseNavigationComponent } from './../../../shared/components/base-navigation/base-navigation.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +17,7 @@ export class InvoiceGeneratorBuyersComponent extends BaseNavigationComponent imp
   form: FormGroup;
   clients: Client[];
   nextBtnClicked = false;
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private intercom: Intercom) {
     super();
   }
   ngOnInit() {

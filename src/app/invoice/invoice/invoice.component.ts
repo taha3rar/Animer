@@ -1,3 +1,4 @@
+import { Intercom } from 'ng-intercom';
 import { DocumentDownloadComponent } from './../../shared/components/document-download/document-download.component';
 import { AlertsService } from './../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -31,7 +32,8 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
     private route: ActivatedRoute,
     private router: Router,
     private alertsService: AlertsService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private intercom: Intercom
   ) {
     super(invoiceService, 'proforma-invoice', 'Proforma Invoice');
   }
@@ -45,6 +47,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
       });
     }
     super.setTransaction(this.invoice);
+    this.intercom.startTour(101991);
   }
 
   back() {

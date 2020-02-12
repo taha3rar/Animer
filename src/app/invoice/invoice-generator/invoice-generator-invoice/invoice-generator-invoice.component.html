@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div tour-intercom-purchase-order="step_1" class="card">
     <div class="row">
       <div class="col-md-4">
         <p class="heading-3">Purchase Order Number</p>
@@ -39,7 +39,14 @@
   <div class="row">
     <div class="col">
       <div class="dropdown">
-        <button class="bttn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add New Product</button>
+        <button
+          tour-intercom-purchase-order="step_2"
+          class="bttn-primary dropdown-toggle"
+          type="button"
+          data-toggle="dropdown"
+        >
+          Add New Product
+        </button>
         <ul class="dropdown-menu">
           <li><a (click)="openDialogInventory()">From Inventory</a></li>
           <li><a (click)="openDialogAgricultural(undefined, 'invoice')">New Agricultural Product</a></li>
@@ -56,7 +63,7 @@
     Please choose product!
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div tour-intercom-purchase-order="step_3" class="col-md-4">
       <div class="comments">
         <label for="payment_comments">Comments or special instructions for payment</label>
         <textarea
@@ -67,7 +74,7 @@
         ></textarea>
       </div>
     </div>
-    <div class="col-md-4">
+    <div tour-intercom-purchase-order="step_4" class="col-md-4">
       <div class="comments">
         <label for="po_comments">Comments or special instructions for Proforma Invoice</label>
         <textarea
@@ -78,7 +85,7 @@
         ></textarea>
       </div>
     </div>
-    <div class="col-md-4 price-box">
+    <div tour-intercom-purchase-order="step_5" class="col-md-4 price-box">
       <div class="total-table-wrapper">
         <table class="total-table">
           <tr>
@@ -124,7 +131,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div tour-intercom-purchase-order="step_6" class="col-md-6">
       <div class="info">
         <p class="heading-3">SIGNED BY</p>
         <div formGroupName="sign_by">
@@ -219,7 +226,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div tour-intercom-purchase-order="step_7" class="col-md-6">
       <div formGroupName="deliver_to" class="info">
         <p class="heading-3">DELIVER TO</p>
         <div class="form-row">

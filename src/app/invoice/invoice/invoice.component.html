@@ -204,7 +204,13 @@
         </div>
       </div>
       <div>
-        <button #submitButton *ngIf="generateInvoice" class="bttn-primary pull-right" (click)="saveInvoice()">
+        <button
+          tour-intercom-purchase-review="step_2"
+          #submitButton
+          *ngIf="generateInvoice"
+          class="bttn-primary pull-right"
+          (click)="saveInvoice()"
+        >
           Send Proforma Invoice
         </button>
         <button
@@ -226,7 +232,7 @@
           Pay Invoice
         </button>
         <div class="disclaimer" *ngIf="generateInvoice">
-          <div>
+          <div tour-intercom-purchase-review="step_1">
             <input type="checkbox" class="checkbox" id="checkbox1" [(ngModel)]="disclaimerAccepted" /><label
               class="checkbox_label"
               for="checkbox1"

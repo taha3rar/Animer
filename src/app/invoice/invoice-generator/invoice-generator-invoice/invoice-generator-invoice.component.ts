@@ -1,3 +1,4 @@
+import { Intercom } from 'ng-intercom';
 import { AlertsService } from './../../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -41,7 +42,8 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private intercom: Intercom
   ) {
     super(dialog);
   }
@@ -55,6 +57,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     this.validBy = this.formInput.value.sign_by.date;
     this.issuedOn = this.formInput.value.date_created;
     this.deliveryOn = this.formInput.value.deliver_to.expected_delivery_date;
+    this.intercom.startTour(101961);
   }
 
   onChanges(): void {
