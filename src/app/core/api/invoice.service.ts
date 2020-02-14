@@ -40,4 +40,12 @@ export class InvoiceService extends BaseService {
       })
     );
   }
+
+  pay(invoice: Invoice): Observable<Invoice> {
+    return this.apiService.post(`/invoice/${invoice._id}/pay`).pipe(
+      map(data => {
+        return data;
+      })
+    );
+  }
 }

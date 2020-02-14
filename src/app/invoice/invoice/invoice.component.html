@@ -215,6 +215,14 @@
         >
           Download PDF
         </button>
+        <button
+          *ngIf="!generateInvoice && invoice.payable && !invoice.dpo_transaction_token"
+          class="bttn-primary pull-right"
+          data-html2canvas-ignore="true"
+          (click)="payInvoicePopup()"
+        >
+          Pay Invoice
+        </button>
         <div class="disclaimer" *ngIf="generateInvoice">
           <div>
             <input type="checkbox" class="checkbox" id="checkbox1" [(ngModel)]="disclaimerAccepted" /><label

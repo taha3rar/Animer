@@ -110,4 +110,27 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
       );
     }
   }
+
+  payInvoicePopup() {
+    swal({
+      text: `Are you sure you want to pay this invoice through DPO?`,
+      buttons: ['Cancel', 'Yes'],
+      icon: 'warning'
+    }).then(value => {
+      if (value) {
+        this.invoiceService.pay(this.invoice).subscribe(
+          (invoice: Invoice) => {
+            this.alertsService.showAlert('Your proforma invoice has been paid through DPO');
+            this.router.navigateByUrl('/invoice');
+          },
+          (err: any) => {
+            console.log(err);
+            this.router.navigateByUrl('/invoice');
+          }
+        );
+      } else {
+        return false;
+      }
+    });
+  }
 }
