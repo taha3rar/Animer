@@ -26,6 +26,7 @@
         <div class="tab-pane" id="fillInvoice">
           <app-invoice-generator-invoice
             [form]="invoiceForm"
+            [dpoEnabled]="dpoEnabled"
             (savedAsDraft)="newDraftInvoice($event)"
             (newInvoiceEvent)="receiveNewInvoice($event)"
           ></app-invoice-generator-invoice>

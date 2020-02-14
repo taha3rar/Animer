@@ -23,6 +23,7 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
   invoiceForm: FormGroup;
   formSubmitted: any;
   isDraft: boolean;
+  dpoEnabled: boolean;
 
   constructor(
     private router: Router,
@@ -145,6 +146,10 @@ export class InvoiceGeneratorComponent implements OnInit, CanComponentDeactivate
       this.invoiceForm.controls.seller.setValue(this.draftInvoice.seller);
     }
     this.stepperService.stepperInit();
+
+    this.route.data.subscribe(({ seller }) => {
+      this.dpoEnabled = seller.allow_dpo;
+    });
   }
 
   @HostListener('window:beforeunload')

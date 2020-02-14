@@ -33,7 +33,8 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
   issuedOn: NgbDateStruct;
   deliveryOn: NgbDateStruct;
   @ViewChild('checkbox') checkbox: ElementRef;
-  hasDPOToken = true;
+  @Input()
+  dpoEnabled: boolean;
 
   constructor(
     private invoiceService: InvoiceService,
