@@ -216,7 +216,9 @@
           Download PDF
         </button>
         <button
-          *ngIf="!generateInvoice && invoice.payable && !invoice.dpo_transaction_token"
+          *ngIf="
+            !generateInvoice && invoice.payable && !invoice.dpo_transaction_token && invoice.buyer._id === currentUserId
+          "
           class="bttn-primary pull-right"
           data-html2canvas-ignore="true"
           (click)="payInvoicePopup()"

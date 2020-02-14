@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '@app/core/models/invoice/invoice';
 import { InvoiceService } from '@app/core/api/invoice.service';
-import { ProductService } from '@app/core';
+import { ProductService, AuthenticationService } from '@app/core';
 
 @Component({
   selector: 'app-invoice',
@@ -18,6 +18,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
   generateInvoice = false;
   payableInvoice = false;
   invoicePaid = false;
+  currentUserId: string;
 
   @Input()
   invoice: Invoice;
@@ -29,12 +30,14 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertsService: AlertsService
+    private alertsService: AlertsService,
+    private authenticationService: AuthenticationService
   ) {
     super(invoiceService, 'proforma-invoice', 'Proforma Invoice');
   }
 
   ngOnInit() {
+    this.currentUserId = this.authenticationService.currentUserId;
     this.disclaimerAccepted = false;
     if (!this.generateInvoice) {
       this.route.data.subscribe(({ invoice }) => {
@@ -113,7 +116,10 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
 
   payInvoicePopup() {
     swal({
-      text: `Are you sure you want to pay this invoice through DPO?`,
+      // tslint:disable-next-line:max-line-length
+      text: `Are you sure you want to pay ${this.invoice.total_due} ${this.invoice.currency} to ${
+        this.invoice.seller.first_name
+      } ${this.invoice.seller.last_name} through DPO?`,
       buttons: ['Cancel', 'Yes'],
       icon: 'warning'
     }).then(value => {
