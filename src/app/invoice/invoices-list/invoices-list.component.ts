@@ -1,3 +1,4 @@
+import { Intercom } from 'ng-intercom';
 import { InvoiceTutorialsComponent } from './../../tutorials/invoice-tutorials/invoice-tutorials.component';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -36,7 +37,8 @@ export class InvoicesListComponent implements OnInit {
     private csvService: CsvService,
     private datePipe: DatePipe,
     private decimalPipe: DecimalPipe,
-    private csv: CsvService
+    private csv: CsvService,
+    private intercom: Intercom
   ) {}
 
   ngOnInit() {
@@ -54,6 +56,7 @@ export class InvoicesListComponent implements OnInit {
         this.viewAs('buyer');
       }
     });
+    this.intercom.startTour(102834);
   }
 
   viewAs(profileType: any) {

@@ -24,6 +24,7 @@ export class InvoiceGeneratorBuyersComponent extends BaseNavigationComponent imp
     this.route.data.subscribe(({ buyers }) => {
       this.clients = buyers;
     });
+    this.intercom.startTour(102838);
   }
 
   profilePicture(client: Client) {

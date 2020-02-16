@@ -63,7 +63,7 @@
       <div class="add-supplier-box" [hidden]="clients?.length > 0">
         <img src="../../../../assets/img/default/pi-po/noClient.png" width="285" height="183" />
         <p>You have no buyers yet! Please go to the contacts page to add your first buyer contact.</p>
-        <button class="bttn-primary" [routerLink]="['/client']">
+        <button tour-intercom-PI-contacts="step_1" class="bttn-primary" [routerLink]="['/client']">
           <span>Go to Contacts</span>
         </button>
       </div>
