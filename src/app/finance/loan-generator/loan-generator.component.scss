@@ -1,5 +1,6 @@
 ul.nav > li > a {
   white-space: pre-wrap !important;
+  pointer-events: none;
 }
 
 .active::after {

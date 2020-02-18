@@ -201,7 +201,7 @@ div.filter-option-inner-inner {
   user-select: none;
 }
 
-.container:hover input ~ .checkmark {
+label.container:hover input ~ .checkmark {
   background-color: #f2feff;
 }
 
@@ -209,11 +209,11 @@ label.container {
   padding: 0px !important;
 }
 
-.container input:checked {
+label.container input:checked {
   display: block;
 }
 
-.container .checkmark:after {
+label.container .checkmark:after {
   background: white;
   min-height: 7rem;
   padding: 1.5rem 1.6rem;
@@ -235,7 +235,7 @@ label.container {
 }
 
 /* Hide the browser's default radio button */
-.container input {
+label.container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -243,11 +243,11 @@ label.container {
   width: 0;
 }
 
-.container:hover input ~ .checkmark {
+label.container:hover input ~ .checkmark {
   background-color: #f2feff;
 }
 
-.container input:checked ~ .checkmark {
+label.container input:checked ~ .checkmark {
   background-color: #f2feff;
   border: 1px solid #37c1ce;
 }

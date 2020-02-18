@@ -3,25 +3,25 @@
   <div class="stepper-wrapper">
     <div>
       <ul class="nav nav-tabs" #generalSteps>
-        <li class="active" style="pointer-events: none;">
-          <a style="pointer-events: none;" data-toggle="tab" class="label" href="#loan-details">
-            <span class="round-tab">1</span>Loan Details</a
-          >
-          <span class="step-progress-bar-wrapper">
-            <span class="step-progress-bar"></span>
-          </span>
-        </li>
-        <li style="pointer-events: none;" class="disabled">
-          <a style="pointer-events: none;" data-toggle="tab" class="label" href="#business-details"
-            ><span class="round-tab">2</span>Business Details</a
+        <li class="active">
+          <a data-toggle="tab" class="label" href="#loan-details">
+            <span class="round-tab">1</span><span class="l-step-title">Loan Details</span></a
           >
           <span class="step-progress-bar-wrapper">
             <span class="step-progress-bar"></span>
           </span>
         </li>
         <li class="disabled">
+          <a data-toggle="tab" class="label" href="#business-details"
+            ><span class="round-tab">2</span><span class="l-step-title">Business Details</span>
+          </a>
+          <span class="step-progress-bar-wrapper">
+            <span class="step-progress-bar"></span>
+          </span>
+        </li>
+        <li class="disabled">
           <a data-toggle="tab" class="label" href="#applicant-details">
-            <span class="round-tab">3</span>Applicant Details</a
+            <span class="round-tab">3</span><span class="l-step-title">Applicant Details</span></a
           >
           <span class="step-progress-bar-wrapper">
             <span class="step-progress-bar"></span>
@@ -29,7 +29,7 @@
         </li>
         <li class="disabled">
           <a data-toggle="tab" class="label" href="#referee-details">
-            <span class="round-tab">4</span>Referee Details</a
+            <span class="round-tab">4</span><span class="l-step-title">Referee Details</span></a
           >
           <span class="step-progress-bar-wrapper">
             <span class="step-progress-bar"></span>
@@ -37,13 +37,16 @@
         </li>
         <li class="disabled">
           <a data-toggle="tab" class="label" href="#business-banking-details">
-            <span class="round-tab">5</span>Business Banking Details</a
+            <span class="round-tab">5</span><span class="l-step-title">Business Banking Details</span></a
           >
           <span class="step-progress-bar-wrapper">
             <span class="step-progress-bar"></span>
           </span>
         </li>
       </ul>
+      <span class="step-progress-bar-wrapper responsive">
+        <span class="step-progress-bar"></span>
+      </span>
 
       <div class="tab-content">
         <div class="tab-pane active" id="loan-details">
