@@ -8,7 +8,7 @@
   textarea {
     font-size: 1.3rem;
     padding: 1.5rem;
-    border-radius: 0.4rem;
+    border-radius: 0.3rem;
   }
 }
 
@@ -178,4 +178,76 @@ div.filter-option-inner-inner {
 
 .material-icons.md-18 {
   font-size: 18px;
+}
+
+//Loan Radio Button
+.checkmark {
+  background: white;
+  min-height: 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #ced3de;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  color: #5a6c7b;
+  font-weight: bold;
+  display: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #f2feff;
+}
+
+label.container {
+  padding: 0px !important;
+}
+
+.container input:checked {
+  display: block;
+}
+
+.container .checkmark:after {
+  background: white;
+  min-height: 7rem;
+  padding: 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #ced3de;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  color: #5a6c7b;
+  font-weight: bold;
+  display: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #f2feff;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #f2feff;
+  border: 1px solid #37c1ce;
 }

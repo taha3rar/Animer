@@ -1,0 +1,12 @@
+ul.nav > li > a {
+  white-space: pre-wrap !important;
+}
+
+.active::after {
+  display: none;
+}
+
+li.completed,
+li.active {
+  border-left: 0px !important;
+}

@@ -25,6 +25,8 @@ import { RefereeSecondComponent } from './loan-generator/referee-details/referee
 import { ApplicantBankDetailsComponent } from './loan-generator/bank-details/applicant-bank-details/applicant-bank-details.component';
 import { ApplicantOtherLoansComponent } from './loan-generator/bank-details/applicant-other-loans/applicant-other-loans.component';
 import { ApplicantCardsComponent } from './loan-generator/bank-details/applicant-cards/applicant-cards.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { MatSliderModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,7 @@ import { ApplicantCardsComponent } from './loan-generator/bank-details/applicant
   ],
   entryComponents: [],
 
-  imports: [CommonModule, ProductRoutingModule],
+  imports: [CommonModule, ProductRoutingModule, CdkStepperModule, MatSliderModule],
   providers: []
 })
 export class FinanceModule {}

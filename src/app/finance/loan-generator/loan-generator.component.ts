@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { StepperNavigationService } from './stepper-navigation.service';
 
 @Component({
   selector: 'app-loan-generator-list',
@@ -8,7 +9,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class LoanGeneratorComponent implements OnInit {
   loan_form: FormGroup;
-  constructor(private formBuilder: FormBuilder) {}
+  @ViewChild('generalSteps') generalSteps: ElementRef<HTMLElement>;
+
+  constructor(private formBuilder: FormBuilder, private stepperNavigation: StepperNavigationService) {}
 
   ngOnInit() {
     this.loan_form = this.formBuilder.group({
@@ -131,5 +134,6 @@ export class LoanGeneratorComponent implements OnInit {
         ]
       })
     });
+    this.stepperNavigation.generalStepsList = this.generalSteps.nativeElement.children;
   }
 }

@@ -1,3 +1,31 @@
-<p>
-  referee-details works!
-</p>
+<div class="stepper">
+  <ul class="nav nav-tabs" style="display: none;" #refereeStepper>
+    <li class="active">
+      <a data-toggle="tab" class="label" href="#referee-first"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#referee-second"></a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="referee-first">
+      <app-referee-first></app-referee-first>
+    </div>
+    <div class="tab-pane" id="referee-second">
+      <app-referee-second></app-referee-second>
+    </div>
+  </div>
+
+  <div class="stepper-footer">
+    <div class="stepper-footer-wrapper">
+      <div>
+        <button class="bttn-secondary">PREV</button>
+      </div>
+      <div>
+        <button class="btn-primary-transp" (click)="goBack()">SAVE</button>
+        <button class="bttn bttn-primary" (click)="goNext()">NEXT</button>
+      </div>
+    </div>
+  </div>
+</div>

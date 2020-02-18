@@ -448,6 +448,15 @@
   }
 }
 
+.blue {
+  background-color: $primary-color;
+}
+
+.large {
+  width: 3.3rem;
+  height: 3.3rem;
+}
+
 .btn.glyphicon {
   top: 0 !important;
 }
@@ -594,4 +603,38 @@ button.btn-outline.dpo {
 
 div.swal2-popup div.swal2-actions {
   display: block !important;
+}
+
+.bttn-secondary {
+  background-color: white;
+  border-radius: 10rem;
+  border: none;
+  display: flex;
+  color: $primary-color;
+  font-weight: 600;
+  padding: 0 2.8rem;
+  font-size: 1.4rem;
+  margin: 0.5rem;
+  box-shadow: 0px 3px 3px rgba(209, 215, 216, 0.7);
+  height: 3.55rem;
+}
+
+.loan-option-button {
+  background: white;
+  min-height: 7rem;
+  padding: 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #ced3de;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  color: #5a6c7b;
+  font-weight: bold;
+}
+
+.loan-option-button:not(:last-child) {
+  margin-right: 1rem;
 }

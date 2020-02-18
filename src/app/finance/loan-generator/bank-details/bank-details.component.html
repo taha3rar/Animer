@@ -1,3 +1,37 @@
-<p>
-  bank-details works!
-</p>
+<div class="stepper">
+  <ul class="nav nav-tabs" style="display: none;" #bankStepper>
+    <li class="active">
+      <a data-toggle="tab" class="label" href="#bank-details"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#other-loans"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#bank-cards"></a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="bank-details">
+      <app-applicant-bank-details></app-applicant-bank-details>
+    </div>
+    <div class="tab-pane" id="other-loans">
+      <app-applicant-other-loans></app-applicant-other-loans>
+    </div>
+    <div class="tab-pane" id="bank-cards">
+      <app-applicant-cards></app-applicant-cards>
+    </div>
+  </div>
+
+  <div class="stepper-footer">
+    <div class="stepper-footer-wrapper">
+      <div>
+        <button class="bttn-secondary" (click)="goBack()">PREV</button>
+      </div>
+      <div>
+        <button class="btn-primary-transp">SAVE</button>
+        <button class="bttn bttn-primary" (click)="goNext()">NEXT</button>
+      </div>
+    </div>
+  </div>
+</div>

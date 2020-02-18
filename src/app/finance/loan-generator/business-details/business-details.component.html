@@ -1,3 +1,43 @@
-<p>
-  business-details works!
-</p>
+<div class="stepper">
+  <ul class="nav nav-tabs" style="display: none;" #businessStepper>
+    <li class="active">
+      <a data-toggle="tab" class="label" href="#basic-details"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-location"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-premises"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-other"></a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="basic-details">
+      <app-business-basic-details></app-business-basic-details>
+    </div>
+    <div class="tab-pane" id="business-location">
+      <app-business-location></app-business-location>
+    </div>
+    <div class="tab-pane" id="business-premises">
+      <app-business-premises></app-business-premises>
+    </div>
+    <div class="tab-pane" id="business-other">
+      <app-business-other-details></app-business-other-details>
+    </div>
+  </div>
+
+  <div class="stepper-footer">
+    <div class="stepper-footer-wrapper">
+      <div>
+        <button class="bttn-secondary" (click)="goBack()">PREV</button>
+      </div>
+      <div>
+        <button class="btn-primary-transp">SAVE</button>
+        <button class="bttn bttn-primary next-step" (click)="goNext()">NEXT</button>
+      </div>
+    </div>
+  </div>
+</div>

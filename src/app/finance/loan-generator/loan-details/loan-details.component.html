@@ -1,3 +1,31 @@
-<p>
-  loan-details works!
-</p>
+<ul class="nav nav-tabs" style="display: none;" #loanDetailStepper>
+  <li class="active">
+    <a data-toggle="tab" class="label"></a>
+  </li>
+</ul>
+
+<div class="loan-step-wrapper">
+  <div class="step-header">
+    <div class="loan-assitant-img"></div>
+    <p class="step-title">Tell us about the loan you're after.</p>
+  </div>
+
+  <div class="step-content">
+    <label for="laon-size">What size loan do you need for your business?</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">KES</span>
+      </div>
+      <input type="text" class="form-control" />
+    </div>
+  </div>
+</div>
+
+<div class="stepper-footer">
+  <div class="stepper-footer-wrapper">
+    <div>
+      <button class="btn-primary-transp">SAVE</button>
+      <button class="bttn bttn-primary" (click)="onNext()">NEXT</button>
+    </div>
+  </div>
+</div>

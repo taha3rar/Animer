@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { StepperNavigationService } from './../stepper-navigation.service';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-referee-details',
@@ -6,7 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./referee-details.component.scss']
 })
 export class RefereeDetailsComponent implements OnInit {
-  constructor() {}
+  currentStep = 1;
+  @ViewChild('refereeStepper') refereeStepper: ElementRef;
+
+  constructor(private stepperService: StepperNavigationService) {}
 
   ngOnInit() {}
+
+  goNext() {
+    this.stepperService.innerStepsList = this.refereeStepper.nativeElement.children;
+    this.stepperService.onNext();
+  }
+
+  goBack() {
+    this.stepperService.innerStepsList = this.refereeStepper.nativeElement.children;
+    this.stepperService.onPrevious();
+  }
 }

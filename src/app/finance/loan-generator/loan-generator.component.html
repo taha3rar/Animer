@@ -1,0 +1,71 @@
+<div class="wrapper wizard">
+  <h1 class="main-title btn-main margin-bottom-2"><a class="material-icons">keyboard_backspace</a> Finance</h1>
+  <div class="stepper-wrapper">
+    <div>
+      <ul class="nav nav-tabs" #generalSteps>
+        <li class="active" style="pointer-events: none;">
+          <a style="pointer-events: none;" data-toggle="tab" class="label" href="#loan-details">
+            <span class="round-tab">1</span>Loan Details</a
+          >
+          <span class="step-progress-bar-wrapper">
+            <span class="step-progress-bar"></span>
+          </span>
+        </li>
+        <li style="pointer-events: none;" class="disabled">
+          <a style="pointer-events: none;" data-toggle="tab" class="label" href="#business-details"
+            ><span class="round-tab">2</span>Business Details</a
+          >
+          <span class="step-progress-bar-wrapper">
+            <span class="step-progress-bar"></span>
+          </span>
+        </li>
+        <li class="disabled">
+          <a data-toggle="tab" class="label" href="#applicant-details">
+            <span class="round-tab">3</span>Applicant Details</a
+          >
+          <span class="step-progress-bar-wrapper">
+            <span class="step-progress-bar"></span>
+          </span>
+        </li>
+        <li class="disabled">
+          <a data-toggle="tab" class="label" href="#referee-details">
+            <span class="round-tab">4</span>Referee Details</a
+          >
+          <span class="step-progress-bar-wrapper">
+            <span class="step-progress-bar"></span>
+          </span>
+        </li>
+        <li class="disabled">
+          <a data-toggle="tab" class="label" href="#business-banking-details">
+            <span class="round-tab">5</span>Business Banking Details</a
+          >
+          <span class="step-progress-bar-wrapper">
+            <span class="step-progress-bar"></span>
+          </span>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="loan-details">
+          <app-loan-details></app-loan-details>
+        </div>
+
+        <div class="tab-pane" id="business-details">
+          <app-business-details></app-business-details>
+        </div>
+
+        <div class="tab-pane" id="applicant-details">
+          <app-applicant-details></app-applicant-details>
+        </div>
+
+        <div class="tab-pane" id="referee-details">
+          <app-referee-details></app-referee-details>
+        </div>
+
+        <div class="tab-pane" id="business-banking-details">
+          <app-bank-details></app-bank-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
