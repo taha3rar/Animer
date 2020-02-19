@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, AfterContentChecked } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, AfterContentChecked, Inject } from '@angular/core';
 import { StepperNavigationService } from './stepper-navigation.service';
 
 @Component({
@@ -10,7 +10,10 @@ export class LoanNavigationComponent implements AfterViewInit, AfterContentCheck
   currentInnerStep: number;
   currentGeneralStep: number;
 
-  constructor(private generalStepId: number, private stepperNavigationService: StepperNavigationService) {}
+  constructor(
+    private generalStepId: number,
+    @Inject(StepperNavigationService) private stepperNavigationService: StepperNavigationService
+  ) {}
 
   ngAfterContentChecked() {
     this.stepperNavigationService.currentActiveInnerStep.subscribe(currentStep => {
