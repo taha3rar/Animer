@@ -10,10 +10,7 @@ export class LoanNavigationComponent implements AfterViewInit, AfterContentCheck
   currentInnerStep: number;
   currentGeneralStep: number;
 
-  constructor(
-    private generalStepId: number,
-    @Inject(StepperNavigationService) private stepperNavigationService: StepperNavigationService
-  ) {}
+  constructor(private generalStepId: number, private stepperNavigationService: StepperNavigationService) {}
 
   ngAfterContentChecked() {
     this.stepperNavigationService.currentActiveInnerStep.subscribe(currentStep => {
