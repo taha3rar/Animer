@@ -185,6 +185,7 @@ div.filter-option-inner-inner {
   background: white;
   min-height: 7rem;
   display: flex;
+  padding: 1.5rem 1.6rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -195,14 +196,20 @@ div.filter-option-inner-inner {
   color: #5a6c7b;
   font-weight: bold;
   display: relative;
+  text-align: center;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  &__img {
+    width: 5.5rem;
+    height: auto;
+  }
 }
 
 label.container:hover input ~ .checkmark {
-  background-color: #f2feff;
+  background-color: #f5fbfc;
 }
 
 label.container {
@@ -213,27 +220,6 @@ label.container input:checked {
   display: block;
 }
 
-label.container .checkmark:after {
-  background: white;
-  min-height: 7rem;
-  padding: 1.5rem 1.6rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border: 1px solid #ced3de;
-  border-radius: 5px;
-  font-size: 1.6rem;
-  color: #5a6c7b;
-  font-weight: bold;
-  display: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 /* Hide the browser's default radio button */
 label.container input {
   position: absolute;
@@ -241,10 +227,6 @@ label.container input {
   cursor: pointer;
   height: 0;
   width: 0;
-}
-
-label.container:hover input ~ .checkmark {
-  background-color: #f2feff;
 }
 
 label.container input:checked ~ .checkmark {

@@ -23,6 +23,10 @@ html {
     font-size: 50%; // 1rem = 8 -> 8/16px
   }
 
+  @include respond(phone) {
+    font-size: 55%; // 1rem = 8.8 -> 8.8/16px
+  }
+
   @include respond(big-desktop) {
     font-size: 75%; // 1rem = 11 -> 11/16px
   }

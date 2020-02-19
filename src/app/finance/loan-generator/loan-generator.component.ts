@@ -10,6 +10,7 @@ import { StepperNavigationService } from './stepper-navigation.service';
 export class LoanGeneratorComponent implements OnInit {
   loan_form: FormGroup;
   @ViewChild('generalSteps') generalSteps: ElementRef<HTMLElement>;
+  @Input() beginApplication = false;
 
   constructor(private formBuilder: FormBuilder, private stepperNavigation: StepperNavigationService) {}
 

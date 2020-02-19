@@ -87,6 +87,8 @@ span.step-progress-bar-wrapper.responsive {
   }
 
   .stepper-footer-wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
     width: 100% !important;
   }
 
@@ -116,6 +118,9 @@ span.step-progress-bar-wrapper.responsive {
 
   .step-header {
     margin-top: 1.5rem !important;
+    .step-title {
+      flex-shrink: 7;
+    }
   }
 
   .stepper-wrapper .nav.nav-tabs {

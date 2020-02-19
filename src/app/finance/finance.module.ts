@@ -27,6 +27,7 @@ import { ApplicantOtherLoansComponent } from './loan-generator/bank-details/appl
 import { ApplicantCardsComponent } from './loan-generator/bank-details/applicant-cards/applicant-cards.component';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { MatSliderModule } from '@angular/material';
+import { QualifcationToolComponent } from './loan-generator/qualifcation-tool/qualifcation-tool.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MatSliderModule } from '@angular/material';
     RefereeSecondComponent,
     ApplicantBankDetailsComponent,
     ApplicantOtherLoansComponent,
-    ApplicantCardsComponent
+    ApplicantCardsComponent,
+    QualifcationToolComponent
   ],
   entryComponents: [],
 

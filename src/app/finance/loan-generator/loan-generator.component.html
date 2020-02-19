@@ -1,4 +1,4 @@
-<div class="wrapper wizard">
+<div class="wrapper wizard" *ngIf="beginApplication">
   <h1 class="main-title btn-main margin-bottom-2"><a class="material-icons">keyboard_backspace</a> Finance</h1>
   <div class="stepper-wrapper">
     <div>
@@ -72,3 +72,5 @@
     </div>
   </div>
 </div>
+
+<app-qualifcation-tool *ngIf="!beginApplication" (beginApplication)="beginApplication = $event"></app-qualifcation-tool>

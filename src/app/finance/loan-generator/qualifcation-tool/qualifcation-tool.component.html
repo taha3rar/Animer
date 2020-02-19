@@ -1,0 +1,266 @@
+<div class="loan-step-wrapper">
+  <div class="step-header">
+    <div class="loan-assitant-img"></div>
+    <p class="step-title" [class.display-tab]="displayTab(1)">
+      Hey, {{ userFirstName }}! I'm Sarah.<br />
+      How can I help you?
+    </p>
+    <p class="step-title" [class.display-tab]="displayTab(2)">
+      What is the loan for?
+    </p>
+    <p class="step-title" [class.display-tab]="displayTab(3)">
+      Which type of agribusiness are you? <br />
+      Choose up to 3 main types.
+    </p>
+    <p class="step-title" [class.display-tab]="displayTab(4)">
+      How long have you been in business?
+    </p>
+    <p class="step-title" [class.display-tab]="displayTab(5)">
+      Where is your business registered?
+    </p>
+    <p class="step-title" [class.display-tab]="displayTab(6)">
+      Just one more question,<br />
+      do you have an Absa (previously Barclays) bank account?
+    </p>
+    <p class="step-title" [class.display-tab]="displayTab(7)">
+      Great, {{ userFirstName }}! You're eligible to apply for a loan. <br />
+      Ready to go?
+    </p>
+  </div>
+
+  <div class="qualification">
+    <div class="qualification__item" [class.display-tab]="displayTab(1)">
+      <div class="row options-wrapper">
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              I need approximately<br />
+              KES 100,000 - KES 3 million
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              I need approximately <br />
+              KES 3 million - KES 7 million
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              I need approximately <br />
+              KES 7 million or more
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(2)">
+      <label class="container">
+        <input type="radio" name="radio" />
+        <span class="checkmark agri-type">
+          I need funds for ongoing expenses - to cover purchasing produce, paying staff, working capital, etc.
+        </span>
+      </label>
+      <label class="container">
+        <input type="radio" name="radio" />
+        <span class="checkmark agri-type">
+          I need funds for a one-off purchase - to use for buying equipment, inputs, growth or expansion.
+        </span>
+      </label>
+      <label class="container">
+        <input type="radio" name="radio" />
+        <span class="checkmark agri-type">
+          I need funds for a bit of both.
+        </span>
+      </label>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(3)">
+      <div class="options-wrapper">
+        <div>
+          <label class="container">
+            <input type="checkbox" name="processing-type" (change)="onCheck($event)" />
+            <span class="checkmark agri-type">
+              <img class="checkmark__img" src="/assets/img/loan-application-imgs/processing.svg" />
+              Processing <br />
+              (aggregator, packing house, miller, etc.)
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="checkbox" name="manufacturer-type" (change)="onCheck($event)" />
+            <span class="checkmark agri-type">
+              <img class="checkmark__img" src="/assets/img/loan-application-imgs/food-manufacturer.svg" />
+              Food manufacturer
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="options-wrapper">
+        <div>
+          <label class="container">
+            <input type="checkbox" name="feed-manufacuturer-type" (change)="onCheck($event)" />
+            <span class="checkmark agri-type">
+              <img class="checkmark__img" src="/assets/img/loan-application-imgs/animal-feed.svg" />
+              Animal feed manufacturer
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="checkbox" name="input-provider-type" (change)="onCheck($event)" />
+            <span class="checkmark agri-type">
+              <img class="checkmark__img" src="/assets/img/loan-application-imgs/input-provider.svg" />
+              Input provider <br />
+              (seeds, fertilizers, machinery, etc.)
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="options-wrapper">
+        <div>
+          <label class="container">
+            <input type="checkbox" name="crop-production-type" (change)="onCheck($event)" />
+            <span class="checkmark agri-type">
+              <img class="checkmark__img" src="/assets/img/loan-application-imgs/crop-production.svg" />
+              Crop production <br />
+              (farmer, grower, etc.)
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="checkbox" name="retail-type" (change)="onCheck($event)" />
+            <span class="checkmark agri-type">
+              <img class="checkmark__img" src="/assets/img/loan-application-imgs/retailer.svg" />
+              Retail<br />
+              (kiosk, supermarket, etc.)
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="options-wrapper" *ngIf="!otherOption">
+        <div class="mr-0">
+          <label class="container">
+            <input type="radio" name="radio" (change)="openTextField()" />
+            <span class="checkmark agri-type">
+              Other
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="input-group" *ngIf="otherOption">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Other</span>
+        </div>
+        <input type="text" class="form-control" autofocus />
+      </div>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(4)">
+      <div class="row options-wrapper">
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/small-business.svg" />
+              Less than 12 months
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/big-business.svg" />
+              More than 12 months
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(5)">
+      <div class="row options-wrapper">
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              Kenya
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              Other
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(6)">
+      <div class="row options-wrapper">
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark text-logo">
+              <span
+                >Yes, I have an
+                <img id="absa-logo" src="/assets/img/loan-application-imgs/absa-logo.svg" alt="absa" />
+                (Barclays) bank account.</span
+              >
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              No, I have a different bank account.
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(7)">
+      <p class="qualification__item__header">Before you begin, here's what you need to know:</p>
+      <ul class="qualification__item__list">
+        <li>How much you want to borrow.</li>
+        <li>Basic information about your company.</li>
+        <li>Basic information about your banking details.</li>
+      </ul>
+      <p class="qualification__item__header">
+        In addition, these are the documents that you'll need in order to complete the loan application:
+      </p>
+      <ul>
+        <li>A scan of your National ID</li>
+        <li>Proof of address</li>
+      </ul>
+      <div class="mb-4 note">
+        <img src="/assets/img/lamp.svg" />
+        <p>
+          <strong>Don't have some of the information at hand?</strong> <br />
+          You can save the application at any point and return to it whenever you have it!
+        </p>
+      </div>
+      <button class="bttn-primary mt-5" (click)="onFinishQualification()">Let's begin</button>
+    </div>
+  </div>
+</div>
+
+<div class="stepper-footer" *ngIf="currentIndex < 7">
+  <div class="stepper-footer-wrapper">
+    <div>
+      <button class="bttn-secondary" *ngIf="currentIndex > 1" (click)="onPrevQuestion()">PREV</button>
+    </div>
+    <div>
+      <button class="bttn-primary" *ngIf="currentIndex < 7" (click)="onNextQuestion()">NEXT</button>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+@import "../../../../assets/sass/abstracts/mixins";
 span.progress {
   margin-left: auto;
   margin-top: 0.87rem;
@@ -26,6 +27,10 @@ button {
   }
   i {
     margin-top: 2px;
+  }
+
+  @include respond(small-desktop) {
+    display: none;
   }
 }
 
