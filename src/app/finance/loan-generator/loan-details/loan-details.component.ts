@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { LoanNavigationComponent } from '../loan-navigation.component';
 import { StepperNavigationService } from '../stepper-navigation.service';
 
@@ -10,7 +10,7 @@ import { StepperNavigationService } from '../stepper-navigation.service';
 export class LoanDetailsComponent extends LoanNavigationComponent implements OnInit, AfterViewInit {
   @ViewChild('loanDetailStepper') loanDetailStepper: ElementRef<HTMLElement>;
 
-  constructor(@Inject(StepperNavigationService) stepperNavigationService: StepperNavigationService) {
+  constructor(stepperNavigationService: StepperNavigationService) {
     super(0, stepperNavigationService);
   }
 

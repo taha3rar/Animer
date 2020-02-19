@@ -8,7 +8,7 @@ import { LoanNavigationComponent } from '../loan-navigation.component';
   styleUrls: ['./applicant-details.component.scss']
 })
 export class ApplicantDetailsComponent extends LoanNavigationComponent implements OnInit, AfterViewInit {
-  constructor(@Inject(StepperNavigationService) stepperNavigationService: StepperNavigationService) {
+  constructor(stepperNavigationService: StepperNavigationService) {
     super(2, stepperNavigationService);
   }
 

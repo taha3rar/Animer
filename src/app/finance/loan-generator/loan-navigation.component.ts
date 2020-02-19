@@ -1,10 +1,6 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, AfterContentChecked, Inject } from '@angular/core';
+import { AfterViewInit, ViewChild, ElementRef, AfterContentChecked, Inject } from '@angular/core';
 import { StepperNavigationService } from './stepper-navigation.service';
 
-@Component({
-  selector: 'app-loan-navigation',
-  template: ''
-})
 export class LoanNavigationComponent implements AfterViewInit, AfterContentChecked {
   @ViewChild('listStepDetails') stepperDetails: ElementRef<HTMLElement>;
   currentInnerStep: number;
