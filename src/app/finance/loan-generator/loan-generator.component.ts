@@ -11,10 +11,15 @@ export class LoanGeneratorComponent implements OnInit {
   loan_form: FormGroup;
   @ViewChild('generalSteps') generalSteps: ElementRef<HTMLElement>;
   @Input() beginApplication = false;
+  currentGeneralActiveStep: number;
 
   constructor(private formBuilder: FormBuilder, private stepperNavigation: StepperNavigationService) {}
 
   ngOnInit() {
+    this.stepperNavigation.setGeneralStepsNumber(this.generalSteps.nativeElement.children.length);
+    this.stepperNavigation.currentActiveGeneralStep.subscribe(stepNumber => {
+      this.currentGeneralActiveStep = stepNumber;
+    });
     this.loan_form = this.formBuilder.group({
       // STEP 1
       loan_details: this.formBuilder.group({
@@ -135,6 +140,13 @@ export class LoanGeneratorComponent implements OnInit {
         ]
       })
     });
-    this.stepperNavigation.generalStepsList = this.generalSteps.nativeElement.children;
+  }
+
+  displayStepTab(stepNumber: number): boolean {
+    return this.currentGeneralActiveStep >= stepNumber;
+  }
+
+  displayStepContent(stepNumber: number): boolean {
+    return this.currentGeneralActiveStep === stepNumber;
   }
 }

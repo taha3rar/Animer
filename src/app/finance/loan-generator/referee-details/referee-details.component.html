@@ -1,5 +1,5 @@
 <div class="stepper">
-  <ul class="nav nav-tabs" style="display: none;" #refereeStepper>
+  <ul class="nav nav-tabs" style="display: none;" #listStepDetails>
     <li class="active">
       <a data-toggle="tab" class="label" href="#referee-first"></a>
     </li>
@@ -9,10 +9,10 @@
   </ul>
 
   <div class="tab-content">
-    <div class="tab-pane active" id="referee-first">
+    <div class="tab-pane" [class.active]="displayStep(0)" id="referee-first">
       <app-referee-first></app-referee-first>
     </div>
-    <div class="tab-pane" id="referee-second">
+    <div class="tab-pane" [class.active]="displayStep(1)" id="referee-second">
       <app-referee-second></app-referee-second>
     </div>
   </div>
@@ -20,11 +20,11 @@
   <div class="stepper-footer">
     <div class="stepper-footer-wrapper">
       <div>
-        <button class="bttn-secondary">PREV</button>
+        <button class="bttn-secondary" (click)="onPrevious()">PREV</button>
       </div>
       <div>
-        <button class="btn-primary-transp" (click)="goBack()">SAVE</button>
-        <button class="bttn bttn-primary" (click)="goNext()">NEXT</button>
+        <button class="btn-primary-transp">SAVE</button>
+        <button class="bttn bttn-primary" (click)="onNext()">NEXT</button>
       </div>
     </div>
   </div>

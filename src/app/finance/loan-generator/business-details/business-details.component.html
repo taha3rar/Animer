@@ -1,5 +1,5 @@
 <div class="stepper">
-  <ul class="nav nav-tabs" style="display: none;" #businessStepper>
+  <ul class="nav nav-tabs" style="display: none;" #listStepDetails>
     <li class="active">
       <a data-toggle="tab" class="label" href="#basic-details"></a>
     </li>
@@ -15,16 +15,16 @@
   </ul>
 
   <div class="tab-content">
-    <div class="tab-pane active" id="basic-details">
+    <div class="tab-pane" [class.active]="displayStep(0)" id="basic-details">
       <app-business-basic-details></app-business-basic-details>
     </div>
-    <div class="tab-pane" id="business-location">
+    <div class="tab-pane" [class.active]="displayStep(1)" id="business-location">
       <app-business-location></app-business-location>
     </div>
-    <div class="tab-pane" id="business-premises">
+    <div class="tab-pane" [class.active]="displayStep(2)" id="business-premises">
       <app-business-premises></app-business-premises>
     </div>
-    <div class="tab-pane" id="business-other">
+    <div class="tab-pane" [class.active]="displayStep(3)" id="business-other">
       <app-business-other-details></app-business-other-details>
     </div>
   </div>
@@ -32,11 +32,11 @@
   <div class="stepper-footer">
     <div class="stepper-footer-wrapper">
       <div>
-        <button class="bttn-secondary" (click)="goBack()">PREV</button>
+        <button class="bttn-secondary" (click)="onPrevious()">PREV</button>
       </div>
       <div>
         <button class="btn-primary-transp">SAVE</button>
-        <button class="bttn bttn-primary next-step" (click)="goNext()">NEXT</button>
+        <button class="bttn bttn-primary next-step" (click)="onNext()">NEXT</button>
       </div>
     </div>
   </div>

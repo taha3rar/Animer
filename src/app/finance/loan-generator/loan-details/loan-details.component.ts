@@ -1,21 +1,22 @@
-import { StepperNavigationService } from './../stepper-navigation.service';
-import { StepperService } from '@app/core/forms/stepper.service';
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { LoanNavigationComponent } from '../loan-navigation.component';
+import { StepperNavigationService } from '../stepper-navigation.service';
 
 @Component({
   selector: 'app-loan-details',
   templateUrl: './loan-details.component.html',
   styleUrls: ['./loan-details.component.scss']
 })
-export class LoanDetailsComponent implements OnInit {
+export class LoanDetailsComponent extends LoanNavigationComponent implements OnInit, AfterViewInit {
   @ViewChild('loanDetailStepper') loanDetailStepper: ElementRef<HTMLElement>;
 
-  constructor(private stepperNavigation: StepperNavigationService) {}
+  constructor(stepperNavigationService: StepperNavigationService) {
+    super(0, stepperNavigationService);
+  }
 
   ngOnInit() {}
 
-  onNext() {
-    this.stepperNavigation.innerStepsList = this.loanDetailStepper.nativeElement.children;
-    this.stepperNavigation.onNext();
+  ngAfterViewInit() {
+    super.ngAfterViewInit();
   }
 }

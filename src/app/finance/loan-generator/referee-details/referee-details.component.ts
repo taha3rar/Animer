@@ -1,26 +1,20 @@
-import { StepperNavigationService } from './../stepper-navigation.service';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { LoanNavigationComponent } from '../loan-navigation.component';
+import { StepperNavigationService } from '../stepper-navigation.service';
 
 @Component({
   selector: 'app-referee-details',
   templateUrl: './referee-details.component.html',
   styleUrls: ['./referee-details.component.scss']
 })
-export class RefereeDetailsComponent implements OnInit {
-  currentStep = 1;
-  @ViewChild('refereeStepper') refereeStepper: ElementRef;
-
-  constructor(private stepperService: StepperNavigationService) {}
+export class RefereeDetailsComponent extends LoanNavigationComponent implements OnInit, AfterViewInit {
+  constructor(stepperNavigationService: StepperNavigationService) {
+    super(3, stepperNavigationService);
+  }
 
   ngOnInit() {}
 
-  goNext() {
-    this.stepperService.innerStepsList = this.refereeStepper.nativeElement.children;
-    this.stepperService.onNext();
-  }
-
-  goBack() {
-    this.stepperService.innerStepsList = this.refereeStepper.nativeElement.children;
-    this.stepperService.onPrevious();
+  ngAfterViewInit() {
+    super.ngAfterViewInit();
   }
 }
