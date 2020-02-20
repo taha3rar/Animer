@@ -240,3 +240,29 @@
     color: #5a6c7b;
   }
 }
+
+.text-right {
+  text-align: right;
+}
+
+.note {
+  background-color: #e8f1f2;
+  padding: 1.4rem 1.5rem;
+  width: 50%;
+  display: flex;
+  align-items: flex-start;
+  color: #5a6c7b;
+
+  @include respond(tab-land) {
+    width: 100%;
+  }
+
+  p {
+    font-size: 1.45rem;
+  }
+
+  img {
+    width: 2.5rem;
+    margin-right: 8px;
+  }
+}

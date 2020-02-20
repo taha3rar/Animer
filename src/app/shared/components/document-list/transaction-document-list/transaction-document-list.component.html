@@ -62,4 +62,19 @@
       <p class="t-light-gray">{{ document.date_created | date: 'dd/MM/yyyy' }}</p>
     </div>
   </div>
+
+  <div class="doc-card-upload">
+    <div>
+      <label class="material-icons" id="add-btn" for="btn-input">add</label>
+      <input type="file" id="btn-input" (change)="onFileChange($event)" />
+      <p>Address Proof</p>
+    </div>
+  </div>
+  <div class="doc-card-upload">
+    <div>
+      <label class="material-icons" id="add-btn" for="btn-input">add</label>
+      <input type="file" id="btn-input" (change)="onFileChange($event)" />
+      <p>Personal Identification</p>
+    </div>
+  </div>
 </div>

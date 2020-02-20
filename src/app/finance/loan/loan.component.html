@@ -1,0 +1,136 @@
+<h1 class="main-title btn-main" (click)="back()"><a class="material-icons">keyboard_backspace</a> Finance</h1>
+
+<div class="col-md-12">
+  <div class="panel">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="info-top">
+            <div>
+              <p class="heading-2">Loan #444</p>
+            </div>
+            <div class="timing-section">
+              <span
+                ><i class="material-icons">calendar_today</i> <span class="time-text">Issued on 06/02/2020</span></span
+              >
+            </div>
+          </div>
+          <div class="info">
+            <div>
+              <p class="t-light-gray">LOAN SIZE</p>
+              <p class="t-bold">KES 80,000</p>
+            </div>
+            <div style="margin-left: auto;">
+              <p class="t-light-gray text-right">STATUS</p>
+              <div class="status status-orange">In Progress</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 application-submission">
+          <button
+            [ngClass]="{ 'bttn-primary': applicationCompleted, 'bttn-transparent-disabled': !applicationCompleted }"
+          >
+            Send Application
+          </button>
+          <p>You'll be able to send the application to Absa after completing the 3 steps below.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a data-toggle="tab" href="#loanOverview">Loan Overview</a>
+    </li>
+    <li><a data-toggle="tab" href="#documents">Necessary Documents</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="loanOverview">
+      <div class="panel panel-tab">
+        <div class="panel-body">
+          <ul class="loan-progress">
+            <li class="step">
+              <div class="step_header">
+                <div class="circle-wrapper"><span class="circle">1</span></div>
+                <div class="step_header_title">Complete Loan Application Details</div>
+              </div>
+              <div class="step_content">
+                <div class="step_content_item">
+                  <p>Loan Details</p>
+                  <span class="progress">
+                    <span class="progress-bar" [style.width.px]="100" role="progressbar" aria-valuemax="100">40%</span>
+                  </span>
+                </div>
+                <div class="step_content_item">
+                  <p>Business Details</p>
+                  <span class="progress">
+                    <span class="progress-bar" [style.width.px]="0" role="progressbar" aria-valuemax="100"></span>
+                  </span>
+                </div>
+                <div class="step_content_item">
+                  <p>Applicant’s Details</p>
+                  <span class="progress">
+                    <span class="progress-bar" [style.width.px]="0" role="progressbar" aria-valuemax="100"></span>
+                  </span>
+                </div>
+                <div class="step_content_item">
+                  <p>Referee’s Details</p>
+                  <span class="progress">
+                    <span class="progress-bar" [style.width.px]="0" role="progressbar" aria-valuemax="100"></span>
+                  </span>
+                </div>
+                <div class="step_content_item">
+                  <p>Business banking details</p>
+                  <span class="progress">
+                    <span class="progress-bar" [style.width.px]="0" role="progressbar" aria-valuemax="100"></span>
+                  </span>
+                </div>
+              </div>
+            </li>
+            <li class="step">
+              <div class="step_header">
+                <div class="circle-wrapper"><span class="circle">2</span></div>
+                <div class="step_header_title">Upload Necessary Documents</div>
+              </div>
+              <div class="step_content">
+                <div class="step_content_item"><p>0 out 4 documents uploaded</p></div>
+              </div>
+            </li>
+            <li class="step disabled">
+              <div class="step_header">
+                <div class="circle-wrapper"><span class="circle">3</span></div>
+                <div class="step_header_title">Sign Application</div>
+              </div>
+              <div class="step_content">
+                <div class="step_content_item"><p>Click here to sign application</p></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="documents">
+      <div class="tab-pane active" id="loandetails" role="tabpanel">
+        <div class="panel panel-tab">
+          <div class="panel-body p-5">
+            <h2>
+              Necessary Documents.
+            </h2>
+            <h4 class="mb-4">Upload the following documents to speed up your loan application process.</h4>
+            <div class="mb-4 note">
+              <img src="/assets/img/lamp.svg" />
+              <p>
+                If you're uploading a picture of the document, please make sure to take a clear photo of the original
+                document.
+              </p>
+            </div>
+            <app-transaction-document-list></app-transaction-document-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

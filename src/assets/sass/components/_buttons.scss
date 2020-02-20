@@ -17,7 +17,8 @@
   }
 }
 
-.btn-primary-transp {
+.btn-primary-transp,
+.bttn-transparent-disabled {
   background: transparent;
   border-radius: 10rem;
   position: relative;
@@ -40,6 +41,12 @@
     font-size: 1.5rem;
     vertical-align: middle;
   }
+}
+
+.bttn-transparent-disabled {
+  color: #ced3de !important;
+  border: 1px solid #ced3de !important;
+  cursor: default;
 }
 
 .bttns-flex {

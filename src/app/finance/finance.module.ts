@@ -1,3 +1,4 @@
+import { SharedModule } from '@app/shared';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductRoutingModule } from './finance-routing.module';
@@ -28,6 +29,7 @@ import { ApplicantCardsComponent } from './loan-generator/bank-details/applicant
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { MatSliderModule } from '@angular/material';
 import { QualifcationToolComponent } from './loan-generator/qualifcation-tool/qualifcation-tool.component';
+import { LoanComponent } from './loan/loan.component';
 
 @NgModule({
   declarations: [
@@ -52,11 +54,12 @@ import { QualifcationToolComponent } from './loan-generator/qualifcation-tool/qu
     ApplicantBankDetailsComponent,
     ApplicantOtherLoansComponent,
     ApplicantCardsComponent,
-    QualifcationToolComponent
+    QualifcationToolComponent,
+    LoanComponent
   ],
   entryComponents: [],
 
-  imports: [CommonModule, ProductRoutingModule, CdkStepperModule, MatSliderModule],
+  imports: [CommonModule, ProductRoutingModule, CdkStepperModule, SharedModule, MatSliderModule],
   providers: []
 })
 export class FinanceModule {}

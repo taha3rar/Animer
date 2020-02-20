@@ -1,3 +1,4 @@
+import { LoanComponent } from './loan/loan.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
@@ -14,6 +15,10 @@ const routes: Routes = [
     {
       path: 'finance/generator/loan',
       component: LoanGeneratorComponent
+    },
+    {
+      path: 'finance/loan/:id',
+      component: LoanComponent
     }
   ])
 ];

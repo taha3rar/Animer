@@ -134,30 +134,6 @@
   }
 }
 
-.note {
-  background-color: #e8f1f2;
-  padding: 1.8rem 1.5rem;
-  width: 50%;
-  margin: 0 auto;
-  display: flex;
-  align-items: flex-start;
-  color: #5a6c7b;
-
-  @include respond(tab-land) {
-    width: 100%;
-  }
-
-  p {
-    font-size: 1.45rem;
-  }
-
-  img {
-    width: 2.5rem;
-    padding-top: 5px;
-    margin-right: 8px;
-  }
-}
-
 .input-group {
   height: 7rem;
 
