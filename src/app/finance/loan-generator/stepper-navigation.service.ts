@@ -1,53 +1,41 @@
-import { Injectable, QueryList } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StepperNavigationService {
-  activeGeneralStep = 0;
-  activeInnerStep = 0;
-  generalStepsList: HTMLCollection;
-  innerStepsList: HTMLCollection;
+  activeGeneralStepSource = new BehaviorSubject(0);
+  activeInnerStepSource = new BehaviorSubject(0);
+  currentActiveGeneralStep = this.activeGeneralStepSource.asObservable();
+  currentActiveInnerStep = this.activeInnerStepSource.asObservable();
+  stepDictionnary = new Array();
 
   constructor() {}
 
-  onNext() {
-    if (this.activeInnerStep === this.innerStepsList.length - 1) {
-      this.updateStatus('completed');
-      this.activeGeneralStep = this.activeGeneralStep + 1;
-      this.showStep('general');
-      this.updateStatus('active');
+  setGeneralStepsNumber(generalStepsNumber: number): void {
+    this.stepDictionnary = new Array(generalStepsNumber);
+  }
+
+  setInnerStepsNumber(generalStepId: number, innerStepsNumber: number): void {
+    this.stepDictionnary[generalStepId] = innerStepsNumber;
+  }
+
+  onNext(): void {
+    if (this.activeInnerStepSource.getValue() === this.stepDictionnary[this.activeGeneralStepSource.getValue()]) {
+      this.activeGeneralStepSource.next(this.activeGeneralStepSource.getValue() + 1);
+      this.activeInnerStepSource.next(0);
     } else {
-      this.activeInnerStep = this.activeInnerStep + 1;
-      this.showStep();
+      this.activeInnerStepSource.next(this.activeInnerStepSource.getValue() + 1);
     }
   }
 
-  onPrevious() {
-    if (this.activeInnerStep === 0) {
-      this.activeGeneralStep = this.activeGeneralStep - 1;
-      this.showStep('general');
+  onPrevious(): void {
+    if (this.activeInnerStepSource.getValue() === 0) {
+      this.activeGeneralStepSource.next(this.activeGeneralStepSource.getValue() - 1);
+      this.activeInnerStepSource.next(this.stepDictionnary[this.activeGeneralStepSource.getValue()]);
     } else {
-      this.activeInnerStep -= 1;
-      this.showStep();
-    }
-  }
-
-  showStep(generalStep?: string) {
-    if (generalStep) {
-      this.activeInnerStep = 0;
-      $(this.generalStepsList[this.activeGeneralStep].children[0]).trigger('click');
-    } else {
-      $(this.innerStepsList[this.activeInnerStep].children[0]).trigger('click');
-    }
-  }
-
-  updateStatus(status: string) {
-    if (status === 'completed') {
-      $(this.generalStepsList[this.activeGeneralStep]).addClass('completed');
-    } else {
-      $(this.generalStepsList[this.activeGeneralStep]).removeClass('disabled');
-      $(this.generalStepsList[this.activeGeneralStep]).addClass('active');
+      this.activeInnerStepSource.next(this.activeInnerStepSource.getValue() - 1);
     }
   }
 }

@@ -1,9 +1,9 @@
-<div class="wrapper wizard" *ngIf="beginApplication">
+<div class="wrapper wizard" [hidden]="!beginApplication">
   <h1 class="main-title btn-main margin-bottom-2"><a class="material-icons">keyboard_backspace</a> Finance</h1>
   <div class="stepper-wrapper">
     <div>
       <ul class="nav nav-tabs" #generalSteps>
-        <li class="active">
+        <li [class.active]="displayStepTab(0)" [class.disabled]="!displayStepTab(0)">
           <a data-toggle="tab" class="label" href="#loan-details">
             <span class="round-tab">1</span><span class="l-step-title">Loan Details</span></a
           >
@@ -11,7 +11,7 @@
             <span class="step-progress-bar"></span>
           </span>
         </li>
-        <li class="disabled">
+        <li [class.active]="displayStepTab(1)" [class.disabled]="!displayStepTab(1)">
           <a data-toggle="tab" class="label" href="#business-details"
             ><span class="round-tab">2</span><span class="l-step-title">Business Details</span>
           </a>
@@ -19,7 +19,7 @@
             <span class="step-progress-bar"></span>
           </span>
         </li>
-        <li class="disabled">
+        <li [class.active]="displayStepTab(2)" [class.disabled]="!displayStepTab(2)">
           <a data-toggle="tab" class="label" href="#applicant-details">
             <span class="round-tab">3</span><span class="l-step-title">Applicant Details</span></a
           >
@@ -27,7 +27,7 @@
             <span class="step-progress-bar"></span>
           </span>
         </li>
-        <li class="disabled">
+        <li [class.active]="displayStepTab(3)" [class.disabled]="!displayStepTab(3)">
           <a data-toggle="tab" class="label" href="#referee-details">
             <span class="round-tab">4</span><span class="l-step-title">Referee Details</span></a
           >
@@ -35,7 +35,7 @@
             <span class="step-progress-bar"></span>
           </span>
         </li>
-        <li class="disabled">
+        <li [class.active]="displayStepTab(4)" [class.disabled]="!displayStepTab(4)">
           <a data-toggle="tab" class="label" href="#business-banking-details">
             <span class="round-tab">5</span><span class="l-step-title">Business Banking Details</span></a
           >
@@ -49,23 +49,23 @@
       </span>
 
       <div class="tab-content">
-        <div class="tab-pane active" id="loan-details">
+        <div class="tab-pane" [class.active]="displayStepContent(0)" id="loan-details">
           <app-loan-details></app-loan-details>
         </div>
 
-        <div class="tab-pane" id="business-details">
+        <div class="tab-pane" [class.active]="displayStepContent(1)" id="business-details">
           <app-business-details></app-business-details>
         </div>
 
-        <div class="tab-pane" id="applicant-details">
+        <div class="tab-pane" [class.active]="displayStepContent(2)" id="applicant-details">
           <app-applicant-details></app-applicant-details>
         </div>
 
-        <div class="tab-pane" id="referee-details">
+        <div class="tab-pane" [class.active]="displayStepContent(3)" id="referee-details">
           <app-referee-details></app-referee-details>
         </div>
 
-        <div class="tab-pane" id="business-banking-details">
+        <div class="tab-pane" [class.active]="displayStepContent(4)" id="business-banking-details">
           <app-bank-details></app-bank-details>
         </div>
       </div>
