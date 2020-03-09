@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../../shared/services/spinner-toggle.service';
 import { Intercom } from 'ng-intercom';
 import { AlertsService } from './../../../core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
@@ -43,7 +44,8 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     private route: ActivatedRoute,
     private router: Router,
     private alerts: AlertsService,
-    private intercom: Intercom
+    private intercom: Intercom,
+    private spinnerToggleService: SpinnerToggleService
   ) {
     super(dialog);
   }
@@ -176,6 +178,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
 
   draftInvoice() {
     this.disableSubmitButton(true);
+    this.spinnerToggleService.showSpinner();
     this.preSubmit();
     this.savedAsDraft.emit(true);
     this.newInvoice = this.form.value;
@@ -186,6 +189,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     if (!this.draft) {
       this.invoiceService.draft(this.newInvoice).subscribe(
         () => {
+          this.spinnerToggleService.hideSpinner();
           this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
           this.router.navigateByUrl('/invoice');
         },
@@ -196,6 +200,7 @@ export class InvoiceGeneratorInvoiceComponent extends DocumentGeneratorComponent
     } else {
       this.invoiceService.update(this.newInvoice._id, this.newInvoice).subscribe(
         () => {
+          this.spinnerToggleService.hideSpinner();
           this.alerts.showAlert('Your proforma invoice has been saved as a draft!');
           this.router.navigateByUrl('/invoice');
         },

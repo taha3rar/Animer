@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { DocumentDownloadComponent } from './../../shared/components/document-download/document-download.component';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { QuoteRequestDataService } from '../quote-request-generator/quote-request-data.service';
@@ -28,7 +29,8 @@ export class QuoteRequestComponent extends DocumentDownloadComponent implements 
     private quoteRequestDataService: QuoteRequestDataService,
     private quoteRequestService: QuoteRequestService,
     private alerts: AlertsService,
-    private router: Router
+    private router: Router,
+    private spinnerToggleService: SpinnerToggleService
   ) {
     super(quoteRequestService, 'quote-request', 'Quote Request');
   }
@@ -47,10 +49,12 @@ export class QuoteRequestComponent extends DocumentDownloadComponent implements 
 
   submitQuoteRequest() {
     this.disableSubmitButton(true);
+    this.spinnerToggleService.showSpinner();
     if (this.quoteRequest.product && this.quoteRequest.sellers.length > 0) {
       this.validQuoteRequest.emit(true);
       this.quoteRequestService.create(this.quoteRequest).subscribe(
         quoteRequest => {
+          this.spinnerToggleService.hideSpinner();
           this.alerts.showAlert('Your quote request has been sent');
           this.router.navigateByUrl('/quote-request');
         },

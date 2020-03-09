@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../../shared/services/spinner-toggle.service';
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '@app/core/models/user/client';
@@ -35,7 +36,8 @@ export class QuoteRequestGeneratorSuppliersComponent extends BaseValidationCompo
     private quoteRequestDataService: QuoteRequestDataService,
     private quoteRequestService: QuoteRequestService,
     private alerts: AlertsService,
-    private router: Router
+    private router: Router,
+    private spinnerToggleSerivce: SpinnerToggleService
   ) {
     super();
   }
@@ -163,9 +165,11 @@ export class QuoteRequestGeneratorSuppliersComponent extends BaseValidationCompo
 
   draftQuoterequest() {
     this.disableSubmitButton(true);
+    this.spinnerToggleSerivce.showSpinner();
     this.validQuoteRequest.emit(true);
     this.quoteRequestService.draft(this.quoteRequest).subscribe(
       quoteRequest => {
+        this.spinnerToggleSerivce.hideSpinner();
         this.alerts.showAlert('Your quote request has been saved');
         this.router.navigateByUrl('/quote-request');
       },

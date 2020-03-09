@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { Component, OnInit, Input, Inject, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { Quotation } from '@app/core/models/quotation/quotation';
@@ -21,6 +22,7 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
     @Optional() public dialogRef: MatDialogRef<QuotationComponent>,
     private quotationService: QuotationService,
     private alerts: AlertsService,
+    private spinnerToggleService: SpinnerToggleService,
     private router: Router
   ) {
     super(quotationService, 'quotation', 'Quotation');
@@ -36,9 +38,11 @@ export class QuotationComponent extends DocumentDownloadComponent implements OnI
   }
 
   submitQuotation() {
+    this.spinnerToggleService.showSpinner();
     this.disableSubmitButton(true);
     this.quotationService.create(this.quotation).subscribe(
       quotation => {
+        this.spinnerToggleService.hideSpinner();
         this.alerts.showAlert('Your quotation has been sent');
         this.router.navigateByUrl('/quote-request');
       },

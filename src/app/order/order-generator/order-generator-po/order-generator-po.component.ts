@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../../shared/services/spinner-toggle.service';
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { Order } from '@app/core/models/order/order';
 import { ProductInvoice } from '@app/core/models/invoice/product-invoice';
@@ -47,7 +48,8 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     private orderService: OrderService,
     private quotationService: QuotationService,
     private router: Router,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private spinnerToggleService: SpinnerToggleService
   ) {
     super(dialog, orderDataService);
   }
@@ -191,12 +193,14 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
   }
 
   draftOrder() {
+    this.spinnerToggleService.showSpinner();
     this.disableSubmitButton(true);
     this.newDraftPO.emit(true);
     this.preSubmit();
     if (this.openOrder) {
       this.orderService.draftOpen(this.newOrder).subscribe(
         () => {
+          this.spinnerToggleService.hideSpinner();
           this.alerts.showAlert('Your purchase order has been saved as a draft!');
           this.router.navigateByUrl('/order');
         },
@@ -207,6 +211,7 @@ export class OrderGeneratorPoComponent extends DocumentGeneratorComponent implem
     } else {
       this.orderService.draft(this.newOrder).subscribe(
         () => {
+          this.spinnerToggleService.hideSpinner();
           this.alerts.showAlert('Your purchase order has been saved as a draft!');
           this.router.navigateByUrl('/order');
         },

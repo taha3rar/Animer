@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { Intercom } from 'ng-intercom';
 import { DocumentDownloadComponent } from './../../shared/components/document-download/document-download.component';
 import { AlertsService } from './../../core/alerts.service';
@@ -33,7 +34,8 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
     private router: Router,
     private alertsService: AlertsService,
     private authenticationService: AuthenticationService,
-    private intercom: Intercom
+    private intercom: Intercom,
+    private spinnerToggleService: SpinnerToggleService
   ) {
     super(invoiceService, 'proforma-invoice', 'Proforma Invoice');
   }
@@ -95,6 +97,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
 
   saveInvoice(): void {
     this.formSubmitted.emit(true);
+    this.spinnerToggleService.showSpinner();
     if (this.disclaimerAccepted === false) {
       this.disclaimerPopup();
     } else {
@@ -107,6 +110,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
               this.productService.create(product).subscribe();
             }
           }
+          this.spinnerToggleService.hideSpinner();
           this.alertsService.showAlert('Your proforma invoice has been sent');
           this.router.navigateByUrl('/invoice');
         },

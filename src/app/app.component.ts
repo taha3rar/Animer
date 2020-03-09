@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, AfterContentChecked } from '@angular/core';
 import {
   Router,
   NavigationEnd,
@@ -18,6 +18,7 @@ import { Location } from '@angular/common';
 import { environment } from '@env/environment';
 import { Logger, I18nService } from '@app/core';
 import { Intercom } from 'ng-intercom';
+import { SpinnerToggleService } from './shared/services/spinner-toggle.service';
 
 const log = new Logger('App');
 declare const $: any;
@@ -25,11 +26,12 @@ declare const $: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [SpinnerToggleService]
 })
 export class AppComponent implements OnInit {
-  showLoading = true;
   userValidation = false;
+  showSpinner: boolean;
 
   constructor(
     private router: Router,
@@ -38,6 +40,7 @@ export class AppComponent implements OnInit {
     private location: Location,
     private translateService: TranslateService,
     private authenticationService: AuthenticationService,
+    private spinnerToggleService: SpinnerToggleService,
     // do not remove the analytics injection, even if the call in ngOnInit() is removed
     // this injection initializes page tracking through the router
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
@@ -46,14 +49,14 @@ export class AppComponent implements OnInit {
   ) {
     this.router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
-        this.showLoading = true;
+        this.spinnerToggleService.showSpinner();
       }
       if (
         routerEvent instanceof NavigationEnd ||
         routerEvent instanceof NavigationError ||
         routerEvent instanceof NavigationCancel
       ) {
-        this.showLoading = false;
+        this.spinnerToggleService.hideSpinner();
       }
     });
   }
@@ -69,6 +72,10 @@ export class AppComponent implements OnInit {
     if (environment.production) {
       Logger.enableProductionMode();
     }
+
+    this.spinnerToggleService.spinnerStatus.subscribe(state => {
+      this.showSpinner = state;
+    });
 
     log.debug('init');
 
