@@ -20,7 +20,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
   countries = countries;
   @Input() showPaymentSection = false;
   applicationStatus: string;
-  documentsArray: any[] = [];
+  documentsArray: any = [];
   termsAccepted = false;
   idDocumentReceived = false;
   markDocumentAsIncorrect = false;
@@ -89,7 +89,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
 
   receiveDocuments($event: any) {
     this.documentsArray.push($event);
-    if (this.documentsArray.find(x => x.file_type === 'ID')) {
+    if (this.documentsArray.find((x: any) => x.file_type === 'ID')) {
       this.idDocumentReceived = true;
       this.markDocumentAsIncorrect = false;
     }

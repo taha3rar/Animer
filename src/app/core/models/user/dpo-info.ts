@@ -10,5 +10,11 @@ export class DpoInformation {
   company_email: String;
   website: String;
   phone_number: String;
-  documents: DpoDocuments[];
+  documents: [
+    {
+      file_type: string;
+      file_name: string;
+      url: string;
+    }
+  ];
 }
