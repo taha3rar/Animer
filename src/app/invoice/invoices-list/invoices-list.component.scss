@@ -13,3 +13,41 @@
     0 8px 10px -5px hsla(0, 0%, 60%, 0.2);
   transition: all 0.5s;
 }
+
+.helper-payment-wrapper {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.helper-panel {
+  margin-bottom: 0px;
+  font-size: 1.4rem;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.pay-section {
+  width: 30%;
+  position: relative;
+  background: #5089f0;
+  color: white;
+  border-radius: 2px;
+  margin-top: 1rem;
+  padding: 1rem 1rem 1rem 1.5rem;
+  margin-left: 1.7rem;
+
+  p {
+    z-index: 100;
+  }
+  a {
+    text-decoration: underline;
+    color: white;
+  }
+
+  img {
+    position: absolute;
+    right: 9px;
+    top: 9px;
+    width: 9%;
+  }
+}

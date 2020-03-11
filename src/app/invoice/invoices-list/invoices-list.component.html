@@ -2,9 +2,22 @@
   >Need help?</a
 >
 <h1 translate class="main-title">Proforma Invoices</h1>
-<div class="helper-panel clearfix">
-  <i class="material-icons pull-left">info</i>
-  <p>{{ helpLegend }}</p>
+<div class="helper-payment-wrapper">
+  <div class="helper-panel">
+    <i class="material-icons pull-left">info</i>
+    <p>{{ helpLegend }}</p>
+  </div>
+  <div
+    class="pay-section"
+    *ngIf="!currentUser.dpo.status && (currentUser.roles[0] == 'buyer' || currentUser.roles[0] == 'agribusiness')"
+  >
+    <img src="../../../assets/img/money.svg" />
+    <p><strong>Want to pay faster?</strong></p>
+    <p>
+      Use DPO payment provider to pay invoices online.<br />
+      <a [routerLink]="['/profile', 'payment']">Setup DPO payment</a>
+    </p>
+  </div>
 </div>
 
 <h1 translate class="main-title" *ngIf="hasInvoices">Proforma Invoices List</h1>

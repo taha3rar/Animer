@@ -35,6 +35,7 @@ import { ContactGeneratorComponent } from './components/contact-generator/contac
 import { UserProgressComponent } from './components/user-progress/user-progress.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { InputProductComponent } from './components/products/input-product/input-product.component';
+import { DpoDocumentsComponent } from './components/document-list/dpo-documents/dpo-documents.component';
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import { InputProductComponent } from './components/products/input-product/input
     FilterPipe,
     ContactGeneratorComponent,
     UserProgressComponent,
-    InputProductComponent
+    InputProductComponent,
+    DpoDocumentsComponent
   ],
   entryComponents: [
     ModalAgriculturalProductComponent,
@@ -97,7 +99,8 @@ import { InputProductComponent } from './components/products/input-product/input
     ModalInventoryComponent,
     ContactGeneratorComponent,
     UserProgressComponent,
-    FilterPipe
+    FilterPipe,
+    DpoDocumentsComponent
   ],
   providers: [CsvService, DatePipe]
 })

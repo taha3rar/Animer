@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   clientDetailsForm: FormGroup;
   companyDetailsForm: FormGroup;
   credentials: Credentials;
+  showPaymentSection = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +33,7 @@ export class ProfileComponent implements OnInit {
     this.credentials = this.authenticationService.credentials;
     this.currentUserId = this.authenticationService.currentUserId;
     this.user = this.route.snapshot.data['currentUser'];
+    this.showPaymentSection = this.route.snapshot.params.flag ? true : false;
     this.clientDetailsForm = this.formBuilder.group({
       firstName: [this.user.personal_information.first_name, Validators.required],
       lastName: [this.user.personal_information.last_name, Validators.required],

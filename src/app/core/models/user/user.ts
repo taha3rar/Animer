@@ -1,5 +1,6 @@
 import { PersonalInformation } from './personal-information';
 import { CompanyInformation } from './company-information';
+import { DpoInformation } from './dpo-info';
 
 export class User {
   email: string;
@@ -31,10 +32,12 @@ export class User {
   image: string;
   contact_by: string[];
   notifications: string[];
+  dpo_information: DpoInformation;
 
   constructor() {
     this.personal_information = new PersonalInformation();
     this.company_information = new CompanyInformation();
+    this.dpo_information = new DpoInformation();
     this.permissions = [];
     this.contact_by = [];
     this.roles = [];

@@ -48,11 +48,11 @@
               data-target="#personalCompanySection"
               aria-expanded="false"
             >
-              <i class="glyphicon glyphicon-minus"></i>
+              <i class="glyphicon glyphicon-plus"></i>
             </button>
           </div>
         </div>
-        <div class="collapse in" id="personalCompanySection">
+        <div class="collapse" id="personalCompanySection">
           <div class="col-md-6 contact-info-section">
             <div class="icon-text">
               <i class="material-icons">person</i><span class="heading-3"> CONTACT INFORMATION</span>
@@ -155,6 +155,11 @@
             </form>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="user.roles[0] == 'buyer' || user.roles[0] == 'agribusiness'">
+      <div class="col">
+        <app-payment-settings [showPaymentSection]="showPaymentSection"></app-payment-settings>
       </div>
     </div>
     <div class="row">

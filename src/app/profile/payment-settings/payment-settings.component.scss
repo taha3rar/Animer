@@ -1,0 +1,33 @@
+.dpo-img {
+  width: 100%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.dpo-img-wrapper {
+  background: white;
+  width: 70px;
+  height: 40px;
+  right: 0;
+  display: inline-block;
+  position: relative;
+  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.07);
+}
+
+select.form-control {
+  height: 3.2rem;
+}
+
+.application-header {
+  display: flex;
+  align-items: flex-start;
+  .status {
+    margin-left: auto;
+    flex: auto;
+  }
+}
+
+.help-block {
+  margin-bottom: 1.2rem !important;
+}

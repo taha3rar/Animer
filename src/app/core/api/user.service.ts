@@ -7,6 +7,8 @@ import { BaseService } from './base.service';
 import { Passwords } from '../models/user/passwords';
 import { Client } from '../models/user/client';
 import { UserRegistration } from '../models/user/user-registration';
+import { DpoInformation } from '../models/user/dpo-info';
+import { DpoDocuments } from '../models/user/dpo-documents';
 
 @Injectable({
   providedIn: 'root'
@@ -89,5 +91,13 @@ export class UserService extends BaseService {
 
   updateUserValidation(id: string): Observable<any> {
     return this.apiService.post(`/user/validate/${id}`).pipe(map(data => data));
+  }
+
+  saveUserDPOInformation(userDpoInfo: DpoInformation, id: string): Observable<any> {
+    return this.apiService.post(`/user/${id}/dpo`, userDpoInfo).pipe(map(data => data));
+  }
+
+  saveDPODocuments(dpoDocs: DpoDocuments, id: string): Observable<any> {
+    return this.apiService.post(`/user/${id}/dpo/document`, dpoDocs).pipe(map(data => data));
   }
 }

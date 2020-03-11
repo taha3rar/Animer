@@ -1,0 +1,174 @@
+<div class="panel user-settings">
+  <div class="panel-body">
+    <div class="panel-header">
+      <div class="icon-text">
+        <i class="material-icons">payment</i> <span class="heading-2"> Payment Settings </span>
+      </div>
+      <div class="show-hide">
+        <button
+          class="show-hide-btn"
+          type="button"
+          data-toggle="collapse"
+          data-target="#paymentSettings"
+          aria-expanded="false"
+        >
+          <i
+            [ngClass]="{ 'glyphicon-minus': showPaymentSection, 'glyphicon-plus': !showPaymentSection }"
+            class="glyphicon"
+          ></i>
+        </button>
+      </div>
+    </div>
+    <div class="collapse" id="paymentSettings" [ngClass]="{ in: showPaymentSection }">
+      <div class="padding-all">
+        <div class="application-header">
+          <div class="dpo-img-wrapper">
+            <img src="../../../assets/img/dpo-logo.png" class="dpo-img" />
+          </div>
+          <div *ngIf="applicationStatus && applicationStatus == 'PENDING APPROVAL'" class="status status-orange">
+            {{ applicationStatus }}
+          </div>
+          <div *ngIf="applicationStatus && applicationStatus == 'ACCEPTED'" class="status status-green">
+            {{ applicationStatus }}
+          </div>
+          <div *ngIf="applicationStatus && applicationStatus == 'DECLINED'" class="status status-red">
+            {{ applicationStatus }}
+          </div>
+        </div>
+        <div>
+          <h4 class="mt-3">
+            Avenews-GT uses <a href="https://www.dpogroup.com/africa/" target="_blank">DPO</a> to facilitate the payment
+            process. DPO is a secure online payment provider that makes payments simple by allowing businesses to accept
+            credit cards, mobile payments and cross-border payments.
+          </h4>
+          <h4>To register in DPO, you need to provide the following information and documents:</h4>
+
+          <form [formGroup]="dpoForm">
+            <div class="row mt-5">
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="showFieldStyle('companyName')">
+                  <label for="company-name">Company Name *</label>
+                  <input class="form-control" formControlName="companyName" id="company-name" type="text" />
+                  <div class="help-block" *ngIf="isFieldInvalid('companyName')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('tradeName')">
+                  <label for="trade-name">Trade Name *</label>
+                  <input class="form-control" formControlName="tradeName" id="trade-name" />
+                  <div class="help-block" *ngIf="isFieldInvalid('tradeName')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('companyRegistrationNo')">
+                  <label for="registration-no">Registration Number *</label>
+                  <input
+                    class="form-control"
+                    formControlName="companyRegistrationNo"
+                    id="registration-no"
+                    type="text"
+                  />
+                  <div class="help-block" *ngIf="isFieldInvalid('companyRegistrationNo')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('companyEmail')">
+                  <label for="company-email">Company Email *</label>
+                  <input class="form-control" formControlName="companyEmail" id="company-email" type="text" />
+                  <div class="help-block" *ngIf="isFieldInvalid('companyEmail')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('websiteURL')">
+                  <label for="website-url">Website URL *</label>
+                  <input class="form-control" formControlName="websiteURL" id="website-url" type="text" />
+                  <div class="help-block" *ngIf="isFieldInvalid('websiteURL')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="showFieldStyle('phoneNumber')">
+                  <label for="phone-number">Phone Number *</label>
+                  <input
+                    class="form-control"
+                    formControlName="phoneNumber"
+                    id="phone-number"
+                    type="text"
+                    placeholder=""
+                  />
+                  <div class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('address')">
+                  <label for="address-line">Address Line *</label>
+                  <input class="form-control" formControlName="address" id="address-line" type="text" placeholder="" />
+                  <div class="help-block" *ngIf="isFieldInvalid('address')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('country')">
+                  <label for="country">Country *</label>
+                  <select formControlName="country" id="country" class="form-control">
+                    <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
+                      country.viewValue
+                    }}</option>
+                  </select>
+                  <div class="help-block" *ngIf="isFieldInvalid('country')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="showFieldStyle('city')">
+                  <label for="city">City *</label>
+                  <input formControlName="city" class="form-control" id="city" />
+                  <div class="help-block" *ngIf="isFieldInvalid('city')">
+                    <p>This field is required</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <app-dpo-documents
+            [documentInvalid]="markDocumentAsIncorrect"
+            *ngIf="!applicationStatus"
+            (documentInfoEmitter)="receiveDocuments($event)"
+          ></app-dpo-documents>
+
+          <div *ngIf="!applicationStatus" class="disclaimer">
+            <input type="checkbox" class="checkbox" id="checkbox1" (change)="acceptTerms($event)" /><label
+              class="checkbox_label"
+              for="checkbox1"
+              ><span class="form_checkbox_btn"></span
+            ></label>
+            <p>
+              I have read and accepted
+              <a
+                style="color:blue; cursor:pointer;"
+                href="https://www.dpogroup.com/africa/terms-conditions/"
+                target="_blank"
+                >DPO's terms and conditions</a
+              >.
+            </p>
+          </div>
+          <button
+            *ngIf="!applicationStatus"
+            class="bttn-primary pull-right mb-4"
+            [hidden]="dpoForm.valid"
+            (click)="onSubmit(dpoForm)"
+          >
+            Submit
+          </button>
+          <button
+            *ngIf="!applicationStatus"
+            class="bttn-primary pull-right mb-4"
+            [hidden]="!dpoForm.valid"
+            (click)="onApplicationSubmit()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

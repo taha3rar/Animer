@@ -15,6 +15,14 @@ const routes: Routes = [
       resolve: {
         currentUser: CurrentUserResolver
       }
+    },
+    {
+      path: 'profile/:flag',
+      component: ProfileComponent,
+      data: { title: extract('Profile') },
+      resolve: {
+        currentUser: CurrentUserResolver
+      }
     }
   ])
 ];

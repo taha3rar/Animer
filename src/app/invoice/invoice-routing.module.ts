@@ -24,7 +24,8 @@ const routes: Routes = [
       resolve: {
         invoices: InvoiceListResolver,
         invoicesAsBuyer: InvoiceListAsBuyerResolver,
-        invoicesAsSeller: InvoiceListAsSellerResolver
+        invoicesAsSeller: InvoiceListAsSellerResolver,
+        currentUser: CurrentUserResolver
       },
       canActivate: [PermissionGuard],
       data: {

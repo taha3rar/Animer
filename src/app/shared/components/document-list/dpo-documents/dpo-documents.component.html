@@ -1,0 +1,23 @@
+<div class="push-modal">
+  <div class="margin-all">
+    <p class="label-2">{{ uploadingFileName }}</p>
+    <p style="font-size:1.4rem;"><ngb-progressbar type="info" [value]="dynamic" [striped]="true"></ngb-progressbar></p>
+    <span class="t-light-gray">Uploading {{ dynamic }}%</span>
+  </div>
+</div>
+
+<div class="contact-info-section docs-section">
+  <div class="doc-card-upload mr-3" [ngClass]="{ redBorder: documentInvalid }">
+    <label class="material-icons" id="add-btn" for="btn-input" disabled>add</label>
+    <input type="file" id="btn-input" (change)="onFileChange($event, 'ID')" />
+    <p class="pb-2">Coloured copy of ID/Passport</p>
+    <p class="pb-0" *ngIf="id_file_name">{{ id_file_name }}</p>
+    <p *ngIf="documentInvalid" class="help-block">This document is required</p>
+  </div>
+  <div class="doc-card-upload mr-0">
+    <label class="material-icons" id="add-btn" for="btn-dpo">add</label>
+    <input type="file" id="btn-dpo" (change)="onFileChange($event, 'certificate_of_inco')" />
+    <p class="pb-2">Certificate of Incorporation</p>
+    <p class="pb-0" *ngIf="certificate_file_name">{{ certificate_file_name }}</p>
+  </div>
+</div>
