@@ -14,7 +14,8 @@ const routes: Routes = [
       data: { title: extract('Profile') },
       resolve: {
         currentUser: CurrentUserResolver
-      }
+      },
+      runGuardsAndResolvers: 'always'
     },
     {
       path: 'profile/:flag',

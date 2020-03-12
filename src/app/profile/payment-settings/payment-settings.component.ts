@@ -38,27 +38,27 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
   ngOnInit() {
     this.route.data.subscribe(({ currentUser }) => {
       this.user = currentUser;
+
+      this.userId = this.user._id;
+      this.applicationStatus = this.user.dpo.status;
+      this.dpoForm = this.fb.group({
+        companyName: [this.user.dpo.company_name, Validators.required],
+        companyRegistrationNo: [this.user.dpo.registration_number, Validators.required],
+        tradeName: [this.user.dpo.trade_name, Validators.required],
+        phoneNumber: [this.user.dpo.phone_number, Validators.required],
+        address: [this.user.dpo.address, Validators.required],
+        city: [this.user.dpo.city, Validators.required],
+        country: [this.user.dpo.country, Validators.required],
+        websiteURL: [this.user.dpo.website, Validators.required],
+        companyEmail: [this.user.dpo.company_email, [Validators.email, Validators.required]]
+      });
+
+      this.formInput = this.dpoForm;
+
+      if (this.user.dpo && this.user.dpo.status) {
+        this.dpoForm.disable();
+      }
     });
-
-    this.userId = this.user._id;
-    this.applicationStatus = this.user.dpo.status;
-    this.dpoForm = this.fb.group({
-      companyName: [this.user.dpo.company_name, Validators.required],
-      companyRegistrationNo: [this.user.dpo.registration_number, Validators.required],
-      tradeName: [this.user.dpo.trade_name, Validators.required],
-      phoneNumber: [this.user.dpo.phone_number, Validators.required],
-      address: [this.user.dpo.address, Validators.required],
-      city: [this.user.dpo.city, Validators.required],
-      country: [this.user.dpo.country, Validators.required],
-      websiteURL: [this.user.dpo.website, Validators.required],
-      companyEmail: [this.user.dpo.company_email, [Validators.email, Validators.required]]
-    });
-
-    this.formInput = this.dpoForm;
-
-    if (this.user.dpo.status && this.user.dpo) {
-      this.dpoForm.disable();
-    }
   }
 
   get userInfo() {
@@ -81,6 +81,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
     if (this.dpoForm.valid && this.termsAccepted && this.idDocumentReceived) {
       this.userService.saveUserDPOInformation(this.userDPOInfo, this.userId).subscribe(res => {
         this.alerts.showAlert('Your information has been sent successfully!');
+        this.router.navigateByUrl('/profile');
       });
     } else if (!this.idDocumentReceived) {
       this.markDocumentAsIncorrect = true;
