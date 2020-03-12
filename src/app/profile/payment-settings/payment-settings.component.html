@@ -23,7 +23,7 @@
       <div class="padding-all">
         <div class="application-header">
           <div class="dpo-img-wrapper">
-            <img src="../../../assets/img/dpo-logo.png" class="dpo-img" />
+            <img src="../../../assets/img/dpo-logo.svg" class="dpo-img" />
           </div>
           <div *ngIf="applicationStatus && applicationStatus == 'PENDING APPROVAL'" class="status status-orange">
             {{ applicationStatus }}
@@ -48,14 +48,31 @@
               <div class="col-md-6">
                 <div class="form-group" [ngClass]="showFieldStyle('companyName')">
                   <label for="company-name">Company Name *</label>
-                  <input class="form-control" formControlName="companyName" id="company-name" type="text" />
+                  <input
+                    class="form-control"
+                    formControlName="companyName"
+                    id="company-name"
+                    type="text"
+                    placeholder="Add your company name"
+                  />
                   <div class="help-block" *ngIf="isFieldInvalid('companyName')">
                     <p>This field is required</p>
                   </div>
                 </div>
                 <div class="form-group" [ngClass]="showFieldStyle('tradeName')">
                   <label for="trade-name">Trade Name *</label>
-                  <input class="form-control" formControlName="tradeName" id="trade-name" />
+                  <i
+                    class="material-icons ml-3 mb-1"
+                    style="vertical-align: middle; font-size: 21px;"
+                    matTooltip="It is a name used by companies that don't want to operate under their registered name"
+                    >info</i
+                  >
+                  <input
+                    class="form-control"
+                    formControlName="tradeName"
+                    placeholder="Add the trade name"
+                    id="trade-name"
+                  />
                   <div class="help-block" *ngIf="isFieldInvalid('tradeName')">
                     <p>This field is required</p>
                   </div>
@@ -66,6 +83,7 @@
                     class="form-control"
                     formControlName="companyRegistrationNo"
                     id="registration-no"
+                    placeholder="Add your company's registration number"
                     type="text"
                   />
                   <div class="help-block" *ngIf="isFieldInvalid('companyRegistrationNo')">
@@ -74,17 +92,26 @@
                 </div>
                 <div class="form-group" [ngClass]="showFieldStyle('companyEmail')">
                   <label for="company-email">Company Email *</label>
-                  <input class="form-control" formControlName="companyEmail" id="company-email" type="text" />
+                  <input
+                    class="form-control"
+                    formControlName="companyEmail"
+                    id="company-email"
+                    placeholder="Add your company email"
+                    type="text"
+                  />
                   <div class="help-block" *ngIf="isFieldInvalid('companyEmail')">
                     <p>This field is required</p>
                   </div>
                 </div>
-                <div class="form-group" [ngClass]="showFieldStyle('websiteURL')">
-                  <label for="website-url">Website URL *</label>
-                  <input class="form-control" formControlName="websiteURL" id="website-url" type="text" />
-                  <div class="help-block" *ngIf="isFieldInvalid('websiteURL')">
-                    <p>This field is required</p>
-                  </div>
+                <div class="form-group">
+                  <label for="website-url">Website URL</label>
+                  <input
+                    class="form-control"
+                    placeholder="Add your website URL if you have one"
+                    formControlName="websiteURL"
+                    id="website-url"
+                    type="text"
+                  />
                 </div>
               </div>
               <div class="col-md-6">
@@ -95,7 +122,7 @@
                     formControlName="phoneNumber"
                     id="phone-number"
                     type="text"
-                    placeholder=""
+                    placeholder="Add your phone number"
                   />
                   <div class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
                     <p>This field is required</p>
@@ -103,7 +130,13 @@
                 </div>
                 <div class="form-group" [ngClass]="showFieldStyle('address')">
                   <label for="address-line">Address Line *</label>
-                  <input class="form-control" formControlName="address" id="address-line" type="text" placeholder="" />
+                  <input
+                    class="form-control"
+                    placeholder="Add your street address"
+                    formControlName="address"
+                    id="address-line"
+                    type="text"
+                  />
                   <div class="help-block" *ngIf="isFieldInvalid('address')">
                     <p>This field is required</p>
                   </div>
@@ -121,7 +154,7 @@
                 </div>
                 <div class="form-group" [ngClass]="showFieldStyle('city')">
                   <label for="city">City *</label>
-                  <input formControlName="city" class="form-control" id="city" />
+                  <input formControlName="city" placeholder="Add your city" class="form-control" id="city" />
                   <div class="help-block" *ngIf="isFieldInvalid('city')">
                     <p>This field is required</p>
                   </div>

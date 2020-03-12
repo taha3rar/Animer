@@ -7,16 +7,21 @@
 
 .dpo-img-wrapper {
   background: white;
-  width: 70px;
-  height: 40px;
+  width: 8.2rem;
+  height: 2.9rem;
   right: 0;
   display: inline-block;
   position: relative;
-  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.07);
+  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
 }
 
 select.form-control {
   height: 3.2rem;
+}
+
+h4:nth-child(2) {
+  font-weight: bold;
+  margin-top: 2rem;
 }
 
 .application-header {

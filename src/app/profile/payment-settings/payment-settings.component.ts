@@ -49,7 +49,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
         address: [this.user.dpo.address, Validators.required],
         city: [this.user.dpo.city, Validators.required],
         country: [this.user.dpo.country, Validators.required],
-        websiteURL: [this.user.dpo.website, Validators.required],
+        websiteURL: [this.user.dpo.website],
         companyEmail: [this.user.dpo.company_email, [Validators.email, Validators.required]]
       });
 
@@ -82,6 +82,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
       this.userService.saveUserDPOInformation(this.userDPOInfo, this.userId).subscribe(res => {
         this.alerts.showAlert('Your information has been sent successfully!');
         this.router.navigateByUrl('/profile');
+        this.dpoForm.disable();
       });
     } else if (!this.idDocumentReceived) {
       this.markDocumentAsIncorrect = true;
