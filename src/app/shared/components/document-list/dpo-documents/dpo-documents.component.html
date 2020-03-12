@@ -9,15 +9,28 @@
 <div class="contact-info-section docs-section">
   <div class="doc-card-upload mr-3" [ngClass]="{ redBorder: documentInvalid }">
     <label class="material-icons" id="add-btn" for="btn-input" disabled>add</label>
-    <input type="file" id="btn-input" (change)="onFileChange($event, 'ID')" />
+    <input type="file" id="btn-input" class="btn-doc-uploader" (change)="onFileChange($event, 'ID')" />
     <p class="pb-2">Coloured copy of ID/Passport</p>
     <p class="pb-0" *ngIf="id_file_name">{{ id_file_name }}</p>
     <p *ngIf="documentInvalid" class="help-block">This document is required</p>
   </div>
-  <div class="doc-card-upload mr-0">
+  <div class="doc-card-upload mr-3">
+    <p class="pb-0 opt">Optional</p>
     <label class="material-icons" id="add-btn" for="btn-dpo">add</label>
-    <input type="file" id="btn-dpo" (change)="onFileChange($event, 'certificate_of_inco')" />
+    <input
+      type="file"
+      id="btn-dpo"
+      class="btn-doc-uploader mt-0"
+      (change)="onFileChange($event, 'certificate_of_inco')"
+    />
     <p class="pb-2">Certificate of Incorporation</p>
     <p class="pb-0" *ngIf="certificate_file_name">{{ certificate_file_name }}</p>
+  </div>
+  <div class="doc-card-upload mr-0">
+    <p class="pb-0 opt">Optional</p>
+    <label class="material-icons" id="add-btn" for="terms">add</label>
+    <input type="file" id="terms" class="btn-doc-uploader mt-0" (change)="onFileChange($event, 'terms')" />
+    <p class="pb-2">Terms and Conditions</p>
+    <p class="pb-0" *ngIf="terms_file_name">{{ terms_file_name }}</p>
   </div>
 </div>

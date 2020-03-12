@@ -9,3 +9,11 @@
 .redBorder {
   border-color: red;
 }
+
+#add-btn:not(:first-child) {
+  margin-top: 7px;
+}
+
+p.opt {
+  color: #b2bec5;
+}

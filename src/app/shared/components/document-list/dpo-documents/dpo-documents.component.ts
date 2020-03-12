@@ -20,6 +20,7 @@ export class DpoDocumentsComponent implements OnInit {
   url: string;
   id_file_name: string;
   certificate_file_name: string;
+  terms_file_name: string;
   @Output() documentInfoEmitter = new EventEmitter();
   acceptedMimeTypes = [
     'application/pdf',
@@ -59,11 +60,12 @@ export class DpoDocumentsComponent implements OnInit {
             this.alerts.showAlert('Your document has been uploaded');
             $('.push-modal').css('display', 'none');
             this.dynamic = 0;
-
             if (file_type === 'ID') {
               this.id_file_name = file_name;
-            } else {
+            } else if (file_type === 'certificate_of_inco') {
               this.certificate_file_name = file_name;
+            } else {
+              this.terms_file_name = file_name;
             }
           });
         };
