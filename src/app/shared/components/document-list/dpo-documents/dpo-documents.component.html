@@ -14,7 +14,7 @@
     <p class="pb-0" *ngIf="id_file_name">{{ id_file_name }}</p>
     <p *ngIf="documentInvalid" class="help-block">This document is required</p>
   </div>
-  <div class="doc-card-upload mr-3">
+  <div class="doc-card-upload mr-3" [ngClass]="{ redBorder: documentInvalid }">
     <label class="material-icons" id="add-btn" for="btn-dpo">add</label>
     <input
       type="file"
@@ -24,6 +24,7 @@
     />
     <p class="pb-2">Certificate of Incorporation</p>
     <p class="pb-0" *ngIf="certificate_file_name">{{ certificate_file_name }}</p>
+    <p *ngIf="documentInvalid" class="help-block">This document is required</p>
   </div>
   <div class="doc-card-upload mr-0">
     <p class="pb-0 opt">Optional</p>

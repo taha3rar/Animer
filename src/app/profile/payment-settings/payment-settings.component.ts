@@ -23,6 +23,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
   documentsArray: any = [];
   termsAccepted = false;
   idDocumentReceived = false;
+  certOfIncoReceived = false;
   markDocumentAsIncorrect = false;
   userDPOInfo: DpoInformation = new DpoInformation();
   constructor(
@@ -78,13 +79,13 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
     this.userDPOInfo.country = this.userInfo.country.value;
     this.userDPOInfo.documents = this.documentsArray;
 
-    if (this.dpoForm.valid && this.termsAccepted && this.idDocumentReceived) {
+    if (this.dpoForm.valid && this.termsAccepted && this.idDocumentReceived && this.certOfIncoReceived) {
       this.userService.saveUserDPOInformation(this.userDPOInfo, this.userId).subscribe(res => {
         this.alerts.showAlert('Your information has been sent successfully!');
         this.router.navigateByUrl('/profile');
         this.dpoForm.disable();
       });
-    } else if (!this.idDocumentReceived) {
+    } else if (!this.idDocumentReceived || !this.certOfIncoReceived) {
       this.markDocumentAsIncorrect = true;
     } else {
       this.acceptTermsPopup();
@@ -95,7 +96,10 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
     this.documentsArray.push($event);
     if (this.documentsArray.find((x: any) => x.file_type === 'ID')) {
       this.idDocumentReceived = true;
-      this.markDocumentAsIncorrect = false;
+    }
+
+    if (this.documentsArray.find((x: any) => x.file_type === 'certificate_of_inco')) {
+      this.certOfIncoReceived = true;
     }
   }
 
