@@ -15,7 +15,8 @@ export class DpoDocumentsComponent implements OnInit {
   uploadingFileName: String;
   dynamic = 0;
   userId: string;
-  @Input() documentInvalid: boolean;
+  @Input() documentIDvalid: boolean;
+  @Input() documentCertificatevalid: boolean;
   documentInfo = {};
   url: string;
   id_file_name: string;

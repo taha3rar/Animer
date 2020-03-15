@@ -163,7 +163,8 @@
             </div>
           </form>
           <app-dpo-documents
-            [documentInvalid]="markDocumentAsIncorrect"
+            [documentIDvalid]="idDocumentReceived"
+            [documentCertificatevalid]="certOfIncoReceived"
             *ngIf="!applicationStatus"
             (documentInfoEmitter)="receiveDocuments($event)"
           ></app-dpo-documents>
