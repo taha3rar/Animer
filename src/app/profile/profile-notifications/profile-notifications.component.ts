@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService, AuthenticationService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
@@ -20,7 +21,8 @@ export class ProfileNotificationsComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private alerts: AlertsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private spinnerService: SpinnerToggleService
   ) {}
 
   ngOnInit() {
@@ -58,6 +60,7 @@ export class ProfileNotificationsComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinnerService.showSpinner();
     const poPiNotification = this.notificationsSettingsForm.value.poPi;
     const documentNotification = this.notificationsSettingsForm.value.documents;
     const qrNotification = this.notificationsSettingsForm.value.qr;
@@ -81,6 +84,7 @@ export class ProfileNotificationsComponent implements OnInit {
 
     this.userService.updateNotifications(this.user._id, notifications).subscribe(
       () => {
+        this.spinnerService.hideSpinner();
         this.alerts.showAlert('Your notifications settings have been updated!');
       },
       err => {

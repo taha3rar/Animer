@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../services/spinner-toggle.service';
 import { UserService } from './../../../core/api/user.service';
 import { User } from './../../../core/models/user/user';
 import { Ecosystem } from '@app/core/models/ecosystem';
@@ -46,7 +47,8 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     private router: Router,
     private route: ActivatedRoute,
     private stepperService: StepperService,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private spinnerService: SpinnerToggleService
   ) {
     super();
   }
@@ -206,6 +208,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.invitedClient.company_information.zipcode = this.companyf.zipcode.value;
     this.invitedClient.company_information.country = this.companyf.country.value;
     this.clientSubmitted = true;
+    this.spinnerService.showSpinner();
 
     if (this.idPicture !== defaultValues.profile_picture) {
       this.invitedClient.personal_information.id_picture = this.idPicture;
@@ -214,6 +217,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       data => {
         if (data._id) {
           const participant = new Client(data);
+          this.spinnerService.hideSpinner();
           if (this.ecosystemsToBeAdded.length) {
             this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
               this.alerts.showAlert('New contact profile has been created!');

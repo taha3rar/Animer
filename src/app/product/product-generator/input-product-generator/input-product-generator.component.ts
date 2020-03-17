@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../../shared/services/spinner-toggle.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -40,7 +41,8 @@ export class InputProductGeneratorComponent extends BaseValidationComponent impl
     private dialog: MatDialogRef<InputProductGeneratorComponent>,
     private productService: ProductService,
     private router: Router,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private spinnerService: SpinnerToggleService
   ) {
     super();
   }
@@ -152,11 +154,13 @@ export class InputProductGeneratorComponent extends BaseValidationComponent impl
   submit() {
     this.newProduct = this.productForm.value;
     this.newProduct.image = this.productImage;
+    this.spinnerService.showSpinner();
     if (!this.onUpdate) {
       this.disableSubmitButton(true);
       if (this.productForm.valid) {
         this.productService.create(this.newProduct).subscribe(
           () => {
+            this.spinnerService.hideSpinner();
             this.alerts.showAlert('New product profile has been created!');
             this.dialog.close();
             this.router.navigateByUrl(this.router.url);
@@ -171,6 +175,7 @@ export class InputProductGeneratorComponent extends BaseValidationComponent impl
       this.newProduct._id = this.data.product._id;
       this.productService.update(this.newProduct._id, this.newProduct).subscribe(
         () => {
+          this.spinnerService.hideSpinner();
           this.alerts.showAlert('The product has been updated!');
           this.dialog.close();
           this.router.navigateByUrl('/product/list');

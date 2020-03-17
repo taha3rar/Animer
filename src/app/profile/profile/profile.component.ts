@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { AlertsService } from './../../core/alerts.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -26,7 +27,8 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private spinnerService: SpinnerToggleService
   ) {}
 
   ngOnInit() {
@@ -112,6 +114,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmitClientDetails() {
+    this.spinnerService.showSpinner();
     this.user.personal_information.first_name = this.clientf.firstName.value;
     this.user.personal_information.last_name = this.clientf.lastName.value;
     this.user.email = this.clientf.email.value;
@@ -120,6 +123,7 @@ export class ProfileComponent implements OnInit {
     this.user.personal_information.job_title = this.clientf.jobTitle.value;
     this.user.personal_information.bio = this.clientf.bio.value;
     this.userService.update(this.currentUserId, this.user).subscribe(data => {
+      this.spinnerService.hideSpinner();
       const credentialsToUpdate = this.authenticationService.credentials;
       credentialsToUpdate.user.personal_information = data.personal_information;
       credentialsToUpdate.user.email = data.email;
@@ -130,6 +134,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmitCompanyDetails() {
+    this.spinnerService.showSpinner();
     this.user.company_information.company_name = this.companyf.companyName.value;
     this.user.company_information.company_registered_number = this.companyf.companyNumber.value;
     this.user.company_information.state_province_region = this.companyf.stateRegionProvince.value;
@@ -139,6 +144,7 @@ export class ProfileComponent implements OnInit {
     this.user.company_information.country = this.companyf.country.value;
     this.user.company_information.bio = this.companyf.bio.value;
     this.userService.update(this.currentUserId, this.user).subscribe(data => {
+      this.spinnerService.hideSpinner();
       this.alerts.showAlert('Changes saved!');
       this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
     });

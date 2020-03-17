@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { AlertsService } from './../../core/alerts.service';
 import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
@@ -34,7 +35,8 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
     private route: ActivatedRoute,
     private ecosystemService: EcosystemService,
     private stepperService: StepperService,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private spinnerService: SpinnerToggleService
   ) {
     super();
   }
@@ -77,8 +79,10 @@ export class EcosystemGeneratorComponent extends BaseValidationComponent impleme
     this.newEcosystem.name = this.ecosystemf.name.value;
     this.newEcosystem.type = this.ecosystemf.ecosystemType.value;
     this.newEcosystem.description = this.ecosystemf.description.value;
+    this.spinnerService.showSpinner();
     this.ecosystemService.create(this.newEcosystem).subscribe(
       data => {
+        this.spinnerService.hideSpinner();
         this.alerts.showAlert('New ecosystem has been created');
         this.closeModal.nativeElement.click();
         this.router.navigate([this.router.url]);

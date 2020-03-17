@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { AlertsService } from '@app/core/alerts.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
@@ -18,7 +19,8 @@ export class ProfilePasswordComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authService: AuthenticationService,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private spinnerService: SpinnerToggleService
   ) {}
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class ProfilePasswordComponent implements OnInit {
 
   onSubmitChangePassword() {
     if (this.changePasswordForm.valid) {
+      this.spinnerService.showSpinner();
       const passwords = new Passwords();
 
       passwords.old_password = this.changePasswordForm.value.current;
@@ -57,6 +60,7 @@ export class ProfilePasswordComponent implements OnInit {
 
       this.userService.changePassword(this.authService.currentUserId, passwords).subscribe(
         () => {
+          this.spinnerService.hideSpinner();
           this.changePasswordForm.reset();
           this.alerts.showAlert('Your password has been updated!');
         },

@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from './../../../shared/services/spinner-toggle.service';
 import { AlertsService } from '@app/core/alerts.service';
 import { CanComponentDeactivate } from './../../../shared/guards/confirmation.guard';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -31,6 +32,7 @@ export class AgriculturalProductGeneratorComponent extends BaseValidationCompone
     private formBuilder: FormBuilder,
     private dialog: MatDialogRef<AgriculturalProductGeneratorComponent>,
     private productService: ProductService,
+    private spinnerService: SpinnerToggleService,
     private router: Router,
     private alerts: AlertsService
   ) {
@@ -175,6 +177,7 @@ export class AgriculturalProductGeneratorComponent extends BaseValidationCompone
   submit() {
     this.newProduct = this.productForm.value;
     this.newProduct.image = this.productImage;
+    this.spinnerService.showSpinner();
     if (!this.onUpdate) {
       this.disableSubmitButton(true);
       if (this.productForm.valid) {
@@ -183,6 +186,7 @@ export class AgriculturalProductGeneratorComponent extends BaseValidationCompone
             this.alerts.showAlert('New product profile has been created!');
             this.dialog.close();
             this.router.navigateByUrl(this.router.url);
+            this.spinnerService.hideSpinner();
           },
           err => {
             this.disableSubmitButton(false);
@@ -197,6 +201,7 @@ export class AgriculturalProductGeneratorComponent extends BaseValidationCompone
           this.alerts.showAlert('The product has been updated!');
           this.dialog.close();
           this.router.navigateByUrl('/product/list');
+          this.spinnerService.hideSpinner();
         },
         err => {
           this.disableSubmitButton(false);
