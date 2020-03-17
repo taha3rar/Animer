@@ -13,16 +13,19 @@
       Choose up to 3 main types.
     </p>
     <p class="step-title" [class.display-tab]="displayTab(4)">
-      How long have you been in business?
+      What is your business type?
     </p>
     <p class="step-title" [class.display-tab]="displayTab(5)">
-      Where is your business registered?
+      How long have you been in business?
     </p>
     <p class="step-title" [class.display-tab]="displayTab(6)">
+      Where is your business registered?
+    </p>
+    <p class="step-title" [class.display-tab]="displayTab(7)">
       Just one more question,<br />
       do you have an Absa (previously Barclays) bank account?
     </p>
-    <p class="step-title" [class.display-tab]="displayTab(7)">
+    <p class="step-title" [class.display-tab]="displayTab(8)">
       Great, {{ userFirstName }}! You're eligible to apply for a loan. <br />
       Ready to go?
     </p>
@@ -265,32 +268,137 @@
             </div>
           </div>
         </div>
-        <div class="qualification__item" [class.display-tab]="displayTab(7)">
-          <p class="qualification__item__header">Before you begin, here's what you need to know:</p>
-          <ul class="qualification__item__list">
-            <li>How much you want to borrow.</li>
-            <li>Basic information about your company.</li>
-            <li>Basic information about your banking details.</li>
-          </ul>
-          <p class="qualification__item__header">
-            In addition, these are the documents that you'll need in order to complete the loan application:
-          </p>
-          <ul>
-            <li>A scan of your National ID</li>
-            <li>Proof of address</li>
-          </ul>
-          <div class="mb-4 note">
-            <img src="/assets/img/lamp.svg" />
-            <p>
-              <strong>Don't have some of the information at hand?</strong> <br />
-              You can save the application at any point and return to it whenever you have it!
-            </p>
+      </div>
+      <div class="input-group" *ngIf="otherOption">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Other</span>
+        </div>
+        <input type="text" class="form-control" autofocus />
+      </div>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(4)">
+      <div class="row options-wrapper">
+        <div class="row options-wrapper">
+          <div class="col-md-4 pr-3">
+            <label class="container">
+              <input type="radio" name="radio" />
+              <span class="checkmark">
+                <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/small-business.svg" />
+                Sole Trader
+              </span>
+            </label>
           </div>
-          <button class="bttn-primary mt-5" (click)="onFinishQualification()">Let's begin</button>
+          <div class="col-md-4 pr-3">
+            <label class="container">
+              <input type="radio" name="radio" />
+              <span class="checkmark">
+                <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/small-business.svg" />
+                Partnership
+              </span>
+            </label>
+          </div>
+          <div class="col-md-4 pr-0">
+            <label class="container">
+              <input type="radio" name="radio" />
+              <span class="checkmark">
+                <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/small-business.svg" />
+                Limited Company
+              </span>
+            </label>
+          </div>
         </div>
       </div>
     </div>
-  </form>
+    <div class="qualification__item" [class.display-tab]="displayTab(5)">
+      <div class="row options-wrapper">
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/small-business.svg" />
+              Less than 12 months
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/big-business.svg" />
+              More than 12 months
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(6)">
+      <div class="row options-wrapper">
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              Kenya
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              Other
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(7)">
+      <div class="row options-wrapper">
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark text-logo">
+              <span
+                >Yes, I have an
+                <img id="absa-logo" src="/assets/img/loan-application-imgs/absa-logo.svg" alt="absa" />
+                (Barclays) bank account.</span
+              >
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="container">
+            <input type="radio" name="radio" />
+            <span class="checkmark">
+              No, I have a different bank account.
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="qualification__item" [class.display-tab]="displayTab(8)">
+      <p class="qualification__item__header">Before you begin, here's what you need to know:</p>
+      <ul class="qualification__item__list">
+        <li>How much you want to borrow.</li>
+        <li>Basic information about your company.</li>
+        <li>Basic information about your banking details.</li>
+      </ul>
+      <p class="qualification__item__header">
+        In addition, these are the documents that you'll need in order to complete the loan application:
+      </p>
+      <ul>
+        <li>A scan of your National ID</li>
+        <li>Proof of address</li>
+      </ul>
+      <div class="mb-4 note">
+        <img src="/assets/img/lamp.svg" />
+        <p>
+          <strong>Don't have some of the information at hand?</strong> <br />
+          You can save the application at any point and return to it whenever you have it!
+        </p>
+      </div>
+      <button class="bttn-primary mt-5" (click)="onFinishQualification()">Let's begin</button>
+    </div>
+  </div>
 </div>
 
 <div class="stepper-footer" *ngIf="currentIndex < 8">
@@ -299,7 +407,7 @@
       <button class="bttn-secondary" *ngIf="currentIndex > 1" (click)="onPrevQuestion()">PREV</button>
     </div>
     <div>
-      <button class="bttn-primary" *ngIf="currentIndex < 7" (click)="onNextQuestion()">NEXT</button>
+      <button class="bttn-primary" *ngIf="currentIndex < 8" (click)="onNextQuestion()">NEXT</button>
     </div>
   </div>
 </div>
