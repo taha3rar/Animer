@@ -13,16 +13,15 @@ app.get('/url', (req, res, next) => {
     if (url.includes('http')) {
         pup(url, res);
     }
-    // res.json(["Tony", "Lisa", "Michael", "Ginger", "Food", pup(url)]); this is the example from the medium tutorial 
 
 });
-app.listen(3000, () => {// need to change to app.listen(process.env.PORT||3000,()=>{ // to be useable in the heroku server
-    console.log("Server running on port 3000"); //useless just to know that node is running
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server running on port 3000");
 });
 
 async function pup(url, res) {
 
-    const browser = await puppeteer.launch({ executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome', headless: true });
+    const browser = await puppeteer.launch( {executablePath:'Google/Chrome/Application/chrome',  args: ['--no-sandbox'], headless: true });
     const page = await browser.newPage();
     await page.goto(url);
     await page.waitForSelector('video')
