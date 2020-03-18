@@ -16,13 +16,13 @@ app.get('/url', (req, res, next) => {
     // res.json(["Tony", "Lisa", "Michael", "Ginger", "Food", pup(url)]);
 
 });
-app.listen(process.env.PORT || 3000, () => {
+app.listen(3000, () => {
     console.log("Server running on port 3000");
 });
 
 async function pup(url, res) {
 
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome', headless: true });
     const page = await browser.newPage();
     await page.goto(url);
     await page.waitForSelector('video')
