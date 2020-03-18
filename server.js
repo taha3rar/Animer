@@ -13,7 +13,7 @@ app.get('/url', (req, res, next) => {
     if (url.includes('http')) {
         pup(url, res);
     }
-    // res.json(["Tony", "Lisa", "Michael", "Ginger", "Food", pup(url)]);
+    // res.json(["Tony", "Lisa", "Michael", "Ginger", "Food", pup(url)]); this is the example from the medium tutorial 
 
 });
 app.listen(3000, () => {// need to change to app.listen(process.env.PORT||3000,()=>{ // to be useable in the heroku server
