@@ -21,7 +21,7 @@ app.listen(process.env.PORT || 3000, () => {
 
 async function pup(url, res) {
     //executablePath: 'Google/Chrome/Application/chrome',
-    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'], headless: true });
+    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'], headless: false });
     const page = await browser.newPage();
     await page.goto(url);
     await page.waitForSelector('video')
@@ -30,7 +30,8 @@ async function pup(url, res) {
     let pages = await browser.pages();
     await pages[2].close();//first click opens an ad in a new tab and this closes it
     await page.click('video');
-    await page.waitForSelector('.jw-state-playing');
+    await page.waitForFunction('document.querySelector("video").getAttribute("src").includes("http")');
+    console.log('Value changed!')
     let p = await page.evaluate('document.querySelector("video").getAttribute("src")'); //this is how i get the src and thats what i return
     await browser.close();
     res.setHeader('Access-Control-Allow-Origin', '*');// i dont know what this is 
