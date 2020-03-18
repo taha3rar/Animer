@@ -21,17 +21,20 @@ app.listen(process.env.PORT || 3000, () => {
 
 async function pup(url, res) {
     //executablePath: 'Google/Chrome/Application/chrome',
-    const browser = await puppeteer.launch({  args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-      ],});
+    const browser = await puppeteer.launch({
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+        ],
+    });
     const page = await browser.newPage();
     await page.goto(url);
     await page.waitForSelector('video')
     await page.click('video');
     await page.waitFor(500);
     let pages = await browser.pages();
-    await pages[2].close();//first click opens an ad in a new tab and this closes it
+    // await pages[2].close();//first click opens an ad in a new tab and this closes it
+    console.log(pages.length);
     await page.click('video');
     await page.waitForFunction('document.querySelector("video").getAttribute("src").includes("http")');
     console.log('Value changed!')
