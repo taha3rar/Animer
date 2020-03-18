@@ -4,20 +4,20 @@ var cors = require('cors')
 const puppeteer = require('puppeteer');
 const anime = require('gogoanime')
 anime.animeEpisodeHandler('naruto-episode-1').then(ep => {
-    console.log(ep[0].servers[0].iframe);
-})
+    console.log(ep[0].servers[0].iframe); // this could be a url for any episode just change 'naruto-episode-1' to any anime + '-episode-number' 
+})                                       
 app.use(cors({origin: 'http://localhost:8888'}));
 app.get('/url', (req, res, next) => {
-    var url = req.url.substr(req.url.indexOf('?') + 1)
-    console.log(url);
+    var url = req.url.substr(req.url.indexOf('?') + 1)// i send the link for the episode with ?{link} and this is how i get the link in express
+    console.log(url);//https://vidstreaming.io/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1 ins this case
     if (url.includes('http')) {
         pup(url, res);
     }
     // res.json(["Tony", "Lisa", "Michael", "Ginger", "Food", pup(url)]);
 
 });
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.listen(3000, () => {// need to change to app.listen(process.env.PORT||3000,()=>{ // to be useable in the heroku server
+    console.log("Server running on port 3000"); //useless just to know that node is running
 });
 
 async function pup(url, res) {
@@ -29,16 +29,16 @@ async function pup(url, res) {
     await page.click('video');
     await page.waitFor(500);
     let pages = await browser.pages();
-    await pages[2].close();
+    await pages[2].close();//first click opens an ad in a new tab and this closes it
     await page.click('video');
     await page.waitForSelector('.jw-state-playing');
-    let p = await page.evaluate('document.querySelector("video").getAttribute("src")');
+    let p = await page.evaluate('document.querySelector("video").getAttribute("src")'); //this is how i get the src and thats what i return
     await browser.close();
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', '*');// i dont know what this is 
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
     res.setHeader('Access-Control-Allow-Credentials', true); // If needed
 
-    res.send(p);
-    return p;
+    res.send(p);//responds with the link to the original .mp4 video 
+    return p; //not needed 
 };
