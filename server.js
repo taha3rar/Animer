@@ -22,7 +22,7 @@ app.listen(3000, () => {
 
 async function pup(url, res) {
 
-    const browser = await puppeteer.launch({ executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome', headless: false });
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto(url);
     await page.waitForSelector('video')
