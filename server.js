@@ -5,8 +5,8 @@ const puppeteer = require('puppeteer');
 const anime = require('gogoanime')
 anime.animeEpisodeHandler('naruto-episode-1').then(ep => {
     console.log(ep[0].servers[0].iframe); // this could be a url for any episode just change 'naruto-episode-1' to any anime + '-episode-number' 
-})                                       
-app.use(cors({origin: 'http://localhost:8888'}));
+})
+app.use(cors({ origin: 'http://localhost:8888' }));
 app.get('/url', (req, res, next) => {
     var url = req.url.substr(req.url.indexOf('?') + 1)// i send the link for the episode with ?{link} and this is how i get the link in express
     console.log(url);//https://vidstreaming.io/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1 ins this case
@@ -20,8 +20,8 @@ app.listen(process.env.PORT || 3000, () => {
 });
 
 async function pup(url, res) {
-
-    const browser = await puppeteer.launch( {executablePath:'Google/Chrome/Application/chrome',  args: ['--no-sandbox'], headless: true });
+    //executablePath: 'Google/Chrome/Application/chrome',
+    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'], headless: true });
     const page = await browser.newPage();
     await page.goto(url);
     await page.waitForSelector('video')
