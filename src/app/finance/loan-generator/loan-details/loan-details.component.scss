@@ -1,29 +1,3 @@
-.loan-step-wrapper {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  width: 70%;
-  margin: 0 auto;
-}
-
-.step-header {
-  margin-top: 3.5rem;
-  margin-bottom: 2.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.step-content {
-  width: 100%;
-}
-
-label {
-  color: #5a6c7b;
-  font-size: 1.6rem;
-  font-weight: 500;
-}
-
 .stepper-footer {
   justify-content: center !important;
   position: fixed !important;
@@ -37,7 +11,10 @@ label {
   right: 0 !important;
   bottom: 0 !important;
 
-  div {
+  div:first-child {
+    margin-right: auto;
+  }
+  div:last-child {
     margin-left: auto;
   }
 }
@@ -46,80 +23,4 @@ label {
   display: flex;
   width: 70%;
   margin: 0 auto;
-}
-
-.list-group-horizontal {
-  flex-direction: row;
-  max-width: 100%;
-  margin-bottom: 8rem;
-}
-
-.list-checkmark {
-  width: 100%;
-  min-height: 10rem;
-}
-
-.list-checkmark:not(:first-child):not(:last-child) {
-  border-radius: 0;
-  border-left: 0;
-  border-right: 0;
-}
-
-.list-checkmark:first-child {
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-right: 0px;
-}
-
-.list-checkmark:last-child {
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  margin-bottom: -1px;
-  border-left: 0px;
-}
-
-.resume-numbers {
-  color: #00bcd4;
-  font-size: 1.7rem;
-}
-
-.custom-range {
-  margin: 10px 0;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  border: 0px;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background: #00bcd4;
-  cursor: pointer;
-  color: #ffffff;
-}
-
-input[type="range"]::-moz-range-thumb {
-  -webkit-appearance: none;
-  border: 0px;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background: #00bcd4;
-  cursor: pointer;
-  color: #ffffff;
-}
-
-input[type="range"]::-ms-thumb {
-  -webkit-appearance: none;
-  border: 0px;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background: #00bcd4;
-  cursor: pointer;
-  color: #ffffff;
-}
-
-input[type="range"]::before {
-  content: 6;
 }

@@ -1,94 +1,31 @@
-<ul class="nav nav-tabs" style="display: none;" #listStepDetails>
-  <li class="active">
-    <a data-toggle="tab" class="label"></a>
-  </li>
-</ul>
+<div class="stepper">
+  <ul class="nav nav-tabs" style="display: none;" #listStepDetails>
+    <li class="active">
+      <a data-toggle="tab" class="label" href="#loan-about"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#loan-goals"></a>
+    </li>
+  </ul>
 
-<div class="loan-step-wrapper">
-  <div class="step-header">
-    <div class="loan-assitant-img"></div>
-    <p class="step-title">Tell us about the loan you're after.</p>
-  </div>
-
-  <div class="step-content">
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <label for="loan-size">What size loan do you need for your business?</label
-        ><span class="text-muted"> - Up to 10,000,000 KSH</span>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">KES</span>
-          </div>
-          <input type="text" id="loan-size" class="form-control" />
-        </div>
-      </div>
+  <div class="tab-content">
+    <div class="tab-pane" [class.active]="displayStep(0)" id="loan-about">
+      <app-loan-about></app-loan-about>
     </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <label for="repayments-num">Number of repayments</label><span class="text-muted"> - In months</span>
-        <div class="input-group">
-          <input type="range" id="repayments-num" name="repayments-num" class="col-md-12 custom-range" />
-          <output for="repayments-num" onforminput="value = repayments-num.valueAsNumber;"></output>
-        </div>
-        <span class="font-weight-lighter">Min: 6 Months</span>
-        <div class="pull-right">
-          <span class="font-weight-lighter">Max: 48 Months</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <label for="laon-size">Do you want to insure your loan with Absa?</label>
-      <div class="form-group col-md-12">
-        <div class="col-md-6 pl-0 pr-2">
-          <label class="container">
-            <input type="radio" name="radio" />
-            <span class="checkmark">
-              Yes
-            </span>
-          </label>
-        </div>
-        <div class="col-md-6 pr-0 pl-2">
-          <label class="container">
-            <input type="radio" name="radio" />
-            <span class="checkmark">
-              No
-            </span>
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <ul class="list-group list-group-horizontal">
-          <li class="list-group-item checkmark list-checkmark">
-            <span class="resume-numbers">KES 10,000</span>
-            <span>Monthly Repayment</span>
-          </li>
-          <li class="list-group-item checkmark list-checkmark">
-            <span class="resume-numbers">6 Months</span>
-            <span>Number of Repayments</span>
-          </li>
-          <li class="list-group-item checkmark list-checkmark">
-            <span class="resume-numbers">550,000</span>
-            <span
-              >Payback Amount <br />
-              (Inclusive of Insurance)</span
-            >
-          </li>
-        </ul>
-      </div>
+    <div class="tab-pane" [class.active]="displayStep(1)" id="loan-goals">
+      <app-loan-goals></app-loan-goals>
     </div>
   </div>
-</div>
 
-<div class="stepper-footer">
-  <div class="stepper-footer-wrapper">
-    <div>
-      <button class="btn-primary-transp">SAVE</button>
-      <button class="bttn bttn-primary" (click)="onNext()">NEXT</button>
+  <div class="stepper-footer">
+    <div class="stepper-footer-wrapper">
+      <div>
+        <button class="bttn-secondary" (click)="onPrevious()">PREV</button>
+      </div>
+      <div>
+        <button class="btn-primary-transp">SAVE</button>
+        <button class="bttn bttn-primary next-step" (click)="onNext()">NEXT</button>
+      </div>
     </div>
   </div>
 </div>

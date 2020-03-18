@@ -5,6 +5,8 @@ import { ProductRoutingModule } from './finance-routing.module';
 import { FinanceListComponent } from './finance-list/finance-list.component';
 import { LoanGeneratorComponent } from './loan-generator/loan-generator.component';
 import { LoanDetailsComponent } from './loan-generator/loan-details/loan-details.component';
+import { LoanAboutComponent } from './loan-generator/loan-details/loan-about/loan-about.component';
+import { LoanGoalsComponent } from './loan-generator/loan-details/loan-goals/loan-goals.component';
 import { BusinessDetailsComponent } from './loan-generator/business-details/business-details.component';
 import { ApplicantDetailsComponent } from './loan-generator/applicant-details/applicant-details.component';
 import { RefereeDetailsComponent } from './loan-generator/referee-details/referee-details.component';
@@ -37,6 +39,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FinanceListComponent,
     LoanGeneratorComponent,
     LoanDetailsComponent,
+    LoanGoalsComponent,
+    LoanAboutComponent,
     BusinessDetailsComponent,
     ApplicantDetailsComponent,
     RefereeDetailsComponent,
