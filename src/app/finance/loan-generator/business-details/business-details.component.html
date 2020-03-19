@@ -12,6 +12,9 @@
     <li class="disabled">
       <a data-toggle="tab" class="label" href="#business-other"></a>
     </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-financial"></a>
+    </li>
   </ul>
 
   <div class="tab-content">
@@ -26,6 +29,9 @@
     </div>
     <div class="tab-pane" [class.active]="displayStep(3)" id="business-other">
       <app-business-other-details></app-business-other-details>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(4)" id="business-financial">
+      <app-business-financial-details></app-business-financial-details>
     </div>
   </div>
 

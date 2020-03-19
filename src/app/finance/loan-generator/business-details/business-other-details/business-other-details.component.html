@@ -7,22 +7,31 @@
   <div class="step-content">
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="number-of-employees">Number of people working in business</label>
-        <input type="number" id="number-of-employees" class="form-control" />
+        <label for="experience">Experience (years in the line of business)</label>
+        <div class="input-group">
+          <input type="text" id="experience" class="form-control" />
+          <div class="input-group-append">
+            <span class="input-group-text">Years</span>
+          </div>
+        </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="business-type">Type of business (product/service)</label>
-        <input type="text" id="business-type" class="form-control" />
+        <label for="contact-person">Contact person</label>
+        <input type="text" id="contact-person" class="form-control" />
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="insurance-type">Type of insurance take on business</label>
-        <input type="text" id="insurance-type" class="form-control" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="years-of-operation">Number of years in operation</label>
-        <input type="number" id="years-of-operation" class="form-control" />
+        <label for="number-of-workers">Number of people working in business</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-lg btn-secondary" type="button">-</button>
+          </div>
+          <input type="text" id="number-of-workers" class="form-control col-md-5" />
+          <div class="input-group-append">
+            <button class="btn btn-lg btn-secondary" type="button">+</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

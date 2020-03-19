@@ -15,6 +15,7 @@ import { BusinessBasicDetailsComponent } from './loan-generator/business-details
 import { BusinessLocationComponent } from './loan-generator/business-details/business-location/business-location.component';
 import { BusinessPremisesComponent } from './loan-generator/business-details/business-premises/business-premises.component';
 import { BusinessOtherDetailsComponent } from './loan-generator/business-details/business-other-details/business-other-details.component';
+import { BusinessFinancialDetailsComponent } from './loan-generator/business-details/business-financial-details/business-financial-details.component';
 // tslint:disable-next-line:max-line-length
 import { ApplicantPersonalInfoComponent } from './loan-generator/applicant-details/applicant-personal-info/applicant-personal-info.component';
 import { ApplicantLocationComponent } from './loan-generator/applicant-details/applicant-location/applicant-location.component';
@@ -60,7 +61,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ApplicantOtherLoansComponent,
     ApplicantCardsComponent,
     QualifcationToolComponent,
-    LoanComponent
+    LoanComponent,
+    BusinessFinancialDetailsComponent
   ],
   entryComponents: [],
 
