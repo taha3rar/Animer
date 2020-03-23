@@ -34,6 +34,7 @@ import { MatSliderModule } from '@angular/material';
 import { QualifcationToolComponent } from './loan-generator/qualifcation-tool/qualifcation-tool.component';
 import { LoanComponent } from './loan/loan.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BusinessDirectorsDetailsComponent } from './loan-generator/business-details/business-directors-details/business-directors-details.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ApplicantCardsComponent,
     QualifcationToolComponent,
     LoanComponent,
-    BusinessFinancialDetailsComponent
+    BusinessFinancialDetailsComponent,
+    BusinessDirectorsDetailsComponent
   ],
   entryComponents: [],
 

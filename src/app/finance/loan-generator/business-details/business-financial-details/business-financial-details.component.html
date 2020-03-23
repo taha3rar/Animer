@@ -8,11 +8,11 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="business-from">From</label>
-        <input type="text" id="business-from" class="form-control" />
+        <input type="text" id="business-from" class="form-control" placeholder="DD/MM/YYYY" ngbDatepicker>
       </div>
       <div class="form-group col-md-6">
         <label for="business-to">To</label>
-        <input type="text" id="business-to" class="form-control" />
+        <input type="text" id="business-to" class="form-control" placeholder="DD/MM/YYYY" ngbDatepicker/>
       </div>
     </div>
 
@@ -26,9 +26,14 @@
           <input type="text" id="business-sales" class="form-control" />
         </div>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-6 has-feedback">
         <label for="stocks-held">Value of stocks held</label>
-        <input type="text" id="stocks-held" class="form-control" />
+        <div class="input-group">
+          <input type="text" id="stocks-held" class="form-control" />
+          <div class="input-group-append">
+            <span class="form-control-feedback" id="basic-addon1"><i class="material-icons ml-2 md-18 infoAddon">info</i></span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -44,7 +49,10 @@
       </div>
       <div class="form-group col-md-6">
         <label for="debtors-outstanding">Trade debtors outstanding</label>
-        <input type="text" id="debtors-outstanding" class="form-control" />
+        <div class="input-group">
+          <input type="text" id="debtors-outstanding" class="form-control" />
+          <span class="form-control-feedback" id="basic-addon1"><i class="material-icons ml-2 md-18 infoAddon">info</i></span>
+        </div>
       </div>
     </div>
 
@@ -55,7 +63,10 @@
       </div>
       <div class="form-group col-md-6">
         <label for="creditors-oustanding">Trade creditors outstanding</label>
-        <input type="text" id="creditors-oustanding" class="form-control" />
+        <div class="input-group">
+          <input type="text" id="creditors-oustanding" class="form-control" />
+          <span class="form-control-feedback" id="basic-addon1"><i class="material-icons ml-2 md-18 infoAddon">info</i></span>
+        </div>
       </div>
     </div>
 
