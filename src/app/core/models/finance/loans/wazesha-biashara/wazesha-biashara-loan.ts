@@ -1,4 +1,13 @@
 export class WBLoan {
+  qualification: {
+    amount_needed: Number;
+    loan_purpose: String;
+    agribusiness_type: [String];
+    other_agribusiness_type: String;
+    incorporation_seniority: String;
+    registration_country: String;
+    absa_bank_account: Boolean;
+  };
   loan_details: {
     loan_amount: Number;
     loan_purpose: String;

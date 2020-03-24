@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperNavigationService } from './stepper-navigation.service';
+import { LoanGeneratorDataService } from './loan-generator-data.service';
 
 @Component({
   selector: 'app-loan-generator-list',
@@ -13,7 +14,11 @@ export class LoanGeneratorComponent implements OnInit {
   @Input() beginApplication = false;
   currentGeneralActiveStep: number;
 
-  constructor(private formBuilder: FormBuilder, private stepperNavigation: StepperNavigationService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private stepperNavigation: StepperNavigationService,
+    private loanGeneratorDataService: LoanGeneratorDataService
+  ) {}
 
   ngOnInit() {
     this.stepperNavigation.setGeneralStepsNumber(this.generalSteps.nativeElement.children.length);
@@ -21,125 +26,136 @@ export class LoanGeneratorComponent implements OnInit {
       this.currentGeneralActiveStep = stepNumber;
     });
     this.loan_form = this.formBuilder.group({
+      // Qualification
+      qualification: this.formBuilder.group({
+        amount_needed: [undefined, Validators.required],
+        loan_purpose: [undefined, Validators.required],
+        agribusiness_type: this.formBuilder.array([], Validators.required),
+        other_agribusiness_type: [undefined],
+        incorporation_seniority: [undefined, Validators.required],
+        registration_country: [undefined, Validators.required],
+        absa_bank_account: [undefined, Validators.required]
+      }),
       // STEP 1
       loan_details: this.formBuilder.group({
-        loan_amount: Number,
-        loan_purpose: String
+        loan_amount: undefined,
+        loan_purpose: undefined
       }),
       // STEP 2
       business_details: this.formBuilder.group({
-        business_name: String,
-        ownership_type: String,
-        registration_number: String,
-        incorporation_date: Date,
-        vat_number: Number,
-        employees_amount: Number,
-        pin_number: Number,
-        phone_number: Number,
+        business_name: undefined,
+        ownership_type: undefined,
+        registration_number: undefined,
+        incorporation_date: undefined,
+        vat_number: undefined,
+        employees_amount: undefined,
+        pin_number: undefined,
+        phone_number: undefined,
         business_location: this.formBuilder.group({
-          po_box: Number,
-          postal_code: Number,
-          city: String,
-          street: String,
-          building: String,
-          plot_number: Number
+          po_box: undefined,
+          postal_code: undefined,
+          city: undefined,
+          street: undefined,
+          building: undefined,
+          plot_number: undefined
         }),
-        business_type: String, // Product or Service
-        country_of_operation: String,
-        business_premises: String,
-        business_insurance: String,
-        is_business_insured: Boolean,
-        operation_time: Number
+        business_type: undefined, // Product or Service
+        country_of_operation: undefined,
+        business_premises: undefined,
+        business_insurance: undefined,
+        is_business_insured: undefined,
+        operation_time: undefined
       }),
       // STEP 3 can be up to 5 applicants
-      applicant_details: [
+      applicant_details: this.formBuilder.array([
         this.formBuilder.group({
-          first_name: String,
-          middle_name: String,
-          last_name: String,
-          national_id_number: String,
-          passport_number: String,
-          pin_number: Number,
-          nationality: String,
-          kenyan_resident: Boolean,
-          residence_country: String,
-          birth_date: Date,
-          birth_place: String,
-          gender: String,
-          marital_status: String,
-          number_of_dependants: Number,
-          ages_of_dependants: Number, // Array
+          first_name: undefined,
+          middle_name: undefined,
+          last_name: undefined,
+          national_id_number: undefined,
+          passport_number: undefined,
+          pin_number: undefined,
+          nationality: undefined,
+          kenyan_resident: undefined,
+          residence_country: undefined,
+          birth_date: undefined,
+          birth_place: undefined,
+          gender: undefined,
+          marital_status: undefined,
+          number_of_dependants: undefined,
+          ages_of_dependants: undefined, // Array
           residential_address: this.formBuilder.group({
-            physical_address: String,
-            city: String,
-            province: String,
-            years_of_residency: Number
+            physical_address: undefined,
+            city: undefined,
+            province: undefined,
+            years_of_residency: undefined
           }),
           postal_address: this.formBuilder.group({
-            po_box: Number,
-            postal_code: Number,
-            city: String,
-            province: String
+            po_box: undefined,
+            postal_code: undefined,
+            city: undefined,
+            province: undefined
           }),
           contact_details: this.formBuilder.group({
-            mobile_phone_number: Number,
-            home_phone_number: Number,
-            other_phone_number: Number,
-            email_address: Number
+            mobile_phone_number: undefined,
+            home_phone_number: undefined,
+            other_phone_number: undefined,
+            email_address: undefined
           }),
-          five_years_same_address: Boolean,
-          previous_physical_address: String,
-          previous_city: String,
-          previous_province: String,
-          accomodation_type: String, // Specific conditions
-          accomodation_owned_type: String,
-          estimated_property_value: Number,
-          signature: String,
-          signature_date: Date
+          five_years_same_address: undefined,
+          previous_physical_address: undefined,
+          previous_city: undefined,
+          previous_province: undefined,
+          accomodation_type: undefined, // Specific conditions
+          accomodation_owned_type: undefined,
+          estimated_property_value: undefined,
+          signature: undefined,
+          signature_date: undefined
         })
-      ],
+      ]),
       // STEP 4 can be up to 2 referees
-      referee_details: [
+      referee_details: this.formBuilder.array([
         this.formBuilder.group({
-          full_name: String,
-          applicant_relationship: String,
-          phone_number: String,
-          po_box: Number,
-          postal_code: Number,
-          city: String,
-          country: String
+          full_name: undefined,
+          applicant_relationship: undefined,
+          phone_number: undefined,
+          po_box: undefined,
+          postal_code: undefined,
+          city: undefined,
+          country: undefined
         })
-      ],
+      ]),
       // STEP 5
       business_banking_details: this.formBuilder.group({
-        bank_details: [
+        bank_details: this.formBuilder.array([
           this.formBuilder.group({
-            bank_name: String,
-            bank_branch: String,
-            account_number: Number,
-            any_loan_in_bank: Boolean,
-            loan_type: String,
-            loan_currency: String,
-            loan_amount: String,
-            loan_date_taken: Date,
-            outstanding_balance: Number, // WHATS IS IT ?
-            monthly_repayment: Number, // WHAT IS IT ?
-            term: String
+            bank_name: undefined,
+            bank_branch: undefined,
+            account_number: undefined,
+            any_loan_in_bank: undefined,
+            loan_type: undefined,
+            loan_currency: undefined,
+            loan_amount: undefined,
+            loan_date_taken: undefined,
+            outstanding_balance: undefined, // WHATS IS IT ?
+            monthly_repayment: undefined, // WHAT IS IT ?
+            term: undefined
           })
-        ],
-        // Check the number of cards
-        applicant_card_details: [
+        ]),
+        // Check the undefined of cards
+        applicant_card_details: this.formBuilder.array([
           this.formBuilder.group({
-            applicant_name: String,
-            card_issuer: String,
-            credit_card_type: String,
-            card_number: String, // Format separator
-            card_expiry_date: Date,
-            card_limit: Number
+            applicant_name: undefined,
+            card_issuer: undefined,
+            credit_card_type: undefined,
+            card_number: undefined, // Format separator
+            card_expiry_date: undefined,
+            card_limit: undefined
           })
-        ]
+        ])
       })
     });
+    this.loanGeneratorDataService.setForm(this.loan_form);
   }
 
   displayStepTab(stepNumber: number): boolean {

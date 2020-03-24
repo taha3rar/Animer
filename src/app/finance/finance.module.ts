@@ -30,6 +30,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { MatSliderModule } from '@angular/material';
 import { QualifcationToolComponent } from './loan-generator/qualifcation-tool/qualifcation-tool.component';
 import { LoanComponent } from './loan/loan.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { LoanComponent } from './loan/loan.component';
   ],
   entryComponents: [],
 
-  imports: [CommonModule, ProductRoutingModule, CdkStepperModule, SharedModule, MatSliderModule],
+  imports: [CommonModule, ProductRoutingModule, CdkStepperModule, SharedModule, MatSliderModule, ReactiveFormsModule],
   providers: []
 })
 export class FinanceModule {}

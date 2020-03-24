@@ -1,5 +1,10 @@
 import { AuthenticationService } from '@app/core';
-import { Component, OnInit, EventEmitter, Output, ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { LoanGeneratorDataService } from '../loan-generator-data.service';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
+import { FinanceService } from '@app/core/api/finance.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-qualifcation-tool',
@@ -7,16 +12,44 @@ import { Component, OnInit, EventEmitter, Output, ElementRef } from '@angular/co
   styleUrls: ['./qualifcation-tool.component.scss']
 })
 export class QualifcationToolComponent implements OnInit {
+  loan_form: FormGroup;
+  loan: WBLoan;
   userFirstName: string;
   currentIndex = 1;
   checkboxCounter = 0;
   otherOption = false;
   @Output() beginApplication: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private loanGeneratorDataService: LoanGeneratorDataService,
+    private financeService: FinanceService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.userFirstName = this.authenticationService.credentials.user.personal_information.first_name;
+    this.loanGeneratorDataService.currentForm.subscribe(form => {
+      this.loan_form = form;
+    });
+    this.loan_form
+      .get('qualification')
+      .get('other_agribusiness_type')
+      .valueChanges.subscribe(type => {
+        type
+          ? this.loan_form
+              .get('qualification')
+              .get('agribusiness_type')
+              .setValidators([])
+          : this.loan_form
+              .get('qualification')
+              .get('agribusiness_type')
+              .setValidators([Validators.required]);
+        this.loan_form
+          .get('qualification')
+          .get('agribusiness_type')
+          .updateValueAndValidity();
+      });
   }
 
   onNextQuestion() {
@@ -28,13 +61,28 @@ export class QualifcationToolComponent implements OnInit {
   }
 
   onFinishQualification() {
-    this.beginApplication.emit(true);
+    // this.beginApplication.emit(true);
+    this.loan = this.loan_form.value;
+    this.financeService.draft(this.loan).subscribe(loan => {
+      this.router.navigateByUrl('/finance');
+    });
   }
 
   onCheck(event: any) {
+    const formArray: FormArray = this.loan_form.get('qualification').get('agribusiness_type') as FormArray;
+
     if (event.target.checked && this.checkboxCounter < 3) {
+      formArray.push(new FormControl(event.target.value));
       this.checkboxCounter += 1;
     } else if (!event.target.checked) {
+      let i = 0;
+      formArray.controls.forEach((ctrl: FormControl) => {
+        if (ctrl.value === event.target.value) {
+          formArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
       this.checkboxCounter -= 1;
     } else {
       event.target.checked = false;
