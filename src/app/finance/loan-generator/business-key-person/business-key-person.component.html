@@ -1,0 +1,37 @@
+<div class="stepper">
+  <ul class="nav nav-tabs" style="display: none;" #listStepDetails>
+    <li class="active">
+      <a data-toggle="tab" class="label" href="#key-details"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#key-contact"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#key-role"></a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane" [class.active]="displayStep(0)" id="key-details">
+      <app-business-key-details></app-business-key-details>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(1)" id="key-contact">
+      <app-business-key-contact></app-business-key-contact>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(2)" id="key-role">
+      <app-business-key-role></app-business-key-role>
+    </div>
+  </div>
+
+  <div class="stepper-footer">
+    <div class="stepper-footer-wrapper">
+      <div>
+        <button class="bttn-secondary" (click)="onPrevious()">PREV</button>
+      </div>
+      <div>
+        <button class="btn-primary-transp">SAVE</button>
+        <button class="bttn bttn-primary next-step" (click)="onNext()">NEXT</button>
+      </div>
+    </div>
+  </div>
+</div>

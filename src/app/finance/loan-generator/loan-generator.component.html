@@ -28,7 +28,7 @@
           </span>
         </li>
         <li [class.active]="displayStepTab(3)" [class.disabled]="!displayStepTab(3)">
-          <a data-toggle="tab" class="label" href="#referee-details">
+          <a data-toggle="tab" class="label" href="#business-key-person">
             <span class="round-tab">4</span><span class="l-step-title">Business Key Person</span></a
           >
           <span class="step-progress-bar-wrapper">
@@ -61,8 +61,8 @@
           <app-applicant-details></app-applicant-details>
         </div>
 
-        <div class="tab-pane" [class.active]="displayStepContent(3)" id="referee-details">
-          <app-referee-details></app-referee-details>
+        <div class="tab-pane" [class.active]="displayStepContent(3)" id="business-key-person">
+          <app-business-key-person></app-business-key-person>
         </div>
 
         <div class="tab-pane" [class.active]="displayStepContent(4)" id="business-banking-details">

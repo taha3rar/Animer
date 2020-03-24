@@ -15,8 +15,14 @@ import { BusinessBasicDetailsComponent } from './loan-generator/business-details
 import { BusinessLocationComponent } from './loan-generator/business-details/business-location/business-location.component';
 import { BusinessPremisesComponent } from './loan-generator/business-details/business-premises/business-premises.component';
 import { BusinessOtherDetailsComponent } from './loan-generator/business-details/business-other-details/business-other-details.component';
+// tslint:disable-next-line:max-line-length
 import { BusinessFinancialDetailsComponent } from './loan-generator/business-details/business-financial-details/business-financial-details.component';
+// tslint:disable-next-line:max-line-length
 import { BusinessDirectorsDetailsComponent } from './loan-generator/business-details/business-directors-details/business-directors-details.component';
+import { BusinessKeyPersonComponent } from './loan-generator/business-key-person/business-key-person.component';
+import { BusinessKeyDetailsComponent } from './loan-generator/business-key-person/business-key-details/business-key-details.component';
+import { BusinessKeyContactComponent } from './loan-generator/business-key-person/business-key-contact/business-key-contact.component';
+import { BusinessKeyRoleComponent } from './loan-generator/business-key-person/business-key-role/business-key-role.component';
 // tslint:disable-next-line:max-line-length
 import { ApplicantPersonalInfoComponent } from './loan-generator/applicant-details/applicant-personal-info/applicant-personal-info.component';
 import { ApplicantLocationComponent } from './loan-generator/applicant-details/applicant-location/applicant-location.component';
@@ -64,7 +70,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     QualifcationToolComponent,
     LoanComponent,
     BusinessFinancialDetailsComponent,
-    BusinessDirectorsDetailsComponent
+    BusinessDirectorsDetailsComponent,
+    BusinessKeyPersonComponent,
+    BusinessKeyDetailsComponent,
+    BusinessKeyContactComponent,
+    BusinessKeyRoleComponent
   ],
   entryComponents: [],
 
