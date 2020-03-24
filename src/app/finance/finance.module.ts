@@ -16,6 +16,7 @@ import { BusinessLocationComponent } from './loan-generator/business-details/bus
 import { BusinessPremisesComponent } from './loan-generator/business-details/business-premises/business-premises.component';
 import { BusinessOtherDetailsComponent } from './loan-generator/business-details/business-other-details/business-other-details.component';
 import { BusinessFinancialDetailsComponent } from './loan-generator/business-details/business-financial-details/business-financial-details.component';
+import { BusinessDirectorsDetailsComponent } from './loan-generator/business-details/business-directors-details/business-directors-details.component';
 // tslint:disable-next-line:max-line-length
 import { ApplicantPersonalInfoComponent } from './loan-generator/applicant-details/applicant-personal-info/applicant-personal-info.component';
 import { ApplicantLocationComponent } from './loan-generator/applicant-details/applicant-location/applicant-location.component';
@@ -34,7 +35,6 @@ import { MatSliderModule } from '@angular/material';
 import { QualifcationToolComponent } from './loan-generator/qualifcation-tool/qualifcation-tool.component';
 import { LoanComponent } from './loan/loan.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BusinessDirectorsDetailsComponent } from './loan-generator/business-details/business-directors-details/business-directors-details.component';
 
 @NgModule({
   declarations: [

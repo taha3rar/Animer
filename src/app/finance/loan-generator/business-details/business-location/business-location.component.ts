@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-business-location',
   templateUrl: './business-location.component.html',
-  styleUrls: ['./business-location.component.scss']
+  styleUrls: ['./business-location.component.scss', '../business-details.component.scss']
 })
 export class BusinessLocationComponent implements OnInit {
   countries = countries;

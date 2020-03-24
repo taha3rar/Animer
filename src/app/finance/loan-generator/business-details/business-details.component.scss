@@ -24,3 +24,24 @@
   width: 70%;
   margin: 0 auto;
 }
+
+.input-group {
+  position: sticky !important;
+}
+
+.infoAddon {
+  vertical-align: middle;
+  color: #fff;
+  background-color: #00bcd4;
+  border-radius: 1rem;
+  border-color: #00bcd4;
+}
+
+.container {
+  border: 1px solid #ced4da;
+  padding: 3rem;
+}
+
+.radio {
+  display: none;
+}
