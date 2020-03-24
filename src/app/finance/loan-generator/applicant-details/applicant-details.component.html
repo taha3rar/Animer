@@ -4,16 +4,7 @@
       <a data-toggle="tab" class="label" href="#contact-pi"></a>
     </li>
     <li class="disabled">
-      <a data-toggle="tab" class="label" href="#contact-location"></a>
-    </li>
-    <li class="disabled">
-      <a data-toggle="tab" class="label" href="#contact-postal"></a>
-    </li>
-    <li class="disabled">
       <a data-toggle="tab" class="label" href="#contact-details"></a>
-    </li>
-    <li class="disabled">
-      <a data-toggle="tab" class="label" href="#contact-properties"></a>
     </li>
   </ul>
 
@@ -21,17 +12,8 @@
     <div class="tab-pane" [class.active]="displayStep(0)" id="contact-pi">
       <app-applicant-personal-info></app-applicant-personal-info>
     </div>
-    <div class="tab-pane" [class.active]="displayStep(1)" id="contact-location">
-      <app-applicant-location></app-applicant-location>
-    </div>
-    <div class="tab-pane" [class.active]="displayStep(2)" id="contact-postal">
-      <app-applicant-postal></app-applicant-postal>
-    </div>
-    <div class="tab-pane" [class.active]="displayStep(3)" id="contact-details">
+    <div class="tab-pane" [class.active]="displayStep(1)" id="contact-details">
       <app-applicant-contact-details></app-applicant-contact-details>
-    </div>
-    <div class="tab-pane" [class.active]="displayStep(4)" id="contact-properties">
-      <app-applicant-contact-properties></app-applicant-contact-properties>
     </div>
   </div>
 
