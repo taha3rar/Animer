@@ -124,9 +124,7 @@ export class InvoiceComponent extends DocumentDownloadComponent implements OnIni
   payInvoicePopup() {
     swal({
       // tslint:disable-next-line:max-line-length
-      text: `Are you sure you want to pay ${this.invoice.total_due} ${this.invoice.currency} to ${
-        this.invoice.seller.first_name
-      } ${this.invoice.seller.last_name} through DPO?`,
+      text: `Are you sure you want to pay ${this.invoice.total_due} ${this.invoice.currency} to ${this.invoice.seller.first_name} ${this.invoice.seller.last_name} through DPO?`,
       buttons: ['Cancel', 'Yes'],
       icon: 'warning'
     }).then(value => {

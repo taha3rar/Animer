@@ -67,9 +67,7 @@ export class HeaderComponent implements OnInit {
 
   get username(): string | null {
     if (this.credentials) {
-      return `${this.credentials.user.personal_information.first_name} ${
-        this.credentials.user.personal_information.last_name
-      }`;
+      return `${this.credentials.user.personal_information.first_name} ${this.credentials.user.personal_information.last_name}`;
     }
 
     return null;
