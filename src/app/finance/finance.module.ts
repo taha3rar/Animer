@@ -24,6 +24,8 @@ import { BusinessKeyDetailsComponent } from './loan-generator/business-key-perso
 import { BusinessKeyContactComponent } from './loan-generator/business-key-person/business-key-contact/business-key-contact.component';
 import { BusinessKeyRoleComponent } from './loan-generator/business-key-person/business-key-role/business-key-role.component';
 // tslint:disable-next-line:max-line-length
+import { BusinessKeyLocationComponent } from './loan-generator/business-key-person/business-key-location/business-key-location.component';
+// tslint:disable-next-line:max-line-length
 import { ApplicantPersonalInfoComponent } from './loan-generator/applicant-details/applicant-personal-info/applicant-personal-info.component';
 import { ApplicantLocationComponent } from './loan-generator/applicant-details/applicant-location/applicant-location.component';
 import { ApplicantPostalComponent } from './loan-generator/applicant-details/applicant-postal/applicant-postal.component';
@@ -74,7 +76,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BusinessKeyPersonComponent,
     BusinessKeyDetailsComponent,
     BusinessKeyContactComponent,
-    BusinessKeyRoleComponent
+    BusinessKeyRoleComponent,
+    BusinessKeyLocationComponent
   ],
   entryComponents: [],
 

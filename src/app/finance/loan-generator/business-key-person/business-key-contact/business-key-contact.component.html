@@ -1,1 +1,70 @@
-<p>Working</p>
+<div class="loan-step-wrapper">
+  <div class="step-header">
+    <div class="loan-assitant-img"></div>
+    <p class="step-title">What are the contact details of the key person?</p>
+  </div>
+
+  <div class="step-content">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="birthday">Date of birth</label>
+        <input type="text" id="birthday" class="form-control" />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="pin">Pin Number</label>
+        <input type="text" id="pin" class="form-control" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <div class="col-md-6 pl-0 pr-2">
+          <label for="country">Country</label>
+          (Sole/LLC Only)
+          <select id="country" class="form-control">
+            <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
+              country.viewValue
+            }}</option>
+          </select>
+        </div>
+        <div class="col-md-6 pl-2 pr-0">
+          <label for="nationality">Nationality</label>
+          <input type="text" id="nationality" class="form-control" />
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="national-id">National ID</label>
+        <input type="text" id="national-id" class="form-control" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        (Sole/LLC Only)
+        <label for="po-box">P.O. box</label>
+        <input type="text" id="po-box" class="form-control" />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="postal-code">Postal code</label>
+        <input type="text" id="postal-code" class="form-control" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="telephone">Telephone</label>
+        <input type="text" id="telephone" class="form-control" placeholder="(+254) 7XX-XXX-XXX" />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="mobile">Mobile</label>
+        <input type="text" id="mobile" class="form-control" placeholder="(+254) 7XX-XXX-XXX" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <label for="email-address">Email address</label>
+        <input type="text" id="email-address" class="form-control" />
+      </div>
+    </div>
+  </div>
+</div>
