@@ -6,9 +6,6 @@
     <li class="disabled">
       <a data-toggle="tab" class="label" href="#other-loans"></a>
     </li>
-    <li class="disabled">
-      <a data-toggle="tab" class="label" href="#bank-cards"></a>
-    </li>
   </ul>
 
   <div class="tab-content">
@@ -17,9 +14,6 @@
     </div>
     <div class="tab-pane" [class.active]="displayStep(1)" id="other-loans">
       <app-applicant-other-loans></app-applicant-other-loans>
-    </div>
-    <div class="tab-pane" [class.active]="displayStep(2)" id="bank-cards">
-      <app-applicant-cards></app-applicant-cards>
     </div>
   </div>
 
@@ -30,7 +24,7 @@
       </div>
       <div>
         <button class="btn-primary-transp">SAVE</button>
-        <button class="bttn bttn-primary">SUBMIT</button>
+        <button class="bttn bttn-primary next-step" (click)="onNext()">NEXT</button>
       </div>
     </div>
   </div>

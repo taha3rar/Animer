@@ -61,10 +61,10 @@ export class QualifcationToolComponent implements OnInit {
   }
 
   onFinishQualification() {
-    // this.beginApplication.emit(true);
+    this.beginApplication.emit(true);
     this.loan = this.loan_form.value;
     this.financeService.draft(this.loan).subscribe(loan => {
-      this.router.navigateByUrl('/finance');
+      // this.router.navigateByUrl('/finance');
     });
   }
 

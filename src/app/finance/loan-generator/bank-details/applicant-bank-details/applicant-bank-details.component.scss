@@ -1,0 +1,26 @@
+.loan-bank {
+  width: 100%;
+  min-height: 30rem;
+  border: 1px solid #ced3de;
+  padding: 1.5rem 1.6rem;
+  margin-top: 2rem;
+
+  &_title {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ced3de;
+    color: #5a6c7b;
+    font-weight: bold;
+    margin-bottom: 1.8rem;
+    p {
+      font-size: 1.6rem !important;
+    }
+  }
+}
+
+.absa {
+  color: rgb(214, 0, 29);
+}
+
+.input-group {
+  position: sticky !important;
+}
