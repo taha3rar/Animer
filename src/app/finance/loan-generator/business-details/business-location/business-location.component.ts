@@ -1,5 +1,7 @@
 import { countries } from '@app/shared/helpers/countries';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { LoanGeneratorDataService } from '../../loan-generator-data.service';
 
 @Component({
   selector: 'app-business-location',
@@ -8,8 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusinessLocationComponent implements OnInit {
   countries = countries;
+  loan_form: FormGroup;
 
-  constructor() {}
+  constructor(private loanGeneratorDataService: LoanGeneratorDataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loanGeneratorDataService.currentForm.subscribe(form => {
+      this.loan_form = form;
+    });
+  }
 }

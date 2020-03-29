@@ -4,35 +4,44 @@
     <p class="step-title">Tell us a bit more about your business.</p>
   </div>
 
-  <div class="step-content">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="experience">Experience (years in the line of business)</label>
-        <div class="input-group">
-          <input type="text" id="experience" class="form-control" />
-          <div class="input-group-append">
-            <span class="input-group-text">Years</span>
+  <form [formGroup]="loan_form" class="col">
+    <div formGroupName="business_other_details" #businessOtherDetails>
+      <div class="step-content">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="experience">Experience (years in the line of business)</label>
+            <div class="input-group">
+              <input type="text" id="experience" class="form-control" formControlName="experience" />
+              <div class="input-group-append">
+                <span class="input-group-text">Years</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="contact-person">Contact person</label>
+            <input type="text" id="contact-person" class="form-control" formControlName="contact_person" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="number-of-workers">Number of people working in business</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button class="btn btn-lg btn-secondary" type="button">-</button>
+              </div>
+              <input
+                type="text"
+                id="number-of-workers"
+                class="form-control col-md-5"
+                formControlName="people_working"
+              />
+              <div class="input-group-append">
+                <button class="btn btn-lg btn-secondary" type="button">+</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="form-group col-md-6">
-        <label for="contact-person">Contact person</label>
-        <input type="text" id="contact-person" class="form-control" />
-      </div>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="number-of-workers">Number of people working in business</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <button class="btn btn-lg btn-secondary" type="button">-</button>
-          </div>
-          <input type="text" id="number-of-workers" class="form-control col-md-5" />
-          <div class="input-group-append">
-            <button class="btn btn-lg btn-secondary" type="button">+</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </form>
 </div>

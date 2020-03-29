@@ -39,17 +39,20 @@ export class LoanGeneratorComponent implements OnInit {
         absa_bank_account: [undefined, Validators.required]
       }),
       // STEP 1
+      // Loan Details
       loan_details: this.formBuilder.group({
         loan_size: [undefined],
         repayments_num: [undefined],
         insure_absa: [undefined]
       }),
+      // Loan Goals
       loan_goals: this.formBuilder.group({
         loan_for: [undefined],
         short_term: [undefined],
         long_term: [undefined]
       }),
       // STEP 2
+      // Business Basic Details
       business_basic_details: this.formBuilder.group({
         business_name: undefined,
         business_nature: undefined,
@@ -62,6 +65,52 @@ export class LoanGeneratorComponent implements OnInit {
         phone_number: undefined,
         email_address: undefined,
         company_website: undefined
+      }),
+      // Business Location
+      business_location: this.formBuilder.group({
+        country: undefined,
+        town: undefined,
+        address: undefined,
+        block_number: undefined,
+        building_name: undefined,
+        postal_code: undefined,
+        po_box: undefined
+      }),
+      // Business Premises
+      business_premises: this.formBuilder.group({
+        premises_radio: undefined
+      }),
+      // Business Other Details
+      business_other_details: this.formBuilder.group({
+        experience: undefined,
+        contact_person: undefined,
+        people_working: undefined
+      }),
+      // Business Financial Details
+      business_financial_details: this.formBuilder.group({
+        business_from: undefined,
+        business_to: undefined,
+        business_sales: undefined,
+        stocks_held: undefined,
+        cost_goods: undefined,
+        debtors_outstanding: undefined,
+        operating_expenses: undefined,
+        creditors_oustanding: undefined,
+        other_costs: undefined,
+        other_debts: undefined,
+        net_profit: undefined,
+        paid_capital: undefined
+      }),
+      // Business Directors Details
+      business_directors_details: this.formBuilder.group({
+        full_name: undefined,
+        id: undefined,
+        role_type: undefined,
+        pin: undefined,
+        shareholding: undefined,
+        role_type: undefined,
+        postal_address: undefined,
+        pc: undefined
       }),
       // STEP 3 can be up to 5 applicants
       applicant_details: this.formBuilder.array([

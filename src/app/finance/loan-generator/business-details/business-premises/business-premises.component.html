@@ -4,25 +4,29 @@
     <p class="step-title">Do you own your business premises or do you lease?</p>
   </div>
 
-  <div class="step-content">
-    <label for="ownership-type">Type of business premises</label>
-    <div class="row options-wrapper">
-      <div class="col-md-6 pl-0 mb-3">
-        <label class="container">
-          <input type="radio" name="premises-radio" />
-          <span class="checkmark">
-            Owned
-          </span>
-        </label>
-      </div>
-      <div class="col-md-6 pl-0 ">
-        <label class="container">
-          <input type="radio" name="premises-radio" />
-          <span class="checkmark">
-            Rented
-          </span>
-        </label>
+  <form [formGroup]="loan_form" class="col">
+    <div formGroupName="business_premises" #businessPremises>
+      <div class="step-content">
+        <label for="ownership-type">Type of business premises</label>
+        <div class="row options-wrapper">
+          <div class="col-md-6 pl-0 mb-3">
+            <label class="container">
+              <input type="radio" id="owned" name="premises_radio" formControlName="premises_radio" />
+              <span class="checkmark">
+                Owned
+              </span>
+            </label>
+          </div>
+          <div class="col-md-6 pl-0 ">
+            <label class="container">
+              <input type="radio" id="rented" name="premises_radio" formControlName="premises_radio" />
+              <span class="checkmark">
+                Rented
+              </span>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>

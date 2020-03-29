@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { LoanGeneratorDataService } from '../../loan-generator-data.service';
 
 @Component({
   selector: 'app-business-other-details',
@@ -6,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./business-other-details.component.scss', '../business-details.component.scss']
 })
 export class BusinessOtherDetailsComponent implements OnInit {
-  constructor() {}
+  loan_form: FormGroup;
 
-  ngOnInit() {}
+  constructor(private loanGeneratorDataService: LoanGeneratorDataService) {}
+
+  ngOnInit() {
+    this.loanGeneratorDataService.currentForm.subscribe(form => {
+      this.loan_form = form;
+    });
+  }
 }
