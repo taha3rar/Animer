@@ -4,32 +4,51 @@
   </li>
 </ul>
 
-<div class="loan-step-wrapper">
-  <div class="step-header">
-    <div class="loan-assitant-img"></div>
-    <p class="step-title">Tell us about your goals regarding this loan.</p>
+<form [formGroup]="loan_form" class="col">
+  <div formGroupName="loan_goals" #loanGoals>
+    <div class="loan-step-wrapper">
+      <div class="step-header">
+        <div class="loan-assitant-img"></div>
+        <p class="step-title">Tell us about your goals regarding this loan.</p>
+      </div>
+
+      <div class="step-content">
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="loan-for">What is the loan for?</label>
+            <textarea
+              name="loan-for"
+              id="loan-for"
+              class="form-control custom-textarea"
+              formControlName="loan_for"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="short-term">What do you want to achieve in the short term with these founds?</label>
+            <textarea
+              name="short-term"
+              id="short-term"
+              class="form-control custom-textarea"
+              formControlName="short_term"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="long-term">What do you want to achieve in the long term with these founds?</label>
+            <textarea
+              name="long-term"
+              id="long-term"
+              class="form-control custom-textarea"
+              formControlName="long_term"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="step-content">
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <label for="loan-for">What is the loan for?</label>
-        <textarea name="loan-for" id="loan-for" class="form-control custom-textarea"></textarea>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <label for="short-term">What do you want to achieve in the short term with these founds?</label>
-        <textarea name="short-term" id="short-term" class="form-control custom-textarea"></textarea>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <label for="long-term">What do you want to achieve in the long term with these founds?</label>
-        <textarea name="long-term" id="long-term" class="form-control custom-textarea"></textarea>
-      </div>
-    </div>
-  </div>
-</div>
+</form>

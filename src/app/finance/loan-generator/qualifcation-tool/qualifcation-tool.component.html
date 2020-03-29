@@ -38,12 +38,8 @@
           <div class="row options-wrapper">
             <div>
               <label class="container">
-                <input
-                  type="radio"
-                  name="amount_needed"
-                  value="KES 100,000 - KES 3 million"
-                  formControlName="amount_needed"
-                />
+                <input type="radio" name="amount_needed" value="KES 100,000 - KES 3 million"
+                  formControlName="amount_needed" />
                 <span class="checkmark">
                   I need approximately<br />
                   KES 100,000 - KES 3 million
@@ -52,12 +48,8 @@
             </div>
             <div>
               <label class="container">
-                <input
-                  type="radio"
-                  name="amount_needed"
-                  value="KES 3 million - KES 7 million"
-                  formControlName="amount_needed"
-                />
+                <input type="radio" name="amount_needed" value="KES 3 million - KES 7 million"
+                  formControlName="amount_needed" />
                 <span class="checkmark">
                   I need approximately <br />
                   KES 3 million - KES 7 million
@@ -66,12 +58,8 @@
             </div>
             <div>
               <label class="container">
-                <input
-                  type="radio"
-                  name="amount_needed"
-                  value="KES 7 million or more"
-                  formControlName="amount_needed"
-                />
+                <input type="radio" name="amount_needed" value="KES 7 million or more"
+                  formControlName="amount_needed" />
                 <span class="checkmark">
                   I need approximately <br />
                   KES 7 million or more
@@ -94,12 +82,8 @@
             </span>
           </label>
           <label class="container">
-            <input
-              type="radio"
-              name="loan_purpose"
-              value="ongoing expenses & one-off purchase"
-              formControlName="loan_purpose"
-            />
+            <input type="radio" name="loan_purpose" value="ongoing expenses & one-off purchase"
+              formControlName="loan_purpose" />
             <span class="checkmark agri-type">
               I need funds for a bit of both.
             </span>
@@ -109,7 +93,7 @@
           <div class="options-wrapper">
             <div>
               <label class="container">
-                <input type="checkbox" name="processing-type" value="processing" (change)="onCheck($event)" />
+                <input type="checkbox" name="processing-type" value="processing" formControlName="agribusiness_type" />
                 <span class="checkmark agri-type">
                   <img class="checkmark__img" src="/assets/img/loan-application-imgs/processing.svg" />
                   Processing <br />
@@ -119,7 +103,8 @@
             </div>
             <div>
               <label class="container">
-                <input type="checkbox" name="manufacturer-type" value="food manufacturer" (change)="onCheck($event)" />
+                <input type="checkbox" name="manufacturer-type" value="food manufacturer"
+                  formControlName="agribusiness_type" />
                 <span class="checkmark agri-type">
                   <img class="checkmark__img" src="/assets/img/loan-application-imgs/food-manufacturer.svg" />
                   Food manufacturer
@@ -130,12 +115,8 @@
           <div class="options-wrapper">
             <div>
               <label class="container">
-                <input
-                  type="checkbox"
-                  name="feed-manufacuturer-type"
-                  value="animal feed manufacturer"
-                  (change)="onCheck($event)"
-                />
+                <input type="checkbox" name="feed-manufacuturer-type" value="animal feed manufacturer"
+                  formControlName="agribusiness_type" />
                 <span class="checkmark agri-type">
                   <img class="checkmark__img" src="/assets/img/loan-application-imgs/animal-feed.svg" />
                   Animal feed manufacturer
@@ -144,7 +125,8 @@
             </div>
             <div>
               <label class="container">
-                <input type="checkbox" name="input-provider-type" value="input provider" (change)="onCheck($event)" />
+                <input type="checkbox" name="input-provider-type" value="input provider"
+                  formControlName="agribusiness_type" />
                 <span class="checkmark agri-type">
                   <img class="checkmark__img" src="/assets/img/loan-application-imgs/input-provider.svg" />
                   Input provider <br />
@@ -156,7 +138,8 @@
           <div class="options-wrapper">
             <div>
               <label class="container">
-                <input type="checkbox" name="crop-production-type" value="crop production" (change)="onCheck($event)" />
+                <input type="checkbox" name="crop-production-type" value="crop production"
+                  formControlName="agribusiness_type" />
                 <span class="checkmark agri-type">
                   <img class="checkmark__img" src="/assets/img/loan-application-imgs/crop-production.svg" />
                   Crop production <br />
@@ -166,7 +149,7 @@
             </div>
             <div>
               <label class="container">
-                <input type="checkbox" name="retail-type" value="retail" (change)="onCheck($event)" />
+                <input type="checkbox" name="retail-type" value="retail" formControlName="agribusiness_type" />
                 <span class="checkmark agri-type">
                   <img class="checkmark__img" src="/assets/img/loan-application-imgs/retailer.svg" />
                   Retail<br />
@@ -194,14 +177,45 @@
         </div>
         <div class="qualification__item" [class.display-tab]="displayTab(4)">
           <div class="row options-wrapper">
+            <div class="row options-wrapper">
+              <div class="col-md-4 pr-3">
+                <label class="container">
+                  <input type="radio" name="business_type" (change)="onCheck($event)" formControlName="business_type" />
+                  <span class="checkmark">
+                    <img class="checkmark__img business-sole-img"
+                      src="/assets/img/loan-application-imgs/individual.png" />
+                    Sole Trader
+                  </span>
+                </label>
+              </div>
+              <div class="col-md-4 pr-3">
+                <label class="container">
+                  <input type="radio" name="business_type" (change)="onCheck($event)" formControlName="business_type" />
+                  <span class="checkmark">
+                    <img class="checkmark__img business-partner-img"
+                      src="/assets/img/loan-application-imgs/partnership.png" />
+                    Partnership
+                  </span>
+                </label>
+              </div>
+              <div class="col-md-4 pr-0">
+                <label class="container">
+                  <input type="radio" name="business_type" (change)="onCheck($event)" formControlName="business_type" />
+                  <span class="checkmark">
+                    <img class="checkmark__img business-partner-img" src="/assets/img/loan-application-imgs/llc.png" />
+                    Limited Company
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="qualification__item" [class.display-tab]="displayTab(5)">
+          <div class="row options-wrapper">
             <div>
               <label class="container">
-                <input
-                  type="radio"
-                  name="incorporation_seniority"
-                  value="less than 12 months"
-                  formControlName="incorporation_seniority"
-                />
+                <input type="radio" name="incorporation_seniority" (change)="onCheck($event)"
+                  formControlName="incorporation_seniority" />
                 <span class="checkmark">
                   <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/small-business.svg" />
                   Less than 12 months
@@ -210,12 +224,8 @@
             </div>
             <div>
               <label class="container">
-                <input
-                  type="radio"
-                  name="incorporation_seniority"
-                  value="more than 12 months"
-                  formControlName="incorporation_seniority"
-                />
+                <input type="radio" name="incorporation_seniority" (change)="onCheck($event)"
+                  formControlName="incorporation_seniority" />
                 <span class="checkmark">
                   <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/big-business.svg" />
                   More than 12 months
@@ -224,11 +234,12 @@
             </div>
           </div>
         </div>
-        <div class="qualification__item" [class.display-tab]="displayTab(5)">
+        <div class="qualification__item" [class.display-tab]="displayTab(6)">
           <div class="row options-wrapper">
             <div>
               <label class="container">
-                <input type="radio" name="registration_country" value="kenya" formControlName="registration_country" />
+                <input type="radio" name="registration_country" (change)="onCheck($event)"
+                  formControlName="registration_country" />
                 <span class="checkmark">
                   Kenya
                 </span>
@@ -244,30 +255,6 @@
             </div>
           </div>
         </div>
-        <div class="qualification__item" [class.display-tab]="displayTab(6)">
-          <div class="row options-wrapper">
-            <div>
-              <label class="container">
-                <input type="radio" name="absa_bank_account" [value]="true" formControlName="absa_bank_account" />
-                <span class="checkmark text-logo">
-                  <span
-                    >Yes, I have an
-                    <img id="absa-logo" src="/assets/img/loan-application-imgs/absa-logo.svg" alt="absa" />
-                    (Barclays) bank account.</span
-                  >
-                </span>
-              </label>
-            </div>
-            <div>
-              <label class="container">
-                <input type="radio" name="absa_bank_account" [value]="false" formControlName="absa_bank_account" />
-                <span class="checkmark">
-                  No, I have a different bank account.
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="input-group" *ngIf="otherOption">
         <div class="input-group-prepend">
@@ -276,95 +263,15 @@
         <input type="text" class="form-control" autofocus />
       </div>
     </div>
-    <div class="qualification__item" [class.display-tab]="displayTab(4)">
-      <div class="row options-wrapper">
-        <div class="row options-wrapper">
-          <div class="col-md-4 pr-3">
-            <label class="container">
-              <input type="radio" name="radio" />
-              <span class="checkmark">
-                <img class="checkmark__img business-sole-img" src="/assets/img/loan-application-imgs/individual.png" />
-                Sole Trader
-              </span>
-            </label>
-          </div>
-          <div class="col-md-4 pr-3">
-            <label class="container">
-              <input type="radio" name="radio" />
-              <span class="checkmark">
-                <img
-                  class="checkmark__img business-partner-img"
-                  src="/assets/img/loan-application-imgs/partnership.png"
-                />
-                Partnership
-              </span>
-            </label>
-          </div>
-          <div class="col-md-4 pr-0">
-            <label class="container">
-              <input type="radio" name="radio" />
-              <span class="checkmark">
-                <img class="checkmark__img business-partner-img" src="/assets/img/loan-application-imgs/llc.png" />
-                Limited Company
-              </span>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="qualification__item" [class.display-tab]="displayTab(5)">
-      <div class="row options-wrapper">
-        <div>
-          <label class="container">
-            <input type="radio" name="radio" />
-            <span class="checkmark">
-              <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/small-business.svg" />
-              Less than 12 months
-            </span>
-          </label>
-        </div>
-        <div>
-          <label class="container">
-            <input type="radio" name="radio" />
-            <span class="checkmark">
-              <img class="checkmark__img business-img" src="/assets/img/loan-application-imgs/big-business.svg" />
-              More than 12 months
-            </span>
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="qualification__item" [class.display-tab]="displayTab(6)">
-      <div class="row options-wrapper">
-        <div>
-          <label class="container">
-            <input type="radio" name="radio" />
-            <span class="checkmark">
-              Kenya
-            </span>
-          </label>
-        </div>
-        <div>
-          <label class="container">
-            <input type="radio" name="radio" />
-            <span class="checkmark">
-              Other
-            </span>
-          </label>
-        </div>
-      </div>
-    </div>
     <div class="qualification__item" [class.display-tab]="displayTab(7)">
       <div class="row options-wrapper">
         <div>
           <label class="container">
             <input type="radio" name="radio" />
             <span class="checkmark text-logo">
-              <span
-                >Yes, I have an
+              <span>Yes, I have an
                 <img id="absa-logo" src="/assets/img/loan-application-imgs/absa-logo.svg" alt="absa" />
-                (Barclays) bank account.</span
-              >
+                (Barclays) bank account.</span>
             </span>
           </label>
         </div>
@@ -401,7 +308,7 @@
       </div>
       <button class="bttn-primary mt-5" (click)="onFinishQualification()">Let's begin</button>
     </div>
-  </div>
+  </form>
 </div>
 
 <div class="stepper-footer" *ngIf="currentIndex < 8">

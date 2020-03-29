@@ -2,6 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, ViewChi
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperNavigationService } from './stepper-navigation.service';
 import { LoanGeneratorDataService } from './loan-generator-data.service';
+import { LoanAboutComponent } from './loan-details/loan-about/loan-about.component';
 
 @Component({
   selector: 'app-loan-generator-list',
@@ -30,7 +31,8 @@ export class LoanGeneratorComponent implements OnInit {
       qualification: this.formBuilder.group({
         amount_needed: [undefined, Validators.required],
         loan_purpose: [undefined, Validators.required],
-        agribusiness_type: this.formBuilder.array([], Validators.required),
+        agribusiness_type: [this.formBuilder.array([], Validators.required)],
+        business_type: [undefined],
         other_agribusiness_type: [undefined],
         incorporation_seniority: [undefined, Validators.required],
         registration_country: [undefined, Validators.required],
@@ -38,33 +40,28 @@ export class LoanGeneratorComponent implements OnInit {
       }),
       // STEP 1
       loan_details: this.formBuilder.group({
-        loan_amount: undefined,
-        loan_purpose: undefined
+        loan_size: [undefined],
+        repayments_num: [undefined],
+        insure_absa: [undefined]
+      }),
+      loan_goals: this.formBuilder.group({
+        loan_for: [undefined],
+        short_term: [undefined],
+        long_term: [undefined]
       }),
       // STEP 2
-      business_details: this.formBuilder.group({
+      business_basic_details: this.formBuilder.group({
         business_name: undefined,
-        ownership_type: undefined,
-        registration_number: undefined,
-        incorporation_date: undefined,
+        business_nature: undefined,
+        registration_date: undefined,
+        brn: undefined,
+        b_pin: undefined,
         vat_number: undefined,
-        employees_amount: undefined,
-        pin_number: undefined,
+        physical_address: undefined,
+        street: undefined,
         phone_number: undefined,
-        business_location: this.formBuilder.group({
-          po_box: undefined,
-          postal_code: undefined,
-          city: undefined,
-          street: undefined,
-          building: undefined,
-          plot_number: undefined
-        }),
-        business_type: undefined, // Product or Service
-        country_of_operation: undefined,
-        business_premises: undefined,
-        business_insurance: undefined,
-        is_business_insured: undefined,
-        operation_time: undefined
+        email_address: undefined,
+        company_website: undefined
       }),
       // STEP 3 can be up to 5 applicants
       applicant_details: this.formBuilder.array([

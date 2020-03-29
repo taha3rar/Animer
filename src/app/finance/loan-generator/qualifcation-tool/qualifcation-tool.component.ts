@@ -64,6 +64,7 @@ export class QualifcationToolComponent implements OnInit {
     this.beginApplication.emit(true);
     this.loan = this.loan_form.value;
     this.financeService.draft(this.loan).subscribe(loan => {
+      console.log(loan);
       // this.router.navigateByUrl('/finance');
     });
   }
