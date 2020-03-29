@@ -108,7 +108,7 @@ export class LoanGeneratorComponent implements OnInit {
         role_type: undefined,
         pin: undefined,
         shareholding: undefined,
-        role_type: undefined,
+        // role_type: undefined,
         postal_address: undefined,
         pc: undefined
       }),
