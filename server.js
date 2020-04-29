@@ -79,6 +79,7 @@ async function pup(url, res) {
       res.setHeader("Access-Control-Allow-Credentials", true); // If needed
       numberOfResponses -= -1; //xd
       console.log(numberOfResponses);
+    if(p)
       res.send(p); //responds with the link to the original .mp4 video
       console.log(p);
     })
@@ -87,6 +88,7 @@ async function pup(url, res) {
         console.log(p);
         res.send(p);
     });
+  
 }
 ///
 // const express = require("express");
