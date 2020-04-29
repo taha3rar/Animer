@@ -84,9 +84,22 @@ async function pup(url, res) {
       console.log(p);
     })
     .catch(async() => {
+          res.setHeader("Access-Control-Allow-Origin", "*"); // i dont know what this is
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+      ); // If needed
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "X-Requested-With,content-type"
+      ); // If needed
+      res.setHeader("Access-Control-Allow-Credentials", true); // If needed
+      numberOfResponses -= -1; //xd
+      console.log(numberOfResponses);
         let p=(bodyHTML.slice(bodyHTML.lastIndexOf('https://hls'),bodyHTML.lastIndexOf('.m3u8')+5));
         console.log(p);
-        res.send(p);
+    await browser.close();
+    res.send(p);
     });
   
 }
