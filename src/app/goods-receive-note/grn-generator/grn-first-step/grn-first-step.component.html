@@ -1,0 +1,169 @@
+<div class="strip">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="supplier">Contact</label>
+        <select id="contact" data-live-search="true" placeholder="Choose supplier" class="selectpicker" data-size="7">
+          <option value="seller1"></option>
+          <option value="seller2"></option>
+        </select>
+      </div>
+      <a class="bttn-line">Add New Contact</a>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-4">
+          <p class="text-label">CONTACT</p>
+          <p class="text-regular">Contact Name</p>
+        </div>
+        <div class="col-md-4">
+          <p class="text-label">ORGANIZTION</p>
+          <p class="text-regular">Organization name</p>
+        </div>
+        <div class="col-md-4">
+          <p class="text-label">COUNTRY</p>
+          <p class="text-regular">Country</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p class="text-label">LOCATION</p>
+          <p class="text-regular">Location</p>
+        </div>
+        <div class="col-md-4">
+          <p class="text-label">PHONE</p>
+          <p class="text-regular">Phone number</p>
+        </div>
+        <div class="col-md-4">
+          <p class="text-label">EMAIL</p>
+          <p class="text-regular">Email address</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="strip mt-5">
+  <div class="form-row">
+    <!-- <div class="form-group col-md-6">
+      <label for="issue-date">Issue Date *</label>
+      <input type="text" id="issue-date" class="form-control" />
+    </div> -->
+    <div class="form-group col-md-3">
+      <label for="expected_delivery">Issue Date *</label>
+      <div class="input-group">
+        <input
+          id="expected_delivery"
+          class="form-control"
+          placeholder="dd/mm/yyyyy"
+          name="ddp"
+          ngbDatepicker
+          #dp3="ngbDatepicker"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn glyphicon glyphicon-calendar"
+            style="position:0;"
+            (click)="dp3.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-3 ref-input">
+      <label for="ref-code">Reference Code</label>
+      <input type="text" id="ref-code" class="form-control" />
+    </div>
+  </div>
+</div>
+
+<div class="mt-5">
+  <h3 class="t-bold">PRODUCTS</h3>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>PRODUCT</th>
+        <th>DESCRIPTION</th>
+        <th>QUANTITY</th>
+        <th>RATE</th>
+        <th>PRICE</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Green Coffee Beans
+        </td>
+        <td>
+          Description
+        </td>
+        <td>
+          1,000.00 KG
+        </td>
+        <td>
+          50.00 KES per KG
+        </td>
+        <td>
+          50,000.000 KES per KG
+        </td>
+        <td class="text-right">
+          <a class="bttn-line">Edit</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="bttn-primary" type="button">
+    Add Product
+  </button>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-6">
+    <div class="strip">
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea class="form-control" rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 ">
+    <div class="strip flex-strip" id="notes-sec">
+      <div class="form-group" id="payment-status">
+        <label for="status">Payment</label>
+        <select id="status" placeholder="Choose status" class="form-control">
+          <option value="paid">Paid</option>
+          <option value="partially-paid">Partially Paid</option>
+          <option value="awaiting">Awaiting Payment</option>
+        </select>
+      </div>
+
+      <div class="total-wrapper">
+        <h2>KES 1,000.00</h2>
+        <h5>TOTAL</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="strip mt-5">
+  <h3 class="t-bold mb-3">RECIEVED BY</h3>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="name">Full Name *</label>
+      <input type="text" class="form-control" id="name" />
+    </div>
+    <div class="form-group col-md-4 pl-3">
+      <label for="business">Business Name *</label>
+      <input type="text" class="form-control" id="business" />
+    </div>
+    <div class="form-group col-md-4 pl-3">
+      <label for="phone">Phone Number *</label>
+      <input class="form-control" id="phone" type="tel" />
+    </div>
+  </div>
+</div>
+
+<button class="flex-r btn-next next-step bttn-primary mt-5">
+  Next Step &rarr;
+</button>
