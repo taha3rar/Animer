@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { User } from '@app/core/models/user/user';
 
 @Injectable()
-export class ClientResolver implements Resolve<User> {
+export class ContactResolver implements Resolve<User> {
   constructor(private userService: UserService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<User> {

@@ -1,21 +1,21 @@
-import { ClientComponent } from './client/client.component';
+import { ContactComponent } from './contact/contact.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { extract } from '@app/core';
-import { ClientListComponent } from './client-list/client-list.component';
+import { ContactListComponent } from './contact-list/contact-list.component';
 import { Shell } from '@app/shell/shell.service';
 import { CurrentUserClientsResolver } from '@app/shared/resolvers/current-user-clients.resolver';
-import { ClientResolver } from './resolvers/client.resolver';
+import { ContactResolver } from './resolvers/contact.resolver';
 import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
 import { UserDocumentListResolver } from './resolvers/document-list.resolver';
-import { ClientGuard } from '../shared/guards/client.guard';
+import { ContactGuard } from '../shared/guards/contact.guard';
 import { PermissionGuard } from '../shared/guards/permission.guard';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'client',
-      component: ClientListComponent,
+      component: ContactListComponent,
       resolve: {
         currentUser: CurrentUserResolver,
         clients: CurrentUserClientsResolver
@@ -29,10 +29,10 @@ const routes: Routes = [
     },
     {
       path: 'client/:id',
-      component: ClientComponent,
-      canActivate: [ClientGuard],
+      component: ContactComponent,
+      canActivate: [ContactGuard],
       resolve: {
-        user: ClientResolver,
+        user: ContactResolver,
         documents: UserDocumentListResolver
       },
       runGuardsAndResolvers: 'always'
@@ -43,6 +43,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ClientGuard, PermissionGuard]
+  providers: [ContactGuard, PermissionGuard]
 })
-export class ClientRoutingModule {}
+export class ContactRoutingModule {}

@@ -9,12 +9,12 @@ import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 
 @Component({
-  selector: 'app-client-list',
-  templateUrl: './client-list.component.html',
-  styleUrls: ['./client-list.component.scss'],
+  selector: 'app-contact-list',
+  templateUrl: './contact-list.component.html',
+  styleUrls: ['./contact-list.component.scss'],
   providers: [FilterPipe]
 })
-export class ClientListComponent extends BaseListComponent implements OnInit {
+export class ContactListComponent extends BaseListComponent implements OnInit {
   clients: Client[];
   hasClients: boolean;
   itemsPerPage = defaultValues.items_per_page;
