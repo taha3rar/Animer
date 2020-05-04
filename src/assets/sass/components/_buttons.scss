@@ -645,3 +645,10 @@ div.swal2-popup div.swal2-actions {
 .loan-option-button:not(:last-child) {
   margin-right: 1rem;
 }
+
+a.bttn-line {
+  color: #006fff;
+  text-decoration-line: underline;
+  cursor: pointer;
+  font-weight: 500;
+}

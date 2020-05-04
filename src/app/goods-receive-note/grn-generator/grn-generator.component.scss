@@ -1,0 +1,14 @@
+@import "../../../assets/sass/abstracts/variables";
+
+.wrapper {
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+}
+
+.tab-pane {
+  padding-bottom: 4.2rem;
+}
+
+ul.nav > li > a {
+  white-space: pre-wrap !important;
+}

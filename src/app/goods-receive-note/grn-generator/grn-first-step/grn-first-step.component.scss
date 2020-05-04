@@ -1,0 +1,38 @@
+.ref-input {
+  padding-left: 1.5rem;
+}
+
+.total-wrapper {
+  padding: 2.4rem;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+    color: #7d8796;
+  }
+}
+
+#payment-status {
+  width: 50%;
+}
+
+#notes-sec {
+  min-height: 16rem;
+}
+
+.flex-r {
+  display: flex;
+  margin-left: auto;
+  justify-content: center;
+}

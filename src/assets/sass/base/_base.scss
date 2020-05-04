@@ -10,7 +10,6 @@
 html {
   font-size: 62.5%; // 1rem = 10px -> 10/16 = 0.625
   background-color: $bg-color;
-
   @include respond(small-desktop) {
     font-size: 56.25%; // 1rem = 9 -> 9/16px
   }
@@ -33,8 +32,8 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #585858;
+  font-family: "Roboto", sans-serif;
+  color: #455263;
 }
 
 .my-pagination {
@@ -76,4 +75,12 @@ body {
 
 div[data-notify="container"] {
   width: 88% !important;
+}
+
+.main-color {
+  color: #5a6c7b !important;
+}
+
+.dropdown.bootstrap-select {
+  width: 100% !important;
 }
