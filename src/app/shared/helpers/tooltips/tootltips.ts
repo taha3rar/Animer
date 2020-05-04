@@ -18,9 +18,9 @@ export const tooltips = {
   invoices: {
     issue_order: 'Issue an Invoice and send it to your Buyer'
   },
-  clients: {
-    clients_list: {
-      add_client: 'Adding a contact will let you manage all your future transactions with him'
+  contacts: {
+    contacts_list: {
+      add_contact: 'Adding a contact will let you manage all your future transactions with him'
     }
   },
   products: {

@@ -1,4 +1,4 @@
-<div class="modal-box" id="clientTutorials" *ngxPermissionsOnly="['create-client']">
+<div class="modal-box" id="contactTutorials" *ngxPermissionsOnly="['create-client']">
   <button class="bttn-icon right" (click)="nextSlide()" [hidden]="currentSlide == numberOfSlides">
     <i class="material-icons">keyboard_arrow_right</i>
   </button>
@@ -63,7 +63,7 @@
   </div>
 </div>
 
-<div class="modal-box" id="clientTutorials" *ngxPermissionsOnly="!['create-client']">
+<div class="modal-box" id="contactTutorials" *ngxPermissionsOnly="!['create-client']">
   <div class="modal-box-content-wrapper">
     <div class="modal-box-content-lg">
       <i class="material-icons pull-right close-modal" data-dismiss="modal" #closeModal>close</i>

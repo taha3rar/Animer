@@ -1,6 +1,6 @@
 import { User } from './user';
 
-export class Client {
+export class Contact {
   company_name: string;
   email: string;
   first_name: string;

@@ -13,7 +13,7 @@ export class UserDocumentService extends BaseService {
     super(apiService, '/contract');
   }
 
-  getByUserIdAndClientId(userId: string, clientId: string): Observable<UserDocument[]> {
-    return this.apiService.get(`/user/${userId}/client/${clientId}/contract`).pipe(map(data => data));
+  getByUserIdAndClientId(userId: string, contactId: string): Observable<UserDocument[]> {
+    return this.apiService.get(`/user/${userId}/client/${contactId}/contract`).pipe(map(data => data));
   }
 }

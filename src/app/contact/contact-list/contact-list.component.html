@@ -1,4 +1,4 @@
-<a class="pull-right need-help" data-toggle="wizard" data-target="#clientTutorials">Need help?</a>
+<a class="pull-right need-help" data-toggle="wizard" data-target="#contactTutorials">Need help?</a>
 <h1 class="main-title">Contacts</h1>
 <div class="helper-panel">
   <i class="material-icons pull-left">info</i>
@@ -8,9 +8,9 @@
     with them.
   </p>
 </div>
-<h1 class="main-title" *ngIf="hasClients">Contact List</h1>
+<h1 class="main-title" *ngIf="hasContacts">Contact List</h1>
 
-<div class="mt-1 actions-section clearfix" *ngIf="hasClients">
+<div class="mt-1 actions-section clearfix" *ngIf="hasContacts">
   <div>
     <input
       type="text"
@@ -26,8 +26,8 @@
       class="bttn-primary bttn-add"
       data-toggle="wizard"
       *ngxPermissionsOnly="['create-client']"
-      data-target="#addClientWizard"
-      matTooltip="{{ tooltips.add_client }}"
+      data-target="#addContactWizard"
+      matTooltip="{{ tooltips.add_contact }}"
       matTooltipPosition="above"
     >
       <span>Add a Contact</span>
@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<table class="table main-table" matSort (matSortChange)="sortData($event)" *ngIf="hasClients">
+<table class="table main-table" matSort (matSortChange)="sortData($event)" *ngIf="hasContacts">
   <thead>
     <tr id="table-head">
       <th mat-sort-header="id" class="text-center">ID</th>
@@ -48,32 +48,34 @@
   <tbody>
     <tr
       *ngFor="
-        let client of clients | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }
+        let contact of contacts
+          | filter: searchTerm
+          | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }
       "
     >
-      <td class="text-center">{{ client.numericId }}</td>
+      <td class="text-center">{{ contact.numericId }}</td>
       <td>
-        <span *ngIf="client.company_name">{{ client.company_name }} / </span>{{ client.first_name }}
-        {{ client.last_name }}
+        <span *ngIf="contact.company_name">{{ contact.company_name }} / </span>{{ contact.first_name }}
+        {{ contact.last_name }}
       </td>
       <td>
-        <span *ngIf="client.email && client.phone_number">{{ client.email }} / {{ client.phone_number }}</span>
-        <span *ngIf="client.email && !client.phone_number">{{ client.email }}</span>
-        <span *ngIf="!client.email && client.phone_number">{{ client.phone_number }}</span>
+        <span *ngIf="contact.email && contact.phone_number">{{ contact.email }} / {{ contact.phone_number }}</span>
+        <span *ngIf="contact.email && !contact.phone_number">{{ contact.email }}</span>
+        <span *ngIf="!contact.email && contact.phone_number">{{ contact.phone_number }}</span>
       </td>
       <td>
-        {{ client.country }}
-        <span *ngIf="!client.country">N/A</span>
+        {{ contact.country }}
+        <span *ngIf="!contact.country">N/A</span>
       </td>
       <td class="text-right">
-        <a id="view" [routerLink]="['/client', client._id]">View</a>
+        <a id="view" [routerLink]="['/contact', contact._id]">View</a>
         <a id="edit">Edit</a>
       </td>
     </tr>
   </tbody>
 </table>
 <div style="background-color: white;">
-  <div class="add-supplier-box panel" *ngIf="!hasClients">
+  <div class="add-supplier-box panel" *ngIf="!hasContacts">
     <div class="panel-body">
       <img src="../../../assets/img/default/pi-po/noClient.png" width="375" height="225" />
       <p style="font-size: large;">Add your first contact and begin trading.</p>
@@ -81,8 +83,8 @@
         class="bttn-primary bttn-add"
         data-toggle="wizard"
         *ngxPermissionsOnly="['create-client']"
-        data-target="#addClientWizard"
-        matTooltip="{{ tooltips.add_client }}"
+        data-target="#addContactWizard"
+        matTooltip="{{ tooltips.add_contact }}"
         matTooltipPosition="below"
       >
         <span>Add your first Contact</span>
@@ -91,7 +93,7 @@
   </div>
 </div>
 
-<pagination-controls (pageChange)="pageChanged($event)" *ngIf="hasClients"></pagination-controls>
+<pagination-controls (pageChange)="pageChanged($event)" *ngIf="hasContacts"></pagination-controls>
 
 <app-contact-generator></app-contact-generator>
 <app-contact-tutorials></app-contact-tutorials>

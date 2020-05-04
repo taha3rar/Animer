@@ -22,7 +22,7 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'icon-dashboard'
   },
   {
-    path: '/client',
+    path: '/contact',
     title: 'Contacts',
     type: 'link',
     icontype: 'icon-clients',

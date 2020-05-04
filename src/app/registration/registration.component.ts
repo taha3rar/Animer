@@ -198,8 +198,8 @@ export class RegistrationComponent extends BaseValidationComponent implements On
 
   showEmailPhoneError() {
     return (
-      this.clientf.email.touched &&
-      this.clientf.phoneNumber.touched &&
+      this.contactf.email.touched &&
+      this.contactf.phoneNumber.touched &&
       this.userRegistrationForm.hasError('emailAndPhoneError')
     );
   }
@@ -229,7 +229,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     }
     this.userRegistrationForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
     if (!this.phoneUtil.isValidNumber(phoneNumber)) {
-      this.clientf.phoneNumber.setErrors({ notValid: true });
+      this.contactf.phoneNumber.setErrors({ notValid: true });
     }
   }
 
@@ -241,14 +241,14 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   }
 
   onGeneralSubmit() {
-    this.newUser.first_name = this.clientf.firstName.value;
-    this.newUser.last_name = this.clientf.lastName.value;
-    this.newUser.email = this.clientf.email.value;
-    this.newUser.country = this.clientf.country.value;
-    this.newUser.password = this.clientf.password.value;
-    this.newUser.phone_number = this.clientf.phoneNumber.value;
+    this.newUser.first_name = this.contactf.firstName.value;
+    this.newUser.last_name = this.contactf.lastName.value;
+    this.newUser.email = this.contactf.email.value;
+    this.newUser.country = this.contactf.country.value;
+    this.newUser.password = this.contactf.password.value;
+    this.newUser.phone_number = this.contactf.phoneNumber.value;
     this.newUser.role = this.userType;
-    this.newUser.company_name = this.clientf.companyName.value;
+    this.newUser.company_name = this.contactf.companyName.value;
     this.newUser.marketing_campaign = this.marketing_campaign;
 
     this.userService.saveNewUser(this.newUser).subscribe(
@@ -281,7 +281,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     );
   }
 
-  get clientf() {
+  get contactf() {
     return this.userRegistrationForm.controls;
   }
 

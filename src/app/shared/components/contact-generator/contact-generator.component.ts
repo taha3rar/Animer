@@ -21,8 +21,8 @@ declare const $: any;
 })
 export class ContactGeneratorComponent extends BaseValidationComponent implements OnInit {
   currentUser: User;
-  invitedClient: User = new User();
-  clientDetailsForm: FormGroup;
+  invitedContact: User = new User();
+  contactDetailsForm: FormGroup;
   companyDetailsForm: FormGroup;
   countries = countries;
   phoneUtil: any;
@@ -31,7 +31,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   partialPhoneNumber: string;
   @ViewChild('closeModal')
   closeModal: ElementRef;
-  clientSubmitted = false;
+  contactSubmitted = false;
   idPicture = defaultValues.profile_picture;
   hasEcosystem = true;
 
@@ -53,7 +53,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.regionCode = 'US';
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
 
-    this.clientDetailsForm = this.formBuilder.group({
+    this.contactDetailsForm = this.formBuilder.group({
       firstName: [undefined, Validators.required],
       lastName: [undefined, Validators.required],
       email: [undefined, [Validators.email]],
@@ -72,15 +72,15 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       country: [undefined, [Validators.required]]
     });
     this.stepperService.stepperInit();
-    this.formInput = this.clientDetailsForm;
+    this.formInput = this.contactDetailsForm;
 
     setTimeout(function() {
       $('.selectpicker').selectpicker();
     }, 200);
   }
 
-  get clientf() {
-    return this.clientDetailsForm.controls;
+  get contactf() {
+    return this.contactDetailsForm.controls;
   }
 
   get companyf() {
@@ -114,31 +114,31 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   // Easier acces to form values
 
   onChangeContactType(contactType: string, isChecked: boolean) {
-    const contactTypesFormArray = <FormArray>this.clientDetailsForm.controls.contactTypes;
+    const contactTypesFormArray = <FormArray>this.contactDetailsForm.controls.contactTypes;
     if (isChecked) {
       contactTypesFormArray.push(new FormControl(contactType));
       if (contactType === 'email') {
-        this.clientf.email.setValidators([Validators.required, Validators.email]);
-        this.clientf.email.updateValueAndValidity();
+        this.contactf.email.setValidators([Validators.required, Validators.email]);
+        this.contactf.email.updateValueAndValidity();
       } else {
-        this.clientf.phoneNumber.setValidators([Validators.required]);
-        this.clientf.phoneNumber.updateValueAndValidity();
+        this.contactf.phoneNumber.setValidators([Validators.required]);
+        this.contactf.phoneNumber.updateValueAndValidity();
       }
     } else {
       const index = contactTypesFormArray.controls.findIndex(x => x.value === contactType);
       contactTypesFormArray.removeAt(index);
       if (contactType === 'email') {
-        this.clientf.email.setValidators([Validators.email]);
-        this.clientf.email.updateValueAndValidity();
+        this.contactf.email.setValidators([Validators.email]);
+        this.contactf.email.updateValueAndValidity();
       } else {
-        this.clientf.phoneNumber.setValidators([]);
-        this.clientf.phoneNumber.updateValueAndValidity();
+        this.contactf.phoneNumber.setValidators([]);
+        this.contactf.phoneNumber.updateValueAndValidity();
       }
     }
   }
 
   onChangeProfileType(profileType: string, isChecked: boolean) {
-    const profileTypeFormArray = <FormArray>this.clientDetailsForm.controls.profileType;
+    const profileTypeFormArray = <FormArray>this.contactDetailsForm.controls.profileType;
 
     if (isChecked) {
       profileTypeFormArray.removeAt(0);
@@ -153,13 +153,13 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     try {
       phoneNumber = this.phoneUtil.parse(this.partialPhoneNumber, this.regionCode);
     } catch (error) {
-      this.clientDetailsForm.patchValue({ phoneNumber: undefined });
+      this.contactDetailsForm.patchValue({ phoneNumber: undefined });
       return;
     }
-    this.clientDetailsForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
+    this.contactDetailsForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
   }
 
-  get clientIdPicture(): string | null {
+  get contactIdPicture(): string | null {
     return this.idPicture || defaultValues.profile_picture;
   }
 
@@ -173,26 +173,26 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
 
   onGeneralSubmit() {
     this.disableSubmitButton(true);
-    this.invitedClient.personal_information.first_name = this.clientf.firstName.value;
-    this.invitedClient.personal_information.last_name = this.clientf.lastName.value;
-    this.invitedClient.email = this.clientf.email.value;
-    this.invitedClient.personal_information.job_title = this.clientf.jobTitle.value;
-    this.invitedClient.user_personal_id = this.clientf.user_personal_id.value;
-    this.invitedClient.personal_information.phone_number = this.clientf.phoneNumber.value;
-    this.invitedClient.roles = this.clientf.profileType.value;
-    this.invitedClient.contact_by = this.clientf.contactTypes.value;
-    this.invitedClient.company_information.company_name = this.companyf.companyName.value;
-    this.invitedClient.company_information.street = this.companyf.address.value;
-    this.invitedClient.company_information.city = this.companyf.city.value;
-    this.invitedClient.company_information.zipcode = this.companyf.zipcode.value;
-    this.invitedClient.company_information.country = this.companyf.country.value;
-    this.clientSubmitted = true;
+    this.invitedContact.personal_information.first_name = this.contactf.firstName.value;
+    this.invitedContact.personal_information.last_name = this.contactf.lastName.value;
+    this.invitedContact.email = this.contactf.email.value;
+    this.invitedContact.personal_information.job_title = this.contactf.jobTitle.value;
+    this.invitedContact.user_personal_id = this.contactf.user_personal_id.value;
+    this.invitedContact.personal_information.phone_number = this.contactf.phoneNumber.value;
+    this.invitedContact.roles = this.contactf.profileType.value;
+    this.invitedContact.contact_by = this.contactf.contactTypes.value;
+    this.invitedContact.company_information.company_name = this.companyf.companyName.value;
+    this.invitedContact.company_information.street = this.companyf.address.value;
+    this.invitedContact.company_information.city = this.companyf.city.value;
+    this.invitedContact.company_information.zipcode = this.companyf.zipcode.value;
+    this.invitedContact.company_information.country = this.companyf.country.value;
+    this.contactSubmitted = true;
     this.spinnerService.showSpinner();
 
     if (this.idPicture !== defaultValues.profile_picture) {
-      this.invitedClient.personal_information.id_picture = this.idPicture;
+      this.invitedContact.personal_information.id_picture = this.idPicture;
     }
-    this.userService.saveInvitedClient(this.invitedClient).subscribe(
+    this.userService.saveInvitedClient(this.invitedContact).subscribe(
       data => {
         if (data._id) {
           this.spinnerService.hideSpinner();
@@ -224,24 +224,24 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   }
 
   markAsTouched(formControl: string) {
-    this.clientDetailsForm.get(formControl).markAsTouched();
+    this.contactDetailsForm.get(formControl).markAsTouched();
   }
 
   closeAndRefresh(): any {
-    $('#addClientWizard').fadeOut('fast');
+    $('#addContactWizard').fadeOut('fast');
     this.resetForm();
     this.idPicture = undefined;
     this.router.navigate([this.router.url]);
   }
 
   resetForm() {
-    this.clientDetailsForm.reset();
+    this.contactDetailsForm.reset();
     this.companyDetailsForm.reset();
-    this.clientDetailsForm.controls.phoneNumber.clearValidators();
-    this.clientDetailsForm.controls.email.clearValidators();
-    this.clientDetailsForm.controls.email.setValidators([Validators.email]);
-    this.clientDetailsForm.controls.contactTypes.setErrors({ incorrect: true });
-    this.clientDetailsForm.controls.profileType.setErrors({ incorrect: true });
+    this.contactDetailsForm.controls.phoneNumber.clearValidators();
+    this.contactDetailsForm.controls.email.clearValidators();
+    this.contactDetailsForm.controls.email.setValidators([Validators.email]);
+    this.contactDetailsForm.controls.contactTypes.setErrors({ incorrect: true });
+    this.contactDetailsForm.controls.profileType.setErrors({ incorrect: true });
 
     $('.stepper')
       .find('li.completed:not(:first-child)')
@@ -264,11 +264,11 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     $('.checkbox').prop('checked', false);
     $('.form_radio').prop('checked', false);
     $('input[type=tel]').val('');
-    this.clientSubmitted = false;
+    this.contactSubmitted = false;
   }
 
   onModalClose() {
-    if (!this.clientSubmitted && this.clientDetailsForm.dirty) {
+    if (!this.contactSubmitted && this.contactDetailsForm.dirty) {
       swal({
         text: 'Are you sure you want to leave this page? All information will be lost!',
         buttons: ['Cancel', 'Yes'],

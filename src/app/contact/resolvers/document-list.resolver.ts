@@ -12,9 +12,9 @@ export class UserDocumentListResolver implements Resolve<UserDocument[]> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<UserDocument[]> {
     const currentUserId = this.authService.currentUserId;
-    const clientId = route.params['id'];
+    const contactId = route.params['id'];
 
-    return this.documentService.getByUserIdAndClientId(currentUserId, clientId).pipe(
+    return this.documentService.getByUserIdAndClientId(currentUserId, contactId).pipe(
       catchError(err => {
         console.error(err);
         return EMPTY.pipe();

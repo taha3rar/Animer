@@ -36,6 +36,6 @@ export class ContactComponent implements OnInit {
   }
 
   back() {
-    this.router.navigateByUrl('/client');
+    this.router.navigateByUrl('/contact');
   }
 }

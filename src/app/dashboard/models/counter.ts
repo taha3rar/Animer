@@ -4,6 +4,6 @@ export class Counter {
   proforma_invoices: number;
   purchase_orders: number;
   invoices: number;
-  clients: number;
+  contacts: number;
   products: number;
 }

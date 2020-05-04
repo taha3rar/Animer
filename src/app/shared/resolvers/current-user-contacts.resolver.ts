@@ -3,13 +3,13 @@ import { Resolve } from '@angular/router';
 import { UserService, AuthenticationService } from '@app/core';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Client } from '@app/core/models/user/client';
+import { Contact } from '@app/core/models/user/contact';
 
 @Injectable()
-export class CurrentUserClientsResolver implements Resolve<Client[]> {
+export class CurrentUserContactsResolver implements Resolve<Contact[]> {
   constructor(private authService: AuthenticationService, private userService: UserService) {}
 
-  resolve(): Observable<Client[]> {
+  resolve(): Observable<Contact[]> {
     const currentUserId = this.authService.currentUserId;
 
     return this.userService.getClientsByUser(currentUserId).pipe(

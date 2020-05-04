@@ -11,7 +11,7 @@ export class ContactDocumentsComponent implements OnInit {
   @Input()
   documents: UserDocument[];
   @Input()
-  client_id: string;
+  contact_id: string;
   @Input()
   user: User;
 

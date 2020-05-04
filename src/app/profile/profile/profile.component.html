@@ -57,7 +57,7 @@
             <div class="icon-text">
               <i class="material-icons">person</i><span class="heading-3"> CONTACT INFORMATION</span>
             </div>
-            <form [formGroup]="clientDetailsForm" (ngSubmit)="onSubmitClientDetails()" id="contact-info-form">
+            <form [formGroup]="contactDetailsForm" (ngSubmit)="onSubmitContactDetails()" id="contact-info-form">
               <div class="form-row">
                 <div class="form-group col-md-6" [ngClass]="showFieldStyle('firstName')">
                   <label for="fist-name">First Name *</label>
@@ -98,7 +98,7 @@
                 <label for="street-address">Additional Details</label>
                 <textarea type="span" rows="3" formControlName="bio" class="form-control" id="client-bio"></textarea>
               </div>
-              <button type="submit" class="bttn-primary pull-right" [disabled]="!clientDetailsForm.valid">
+              <button type="submit" class="bttn-primary pull-right" [disabled]="!contactDetailsForm.valid">
                 Save Changes
               </button>
             </form>

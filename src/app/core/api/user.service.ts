@@ -5,7 +5,7 @@ import { User } from '../models/user/user';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
 import { Passwords } from '../models/user/passwords';
-import { Client } from '../models/user/client';
+import { Contact } from '../models/user/contact';
 import { UserRegistration } from '../models/user/user-registration';
 import { DpoInformation } from '../models/user/dpo-info';
 import { DpoDocuments } from '../models/user/dpo-documents';
@@ -18,15 +18,15 @@ export class UserService extends BaseService {
     super(_apiService, '/user');
   }
 
-  getClientsByUser(id: string): Observable<Client[]> {
+  getClientsByUser(id: string): Observable<Contact[]> {
     return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
   }
 
-  getBuyersByUser(id: string): Observable<Client[]> {
+  getBuyersByUser(id: string): Observable<Contact[]> {
     return this.apiService.get(`${this.path}/${id}/buyer`).pipe(map(data => data));
   }
 
-  getSuppliersByUser(id: string): Observable<Client[]> {
+  getSuppliersByUser(id: string): Observable<Contact[]> {
     return this.apiService.get(`${this.path}/${id}/supplier`).pipe(map(data => data));
   }
 

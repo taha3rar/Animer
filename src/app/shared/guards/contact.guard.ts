@@ -4,7 +4,7 @@ import { AuthenticationService } from '@app/core/authentication/authentication.s
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { UserService } from '@app/core';
-import { Client } from '@app/core/models/user/client';
+import { Contact } from '@app/core/models/user/contact';
 
 @Injectable()
 export class ContactGuard implements CanActivate {
@@ -15,14 +15,14 @@ export class ContactGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Promise<boolean> | Observable<boolean> | boolean {
     const loggedUserId = this.authService.currentUserId;
-    const clientId = route.params.id;
+    const contactId = route.params.id;
 
     return this.userService.getClientsByUser(loggedUserId).pipe(
-      map((clients: Client[]) => {
-        // check if the logged user is a client of the client's profile he's intending to see
-        const isClient = clients.filter(u => u._id === clientId).length > 0 ? true : false;
+      map((contact: Contact[]) => {
+        // check if the logged user is a contact of the client's profile he's intending to see
+        const isContact = contact.filter(u => u._id === contactId).length > 0 ? true : false;
 
-        if (isClient) {
+        if (isContact) {
           return true;
         }
 

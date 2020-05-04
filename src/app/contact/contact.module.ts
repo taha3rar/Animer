@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactRoutingModule } from './contact-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ContactListComponent } from './contact-list/contact-list.component';
-import { CurrentUserClientsResolver } from '@app/shared/resolvers/current-user-clients.resolver';
+import { CurrentUserContactsResolver } from '@app/shared/resolvers/current-user-contacts.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactComponent } from './contact/contact.component';
@@ -35,6 +35,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule
   ],
   declarations: [ContactListComponent, ContactComponent, ContactProfileComponent, ContactDocumentsComponent],
-  providers: [CurrentUserClientsResolver, ContactResolver, CurrentUserResolver, UserDocumentListResolver]
+  providers: [CurrentUserContactsResolver, ContactResolver, CurrentUserResolver, UserDocumentListResolver]
 })
 export class ContactModule {}

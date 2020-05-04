@@ -27,7 +27,7 @@
             <a data-toggle="tab" class="label" href="#create-product">Products</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-client']">
-            <a data-toggle="tab" class="label" href="#add-clients">Contacts</a>
+            <a data-toggle="tab" class="label" href="#add-contacts">Contacts</a>
           </li>
           <li class="step" *ngxPermissionsOnly="['create-ecosystem']">
             <a data-toggle="tab" class="label" href="#create-ecosystem">Ecosystems</a>
@@ -36,7 +36,7 @@
       </div>
       <div class="panel-right">
         <div class="tab-content">
-          <div class="tab-pane" id="add-clients" *ngxPermissionsOnly="['create-client']">
+          <div class="tab-pane" id="add-contacts" *ngxPermissionsOnly="['create-client']">
             <figure class="vector-container">
               <img src="../../../assets/img/dashboard-imgs/clients.png" class="vector-tutorial" />
             </figure>
@@ -46,7 +46,7 @@
               contacts to your network, centrally manage your existing contacts, and review the transactions you have
               with them.
             </p>
-            <button class="btn-primary-shadow pull-right" routerLink="/client">Go to Contacts</button>
+            <button class="btn-primary-shadow pull-right" routerLink="/contact">Go to Contacts</button>
           </div>
           <div
             class="tab-pane"

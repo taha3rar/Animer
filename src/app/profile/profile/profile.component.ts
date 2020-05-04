@@ -17,7 +17,7 @@ import { defaultValues } from '@app/shared/helpers/default_values';
 export class ProfileComponent implements OnInit {
   user: User;
   currentUserId: string;
-  clientDetailsForm: FormGroup;
+  contactDetailsForm: FormGroup;
   companyDetailsForm: FormGroup;
   credentials: Credentials;
   showPaymentSection = false;
@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
     this.currentUserId = this.authenticationService.currentUserId;
     this.user = this.route.snapshot.data['currentUser'];
     this.showPaymentSection = this.route.snapshot.params.flag ? true : false;
-    this.clientDetailsForm = this.formBuilder.group({
+    this.contactDetailsForm = this.formBuilder.group({
       firstName: [this.user.personal_information.first_name, Validators.required],
       lastName: [this.user.personal_information.last_name, Validators.required],
       email: [this.user.email, [Validators.email]],
@@ -75,8 +75,8 @@ export class ProfileComponent implements OnInit {
   }
 
   // Easier acces to form values
-  get clientf() {
-    return this.clientDetailsForm.controls;
+  get contactf() {
+    return this.contactDetailsForm.controls;
   }
   get companyf() {
     return this.companyDetailsForm.controls;
@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit {
   }
 
   isFieldInvalid(field: string) {
-    return this.clientDetailsForm.get(field).invalid && this.clientDetailsForm.get(field).touched;
+    return this.contactDetailsForm.get(field).invalid && this.contactDetailsForm.get(field).touched;
   }
 
   showFieldStyle(field: string) {
@@ -113,15 +113,15 @@ export class ProfileComponent implements OnInit {
     };
   }
 
-  onSubmitClientDetails() {
+  onSubmitContactDetails() {
     this.spinnerService.showSpinner();
-    this.user.personal_information.first_name = this.clientf.firstName.value;
-    this.user.personal_information.last_name = this.clientf.lastName.value;
-    this.user.email = this.clientf.email.value;
-    this.user.user_personal_id = this.clientf.userId.value;
-    this.user.personal_information.phone_number = this.clientf.phoneNumber.value;
-    this.user.personal_information.job_title = this.clientf.jobTitle.value;
-    this.user.personal_information.bio = this.clientf.bio.value;
+    this.user.personal_information.first_name = this.contactf.firstName.value;
+    this.user.personal_information.last_name = this.contactf.lastName.value;
+    this.user.email = this.contactf.email.value;
+    this.user.user_personal_id = this.contactf.userId.value;
+    this.user.personal_information.phone_number = this.contactf.phoneNumber.value;
+    this.user.personal_information.job_title = this.contactf.jobTitle.value;
+    this.user.personal_information.bio = this.contactf.bio.value;
     this.userService.update(this.currentUserId, this.user).subscribe(data => {
       this.spinnerService.hideSpinner();
       const credentialsToUpdate = this.authenticationService.credentials;

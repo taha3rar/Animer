@@ -16,7 +16,7 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
   @Input()
   documents: UserDocument[];
   @Input()
-  client_id: string;
+  contact_id: string;
   @Input()
   user: User;
   page = 1;
@@ -56,7 +56,7 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
           const document = new UserDocument();
           document.file_name = file.name.replace(/\.[^/.]+$/, '');
           this.uploadingFileName = document.file_name;
-          document.client_id = this.client_id;
+          document.client_id = this.contact_id;
           const base64File = (reader.result as string).split(',')[1];
           document.file = base64File;
           this.userDocumentService.create(document).subscribe(() => {

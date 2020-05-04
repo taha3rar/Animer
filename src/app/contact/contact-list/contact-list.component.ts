@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Client } from '@app/core/models/user/client';
+import { Contact } from '@app/core/models/user/contact';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { AuthenticationService, UserService } from '@app/core';
 import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
@@ -15,11 +15,11 @@ import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
   providers: [FilterPipe]
 })
 export class ContactListComponent extends BaseListComponent implements OnInit {
-  clients: Client[];
-  hasClients: boolean;
+  contacts: Contact[];
+  hasContacts: boolean;
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
-  tooltips = tooltips.clients.clients_list;
+  tooltips = tooltips.contacts.contacts_list;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,25 +28,25 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
     protected router: Router
   ) {
     super(undefined, undefined, {
-      pageName: 'clients'
+      pageName: 'contacts'
     });
   }
 
   ngOnInit() {
-    this.route.data.subscribe(({ clients }) => {
-      this.hasClients = clients.length > 0;
-      this.clients = clients.slice();
+    this.route.data.subscribe(({ contacts }) => {
+      this.hasContacts = contacts.length > 0;
+      this.contacts = contacts.slice();
     });
   }
 
   sortData(sort: Sort) {
-    const data = this.clients.slice();
+    const data = this.contacts.slice();
     if (!sort.active || sort.direction === '') {
-      this.clients = data;
+      this.contacts = data;
       return;
     }
 
-    this.clients = data.sort((a, b) => {
+    this.contacts = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'id':

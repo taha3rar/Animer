@@ -9,7 +9,7 @@
         <div class="modal-box-left">
           <ul class="nav nav-tabs">
             <li class="active">
-              <a href="#client-details" data-toggle="tab"
+              <a href="#contact-details" data-toggle="tab"
                 ><span class="step-number">1</span> <span translate>Add contact details</span></a
               >
             </li>
@@ -35,8 +35,8 @@
         </div>
         <div class="modal-box-right">
           <div class="tab-content">
-            <div class="row tab-pane active margin-none" id="client-details">
-              <form [formGroup]="clientDetailsForm">
+            <div class="row tab-pane active margin-none" id="contact-details">
+              <form [formGroup]="contactDetailsForm">
                 <div class="col-md-12">
                   <div class="form-row">
                     <div class="form-group col-md-6" [ngClass]="showFieldStyle('firstName')">
@@ -69,7 +69,9 @@
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6" [ngClass]="showFieldStyle('email')">
-                      <label for="Email">Email Address<span *ngIf="isRequired(clientf.email) === true"> *</span></label>
+                      <label for="Email"
+                        >Email Address<span *ngIf="isRequired(contactf.email) === true"> *</span></label
+                      >
                       <input
                         type="email"
                         formControlName="email"
@@ -77,13 +79,13 @@
                         id="Email"
                         placeholder="Type email here..."
                       />
-                      <div class="help-block" *ngIf="isFieldInvalid('email') && isRequired(clientf.email) === true">
+                      <div class="help-block" *ngIf="isFieldInvalid('email') && isRequired(contactf.email) === true">
                         <p>This field is required</p>
                       </div>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="region_code"
-                        >Phone Number<span *ngIf="isRequired(clientf.phoneNumber) === true"> *</span></label
+                        >Phone Number<span *ngIf="isRequired(contactf.phoneNumber) === true"> *</span></label
                       >
                       <div class="input-group" [ngClass]="showFieldStyle('phoneNumber')">
                         <div class="input-group-prepend">
@@ -119,7 +121,7 @@
                       <div
                         style="color:#a94442"
                         class="help-block"
-                        *ngIf="isFieldInvalid('phoneNumber') && isRequired(clientf.phoneNumber) === true"
+                        *ngIf="isFieldInvalid('phoneNumber') && isRequired(contactf.phoneNumber) === true"
                       >
                         <p>This field is required</p>
                       </div>
@@ -178,7 +180,7 @@
                       <div
                         style="color:#a94442"
                         class="help-block"
-                        *ngIf="clientDetailsForm.controls.profileType.invalid"
+                        *ngIf="contactDetailsForm.controls.profileType.invalid"
                       >
                         <p>This field is required</p>
                       </div>
@@ -192,7 +194,7 @@
                         rows="2"
                         placeholder="Type additional details here..."
                         [ngModelOptions]="{ standalone: true }"
-                        [(ngModel)]="invitedClient.personal_information.bio"
+                        [(ngModel)]="invitedContact.personal_information.bio"
                       ></textarea>
                     </div>
                   </div>
@@ -226,29 +228,29 @@
                       <div
                         style="color:#a94442"
                         class="help-block"
-                        *ngIf="clientDetailsForm.controls.contactTypes.invalid"
+                        *ngIf="contactDetailsForm.controls.contactTypes.invalid"
                       >
                         <p>Please choose at least one option</p>
                       </div>
                     </div>
                     <div class="col">
-                      <label>Upload client ID for payment purpose</label><br />
+                      <label>Upload contact ID for payment purpose</label><br />
                       <app-upload-picture
                         style="width: 20px;"
                         (imageEvent)="receiveId($event)"
-                        [picture]="clientIdPicture"
-                        [type]="'client_id'"
+                        [picture]="contactIdPicture"
+                        [type]="'contact_id'"
                       ></app-upload-picture>
                     </div>
                   </div>
                 </div>
-                <button [hidden]="!clientDetailsForm.valid" class="btn-next next-step pull-right">
+                <button [hidden]="!contactDetailsForm.valid" class="btn-next next-step pull-right">
                   Next &rarr;
                 </button>
                 <button
-                  [hidden]="clientDetailsForm.valid"
+                  [hidden]="contactDetailsForm.valid"
                   class="btn-next pull-right"
-                  (click)="onSubmit(clientDetailsForm)"
+                  (click)="onSubmit(contactDetailsForm)"
                 >
                   Next &rarr;
                 </button>
@@ -276,7 +278,7 @@
                         id="company_number"
                         placeholder="Type company number here..."
                         [ngModelOptions]="{ standalone: true }"
-                        [(ngModel)]="invitedClient.company_information.company_registered_number"
+                        [(ngModel)]="invitedContact.company_information.company_registered_number"
                       />
                     </div>
                   </div>
@@ -344,7 +346,7 @@
                       rows="2"
                       placeholder="Type additional details here..."
                       [ngModelOptions]="{ standalone: true }"
-                      [(ngModel)]="invitedClient.company_information.bio"
+                      [(ngModel)]="invitedContact.company_information.bio"
                     ></textarea>
                   </div>
                 </div>
@@ -360,7 +362,7 @@
             </div>
             <div class="row tab-pane" id="review">
               <div class="col-md-12">
-                <button class="btn-icons  pull-right" (click)="targetStep('client-details')">
+                <button class="btn-icons  pull-right" (click)="targetStep('contact-details')">
                   <i class="material-icons">edit</i>
                 </button>
                 <div class="row margin-none">
@@ -372,25 +374,25 @@
                   <div class="col-md-4">
                     <div>
                       <p class="label-2">Contact Name</p>
-                      <p class="normal-text-light">{{ clientf.firstName.value }} {{ clientf.lastName.value }}</p>
+                      <p class="normal-text-light">{{ contactf.firstName.value }} {{ contactf.lastName.value }}</p>
                     </div>
                     <div>
                       <p class="label-2">Email Address</p>
-                      <p class="normal-text-light">{{ clientf.email.value }}</p>
+                      <p class="normal-text-light">{{ contactf.email.value }}</p>
                     </div>
                     <div>
                       <p class="label-2">Additional details</p>
-                      <p class="normal-text-light">{{ invitedClient.personal_information.bio }}</p>
+                      <p class="normal-text-light">{{ invitedContact.personal_information.bio }}</p>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div>
                       <p class="label-2">Contact ID</p>
-                      <p class="normal-text-light">{{ clientf.user_personal_id.value }}</p>
+                      <p class="normal-text-light">{{ contactf.user_personal_id.value }}</p>
                     </div>
                     <div>
                       <p class="label-2">Phone Number</p>
-                      <p class="normal-text-light">{{ clientf.phoneNumber.value }}</p>
+                      <p class="normal-text-light">{{ contactf.phoneNumber.value }}</p>
                     </div>
                   </div>
                 </div>
@@ -419,13 +421,15 @@
                     </div>
                     <div>
                       <p class="label-2">Additional details</p>
-                      <p class="normal-text-light">{{ invitedClient.company_information.bio }}</p>
+                      <p class="normal-text-light">{{ invitedContact.company_information.bio }}</p>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div>
                       <p class="label-2">Company number</p>
-                      <p class="normal-text-light">{{ invitedClient.company_information.company_registered_number }}</p>
+                      <p class="normal-text-light">
+                        {{ invitedContact.company_information.company_registered_number }}
+                      </p>
                     </div>
                     <div>
                       <p class="label-2">Zip code</p>
@@ -437,14 +441,14 @@
                     </div>
                     <div>
                       <p class="label-2">State/province/region</p>
-                      <p class="normal-text-light">{{ invitedClient.company_information.state_province_region }}</p>
+                      <p class="normal-text-light">{{ invitedContact.company_information.state_province_region }}</p>
                     </div>
                   </div>
                 </div>
               </div>
               <button
                 #submitButton
-                [disabled]="!companyDetailsForm.valid || !clientDetailsForm.valid"
+                [disabled]="!companyDetailsForm.valid || !contactDetailsForm.valid"
                 (click)="onGeneralSubmit()"
                 class="btn-next pull-right"
               >
