@@ -24,6 +24,7 @@ import { RegistrationModule } from './registration/registration.module';
 import { IntercomModule } from 'ng-intercom';
 import { environment } from '@env/environment.local';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GoodsReceiveNoteModule } from './goods-receive-note/goods-receive-note.module';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LandingModule,
     RegistrationModule,
     HelpCenterModule,
+    GoodsReceiveNoteModule,
     IntercomModule.forRoot({
       appId: environment.intercom.app_id,
       updateOnRouterChange: true // will automatically run `update` on router event changes. Default: `false`

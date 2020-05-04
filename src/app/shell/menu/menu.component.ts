@@ -29,6 +29,12 @@ export const ROUTES: RouteInfo[] = [
     neededPermission: 'list-clients'
   },
   {
+    path: '/grn',
+    title: 'Goods Receive Note',
+    type: 'link',
+    icontype: 'icon-grn'
+  },
+  {
     path: '/finance',
     title: 'Finance',
     type: 'link',
