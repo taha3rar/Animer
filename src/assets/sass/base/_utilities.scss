@@ -145,16 +145,15 @@
 }
 
 .status {
-  max-width: 21rem;
   border-radius: 12rem;
   text-align: center;
   font-weight: 600;
-  padding: 3px 0px;
+  padding: 2px 2rem;
   font-size: 1.3rem;
 
   &-blue {
-    background-color: #e9fafc;
-    color: #33c1ce;
+    background-color: #e8f8f9;
+    color: #1cb4be;
   }
 
   &-yellow {
@@ -168,8 +167,8 @@
   }
 
   &-orange {
-    background-color: #fff2ec;
-    color: #fab56a;
+    background-color: #f9f4e8;
+    color: #e8a23a;
   }
 
   &-bg-orange {
@@ -183,8 +182,8 @@
   }
 
   &-green {
-    background-color: #e9fff2;
-    color: #6ddd91;
+    background-color: #eefaf6;
+    color: #3caa82;
   }
 
   &-bg-green {
