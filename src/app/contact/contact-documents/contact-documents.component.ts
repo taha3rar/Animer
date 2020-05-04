@@ -3,11 +3,11 @@ import { UserDocument } from '@app/core/models/user/document';
 import { User } from '@app/core/models/user/user';
 
 @Component({
-  selector: 'app-client-documents',
-  templateUrl: './client-documents.component.html',
-  styleUrls: ['./client-documents.component.scss']
+  selector: 'app-contact-documents',
+  templateUrl: './contact-documents.component.html',
+  styleUrls: ['./contact-documents.component.scss']
 })
-export class ClientDocumentsComponent implements OnInit {
+export class ContactDocumentsComponent implements OnInit {
   @Input()
   documents: UserDocument[];
   @Input()

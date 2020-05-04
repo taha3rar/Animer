@@ -15,7 +15,7 @@ import { ShellModule } from './shell/shell.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ClientModule } from './client/client.module';
+import { ContactModule } from './contact/contact.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { FinanceModule } from './finance/finance.module';
@@ -40,7 +40,7 @@ import { GoodsReceiveNoteModule } from './goods-receive-note/goods-receive-note.
     ShellModule,
     DashboardModule,
     LoginModule,
-    ClientModule,
+    ContactModule,
     DashboardModule,
     ProfileModule,
     NotificationsModule,

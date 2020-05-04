@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '@app/core/models/user/user';
-import { Counter } from '../client/client.component';
+import { Counter } from '../contact/contact.component';
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-client-profile',
-  templateUrl: './client-profile.component.html',
-  styleUrls: ['./client-profile.component.scss']
+  selector: 'app-contact-profile',
+  templateUrl: './contact-profile.component.html',
+  styleUrls: ['./contact-profile.component.scss']
 })
-export class ClientProfileComponent implements OnInit {
+export class ContactProfileComponent implements OnInit {
   @Input()
   user: User;
   @Input()

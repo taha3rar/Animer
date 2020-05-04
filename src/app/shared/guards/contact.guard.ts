@@ -7,7 +7,7 @@ import { UserService } from '@app/core';
 import { Client } from '@app/core/models/user/client';
 
 @Injectable()
-export class ClientGuard implements CanActivate {
+export class ContactGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthenticationService, private userService: UserService) {}
 
   canActivate(
