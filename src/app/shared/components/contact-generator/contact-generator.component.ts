@@ -1,9 +1,6 @@
 import { SpinnerToggleService } from './../../services/spinner-toggle.service';
 import { UserService } from './../../../core/api/user.service';
 import { User } from './../../../core/models/user/user';
-import { Ecosystem } from '@app/core/models/ecosystem';
-import { Client } from '@app/core/models/user/client';
-import { EcosystemService } from '@app/core';
 import { StepperService } from '@app/core/stepper.service';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -27,8 +24,6 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   invitedClient: User = new User();
   clientDetailsForm: FormGroup;
   companyDetailsForm: FormGroup;
-  ecosystems: Ecosystem[];
-  ecosystemsToBeAdded: Ecosystem[] = [];
   countries = countries;
   phoneUtil: any;
   regionCode: string;
@@ -42,7 +37,6 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
 
   constructor(
     private userService: UserService,
-    private ecosystemService: EcosystemService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -55,12 +49,6 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
 
   ngOnInit() {
     this.currentUser = this.route.snapshot.data['currentUser'];
-    this.route.data.subscribe(({ ecosystems }) => {
-      this.ecosystems = ecosystems;
-      if (ecosystems && ecosystems.length < 1) {
-        this.hasEcosystem = false;
-      }
-    });
     this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
     this.regionCode = 'US';
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
@@ -183,15 +171,6 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.idPicture = picture;
   }
 
-  pushEcosystem(ecosystem: Ecosystem) {
-    const idx = this.ecosystemsToBeAdded.indexOf(ecosystem);
-    if (idx > -1) {
-      this.ecosystemsToBeAdded.splice(idx, 1);
-    } else {
-      this.ecosystemsToBeAdded.push(ecosystem);
-    }
-  }
-
   onGeneralSubmit() {
     this.disableSubmitButton(true);
     this.invitedClient.personal_information.first_name = this.clientf.firstName.value;
@@ -216,17 +195,9 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.userService.saveInvitedClient(this.invitedClient).subscribe(
       data => {
         if (data._id) {
-          const participant = new Client(data);
           this.spinnerService.hideSpinner();
-          if (this.ecosystemsToBeAdded.length) {
-            this.ecosystemService.addParticipantToEcosystems(participant, this.ecosystemsToBeAdded).subscribe(() => {
-              this.alerts.showAlert('New contact profile has been created!');
-              this.closeAndRefresh();
-            });
-          } else {
-            this.alerts.showAlert('New contact profile has been created!');
-            this.closeAndRefresh();
-          }
+          this.alerts.showAlert('New contact profile has been created!');
+          this.closeAndRefresh();
         } else {
           console.log(data); // TODO: Manage errors
         }
@@ -271,7 +242,6 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.clientDetailsForm.controls.email.setValidators([Validators.email]);
     this.clientDetailsForm.controls.contactTypes.setErrors({ incorrect: true });
     this.clientDetailsForm.controls.profileType.setErrors({ incorrect: true });
-    this.ecosystemsToBeAdded = [];
 
     $('.stepper')
       .find('li.completed:not(:first-child)')

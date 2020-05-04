@@ -22,43 +22,11 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'icon-dashboard'
   },
   {
-    path: '/order',
-    title: 'Orders',
-    type: 'link',
-    icontype: 'icon-orders'
-  },
-  {
-    path: '/quote-request',
-    title: 'Quote Requests',
-    type: 'link',
-    icontype: 'icon-qr'
-  },
-  {
-    path: '/invoice',
-    title: 'Proforma Invoices',
-    type: 'link',
-    icontype: 'icon-pi'
-  },
-  {
-    path: '/product/list',
-    title: 'Products',
-    type: 'link',
-    icontype: 'icon-products',
-    neededPermission: 'list-products'
-  },
-  {
     path: '/client',
     title: 'Contacts',
     type: 'link',
     icontype: 'icon-clients',
     neededPermission: 'list-clients'
-  },
-  {
-    path: '/ecosystem',
-    title: 'Ecosystems',
-    type: 'link',
-    icontype: 'icon-ecosystems',
-    neededPermission: 'list-ecosystems'
   },
   {
     path: '/finance',

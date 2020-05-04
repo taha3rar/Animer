@@ -4,37 +4,17 @@ import { ApiService } from '..';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Notification } from '../models/notification';
-import { OrderService } from './order.service';
-import { Order } from '../models/order/order';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService extends BaseService {
-  constructor(protected apiService: ApiService, private orderService: OrderService) {
+  constructor(protected apiService: ApiService) {
     super(apiService, '/notification');
   }
 
   markAsRead(id: string): Observable<Notification> {
     return this.apiService.put(`${this.path}/${id}/read`).pipe(map(data => data));
-  }
-
-  setLinks(notifications: Notification[]) {
-    for (let index = 0; index < notifications.length; index++) {
-      const notification = notifications[index];
-
-      // if its a PO, we need to send the user to the PI generator
-      // but if PI was already created, the user should be redirected to the PI view
-      if (notification.topic.name === 'new-order-receiver') {
-        this.orderService.get(notification.topic._id).subscribe((order: Order) => {
-          if (order.invoice && order.invoice._id) {
-            notification.link = `order/${notification.topic._id}`;
-          } else {
-            notification.link = `order/invoice/generator/${notification.topic._id}`;
-          }
-        });
-      }
-    }
   }
 
   getUrl(notification: Notification): String {

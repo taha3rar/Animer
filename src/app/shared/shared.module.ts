@@ -8,33 +8,21 @@ import { LoaderComponent } from './loader/loader.component';
 import { RoundUpPipe } from './pipes/roundup.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { OrderListComponent } from './components/order-list/order-list.component';
-import { UserDataComponent } from './components/user-data/user-data.component';
-import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
-import { QuoteRequestListComponent } from './components/quote-request-list/quote-request-list.component';
 import { BaseListComponent } from './components/base-list/base-list.component';
 import { GooglePlacesDirective } from './directives/google-places.directive';
 import { BaseNavigationComponent } from './components/base-navigation/base-navigation.component';
 import { UploadPictureComponent } from './components/upload-picture/upload-picture.component';
 import { UserDocumentComponent } from './components/document-list/user-document-list/user-document-list.component';
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
-import { DocumentGeneratorComponent } from './components/document-generator/document-generator.component';
 import { TutorialControlComponent } from './components/tutorial-control/tutorial-control.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UnauthorizedPageComponent } from './components/unauthorized-page/unauthorized-page.component';
-// tslint:disable-next-line:max-line-length
-import { ModalAgriculturalProductComponent } from './components/products/modal-agricultural-product/modal-agricultural-product.component';
-// tslint:disable-next-line:max-line-length
-import { ModalProcessedProductComponent } from './components/products/modal-processed-product/modal-processed-product.component';
-import { DocumentDownloadComponent } from './components/document-download/document-download.component';
-import { ModalInventoryComponent } from './components/products/modal-inventory/modal-inventory.component';
 import { MatSortModule } from '@angular/material';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 import { ContactGeneratorComponent } from './components/contact-generator/contact-generator.component';
 import { UserProgressComponent } from './components/user-progress/user-progress.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
-import { InputProductComponent } from './components/products/input-product/input-product.component';
 import { DpoDocumentsComponent } from './components/document-list/dpo-documents/dpo-documents.component';
 
 @NgModule({
@@ -54,49 +42,28 @@ import { DpoDocumentsComponent } from './components/document-list/dpo-documents/
   declarations: [
     LoaderComponent,
     RoundUpPipe,
-    InvoiceListComponent,
-    OrderListComponent,
-    QuoteRequestListComponent,
     TransactionDocumentListComponent,
-    UserDataComponent,
     UserDocumentComponent,
     BaseNavigationComponent,
     BaseListComponent,
     GooglePlacesDirective,
     UploadPictureComponent,
-    DocumentGeneratorComponent,
     TutorialControlComponent,
     NotFoundComponent,
     UnauthorizedPageComponent,
-    ModalAgriculturalProductComponent,
-    ModalProcessedProductComponent,
-    ModalInventoryComponent,
     FilterPipe,
     ContactGeneratorComponent,
     UserProgressComponent,
-    InputProductComponent,
     DpoDocumentsComponent
   ],
-  entryComponents: [
-    ModalAgriculturalProductComponent,
-    ModalProcessedProductComponent,
-    ModalInventoryComponent,
-    InputProductComponent
-  ],
+  entryComponents: [],
   exports: [
     LoaderComponent,
     RoundUpPipe,
-    InvoiceListComponent,
-    OrderListComponent,
-    QuoteRequestListComponent,
     TransactionDocumentListComponent,
-    UserDataComponent,
     UserDocumentComponent,
     UploadPictureComponent,
-    InputProductComponent,
-    DocumentGeneratorComponent,
     TutorialControlComponent,
-    ModalInventoryComponent,
     ContactGeneratorComponent,
     UserProgressComponent,
     FilterPipe,

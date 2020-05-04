@@ -17,7 +17,6 @@ export class NotificationListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(({ notifications }) => {
       this.notifications = notifications;
-      this.service.setLinks(this.notifications);
     });
   }
 

@@ -1,5 +1,4 @@
 import { HelpCenterModule } from './help-center/help-center.module';
-import { QuoteRequestModule } from './quote-request/quote-request.module';
 import { ProfileModule } from './profile/profile.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,7 +9,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { NgxPermissionsModule } from 'ngx-permissions';
-
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { ShellModule } from './shell/shell.module';
@@ -18,22 +16,19 @@ import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ClientModule } from './client/client.module';
-import { OrderModule } from './order/order.module';
-import { InvoiceModule } from './invoice/invoice.module';
-import { ProductModule } from './product/product.module';
-import { EcosystemModule } from './ecosystem/ecosystem.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { FinanceModule } from './finance/finance.module';
-import { RouterModule } from '@angular/router';
 import { LandingModule } from './landing/landing.module';
 import { RegistrationModule } from './registration/registration.module';
 import { IntercomModule } from 'ng-intercom';
 import { environment } from '@env/environment.local';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
@@ -45,13 +40,8 @@ import { environment } from '@env/environment.local';
     DashboardModule,
     LoginModule,
     ClientModule,
-    OrderModule,
-    InvoiceModule,
-    ProductModule,
     DashboardModule,
     ProfileModule,
-    EcosystemModule,
-    QuoteRequestModule,
     NotificationsModule,
     FinanceModule,
     LandingModule,

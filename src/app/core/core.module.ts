@@ -8,7 +8,6 @@ import { RouteReusableStrategy } from './route-reusable-strategy';
 import { AuthenticationService } from './authentication/authentication.service';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AuthenticationGuard } from './authentication/authentication.guard';
-import { I18nService } from './i18n.service';
 import { HttpService } from './http/http.service';
 import { HttpCacheService } from './http/http-cache.service';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
@@ -18,12 +17,8 @@ import { AuthInterceptor } from './authentication/auth.interceptor';
 import { UserService } from './api/user.service';
 import { ApiService } from './api/api.service';
 import { JwtService } from './authentication/jwt.service';
-import { EcosystemService } from './api/ecosystem.service';
-import { OrderService } from './api/order.service';
-import { InvoiceService } from './api/invoice.service';
-import { ProductService } from './api/product.service';
-import { QuoteRequestService } from './api/quote-request.service';
 import { AlertsService } from './alerts.service';
+import { I18nService } from './i18n.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule, NgxPermissionsModule.forRoot()],
@@ -31,7 +26,6 @@ import { AlertsService } from './alerts.service';
   providers: [
     AuthenticationService,
     AuthenticationGuard,
-    I18nService,
     HttpCacheService,
     ApiPrefixInterceptor,
     ErrorHandlerInterceptor,
@@ -40,13 +34,9 @@ import { AlertsService } from './alerts.service';
     JwtService,
     ApiService,
     UserService,
-    EcosystemService,
-    OrderService,
-    InvoiceService,
-    ProductService,
-    QuoteRequestService,
     AlertsService,
     StepperService,
+    I18nService,
     {
       provide: HttpClient,
       useClass: HttpService

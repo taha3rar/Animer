@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { acceptedMimeTypes } from '@app/shared/helpers/pictureMimeTypes';
-import { UserService, AuthenticationService, ProductService } from '@app/core';
+import { UserService, AuthenticationService } from '@app/core';
 import { User } from '@app/core/models/user/user';
 
 @Component({
@@ -22,11 +22,7 @@ export class UploadPictureComponent implements OnInit {
   hideBar = false;
   loaderVisible = false;
   dynamic = 0;
-  constructor(
-    private userService: UserService,
-    private productService: ProductService,
-    private authenticationService: AuthenticationService
-  ) {}
+  constructor(private userService: UserService, private authenticationService: AuthenticationService) {}
 
   ngOnInit() {}
 
@@ -61,13 +57,6 @@ export class UploadPictureComponent implements OnInit {
               // TODO
             }
           );
-        }
-        if (this.type === 'product') {
-          this.productService.saveImage(base64File).subscribe(res => {
-            this.picture = res.url;
-            this.imageEvent.emit(this.picture.toString());
-            this.loaderVisible = false;
-          });
         }
         if (this.type === 'client_id') {
           this.userService.saveClientIdPicture(base64File).subscribe(res => {

@@ -19,16 +19,9 @@
                 <span translate>Add company details</span>
               </a>
             </li>
-            <li *ngIf="hasEcosystem" class="disabled">
-              <a href="#ecosystem" data-toggle="tab">
-                <div class="step-number">3</div>
-                <span translate>Choose ecosystem</span>
-              </a>
-            </li>
             <li class="disabled">
               <a href="#review" data-toggle="tab">
-                <div *ngIf="hasEcosystem" class="step-number">4</div>
-                <div *ngIf="!hasEcosystem" class="step-number">3</div>
+                <div class="step-number">3</div>
                 <span translate>Review and confirm</span>
               </a>
             </li>
@@ -364,42 +357,6 @@
                   Next &rarr;
                 </button>
               </form>
-            </div>
-            <div class="row tab-pane margin-none" id="ecosystem">
-              <div class="col-md-12">
-                <p class="heading-3">Your Ecosystems List</p>
-
-                <table class="table main-table">
-                  <thead>
-                    <tr>
-                      <th>Add to Ecosystem</th>
-                      <th>Id</th>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Members</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let ecosystem of ecosystems">
-                      <td>
-                        <input
-                          type="checkbox"
-                          class="checkbox"
-                          [id]="ecosystem.numericId"
-                          (change)="pushEcosystem(ecosystem)"
-                        /><label class="checkbox_label" [for]="ecosystem.numericId"
-                          ><span class="form_checkbox_btn"></span
-                        ></label>
-                      </td>
-                      <td>{{ ecosystem.numericId }}</td>
-                      <td>{{ ecosystem.name }}</td>
-                      <td style="text-transform: capitalize;">{{ ecosystem.type }}</td>
-                      <td>{{ ecosystem.participants.length }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <button class="btn-next next-step pull-right">Next &rarr;</button>
             </div>
             <div class="row tab-pane" id="review">
               <div class="col-md-12">
