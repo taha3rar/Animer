@@ -24,15 +24,10 @@ export class ContactComponent implements OnInit {
     this.route.data.subscribe(({ user, documents }) => {
       this.user = user;
       this.documents = documents;
-
       this.counter = {
         documents: this.documents.length
       };
     });
-  }
-
-  product_image() {
-    return this.user.personal_information.profile_picture || defaultValues.profile_picture;
   }
 
   back() {

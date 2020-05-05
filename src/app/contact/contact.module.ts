@@ -18,6 +18,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
 import { MatSortModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ContactTransactionsComponent } from './contact-transactions/contact-transactions.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSortModule,
     MatTooltipModule
   ],
-  declarations: [ContactListComponent, ContactComponent, ContactProfileComponent, ContactDocumentsComponent],
+  declarations: [
+    ContactListComponent,
+    ContactComponent,
+    ContactProfileComponent,
+    ContactTransactionsComponent,
+    ContactDocumentsComponent
+  ],
   providers: [CurrentUserContactsResolver, ContactResolver, CurrentUserResolver, UserDocumentListResolver]
 })
 export class ContactModule {}

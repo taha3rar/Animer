@@ -1,24 +1,6 @@
-<div class="client-tabs">
-  <div><i class="material-icons back" (click)="back()">keyboard_backspace</i></div>
-  <div>
-    <figure class="img-circular img-circular-md" [style.background-image]="'url(' + product_image() + ')'"></figure>
-    <p>{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
-  </div>
-  <div>
-    <ul class="nav flex-column" #tabs>
-      <li class="active"><a data-toggle="tab" href="#userProfile">User Profile</a></li>
-      <li><a data-toggle="tab" href="#documents">Documents</a></li>
-    </ul>
-  </div>
+<div>
+  <i class="material-icons back" (click)="back()">keyboard_backspace</i><span class="after-icon"> Contacts</span>
 </div>
+<app-contact-profile [user]="user"></app-contact-profile>
 
-<div class="tabs-content">
-  <div class="tab-content">
-    <div class="tab-pane active" id="userProfile">
-      <app-contact-profile [tabs]="tabs" [user]="user" [counter]="counter"></app-contact-profile>
-    </div>
-    <div class="tab-pane" id="documents">
-      <app-contact-documents [documents]="documents" [contact_id]="user._id" [user]="user"></app-contact-documents>
-    </div>
-  </div>
-</div>
+<!-- <app-contact-documents [documents]="documents" [contact_id]="user._id" [user]="user"></app-contact-documents> -->

@@ -1,39 +1,38 @@
-<div class="row">
-  <div class="col-md-6">
-    <div class="card personal-details-card">
-      <div class="card-content top-card-content-height">
-        <p style="margin-bottom:15px;"><strong>Contact Details</strong></p>
-        <p>{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
-        <p>{{ user.email }}</p>
-        <p>{{ user.personal_information.phone_number }}</p>
-        <p>{{ user.user_personal_id }}</p>
-        <p>{{ user.personal_information.job_title }}</p>
-        <p style="width: 75%;">
-          {{ user.personal_information.bio }}
-        </p>
+<div>
+  <div class="row">
+    <div class="col-12 mt-3">
+      <div class="card">
+        <div class="card-horizontal d-flex">
+          <div class="ellipse-container d-flex">
+            <div class="ellipse">
+              <p>RK</p>
+            </div>
+          </div>
+          <div class="info-left d-flex">
+            <div class="vertical-flex">
+              <p class="name">Riham Kharoub</p>
+              <p class="faded">Organization Name</p>
+              <a id="edit">Edit</a>
+            </div>
+          </div>
+          <div class="flex-right">
+            <div class="vertical-flex social-media-wrapper">
+              <p class="card-text social-media">
+                Rihamkh.114@gmail.com
+                <i data-feather="at-sign"></i>
+              </p>
+              <p class="card-text social-media phone">
+                +972541911821
+                <i data-feather="phone"></i>
+              </p>
+              <p class="card-text social-media">
+                Address, Location, Region, Country
+                <i data-feather="map-pin"></i>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card company-details-card">
-      <div class="card-content">
-        <p style="margin-bottom:15px;"><strong>Company Details</strong></p>
-        <p>{{ user.company_information.company_name }}</p>
-        <p>{{ user.company_information.company_registered_number }}</p>
-        <p>{{ user.company_information.street }}, {{ user.company_information.city }}</p>
-        <p>{{ user.company_information.zipcode }}, {{ user.company_information.state_province_region }}</p>
-        <p>{{ user.company_information.country }}</p>
-        <p>{{ user.company_information.bio }}</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row margin-none">
-  <div class="col-md-12">
-    <a class="status-bar" data-toggle="tab" href="#documents" (click)="activateTab('documents')">
-      <p>{{ counter.documents }}</p>
-      <p>DOCUMENTS</p>
-    </a>
   </div>
 </div>

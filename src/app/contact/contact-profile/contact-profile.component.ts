@@ -1,31 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { User } from '@app/core/models/user/user';
-import { Counter } from '../contact/contact.component';
-import * as $ from 'jquery';
-
+import { User } from './../../core/models/user/user';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import * as Feather from 'feather-icons';
 @Component({
   selector: 'app-contact-profile',
   templateUrl: './contact-profile.component.html',
   styleUrls: ['./contact-profile.component.scss']
 })
-export class ContactProfileComponent implements OnInit {
-  @Input()
-  user: User;
-  @Input()
-  counter: Counter;
-  @Input()
-  tabs: any;
+export class ContactProfileComponent implements OnInit, AfterViewInit {
+  @Input() user: User;
+
   constructor() {}
-
   ngOnInit() {}
-
-  activateTab(tabRef: string) {
-    $(this.tabs)
-      .find('.active')
-      .removeClass('active');
-    $(this.tabs)
-      .find('a[href="#' + tabRef + '"]')
-      .parent()
-      .addClass('active');
+  ngAfterViewInit() {
+    Feather.replace();
   }
 }
