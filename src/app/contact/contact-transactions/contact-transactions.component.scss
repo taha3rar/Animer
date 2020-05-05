@@ -1,0 +1,25 @@
+.table {
+  margin: 0;
+}
+
+.panel-body {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.panel {
+  margin-top: 0;
+  padding-top: 30px;
+}
+thead {
+  background: transparent;
+}
+
+#table-head {
+  background-color: transparent;
+  font-size: 1.4rem;
+  box-shadow: none !important;
+  color: #5a6c7b;
+  font-family: roboto;
+  font-weight: 500;
+}

@@ -1,0 +1,41 @@
+<table class="table main-table">
+    <thead>
+      <tr id="table-head">
+        <th mat-sort-header="id" class="text-center">ID</th>
+        <th mat-sort-header="date">Date</th>
+        <th mat-sort-header="contact">Contact</th>
+        <th mat-sort-header="product">Product</th>
+        <th mat-sort-header="quantity">Quantity</th>
+        <th mat-sort-header="price">Price</th>
+        <th mat-sort-header="status">Status</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr
+        *ngFor="
+          let contact of contacts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+          let i = index
+        "
+      >
+        <td class="text-center">{{ contact.numericId }}</td>
+        <td>
+          <span *ngIf="contact.company_name">{{ contact.company_name }} / </span>{{ contact.first_name }}
+          {{ contact.last_name }}
+        </td>
+        <td>
+          <span *ngIf="contact.email && contact.phone_number">{{ contact.email }} / {{ contact.phone_number }}</span>
+          <span *ngIf="contact.email && !contact.phone_number">{{ contact.email }}</span>
+          <span *ngIf="!contact.email && contact.phone_number">{{ contact.phone_number }}</span>
+        </td>
+        <td>
+          {{ contact.country }}
+          <span *ngIf="!contact.country">N/A</span>
+        </td>
+        <td class="text-right">
+          <a id="view" [routerLink]="['/contact', contact._id]">View</a>
+          <a (click)="editContact(i)" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
+        </td>
+      </tr> -->
+    </tbody>
+  </table>

@@ -20,8 +20,8 @@
     "prettier": "prettier --write \"./{src,e2e}/**/*.{ts,js,scss}\"",
     "prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,scss}\"",
     "postinstall": "npm run prettier -s",
-    "precommit": "ng lint && pretty-quick --staged",
-    "prepush": "npm run build-staging",
+    "precommit": "",
+    "prepush": "",
     "generate": "ng generate"
   },
   "dependencies": {
