@@ -9,7 +9,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { RouterModule } from '@angular/router';
 import { GoodsReceiveNoteComponent } from './goods-receive-note.component';
 import { GrnFirstStepComponent } from './grn-generator/grn-first-step/grn-first-step.component';
-import { GrnViewComponent } from './grn-view/grn-view.component';
+import { GrnDocumentComponent } from './grn-document/grn-document.component';
 
 @NgModule({
   imports: [
@@ -22,6 +22,6 @@ import { GrnViewComponent } from './grn-view/grn-view.component';
     CommonModule,
     NgxPermissionsModule.forRoot()
   ],
-  declarations: [GoodsReceiveNoteComponent, GrnGeneratorComponent, GrnFirstStepComponent, GrnViewComponent]
+  declarations: [GoodsReceiveNoteComponent, GrnGeneratorComponent, GrnFirstStepComponent, GrnDocumentComponent]
 })
 export class GoodsReceiveNoteModule {}
