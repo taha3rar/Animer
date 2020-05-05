@@ -2,5 +2,37 @@
   <i class="material-icons back" (click)="back()">keyboard_backspace</i><span class="after-icon"> Contacts</span>
 </div>
 <app-contact-profile [user]="user"></app-contact-profile>
-
-<!-- <app-contact-documents [documents]="documents" [contact_id]="user._id" [user]="user"></app-contact-documents> -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item active">
+    <a
+      class="nav-link"
+      id="transactions-tab"
+      data-toggle="tab"
+      href="#transaction"
+      role="tab"
+      aria-controls="transaction"
+      aria-selected="true"
+      >Transactions (2)</a
+    >
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      id="documents-tab"
+      data-toggle="tab"
+      href="#documents"
+      role="tab"
+      aria-controls="documents"
+      aria-selected="false"
+      >Documents (0)</a
+    >
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fading active in" id="transaction" role="tabpanel" aria-labelledby="transactions-tab">
+    <app-contact-transactions [user]="user"></app-contact-transactions>
+  </div>
+  <div class="tab-pane fading" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+    <app-contact-documents [documents]="documents" [contact_id]="user._id" [user]="user"></app-contact-documents>
+  </div>
+</div>

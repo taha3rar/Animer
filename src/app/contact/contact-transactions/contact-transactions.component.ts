@@ -1,13 +1,20 @@
 import { User } from './../../core/models/user/user';
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { defaultValues } from '@app/shared/helpers/default_values';
+import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
 @Component({
   selector: 'app-contact-transactions',
   templateUrl: './contact-transactions.component.html',
   styleUrls: ['./contact-transactions.component.scss']
 })
-export class ContactTransactionsComponent implements OnInit {
+export class ContactTransactionsComponent extends BaseListComponent implements OnInit {
   @Input() user: User;
-
-  constructor() {}
+  itemsPerPage = defaultValues.items_per_page;
+  today = new Date();
+  price = 50;
+  contacts = new Array(20);
+  constructor() {
+    super();
+  }
   ngOnInit() {}
 }

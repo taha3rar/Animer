@@ -1,18 +1,43 @@
 <table class="table main-table">
-    <thead>
-      <tr id="table-head">
-        <th mat-sort-header="id" class="text-center">ID</th>
-        <th mat-sort-header="date">Date</th>
-        <th mat-sort-header="contact">Contact</th>
-        <th mat-sort-header="product">Product</th>
-        <th mat-sort-header="quantity">Quantity</th>
-        <th mat-sort-header="price">Price</th>
-        <th mat-sort-header="status">Status</th>
-        <th class="text-right">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- <tr
+  <thead>
+    <tr id="table-head">
+      <th>ID</th>
+      <th>Date</th>
+      <th>Contact</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="
+        let contact of contacts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+        let i = index
+      "
+    >
+      <td>51</td>
+      <td>
+        {{ today | date: 'dd/MM/yyyy' }}
+      </td>
+      <td>
+        Taha Arar
+      </td>
+      <td>
+        10
+      </td>
+      <td>
+        Orange Juice
+      </td>
+      <td>{{ price | number: '1.2-2' }} ILS</td>
+      <td>Paid</td>
+      <td>
+        <a id="view">View</a>
+      </td>
+    </tr>
+    <!-- <tr
         *ngFor="
           let contact of contacts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
           let i = index
@@ -37,5 +62,5 @@
           <a (click)="editContact(i)" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
         </td>
       </tr> -->
-    </tbody>
-  </table>
+  </tbody>
+</table>

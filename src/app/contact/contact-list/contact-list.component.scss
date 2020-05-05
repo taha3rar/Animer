@@ -16,12 +16,22 @@ thead {
 }
 
 #table-head {
-  background-color: transparent;
+  background-color: transparent !important;
   font-size: 1.4rem;
   box-shadow: none !important;
   color: #5a6c7b;
   font-family: roboto;
   font-weight: 500;
+  th {
+    justify-content: unset !important;
+  }
+}
+tr:not(#table-head) {
+  height: 52px !important;
+  background: #ffffff 0% 0% no-repeat padding-box !important;
+  box-shadow: 0px 3px 13px #17515705 !important;
+  border-radius: 5px !important;
+  opacity: 1 !important;
 }
 #view,
 #edit {

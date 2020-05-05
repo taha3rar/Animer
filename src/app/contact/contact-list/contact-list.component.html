@@ -39,7 +39,7 @@
 <table class="table main-table" matSort (matSortChange)="sortData($event)" *ngIf="hasContacts">
   <thead>
     <tr id="table-head">
-      <th mat-sort-header="id" class="text-center">ID</th>
+      <th mat-sort-header="id">ID</th>
       <th mat-sort-header="contact">Contact</th>
       <th mat-sort-header="details">Details</th>
       <th mat-sort-header="country">Country</th>
@@ -49,11 +49,13 @@
   <tbody>
     <tr
       *ngFor="
-        let contact of contacts | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+        let contact of contacts
+          | filter: searchTerm
+          | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
         let i = index
       "
     >
-      <td class="text-center">{{ contact.numericId }}</td>
+      <td>{{ contact.numericId }}</td>
       <td>
         <span *ngIf="contact.company_name">{{ contact.company_name }} / </span>{{ contact.first_name }}
         {{ contact.last_name }}
