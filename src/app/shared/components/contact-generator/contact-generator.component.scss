@@ -5,18 +5,33 @@
 .margin-bottom {
   margin-bottom: 0.15rem;
 }
-
+label {
+  font-size: 16px !important;
+  color: #455263 !important;
+  font-family: roboto !important;
+  font-weight: 400 !important;
+}
 .modal-box-content {
-  width: 63%;
   max-height: 85vh;
-  overflow: auto;
+  padding-bottom: 10px;
+  border-radius: 12px;
+}
+.modal-box-center {
+  padding: 16px 32px;
 }
 
 .stepper {
   position: relative;
   display: inline-block;
 }
-
+.modal-title {
+  font-size: 20px !important;
+  font-family: roboto !important;
+  letter-spacing: 0px !important;
+  color: #455263 !important;
+  margin: 0;
+  font-weight: bold;
+}
 .contact-help-wrapper {
   display: flex;
   position: absolute;
@@ -52,4 +67,22 @@
       font-size: 15px;
     }
   }
+}
+.btn {
+  border-radius: 30px;
+  background: #37c1ce;
+  padding: 12px;
+}
+input,
+select {
+  background: #ffffff 0% 0% no-repeat padding-box !important;
+  border: 1px solid #e3e5f1;
+  border-radius: 3px !important;
+  height: 37px;
+}
+#input-group .bootstrap-select > .dropdown-toggle,
+.bootstrap-select > .dropdown-toggle.bs-placeholder:active,
+.bootstrap-select > .dropdown-toggle.bs-placeholder:focus,
+.bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
+  height: 37px !important;
 }

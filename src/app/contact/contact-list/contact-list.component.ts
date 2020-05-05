@@ -20,7 +20,8 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
   tooltips = tooltips.contacts.contacts_list;
-
+  contact: string;
+  edit = false;
   constructor(
     private route: ActivatedRoute,
     private authService: AuthenticationService,
@@ -64,7 +65,13 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
       }
     });
   }
-
+  editContact(i: number) {
+    this.edit = true;
+    this.contact = JSON.stringify(this.contacts[i]);
+  }
+  addContact() {
+    this.edit = false;
+  }
   get isInvited() {
     return this.authService.isInvited;
   }

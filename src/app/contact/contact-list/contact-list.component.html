@@ -23,6 +23,7 @@
   </div>
   <div class="flex-pr">
     <button
+      (click)="addContact()"
       class="bttn-primary bttn-add"
       data-toggle="wizard"
       *ngxPermissionsOnly="['create-client']"
@@ -48,9 +49,8 @@
   <tbody>
     <tr
       *ngFor="
-        let contact of contacts
-          | filter: searchTerm
-          | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }
+        let contact of contacts | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+        let i = index
       "
     >
       <td class="text-center">{{ contact.numericId }}</td>
@@ -69,7 +69,7 @@
       </td>
       <td class="text-right">
         <a id="view" [routerLink]="['/contact', contact._id]">View</a>
-        <a id="edit">Edit</a>
+        <a (click)="editContact(i)" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
       </td>
     </tr>
   </tbody>
@@ -95,5 +95,5 @@
 
 <pagination-controls (pageChange)="pageChanged($event)" *ngIf="hasContacts"></pagination-controls>
 
-<app-contact-generator></app-contact-generator>
+<app-contact-generator [contact]="contact" [edit]="edit"></app-contact-generator>
 <app-contact-tutorials></app-contact-tutorials>

@@ -148,7 +148,9 @@ label {
   text-align: right;
   white-space: nowrap;
 }
-
+#input-group .bootstrap-select > .dropdown-toggle {
+  height: 37px !important;
+}
 .dropdown-menu {
   font-size: 1.3rem;
 }
