@@ -87,7 +87,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       }
     }
   }
-  get clientf() {
+  get contactf() {
     return this.contactDetailsForm.controls;
   }
 
@@ -105,17 +105,17 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   }
 
   onGeneralSubmit() {
-    if (!this.isEdit && this.clientf) {
+    if (!this.isEdit && this.contactf) {
       this.disableSubmitButton(true);
-      this.contact.personal_information.first_name = this.clientf.fullName.value;
-      this.contact.personal_information.nationalId = this.clientf.nationalId.value;
-      this.contact.personal_information.companyName = this.clientf.companyName.value;
-      this.contact.phoneNumber = this.clientf.user_personaphoneNumberl_id.value;
-      this.contact.email = this.clientf.email.value;
-      this.contact.personal_information.country = this.clientf.country.value;
-      this.contact.region = this.clientf.region.value;
-      this.contact.location = this.clientf.location.value;
-      this.contact.address = this.clientf.address.value;
+      this.contact.personal_information.first_name = this.contactf.fullName.value;
+      this.contact.personal_information.nationalId = this.contactf.nationalId.value;
+      this.contact.personal_information.companyName = this.contactf.companyName.value;
+      this.contact.phoneNumber = this.contactf.user_personaphoneNumberl_id.value;
+      this.contact.email = this.contactf.email.value;
+      this.contact.personal_information.country = this.contactf.country.value;
+      this.contact.region = this.contactf.region.value;
+      this.contact.location = this.contactf.location.value;
+      this.contact.address = this.contactf.address.value;
       this.contactSubmitted = true;
       this.spinnerService.showSpinner();
       this.userService.saveInvitedClient(this.invitedContact).subscribe(
@@ -162,8 +162,6 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
 
   onModalClose() {
     if (!this.contactSubmitted && this.contactDetailsForm.dirty) {
-      console.log(this.contactDetailsForm.valid);
-      console.log(this.contactDetailsForm.value);
       swal({
         text: 'Are you sure you want to leave this page? All information will be lost!',
         buttons: ['Cancel', 'Yes'],
