@@ -17,7 +17,7 @@
             <div class="form-group col-md-6 pl-3">
               <label for="id">ID number</label>
               <div class="input-group">
-                <input type="text" id="id" class="form-control" formControlName="id" />
+                <input type="text" id="id" class="form-control" formControlName="id_number" />
               </div>
             </div>
           </div>
@@ -28,33 +28,39 @@
               <div class="form-check form-check-inline col-12">
                 <div class="col-md-4">
                   <input
+                    [checked]="false"
+                    (change)="onCheck($event)"
+                    value="director"
                     type="checkbox"
                     class="form-check-input checkbox"
-                    name="role_type"
+                    name="role"
                     id="checkbox_director"
-                    formControlName="role_type"
-                  /><label class="form-check-label checkbox_label" for="checkbox_director"
+                  /><label class="checkbox_label" for="checkbox_director"
                     ><span class="form_checkbox_btn"></span
                   ></label>
                   <label for="checkbox_director" style="font-weight:400;">Director (LLC)</label>
                 </div>
                 <div class="col-md-4">
                   <input
+                    [checked]="false"
+                    (change)="onCheck($event)"
+                    value="partner"
                     type="checkbox"
                     class="form-check-input checkbox"
-                    name="role_type"
+                    name="role"
                     id="checkbox_partner"
-                    formControlName="role_type"
                   /><label class="checkbox_label" for="checkbox_partner"><span class="form_checkbox_btn"></span></label>
                   <label for="checkbox_partner" style="font-weight:400;">Partner</label>
                 </div>
                 <div class="col-md-4 pr-0">
                   <input
+                    [checked]="false"
+                    (change)="onCheck($event)"
+                    value="shareholder"
                     type="checkbox"
                     class="form-check-input checkbox"
-                    name="role_type"
+                    name="role"
                     id="checkbox_shareholder"
-                    formControlName="role_type"
                   /><label class="checkbox_label" for="checkbox_shareholder"
                     ><span class="form_checkbox_btn"></span
                   ></label>
@@ -65,7 +71,7 @@
             <div class="form-group col-md-6 pl-3">
               <label for="PIN2">PIN Number</label>
               <div class="input-group">
-                <input type="text" id="PIN2" class="form-control" formControlName="pin" />
+                <input type="text" id="PIN2" class="form-control" formControlName="pin_number" />
               </div>
             </div>
           </div>
@@ -87,10 +93,10 @@
                   <input
                     type="radio"
                     class="form-check-input form_radio_input"
-                    name="role_type"
+                    name="loan_guarantor"
                     id="yes_guarantor"
-                    checked="checked"
-                    formControlName="role_type"
+                    [value]="true"
+                    formControlName="loan_guarantor"
                   />
                   <label for="yes_guarantor" style="vertical-align: top;">Yes</label>
                 </div>
@@ -98,9 +104,10 @@
                   <input
                     type="radio"
                     class="form-check-input form_radio_input"
-                    name="role_type"
+                    name="loan_guarantor"
                     id="no_guarantor"
-                    formControlName="role_type"
+                    [value]="false"
+                    formControlName="loan_guarantor"
                   />
                   <label for="no_guarantor" style="vertical-align: top;">No</label>
                 </div>
@@ -115,16 +122,15 @@
             </div>
             <div class="form-group col-md-6 pl-3">
               <label for="PC">Postal code (LLC)</label>
-              <input type="text" id="PC" class="form-control" formControlName="pc" />
+              <input type="text" id="PC" class="form-control" formControlName="postal_code" />
             </div>
           </div>
         </div>
       </div>
     </div>
   </form>
-
-  <div class="add-bank-wrapper">
+  <!-- <div class="add-bank-wrapper">
     <button class="btn-circle blue large"><i class="material-icons">add</i></button>
     <p>Add another</p>
-  </div>
+  </div> -->
 </div>

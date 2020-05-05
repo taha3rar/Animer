@@ -11,7 +11,7 @@
           <div class="form-group col-md-6">
             <label for="experience">Experience (years in the line of business)</label>
             <div class="input-group">
-              <input type="text" id="experience" class="form-control" formControlName="experience" />
+              <input type="number" min="0" id="experience" class="form-control" formControlName="years_of_experience" />
               <div class="input-group-append">
                 <span class="input-group-text">Years</span>
               </div>
@@ -27,16 +27,17 @@
             <label for="number-of-workers">Number of people working in business</label>
             <div class="input-group">
               <div class="input-group-prepend">
-                <button class="btn btn-lg btn-secondary" type="button">-</button>
+                <button class="btn btn-lg btn-secondary" (click)="removePeople()" type="button">-</button>
               </div>
               <input
-                type="text"
+                type="number"
+                min="0"
                 id="number-of-workers"
                 class="form-control col-md-5"
-                formControlName="people_working"
+                formControlName="number_of_people_working"
               />
               <div class="input-group-append">
-                <button class="btn btn-lg btn-secondary" type="button">+</button>
+                <button class="btn btn-lg btn-secondary" (click)="addPeople()" type="button">+</button>
               </div>
             </div>
           </div>

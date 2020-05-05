@@ -4,114 +4,130 @@
     <p class="step-title">Tell us about the key person in your business.</p>
   </div>
 
-  <div class="step-content">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="surname2">Surname</label>
-        <input type="text" id="surname2" class="form-control" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="other-names2">Other names</label>
-        <input type="text" id="other-names2" class="form-control" />
-      </div>
-    </div>
+  <form [formGroup]="loan_form" class="col">
+    <div formGroupName="business_key_person" #businessKeyPerson>
+      <div class="step-content">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="surname1bkp">Full name</label>
+            <input type="text" id="surname1bkp" class="form-control" formControlName="full_name" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="other-names1bkp">Other names</label>
+            <input type="text" id="other-names1bkp" class="form-control" formControlName="other_names" />
+          </div>
+        </div>
 
-    <label for="ownership-type">What is his/her gender?</label>
-    <div class="row options-wrapper mb-2">
-      <div class="col-md-6 pl-0 pr-2 mb-3">
-        <label class="container">
-          <input type="radio" name="premises-radio" />
-          <span class="checkmark">
-            Male
-          </span>
-        </label>
-      </div>
-      <div class="col-md-6 pl-2 pr-0">
-        <label class="container">
-          <input type="radio" name="premises-radio" />
-          <span class="checkmark">
-            Female
-          </span>
-        </label>
-      </div>
-    </div>
+        <label for="ownership-type">What is your gender?</label>
+        <div class="row options-wrapper mb-2">
+          <div class="col-md-6 pl-0 pr-2 mb-3">
+            <label class="container">
+              <input type="radio" name="gender" value="male" formControlName="gender" />
+              <span class="checkmark">
+                Male
+              </span>
+            </label>
+          </div>
+          <div class="col-md-6 pl-2 pr-0">
+            <label class="container">
+              <input type="radio" name="gender" value="female" formControlName="gender" />
+              <span class="checkmark">
+                Female
+              </span>
+            </label>
+          </div>
+        </div>
 
-    <label for="ownership-type">What is his/her martial status?</label>
-    <div class="row options-wrapper mb-2">
-      <div class="col-md-6 pl-0 pr-2 mb-3">
-        <label class="container">
-          <input type="radio" name="premises-radio" />
-          <span class="checkmark">
-            Married
-          </span>
-        </label>
-      </div>
-      <div class="col-md-6 pl-2 pr-0">
-        <label class="container">
-          <input type="radio" name="premises-radio" />
-          <span class="checkmark">
-            Single
-          </span>
-        </label>
-      </div>
-    </div>
+        <label for="ownership-type">What is your martial status?</label>
+        <div class="row options-wrapper mb-2">
+          <div class="col-md-6 pl-0 pr-2 mb-3">
+            <label class="container">
+              <input type="radio" name="marital_status" value="married" formControlName="marital_status" />
+              <span class="checkmark">
+                Married
+              </span>
+            </label>
+          </div>
+          <div class="col-md-6 pl-2 pr-0">
+            <label class="container">
+              <input type="radio" name="marital_status" value="single" formControlName="marital_status" />
+              <span class="checkmark">
+                Single
+              </span>
+            </label>
+          </div>
+        </div>
 
-    <label for="ownership-type">Is he/she resident of Kenya?</label>
-    <div class="row options-wrapper mb-2">
-      <div class="col-md-6 pl-0 pr-2 mb-3">
-        <label class="container">
-          <input type="radio" checked="checked" name="premises-radio" />
-          <span class="checkmark">
-            Yes
-          </span>
-        </label>
-      </div>
-      <div class="col-md-6 pl-2 pr-0">
-        <label class="container">
-          <input type="radio" name="premises-radio" />
-          <span class="checkmark">
-            No
-          </span>
-        </label>
-      </div>
-    </div>
+        <label for="ownership-type">Are you resident of Kenya?</label>
+        <div class="row options-wrapper mb-2">
+          <div class="col-md-6 pl-0 pr-2 mb-3">
+            <label class="container">
+              <input
+                type="radio"
+                checked="checked"
+                name="kenyan_resident"
+                [value]="true"
+                formControlName="kenyan_resident"
+              />
+              <span class="checkmark">
+                Yes
+              </span>
+            </label>
+          </div>
+          <div class="col-md-6 pl-2 pr-0">
+            <label class="container">
+              <input type="radio" name="kenyan_resident" [value]="false" formControlName="kenyan_resident" />
+              <span class="checkmark">
+                No
+              </span>
+            </label>
+          </div>
+        </div>
 
-    (Sole trader only)
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="2">Date of birth</label>
-        <input type="text" id="birth-date2" class="form-control" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="PIN4">PIN number</label>
-        <input type="text" id="PIN4" class="form-control" />
-      </div>
-    </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="birth-date1bkp">Date of birth</label>
+            <input type="text" id="birth-date1bkp" class="form-control" formControlName="birth_date" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="PIN1bkp">PIN number</label>
+            <input type="text" id="PIN1bkp" class="form-control" formControlName="pin_number" />
+          </div>
+        </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-3">
-        <label for="country4">Country</label>
-        <input type="text" id="country4" class="form-control" />
-      </div>
-      <div class="form-group col-md-3">
-        <label for="nationality3">Nationality</label>
-        <input type="text" id="nationality3" class="form-control" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="national-id3">National ID</label>
-        <input type="text" id="national-id3" class="form-control" />
-      </div>
-    </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="country1bkp">Country of Residence</label>
+            <input type="text" id="country1bkp" class="form-control" formControlName="residence_country" />
+          </div>
+          <div class="form-group col-md-3">
+            <label for="nationality1bkp">Nationality</label>
+            <input type="text" id="nationality1bkp" class="form-control" formControlName="nationality" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="national-id1bkp">National ID</label>
+            <input type="text" id="national-id1bkp" class="form-control" formControlName="national_id_number" />
+          </div>
+        </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="po-box3">P.O. box</label>
-        <input type="text" id="po-box3" class="form-control" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="postal-code4">Postal code</label>
-        <input type="text" id="postal-code4" class="form-control" />
+        <div class="form-row">
+          <div class="col">
+            <label for="passport-numberbkp">Passport number</label>
+            <input type="text" id="passport-numberbkp" class="form-control" formControlName="passport_number" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="po-box1bkp">P.O. box</label>
+            <input type="text" id="po-box1bkp" class="form-control" formControlName="postal_box" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="postal-code1bkp">Postal code</label>
+            <input type="text" id="postal-code1bkp" class="form-control" formControlName="postal_code" />
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>

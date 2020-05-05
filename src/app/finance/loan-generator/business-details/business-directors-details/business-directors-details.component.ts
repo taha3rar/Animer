@@ -17,4 +17,25 @@ export class BusinessDirectorsDetailsComponent implements OnInit {
       this.loan_form = form;
     });
   }
+
+  onCheck(event: any) {
+    const formArray: FormArray = this.loan_form.get('business_directors_details').get('role').value as FormArray;
+    if (event.target.checked) {
+      formArray.push(new FormControl(event.target.value));
+    } else if (!event.target.checked) {
+      let i = 0;
+      formArray.controls.forEach((ctrl: FormControl) => {
+        if (ctrl.value === event.target.value) {
+          formArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    } else {
+      event.target.checked = false;
+    }
+    this.loan_form.get('qualification').patchValue({
+      role: formArray.value
+    });
+  }
 }

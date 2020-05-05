@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperNavigationService } from './stepper-navigation.service';
 import { LoanGeneratorDataService } from './loan-generator-data.service';
-import { LoanAboutComponent } from './loan-details/loan-about/loan-about.component';
 
 @Component({
   selector: 'app-loan-generator-list',
@@ -41,9 +40,9 @@ export class LoanGeneratorComponent implements OnInit {
       // STEP 1
       // Loan Details
       loan_details: this.formBuilder.group({
-        loan_size: [undefined],
-        repayments_num: [undefined],
-        insure_absa: [undefined]
+        amount_requested: [undefined],
+        repayments_number: [undefined],
+        insure_with_absa: [undefined]
       }),
       // Loan Goals
       loan_goals: this.formBuilder.group({
@@ -57,8 +56,8 @@ export class LoanGeneratorComponent implements OnInit {
         business_name: undefined,
         business_nature: undefined,
         registration_date: undefined,
-        brn: undefined,
-        b_pin: undefined,
+        registration_number: undefined,
+        pin_number: undefined,
         vat_number: undefined,
         physical_address: undefined,
         street: undefined,
@@ -78,100 +77,97 @@ export class LoanGeneratorComponent implements OnInit {
       }),
       // Business Premises
       business_premises: this.formBuilder.group({
-        premises_radio: undefined
+        premises: undefined
       }),
       // Business Other Details
       business_other_details: this.formBuilder.group({
-        experience: undefined,
+        years_of_experience: 0,
         contact_person: undefined,
-        people_working: undefined
+        number_of_people_working: 0
       }),
       // Business Financial Details
       business_financial_details: this.formBuilder.group({
-        business_from: undefined,
-        business_to: undefined,
+        activity_from: undefined,
+        activity_to: undefined,
         business_sales: undefined,
         stocks_held: undefined,
         cost_goods: undefined,
-        debtors_outstanding: undefined,
+        trade_debtors_outstanding: undefined,
         operating_expenses: undefined,
-        creditors_oustanding: undefined,
+        trade_creditors_oustanding: undefined,
         other_costs: undefined,
         other_debts: undefined,
         net_profit: undefined,
-        paid_capital: undefined
+        paid_up_capital: undefined
       }),
       // Business Directors Details
       business_directors_details: this.formBuilder.group({
         full_name: undefined,
-        id: undefined,
-        role_type: undefined,
-        pin: undefined,
+        id_number: undefined,
+        role: [this.formBuilder.array([], Validators.required)],
+        pin_number: undefined,
         shareholding: undefined,
-        // role_type: undefined,
+        loan_guarantor: undefined,
         postal_address: undefined,
-        pc: undefined
+        postal_code: undefined
       }),
-      // STEP 3 can be up to 5 applicants
-      applicant_details: this.formBuilder.array([
-        this.formBuilder.group({
-          first_name: undefined,
-          middle_name: undefined,
-          last_name: undefined,
-          national_id_number: undefined,
-          passport_number: undefined,
-          pin_number: undefined,
-          nationality: undefined,
-          kenyan_resident: undefined,
-          residence_country: undefined,
-          birth_date: undefined,
-          birth_place: undefined,
-          gender: undefined,
-          marital_status: undefined,
-          number_of_dependants: undefined,
-          ages_of_dependants: undefined, // Array
-          residential_address: this.formBuilder.group({
-            physical_address: undefined,
-            city: undefined,
-            province: undefined,
-            years_of_residency: undefined
-          }),
-          postal_address: this.formBuilder.group({
-            po_box: undefined,
-            postal_code: undefined,
-            city: undefined,
-            province: undefined
-          }),
-          contact_details: this.formBuilder.group({
-            mobile_phone_number: undefined,
-            home_phone_number: undefined,
-            other_phone_number: undefined,
-            email_address: undefined
-          }),
-          five_years_same_address: undefined,
-          previous_physical_address: undefined,
-          previous_city: undefined,
-          previous_province: undefined,
-          accomodation_type: undefined, // Specific conditions
-          accomodation_owned_type: undefined,
-          estimated_property_value: undefined,
-          signature: undefined,
-          signature_date: undefined
-        })
-      ]),
-      // STEP 4 can be up to 2 referees
-      referee_details: this.formBuilder.array([
-        this.formBuilder.group({
-          full_name: undefined,
-          applicant_relationship: undefined,
-          phone_number: undefined,
-          po_box: undefined,
-          postal_code: undefined,
-          city: undefined,
-          country: undefined
-        })
-      ]),
+      // STEP 3
+      applicant_details: this.formBuilder.group({
+        full_name: undefined,
+        other_names: undefined,
+        gender: undefined,
+        marital_status: undefined,
+        kenyan_resident: undefined,
+        birth_date: undefined,
+        pin_number: undefined,
+        residence_country: undefined,
+        nationality: undefined,
+        national_id_number: undefined,
+        passport_number: undefined,
+        postal_box: undefined,
+        postal_code: undefined,
+        telephone: undefined,
+        mobile_phone: undefined,
+        email: [undefined, Validators.email]
+      }),
+      // STEP 4
+      business_key_person: this.formBuilder.group({
+        full_name: undefined,
+        other_names: undefined,
+        gender: undefined,
+        marital_status: undefined,
+        kenyan_resident: undefined,
+        birth_date: undefined,
+        pin_number: undefined,
+        residence_country: undefined,
+        nationality: undefined,
+        national_id_number: undefined,
+        passport_number: undefined,
+        postal_box: undefined,
+        postal_code: undefined,
+        country: undefined,
+        telephone: undefined,
+        mobile_phone: undefined,
+        email: [undefined, Validators.email],
+        designation: undefined,
+        duration_in_business: undefined,
+        qualification: undefined
+      }),
+      // biz key person location
+      business_key_person_location: this.formBuilder.group({
+        country: undefined,
+        address: undefined,
+        house_number: undefined,
+        current_address_duration: undefined,
+        postal_box: undefined
+      }),
       // STEP 5
+      absa_banking_details: this.formBuilder.group({
+        branch: undefined,
+        account_number: undefined,
+        created_on: undefined,
+        other_facilites: undefined
+      }),
       business_banking_details: this.formBuilder.group({
         bank_details: this.formBuilder.array([
           this.formBuilder.group({
@@ -202,7 +198,7 @@ export class LoanGeneratorComponent implements OnInit {
       })
     });
     this.loanGeneratorDataService.setForm(this.loan_form);
-    // this.onChanges();
+    this.onChanges();
   }
 
   onChanges(): void {

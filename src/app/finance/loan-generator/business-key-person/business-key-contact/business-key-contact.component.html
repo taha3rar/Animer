@@ -4,67 +4,83 @@
     <p class="step-title">What are the contact details of the key person?</p>
   </div>
 
-  <div class="step-content">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="birthday">Date of birth</label>
-        <input type="text" id="birthday" class="form-control" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="pin3">Pin Number</label>
-        <input type="text" id="pin3" class="form-control" />
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <div class="col-md-6 pl-0 pr-2">
-          <label for="country3">Country</label>
-          (Sole/LLC Only)
-          <select id="country3" class="form-control">
-            <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
-              country.viewValue
-            }}</option>
-          </select>
+  <form [formGroup]="loan_form" class="col">
+    <div formGroupName="business_key_person" #businessKeyPerson>
+      <div class="step-content">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="birthday">Date of birth</label>
+            <input type="text" id="birthday" class="form-control" formControlName="birth_date" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="pin3">Pin Number</label>
+            <input type="text" id="pin3" class="form-control" formControlName="pin_number" />
+          </div>
         </div>
-        <div class="col-md-6 pl-2 pr-0">
-          <label for="nationality2">Nationality</label>
-          <input type="text" id="nationality2" class="form-control" />
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <div class="col-md-6 pl-0 pr-2">
+              <label for="country3">Country</label>
+              (Sole/LLC Only)
+              <select id="country3" class="form-control" formControlName="country">
+                <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
+                  country.viewValue
+                }}</option>
+              </select>
+            </div>
+            <div class="col-md-6 pl-2 pr-0">
+              <label for="nationality2">Nationality</label>
+              <input type="text" id="nationality2" class="form-control" formControlName="nationality" />
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="national-id2">National ID</label>
+            <input type="text" id="national-id2" class="form-control" formControlName="national_id_number" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            (Sole/LLC Only)
+            <label for="po-box2">P.O. box</label>
+            <input type="text" id="po-box2" class="form-control" formControlName="postal_box" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="postal-code3">Postal code</label>
+            <input type="text" id="postal-code3" class="form-control" formControlName="postal_code" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="telephone4">Telephone</label>
+            <input
+              type="text"
+              id="telephone4"
+              class="form-control"
+              placeholder="(+254) 7XX-XXX-XXX"
+              formControlName="telephone"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="mobile3">Mobile</label>
+            <input
+              type="text"
+              id="mobile3"
+              class="form-control"
+              placeholder="(+254) 7XX-XXX-XXX"
+              formControlName="mobile_phone"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <label for="email-address2">Email address</label>
+            <input type="text" id="email-address2" class="form-control" formControlName="email" />
+          </div>
         </div>
       </div>
-      <div class="form-group col-md-6">
-        <label for="national-id2">National ID</label>
-        <input type="text" id="national-id2" class="form-control" />
-      </div>
     </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        (Sole/LLC Only)
-        <label for="po-box2">P.O. box</label>
-        <input type="text" id="po-box2" class="form-control" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="postal-code3">Postal code</label>
-        <input type="text" id="postal-code3" class="form-control" />
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="telephone4">Telephone</label>
-        <input type="text" id="telephone4" class="form-control" placeholder="(+254) 7XX-XXX-XXX" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="mobile3">Mobile</label>
-        <input type="text" id="mobile3" class="form-control" placeholder="(+254) 7XX-XXX-XXX" />
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="col">
-        <label for="email-address2">Email address</label>
-        <input type="text" id="email-address2" class="form-control" />
-      </div>
-    </div>
-  </div>
+  </form>
 </div>

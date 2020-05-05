@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { countries } from '@app/shared/helpers/countries';
+import { LoanGeneratorDataService } from '../../loan-generator-data.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-business-key-contact',
@@ -7,9 +9,14 @@ import { countries } from '@app/shared/helpers/countries';
   styleUrls: ['./business-key-contact.component.scss']
 })
 export class BusinessKeyContactComponent implements OnInit {
+  loan_form: FormGroup;
   countries = countries;
 
-  constructor() {}
+  constructor(private loanGeneratorDataService: LoanGeneratorDataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loanGeneratorDataService.currentForm.subscribe(form => {
+      this.loan_form = form;
+    });
+  }
 }

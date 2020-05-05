@@ -21,7 +21,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">KES</span>
               </div>
-              <input type="text" name="loan_size" class="form-control" formControlName="loan_size" />
+              <input type="number" name="loan_size" class="form-control" formControlName="amount_requested" />
             </div>
           </div>
         </div>
@@ -33,9 +33,9 @@
               <input
                 type="range"
                 id="repayments-num"
-                name="repayments_num"
+                name="repayments_number"
                 class="col-md-12 custom-range"
-                formControlName="repayments_num"
+                formControlName="repayments_number"
               />
               <output for="repayments-num" onforminput="value = repayments-num.valueAsNumber;"></output>
             </div>
@@ -51,7 +51,7 @@
           <div class="form-group col-md-12">
             <div class="col-md-6 pl-0 pr-2">
               <label class="container">
-                <input type="radio" name="insure_absa" formControlName="insure_absa" />
+                <input type="radio" name="insure_with_absa" [value]="true" formControlName="insure_with_absa" />
                 <span class="checkmark">
                   Yes
                 </span>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-6 pr-0 pl-2">
               <label class="container">
-                <input type="radio" name="insure_absa" formControlName="insure_absa" />
+                <input type="radio" name="insure_with_absa" [value]="false" formControlName="insure_with_absa" />
                 <span class="checkmark">
                   No
                 </span>

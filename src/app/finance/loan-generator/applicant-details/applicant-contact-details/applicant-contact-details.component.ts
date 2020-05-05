@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { LoanGeneratorDataService } from '../../loan-generator-data.service';
 
 @Component({
   selector: 'app-applicant-contact-details',
@@ -6,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./applicant-contact-details.component.scss']
 })
 export class ApplicantContactDetailsComponent implements OnInit {
-  constructor() {}
+  loan_form: FormGroup;
+  constructor(private loanGeneratorDataService: LoanGeneratorDataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loanGeneratorDataService.currentForm.subscribe(form => {
+      this.loan_form = form;
+    });
+  }
 }

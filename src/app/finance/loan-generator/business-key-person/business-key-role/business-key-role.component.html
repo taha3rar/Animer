@@ -10,28 +10,38 @@
     <p class="step-title">Tell us about the key person at 'Business Name'.</p>
   </div>
 
-  <div class="step-content">
-    <div class="form-row">
-      <div class="form-group col-md-6 pl-0 pr-2">
-        <label for="designation">Designation</label>
-        <input type="text" id="designation" class="form-control" />
-      </div>
-      <div class="form-group col-md-6 pr-0 pl-2">
-        <label for="period-business">Length of period in Business</label>
-        <div class="input-group">
-          <input type="text" id="period-business" class="form-control" />
-          <div class="input-group-append">
-            <span class="input-group-text" id="basic-addon1">Years</span>
+  <form [formGroup]="loan_form" class="col">
+    <div formGroupName="business_key_person" #businessKeyPerson>
+      <div class="step-content">
+        <div class="form-row">
+          <div class="form-group col-md-6 pl-0 pr-2">
+            <label for="designation">Designation</label>
+            <input type="text" id="designation" class="form-control" formControlName="designation" />
+          </div>
+          <div class="form-group col-md-6 pr-0 pl-2">
+            <label for="period-business">Length of period in Business</label>
+            <div class="input-group">
+              <input
+                type="number"
+                min="0"
+                id="period-business"
+                class="form-control"
+                formControlName="duration_in_business"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon1">Years</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="qualification">Qualification</label>
+            <input type="text" id="qualification" class="form-control" formControlName="qualification" />
           </div>
         </div>
       </div>
     </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <label for="qualification">Qualification</label>
-        <input type="text" id="qualification" class="form-control" />
-      </div>
-    </div>
-  </div>
+  </form>
 </div>

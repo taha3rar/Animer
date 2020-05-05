@@ -4,39 +4,43 @@
     <p class="step-title">What is the location of the key person? (Only Partnership)</p>
   </div>
 
-  <div class="step-content">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="country5">Country</label>
-        (Sole/LLC Only)
-        <select id="country5" class="form-control">
-          <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
-            country.viewValue
-          }}</option>
-        </select>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="physical-address2">Physical address</label>
-        <input type="text" id="physical-address2" class="form-control" />
-      </div>
-    </div>
+  <form [formGroup]="loan_form" class="col">
+    <div formGroupName="business_key_person_location" #businessKeyPersonLocation>
+      <div class="step-content">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="country5">Country</label>
+            (Sole/LLC Only)
+            <select id="country5" class="form-control" formControlName="country">
+              <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
+                country.viewValue
+              }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="physical-address2">Physical address</label>
+            <input type="text" id="physical-address2" class="form-control" formControlName="address" />
+          </div>
+        </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="house-number">House number</label>
-        <input type="text" id="house-number" class="form-control" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="duration-address">Duration at current address</label>
-        <input type="text" id="duration-address" class="form-control" />
-      </div>
-    </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="house-number">House number</label>
+            <input type="text" id="house-number" class="form-control" formControlName="house_number" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="duration-address">Duration at current address</label>
+            <input type="text" id="duration-address" class="form-control" formControlName="current_address_duration" />
+          </div>
+        </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="po-box4">P.O. box</label>
-        <input type="text" id="po-box4" class="form-control" />
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="po-box4">P.O. box</label>
+            <input type="text" id="po-box4" class="form-control" formControlName="postal_box" />
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
