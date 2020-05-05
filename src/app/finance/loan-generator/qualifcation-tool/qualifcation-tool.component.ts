@@ -63,6 +63,8 @@ export class QualifcationToolComponent implements OnInit {
   onFinishQualification() {
     this.beginApplication.emit(true);
     this.loan = this.loan_form.value;
+    console.log('form', this.loan_form);
+    console.log('loan', this.loan);
     this.financeService.draft(this.loan).subscribe(loan => {
       console.log(loan);
       // this.router.navigateByUrl('/finance');
@@ -70,8 +72,7 @@ export class QualifcationToolComponent implements OnInit {
   }
 
   onCheck(event: any) {
-    const formArray: FormArray = this.loan_form.get('qualification').get('agribusiness_type') as FormArray;
-
+    const formArray: FormArray = this.loan_form.get('qualification').get('agribusiness_type').value as FormArray;
     if (event.target.checked && this.checkboxCounter < 3) {
       formArray.push(new FormControl(event.target.value));
       this.checkboxCounter += 1;
@@ -88,6 +89,9 @@ export class QualifcationToolComponent implements OnInit {
     } else {
       event.target.checked = false;
     }
+    this.loan_form.get('qualification').patchValue({
+      agribusiness_type: formArray.value
+    });
   }
 
   openTextField() {

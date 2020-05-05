@@ -202,6 +202,13 @@ export class LoanGeneratorComponent implements OnInit {
       })
     });
     this.loanGeneratorDataService.setForm(this.loan_form);
+    // this.onChanges();
+  }
+
+  onChanges(): void {
+    this.loan_form.valueChanges.subscribe(val => {
+      console.log(this.loan_form.value);
+    });
   }
 
   displayStepTab(stepNumber: number): boolean {
