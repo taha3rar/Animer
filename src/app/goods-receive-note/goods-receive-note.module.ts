@@ -1,3 +1,4 @@
+import { SharedModule } from '@app/shared';
 import { GrnGeneratorComponent } from './grn-generator/grn-generator.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { GoodsReceiveNoteComponent } from './goods-receive-note.component';
 import { GrnFirstStepComponent } from './grn-generator/grn-first-step/grn-first-step.component';
 import { GrnDocumentComponent } from './grn-document/grn-document.component';
+import { GrnViewComponent } from './grn-view/grn-view.component';
 
 @NgModule({
   imports: [
@@ -17,11 +19,18 @@ import { GrnDocumentComponent } from './grn-document/grn-document.component';
     TranslateModule,
     FormsModule,
     NgbModule,
+    SharedModule,
     GoodsReceiveNoteRoutingModule,
     RouterModule,
     CommonModule,
     NgxPermissionsModule.forRoot()
   ],
-  declarations: [GoodsReceiveNoteComponent, GrnGeneratorComponent, GrnFirstStepComponent, GrnDocumentComponent]
+  declarations: [
+    GoodsReceiveNoteComponent,
+    GrnGeneratorComponent,
+    GrnFirstStepComponent,
+    GrnDocumentComponent,
+    GrnViewComponent
+  ]
 })
 export class GoodsReceiveNoteModule {}

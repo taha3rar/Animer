@@ -29,7 +29,7 @@ p {
 }
 
 .heading-1 {
-  color: $dark-gray-2;
+  color: $main-title-color;
   font-size: 2rem;
   font-weight: 500;
 }
@@ -97,6 +97,14 @@ p {
   cursor: pointer;
 }
 
+.sm-text-label {
+  color: #9ba5ae;
+  margin-bottom: 2px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
 .text-regular {
   font-size: 1.5rem;
+  color: #5a6c7b;
 }

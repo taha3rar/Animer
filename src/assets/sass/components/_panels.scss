@@ -61,9 +61,9 @@
 
 .docs-section {
   display: flex;
-
+  flex-wrap: wrap;
   .doc-card:not(:last-child) {
-    margin-right: 0.8%;
+    margin-right: 12px;
   }
 }
 
@@ -392,4 +392,14 @@ div[data-notify="container"] {
   padding: 2.4rem 2.4rem;
   border: 1px solid #eff3f5;
   box-shadow: 0px 3px 8px rgba(98, 117, 160, 0.08);
+}
+
+.doc-view li a {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #5a6c7b;
+}
+
+.doc-view.nav-tabs > li.active > a {
+  color: #455263;
 }

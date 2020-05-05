@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
 import { GoodsReceiveNoteComponent } from './goods-receive-note.component';
+import { GrnViewComponent } from './grn-view/grn-view.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
       path: 'grn/generator',
       component: GrnGeneratorComponent
+    },
+    {
+      path: 'grn/:id',
+      component: GrnViewComponent
     }
   ])
 ];

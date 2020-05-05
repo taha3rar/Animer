@@ -1,0 +1,72 @@
+<h1 class="main-title btn-main mb-4" routerLink="/grn">
+  <a class="main-color"><i class="material-icons">keyboard_backspace</i></a> Goods Received Note
+</h1>
+
+<div class="strip">
+  <h3 class="heading-1 mb-3">GRN #432</h3>
+  <div class="header-wrapper">
+    <div id="grn-info">
+      <div>
+        <p class="sm-text-label">ISSUE DATE</p>
+        <P class="text-regular">20/03/2020</P>
+      </div>
+      <div>
+        <p class="sm-text-label">REFERENCE</p>
+        <P class="text-regular">PO-GR 3467279</P>
+      </div>
+      <div>
+        <p class="sm-text-label">PAYMENT STATUS</p>
+        <p class="text-regular">Paid</p>
+      </div>
+    </div>
+    <div id="grn-actions">
+      <button class="bttn bttn-outline">Download GRN</button>
+      <button class="bttn bttn-outline" data-toggle="wizard" data-target="#updatePaymentStatusModal">
+        Update Payment Status
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 mt-5">
+  <ul class="nav nav-tabs doc-view">
+    <li class="active">
+      <a data-toggle="tab" href="#grn">Goods Received Note</a>
+    </li>
+    <li><a data-toggle="tab" href="#documents">Necessary Documents</a></li>
+  </ul>
+  <div class="tab-content mb-5">
+    <div class="tab-pane active" id="grn">
+      <app-grn-document [generateGrn]="false"></app-grn-document>
+    </div>
+    <div class="tab-pane" id="documents">
+      <app-transaction-document-list></app-transaction-document-list>
+    </div>
+  </div>
+</div>
+
+<div class="modal-box" id="updatePaymentStatusModal">
+  <div class="modal-box-content-wrapper">
+    <div class="modal-box-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Payment Status</h5>
+        <button class="text-left" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group" id="payment-status">
+          <label for="status">Payment</label>
+          <select id="status" placeholder="Choose status" class="form-control">
+            <option value="paid">Paid</option>
+            <option value="partially-paid">Partially Paid</option>
+            <option value="awaiting">Awaiting Payment</option>
+          </select>
+        </div>
+        <button class="bttn-primary">
+          Update Payment Status
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+.header-wrapper,
+#grn-info,
+#grn-actions {
+  display: flex;
+}
+
+#grn-info {
+  flex-grow: 1;
+  margin-right: 10rem;
+}
+
+#grn-info div {
+  flex-grow: 1;
+}
+
+#grn-info div:not(:last-child) {
+  margin-right: 16px;
+}
+
+.modal-body {
+  padding: 2.4rem;
+
+  .bttn-primary {
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 5.2rem;
+  }
+}
+
+.modal-box-content {
+  min-height: 27rem;
+  width: 42%;
+}
+
+.modal-header {
+  padding: 16px 24px;
+
+  span {
+    font-size: 2.3rem;
+  }
+}

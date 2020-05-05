@@ -13,11 +13,11 @@
 
 .doc-card {
   display: flex;
-  width: 16%;
   flex-direction: column;
   border-radius: 5px;
   border: 1px solid $light-gray-2;
   padding: 0.8rem;
+  min-width: 19.5rem;
 
   div:nth-child(2),
   div:nth-child(3) {
@@ -81,11 +81,10 @@
 
 .doc-card-upload {
   border: 1px dashed $primary-color;
-  width: 16%;
   background-color: #f6fdff;
-  margin-right: 0.8%;
+  margin-right: 12px;
   padding: 0.8rem;
-
+  min-width: 19.5rem;
   .btn-doc-uploader {
     display: none;
   }

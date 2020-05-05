@@ -652,3 +652,28 @@ a.bttn-line {
   cursor: pointer;
   font-weight: 500;
 }
+
+.bttn {
+  border-radius: 10rem;
+  border: none;
+  outline: none;
+  display: flex;
+  font-weight: 500;
+  padding: 0 2.8rem;
+  font-size: 1.4rem;
+  margin: 5px;
+  height: 3.55rem;
+}
+
+.bttn-outline {
+  border: 1.5px solid #d7dee2;
+  color: #455263;
+  padding-top: 1px;
+  background: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.bttn-outline:hover {
+  background: #04a8be12;
+  border: 1.5px solid #37c1ce;
+}
