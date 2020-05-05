@@ -22,9 +22,9 @@ thead {
   color: #5a6c7b;
   font-family: roboto;
   font-weight: 500;
-  th {
-    justify-content: unset !important;
-  }
+}
+tr {
+  text-align: center !important;
 }
 tr:not(#table-head) {
   height: 52px !important;

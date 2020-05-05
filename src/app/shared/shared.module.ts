@@ -24,6 +24,7 @@ import { ContactGeneratorComponent } from './components/contact-generator/contac
 import { UserProgressComponent } from './components/user-progress/user-progress.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { DpoDocumentsComponent } from './components/document-list/dpo-documents/dpo-documents.component';
+import { StatusPipe } from './pipes/status.pipe';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { DpoDocumentsComponent } from './components/document-list/dpo-documents/
   declarations: [
     LoaderComponent,
     RoundUpPipe,
+    StatusPipe,
     TransactionDocumentListComponent,
     UserDocumentComponent,
     BaseNavigationComponent,
@@ -67,6 +69,7 @@ import { DpoDocumentsComponent } from './components/document-list/dpo-documents/
     ContactGeneratorComponent,
     UserProgressComponent,
     FilterPipe,
+    StatusPipe,
     DpoDocumentsComponent
   ],
   providers: [CsvService, DatePipe]

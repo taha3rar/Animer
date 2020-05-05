@@ -1,0 +1,61 @@
+<div class="helper-panel clearfix">
+  <i class="material-icons pull-left">info</i>
+  <p>بسم الله الرحمن الرحيم</p>
+</div>
+<div class="grn-container d-flex">
+  <h1 translate class="main-title d-inline-flex align-self-center">Goods Received List</h1>
+  <div class="grn-buttons">
+    <div class="btn-holder">
+      <button class="order-2 bttn-primary bttn-add" routerLink="grn/generator">
+        <span>Create a GRN</span>
+      </button>
+      <button class="order-1 btn-primary-transp">
+        <i class="material-icons">arrow_upward</i>
+        <span translate>Export</span>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="searchbar d-flex">
+  <input placeholder="Search contacts" class="search" type="search" />
+  <span></span>
+</div>
+<table class="table main-table">
+  <thead>
+    <tr id="table-head">
+      <th>ID</th>
+      <th>Date</th>
+      <th>Contact</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let grn of grns | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+      <td>51</td>
+      <td>
+        {{ today | date: 'dd/MM/yyyy' }}
+      </td>
+      <td>
+        Taha Arar
+      </td>
+      <td>
+        Orange Juice
+      </td>
+      <td>
+        10
+      </td>
+      <td>{{ price | number: '1.2-2' }} ILS</td>
+      <td>
+        <p class="{{ status | status }}">{{ status }}</p>
+      </td>
+      <td>
+        <a [routerLink]="['/grn', 123]" id="view">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

@@ -26,13 +26,13 @@
         Taha Arar
       </td>
       <td>
-        10
-      </td>
-      <td>
         Orange Juice
       </td>
+      <td>
+        10
+      </td>
       <td>{{ price | number: '1.2-2' }} ILS</td>
-      <td>Paid</td>
+      <td><p class="{{ 'paid' | status }}">Paid</p></td>
       <td>
         <a id="view">View</a>
       </td>
@@ -64,3 +64,4 @@
       </tr> -->
   </tbody>
 </table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

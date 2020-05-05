@@ -8,10 +8,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GoodsReceiveNoteRoutingModule } from './goods-receive-note-routing.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { RouterModule } from '@angular/router';
-import { GoodsReceiveNoteComponent } from './goods-receive-note.component';
 import { GrnFirstStepComponent } from './grn-generator/grn-first-step/grn-first-step.component';
 import { GrnDocumentComponent } from './grn-document/grn-document.component';
 import { GrnViewComponent } from './grn-view/grn-view.component';
+import { GrnListComponent } from './grn-list/grn-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -19,18 +20,22 @@ import { GrnViewComponent } from './grn-view/grn-view.component';
     TranslateModule,
     FormsModule,
     NgbModule,
+    NgxPaginationModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     GoodsReceiveNoteRoutingModule,
     RouterModule,
     CommonModule,
     NgxPermissionsModule.forRoot()
   ],
   declarations: [
-    GoodsReceiveNoteComponent,
     GrnGeneratorComponent,
+    GrnListComponent,
     GrnFirstStepComponent,
     GrnDocumentComponent,
-    GrnViewComponent
+    GrnViewComponent,
+    GrnListComponent
   ]
 })
 export class GoodsReceiveNoteModule {}
