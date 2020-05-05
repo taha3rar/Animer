@@ -72,7 +72,6 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isEdit']) {
       if (this.isEdit) {
-        console.log(this.contact);
         this.newContact = JSON.parse(this.contact);
         this.contactDetailsForm.patchValue({
           fullName: this.newContact.fullName,
