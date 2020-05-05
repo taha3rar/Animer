@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../core/authentication/authentication.
 import { User } from '../../core/models/user/user';
 import { Credentials } from '../../core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
+declare const $: any;
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,6 @@ export class ProfileComponent implements OnInit {
   companyDetailsForm: FormGroup;
   credentials: Credentials;
   showPaymentSection = false;
-
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
