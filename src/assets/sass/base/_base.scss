@@ -11,19 +11,19 @@ html {
   font-size: 62.5%; // 1rem = 10px -> 10/16 = 0.625
   background-color: $bg-color;
   @include respond(small-desktop) {
-    font-size: 56.25%; // 1rem = 9 -> 9/16px
+    font-size: 59.375%; // 1rem = 9.5 -> 9.5/16px
   }
 
   @include respond(tab-land) {
-    font-size: 53.125%; // 1rem = 8.5 -> 8.5/16px
+    font-size: 56.25%; // 1rem = 9 -> 9/16px
   }
 
   @include respond(tab-port) {
-    font-size: 50%; // 1rem = 8 -> 8/16px
+    font-size: 53.125%; // 1rem = 8.5 -> 8.5/16px
   }
 
   @include respond(phone) {
-    font-size: 55%; // 1rem = 8.8 -> 8.8/16px
+    font-size: 56.25%; // 1rem = 9 -> 9/16px
   }
 
   @include respond(big-desktop) {
@@ -83,4 +83,9 @@ div[data-notify="container"] {
 
 .dropdown.bootstrap-select {
   width: 100% !important;
+}
+
+.mobile-list-wrapper div,
+span {
+  font-size: 1.5rem;
 }

@@ -1,5 +1,18 @@
+@import "../../../assets/sass/abstracts/mixins";
+
 .table {
   margin: 0;
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.mobile-list-wrapper {
+  display: none;
+
+  @include respond(phone) {
+    display: block;
+  }
 }
 
 .panel-body {
@@ -13,6 +26,20 @@
 }
 thead {
   background: transparent;
+}
+
+.btn-desktop-txt,
+.need-help {
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.btn-mobile-txt {
+  display: none;
+  @include respond(phone) {
+    display: inline-block;
+  }
 }
 
 #table-head {
@@ -49,4 +76,10 @@ tr:not(#table-head) {
 }
 #edit {
   color: #d39b4b !important;
+}
+
+.bttn-primary {
+  @include respond(phone) {
+    min-width: 9rem;
+  }
 }

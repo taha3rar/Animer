@@ -5,6 +5,10 @@
   right: 0;
   bottom: 0;
   padding: 2rem;
+
+  @include respond(phone) {
+    padding: 1.5rem 2px;
+  }
 }
 
 .actions-section {

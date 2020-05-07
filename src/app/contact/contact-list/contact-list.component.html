@@ -31,7 +31,8 @@
       matTooltip="{{ tooltips.add_contact }}"
       matTooltipPosition="above"
     >
-      <span>Add a Contact</span>
+      <span class="btn-desktop-txt">Add a Contact</span>
+      <span class="btn-mobile-txt">Add</span>
     </button>
   </div>
 </div>
@@ -91,6 +92,37 @@
       >
         <span>Add your first Contact</span>
       </button>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-list-wrapper">
+  <div
+    class="strip mt-4 mb-3"
+    *ngFor="
+      let contact of contacts | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+      let i = index
+    "
+  >
+    <div># {{ contact.numericId }}</div>
+    <div>
+      <span *ngIf="contact.company_name">{{ contact.company_name }} / </span>{{ contact.first_name }}
+      {{ contact.last_name }}
+    </div>
+    <div>
+      <span *ngIf="contact.email && contact.phone_number">{{ contact.email }} / {{ contact.phone_number }}</span>
+      <span *ngIf="contact.email && !contact.phone_number">{{ contact.email }}</span>
+      <span *ngIf="!contact.email && contact.phone_number">{{ contact.phone_number }}</span>
+    </div>
+    <div>
+      <div>
+        {{ contact.country }}
+        <span *ngIf="!contact.country">N/A</span>
+      </div>
+    </div>
+    <div class="mt-3">
+      <a id="view" [routerLink]="['/contact', contact._id]">View</a>
+      <a (click)="editContact(i)" class="ml-4" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
     </div>
   </div>
 </div>

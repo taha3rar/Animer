@@ -331,6 +331,7 @@
 .company-info-section {
   padding: 2rem;
   border-left: 1px solid $light-gray-2;
+  clear: both;
 }
 
 #company-info-form {
@@ -392,6 +393,10 @@ div[data-notify="container"] {
   padding: 2.4rem 2.4rem;
   border: 1px solid #eff3f5;
   box-shadow: 0px 3px 8px rgba(98, 117, 160, 0.08);
+
+  @include respond(phone) {
+    padding: 2rem 2rem;
+  }
 }
 
 .doc-view li a {

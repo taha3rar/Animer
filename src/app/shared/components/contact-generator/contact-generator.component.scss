@@ -1,12 +1,14 @@
-.form-group:not(:last-child) {
-  margin-bottom: 2.5rem;
+@import "../../../../assets/sass/abstracts/mixins";
+
+.form-group {
+  margin-bottom: 1.6rem;
 }
 
 .margin-bottom {
   margin-bottom: 0.15rem;
 }
 label {
-  font-size: 16px !important;
+  font-size: 1.6rem !important;
   color: #455263 !important;
   font-family: roboto !important;
   font-weight: 400 !important;
@@ -15,9 +17,14 @@ label {
   max-height: 85vh;
   padding-bottom: 10px;
   border-radius: 12px;
+  @include respond(phone) {
+    max-height: 95vh;
+    width: 91%;
+    overflow: auto;
+  }
 }
 .modal-box-center {
-  padding: 16px 32px;
+  padding: 1.6rem 3.2rem;
 }
 
 .stepper {
@@ -25,7 +32,7 @@ label {
   display: inline-block;
 }
 .modal-title {
-  font-size: 20px !important;
+  font-size: 2rem !important;
   font-family: roboto !important;
   letter-spacing: 0px !important;
   color: #455263 !important;
@@ -68,21 +75,23 @@ label {
     }
   }
 }
-.btn {
+.bttn-primary {
   border-radius: 30px;
   background: #37c1ce;
-  padding: 12px;
+  @include respond(phone) {
+    width: 100%;
+  }
 }
 input,
 select {
   background: #ffffff 0% 0% no-repeat padding-box !important;
   border: 1px solid #e3e5f1;
   border-radius: 3px !important;
-  height: 37px;
+  height: 3.7rem;
 }
 #input-group .bootstrap-select > .dropdown-toggle,
 .bootstrap-select > .dropdown-toggle.bs-placeholder:active,
 .bootstrap-select > .dropdown-toggle.bs-placeholder:focus,
 .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
-  height: 37px !important;
+  height: 3.7rem !important;
 }

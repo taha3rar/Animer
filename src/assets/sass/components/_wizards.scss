@@ -37,6 +37,17 @@
     width: 100%;
     z-index: 888;
     margin-bottom: 4rem;
+
+    @include respond(phone) {
+      background-color: white;
+      top: 52px !important;
+      padding-left: 10px;
+      padding-right: 10px;
+      display: flex;
+      position: fixed;
+      box-shadow: 0px 3px 8px rgba(98, 117, 160, 0.1);
+    }
+
     li {
       display: flex !important;
       align-items: center;
@@ -47,6 +58,19 @@
       position: relative;
       display: inline-block;
       height: 5rem;
+
+      @include respond(phone) {
+        box-shadow: none;
+        width: unset !important;
+      }
+    }
+
+    li.active {
+      @include respond(phone) {
+        a {
+          display: inline-flex;
+        }
+      }
     }
 
     li:first-child:nth-last-child(5),
@@ -67,6 +91,9 @@
     li:first-child:nth-last-child(2),
     li:first-child:nth-last-child(2) ~ li {
       width: 49.5%;
+      @include respond(phone) {
+        // width: 49.5% !important;
+      }
     }
 
     a {
@@ -76,9 +103,34 @@
       background-color: transparent !important;
       padding: 0px;
       text-align: left !important;
+
+      @include respond(phone) {
+        text-align: center !important;
+      }
+
+      .step-text {
+        padding-top: 3px;
+      }
     }
     li:not(:last-child) {
       margin-right: 1%;
+    }
+
+    li.completed,
+    li.disabled {
+      @include respond(phone) {
+        a span.step-text {
+          display: none;
+        }
+      }
+    }
+
+    li.active {
+      @include respond(phone) {
+        a span.step-text {
+          display: inline-block;
+        }
+      }
     }
 
     li.completed,
@@ -88,6 +140,10 @@
       border-left: 3px solid $primary-color;
       border-top-left-radius: 0px !important;
       border-bottom-left-radius: 0px !important;
+
+      @include respond(phone) {
+        border-left: 0px;
+      }
 
       .round-tab {
         width: 2.9rem;
@@ -119,12 +175,19 @@
       transform: rotate(45deg);
       margin-top: -1.25rem;
       box-shadow: 0px 3px 8px rgba(94, 111, 148, 0.1);
+      @include respond(phone) {
+        display: none;
+      }
     }
 
     .disabled > a {
       color: $light-gray-2;
     }
   }
+}
+
+.round-tab {
+  position: relative;
 }
 
 .help-block p,

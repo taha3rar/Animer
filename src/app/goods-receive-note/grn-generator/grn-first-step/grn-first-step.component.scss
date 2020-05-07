@@ -1,5 +1,11 @@
+@import "../../../../assets/sass/abstracts/mixins";
+
 .ref-input {
   padding-left: 1.5rem;
+  @include respond(phone) {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }
 
 .total-wrapper {
@@ -35,4 +41,52 @@
   display: flex;
   margin-left: auto;
   justify-content: center;
+}
+
+.d-flex.bottom div {
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 0px;
+}
+
+#contactInfo {
+  @include respond(phone) {
+    margin-top: 24px;
+  }
+}
+
+.form-group {
+  @include respond(phone) {
+    margin-bottom: 1rem !important;
+  }
+}
+
+.col-md-6 {
+  @include respond(phone) {
+    padding-right: 15px !important;
+  }
+}
+
+#received-by div.form-group {
+  @include respond(phone) {
+    padding-left: 5px !important;
+  }
+}
+
+.table-blue {
+  display: table;
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.mobile-table {
+  display: none;
+  @include respond(phone) {
+    display: block;
+  }
 }

@@ -89,6 +89,13 @@
     }
   }
 
+  .dropdown-menu.notifications.pull-right {
+    @include respond(phone) {
+      left: -40px;
+      right: unset !important;
+    }
+  }
+
   .dropdown-item.active,
   .dropdown-item:active {
     color: #16181b;

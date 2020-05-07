@@ -1,3 +1,5 @@
+@import "../../../assets/sass/abstracts/mixins";
+
 .card-horizonal {
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 12px #1751570d;
@@ -33,6 +35,25 @@
 }
 .ellipse-container {
   justify-content: start;
+
+  @include respond(phone) {
+    align-items: center;
+
+    .ellipse {
+      margin-right: 0px;
+    }
+  }
+}
+
+.social-media-wrapper {
+  @include respond(phone) {
+    margin-top: 20px;
+    justify-content: flex-start;
+
+    svg {
+      float: left;
+    }
+  }
 }
 #edit {
   text-decoration: underline;
@@ -54,6 +75,10 @@
 .vertical-flex {
   flex-direction: column;
   display: flex;
+
+  @include respond(phone) {
+    align-items: center;
+  }
 }
 .flex-right {
   flex: 1;
@@ -65,7 +90,23 @@
     color: #455263;
   }
   .feather {
-    color: #e0e3e8;
+    color: #d3d8df;
     height: 17px;
+  }
+
+  @include respond(phone) {
+    justify-content: center;
+    .card-text {
+      align-self: center;
+    }
+    .feather {
+      text-align: left;
+    }
+  }
+}
+
+.d-flex {
+  @include respond(phone) {
+    flex-direction: column;
   }
 }

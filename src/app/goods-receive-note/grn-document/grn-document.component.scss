@@ -1,7 +1,13 @@
+@import "../../../assets/sass/abstracts/mixins";
+
 .grn-wrapper {
   background: white;
   padding: 24px 32px;
   box-shadow: 0px 3px 6px #1751570d;
+
+  @include respond(phone) {
+    padding: 24px 24px;
+  }
 }
 
 p,
@@ -25,4 +31,34 @@ h2 {
 h5 {
   font-size: 1.5rem;
   color: #7d8796;
+}
+
+.table-blue {
+  display: table;
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.mobile-table {
+  display: none;
+  @include respond(phone) {
+    display: block;
+  }
+}
+
+.flex-r {
+  display: flex;
+  margin-left: auto;
+  justify-content: center;
+}
+
+.d-flex.bottom div {
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 0px;
 }

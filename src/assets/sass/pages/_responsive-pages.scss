@@ -38,10 +38,6 @@
     border-radius: 0px !important;
   }
 
-  .col:first-child {
-    padding-right: 0px !important;
-  }
-
   .bttns-line button {
     padding: 0.8rem 0.5rem !important;
   }
@@ -55,9 +51,7 @@
     margin-bottom: 1.3rem !important;
   }
 
-  .row.options-wrapper .col-md-4,
-  .col-md-6,
-  .col {
+  .row.options-wrapper .col-md-4 {
     padding-right: 0px !important;
   }
 
@@ -120,10 +114,6 @@ span.step-progress-bar-wrapper.responsive {
   }
 
   .stepper-wrapper .nav.nav-tabs {
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
-    display: flex;
-    position: fixed;
     top: 6rem;
     left: 0;
 
@@ -132,9 +122,7 @@ span.step-progress-bar-wrapper.responsive {
     }
 
     li {
-      margin-right: 0px !important;
       box-shadow: none !important;
-      width: unset !important;
       flex-grow: 0;
 
       span.step-progress-bar-wrapper {
@@ -143,7 +131,7 @@ span.step-progress-bar-wrapper.responsive {
     }
 
     li.active {
-      flex-grow: 1;
+      flex-grow: 0.5;
     }
 
     li.completed {

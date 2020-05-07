@@ -11,7 +11,7 @@
       <a class="bttn-line">Add New Contact</a>
     </div>
     <div class="col-md-6">
-      <div class="row">
+      <div class="row" id="contactInfo">
         <div class="col-md-4">
           <p class="sm-text-label">CONTACT</p>
           <p class="text-regular">Contact Name</p>
@@ -113,7 +113,63 @@
       </tr>
     </tbody>
   </table>
-  <button class="bttn-primary" type="button">
+  <div class="mobile-table">
+    <div class="strip">
+      <div class="d-flex top">
+        <div>
+          <p class="product-name">Green Coffee Beans/ Variety</p>
+          <p class="mt-0">Product Description</p>
+        </div>
+        <div class="flex-r">
+          <a class="bttn-line">Edit</a>
+        </div>
+      </div>
+      <div>
+        <div class="d-flex bottom mt-2">
+          <div>
+            <p class="sm-text-label">Quanitiy</p>
+            <p class="text-regular">100.00 KG</p>
+          </div>
+          <div>
+            <p class="sm-text-label">Rate</p>
+            <p class="text-regular">50.00 KES per KG</p>
+          </div>
+          <div>
+            <p class="sm-text-label">Price</p>
+            <p class="text-regular">50,000.00 KES</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="strip">
+      <div class="d-flex top">
+        <div>
+          <p class="product-name">Green Coffee Beans/ Variety</p>
+          <p class="mt-0">Product Description</p>
+        </div>
+        <div class="flex-r">
+          <a class="bttn-line">Edit</a>
+        </div>
+      </div>
+      <div>
+        <div class="d-flex bottom mt-2">
+          <div>
+            <p class="sm-text-label">Quantity</p>
+            <p class="text-regular">100.00 KG</p>
+          </div>
+          <div>
+            <p class="sm-text-label">Rate</p>
+            <p class="text-regular">50.00 KES per KG</p>
+          </div>
+          <div>
+            <p class="sm-text-label">Price</p>
+            <p class="text-regular">50,000.00 KES</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="bttn-primary mt-4" type="button">
     Add Product
   </button>
 </div>
@@ -121,7 +177,7 @@
 <div class="row mt-5">
   <div class="col-md-6">
     <div class="strip">
-      <div class="form-group">
+      <div class="form-group" id="notes">
         <label for="notes">Notes</label>
         <textarea class="form-control" rows="2"></textarea>
       </div>
@@ -130,7 +186,7 @@
   <div class="col-md-6 ">
     <div class="strip flex-strip" id="notes-sec">
       <div class="form-group" id="payment-status">
-        <label for="status">Payment</label>
+        <label for="status">Payment Status</label>
         <select id="status" placeholder="Choose status" class="form-control">
           <option value="paid">Paid</option>
           <option value="partially-paid">Partially Paid</option>
@@ -148,7 +204,7 @@
 
 <div class="strip mt-5">
   <h3 class="t-bold mb-3">RECIEVED BY</h3>
-  <div class="form-row">
+  <div class="form-row" id="received-by">
     <div class="form-group col-md-4">
       <label for="name">Full Name *</label>
       <input type="text" class="form-control" id="name" />

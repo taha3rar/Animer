@@ -7,10 +7,10 @@
 </div>
 
 <div class="docs-wrapper">
-  <button class="btn-icons pull-right" style="margin-top:.5rem;">
+  <button class="btn-icons pull-right mb-4" style="margin-top:.5rem;">
     <i class="material-icons">keyboard_arrow_right</i>
   </button>
-  <button class="btn-icons pull-right" style="margin-top:.5rem;">
+  <button class="btn-icons pull-right mb-4" style="margin-top:.5rem;">
     <i class="material-icons">keyboard_arrow_left</i>
   </button>
   <div class="docs-section clearfix">
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div
-      *ngFor="let document of (documents | paginate: { itemsPerPage: 5, currentPage: page })"
+      *ngFor="let document of documents | paginate: { itemsPerPage: 5, currentPage: page }"
       class="doc-card clearfix"
     >
       <div>
