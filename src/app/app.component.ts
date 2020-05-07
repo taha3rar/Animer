@@ -61,12 +61,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // @HostListener('window:resize', ['$event'])
-  // onResize(event: any) {
-  //   const windowSize = event.target.innerWidth;
-  //   this.responsive(windowSize);
-  // }
-
   ngOnInit() {
     // Setup logger
     if (environment.production) {
@@ -132,41 +126,5 @@ export class AppComponent implements OnInit {
       });
     // Set permissions on every refresh
     this.authenticationService.setCurrentPermissions();
-    // this.responsive(window.innerWidth);
-
-    // this.router.events.subscribe(event => {
-    //   this.responsive(window.innerWidth);
-    // });
   }
-
-  // responsive(windowSize: any) {
-  //   const currentUrl = window.location.href;
-  //   if (
-  //     windowSize <= 600 &&
-  //     !currentUrl.includes('home') &&
-  //     !currentUrl.includes('registration') &&
-  //     !(this.router.url === '/' && !this.authenticationService.isAuthenticated())
-  //   ) {
-  //     const user_id = currentUrl.substr(currentUrl.length - 24); // 24 is the length of a Mongo ObjectId
-  //     if (currentUrl.includes('staging')) {
-  //       if (currentUrl.includes('validation')) {
-  //         window.location.href = `https://mobile-staging.agt-platform.com/validation/${user_id}`;
-  //       } else {
-  //         window.location.href = 'https://mobile-staging.agt-platform.com';
-  //       }
-  //     } else if (currentUrl.includes('demo')) {
-  //       if (currentUrl.includes('validation')) {
-  //         window.location.href = `https://mobile-demo.agt-platform.com/validation/${user_id}`;
-  //       } else {
-  //         window.location.href = 'https://mobile-demo.agt-platform.com';
-  //       }
-  //     } else {
-  //       if (currentUrl.includes('validation')) {
-  //         window.location.href = `https://mobile.agt-platform.com/validation/${user_id}`;
-  //       } else {
-  //         window.location.href = 'https://mobile.agt-platform.com';
-  //       }
-  //     }
-  //   }
-  // }
 }
