@@ -129,6 +129,18 @@
                     <p>Email address is required</p>
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="company">Business Name</label><span>&nbsp; – Optional</span>
+                  <input
+                    type="text"
+                    formControlName="companyName"
+                    class="form-control"
+                    placeholder="Business Name"
+                    id="company"
+                  />
+                </div>
+
                 <div class="row form-group">
                   <div class="col-lg-6 col-md-6 col-sm-12 phone-input">
                     <label for="phone">Phone Number</label>
@@ -189,6 +201,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="form-group" [ngClass]="showFieldStyle('password')">
                   <label for="password">Password</label>
                   <input
@@ -249,17 +262,6 @@
                   <button [ngClass]="{ active: userType === 'agribusiness' }" (click)="onActiveBtn('agribusiness')">
                     Agribusiness
                   </button>
-                </div>
-
-                <div class="form-group mt-5">
-                  <label for="company">Company Name</label><span>&nbsp; – Optional</span>
-                  <input
-                    type="text"
-                    formControlName="companyName"
-                    class="form-control"
-                    placeholder="Company Name"
-                    id="company"
-                  />
                 </div>
 
                 <p>
