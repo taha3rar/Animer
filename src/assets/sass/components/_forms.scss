@@ -178,9 +178,34 @@ select {
 }
 
 .search-bar {
-  padding: 0.7rem 1rem 0.8rem 2rem;
-  border-radius: 2.5rem;
-  border: 1px solid #ced4da;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #e3e5f1;
+  border-radius: 3px;
+  height: 3.6rem;
+  padding: 0px 29px;
+  font: 14px/19px Roboto;
+  letter-spacing: 0.17px;
+}
+.search-bar::placeholder {
+  color: #cacbd5;
+}
+.search-bar + span::before {
+  content: "\f002";
+  position: relative;
+  top: 0;
+  font-size: 1.5rem;
+  transition: 0.5s;
+  font-family: FontAwesome;
+  color: #cacbd5;
+}
+.search-bar + span {
+  position: absolute;
+  padding-left: 12px;
+  padding-top: 6px;
+}
+.search-bar:hover + span::before,
+.search-bar:focus + span::before {
+  color: #000 !important;
 }
 
 div.filter-option-inner-inner {

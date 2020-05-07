@@ -1,41 +1,24 @@
+@import "../../../assets/sass/abstracts/mixins";
+
 .grn-buttons {
   flex: 1;
   display: inline-flex;
   justify-content: flex-end;
 }
-.search {
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #e3e5f1;
-  border-radius: 3px;
-  height: 36px;
-  padding: 0px 29px;
-  width: 20%;
-  font: 14px/19px Roboto;
-  letter-spacing: 0.17px;
-}
-.search::placeholder {
-  color: #cacbd5;
-}
-.search + span::before {
-  content: "\f002";
-  position: relative;
-  top: 0;
-  font-size: 1.5rem;
-  transition: 0.5s;
-  font-family: FontAwesome;
-  color: #cacbd5;
-}
-.search + span {
-  position: absolute;
-  padding-left: 12px;
-  padding-top: 6px;
-}
-.search:hover + span::before,
-.search:focus + span::before {
-  color: #000 !important;
-}
+
 .table {
   margin: 0;
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.mobile-list-wrapper {
+  display: none;
+
+  @include respond(phone) {
+    display: block;
+  }
 }
 
 .panel-body {
@@ -85,6 +68,23 @@ tr {
 #edit {
   color: #d39b4b !important;
 }
-.status {
-  padding: 5px 0px !important;
+
+.flex-row {
+  display: flex;
+
+  div:last-child {
+    margin-left: auto;
+  }
+}
+
+.bttn-primary {
+  @include respond(phone) {
+    min-width: 9rem;
+  }
+}
+
+.btn-primary-transp {
+  @include respond(phone) {
+    display: none;
+  }
 }

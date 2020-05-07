@@ -99,6 +99,12 @@
 
 .welcome-panel {
   min-height: 49rem;
+
+  @include respond(phone) {
+    min-height: unset;
+    height: 100%;
+  }
+
   [class^="col"] {
     padding: 0px !important;
   }

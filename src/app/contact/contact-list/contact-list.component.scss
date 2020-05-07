@@ -35,13 +35,6 @@ thead {
   }
 }
 
-.btn-mobile-txt {
-  display: none;
-  @include respond(phone) {
-    display: inline-block;
-  }
-}
-
 #table-head {
   background-color: transparent !important;
   font-size: 1.4rem;
@@ -50,7 +43,8 @@ thead {
   font-family: roboto;
   font-weight: 500;
 }
-tr {
+tr,
+th {
   text-align: center !important;
 }
 tr:not(#table-head) {

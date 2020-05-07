@@ -274,3 +274,16 @@
 .flex-strip {
   display: flex;
 }
+
+.btn-desktop-txt {
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.btn-mobile-txt {
+  display: none;
+  @include respond(phone) {
+    display: inline-block;
+  }
+}
