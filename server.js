@@ -42,12 +42,17 @@ app.listen(process.env.PORT || 3000, () => {
 });
 
 async function pup(url, res, hd) {
-  const browser = await puppeteer.launch({
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox", // these two args for heroku to use puppeteer
-    ],
-  });
+  const browser = await puppeteer
+    .launch({
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox", // these two args for heroku to use puppeteer
+      ],
+    })
+    .catch((err) => {
+      console.log(err);
+      console.log("sad");
+    });
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: "domcontentloaded" });
   let ure = "";
