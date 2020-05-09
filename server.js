@@ -51,7 +51,16 @@ async function pup(url, res, hd) {
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: "domcontentloaded" });
   let ure = "";
-
+        res.setHeader("Access-Control-Allow-Origin", "*"); // i dont know what this is
+        res.setHeader(
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+        ); // If needed
+        res.setHeader(
+          "Access-Control-Allow-Headers",
+          "X-Requested-With,content-type"
+        ); // If needed
+        res.setHeader("Access-Control-Allow-Credentials", true); // If needed
   console.log("video found");
   //   page.on("response", (res) => {
   //     if (res.url === url) {
@@ -79,16 +88,6 @@ async function pup(url, res, hd) {
           'document.querySelector("video").getAttribute("src")'
         ); //this is how i get the src and thats what i return
         await browser.close();
-        res.setHeader("Access-Control-Allow-Origin", "*"); // i dont know what this is
-        res.setHeader(
-          "Access-Control-Allow-Methods",
-          "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-        ); // If needed
-        res.setHeader(
-          "Access-Control-Allow-Headers",
-          "X-Requested-With,content-type"
-        ); // If needed
-        res.setHeader("Access-Control-Allow-Credentials", true); // If needed
         numberOfResponses -= -1; //xd
         console.log(numberOfResponses);
         res.send(p); //responds with the link to the original .mp4 video
