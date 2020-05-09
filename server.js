@@ -19,7 +19,18 @@ app.get("/anime", (req, res, next) => {
     anime.animeEpisodeHandler(url).then((ep) => {
       let link = "https://" + ep[0].servers[0].iframe;
       console.log(ep[0].servers[0].iframe);
-      pup(link, res);
+      pup(link, res, false);
+    });
+  }
+});
+app.get("/hd", (req, res, next) => {
+  let url = req.url.substr(req.url.indexOf("?") + 1); // i send the link for the episode with ?{link} and this is how i get the link in express
+  console.log(url); //anime name and episode in this case
+  if (url.includes("episode")) {
+    anime.animeEpisodeHandler(url).then((ep) => {
+      let link = "https://" + ep[0].servers[0].iframe;
+      console.log(ep[0].servers[0].iframe);
+      pup(link, res, true);
     });
   }
 });
@@ -30,7 +41,7 @@ app.listen(process.env.PORT || 3000, () => {
   console.log("Server running on port 3000");
 });
 
-async function pup(url, res) {
+async function pup(url, res, hd) {
   const browser = await puppeteer.launch({
     args: [
       "--no-sandbox",
@@ -42,66 +53,71 @@ async function pup(url, res) {
   let ure = "";
 
   console.log("video found");
-//   page.on("response", (res) => {
-//     if (res.url === url) {
-//       console.log("match");
-//     }
-//     uri = res.url();
-//     console.log(res.url());
-//     if (uri && uri.includes("https://hls") && uri.includes(".m3u8")) {
-//       console.log(res.url());
-//       ure = res.url();
-//     }
-//   });
+  //   page.on("response", (res) => {
+  //     if (res.url === url) {
+  //       console.log("match");
+  //     }
+  //     uri = res.url();
+  //     console.log(res.url());
+  //     if (uri && uri.includes("https://hls") && uri.includes(".m3u8")) {
+  //       console.log(res.url());
+  //       ure = res.url();
+  //     }
+  //   });
   let bodyHTML = await page.evaluate(() => document.body.innerHTML);
   await page.click("html");
-  console.log("clicked");
-  await page.waitFor(500);
-  page
-    .click("video")
-    .then(async () => {
-      await page.waitForFunction(
-        'document.querySelector("video").getAttribute("src").includes("http")'
-      );
-      let p = await page.evaluate(
-        'document.querySelector("video").getAttribute("src")'
-      ); //this is how i get the src and thats what i return
-      await browser.close();
-      res.setHeader("Access-Control-Allow-Origin", "*"); // i dont know what this is
-      res.setHeader(
-        "Access-Control-Allow-Methods",
-        "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-      ); // If needed
-      res.setHeader(
-        "Access-Control-Allow-Headers",
-        "X-Requested-With,content-type"
-      ); // If needed
-      res.setHeader("Access-Control-Allow-Credentials", true); // If needed
-      numberOfResponses -= -1; //xd
-      console.log(numberOfResponses);
-    if(p)
-      res.send(p); //responds with the link to the original .mp4 video
-      console.log(p);
-    })
-    .catch(async() => {
-          res.setHeader("Access-Control-Allow-Origin", "*"); // i dont know what this is
-      res.setHeader(
-        "Access-Control-Allow-Methods",
-        "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-      ); // If needed
-      res.setHeader(
-        "Access-Control-Allow-Headers",
-        "X-Requested-With,content-type"
-      ); // If needed
-      res.setHeader("Access-Control-Allow-Credentials", true); // If needed
-      numberOfResponses -= -1; //xd
-      console.log(numberOfResponses);
-        let p=(bodyHTML.slice(bodyHTML.lastIndexOf('https://hls'),bodyHTML.lastIndexOf('.m3u8')+5));
+  if (!hd) {
+    console.log("clicked");
+    await page.waitFor(500);
+    page
+      .click("video")
+      .then(async () => {
+        await page.waitForFunction(
+          'document.querySelector("video").getAttribute("src").includes("http")'
+        );
+        let p = await page.evaluate(
+          'document.querySelector("video").getAttribute("src")'
+        ); //this is how i get the src and thats what i return
+        await browser.close();
+        res.setHeader("Access-Control-Allow-Origin", "*"); // i dont know what this is
+        res.setHeader(
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+        ); // If needed
+        res.setHeader(
+          "Access-Control-Allow-Headers",
+          "X-Requested-With,content-type"
+        ); // If needed
+        res.setHeader("Access-Control-Allow-Credentials", true); // If needed
+        numberOfResponses -= -1; //xd
+        console.log(numberOfResponses);
+        res.send(p); //responds with the link to the original .mp4 video
         console.log(p);
-    await browser.close();
-    res.send(p);
-    });
-  
+      })
+      .catch(async () => {
+        res.send(HD(bodyHTML));
+      });
+  } else {
+    res.setHeader("Access-Control-Allow-Origin", "*"); // i dont know what this is
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    ); // If needed
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,content-type"
+    ); // If needed
+    res.setHeader("Access-Control-Allow-Credentials", true); // If needed
+    res.send(HD(bodyHTML));
+  }
+}
+function HD(bodyHTML) {
+  let p = bodyHTML.slice(
+    bodyHTML.lastIndexOf("https://hls"),
+    bodyHTML.lastIndexOf(".m3u8") + 5
+  );
+  console.log(p);
+  return p;
 }
 ///
 // const express = require("express");
