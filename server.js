@@ -4,7 +4,7 @@ const cors = require("cors");
 const puppeteer = require("puppeteer");
 const anime = require("gogoanime");
 let numberOfResponses = 0;
-app.use(cors({ origin: "http://localhost:8888" })); //idk
+app.use(cors({origin:'http://anime-taha.s3-website-us-east-1.amazonaws.com'})); //idk
 app.get("/url", (req, res, next) => {
   let url = req.url.substr(req.url.indexOf("?") + 1); //probably not the best way to get the param but it works lol // i send the link for the episode with ?{link} and this is how i get the link in express
   console.log(url); //https://vidstreaming.io/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1 in  this case
