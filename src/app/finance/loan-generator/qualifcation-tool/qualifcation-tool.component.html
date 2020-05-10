@@ -25,9 +25,12 @@
       Just one more question,<br />
       do you have an Absa (previously Barclays) bank account?
     </p>
-    <p class="step-title" [class.display-tab]="displayTab(8)">
-      Great, {{ userFirstName }}! You're eligible to apply for a loan. <br />
+    <p *ngIf="checkEligibility(loan)" class="step-title" [class.display-tab]="displayTab(8)">
+      Great, {{ first_name }} {{ last_name }}! You're eligible to apply for a loan. <br />
       Ready to go?
+    </p>
+    <p *ngIf="!checkEligibility(loan)" class="step-title" [class.display-tab]="displayTab(8)">
+      Hi, {{ first_name }} {{ last_name }}! it looks like you don't qualify to apply for this loan.
     </p>
   </div>
 
@@ -341,20 +344,20 @@
       </div>
     </div>
 
-    <div class="qualification__item" [class.display-tab]="displayTab(8)">
+    <div *ngIf="checkEligibility(loan)" class="qualification__item" [class.display-tab]="displayTab(8)">
       <p class="qualification__item__header">Before you begin, here's what you need to know:</p>
       <ul class="qualification__item__list">
         <li>How much you want to borrow.</li>
         <li>Basic information about your company.</li>
         <li>Basic information about your banking details.</li>
       </ul>
-      <p class="qualification__item__header">
+      <!-- <p class="qualification__item__header">
         In addition, these are the documents that you'll need in order to complete the loan application:
       </p>
       <ul>
         <li>A scan of your National ID</li>
         <li>Proof of address</li>
-      </ul>
+      </ul> -->
       <div class="mb-4 note">
         <img src="/assets/img/lamp.svg" />
         <p>
@@ -363,6 +366,30 @@
         </p>
       </div>
       <button type="button" class="bttn-primary mt-5" (click)="onFinishQualification()">Let's begin</button>
+    </div>
+
+    <div *ngIf="!checkEligibility(loan)" class="qualification__item" [class.display-tab]="displayTab(8)">
+      <p class="qualification__item__header">In order to apply for this loan you need to:</p>
+      <ul class="qualification__item__list">
+        <li>Have an Absa bank account in Kenya.</li>
+        <li>Have a business registered in Kenya.</li>
+      </ul>
+      <!-- <p class="qualification__item__header">
+        In addition, these are the documents that you'll need in order to complete the loan application:
+      </p>
+      <ul>
+        <li>A scan of your National ID</li>
+        <li>Proof of address</li>
+      </ul> -->
+      <div class="mb-4 note">
+        <img src="/assets/img/lamp.svg" />
+        <p>
+          <strong>We do have some good news !</strong> <br />
+          Even if you don't qualify yet to apply for this loan, you can still user The Avenews platform to manage your
+          agribusiness digitally.
+        </p>
+      </div>
+      <button [routerLink]="['/dashboard']" type="button" class="bttn-primary mt-5">Let's go</button>
     </div>
   </form>
 </div>

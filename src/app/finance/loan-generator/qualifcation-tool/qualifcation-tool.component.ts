@@ -14,7 +14,8 @@ import { Router } from '@angular/router';
 export class QualifcationToolComponent implements OnInit {
   loan_form: FormGroup;
   loan: WBLoan;
-  userFirstName: string;
+  first_name: string;
+  last_name: string;
   currentIndex = 1;
   checkboxCounter = 0;
   otherOption = false;
@@ -28,9 +29,11 @@ export class QualifcationToolComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userFirstName = this.authenticationService.credentials.user.personalInformation.firstName;
+    this.first_name = this.authenticationService.credentials.user.personal_information.first_name;
+    this.last_name = this.authenticationService.credentials.user.personal_information.last_name;
     this.loanGeneratorDataService.currentForm.subscribe(form => {
       this.loan_form = form;
+      this.loan = this.loan_form.value;
     });
     this.loan_form
       .get('qualification')
@@ -60,15 +63,19 @@ export class QualifcationToolComponent implements OnInit {
     this.currentIndex -= 1;
   }
 
+  checkEligibility(loan: WBLoan) {
+    return loan.qualification.absa_bank_account && this.loan.qualification.registration_country === 'kenya';
+  }
+
   onFinishQualification() {
-    this.beginApplication.emit(true);
     this.loan = this.loan_form.value;
-    console.log('form', this.loan_form);
-    console.log('loan', this.loan);
-    this.financeService.draft(this.loan).subscribe(loan => {
-      console.log(loan);
-      // this.router.navigateByUrl('/finance');
+    // this.financeService.draft(this.loan).subscribe(loan => {
+    //   // this.router.navigateByUrl('/finance');
+    // });
+    this.loan_form.get('qualification').patchValue({
+      qualification_done: true
     });
+    this.beginApplication.emit(true);
   }
 
   onCheck(event: any) {

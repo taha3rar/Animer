@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperNavigationService } from './stepper-navigation.service';
 import { LoanGeneratorDataService } from './loan-generator-data.service';
+import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
 
 @Component({
   selector: 'app-loan-generator-list',
@@ -13,6 +14,7 @@ export class LoanGeneratorComponent implements OnInit {
   @ViewChild('generalSteps') generalSteps: ElementRef<HTMLElement>;
   @Input() beginApplication = false;
   currentGeneralActiveStep: number;
+  loan: WBLoan;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,7 +23,12 @@ export class LoanGeneratorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.stepperNavigation.setGeneralStepsNumber(this.generalSteps.nativeElement.children.length);
+    this.loanGeneratorDataService.currentForm.subscribe(form => {
+      if (form) {
+        this.loan = form.value;
+      }
+    });
+    // this.stepperNavigation.setGeneralStepsNumber(this.generalSteps.nativeElement.children.length);
     this.stepperNavigation.currentActiveGeneralStep.subscribe(stepNumber => {
       this.currentGeneralActiveStep = stepNumber;
     });
@@ -35,7 +42,8 @@ export class LoanGeneratorComponent implements OnInit {
         other_agribusiness_type: [undefined],
         incorporation_seniority: [undefined, Validators.required],
         registration_country: [undefined, Validators.required],
-        absa_bank_account: [undefined, Validators.required]
+        absa_bank_account: [undefined, Validators.required],
+        qualification_done: false
       }),
       // STEP 1
       // Loan Details
@@ -163,38 +171,18 @@ export class LoanGeneratorComponent implements OnInit {
       }),
       // STEP 5
       absa_banking_details: this.formBuilder.group({
-        branch: undefined,
+        bank_name: 'absa',
+        bank_branch: undefined,
         account_number: undefined,
-        created_on: undefined,
-        other_facilites: undefined
-      }),
-      business_banking_details: this.formBuilder.group({
-        bank_details: this.formBuilder.array([
-          this.formBuilder.group({
-            bank_name: undefined,
-            bank_branch: undefined,
-            account_number: undefined,
-            any_loan_in_bank: undefined,
-            loan_type: undefined,
-            loan_currency: undefined,
-            loan_amount: undefined,
-            loan_date_taken: undefined,
-            outstanding_balance: undefined, // WHATS IS IT ?
-            monthly_repayment: undefined, // WHAT IS IT ?
-            term: undefined
-          })
-        ]),
-        // Check the undefined of cards
-        applicant_card_details: this.formBuilder.array([
-          this.formBuilder.group({
-            applicant_name: undefined,
-            card_issuer: undefined,
-            credit_card_type: undefined,
-            card_number: undefined, // Format separator
-            card_expiry_date: undefined,
-            card_limit: undefined
-          })
-        ])
+        account_opening_date: undefined,
+        other_absa_facility: undefined,
+        other_facility: this.formBuilder.group({
+          bank_branch: undefined,
+          nature_of_facility: undefined,
+          limit_initial_granted: undefined,
+          monthly_repayment: undefined,
+          outstanding_balance: undefined
+        })
       })
     });
     this.loanGeneratorDataService.setForm(this.loan_form);
@@ -204,7 +192,20 @@ export class LoanGeneratorComponent implements OnInit {
   onChanges(): void {
     this.loan_form.valueChanges.subscribe(val => {
       console.log(this.loan_form.value);
+      this.loanGeneratorDataService.setForm(this.loan_form);
     });
+  }
+
+  generateStepper() {
+    this.stepperNavigation.setGeneralStepsNumber(this.generalSteps.nativeElement.children.length);
+  }
+
+  isQualificationDone() {
+    return this.loan.qualification.qualification_done;
+  }
+
+  isSoleTrader() {
+    return this.loan.qualification.business_type === 'sole trader';
   }
 
   displayStepTab(stepNumber: number): boolean {

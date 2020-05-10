@@ -19,7 +19,7 @@
             <span class="step-progress-bar"></span>
           </span>
         </li>
-        <li [class.active]="displayStepTab(2)" [class.disabled]="!displayStepTab(2)">
+        <li *ngIf="isSoleTrader()" [class.active]="displayStepTab(2)" [class.disabled]="!displayStepTab(2)">
           <a data-toggle="tab" class="label" href="#applicant-details">
             <span class="round-tab">3</span><span class="l-step-title">Applicant Details (Sole)</span></a
           >
@@ -29,7 +29,9 @@
         </li>
         <li [class.active]="displayStepTab(3)" [class.disabled]="!displayStepTab(3)">
           <a data-toggle="tab" class="label" href="#business-key-person">
-            <span class="round-tab">4</span><span class="l-step-title">Business Key Person</span></a
+            <span *ngIf="isSoleTrader()" class="round-tab">4</span
+            ><span *ngIf="!isSoleTrader()" class="round-tab">3</span
+            ><span class="l-step-title">Business Key Person</span></a
           >
           <span class="step-progress-bar-wrapper">
             <span class="step-progress-bar"></span>
@@ -37,7 +39,9 @@
         </li>
         <li [class.active]="displayStepTab(4)" [class.disabled]="!displayStepTab(4)">
           <a data-toggle="tab" class="label" href="#business-banking-details">
-            <span class="round-tab">5</span><span class="l-step-title">Business Banking Details</span></a
+            <span *ngIf="isSoleTrader()" class="round-tab">5</span
+            ><span *ngIf="!isSoleTrader()" class="round-tab">4</span
+            ><span class="l-step-title">Business Banking Details</span></a
           >
           <span class="step-progress-bar-wrapper">
             <span class="step-progress-bar"></span>
@@ -48,7 +52,7 @@
         <span class="step-progress-bar"></span>
       </span>
 
-      <div class="tab-content">
+      <div *ngIf="isQualificationDone()" class="tab-content">
         <div class="tab-pane" [class.active]="displayStepContent(0)" id="loan-details">
           <app-loan-details></app-loan-details>
         </div>
@@ -57,7 +61,7 @@
           <app-business-details></app-business-details>
         </div>
 
-        <div class="tab-pane" [class.active]="displayStepContent(2)" id="applicant-details">
+        <div *ngIf="isSoleTrader()" class="tab-pane" [class.active]="displayStepContent(2)" id="applicant-details">
           <app-applicant-details></app-applicant-details>
         </div>
 
@@ -73,4 +77,7 @@
   </div>
 </div>
 
-<app-qualifcation-tool *ngIf="!beginApplication" (beginApplication)="beginApplication = $event"></app-qualifcation-tool>
+<app-qualifcation-tool
+  *ngIf="!beginApplication"
+  (beginApplication)="generateStepper(); beginApplication = $event"
+></app-qualifcation-tool>

@@ -57,7 +57,7 @@ button:focus {
   margin: 3px 0 0;
 }
 
-.radio-item input[type=radio] {
+.radio-item input[type="radio"] {
   display: none;
 }
 
@@ -79,7 +79,7 @@ button:focus {
   background-color: transparent;
 }
 
-.radio-item input[type=radio]:checked + label:after {
+.radio-item input[type="radio"]:checked + label:after {
   border-radius: 30px;
   width: 25px;
   height: 25px;

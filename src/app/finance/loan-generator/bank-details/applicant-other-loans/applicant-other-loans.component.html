@@ -4,75 +4,79 @@
     <p class="step-title">Existing facilites with Absa.</p>
   </div>
 
-  <div class="step-content">
-    <label for="ownership-type">Do you have any other existing facilites with Absa?</label>
-    <div class="row options-wrapper mb-2">
-      <div class="col-md-6 pl-0 mb-3">
-        <label class="container">
-          <input type="radio" checked="checked" name="other-loans-radio" />
-          <span class="checkmark">
-            Yes
-          </span>
-        </label>
-      </div>
-      <div class="col-md-6 pl-0">
-        <label class="container">
-          <input type="radio" name="other-loans-radio" />
-          <span class="checkmark">
-            No
-          </span>
-        </label>
-      </div>
-    </div>
-
-    <div class="loan-bank">
-      <div class="loan-bank_title">
-        <p>Absa Bank</p>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="bank-branch2">Branch</label>
-          <input type="text" id="bank-branch2" class="form-control" />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="nature-facility">Nature of facility</label>
-          <input type="text" id="nature-facility" class="form-control" />
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="col">
-          <label for="initial-granted1">Limit/Initial granted</label>
-          <input type="text" id="initial-granted1" class="form-control" />
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="col">
-          <label for="laon-size">Monthly repayment</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">KES</span>
-            </div>
-            <input type="text" class="form-control" />
+  <form [formGroup]="loan_form" class="col">
+    <div class="step-content">
+      <div formGroupName="absa_banking_details" #bankDetails>
+        <label for="ownership-type">Do you have any other existing facilites with Absa?</label>
+        <div class="row options-wrapper mb-2">
+          <div class="col-md-6 pl-0 mb-3">
+            <label class="container">
+              <input type="radio" name="other_absa_facility" [value]="true" formControlName="other_absa_facility" />
+              <span class="checkmark">
+                Yes
+              </span>
+            </label>
+          </div>
+          <div class="col-md-6 pl-0">
+            <label class="container">
+              <input type="radio" name="other_absa_facility" [value]="false" formControlName="other_absa_facility" />
+              <span class="checkmark">
+                No
+              </span>
+            </label>
           </div>
         </div>
-      </div>
 
-      <div class="form-row">
-        <div class="col">
-          <label for="laon-size">Outstanding balance</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">KES</span>
+        <div *ngIf="loan.absa_banking_details.other_absa_facility" formGroupName="other_facility" #bankFacilities>
+          <div class="loan-bank">
+            <div class="loan-bank_title">
+              <p>Absa Bank</p>
             </div>
-            <input type="text" class="form-control" />
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="bank-branch2">Branch</label>
+                <input type="text" id="bank-branch2" class="form-control" formControlName="bank_branch" />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="nature-facility">Nature of facility</label>
+                <input type="text" id="nature-facility" class="form-control" formControlName="nature_of_facility" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col">
+                <label for="initial-granted1">Limit/Initial granted</label>
+                <input type="text" id="initial-granted1" class="form-control" formControlName="limit_initial_granted" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col">
+                <label for="laon-size">Monthly repayment</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">KES</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="monthly_repayment" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col">
+                <label for="laon-size">Outstanding balance</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">KES</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="outstanding_balance" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="loan-bank">
+        <!-- <div class="loan-bank"> // TO BE ADDED IN THE FUTURE
       <div class="loan-bank_title">
         <p>Bank 1</p>
       </div>
@@ -123,11 +127,13 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="add-bank-wrapper">
+        <!-- <div class="add-bank-wrapper">
       <button class="btn-circle blue large"><i class="material-icons">add</i></button>
       <p>Add another</p>
+    </div> -->
+      </div>
     </div>
-  </div>
+  </form>
 </div>

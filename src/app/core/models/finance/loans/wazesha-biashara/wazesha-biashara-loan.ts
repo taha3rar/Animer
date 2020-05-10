@@ -3,10 +3,12 @@ export class WBLoan {
     amount_needed: Number;
     loan_purpose: String;
     agribusiness_type: [String];
+    business_type: String;
     other_agribusiness_type: String;
     incorporation_seniority: String;
     registration_country: String;
     absa_bank_account: Boolean;
+    qualification_done: Boolean;
   };
   loan_details: {
     loan_amount: Number;
@@ -93,31 +95,18 @@ export class WBLoan {
       country: String;
     }
   ];
-  business_banking_details: {
-    bank_details: [
-      {
-        bank_name: String;
-        bank_branch: String;
-        account_number: Number;
-        any_loan_in_bank: Boolean;
-        loan_type: String;
-        loan_currency: String;
-        loan_amount: String;
-        loan_date_taken: Date;
-        outstanding_balance: Number;
-        monthly_repayment: Number;
-        term: String;
-      }
-    ];
-    applicant_card_details: [
-      {
-        applicant_name: String;
-        card_issuer: String;
-        credit_card_type: String;
-        card_number: String;
-        card_expiry_date: Date;
-        card_limit: Number;
-      }
-    ];
+  absa_banking_details: {
+    bank_name: String;
+    bank_branch: String;
+    account_number: String;
+    account_opening_date: String;
+    other_absa_facility: boolean;
+    other_facility: {
+      bank_branch: String;
+      nature_of_facility: String;
+      limit_initial_granted: String;
+      monthly_repayment: number;
+      outstanding_balance: number;
+    };
   };
 }
