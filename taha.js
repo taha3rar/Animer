@@ -189,14 +189,9 @@ async function pup(url, res, hd, alt) {
           await page.goto(alt, { waitUntil: "domcontentloaded" });
           console.log(alt);
           page.on("response", async (resp) => {
-            if (resp.url === url) {
-              console.log("match");
-            }
             uri = resp.url();
-            console.log(resp.url());
             if (uri && uri.includes("video.mp4") && uri.includes("mp4upload")) {
               ure = resp.url();
-              console.log(resp.contentType);
               console.log(resp.url());
               res.send(ure);
               await browser.close();
