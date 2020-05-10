@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { ApiService as SdkService } from '@avenews/agt-sdk';
 import { map } from 'rxjs/operators';
 import { Credentials, LoginContext, OAuthLoginContext } from '../models/user/login-models';
@@ -8,17 +8,12 @@ import { ApiService } from '../api/api.service';
 
 const credentialsKey = 'credentials';
 
-/**
- * Provides a base for authentication workflow.
- * The Credentials interface as well as login/logout methods should be replaced with proper implementation.
- */
 @Injectable()
 export class AuthenticationService {
   private _credentials: Credentials | null;
   private sdkService: SdkService;
 
   constructor(private apiService: ApiService) {
-    console.log(environment.new_api_url);
     this.sdkService = new SdkService(environment.new_api_url);
 
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
@@ -64,7 +59,7 @@ export class AuthenticationService {
       email: username
     };
 
-    return this.apiService.post('/user/forgot-password', data).pipe(map(() => true));
+    return from(this.sdkService.resetPassword(data)).pipe(map(() => true));
   }
 
   /**

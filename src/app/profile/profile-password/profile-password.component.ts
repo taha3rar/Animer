@@ -1,9 +1,9 @@
 import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { AlertsService } from '@app/core/alerts.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { UserService, AuthenticationService } from '@app/core';
-import { Passwords } from '@app/core/models/user/passwords';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SdkService } from '@app/core/sdk.service';
+import { AGTError, ChangePasswordDTO } from '@avenews/agt-sdk';
 
 declare const $: any;
 
@@ -17,10 +17,9 @@ export class ProfilePasswordComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
-    private authService: AuthenticationService,
     private alerts: AlertsService,
-    private spinnerService: SpinnerToggleService
+    private spinnerService: SpinnerToggleService,
+    private sdkService: SdkService
   ) {}
 
   ngOnInit() {
@@ -42,7 +41,6 @@ export class ProfilePasswordComponent implements OnInit {
   }
 
   passwordsNotMatch() {
-    // tslint:disable-next-line:max-line-length
     return (
       this.changePasswordForm.invalid &&
       this.changePasswordForm.get('repeatNew').touched &&
@@ -53,22 +51,23 @@ export class ProfilePasswordComponent implements OnInit {
   onSubmitChangePassword() {
     if (this.changePasswordForm.valid) {
       this.spinnerService.showSpinner();
-      const passwords = new Passwords();
+      const passwords: ChangePasswordDTO = {
+        oldPwd: this.changePasswordForm.value.current,
+        newPwd: this.changePasswordForm.value.new
+      };
 
-      passwords.old_password = this.changePasswordForm.value.current;
-      passwords.new_password = this.changePasswordForm.value.new;
-
-      this.userService.changePassword(this.authService.currentUserId, passwords).subscribe(
-        () => {
+      this.sdkService
+        .changePassword(passwords)
+        .then(() => {
           this.spinnerService.hideSpinner();
           this.changePasswordForm.reset();
           this.alerts.showAlert('Your password has been updated!');
-        },
-        err => {
+        })
+        .catch((err: AGTError) => {
           $.notify(
             {
               icon: 'notifications',
-              message: err.error.message
+              message: err.message
             },
             {
               type: 'danger',
@@ -80,8 +79,7 @@ export class ProfilePasswordComponent implements OnInit {
               offset: 78
             }
           );
-        }
-      );
+        });
     }
   }
 }

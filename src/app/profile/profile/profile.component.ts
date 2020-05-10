@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../core/authentication/authentication.
 import { Credentials } from '../../core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { User } from '@avenews/agt-sdk';
+import { SdkService } from '@app/core/sdk.service';
 declare const $: any;
 
 @Component({
@@ -28,7 +29,8 @@ export class ProfileComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private alerts: AlertsService,
-    private spinnerService: SpinnerToggleService
+    private spinnerService: SpinnerToggleService,
+    private sdkService: SdkService
   ) {}
 
   ngOnInit() {
@@ -122,13 +124,12 @@ export class ProfileComponent implements OnInit {
     this.user.personalInformation.phoneNumber = this.contactf.phoneNumber.value;
     this.user.personalInformation.jobTitle = this.contactf.jobTitle.value;
     this.user.personalInformation.bio = this.contactf.bio.value;
-    this.userService.update(this.currentUserId, this.user).subscribe(data => {
+    this.sdkService.updateMyPersonalDetails(this.user.personalInformation).then(data => {
       this.spinnerService.hideSpinner();
       const credentialsToUpdate = this.authenticationService.credentials;
       // credentialsToUpdate.user.personalInformation = data.personalInformation; // TODO!
       credentialsToUpdate.user.personalInformation.email = data.personalInformation.email;
       this.authenticationService.setCredentials(credentialsToUpdate);
-      this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
       this.alerts.showAlert('Your profile has been updated!');
     });
   }
@@ -143,10 +144,9 @@ export class ProfileComponent implements OnInit {
     this.user.companyInformation.zipcode = this.companyf.zipcode.value;
     this.user.companyInformation.country = this.companyf.country.value;
     this.user.companyInformation.bio = this.companyf.bio.value;
-    this.userService.update(this.currentUserId, this.user).subscribe(data => {
+    this.sdkService.updateMyCompanyDetails(this.user.companyInformation).then(() => {
       this.spinnerService.hideSpinner();
       this.alerts.showAlert('Changes saved!');
-      this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
     });
   }
 }

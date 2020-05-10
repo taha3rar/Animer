@@ -55,19 +55,6 @@ export class UserService extends BaseService {
     return this.apiService.post('/image/client', body).pipe(map(data => data));
   }
 
-  update(id: string, user: User): Observable<User> {
-    return super.update(id, user).pipe(
-      map(data => {
-        // TODO: update the current user in authService
-        return data;
-      })
-    );
-  }
-
-  changePassword(id: string, passwords: Passwords): Observable<User> {
-    return this.apiService.put(`/user/${id}/password`, passwords).pipe(map(data => data));
-  }
-
   updateNotifications(id: string, notifications: string[]): Observable<User> {
     return this.apiService.put(`/user/${id}`, { notifications: notifications }).pipe(map(data => data));
   }
