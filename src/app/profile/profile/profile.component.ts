@@ -5,9 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../core/api/user.service';
 import { AuthenticationService } from '../../core/authentication/authentication.service';
-import { User } from '../../core/models/user/user';
 import { Credentials } from '../../core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
+import { User } from '@avenews/agt-sdk';
 declare const $: any;
 
 @Component({
@@ -37,23 +37,23 @@ export class ProfileComponent implements OnInit {
     this.user = this.route.snapshot.data['currentUser'];
     this.showPaymentSection = this.route.snapshot.params.flag ? true : false;
     this.contactDetailsForm = this.formBuilder.group({
-      firstName: [this.user.personal_information.first_name, Validators.required],
-      lastName: [this.user.personal_information.last_name, Validators.required],
-      email: [this.user.email, [Validators.email]],
-      phoneNumber: [this.user.personal_information.phone_number],
-      jobTitle: [this.user.personal_information.job_title],
-      bio: [this.user.personal_information.bio],
-      userId: [this.user.user_personal_id]
+      firstName: [this.user.personalInformation.firstName, Validators.required],
+      lastName: [this.user.personalInformation.lastName, Validators.required],
+      email: [this.user.personalInformation.email, [Validators.email]],
+      phoneNumber: [this.user.personalInformation.phoneNumber],
+      jobTitle: [this.user.personalInformation.jobTitle],
+      bio: [this.user.personalInformation.bio],
+      userId: [this.user.personalInformation.nationalId]
     });
     this.companyDetailsForm = this.formBuilder.group({
-      companyName: [this.user.company_information.company_name],
-      companyNumber: [this.user.company_information.company_registered_number],
-      stateRegionProvince: [this.user.company_information.state_province_region],
-      address: [this.user.company_information.street],
-      city: [this.user.company_information.city],
-      zipcode: [this.user.company_information.zipcode],
-      country: [this.user.company_information.country, [Validators.required]],
-      bio: [this.user.company_information.bio]
+      companyName: [this.user.companyInformation.companyName],
+      companyNumber: [this.user.companyInformation.companyRegisteredNumber],
+      stateRegionProvince: [this.user.companyInformation.stateProvinceRegion],
+      address: [this.user.companyInformation.street],
+      city: [this.user.companyInformation.city],
+      zipcode: [this.user.companyInformation.zipcode],
+      country: [this.user.companyInformation.country, [Validators.required]],
+      bio: [this.user.companyInformation.bio]
     });
 
     $('.collapse')
@@ -87,8 +87,8 @@ export class ProfileComponent implements OnInit {
   }
 
   get profilePicture(): string | null {
-    if (this.credentials && this.credentials.user && this.credentials.user.personal_information.profile_picture) {
-      return this.credentials.user.personal_information.profile_picture;
+    if (this.credentials && this.credentials.user && this.credentials.user.personalInformation.profilePicture) {
+      return this.credentials.user.personalInformation.profilePicture;
     }
     return defaultValues.profile_picture;
   }
@@ -115,18 +115,18 @@ export class ProfileComponent implements OnInit {
 
   onSubmitContactDetails() {
     this.spinnerService.showSpinner();
-    this.user.personal_information.first_name = this.contactf.firstName.value;
-    this.user.personal_information.last_name = this.contactf.lastName.value;
-    this.user.email = this.contactf.email.value;
-    this.user.user_personal_id = this.contactf.userId.value;
-    this.user.personal_information.phone_number = this.contactf.phoneNumber.value;
-    this.user.personal_information.job_title = this.contactf.jobTitle.value;
-    this.user.personal_information.bio = this.contactf.bio.value;
+    this.user.personalInformation.firstName = this.contactf.firstName.value;
+    this.user.personalInformation.lastName = this.contactf.lastName.value;
+    this.user.personalInformation.email = this.contactf.email.value;
+    this.user.personalInformation.nationalId = this.contactf.userId.value;
+    this.user.personalInformation.phoneNumber = this.contactf.phoneNumber.value;
+    this.user.personalInformation.jobTitle = this.contactf.jobTitle.value;
+    this.user.personalInformation.bio = this.contactf.bio.value;
     this.userService.update(this.currentUserId, this.user).subscribe(data => {
       this.spinnerService.hideSpinner();
       const credentialsToUpdate = this.authenticationService.credentials;
-      credentialsToUpdate.user.personal_information = data.personal_information;
-      credentialsToUpdate.user.email = data.email;
+      // credentialsToUpdate.user.personalInformation = data.personalInformation; // TODO!
+      credentialsToUpdate.user.personalInformation.email = data.personalInformation.email;
       this.authenticationService.setCredentials(credentialsToUpdate);
       this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
       this.alerts.showAlert('Your profile has been updated!');
@@ -135,14 +135,14 @@ export class ProfileComponent implements OnInit {
 
   onSubmitCompanyDetails() {
     this.spinnerService.showSpinner();
-    this.user.company_information.company_name = this.companyf.companyName.value;
-    this.user.company_information.company_registered_number = this.companyf.companyNumber.value;
-    this.user.company_information.state_province_region = this.companyf.stateRegionProvince.value;
-    this.user.company_information.street = this.companyf.address.value;
-    this.user.company_information.city = this.companyf.city.value;
-    this.user.company_information.zipcode = this.companyf.zipcode.value;
-    this.user.company_information.country = this.companyf.country.value;
-    this.user.company_information.bio = this.companyf.bio.value;
+    this.user.companyInformation.companyName = this.companyf.companyName.value;
+    this.user.companyInformation.companyRegisteredNumber = this.companyf.companyNumber.value;
+    this.user.companyInformation.stateProvinceRegion = this.companyf.stateRegionProvince.value;
+    this.user.companyInformation.street = this.companyf.address.value;
+    this.user.companyInformation.city = this.companyf.city.value;
+    this.user.companyInformation.zipcode = this.companyf.zipcode.value;
+    this.user.companyInformation.country = this.companyf.country.value;
+    this.user.companyInformation.bio = this.companyf.bio.value;
     this.userService.update(this.currentUserId, this.user).subscribe(data => {
       this.spinnerService.hideSpinner();
       this.alerts.showAlert('Changes saved!');

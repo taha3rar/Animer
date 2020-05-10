@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@app/core/models/user/user';
 import { ActivatedRoute } from '@angular/router';
+import { User } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-dashboard-welcome-panel',

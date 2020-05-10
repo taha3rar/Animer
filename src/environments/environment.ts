@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   api_url: 'https://dev.api.agt-platform.com',
+  new_api_url: 'https://new-dev-api.agt-platform.com',
   version: '2.0.0-dev',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'af-SA'],

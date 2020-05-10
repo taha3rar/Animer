@@ -21,7 +21,7 @@ export class DashboardMainComponent implements OnInit {
 
   get username() {
     if (this.authenticationService.credentials) {
-      return this.authenticationService.credentials.user.personal_information.first_name;
+      return this.authenticationService.credentials.user.personalInformation.firstName;
     }
 
     return null;

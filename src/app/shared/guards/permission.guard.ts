@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { NgxPermissionsService } from 'ngx-permissions';
+import { AuthenticationService } from '@app/core';
 
 @Injectable()
 export class PermissionGuard implements CanActivate {
-  constructor(private router: Router, private permissionsService: NgxPermissionsService) {}
+  constructor(private router: Router, private authService: AuthenticationService) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Promise<boolean> | Observable<boolean> | boolean {
-    const permission = route.data.permission;
-    const isPermitted = this.permissionsService.getPermission(permission);
+  canActivate(): Promise<boolean> | Observable<boolean> | boolean {
+    const isPermitted = this.authService.credentials.user.roles.includes('agribusiness');
 
     if (isPermitted) {
       return true;

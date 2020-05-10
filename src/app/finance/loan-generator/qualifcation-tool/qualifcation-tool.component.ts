@@ -28,7 +28,7 @@ export class QualifcationToolComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userFirstName = this.authenticationService.credentials.user.personal_information.first_name;
+    this.userFirstName = this.authenticationService.credentials.user.personalInformation.firstName;
     this.loanGeneratorDataService.currentForm.subscribe(form => {
       this.loan_form = form;
     });

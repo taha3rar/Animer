@@ -4,7 +4,7 @@ import { BaseListComponent } from '../../base-list/base-list.component';
 import { UserDocumentService } from '@app/core/api/user-document.service';
 import { Router } from '@angular/router';
 import { UserDocument } from '@app/core/models/user/document';
-import { User } from '@app/core/models/user/user';
+import { User } from '@avenews/agt-sdk';
 declare const $: any;
 
 @Component({

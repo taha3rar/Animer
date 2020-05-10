@@ -4,9 +4,9 @@ import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 import { AuthenticationService, I18nService } from '@app/core';
 import { Credentials } from '@app/core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
-import { User } from '@app/core/models/user/user';
 import { Intercom } from 'ng-intercom';
 import { environment } from '@env/environment';
+import { User } from '@avenews/agt-sdk';
 
 declare const $: any;
 
@@ -67,15 +67,15 @@ export class HeaderComponent implements OnInit {
 
   get username(): string | null {
     if (this.credentials) {
-      return `${this.credentials.user.personal_information.first_name} ${this.credentials.user.personal_information.last_name}`;
+      return `${this.credentials.user.personalInformation.firstName} ${this.credentials.user.personalInformation.lastName}`;
     }
 
     return null;
   }
 
   get profilePicture(): string | null {
-    if (this.credentials && this.credentials.user && this.credentials.user.personal_information.profile_picture) {
-      return this.credentials.user.personal_information.profile_picture;
+    if (this.credentials && this.credentials.user && this.credentials.user.personalInformation.profilePicture) {
+      return this.credentials.user.personalInformation.profilePicture;
     }
 
     return defaultValues.profile_picture;

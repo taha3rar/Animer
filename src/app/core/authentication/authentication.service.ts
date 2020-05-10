@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ApiService } from '../api/api.service';
+import { ApiService as SdkService } from '@avenews/agt-sdk';
 import { map } from 'rxjs/operators';
 import { Credentials, LoginContext, OAuthLoginContext } from '../models/user/login-models';
-import { JwtService } from './jwt.service';
-import { NgxPermissionsService, NgxPermissionsObject } from 'ngx-permissions';
+import { environment } from '@env/environment';
+import { ApiService } from '../api/api.service';
+
+const credentialsKey = 'credentials';
 
 /**
  * Provides a base for authentication workflow.
@@ -12,43 +14,52 @@ import { NgxPermissionsService, NgxPermissionsObject } from 'ngx-permissions';
  */
 @Injectable()
 export class AuthenticationService {
-  constructor(
-    private apiService: ApiService,
-    private jwtService: JwtService,
-    private permissionsService: NgxPermissionsService
-  ) {}
+  private _credentials: Credentials | null;
+  private sdkService: SdkService;
+
+  constructor(private apiService: ApiService) {
+    console.log(environment.new_api_url);
+    this.sdkService = new SdkService(environment.new_api_url);
+
+    const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
+    if (savedCredentials) {
+      this._credentials = JSON.parse(savedCredentials);
+    }
+  }
 
   /**
    * Authenticates the user.
    * @param context The login parameters.
    * @return The user credentials.
    */
-  login(context: LoginContext): Observable<Credentials> {
-    const data = {
-      email: context.username,
-      password: context.password
-    };
+  async login(context: LoginContext): Promise<Credentials> {
+    const { username, password, remember } = context;
 
-    return this.apiService.post('/user/login', data).pipe(
-      map((user: Credentials) => {
-        this.jwtService.setCredentials(user, context.remember);
-        this.setPermissions(user);
-        return user;
-      })
-    );
+    const creds = await this.sdkService.login(username, password);
+
+    this.setCredentials(creds, remember);
+
+    return creds;
   }
 
   oAuthLogin(context: OAuthLoginContext, network: string): Observable<Credentials> {
+    // async oAuthLogin(context: OAuthLoginContext, network: string): Promise<Credentials> {
+    // const creds = await this.sdkService.socialLogin(network, context); // TODO
+
+    // this.setCredentials(creds, context.remember);
+
+    // return creds;
+
     return this.apiService.post(`/user/login/${network}`, context).pipe(
       map((user: Credentials) => {
-        this.jwtService.setCredentials(user, context.remember);
-        this.setPermissions(user);
+        this.setCredentials(user, context.remember);
         return user;
       })
     );
   }
 
   forgotPassword(username: string): Observable<boolean> {
+    // TODO
     const data = {
       email: username
     };
@@ -61,14 +72,14 @@ export class AuthenticationService {
    * @return True if the user was logged out successfully.
    */
   logout(): Observable<boolean> {
+    // TODO
     const data = {
-      _id: this.jwtService.currentUserId
+      _id: this.currentUserId
     };
 
     return this.apiService.post('/user/logout', data).pipe(
       map(() => {
-        this.jwtService.setCredentials();
-        this.removePermissions();
+        this.setCredentials();
         return true;
       })
     );
@@ -79,7 +90,7 @@ export class AuthenticationService {
    * @return True if the user is authenticated.
    */
   isAuthenticated(): boolean {
-    return !!this.jwtService.credentials;
+    return !!this.credentials;
   }
 
   /**
@@ -87,7 +98,7 @@ export class AuthenticationService {
    * @return The user credentials or null if the user is not authenticated.
    */
   get credentials(): Credentials | null {
-    return this.jwtService.credentials;
+    return this._credentials;
   }
 
   /**
@@ -95,23 +106,11 @@ export class AuthenticationService {
    * @return The user id or null if the user is not authenticated.
    */
   get currentUserId(): string | null {
-    return this.jwtService.currentUserId;
+    return this._credentials && this._credentials.user ? this._credentials.user._id : null;
   }
 
   get isAgribusiness(): boolean {
     return this.credentials.user.roles.includes('agribusiness');
-  }
-
-  get isSeller(): boolean {
-    return this.credentials.user.roles.includes('seller');
-  }
-
-  get isBuyer(): boolean {
-    return this.credentials.user.roles.includes('buyer');
-  }
-
-  get isInvited(): boolean {
-    return this.credentials.user.roles.includes('client');
   }
 
   /**
@@ -123,39 +122,15 @@ export class AuthenticationService {
    */
   // private //make it public for testing purposes
   setCredentials(credentials?: Credentials, remember?: boolean) {
-    this.jwtService.setCredentials(credentials, remember);
-  }
+    this._credentials = credentials || null;
 
-  /**
-   * Sets the user permissions from permissions field of the Credentials objects
-   * to be called on each the main app component to get the permissions on every refresh
-   */
-  setCurrentPermissions(): void {
-    this.setPermissions(this.credentials);
-  }
+    // flush existing credentials in case exists
+    sessionStorage.removeItem(credentialsKey);
+    localStorage.clear(); // removes everything, it includes the currentPage in the different lists
 
-  /**
-   * Sets the user permissions from the permissions field of the Credentials objects
-   * @return The user permissions
-   */
-  private setPermissions(credentials?: Credentials): Observable<NgxPermissionsObject> {
-    if (credentials != null) {
-      if (credentials.user != null) {
-        // flush existing permissions before
-        this.removePermissions();
-
-        this.permissionsService.addPermission(credentials.user.permissions);
-        return this.permissionsService.permissions$.pipe(permissions => {
-          return permissions;
-        });
-      }
+    if (credentials) {
+      const storage = remember ? localStorage : sessionStorage;
+      storage.setItem(credentialsKey, JSON.stringify(credentials));
     }
-  }
-
-  /**
-   * Removes the user permissions from the permissions. To be called while logging out
-   */
-  private removePermissions(): void {
-    this.permissionsService.flushPermissions();
   }
 }

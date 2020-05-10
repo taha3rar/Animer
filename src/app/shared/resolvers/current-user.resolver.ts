@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router } from '@angular/router';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, from } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { UserService } from '@app/core/api/user.service';
-import { AuthenticationService } from '@app/core/authentication/authentication.service';
-import { User } from '@app/core/models/user/user';
+import { SdkService } from '@app/core/sdk.service';
+import { User } from '@avenews/agt-sdk';
 
 @Injectable()
 export class CurrentUserResolver implements Resolve<User> {
-  constructor(private authService: AuthenticationService, private userService: UserService, private router: Router) {}
+  constructor(private sdkService: SdkService, private router: Router) {}
 
   resolve(): Observable<User> {
-    const currentUserId = this.authService.currentUserId;
-
-    return this.userService.get(currentUserId).pipe(
+    return from(this.sdkService.getCurrentUser()).pipe(
       catchError(err => {
         console.error(err);
         this.router.navigate(['/login']);

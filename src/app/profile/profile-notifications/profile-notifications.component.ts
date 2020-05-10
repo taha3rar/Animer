@@ -1,10 +1,10 @@
 import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService, AuthenticationService } from '@app/core';
+import { UserService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
-import { User } from '@app/core/models/user/user';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { User } from '@avenews/agt-sdk';
 
 declare const $: any;
 
@@ -29,15 +29,15 @@ export class ProfileNotificationsComponent implements OnInit {
     this.route.data.subscribe(({ currentUser }) => {
       this.user = currentUser;
 
-      const poPiNotifications =
-        !this.user.notifications ||
-        (this.user.notifications.includes('order') && this.user.notifications.includes('invoice'));
-      const documentsNotifications =
-        !this.user.notifications ||
-        (this.user.notifications.includes('document') && this.user.notifications.includes('contract'));
-      const qrNotifications =
-        !this.user.notifications ||
-        (this.user.notifications.includes('quote-request') && this.user.notifications.includes('quotation'));
+      const poPiNotifications = false;
+      // !this.user.notifications ||
+      // (this.user.notifications.includes('order') && this.user.notifications.includes('invoice'));
+      const documentsNotifications = false;
+      // !this.user.notifications ||
+      // (this.user.notifications.includes('document') && this.user.notifications.includes('contract'));
+      const qrNotifications = false;
+      // !this.user.notifications ||
+      // (this.user.notifications.includes('quote-request') && this.user.notifications.includes('quotation'));
 
       this.notificationsSettingsForm = this.formBuilder.group({
         poPi: [poPiNotifications.toString()],

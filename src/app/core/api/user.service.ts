@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
-import { User } from '../models/user/user';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
 import { Passwords } from '../models/user/passwords';
-import { Contact } from '../models/user/contact';
 import { UserRegistration } from '../models/user/user-registration';
 import { DpoInformation } from '../models/user/dpo-info';
 import { DpoDocuments } from '../models/user/dpo-documents';
+import { User } from '@avenews/agt-sdk';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +15,6 @@ import { DpoDocuments } from '../models/user/dpo-documents';
 export class UserService extends BaseService {
   constructor(protected _apiService: ApiService) {
     super(_apiService, '/user');
-  }
-
-  getClientsByUser(id: string): Observable<Contact[]> {
-    return this.apiService.get(`${this.path}/${id}/client`).pipe(map(data => data));
-  }
-
-  getBuyersByUser(id: string): Observable<Contact[]> {
-    return this.apiService.get(`${this.path}/${id}/buyer`).pipe(map(data => data));
-  }
-
-  getSuppliersByUser(id: string): Observable<Contact[]> {
-    return this.apiService.get(`${this.path}/${id}/supplier`).pipe(map(data => data));
-  }
-
-  getUserProgress(id: string): Observable<any> {
-    return this.apiService.get(`${this.path}/${id}/progress`).pipe(map(data => data));
   }
 
   saveInvitedClient(client: User): Observable<any> {

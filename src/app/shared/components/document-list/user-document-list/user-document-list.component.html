@@ -21,7 +21,8 @@
         <p>Upload Document</p>
       </div>
     </div>
-    <div *ngIf="user.personal_information.id_picture" class="doc-card clearfix">
+    <!-- TODO -->
+    <!-- <div *ngIf="user.personal_information.id_picture" class="doc-card clearfix">
       <div>
         <span class="pull-left">Contact Identity</span>
         <a href="{{ user.personal_information.id_picture }}" download="iddPic" target="_blank"
@@ -40,7 +41,7 @@
         <p class="t-bold">Identity Information</p>
         <p class="t-light-gray">{{ user.personal_information.first_name }} {{ user.personal_information.last_name }}</p>
       </div>
-    </div>
+    </div> -->
     <div
       *ngFor="let document of documents | paginate: { itemsPerPage: 5, currentPage: page }"
       class="doc-card clearfix"

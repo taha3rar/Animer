@@ -31,8 +31,8 @@ const routes: Routes = [
       component: ContactComponent,
       canActivate: [ContactGuard],
       resolve: {
-        user: ContactResolver,
-        documents: UserDocumentListResolver
+        contact: ContactResolver
+        // documents: UserDocumentListResolver
       },
       runGuardsAndResolvers: 'always'
     }

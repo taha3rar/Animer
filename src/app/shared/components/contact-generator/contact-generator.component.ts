@@ -1,6 +1,5 @@
 import { SpinnerToggleService } from './../../services/spinner-toggle.service';
 import { UserService } from './../../../core/api/user.service';
-import { User } from './../../../core/models/user/user';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,6 +11,7 @@ import { BaseValidationComponent } from '@app/shared/components/base-validation/
 import { defaultValues } from '@app/shared/helpers/default_values';
 declare const $: any;
 import { PhoneNumberValidator } from '@app/core/validators/phone.validator';
+import { User } from '@avenews/agt-sdk';
 @Component({
   selector: 'app-contact-generator',
   templateUrl: './contact-generator.component.html',
@@ -19,7 +19,7 @@ import { PhoneNumberValidator } from '@app/core/validators/phone.validator';
 })
 export class ContactGeneratorComponent extends BaseValidationComponent implements OnInit, OnChanges {
   currentUser: User;
-  invitedContact: User = new User();
+  invitedContact = {};
   contactDetailsForm: FormGroup;
   countries = countries;
   phoneUtil: any;
@@ -118,7 +118,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       this.contact.address = this.contactf.address.value;
       this.contactSubmitted = true;
       this.spinnerService.showSpinner();
-      this.userService.saveInvitedClient(this.invitedContact).subscribe(
+      this.userService.saveInvitedClient(this.invitedContact as User).subscribe(
         data => {
           if (data._id) {
             this.spinnerService.hideSpinner();

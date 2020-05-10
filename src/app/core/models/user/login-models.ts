@@ -1,14 +1,8 @@
-import { PersonalInformation } from './personal-information';
+import { User } from '@avenews/agt-sdk';
 
 export interface Credentials {
-  user: {
-    token: string;
-    _id: string;
-    personal_information: PersonalInformation;
-    email: string;
-    permissions: string[];
-    roles: string[];
-  };
+  user: User;
+  token: string;
 }
 
 export interface LoginContext {

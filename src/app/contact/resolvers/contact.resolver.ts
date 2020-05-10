@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { UserService, AuthenticationService } from '@app/core';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { User } from '@app/core/models/user/user';
+import { SdkService } from '@app/core/sdk.service';
+import { from } from 'rxjs';
+import { Contact } from '@avenews/agt-sdk';
 
 @Injectable()
-export class ContactResolver implements Resolve<User> {
-  constructor(private userService: UserService, private router: Router) {}
+export class ContactResolver implements Resolve<Contact> {
+  constructor(private sdkService: SdkService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<User> {
-    return this.userService.get(route.params['id']).pipe(
-      catchError(err => {
-        return this.router.navigateByUrl('/not-found');
+  resolve(route: ActivatedRouteSnapshot): Observable<Contact> {
+    const id = route.params['id'];
+    return from(this.sdkService.getContactById(id)).pipe(
+      catchError(() => {
+        this.router.navigateByUrl('/not-found');
+        return EMPTY.pipe();
       })
     );
   }

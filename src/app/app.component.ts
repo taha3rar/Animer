@@ -79,14 +79,13 @@ export class AppComponent implements OnInit {
       this.intercom.boot({
         app_id: environment.intercom.app_id,
         name:
-          this.authenticationService.credentials.user.personal_information.first_name +
+          this.authenticationService.credentials.user.personalInformation.firstName +
           ' ' +
-          this.authenticationService.credentials.user.personal_information.last_name,
-        email: this.authenticationService.credentials.user.email,
-        phone: this.authenticationService.credentials.user.personal_information.phone_number,
+          this.authenticationService.credentials.user.personalInformation.lastName,
+        email: this.authenticationService.credentials.user.username,
+        phone: this.authenticationService.credentials.user.personalInformation.phoneNumber,
         user_id: this.authenticationService.credentials.user._id,
         role: this.authenticationService.credentials.user.roles[0],
-        client: this.authenticationService.credentials.user.roles.includes('client'),
         widget: {
           activator: '#intercom'
         }
@@ -124,7 +123,5 @@ export class AppComponent implements OnInit {
           this.titleService.setTitle(this.translateService.instant(title));
         }
       });
-    // Set permissions on every refresh
-    this.authenticationService.setCurrentPermissions();
   }
 }

@@ -1,13 +1,5 @@
 <a class="pull-right need-help" data-toggle="wizard" data-target="#contactTutorials">Need help?</a>
 <h1 class="main-title">Contacts</h1>
-<div class="helper-panel">
-  <i class="material-icons pull-left">info</i>
-  <p *ngIf="isInvited">Review your work with the Contact who invited you to his network.</p>
-  <p *ngIf="!isInvited">
-    Invite new Contacts to your network, centrally manage your existing contacts, and review the transactions you have
-    with them.
-  </p>
-</div>
 <h1 class="main-title" *ngIf="hasContacts">Contact List</h1>
 
 <div class="mt-1 actions-section clearfix" *ngIf="hasContacts">
@@ -20,7 +12,6 @@
       (click)="addContact()"
       class="bttn-primary bttn-add"
       data-toggle="wizard"
-      *ngxPermissionsOnly="['create-client']"
       data-target="#addContactWizard"
       matTooltip="{{ tooltips.add_contact }}"
       matTooltipPosition="above"
@@ -52,13 +43,12 @@
     >
       <td>{{ contact.numericId }}</td>
       <td>
-        <span *ngIf="contact.company_name">{{ contact.company_name }} / </span>{{ contact.first_name }}
-        {{ contact.last_name }}
+        <span *ngIf="contact.companyName">{{ contact.companyName }} / </span>{{ contact.fullName }}
       </td>
       <td>
-        <span *ngIf="contact.email && contact.phone_number">{{ contact.email }} / {{ contact.phone_number }}</span>
-        <span *ngIf="contact.email && !contact.phone_number">{{ contact.email }}</span>
-        <span *ngIf="!contact.email && contact.phone_number">{{ contact.phone_number }}</span>
+        <span *ngIf="contact.email && contact.phoneNumber">{{ contact.email }} / {{ contact.phoneNumber }}</span>
+        <span *ngIf="contact.email && !contact.phoneNumber">{{ contact.email }}</span>
+        <span *ngIf="!contact.email && contact.phoneNumber">{{ contact.phoneNumber }}</span>
       </td>
       <td>
         {{ contact.country }}
@@ -79,7 +69,6 @@
       <button
         class="bttn-primary bttn-add"
         data-toggle="wizard"
-        *ngxPermissionsOnly="['create-client']"
         data-target="#addContactWizard"
         matTooltip="{{ tooltips.add_contact }}"
         matTooltipPosition="below"
@@ -100,13 +89,12 @@
   >
     <div># {{ contact.numericId }}</div>
     <div>
-      <span *ngIf="contact.company_name">{{ contact.company_name }} / </span>{{ contact.first_name }}
-      {{ contact.last_name }}
+      <span *ngIf="contact.companyName">{{ contact.companyName }} / </span>{{ contact.fullName }}
     </div>
     <div>
-      <span *ngIf="contact.email && contact.phone_number">{{ contact.email }} / {{ contact.phone_number }}</span>
-      <span *ngIf="contact.email && !contact.phone_number">{{ contact.email }}</span>
-      <span *ngIf="!contact.email && contact.phone_number">{{ contact.phone_number }}</span>
+      <span *ngIf="contact.email && contact.phoneNumber">{{ contact.email }} / {{ contact.phoneNumber }}</span>
+      <span *ngIf="contact.email && !contact.phoneNumber">{{ contact.email }}</span>
+      <span *ngIf="!contact.email && contact.phoneNumber">{{ contact.phoneNumber }}</span>
     </div>
     <div>
       <div>

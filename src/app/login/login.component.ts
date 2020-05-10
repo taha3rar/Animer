@@ -10,7 +10,7 @@ import * as libphonenumber from 'google-libphonenumber';
 import { AuthService as SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { OAuthLoginContext } from '@app/core/models/user/login-models';
 import { Intercom } from 'ng-intercom';
-import { User } from '@app/core/models/user/user';
+import { User } from '@avenews/agt-sdk';
 
 const log = new Logger('Login');
 declare var $: any;
@@ -80,37 +80,33 @@ export class LoginComponent implements OnInit {
     return `<img src='../../assets/img/flags/${code}.png' height='19' height='27'><span>\xa0\xa0${country}</span>`;
   }
 
-  login() {
+  async login() {
     this.isLoading = true;
     this.error = '';
+
     this.authenticationService
       .login(this.loginForm.value)
-      .pipe(
-        finalize(() => {
-          this.loginForm.markAsPristine();
+      .then(credentials => {
+        this.loginForm.markAsPristine();
+        this.isLoading = false;
+
+        log.debug(`${credentials.user.username} successfully logged in`);
+        this.intercomLogin(credentials.user, true);
+        this.route.queryParams.subscribe(params =>
+          this.router.navigate([params.redirect || '/'], { replaceUrl: true })
+        );
+      })
+      .catch(error => {
+        if (this.filledPhoneEmail) {
+          this.loginForm.controls.username.setValue(this.phoneNumber);
+          this.filledPhoneEmail = false;
+          this.login();
+        } else {
           this.isLoading = false;
-        })
-      )
-      .subscribe(
-        credentials => {
-          log.debug(`${credentials.user.email} successfully logged in`);
-          this.intercomLogin(credentials.user, true);
-          this.route.queryParams.subscribe(params =>
-            this.router.navigate([params.redirect || '/'], { replaceUrl: true })
-          );
-        },
-        error => {
-          if (this.filledPhoneEmail) {
-            this.loginForm.controls.username.setValue(this.phoneNumber);
-            this.filledPhoneEmail = false;
-            this.login();
-          } else {
-            this.isLoading = false;
-            log.debug(`Login error: ${error}`);
-            this.error = error;
-          }
+          log.debug(`Login error: ${error}`);
+          this.error = error;
         }
-      );
+      });
   }
 
   onSubmit() {
@@ -152,7 +148,7 @@ export class LoginComponent implements OnInit {
           )
           .subscribe(
             credentials => {
-              log.debug(`${credentials.user.email} successfully logged in`);
+              log.debug(`${credentials.user.username} successfully logged in`);
               this.intercomLogin(credentials.user, true);
               this.route.queryParams.subscribe(params =>
                 this.router.navigate([params.redirect || '/'], { replaceUrl: true })
@@ -219,15 +215,14 @@ export class LoginComponent implements OnInit {
     $('#' + showDiv).css({ display: 'block' });
   }
 
-  intercomLogin(user: any, logged_in: boolean) {
+  intercomLogin(user: User, logged_in: boolean) {
     this.intercom.update({
       app_id: environment.intercom.app_id,
-      name: user.personal_information.first_name + ' ' + user.personal_information.last_name,
-      email: user.email,
-      phone: user.personal_information.phone_number,
+      name: user.personalInformation.firstName + ' ' + user.personalInformation.lastName,
+      email: user.personalInformation.email,
+      phone: user.personalInformation.phoneNumber,
       user_id: user._id,
       role: user.roles[0],
-      client: user.roles.includes('client'),
       validated: true,
       logged_in: logged_in,
       widget: {

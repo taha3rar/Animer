@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { acceptedMimeTypes } from '@app/shared/helpers/pictureMimeTypes';
 import { UserService, AuthenticationService } from '@app/core';
-import { User } from '@app/core/models/user/user';
+import { User } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-upload-picture',
@@ -43,11 +43,11 @@ export class UploadPictureComponent implements OnInit {
             res => {
               // set image with the S3 url
               this.picture = res.url;
-              this.user.personal_information.profile_picture = this.picture.toString();
+              this.user.personalInformation.profilePicture = this.picture.toString();
               // update user object
               this.userService.update(this.user._id, this.user).subscribe(data => {
                 const credentialsToUpdate = this.authenticationService.credentials;
-                credentialsToUpdate.user.personal_information = data.personal_information;
+                // credentialsToUpdate.user.personalInformation = data.personal_information; // TODO!
                 this.authenticationService.setCredentials(credentialsToUpdate);
                 this.imageEvent.emit(false);
                 this.loaderVisible = false;

@@ -6,6 +6,7 @@
 export const environment = {
   production: false,
   api_url: 'https://staging.api.agt-platform.com',
+  new_api_url: 'https://new-staging-api.agt-platform.com',
   version: '2.0.0-dev',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'af-SA'],

@@ -11,6 +11,7 @@ export class UserDocumentListResolver implements Resolve<UserDocument[]> {
   constructor(private authService: AuthenticationService, private documentService: UserDocumentService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<UserDocument[]> {
+    // TODO!
     const currentUserId = this.authService.currentUserId;
     const contactId = route.params['id'];
 

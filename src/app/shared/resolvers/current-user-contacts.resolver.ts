@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
-import { UserService, AuthenticationService } from '@app/core';
-import { Observable, EMPTY } from 'rxjs';
+import { Resolve, Router } from '@angular/router';
+import { Observable, EMPTY, from } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Contact } from '@app/core/models/user/contact';
+import { SdkService } from '@app/core/sdk.service';
+import { Contact } from '@avenews/agt-sdk';
 
 @Injectable()
 export class CurrentUserContactsResolver implements Resolve<Contact[]> {
-  constructor(private authService: AuthenticationService, private userService: UserService) {}
+  constructor(private sdkService: SdkService, private router: Router) {}
 
   resolve(): Observable<Contact[]> {
-    const currentUserId = this.authService.currentUserId;
-
-    return this.userService.getClientsByUser(currentUserId).pipe(
+    return from(this.sdkService.getMyContacts()).pipe(
       catchError(err => {
         console.error(err);
         return EMPTY.pipe();

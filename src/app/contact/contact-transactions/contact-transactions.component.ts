@@ -1,7 +1,7 @@
-import { User } from './../../core/models/user/user';
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
+import { User } from '@avenews/agt-sdk';
 @Component({
   selector: 'app-contact-transactions',
   templateUrl: './contact-transactions.component.html',

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationService, UserService } from '@app/core';
 import { Resolve } from '@angular/router';
 import { Counter } from '../models/counter';
-import { Contact } from '@app/core/models/user/contact';
+import { SdkService } from '@app/core/sdk.service';
+import { from } from 'rxjs';
+import { Contact } from '@avenews/agt-sdk';
 
 @Injectable()
 export class DashboardCounterResolver implements Resolve<Counter> {
-  constructor(private authService: AuthenticationService, private userService: UserService) {}
+  constructor(private sdkService: SdkService) {}
 
   resolve(): Counter {
-    const currentUserId = this.authService.currentUserId;
     const counter: Counter = new Counter();
 
-    this.userService.getClientsByUser(currentUserId).subscribe((contacts: Contact[]) => {
+    from(this.sdkService.getMyContacts()).subscribe((contacts: Partial<Contact>[]) => {
       counter.contacts = contacts.length;
     });
 

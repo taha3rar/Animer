@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Contact } from '@app/core/models/user/contact';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { AuthenticationService, UserService } from '@app/core';
 import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
 import { Sort } from '@angular/material/sort';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
+import { Contact } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-contact-list',
@@ -53,13 +53,11 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
         case 'id':
           return super.compare(a.numericId, b.numericId, isAsc);
         case 'contact':
-          return super.compare(a.first_name + a.last_name, b.first_name + b.last_name, isAsc);
+          return super.compare(a.fullName, b.fullName, isAsc);
         case 'details':
           return super.compare(a.email, b.email, isAsc);
         case 'country':
           return super.compare(a.country, b.country, isAsc);
-        case 'type':
-          return super.compare(a.role, b.role, isAsc);
         default:
           return 0;
       }
@@ -71,8 +69,5 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
   }
   addContact() {
     this.edit = false;
-  }
-  get isInvited() {
-    return this.authService.isInvited;
   }
 }

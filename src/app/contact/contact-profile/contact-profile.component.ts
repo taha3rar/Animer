@@ -1,6 +1,6 @@
-import { User } from './../../core/models/user/user';
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import * as Feather from 'feather-icons';
+import { User } from '@avenews/agt-sdk';
 @Component({
   selector: 'app-contact-profile',
   templateUrl: './contact-profile.component.html',

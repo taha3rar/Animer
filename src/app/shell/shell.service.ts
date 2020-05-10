@@ -25,7 +25,7 @@ export class Shell {
       // Reuse ShellComponent instance when navigating between child views
       data: { reuse: true },
       resolve: {
-        notifications: NotificationListResolver,
+        // notifications: NotificationListResolver,
         currentUser: CurrentUserResolver,
         progress: CurrentUserProgressResolver
       }

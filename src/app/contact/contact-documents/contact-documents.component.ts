@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserDocument } from '@app/core/models/user/document';
-import { User } from '@app/core/models/user/user';
+import { User } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-contact-documents',

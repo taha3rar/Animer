@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '@app/core/models/user/user';
 import { defaultValues } from '@app/shared/helpers/default_values';
+import { User } from '@avenews/agt-sdk';
 
 export class Counter {
   documents: number;
@@ -21,12 +21,13 @@ export class ContactComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({ user, documents }) => {
-      this.user = user;
-      this.documents = documents;
-      this.counter = {
-        documents: this.documents.length
-      };
+    this.route.data.subscribe(({ contact }) => {
+      // documents
+      this.user = contact;
+      // this.documents = documents;
+      // this.counter = {
+      //   documents: this.documents.length
+      // };
     });
   }
 
