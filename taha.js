@@ -22,10 +22,10 @@ app.get("/anime", (req, res, next) => {
       let alt = ep[0].servers.find((e, i) => {
         if (e.name.toLowerCase().includes("mp4")) return e;
       });
-      if (alt && alt.iframe) console.log(alt);
-      else alt["iframe"] = false;
-
-      pup(link, res, false, alt.iframe);
+      if (alt && alt.iframe) {
+        console.log(alt);
+        pup(link, res, false, alt.iframe);
+      } else pup(link, res, false, false);
     });
   }
 });
