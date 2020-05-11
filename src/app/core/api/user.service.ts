@@ -3,7 +3,6 @@ import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
-import { Passwords } from '../models/user/passwords';
 import { UserRegistration } from '../models/user/user-registration';
 import { DpoInformation } from '../models/user/dpo-info';
 import { DpoDocuments } from '../models/user/dpo-documents';
@@ -36,23 +35,6 @@ export class UserService extends BaseService {
     if (network === 'google') {
       return this.apiService.post('/user/oauth/registration/google', socialUserInfo).pipe(map(data => data));
     }
-  }
-
-  // TODO: Type return object properly, not use any. Check in the backend. Also move this method to another service
-  saveProfileImage(image: string): Observable<any> {
-    const body = { image: image };
-    return this.apiService.post('/image/user', body).pipe(map(data => data));
-  }
-
-  // TODO: Type return object properly, not use any. Check in the backend. Also move this method to another service
-  saveCompanyImage(image: string): Observable<any> {
-    const body = { image: image };
-    return this.apiService.post('/image/company', body).pipe(map(data => data));
-  }
-
-  saveClientIdPicture(image: string): Observable<any> {
-    const body = { image: image };
-    return this.apiService.post('/image/client', body).pipe(map(data => data));
   }
 
   updateNotifications(id: string, notifications: string[]): Observable<User> {

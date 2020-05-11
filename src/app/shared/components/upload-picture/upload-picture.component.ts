@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter }
 import { acceptedMimeTypes } from '@app/shared/helpers/pictureMimeTypes';
 import { UserService, AuthenticationService } from '@app/core';
 import { User } from '@avenews/agt-sdk';
+import { SdkService } from '@app/core/sdk.service';
 
 @Component({
   selector: 'app-upload-picture',
@@ -22,7 +23,7 @@ export class UploadPictureComponent implements OnInit {
   hideBar = false;
   loaderVisible = false;
   dynamic = 0;
-  constructor(private userService: UserService, private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService, private sdkService: SdkService) {}
 
   ngOnInit() {}
 
@@ -39,35 +40,15 @@ export class UploadPictureComponent implements OnInit {
         base64File = picture.toString().split(',')[1];
         this.loaderVisible = true;
         if (this.type === 'profile') {
-          this.userService.saveProfileImage(base64File).subscribe(
-            res => {
-              // set image with the S3 url
-              this.picture = res.url;
-              this.user.personalInformation.profilePicture = this.picture.toString();
-              // update user object
-              this.userService.update(this.user._id, this.user).subscribe(data => {
-                const credentialsToUpdate = this.authenticationService.credentials;
-                // credentialsToUpdate.user.personalInformation = data.personal_information; // TODO!
-                this.authenticationService.setCredentials(credentialsToUpdate);
-                this.imageEvent.emit(false);
-                this.loaderVisible = false;
-              });
-            },
-            err => {
-              // TODO
-            }
-          );
-        }
-        if (this.type === 'client_id') {
-          this.userService.saveClientIdPicture(base64File).subscribe(res => {
-            this.picture = res.url;
-            this.imageEvent.emit(this.picture.toString());
+          this.sdkService.uploadProfilePicture(base64File).then((user: User) => {
+            const credentialsToUpdate = this.authenticationService.credentials;
+            credentialsToUpdate.user.personalInformation.profilePicture = user.personalInformation.profilePicture;
+            this.authenticationService.setCredentials(credentialsToUpdate);
+            this.imageEvent.emit(false);
             this.loaderVisible = false;
           });
         }
       };
-    } else {
-      // TODO
     }
   }
 
