@@ -8,7 +8,7 @@ const routes: Routes = [
   // Fallback when no prior route is matched
   { path: 'not-found', component: NotFoundComponent },
   { path: 'unauthorized', component: UnauthorizedPageComponent },
-  { path: 'home', component: LandingComponent },
+  // { path: 'home', component: LandingComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 
