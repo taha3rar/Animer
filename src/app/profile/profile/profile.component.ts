@@ -3,7 +3,6 @@ import { AlertsService } from './../../core/alerts.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../core/api/user.service';
 import { AuthenticationService } from '../../core/authentication/authentication.service';
 import { Credentials } from '../../core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
@@ -25,7 +24,6 @@ export class ProfileComponent implements OnInit {
   showPaymentSection = false;
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private alerts: AlertsService,
@@ -73,7 +71,7 @@ export class ProfileComponent implements OnInit {
           .removeClass('glyphicon-minus')
           .addClass('glyphicon-plus');
       });
-    this.userService.saveReviewAccountProgress(this.currentUserId).subscribe();
+    this.sdkService.markMyAccountAsReviewed();
   }
 
   // Easier acces to form values

@@ -67,12 +67,8 @@ export class AuthenticationService {
    * @return True if the user was logged out successfully.
    */
   logout(): Observable<boolean> {
-    // TODO
-    const data = {
-      _id: this.currentUserId
-    };
-
-    return this.apiService.post('/user/logout', data).pipe(
+    this.sdkService.setToken(this.credentials.token);
+    return from(this.sdkService.logout()).pipe(
       map(() => {
         this.setCredentials();
         return true;

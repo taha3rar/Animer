@@ -24,10 +24,6 @@ export class UserService extends BaseService {
     return this.apiService.post('/user/registration', client).pipe(map(data => data));
   }
 
-  saveReviewAccountProgress(id: string): Observable<any> {
-    return this.apiService.post(`${this.path}/${id}/reviewed`).pipe(map(data => data));
-  }
-
   oAuthRegistration(socialUserInfo: any, network: string): Observable<any> {
     if (network === 'facebook') {
       return this.apiService.post('/user/oauth/registration/facebook', socialUserInfo).pipe(map(data => data));
