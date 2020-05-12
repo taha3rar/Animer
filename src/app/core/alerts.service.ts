@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import swal from 'sweetalert';
 
 declare const $: any;
 
@@ -40,5 +41,12 @@ export class AlertsService {
         offset: 78
       }
     );
+  }
+  showAlertBack() {
+    return swal({
+      text: 'Are you sure you want to leave this page? All information will be lost!',
+      buttons: ['Cancel', 'Yes'],
+      icon: 'warning'
+    });
   }
 }

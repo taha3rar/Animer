@@ -1,3 +1,4 @@
+import { SdkService } from './../../../core/sdk.service';
 import { SpinnerToggleService } from './../../services/spinner-toggle.service';
 import { UserService } from './../../../core/api/user.service';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
@@ -5,13 +6,13 @@ import { Component, OnInit, ViewChild, ElementRef, Input, SimpleChanges, OnChang
 import { Router, ActivatedRoute } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
-import swal from 'sweetalert';
 import { AlertsService } from '@app/core/alerts.service';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { defaultValues } from '@app/shared/helpers/default_values';
 declare const $: any;
 import { PhoneNumberValidator } from '@app/core/validators/phone.validator';
-import { User } from '@avenews/agt-sdk';
+import { User, RegisterContactDTO, Contact } from '@avenews/agt-sdk';
+import { UpdateContactDTO } from '@avenews/agt-sdk/lib/types/contact';
 @Component({
   selector: 'app-contact-generator',
   templateUrl: './contact-generator.component.html',
@@ -24,12 +25,10 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   countries = countries;
   phoneUtil: any;
   regionCode = 'KES';
-  // tslint:disable-next-line:no-input-rename
-  @Input('contact') contact: any;
-  // tslint:disable-next-line:no-input-rename
-  @Input('edit') isEdit: boolean;
+  @Input() contact: Contact;
+  @Input() isEdit: boolean;
   phoneCode: string;
-  newContact: any; // TODO new client model
+  newContact: RegisterContactDTO; // TODO new client model
   partialPhoneNumber: string;
   @ViewChild('closeModal')
   closeModal: ElementRef;
@@ -42,6 +41,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    private sdkService: SdkService,
     private alerts: AlertsService,
     private spinnerService: SpinnerToggleService
   ) {
@@ -56,7 +56,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.contactDetailsForm = this.formBuilder.group({
       fullName: [undefined, Validators.required],
       nationalId: [undefined],
-      companyName: [undefined],
+      businessName: [undefined],
       phoneNumber: [undefined, [Validators.required, PhoneNumberValidator(this.regionCode)]],
       email: [undefined, [Validators.required, Validators.email]],
       country: [undefined, Validators.required],
@@ -70,19 +70,18 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     }, 200);
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isEdit']) {
-      if (this.isEdit) {
-        this.newContact = JSON.parse(this.contact);
+    if (changes['isEdit'] || changes['contact']) {
+      if (this.isEdit && this.contact) {
         this.contactDetailsForm.patchValue({
-          fullName: this.newContact.fullName,
-          nationalId: this.newContact.nationalId,
-          companyName: this.newContact.companyName,
-          phoneNumber: this.newContact.phoneNumber,
-          email: this.newContact.email,
-          country: this.newContact.country,
-          region: this.newContact.region,
-          location: this.newContact.location,
-          address: this.newContact.address
+          fullName: this.contact.fullName,
+          nationalId: this.contact.nationalId,
+          businessName: this.contact.businessName,
+          phoneNumber: this.contact.phoneNumber,
+          email: this.contact.email,
+          country: this.contact.country,
+          region: this.contact.region,
+          location: this.contact.location,
+          address: this.contact.address
         });
       }
     }
@@ -105,48 +104,62 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   }
 
   onGeneralSubmit() {
-    if (!this.isEdit && this.contactf) {
+    if (this.contactf) {
       this.disableSubmitButton(true);
-      this.contact.personal_information.first_name = this.contactf.fullName.value;
-      this.contact.personal_information.nationalId = this.contactf.nationalId.value;
-      this.contact.personal_information.companyName = this.contactf.companyName.value;
-      this.contact.phoneNumber = this.contactf.user_personaphoneNumberl_id.value;
-      this.contact.email = this.contactf.email.value;
-      this.contact.personal_information.country = this.contactf.country.value;
-      this.contact.region = this.contactf.region.value;
-      this.contact.location = this.contactf.location.value;
-      this.contact.address = this.contactf.address.value;
+      const newContact: RegisterContactDTO = {
+        fullName: this.contactf.fullName.value,
+        nationalId: this.contactf.nationalId.value,
+        businessName: this.contactf.businessName.value,
+        phoneNumber: this.contactf.phoneNumber.value,
+        email: this.contactf.email.value,
+        country: this.contactf.country.value,
+        region: this.contactf.region.value,
+        location: this.contactf.location.value,
+        address: this.contactf.address.value
+      };
+
       this.contactSubmitted = true;
       this.spinnerService.showSpinner();
-      this.userService.saveInvitedClient(this.invitedContact as User).subscribe(
-        data => {
-          if (data._id) {
-            this.spinnerService.hideSpinner();
-            this.alerts.showAlert('New contact profile has been created!');
-            this.closeAndRefresh();
-          } else {
-            console.log(data); // TODO: Manage errors
-          }
-        },
-        err => {
-          this.disableSubmitButton(false);
-          $.notify(
-            {
-              icon: 'notifications',
-              message: err.error.message
-            },
-            {
-              type: 'danger',
-              timer: 5000,
-              placement: {
-                from: 'top',
-                align: 'right'
-              },
-              offset: 78
+      if (!this.isEdit) {
+        this.sdkService
+          .registerContact(newContact)
+          .then(data => {
+            if (data._id) {
+              this.spinnerService.hideSpinner();
+              this.alerts.showAlert('New contact profile has been created!');
+              this.closeAndRefresh();
             }
-          );
-        }
-      );
+          })
+          .catch(err => {
+            this.disableSubmitButton(false);
+            this.alerts.showAlertDanger(err.error.message);
+          });
+      } else {
+        const updateContact: UpdateContactDTO = {
+          fullName: this.contactf.fullName.value,
+          nationalId: this.contactf.nationalId.value,
+          businessName: this.contactf.businessName.value,
+          phoneNumber: this.contactf.phoneNumber.value,
+          email: this.contactf.email.value,
+          country: this.contactf.country.value,
+          region: this.contactf.region.value,
+          location: this.contactf.location.value,
+          address: this.contactf.address.value
+        };
+        this.sdkService
+          .updateContact(this.contact._id, updateContact)
+          .then(data => {
+            if (data._id) {
+              this.spinnerService.hideSpinner();
+              this.alerts.showAlert('Contact profile has been updated!');
+              this.closeAndRefresh();
+            }
+          })
+          .catch(err => {
+            this.disableSubmitButton(false);
+            this.alerts.showAlertDanger(err.error.message);
+          });
+      }
     }
   }
 
@@ -157,16 +170,26 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   closeAndRefresh(): any {
     $('#addContactWizard').fadeOut('fast');
     this.idPicture = undefined;
+    this.deleteData();
     this.router.navigate([this.router.url]);
   }
-
+  deleteData() {
+    this.contactDetailsForm.patchValue({
+      fullName: undefined,
+      nationalId: undefined,
+      businessName: undefined,
+      phoneNumber: undefined,
+      email: undefined,
+      country: undefined,
+      region: undefined,
+      location: undefined,
+      address: undefined
+    });
+    this.newContact = undefined;
+  }
   onModalClose() {
     if (!this.contactSubmitted && this.contactDetailsForm.dirty) {
-      swal({
-        text: 'Are you sure you want to leave this page? All information will be lost!',
-        buttons: ['Cancel', 'Yes'],
-        icon: 'warning'
-      }).then(value => {
+      this.alerts.showAlertBack().then(value => {
         if (value) {
           this.closeAndRefresh();
         } else {

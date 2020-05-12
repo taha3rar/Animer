@@ -9,7 +9,7 @@
       <div class="modal-box-center">
         <div class="tab-content">
           <div class="row tab-pane active margin-none" id="client-details">
-            <form [formGroup]="contactDetailsForm">
+            <form [formGroup]="contactDetailsForm" (ngSubmit)="onGeneralSubmit()">
               <div class="col-md-12">
                 <div class="form-row">
                   <div class="form-group col-md-6" [ngClass]="showFieldStyle('fullName')">
@@ -26,13 +26,13 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col">
-                    <label for="companyName">Organization Name</label>
+                    <label for="businessName">Organization Name</label>
                     <input
                       type="text"
                       class="form-control"
-                      formControlName="companyName"
+                      formControlName="businessName"
                       placeholder="e.g. company, co-op, cluster, etc."
-                      id="companyName"
+                      id="businessName"
                     />
                   </div>
                 </div>

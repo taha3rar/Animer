@@ -20,7 +20,7 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
   tooltips = tooltips.contacts.contacts_list;
-  contact: string;
+  contact: Contact;
   edit = false;
   constructor(
     private route: ActivatedRoute,
@@ -65,7 +65,7 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
   }
   editContact(i: number) {
     this.edit = true;
-    this.contact = JSON.stringify(this.contacts[i]);
+    this.contact = this.contacts[i];
   }
   addContact() {
     this.edit = false;

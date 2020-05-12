@@ -95,3 +95,6 @@ select {
 .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
   height: 3.7rem !important;
 }
+button:disabled {
+  cursor: no-drop;
+}
