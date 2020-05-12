@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserDocument } from '@app/core/models/user/document';
-import { User } from '@avenews/agt-sdk';
+import { Contact } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-contact-documents',
@@ -13,7 +13,7 @@ export class ContactDocumentsComponent implements OnInit {
   @Input()
   contact_id: string;
   @Input()
-  user: User;
+  user: Contact;
 
   constructor() {}
 

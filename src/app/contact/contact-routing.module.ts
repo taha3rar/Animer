@@ -1,3 +1,4 @@
+import { ContactGRNResolver } from './resolvers/contact.grn.resolver';
 import { ContactComponent } from './contact/contact.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -31,7 +32,8 @@ const routes: Routes = [
       component: ContactComponent,
       canActivate: [ContactGuard],
       resolve: {
-        contact: ContactResolver
+        contact: ContactResolver,
+        grn: ContactGRNResolver
         // documents: UserDocumentListResolver
       },
       runGuardsAndResolvers: 'always'

@@ -6,13 +6,13 @@
           <div class="card-horizontal d-flex">
             <div class="ellipse-container d-flex">
               <div class="ellipse">
-                <p>RK</p>
+                <p>{{ user?.fullName | slice: 0:1 }}{{ secondLetter }}</p>
               </div>
             </div>
             <div class="info-left d-flex">
               <div class="vertical-flex">
-                <p class="name">Riham Kharoub</p>
-                <p class="faded">Organization Name</p>
+                <p class="name">{{ user?.fullName }}</p>
+                <p class="faded">{{ user?.businessName }}</p>
                 <a id="edit">Edit</a>
               </div>
             </div>
@@ -20,15 +20,15 @@
           <div class="flex-right">
             <div class="vertical-flex social-media-wrapper">
               <p class="card-text social-media">
-                Rihamkh.114@gmail.com
+                {{ user?.email || 'none' }}
                 <i data-feather="at-sign"></i>
               </p>
               <p class="card-text social-media phone">
-                +972541911821
+                {{ user?.phoneNumber || 'none' }}
                 <i data-feather="phone"></i>
               </p>
               <p class="card-text social-media">
-                Address, Location, Region, Country
+                {{ user?.address }}, {{ user?.location }}, {{ user?.region }}, {{ user?.country }}
                 <i data-feather="map-pin"></i>
               </p>
             </div>

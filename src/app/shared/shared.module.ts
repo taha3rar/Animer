@@ -25,6 +25,8 @@ import { UserProgressComponent } from './components/user-progress/user-progress.
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { DpoDocumentsComponent } from './components/document-list/dpo-documents/dpo-documents.component';
 import { StatusPipe } from './pipes/status.pipe';
+import { MultiProductPipe } from './pipes/multi-products.pipe';
+import { ProductQuantityPipe } from './pipes/product-quantity.pipe';
 
 @NgModule({
   imports: [
@@ -54,6 +56,8 @@ import { StatusPipe } from './pipes/status.pipe';
     NotFoundComponent,
     UnauthorizedPageComponent,
     FilterPipe,
+    MultiProductPipe,
+    ProductQuantityPipe,
     ContactGeneratorComponent,
     UserProgressComponent,
     DpoDocumentsComponent
@@ -62,7 +66,9 @@ import { StatusPipe } from './pipes/status.pipe';
   exports: [
     LoaderComponent,
     RoundUpPipe,
+    MultiProductPipe,
     TransactionDocumentListComponent,
+    ProductQuantityPipe,
     UserDocumentComponent,
     UploadPictureComponent,
     TutorialControlComponent,

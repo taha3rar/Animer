@@ -281,3 +281,17 @@
     padding-bottom: 10px;
   }
 }
+#contact-view-tabs {
+  mat-ink-bar {
+    background-color: #455263 !important;
+  }
+  .mat-tab-label {
+    opacity: 1 !important;
+  }
+  .mat-tab-label .mat-tab-label-content {
+    color: #455263;
+  }
+  mat-tab-header {
+    border-bottom: none !important;
+  }
+}

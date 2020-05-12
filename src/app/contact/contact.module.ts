@@ -1,3 +1,4 @@
+import { ContactGRNResolver } from './resolvers/contact.grn.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +17,7 @@ import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
-import { MatSortModule } from '@angular/material';
+import { MatSortModule, MatTabGroup, MatTab, MatTabsModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContactTransactionsComponent } from './contact-transactions/contact-transactions.component';
 
@@ -30,6 +31,7 @@ import { ContactTransactionsComponent } from './contact-transactions/contact-tra
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTabsModule,
     TutorialsModule,
     NgxPermissionsModule.forRoot(),
     MatSortModule,
@@ -42,6 +44,12 @@ import { ContactTransactionsComponent } from './contact-transactions/contact-tra
     ContactTransactionsComponent,
     ContactDocumentsComponent
   ],
-  providers: [CurrentUserContactsResolver, ContactResolver, CurrentUserResolver, UserDocumentListResolver]
+  providers: [
+    CurrentUserContactsResolver,
+    ContactGRNResolver,
+    ContactResolver,
+    CurrentUserResolver,
+    UserDocumentListResolver
+  ]
 })
 export class ContactModule {}

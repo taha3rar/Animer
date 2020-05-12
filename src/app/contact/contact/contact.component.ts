@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { defaultValues } from '@app/shared/helpers/default_values';
-import { User } from '@avenews/agt-sdk';
+import { Contact } from '@avenews/agt-sdk';
+import { GoodsReceivedNote } from '@avenews/agt-sdk/lib/types/goods-receive-note';
 
 export class Counter {
   documents: number;
@@ -13,7 +13,8 @@ export class Counter {
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-  user: User;
+  user: Contact;
+  grnList: GoodsReceivedNote[] = [];
   documents: any[];
   counter: Counter = new Counter();
   @ViewChildren('tabs')
@@ -21,8 +22,9 @@ export class ContactComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({ contact }) => {
+    this.route.data.subscribe(({ contact, grn }) => {
       // documents
+      this.grnList = grn;
       this.user = contact;
       // this.documents = documents;
       // this.counter = {

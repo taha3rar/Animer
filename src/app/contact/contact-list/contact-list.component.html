@@ -1,7 +1,21 @@
-<a class="pull-right need-help" data-toggle="wizard" data-target="#contactTutorials">Need help?</a>
-<h1 class="main-title">Contacts</h1>
+<div class="helper-panel clearfix">
+  <i class="material-icons pull-left">info</i>
+  <div class="d-flex flex-column">
+    <div>
+      <p class="info">
+        Invite new Contacts to your network, centrally manage your existing contacts, and review the transactions you
+        have with them.
+      </p>
+    </div>
+    <div>
+      <p class="info bold">
+        Would you like our help adding your contacts?
+        <span class="brighter"><a class="link click"> Click here</a> to send us a request.</span>
+      </p>
+    </div>
+  </div>
+</div>
 <h1 class="main-title" *ngIf="hasContacts">Contact List</h1>
-
 <div class="mt-1 actions-section clearfix" *ngIf="hasContacts">
   <div class="searchbar d-flex">
     <input [(ngModel)]="searchTerm" placeholder="Search contacts..." class="search-bar" type="search" />
