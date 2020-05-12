@@ -1,7 +1,6 @@
 import { SdkService } from './../../../core/sdk.service';
 import { SpinnerToggleService } from './../../services/spinner-toggle.service';
-import { UserService } from './../../../core/api/user.service';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
@@ -37,7 +36,6 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   hasEcosystem = true;
 
   constructor(
-    private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -104,7 +102,8 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   }
 
   onGeneralSubmit() {
-    if (this.contactf) {
+    this.onSubmit(this.contactDetailsForm);
+    if (this.contactf && this.contactDetailsForm.valid) {
       this.disableSubmitButton(true);
       const newContact: RegisterContactDTO = {
         fullName: this.contactf.fullName.value,

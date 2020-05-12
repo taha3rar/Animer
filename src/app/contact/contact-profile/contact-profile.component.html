@@ -6,13 +6,13 @@
           <div class="card-horizontal d-flex">
             <div class="ellipse-container d-flex">
               <div class="ellipse">
-                <p>{{ user?.fullName | slice: 0:1 }}{{ secondLetter }}</p>
+                <p>{{ contact?.fullName | slice: 0:1 }}{{ secondLetter }}</p>
               </div>
             </div>
             <div class="info-left d-flex">
               <div class="vertical-flex">
-                <p class="name">{{ user?.fullName }}</p>
-                <p class="faded">{{ user?.businessName }}</p>
+                <p class="name">{{ contact?.fullName }}</p>
+                <p class="faded">{{ contact?.businessName }}</p>
                 <a id="edit">Edit</a>
               </div>
             </div>
@@ -20,15 +20,15 @@
           <div class="flex-right">
             <div class="vertical-flex social-media-wrapper">
               <p class="card-text social-media">
-                {{ user?.email || 'none' }}
+                {{ contact?.email || 'none' }}
                 <i data-feather="at-sign"></i>
               </p>
               <p class="card-text social-media phone">
-                {{ user?.phoneNumber || 'none' }}
+                {{ contact?.phoneNumber || 'none' }}
                 <i data-feather="phone"></i>
               </p>
               <p class="card-text social-media">
-                {{ user?.address }}, {{ user?.location }}, {{ user?.region }}, {{ user?.country }}
+                {{ contact?.address }}, {{ contact?.location }}, {{ contact?.region }}, {{ contact?.country }}
                 <i data-feather="map-pin"></i>
               </p>
             </div>

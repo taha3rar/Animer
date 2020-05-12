@@ -13,7 +13,7 @@ export class ContactDocumentsComponent implements OnInit {
   @Input()
   contact_id: string;
   @Input()
-  user: Contact;
+  contact: Contact;
 
   constructor() {}
 

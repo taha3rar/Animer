@@ -1,46 +1,16 @@
 <div>
   <i class="material-icons back" (click)="back()">keyboard_backspace</i><span class="after-icon"> Contacts</span>
 </div>
-<app-contact-profile [user]="user"></app-contact-profile>
-<!-- <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
-  <li class="nav-item active">
-    <a
-      class="nav-link"
-      id="transactions-tab"
-      data-toggle="tab"
-      href="#transaction"
-      role="tab"
-      aria-controls="transaction"
-      aria-selected="true"
-      >Transactions ({{ grnList.length }})</a
-    >
-  </li>
-  <li class="nav-item">
-    <a
-      class="nav-link"
-      id="documents-tab"
-      data-toggle="tab"
-      href="#documents"
-      role="tab"
-      aria-controls="documents"
-      aria-selected="false"
-      >Documents (0)</a
-    >
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fading active in" id="transaction" role="tabpanel" aria-labelledby="transactions-tab">
-    <app-contact-transactions [grnList]="grnList" [user]="user"></app-contact-transactions>
-  </div>
-  <div class="tab-pane fading" id="documents" role="tabpanel" aria-labelledby="documents-tab">
-    <app-contact-documents [documents]="documents" [contact_id]="user._id" [user]="user"></app-contact-documents>
-  </div>
-</div> -->
+<app-contact-profile [contact]="contact"></app-contact-profile>
 <mat-tab-group id="contact-view-tabs">
   <mat-tab color="#455263" label="Transactions ({{ grnList?.length }})">
-    <app-contact-transactions [grnList]="grnList" [user]="user"></app-contact-transactions>
+    <app-contact-transactions [grnList]="grnList" [contact]="contact"></app-contact-transactions>
   </mat-tab>
   <mat-tab color="#455263" label="Documents (0)">
-    <app-contact-documents [documents]="documents" [contact_id]="user._id" [user]="user"></app-contact-documents>
+    <app-contact-documents
+      [documents]="documents"
+      [contact_id]="contact._id"
+      [contact]="contact"
+    ></app-contact-documents>
   </mat-tab>
 </mat-tab-group>

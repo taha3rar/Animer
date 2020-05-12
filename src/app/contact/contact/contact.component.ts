@@ -13,7 +13,7 @@ export class Counter {
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-  user: Contact;
+  contact: Contact;
   grnList: GoodsReceivedNote[] = [];
   documents: any[];
   counter: Counter = new Counter();
@@ -23,9 +23,9 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(({ contact, grn }) => {
-      // documents
       this.grnList = grn;
-      this.user = contact;
+      this.contact = contact;
+      // documents
       // this.documents = documents;
       // this.counter = {
       //   documents: this.documents.length

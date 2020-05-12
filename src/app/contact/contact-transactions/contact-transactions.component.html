@@ -34,31 +34,6 @@
         <a id="view">View</a>
       </td>
     </tr>
-    <!-- <tr
-        *ngFor="
-          let contact of contacts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
-          let i = index
-        "
-      >
-        <td class="text-center">{{ contact.numericId }}</td>
-        <td>
-          <span *ngIf="contact.company_name">{{ contact.company_name }} / </span>{{ contact.first_name }}
-          {{ contact.last_name }}
-        </td>
-        <td>
-          <span *ngIf="contact.email && contact.phone_number">{{ contact.email }} / {{ contact.phone_number }}</span>
-          <span *ngIf="contact.email && !contact.phone_number">{{ contact.email }}</span>
-          <span *ngIf="!contact.email && contact.phone_number">{{ contact.phone_number }}</span>
-        </td>
-        <td>
-          {{ contact.country }}
-          <span *ngIf="!contact.country">N/A</span>
-        </td>
-        <td class="text-right">
-          <a id="view" [routerLink]="['/contact', contact._id]">View</a>
-          <a (click)="editContact(i)" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
-        </td>
-      </tr> -->
   </tbody>
 </table>
 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

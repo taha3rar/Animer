@@ -7,7 +7,7 @@ import { Contact } from '@avenews/agt-sdk';
   styleUrls: ['./contact-profile.component.scss']
 })
 export class ContactProfileComponent implements OnInit, AfterViewInit, OnChanges {
-  @Input() user: Contact;
+  @Input() contact: Contact;
   secondLetter: string;
   constructor() {}
   ngOnInit() {}
@@ -15,11 +15,11 @@ export class ContactProfileComponent implements OnInit, AfterViewInit, OnChanges
     Feather.replace();
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['user']) {
-      if (this.user.fullName) {
-        this.secondLetter = this.user.fullName.slice(
-          this.user.fullName.indexOf(' ') + 1,
-          this.user.fullName.indexOf(' ') + 2
+    if (changes['contact']) {
+      if (this.contact.fullName) {
+        this.secondLetter = this.contact.fullName.slice(
+          this.contact.fullName.indexOf(' ') + 1,
+          this.contact.fullName.indexOf(' ') + 2
         );
       }
     }
