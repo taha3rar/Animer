@@ -11,7 +11,7 @@ declare const $: any;
   styleUrls: ['./starting-guide.component.scss']
 })
 export class StartingGuideComponent implements OnInit {
-  userProgress = {};
+  userProgress: any;
   currentUser: any;
 
   swalWithStyledButtons = Swal.mixin({
