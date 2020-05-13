@@ -38,5 +38,8 @@ export const tooltips = {
         total_price: 'Total price Calculated based on Number of Package and Price per Package fields'
       }
     }
+  },
+  grn: {
+    create_grn: 'Create digital goods received notes for products that you get from suppliers'
   }
 };

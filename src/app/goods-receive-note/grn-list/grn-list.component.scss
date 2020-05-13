@@ -88,3 +88,23 @@ tr {
     display: none;
   }
 }
+
+.info {
+  font-size: 1.4rem;
+  color: #455263;
+  line-height: 29px;
+}
+
+.create-grn-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    width: 65rem;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+}

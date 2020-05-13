@@ -13,6 +13,7 @@ import { GrnDocumentComponent } from './grn-document/grn-document.component';
 import { GrnViewComponent } from './grn-view/grn-view.component';
 import { GrnListComponent } from './grn-list/grn-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     GoodsReceiveNoteRoutingModule,
     RouterModule,
     CommonModule,
+    MatTooltipModule,
     NgxPermissionsModule.forRoot()
   ],
   declarations: [
