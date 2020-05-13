@@ -12,33 +12,11 @@
     <div class="starting-guide">
       <div class="starting-guide--left">
         <ul class="nav nav-tabs" role="tablist" id="startingGuideTab">
-          <li
-            class="nav-item completed"
-            *ngIf="!currentUser.referrer"
-            data-toggle="tab"
-            href="#account"
-            role="tab"
-            aria-selected="true"
-          >
+          <li class="nav-item completed" data-toggle="tab" href="#account" role="tab" aria-selected="true">
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">
               <span class="btn-desktop-txt">Create an Account</span>
               <span class="btn-mobile-txt">Account</span>
-            </div>
-          </li>
-          <li
-            class="nav-item active"
-            [class.completed]="userProgress.account_reviewed"
-            *ngIf="currentUser.referrer"
-            data-toggle="tab"
-            href="#review-account"
-            role="tab"
-            aria-selected="true"
-          >
-            <div class="circle-wrapper"><span class="circle"></span></div>
-            <div class="step-title">
-              Review your Account
-              <p class="small">Estimated time: 1 min</p>
             </div>
           </li>
           <li
@@ -47,14 +25,28 @@
             href="#contact"
             role="tab"
             aria-selected="true"
-            [class.completed]="userProgress.first_contact"
-            *ngxPermissionsOnly="['create-client']"
+            [class.completed]="userProgress.contactCreated"
           >
             <div class="circle-wrapper"><span class="circle"></span></div>
             <div class="step-title">
               <span class="btn-desktop-txt"> Add your first Contact</span>
               <span class="btn-mobile-txt">Contact</span>
               <p class="small">Estimated time: 2 min</p>
+            </div>
+          </li>
+          <li
+            class="nav-item"
+            data-toggle="tab"
+            href="#grn"
+            role="tab"
+            aria-selected="true"
+            [class.completed]="userProgress.grnCreated"
+          >
+            <div class="circle-wrapper"><span class="circle"></span></div>
+            <div class="step-title">
+              <span class="btn-desktop-txt"> Issue your first Goods Received Note</span>
+              <span class="btn-mobile-txt">GRN</span>
+              <p class="small">Estimated time: 4 min</p>
             </div>
           </li>
           <li
@@ -76,96 +68,34 @@
       </div>
       <div class="starting-guide--right tab-content">
         <div class="tab-pane active" id="account" role="tabpanel" *ngIf="!currentUser.referrer">
-          <h2>Well Done! You created your Account.</h2>
+          <h2>Well done! You created your Account.</h2>
           <p>
             Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.
           </p>
-          <button
-            class="btn btn-primary"
-            *ngIf="currentUser.roles[0] == 'buyer' && currentUser.referrer"
-            (click)="nextStep('po')"
-          >
+          <button class="btn btn-primary" (click)="nextStep('contact')">
             NEXT STEP
           </button>
-          <button
-            class="btn btn-primary"
-            *ngIf="currentUser.roles[0] == 'seller' && currentUser.referrer"
-            (click)="nextStep('product')"
-          >
-            NEXT STEP
-          </button>
-          <button class="btn btn-primary" *ngxPermissionsOnly="['create-client']" (click)="nextStep('contact')">
-            NEXT STEP
-          </button>
-
           <img src="../../../assets/img/dashboard-imgs/account.png" id="account-img" alt="" />
         </div>
 
-        <div class="tab-pane active" id="review-account" *ngIf="currentUser.referrer" role="tabpanel">
-          <div [hidden]="userProgress.account_reviewed">
-            <h2>Welcome! Please review your account details</h2>
-            <p>
-              Confirm your details are correct, then you can start trading.
-            </p>
-            <button class="btn btn-primary" routerLink="/profile">REVIEW ACCOUNT</button>
-            <a class="skip-btn" *ngIf="currentUser.roles[0] != 'buyer'" (click)="nextStep('product')">Skip Step</a>
-            <a class="skip-btn" *ngIf="currentUser.roles[0] == 'buyer'" (click)="nextStep('po')">Skip Step</a>
-          </div>
-          <div [hidden]="!userProgress.account_reviewed">
-            <h2>Well Done! You have reviewed your account.</h2>
-            <p>Now you can keep going and complete the next simple steps to see what you can do with Avenews-GT.</p>
-            <button
-              class="btn btn-primary"
-              *ngIf="currentUser.roles[0] == 'buyer' && currentUser.referrer"
-              (click)="nextStep('po')"
-            >
-              NEXT STEP
-            </button>
-            <button
-              class="btn btn-primary"
-              *ngIf="currentUser.roles[0] == 'seller' && currentUser.referrer"
-              (click)="nextStep('product')"
-            >
-              NEXT STEP
-            </button>
-            <button class="btn btn-primary" *ngxPermissionsOnly="['create-client']" (click)="nextStep('contact')">
-              NEXT STEP
-            </button>
-          </div>
-          <img src="../../../assets/img/dashboard-imgs/review-account.png" />
-        </div>
         <div class="tab-pane" id="contact" role="tabpanel">
           <div class="tab-wrapper">
-            <div>
-              <!-- [hidden]="userProgress.first_contact" -->
+            <div [hidden]="userProgress.contactCreated">
               <h2>Add your first Contact.</h2>
               <p>
                 Add the names, emails, telephone numbers and addresses of the people you do business with.
               </p>
-              <button
-                class="btn btn-primary"
-                data-toggle="wizard"
-                *ngxPermissionsOnly="['create-client']"
-                data-target="#addContactWizard"
-              >
+              <button class="btn btn-primary" data-toggle="wizard" data-target="#addContactWizard">
                 ADD CONTACT
               </button>
-
-              <a class="skip-btn" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">Skip Step</a>
-              <a class="skip-btn" *ngxPermissionsOnly="['create-order']" (click)="nextStep('po')">Skip Step</a>
+              <a class="skip-btn" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('grn')">Skip Step</a>
             </div>
-            <div>
-              <!-- [hidden]="!userProgress.first_contact" -->
-              <h2 *ngIf="currentUser.roles[0] == 'agribusiness'">Well done! You added your first Contact.</h2>
-              <h2 *ngIf="currentUser.roles[0] == 'buyer'">Well done! You added your first Seller Contact.</h2>
-              <h2 *ngIf="currentUser.roles[0] == 'seller'">Well done! You added your first Buyer Contact.</h2>
+            <div [hidden]="!userProgress.contactCreated">
+              <h2>Well done! You added your first Contact.</h2>
               <p>
                 To do this again, click the Contacts button on the left side menu. Now you’re ready for the next step.
               </p>
-              <button class="btn btn-primary" *ngxPermissionsOnly="['create-order']" (click)="nextStep('po')">
-                NEXT STEP
-              </button>
-              <button class="btn btn-primary" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('product')">
+              <button class="btn btn-primary" (click)="nextStep('grn')">
                 NEXT STEP
               </button>
             </div>
@@ -178,6 +108,29 @@
             <img src="../../../assets/img/dashboard-imgs/clients.png" />
           </div>
         </div>
+
+        <div class="tab-pane" id="grn" role="tabpanel">
+          <div class="tab-wrapper">
+            <div [hidden]="userProgress.grnCreated">
+              <h2>Issue your first Goods Received Note.</h2>
+              <p>
+                Add the products you received, the supplier details, the payment status, and send a digital Goods
+                Received Note to your supplier.
+              </p>
+              <button class="btn btn-primary" routerLink="/grn/generator">
+                ISSUE GOODS RECEIVED NOTE
+              </button>
+            </div>
+            <div [hidden]="!userProgress.grnCreated">
+              <h2>Well done! You issued your first Goods Received Note.</h2>
+              <p>
+                To do this again, click the Goods Received button on the left side menu. Now you’re ready for the next
+                step.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div class="tab-pane" id="business" role="tabpanel" [hidden]="!progressCompleted">
           <div>
             <h2>Now you're in business!</h2>
@@ -190,6 +143,6 @@
       </div>
     </div>
   </div>
-</div>
 
-<app-contact-generator></app-contact-generator>
+  <app-contact-generator></app-contact-generator>
+</div>
