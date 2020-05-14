@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Credentials } from '@app/core/models/user/login-models';
+import { Credentials } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-shell',

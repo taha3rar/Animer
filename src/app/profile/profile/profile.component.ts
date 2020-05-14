@@ -4,9 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../core/authentication/authentication.service';
-import { Credentials } from '../../core/models/user/login-models';
 import { defaultValues } from '@app/shared/helpers/default_values';
-import { User } from '@avenews/agt-sdk';
+import { User, Credentials } from '@avenews/agt-sdk';
 import { SdkService } from '@app/core/sdk.service';
 declare const $: any;
 

@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
-import { Credentials } from '@app/core/models/user/login-models';
+import { Credentials } from '@avenews/agt-sdk';
 
 declare const $: any;
 

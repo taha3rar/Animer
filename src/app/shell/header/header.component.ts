@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 import { AuthenticationService, I18nService } from '@app/core';
-import { Credentials } from '@app/core/models/user/login-models';
+import { Credentials } from '@avenews/agt-sdk';
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { Intercom } from 'ng-intercom';
 import { environment } from '@env/environment';

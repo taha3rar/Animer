@@ -15,15 +15,6 @@ export class UserService extends BaseService {
     super(_apiService, '/user');
   }
 
-  oAuthRegistration(socialUserInfo: any, network: string): Observable<any> {
-    if (network === 'facebook') {
-      return this.apiService.post('/user/oauth/registration/facebook', socialUserInfo).pipe(map(data => data));
-    }
-    if (network === 'google') {
-      return this.apiService.post('/user/oauth/registration/google', socialUserInfo).pipe(map(data => data));
-    }
-  }
-
   updateNotifications(id: string, notifications: string[]): Observable<User> {
     return this.apiService.put(`/user/${id}`, { notifications: notifications }).pipe(map(data => data));
   }

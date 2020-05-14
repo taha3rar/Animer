@@ -8,9 +8,8 @@ import { Logger, I18nService, AuthenticationService } from '@app/core';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
 import { AuthService as SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
-import { OAuthLoginContext } from '@app/core/models/user/login-models';
 import { Intercom } from 'ng-intercom';
-import { User, SocialNetworkName } from '@avenews/agt-sdk';
+import { User, SocialNetworkName, OAuthContext } from '@avenews/agt-sdk';
 
 const log = new Logger('Login');
 declare var $: any;
@@ -133,7 +132,7 @@ export class LoginComponent implements OnInit {
     }
     this.socialAuthentificationService.signIn(platform).then(
       response => {
-        const context: OAuthLoginContext = {
+        const context: OAuthContext = {
           email: response.email,
           personal_network_id: response.id,
           access_token: response.authToken
@@ -234,8 +233,7 @@ export class LoginComponent implements OnInit {
   private createForm() {
     this.loginForm = this.formBuilder.group({
       username: [''],
-      password: ['', Validators.required],
-      remember: true
+      password: ['', Validators.required]
     });
   }
 }

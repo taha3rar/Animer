@@ -12,11 +12,10 @@ import {
   SocialUser,
   GoogleLoginProvider
 } from 'angularx-social-login';
-import { OAuthLoginContext } from '@app/core/models/user/login-models';
 import { environment } from '@env/environment';
 import { Intercom } from 'ng-intercom';
-import { ApiService, SocialNetworkName, SocialNetworkRegistrationDTO, LoginResponseDTO } from '@avenews/agt-sdk';
-import { User, AGTError, RegisterUserDTO } from '@avenews/agt-sdk';
+import { SocialNetworkName, SocialNetworkRegistrationDTO, User, AGTError, RegisterUserDTO } from '@avenews/agt-sdk';
+import { SdkService } from '@app/core/sdk.service';
 
 declare const $: any;
 
@@ -39,7 +38,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   accessToken: string;
   isLoading = false;
   network: SocialNetworkName;
-  sdkService: ApiService;
+  // sdkService: ApiService;
 
   constructor(
     private router: Router,
@@ -47,10 +46,11 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     private route: ActivatedRoute,
     private socialAuthentificationService: SocialAuthService,
     private authenticationService: AuthenticationService,
-    public intercom: Intercom
+    public intercom: Intercom,
+    private sdkService: SdkService
   ) {
     super();
-    this.sdkService = new ApiService(environment.new_api_url);
+    // this.sdkService = new ApiService(environment.new_api_url);
   }
 
   ngOnInit() {
