@@ -35,10 +35,10 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   partialPhoneNumber: string;
   emailPhoneError = false;
   user: User;
+  socialUser: SocialUser;
   accessToken: string;
   isLoading = false;
   network: SocialNetworkName;
-  // sdkService: ApiService;
 
   constructor(
     private router: Router,
@@ -50,7 +50,6 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     private sdkService: SdkService
   ) {
     super();
-    // this.sdkService = new ApiService(environment.new_api_url);
   }
 
   ngOnInit() {
@@ -108,6 +107,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
         );
       } else {
         this.accessToken = response.authToken;
+        this.socialUser = response;
         this.changeDiv('complement');
         setTimeout(function() {
           $('.selectpicker').selectpicker();
