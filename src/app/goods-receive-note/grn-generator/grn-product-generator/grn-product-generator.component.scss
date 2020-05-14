@@ -1,0 +1,123 @@
+@import "../../../../assets/sass/abstracts/mixins";
+
+.form-group {
+  margin-bottom: 1.6rem;
+}
+
+.margin-bottom {
+  margin-bottom: 0.15rem;
+}
+label {
+  font-size: 1.6rem !important;
+  color: #455263 !important;
+  font-family: roboto !important;
+  font-weight: 400 !important;
+}
+.modal-box-content {
+  max-height: 85vh;
+  padding-bottom: 10px;
+  border-radius: 12px;
+  @include respond(phone) {
+    max-height: 95vh;
+    width: 91%;
+    overflow: auto;
+  }
+}
+.modal-box-center {
+  padding: 1.6rem 3.2rem;
+}
+
+.stepper {
+  position: relative;
+  display: inline-block;
+}
+.modal-title {
+  font-size: 2rem !important;
+  font-family: roboto !important;
+  letter-spacing: 0px !important;
+  color: #455263 !important;
+  margin: 0;
+  font-weight: bold;
+}
+.contact-help-wrapper {
+  display: flex;
+  position: absolute;
+  bottom: 3rem;
+  margin-right: 3rem !important;
+  margin-left: 3rem;
+  width: 30%;
+
+  #contact-help-text {
+    margin-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    p:first-child {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 1.4rem;
+      margin-bottom: 0px;
+      font-size: 15px;
+    }
+
+    a {
+      font-size: 1.4rem;
+      color: #37c1ce;
+      text-decoration-line: underline;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+  }
+}
+.bttn-primary {
+  border-radius: 30px;
+  background: #37c1ce;
+  @include respond(phone) {
+    width: 100%;
+  }
+}
+input,
+select {
+  background: #ffffff 0% 0% no-repeat padding-box !important;
+  border: 1px solid #e3e5f1;
+  border-radius: 3px !important;
+  height: 3.7rem;
+}
+#input-group .bootstrap-select > .dropdown-toggle,
+.bootstrap-select > .dropdown-toggle.bs-placeholder:active,
+.bootstrap-select > .dropdown-toggle.bs-placeholder:focus,
+.bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
+  height: 3.7rem !important;
+}
+button:disabled {
+  cursor: no-drop;
+}
+.disabled {
+  cursor: no-drop;
+}
+.disable {
+  cursor: no-drop;
+  pointer-events: none !important;
+}
+#price-trick {
+  position: relative;
+  bottom: 30px;
+  left: 16px;
+  right: 0;
+  cursor: no-drop;
+}
+@media (max-width: 1201) {
+  #price-trick {
+    position: relative;
+    bottom: 28px;
+    left: 16px;
+    right: 0;
+    cursor: no-drop;
+  }
+}

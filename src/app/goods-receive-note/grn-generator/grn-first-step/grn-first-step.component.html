@@ -53,25 +53,21 @@
 
 <div class="strip mt-5">
   <div class="form-row">
-    <div class="form-group col-md-3">
-      <label for="expected_delivery">Issue Date *</label>
-      <div class="input-group">
+    <div id="date-field" class="form-group col-md-3">
+      <label for="date">Issue Date *</label>
+      <div (click)="dp3.toggle()" class="input-group">
         <input
-          id="expected_delivery"
+          id="date"
           class="form-control"
           placeholder="dd/mm/yyyyy"
           name="ddp"
           ngbDatepicker
           #dp3="ngbDatepicker"
-          [(ngModel)]="grn.issueDate"
+          [ngModel]="today"
+          (ngModelChange)="onDate($event)"
         />
         <div class="input-group-append">
-          <button
-            class="btn glyphicon glyphicon-calendar"
-            style="position:0;"
-            (click)="dp3.toggle()"
-            type="button"
-          ></button>
+          <button class="btn glyphicon glyphicon-calendar" style="position:0;" type="button"></button>
         </div>
       </div>
     </div>
@@ -96,38 +92,38 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of grn.products">
+      <tr *ngFor="let product of products; let i = index">
         <td>
           {{ product.name }}
         </td>
         <td>
           {{ product.description || '-' }}
         </td>
-        <td>{{ product.quantity | number: '1.0-2' }} {{ product.measurement }}</td>
+        <td>{{ product.quantity | number: '1.2-2' }} {{ product.measurement }}</td>
         <td>{{ product.rate | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}</td>
         <td>{{ product.price | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}</td>
         <td class="text-right">
-          <a class="bttn-line">Edit</a>
+          <a (click)="edit(i)" data-toggle="wizard" data-target="#addGrnProductWizard" class="bttn-line">Edit</a>
         </td>
       </tr>
     </tbody>
   </table>
   <div class="mobile-table">
-    <div *ngFor="let product of grn.products" class="strip">
+    <div *ngFor="let product of grn.products; let i = index" class="strip">
       <div class="d-flex top">
         <div>
           <p class="product-name">{{ product.name }}</p>
           <p class="mt-0">{{ product.description || '-' }}</p>
         </div>
         <div class="flex-r">
-          <a class="bttn-line">Edit</a>
+          <a (click)="edit(i)" data-toggle="wizard" data-target="#addGrnProductWizard" class="bttn-line">Edit</a>
         </div>
       </div>
       <div>
         <div class="d-flex bottom mt-2">
           <div>
             <p class="sm-text-label">Quanitiy</p>
-            <p class="text-regular">{{ product.quantity | number: '1.0-2' }} {{ product.measurement }}</p>
+            <p class="text-regular">{{ product.quantity | number: '1.2-2' }} {{ product.measurement }}</p>
           </div>
           <div>
             <p class="sm-text-label">Rate</p>
@@ -145,7 +141,14 @@
       </div>
     </div>
   </div>
-  <button data-toggle="wizard" data-target="#addGrnProductWizard" class="bttn-primary mt-4" type="button">
+  <button
+    id="product-field"
+    (click)="index = -1; product = undefined"
+    data-toggle="wizard"
+    data-target="#addGrnProductWizard"
+    class="bttn-primary mt-4"
+    type="button"
+  >
     Add Product
   </button>
 </div>
@@ -165,13 +168,13 @@
         <label for="status">Payment Status</label>
         <select [(ngModel)]="grn.paymentStatus" id="status" placeholder="Choose status" class="form-control">
           <option value="paid">Paid</option>
-          <option value="partially-paid">Partially Paid</option>
+          <option value="partially">Partially Paid</option>
           <option value="awaiting">Awaiting Payment</option>
         </select>
       </div>
 
       <div class="total-wrapper">
-        <h2>{{ grn.currency }} {{ grn.total | number: '1.2-2' }}</h2>
+        <h2>{{ currency }} {{ grn.total | number: '1.2-2' }}</h2>
         <h5>TOTAL</h5>
       </div>
     </div>
@@ -183,20 +186,34 @@
   <div class="form-row" id="received-by">
     <div class="form-group col-md-4">
       <label for="name">Full Name *</label>
-      <input [(ngModel)]="grn.receivedBy.name" type="text" class="form-control" id="name" />
+      <input (change)="checkRec()" [(ngModel)]="grn.receivedBy.name" type="text" class="form-control" id="name" />
     </div>
     <div class="form-group col-md-4 pl-3">
       <label for="business">Business Name *</label>
-      <input [(ngModel)]="grn.receivedBy.businessName" type="text" class="form-control" id="business" />
+      <input
+        (change)="checkRec()"
+        [(ngModel)]="grn.receivedBy.businessName"
+        type="text"
+        class="form-control"
+        id="business"
+      />
     </div>
     <div class="form-group col-md-4 pl-3">
       <label for="phone">Phone Number *</label>
-      <input [(ngModel)]="grn.receivedBy.phoneNumber" class="form-control" id="phone" type="tel" />
+      <input
+        (change)="checkRec()"
+        [(ngModel)]="grn.receivedBy.phoneNumber"
+        class="form-control"
+        id="phone"
+        type="tel"
+      />
     </div>
   </div>
 </div>
-
-<button class="flex-r btn-next next-step bttn-primary mt-5">
+<button [hidden]="checkForm()" (click)="validate()" class="btn-next flex-r bttn-primary mt-5">
+  Next Step &rarr;
+</button>
+<button [hidden]="!checkForm()" (click)="validate()" class="btn-next next-step flex-r bttn-primary mt-5">
   Next Step &rarr;
 </button>
 <app-contact-generator
@@ -205,4 +222,9 @@
   [contact]="contact"
   [isEdit]="false"
 ></app-contact-generator>
-<app-grn-product-generator (productEmit)="addProduct($event)"></app-grn-product-generator>
+<app-grn-product-generator
+  [product]="product"
+  [i]="index"
+  [currency]="currency"
+  (addProduct)="addProduct($event)"
+></app-grn-product-generator>

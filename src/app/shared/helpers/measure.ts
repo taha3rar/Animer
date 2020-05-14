@@ -7,3 +7,8 @@ export const measureUnits = [
   { value: 'LI', viewValue: 'Liters' },
   { value: 'OZ', viewValue: 'OZ' }
 ];
+export const measurement = [
+  { value: 'KG', viewValue: 'Kilograms' },
+  { value: 'LI', viewValue: 'Liters' },
+  { value: 'Unit', viewValue: 'Unit' }
+];

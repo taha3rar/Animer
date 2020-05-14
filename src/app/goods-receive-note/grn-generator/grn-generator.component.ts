@@ -31,6 +31,5 @@ export class GrnGeneratorComponent implements OnInit {
     this.route.data.subscribe(({ contacts }) => {
       this.contacts = contacts;
     });
-    console.log(this.grn);
   }
 }

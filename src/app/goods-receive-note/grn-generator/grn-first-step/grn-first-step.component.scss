@@ -54,6 +54,9 @@
   font-weight: 500;
   margin-top: 0px;
 }
+.click {
+  cursor: pointer !important;
+}
 
 #contactInfo {
   @include respond(phone) {
@@ -91,4 +94,14 @@
   @include respond(phone) {
     display: block;
   }
+}
+#expected_delivery {
+  pointer-events: none !important;
+  cursor: pointer;
+}
+.btn {
+  cursor: pointer;
+}
+.red-border {
+  border: #b94a48 1px solid;
 }

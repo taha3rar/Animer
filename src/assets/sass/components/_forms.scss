@@ -269,3 +269,6 @@ label.container input:checked ~ .checkmark {
   background-color: #f2feff;
   border: 1px solid #37c1ce;
 }
+select#contact.red-border + button.btn.dropdown-toggle {
+  border: #b94a48 1px solid;
+}
