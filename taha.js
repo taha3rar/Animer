@@ -82,7 +82,7 @@ async function pup(url, res, hd, alt) {
 
   let bodyHTML = await page.evaluate(() => document.body.innerHTML);
   await page.click("html");
-  if (hd) {
+  if (!hd) {
     console.log("clicked");
     await page.waitFor(500);
     try {
