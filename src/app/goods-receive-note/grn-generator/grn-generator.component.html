@@ -3,7 +3,6 @@
     <a class="main-color"><i class="material-icons">keyboard_backspace</i></a> Goods Received Note
   </h1>
 
-  <!-- Main Generator -->
   <div class="stepper-wrapper">
     <div class="stepper desktop-stepper">
       <ul class="nav nav-tabs">
@@ -16,7 +15,6 @@
         <li class="disabled">
           <a data-toggle="tab" class="label" href="#review-grn">
             <span class="round-tab horizantal-line">2</span>
-
             <span class="step-text"> Review and Submit</span></a
           >
         </li>
@@ -24,7 +22,7 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="grng">
-          <app-grn-first-step></app-grn-first-step>
+          <app-grn-first-step [contacts]="contacts" [grn]="grn"></app-grn-first-step>
         </div>
 
         <div class="tab-pane" id="review-grn">

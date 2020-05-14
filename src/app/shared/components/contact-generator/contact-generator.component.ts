@@ -1,7 +1,17 @@
 import { SdkService } from './../../../core/sdk.service';
 import { SpinnerToggleService } from './../../services/spinner-toggle.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild, ElementRef, Input, SimpleChanges, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Input,
+  SimpleChanges,
+  OnChanges,
+  EventEmitter,
+  Output
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
@@ -24,8 +34,10 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   countries = countries;
   phoneUtil: any;
   regionCode = 'KES';
+  @Output() contactEmit = new EventEmitter<Contact>();
   @Input() contact: Contact;
   @Input() isEdit: boolean;
+  @Input() isGrn: boolean;
   phoneCode: string;
   newContact: RegisterContactDTO; // TODO new client model
   partialPhoneNumber: string;
@@ -124,6 +136,9 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           .registerContact(newContact)
           .then(data => {
             if (data._id) {
+              if (this.isGrn) {
+                this.contactEmit.emit(data);
+              }
               this.spinnerService.hideSpinner();
               this.alerts.showAlert('New contact profile has been created!');
               this.closeAndRefresh();
@@ -190,13 +205,23 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     if (!this.contactSubmitted && this.contactDetailsForm.dirty) {
       this.alerts.showAlertBack().then(value => {
         if (value) {
-          this.closeAndRefresh();
+          if (this.isGrn) {
+            $('#addContactWizard').fadeOut('fast');
+            this.deleteData();
+          } else {
+            this.closeAndRefresh();
+          }
         } else {
           return false;
         }
       });
     } else {
-      this.closeAndRefresh();
+      if (this.isGrn) {
+        $('#addContactWizard').fadeOut('fast');
+        this.deleteData();
+      } else {
+        this.closeAndRefresh();
+      }
     }
   }
 

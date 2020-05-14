@@ -2,41 +2,49 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <label for="supplier">Contact</label>
-        <select id="contact" data-live-search="true" placeholder="Choose supplier" class="selectpicker" data-size="7">
-          <option value="seller1"></option>
-          <option value="seller2"></option>
+        <label for="contact">Contact</label>
+        <select
+          required
+          [compareWith]="compare"
+          [ngModel]="selectedContact"
+          (ngModelChange)="change($event)"
+          id="contact"
+          data-live-search="true"
+          class="selectpicker"
+          data-size="7"
+        >
+          <option *ngFor="let contact of contacts; let i = index" [ngValue]="contact">{{ contact.fullName }}</option>
         </select>
       </div>
-      <a class="bttn-line">Add New Contact</a>
+      <a data-toggle="wizard" data-target="#addContactWizard" class="bttn-line">Add New Contact</a>
     </div>
     <div class="col-md-6">
       <div class="row" id="contactInfo">
         <div class="col-md-4">
           <p class="sm-text-label">CONTACT</p>
-          <p class="text-regular">Contact Name</p>
+          <p class="text-regular">{{ selectedContact?.fullName || '-' }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">ORGANIZTION</p>
-          <p class="text-regular">Organization name</p>
+          <p class="text-regular">{{ selectedContact?.businessName || '-' }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">COUNTRY</p>
-          <p class="text-regular">Country</p>
+          <p class="text-regular">{{ selectedContact?.country || '-' }}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <p class="sm-text-label">LOCATION</p>
-          <p class="text-regular">Location</p>
+          <p class="text-regular">{{ selectedContact?.location || '-' }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">PHONE</p>
-          <p class="text-regular">Phone number</p>
+          <p class="text-regular">{{ selectedContact?.phoneNumber || '-' }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">EMAIL</p>
-          <p class="text-regular">Email address</p>
+          <p class="text-regular">{{ selectedContact?.email || '-' }}</p>
         </div>
       </div>
     </div>
@@ -45,10 +53,6 @@
 
 <div class="strip mt-5">
   <div class="form-row">
-    <!-- <div class="form-group col-md-6">
-      <label for="issue-date">Issue Date *</label>
-      <input type="text" id="issue-date" class="form-control" />
-    </div> -->
     <div class="form-group col-md-3">
       <label for="expected_delivery">Issue Date *</label>
       <div class="input-group">
@@ -59,6 +63,7 @@
           name="ddp"
           ngbDatepicker
           #dp3="ngbDatepicker"
+          [(ngModel)]="grn.issueDate"
         />
         <div class="input-group-append">
           <button
@@ -72,7 +77,7 @@
     </div>
     <div class="form-group col-md-3 ref-input">
       <label for="ref-code">Reference Code</label>
-      <input type="text" id="ref-code" class="form-control" />
+      <input [(ngModel)]="grn.referenceCode" type="text" id="ref-code" class="form-control" />
     </div>
   </div>
 </div>
@@ -91,22 +96,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr *ngFor="let product of grn.products">
         <td>
-          Green Coffee Beans
+          {{ product.name }}
         </td>
         <td>
-          Description
+          {{ product.description || '-' }}
         </td>
-        <td>
-          1,000.00 KG
-        </td>
-        <td>
-          50.00 KES per KG
-        </td>
-        <td>
-          50,000.000 KES per KG
-        </td>
+        <td>{{ product.quantity | number: '1.0-2' }} {{ product.measurement }}</td>
+        <td>{{ product.rate | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}</td>
+        <td>{{ product.price | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}</td>
         <td class="text-right">
           <a class="bttn-line">Edit</a>
         </td>
@@ -114,11 +113,11 @@
     </tbody>
   </table>
   <div class="mobile-table">
-    <div class="strip">
+    <div *ngFor="let product of grn.products" class="strip">
       <div class="d-flex top">
         <div>
-          <p class="product-name">Green Coffee Beans/ Variety</p>
-          <p class="mt-0">Product Description</p>
+          <p class="product-name">{{ product.name }}</p>
+          <p class="mt-0">{{ product.description || '-' }}</p>
         </div>
         <div class="flex-r">
           <a class="bttn-line">Edit</a>
@@ -128,48 +127,25 @@
         <div class="d-flex bottom mt-2">
           <div>
             <p class="sm-text-label">Quanitiy</p>
-            <p class="text-regular">100.00 KG</p>
+            <p class="text-regular">{{ product.quantity | number: '1.0-2' }} {{ product.measurement }}</p>
           </div>
           <div>
             <p class="sm-text-label">Rate</p>
-            <p class="text-regular">50.00 KES per KG</p>
+            <p class="text-regular">
+              {{ product.rate | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}
+            </p>
           </div>
           <div>
             <p class="sm-text-label">Price</p>
-            <p class="text-regular">50,000.00 KES</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="strip">
-      <div class="d-flex top">
-        <div>
-          <p class="product-name">Green Coffee Beans/ Variety</p>
-          <p class="mt-0">Product Description</p>
-        </div>
-        <div class="flex-r">
-          <a class="bttn-line">Edit</a>
-        </div>
-      </div>
-      <div>
-        <div class="d-flex bottom mt-2">
-          <div>
-            <p class="sm-text-label">Quantity</p>
-            <p class="text-regular">100.00 KG</p>
-          </div>
-          <div>
-            <p class="sm-text-label">Rate</p>
-            <p class="text-regular">50.00 KES per KG</p>
-          </div>
-          <div>
-            <p class="sm-text-label">Price</p>
-            <p class="text-regular">50,000.00 KES</p>
+            <p class="text-regular">
+              {{ product.price | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <button class="bttn-primary mt-4" type="button">
+  <button data-toggle="wizard" data-target="#addGrnProductWizard" class="bttn-primary mt-4" type="button">
     Add Product
   </button>
 </div>
@@ -179,7 +155,7 @@
     <div class="strip">
       <div class="form-group" id="notes">
         <label for="notes">Notes</label>
-        <textarea class="form-control" rows="2"></textarea>
+        <textarea [(ngModel)]="grn.notes" class="form-control" rows="2"></textarea>
       </div>
     </div>
   </div>
@@ -187,7 +163,7 @@
     <div class="strip flex-strip" id="notes-sec">
       <div class="form-group" id="payment-status">
         <label for="status">Payment Status</label>
-        <select id="status" placeholder="Choose status" class="form-control">
+        <select [(ngModel)]="grn.paymentStatus" id="status" placeholder="Choose status" class="form-control">
           <option value="paid">Paid</option>
           <option value="partially-paid">Partially Paid</option>
           <option value="awaiting">Awaiting Payment</option>
@@ -195,7 +171,7 @@
       </div>
 
       <div class="total-wrapper">
-        <h2>KES 1,000.00</h2>
+        <h2>{{ grn.currency }} {{ grn.total | number: '1.2-2' }}</h2>
         <h5>TOTAL</h5>
       </div>
     </div>
@@ -207,15 +183,15 @@
   <div class="form-row" id="received-by">
     <div class="form-group col-md-4">
       <label for="name">Full Name *</label>
-      <input type="text" class="form-control" id="name" />
+      <input [(ngModel)]="grn.receivedBy.name" type="text" class="form-control" id="name" />
     </div>
     <div class="form-group col-md-4 pl-3">
       <label for="business">Business Name *</label>
-      <input type="text" class="form-control" id="business" />
+      <input [(ngModel)]="grn.receivedBy.businessName" type="text" class="form-control" id="business" />
     </div>
     <div class="form-group col-md-4 pl-3">
       <label for="phone">Phone Number *</label>
-      <input class="form-control" id="phone" type="tel" />
+      <input [(ngModel)]="grn.receivedBy.phoneNumber" class="form-control" id="phone" type="tel" />
     </div>
   </div>
 </div>
@@ -223,3 +199,10 @@
 <button class="flex-r btn-next next-step bttn-primary mt-5">
   Next Step &rarr;
 </button>
+<app-contact-generator
+  (contactEmit)="newContact($event)"
+  [isGrn]="true"
+  [contact]="contact"
+  [isEdit]="false"
+></app-contact-generator>
+<app-grn-product-generator (productEmit)="addProduct($event)"></app-grn-product-generator>

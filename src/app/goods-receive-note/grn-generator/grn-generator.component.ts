@@ -1,4 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
+import { CreateGoodsReceivedNoteDTO } from '@avenews/agt-sdk/lib/types/goods-receive-note';
 import { Component, OnInit } from '@angular/core';
+import { Contact } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-grn-generator',
@@ -6,7 +9,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grn-generator.component.scss']
 })
 export class GrnGeneratorComponent implements OnInit {
-  constructor() {}
+  grn: CreateGoodsReceivedNoteDTO = {
+    currency: undefined,
+    issueDate: undefined,
+    notes: undefined,
+    paymentStatus: undefined,
+    products: [],
+    receivedBy: {
+      businessName: undefined,
+      name: undefined,
+      phoneNumber: undefined
+    },
+    referenceCode: undefined,
+    supplier: undefined,
+    total: undefined
+  };
+  contacts: Contact[] = [];
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.data.subscribe(({ contacts }) => {
+      this.contacts = contacts;
+    });
+    console.log(this.grn);
+  }
 }

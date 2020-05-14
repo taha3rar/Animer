@@ -14,6 +14,10 @@ import { GrnViewComponent } from './grn-view/grn-view.component';
 import { GrnListComponent } from './grn-list/grn-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTooltipModule } from '@angular/material';
+import { GrnViewResolver } from './reslovers/grn-view.reslover';
+import { GrnResolver } from './reslovers/grn.resolver';
+import { CurrentUserContactsResolver } from '@app/shared/resolvers/current-user-contacts.resolver';
+import { GrnProductGeneratorComponent } from './grn-generator/grn-product-generator/grn-product-generator.component';
 
 @NgModule({
   imports: [
@@ -35,9 +39,11 @@ import { MatTooltipModule } from '@angular/material';
     GrnGeneratorComponent,
     GrnListComponent,
     GrnFirstStepComponent,
+    GrnProductGeneratorComponent,
     GrnDocumentComponent,
     GrnViewComponent,
     GrnListComponent
-  ]
+  ],
+  providers: [GrnViewResolver, GrnResolver, CurrentUserContactsResolver]
 })
 export class GoodsReceiveNoteModule {}

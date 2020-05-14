@@ -110,10 +110,10 @@
                   <input type="text" class="form-control" formControlName="address" id="address" />
                 </div>
               </div>
-              <button *ngIf="!isEdit" [disabled]="!contactDetailsForm.valid" class="bttn-primary next-step pull-right">
+              <button *ngIf="!isEdit" [disabled]="!contactDetailsForm.valid" class="bttn-primary pull-right">
                 Add Contact
               </button>
-              <button *ngIf="isEdit" [disabled]="!contactDetailsForm.valid" class="bttn-primary next-step pull-right">
+              <button *ngIf="isEdit" [disabled]="!contactDetailsForm.valid" class="bttn-primary pull-right">
                 Save Changes
               </button>
             </form>

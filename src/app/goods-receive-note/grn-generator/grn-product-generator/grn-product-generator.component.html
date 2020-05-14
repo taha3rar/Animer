@@ -1,0 +1,126 @@
+<!-- <div class="modal-box" id="addGrnProductWizard">
+    <div class="modal-box-content-wrapper">
+      <div class="modal-box-content">
+        <div class="modal-box-heading">
+          <i class="material-icons pull-right" (click)="onModalClose()" #closeModal>close</i>
+          <h2 *ngIf="!isEdit" translate class="modal-title">Add Contact</h2>
+          <h2 *ngIf="isEdit" translate class="modal-title">Edit Contact</h2>
+        </div>
+        <div class="modal-box-center">
+          <div class="tab-content">
+            <div class="row tab-pane active margin-none" id="client-details">
+              <form [formGroup]="contactDetailsForm" (ngSubmit)="onGeneralSubmit()">
+                <div class="col-md-12">
+                  <div class="form-row">
+                    <div class="form-group col-md-6" [ngClass]="showFieldStyle('fullName')">
+                      <label for="first_name">Full Name *</label>
+                      <input type="text" formControlName="fullName" class="form-control" id="full_name" />
+                      <div class="help-block" *ngIf="isFieldInvalid('fullName')">
+                        <p>This field is required</p>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="last_name">National ID</label>
+                      <input type="text" formControlName="nationalId" class="form-control" id="national_id" />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="businessName">Organization Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="businessName"
+                        placeholder="e.g. company, co-op, cluster, etc."
+                        id="businessName"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="region_code">Phone Number *</label>
+                      <div class="input-group" [ngClass]="showFieldStyle('phoneNumber')">
+                        <div id="input-group" class="input-group-prepend">
+                          <select
+                            data-width="65px"
+                            id="region_code"
+                            data-live-search="true"
+                            class="selectpicker"
+                            data-size="7"
+                            [(ngModel)]="regionCode"
+                            [ngModelOptions]="{ standalone: true }"
+                            (change)="changeRegionCode()"
+                          >
+                            <option
+                              *ngFor="let country of countries"
+                              [value]="country.value"
+                              [attr.data-content]="generateLink(country.value, country.viewValue)"
+                            ></option>
+                          </select>
+                        </div>
+                        <input
+                          type="tel"
+                          class="form-control"
+                          id="phone"
+                          placeholder="Type phone number here..."
+                          [(ngModel)]="partialPhoneNumber"
+                          [ngModelOptions]="{ standalone: true }"
+                          (ngModelChange)="changeRegionCode()"
+                          (click)="markAsTouched('phoneNumber')"
+                        />
+                      </div>
+                      <div style="color:#a94442" class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
+                        <p>This field is required</p>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6" [ngClass]="showFieldStyle('email')">
+                      <label for="Email">Email Address *</label>
+                      <input type="email" formControlName="email" class="form-control" id="Email" />
+                      <div class="help-block" *ngIf="isFieldInvalid('email')">
+                        <p>This field is required</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="country">Country *</label>
+                      <select formControlName="country" class="form-control" id="country">
+                        <option *ngFor="let country of countries">{{ country.viewValue }}</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="region">Region</label>
+                      <input type="text" class="form-control" formControlName="region" id="region" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="location">Location</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="location"
+                      placeholder="e.g. city, village, etc."
+                      id="location"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" formControlName="address" id="address" />
+                  </div>
+                </div>
+                <button *ngIf="!isEdit" [disabled]="!contactDetailsForm.valid" class="bttn-primary next-step pull-right">
+                  Add Contact
+                </button>
+                <button *ngIf="isEdit" [disabled]="!contactDetailsForm.valid" class="bttn-primary next-step pull-right">
+                  Save Changes
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->
