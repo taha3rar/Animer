@@ -4,7 +4,6 @@ import { ApiService as SdkService } from '@avenews/agt-sdk';
 import { map } from 'rxjs/operators';
 import { Credentials, LoginContext, OAuthLoginContext } from '../models/user/login-models';
 import { environment } from '@env/environment';
-import { ApiService } from '../api/api.service';
 
 const credentialsKey = 'credentials';
 
@@ -13,7 +12,7 @@ export class AuthenticationService {
   private _credentials: Credentials | null;
   private sdkService: SdkService;
 
-  constructor(private apiService: ApiService) {
+  constructor() {
     this.sdkService = new SdkService(environment.new_api_url);
 
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
@@ -37,15 +36,8 @@ export class AuthenticationService {
     return creds;
   }
 
-  oAuthLogin(context: OAuthLoginContext, network: string): Observable<Credentials> {
-    // async oAuthLogin(context: OAuthLoginContext, network: string): Promise<Credentials> {
-    // const creds = await this.sdkService.socialLogin(network, context); // TODO
-
-    // this.setCredentials(creds, context.remember);
-
-    // return creds;
-
-    return this.apiService.post(`/user/login/${network}`, context).pipe(
+  oAuthLogin(context: OAuthLoginContext, network: 'facebook' | 'google'): Observable<Credentials> {
+    return from(this.sdkService.socialLogin(network, context)).pipe(
       map((user: Credentials) => {
         this.setCredentials(user, context.remember);
         return user;
@@ -54,7 +46,6 @@ export class AuthenticationService {
   }
 
   forgotPassword(username: string): Observable<boolean> {
-    // TODO
     const data = {
       email: username
     };

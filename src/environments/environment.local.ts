@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost',
-  new_api_url: 'http://localhost',
+  new_api_url: 'http://localhost:3000',
   version: '2.0.0-dev',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'af-SA'],

@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
     }
   }
   // Method to sign in with social networks.
-  signIn(network: string): void {
+  signIn(network: 'facebook' | 'google'): void {
     this.network = network;
     let platform: string;
     this.isLoading = true;

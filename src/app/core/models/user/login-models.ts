@@ -1,19 +1,14 @@
-import { User } from '@avenews/agt-sdk';
+import { User, LoginDTO, OAuthContext } from '@avenews/agt-sdk';
 
 export interface Credentials {
   user: User;
   token: string;
 }
 
-export interface LoginContext {
-  username: string;
-  password: string;
+export interface LoginContext extends LoginDTO {
   remember?: boolean;
 }
 
-export interface OAuthLoginContext {
-  email: string;
-  personal_network_id: string;
-  access_token: string;
+export interface OAuthLoginContext extends OAuthContext {
   remember?: boolean;
 }

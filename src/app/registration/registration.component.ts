@@ -38,7 +38,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   user: SocialUser;
   accessToken: string;
   isLoading = false;
-  network: string;
+  network: 'facebook' | 'google';
   marketing_campaign = true;
 
   constructor(
@@ -83,7 +83,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   }
 
   // Method to sign in with facebook.
-  preSignUp(network: string): void {
+  preSignUp(network: 'facebook' | 'google'): void {
     this.network = network;
     let platform: string;
     if (network === 'facebook') {
