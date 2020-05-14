@@ -24,7 +24,10 @@
       </div>
       <div>
         <button class="btn-primary-transp">SAVE</button>
-        <button class="bttn bttn-primary next-step" (click)="onNext()">NEXT</button>
+        <button *ngIf="currentInnerStep != 1" class="bttn bttn-primary next-step" (click)="onNext()">NEXT</button>
+        <button *ngIf="currentInnerStep == 1" class="bttn bttn-primary next-step" (click)="toPreview()">
+          Preview your application
+        </button>
       </div>
     </div>
   </div>

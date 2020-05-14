@@ -21,10 +21,11 @@ export class LoanAboutComponent implements OnInit {
 
   ngOnInit() {
     this.loanGeneratorDataService.currentForm.subscribe(form => {
-      this.loan_form = form;
-      this.loan = this.loan_form.value;
-
-      this.calculatePmt(this.loan.loan_details.insure_with_absa);
+      if (form) {
+        this.loan_form = form;
+        this.loan = this.loan_form.value;
+        this.calculatePmt(this.loan.loan_details.insure_with_absa);
+      }
     });
   }
 

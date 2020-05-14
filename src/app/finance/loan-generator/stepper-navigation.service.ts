@@ -46,4 +46,14 @@ export class StepperNavigationService {
       this.activeInnerStepSource.next(this.activeInnerStepSource.getValue() - 1);
     }
   }
+
+  manuallySetStep(generalStep: number) {
+    this.activeGeneralStepSource.next(generalStep);
+    this.activeInnerStepSource.next(0);
+  }
+
+  flushSteps() {
+    this.activeGeneralStepSource.next(0);
+    this.activeInnerStepSource.next(0);
+  }
 }

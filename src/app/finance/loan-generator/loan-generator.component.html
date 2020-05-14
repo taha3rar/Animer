@@ -1,5 +1,8 @@
-<div class="wrapper wizard" [hidden]="!beginApplication">
-  <h1 class="main-title btn-main margin-bottom-2"><a class="material-icons">keyboard_backspace</a> Finance</h1>
+<div class="wrapper wizard" [hidden]="!beginApplication || previewDisplayed">
+  <h1 routerLink="/finance" class="main-title btn-main margin-bottom-2">
+    <a class="material-icons">keyboard_backspace</a> Finance
+  </h1>
+  <!-- <div (click)="setPreview(true)"  class="main-title btn-main margin-bottom-2"><a class="material-icons">keyboard_backspace</a> To preview</div> -->
   <div class="stepper-wrapper">
     <div>
       <ul class="nav nav-tabs" #generalSteps>
@@ -70,7 +73,7 @@
         </div>
 
         <div class="tab-pane" [class.active]="displayStepContent(4)" id="business-banking-details">
-          <app-bank-details></app-bank-details>
+          <app-bank-details (actionOnPreview)="setPreview($event)"></app-bank-details>
         </div>
       </div>
     </div>
@@ -81,3 +84,5 @@
   *ngIf="!beginApplication"
   (beginApplication)="generateStepper(); beginApplication = $event"
 ></app-qualifcation-tool>
+
+<app-loan *ngIf="previewDisplayed" (actionOnPreview)="setPreview($event)"></app-loan>

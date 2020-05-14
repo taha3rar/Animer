@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperNavigationService } from './stepper-navigation.service';
 import { LoanGeneratorDataService } from './loan-generator-data.service';
@@ -9,12 +9,13 @@ import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-
   templateUrl: './loan-generator.component.html',
   styleUrls: ['./loan-generator.component.scss']
 })
-export class LoanGeneratorComponent implements OnInit {
+export class LoanGeneratorComponent implements OnInit, OnDestroy {
   loan_form: FormGroup;
   @ViewChild('generalSteps') generalSteps: ElementRef<HTMLElement>;
   @Input() beginApplication = false;
   currentGeneralActiveStep: number;
   loan: WBLoan;
+  previewDisplayed: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -214,5 +215,14 @@ export class LoanGeneratorComponent implements OnInit {
 
   displayStepContent(stepNumber: number): boolean {
     return this.currentGeneralActiveStep === stepNumber;
+  }
+
+  setPreview(toBeDisplayed: boolean) {
+    this.previewDisplayed = toBeDisplayed;
+  }
+
+  ngOnDestroy() {
+    this.loanGeneratorDataService.flushForm();
+    this.stepperNavigation.flushSteps();
   }
 }

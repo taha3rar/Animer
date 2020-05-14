@@ -14,4 +14,8 @@ export class LoanGeneratorDataService {
   setForm(form: FormGroup) {
     this.formSource.next(form);
   }
+
+  flushForm() {
+    this.formSource.next(undefined);
+  }
 }

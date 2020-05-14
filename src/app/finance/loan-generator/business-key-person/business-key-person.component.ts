@@ -26,9 +26,11 @@ export class BusinessKeyPersonComponent extends LoanNavigationComponent implemen
 
   ngOnInit() {
     this.loanGeneratorDataService.currentForm.subscribe(form => {
-      this.loan_form = form;
-      this.loan = this.loan_form.value;
-      this.isLimitedCompany = this.loan.qualification.business_type === 'limited company';
+      if (form) {
+        this.loan_form = form;
+        this.loan = this.loan_form.value;
+        this.isLimitedCompany = this.loan.qualification.business_type === 'limited company';
+      }
     });
   }
 

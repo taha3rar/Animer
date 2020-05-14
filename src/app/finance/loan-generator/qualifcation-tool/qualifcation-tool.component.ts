@@ -27,11 +27,13 @@ export class QualifcationToolComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.first_name = this.authenticationService.credentials.user.personal_information.first_name;
-    this.last_name = this.authenticationService.credentials.user.personal_information.last_name;
+    this.first_name = this.authenticationService.credentials.user.personalInformation.firstName;
+    this.last_name = this.authenticationService.credentials.user.personalInformation.lastName;
     this.loanGeneratorDataService.currentForm.subscribe(form => {
-      this.loan_form = form;
-      this.loan = this.loan_form.value;
+      if (form) {
+        this.loan_form = form;
+        this.loan = this.loan_form.value;
+      }
     });
     this.loan_form
       .get('qualification')
@@ -54,6 +56,9 @@ export class QualifcationToolComponent implements OnInit {
   }
 
   onNextQuestion() {
+    if (this.currentIndex === 4 && !this.loan.qualification.business_type) {
+      return;
+    }
     this.currentIndex += 1;
   }
 

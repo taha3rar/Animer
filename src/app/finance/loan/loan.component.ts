@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
+import { LoanGeneratorDataService } from '../loan-generator/loan-generator-data.service';
+import { StepperNavigationService } from '../loan-generator/stepper-navigation.service';
 
 @Component({
   selector: 'app-loan',
@@ -8,12 +11,24 @@ import { Router } from '@angular/router';
 })
 export class LoanComponent implements OnInit {
   applicationCompleted = false;
+  loan_form: FormGroup;
+  loan: WBLoan;
+  @Output() actionOnPreview = new EventEmitter<boolean>();
 
-  constructor(private router: Router) {}
+  constructor(
+    private loanGeneratorDataService: LoanGeneratorDataService,
+    private stepperNavigationService: StepperNavigationService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loanGeneratorDataService.currentForm.subscribe(form => {
+      this.loan_form = form;
+      this.loan = this.loan_form.value;
+    });
+  }
 
-  back() {
-    this.router.navigateByUrl('/finance');
+  toGenerator(generalStep: number) {
+    this.stepperNavigationService.manuallySetStep(generalStep);
+    this.actionOnPreview.emit(false);
   }
 }
