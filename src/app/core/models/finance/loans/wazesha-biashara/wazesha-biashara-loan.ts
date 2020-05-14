@@ -11,8 +11,10 @@ export class WBLoan {
     qualification_done: Boolean;
   };
   loan_details: {
-    loan_amount: Number;
+    amount_requested: number;
     loan_purpose: String;
+    insure_with_absa: boolean;
+    repayments_number: number;
   };
   business_details: {
     business_name: String;

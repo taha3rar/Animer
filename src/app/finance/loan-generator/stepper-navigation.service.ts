@@ -15,12 +15,10 @@ export class StepperNavigationService {
 
   setGeneralStepsNumber(generalStepsNumber: number): void {
     this.stepDictionnary = new Array(generalStepsNumber);
-    console.log('Set General Steps', this.stepDictionnary);
   }
 
   setInnerStepsNumber(generalStepId: number, innerStepsNumber: number): void {
     this.stepDictionnary[generalStepId] = innerStepsNumber;
-    console.log('Set inner Steps - ID :', generalStepId, this.stepDictionnary[generalStepId]);
   }
 
   onNext(): void {
@@ -49,7 +47,5 @@ export class StepperNavigationService {
     } else {
       this.activeInnerStepSource.next(this.activeInnerStepSource.getValue() - 1);
     }
-    console.log('General Step', this.activeGeneralStepSource.getValue());
-    console.log('Inner Step', this.activeInnerStepSource.getValue());
   }
 }

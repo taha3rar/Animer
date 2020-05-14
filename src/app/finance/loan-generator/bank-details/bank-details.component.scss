@@ -15,6 +15,7 @@
     margin-right: auto;
   }
   div:last-child {
+    display: flex;
     margin-left: auto;
   }
 }
@@ -23,4 +24,20 @@
   display: flex;
   width: 70%;
   margin: 0 auto;
+}
+
+.bttn-primary {
+  background: #00bcd4;
+  border-radius: 10rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1.4rem;
+  min-width: 1rem;
+  margin: 0.5rem;
+  transition: all 0.5s;
+  height: 3.55rem;
+  padding: 0 1.8rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 212, 35, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2),
+    0 2px 5px 0 rgba(0, 188, 212, 0.12);
+  border: none;
 }

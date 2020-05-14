@@ -49,7 +49,7 @@ export class LoanGeneratorComponent implements OnInit {
       // Loan Details
       loan_details: this.formBuilder.group({
         amount_requested: [undefined],
-        repayments_number: [undefined],
+        repayments_number: 27,
         insure_with_absa: [undefined]
       }),
       // Loan Goals

@@ -3,7 +3,6 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { LoanGeneratorDataService } from '../loan-generator-data.service';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
-import { FinanceService } from '@app/core/api/finance.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,7 +23,6 @@ export class QualifcationToolComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private loanGeneratorDataService: LoanGeneratorDataService,
-    private financeService: FinanceService,
     private router: Router
   ) {}
 

@@ -21,17 +21,26 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">KES</span>
               </div>
-              <input type="number" name="loan_size" class="form-control" formControlName="amount_requested" />
+              <input
+                type="number"
+                max="10000000"
+                name="loan_size"
+                class="form-control"
+                formControlName="amount_requested"
+              />
             </div>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-12">
-            <label for="repayments-num">Number of repayments</label><span class="text-muted"> - In months</span>
+            <label for="repayments-num">Number of repayments</label
+            ><span class="text-muted"> - In months : {{ loan.loan_details.repayments_number }}</span>
             <div class="input-group">
               <input
                 type="range"
+                min="6"
+                max="48"
                 id="repayments-num"
                 name="repayments_number"
                 class="col-md-12 custom-range"
@@ -72,18 +81,18 @@
           <div class="form-group col-md-12">
             <ul class="list-group list-group-horizontal" style="position: sticky;">
               <li class="list-group-item checkmark list-checkmark">
-                <span class="resume-numbers">KES 10,000</span>
+                <span class="resume-numbers">KES {{ expected_period_repayment | number: '1.2-2' }}</span>
                 <span>Monthly Repayment</span>
               </li>
               <li class="list-group-item checkmark list-checkmark">
-                <span class="resume-numbers">6 Months</span>
+                <span class="resume-numbers">{{ loan.loan_details.repayments_number }} Months</span>
                 <span>Number of Repayments</span>
               </li>
               <li class="list-group-item checkmark list-checkmark">
-                <span class="resume-numbers">550,000</span>
+                <span class="resume-numbers">KES {{ expected_total_repayment | number: '1.2-2' }}</span>
                 <span
                   >Payback Amount <br />
-                  (Inclusive of Insurance)</span
+                  <div *ngIf="loan.loan_details.insure_with_absa">(Inclusive of Insurance)</div></span
                 >
               </li>
             </ul>

@@ -53,6 +53,7 @@
     "export-to-csv": "^0.2.1",
     "feather-icons": "^4.28.0",
     "file-saver": "^2.0.1",
+    "formula-pmt": "^1.0.1",
     "google-libphonenumber": "^3.2.2",
     "jquery": "^3.3.1",
     "jquery-ui": "^1.12.1",
