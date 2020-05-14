@@ -83,7 +83,7 @@
     "@types/jasmine": "^2.8.7",
     "@types/jasminewd2": "^2.0.2",
     "@types/lodash": "^4.14.108",
-    "@types/node": "^8.10.13",
+    "@types/node": "^8.10.60",
     "codelyzer": "^4.4.4",
     "hads": "^1.7.0",
     "har-validator": "^5.1.3",
