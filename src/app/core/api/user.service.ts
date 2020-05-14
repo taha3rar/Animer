@@ -3,7 +3,6 @@ import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
-import { UserRegistration } from '../models/user/user-registration';
 import { DpoInformation } from '../models/user/dpo-info';
 import { DpoDocuments } from '../models/user/dpo-documents';
 import { User } from '@avenews/agt-sdk';
@@ -14,14 +13,6 @@ import { User } from '@avenews/agt-sdk';
 export class UserService extends BaseService {
   constructor(protected _apiService: ApiService) {
     super(_apiService, '/user');
-  }
-
-  saveInvitedClient(client: User): Observable<any> {
-    return this.apiService.post('/user/client', client).pipe(map(data => data));
-  }
-
-  saveNewUser(client: UserRegistration): Observable<User> {
-    return this.apiService.post('/user/registration', client).pipe(map(data => data));
   }
 
   oAuthRegistration(socialUserInfo: any, network: string): Observable<any> {

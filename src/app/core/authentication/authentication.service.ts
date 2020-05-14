@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
-import { ApiService as SdkService } from '@avenews/agt-sdk';
+import { ApiService as SdkService, SocialNetworkName, SocialNetworkRegistrationDTO } from '@avenews/agt-sdk';
 import { map } from 'rxjs/operators';
 import { Credentials, LoginContext, OAuthLoginContext } from '../models/user/login-models';
 import { environment } from '@env/environment';
@@ -36,10 +36,19 @@ export class AuthenticationService {
     return creds;
   }
 
-  oAuthLogin(context: OAuthLoginContext, network: 'facebook' | 'google'): Observable<Credentials> {
+  oAuthLogin(context: OAuthLoginContext, network: SocialNetworkName): Observable<Credentials> {
     return from(this.sdkService.socialLogin(network, context)).pipe(
       map((user: Credentials) => {
         this.setCredentials(user, context.remember);
+        return user;
+      })
+    );
+  }
+
+  oAuthRegistration(socialUserInfo: SocialNetworkRegistrationDTO, network: SocialNetworkName): Observable<Credentials> {
+    return from(this.sdkService.socialRegistration(socialUserInfo, network)).pipe(
+      map((user: Credentials) => {
+        this.setCredentials(user);
         return user;
       })
     );

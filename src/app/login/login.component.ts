@@ -10,7 +10,7 @@ import * as libphonenumber from 'google-libphonenumber';
 import { AuthService as SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { OAuthLoginContext } from '@app/core/models/user/login-models';
 import { Intercom } from 'ng-intercom';
-import { User } from '@avenews/agt-sdk';
+import { User, SocialNetworkName } from '@avenews/agt-sdk';
 
 const log = new Logger('Login');
 declare var $: any;
@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
     }
   }
   // Method to sign in with social networks.
-  signIn(network: 'facebook' | 'google'): void {
+  signIn(network: SocialNetworkName): void {
     this.network = network;
     let platform: string;
     this.isLoading = true;

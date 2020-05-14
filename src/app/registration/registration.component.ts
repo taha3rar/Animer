@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { UserService, AuthenticationService } from '@app/core';
+import { AuthenticationService } from '@app/core';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
-import { UserRegistration } from '@app/core/models/user/user-registration';
 import {
   AuthService as SocialAuthService,
   FacebookLoginProvider,
@@ -16,6 +15,8 @@ import {
 import { OAuthLoginContext } from '@app/core/models/user/login-models';
 import { environment } from '@env/environment';
 import { Intercom } from 'ng-intercom';
+import { ApiService, SocialNetworkName, SocialNetworkRegistrationDTO, LoginResponseDTO } from '@avenews/agt-sdk';
+import { User, AGTError, RegisterUserDTO } from '@avenews/agt-sdk';
 
 declare const $: any;
 
@@ -26,35 +27,33 @@ declare const $: any;
 })
 export class RegistrationComponent extends BaseValidationComponent implements OnInit {
   userRegistrationForm: FormGroup;
-  newUser: UserRegistration = new UserRegistration();
-  userType = 'seller';
   countrySocialUser: string;
+  businessNameSocialUser: string;
   countries = countries;
   phoneUtil: any;
   regionCode: string;
   phoneCode: string;
   partialPhoneNumber: string;
   emailPhoneError = false;
-  user: SocialUser;
+  user: User;
   accessToken: string;
   isLoading = false;
-  network: 'facebook' | 'google';
-  marketing_campaign = true;
+  network: SocialNetworkName;
+  sdkService: ApiService;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private userService: UserService,
     private socialAuthentificationService: SocialAuthService,
     private authenticationService: AuthenticationService,
     public intercom: Intercom
   ) {
     super();
+    this.sdkService = new ApiService(environment.new_api_url);
   }
 
   ngOnInit() {
-    this.marketing_campaign = this.route.snapshot.queryParamMap.get('m') !== '1';
     this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
     this.regionCode = 'KE';
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
@@ -75,15 +74,13 @@ export class RegistrationComponent extends BaseValidationComponent implements On
 
     this.formInput = this.userRegistrationForm;
 
-    this.checkUrlUserType();
-
     setTimeout(function() {
       $('.selectpicker').selectpicker();
     }, 200);
   }
 
   // Method to sign in with facebook.
-  preSignUp(network: 'facebook' | 'google'): void {
+  preSignUp(network: SocialNetworkName): void {
     this.network = network;
     let platform: string;
     if (network === 'facebook') {
@@ -111,9 +108,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
         );
       } else {
         this.accessToken = response.authToken;
-        this.userType = undefined;
         this.changeDiv('complement');
-        this.user = response;
         setTimeout(function() {
           $('.selectpicker').selectpicker();
         }, 200);
@@ -123,53 +118,45 @@ export class RegistrationComponent extends BaseValidationComponent implements On
 
   oAuthSignUp() {
     this.isLoading = true;
-    const socialuserInfo = {
+    const socialuserInfo: SocialNetworkRegistrationDTO = {
       access_token: this.accessToken,
       country: this.countrySocialUser,
-      marketing_campaign: this.marketing_campaign,
-      role: this.userType
+      businessName: this.businessNameSocialUser
     };
-    this.userService.oAuthRegistration(socialuserInfo, this.network).subscribe(
-      response => {
-        const context: OAuthLoginContext = {
-          email: response.email,
-          personal_network_id: response[this.network][this.network + '_id'],
-          access_token: this.accessToken
-        };
-        this.authenticationService
-          .oAuthLogin(context, this.network)
-          .pipe(
-            finalize(() => {
-              this.isLoading = false;
-            })
-          )
-          .subscribe(credentials => {
-            this.route.queryParams.subscribe(params =>
-              this.router.navigate([params.redirect || '/'], { replaceUrl: true })
-            );
-            this.intercomLogin(credentials.user, true);
-            this.user = response;
-          });
-      },
-      err => {
-        this.isLoading = false;
-        $.notify(
-          {
-            icon: 'notifications',
-            message: err.error.message
-          },
-          {
-            type: 'danger',
-            timer: 5000,
-            placement: {
-              from: 'top',
-              align: 'right'
+
+    this.authenticationService
+      .oAuthRegistration(socialuserInfo, this.network)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        credentials => {
+          this.route.queryParams.subscribe(params =>
+            this.router.navigate([params.redirect || '/'], { replaceUrl: true })
+          );
+          this.intercomLogin(credentials.user, true);
+        },
+        (err: AGTError) => {
+          this.isLoading = false;
+          $.notify(
+            {
+              icon: 'notifications',
+              message: err.message
             },
-            offset: 20
-          }
-        );
-      }
-    );
+            {
+              type: 'danger',
+              timer: 5000,
+              placement: {
+                from: 'top',
+                align: 'right'
+              },
+              offset: 20
+            }
+          );
+        }
+      );
   }
 
   equalPasswordsValidator(group: FormGroup) {
@@ -198,19 +185,10 @@ export class RegistrationComponent extends BaseValidationComponent implements On
 
   showEmailPhoneError() {
     return (
-      this.contactf.email.touched &&
-      this.contactf.phoneNumber.touched &&
+      this.userf.email.touched &&
+      this.userf.phoneNumber.touched &&
       this.userRegistrationForm.hasError('emailAndPhoneError')
     );
-  }
-
-  checkUrlUserType() {
-    const userRole = this.route.snapshot.paramMap.get('userRole');
-    if (userRole) {
-      this.userType = userRole;
-    } else {
-      this.userType = 'seller';
-    }
   }
 
   generateLink(code: any, country: any) {
@@ -229,7 +207,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     }
     this.userRegistrationForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
     if (!this.phoneUtil.isValidNumber(phoneNumber)) {
-      this.contactf.phoneNumber.setErrors({ notValid: true });
+      this.userf.phoneNumber.setErrors({ notValid: true });
     }
   }
 
@@ -241,31 +219,33 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   }
 
   onGeneralSubmit() {
-    this.newUser.first_name = this.contactf.firstName.value;
-    this.newUser.last_name = this.contactf.lastName.value;
-    this.newUser.email = this.contactf.email.value;
-    this.newUser.country = this.contactf.country.value;
-    this.newUser.password = this.contactf.password.value;
-    this.newUser.phone_number = this.contactf.phoneNumber.value;
-    this.newUser.role = this.userType;
-    this.newUser.company_name = this.contactf.companyName.value;
-    this.newUser.marketing_campaign = this.marketing_campaign;
+    const dto: RegisterUserDTO = {
+      firstName: this.userf.firstName.value,
+      lastName: this.userf.lastName.value,
+      username: this.userf.email.value,
+      country: this.userf.country.value,
+      password: this.userf.password.value,
+      phoneNumber: this.userf.phoneNumber.value,
+      companyName: this.userf.companyName.value
+    };
 
-    this.userService.saveNewUser(this.newUser).subscribe(
-      data => {
-        if (data._id) {
-          $('#standardRegistration2').css({ display: 'none' });
+    this.sdkService
+      .register(dto)
+      .then((user: User) => {
+        if (user._id) {
+          this.user = user;
+          $('#standardRegistration').css({ display: 'none' });
           $('#confirmation').css({ display: 'flex' });
-          this.intercomLogin(data, false);
+          this.intercomLogin(user, false);
         } else {
           return;
         }
-      },
-      err => {
+      })
+      .catch((err: AGTError) => {
         $.notify(
           {
             icon: 'notifications',
-            message: err.error.message
+            message: err.message
           },
           {
             type: 'danger',
@@ -277,11 +257,10 @@ export class RegistrationComponent extends BaseValidationComponent implements On
             offset: 20
           }
         );
-      }
-    );
+      });
   }
 
-  get contactf() {
+  get userf() {
     return this.userRegistrationForm.controls;
   }
 
@@ -294,20 +273,14 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     $('#' + showDiv).css({ display: 'block' });
   }
 
-  onActiveBtn(btnType: string) {
-    this.userType = btnType;
-  }
-
-  intercomLogin(user: any, isOAuth: boolean) {
+  intercomLogin(user: User, isOAuth: boolean) {
     this.intercom.update({
       app_id: environment.intercom.app_id,
-      name: user.personal_information.first_name + ' ' + user.personal_information.last_name,
-      email: user.email,
-      phone: user.personal_information.phone_number,
+      name: user.personalInformation.firstName + ' ' + user.personalInformation.lastName,
+      email: user.personalInformation.email,
+      phone: user.personalInformation.phoneNumber,
       user_id: user._id,
       role: user.roles[0],
-      client: user.roles.includes('client'),
-      marketing_campaign: this.marketing_campaign,
       registered: true,
       validated: isOAuth,
       logged_in: isOAuth,

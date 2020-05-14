@@ -46,32 +46,38 @@
               <form id="complement" style="display: none">
                 <h1 class="mb-4">Welcome {{ user?.name }} !</h1>
                 <h3 class="mb-4">We have few more info that we need from you.</h3>
-                <label for="country">Country</label>
-                <select
-                  data-live-search="true"
-                  type="text"
-                  [(ngModel)]="countrySocialUser"
-                  [ngModelOptions]="{ standalone: true }"
-                  [ngClass]="showFieldStyle('country')"
-                  class="form-control selectpicker"
-                  id="country1"
-                >
-                  <option *ngFor="let country of countries" [value]="country.viewValue">{{ country.viewValue }}</option>
-                </select>
-                <div class="help-block" *ngIf="isFieldInvalid('country')">
-                  <p>Country is required</p>
+                <div class="row form-group">
+                  <label for="country">Country</label>
+                  <select
+                    data-live-search="true"
+                    type="text"
+                    [(ngModel)]="countrySocialUser"
+                    [ngModelOptions]="{ standalone: true }"
+                    [ngClass]="showFieldStyle('country')"
+                    class="form-control selectpicker"
+                    id="country1"
+                  >
+                    <option *ngFor="let country of countries" [value]="country.viewValue">{{
+                      country.viewValue
+                    }}</option>
+                  </select>
+                  <div class="help-block" *ngIf="isFieldInvalid('country')">
+                    <p>Country is required</p>
+                  </div>
                 </div>
 
-                <label for="bttns-line" class="mt-5">Join Avenews-GT as</label>
-                <div class="bttns-line">
-                  <button [ngClass]="{ active: userType === 'seller' }" (click)="onActiveBtn('seller')">
-                    Seller
-                  </button>
-                  <button [ngClass]="{ active: userType === 'buyer' }" (click)="onActiveBtn('buyer')">Buyer</button>
-                  <button [ngClass]="{ active: userType === 'agribusiness' }" (click)="onActiveBtn('agribusiness')">
-                    Agribusiness
-                  </button>
+                <div class="row form-group">
+                  <label for="company">Business Name</label><span>&nbsp; – Optional</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Business Name"
+                    [(ngModel)]="businessNameSocialUser"
+                    [ngModelOptions]="{ standalone: true }"
+                    id="company"
+                  />
                 </div>
+
                 <div class="f-bttns-wrapper">
                   <a class="icon-text" (click)="changeDiv('registrationType')"
                     ><i class="material-icons">keyboard_backspace</i> Go Back</a
@@ -231,6 +237,11 @@
                 <div class="help-block" *ngIf="passwordsNotMatch()">
                   <p>Passwords doesn't match</p>
                 </div>
+                <p>
+                  By clicking on the create account button, you agree to Avenews-gt
+                  <a routerLink="/terms-of-use" target="_blank">Terms of use</a> and
+                  <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
+                </p>
                 <div class="f-bttns-wrapper">
                   <a class="icon-text" (click)="changeDiv('registrationType')"
                     ><i class="material-icons">keyboard_backspace</i> Go Back</a
@@ -240,63 +251,33 @@
                     [hidden]="userRegistrationForm.valid"
                     (click)="onSubmit(userRegistrationForm)"
                   >
-                    Next
+                    Create Account
                   </button>
                   <button
                     class="bttn-primary action-bttn"
                     [hidden]="!userRegistrationForm.valid"
-                    (click)="changeDiv('standardRegistration2')"
+                    (click)="onGeneralSubmit()"
                   >
-                    Next
-                  </button>
-                </div>
-              </form>
-              <form id="standardRegistration2" style="display: none" [formGroup]="userRegistrationForm">
-                <h1 class="mb-4">Sign up</h1>
-                <h3>Join Avenews-gt as</h3>
-                <div class="bttns-line">
-                  <button [ngClass]="{ active: userType === 'seller' }" (click)="onActiveBtn('seller')">
-                    Seller
-                  </button>
-                  <button [ngClass]="{ active: userType === 'buyer' }" (click)="onActiveBtn('buyer')">Buyer</button>
-                  <button [ngClass]="{ active: userType === 'agribusiness' }" (click)="onActiveBtn('agribusiness')">
-                    Agribusiness
-                  </button>
-                </div>
-
-                <p>
-                  By clicking on the create account button, you agree to Avenews-gt
-                  <a routerLink="/terms-of-use" target="_blank">Terms of use</a> and
-                  <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
-                </p>
-                <div class="f-bttns-wrapper">
-                  <a class="icon-text" (click)="changeDiv('standardRegistration')"
-                    ><i class="material-icons">keyboard_backspace</i> Go Back</a
-                  >
-                  <button class="pull-right bttn-primary action-bttn" (click)="onGeneralSubmit()">
                     Create Account
                   </button>
                 </div>
               </form>
               <div id="confirmation" style="display: none;">
                 <img src="../../assets/img/Success-icon.png" />
-                <h1 class="mb-4" *ngIf="userRegistrationForm.get('email').value">Check your email!</h1>
-                <h1
-                  class="mb-4"
-                  *ngIf="userRegistrationForm.get('phoneNumber').value && userRegistrationForm.get('email').value == ''"
-                >
+                <h1 class="mb-4" *ngIf="user?.personalInformation.email">Check your email!</h1>
+                <h1 class="mb-4" *ngIf="!user?.personalInformation.email">
                   Check your phone!
                 </h1>
 
-                <p class="success-content" *ngIf="userRegistrationForm.get('email').value; else elseBlock">
-                  We've sent you an email with a special link to <strong>{{ newUser?.email }}</strong
+                <p class="success-content" *ngIf="user?.personalInformation.email; else elseBlock">
+                  We've sent you an email with a special link to <strong>{{ user?.personalInformation.email }}</strong
                   >. Click the link to confirm your email address and get started.
                 </p>
                 <ng-template #elseBlock>
                   <p class="success-content">
                     We've sent you an sms with a special link to
-                    <strong>{{ newUser?.phone_number }}.</strong> Click the link to confirm your phone number and get
-                    started.
+                    <strong>{{ user?.personalInformation.phone_number }}.</strong> Click the link to confirm your phone
+                    number and get started.
                   </p>
                 </ng-template>
               </div>
