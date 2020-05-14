@@ -99,6 +99,7 @@
 
 .welcome-panel {
   min-height: 49rem;
+  position: relative;
 
   @include respond(phone) {
     min-height: unset;
@@ -114,6 +115,10 @@
     min-height: auto;
     width: 100%;
     height: 43rem;
+
+    @include respond(phone) {
+      height: 50rem;
+    }
   }
 
   .row {
