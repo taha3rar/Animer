@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { UserProgress } from '@avenews/agt-sdk';
 
 declare const $: any;
 
@@ -11,7 +12,7 @@ declare const $: any;
   styleUrls: ['./starting-guide.component.scss']
 })
 export class StartingGuideComponent implements OnInit {
-  userProgress: any;
+  userProgress: UserProgress;
   currentUser: any;
 
   swalWithStyledButtons = Swal.mixin({

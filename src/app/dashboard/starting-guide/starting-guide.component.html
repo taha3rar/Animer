@@ -88,7 +88,6 @@
               <button class="btn btn-primary" data-toggle="wizard" data-target="#addContactWizard">
                 ADD CONTACT
               </button>
-              <a class="skip-btn" *ngIf="currentUser.roles[0] == 'seller'" (click)="nextStep('grn')">Skip Step</a>
             </div>
             <div [hidden]="!userProgress.contactCreated">
               <h2>Well done! You added your first Contact.</h2>
