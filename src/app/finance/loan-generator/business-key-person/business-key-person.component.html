@@ -6,7 +6,7 @@
     <li class="disabled">
       <a data-toggle="tab" class="label" href="#key-contact"></a>
     </li>
-    <li class="disabled">
+    <li *ngIf="!isLimitedCompany" class="disabled">
       <a data-toggle="tab" class="label" href="#key-location"></a>
     </li>
     <li class="disabled">
@@ -21,10 +21,13 @@
     <div class="tab-pane" [class.active]="displayStep(1)" id="key-contact">
       <app-business-key-contact></app-business-key-contact>
     </div>
-    <div class="tab-pane" [class.active]="displayStep(2)" id="key-location">
+    <div *ngIf="!isLimitedCompany" class="tab-pane" [class.active]="displayStep(2)" id="key-location">
       <app-business-key-location></app-business-key-location>
     </div>
-    <div class="tab-pane" [class.active]="displayStep(3)" id="key-role">
+    <div *ngIf="isLimitedCompany" class="tab-pane" [class.active]="displayStep(2)" id="key-role">
+      <app-business-key-role></app-business-key-role>
+    </div>
+    <div *ngIf="!isLimitedCompany" class="tab-pane" [class.active]="displayStep(3)" id="key-role">
       <app-business-key-role></app-business-key-role>
     </div>
   </div>

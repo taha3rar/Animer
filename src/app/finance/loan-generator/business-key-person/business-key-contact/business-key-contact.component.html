@@ -17,11 +17,10 @@
             <input type="text" id="pin3" class="form-control" formControlName="pin_number" />
           </div>
         </div>
-        <div class="form-row">
+        <div class="form-row" *ngIf="loan.qualification.business_type == 'limited company'">
           <div class="form-group col-md-6">
             <div class="col-md-6 pl-0 pr-2">
               <label for="country3">Country</label>
-              (Sole/LLC Only)
               <select id="country3" class="form-control" formControlName="country">
                 <option *ngFor="let country of countries" [value]="country.viewValue" selected="selected">{{
                   country.viewValue
@@ -39,15 +38,32 @@
           </div>
         </div>
 
-        <div class="form-row">
+        <div class="form-row" *ngIf="loan.qualification.business_type != 'limited company'">
           <div class="form-group col-md-6">
-            (Sole/LLC Only)
+            <label for="nationality2">Nationality</label>
+            <input type="text" id="nationality2" class="form-control" formControlName="nationality" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="national-id2">National ID</label>
+            <input type="text" id="national-id2" class="form-control" formControlName="national_id_number" />
+          </div>
+        </div>
+
+        <div class="form-row" *ngIf="loan.qualification.business_type == 'limited company'">
+          <div class="form-group col-md-6">
             <label for="po-box2">P.O. box</label>
             <input type="text" id="po-box2" class="form-control" formControlName="postal_box" />
           </div>
           <div class="form-group col-md-6">
             <label for="postal-code3">Postal code</label>
             <input type="text" id="postal-code3" class="form-control" formControlName="postal_code" />
+          </div>
+        </div>
+
+        <div class="form-row" *ngIf="loan.qualification.business_type == 'sole trader'">
+          <div class="col">
+            <label for="passport-numberbkp">Passport number</label>
+            <input type="text" id="passport-numberbkp" class="form-control" formControlName="passport_number" />
           </div>
         </div>
 
