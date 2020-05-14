@@ -1,10 +1,11 @@
 @font-face {
   font-family: 'avenews-icons';
-  src: url('/font/avenews-icons.eot?96564731');
-  src: url('/font/avenews-icons.eot?96564731#iefix') format('embedded-opentype'),
-    url('/font/avenews-icons.woff2?96564731') format('woff2'), url('/font/avenews-icons.woff?96564731') format('woff'),
-    url('/font/avenews-icons.ttf?96564731') format('truetype'),
-    url('/font/avenews-icons.svg?96564731#avenews-icons') format('svg');
+  src: url('../font/avenews-icons.eot?66561539');
+  src: url('../font/avenews-icons.eot?66561539#iefix') format('embedded-opentype'),
+    url('../font/avenews-icons.woff2?66561539') format('woff2'),
+    url('../font/avenews-icons.woff?66561539') format('woff'),
+    url('../font/avenews-icons.ttf?66561539') format('truetype'),
+    url('../font/avenews-icons.svg?66561539#avenews-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'avenews-icons';
-    src: url('../font/avenews-icons.svg?96564731#avenews-icons') format('svg');
+    src: url('../font/avenews-icons.svg?66561539#avenews-icons') format('svg');
   }
 }
 */
@@ -55,24 +56,15 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-pi:before {
-  content: '\e800';
-} /* '' */
-.icon-orders:before {
+.icon-grn:before {
   content: '\e801';
 } /* '' */
-.icon-clients:before {
-  content: '\e802';
-} /* '' */
-.icon-dashboard:before {
-  content: '\e803';
-} /* '' */
-.icon-ecosystems:before {
+.icon-finance:before {
   content: '\e804';
 } /* '' */
-.icon-qr:before {
+.icon-dashboard:before {
   content: '\e805';
 } /* '' */
-.icon-products:before {
-  content: '\e806';
-} /* '' */
+.icon-contacts:before {
+  content: '\e807';
+} /* '' */

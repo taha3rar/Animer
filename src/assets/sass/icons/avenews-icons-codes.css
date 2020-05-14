@@ -1,21 +1,12 @@
-.icon-pi:before {
-  content: '\e800';
-} /* '' */
-.icon-orders:before {
+.icon-grn:before {
   content: '\e801';
 } /* '' */
-.icon-clients:before {
-  content: '\e802';
-} /* '' */
-.icon-dashboard:before {
-  content: '\e803';
-} /* '' */
-.icon-ecosystems:before {
+.icon-finance:before {
   content: '\e804';
 } /* '' */
-.icon-qr:before {
+.icon-dashboard:before {
   content: '\e805';
 } /* '' */
-.icon-products:before {
-  content: '\e806';
-} /* '' */
+.icon-contacts:before {
+  content: '\e807';
+} /* '' */

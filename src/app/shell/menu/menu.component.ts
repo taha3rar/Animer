@@ -25,11 +25,11 @@ export const ROUTES: RouteInfo[] = [
     path: '/contact',
     title: 'Contacts',
     type: 'link',
-    icontype: 'icon-clients'
+    icontype: 'icon-contacts'
   },
   {
     path: '/grn',
-    title: 'Goods Receive Note',
+    title: 'Goods Received',
     type: 'link',
     icontype: 'icon-grn'
   },
