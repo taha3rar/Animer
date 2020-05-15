@@ -16,7 +16,7 @@ import { Utils } from '@avenews/agt-sdk';
   styleUrls: ['./grn-document.component.scss']
 })
 export class GrnDocumentComponent {
-  @Input() grn: CreateGoodsReceivedNoteDTO | GoodsReceivedNote;
+  @Input() grn: any; // CreateGoodsReceivedNoteDTO | GoodsReceivedNote;
   @Input() products: any[] = [];
   // status = ' ';
   constructor(
