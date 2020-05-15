@@ -1,14 +1,10 @@
-import { SdkService } from './../../../core/sdk.service';
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 declare var $: any;
 import { StepperService } from '@app/core/stepper.service';
 import { Contact } from '@avenews/agt-sdk';
-import {
-  CreateGoodsReceivedNoteDTO,
-  GoodsReceivedNoteProduct,
-  PaymentStatus
-} from '@avenews/agt-sdk/lib/types/goods-receive-note';
+import { CreateGoodsReceivedNoteDTO } from '@avenews/agt-sdk/lib/types/goods-receive-note';
 import { Currency } from '@avenews/agt-sdk/lib/types/shared';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-grn-first-step',
@@ -16,7 +12,7 @@ import { Currency } from '@avenews/agt-sdk/lib/types/shared';
   styleUrls: ['./grn-first-step.component.scss']
 })
 export class GrnFirstStepComponent implements OnInit {
-  @Input() contacts: Contact[];
+  contacts: Contact[];
   contact: Contact;
   changed = false;
   @Input() grn: CreateGoodsReceivedNoteDTO;
@@ -38,8 +34,13 @@ export class GrnFirstStepComponent implements OnInit {
     day: 0
   };
   index = -1;
-  constructor(private stepperService: StepperService, private skdSerivce: SdkService) {}
+
+  constructor(private stepperService: StepperService, private router: Router, private route: ActivatedRoute) {}
+
   ngOnInit() {
+    this.route.data.subscribe(({ contacts }) => {
+      this.contacts = [...contacts];
+    });
     this.stepperService.stepperInit();
     setTimeout(function() {
       $('.selectpicker').selectpicker();
@@ -49,6 +50,7 @@ export class GrnFirstStepComponent implements OnInit {
     }
     this.grn.total = 0;
   }
+
   change(e: Contact) {
     if (e) {
       this.selectedContact = e;
@@ -56,12 +58,13 @@ export class GrnFirstStepComponent implements OnInit {
       this.selectedContact ? $('#contact').removeClass('red-border') : (this.selectedContact = undefined);
     }
   }
+
   newContact(e: Contact) {
     this.selectedContact = e;
-    this.contacts.push(e);
     localStorage.setItem('grnContact', JSON.stringify(e));
-    location.reload();
+    this.router.navigate([this.router.url]);
   }
+
   compare(c1: any, c2: any): boolean {
     if (localStorage.getItem('grnContact') && !this.changed) {
       return c1.numericId === JSON.parse(localStorage.getItem('grnContact')).numericId;
@@ -69,10 +72,12 @@ export class GrnFirstStepComponent implements OnInit {
       return c1 === 'Select supplier';
     }
   }
+
   addProduct(e: any) {
     if (!this.currency) {
       this.currency = e.product.currency;
     }
+
     if (e.i === -1) {
       this.products.push(e.product);
     } else {
@@ -86,10 +91,12 @@ export class GrnFirstStepComponent implements OnInit {
     this.grn.total = sum;
     this.products[0] ? $('#product-field').removeClass('red-border') : $('#product-field').addClass('red-border');
   }
+
   edit(i: number) {
     this.index = i;
     this.product = this.products[i];
   }
+
   validate() {
     this.markFields();
     if (this.checkForm()) {
@@ -97,11 +104,13 @@ export class GrnFirstStepComponent implements OnInit {
       this.grn.currency = this.currency;
     }
   }
+
   onDate(e: any) {
     this.today = e;
-    this.grn.issueDate = new Date(this.today.year, this.today.month, this.today.day);
+    this.grn.issueDate = new Date(this.today.year, this.today.month - 1, this.today.day);
     this.grn.issueDate ? $('#date').removeClass('red-border') : $('#date').addClass('red-border');
   }
+
   checkForm(): boolean {
     if (this.selectedContact) {
       this.validator.contact = true;
@@ -123,6 +132,7 @@ export class GrnFirstStepComponent implements OnInit {
     }
     return Object.values(this.validator).every(field => field);
   }
+
   markFields() {
     this.selectedContact ? $('#contact').removeClass('red-border') : $('#contact').addClass('red-border');
     this.grn.issueDate ? $('#date').removeClass('red-border') : $('#date').addClass('red-border');
@@ -131,6 +141,7 @@ export class GrnFirstStepComponent implements OnInit {
     this.grn.receivedBy.businessName ? $('#business').removeClass('red-border') : $('#business').addClass('red-border');
     this.grn.receivedBy.phoneNumber ? $('#phone').removeClass('red-border') : $('#phone').addClass('red-border');
   }
+
   checkRec() {
     this.grn.receivedBy.name ? $('#name').removeClass('red-border') : $('#name').addClass('red-border');
     this.grn.receivedBy.businessName ? $('#business').removeClass('red-border') : $('#business').addClass('red-border');

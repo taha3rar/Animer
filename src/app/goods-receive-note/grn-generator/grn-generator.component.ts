@@ -24,12 +24,8 @@ export class GrnGeneratorComponent implements OnInit {
     supplier: undefined,
     total: undefined
   };
-  contacts: Contact[] = [];
-  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.route.data.subscribe(({ contacts }) => {
-      this.contacts = contacts;
-    });
-  }
+  constructor() {}
+
+  ngOnInit() {}
 }

@@ -13,13 +13,14 @@ import { tooltips } from '@app/shared/helpers/tooltips/tootltips';
 export class GrnListComponent extends BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
   grnList: GoodsReceivedNote[] = [];
+  tooltips = tooltips.grn;
   constructor(private route: ActivatedRoute) {
     super();
   }
 
   ngOnInit() {
-    this.route.data.subscribe(({ grn }) => {
-      this.grnList = grn;
+    this.route.data.subscribe(({ grns }) => {
+      this.grnList = grns;
     });
   }
 }

@@ -3,24 +3,24 @@
 </h1>
 
 <div class="strip">
-  <h3 class="heading-1 mb-3">GRN #432</h3>
+  <h3 class="heading-1 mb-3">GRN #{{ grn.numericId }}</h3>
   <div class="header-wrapper">
     <div id="grn-info">
       <div>
         <p class="sm-text-label">ISSUE DATE</p>
-        <P class="text-regular">20/03/2020</P>
+        <P class="text-regular">{{ grn.issueDate | dateString }}</P>
       </div>
       <div>
         <p class="sm-text-label">REFERENCE</p>
-        <P class="text-regular">PO-GR 3467279</P>
+        <P class="text-regular">{{ grn.referenceCode }}</P>
       </div>
       <div>
         <p class="sm-text-label">PAYMENT STATUS</p>
-        <p class="text-regular">Paid</p>
+        <p class="text-regular">{{ grn.paymentStatus }}</p>
       </div>
     </div>
     <div id="grn-actions">
-      <button class="bttn bttn-outline">Download GRN</button>
+      <button class="bttn bttn-outline" (click)="downloadPdf()">Download GRN</button>
       <button class="bttn bttn-outline" data-toggle="wizard" data-target="#updatePaymentStatusModal">
         Update Payment Status
       </button>
@@ -37,7 +37,7 @@
   </ul>
   <div class="tab-content mb-5">
     <div class="tab-pane active" id="grn">
-      <app-grn-document [generateGrn]="false"></app-grn-document>
+      <app-grn-document [generateGrn]="false" [grn]="grn"></app-grn-document>
     </div>
     <div class="tab-pane" id="documents">
       <app-transaction-document-list></app-transaction-document-list>
@@ -57,13 +57,20 @@
       <div class="modal-body">
         <div class="form-group" id="payment-status">
           <label for="status">Payment</label>
-          <select id="status" placeholder="Choose status" class="form-control">
-            <option value="paid">Paid</option>
-            <option value="partially-paid">Partially Paid</option>
-            <option value="awaiting">Awaiting Payment</option>
+          {{ grnPaymentStatus }}
+          <select
+            id="status"
+            placeholder="Choose status"
+            class="form-control"
+            [(ngModel)]="grnPaymentStatus"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option [value]="paid">Paid</option>
+            <option [value]="partially - paid">Partially Paid</option>
+            <option [value]="awaiting">Awaiting Payment</option>
           </select>
         </div>
-        <button class="bttn-primary">
+        <button class="bttn-primary" (click)="updatePaymentStatus()">
           Update Payment Status
         </button>
       </div>

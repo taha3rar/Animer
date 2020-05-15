@@ -1,5 +1,5 @@
-import { GrnViewResolver } from './reslovers/grn-view.reslover';
-import { GrnResolver } from './reslovers/grn.resolver';
+import { GrnResolver } from './resolvers/grn.resolver';
+import { MyGrnsResolver } from './resolvers/grn-mine.resolver';
 import { GrnListComponent } from './grn-list/grn-list.component';
 import { GrnGeneratorComponent } from './grn-generator/grn-generator.component';
 import { NgModule } from '@angular/core';
@@ -14,23 +14,25 @@ const routes: Routes = [
       path: 'grn',
       component: GrnListComponent,
       data: {
-        title: 'Goods Received' // not sure what the title should be
+        title: 'Goods Received Notes'
       },
       resolve: {
-        grn: GrnResolver
-      }
+        grns: MyGrnsResolver
+      },
+      runGuardsAndResolvers: 'always'
     },
     {
       path: 'grn/generator',
       component: GrnGeneratorComponent,
       resolve: {
         contacts: CurrentUserContactsResolver
-      }
+      },
+      runGuardsAndResolvers: 'always'
     },
     {
       path: 'grn/:id',
       component: GrnViewComponent,
-      resolve: { grn: GrnViewResolver }
+      resolve: { grn: GrnResolver }
     }
   ])
 ];

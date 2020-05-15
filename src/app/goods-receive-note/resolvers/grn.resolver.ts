@@ -7,7 +7,7 @@ import { SdkService } from '@app/core/sdk.service';
 import { from } from 'rxjs';
 
 @Injectable()
-export class GrnViewResolver implements Resolve<GoodsReceivedNote> {
+export class GrnResolver implements Resolve<GoodsReceivedNote> {
   constructor(private sdkService: SdkService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<GoodsReceivedNote> {

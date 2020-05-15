@@ -27,6 +27,7 @@ import { DpoDocumentsComponent } from './components/document-list/dpo-documents/
 import { StatusPipe } from './pipes/status.pipe';
 import { MultiProductPipe } from './pipes/multi-products.pipe';
 import { ProductQuantityPipe } from './pipes/product-quantity.pipe';
+import { DateStringPipe } from './pipes/date-string.pipe';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { ProductQuantityPipe } from './pipes/product-quantity.pipe';
   declarations: [
     LoaderComponent,
     RoundUpPipe,
+    DateStringPipe,
     StatusPipe,
     TransactionDocumentListComponent,
     UserDocumentComponent,
@@ -66,6 +68,7 @@ import { ProductQuantityPipe } from './pipes/product-quantity.pipe';
   exports: [
     LoaderComponent,
     RoundUpPipe,
+    DateStringPipe,
     MultiProductPipe,
     TransactionDocumentListComponent,
     ProductQuantityPipe,

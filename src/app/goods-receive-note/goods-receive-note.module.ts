@@ -14,10 +14,11 @@ import { GrnViewComponent } from './grn-view/grn-view.component';
 import { GrnListComponent } from './grn-list/grn-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTooltipModule } from '@angular/material';
-import { GrnViewResolver } from './reslovers/grn-view.reslover';
-import { GrnResolver } from './reslovers/grn.resolver';
+import { GrnResolver } from './resolvers/grn.resolver';
 import { CurrentUserContactsResolver } from '@app/shared/resolvers/current-user-contacts.resolver';
 import { GrnProductGeneratorComponent } from './grn-generator/grn-product-generator/grn-product-generator.component';
+import { MyGrnsResolver } from './resolvers/grn-mine.resolver';
+import { DateStringPipe } from '@app/shared/pipes/date-string.pipe';
 
 @NgModule({
   imports: [
@@ -44,6 +45,6 @@ import { GrnProductGeneratorComponent } from './grn-generator/grn-product-genera
     GrnViewComponent,
     GrnListComponent
   ],
-  providers: [GrnViewResolver, GrnResolver, CurrentUserContactsResolver]
+  providers: [MyGrnsResolver, GrnResolver, CurrentUserContactsResolver, DateStringPipe]
 })
 export class GoodsReceiveNoteModule {}

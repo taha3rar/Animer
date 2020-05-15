@@ -1,5 +1,9 @@
 import { SdkService } from './../../core/sdk.service';
-import { CreateGoodsReceivedNoteDTO, GoodsReceivedNoteProduct } from '@avenews/agt-sdk/lib/types/goods-receive-note';
+import {
+  CreateGoodsReceivedNoteDTO,
+  GoodsReceivedNoteProduct,
+  GoodsReceivedNote
+} from '@avenews/agt-sdk/lib/types/goods-receive-note';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AlertsService } from '@app/core/alerts.service';
 import { SpinnerToggleService } from '@app/shared/services/spinner-toggle.service';
@@ -12,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class GrnDocumentComponent implements OnInit, OnChanges {
   @Input() generateGrn = true;
-  @Input() grn: CreateGoodsReceivedNoteDTO;
+  @Input() grn: CreateGoodsReceivedNoteDTO | GoodsReceivedNote;
   @Input() products: any[] = [];
   status = ' ';
   constructor(

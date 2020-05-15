@@ -4,7 +4,7 @@ import { BaseValidationComponent } from './../../../shared/components/base-valid
 import { Component, OnInit, Output, EventEmitter, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 declare var $: any;
 import { Contact } from '@avenews/agt-sdk';
-import { GoodsReceivedNoteProduct } from '@avenews/agt-sdk/lib/types/goods-receive-note';
+import { GoodsReceivedNoteProduct, Currency } from '@avenews/agt-sdk';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertsService } from '@app/core/alerts.service';
 
@@ -22,7 +22,7 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
   @Output() addProduct = new EventEmitter<{ product: GoodsReceivedNoteProduct; i: number }>();
   @Input() product: GoodsReceivedNoteProduct;
   @Input() i: number;
-  @Input() currency: string;
+  @Input() currency: Currency;
   constructor(private alerts: AlertsService, private formBuilder: FormBuilder) {
     super();
   }
