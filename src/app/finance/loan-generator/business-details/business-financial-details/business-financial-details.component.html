@@ -5,7 +5,7 @@
   </div>
 
   <form [formGroup]="loan_form" class="col">
-    <div formGroupName="businessFinancialFetails" #businessFinancialDetails>
+    <div formGroupName="businessFinancialDetails" #businessFinancialDetails>
       <div class="step-content">
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -27,7 +27,7 @@
               class="form-control"
               placeholder="DD/MM/YYYY"
               ngbDatepicker
-              formControlName="activityTo"
+              formControlName="activityUntil"
             />
           </div>
         </div>

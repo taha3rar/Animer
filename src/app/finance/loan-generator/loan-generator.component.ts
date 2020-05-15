@@ -29,7 +29,6 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
         this.loan = form.value;
       }
     });
-    // this.stepperNavigation.setGeneralStepsNumber(this.generalSteps.nativeElement.children.length);
     this.stepperNavigation.currentActiveGeneralStep.subscribe(stepNumber => {
       this.currentGeneralActiveStep = stepNumber;
     });
@@ -96,9 +95,9 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
         numberOfPeopleWorking: 0
       }),
       // Business Financial Details
-      businessFinancialFetails: this.formBuilder.group({
+      businessFinancialDetails: this.formBuilder.group({
         activityFrom: undefined,
-        activityTo: undefined,
+        activityUntil: undefined,
         businessSales: undefined,
         stocksHeld: undefined,
         costGoods: undefined,
