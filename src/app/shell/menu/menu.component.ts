@@ -31,7 +31,7 @@ export const ROUTES: RouteInfo[] = [
     path: '/grn',
     title: 'Goods Received',
     type: 'link',
-    icontype: 'icon-orders'
+    icontype: 'icon-grn'
   },
   {
     path: '/finance',

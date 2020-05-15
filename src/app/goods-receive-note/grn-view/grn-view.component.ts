@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GoodsReceivedNote, PaymentStatus, UpdateGoodsReceivedNoteDTO } from '@avenews/agt-sdk';
 import { ActivatedRoute } from '@angular/router';
 import { SdkService } from '@app/core/sdk.service';
+import Swal from 'sweetalert2';
+declare const $: any;
 
 @Component({
   selector: 'app-grn-view',
@@ -23,11 +25,17 @@ export class GrnViewComponent implements OnInit {
 
   async updatePaymentStatus() {
     // TODO: Add loader
-    // const dto: UpdateGoodsReceivedNoteDTO = {
-    //   paymentStatus: this.grnPaymentStatus
-    // };
-    // const grn = await this.sdkService.updateGrnPaymentStatus(this.grn._id, dto);
-    // this.grn = grn;
+    const dto: UpdateGoodsReceivedNoteDTO = {
+      paymentStatus: this.grnPaymentStatus
+    };
+    await this.sdkService.updateGrnPaymentStatus(this.grn._id, dto).then(data => {
+      this.onModalClose();
+      Swal.fire({
+        icon: 'success',
+        title: 'The payment status has been changed to ' + data.paymentStatus + '!'
+      });
+      this.grn = data;
+    });
   }
 
   downloadPdf() {
@@ -39,5 +47,9 @@ export class GrnViewComponent implements OnInit {
         window.open(link);
       });
     }
+  }
+
+  onModalClose() {
+    $('#updatePaymentStatusModal').fadeOut('fast');
   }
 }

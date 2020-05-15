@@ -15,7 +15,7 @@ label {
 }
 .modal-box-content {
   max-height: 85vh;
-  padding-bottom: 10px;
+  padding-bottom: 3rem;
   border-radius: 12px;
   @include respond(phone) {
     max-height: 95vh;

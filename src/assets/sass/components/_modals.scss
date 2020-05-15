@@ -251,6 +251,10 @@
   }
 }
 
+div div.swal2-icon.swal2-success.swal2-icon-show {
+  font-size: 14.3px !important;
+}
+
 ul.tutorial-list {
   list-style-type: none;
   list-style-position: inside;
@@ -348,7 +352,8 @@ ul.tutorial-list li {
     text-align: left !important;
   }
 
-  button:not(:last-child) {
-    margin-right: 1.6rem;
+  .swal2-styled.swal2-confirm {
+    background-color: #00b7cf;
+    font-size: 1.5rem;
   }
 }

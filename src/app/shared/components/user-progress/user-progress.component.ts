@@ -29,5 +29,6 @@ export class UserProgressComponent implements OnInit, AfterContentChecked {
     const noOfCompleted = stepsArr.filter(Boolean).length;
 
     this.calculatedUserProgress = Math.round((noOfCompleted / totalSteps) * 100);
+    this.completedProgress.emit(noOfCompleted === 3);
   }
 }
