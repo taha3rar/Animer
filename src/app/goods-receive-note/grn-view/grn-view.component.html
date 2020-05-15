@@ -65,9 +65,9 @@
             [(ngModel)]="grnPaymentStatus"
             [ngModelOptions]="{ standalone: true }"
           >
-            <option [value]="paid">Paid</option>
-            <option [value]="partially - paid">Partially Paid</option>
-            <option [value]="awaiting">Awaiting Payment</option>
+            <option [ngValue]="paid">Paid</option>
+            <option [ngValue]="partially - paid">Partially Paid</option>
+            <option [ngValue]="awaiting">Awaiting Payment</option>
           </select>
         </div>
         <button class="bttn-primary" (click)="updatePaymentStatus()">

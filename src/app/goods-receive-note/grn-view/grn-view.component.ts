@@ -23,12 +23,11 @@ export class GrnViewComponent implements OnInit {
 
   async updatePaymentStatus() {
     // TODO: Add loader
-    const dto: UpdateGoodsReceivedNoteDTO = {
-      paymentStatus: this.grnPaymentStatus
-    };
-
-    const grn = await this.sdkService.updateGrnPaymentStatus(this.grn._id, dto);
-    this.grn = grn;
+    // const dto: UpdateGoodsReceivedNoteDTO = {
+    //   paymentStatus: this.grnPaymentStatus
+    // };
+    // const grn = await this.sdkService.updateGrnPaymentStatus(this.grn._id, dto);
+    // this.grn = grn;
   }
 
   downloadPdf() {
