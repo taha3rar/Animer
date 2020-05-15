@@ -5,7 +5,7 @@
   </div>
 
   <form [formGroup]="loan_form" class="col">
-    <div formGroupName="business_financial_details" #businessFinancialDetails>
+    <div formGroupName="businessFinancialFetails" #businessFinancialDetails>
       <div class="step-content">
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -16,7 +16,7 @@
               class="form-control"
               placeholder="DD/MM/YYYY"
               ngbDatepicker
-              formControlName="activity_from"
+              formControlName="activityFrom"
             />
           </div>
           <div class="form-group col-md-6">
@@ -27,7 +27,7 @@
               class="form-control"
               placeholder="DD/MM/YYYY"
               ngbDatepicker
-              formControlName="activity_to"
+              formControlName="activityTo"
             />
           </div>
         </div>
@@ -39,13 +39,13 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">KES</span>
               </div>
-              <input type="number" id="business-sales" class="form-control" formControlName="business_sales" />
+              <input type="number" id="business-sales" class="form-control" formControlName="businessSales" />
             </div>
           </div>
           <div class="form-group col-md-6 has-feedback">
             <label for="stocks-held">Value of stocks held</label>
             <div class="input-group">
-              <input type="number" id="stocks-held" class="form-control" formControlName="stocks_held" />
+              <input type="number" id="stocks-held" class="form-control" formControlName="stocksHeld" />
               <div class="input-group-append">
                 <span class="form-control-feedback" id="basic-addon1"
                   ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
@@ -62,7 +62,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">KES</span>
               </div>
-              <input type="number" id="cost-goods" class="form-control" formControlName="cost_goods" />
+              <input type="number" id="cost-goods" class="form-control" formControlName="costGoods" />
             </div>
           </div>
           <div class="form-group col-md-6">
@@ -72,7 +72,7 @@
                 type="number"
                 id="debtors-outstanding"
                 class="form-control"
-                formControlName="trade_debtors_outstanding"
+                formControlName="tradeDebtorsOutstanding"
               />
               <span class="form-control-feedback" id="basic-addon1"
                 ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
@@ -84,7 +84,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="operating-expenses">Operating expenses</label>
-            <input type="number" id="operating-expenses" class="form-control" formControlName="operating_expenses" />
+            <input type="number" id="operating-expenses" class="form-control" formControlName="operatingExpenses" />
           </div>
           <div class="form-group col-md-6">
             <label for="creditors-oustanding">Trade creditors outstanding</label>
@@ -93,7 +93,7 @@
                 type="number"
                 id="creditors-oustanding"
                 class="form-control"
-                formControlName="trade_creditors_oustanding"
+                formControlName="tradeCreditorsOutstanding"
               />
               <span class="form-control-feedback" id="basic-addon1"
                 ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
@@ -105,11 +105,11 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="other-costs">Other costs</label>
-            <input type="number" id="other-costs" class="form-control" formControlName="other_costs" />
+            <input type="number" id="other-costs" class="form-control" formControlName="otherCosts" />
           </div>
           <div class="form-group col-md-6">
             <label for="other-debts">Other debts</label>
-            <input type="number" id="other-debts" class="form-control" formControlName="other_debts" />
+            <input type="number" id="other-debts" class="form-control" formControlName="otherDebts" />
           </div>
         </div>
 
@@ -120,12 +120,12 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">KES</span>
               </div>
-              <input type="number" id="net-profit" class="form-control" formControlName="net_profit" />
+              <input type="number" id="net-profit" class="form-control" formControlName="netProfit" />
             </div>
           </div>
           <div class="form-group col-md-6">
             <label for="paid-capital">Paid-up capital</label>
-            <input type="number" id="paid-capital" class="form-control" formControlName="paid_up_capital" />
+            <input type="number" id="paid-capital" class="form-control" formControlName="paidUpCapital" />
           </div>
         </div>
       </div>

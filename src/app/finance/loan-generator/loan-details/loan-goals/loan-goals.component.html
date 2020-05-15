@@ -5,7 +5,7 @@
 </ul>
 
 <form [formGroup]="loan_form" class="col">
-  <div formGroupName="loan_goals" #loanGoals>
+  <div formGroupName="loanGoals" #loanGoals>
     <div class="loan-step-wrapper">
       <div class="step-header">
         <div class="loan-assitant-img"></div>
@@ -20,7 +20,7 @@
               name="loan-for"
               id="loan-for"
               class="form-control custom-textarea"
-              formControlName="loan_for"
+              formControlName="loanFor"
             ></textarea>
           </div>
         </div>
@@ -29,10 +29,10 @@
           <div class="form-group col-md-12">
             <label for="short-term">What do you want to achieve in the short term with these founds?</label>
             <textarea
-              name="short_term"
+              name="shortTerm"
               id="short-term"
               class="form-control custom-textarea"
-              formControlName="short_term"
+              formControlName="shortTerm"
             ></textarea>
           </div>
         </div>
@@ -42,9 +42,9 @@
             <label for="long-term">What do you want to achieve in the long term with these founds?</label>
             <textarea
               name="long-term"
-              id="long_term"
+              id="longTerm"
               class="form-control custom-textarea"
-              formControlName="long_term"
+              formControlName="longTerm"
             ></textarea>
           </div>
         </div>

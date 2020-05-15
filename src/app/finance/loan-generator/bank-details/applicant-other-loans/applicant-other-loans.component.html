@@ -6,12 +6,12 @@
 
   <form [formGroup]="loan_form" class="col">
     <div class="step-content">
-      <div formGroupName="absa_banking_details" #bankDetails>
+      <div formGroupName="absaBankingDetails" #bankDetails>
         <label for="ownership-type">Do you have any other existing facilites with Absa?</label>
         <div class="row options-wrapper mb-2">
           <div class="col-md-6 pl-0 mb-3">
             <label class="container">
-              <input type="radio" name="other_absa_facility" [value]="true" formControlName="other_absa_facility" />
+              <input type="radio" name="otherAbsaFacility" [value]="true" formControlName="otherAbsaFacility" />
               <span class="checkmark">
                 Yes
               </span>
@@ -19,7 +19,7 @@
           </div>
           <div class="col-md-6 pl-0">
             <label class="container">
-              <input type="radio" name="other_absa_facility" [value]="false" formControlName="other_absa_facility" />
+              <input type="radio" name="otherAbsaFacility" [value]="false" formControlName="otherAbsaFacility" />
               <span class="checkmark">
                 No
               </span>
@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div *ngIf="loan.absa_banking_details.other_absa_facility" formGroupName="other_facility" #bankFacilities>
+        <div *ngIf="loan.absaBankingDetails.otherAbsaFacility" formGroupName="otherFacility" #bankFacilities>
           <div class="loan-bank">
             <div class="loan-bank_title">
               <p>Absa Bank</p>
@@ -35,18 +35,18 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="bank-branch2">Branch</label>
-                <input type="text" id="bank-branch2" class="form-control" formControlName="bank_branch" />
+                <input type="text" id="bank-branch2" class="form-control" formControlName="bankBranch" />
               </div>
               <div class="form-group col-md-6">
                 <label for="nature-facility">Nature of facility</label>
-                <input type="text" id="nature-facility" class="form-control" formControlName="nature_of_facility" />
+                <input type="text" id="nature-facility" class="form-control" formControlName="natureOfFacility" />
               </div>
             </div>
 
             <div class="form-row">
               <div class="col">
                 <label for="initial-granted1">Limit/Initial granted</label>
-                <input type="text" id="initial-granted1" class="form-control" formControlName="limit_initial_granted" />
+                <input type="text" id="initial-granted1" class="form-control" formControlName="limitInitialGranted" />
               </div>
             </div>
 
@@ -57,7 +57,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">KES</span>
                   </div>
-                  <input type="text" class="form-control" formControlName="monthly_repayment" />
+                  <input type="text" class="form-control" formControlName="monthlyRepayment" />
                 </div>
               </div>
             </div>
@@ -69,7 +69,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">KES</span>
                   </div>
-                  <input type="text" class="form-control" formControlName="outstanding_balance" />
+                  <input type="text" class="form-control" formControlName="outstandingBalance" />
                 </div>
               </div>
             </div>

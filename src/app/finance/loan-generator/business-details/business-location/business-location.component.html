@@ -5,7 +5,7 @@
   </div>
 
   <form [formGroup]="loan_form" class="col">
-    <div formGroupName="business_location" #businessLocation>
+    <div formGroupName="businessLocation" #businessLocation>
       <div class="step-content">
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -33,7 +33,7 @@
           <div class="form-group col-md-6">
             <label for="postal">Building block number</label>
             <div class="input-group">
-              <input type="text" id="block-number" class="form-control" formControlName="block_number" />
+              <input type="text" id="block-number" class="form-control" formControlName="blockNumber" />
               <span class="form-control-feedback" id="basic-addon1"
                 ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
               >
@@ -42,7 +42,7 @@
           <div class="form-group col-md-6">
             <label for="building">Building name</label>
             <div class="input-group">
-              <input type="text" id="building" class="form-control" formControlName="building_name" />
+              <input type="text" id="building" class="form-control" formControlName="buildingName" />
               <span class="form-control-feedback" id="basic-addon1"
                 ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
               >
@@ -54,7 +54,7 @@
           <div class="form-group col-md-6">
             <label for="country">Postal Code</label>
             <div class="input-group">
-              <input type="text" id="building2" class="form-control" formControlName="postal_code" />
+              <input type="text" id="building2" class="form-control" formControlName="postalCode" />
               <span class="form-control-feedback" id="basic-addon1"
                 ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
               >
@@ -63,7 +63,7 @@
           <div class="form-group col-md-6">
             <label for="town">P.O. box</label>
             <div class="input-group">
-              <input type="text" id="town-business-location2" class="form-control" formControlName="po_box" />
+              <input type="text" id="town-business-location2" class="form-control" formControlName="poBox" />
               <span class="form-control-feedback" id="basic-addon1"
                 ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
               >

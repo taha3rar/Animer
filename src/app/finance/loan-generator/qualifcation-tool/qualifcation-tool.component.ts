@@ -37,26 +37,26 @@ export class QualifcationToolComponent implements OnInit {
     });
     this.loan_form
       .get('qualification')
-      .get('other_agribusiness_type')
+      .get('otherAgribusinessType')
       .valueChanges.subscribe(type => {
         type
           ? this.loan_form
               .get('qualification')
-              .get('agribusiness_type')
+              .get('agribusinessType')
               .setValidators([])
           : this.loan_form
               .get('qualification')
-              .get('agribusiness_type')
+              .get('agribusinessType')
               .setValidators([Validators.required]);
         this.loan_form
           .get('qualification')
-          .get('agribusiness_type')
+          .get('agribusinessType')
           .updateValueAndValidity();
       });
   }
 
   onNextQuestion() {
-    if (this.currentIndex === 4 && !this.loan.qualification.business_type) {
+    if (this.currentIndex === 4 && !this.loan.qualification.businessType) {
       return;
     }
     this.currentIndex += 1;
@@ -67,7 +67,7 @@ export class QualifcationToolComponent implements OnInit {
   }
 
   checkEligibility(loan: WBLoan) {
-    return loan.qualification.absa_bank_account && this.loan.qualification.registration_country === 'kenya';
+    return loan.qualification.absaBankAccount && this.loan.qualification.registrationCountry === 'kenya';
   }
 
   onFinishQualification() {
@@ -76,13 +76,13 @@ export class QualifcationToolComponent implements OnInit {
     //   // this.router.navigateByUrl('/finance');
     // });
     this.loan_form.get('qualification').patchValue({
-      qualification_done: true
+      qualificationDone: true
     });
     this.beginApplication.emit(true);
   }
 
   onCheck(event: any) {
-    const formArray: FormArray = this.loan_form.get('qualification').get('agribusiness_type').value as FormArray;
+    const formArray: FormArray = this.loan_form.get('qualification').get('agribusinessType').value as FormArray;
     if (event.target.checked && this.checkboxCounter < 3) {
       formArray.push(new FormControl(event.target.value));
       this.checkboxCounter += 1;
@@ -100,7 +100,7 @@ export class QualifcationToolComponent implements OnInit {
       event.target.checked = false;
     }
     this.loan_form.get('qualification').patchValue({
-      agribusiness_type: formArray.value
+      agribusinessType: formArray.value
     });
   }
 

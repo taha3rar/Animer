@@ -5,16 +5,16 @@
   </div>
 
   <form [formGroup]="loan_form" class="col">
-    <div formGroupName="applicant_details" #applicantDetails>
+    <div formGroupName="applicantDetails" #applicantDetails>
       <div class="step-content">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="surname1">Full name</label>
-            <input type="text" id="surname1" class="form-control" formControlName="full_name" />
+            <input type="text" id="surname1" class="form-control" formControlName="fullName" />
           </div>
           <div class="form-group col-md-6">
             <label for="other-names1">Other names</label>
-            <input type="text" id="other-names1" class="form-control" formControlName="other_names" />
+            <input type="text" id="other-names1" class="form-control" formControlName="otherNames" />
           </div>
         </div>
 
@@ -42,7 +42,7 @@
         <div class="row options-wrapper mb-2">
           <div class="col-md-6 pl-0 pr-2 mb-3">
             <label class="container">
-              <input type="radio" name="marital_status" value="married" formControlName="marital_status" />
+              <input type="radio" name="maritalStatus" value="married" formControlName="maritalStatus" />
               <span class="checkmark">
                 Married
               </span>
@@ -50,7 +50,7 @@
           </div>
           <div class="col-md-6 pl-2 pr-0">
             <label class="container">
-              <input type="radio" name="marital_status" value="single" formControlName="marital_status" />
+              <input type="radio" name="maritalStatus" value="single" formControlName="maritalStatus" />
               <span class="checkmark">
                 Single
               </span>
@@ -65,9 +65,9 @@
               <input
                 type="radio"
                 checked="checked"
-                name="kenyan_resident"
+                name="kenyanResident"
                 [value]="true"
-                formControlName="kenyan_resident"
+                formControlName="kenyanResident"
               />
               <span class="checkmark">
                 Yes
@@ -76,7 +76,7 @@
           </div>
           <div class="col-md-6 pl-2 pr-0">
             <label class="container">
-              <input type="radio" name="kenyan_resident" [value]="false" formControlName="kenyan_resident" />
+              <input type="radio" name="kenyanResident" [value]="false" formControlName="kenyanResident" />
               <span class="checkmark">
                 No
               </span>
@@ -87,18 +87,18 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="birth-date1">Date of birth</label>
-            <input type="text" id="birth-date1" class="form-control" formControlName="birth_date" />
+            <input type="text" id="birth-date1" class="form-control" formControlName="birthDate" />
           </div>
           <div class="form-group col-md-6">
             <label for="PIN1">PIN number</label>
-            <input type="text" id="PIN1" class="form-control" formControlName="pin_number" />
+            <input type="text" id="PIN1" class="form-control" formControlName="pinNumber" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-3">
             <label for="country1">Country of Residence</label>
-            <input type="text" id="country1" class="form-control" formControlName="residence_country" />
+            <input type="text" id="country1" class="form-control" formControlName="residenceCountry" />
           </div>
           <div class="form-group col-md-3">
             <label for="nationality1">Nationality</label>
@@ -106,25 +106,25 @@
           </div>
           <div class="form-group col-md-6">
             <label for="national-id1">National ID</label>
-            <input type="text" id="national-id1" class="form-control" formControlName="national_id_number" />
+            <input type="text" id="national-id1" class="form-control" formControlName="nationalIdNumber" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="col">
             <label for="passport-number">Passport number</label>
-            <input type="text" id="passport-number" class="form-control" formControlName="passport_number" />
+            <input type="text" id="passport-number" class="form-control" formControlName="passportNumber" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="po-box1">P.O. box</label>
-            <input type="text" id="po-box1" class="form-control" formControlName="postal_box" />
+            <input type="text" id="po-box1" class="form-control" formControlName="postalBox" />
           </div>
           <div class="form-group col-md-6">
             <label for="postal-code1">Postal code</label>
-            <input type="text" id="postal-code1" class="form-control" formControlName="postal_code" />
+            <input type="text" id="postal-code1" class="form-control" formControlName="postalCode" />
           </div>
         </div>
       </div>

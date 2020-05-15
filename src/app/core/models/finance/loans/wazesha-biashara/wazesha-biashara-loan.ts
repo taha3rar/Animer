@@ -1,71 +1,71 @@
 export class WBLoan {
   qualification: {
-    amount_needed: Number;
-    loan_purpose: String;
-    agribusiness_type: [String];
-    business_type: String;
-    other_agribusiness_type: String;
-    incorporation_seniority: String;
-    registration_country: String;
-    absa_bank_account: Boolean;
-    qualification_done: Boolean;
+    amountNeeded: Number;
+    loanPurpose: String;
+    agribusinessType: [String];
+    businessType: String;
+    otherAgribusinessType: String;
+    incorporationSeniority: String;
+    registrationCountry: String;
+    absaBankAccount: Boolean;
+    qualificationDone: Boolean;
   };
-  loan_details: {
-    amount_requested: number;
-    loan_purpose: String;
-    insure_with_absa: boolean;
-    repayments_number: number;
+  loanDetails: {
+    amountRequested: number;
+    loanPurpose: String;
+    insureWithAbsa: boolean;
+    repaymentsNumber: number;
   };
   business_details: {
-    business_name: String;
+    businessName: String;
     ownership_type: String;
-    registration_number: String;
+    registrationNumber: String;
     incorporation_date: Date;
-    vat_number: Number;
+    vatNumber: Number;
     employees_amount: Number;
-    pin_number: Number;
-    phone_number: Number;
-    business_location: {
-      po_box: Number;
-      postal_code: Number;
+    pinNumber: Number;
+    phoneNumber: Number;
+    businessLocation: {
+      poBox: Number;
+      postalCode: Number;
       city: String;
       street: String;
       building: String;
       plot_number: Number;
     };
-    business_type: String;
+    businessType: String;
     country_of_operation: String;
-    business_premises: String;
+    businessPremises: String;
     business_insurance: String;
     is_business_insured: Boolean;
     operation_time: Number;
   };
-  applicant_details: [
+  applicantDetails: [
     {
       first_name: String;
       middle_name: String;
       last_name: String;
-      national_id_number: String;
-      passport_number: String;
-      pin_number: Number;
+      nationalIdNumber: String;
+      passportNumber: String;
+      pinNumber: Number;
       nationality: String;
-      kenyan_resident: Boolean;
-      residence_country: String;
-      birth_date: Date;
+      kenyanResident: Boolean;
+      residenceCountry: String;
+      birthDate: Date;
       birth_place: String;
       gender: String;
-      marital_status: String;
+      maritalStatus: String;
       number_of_dependants: Number;
       ages_of_dependants: Number;
       residential_address: {
-        physical_address: String;
+        physicalAddress: String;
         city: String;
         province: String;
         years_of_residency: Number;
       };
-      postal_address: {
-        po_box: Number;
-        postal_code: Number;
+      postalAddress: {
+        poBox: Number;
+        postalCode: Number;
         city: String;
         province: String;
       };
@@ -73,7 +73,7 @@ export class WBLoan {
         mobile_phone_number: Number;
         home_phone_number: Number;
         other_phone_number: Number;
-        email_address: Number;
+        emailAddress: Number;
       };
       five_years_same_address: Boolean;
       previous_physical_address: String;
@@ -88,27 +88,27 @@ export class WBLoan {
   ];
   referee_details: [
     {
-      full_name: String;
+      fullName: String;
       applicant_relationship: String;
-      phone_number: String;
-      po_box: Number;
-      postal_code: Number;
+      phoneNumber: String;
+      poBox: Number;
+      postalCode: Number;
       city: String;
       country: String;
     }
   ];
-  absa_banking_details: {
-    bank_name: String;
-    bank_branch: String;
-    account_number: String;
-    account_opening_date: String;
-    other_absa_facility: boolean;
-    other_facility: {
-      bank_branch: String;
-      nature_of_facility: String;
-      limit_initial_granted: String;
-      monthly_repayment: number;
-      outstanding_balance: number;
+  absaBankingDetails: {
+    bankName: String;
+    bankBranch: String;
+    accountNumber: String;
+    accountOpeningDate: String;
+    otherAbsaFacility: boolean;
+    otherFacility: {
+      bankBranch: String;
+      natureOfFacility: String;
+      limitInitialGranted: String;
+      monthlyRepayment: number;
+      outstandingBalance: number;
     };
   };
 }

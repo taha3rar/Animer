@@ -5,19 +5,18 @@
   </div>
 
   <form [formGroup]="loan_form" class="col">
-    <div formGroupName="business_directors_details" #businessDirectorsDetails>
+    <div formGroupName="businessDirectorsDetails" #businessDirectorsDetails>
       <div class="step-content">
-        (LLC/Partnership only)
         <div class="container">
           <div class="form-row">
             <div class="form-group col-md-6 pr-3">
               <label for="full-name">Full name</label>
-              <input type="text" id="full-name" class="form-control" formControlName="full_name" />
+              <input type="text" id="full-name" class="form-control" formControlName="fullName" />
             </div>
             <div class="form-group col-md-6 pl-3">
               <label for="id">ID number</label>
               <div class="input-group">
-                <input type="text" id="id" class="form-control" formControlName="id_number" />
+                <input type="text" id="id" class="form-control" formControlName="idNumber" />
               </div>
             </div>
           </div>
@@ -71,7 +70,7 @@
             <div class="form-group col-md-6 pl-3">
               <label for="PIN2">PIN Number</label>
               <div class="input-group">
-                <input type="text" id="PIN2" class="form-control" formControlName="pin_number" />
+                <input type="text" id="PIN2" class="form-control" formControlName="pinNumber" />
               </div>
             </div>
           </div>
@@ -93,10 +92,10 @@
                   <input
                     type="radio"
                     class="form-check-input form_radio_input"
-                    name="loan_guarantor"
+                    name="loanGuarantor"
                     id="yes_guarantor"
                     [value]="true"
-                    formControlName="loan_guarantor"
+                    formControlName="loanGuarantor"
                   />
                   <label for="yes_guarantor" style="vertical-align: top;">Yes</label>
                 </div>
@@ -104,10 +103,10 @@
                   <input
                     type="radio"
                     class="form-check-input form_radio_input"
-                    name="loan_guarantor"
+                    name="loanGuarantor"
                     id="no_guarantor"
                     [value]="false"
-                    formControlName="loan_guarantor"
+                    formControlName="loanGuarantor"
                   />
                   <label for="no_guarantor" style="vertical-align: top;">No</label>
                 </div>
@@ -118,11 +117,11 @@
           <div class="form-row">
             <div class="form-group col-md-6 pr-3">
               <label for="postal-adress">Postal address (LLC)</label>
-              <input type="text" id="postal-address" class="form-control" formControlName="postal_address" />
+              <input type="text" id="postal-address" class="form-control" formControlName="postalAddress" />
             </div>
             <div class="form-group col-md-6 pl-3">
               <label for="PC">Postal code (LLC)</label>
-              <input type="text" id="PC" class="form-control" formControlName="postal_code" />
+              <input type="text" id="PC" class="form-control" formControlName="postalCode" />
             </div>
           </div>
         </div>

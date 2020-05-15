@@ -5,7 +5,7 @@
   </div>
 
   <form [formGroup]="loan_form" class="col">
-    <div formGroupName="business_key_person_location" #businessKeyPersonLocation>
+    <div formGroupName="businessKeyPersonLocation" #businessKeyPersonLocation>
       <div class="step-content">
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -25,18 +25,18 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="house-number">House number</label>
-            <input type="text" id="house-number" class="form-control" formControlName="house_number" />
+            <input type="text" id="house-number" class="form-control" formControlName="houseNumber" />
           </div>
           <div class="form-group col-md-6">
             <label for="duration-address">Duration at current address</label>
-            <input type="text" id="duration-address" class="form-control" formControlName="current_address_duration" />
+            <input type="text" id="duration-address" class="form-control" formControlName="currentAddressDuration" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="po-box4">P.O. box</label>
-            <input type="text" id="po-box4" class="form-control" formControlName="postal_box" />
+            <input type="text" id="po-box4" class="form-control" formControlName="postalBox" />
           </div>
         </div>
       </div>

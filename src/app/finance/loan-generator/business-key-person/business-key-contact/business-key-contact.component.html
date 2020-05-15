@@ -5,19 +5,19 @@
   </div>
 
   <form [formGroup]="loan_form" class="col">
-    <div formGroupName="business_key_person" #businessKeyPerson>
+    <div formGroupName="businessKeyPerson" #businessKeyPerson>
       <div class="step-content">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="birthday">Date of birth</label>
-            <input type="text" id="birthday" class="form-control" formControlName="birth_date" />
+            <input type="text" id="birthday" class="form-control" formControlName="birthDate" />
           </div>
           <div class="form-group col-md-6">
             <label for="pin3">Pin Number</label>
-            <input type="text" id="pin3" class="form-control" formControlName="pin_number" />
+            <input type="text" id="pin3" class="form-control" formControlName="pinNumber" />
           </div>
         </div>
-        <div class="form-row" *ngIf="loan.qualification.business_type == 'limited company'">
+        <div class="form-row" *ngIf="loan.qualification.businessType == 'limited company'">
           <div class="form-group col-md-6">
             <div class="col-md-6 pl-0 pr-2">
               <label for="country3">Country</label>
@@ -34,36 +34,36 @@
           </div>
           <div class="form-group col-md-6">
             <label for="national-id2">National ID</label>
-            <input type="text" id="national-id2" class="form-control" formControlName="national_id_number" />
+            <input type="text" id="national-id2" class="form-control" formControlName="nationalIdNumber" />
           </div>
         </div>
 
-        <div class="form-row" *ngIf="loan.qualification.business_type != 'limited company'">
+        <div class="form-row" *ngIf="loan.qualification.businessType != 'limited company'">
           <div class="form-group col-md-6">
             <label for="nationality2">Nationality</label>
             <input type="text" id="nationality2" class="form-control" formControlName="nationality" />
           </div>
           <div class="form-group col-md-6">
             <label for="national-id2">National ID</label>
-            <input type="text" id="national-id2" class="form-control" formControlName="national_id_number" />
+            <input type="text" id="national-id2" class="form-control" formControlName="nationalIdNumber" />
           </div>
         </div>
 
-        <div class="form-row" *ngIf="loan.qualification.business_type == 'limited company'">
+        <div class="form-row" *ngIf="loan.qualification.businessType == 'limited company'">
           <div class="form-group col-md-6">
             <label for="po-box2">P.O. box</label>
-            <input type="text" id="po-box2" class="form-control" formControlName="postal_box" />
+            <input type="text" id="po-box2" class="form-control" formControlName="postalBox" />
           </div>
           <div class="form-group col-md-6">
             <label for="postal-code3">Postal code</label>
-            <input type="text" id="postal-code3" class="form-control" formControlName="postal_code" />
+            <input type="text" id="postal-code3" class="form-control" formControlName="postalCode" />
           </div>
         </div>
 
-        <div class="form-row" *ngIf="loan.qualification.business_type == 'sole trader'">
+        <div class="form-row" *ngIf="loan.qualification.businessType == 'sole trader'">
           <div class="col">
             <label for="passport-numberbkp">Passport number</label>
-            <input type="text" id="passport-numberbkp" class="form-control" formControlName="passport_number" />
+            <input type="text" id="passport-numberbkp" class="form-control" formControlName="passportNumber" />
           </div>
         </div>
 
@@ -85,7 +85,7 @@
               id="mobile3"
               class="form-control"
               placeholder="(+254) 7XX-XXX-XXX"
-              formControlName="mobile_phone"
+              formControlName="mobilePhone"
             />
           </div>
         </div>

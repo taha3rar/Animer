@@ -20,7 +20,7 @@
           <div class="info">
             <div>
               <p class="t-light-gray">LOAN SIZE</p>
-              <p class="t-bold">KES {{ loan.loan_details.amount_requested | number: '1.2-2' }}</p>
+              <p class="t-bold">KES {{ loan.loanDetails.amountRequested | number: '1.2-2' }}</p>
             </div>
             <div style="margin-left: auto;">
               <p class="t-light-gray text-right">STATUS</p>
@@ -72,7 +72,7 @@
                   </span> -->
                 </div>
                 <div
-                  *ngIf="loan.qualification.business_type === 'sole trader'"
+                  *ngIf="loan.qualification.businessType === 'sole trader'"
                   (click)="toGenerator(2)"
                   class="step_content_item"
                 >

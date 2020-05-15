@@ -5,6 +5,7 @@ import { countries } from '@app/shared/helpers/countries';
 import { LoanGeneratorDataService } from '../loan-generator-data.service';
 import { FormGroup } from '@angular/forms';
 import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
+import { SdkService } from '@app/core/sdk.service';
 
 @Component({
   selector: 'app-business-key-person',
@@ -13,25 +14,18 @@ import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-
 })
 export class BusinessKeyPersonComponent extends LoanNavigationComponent implements OnInit, AfterViewInit {
   countries = countries;
-  loan_form: FormGroup;
-  loan: WBLoan;
   isLimitedCompany: boolean;
 
   constructor(
     stepperNavigationService: StepperNavigationService,
-    private loanGeneratorDataService: LoanGeneratorDataService
+    sdkService: SdkService,
+    loanGeneratorDataService: LoanGeneratorDataService
   ) {
-    super(3, stepperNavigationService);
+    super(3, stepperNavigationService, sdkService, loanGeneratorDataService);
   }
 
   ngOnInit() {
-    this.loanGeneratorDataService.currentForm.subscribe(form => {
-      if (form) {
-        this.loan_form = form;
-        this.loan = this.loan_form.value;
-        this.isLimitedCompany = this.loan.qualification.business_type === 'limited company';
-      }
-    });
+    this.isLimitedCompany = this.loan.qualification.businessType === 'limited company';
   }
 
   ngAfterViewInit() {

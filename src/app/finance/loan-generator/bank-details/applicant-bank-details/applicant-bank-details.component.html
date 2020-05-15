@@ -6,7 +6,7 @@
 
   <form [formGroup]="loan_form" class="col">
     <div class="step-content">
-      <div formGroupName="absa_banking_details" #bankDetails>
+      <div formGroupName="absaBankingDetails" #bankDetails>
         <div class="loan-bank">
           <div class="loan-bank_title absa">
             <p>Absa Bank</p>
@@ -14,11 +14,11 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="branch">Branch</label>
-              <input type="text" id="branch-bank-details" class="form-control" formControlName="bank_branch" />
+              <input type="text" id="branch-bank-details" class="form-control" formControlName="bankBranch" />
             </div>
             <div class="form-group col-md-6">
               <label for="bank-number">Account number</label>
-              <input type="text" id="bank-number" class="form-control" formControlName="account_number" />
+              <input type="text" id="bank-number" class="form-control" formControlName="accountNumber" />
             </div>
           </div>
           <div class="form-row">
@@ -29,7 +29,7 @@
                 id="date-opened"
                 class="form-control"
                 placeholder="DD/MM/YYYY"
-                formControlName="account_opening_date"
+                formControlName="accountOpeningDate"
               />
             </div>
           </div>

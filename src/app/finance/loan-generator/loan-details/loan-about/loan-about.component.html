@@ -11,7 +11,7 @@
   </div>
 
   <form [formGroup]="loan_form" class="col">
-    <div formGroupName="loan_details" #loanDetails>
+    <div formGroupName="loanDetails" #loanDetails>
       <div class="step-content">
         <div class="form-row">
           <div class="form-group col-md-12">
@@ -26,7 +26,7 @@
                 max="10000000"
                 name="loan_size"
                 class="form-control"
-                formControlName="amount_requested"
+                formControlName="amountRequested"
               />
             </div>
           </div>
@@ -35,16 +35,16 @@
         <div class="form-row">
           <div class="form-group col-md-12">
             <label for="repayments-num">Number of repayments</label
-            ><span class="text-muted"> - In months : {{ loan.loan_details.repayments_number }}</span>
+            ><span class="text-muted"> - In months : {{ loan.loanDetails.repaymentsNumber }}</span>
             <div class="input-group">
               <input
                 type="range"
                 min="6"
                 max="48"
                 id="repayments-num"
-                name="repayments_number"
+                name="repaymentsNumber"
                 class="col-md-12 custom-range"
-                formControlName="repayments_number"
+                formControlName="repaymentsNumber"
               />
               <output for="repayments-num" onforminput="value = repayments-num.valueAsNumber;"></output>
             </div>
@@ -60,7 +60,7 @@
           <div class="form-group col-md-12">
             <div class="col-md-6 pl-0 pr-2">
               <label class="container">
-                <input type="radio" name="insure_with_absa" [value]="true" formControlName="insure_with_absa" />
+                <input type="radio" name="insureWithAbsa" [value]="true" formControlName="insureWithAbsa" />
                 <span class="checkmark">
                   Yes
                 </span>
@@ -68,7 +68,7 @@
             </div>
             <div class="col-md-6 pr-0 pl-2">
               <label class="container">
-                <input type="radio" name="insure_with_absa" [value]="false" formControlName="insure_with_absa" />
+                <input type="radio" name="insureWithAbsa" [value]="false" formControlName="insureWithAbsa" />
                 <span class="checkmark">
                   No
                 </span>
@@ -85,14 +85,14 @@
                 <span>Monthly Repayment</span>
               </li>
               <li class="list-group-item checkmark list-checkmark">
-                <span class="resume-numbers">{{ loan.loan_details.repayments_number }} Months</span>
+                <span class="resume-numbers">{{ loan.loanDetails.repaymentsNumber }} Months</span>
                 <span>Number of Repayments</span>
               </li>
               <li class="list-group-item checkmark list-checkmark">
                 <span class="resume-numbers">KES {{ expected_total_repayment | number: '1.2-2' }}</span>
                 <span
                   >Payback Amount <br />
-                  <div *ngIf="loan.loan_details.insure_with_absa">(Inclusive of Insurance)</div></span
+                  <div *ngIf="loan.loanDetails.insureWithAbsa">(Inclusive of Insurance)</div></span
                 >
               </li>
             </ul>

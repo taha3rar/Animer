@@ -24,7 +24,7 @@ export class LoanAboutComponent implements OnInit {
       if (form) {
         this.loan_form = form;
         this.loan = this.loan_form.value;
-        this.calculatePmt(this.loan.loan_details.insure_with_absa);
+        this.calculatePmt(this.loan.loanDetails.insureWithAbsa);
       }
     });
   }
@@ -33,16 +33,16 @@ export class LoanAboutComponent implements OnInit {
     let real_amount_requested: number;
     if (insurance) {
       const insurance_amount =
-        (this.insurance_rate * this.loan.loan_details.amount_requested * this.loan.loan_details.repayments_number) / 12;
-      real_amount_requested = this.loan.loan_details.amount_requested + insurance_amount;
+        (this.insurance_rate * this.loan.loanDetails.amountRequested * this.loan.loanDetails.repaymentsNumber) / 12;
+      real_amount_requested = this.loan.loanDetails.amountRequested + insurance_amount;
     } else {
-      real_amount_requested = this.loan.loan_details.amount_requested;
+      real_amount_requested = this.loan.loanDetails.amountRequested;
     }
     this.expected_period_repayment = pmt(
       this.loan_rate / 12,
-      this.loan.loan_details.repayments_number,
+      this.loan.loanDetails.repaymentsNumber,
       -real_amount_requested
     );
-    this.expected_total_repayment = this.expected_period_repayment * this.loan.loan_details.repayments_number;
+    this.expected_total_repayment = this.expected_period_repayment * this.loan.loanDetails.repaymentsNumber;
   }
 }

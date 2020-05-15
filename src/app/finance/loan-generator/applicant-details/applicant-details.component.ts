@@ -1,6 +1,7 @@
 import { StepperNavigationService } from './../stepper-navigation.service';
 import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { LoanNavigationComponent } from '../loan-navigation.component';
+import { SdkService } from '@app/core/sdk.service';
 
 @Component({
   selector: 'app-applicant-details',
@@ -8,8 +9,8 @@ import { LoanNavigationComponent } from '../loan-navigation.component';
   styleUrls: ['./applicant-details.component.scss']
 })
 export class ApplicantDetailsComponent extends LoanNavigationComponent implements OnInit, AfterViewInit {
-  constructor(stepperNavigationService: StepperNavigationService) {
-    super(2, stepperNavigationService);
+  constructor(stepperNavigationService: StepperNavigationService, sdkService: SdkService) {
+    super(2, stepperNavigationService, sdkService);
   }
 
   ngOnInit() {}

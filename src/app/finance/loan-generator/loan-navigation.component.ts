@@ -1,12 +1,33 @@
 import { AfterViewInit, ViewChild, ElementRef, AfterContentChecked, Inject } from '@angular/core';
 import { StepperNavigationService } from './stepper-navigation.service';
+import { CreateLoanDTO } from '@avenews/agt-sdk';
+import { SdkService } from '@app/core/sdk.service';
+import { LoanGeneratorDataService } from './loan-generator-data.service';
+import { FormGroup } from '@angular/forms';
+import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
 
 export class LoanNavigationComponent implements AfterViewInit, AfterContentChecked {
   @ViewChild('listStepDetails') stepperDetails: ElementRef<HTMLElement>;
   currentInnerStep: number;
   currentGeneralStep: number;
+  loan_form: FormGroup;
+  loan: WBLoan;
 
-  constructor(private generalStepId: number, private stepperNavigationService: StepperNavigationService) {}
+  constructor(
+    private generalStepId: number,
+    private stepperNavigationService: StepperNavigationService,
+    private sdkService: SdkService,
+    private loanGeneratorDataService?: LoanGeneratorDataService
+  ) {
+    if (this.loanGeneratorDataService) {
+      this.loanGeneratorDataService.currentForm.subscribe(form => {
+        if (form) {
+          this.loan_form = form;
+          this.loan = this.loan_form.value;
+        }
+      });
+    }
+  }
 
   ngAfterContentChecked() {
     this.stepperNavigationService.currentActiveInnerStep.subscribe(currentStep => {
@@ -25,7 +46,20 @@ export class LoanNavigationComponent implements AfterViewInit, AfterContentCheck
     return this.currentInnerStep === stepNumber;
   }
 
+  onSave() {
+    const loanDTO: CreateLoanDTO = undefined;
+    this.sdkService
+      .saveLoanApplication(loanDTO)
+      .then(loan => {
+        console.log('loan received', loan);
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
+  }
+
   onNext() {
+    this.onSave();
     this.stepperNavigationService.onNext();
   }
 

@@ -4,7 +4,7 @@
     <p class="step-title">What are your contact details?</p>
   </div>
   <form [formGroup]="loan_form" class="col">
-    <div formGroupName="applicant_details" #applicantDetails>
+    <div formGroupName="applicantDetails" #applicantDetails>
       <div class="step-content">
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -24,15 +24,15 @@
               id="mobile1"
               class="form-control"
               placeholder="(+254) 7XX-XXX-XXX"
-              formControlName="mobile_phone"
+              formControlName="mobilePhone"
             />
           </div>
         </div>
 
         <div class="form-row">
           <div class="col">
-            <label for="email_address">Email address</label>
-            <input type="text" id="email_address" class="form-control" formControlName="email" />
+            <label for="emailAddress">Email address</label>
+            <input type="text" id="emailAddress" class="form-control" formControlName="email" />
           </div>
         </div>
       </div>
