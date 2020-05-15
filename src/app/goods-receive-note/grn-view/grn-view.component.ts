@@ -24,7 +24,6 @@ export class GrnViewComponent implements OnInit {
   }
 
   async updatePaymentStatus() {
-    // TODO: Add loader
     const dto: UpdateGoodsReceivedNoteDTO = {
       paymentStatus: this.grnPaymentStatus
     };
@@ -39,9 +38,8 @@ export class GrnViewComponent implements OnInit {
   }
 
   downloadPdf() {
-    // TODO: Add loader
-    if (this.grn.pdf && this.grn.pdf.copy) {
-      window.open(this.grn.pdf.copy);
+    if (this.grn.pdf && this.grn.pdf.url) {
+      window.open(this.grn.pdf.url);
     } else {
       this.sdkService.getGoodsReceivedNotePdfLinkById(this.grn._id).then(link => {
         window.open(link);
