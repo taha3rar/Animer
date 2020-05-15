@@ -3,7 +3,7 @@
     <tr id="table-head">
       <th>ID</th>
       <th>Date</th>
-      <th>Contact</th>
+      <th>Issued By</th>
       <th>Product</th>
       <th>Quantity</th>
       <th>Price</th>
@@ -28,10 +28,10 @@
       </td>
       <td>{{ grn?.total | number: '1.2-2' }} {{ grn?.currency }}</td>
       <td>
-        <span class="{{ grn?.paymentStatus | status }}">{{ grn?.paymentStatus }}</span>
+        <span class="{{ grn?.paymentStatus | status }}">{{ grn?.paymentStatus | paymentStatus }}</span>
       </td>
       <td>
-        <a id="view">View</a>
+        <a [routerLink]="['/grn', grn?._id]" id="view">View</a>
       </td>
     </tr>
   </tbody>

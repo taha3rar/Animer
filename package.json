@@ -36,7 +36,7 @@
     "@angular/platform-browser": "^7.0.0",
     "@angular/platform-browser-dynamic": "^7.0.0",
     "@angular/router": "^7.0.0",
-    "@avenews/agt-sdk": "0.0.19",
+    "@avenews/agt-sdk": "0.0.20",
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "@ng-bootstrap/ng-bootstrap": "^3.3.0",
     "@ngx-translate/core": "^10.0.1",

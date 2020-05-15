@@ -1,6 +1,8 @@
 <div class="grn-wrapper">
   <div class="border-box display-ib ">
-    <h2>GOODS RECEIVED NOTE <span style="font-size: 1.9rem;"> #432 </span></h2>
+    <h2>
+      GOODS RECEIVED NOTE <span *ngIf="grn?.numericId" style="font-size: 1.9rem;"> #{{ grn?.numericId }} </span>
+    </h2>
     <table>
       <tr>
         <td class="t-bold t-blue">ISSUE DATE</td>
@@ -8,7 +10,7 @@
       </tr>
       <tr>
         <td class="t-bold t-blue">REFERENCE</td>
-        <td>{{ grn?.referenceCode || '-' }}</td>
+        <td>{{ grn?.referenceCode | referenceCode }}</td>
       </tr>
     </table>
   </div>
@@ -84,7 +86,7 @@
     </div>
     <div class="col-md-3">
       <div class="border-box center-items pull-left">
-        <div class="{{ status | status }} mb-4">{{ status }}</div>
+        <div class="{{ grn.paymentStatus | status }} mb-4">{{ grn?.paymentStatus | paymentStatus }}</div>
         <h2>{{ grn?.currency }} {{ grn?.total | number: '1.2-2' }}</h2>
         <h5>TOTAL</h5>
       </div>
@@ -100,6 +102,6 @@
     </div>
   </div>
 </div>
-<button *ngIf="generateGrn" (click)="submitGrn()" class="bttn-primary pull-right  mt-5">
-  Generate GRN
+<button *ngIf="!grn?._id" (click)="submitGrn()" class="bttn-primary pull-right  mt-5">
+  Submit
 </button>

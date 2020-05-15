@@ -12,15 +12,15 @@
       </div>
       <div>
         <p class="sm-text-label">REFERENCE</p>
-        <P class="text-regular">{{ grn.referenceCode }}</P>
+        <P class="text-regular">{{ grn.referenceCode | referenceCode }}</P>
       </div>
       <div>
         <p class="sm-text-label">PAYMENT STATUS</p>
-        <p class="text-regular">{{ grn.paymentStatus }}</p>
+        <p class="text-regular">{{ grn.paymentStatus | paymentStatus }}</p>
       </div>
     </div>
     <div id="grn-actions">
-      <button class="bttn bttn-outline" (click)="downloadPdf()">Download GRN</button>
+      <button class="bttn bttn-outline" (click)="downloadPdf()">Download PDF</button>
       <button class="bttn bttn-outline" data-toggle="wizard" data-target="#updatePaymentStatusModal">
         Update Payment Status
       </button>
@@ -37,7 +37,7 @@
   </ul>
   <div class="tab-content mb-5">
     <div class="tab-pane active" id="grn">
-      <app-grn-document [generateGrn]="false" [grn]="grn"></app-grn-document>
+      <app-grn-document [grn]="grn"></app-grn-document>
     </div>
     <div class="tab-pane" id="documents">
       <app-transaction-document-list></app-transaction-document-list>
@@ -57,7 +57,7 @@
       <div class="modal-body">
         <div class="form-group" id="payment-status">
           <label for="status">Payment Status </label>
-          {{ grnPaymentStatus }}
+          {{ grnPaymentStatus | paymentStatus }}
           <select
             id="status"
             placeholder="Choose status"
@@ -65,9 +65,9 @@
             [(ngModel)]="grnPaymentStatus"
             [ngModelOptions]="{ standalone: true }"
           >
-            <option>Paid</option>
-            <option>Partially Paid</option>
-            <option>Awaiting Payment</option>
+            <option value="paid">Paid</option>
+            <option value="partially-paid">Partially Paid</option>
+            <option value="awaiting">Awaiting Payment</option>
           </select>
         </div>
         <button class="bttn-primary" (click)="updatePaymentStatus()">

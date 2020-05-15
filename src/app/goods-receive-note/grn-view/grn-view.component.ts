@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GoodsReceivedNote, PaymentStatus, UpdateGoodsReceivedNoteDTO } from '@avenews/agt-sdk';
+import { GoodsReceivedNote, PaymentStatus, UpdateGoodsReceivedNoteDTO, Utils } from '@avenews/agt-sdk';
 import { ActivatedRoute } from '@angular/router';
 import { SdkService } from '@app/core/sdk.service';
 import Swal from 'sweetalert2';
@@ -32,7 +32,7 @@ export class GrnViewComponent implements OnInit {
       this.onModalClose();
       Swal.fire({
         icon: 'success',
-        title: 'The payment status has been changed to ' + data.paymentStatus + '!'
+        title: 'The payment status has been changed to ' + Utils.getPaymentStatus(data.paymentStatus) + '!'
       });
       this.grn = data;
     });

@@ -8,17 +8,17 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { AlertsService } from '@app/core/alerts.service';
 import { SpinnerToggleService } from '@app/shared/services/spinner-toggle.service';
 import { Router } from '@angular/router';
+import { Utils } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-grn-document',
   templateUrl: './grn-document.component.html',
   styleUrls: ['./grn-document.component.scss']
 })
-export class GrnDocumentComponent implements OnInit, OnChanges {
-  @Input() generateGrn = true;
+export class GrnDocumentComponent {
   @Input() grn: CreateGoodsReceivedNoteDTO | GoodsReceivedNote;
   @Input() products: any[] = [];
-  status = ' ';
+  // status = ' ';
   constructor(
     private alerts: AlertsService,
     private sdkService: SdkService,
@@ -26,18 +26,6 @@ export class GrnDocumentComponent implements OnInit, OnChanges {
     private spinnerService: SpinnerToggleService
   ) {}
 
-  ngOnInit() {}
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['grn'] && this.grn.paymentStatus) {
-      if (this.grn.paymentStatus === 'paid') {
-        this.status = 'Paid';
-      } else if (this.grn.paymentStatus === 'awaiting') {
-        this.status = 'Awaiting Payment';
-      } else {
-        this.status = 'Partially Paid';
-      }
-    }
-  }
   submitGrn() {
     this.spinnerService.showSpinner();
     const grn: CreateGoodsReceivedNoteDTO = {

@@ -45,6 +45,6 @@ import { DateStringPipe } from '@app/shared/pipes/date-string.pipe';
     GrnViewComponent,
     GrnListComponent
   ],
-  providers: [MyGrnsResolver, GrnResolver, CurrentUserContactsResolver, DateStringPipe]
+  providers: [MyGrnsResolver, GrnResolver, CurrentUserContactsResolver]
 })
 export class GoodsReceiveNoteModule {}

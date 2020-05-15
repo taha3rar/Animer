@@ -101,7 +101,7 @@
         </td>
         <td>{{ product.quantity | number: '1.2-2' }} {{ product.measurement }}</td>
         <td>{{ product.rate | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}</td>
-        <td>{{ product.price | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}</td>
+        <td>{{ product.price | number: '1.2-2' }} {{ product.currency }}</td>
         <td class="text-right">
           <a (click)="edit(i)" data-toggle="wizard" data-target="#addGrnProductWizard" class="bttn-line">Edit</a>
         </td>

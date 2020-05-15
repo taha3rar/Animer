@@ -19,7 +19,7 @@
           <p>{{ user.personalInformation.phoneNumber }}</p>
         </div>
         <div id="profile-company-info">
-          <p class="heading-3">Company Information</p>
+          <p class="heading-3">Business Information</p>
           <p class="t-light-gray">Company Name</p>
           <p>{{ user.companyInformation.companyName }}</p>
           <!-- <p class="t-light-gray">Company Email</p>
@@ -105,7 +105,7 @@
           </div>
           <div class="col-md-6 company-info-section">
             <div class="icon-text">
-              <i class="material-icons">business</i><span class="heading-3"> COMPANY INFORMATION</span>
+              <i class="material-icons">business</i><span class="heading-3"> BUSINESS INFORMATION</span>
             </div>
             <form [formGroup]="companyDetailsForm" (ngSubmit)="onSubmitCompanyDetails()" id="company-info-form">
               <div class="form-row">

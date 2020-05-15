@@ -28,6 +28,8 @@ import { StatusPipe } from './pipes/status.pipe';
 import { MultiProductPipe } from './pipes/multi-products.pipe';
 import { ProductQuantityPipe } from './pipes/product-quantity.pipe';
 import { DateStringPipe } from './pipes/date-string.pipe';
+import { PaymentStatusPipe } from './pipes/paymentStatus.pipe';
+import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
 
 @NgModule({
   imports: [
@@ -48,6 +50,7 @@ import { DateStringPipe } from './pipes/date-string.pipe';
     RoundUpPipe,
     DateStringPipe,
     StatusPipe,
+    ReferenceCodePipe,
     TransactionDocumentListComponent,
     UserDocumentComponent,
     BaseNavigationComponent,
@@ -62,7 +65,8 @@ import { DateStringPipe } from './pipes/date-string.pipe';
     ProductQuantityPipe,
     ContactGeneratorComponent,
     UserProgressComponent,
-    DpoDocumentsComponent
+    DpoDocumentsComponent,
+    PaymentStatusPipe
   ],
   entryComponents: [],
   exports: [
@@ -79,7 +83,9 @@ import { DateStringPipe } from './pipes/date-string.pipe';
     UserProgressComponent,
     FilterPipe,
     StatusPipe,
-    DpoDocumentsComponent
+    DpoDocumentsComponent,
+    PaymentStatusPipe,
+    ReferenceCodePipe
   ],
   providers: [CsvService, DatePipe]
 })
