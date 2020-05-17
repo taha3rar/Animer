@@ -15,11 +15,7 @@ app.get("/url", (req, res, next) => {
 app.get("/anime", (req, res, next) => {
   let url = req.url.substr(req.url.indexOf("?") + 1); // i send the link for the episode with ?{link} and this is how i get the link in express
   console.log(url); //anime name and episode in this case
-  if (url.includes("tenki-no")) {
-    res.send(
-      "https://balance.cloud9.to/hls/cd36325e1fde01a2d69e2078ee8f3f804193f9b353ec48d6cd704be05c44b80d004617f07f41f02e0abe4e4b1b867aa998e6d2392ac616d31991c666e9f0b98a06d3d69d85299d42ac8d7bb174e1113c/playlist.m3u8?stime=1589145900&sign=a3fdbff7e43afef0fbba7f5840704d94a681ba9a"
-    );
-  } else if (url.includes("episode")) {
+  if (url.includes("episode")) {
     anime.animeEpisodeHandler(url).then((ep) => {
       let link = "https://" + ep[0].servers[0].iframe;
       console.log(ep[0].servers[0].iframe);
@@ -89,7 +85,7 @@ async function pup(url, res, hd, alt) {
       await page.click("video");
       await page.waitForFunction(
         'document.querySelector("video").getAttribute("src").includes("http")'
-        );
+      );
       let p = await page.evaluate(
         'document.querySelector("video").getAttribute("src")'
       ); //this is how i get the src and thats what i return
