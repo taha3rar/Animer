@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { LoanGeneratorDataService } from '../../loan-generator-data.service';
 import { CreateLoanDTO } from '@avenews/agt-sdk';
-import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
 
 @Component({
   selector: 'app-business-basic-details',
@@ -11,7 +10,7 @@ import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-
 })
 export class BusinessBasicDetailsComponent implements OnInit {
   loan_form: FormGroup;
-  loan: WBLoan;
+  loan: CreateLoanDTO;
 
   constructor(private loanGeneratorDataService: LoanGeneratorDataService) {}
 

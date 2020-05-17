@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular
 import { LoanNavigationComponent } from '../loan-navigation.component';
 import { StepperNavigationService } from '../stepper-navigation.service';
 import { SdkService } from '@app/core/sdk.service';
+import { LoanGeneratorDataService } from '../loan-generator-data.service';
 
 @Component({
   selector: 'app-bank-details',
@@ -10,8 +11,12 @@ import { SdkService } from '@app/core/sdk.service';
 })
 export class BankDetailsComponent extends LoanNavigationComponent implements OnInit, AfterViewInit {
   @Output() actionOnPreview = new EventEmitter<boolean>();
-  constructor(stepperNavigationService: StepperNavigationService, sdkService: SdkService) {
-    super(4, stepperNavigationService, sdkService);
+  constructor(
+    stepperNavigationService: StepperNavigationService,
+    sdkService: SdkService,
+    loanGeneratorDataService: LoanGeneratorDataService
+  ) {
+    super(4, stepperNavigationService, sdkService, loanGeneratorDataService);
   }
 
   ngOnInit() {}

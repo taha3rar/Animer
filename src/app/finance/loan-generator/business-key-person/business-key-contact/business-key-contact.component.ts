@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { countries } from '@app/shared/helpers/countries';
 import { LoanGeneratorDataService } from '../../loan-generator-data.service';
 import { FormGroup } from '@angular/forms';
-import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
+import { CreateLoanDTO } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-business-key-contact',
@@ -11,7 +11,7 @@ import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-
 })
 export class BusinessKeyContactComponent implements OnInit {
   loan_form: FormGroup;
-  loan: WBLoan;
+  loan: CreateLoanDTO;
   countries = countries;
 
   constructor(private loanGeneratorDataService: LoanGeneratorDataService) {}

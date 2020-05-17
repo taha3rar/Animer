@@ -3,8 +3,6 @@ import { LoanNavigationComponent } from '../loan-navigation.component';
 import { StepperNavigationService } from '../stepper-navigation.service';
 import { countries } from '@app/shared/helpers/countries';
 import { LoanGeneratorDataService } from '../loan-generator-data.service';
-import { FormGroup } from '@angular/forms';
-import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
 import { SdkService } from '@app/core/sdk.service';
 
 @Component({

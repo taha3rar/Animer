@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { LoanGeneratorDataService } from '../../loan-generator-data.service';
-import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
+import { CreateLoanDTO } from '@avenews/agt-sdk';
 const pmt = require('formula-pmt');
 
 @Component({
@@ -11,7 +11,7 @@ const pmt = require('formula-pmt');
 })
 export class LoanAboutComponent implements OnInit {
   loan_form: FormGroup;
-  loan: WBLoan;
+  loan: CreateLoanDTO;
   loan_rate = 0.13;
   insurance_rate = 0.0065;
   expected_period_repayment: number;

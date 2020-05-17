@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
 import { LoanGeneratorDataService } from '../loan-generator/loan-generator-data.service';
 import { StepperNavigationService } from '../loan-generator/stepper-navigation.service';
+import { CreateLoanDTO } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-loan',
@@ -12,7 +12,7 @@ import { StepperNavigationService } from '../loan-generator/stepper-navigation.s
 export class LoanComponent implements OnInit {
   applicationCompleted = false;
   loan_form: FormGroup;
-  loan: WBLoan;
+  loan: CreateLoanDTO;
   @Output() actionOnPreview = new EventEmitter<boolean>();
 
   constructor(

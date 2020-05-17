@@ -2,8 +2,7 @@ import { AuthenticationService } from '@app/core';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { LoanGeneratorDataService } from '../loan-generator-data.service';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
-import { Router } from '@angular/router';
+import { CreateLoanDTO } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-qualifcation-tool',
@@ -12,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class QualifcationToolComponent implements OnInit {
   loan_form: FormGroup;
-  loan: WBLoan;
+  loan: CreateLoanDTO;
   first_name: string;
   last_name: string;
   currentIndex = 1;
@@ -22,8 +21,7 @@ export class QualifcationToolComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private loanGeneratorDataService: LoanGeneratorDataService,
-    private router: Router
+    private loanGeneratorDataService: LoanGeneratorDataService
   ) {}
 
   ngOnInit() {
@@ -66,7 +64,7 @@ export class QualifcationToolComponent implements OnInit {
     this.currentIndex -= 1;
   }
 
-  checkEligibility(loan: WBLoan) {
+  checkEligibility(loan: CreateLoanDTO) {
     return loan.qualification.absaBankAccount && this.loan.qualification.registrationCountry === 'kenya';
   }
 

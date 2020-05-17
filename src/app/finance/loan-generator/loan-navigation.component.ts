@@ -4,20 +4,19 @@ import { CreateLoanDTO } from '@avenews/agt-sdk';
 import { SdkService } from '@app/core/sdk.service';
 import { LoanGeneratorDataService } from './loan-generator-data.service';
 import { FormGroup } from '@angular/forms';
-import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
 
 export class LoanNavigationComponent implements AfterViewInit, AfterContentChecked {
   @ViewChild('listStepDetails') stepperDetails: ElementRef<HTMLElement>;
   currentInnerStep: number;
   currentGeneralStep: number;
   loan_form: FormGroup;
-  loan: WBLoan;
+  loan: CreateLoanDTO;
 
   constructor(
     private generalStepId: number,
     private stepperNavigationService: StepperNavigationService,
     private sdkService: SdkService,
-    private loanGeneratorDataService?: LoanGeneratorDataService
+    private loanGeneratorDataService: LoanGeneratorDataService
   ) {
     if (this.loanGeneratorDataService) {
       this.loanGeneratorDataService.currentForm.subscribe(form => {
@@ -47,10 +46,9 @@ export class LoanNavigationComponent implements AfterViewInit, AfterContentCheck
   }
 
   onSave() {
-    // Awaiting push in SDK
-    // const loanDTO: CreateLoanDTO = undefined;
+    // console.log('Loan sent', this.loan);
     // this.sdkService
-    //   .saveLoanApplication(loanDTO)
+    //   .saveLoanApplication(undefined)
     //   .then(loan => {
     //     console.log('loan received', loan);
     //   })

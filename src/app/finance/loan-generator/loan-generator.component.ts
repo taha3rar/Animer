@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy } from '@ang
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperNavigationService } from './stepper-navigation.service';
 import { LoanGeneratorDataService } from './loan-generator-data.service';
-import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
+import { CreateLoanDTO } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-loan-generator-list',
@@ -14,7 +14,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
   @ViewChild('generalSteps') generalSteps: ElementRef<HTMLElement>;
   @Input() beginApplication = false;
   currentGeneralActiveStep: number;
-  loan: WBLoan;
+  loan: CreateLoanDTO;
   previewDisplayed: boolean;
 
   constructor(
@@ -35,6 +35,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
     this.loan_form = this.formBuilder.group({
       // Qualification
       _id: undefined,
+      status: 'draft',
       qualification: this.formBuilder.group({
         amountNeeded: [undefined, Validators.required],
         loanPurpose: [undefined, Validators.required],
