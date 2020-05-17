@@ -93,3 +93,10 @@ span {
 .mat-sort-header-container {
   justify-content: center;
 }
+
+.intercom-lightweight-app-launcher.intercom-launcher,
+.intercom-launcher-frame.intercom-1esuaw8 {
+  @include respond(phone) {
+    transform: scale(0.9);
+  }
+}
