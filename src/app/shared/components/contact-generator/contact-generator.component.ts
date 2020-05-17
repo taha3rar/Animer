@@ -1,6 +1,6 @@
 import { SdkService } from './../../../core/sdk.service';
 import { SpinnerToggleService } from './../../services/spinner-toggle.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {
   Component,
   OnInit,
@@ -33,7 +33,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   contactDetailsForm: FormGroup;
   countries = countries;
   phoneUtil: any;
-  regionCode = 'KES';
+  regionCode = 'KE';
   @Output() contactEmit = new EventEmitter<Contact>();
   @Input() contact: Contact;
   @Input() isEdit: boolean;
@@ -44,6 +44,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   @ViewChild('closeModal')
   closeModal: ElementRef;
   contactSubmitted = false;
+  email: string;
   idPicture = defaultValues.profile_picture;
   hasEcosystem = true;
 
@@ -61,13 +62,13 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   ngOnInit() {
     this.currentUser = this.route.snapshot.data['currentUser'];
     this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
-    this.regionCode = 'KES';
+    this.regionCode = 'KE';
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
     this.contactDetailsForm = this.formBuilder.group({
       fullName: [undefined, Validators.required],
       nationalId: [undefined],
       businessName: [undefined],
-      phoneNumber: [undefined, [Validators.required, PhoneNumberValidator(this.regionCode)]],
+      phoneNumber: [undefined, PhoneNumberValidator(this.regionCode)],
       email: [undefined, [Validators.required, Validators.email]],
       country: [undefined, Validators.required],
       region: [undefined],
@@ -79,9 +80,43 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       $('.selectpicker').selectpicker();
     }, 200);
   }
+  onEmailChanges(): void {
+    const phone = this.contactDetailsForm.controls['phoneNumber'];
+    const email = this.contactDetailsForm.controls['email'];
+    if ((this.contactf && this.contactf.email.value) || !this.partialPhoneNumber) {
+      email.clearValidators();
+      email.setValidators([Validators.required, Validators.email]);
+      email.updateValueAndValidity();
+      phone.clearValidators();
+      phone.updateValueAndValidity();
+    } else if (this.partialPhoneNumber) {
+      this.onPhoneChanges();
+      phone.setValidators([PhoneNumberValidator(this.regionCode)]);
+      phone.updateValueAndValidity();
+    }
+    if (!email.value) {
+      phone.setValidators([Validators.required, PhoneNumberValidator(this.regionCode)]);
+      phone.updateValueAndValidity();
+    }
+  }
+  onPhoneChanges(): void {
+    if (this.contactf && this.partialPhoneNumber) {
+      const phone = this.contactDetailsForm.controls['phoneNumber'];
+      const email = this.contactDetailsForm.controls['email'];
+      phone.clearValidators();
+      phone.setValidators([Validators.required, PhoneNumberValidator(this.regionCode)]);
+      phone.updateValueAndValidity();
+      email.clearValidators();
+      email.setValidators([Validators.email]);
+      email.updateValueAndValidity();
+    } else {
+      this.onEmailChanges();
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isEdit'] || changes['contact']) {
-      if (this.isEdit && this.contact) {
+      if (this.isEdit && this.contact && this.contactDetailsForm) {
         this.contactDetailsForm.patchValue({
           fullName: this.contact.fullName,
           nationalId: this.contact.nationalId,
@@ -99,6 +134,30 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   get contactf() {
     return this.contactDetailsForm.controls;
   }
+  get viewValue() {
+    const country = this.countries.find(s => {
+      return s.value === this.regionCode;
+    });
+    return country.viewValue;
+  }
+  isRequired(abstractControl: AbstractControl) {
+    if (abstractControl.validator) {
+      const validator = abstractControl.validator({} as AbstractControl);
+      if (validator && validator.required) {
+        return true;
+      }
+    }
+    if (abstractControl['controls']) {
+      for (const controlName in abstractControl['controls']) {
+        if (abstractControl['controls'][controlName]) {
+          if (this.isRequired(abstractControl['controls'][controlName])) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
 
   changeRegionCode() {
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
@@ -111,6 +170,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       return;
     }
     this.contactDetailsForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
+    this.onPhoneChanges();
   }
 
   onGeneralSubmit() {
@@ -200,6 +260,10 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       address: undefined
     });
     this.newContact = undefined;
+    this.email = null;
+    this.partialPhoneNumber = null;
+    this.regionCode = 'KE'; // reset country code to kenya
+    this.contactDetailsForm.markAsUntouched(); // instead of clearing validators
   }
   onModalClose() {
     if (!this.contactSubmitted && this.contactDetailsForm.dirty) {

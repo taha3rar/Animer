@@ -95,6 +95,7 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
       description: undefined
     });
     this.product = undefined;
+    this.productForm.markAsUntouched();
   }
   onModalClose() {
     if (this.productForm.dirty) {

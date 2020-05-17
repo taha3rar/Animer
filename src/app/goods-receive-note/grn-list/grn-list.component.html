@@ -21,7 +21,7 @@
   </div>
 </div>
 <div class="searchbar d-flex" *ngIf="grnList.length">
-  <input placeholder="Search goods received..." class="search-bar" type="search" />
+  <input [(ngModel)]="searchTerm" placeholder="Search goods received..." class="search-bar" type="search" />
   <span></span>
 </div>
 <table class="table main-table" *ngIf="grnList.length">
@@ -38,7 +38,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let grn of grnList | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+    <tr
+      *ngFor="
+        let grn of grnList | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+        let i = index
+      "
+    >
       <td># {{ grn?.numericId }}</td>
       <td>
         {{ grn.issueDate | date: 'dd/MM/yyyy' }}
@@ -82,7 +87,10 @@
 <div class="mobile-list-wrapper mb-5">
   <div
     class="strip mt-4 mb-3"
-    *ngFor="let grn of grnList | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index"
+    *ngFor="
+      let grn of grnList | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+      let i = index
+    "
   >
     <div class="flex-row">
       <div># {{ grn?.numericId }}</div>

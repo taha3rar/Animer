@@ -38,7 +38,9 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="region_code">Phone Number *</label>
+                    <label for="region_code"
+                      >Phone Number <span *ngIf="isRequired(contactf.phoneNumber) === true"> *</span></label
+                    >
                     <div class="input-group" [ngClass]="showFieldStyle('phoneNumber')">
                       <div id="input-group" class="input-group-prepend">
                         <select
@@ -69,14 +71,25 @@
                         (click)="markAsTouched('phoneNumber')"
                       />
                     </div>
-                    <div style="color:#a94442" class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
+                    <div
+                      style="color:#a94442"
+                      class="help-block"
+                      *ngIf="isFieldInvalid('phoneNumber') && isRequired(contactf.phoneNumber) === true"
+                    >
                       <p>This field is required</p>
                     </div>
                   </div>
                   <div class="form-group col-md-6" [ngClass]="showFieldStyle('email')">
-                    <label for="Email">Email Address *</label>
-                    <input type="email" formControlName="email" class="form-control" id="Email" />
-                    <div class="help-block" *ngIf="isFieldInvalid('email')">
+                    <label for="Email">Email Address<span *ngIf="isRequired(contactf.email) === true"> *</span></label>
+                    <input
+                      [(ngModel)]="email"
+                      (ngModelChange)="onEmailChanges()"
+                      type="email"
+                      formControlName="email"
+                      class="form-control"
+                      id="Email"
+                    />
+                    <div class="help-block" *ngIf="isFieldInvalid('email') && isRequired(contactf.email) === true">
                       <p>This field is required</p>
                     </div>
                   </div>

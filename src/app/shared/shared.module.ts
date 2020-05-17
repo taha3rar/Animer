@@ -1,3 +1,4 @@
+import { MeasurementPipe } from './pipes/measurement.pipe';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CsvService } from './services/csv.service';
@@ -47,6 +48,7 @@ import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
     LoaderComponent,
     RoundUpPipe,
     DateStringPipe,
+    MeasurementPipe,
     StatusPipe,
     ReferenceCodePipe,
     BaseNavigationComponent,
@@ -70,6 +72,7 @@ import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
     RoundUpPipe,
     DateStringPipe,
     MultiProductPipe,
+    MeasurementPipe,
     ProductQuantityPipe,
     UploadPictureComponent,
     TutorialControlComponent,

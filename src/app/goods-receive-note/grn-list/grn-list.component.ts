@@ -14,6 +14,7 @@ export class GrnListComponent extends BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
   grnList: GoodsReceivedNote[] = [];
   tooltips = tooltips.grn;
+  searchTerm: string;
   constructor(private route: ActivatedRoute) {
     super();
   }
