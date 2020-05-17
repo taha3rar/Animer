@@ -13,6 +13,10 @@
   }
 }
 
+.strip {
+  margin-bottom: 3.5rem;
+}
+
 .mobile-list-wrapper {
   display: none;
 
@@ -102,9 +106,21 @@ tr {
   align-items: center;
 
   p {
-    width: 65rem;
+    width: 60%;
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: 2.5rem;
+
+    @include respond(phone) {
+      width: 95%;
+    }
+  }
+}
+
+.helper-img {
+  width: 32.5rem;
+
+  @include respond(phone) {
+    width: 27.5rem;
   }
 }
