@@ -78,6 +78,7 @@ export class AppComponent implements OnInit {
     if (this.authenticationService.credentials) {
       this.intercom.boot({
         app_id: environment.intercom.app_id,
+        alignment: 'left',
         name:
           this.authenticationService.credentials.user.personalInformation.firstName +
           ' ' +
@@ -93,6 +94,7 @@ export class AppComponent implements OnInit {
     } else {
       this.intercom.boot({
         app_id: environment.intercom.app_id,
+        alignment: 'left',
         widget: {
           activator: '#intercom'
         }

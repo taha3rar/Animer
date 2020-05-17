@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class StatusPipe implements PipeTransform {
   transform(status: string): string {
     if (!status) {
-      return '';
+      return 'status status-gray';
     }
 
     if (status.toLowerCase() === 'paid') {

@@ -3,6 +3,7 @@ import { GoodsReceivedNote, PaymentStatus, UpdateGoodsReceivedNoteDTO, Utils } f
 import { ActivatedRoute } from '@angular/router';
 import { SdkService } from '@app/core/sdk.service';
 import Swal from 'sweetalert2';
+import { SpinnerToggleService } from '@app/shared/services/spinner-toggle.service';
 declare const $: any;
 
 @Component({
@@ -14,7 +15,11 @@ export class GrnViewComponent implements OnInit {
   grn: GoodsReceivedNote;
   grnPaymentStatus: PaymentStatus;
 
-  constructor(private route: ActivatedRoute, private sdkService: SdkService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private sdkService: SdkService,
+    private spinnerToggleService: SpinnerToggleService
+  ) {}
 
   ngOnInit() {
     this.route.data.subscribe(({ grn }) => {
@@ -24,10 +29,13 @@ export class GrnViewComponent implements OnInit {
   }
 
   async updatePaymentStatus() {
+    this.spinnerToggleService.showSpinner();
     const dto: UpdateGoodsReceivedNoteDTO = {
       paymentStatus: this.grnPaymentStatus
     };
+
     await this.sdkService.updateGrnPaymentStatus(this.grn._id, dto).then(data => {
+      this.spinnerToggleService.hideSpinner();
       this.onModalClose();
       Swal.fire({
         icon: 'success',
