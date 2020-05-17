@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <div class="pt-5">
+  <div class="pt-5 pb-4">
     <p class="heading-3 t-blue">PRODUCTS</p>
     <table class="products-table">
       <thead>
@@ -80,11 +80,12 @@
   </div>
 
   <div class="row pt-4">
-    <div class="col-md-9">
+    <div class="col-md-9 mb-4">
       <p class="heading-3 t-blue">NOTES</p>
       <p>{{ grn?.notes || '-' }}</p>
     </div>
     <div class="col-md-3">
+      <p class="heading-3 t-blue mobile-header-txt">PAYMENT</p>
       <div class="border-box center-items pull-left">
         <div class="{{ grn.paymentStatus | status }} mb-4">{{ grn?.paymentStatus | paymentStatus }}</div>
         <h2>{{ grn?.currency }} {{ grn?.total | number: '1.2-2' }}</h2>

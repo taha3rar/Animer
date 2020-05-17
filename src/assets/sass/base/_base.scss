@@ -102,5 +102,13 @@ span {
 .intercom-launcher-frame.intercom-1esuaw8 {
   @include respond(phone) {
     transform: scale(0.9);
+    left: 18px !important;
+    bottom: 16px !important;
+  }
+}
+
+[data-notify="container"] {
+  @include respond(phone) {
+    right: 12px !important;
   }
 }

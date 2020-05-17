@@ -69,6 +69,13 @@ tr:not(#table-head) {
   color: #455263;
   line-height: 29px;
 }
+
+.info.bold {
+  @include respond(phone) {
+    padding: 0px;
+  }
+}
+
 .brighter {
   font-weight: 500 !important;
 }

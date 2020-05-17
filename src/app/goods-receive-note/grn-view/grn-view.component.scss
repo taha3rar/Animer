@@ -1,7 +1,18 @@
+@import "../../../assets/sass/abstracts/mixins";
+
 .header-wrapper,
 #grn-info,
 #grn-actions {
   display: flex;
+  @include respond(tab-port) {
+    flex-direction: column;
+  }
+
+  .bttn {
+    @include respond(tab-port) {
+      justify-content: center;
+    }
+  }
 }
 
 #grn-info {
@@ -30,6 +41,11 @@
 .modal-box-content {
   min-height: 27rem;
   width: 42%;
+  @include respond(phone) {
+    max-height: 95vh;
+    width: 91%;
+    overflow: auto;
+  }
 }
 
 .modal-header {

@@ -1,5 +1,5 @@
 @import "../../../assets/sass/abstracts/variables";
-
+@import "../../../assets/sass/abstracts/mixins";
 .wrapper {
   margin-bottom: 3rem;
   padding-bottom: 3rem;
@@ -7,6 +7,14 @@
 
 .tab-pane {
   padding-bottom: 4.2rem;
+}
+
+.mobile {
+  display: none;
+
+  @include respond(phone) {
+    display: block;
+  }
 }
 
 ul.nav > li > a {
