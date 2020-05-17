@@ -62,6 +62,7 @@
       @include respond(phone) {
         box-shadow: none;
         width: unset !important;
+        white-space: unset !important;
       }
     }
 
