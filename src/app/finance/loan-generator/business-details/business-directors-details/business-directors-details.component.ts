@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { LoanGeneratorDataService } from '../../loan-generator-data.service';
+import { WBLoan } from '@app/core/models/finance/loans/wazesha-biashara/wazesha-biashara-loan';
 
 @Component({
   selector: 'app-business-directors-details',
@@ -9,12 +10,16 @@ import { LoanGeneratorDataService } from '../../loan-generator-data.service';
 })
 export class BusinessDirectorsDetailsComponent implements OnInit {
   loan_form: FormGroup;
+  loan: WBLoan;
 
   constructor(private loanGeneratorDataService: LoanGeneratorDataService) {}
 
   ngOnInit() {
     this.loanGeneratorDataService.currentForm.subscribe(form => {
-      this.loan_form = form;
+      if (form) {
+        this.loan_form = form;
+        this.loan = this.loan_form.value;
+      }
     });
   }
 

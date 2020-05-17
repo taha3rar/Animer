@@ -25,7 +25,7 @@
             <div class="form-group col-md-6 pr-3">
               <label for="checkbox">Role</label>
               <div class="form-check form-check-inline col-12">
-                <div class="col-md-4">
+                <div *ngIf="loan.qualification.businessType === 'limited company'" class="col-md-4">
                   <input
                     [checked]="false"
                     (change)="onCheck($event)"
@@ -37,7 +37,7 @@
                   /><label class="checkbox_label" for="checkbox_director"
                     ><span class="form_checkbox_btn"></span
                   ></label>
-                  <label for="checkbox_director" style="font-weight:400;">Director (LLC)</label>
+                  <label for="checkbox_director" style="font-weight:400;">Director</label>
                 </div>
                 <div class="col-md-4">
                   <input
@@ -85,8 +85,8 @@
                 >
               </div>
             </div>
-            <div class="form-group col-md-6 pl-3">
-              <label for="vat">Is he/she a loan guarantor? (LLC)</label>
+            <div *ngIf="loan.qualification.businessType === 'limited company'" class="form-group col-md-6 pl-3">
+              <label for="vat">Is he/she a loan guarantor?</label>
               <div class="form-check form-check-inline col-12">
                 <div class="col-md-5 pl-0 radio-item">
                   <input
@@ -114,13 +114,13 @@
             </div>
           </div>
 
-          <div class="form-row">
+          <div *ngIf="loan.qualification.businessType === 'limited company'" class="form-row">
             <div class="form-group col-md-6 pr-3">
-              <label for="postal-adress">Postal address (LLC)</label>
+              <label for="postal-adress">Postal address</label>
               <input type="text" id="postal-address" class="form-control" formControlName="postalAddress" />
             </div>
             <div class="form-group col-md-6 pl-3">
-              <label for="PC">Postal code (LLC)</label>
+              <label for="PC">Postal code</label>
               <input type="text" id="PC" class="form-control" formControlName="postalCode" />
             </div>
           </div>

@@ -7,160 +7,162 @@
   <form [formGroup]="loan_form" class="col">
     <div formGroupName="businessBasicDetails" #businessBasicDetails>
       <div class="step-content">
-        (Sole trader)
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="business-name1">Business name</label>
-            <input type="text" id="business-name1" class="form-control" formControlName="businessName" />
+        <div *ngIf="loan.qualification.businessType === 'sole trader'">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="business-name1">Business name</label>
+              <input type="text" id="business-name1" class="form-control" formControlName="businessName" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="business-nature">Nature of business</label>
+              <div class="input-group">
+                <input type="text" id="business-nature" class="form-control" formControlName="businessNature" />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
+            </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="business-nature">Nature of business</label>
-            <div class="input-group">
-              <input type="text" id="business-nature" class="form-control" formControlName="businessNature" />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="registration-date1">Date started</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="registration-date1"
+                  class="form-control"
+                  placeholder="DD/MM/YYYY"
+                  formControlName="registrationDate"
+                />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="BRN1">Registration / ID Number</label>
+              <div class="input-group">
+                <input type="text" id="BRN1" class="form-control" formControlName="registrationNumber" />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="b-pin1">Company PIN number</label>
+              <div class="input-group">
+                <input type="text" id="b-pin1" class="form-control" formControlName="pinNumber" />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="vat1">VAT Number</label>
+              <input type="text" id="vat1" class="form-control" formControlName="vatNumber" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="physical-adress1">Physical address</label>
+              <input type="text" id="physical-address1" class="form-control" formControlName="physicalAddress" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="street">Street</label>
+              <input type="text" id="street" class="form-control" formControlName="street" />
             </div>
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="registration-date1">Date started</label>
-            <div class="input-group">
+        <div *ngIf="loan.qualification.businessType != 'sole trader'">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="business-name2">Business name</label>
+              <input type="text" id="business-name2" class="form-control" formControlName="businessName" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="BRN2">Business registration number</label>
+              <div class="input-group">
+                <input type="text" id="BRN2" class="form-control" formControlName="registrationNumber" />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="registration-date2">Registration date</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="registration-date2"
+                  class="form-control"
+                  placeholder="DD/MM/YYYY"
+                  formControlName="registrationDate"
+                />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="vat2">VAT number</label>
+              <div class="input-group">
+                <input type="text" id="vat2" class="form-control" formControlName="vatNumber" />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="b-pin2">Company PIN number</label>
+              <div class="input-group">
+                <input type="text" id="b-pin2" class="form-control" formControlName="pinNumber" />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="telephone3">Telephone number</label>
               <input
                 type="text"
-                id="registration-date1"
+                id="telephone3"
                 class="form-control"
-                placeholder="DD/MM/YYYY"
-                formControlName="registrationDate"
+                placeholder="(+254) 7XX-XXX-XXX"
+                formControlName="phoneNumber"
               />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
             </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="BRN1">Registration / ID Number</label>
-            <div class="input-group">
-              <input type="text" id="BRN1" class="form-control" formControlName="registrationNumber" />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
-            </div>
-          </div>
-        </div>
 
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="b-pin1">Company PIN number</label>
-            <div class="input-group">
-              <input type="text" id="b-pin1" class="form-control" formControlName="pinNumber" />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="email-adress1">Email adress</label>
+              <div class="input-group">
+                <input type="text" id="email-address1" class="form-control" formControlName="emailAddress" />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
             </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="vat1">VAT Number</label>
-            <input type="text" id="vat1" class="form-control" formControlName="vatNumber" />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="physical-adress1">Physical address</label>
-            <input type="text" id="physical-address1" class="form-control" formControlName="physicalAddress" />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="street">Street</label>
-            <input type="text" id="street" class="form-control" formControlName="street" />
-          </div>
-        </div>
-
-        (LLC & Partnership)
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="business-name2">Business name</label>
-            <input type="text" id="business-name2" class="form-control" formControlName="businessName" />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="BRN2">Business registration number</label>
-            <div class="input-group">
-              <input type="text" id="BRN2" class="form-control" formControlName="registrationNumber" />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="registration-date2">Registration date</label>
-            <div class="input-group">
-              <input
-                type="text"
-                id="registration-date2"
-                class="form-control"
-                placeholder="DD/MM/YYYY"
-                formControlName="registrationDate"
-              />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
-            </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="vat2">VAT number</label>
-            <div class="input-group">
-              <input type="text" id="vat2" class="form-control" formControlName="vatNumber" />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="b-pin2">Company PIN number</label>
-            <div class="input-group">
-              <input type="text" id="b-pin2" class="form-control" formControlName="pinNumber" />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
-            </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="telephone3">Telephone number</label>
-            <input
-              type="text"
-              id="telephone3"
-              class="form-control"
-              placeholder="(+254) 7XX-XXX-XXX"
-              formControlName="phoneNumber"
-            />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="email-adress1">Email adress</label>
-            <div class="input-group">
-              <input type="text" id="email-address1" class="form-control" formControlName="emailAddress" />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
-            </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="website">Company website</label>
-            <div class="input-group">
-              <input type="text" id="website" class="form-control" formControlName="companyWebsite" />
-              <span class="form-control-feedback" id="basic-addon1"
-                ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
-              >
+            <div class="form-group col-md-6">
+              <label for="website">Company website</label>
+              <div class="input-group">
+                <input type="text" id="website" class="form-control" formControlName="companyWebsite" />
+                <span class="form-control-feedback" id="basic-addon1"
+                  ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
+                >
+              </div>
             </div>
           </div>
         </div>

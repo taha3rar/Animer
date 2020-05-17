@@ -20,7 +20,19 @@
     </li>
   </ul>
 
-  <div class="tab-content">
+  <div *ngIf="loan.qualification.businessType === 'sole trader'" class="tab-content">
+    <div class="tab-pane" [class.active]="displayStep(0)" id="basic-details">
+      <app-business-basic-details></app-business-basic-details>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(1)" id="business-other">
+      <app-business-other-details></app-business-other-details>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(2)" id="business-financial">
+      <app-business-financial-details></app-business-financial-details>
+    </div>
+  </div>
+
+  <div *ngIf="loan.qualification.businessType === 'partnership'" class="tab-content">
     <div class="tab-pane" [class.active]="displayStep(0)" id="basic-details">
       <app-business-basic-details></app-business-basic-details>
     </div>
@@ -38,6 +50,27 @@
     </div>
     <div class="tab-pane" [class.active]="displayStep(5)" id="business-directors-details">
       <app-business-directors-details></app-business-directors-details>
+    </div>
+  </div>
+
+  <div *ngIf="loan.qualification.businessType === 'limited company'" class="tab-content">
+    <div class="tab-pane" [class.active]="displayStep(0)" id="basic-details">
+      <app-business-basic-details></app-business-basic-details>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(1)" id="business-location">
+      <app-business-location></app-business-location>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(2)" id="business-premises">
+      <app-business-premises></app-business-premises>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(3)" id="business-other">
+      <app-business-other-details></app-business-other-details>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(4)" id="business-directors-details">
+      <app-business-directors-details></app-business-directors-details>
+    </div>
+    <div class="tab-pane" [class.active]="displayStep(5)" id="business-financial">
+      <app-business-financial-details></app-business-financial-details>
     </div>
   </div>
 
