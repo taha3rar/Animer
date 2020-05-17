@@ -192,7 +192,6 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
 
   onChanges(): void {
     this.loan_form.valueChanges.subscribe(val => {
-      console.log(this.loan_form.value);
       this.loanGeneratorDataService.setForm(this.loan_form);
     });
   }

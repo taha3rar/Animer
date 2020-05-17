@@ -47,15 +47,16 @@ export class LoanNavigationComponent implements AfterViewInit, AfterContentCheck
   }
 
   onSave() {
-    const loanDTO: CreateLoanDTO = undefined;
-    this.sdkService
-      .saveLoanApplication(loanDTO)
-      .then(loan => {
-        console.log('loan received', loan);
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
+    // Awaiting push in SDK
+    // const loanDTO: CreateLoanDTO = undefined;
+    // this.sdkService
+    //   .saveLoanApplication(loanDTO)
+    //   .then(loan => {
+    //     console.log('loan received', loan);
+    //   })
+    //   .catch(err => {
+    //     console.log('err', err);
+    //   });
   }
 
   onNext() {
