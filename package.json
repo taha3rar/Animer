@@ -21,6 +21,7 @@
     "puppeteer-extra": "^3.1.9",
     "puppeteer-extra-plugin-flash": "^2.2.5",
     "puppeteer-extra-plugin-stealth": "^2.4.9",
-    "puppeteer-extra-plugin-user-preferences": "^2.2.4"
+    "puppeteer-extra-plugin-user-preferences": "^2.2.4",
+    "request": "^2.88.2"
   }
 }
