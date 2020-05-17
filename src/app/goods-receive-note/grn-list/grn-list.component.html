@@ -5,9 +5,9 @@
     own necessary documents, and manage the trade process in one place.
   </p>
 </div>
-<div class="grn-container d-flex">
+<div class="grn-container d-flex" *ngIf="grnList.length">
   <h1 translate class="main-title d-inline-flex align-self-center">Goods Received List</h1>
-  <div class="grn-buttons" *ngIf="grnList.length">
+  <div class="grn-buttons">
     <div class="btn-holder">
       <button class="order-2 bttn-primary bttn-add" routerLink="/grn/generator">
         <span class="btn-desktop-txt">Create a GRN</span>
@@ -82,7 +82,7 @@
   </div>
 </div>
 
-<div class="mobile-list-wrapper">
+<div class="mobile-list-wrapper mb-5">
   <div
     class="strip mt-4 mb-3"
     *ngFor="let grn of grnList | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index"
@@ -93,7 +93,7 @@
     </div>
     <div class="flex-row">
       <div>{{ grn?.supplier?.fullName }}</div>
-      <div class="{{ grn.paymentStatus | status }}">{{ grn.paymentStatus }}</div>
+      <div class="{{ grn.paymentStatus | status }}">{{ grn.paymentStatus | paymentStatus }}</div>
     </div>
     <div>{{ grn?.products | multiProduct }}</div>
     <div>Quantity of {{ grn?.products | productQuantity }}</div>

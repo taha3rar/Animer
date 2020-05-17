@@ -250,3 +250,7 @@ table.total-table td:nth-child(even) {
 #last-data-cell {
   padding-bottom: 2rem;
 }
+
+.main-table tr th {
+  padding-bottom: 0px !important;
+}

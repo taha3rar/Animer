@@ -15,12 +15,8 @@
     </div>
   </div>
 </div>
-<h1 class="main-title" *ngIf="hasContacts">Contact List</h1>
-<div class="mt-1 actions-section clearfix" *ngIf="hasContacts">
-  <div class="searchbar d-flex">
-    <input [(ngModel)]="searchTerm" placeholder="Search contacts..." class="search-bar" type="search" />
-    <span class="pt-3 pl-4"></span>
-  </div>
+<div class="actions-section clearfix" *ngIf="hasContacts">
+  <h1 class="main-title align-self-center">Contact List</h1>
   <div class="flex-pr">
     <button
       (click)="addContact()"
@@ -33,6 +29,12 @@
       <span class="btn-desktop-txt">Add a Contact</span>
       <span class="btn-mobile-txt">Add</span>
     </button>
+  </div>
+</div>
+<div class="actions-section clearfix" *ngIf="hasContacts">
+  <div class="searchbar d-flex">
+    <input [(ngModel)]="searchTerm" placeholder="Search contacts..." class="search-bar m-0" type="search" />
+    <span class=""></span>
   </div>
 </div>
 

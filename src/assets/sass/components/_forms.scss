@@ -177,6 +177,13 @@ select {
   font-size: 1.3rem !important;
 }
 
+div.searchbar {
+  @include respond(phone) {
+    width: 100%;
+    margin-top: 12px;
+  }
+}
+
 .search-bar {
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #e3e5f1;
@@ -185,10 +192,14 @@ select {
   padding: 0px 29px;
   font: 14px/19px Roboto;
   letter-spacing: 0.17px;
+  @include respond(phone) {
+    width: 100%;
+  }
 }
 .search-bar::placeholder {
   color: #cacbd5;
 }
+
 .search-bar + span::before {
   content: "\f002";
   position: relative;

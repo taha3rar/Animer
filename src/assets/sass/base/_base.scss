@@ -42,6 +42,10 @@ body {
 
 .ngx-pagination {
   font-size: 1.2rem;
+
+  @include respond(tab-port) {
+    margin-bottom: 4rem !important;
+  }
 }
 
 .tooltip {
