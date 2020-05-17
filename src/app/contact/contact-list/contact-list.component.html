@@ -75,21 +75,20 @@
     </tr>
   </tbody>
 </table>
-<div style="background-color: white;">
-  <div class="add-supplier-box panel" *ngIf="!hasContacts">
-    <div class="panel-body">
-      <img src="../../../assets/img/default/pi-po/noClient.png" width="375" height="225" />
-      <p style="font-size: large;">Add your first contact and begin trading.</p>
-      <button
-        class="bttn-primary bttn-add"
-        data-toggle="wizard"
-        data-target="#addContactWizard"
-        matTooltip="{{ tooltips.add_contact }}"
-        matTooltipPosition="below"
-      >
-        <span>Add your first contact</span>
-      </button>
-    </div>
+
+<div class="strip mt-5" *ngIf="!hasContacts">
+  <div class="add-supplier-box">
+    <img src="../../../assets/img/default/pi-po/noClient.png" width="340" />
+    <p>Add your first contact and begin trading.</p>
+    <button
+      class="bttn-primary bttn-add"
+      data-toggle="wizard"
+      data-target="#addContactWizard"
+      matTooltip="{{ tooltips.add_contact }}"
+      matTooltipPosition="below"
+    >
+      <span>Add your first contact</span>
+    </button>
   </div>
 </div>
 

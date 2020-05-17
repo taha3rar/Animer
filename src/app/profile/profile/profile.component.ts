@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../core/authentication/authentication.
 import { defaultValues } from '@app/shared/helpers/default_values';
 import { User, Credentials } from '@avenews/agt-sdk';
 import { SdkService } from '@app/core/sdk.service';
+import { countries } from '@app/shared/helpers/countries';
 declare const $: any;
 
 @Component({
@@ -21,6 +22,8 @@ export class ProfileComponent implements OnInit {
   companyDetailsForm: FormGroup;
   credentials: Credentials;
   showPaymentSection = false;
+  countries = countries;
+
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,

@@ -90,6 +90,14 @@ tr:not(#table-head) {
   color: #d39b4b !important;
 }
 
+.add-supplier-box {
+  p {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+}
+
 .bttn-primary {
   @include respond(phone) {
     min-width: 9rem;
