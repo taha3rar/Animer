@@ -550,7 +550,7 @@ select.custom-select {
     p {
       margin: 0 auto;
       color: white;
-      font-weight: 600;
+      font-weight: 500;
     }
   }
 
@@ -564,6 +564,8 @@ select.custom-select {
 
   .bttn-email {
     background-color: #5a6c7b;
+    height: unset !important;
+    min-height: 4.5rem;
   }
 }
 
