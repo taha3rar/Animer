@@ -55,11 +55,11 @@
         {{ grn?.products | multiProduct }}
       </td>
       <td>
-        {{ grn?.products | productQuantity }}
+        {{ grn?.products | measurement: (grn?.products | productQuantity) }}
       </td>
       <td>{{ grn?.total | number: '1.2-2' }} {{ grn?.currency }}</td>
       <td>
-        <span class="{{ grn?.paymentStatus | status }}">{{ grn?.paymentStatus | paymentStatus }}</span>
+        <span class="{{ grn?.paymentStatus | paymentStatus | status }}">{{ grn?.paymentStatus | paymentStatus }}</span>
       </td>
       <td>
         <a [routerLink]="['/grn', grn?._id]" id="view">View</a>
@@ -101,7 +101,7 @@
       <div class="{{ grn.paymentStatus | status }}">{{ grn.paymentStatus | paymentStatus }}</div>
     </div>
     <div>{{ grn?.products | multiProduct }}</div>
-    <div>Quantity of {{ grn?.products | productQuantity }}</div>
+    <div>Quantity of {{ grn?.products | measurement: (grn?.products | productQuantity) }}</div>
     <div>Total of {{ grn?.total | number: '1.2-2' }} {{ grn?.currency }}</div>
     <div class="mt-3"><a [routerLink]="['/grn', grn?._id]" id="view">View</a></div>
   </div>

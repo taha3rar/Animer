@@ -9,6 +9,8 @@ import { Contact } from '@avenews/agt-sdk';
 export class ContactProfileComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() contact: Contact;
   secondLetter: string;
+  tempContact: Contact;
+  edit = false;
   constructor() {}
   ngOnInit() {}
   ngAfterViewInit() {
@@ -21,7 +23,12 @@ export class ContactProfileComponent implements OnInit, AfterViewInit, OnChanges
           this.contact.fullName.indexOf(' ') + 1,
           this.contact.fullName.indexOf(' ') + 2
         );
+        this.tempContact = this.contact;
       }
     }
+  }
+  editContact() {
+    this.edit = true;
+    this.tempContact = this.contact;
   }
 }

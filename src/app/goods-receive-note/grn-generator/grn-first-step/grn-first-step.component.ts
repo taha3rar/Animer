@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 declare var $: any;
 import { StepperService } from '@app/core/stepper.service';
-import { Contact } from '@avenews/agt-sdk';
+import { Contact, GoodsReceivedNoteProduct } from '@avenews/agt-sdk';
 import { CreateGoodsReceivedNoteDTO } from '@avenews/agt-sdk/lib/types/goods-receive-note';
 import { Currency } from '@avenews/agt-sdk/lib/types/shared';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -15,9 +15,17 @@ export class GrnFirstStepComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
   changed = false;
+  @Output() goBack = new EventEmitter<boolean>();
   @Input() grn: CreateGoodsReceivedNoteDTO;
   products: any[] = [];
-  product: any;
+  product: GoodsReceivedNoteProduct = {
+    currency: undefined,
+    measurement: undefined,
+    name: undefined,
+    price: undefined,
+    quantity: undefined,
+    rate: undefined
+  };
   selectedContact: Contact;
   validator = {
     contact: false,
@@ -27,7 +35,7 @@ export class GrnFirstStepComponent implements OnInit {
     rBusiness: false,
     rPhone: false
   };
-  currency: Currency;
+  currency: Currency = null;
   today = {
     year: 0,
     month: 0,
@@ -53,6 +61,7 @@ export class GrnFirstStepComponent implements OnInit {
 
   change(e: Contact) {
     if (e) {
+      this.goBack.emit(false);
       this.selectedContact = e;
       this.changed = true;
       this.selectedContact ? $('#contact').removeClass('red-border') : (this.selectedContact = undefined);
@@ -63,6 +72,7 @@ export class GrnFirstStepComponent implements OnInit {
     this.selectedContact = e;
     localStorage.setItem('grnContact', JSON.stringify(e));
     this.router.navigate([this.router.url]);
+    this.goBack.emit(false);
   }
 
   compare(c1: any, c2: any): boolean {
@@ -74,24 +84,43 @@ export class GrnFirstStepComponent implements OnInit {
   }
 
   addProduct(e: any) {
-    if (!this.currency) {
-      this.currency = e.product.currency;
-    }
-
-    if (e.i === -1) {
-      this.products.push(e.product);
+    if (e) {
+      this.goBack.emit(false);
+      if (!this.currency) {
+        this.currency = e.product.currency;
+      }
+      if (e.i === -1) {
+        this.products.push(e.product);
+      } else {
+        this.products[e.i] = e.product;
+      }
+      this.grn.products = this.products;
+      let sum = 0;
+      this.products.forEach(data => {
+        sum += data.price;
+      });
+      this.grn.total = sum;
+      this.products[0] ? $('#product-field').removeClass('red-border') : $('#product-field').addClass('red-border');
     } else {
-      this.products[e.i] = e.product;
+      this.product = null;
     }
-    this.grn.products = this.products;
-    let sum = 0;
-    this.products.forEach(data => {
-      sum += data.price;
-    });
-    this.grn.total = sum;
-    this.products[0] ? $('#product-field').removeClass('red-border') : $('#product-field').addClass('red-border');
   }
-
+  newProduct() {
+    function makeProduct(): GoodsReceivedNoteProduct {
+      const product: GoodsReceivedNoteProduct = {
+        currency: undefined,
+        measurement: undefined,
+        name: undefined,
+        price: undefined,
+        quantity: undefined,
+        rate: undefined
+      };
+      return product;
+    }
+    this.index = -1;
+    this.product = null;
+    this.product = makeProduct();
+  }
   edit(i: number) {
     this.index = i;
     this.product = this.products[i];

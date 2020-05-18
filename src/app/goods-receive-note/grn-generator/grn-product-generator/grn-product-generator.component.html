@@ -11,16 +11,16 @@
             <form [formGroup]="productForm" (ngSubmit)="onGeneralSubmit()">
               <div class="col-md-12">
                 <div class="form-row">
-                  <div class="form-group col-md-6" [ngClass]="showFieldStyle('name')">
-                    <label for="name">Product *</label>
+                  <div class="form-group col-md-6" [ngClass]="showFieldStyle('product_name')">
+                    <label for="product_name">Product *</label>
                     <input
                       placeholder="Add product name and variety"
                       type="text"
-                      formControlName="name"
+                      formControlName="product_name"
                       class="form-control"
-                      id="name"
+                      id="product_name"
                     />
-                    <div class="help-block" *ngIf="isFieldInvalid('name')">
+                    <div class="help-block" *ngIf="isFieldInvalid('product_name')">
                       <p>This field is required</p>
                     </div>
                   </div>
@@ -45,11 +45,11 @@
                 </div>
                 <div class="form-row">
                   <div [ngClass]="showFieldStyle('rate')" class="form-group col-md-6">
-                    <label for="rate">Rate (Price per {{ productf?.measurement || '--' }}) *</label>
+                    <label for="rate">Rate (Price per {{ productf?.measurement.value || '--' }}) *</label>
                     <div class="input-group">
                       <div id="input-group" class="input-group-prepend"></div>
                       <input
-                        [ngModel]="productf?.rate"
+                        [ngModel]="productf?.rate.value"
                         (ngModelChange)="calculator()"
                         type="number"
                         class="form-control"
@@ -69,7 +69,7 @@
                       formControlName="quantity"
                       class="form-control"
                       id="quantity"
-                      [ngModel]="productf?.quantity"
+                      [ngModel]="productf?.quantity.value"
                       (ngModelChange)="calculator()"
                     />
                     <div class="help-block" *ngIf="isFieldInvalid('quantity')">
@@ -115,7 +115,7 @@
                       id="price"
                     />
                     <input disabled type="text" class="form-control disabled" />
-                    <p id="price-trick">{{ productf?.price | number: '1.2-2' }}</p>
+                    <p id="price-trick">{{ productf?.price.value | number: '1.2-2' }}</p>
                   </div>
                 </div>
                 <div class="form-row">

@@ -20,6 +20,8 @@ import { GrnProductGeneratorComponent } from './grn-generator/grn-product-genera
 import { MyGrnsResolver } from './resolvers/grn-mine.resolver';
 import { GrnDocumentListComponent } from './grn-document-list/grn-document-list.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { DateStringPipe } from '@app/shared/pipes/date-string.pipe';
+import { NgbDateCustomParserFormatter } from '@app/shared/customization/ngb-date-parser-il-format';
 
 @NgModule({
   imports: [

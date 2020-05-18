@@ -16,7 +16,10 @@
     background-color: rgba(0, 0, 0, 0.1);
   }
 }
-
+.back-div {
+  cursor: pointer;
+  display: inline-block;
+}
 .btn-primary-transp,
 .bttn-transparent-disabled {
   background: transparent;

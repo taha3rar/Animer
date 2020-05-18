@@ -1,5 +1,5 @@
-<div>
-  <i class="material-icons back" (click)="back()">keyboard_backspace</i><span class="after-icon"> Contacts</span>
+<div (click)="back()" class="back-div">
+  <i class="material-icons back">keyboard_backspace</i><span class="after-icon"> Contacts</span>
 </div>
 <app-contact-profile [contact]="contact"></app-contact-profile>
 <mat-tab-group id="contact-view-tabs">

@@ -1,11 +1,11 @@
 <div class="wrapper">
-  <h1 class="main-title btn-main margin-bottom-2" routerLink="/grn">
+  <h1 (click)="back()" class="back-div main-title btn-main margin-bottom-2">
     <a class="main-color"><i class="material-icons">keyboard_backspace</i></a> Goods Received Note
   </h1>
 
   <div class="stepper-wrapper">
     <div class="stepper desktop-stepper">
-      <h1 class="main-title btn-main mobile" routerLink="/grn">
+      <h1 (click)="back()" class="back-div main-title btn-main mobile">
         <a class="main-color"><i class="material-icons">keyboard_backspace</i></a> Goods Received Note
       </h1>
       <ul class="nav nav-tabs">
@@ -25,7 +25,7 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="grng">
-          <app-grn-first-step [grn]="grn"></app-grn-first-step>
+          <app-grn-first-step (goBack)="canGoBack = $event" [grn]="grn"></app-grn-first-step>
         </div>
 
         <div class="tab-pane" id="review-grn">

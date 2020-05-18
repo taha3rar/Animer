@@ -22,13 +22,13 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
   @Output() addProduct = new EventEmitter<{ product: GoodsReceivedNoteProduct; i: number }>();
   @Input() product: GoodsReceivedNoteProduct;
   @Input() i: number;
-  @Input() currency: Currency;
+  @Input() currency: string;
   constructor(private alerts: AlertsService, private formBuilder: FormBuilder) {
     super();
   }
   ngOnInit() {
     this.productForm = this.formBuilder.group({
-      name: [undefined, Validators.required],
+      product_name: [undefined, Validators.required],
       measurement: [undefined, Validators.required],
       rate: [0, [Validators.required, Validators.min(1)]],
       quantity: [0, [Validators.required, Validators.min(1)]],
@@ -45,25 +45,29 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
     this.formInput = this.productForm;
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['product']) {
-      if (this.product) {
-        this.productForm.patchValue({
-          name: this.product.name,
-          measurement: this.product.measurement,
-          rate: this.product.rate,
-          quantity: this.product.quantity,
-          currency: this.product.currency,
-          price: this.product.price,
-          description: this.product.description
-        });
+    if (this.productForm) {
+      if (changes['product']) {
+        if (this.product) {
+          this.productForm.patchValue({
+            product_name: this.product.name,
+            measurement: this.product.measurement,
+            rate: this.product.rate,
+            quantity: this.product.quantity,
+            currency: this.currency || this.product.currency,
+            price: this.product.price,
+            description: this.product.description
+          });
+          this.productForm.markAsUntouched();
+        }
       }
-    }
-    if (changes['currency']) {
-      if (this.currency) {
-        this.disable = true;
-        this.productForm.patchValue({
-          currency: this.currency
-        });
+      if (changes['currency']) {
+        if (this.currency) {
+          this.disable = true;
+          this.productForm.patchValue({
+            currency: this.currency
+          });
+          this.productForm.markAsUntouched();
+        }
       }
     }
   }
@@ -71,14 +75,16 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
     this.onSubmit(this.productForm);
     if (this.productForm.valid) {
       const product: GoodsReceivedNoteProduct = {
-        name: this.productf.name,
-        measurement: this.productf.measurement,
-        rate: this.productf.rate,
-        quantity: this.productf.quantity,
-        currency: this.productf.currency,
-        price: this.productf.price,
-        description: this.productf.description
+        name: this.productf.product_name.value,
+        measurement: this.productf.measurement.value,
+        rate: this.productf.rate.value,
+        quantity: this.productf.quantity.value,
+        currency: this.productf.currency.value,
+        price: this.productf.price.value,
+        description: this.productf.description.value
       };
+      this.currency = product.currency;
+      this.productForm.markAsUntouched();
       this.addProduct.emit({ product: product, i: this.i });
       $('#addGrnProductWizard').fadeOut('fast');
       this.deleteData();
@@ -86,15 +92,15 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
   }
   deleteData() {
     this.productForm.patchValue({
-      name: undefined,
+      product_name: undefined,
       measurement: undefined,
       rate: undefined,
       quantity: undefined,
-      currency: this.currency || undefined,
+      currency: this.currency,
       price: undefined,
       description: undefined
     });
-    this.product = undefined;
+    this.product = null;
     this.productForm.markAsUntouched();
   }
   onModalClose() {
@@ -103,6 +109,7 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
         if (value) {
           $('#addGrnProductWizard').fadeOut('fast');
           this.deleteData();
+          this.addProduct.emit(undefined);
         } else {
           return false;
         }
@@ -110,10 +117,11 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
     } else {
       $('#addGrnProductWizard').fadeOut('fast');
       this.deleteData();
+      this.addProduct.emit(undefined);
     }
   }
   get productf() {
-    return this.productForm.value;
+    return this.productForm.controls;
   }
   calculator() {
     const rate = this.productForm.controls['rate'];

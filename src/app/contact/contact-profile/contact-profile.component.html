@@ -13,7 +13,9 @@
               <div class="vertical-flex">
                 <p class="name">{{ contact?.fullName }}</p>
                 <p class="faded">{{ contact?.businessName }}</p>
-                <a data-toggle="wizard" class="click" data-target="#addContactWizard" id="edit">Edit</a>
+                <a (click)="editContact()" data-toggle="wizard" class="click" data-target="#addContactWizard" id="edit"
+                  >Edit</a
+                >
               </div>
             </div>
           </div>
@@ -38,4 +40,4 @@
     </div>
   </div>
 </div>
-<app-contact-generator [contact]="contact" [isEdit]="true"></app-contact-generator>
+<app-contact-generator [contact]="tempContact" [isEdit]="edit"></app-contact-generator>
