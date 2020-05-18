@@ -1,44 +1,34 @@
-import { AlertsService } from './../../../../core/alerts.service';
+import { AlertsService } from '@app/core/alerts.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { BaseListComponent } from '../../base-list/base-list.component';
-import { UserDocumentService } from '@app/core/api/user-document.service';
 import { Router } from '@angular/router';
-import { UserDocument } from '@app/core/models/user/document';
-import { User } from '@avenews/agt-sdk';
+import { UploadFileDTO, GoodsReceivedNote } from '@avenews/agt-sdk';
+import { SdkService } from '@app/core/sdk.service';
+import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
+
 declare const $: any;
 
 @Component({
-  selector: 'app-user-document-list',
-  templateUrl: './user-document-list.component.html',
-  styleUrls: ['./user-document-list.component.scss']
+  selector: 'app-grn-document-list',
+  templateUrl: './grn-document-list.component.html'
 })
-export class UserDocumentComponent extends BaseListComponent implements OnInit {
+export class GrnDocumentListComponent extends BaseListComponent implements OnInit {
   @Input()
-  documents: UserDocument[];
-  @Input()
-  contact_id: string;
-  @Input()
-  user: User;
+  grn: GoodsReceivedNote;
   page = 1;
+  max = 100;
   uploadingFileName: string;
   dynamic = 0;
-
   acceptedMimeTypes = [
     'application/pdf',
     'image/jpeg',
     'image/jpg',
     'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     'application/vnd.ms-excel',
     'image/png'
   ];
 
-  constructor(
-    private userDocumentService: UserDocumentService,
-    protected router: Router,
-    private alerts: AlertsService
-  ) {
-    super(userDocumentService, router, {
+  constructor(private sdkService: SdkService, protected router: Router, private alerts: AlertsService) {
+    super(undefined, router, {
       deleteText: 'Once deleted, you will not be able to recover this document!'
     });
   }
@@ -53,15 +43,17 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
         $('.push-modal').css('display', 'block');
         reader.readAsDataURL(file);
         reader.onload = () => {
-          const document = new UserDocument();
-          document.file_name = file.name.replace(/\.[^/.]+$/, '');
-          this.uploadingFileName = document.file_name;
-          document.client_id = this.contact_id;
+          const fileName = file.name.replace(/\.[^/.]+$/, '');
+          this.uploadingFileName = fileName;
           const base64File = (reader.result as string).split(',')[1];
-          document.file = base64File;
-          this.userDocumentService.create(document).subscribe(() => {
-            $('.push-modal').css('display', 'none');
+          const document: UploadFileDTO = {
+            file: base64File,
+            fileName,
+            mime: file.type
+          };
+          this.sdkService.uploadGrnDocument(document, this.grn._id).then(() => {
             this.alerts.showAlert('Your document has been uploaded');
+            $('.push-modal').css('display', 'none');
             this.router.navigate([this.router.url]);
             this.dynamic = 0;
           });
@@ -73,7 +65,7 @@ export class UserDocumentComponent extends BaseListComponent implements OnInit {
         $.notify(
           {
             icon: 'notifications',
-            message: 'Maximum file size is 3MB and it should be .jpg, .pdf or .png'
+            message: 'Maximum file size is 3MB and it should be .jpg, .pdf, .gif or .png'
           },
           {
             type: 'danger',

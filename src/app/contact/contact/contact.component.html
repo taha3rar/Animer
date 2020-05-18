@@ -6,11 +6,7 @@
   <mat-tab color="#455263" label="Transactions ({{ grnList?.length }})">
     <app-contact-transactions [grnList]="grnList" [contact]="contact"></app-contact-transactions>
   </mat-tab>
-  <mat-tab color="#455263" label="Documents (0)">
-    <app-contact-documents
-      [documents]="documents"
-      [contact_id]="contact._id"
-      [contact]="contact"
-    ></app-contact-documents>
+  <mat-tab color="#455263" label="Documents ({{ contact.documents.length }})">
+    <app-contact-documents [contact]="contact"></app-contact-documents>
   </mat-tab>
 </mat-tab-group>

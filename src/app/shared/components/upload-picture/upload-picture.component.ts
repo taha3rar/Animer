@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { acceptedMimeTypes } from '@app/shared/helpers/pictureMimeTypes';
-import { UserService, AuthenticationService } from '@app/core';
+import { AuthenticationService } from '@app/core';
 import { User } from '@avenews/agt-sdk';
 import { SdkService } from '@app/core/sdk.service';
 
@@ -40,7 +40,7 @@ export class UploadPictureComponent implements OnInit {
         base64File = picture.toString().split(',')[1];
         this.loaderVisible = true;
         if (this.type === 'profile') {
-          this.sdkService.uploadProfilePicture(base64File).then((user: User) => {
+          this.sdkService.uploadProfilePicture(base64File, file.type).then((user: User) => {
             const credentialsToUpdate = this.authenticationService.credentials;
             credentialsToUpdate.user.personalInformation.profilePicture = user.personalInformation.profilePicture;
             this.authenticationService.setCredentials(credentialsToUpdate);

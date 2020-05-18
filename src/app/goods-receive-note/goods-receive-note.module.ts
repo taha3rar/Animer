@@ -18,7 +18,8 @@ import { GrnResolver } from './resolvers/grn.resolver';
 import { CurrentUserContactsResolver } from '@app/shared/resolvers/current-user-contacts.resolver';
 import { GrnProductGeneratorComponent } from './grn-generator/grn-product-generator/grn-product-generator.component';
 import { MyGrnsResolver } from './resolvers/grn-mine.resolver';
-import { DateStringPipe } from '@app/shared/pipes/date-string.pipe';
+import { GrnDocumentListComponent } from './grn-document-list/grn-document-list.component';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { DateStringPipe } from '@app/shared/pipes/date-string.pipe';
     RouterModule,
     CommonModule,
     MatTooltipModule,
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
+    ProgressbarModule.forRoot()
   ],
   declarations: [
     GrnGeneratorComponent,
@@ -43,7 +45,8 @@ import { DateStringPipe } from '@app/shared/pipes/date-string.pipe';
     GrnProductGeneratorComponent,
     GrnDocumentComponent,
     GrnViewComponent,
-    GrnListComponent
+    GrnListComponent,
+    GrnDocumentListComponent
   ],
   providers: [MyGrnsResolver, GrnResolver, CurrentUserContactsResolver]
 })

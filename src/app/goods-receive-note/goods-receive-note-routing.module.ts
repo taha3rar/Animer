@@ -32,7 +32,10 @@ const routes: Routes = [
     {
       path: 'grn/:id',
       component: GrnViewComponent,
-      resolve: { grn: GrnResolver }
+      resolve: {
+        grn: GrnResolver
+      },
+      runGuardsAndResolvers: 'always'
     }
   ])
 ];

@@ -13,11 +13,10 @@ import { ContactProfileComponent } from './contact-profile/contact-profile.compo
 import { ContactDocumentsComponent } from './contact-documents/contact-documents.component';
 import { SharedModule } from '@app/shared';
 import { ContactResolver } from './resolvers/contact.resolver';
-import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TutorialsModule } from '@app/tutorials/tutorials.module';
-import { MatSortModule, MatTabGroup, MatTab, MatTabsModule } from '@angular/material';
+import { MatSortModule, MatTabsModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContactTransactionsComponent } from './contact-transactions/contact-transactions.component';
 
@@ -44,12 +43,6 @@ import { ContactTransactionsComponent } from './contact-transactions/contact-tra
     ContactTransactionsComponent,
     ContactDocumentsComponent
   ],
-  providers: [
-    CurrentUserContactsResolver,
-    ContactGRNResolver,
-    ContactResolver,
-    CurrentUserResolver,
-    UserDocumentListResolver
-  ]
+  providers: [CurrentUserContactsResolver, ContactGRNResolver, ContactResolver, CurrentUserResolver]
 })
 export class ContactModule {}

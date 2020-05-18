@@ -12,8 +12,6 @@ import { BaseListComponent } from './components/base-list/base-list.component';
 import { GooglePlacesDirective } from './directives/google-places.directive';
 import { BaseNavigationComponent } from './components/base-navigation/base-navigation.component';
 import { UploadPictureComponent } from './components/upload-picture/upload-picture.component';
-import { UserDocumentComponent } from './components/document-list/user-document-list/user-document-list.component';
-import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
 import { TutorialControlComponent } from './components/tutorial-control/tutorial-control.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -51,8 +49,6 @@ import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
     DateStringPipe,
     StatusPipe,
     ReferenceCodePipe,
-    TransactionDocumentListComponent,
-    UserDocumentComponent,
     BaseNavigationComponent,
     BaseListComponent,
     GooglePlacesDirective,
@@ -74,9 +70,7 @@ import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
     RoundUpPipe,
     DateStringPipe,
     MultiProductPipe,
-    TransactionDocumentListComponent,
     ProductQuantityPipe,
-    UserDocumentComponent,
     UploadPictureComponent,
     TutorialControlComponent,
     ContactGeneratorComponent,

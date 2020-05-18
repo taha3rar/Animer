@@ -7,7 +7,6 @@ import { Shell } from '@app/shell/shell.service';
 import { CurrentUserContactsResolver } from '@app/shared/resolvers/current-user-contacts.resolver';
 import { ContactResolver } from './resolvers/contact.resolver';
 import { CurrentUserResolver } from '@app/shared/resolvers/current-user.resolver';
-import { UserDocumentListResolver } from './resolvers/document-list.resolver';
 import { ContactGuard } from '../shared/guards/contact.guard';
 import { PermissionGuard } from '../shared/guards/permission.guard';
 
@@ -34,7 +33,6 @@ const routes: Routes = [
       resolve: {
         contact: ContactResolver,
         grn: ContactGRNResolver
-        // documents: UserDocumentListResolver
       },
       runGuardsAndResolvers: 'always'
     }
