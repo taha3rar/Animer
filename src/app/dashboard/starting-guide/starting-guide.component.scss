@@ -33,7 +33,7 @@
     height: 100%;
     @include respond(phone) {
       width: 100% !important;
-      height: 40%;
+      height: 108px;
       padding-bottom: 0px;
     }
   }
@@ -58,13 +58,23 @@
     }
 
     img {
-      width: 25rem;
+      width: 28rem;
       height: auto;
-      position: absolute;
-      right: 4rem;
-      bottom: 4rem;
+      display: block;
+      margin-left: auto;
+
+      @include respond(phone) {
+        width: 25rem;
+        margin: 0 auto !important;
+        margin-top: auto !important;
+      }
     }
 
+    .btn.btn-primary {
+      @include respond(phone) {
+        margin-bottom: 24px;
+      }
+    }
     #account-img {
       width: 18.5rem;
     }
@@ -72,14 +82,22 @@
     #product-img {
       width: 21rem;
     }
+
+    #business-img {
+      margin-top: 6rem;
+      width: 25rem;
+      @include respond(phone) {
+        width: 23rem;
+      }
+    }
   }
 
   .contact-help-wrapper {
     display: flex;
-    position: absolute;
-    bottom: 2rem;
-    margin-right: 3rem !important;
 
+    @include respond(phone) {
+      margin-bottom: 30px;
+    }
     #contact-help-text {
       margin-right: 1.5rem;
       display: flex;
@@ -89,14 +107,12 @@
       p:first-child {
         font-weight: bold;
         font-style: italic;
-        width: 65%;
         font-size: 1.6rem;
       }
 
       p {
         font-size: 1.4rem;
         margin-bottom: 0px;
-        width: 70%;
         font-size: 1.6rem;
 
         @include respond(phone) {
@@ -120,6 +136,13 @@
     @include respond(phone) {
       flex-direction: row;
       flex-wrap: unset;
+    }
+  }
+
+  .contact-footer {
+    display: flex;
+    @include respond(phone) {
+      flex-direction: column;
     }
   }
 
