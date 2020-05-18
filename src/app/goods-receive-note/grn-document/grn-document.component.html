@@ -87,7 +87,7 @@
     <div class="col-md-3">
       <p class="heading-3 t-blue mobile-header-txt">PAYMENT</p>
       <div class="border-box center-items pull-left">
-        <div class="{{ grn?.paymentStatus | paymentStatus | status }} mb-4">
+        <div class="{{ grn?.paymentStatus | status }} mb-4">
           {{ grn?.paymentStatus | paymentStatus }}
         </div>
         <h2>{{ grn?.currency }} {{ grn?.total | number: '1.2-2' }}</h2>

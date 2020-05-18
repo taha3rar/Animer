@@ -59,7 +59,7 @@
       </td>
       <td>{{ grn?.total | number: '1.2-2' }} {{ grn?.currency }}</td>
       <td>
-        <span class="{{ grn?.paymentStatus | paymentStatus | status }}">{{ grn?.paymentStatus | paymentStatus }}</span>
+        <span class="{{ grn?.paymentStatus | status }}">{{ grn?.paymentStatus | paymentStatus }}</span>
       </td>
       <td>
         <a [routerLink]="['/grn', grn?._id]" id="view">View</a>

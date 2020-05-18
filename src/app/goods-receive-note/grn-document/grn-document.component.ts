@@ -18,7 +18,7 @@ import { Utils } from '@avenews/agt-sdk';
 export class GrnDocumentComponent {
   @Input() grn: any; // CreateGoodsReceivedNoteDTO | GoodsReceivedNote;
   @Input() products: any[] = [];
-  // status = ' ';
+
   constructor(
     private alerts: AlertsService,
     private sdkService: SdkService,
