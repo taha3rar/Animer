@@ -1,5 +1,27 @@
 <div class="stepper">
-  <ul class="nav nav-tabs" style="display: none;" #listStepDetails>
+  <ul
+    *ngIf="loan.qualification.businessType === 'sole trader'"
+    class="nav nav-tabs"
+    style="display: none;"
+    #listStepDetails
+  >
+    <li class="active">
+      <a data-toggle="tab" class="label" href="#basic-details"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-other"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-financial"></a>
+    </li>
+  </ul>
+
+  <ul
+    *ngIf="loan.qualification.businessType === 'partnership'"
+    class="nav nav-tabs"
+    style="display: none;"
+    #listStepDetails
+  >
     <li class="active">
       <a data-toggle="tab" class="label" href="#basic-details"></a>
     </li>
@@ -17,6 +39,32 @@
     </li>
     <li class="disabled">
       <a data-toggle="tab" class="label" href="#business-directors-details"></a>
+    </li>
+  </ul>
+
+  <ul
+    *ngIf="loan.qualification.businessType === 'limited company'"
+    class="nav nav-tabs"
+    style="display: none;"
+    #listStepDetails
+  >
+    <li class="active">
+      <a data-toggle="tab" class="label" href="#basic-details"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-location"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-premises"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-other"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-directors-details"></a>
+    </li>
+    <li class="disabled">
+      <a data-toggle="tab" class="label" href="#business-financial"></a>
     </li>
   </ul>
 

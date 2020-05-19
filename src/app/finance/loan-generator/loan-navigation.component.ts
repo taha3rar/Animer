@@ -46,15 +46,15 @@ export class LoanNavigationComponent implements AfterViewInit, AfterContentCheck
   }
 
   onSave() {
-    // console.log('Loan sent', this.loan);
-    // this.sdkService
-    //   .saveLoanApplication(undefined)
-    //   .then(loan => {
-    //     console.log('loan received', loan);
-    //   })
-    //   .catch(err => {
-    //     console.log('err', err);
-    //   });
+    console.log('Loan sent', this.loan);
+    this.sdkService
+      .saveLoanApplication(this.loan)
+      .then(loan => {
+        console.log('loan received', loan);
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
   }
 
   onNext() {

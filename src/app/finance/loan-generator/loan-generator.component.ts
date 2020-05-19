@@ -35,12 +35,11 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
     this.loan_form = this.formBuilder.group({
       // Qualification
       _id: undefined,
-      status: 'draft',
       qualification: this.formBuilder.group({
         amountNeeded: [undefined, Validators.required],
         loanPurpose: [undefined, Validators.required],
         agribusinessType: [this.formBuilder.array([], Validators.required)],
-        businessType: [undefined],
+        businessType: [undefined, Validators.required],
         otherAgribusinessType: [undefined],
         incorporationSeniority: [undefined, Validators.required],
         registrationCountry: [undefined, Validators.required],
@@ -50,7 +49,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
       // STEP 1
       // Loan Details
       loanDetails: this.formBuilder.group({
-        amountRequested: [undefined],
+        amountRequested: undefined,
         repaymentsNumber: 27,
         insureWithAbsa: [undefined]
       }),

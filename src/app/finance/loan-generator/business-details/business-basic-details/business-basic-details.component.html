@@ -27,13 +27,15 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="registration-date1">Date started</label>
-              <div class="input-group">
+              <div (click)="dp3.toggle()" class="input-group">
                 <input
-                  type="text"
                   id="registration-date1"
                   class="form-control"
                   placeholder="DD/MM/YYYY"
                   formControlName="registrationDate"
+                  name="ddp"
+                  ngbDatepicker
+                  #dp3="ngbDatepicker"
                 />
                 <span class="form-control-feedback" id="basic-addon1"
                   ><i class="material-icons ml-2 md-18 infoAddon">info</i></span
@@ -99,12 +101,15 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="registration-date2">Registration date</label>
-              <div class="input-group">
+              <div (click)="dp3.toggle()" class="input-group">
                 <input
                   type="text"
                   id="registration-date2"
                   class="form-control"
                   placeholder="DD/MM/YYYY"
+                  name="ddp3"
+                  ngbDatepicker
+                  #dp3="ngbDatepicker"
                   formControlName="registrationDate"
                 />
                 <span class="form-control-feedback" id="basic-addon1"

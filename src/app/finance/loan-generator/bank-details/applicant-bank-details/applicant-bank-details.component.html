@@ -1,7 +1,7 @@
 <div class="loan-step-wrapper">
   <div class="step-header">
     <div class="loan-assitant-img"></div>
-    <p class="step-title">Add your company associated accounts.</p>
+    <p class="step-title">Add your business associated accounts.</p>
   </div>
 
   <form [formGroup]="loan_form" class="col">
@@ -24,13 +24,18 @@
           <div class="form-row">
             <div class="col">
               <label for="date-opened">Date opened</label>
-              <input
-                type="text"
-                id="date-opened"
-                class="form-control"
-                placeholder="DD/MM/YYYY"
-                formControlName="accountOpeningDate"
-              />
+              <div (click)="dp3.toggle()" class="input-group">
+                <input
+                  type="text"
+                  id="date-opened"
+                  class="form-control"
+                  placeholder="DD/MM/YYYY"
+                  name="ddp3"
+                  ngbDatepicker
+                  #dp3="ngbDatepicker"
+                  formControlName="accountOpeningDate"
+                />
+              </div>
             </div>
           </div>
         </div>

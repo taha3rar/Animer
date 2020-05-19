@@ -42,6 +42,7 @@
             <div>
               <label class="container">
                 <input
+                  (click)="onNextQuestion(true)"
                   type="radio"
                   name="amountNeeded"
                   value="KES 100,000 - KES 3 million"
@@ -56,6 +57,7 @@
             <div>
               <label class="container">
                 <input
+                  (click)="onNextQuestion(true)"
                   type="radio"
                   name="amountNeeded"
                   value="KES 3 million - KES 7 million"
@@ -69,7 +71,13 @@
             </div>
             <div>
               <label class="container">
-                <input type="radio" name="amountNeeded" value="KES 7 million or more" formControlName="amountNeeded" />
+                <input
+                  (click)="onNextQuestion(true)"
+                  type="radio"
+                  name="amountNeeded"
+                  value="KES 7 million or more"
+                  formControlName="amountNeeded"
+                />
                 <span class="checkmark">
                   I need approximately <br />
                   KES 7 million or more
@@ -81,7 +89,7 @@
         <div class="qualification__item" [class.display-tab]="displayTab(2)">
           <label class="container">
             <input
-              click="onCheck(event)"
+              (click)="onNextQuestion(true)"
               type="radio"
               name="loanPurpose"
               value="ongoing expenses"
@@ -92,13 +100,20 @@
             </span>
           </label>
           <label class="container">
-            <input type="radio" name="loanPurpose" value="one-off purchase" formControlName="loanPurpose" />
+            <input
+              (click)="onNextQuestion(true)"
+              type="radio"
+              name="loanPurpose"
+              value="one-off purchase"
+              formControlName="loanPurpose"
+            />
             <span class="checkmark agri-type">
               I need funds for a one-off purchase - to use for buying equipment, inputs, growth or expansion.
             </span>
           </label>
           <label class="container">
             <input
+              (click)="onNextQuestion(true)"
               type="radio"
               name="loanPurpose"
               value="ongoing expenses & one-off purchase"
@@ -223,40 +238,56 @@
         </div>
         <div class="qualification__item" [class.display-tab]="displayTab(4)">
           <div class="row options-wrapper">
-            <div class="row options-wrapper">
-              <div class="col-md-4 pr-3">
-                <label class="container">
-                  <input type="radio" name="businessType" value="sole trader" formControlName="businessType" />
-                  <span class="checkmark">
-                    <img
-                      class="checkmark__img business-sole-img"
-                      src="/assets/img/loan-application-imgs/individual.png"
-                    />
-                    Sole Trader
-                  </span>
-                </label>
-              </div>
-              <div class="col-md-4 pr-3">
-                <label class="container">
-                  <input type="radio" name="businessType" value="partnership" formControlName="businessType" />
-                  <span class="checkmark">
-                    <img
-                      class="checkmark__img business-partner-img"
-                      src="/assets/img/loan-application-imgs/partnership.png"
-                    />
-                    Partnership
-                  </span>
-                </label>
-              </div>
-              <div class="col-md-4 pr-0">
-                <label class="container">
-                  <input type="radio" name="businessType" value="limited company" formControlName="businessType" />
-                  <span class="checkmark">
-                    <img class="checkmark__img business-partner-img" src="/assets/img/loan-application-imgs/llc.png" />
-                    Limited Company
-                  </span>
-                </label>
-              </div>
+            <div class="col-md-4 pr-3">
+              <label class="container">
+                <input
+                  (click)="onNextQuestion(true)"
+                  type="radio"
+                  name="businessType"
+                  value="sole trader"
+                  formControlName="businessType"
+                />
+                <span class="checkmark">
+                  <img
+                    class="checkmark__img business-sole-img"
+                    src="/assets/img/loan-application-imgs/individual.png"
+                  />
+                  Sole Trader
+                </span>
+              </label>
+            </div>
+            <div class="col-md-4 pr-3">
+              <label class="container">
+                <input
+                  (click)="onNextQuestion(true)"
+                  type="radio"
+                  name="businessType"
+                  value="partnership"
+                  formControlName="businessType"
+                />
+                <span class="checkmark">
+                  <img
+                    class="checkmark__img business-partner-img"
+                    src="/assets/img/loan-application-imgs/partnership.png"
+                  />
+                  Partnership
+                </span>
+              </label>
+            </div>
+            <div class="col-md-4 pr-0">
+              <label class="container">
+                <input
+                  (click)="onNextQuestion(true)"
+                  type="radio"
+                  name="businessType"
+                  value="limited company"
+                  formControlName="businessType"
+                />
+                <span class="checkmark">
+                  <img class="checkmark__img business-partner-img" src="/assets/img/loan-application-imgs/llc.png" />
+                  Limited Company
+                </span>
+              </label>
             </div>
           </div>
         </div>
@@ -265,6 +296,7 @@
             <div>
               <label class="container">
                 <input
+                  (click)="onNextQuestion(true)"
                   type="radio"
                   name="incorporationSeniority"
                   value="less than 12 months"
@@ -279,6 +311,7 @@
             <div>
               <label class="container">
                 <input
+                  (click)="onNextQuestion(true)"
                   type="radio"
                   name="incorporationSeniority"
                   value="more than 12 months"
@@ -296,7 +329,13 @@
           <div class="row options-wrapper">
             <div>
               <label class="container">
-                <input type="radio" name="registrationCountry" value="kenya" formControlName="registrationCountry" />
+                <input
+                  (click)="onNextQuestion(true)"
+                  type="radio"
+                  name="registrationCountry"
+                  value="kenya"
+                  formControlName="registrationCountry"
+                />
                 <span class="checkmark">
                   Kenya
                 </span>
@@ -304,7 +343,13 @@
             </div>
             <div>
               <label class="container">
-                <input type="radio" name="registrationCountry" value="other" formControlName="registrationCountry" />
+                <input
+                  (click)="onNextQuestion(true)"
+                  type="radio"
+                  name="registrationCountry"
+                  value="other"
+                  formControlName="registrationCountry"
+                />
                 <span class="checkmark">
                   Other
                 </span>
@@ -316,7 +361,13 @@
           <div class="row options-wrapper">
             <div>
               <label class="container">
-                <input type="radio" name="absaBankAccount" [value]="true" formControlName="absaBankAccount" />
+                <input
+                  (click)="onNextQuestion(true)"
+                  type="radio"
+                  name="absaBankAccount"
+                  [value]="true"
+                  formControlName="absaBankAccount"
+                />
                 <span class="checkmark text-logo">
                   <span
                     >Yes, I have an
@@ -328,7 +379,13 @@
             </div>
             <div>
               <label class="container">
-                <input type="radio" name="absaBankAccount" [value]="false" formControlName="absaBankAccount" />
+                <input
+                  (click)="onNextQuestion(true)"
+                  type="radio"
+                  name="absaBankAccount"
+                  [value]="false"
+                  formControlName="absaBankAccount"
+                />
                 <span class="checkmark">
                   No, I have a different bank account.
                 </span>
@@ -360,7 +417,10 @@
           You can save the application at any point and return to it whenever you have it!
         </p>
       </div>
-      <button type="button" class="bttn-primary mt-5" (click)="onFinishQualification()">Let's begin</button>
+      <div class="stepper-footer-wrapper">
+        <button class="bttn-secondary" *ngIf="currentIndex > 1" (click)="onPrevQuestion()">PREV</button>
+        <button type="button" class="bttn-primary" (click)="onFinishQualification()">Let's begin</button>
+      </div>
     </div>
 
     <div *ngIf="!checkEligibility(loan)" class="qualification__item" [class.display-tab]="displayTab(8)">
@@ -384,7 +444,10 @@
           agribusiness digitally.
         </p>
       </div>
-      <button [routerLink]="['/dashboard']" type="button" class="bttn-primary mt-5">Let's go</button>
+      <div class="stepper-footer-wrapper">
+        <button class="bttn-secondary" *ngIf="currentIndex > 1" (click)="onPrevQuestion()">PREV</button>
+        <button [routerLink]="['/dashboard']" type="button" class="bttn-primary">Let's go</button>
+      </div>
     </div>
   </form>
 </div>
@@ -395,7 +458,7 @@
       <button class="bttn-secondary" *ngIf="currentIndex > 1" (click)="onPrevQuestion()">PREV</button>
     </div>
     <div>
-      <button class="bttn-primary" *ngIf="currentIndex < 8" (click)="onNextQuestion()">NEXT</button>
+      <button class="bttn-primary" *ngIf="currentIndex < 8" (click)="onNextQuestion(false)">NEXT</button>
     </div>
   </div>
 </div>

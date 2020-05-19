@@ -1,5 +1,6 @@
 import { SharedModule } from '@app/shared';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { ProductRoutingModule } from './finance-routing.module';
 import { FinanceListComponent } from './finance-list/finance-list.component';
@@ -81,7 +82,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   entryComponents: [],
 
-  imports: [CommonModule, ProductRoutingModule, CdkStepperModule, SharedModule, MatSliderModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ProductRoutingModule,
+    CdkStepperModule,
+    SharedModule,
+    MatSliderModule,
+    ReactiveFormsModule,
+    NgbModule
+  ],
   providers: []
 })
 export class FinanceModule {}

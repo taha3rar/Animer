@@ -24,9 +24,29 @@ export class LoanAboutComponent implements OnInit {
       if (form) {
         this.loan_form = form;
         this.loan = this.loan_form.value;
+        this.validation();
         this.calculatePmt(this.loan.loanDetails.insureWithAbsa);
       }
     });
+  }
+
+  validation() {
+    if (this.loan.loanDetails.amountRequested > 10000000) {
+      this.loan_form
+        .get('loanDetails')
+        .get('amountRequested')
+        .setValue({
+          amountRequested: undefined
+        });
+    }
+    if (this.loan.loanDetails.amountRequested < 0) {
+      this.loan_form
+        .get('loanDetails')
+        .get('amountRequested')
+        .setValue({
+          amountRequested: undefined
+        });
+    }
   }
 
   calculatePmt(insurance: boolean) {

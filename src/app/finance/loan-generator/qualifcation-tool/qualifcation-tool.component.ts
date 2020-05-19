@@ -33,31 +33,54 @@ export class QualifcationToolComponent implements OnInit {
         this.loan = this.loan_form.value;
       }
     });
-    this.loan_form
-      .get('qualification')
-      .get('otherAgribusinessType')
-      .valueChanges.subscribe(type => {
-        type
-          ? this.loan_form
-              .get('qualification')
-              .get('agribusinessType')
-              .setValidators([])
-          : this.loan_form
-              .get('qualification')
-              .get('agribusinessType')
-              .setValidators([Validators.required]);
-        this.loan_form
-          .get('qualification')
-          .get('agribusinessType')
-          .updateValueAndValidity();
-      });
   }
 
-  onNextQuestion() {
-    if (this.currentIndex === 4 && !this.loan.qualification.businessType) {
-      return;
+  onNextQuestion(fastForward?: boolean) {
+    if (fastForward) {
+      this.currentIndex += 1;
+    } else {
+      switch (this.currentIndex) {
+        case 1:
+          if (this.loan_form.get('qualification').get('amountNeeded').valid) {
+            this.currentIndex += 1;
+          }
+          break;
+        case 2:
+          if (this.loan_form.get('qualification').get('loanPurpose').valid) {
+            this.currentIndex += 1;
+          }
+          break;
+        case 3:
+          if (
+            this.loan_form.get('qualification').get('agribusinessType').valid === true ||
+            this.loan_form.get('qualification').get('otherAgribusinessType').dirty
+          ) {
+            this.currentIndex += 1;
+          }
+          break;
+        case 4:
+          if (this.loan_form.get('qualification').get('businessType').valid) {
+            this.currentIndex += 1;
+          }
+          break;
+        case 5:
+          if (this.loan_form.get('qualification').get('incorporationSeniority').valid) {
+            this.currentIndex += 1;
+          }
+          break;
+        case 6:
+          if (this.loan_form.get('qualification').get('registrationCountry').valid) {
+            this.currentIndex += 1;
+          }
+          break;
+        case 7:
+          if (this.loan_form.get('qualification').get('absaBankAccount').valid) {
+            this.currentIndex += 1;
+          }
+          break;
+      }
     }
-    this.currentIndex += 1;
+    console.log(this.currentIndex);
   }
 
   onPrevQuestion() {
@@ -80,26 +103,31 @@ export class QualifcationToolComponent implements OnInit {
   }
 
   onCheck(event: any) {
-    const formArray: FormArray = this.loan_form.get('qualification').get('agribusinessType').value as FormArray;
-    if (event.target.checked && this.checkboxCounter < 3) {
-      formArray.push(new FormControl(event.target.value));
-      this.checkboxCounter += 1;
-    } else if (!event.target.checked) {
-      let i = 0;
-      formArray.controls.forEach((ctrl: FormControl) => {
-        if (ctrl.value === event.target.value) {
-          formArray.removeAt(i);
-          return;
-        }
-        i++;
-      });
-      this.checkboxCounter -= 1;
-    } else {
-      event.target.checked = false;
-    }
-    this.loan_form.get('qualification').patchValue({
-      agribusinessType: formArray.value
-    });
+    // const types = this.loan.qualification.businessType;
+    // console.log('value', event.target.value);
+    // console.log('checked ?', event.target.checked);
+    // console.log('counter', this.checkboxCounter);
+    // console.log('formArray in', types);
+    // if (event.target.checked && this.checkboxCounter < 3) {
+    //   formArray.value.push(new FormControl(event.target.value));
+    //   this.checkboxCounter += 1;
+    // } else if (!event.target.checked) {
+    //   let i = 0;
+    //   formArray.controls.forEach((value: FormControl) => {
+    //     if (value === event.target.value) {
+    //       formArray.value.removeAt(i);
+    //     }
+    //     i++;
+    //   });
+    //   this.checkboxCounter -= 1;
+    // }
+    // else {
+    //   event.target.checked = false;
+    // }
+    // console.log('formArray out', formArray.value);
+    // this.loan_form.get('qualification').patchValue({
+    //   agribusinessType: formArray.value
+    // });
   }
 
   openTextField() {

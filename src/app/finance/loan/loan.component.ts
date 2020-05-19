@@ -22,8 +22,10 @@ export class LoanComponent implements OnInit {
 
   ngOnInit() {
     this.loanGeneratorDataService.currentForm.subscribe(form => {
-      this.loan_form = form;
-      this.loan = this.loan_form.value;
+      if (form) {
+        this.loan_form = form;
+        this.loan = this.loan_form.value;
+      }
     });
   }
 

@@ -10,7 +10,18 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="birthday">Date of birth</label>
-            <input type="text" id="birthday" class="form-control" formControlName="birthDate" />
+            <div (click)="dp3.toggle()" class="input-group">
+              <input
+                type="text"
+                id="birthday"
+                class="form-control"
+                placeholder="DD/MM/YYYY"
+                name="ddp"
+                ngbDatepicker
+                #dp3="ngbDatepicker"
+                formControlName="birthDate"
+              />
+            </div>
           </div>
           <div class="form-group col-md-6">
             <label for="pin3">Pin Number</label>
@@ -44,7 +55,7 @@
             <input type="text" id="nationality2" class="form-control" formControlName="nationality" />
           </div>
           <div class="form-group col-md-6">
-            <label for="national-id2">National ID</label>
+            <label for="national-id2">National ID / Passport Number </label>
             <input type="text" id="national-id2" class="form-control" formControlName="nationalIdNumber" />
           </div>
         </div>
@@ -57,13 +68,6 @@
           <div class="form-group col-md-6">
             <label for="postal-code3">Postal code</label>
             <input type="text" id="postal-code3" class="form-control" formControlName="postalCode" />
-          </div>
-        </div>
-
-        <div class="form-row" *ngIf="loan.qualification.businessType == 'sole trader'">
-          <div class="col">
-            <label for="passport-numberbkp">Passport number</label>
-            <input type="text" id="passport-numberbkp" class="form-control" formControlName="passportNumber" />
           </div>
         </div>
 
