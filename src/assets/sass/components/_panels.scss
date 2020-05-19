@@ -323,6 +323,13 @@
 
   .bttn-primary.change-password {
     margin-top: 2rem;
+    margin-left: auto;
+  }
+
+  .d-flex {
+    @include respond(phone) {
+      flex-direction: column;
+    }
   }
 }
 
