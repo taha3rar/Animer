@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ContactModule } from './contact/contact.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NotificationsModule } from './notifications/notifications.module';
-import { FinanceModule } from './finance/finance.module';
+// import { FinanceModule } from './finance/finance.module';
 import { LandingModule } from './landing/landing.module';
 import { RegistrationModule } from './registration/registration.module';
 import { IntercomModule } from 'ng-intercom';
@@ -44,7 +44,7 @@ import { GoodsReceiveNoteModule } from './goods-receive-note/goods-receive-note.
     DashboardModule,
     ProfileModule,
     NotificationsModule,
-    FinanceModule,
+    // FinanceModule,
     LandingModule,
     RegistrationModule,
     HelpCenterModule,
