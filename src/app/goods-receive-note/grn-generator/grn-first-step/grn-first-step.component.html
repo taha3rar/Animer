@@ -59,7 +59,7 @@
         <input
           id="date"
           class="form-control"
-          placeholder="dd/mm/yyyyy"
+          placeholder="DD/MM/YYYY"
           name="ddp"
           ngbDatepicker
           #dp3="ngbDatepicker"
@@ -99,7 +99,7 @@
         <td>
           {{ product.description || '-' }}
         </td>
-        <td>{{ product.quantity | number: '1.2-2' }} {{ product.measurement }}</td>
+        <td>{{ product.quantity | number: '1.2-2' }} {{ product.measurement | plural: product?.quantity }}</td>
         <td>{{ product.rate | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}</td>
         <td>{{ product.price | number: '1.2-2' }} {{ product.currency }}</td>
         <td class="text-right">
@@ -123,7 +123,9 @@
         <div class="d-flex bottom mt-2">
           <div>
             <p class="sm-text-label">Quanitiy</p>
-            <p class="text-regular">{{ product.quantity | number: '1.2-2' }} {{ product.measurement }}</p>
+            <p class="text-regular">
+              {{ product.quantity | number: '1.2-2' }} {{ product.measurement | plural: product?.quantity }}
+            </p>
           </div>
           <div>
             <p class="sm-text-label">Rate</p>

@@ -73,6 +73,7 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
   }
   onGeneralSubmit() {
     this.onSubmit(this.productForm);
+    this.disableSubmitButton(true);
     if (this.productForm.valid) {
       const product: GoodsReceivedNoteProduct = {
         name: this.productf.product_name.value,
@@ -84,10 +85,8 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
         description: this.productf.description.value
       };
       this.currency = product.currency;
-      this.productForm.markAsUntouched();
       this.addProduct.emit({ product: product, i: this.i });
-      $('#addGrnProductWizard').fadeOut('fast');
-      this.deleteData();
+      this.closeAndDelete();
     }
   }
   deleteData() {
@@ -101,22 +100,25 @@ export class GrnProductGeneratorComponent extends BaseValidationComponent implem
       description: undefined
     });
     this.product = null;
-    this.productForm.markAsUntouched();
+  }
+  closeAndDelete() {
+    $('#addGrnProductWizard').fadeOut('fast', () => {
+      this.productForm.markAsUntouched();
+      this.deleteData();
+    });
   }
   onModalClose() {
     if (this.productForm.dirty) {
       this.alerts.showAlertBack().then(value => {
         if (value) {
-          $('#addGrnProductWizard').fadeOut('fast');
-          this.deleteData();
+          this.closeAndDelete();
           this.addProduct.emit(undefined);
         } else {
           return false;
         }
       });
     } else {
-      $('#addGrnProductWizard').fadeOut('fast');
-      this.deleteData();
+      this.closeAndDelete();
       this.addProduct.emit(undefined);
     }
   }

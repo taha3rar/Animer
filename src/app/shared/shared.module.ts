@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CsvService } from './services/csv.service';
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoaderComponent } from './loader/loader.component';
 import { RoundUpPipe } from './pipes/roundup.pipe';
@@ -29,6 +29,7 @@ import { ProductQuantityPipe } from './pipes/product-quantity.pipe';
 import { DateStringPipe } from './pipes/date-string.pipe';
 import { PaymentStatusPipe } from './pipes/paymentStatus.pipe';
 import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
+import { PluralPipe } from './pipes/plural.pipe';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
     FilterPipe,
     MultiProductPipe,
     ProductQuantityPipe,
+    PluralPipe,
     ContactGeneratorComponent,
     UserProgressComponent,
     DpoDocumentsComponent,
@@ -80,10 +82,11 @@ import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
     UserProgressComponent,
     FilterPipe,
     StatusPipe,
+    PluralPipe,
     DpoDocumentsComponent,
     PaymentStatusPipe,
     ReferenceCodePipe
   ],
-  providers: [CsvService, DatePipe]
+  providers: [CsvService, DatePipe, DecimalPipe]
 })
 export class SharedModule {}

@@ -45,7 +45,7 @@
         <tr *ngFor="let product of grn?.products">
           <td>{{ product?.name }}</td>
           <td>{{ product?.description || '-' }}</td>
-          <td>{{ product?.quantity | number: '1.2-2' }} {{ product?.measurement }}</td>
+          <td>{{ product?.quantity | number: '1.2-2' }} {{ product?.measurement | plural: product?.quantity }}</td>
           <td>{{ product?.rate | number: '1.2-2' }} per {{ product?.measurement }}</td>
           <td>{{ product?.price | number: '1.2-2' }} {{ product?.currency }}</td>
         </tr>
@@ -63,7 +63,9 @@
           <div class="d-flex bottom mt-2">
             <div class="mr-1">
               <p class="sm-text-label">Quanitiy</p>
-              <p class="text-regular">{{ product?.quantity | number: '1.2-2' }} {{ product?.measurement }}</p>
+              <p class="text-regular">
+                {{ product?.quantity | number: '1.2-2' }} {{ product?.measurement | plural: product?.quantity }}
+              </p>
             </div>
             <div class="mr-1">
               <p class="sm-text-label">Rate</p>

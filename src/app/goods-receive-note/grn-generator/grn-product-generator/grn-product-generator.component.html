@@ -8,7 +8,7 @@
       <div class="modal-box-center">
         <div class="tab-content">
           <div class="row tab-pane active margin-none" id="client-details">
-            <form [formGroup]="productForm" (ngSubmit)="onGeneralSubmit()">
+            <form [formGroup]="productForm">
               <div class="col-md-12">
                 <div class="form-row">
                   <div class="form-group col-md-6" [ngClass]="showFieldStyle('product_name')">
@@ -61,23 +61,6 @@
                       <p>This field is required</p>
                     </div>
                   </div>
-                  <div class="form-group col-md-6" [ngClass]="showFieldStyle('quantity')">
-                    <label for="quantity">Quantity *</label>
-                    <input
-                      placeholder="Add total quantity"
-                      type="number"
-                      formControlName="quantity"
-                      class="form-control"
-                      id="quantity"
-                      [ngModel]="productf?.quantity.value"
-                      (ngModelChange)="calculator()"
-                    />
-                    <div class="help-block" *ngIf="isFieldInvalid('quantity')">
-                      <p>This field is required</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
                   <div [ngClass]="showFieldStyle('currency')" class="form-group col-md-6">
                     <label for="currency">Currency *</label>
                     <select
@@ -101,6 +84,23 @@
                       <option *ngFor="let currency of currencies">{{ currency.value }}</option>
                     </select>
                     <div class="help-block" *ngIf="isFieldInvalid('currency')">
+                      <p>This field is required</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6" [ngClass]="showFieldStyle('quantity')">
+                    <label for="quantity">Quantity *</label>
+                    <input
+                      placeholder="Add total quantity"
+                      type="number"
+                      formControlName="quantity"
+                      class="form-control"
+                      id="quantity"
+                      [ngModel]="productf?.quantity.value"
+                      (ngModelChange)="calculator()"
+                    />
+                    <div class="help-block" *ngIf="isFieldInvalid('quantity')">
                       <p>This field is required</p>
                     </div>
                   </div>
