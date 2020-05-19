@@ -10,7 +10,8 @@ import {
   SimpleChanges,
   OnChanges,
   EventEmitter,
-  Output
+  Output,
+  AfterViewInit
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
@@ -27,13 +28,14 @@ import { UpdateContactDTO } from '@avenews/agt-sdk/lib/types/contact';
   templateUrl: './contact-generator.component.html',
   styleUrls: ['./contact-generator.component.scss']
 })
-export class ContactGeneratorComponent extends BaseValidationComponent implements OnInit, OnChanges {
+export class ContactGeneratorComponent extends BaseValidationComponent implements OnInit, OnChanges, AfterViewInit {
   currentUser: User;
   invitedContact = {};
   contactDetailsForm: FormGroup;
   countries = countries;
   phoneUtil: any;
   regionCode = 'KE';
+  canChange: boolean;
   @Output() contactEmit = new EventEmitter<Contact>();
   @Input() contact: Contact;
   @Input() isEdit: boolean;
@@ -78,42 +80,50 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     this.formInput = this.contactDetailsForm;
     setTimeout(function() {
       $('.selectpicker').selectpicker();
+      $('#region_code').selectpicker('refresh');
     }, 200);
   }
+
   onEmailChanges(): void {
-    const phone = this.contactDetailsForm.controls['phoneNumber'];
-    const email = this.contactDetailsForm.controls['email'];
-    if ((this.contactf && this.contactf.email.value) || !this.partialPhoneNumber) {
-      email.clearValidators();
-      email.setValidators([Validators.required, Validators.email]);
-      email.updateValueAndValidity();
-      phone.clearValidators();
-      phone.updateValueAndValidity();
-    } else if (this.partialPhoneNumber) {
-      this.onPhoneChanges();
-      phone.setValidators([PhoneNumberValidator(this.regionCode)]);
-      phone.updateValueAndValidity();
-    }
-    if (!email.value) {
-      phone.setValidators([Validators.required, PhoneNumberValidator(this.regionCode)]);
-      phone.updateValueAndValidity();
+    if (this.canChange) {
+      const phone = this.contactDetailsForm.controls['phoneNumber'];
+      const email = this.contactDetailsForm.controls['email'];
+      if ((this.contactf && this.contactf.email.value) || !this.partialPhoneNumber) {
+        email.clearValidators();
+        email.setValidators([Validators.required, Validators.email]);
+        email.updateValueAndValidity();
+        phone.clearValidators();
+        phone.updateValueAndValidity();
+      } else if (this.partialPhoneNumber) {
+        this.onPhoneChanges();
+        phone.setValidators([PhoneNumberValidator(this.regionCode)]);
+        phone.updateValueAndValidity();
+      }
+      if (!email.value) {
+        phone.setValidators([Validators.required, PhoneNumberValidator(this.regionCode)]);
+        phone.updateValueAndValidity();
+      }
     }
   }
   onPhoneChanges(): void {
-    if (this.contactf && this.partialPhoneNumber) {
-      const phone = this.contactDetailsForm.controls['phoneNumber'];
-      const email = this.contactDetailsForm.controls['email'];
-      phone.clearValidators();
-      phone.setValidators([Validators.required, PhoneNumberValidator(this.regionCode)]);
-      phone.updateValueAndValidity();
-      email.clearValidators();
-      email.setValidators([Validators.email]);
-      email.updateValueAndValidity();
-    } else {
-      this.onEmailChanges();
+    if (this.canChange) {
+      if (this.contactf && this.partialPhoneNumber) {
+        const phone = this.contactDetailsForm.controls['phoneNumber'];
+        const email = this.contactDetailsForm.controls['email'];
+        phone.clearValidators();
+        phone.setValidators([Validators.required, PhoneNumberValidator(this.regionCode)]);
+        phone.updateValueAndValidity();
+        email.clearValidators();
+        email.setValidators([Validators.email]);
+        email.updateValueAndValidity();
+      } else {
+        this.onEmailChanges();
+      }
     }
   }
-
+  ngAfterViewInit(): void {
+    this.canChange = true; // "content changed after it has been checked" error fix
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isEdit'] || changes['contact']) {
       if (this.isEdit && this.contact && this.contactDetailsForm) {
@@ -128,6 +138,8 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           location: this.contact.location,
           address: this.contact.address
         });
+      } else if (!this.isEdit) {
+        $('#region_code').selectpicker('refresh');
       }
     }
   }
@@ -141,24 +153,25 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     return country.viewValue;
   }
   isRequired(abstractControl: AbstractControl) {
-    if (abstractControl.validator) {
-      const validator = abstractControl.validator({} as AbstractControl);
-      if (validator && validator.required) {
-        return true;
+    if (this.contactDetailsForm) {
+      if (abstractControl.validator) {
+        const validator = abstractControl.validator({} as AbstractControl);
+        if (validator && validator.required) {
+          return true;
+        }
       }
-    }
-    if (abstractControl['controls']) {
-      for (const controlName in abstractControl['controls']) {
-        if (abstractControl['controls'][controlName]) {
-          if (this.isRequired(abstractControl['controls'][controlName])) {
-            return true;
+      if (abstractControl['controls']) {
+        for (const controlName in abstractControl['controls']) {
+          if (abstractControl['controls'][controlName]) {
+            if (this.isRequired(abstractControl['controls'][controlName])) {
+              return true;
+            }
           }
         }
       }
+      return false;
     }
-    return false;
   }
-
   changeRegionCode() {
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
     const PNF = libphonenumber.PhoneNumberFormat;

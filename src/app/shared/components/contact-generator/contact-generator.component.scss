@@ -98,3 +98,8 @@ select {
 button:disabled {
   cursor: no-drop;
 }
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef !important;
+  opacity: 1;
+}
