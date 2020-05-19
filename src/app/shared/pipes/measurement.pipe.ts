@@ -12,7 +12,7 @@ export class MeasurementPipe implements PipeTransform {
         // if there is array size is bigger than 1 means that there are multiple measures
         return 'Multiple Measurments';
       } else {
-        return quanity; // if the array size is only 1 then its only got 1 measurement type.
+        return quanity + ` ${measures[0]}`; // if the array size is only 1 then its only got 1 measurement type.
       }
     } else {
       return '';
