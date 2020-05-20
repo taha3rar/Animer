@@ -25,6 +25,7 @@ import { IntercomModule } from 'ng-intercom';
 import { environment } from '@env/environment.local';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoodsReceiveNoteModule } from './goods-receive-note/goods-receive-note.module';
+import { FinanceModule } from './finance/finance.module';
 
 @NgModule({
   imports: [
@@ -44,7 +45,7 @@ import { GoodsReceiveNoteModule } from './goods-receive-note/goods-receive-note.
     DashboardModule,
     ProfileModule,
     NotificationsModule,
-    // FinanceModule,
+    FinanceModule,
     LandingModule,
     RegistrationModule,
     HelpCenterModule,

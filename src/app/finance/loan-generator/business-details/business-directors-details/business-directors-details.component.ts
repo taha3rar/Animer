@@ -24,7 +24,7 @@ export class BusinessDirectorsDetailsComponent implements OnInit {
   }
 
   onCheck(event: any) {
-    const formArray: FormArray = this.loan_form.get('businessDirectorsDetails').get('role').value as FormArray;
+    const formArray: FormArray = this.loan_form.get('businessDirectorsDetails').get('roles') as FormArray;
     if (event.target.checked) {
       formArray.push(new FormControl(event.target.value));
     } else if (!event.target.checked) {
@@ -39,8 +39,5 @@ export class BusinessDirectorsDetailsComponent implements OnInit {
     } else {
       event.target.checked = false;
     }
-    this.loan_form.get('qualification').patchValue({
-      role: formArray.value
-    });
   }
 }

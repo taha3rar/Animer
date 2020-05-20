@@ -32,13 +32,13 @@ export const ROUTES: RouteInfo[] = [
     title: 'Goods Received',
     type: 'link',
     icontype: 'icon-grn'
+  },
+  {
+    path: '/finance',
+    title: 'Finance',
+    type: 'link',
+    icontype: 'icon-finance'
   }
-  // {
-  //   path: '/finance',
-  //   title: 'Finance',
-  //   type: 'link',
-  //   icontype: 'icon-finance'
-  // }
 ];
 
 @Component({

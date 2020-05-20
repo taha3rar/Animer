@@ -80,7 +80,6 @@ export class QualifcationToolComponent implements OnInit {
           break;
       }
     }
-    console.log(this.currentIndex);
   }
 
   onPrevQuestion() {

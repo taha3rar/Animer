@@ -113,7 +113,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
       businessDirectorsDetails: this.formBuilder.group({
         fullName: undefined,
         idNumber: undefined,
-        role: this.formBuilder.array([], Validators.required),
+        roles: this.formBuilder.array([], Validators.required),
         pinNumber: undefined,
         shareholding: undefined,
         loanGuarantor: undefined,
@@ -193,7 +193,6 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
   onChanges(): void {
     this.loan_form.valueChanges.subscribe(val => {
       this.loanGeneratorDataService.setForm(this.loan_form);
-      console.log(this.loan_form.value);
     });
   }
 
