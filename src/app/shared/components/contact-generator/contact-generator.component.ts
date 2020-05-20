@@ -21,7 +21,7 @@ import { BaseValidationComponent } from '@app/shared/components/base-validation/
 import { defaultValues } from '@app/shared/helpers/default_values';
 declare const $: any;
 import { PhoneNumberValidator } from '@app/core/validators/phone.validator';
-import { User, RegisterContactDTO, Contact } from '@avenews/agt-sdk';
+import { User, RegisterContactDTO, Contact, AGTError } from '@avenews/agt-sdk';
 import { UpdateContactDTO } from '@avenews/agt-sdk/lib/types/contact';
 @Component({
   selector: 'app-contact-generator',
@@ -217,9 +217,10 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
               this.closeAndRefresh();
             }
           })
-          .catch(err => {
+          .catch((err: AGTError) => {
             this.disableSubmitButton(false);
-            this.alerts.showAlertDanger(err.error.message);
+            this.spinnerService.hideSpinner();
+            this.alerts.showAlertDanger(err.message);
           });
       } else {
         const updateContact: UpdateContactDTO = {
@@ -242,9 +243,10 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
               this.closeAndRefresh();
             }
           })
-          .catch(err => {
+          .catch((err: AGTError) => {
+            this.spinnerService.hideSpinner();
             this.disableSubmitButton(false);
-            this.alerts.showAlertDanger(err.error.message);
+            this.alerts.showAlertDanger(err.message);
           });
       }
     }

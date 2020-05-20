@@ -8,7 +8,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { AlertsService } from '@app/core/alerts.service';
 import { SpinnerToggleService } from '@app/shared/services/spinner-toggle.service';
 import { Router } from '@angular/router';
-import { Utils } from '@avenews/agt-sdk';
+import { Utils, Contact, AGTError } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-grn-document',
@@ -35,7 +35,7 @@ export class GrnDocumentComponent {
       paymentStatus: this.grn.paymentStatus,
       referenceCode: this.grn.referenceCode,
       products: this.grn.products,
-      supplier: this.grn.supplier,
+      supplier: this.grn.supplier as Contact,
       receivedBy: this.grn.receivedBy,
       total: this.grn.total
     };
@@ -48,8 +48,8 @@ export class GrnDocumentComponent {
           this.router.navigate(['grn']);
         }
       })
-      .catch(err => {
-        this.alerts.showAlertDanger(err.error.message);
+      .catch((err: AGTError) => {
+        this.alerts.showAlertDanger(err.message);
       });
   }
 }
