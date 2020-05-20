@@ -31,15 +31,7 @@ export class LoanAboutComponent implements OnInit {
   }
 
   validation() {
-    if (this.loan.loanDetails.amountRequested > 10000000) {
-      this.loan_form
-        .get('loanDetails')
-        .get('amountRequested')
-        .setValue({
-          amountRequested: undefined
-        });
-    }
-    if (this.loan.loanDetails.amountRequested < 0) {
+    if (this.loan.loanDetails.amountRequested < 0 || this.loan.loanDetails.amountRequested > 10000000) {
       this.loan_form
         .get('loanDetails')
         .get('amountRequested')
