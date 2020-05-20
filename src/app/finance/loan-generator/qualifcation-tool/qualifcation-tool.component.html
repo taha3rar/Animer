@@ -417,10 +417,6 @@
           You can save the application at any point and return to it whenever you have it!
         </p>
       </div>
-      <div class="stepper-footer-wrapper">
-        <button class="bttn-secondary" *ngIf="currentIndex > 1" (click)="onPrevQuestion()">PREV</button>
-        <button type="button" class="bttn-primary" (click)="onFinishQualification()">Let's begin</button>
-      </div>
     </div>
 
     <div *ngIf="!checkEligibility(loan)" class="qualification__item" [class.display-tab]="displayTab(8)">
@@ -444,21 +440,28 @@
           agribusiness digitally.
         </p>
       </div>
-      <div class="stepper-footer-wrapper">
-        <button class="bttn-secondary" *ngIf="currentIndex > 1" (click)="onPrevQuestion()">PREV</button>
-        <button [routerLink]="['/dashboard']" type="button" class="bttn-primary">Let's go</button>
-      </div>
     </div>
   </form>
 </div>
 
-<div class="stepper-footer" *ngIf="currentIndex < 8">
+<div class="stepper-footer">
   <div class="stepper-footer-wrapper">
     <div>
       <button class="bttn-secondary" *ngIf="currentIndex > 1" (click)="onPrevQuestion()">PREV</button>
     </div>
     <div>
       <button class="bttn-primary" *ngIf="currentIndex < 8" (click)="onNextQuestion(false)">NEXT</button>
+      <button [routerLink]="['/dashboard']" class="bttn-primary" *ngIf="currentIndex >= 8 && !checkEligibility(loan)">
+        Let's go
+      </button>
+      <button
+        *ngIf="currentIndex >= 8 && checkEligibility(loan)"
+        type="button"
+        class="bttn-primary"
+        (click)="onFinishQualification()"
+      >
+        Let's begin
+      </button>
     </div>
   </div>
 </div>

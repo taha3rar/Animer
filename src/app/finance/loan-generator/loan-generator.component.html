@@ -1,10 +1,12 @@
 <div class="wrapper wizard" [hidden]="!beginApplication || previewDisplayed">
-  <h1 class="main-title btn-main margin-bottom-2">
-    <div routerLink="/finance"><a class="material-icons">keyboard_arrow_left</a> Finance</div>
-    <div class="pull-right" (click)="setPreview(true)">
+  <div class="d-flex">
+    <h1 class="main-title btn-main margin-bottom-2" routerLink="/finance">
+      <a class="material-icons">keyboard_arrow_left</a> Finance
+    </h1>
+    <h1 class="main-title btn-main margin-bottom-2 pull-right" style="margin-left: auto;" (click)="setPreview(true)">
       To preview <a class="material-icons">keyboard_arrow_right</a>
-    </div>
-  </h1>
+    </h1>
+  </div>
   <div class="stepper-wrapper">
     <div>
       <ul class="nav nav-tabs" #generalSteps>

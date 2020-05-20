@@ -1,7 +1,7 @@
 import { AuthenticationService } from '@app/core';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { LoanGeneratorDataService } from '../loan-generator-data.service';
-import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { CreateLoanDTO } from '@avenews/agt-sdk';
 
 @Component({
@@ -103,31 +103,27 @@ export class QualifcationToolComponent implements OnInit {
   }
 
   onCheck(event: any) {
-    // const types = this.loan.qualification.businessType;
-    // console.log('value', event.target.value);
-    // console.log('checked ?', event.target.checked);
-    // console.log('counter', this.checkboxCounter);
-    // console.log('formArray in', types);
-    // if (event.target.checked && this.checkboxCounter < 3) {
-    //   formArray.value.push(new FormControl(event.target.value));
-    //   this.checkboxCounter += 1;
-    // } else if (!event.target.checked) {
-    //   let i = 0;
-    //   formArray.controls.forEach((value: FormControl) => {
-    //     if (value === event.target.value) {
-    //       formArray.value.removeAt(i);
-    //     }
-    //     i++;
-    //   });
-    //   this.checkboxCounter -= 1;
-    // }
-    // else {
-    //   event.target.checked = false;
-    // }
-    // console.log('formArray out', formArray.value);
-    // this.loan_form.get('qualification').patchValue({
-    //   agribusinessType: formArray.value
-    // });
+    const formArray: FormArray = this.loan_form.get('qualification').get('agribusinessType') as FormArray;
+
+    if (event.target.checked && this.checkboxCounter === 3) {
+      event.target.checked = false;
+    }
+
+    if (event.target.checked && this.checkboxCounter < 3) {
+      formArray.push(new FormControl(event.target.value));
+      this.checkboxCounter += 1;
+    } else {
+      let i = 0;
+
+      formArray.controls.forEach((ctrl: FormControl) => {
+        if (ctrl.value === event.target.value) {
+          formArray.removeAt(i);
+          this.checkboxCounter -= 1;
+          return;
+        }
+        i++;
+      });
+    }
   }
 
   openTextField() {

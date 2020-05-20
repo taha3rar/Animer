@@ -38,7 +38,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
       qualification: this.formBuilder.group({
         amountNeeded: [undefined, Validators.required],
         loanPurpose: [undefined, Validators.required],
-        agribusinessType: [this.formBuilder.array([], Validators.required)],
+        agribusinessType: this.formBuilder.array([], Validators.required),
         businessType: [undefined, Validators.required],
         otherAgribusinessType: [undefined],
         incorporationSeniority: [undefined, Validators.required],
@@ -113,7 +113,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
       businessDirectorsDetails: this.formBuilder.group({
         fullName: undefined,
         idNumber: undefined,
-        role: [this.formBuilder.array([], Validators.required)],
+        role: this.formBuilder.array([], Validators.required),
         pinNumber: undefined,
         shareholding: undefined,
         loanGuarantor: undefined,
