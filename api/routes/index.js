@@ -107,9 +107,9 @@ router.get("/anime*", async (req, res) => {
   const urlParts = url.split("/");
   const _url = url.substr(url.indexOf("?") + 1);
   api.anime(_url).then((videos) => {
-    res.status(200).json(
-      videos,
-    );
+    if (videos === "sad") {
+      res.status(404).json('sad')
+    } else res.status(200).json(videos);
   });
 });
 

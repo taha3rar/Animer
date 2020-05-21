@@ -3,7 +3,6 @@ const cloudscraper = require("cloudscraper");
 const cheerio = require("cheerio");
 const url = require("./urls");
 const puppeteer = require("puppeteer");
-
 const ongoingSeries = async () => {
   const res = await fetch(`${url.BASE_URL}`);
   const body = await res.text();
@@ -427,50 +426,58 @@ const anime = async (url) => {
   url = _url;
   let promises = [];
   console.log(_url); //anime name and episode in this case
-  if (_url.includes("episode")) {
+  if (_url.includes("-episode")) {
     const ep = await animeEpisodeHandler(_url);
-    let link = "https://" + ep[0].servers[0].iframe;
-    console.log(ep[0].servers[0].iframe);
-    let vid = await decodeVidstreamingIframeURL(link);
-    console.log(vid);
-    if (vid.length === 0) {
-      if (ep[0].servers) {
-        let alt = ep[0].servers.find((e, i) => {
-          if (e.name.toLowerCase().includes("mp4upload")) return e;
-        });
-        if (alt) {
-         promises=(await pup(alt.iframe));
+    if (
+      ep &&
+      ep[0] &&
+      ep[0].servers &&
+      ep[0].servers[0] &&
+      ep[0].servers[0].iframe
+    ) {
+      let link = "https://" + ep[0].servers[0].iframe;
+      console.log(ep[0].servers[0].iframe);
+      let vid = await decodeVidstreamingIframeURL(link);
+      console.log(vid);
+      if (vid.length === 0) {
+        if (ep[0].servers) {
+          let alt = ep[0].servers.find((e, i) => {
+            if (e.name.toLowerCase().includes("mp4upload")) return e;
+          });
+          if (alt) {
+            promises = await pup(alt.iframe);
+          }
         }
+      } else {
+        promises = vid;
       }
-    } else {
-      promises = vid;
+      return Promise.all(promises);
     }
-    return Promise.all(promises);
+    return Promise.all('sad')
   }
 };
 const pup = async (alt) => {
-    return new Promise(async(resolve)=>{
-
-        const ure = [];
-        const browser = await puppeteer.launch({
-          args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox", // these two args for heroku to use puppeteer
-          ],
-        });
-        const page = await browser.newPage();
-        await page.goto(alt, { waitUntil: "domcontentloaded" });
-        console.log(alt);
-        page.on("response", async (resp) => {
-          uri = resp.url();
-          if (uri && uri.includes("video.mp4") && uri.includes("mp4upload")) {
-            ure.push(resp.url());
-            console.log(resp.url());
-            resolve(ure)
-            await browser.close();
-          }
-        });
-    })
+  return new Promise(async (resolve) => {
+    const ure = [];
+    const browser = await puppeteer.launch({
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox", // these two args for heroku to use puppeteer
+      ],
+    });
+    const page = await browser.newPage();
+    await page.goto(alt, { waitUntil: "domcontentloaded" });
+    console.log(alt);
+    page.on("response", async (resp) => {
+      uri = resp.url();
+      if (uri && uri.includes("video.mp4") && uri.includes("mp4upload")) {
+        ure.push(resp.url());
+        console.log(resp.url());
+        resolve(ure);
+        await browser.close();
+      }
+    });
+  });
 };
 module.exports = {
   animeEpisodeHandler,
