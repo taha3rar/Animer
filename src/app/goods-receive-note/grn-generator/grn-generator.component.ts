@@ -3,8 +3,10 @@ import { NgbDateCustomParserFormatter } from './../../shared/customization/ngb-d
 import { AlertsService } from './../../core/alerts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CreateGoodsReceivedNoteDTO } from '@avenews/agt-sdk/lib/types/goods-receive-note';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Contact } from '@avenews/agt-sdk';
+import swal from 'sweetalert';
+import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
 
 @Component({
   selector: 'app-grn-generator',
@@ -12,8 +14,10 @@ import { Contact } from '@avenews/agt-sdk';
   styleUrls: ['./grn-generator.component.scss'],
   providers: [{ provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }]
 })
-export class GrnGeneratorComponent implements OnInit {
-  canGoBack = true;
+export class GrnGeneratorComponent implements OnInit, CanComponentDeactivate {
+  formDirty: boolean;
+  formSubmitted: boolean;
+
   grn: CreateGoodsReceivedNoteDTO = {
     currency: undefined,
     issueDate: undefined,
@@ -30,18 +34,27 @@ export class GrnGeneratorComponent implements OnInit {
     total: undefined
   };
 
-  constructor(private alerts: AlertsService, private router: Router) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
   back() {
-    if (!this.canGoBack) {
-      this.alerts.showAlertBack().then(val => {
-        if (val) {
-          this.router.navigate(['grn']);
-        }
-      });
-    } else {
-      this.router.navigate(['grn']);
+    this.router.navigate(['grn']);
+  }
+
+  confirm() {
+    if (!this.formDirty || this.formSubmitted) {
+      return true;
     }
+    return swal({
+      text: 'Are you sure you want to leave this page? All information will be lost!',
+      buttons: ['Cancel', 'Yes'],
+      icon: 'warning'
+    }).then(value => {
+      if (value) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 }

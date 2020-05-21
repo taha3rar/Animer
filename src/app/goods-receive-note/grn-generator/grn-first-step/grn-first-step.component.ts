@@ -15,7 +15,7 @@ export class GrnFirstStepComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
   changed = false;
-  @Output() goBack = new EventEmitter<boolean>();
+  @Output() formDirty = new EventEmitter<boolean>();
   @Input() grn: CreateGoodsReceivedNoteDTO;
   products: any[] = [];
   product: GoodsReceivedNoteProduct = {
@@ -61,7 +61,7 @@ export class GrnFirstStepComponent implements OnInit {
 
   change(e: Contact) {
     if (e) {
-      this.goBack.emit(false);
+      this.formDirty.emit(true);
       this.selectedContact = e;
       this.changed = true;
       this.selectedContact ? $('#contact').removeClass('red-border') : (this.selectedContact = undefined);
@@ -72,7 +72,7 @@ export class GrnFirstStepComponent implements OnInit {
     this.selectedContact = e;
     localStorage.setItem('grnContact', JSON.stringify(e));
     this.router.navigate([this.router.url]);
-    this.goBack.emit(false);
+    this.formDirty.emit(true);
   }
 
   compare(c1: any, c2: any): boolean {
@@ -85,7 +85,7 @@ export class GrnFirstStepComponent implements OnInit {
 
   addProduct(e: any) {
     if (e) {
-      this.goBack.emit(false);
+      this.formDirty.emit(true);
       if (!this.currency) {
         this.currency = e.product.currency;
       }

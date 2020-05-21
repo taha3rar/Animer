@@ -1,3 +1,4 @@
+import { ConfirmationGuard } from '@app/shared/guards/confirmation.guard';
 import { GrnResolver } from './resolvers/grn.resolver';
 import { MyGrnsResolver } from './resolvers/grn-mine.resolver';
 import { GrnListComponent } from './grn-list/grn-list.component';
@@ -27,7 +28,8 @@ const routes: Routes = [
       resolve: {
         contacts: CurrentUserContactsResolver
       },
-      runGuardsAndResolvers: 'always'
+      runGuardsAndResolvers: 'always',
+      canDeactivate: [ConfirmationGuard]
     },
     {
       path: 'grn/:id',
@@ -42,6 +44,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ConfirmationGuard]
 })
 export class GoodsReceiveNoteRoutingModule {}

@@ -39,3 +39,8 @@ a.active p {
 .support-link:hover {
   text-decoration-line: underline;
 }
+
+.support-section:active,
+.support-section:focus {
+  outline: none;
+}

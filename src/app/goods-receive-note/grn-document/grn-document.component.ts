@@ -4,7 +4,7 @@ import {
   GoodsReceivedNoteProduct,
   GoodsReceivedNote
 } from '@avenews/agt-sdk/lib/types/goods-receive-note';
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { AlertsService } from '@app/core/alerts.service';
 import { SpinnerToggleService } from '@app/shared/services/spinner-toggle.service';
 import { Router } from '@angular/router';
@@ -18,6 +18,7 @@ import { Utils, Contact, AGTError } from '@avenews/agt-sdk';
 export class GrnDocumentComponent {
   @Input() grn: any; // CreateGoodsReceivedNoteDTO | GoodsReceivedNote;
   @Input() products: any[] = [];
+  @Output() formSubmitted = new EventEmitter<boolean>();
 
   constructor(
     private alerts: AlertsService,
@@ -43,6 +44,7 @@ export class GrnDocumentComponent {
       .createGoodsReceivedNote(grn)
       .then(data => {
         if (data._id) {
+          this.formSubmitted.emit(true);
           this.spinnerService.hideSpinner();
           this.alerts.showAlert('New Goods Received Note has been created!');
           this.router.navigate(['grn']);
