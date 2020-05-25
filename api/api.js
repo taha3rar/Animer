@@ -353,14 +353,32 @@ const animeContentHandler = async (id) => {
       .replace("Other name:", "")
       .trim();
     const liTotal = $("div.anime_video_body ul#episode_page li").length;
-    const totalEpisodes = parseInt(
+    let totalEpisodes = 0;
+    if (
       $("div.anime_video_body ul#episode_page li")
         .eq(liTotal - 1)
         .find("a")
         .text()
-        .split("-")[1],
-      10
-    );
+        .includes("-")
+    ) {
+      totalEpisodes = parseInt(
+        $("div.anime_video_body ul#episode_page li")
+          .eq(liTotal - 1)
+          .find("a")
+          .text()
+          .split("-")[1],
+        10
+      );
+    } else {
+      totalEpisodes = parseInt(
+        $("div.anime_video_body ul#episode_page li")
+          .eq(liTotal - 1)
+          .find("a")
+          .text(),
+        10
+      );
+    }
+
     const episodes = Array.from({ length: totalEpisodes }, (v, k) => {
       const animeId = `${id}-episode-${k + 1}`.slice(10);
       return {
@@ -453,7 +471,7 @@ const anime = async (url) => {
       }
       return Promise.all(promises);
     }
-    return Promise.all('sad')
+    return Promise.all("sad");
   }
 };
 const pup = async (alt) => {
