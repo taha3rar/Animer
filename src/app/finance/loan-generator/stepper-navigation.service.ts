@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { LoanGeneratorDataService } from './loan-generator-data.service';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StepperNavigationService {
+  loan_form: FormGroup;
   activeGeneralStepSource = new BehaviorSubject(0);
   activeInnerStepSource = new BehaviorSubject(0);
   currentActiveGeneralStep = this.activeGeneralStepSource.asObservable();
   currentActiveInnerStep = this.activeInnerStepSource.asObservable();
   stepDictionnary = new Array();
 
-  constructor() {}
+  constructor(private loanGeneratorDataService: LoanGeneratorDataService) {
+    this.loanGeneratorDataService.currentForm.subscribe(form => {
+      this.loan_form = form;
+    });
+  }
 
   setGeneralStepsNumber(generalStepsNumber: number): void {
     this.stepDictionnary = new Array(generalStepsNumber);

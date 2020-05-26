@@ -11,3 +11,40 @@
     <span>New Loan</span>
   </button>
 </div>
+<table class="table main-table" *ngIf="loans.length">
+  <thead>
+    <tr id="table-head">
+      <th>ID</th>
+      <th>Date</th>
+      <th>Ref No.</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let loan of loans | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+      <td># {{ loan?.numericId }}</td>
+      <td>
+        {{ loan?.created | date: 'dd/MM/yyyy' }}
+      </td>
+      <td>
+        010101
+      </td>
+      <td>
+        {{ loan.qualification.businessType | titlecase }}
+      </td>
+      <td>{{ loan.loanDetails.amountRequested | number: '1.2-2' }} KES</td>
+      <td>
+        <span>{{ loan?.status }}</span>
+      </td>
+      <td>
+        <a *ngIf="loan.status === 'draft'" [routerLink]="['/finance/generator/loan/', loan?._id]" id="view">View</a>
+        <a *ngIf="loan.status != 'draft'" id="view">No view</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<pagination-controls *ngIf="loans.length" (pageChange)="pageChanged($event)"></pagination-controls>

@@ -3,6 +3,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { LoanGeneratorDataService } from '../loan-generator-data.service';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { CreateLoanDTO } from '@avenews/agt-sdk';
+import { SdkService } from '@app/core/sdk.service';
 
 @Component({
   selector: 'app-qualifcation-tool',
@@ -21,7 +22,8 @@ export class QualifcationToolComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private loanGeneratorDataService: LoanGeneratorDataService
+    private loanGeneratorDataService: LoanGeneratorDataService,
+    private sdkService: SdkService
   ) {}
 
   ngOnInit() {
@@ -92,11 +94,13 @@ export class QualifcationToolComponent implements OnInit {
 
   onFinishQualification() {
     this.loan = this.loan_form.value;
-    // this.financeService.draft(this.loan).subscribe(loan => {
-    //   // this.router.navigateByUrl('/finance');
-    // });
     this.loan_form.get('qualification').patchValue({
       qualificationDone: true
+    });
+    this.sdkService.saveLoanApplication(this.loan).then(loan => {
+      this.loan_form.get('_id').setValue({
+        _id: loan._id
+      });
     });
     this.beginApplication.emit(true);
   }

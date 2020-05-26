@@ -23,4 +23,12 @@ export class BusinessDetailsComponent extends LoanNavigationComponent implements
   ngAfterViewInit() {
     super.ngAfterViewInit();
   }
+
+  businessType() {
+    if (this.loan && this.loan.qualification) {
+      return this.loan.qualification.businessType;
+    } else {
+      return null;
+    }
+  }
 }

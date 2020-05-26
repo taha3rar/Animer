@@ -59,7 +59,7 @@
         <span class="step-progress-bar"></span>
       </span>
 
-      <div *ngIf="isQualificationDone()" class="tab-content">
+      <div *ngIf="isQualificationDone() && beginApplication" class="tab-content">
         <div class="tab-pane" [class.active]="displayStepContent(0)" id="loan-details">
           <app-loan-details></app-loan-details>
         </div>

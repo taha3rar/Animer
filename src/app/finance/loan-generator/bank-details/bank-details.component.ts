@@ -26,6 +26,7 @@ export class BankDetailsComponent extends LoanNavigationComponent implements OnI
   }
 
   toPreview() {
+    super.onSave();
     this.actionOnPreview.emit(true);
   }
 }

@@ -1,6 +1,7 @@
 import { SharedModule } from '@app/shared';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { CommonModule } from '@angular/common';
 import { ProductRoutingModule } from './finance-routing.module';
 import { FinanceListComponent } from './finance-list/finance-list.component';
@@ -44,6 +45,9 @@ import { MatSliderModule } from '@angular/material';
 import { QualifcationToolComponent } from './loan-generator/qualifcation-tool/qualifcation-tool.component';
 import { LoanComponent } from './loan/loan.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FinanceListResolver } from './resolvers/finance-list.resolver';
+import { LoanResolver } from './resolvers/loan.resolver';
+import { CustomAdapter, CustomDateParserFormatter } from './loan-generator/loan-navigation.component';
 
 @NgModule({
   declarations: [
@@ -89,8 +93,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     MatSliderModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
   ],
-  providers: []
+  providers: [
+    FinanceListResolver,
+    LoanResolver,
+    { provide: NgbDateAdapter, useClass: CustomAdapter },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
+  ]
 })
 export class FinanceModule {}
