@@ -1,5 +1,8 @@
-<h1 class="main-title btn-main" (click)="toGenerator(4)">
+<h1 *ngIf="!loanSubmitted" class="main-title btn-main margin-bottom-2" (click)="toGenerator(4)">
   <a class="material-icons">keyboard_backspace</a> Back to loan edition
+</h1>
+<h1 *ngIf="loanSubmitted" class="main-title btn-main margin-bottom-2" routerLink="/finance">
+  <a class="material-icons">keyboard_arrow_left</a> Finance
 </h1>
 
 <div class="col-md-12">
@@ -9,39 +12,61 @@
         <div class="col-md-9">
           <div class="info-top">
             <div>
-              <p class="heading-2">Loan Application #444</p>
+              <p class="heading-2">
+                Loan Application <span *ngIf="loan.numericId">#{{ loan.numericId }}</span>
+              </p>
             </div>
             <div class="timing-section">
-              <span
-                ><i class="material-icons">calendar_today</i> <span class="time-text">Issued on 06/02/2020</span></span
+              <span *ngIf="loan.created && !loanSubmitted"
+                ><i class="material-icons">calendar_today</i>
+                <span class="time-text">Created on {{ loan.created | date: 'dd/MM/yyyy' }} </span></span
+              >
+              <span *ngIf="loan.dateSubmitted && loanSubmitted"
+                ><i class="material-icons">calendar_today</i>
+                <span class="time-text">Submitted on {{ loan.dateSubmitted | date: 'dd/MM/yyyy' }} </span></span
               >
             </div>
           </div>
           <div class="info">
             <div>
               <p class="t-light-gray">LOAN SIZE</p>
-              <p class="t-bold">KES {{ loan.loanDetails.amountRequested | number: '1.2-2' }}</p>
+              <p *ngIf="loan.loanDetails.amountRequested" class="t-bold">
+                KES {{ loan.loanDetails.amountRequested | number: '1.2-2' }}
+              </p>
+              <p *ngIf="!loan.loanDetails.amountRequested" class="t-bold">N/A</p>
             </div>
             <div style="margin-left: auto;">
               <p class="t-light-gray text-right">STATUS</p>
-              <div class="status status-orange">In Progress</div>
+              <div *ngIf="loan.status === 'draft'" class="status status-blue">Saved</div>
+              <div *ngIf="loan.status === 'submitted'" class="status status-orange">Processing</div>
             </div>
           </div>
         </div>
-        <div class="col-md-3 application-submission">
+        <div *ngIf="!loanSubmitted" class="col-md-3 application-submission">
+          <button
+            (click)="submitLoan()"
+            [ngClass]="{ 'bttn-primary': applicationCompleted, 'bttn-transparent-disabled': !applicationCompleted }"
+          >
+            Submit Application
+          </button>
+          <p>You'll be able to Submit the application to Absa after completing the 2 steps below.</p>
+        </div>
+        <div *ngIf="loanSubmitted" class="col-md-3 application-submission">
           <button
             [ngClass]="{ 'bttn-primary': applicationCompleted, 'bttn-transparent-disabled': !applicationCompleted }"
           >
-            Send Application
+            Download my application
           </button>
-          <p>You'll be able to send the application to Absa after completing the 2 steps below.</p>
+          <p>
+            Your application is presently reviewed by the ABSA team. You will receive a status notification shortly.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="col-md-12">
+<div *ngIf="!loanSubmitted" class="col-md-12">
   <ul class="nav nav-tabs">
     <li class="active">
       <a data-toggle="tab" href="#loanOverview">Loan Overview</a>
@@ -108,10 +133,10 @@
               <!-- <li class="step disabled"></li> -->
               <div class="step_header">
                 <div class="circle-wrapper"><span class="circle">2</span></div>
-                <div class="step_header_title">Send Application</div>
+                <div class="step_header_title">Submit Application</div>
               </div>
               <div class="step_content">
-                <div class="step_content_item"><p>Click here to send your application</p></div>
+                <button (click)="submitLoan()" class="bttn-primary">Click here to submit your application</button>
               </div>
             </li>
           </ul>

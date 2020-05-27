@@ -24,7 +24,7 @@
       </div>
       <div>
         <button class="btn-primary-transp" (click)="onSave()">SAVE</button>
-        <button class="bttn bttn-primary next-step" (click)="onNext()">NEXT</button>
+        <button class="bttn bttn-primary next-step" (keydown.ArrowLeft)="onNext()" (click)="onNext()">NEXT</button>
       </div>
     </div>
   </div>

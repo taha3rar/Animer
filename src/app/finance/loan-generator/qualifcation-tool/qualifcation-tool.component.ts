@@ -98,8 +98,9 @@ export class QualifcationToolComponent implements OnInit {
       qualificationDone: true
     });
     this.sdkService.saveLoanApplication(this.loan).then(loan => {
-      this.loan_form.get('_id').setValue({
-        _id: loan._id
+      this.loan_form.patchValue({
+        _id: loan._id,
+        numericId: loan.numericId
       });
     });
     this.beginApplication.emit(true);

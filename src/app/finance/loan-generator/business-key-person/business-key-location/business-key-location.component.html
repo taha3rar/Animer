@@ -29,7 +29,17 @@
           </div>
           <div class="form-group col-md-6">
             <label for="duration-address">Duration at current address</label>
-            <input type="text" id="duration-address" class="form-control" formControlName="currentAddressDuration" />
+            <div class="input-group">
+              <input
+                type="number"
+                id="duration-address"
+                class="form-control"
+                formControlName="currentAddressDuration"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">Years</span>
+              </div>
+            </div>
           </div>
         </div>
 

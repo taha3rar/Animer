@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy } from '@ang
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperNavigationService } from './stepper-navigation.service';
 import { LoanGeneratorDataService } from './loan-generator-data.service';
-import { CreateLoanDTO } from '@avenews/agt-sdk';
+import { CreateLoanDTO, Loan } from '@avenews/agt-sdk';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -16,6 +16,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
   @Input() beginApplication = false;
   currentGeneralActiveStep: number;
   loan: CreateLoanDTO;
+  saved_loan: Loan;
   previewDisplayed: boolean;
 
   constructor(
@@ -33,7 +34,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
     });
     this.route.data.subscribe(({ loan }) => {
       if (loan) {
-        this.loan = loan;
+        this.saved_loan = loan;
         // this.stepperNavigation.manuallySetStep(this.loan.currentStep.generalStepNumber);
         this.beginApplication = true;
       }
@@ -47,200 +48,288 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
     });
     this.loan_form = this.formBuilder.group({
       // Qualification
-      _id: Object.is(this.loan, undefined) ? undefined : this.loan._id,
+      _id: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan._id,
+      numericId: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.numericId,
+      created: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.created,
+      status: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.status,
       qualification: this.formBuilder.group({
         amountNeeded: [
-          Object.is(this.loan, undefined) ? undefined : this.loan.qualification.amountNeeded,
+          Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.qualification.amountNeeded,
           Validators.required
         ],
         loanPurpose: [
-          Object.is(this.loan, undefined) ? undefined : this.loan.qualification.loanPurpose,
+          Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.qualification.loanPurpose,
           Validators.required
         ],
-        agribusinessType: this.formBuilder.array([], Validators.required) || this.loan.qualification.agribusinessType,
+        agribusinessType:
+          this.formBuilder.array([], Validators.required) || this.saved_loan.qualification.agribusinessType,
         businessType: [
-          Object.is(this.loan, undefined) ? undefined : this.loan.qualification.businessType,
+          Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.qualification.businessType,
           Validators.required
         ],
         otherAgribusinessType: [
-          Object.is(this.loan, undefined) ? undefined : this.loan.qualification.otherAgribusinessType
+          Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.qualification.otherAgribusinessType
         ],
         incorporationSeniority: [
-          Object.is(this.loan, undefined) ? undefined : this.loan.qualification.incorporationSeniority,
+          Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.qualification.incorporationSeniority,
           Validators.required
         ],
         registrationCountry: [
-          Object.is(this.loan, undefined) ? undefined : this.loan.qualification.registrationCountry,
+          Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.qualification.registrationCountry,
           Validators.required
         ],
         absaBankAccount: [
-          Object.is(this.loan, undefined) ? undefined : this.loan.qualification.absaBankAccount,
+          Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.qualification.absaBankAccount,
           Validators.required
         ],
-        qualificationDone: Object.is(this.loan, undefined) ? false : this.loan.qualification.qualificationDone
+        qualificationDone: Object.is(this.saved_loan, undefined)
+          ? false
+          : this.saved_loan.qualification.qualificationDone
       }),
       // STEP 1
       // Loan Details
       loanDetails: this.formBuilder.group({
-        amountRequested: Object.is(this.loan, undefined) ? undefined : this.loan.loanDetails.amountRequested,
-        repaymentsNumber: Object.is(this.loan, undefined) ? 27 : this.loan.loanDetails.repaymentsNumber,
-        insureWithAbsa: [Object.is(this.loan, undefined) ? undefined : this.loan.loanDetails.insureWithAbsa]
+        amountRequested: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.loanDetails.amountRequested,
+        repaymentsNumber: Object.is(this.saved_loan, undefined) ? 27 : this.saved_loan.loanDetails.repaymentsNumber,
+        insureWithAbsa: [Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.loanDetails.insureWithAbsa]
       }),
       // Loan Goals
       loanGoals: this.formBuilder.group({
-        loanFor: [Object.is(this.loan, undefined) ? undefined : this.loan.loanGoals.loanFor],
-        shortTerm: [Object.is(this.loan, undefined) ? undefined : this.loan.loanGoals.shortTerm],
-        longTerm: [Object.is(this.loan, undefined) ? undefined : this.loan.loanGoals.longTerm]
+        loanFor: [Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.loanGoals.loanFor],
+        shortTerm: [Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.loanGoals.shortTerm],
+        longTerm: [Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.loanGoals.longTerm]
       }),
       // STEP 2
       // Business Basic Details
       businessBasicDetails: this.formBuilder.group({
-        businessName: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.businessName,
-        businessNature: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.businessNature,
-        registrationDate: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.registrationDate,
-        registrationNumber: Object.is(this.loan, undefined)
+        businessName: Object.is(this.saved_loan, undefined)
           ? undefined
-          : this.loan.businessBasicDetails.registrationNumber,
-        pinNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.pinNumber,
-        vatNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.vatNumber,
-        physicalAddress: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.physicalAddress,
-        street: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.street,
-        phoneNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.phoneNumber,
-        emailAddress: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.emailAddress,
-        companyWebsite: Object.is(this.loan, undefined) ? undefined : this.loan.businessBasicDetails.companyWebsite
+          : this.saved_loan.businessBasicDetails.businessName,
+        businessNature: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessBasicDetails.businessNature,
+        registrationDate: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessBasicDetails.registrationDate,
+        registrationNumber: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessBasicDetails.registrationNumber,
+        pinNumber: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessBasicDetails.pinNumber,
+        vatNumber: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessBasicDetails.vatNumber,
+        physicalAddress: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessBasicDetails.physicalAddress,
+        street: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessBasicDetails.street,
+        phoneNumber: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessBasicDetails.phoneNumber,
+        emailAddress: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessBasicDetails.emailAddress,
+        companyWebsite: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessBasicDetails.companyWebsite
       }),
       // Business Location
       businessLocation: this.formBuilder.group({
-        country: Object.is(this.loan, undefined) ? undefined : this.loan.businessLocation.country,
-        town: Object.is(this.loan, undefined) ? undefined : this.loan.businessLocation.town,
-        address: Object.is(this.loan, undefined) ? undefined : this.loan.businessLocation.address,
-        blockNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessLocation.blockNumber,
-        buildingName: Object.is(this.loan, undefined) ? undefined : this.loan.businessLocation.buildingName,
-        postalCode: Object.is(this.loan, undefined) ? undefined : this.loan.businessLocation.postalCode,
-        poBox: Object.is(this.loan, undefined) ? undefined : this.loan.businessLocation.poBox
+        country: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessLocation.country,
+        town: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessLocation.town,
+        address: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessLocation.address,
+        blockNumber: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessLocation.blockNumber,
+        buildingName: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessLocation.buildingName,
+        postalCode: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessLocation.postalCode,
+        poBox: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessLocation.poBox
       }),
       // Business Premises
       businessPremises: this.formBuilder.group({
-        premises: Object.is(this.loan, undefined) ? undefined : this.loan.businessPremises.premises
+        premises: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessPremises.premises
       }),
       // Business Other Details
       businessOtherDetails: this.formBuilder.group({
-        yearsOfExperience: Object.is(this.loan, undefined)
+        yearsOfExperience: Object.is(this.saved_loan, undefined)
           ? undefined
-          : this.loan.businessOtherDetails.yearsOfExperience,
-        contactPerson: Object.is(this.loan, undefined) ? undefined : this.loan.businessOtherDetails.contactPerson,
-        numberOfPeopleWorking: Object.is(this.loan, undefined)
+          : this.saved_loan.businessOtherDetails.yearsOfExperience,
+        contactPerson: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessOtherDetails.contactPerson,
+        numberOfPeopleWorking: Object.is(this.saved_loan, undefined)
           ? 0
-          : this.loan.businessOtherDetails.numberOfPeopleWorking
+          : this.saved_loan.businessOtherDetails.numberOfPeopleWorking
       }),
       // Business Financial Details
       businessFinancialDetails: this.formBuilder.group({
-        activityFrom: Object.is(this.loan, undefined) ? undefined : this.loan.businessFinancialDetails.activityFrom,
-        activityUntil: Object.is(this.loan, undefined) ? undefined : this.loan.businessFinancialDetails.activityUntil,
-        businessSales: Object.is(this.loan, undefined) ? undefined : this.loan.businessFinancialDetails.businessSales,
-        stocksHeld: Object.is(this.loan, undefined) ? undefined : this.loan.businessFinancialDetails.stocksHeld,
-        costGoods: Object.is(this.loan, undefined) ? undefined : this.loan.businessFinancialDetails.costGoods,
-        tradeDebtorsOutstanding: Object.is(this.loan, undefined)
+        activityFrom: Object.is(this.saved_loan, undefined)
           ? undefined
-          : this.loan.businessFinancialDetails.tradeDebtorsOutstanding,
-        operatingExpenses: Object.is(this.loan, undefined)
+          : this.saved_loan.businessFinancialDetails.activityFrom,
+        activityUntil: Object.is(this.saved_loan, undefined)
           ? undefined
-          : this.loan.businessFinancialDetails.operatingExpenses,
-        tradeCreditorsOutstanding: Object.is(this.loan, undefined)
+          : this.saved_loan.businessFinancialDetails.activityUntil,
+        businessSales: Object.is(this.saved_loan, undefined)
           ? undefined
-          : this.loan.businessFinancialDetails.tradeCreditorsOutstanding,
-        otherCosts: Object.is(this.loan, undefined) ? undefined : this.loan.businessFinancialDetails.otherCosts,
-        otherDebts: Object.is(this.loan, undefined) ? undefined : this.loan.businessFinancialDetails.otherDebts,
-        netProfit: Object.is(this.loan, undefined) ? undefined : this.loan.businessFinancialDetails.netProfit,
-        paidUpCapital: Object.is(this.loan, undefined) ? undefined : this.loan.businessFinancialDetails.paidUpCapital
+          : this.saved_loan.businessFinancialDetails.businessSales,
+        stocksHeld: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessFinancialDetails.stocksHeld,
+        costGoods: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessFinancialDetails.costGoods,
+        tradeDebtorsOutstanding: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessFinancialDetails.tradeDebtorsOutstanding,
+        operatingExpenses: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessFinancialDetails.operatingExpenses,
+        tradeCreditorsOutstanding: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessFinancialDetails.tradeCreditorsOutstanding,
+        otherCosts: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessFinancialDetails.otherCosts,
+        otherDebts: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessFinancialDetails.otherDebts,
+        netProfit: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessFinancialDetails.netProfit,
+        paidUpCapital: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessFinancialDetails.paidUpCapital
       }),
       // Business Directors Details
       businessDirectorsDetails: this.formBuilder.group({
-        fullName: Object.is(this.loan, undefined) ? undefined : this.loan.businessDirectorsDetails.fullName,
-        idNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessDirectorsDetails.idNumber,
-        roles: this.formBuilder.array([] || this.loan.businessDirectorsDetails.roles, Validators.required),
-        pinNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessDirectorsDetails.pinNumber,
-        shareholding: Object.is(this.loan, undefined) ? undefined : this.loan.businessDirectorsDetails.shareholding,
-        loanGuarantor: Object.is(this.loan, undefined) ? undefined : this.loan.businessDirectorsDetails.loanGuarantor,
-        postalAddress: Object.is(this.loan, undefined) ? undefined : this.loan.businessDirectorsDetails.postalAddress,
-        postalCode: Object.is(this.loan, undefined) ? undefined : this.loan.businessDirectorsDetails.postalCode
+        fullName: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessDirectorsDetails.fullName,
+        idNumber: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessDirectorsDetails.idNumber,
+        roles: this.formBuilder.array([] || this.saved_loan.businessDirectorsDetails.roles, Validators.required),
+        pinNumber: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessDirectorsDetails.pinNumber,
+        shareholding: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessDirectorsDetails.shareholding,
+        loanGuarantor: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessDirectorsDetails.loanGuarantor,
+        postalAddress: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessDirectorsDetails.postalAddress,
+        postalCode: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessDirectorsDetails.postalCode
       }),
       // STEP 3
       applicantDetails: this.formBuilder.group({
-        fullName: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.fullName,
-        otherNames: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.otherNames,
-        gender: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.gender,
-        maritalStatus: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.maritalStatus,
-        kenyanResident: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.kenyanResident,
-        birthDate: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.birthDate,
-        pinNumber: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.pinNumber,
-        residenceCountry: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.residenceCountry,
-        nationality: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.nationality,
-        nationalIdNumber: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.nationalIdNumber,
-        passportNumber: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.passportNumber,
-        postalBox: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.postalBox,
-        postalCode: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.postalCode,
-        telephone: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.telephone,
-        mobilePhone: Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.mobilePhone,
-        email: [Object.is(this.loan, undefined) ? undefined : this.loan.applicantDetails.email, Validators.email]
+        fullName: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.fullName,
+        otherNames: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.otherNames,
+        gender: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.gender,
+        maritalStatus: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.applicantDetails.maritalStatus,
+        kenyanResident: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.applicantDetails.kenyanResident,
+        birthDate: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.birthDate,
+        pinNumber: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.pinNumber,
+        residenceCountry: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.applicantDetails.residenceCountry,
+        nationality: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.nationality,
+        nationalIdNumber: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.applicantDetails.nationalIdNumber,
+        passportNumber: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.applicantDetails.passportNumber,
+        postalBox: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.postalBox,
+        postalCode: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.postalCode,
+        telephone: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.telephone,
+        mobilePhone: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.mobilePhone,
+        email: [
+          Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.applicantDetails.email,
+          Validators.email
+        ]
       }),
       // STEP 4
       businessKeyPerson: this.formBuilder.group({
-        fullName: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.fullName,
-        otherNames: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.otherNames,
-        gender: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.gender,
-        maritalStatus: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.maritalStatus,
-        kenyanResident: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.kenyanResident,
-        birthDate: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.birthDate,
-        pinNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.pinNumber,
-        residenceCountry: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.residenceCountry,
-        nationality: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.nationality,
-        nationalIdNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.nationalIdNumber,
-        passportNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.passportNumber,
-        postalBox: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.postalBox,
-        postalCode: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.postalCode,
-        country: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.country,
-        telephone: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.telephone,
-        mobilePhone: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.mobilePhone,
-        email: [Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.email, Validators.email],
-        designation: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.designation,
-        durationInBusiness: Object.is(this.loan, undefined)
+        fullName: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.fullName,
+        otherNames: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.otherNames,
+        gender: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.gender,
+        maritalStatus: Object.is(this.saved_loan, undefined)
           ? undefined
-          : this.loan.businessKeyPerson.durationInBusiness,
-        qualification: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPerson.qualification
+          : this.saved_loan.businessKeyPerson.maritalStatus,
+        kenyanResident: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessKeyPerson.kenyanResident,
+        birthDate: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.birthDate,
+        pinNumber: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.pinNumber,
+        residenceCountry: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessKeyPerson.residenceCountry,
+        nationality: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.nationality,
+        nationalIdNumber: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessKeyPerson.nationalIdNumber,
+        passportNumber: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessKeyPerson.passportNumber,
+        postalBox: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.postalBox,
+        postalCode: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.postalCode,
+        country: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.country,
+        telephone: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.telephone,
+        mobilePhone: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.mobilePhone,
+        email: [
+          Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.email,
+          Validators.email
+        ],
+        designation: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPerson.designation,
+        durationInBusiness: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessKeyPerson.durationInBusiness,
+        qualification: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessKeyPerson.qualification
       }),
       // biz key person location
       businessKeyPersonLocation: this.formBuilder.group({
-        country: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPersonLocation.country,
-        address: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPersonLocation.address,
-        houseNumber: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPersonLocation.houseNumber,
-        currentAddressDuration: Object.is(this.loan, undefined)
+        country: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPersonLocation.country,
+        address: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.businessKeyPersonLocation.address,
+        houseNumber: Object.is(this.saved_loan, undefined)
           ? undefined
-          : this.loan.businessKeyPersonLocation.currentAddressDuration,
-        postalBox: Object.is(this.loan, undefined) ? undefined : this.loan.businessKeyPersonLocation.postalBox
+          : this.saved_loan.businessKeyPersonLocation.houseNumber,
+        currentAddressDuration: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessKeyPersonLocation.currentAddressDuration,
+        postalBox: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.businessKeyPersonLocation.postalBox
       }),
       // STEP 5
       absaBankingDetails: this.formBuilder.group({
-        branch: Object.is(this.loan, undefined) ? undefined : this.loan.absaBankingDetails.branch,
-        accountNumber: Object.is(this.loan, undefined) ? undefined : this.loan.absaBankingDetails.accountNumber,
-        createdOn: Object.is(this.loan, undefined) ? undefined : this.loan.absaBankingDetails.createdOn,
-        otherAbsaFacility: Object.is(this.loan, undefined) ? undefined : this.loan.absaBankingDetails.otherAbsaFacility,
+        branch: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.absaBankingDetails.branch,
+        accountNumber: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.absaBankingDetails.accountNumber,
+        createdOn: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.absaBankingDetails.createdOn,
+        otherAbsaFacility: Object.is(this.saved_loan, undefined)
+          ? undefined
+          : this.saved_loan.absaBankingDetails.otherAbsaFacility,
         otherFacility: this.formBuilder.group({
-          bankBranch: Object.is(this.loan, undefined)
+          bankBranch: Object.is(this.saved_loan, undefined)
             ? undefined
-            : this.loan.absaBankingDetails.otherFacility.bankBranch,
-          natureOfFacility: Object.is(this.loan, undefined)
+            : this.saved_loan.absaBankingDetails.otherFacility.bankBranch,
+          natureOfFacility: Object.is(this.saved_loan, undefined)
             ? undefined
-            : this.loan.absaBankingDetails.otherFacility.natureOfFacility,
-          limitInitialGranted: Object.is(this.loan, undefined)
+            : this.saved_loan.absaBankingDetails.otherFacility.natureOfFacility,
+          limitInitialGranted: Object.is(this.saved_loan, undefined)
             ? undefined
-            : this.loan.absaBankingDetails.otherFacility.limitInitialGranted,
-          monthlyRepayment: Object.is(this.loan, undefined)
+            : this.saved_loan.absaBankingDetails.otherFacility.limitInitialGranted,
+          monthlyRepayment: Object.is(this.saved_loan, undefined)
             ? undefined
-            : this.loan.absaBankingDetails.otherFacility.monthlyRepayment,
-          outstandingBalance: Object.is(this.loan, undefined)
+            : this.saved_loan.absaBankingDetails.otherFacility.monthlyRepayment,
+          outstandingBalance: Object.is(this.saved_loan, undefined)
             ? undefined
-            : this.loan.absaBankingDetails.otherFacility.outstandingBalance
+            : this.saved_loan.absaBankingDetails.otherFacility.outstandingBalance
         })
       })
     });

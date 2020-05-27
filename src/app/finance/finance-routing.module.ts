@@ -30,7 +30,10 @@ const routes: Routes = [
     },
     {
       path: 'finance/loan/:id',
-      component: LoanComponent
+      component: LoanComponent,
+      resolve: {
+        submittedLoan: LoanResolver
+      }
     }
   ])
 ];

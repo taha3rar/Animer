@@ -89,16 +89,9 @@ export class LoanNavigationComponent implements AfterViewInit, AfterContentCheck
   }
 
   onSave() {
-    this.sdkService
-      .saveLoanApplication(this.loan)
-      .then(loan => {
-        this.loan_form.get('_id').setValue({
-          _id: loan._id
-        });
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
+    this.sdkService.saveLoanApplication(this.loan).catch(err => {
+      console.log('err', err);
+    });
   }
 
   onNext() {
