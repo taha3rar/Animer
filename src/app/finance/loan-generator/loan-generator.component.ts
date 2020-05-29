@@ -35,7 +35,6 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
     this.route.data.subscribe(({ loan }) => {
       if (loan) {
         this.saved_loan = loan;
-        console.log(this.saved_loan);
         this.beginApplication = true;
       }
       this.initializeGenerator();

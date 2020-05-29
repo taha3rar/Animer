@@ -13,32 +13,34 @@
           <div class="info-top">
             <div>
               <p class="heading-2">
-                Loan Application <span *ngIf="loan.numericId">#{{ loan.numericId }}</span>
+                Loan Application <span *ngIf="displayedLoan.numericId">#{{ displayedLoan.numericId }}</span>
               </p>
             </div>
             <div class="timing-section">
-              <span *ngIf="loan.dateCreated && !loanSubmitted"
+              <span *ngIf="displayedLoan.dateCreated && !loanSubmitted"
                 ><i class="material-icons">calendar_today</i>
-                <span class="time-text">Created on {{ loan.dateCreated | date: 'dd/MM/yyyy' }} </span></span
+                <span class="time-text">Created on {{ displayedLoan.dateCreated | date: 'dd/MM/yyyy' }} </span></span
               >
-              <span *ngIf="loan.dateSubmitted && loanSubmitted"
+              <span *ngIf="displayedLoan.dateSubmitted && loanSubmitted"
                 ><i class="material-icons">calendar_today</i>
-                <span class="time-text">Submitted on {{ loan.dateSubmitted | date: 'dd/MM/yyyy' }} </span></span
+                <span class="time-text"
+                  >Submitted on {{ displayedLoan.dateSubmitted | date: 'dd/MM/yyyy' }}
+                </span></span
               >
             </div>
           </div>
           <div class="info">
             <div>
               <p class="t-light-gray">LOAN SIZE</p>
-              <p *ngIf="loan.loanDetails.amountRequested" class="t-bold">
-                KES {{ loan.loanDetails.amountRequested | number: '1.2-2' }}
+              <p *ngIf="displayedLoan.loanDetails.amountRequested" class="t-bold">
+                KES {{ displayedLoan.loanDetails.amountRequested | number: '1.2-2' }}
               </p>
-              <p *ngIf="!loan.loanDetails.amountRequested" class="t-bold">N/A</p>
+              <p *ngIf="!displayedLoan.loanDetails.amountRequested" class="t-bold">N/A</p>
             </div>
-            <div style="margin-left: auto;">
+            <div *ngIf="displayedLoan.status" style="margin-left: auto;">
               <p class="t-light-gray text-right">STATUS</p>
-              <div *ngIf="loan.status === 'draft'" class="status status-blue">Saved</div>
-              <div *ngIf="loan.status === 'submitted'" class="status status-orange">Processing</div>
+              <div *ngIf="displayedLoan.status === 'draft'" class="status status-blue">Saved</div>
+              <div *ngIf="displayedLoan.status === 'submitted'" class="status status-orange">Processing</div>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { LoanGeneratorDataService } from '../loan-generator/loan-generator-data.service';
 import { StepperNavigationService } from '../loan-generator/stepper-navigation.service';
-import { CreateLoanDTO } from '@avenews/agt-sdk';
+import { CreateLoanDTO, Loan } from '@avenews/agt-sdk';
 import { SdkService } from '@app/core/sdk.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -16,6 +16,7 @@ export class LoanComponent implements OnInit {
   loanSubmitted = false;
   loan_form: FormGroup;
   loan: CreateLoanDTO;
+  displayedLoan: Loan;
   @Output() actionOnPreview = new EventEmitter<boolean>();
 
   constructor(
@@ -29,7 +30,7 @@ export class LoanComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(({ submittedLoan }) => {
       if (submittedLoan) {
-        this.loan = submittedLoan;
+        this.displayedLoan = submittedLoan;
         this.loanSubmitted = true;
       }
     });
@@ -37,6 +38,7 @@ export class LoanComponent implements OnInit {
       if (form) {
         this.loan_form = form;
         this.loan = this.loan_form.value;
+        this.displayedLoan = this.loan_form.value;
       }
     });
   }
