@@ -18,6 +18,7 @@ export class QualifcationToolComponent implements OnInit {
   currentIndex = 1;
   checkboxCounter = 0;
   otherOption = false;
+  disableNext = false;
   @Output() beginApplication: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
@@ -93,17 +94,23 @@ export class QualifcationToolComponent implements OnInit {
   }
 
   onFinishQualification() {
+    this.disableNext = true;
     this.loan = this.loan_form.value;
     this.loan_form.get('qualification').patchValue({
       qualificationDone: true
     });
-    this.sdkService.saveLoanApplication(this.loan).then(loan => {
-      this.loan_form.patchValue({
-        _id: loan._id,
-        numericId: loan.numericId
+    this.sdkService
+      .saveLoanApplication(this.loan)
+      .then(loan => {
+        this.loan_form.patchValue({
+          _id: loan._id,
+          numericId: loan.numericId
+        });
+        this.beginApplication.emit(true);
+      })
+      .catch(err => {
+        this.disableNext = false;
       });
-    });
-    this.beginApplication.emit(true);
   }
 
   onCheck(event: any) {

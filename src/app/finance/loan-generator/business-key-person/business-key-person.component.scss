@@ -10,6 +10,7 @@
   width: calc(100% - 17rem);
   right: 0 !important;
   bottom: 0 !important;
+  z-index: 1000;
 
   div:first-child {
     margin-right: auto;
@@ -27,7 +28,7 @@
 }
 
 .input-group {
-  position: sticky !important;
+  position: relative !important;
 }
 
 .bttn-primary {

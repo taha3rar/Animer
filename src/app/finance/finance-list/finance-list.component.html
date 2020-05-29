@@ -30,7 +30,7 @@
         {{ loan?.created | date: 'dd/MM/yyyy' }}
       </td>
       <td>
-        010101
+        {{ refNumber(loan) }}
       </td>
       <td>
         {{ loan.qualification.businessType | titlecase }}

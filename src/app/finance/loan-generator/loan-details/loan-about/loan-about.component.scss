@@ -36,6 +36,7 @@ label {
   width: calc(100% - 17rem);
   right: 0 !important;
   bottom: 0 !important;
+  z-index: 1000;
 
   div {
     margin-left: auto;

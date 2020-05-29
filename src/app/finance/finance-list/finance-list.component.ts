@@ -21,4 +21,15 @@ export class FinanceListComponent extends BaseListComponent implements OnInit {
       this.loans = financeList;
     });
   }
+
+  refNumber(loan: Loan) {
+    switch (loan.qualification.businessType) {
+      case 'sole trader':
+        return 'ST-' + loan.numericId;
+      case 'partnership':
+        return 'PTS-' + loan.numericId;
+      case 'limited company':
+        return 'LLC-' + loan.numericId;
+    }
+  }
 }

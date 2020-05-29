@@ -35,7 +35,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
     this.route.data.subscribe(({ loan }) => {
       if (loan) {
         this.saved_loan = loan;
-        // this.stepperNavigation.manuallySetStep(this.loan.currentStep.generalStepNumber);
+        console.log(this.saved_loan);
         this.beginApplication = true;
       }
       this.initializeGenerator();
@@ -50,7 +50,7 @@ export class LoanGeneratorComponent implements OnInit, OnDestroy {
       // Qualification
       _id: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan._id,
       numericId: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.numericId,
-      created: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.created,
+      dateCreated: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.dateCreated,
       status: Object.is(this.saved_loan, undefined) ? undefined : this.saved_loan.status,
       qualification: this.formBuilder.group({
         amountNeeded: [

@@ -1,4 +1,4 @@
-<h1 *ngIf="!loanSubmitted" class="main-title btn-main margin-bottom-2" (click)="toGenerator(4)">
+<h1 *ngIf="!loanSubmitted" class="main-title btn-main margin-bottom-2" (click)="toGenerator(0)">
   <a class="material-icons">keyboard_backspace</a> Back to loan edition
 </h1>
 <h1 *ngIf="loanSubmitted" class="main-title btn-main margin-bottom-2" routerLink="/finance">
@@ -17,9 +17,9 @@
               </p>
             </div>
             <div class="timing-section">
-              <span *ngIf="loan.created && !loanSubmitted"
+              <span *ngIf="loan.dateCreated && !loanSubmitted"
                 ><i class="material-icons">calendar_today</i>
-                <span class="time-text">Created on {{ loan.created | date: 'dd/MM/yyyy' }} </span></span
+                <span class="time-text">Created on {{ loan.dateCreated | date: 'dd/MM/yyyy' }} </span></span
               >
               <span *ngIf="loan.dateSubmitted && loanSubmitted"
                 ><i class="material-icons">calendar_today</i>

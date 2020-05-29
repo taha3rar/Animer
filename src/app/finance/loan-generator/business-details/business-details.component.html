@@ -1,5 +1,5 @@
 <div class="stepper">
-  <ul *ngIf="businessType() === 'sole trader'" class="nav nav-tabs" style="display: none;" #listStepDetails>
+  <ul *ngIf="businessType === 'sole trader'" class="nav nav-tabs" style="display: none;" #listStepDetails>
     <li class="active">
       <a data-toggle="tab" class="label" href="#basic-details"></a>
     </li>
@@ -11,7 +11,7 @@
     </li>
   </ul>
 
-  <ul *ngIf="businessType() === 'partnership'" class="nav nav-tabs" style="display: none;" #listStepDetails>
+  <ul *ngIf="businessType === 'partnership'" class="nav nav-tabs" style="display: none;" #listStepDetails>
     <li class="active">
       <a data-toggle="tab" class="label" href="#basic-details"></a>
     </li>
@@ -32,7 +32,7 @@
     </li>
   </ul>
 
-  <ul *ngIf="businessType() === 'limited company'" class="nav nav-tabs" style="display: none;" #listStepDetails>
+  <ul *ngIf="businessType === 'limited company'" class="nav nav-tabs" style="display: none;" #listStepDetails>
     <li class="active">
       <a data-toggle="tab" class="label" href="#basic-details"></a>
     </li>
@@ -53,7 +53,7 @@
     </li>
   </ul>
 
-  <div *ngIf="businessType() === 'sole trader'" class="tab-content">
+  <div *ngIf="businessType === 'sole trader'" class="tab-content">
     <div class="tab-pane" [class.active]="displayStep(0)" id="basic-details">
       <app-business-basic-details></app-business-basic-details>
     </div>
@@ -65,7 +65,7 @@
     </div>
   </div>
 
-  <div *ngIf="businessType() === 'partnership'" class="tab-content">
+  <div *ngIf="businessType === 'partnership'" class="tab-content">
     <div class="tab-pane" [class.active]="displayStep(0)" id="basic-details">
       <app-business-basic-details></app-business-basic-details>
     </div>
@@ -86,7 +86,7 @@
     </div>
   </div>
 
-  <div *ngIf="businessType() === 'limited company'" class="tab-content">
+  <div *ngIf="businessType === 'limited company'" class="tab-content">
     <div class="tab-pane" [class.active]="displayStep(0)" id="basic-details">
       <app-business-basic-details></app-business-basic-details>
     </div>
