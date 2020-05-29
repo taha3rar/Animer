@@ -23,6 +23,11 @@ const anime = new Schema({
   synopsis: String,
   totalEpisodes: Number,
 });
+const Animes = new Schema({
+
+  name: String,
+  episodes: [],
+});
 const favorites = new Schema({
   anime: [anime],
   owner: {
@@ -58,6 +63,7 @@ mongoose.model("keeper", keeper);
 mongoose.model("favorites", favorites);
 mongoose.model("keep", keep);
 mongoose.model("watched", watched);
+mongoose.model("Animes", Animes);
 
 module.exports = {
   favorites,
@@ -65,4 +71,5 @@ module.exports = {
   watched,
   anime,
   user,
+  Animes
 };

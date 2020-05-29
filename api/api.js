@@ -3,6 +3,7 @@ const cloudscraper = require("cloudscraper");
 const cheerio = require("cheerio");
 const url = require("./urls");
 const puppeteer = require("puppeteer");
+const mongoose = require("mongoose");
 const ongoingSeries = async () => {
   const res = await fetch(`${url.BASE_URL}`);
   const body = await res.text();
@@ -443,6 +444,10 @@ const anime = async (url) => {
   const _url = url;
   url = _url;
   let promises = [];
+  let splitted = _url.split("-episode-");
+  const name = splitted[0];
+  const num = parseInt(splitted[1], 10);
+  console.log(name, num);
   console.log(_url); //anime name and episode in this case
   if (_url.includes("-episode")) {
     const ep = await animeEpisodeHandler(_url);
@@ -456,7 +461,6 @@ const anime = async (url) => {
       let link = "https://" + ep[0].servers[0].iframe;
       console.log(ep[0].servers[0].iframe);
       let vid = await decodeVidstreamingIframeURL(link);
-      console.log(vid);
       if (vid.length === 0) {
         if (ep[0].servers) {
           let alt = ep[0].servers.find((e, i) => {
@@ -469,6 +473,11 @@ const anime = async (url) => {
       } else {
         promises = vid;
       }
+      const AU = await getEp(name, num);
+      if (AU) {
+        promises.push(AU);
+      }
+      console.log(promises);
       return Promise.all(promises);
     }
     return Promise.all("sad");
@@ -497,6 +506,23 @@ const pup = async (alt) => {
     });
   });
 };
+const getEp = async (name, num) => {
+  try {
+    const eps = await mongoose.model("Animes").findOne({ name: name }).exec();
+    if (eps == null) {
+      return Promise.resolve(false);
+    } else {
+      if (num > eps.episodes.length) {
+        return Promise.resolve(false);
+      } else if (num > 0) {
+        console.log(eps.episodes[num - 1]);
+        return Promise.resolve(eps.episodes[num - 1]);
+      }
+    }
+  } catch (err) {
+    res.status(400).json(false);
+  }
+};
 module.exports = {
   animeEpisodeHandler,
   recentReleaseEpisodes,
@@ -510,4 +536,5 @@ module.exports = {
   genres,
   decodeVidstreamingIframeURL,
   anime,
+  getEp,
 };

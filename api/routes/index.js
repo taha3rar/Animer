@@ -5,6 +5,9 @@ const schemas = require("../../mongo/schemas");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const helpers = require("../../helpers/helper");
+const cheerio = require("cheerio");
+const exists = require("url-exists-promise");
+
 router.get("/Search/:query", (req, res) => {
   const query = req.params.query;
   api.search(query).then((search) => {
@@ -172,7 +175,7 @@ router.post("/db/favorites/delete", async (req, res) => {
     } else {
       try {
         //favs
-        favs = await helpers.getFavs(id);
+        const favs = await helpers.getFavs(id);
         favs.anime = anime;
         favs.save().then((monData) => {
           res.status(200).json(monData);
@@ -453,5 +456,58 @@ router.get("/db/watched/:id", async (req, res) => {
       }
     }
   } catch (err) {}
+});
+const fetch = require("node-fetch");
+const performance = require("perf_hooks").performance;
+
+router.get("/check", async (req, res) => {
+  // let id = "hunter-x-hunter-2011";
+  // let start_id = 8714;
+  // let ep_number = 1;
+  // let episodes = [];
+  // let url = "https://storage.googleapis.com/auengine.appspot.com/393/sub/";
+  // let thing = "1_8714.mp4";
+  // let new_url = url + thing;
+  // var t0 = performance.now();
+  // while (episodes.length != 148) {
+  //   new_url = `${url}${ep_number}_${start_id}.mp4`;
+  //   if (await exists.urlExists(new_url)) {
+  //     console.log(new_url);
+  //     episodes.push(new_url);
+  //     ep_number++;
+  //   }
+  //   start_id++;
+  // }
+  // var t1 = performance.now();
+  // console.log(episodes);
+  // console.log(
+  //   "this shit took" +
+  //     (t1 - t0) +
+  //     " milliseconds. to find " +
+  //     episodes.length +
+  //     "episodes lol wtf"
+  // );
+  // episodes.forEach((ep, i) => {
+  //   episodes[i] =
+  //     ep + "?GoogleAccessId=auevod%40auengine.iam.gserviceaccount.com";
+  // });
+  // const animes = await mongoose.model("Animes").findOne({ name: id }).exec();
+  // console.log(animes);
+  // const animenz = {
+  //   name: id,
+  //   episodes: episodes,
+  // };
+  // const anim = mongoose.model("Animes", schemas.Animes);
+  // new anim(animenz).save().then((data) => {
+  //   res.status(200).json(data);
+  // });
+});
+router.get("/episode/:name/:number", async (req, res) => {
+  const name = req.params.name;
+  const num = parseInt(req.params.number, 10);
+  const episode = await api.getEp(name, num);
+  if (episode) {
+    res.status(200).json(episode);
+  } else res.status(400).json(false);
 });
 module.exports = router;
