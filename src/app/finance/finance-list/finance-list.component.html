@@ -26,8 +26,11 @@
   <tbody>
     <tr *ngFor="let loan of loans | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
       <td># {{ loan?.numericId }}</td>
-      <td>
-        {{ loan?.created | date: 'dd/MM/yyyy' }}
+      <td *ngIf="loan.status != 'submited'">
+        {{ loan?.dateCreated | date: 'dd/MM/yyyy' }}
+      </td>
+      <td *ngIf="loan.status === 'submited'">
+        {{ loan?.dateSubmited | date: 'dd/MM/yyyy' }}
       </td>
       <td>
         {{ refNumber(loan) }}
@@ -35,7 +38,8 @@
       <td>
         {{ loan.qualification.businessType | titlecase }}
       </td>
-      <td>{{ loan.loanDetails.amountRequested | number: '1.2-2' }} KES</td>
+      <td *ngIf="loan.loanDetails.amountRequested">{{ loan.loanDetails.amountRequested | number: '1.2-2' }} KES</td>
+      <td *ngIf="!loan.loanDetails.amountRequested">N/A</td>
       <td>
         <span *ngIf="loan.status === 'draft'" class="status status-blue">Saved</span>
         <span *ngIf="loan.status === 'submitted'" class="status status-orange">Processing</span>
