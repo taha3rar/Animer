@@ -1,0 +1,64 @@
+<div class="strip d-flex mt-3">
+  <div class="left-section pr-5">
+    <div class="header-wrapper">
+      <h1>Welcome to Payments!</h1>
+      <p class="t-15">
+        Now you can pay suppliers & business contacts or pay trade documents directly using Avenews. Just follow the
+        simple steps to set up the payments feature.
+      </p>
+    </div>
+
+    <div class="body-wrapper">
+      <h4>Steps to do to activate payments:</h4>
+      <ul>
+        <li class="active" routerLink="/profile">
+          <div class="circle-wrapper"><span class="circle"></span></div>
+          <div class="step-title">
+            <span class="btn-desktop-txt">Complete KYC form in the settings.</span>
+          </div>
+        </li>
+        <li class="disabled" data-toggle="wizard" data-target="#topUpBalance">
+          <div class="circle-wrapper"><span class="circle"></span></div>
+          <div class="step-title">
+            <span class="btn-desktop-txt">Send request to top-up your balance.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="right-section">
+    <img src="../../../assets/img/payment-img.png" alt="" />
+  </div>
+</div>
+
+<div class="modal-box" id="topUpBalance">
+  <div class="modal-box-content-wrapper">
+    <div class="modal-box-content">
+      <div class="modal-box-heading">
+        <i class="material-icons pull-right" (click)="onModalClose()" #closeModal>close</i>
+        <h2 class="modal-title">Request to Top-up Balance</h2>
+      </div>
+      <div class="modal-box-center">
+        <div class="tab-content p-5">
+          <div class="d-flex mt-3">
+            <p class="mr-3">I would like to add</p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">KES</span>
+              </div>
+              <input type="number" name="balance" id="balance" class="form-control" />
+            </div>
+            <p class="ml-3">to my balance.</p>
+          </div>
+          <div class="footer">
+            <div class="note blue">
+              <span class="material-icons mr-2">error_outline</span
+              ><span>It takes up to 48 hours to top-up your balance.</span>
+            </div>
+            <button class="bttn-primary" (click)="onPaymentSubmit()">Submit Request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

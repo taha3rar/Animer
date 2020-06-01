@@ -38,6 +38,12 @@ export const ROUTES: RouteInfo[] = [
     title: 'Finance',
     type: 'link',
     icontype: 'icon-finance'
+  },
+  {
+    path: '/payments',
+    title: 'Payments',
+    type: 'link',
+    icontype: 'icon-finance'
   }
 ];
 

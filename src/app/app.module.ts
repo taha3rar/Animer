@@ -1,3 +1,4 @@
+import { PaymentsModule } from './payments/payments.module';
 import { HelpCenterModule } from './help-center/help-center.module';
 import { ProfileModule } from './profile/profile.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -47,6 +48,7 @@ import { FinanceModule } from './finance/finance.module';
     NotificationsModule,
     FinanceModule,
     LandingModule,
+    PaymentsModule,
     RegistrationModule,
     HelpCenterModule,
     GoodsReceiveNoteModule,
