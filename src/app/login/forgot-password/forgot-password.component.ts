@@ -1,9 +1,12 @@
+import { ActivatedRoute } from '@angular/router';
+import { SdkService } from '@app/core/sdk.service';
 import { countries } from '@app/shared/helpers/countries';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@app/core';
 import * as libphonenumber from 'google-libphonenumber';
+import { ResetPasswordDTO } from '@avenews/agt-sdk';
 declare const $: any;
 
 @Component({
@@ -26,7 +29,12 @@ export class ForgotPasswordComponent implements OnInit {
   methodName: string;
   partialPhoneNumber: string;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthenticationService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthenticationService,
+    private sdkService: SdkService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
@@ -73,17 +81,18 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   recoverPassword() {
-    if (this.forgotPasswordForm.valid) {
-      this.username = this.forgotPasswordForm.value.email || this.forgotPasswordForm.value.phone;
-      this.authService.forgotPassword(this.username).subscribe(
-        () => (this.resetLinkStatus = 1),
-        err => {
-          this.resetLinkStatus = 2;
-          console.log(err);
-        }
-      );
-    }
-    this.checkMethod();
+    // if (this.forgotPasswordForm.valid) {
+    //   this.username = this.forgotPasswordForm.value.email || this.forgotPasswordForm.value.phone;
+    //   this.sdkService.sendResetLink().subscribe(() => {
+    //     this.resetLinkStatus = 1
+    //   },
+    //     err => {
+    //       console.log(err);
+    //       this.resetLinkStatus = 2
+    //     });
+    // when sdk ready will be uncommented
+    // }
+    // this.checkMethod();
   }
 
   generateLink(code: any, country: any) {

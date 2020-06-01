@@ -1,5 +1,8 @@
+import { SdkService } from '@app/core/sdk.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ResetPasswordDTO } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-reset-password',
@@ -8,8 +11,33 @@ import { Router } from '@angular/router';
 })
 export class ResetPasswordComponent implements OnInit {
   passwordChanged = false;
-
-  constructor(private router: Router) {}
-
-  ngOnInit() {}
+  resetToken: string;
+  passwordForm: FormGroup;
+  constructor(
+    private sdkService: SdkService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
+  ) {}
+  ngOnInit() {
+    this.resetToken = this.route.snapshot.params['token'];
+    this.passwordForm = this.formBuilder.group({
+      newPassword: [undefined, [Validators.required, Validators.minLength(8)]],
+      confrimPassword: [undefined, [Validators.required, Validators.minLength(8)]]
+    });
+  }
+  submit() {
+    if (
+      this.passwordForm.valid &&
+      this.passwordForm.get('newPassword').value === this.passwordForm.get('confirmPassword').value
+    ) {
+      const reset: ResetPasswordDTO = {
+        token: this.resetToken,
+        newPwd: this.passwordForm.get('newPassword').value
+      };
+      // this.sdkService.resetPassword(reset).subscribe(data => {
+      // ??
+      // });
+    }
+  }
 }

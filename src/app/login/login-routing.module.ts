@@ -9,7 +9,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { title: extract('Login') } },
   { path: 'forgot-password', component: ForgotPasswordComponent, data: { title: extract('Forgot Password') } },
-  { path: 'reset-password', component: ResetPasswordComponent, data: { title: extract('Reset Password') } },
+  { path: 'reset-password/:token', component: ResetPasswordComponent, data: { title: extract('Reset Password') } },
   { path: 'validation/:id', component: LoginComponent }
 ];
 
