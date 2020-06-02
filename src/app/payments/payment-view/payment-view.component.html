@@ -1,0 +1,28 @@
+<h1 class="back-div main-title btn-main mb-4" routerLink="/payments">
+  <a class="main-color"><i class="material-icons">keyboard_backspace</i></a> Payments
+</h1>
+
+<div class="strip mb-5">
+  <h3 class="heading-1 mb-3">PAYMENT #522</h3>
+  <div class="header-wrapper">
+    <div id="payment-info">
+      <div>
+        <p class="sm-text-label">ISSUE DATE</p>
+        <P class="text-regular">20/05/2020</P>
+      </div>
+      <div>
+        <p class="sm-text-label">REFERENCE</p>
+        <P class="text-regular">-</P>
+      </div>
+      <div>
+        <p class="sm-text-label">PAYMENT STATUS</p>
+        <p class="text-regular">Paid</p>
+      </div>
+    </div>
+    <div id="payment-actions">
+      <button class="bttn bttn-outline">Download PDF</button>
+    </div>
+  </div>
+</div>
+
+<app-payment-document [isPayment]="false"></app-payment-document>

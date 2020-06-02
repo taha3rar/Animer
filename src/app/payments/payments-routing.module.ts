@@ -1,3 +1,4 @@
+import { PaymentViewComponent } from './payment-view/payment-view.component';
 import { ContactPaymentComponent } from './contact-payment/contact-payment.component';
 import { PaymentsListComponent } from './payments-list/payments-list.component';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,10 @@ const routes: Routes = [
         contacts: CurrentUserContactsResolver
       },
       runGuardsAndResolvers: 'always'
+    },
+    {
+      path: 'payments/payment/:id',
+      component: PaymentViewComponent
     }
   ])
 ];

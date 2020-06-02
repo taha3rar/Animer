@@ -83,3 +83,7 @@ ul.dropdown-menu {
   text-decoration: none;
   background-color: #effafc;
 }
+
+.dropdown-menu > li:focus {
+  outline: none;
+}

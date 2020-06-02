@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-payment-document',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment-document.component.scss']
 })
 export class PaymentDocumentComponent implements OnInit {
-  isPayment = true;
+  @Input() isPayment = true;
 
   constructor() {}
 

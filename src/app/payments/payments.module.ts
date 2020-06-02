@@ -6,6 +6,7 @@ import { PaymentsListComponent } from './payments-list/payments-list.component';
 import { ContactPaymentComponent } from './contact-payment/contact-payment.component';
 import { ContactPaymentDetailsComponent } from './contact-payment/contact-payment-details/contact-payment-details.component';
 import { PaymentDocumentComponent } from './payment-document/payment-document.component';
+import { PaymentViewComponent } from './payment-view/payment-view.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { PaymentDocumentComponent } from './payment-document/payment-document.co
     PaymentsListComponent,
     ContactPaymentComponent,
     ContactPaymentDetailsComponent,
-    PaymentDocumentComponent
+    PaymentDocumentComponent,
+    PaymentViewComponent
   ],
   imports: [CommonModule, PaymentsRoutingModule]
 })
