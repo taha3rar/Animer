@@ -1,0 +1,23 @@
+.d-flex .form-row,
+.d-flex .balance {
+  flex: 1;
+}
+
+.balance {
+  text-align: center;
+
+  p:first-child {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  p:last-child {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}
+
+.flex-r {
+  display: flex;
+  margin-left: auto;
+  justify-content: center;
+}

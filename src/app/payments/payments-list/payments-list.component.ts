@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentsListComponent implements OnInit {
   availablePayments = true;
+  topUpApproved = true;
   constructor() {}
 
   ngOnInit() {}

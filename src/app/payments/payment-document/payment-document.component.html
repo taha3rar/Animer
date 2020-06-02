@@ -1,0 +1,46 @@
+<div class="strip">
+  <div class="border-box display-ib ">
+    <h2>PAYMENT <span style="font-size: 1.9rem;"> - </span></h2>
+    <table>
+      <tr>
+        <td class="t-bold t-blue">ISSUE DATE</td>
+        <td>20/03/2020</td>
+      </tr>
+      <tr>
+        <td class="t-bold t-blue">REFERENCE</td>
+        <td>-</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col">
+      <p class="t-bold t-blue">SUPPLIER</p>
+      <p>Full Name</p>
+      <p>Organisation Name</p>
+      <p>
+        Address, Location, Region, Country
+      </p>
+      <p>Phone Number</p>
+      <p>Email Address</p>
+    </div>
+  </div>
+
+  <div class="row pt-4">
+    <div class="col-md-9 mb-4">
+      <p class="t-bold t-blue">SIGNED BY</p>
+      <p>User Full Name</p>
+      <p>User Business Name</p>
+      <p>User Phone Number</p>
+    </div>
+    <div class="col-md-3">
+      <div class="border-box center-items pull-left">
+        <h2>50,000 KES</h2>
+        <h5>AMOUNT</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<button *ngIf="isPayment" class="bttn-primary pull-right mt-5">
+  Submit
+</button>

@@ -1,0 +1,37 @@
+<div class="wrapper">
+  <h1 (click)="back()" class="back-div main-title btn-main margin-bottom-2">
+    <a class="main-color"><i class="material-icons">keyboard_backspace</i></a> Payments History
+  </h1>
+
+  <div class="stepper-wrapper">
+    <div class="stepper desktop-stepper">
+      <h1 (click)="back()" class="back-div main-title btn-main mobile">
+        <a class="main-color"><i class="material-icons">keyboard_backspace</i></a> Payments History
+      </h1>
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a data-toggle="tab" class="label" href="#payments-details">
+            <span class="round-tab horizantal-line">1</span>
+            <span class="step-text">Add Payment Details</span>
+          </a>
+        </li>
+        <li class="disabled">
+          <a data-toggle="tab" class="label" href="#review-grn">
+            <span class="round-tab horizantal-line">2</span>
+            <span class="step-text">Review and Submit</span></a
+          >
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="payments-details">
+          <app-contact-payment-details></app-contact-payment-details>
+        </div>
+
+        <div class="tab-pane" id="review-grn">
+          <app-payment-document></app-payment-document>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
-<!-- <app-payment-activation></app-payment-activation> -->
+<app-payment-activation *ngIf="!topUpApproved"></app-payment-activation>
 
-<div class="payments-container">
+<div class="payments-container" *ngIf="topUpApproved">
   <h1 translate class="main-title d-inline-flex align-self-center">Payments</h1>
 
   <div class="d-flex mt-4">
@@ -32,7 +32,7 @@
             <span class="btn-mobile-txt">New</span>
           </button>
           <ul class="dropdown-menu">
-            <li><a>Pay a Contact</a></li>
+            <li routerLink="/payments/generator/contact"><a>Pay a Contact</a></li>
             <li><a>Pay a Trade Document</a></li>
           </ul>
         </div>

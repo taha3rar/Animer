@@ -1,0 +1,18 @@
+@import "../../../assets/sass/abstracts/variables";
+@import "../../../assets/sass/abstracts/mixins";
+.wrapper {
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+}
+
+.tab-pane {
+  padding-bottom: 10.5rem;
+}
+
+.mobile {
+  display: none;
+
+  @include respond(phone) {
+    display: block;
+  }
+}

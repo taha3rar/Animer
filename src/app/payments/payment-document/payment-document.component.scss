@@ -1,0 +1,21 @@
+.border-box.center-items {
+  width: 100%;
+  min-height: 16rem;
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+h5 {
+  font-size: 1.5rem;
+  color: #7d8796;
+}
