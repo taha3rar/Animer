@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payments-list.component.scss']
 })
 export class PaymentsListComponent implements OnInit {
+  availablePayments = true;
   constructor() {}
 
   ngOnInit() {}

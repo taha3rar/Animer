@@ -1,1 +1,83 @@
-<app-payment-activation></app-payment-activation>
+<!-- <app-payment-activation></app-payment-activation> -->
+
+<div class="payments-container">
+  <h1 translate class="main-title d-inline-flex align-self-center">Payments</h1>
+
+  <div class="d-flex mt-4">
+    <div class="strip stats-container">
+      <div class="d-flex">
+        <p class="stats-title">BALANCE</p>
+        <a class="bttn-line t-blue">Top-up Balance</a>
+      </div>
+      <p class="stats-value">KES 10,0000.00</p>
+    </div>
+    <div class="strip stats-container">
+      <p class="stats-title">TOTAL PROCESSING PAYMENTS</p>
+      <p class="stats-value">KES 5,0000.00</p>
+    </div>
+    <div class="strip stats-container">
+      <p class="stats-title">TOTAL PAYMENTS</p>
+      <p class="stats-value">KES 8,0000.00</p>
+    </div>
+  </div>
+
+  <div class="mt-5" [style.display]="availablePayments ? 'block' : 'none'">
+    <div class="actions-section clearfix">
+      <h1 class="main-title align-self-center">Payments History</h1>
+
+      <div class="flex-pr">
+        <div class="dropdown">
+          <button class="bttn-primary bttn-add" type="button" data-toggle="dropdown">
+            <span class="btn-desktop-txt">New Payment</span>
+            <span class="btn-mobile-txt">New</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a>Pay a Contact</a></li>
+            <li><a>Pay a Trade Document</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-section clearfix">
+      <div class="searchbar d-flex">
+        <input placeholder="Search payments..." class="search-bar m-0" type="search" />
+        <span class=""></span>
+      </div>
+    </div>
+
+    <table class="table main-table" matSort>
+      <thead>
+        <tr id="table-head">
+          <th mat-sort-header="id">ID</th>
+          <th mat-sort-header="date" class="text-center">Date</th>
+          <th mat-sort-header="contact" class="text-center">Contact</th>
+          <th mat-sort-header="type" class="text-center">Type</th>
+          <th mat-sort-header="amount" class="text-center">Amount</th>
+          <th mat-sort-header="status" class="text-center">Status</th>
+          <th class="text-right">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>#4645</td>
+          <td>01/06/20</td>
+          <td>Javi Esses</td>
+          <td>Trade Document</td>
+          <td>50,000 KES</td>
+          <td><span class="status status-green">Paid</span></td>
+          <td><a id="view">View</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="strip mt-5" id="payments-empty" [style.display]="availablePayments ? 'none' : 'flex'">
+    <div>
+      <img src="../../../assets/img/payment-img.png" />
+      <p>You don't have any payments yet.</p>
+      <button class="bttn-primary">Make a Payment</button>
+    </div>
+  </div>
+</div>
