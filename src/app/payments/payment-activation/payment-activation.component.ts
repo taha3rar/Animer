@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 declare const $: any;
 @Component({
@@ -6,12 +7,20 @@ declare const $: any;
   styleUrls: ['./payment-activation.component.scss']
 })
 export class PaymentActivationComponent implements OnInit {
-  topupReady = false;
-  constructor() {}
+  topupReady = false; // will be getting it from sdk or user object depends
+  constructor(private router: Router) {}
   ngOnInit() {}
   dontShow(e: any) {
     if (!this.topupReady) {
-      e.stopPropagation();
+      e.stopPropagation(); // stop the modal from popping up when disabled
+    }
+  }
+  topup() {
+    // sdk topup method.
+  }
+  kyc() {
+    if (!this.topupReady) {
+      this.router.navigate(['profile', 'kyc']);
     }
   }
 }

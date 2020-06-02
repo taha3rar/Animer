@@ -11,15 +11,19 @@
     <div class="body-wrapper">
       <h4>Steps to do to activate payments:</h4>
       <ul>
-        <li class="active" routerLink="/profile">
+        <li [ngClass]="topupReady ? 'completed disabled no-drop' : 'active click'" (click)="kyc()">
           <div class="circle-wrapper"><span class="circle"></span></div>
           <div class="step-title">
             <span>Complete KYC form in the settings.</span>
           </div>
         </li>
+        <div class="under-list" *ngIf="topupReady">
+          <p>Your info has been sent to DPO and is being processed.</p>
+          <p>You will be contacted by DPO within 48 hours to complete the process.</p>
+        </div>
         <li
           (click)="dontShow($event)"
-          [ngClass]="!topupReady ? 'disabled no-drop' : 'click'"
+          [ngClass]="!topupReady ? 'disabled no-drop' : 'active click'"
           data-toggle="wizard"
           data-target="#topUpBalance"
         >
@@ -36,4 +40,4 @@
   </div>
 </div>
 
-<app-topup-modal></app-topup-modal>
+<app-topup-modal (balanceSubmit)="topup($event)"></app-topup-modal>

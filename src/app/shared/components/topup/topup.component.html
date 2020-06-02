@@ -13,7 +13,15 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">KES</span>
               </div>
-              <input [(ngModel)]="balance" type="number" name="balance" id="balance" class="form-control" />
+              <input
+                (ngModelChange)="checkValidity()"
+                [(ngModel)]="balance"
+                type="number"
+                min="1"
+                name="balance"
+                id="balance"
+                class="form-control"
+              />
             </div>
             <p class="ml-3">to my balance.</p>
           </div>

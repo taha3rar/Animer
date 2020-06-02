@@ -12,7 +12,6 @@
   right: 0;
   display: inline-block;
   position: relative;
-  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
 }
 
 select.form-control {
@@ -29,7 +28,7 @@ h4:nth-child(2) {
   align-items: flex-start;
   .status {
     margin-left: auto;
-    flex: auto;
+    // flex: auto;
   }
 }
 

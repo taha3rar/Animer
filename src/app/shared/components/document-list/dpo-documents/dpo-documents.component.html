@@ -26,7 +26,7 @@
     <p class="pb-0" *ngIf="certificate_file_name">{{ certificate_file_name }}</p>
     <p *ngIf="documentCertificatevalid === false" class="help-block">This document is required</p>
   </div>
-  <div class="doc-card-upload mr-0">
+  <div class="doc-card-upload mr-3">
     <p class="pb-0 opt">Optional</p>
     <label class="material-icons" id="add-btn" for="terms">add</label>
     <input type="file" id="terms" class="btn-doc-uploader mt-0" (change)="onFileChange($event, 'terms')" />

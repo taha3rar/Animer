@@ -1,9 +1,11 @@
+import { SdkService } from './../../core/sdk.service';
+import { DashboardDataService } from './../../shared/services/dashboard-data-service';
 import { BaseValidationComponent } from './../../shared/components/base-validation/base-validation.component';
 import { AlertsService } from './../../core/alerts.service';
 import { UserService } from './../../core/api/user.service';
 import { countries } from './../../shared/helpers/countries';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DpoInformation } from '@app/core/models/user/dpo-info';
 import swal from 'sweetalert';
@@ -13,12 +15,12 @@ import swal from 'sweetalert';
   templateUrl: './payment-settings.component.html',
   styleUrls: ['./payment-settings.component.scss']
 })
-export class PaymentSettingsComponent extends BaseValidationComponent implements OnInit {
+export class PaymentSettingsComponent extends BaseValidationComponent implements OnInit, OnChanges, OnDestroy {
   dpoForm: FormGroup;
   user: any;
   userId: string;
   countries = countries;
-  @Input() showPaymentSection = false;
+  @Input() showPaymentSection: boolean;
   applicationStatus: string;
   documentsArray: any = [];
   termsAccepted = false;
@@ -28,9 +30,11 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private sdk: SdkService,
     private userService: UserService,
     private router: Router,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private dashboardDataService: DashboardDataService
   ) {
     super();
     this.dpoForm = this.fb.group({
@@ -77,6 +81,16 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
     });
     this.formInput = this.dpoForm;
   }
+  ngOnChanges(changes: any) {
+    if (changes['showPaymentSection']) {
+      if (this.showPaymentSection) {
+        this.dashboardDataService.saveIndexByName('payment');
+      }
+    }
+  }
+  ngOnDestroy() {
+    this.dashboardDataService.saveIndexByName('none');
+  }
 
   get userInfo() {
     return this.dpoForm.controls;
@@ -96,11 +110,11 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
     this.userDPOInfo.documents = this.documentsArray;
 
     if (this.dpoForm.valid && this.termsAccepted && this.idDocumentReceived && this.certOfIncoReceived) {
-      this.userService.saveUserDPOInformation(this.userDPOInfo, this.userId).subscribe(res => {
-        this.alerts.showAlert('Your information has been sent successfully!');
-        this.router.navigateByUrl('/profile');
-        this.dpoForm.disable();
-      });
+      // this.sdk.updateMyPaymentDetails(this.userDPOInfo, this.userId).subscribe(res => {
+      //   this.alerts.showAlert('Your information has been sent successfully!');
+      //   this.router.navigateByUrl('/profile');
+      //   this.dpoForm.disable();
+      // });
     } else if (!this.idDocumentReceived || !this.certOfIncoReceived) {
       this.checkDocuments();
     } else {

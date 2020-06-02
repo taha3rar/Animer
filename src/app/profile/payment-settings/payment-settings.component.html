@@ -25,13 +25,7 @@
           <div class="dpo-img-wrapper">
             <img src="../../../assets/img/dpo-logo.svg" class="dpo-img" />
           </div>
-          <div *ngIf="applicationStatus && applicationStatus == 'PENDING APPROVAL'" class="status status-orange">
-            {{ applicationStatus }}
-          </div>
-          <div *ngIf="applicationStatus && applicationStatus == 'ACCEPTED'" class="status status-green">
-            {{ applicationStatus }}
-          </div>
-          <div *ngIf="applicationStatus && applicationStatus == 'DECLINED'" class="status status-red">
+          <div *ngIf="applicationStatus" class="{{ applicationStatus | status }}">
             {{ applicationStatus }}
           </div>
         </div>

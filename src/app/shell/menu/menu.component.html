@@ -5,8 +5,8 @@
       <a routerLink="/dashboard"><img src="../../../assets/img/AvenewsLogo.png" alt="logo" class="brand-img"/></a>
     </div>
     <ul class="nav">
-      <li *ngFor="let menuitem of menuItems" class="nav-item">
-        <a [routerLink]="[menuitem.path]" routerLinkActive="active">
+      <li *ngFor="let menuitem of menuItems; let i = index" class="nav-item">
+        <a [ngClass]="i === index ? 'active' : ''" [routerLink]="[menuitem.path]" routerLinkActive="active">
           <i class="{{ menuitem.icontype }}"></i>
           <p>{{ menuitem.title }}</p>
         </a>

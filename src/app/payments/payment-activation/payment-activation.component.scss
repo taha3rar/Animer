@@ -30,6 +30,15 @@ ul {
     flex-direction: column;
   }
 }
+.under-list {
+  margin-left: 3.4rem;
+  p {
+    font: 500 12px/20px Roboto;
+    letter-spacing: 0px;
+    color: #e8a23a;
+    opacity: 1;
+  }
+}
 
 .body-wrapper {
   margin-top: 2rem;

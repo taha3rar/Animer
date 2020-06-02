@@ -307,11 +307,14 @@
         height: 3.5rem;
         border-radius: 50%;
         justify-content: center;
+        align-items: center;
         background-color: $light-gray-2;
         transition: box-shadow 0.15s ease-in-out;
 
         i {
           font-size: 1.2rem;
+          top: 0px !important;
+          left: 0.5px;
         }
       }
 

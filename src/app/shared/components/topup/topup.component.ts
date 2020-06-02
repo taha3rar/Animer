@@ -15,12 +15,17 @@ export class TopupComponent {
   }
 
   onPaymentSubmit() {
-    this.onModalClose();
-    Swal.fire({
-      icon: 'success',
-      title: 'TOP-UP REQUEST SENT!',
-      text: 'A DPO agent will be in touch with you soon to complete the top-up process.'
-    });
-    this.balanceSubmit.emit(this.balance);
+    if (this.balance >= 1) {
+      this.onModalClose();
+      Swal.fire({
+        icon: 'success',
+        title: 'TOP-UP REQUEST SENT!',
+        text: 'A DPO agent will be in touch with you soon to complete the top-up process.'
+      });
+      this.balanceSubmit.emit(this.balance);
+    }
+  }
+  checkValidity() {
+    this.balance < 1 ? $('#balance').addClass('red-border') : $('#balance').removeClass('red-border');
   }
 }
