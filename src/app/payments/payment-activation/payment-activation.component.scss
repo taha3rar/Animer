@@ -142,15 +142,6 @@ ul li.completed .circle::after {
   width: 230px;
 }
 
-.modal-box .d-flex p {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.modal-box-content {
-  min-height: 36rem;
-}
-
 .note {
   padding: 8px 16px;
 }
@@ -177,4 +168,12 @@ ul li.completed .circle::after {
     margin-left: auto;
     margin-top: 2rem;
   }
+}
+
+.no-drop {
+  cursor: no-drop;
+}
+
+.click {
+  cursor: pointer;
 }

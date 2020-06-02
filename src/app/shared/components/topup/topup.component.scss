@@ -1,0 +1,44 @@
+.modal-box .d-flex p {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.modal-box-content {
+  min-height: 36rem;
+}
+
+.input-group {
+  width: 230px;
+}
+
+.footer {
+  margin-top: 7rem;
+
+  button {
+    display: block;
+    margin-left: auto;
+    margin-top: 2rem;
+  }
+}
+
+.note {
+  padding: 8px 16px;
+}
+
+.note.blue {
+  background: #e7fafd;
+  border-radius: 3px;
+  width: 100%;
+  border: 1.5px solid #37c1ce;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+
+  span.material-icons {
+    color: #37c1ce;
+  }
+}
+
+.input-group-text {
+  font-size: 15px;
+}

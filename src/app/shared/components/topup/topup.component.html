@@ -1,0 +1,31 @@
+<div class="modal-box" id="topUpBalance">
+  <div class="modal-box-content-wrapper">
+    <div class="modal-box-content">
+      <div class="modal-box-heading">
+        <i class="material-icons pull-right" (click)="onModalClose()" #closeModal>close</i>
+        <h2 class="modal-title">Request to Top-up Balance</h2>
+      </div>
+      <div class="modal-box-center">
+        <div class="tab-content p-5">
+          <div class="d-flex mt-3">
+            <p class="mr-3">I would like to add</p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">KES</span>
+              </div>
+              <input [(ngModel)]="balance" type="number" name="balance" id="balance" class="form-control" />
+            </div>
+            <p class="ml-3">to my balance.</p>
+          </div>
+          <div class="footer">
+            <div class="note blue">
+              <span class="material-icons mr-2">error_outline</span
+              ><span>It takes up to 48 hours to top-up your balance.</span>
+            </div>
+            <button class="bttn-primary" (click)="onPaymentSubmit()">Submit Request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
