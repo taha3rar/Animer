@@ -15,7 +15,7 @@ export class PaymentActivationComponent implements OnInit {
       e.stopPropagation(); // stop the modal from popping up when disabled
     }
   }
-  topup() {
+  topup(e: any) {
     // sdk topup method.
   }
   kyc() {
