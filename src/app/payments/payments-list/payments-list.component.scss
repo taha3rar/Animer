@@ -1,3 +1,5 @@
+@import "../../../assets/sass/abstracts/mixins";
+
 .strip.stats-container {
   flex: 1;
 }
@@ -86,4 +88,39 @@ ul.dropdown-menu {
 
 .dropdown-menu > li:focus {
   outline: none;
+}
+
+.mobile-list-wrapper {
+  display: none;
+
+  @include respond(phone) {
+    display: block;
+  }
+}
+
+.flex-row {
+  display: flex;
+
+  div:last-child {
+    margin-left: auto;
+  }
+}
+
+.table {
+  margin: 0;
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+#stats-counter {
+  @include respond(phone) {
+    width: 100%;
+    overflow: scroll;
+
+    .stats-container {
+      min-width: 260px;
+      overflow: hidden;
+    }
+  }
 }

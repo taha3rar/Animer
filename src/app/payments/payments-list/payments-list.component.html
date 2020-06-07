@@ -3,21 +3,21 @@
 <div class="payments-container" *ngIf="topUpApproved">
   <h1 translate class="main-title d-inline-flex align-self-center">Payments</h1>
 
-  <div class="d-flex mt-4">
+  <div class="d-flex mt-4" id="stats-counter">
     <div class="strip stats-container">
       <div class="d-flex">
         <p class="stats-title">BALANCE</p>
-        <a class="bttn-line t-blue">Top-up Balance</a>
+        <a class="bttn-line t-blue">Top-up Balance</a>
       </div>
-      <p class="stats-value">KES 10,0000.00</p>
+      <p class="stats-value">KES 10,0000.00</p>
     </div>
     <div class="strip stats-container">
-      <p class="stats-title">TOTAL PROCESSING PAYMENTS</p>
-      <p class="stats-value">KES 5,0000.00</p>
+      <p class="stats-title">TOTAL PROCESSING PAYMENTS</p>
+      <p class="stats-value">KES 5,0000.00</p>
     </div>
     <div class="strip stats-container">
-      <p class="stats-title">TOTAL PAYMENTS</p>
-      <p class="stats-value">KES 8,0000.00</p>
+      <p class="stats-title">TOTAL PAYMENTS</p>
+      <p class="stats-value">KES 8,0000.00</p>
     </div>
   </div>
 
@@ -71,6 +71,22 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="mobile-list-wrapper mb-5">
+    <div class="strip mt-4 mb-3">
+      <div class="flex-row">
+        <div># ID</div>
+        <div>01/06/20</div>
+      </div>
+      <div class="flex-row">
+        <div>Contact</div>
+        <div class="status status-green">Paid</div>
+      </div>
+      <div>Trade Document</div>
+      <div>Total of 50,000 KES</div>
+      <div class="mt-3"><a id="view">View</a></div>
+    </div>
   </div>
 
   <div class="strip mt-5" id="payments-empty" [style.display]="availablePayments ? 'none' : 'flex'">
