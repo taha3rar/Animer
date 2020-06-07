@@ -141,6 +141,10 @@ span.step-progress-bar-wrapper.responsive {
     li.active span.l-step-title {
       display: inline-block !important;
     }
+
+    li.completed span.l-step-title {
+      display: none !important;
+    }
   }
 
   .loan-step-wrapper .step-header {
