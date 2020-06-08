@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payments-list.component.scss']
 })
 export class PaymentsListComponent implements OnInit {
-  availablePayments = true;
-  topUpApproved = true;
+  availablePayments = false;
+  topUpApproved = false;
   constructor() {}
 
   ngOnInit() {}

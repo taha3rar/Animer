@@ -27,6 +27,11 @@
     overflow: hidden;
     animation: open-modal 0.4s;
     animation-timing-function: ease-out;
+
+    @include respond(phone) {
+      min-height: 95vh !important;
+      width: 92vw;
+    }
   }
 
   &-content-lg {

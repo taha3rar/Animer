@@ -1,3 +1,5 @@
+@import "../../../assets/sass/abstracts/mixins";
+
 ul {
   list-style: none;
 
@@ -22,6 +24,10 @@ ul {
 
   h4 {
     font-weight: 600;
+  }
+
+  @include respond(phone) {
+    flex-direction: column;
   }
 }
 
@@ -103,6 +109,15 @@ ul li.completed .circle::after {
 
 .right-section {
   margin-left: auto;
+
+  @include respond(phone) {
+    margin: 0 auto;
+    margin-top: 32px;
+  }
+}
+
+.left-section {
+  padding-right: 0rem !important;
 }
 
 .statement-status {
