@@ -1,4 +1,4 @@
-<app-payment-activation *ngIf="!topUpApproved"></app-payment-activation>
+<app-payment-activation [dpoAccount]="dpoAccount" *ngIf="!topUpApproved"></app-payment-activation>
 
 <div class="payments-container" *ngIf="topUpApproved">
   <h1 translate class="main-title d-inline-flex align-self-center">Payments</h1>

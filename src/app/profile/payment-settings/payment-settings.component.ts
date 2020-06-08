@@ -1,8 +1,8 @@
+import { DPOAccount, RegisterDPOAccountDTO } from '@avenews/agt-sdk';
 import { SdkService } from './../../core/sdk.service';
 import { DashboardDataService } from './../../shared/services/dashboard-data-service';
 import { BaseValidationComponent } from './../../shared/components/base-validation/base-validation.component';
 import { AlertsService } from './../../core/alerts.service';
-import { UserService } from './../../core/api/user.service';
 import { countries } from './../../shared/helpers/countries';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
@@ -22,16 +22,16 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
   countries = countries;
   @Input() showPaymentSection: boolean;
   applicationStatus: string;
-  documentsArray: any = [];
+  dpoAccount: DPOAccount;
   termsAccepted = false;
-  idDocumentReceived: boolean;
-  certOfIncoReceived: boolean;
+  nationalId: string;
+  userTerms: string;
+  certOfIncome: string;
   userDPOInfo: DpoInformation = new DpoInformation();
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private sdk: SdkService,
-    private userService: UserService,
     private router: Router,
     private alerts: AlertsService,
     private dashboardDataService: DashboardDataService
@@ -39,43 +39,43 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
     super();
     this.dpoForm = this.fb.group({
       companyName: [undefined, Validators.required],
-      companyRegistrationNo: [undefined, Validators.required],
       tradeName: [undefined, Validators.required],
+      companyRegistrationNo: [undefined, Validators.required],
+      companyEmail: [undefined, [Validators.email, Validators.required]],
+      websiteURL: [undefined],
       phoneNumber: [undefined, Validators.required],
       address: [undefined, Validators.required],
-      city: [undefined, Validators.required],
       country: [undefined, Validators.required],
-      websiteURL: [undefined],
-      companyEmail: [undefined, [Validators.email, Validators.required]]
+      city: [undefined, Validators.required]
     });
   }
 
   ngOnInit() {
-    this.route.data.subscribe(({ currentUser }) => {
+    this.route.data.subscribe(({ currentUser, account }) => {
       this.user = currentUser;
-
+      this.dpoAccount = account;
       this.userId = this.user._id;
-      if (this.user.dpo) {
+      if (this.dpoAccount) {
         this.applicationStatus = this.user.dpo.status;
       }
-      if (this.user.dpo) {
+      if (this.dpoAccount) {
         // temporary
         this.dpoForm.patchValue({
-          companyName: this.user.dpo.company_name,
-          companyRegistrationNo: this.user.dpo.registration_number,
-          tradeName: this.user.dpo.trade_name,
-          phoneNumber: this.user.dpo.phone_number,
-          address: this.user.dpo.address,
-          city: this.user.dpo.city,
-          country: this.user.dpo.country,
-          websiteURL: this.user.dpo.website,
-          companyEmail: this.user.dpo.company_email
+          companyName: this.user.dpo.company_name || undefined,
+          companyRegistrationNo: this.user.dpo.registration_number || undefined,
+          tradeName: this.user.dpo.trade_name || undefined,
+          phoneNumber: this.user.dpo.phone_number || undefined,
+          address: this.user.dpo.address || undefined,
+          city: this.user.dpo.city || undefined,
+          country: this.user.dpo.country || undefined,
+          websiteURL: this.user.dpo.website || undefined,
+          companyEmail: this.user.dpo.company_email || undefined
         });
       }
 
       this.formInput = this.dpoForm;
 
-      if (this.user.dpo && this.user.dpo.status) {
+      if (this.dpoAccount && this.dpoAccount.status === 'approved') {
         this.dpoForm.disable();
       }
     });
@@ -97,46 +97,62 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
   }
 
   onApplicationSubmit() {
-    this.userDPOInfo.address = this.userInfo.address.value;
-    this.userDPOInfo.company_name = this.userInfo.companyName.value;
-    this.userDPOInfo.company_email = this.userInfo.companyEmail.value;
-    this.userDPOInfo.registration_number = this.userInfo.companyRegistrationNo.value;
-    this.userDPOInfo.country = this.userInfo.country.value;
-    this.userDPOInfo.phone_number = this.userInfo.phoneNumber.value;
-    this.userDPOInfo.city = this.userInfo.city.value;
-    this.userDPOInfo.website = this.userInfo.websiteURL.value;
-    this.userDPOInfo.trade_name = this.userInfo.tradeName.value;
-    this.userDPOInfo.country = this.userInfo.country.value;
-    this.userDPOInfo.documents = this.documentsArray;
-
-    if (this.dpoForm.valid && this.termsAccepted && this.idDocumentReceived && this.certOfIncoReceived) {
-      // this.sdk.updateMyPaymentDetails(this.userDPOInfo, this.userId).subscribe(res => {
-      //   this.alerts.showAlert('Your information has been sent successfully!');
-      //   this.router.navigateByUrl('/profile');
-      //   this.dpoForm.disable();
-      // });
-    } else if (!this.idDocumentReceived || !this.certOfIncoReceived) {
+    if (this.dpoForm.valid && this.termsAccepted && this.nationalId && this.certOfIncome) {
+      const dpoAccountRegister: RegisterDPOAccountDTO = {
+        companyName: this.userInfo.companyName.value,
+        tradeName: this.userInfo.tradeName.value,
+        registrationNumber: this.userInfo.companyRegistrationNo.value,
+        companyEmail: this.userInfo.companyEmail.value,
+        website: this.userInfo.websiteURL.value,
+        phoneNumber: this.userInfo.phoneNumber.value,
+        address: this.userInfo.address.value,
+        country: this.userInfo.country.value,
+        city: this.userInfo.city.value,
+        nationalIdUrl: this.nationalId,
+        certificateOfIncorporationUrl: this.certOfIncome,
+        termsAndConditionsUrl: this.userTerms
+      };
+      this.sdk
+        .registerDPOAccount(dpoAccountRegister)
+        .then(res => {
+          if (res.companyName) {
+            this.alerts.showAlert('Your information has been sent successfully!');
+            this.router.navigateByUrl('/profile');
+            this.dpoForm.disable();
+          } else {
+            console.log(res);
+          } // error?
+        })
+        .catch(err => {
+          console.log(err); // handle errors
+        });
+    } else if (!this.nationalId || !this.certOfIncome) {
       this.checkDocuments();
     } else {
       this.acceptTermsPopup();
     }
   }
 
-  receiveDocuments($event: any) {
-    this.documentsArray.push($event);
-    this.checkDocuments();
+  receiveDocuments(document: { url: string; file_name: string; file_type: string }) {
+    if (document.file_type === 'ID') {
+      this.nationalId = document.url;
+    } else if (document.file_type === 'certificate_of_inco') {
+      this.certOfIncome = document.url;
+    } else {
+      this.userTerms = document.url;
+    }
   }
-
   checkDocuments() {
-    this.documentsArray.find((x: any) => x.file_type === 'ID')
-      ? (this.idDocumentReceived = true)
-      : (this.idDocumentReceived = false);
-
-    this.documentsArray.find((x: any) => x.file_type === 'certificate_of_inco')
-      ? (this.certOfIncoReceived = true)
-      : (this.certOfIncoReceived = false);
+    if (!this.nationalId) {
+      // to trigger on changes in upload doc component
+      this.nationalId = ' ';
+      this.nationalId = '';
+    }
+    if (!this.certOfIncome) {
+      this.certOfIncome = ' ';
+      this.certOfIncome = '';
+    }
   }
-
   acceptTerms($event: any) {
     $event.target.checked ? (this.termsAccepted = true) : (this.termsAccepted = false);
   }

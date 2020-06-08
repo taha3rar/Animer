@@ -1,9 +1,8 @@
+import { SdkService } from './../../../../core/sdk.service';
+import { UploadFileDTO } from '@avenews/agt-sdk';
 import { AuthenticationService } from './../../../../core/authentication/authentication.service';
-import { DpoInformation } from './../../../../core/models/user/dpo-info';
 import { AlertsService } from '@app/core/alerts.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DpoDocuments } from '@app/core/models/user/dpo-documents';
-import { UserService } from '@app/core';
 declare const $: any;
 @Component({
   selector: 'app-dpo-documents',
@@ -15,14 +14,18 @@ export class DpoDocumentsComponent implements OnInit {
   uploadingFileName: String;
   dynamic = 0;
   userId: string;
-  @Input() documentIDvalid: boolean;
-  @Input() documentCertificatevalid: boolean;
-  documentInfo = {};
+  @Input() documentIDvalid: string;
+  @Input() documentCertValid: string;
+  documentInfo: {
+    url: string;
+    file_name: string;
+    file_type: string;
+  };
   url: string;
   id_file_name: string;
   certificate_file_name: string;
   terms_file_name: string;
-  @Output() documentInfoEmitter = new EventEmitter();
+  @Output() documentInfoEmitter = new EventEmitter<{ url: string; file_name: string; file_type: string }>();
   acceptedMimeTypes = [
     'application/pdf',
     'image/jpeg',
@@ -33,7 +36,7 @@ export class DpoDocumentsComponent implements OnInit {
     'image/png'
   ];
 
-  constructor(private alerts: AlertsService, private userService: UserService, private auth: AuthenticationService) {}
+  constructor(private alerts: AlertsService, private sdkService: SdkService, private auth: AuthenticationService) {}
 
   ngOnInit() {
     this.userId = this.auth.currentUserId;
@@ -47,16 +50,13 @@ export class DpoDocumentsComponent implements OnInit {
         $('.push-modal').css('display', 'block');
         reader.readAsDataURL(file);
         reader.onload = () => {
-          const document = new DpoDocuments();
-          document.file_name = file.name.replace(/\.[^/.]+$/, '');
-          this.uploadingFileName = document.file_name;
+          const fileName = file.name.replace(/\.[^/.]+$/, '');
           const base64File = (reader.result as string).split(',')[1];
-          document.bytes = base64File;
-          document.file_type = file_type;
-          this.userService.saveDPODocuments(document, this.userId).subscribe(res => {
-            const url = res.url;
-            const file_name = res.file_name;
-            this.documentInfo = { url, file_name, file_type };
+          const doc: UploadFileDTO = { file: base64File, fileName, mime: file.type };
+          this.sdkService.uploadDocument(doc).then(res => {
+            const url = res;
+            const file_name = fileName;
+            this.documentInfo = { url, file_name, file_type: file_type.toString() };
             this.documentInfoEmitter.emit(this.documentInfo);
             this.alerts.showAlert('Your document has been uploaded');
             $('.push-modal').css('display', 'none');

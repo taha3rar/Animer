@@ -157,8 +157,8 @@
             </div>
           </form>
           <app-dpo-documents
-            [documentIDvalid]="idDocumentReceived"
-            [documentCertificatevalid]="certOfIncoReceived"
+            [documentIDvalid]="nationalId"
+            [documentCertValid]="certOfIncome"
             *ngIf="!applicationStatus"
             (documentInfoEmitter)="receiveDocuments($event)"
           ></app-dpo-documents>

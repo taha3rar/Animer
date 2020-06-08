@@ -1,5 +1,7 @@
+import { SdkService } from './../../core/sdk.service';
+import { DPOAccount } from '@avenews/agt-sdk';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 declare const $: any;
 @Component({
   selector: 'app-payment-activation',
@@ -8,8 +10,15 @@ declare const $: any;
 })
 export class PaymentActivationComponent implements OnInit {
   topupReady = false; // will be getting it from sdk or user object depends
-  constructor(private router: Router) {}
-  ngOnInit() {}
+  @Input() dpoAccount: DPOAccount;
+  constructor(private router: Router, private sdkService: SdkService) {}
+  ngOnInit() {
+    if (this.dpoAccount && this.dpoAccount.status !== 'approved') {
+      this.topupReady = false;
+    } else {
+      this.topupReady = true;
+    }
+  }
   dontShow(e: any) {
     if (!this.topupReady) {
       e.stopPropagation(); // stop the modal from popping up when disabled
@@ -17,6 +26,15 @@ export class PaymentActivationComponent implements OnInit {
   }
   topup(e: any) {
     // sdk topup method.
+    this.sdkService
+      .submitTopupRequest(e)
+      .then(data => {
+        // success message
+      })
+      .catch(err => {
+        console.log(err);
+        // error message
+      });
   }
   kyc() {
     if (!this.topupReady) {

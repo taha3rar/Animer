@@ -1,3 +1,4 @@
+import { DpoAccountResolver } from './../payments/resolvers/dpo-account.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -22,7 +23,8 @@ const routes: Routes = [
       component: ProfileComponent,
       data: { title: extract('Profile') },
       resolve: {
-        currentUser: CurrentUserResolver
+        currentUser: CurrentUserResolver,
+        account: DpoAccountResolver
       }
     }
   ])
@@ -31,6 +33,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [CurrentUserResolver]
+  providers: [CurrentUserResolver, DpoAccountResolver]
 })
 export class ProfileRoutingModule {}

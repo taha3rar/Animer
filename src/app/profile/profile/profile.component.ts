@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../core/authentication/authentication.service';
 import { defaultValues } from '@app/shared/helpers/default_values';
-import { User, Credentials } from '@avenews/agt-sdk';
+import { User, Credentials, DPOAccount } from '@avenews/agt-sdk';
 import { SdkService } from '@app/core/sdk.service';
 import { countries } from '@app/shared/helpers/countries';
 declare const $: any;
@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   currentUserId: string;
   contactDetailsForm: FormGroup;
   companyDetailsForm: FormGroup;
+  dpoAccount: DPOAccount;
   credentials: Credentials;
   showPaymentSection = false;
   countries = countries;
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
     this.credentials = this.authenticationService.credentials;
     this.currentUserId = this.authenticationService.currentUserId;
     this.user = this.route.snapshot.data['currentUser'];
+    this.dpoAccount = this.route.snapshot.data['account'];
     this.showPaymentSection = this.route.snapshot.params.flag ? true : false;
     this.contactDetailsForm = this.formBuilder.group({
       firstName: [this.user.personalInformation.firstName, Validators.required],

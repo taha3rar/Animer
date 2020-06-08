@@ -1,4 +1,5 @@
-import { SharedModule } from '@app/shared';
+import { DpoAccountResolver } from './resolvers/dpo-account.resolver';
+import { SharedModule } from './../shared/shared.module';
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,6 +25,7 @@ import { DocumentPaymentDetailsComponent } from './document-payment/document-pay
     DocumentPaymentDocumentsComponent,
     DocumentPaymentDetailsComponent
   ],
-  imports: [CommonModule, PaymentsRoutingModule, SharedModule]
+  imports: [CommonModule, SharedModule, PaymentsRoutingModule],
+  providers: [DpoAccountResolver]
 })
 export class PaymentsModule {}
