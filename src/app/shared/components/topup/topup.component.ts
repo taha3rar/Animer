@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { SdkService } from './../../../core/sdk.service';
 import { Component, Output, EventEmitter } from '@angular/core';
 import Swal from 'sweetalert2';
 declare const $: any;
@@ -9,20 +11,33 @@ declare const $: any;
 export class TopupComponent {
   @Output() balanceSubmit = new EventEmitter<number>();
   balance: number;
-  constructor() {}
+  constructor(private sdkService: SdkService, private router: Router) {}
   onModalClose() {
     $('#topUpBalance').fadeOut('fast');
   }
 
-  onPaymentSubmit() {
+  async onPaymentSubmit() {
     if (this.balance >= 1) {
-      this.onModalClose();
-      Swal.fire({
-        icon: 'success',
-        title: 'TOP-UP REQUEST SENT!',
-        text: 'A DPO agent will be in touch with you soon to complete the top-up process.'
-      });
-      this.balanceSubmit.emit(this.balance);
+      try {
+        const data = await this.sdkService.submitTopupRequest(this.balance);
+        console.log(data);
+        if (data.owner) {
+          this.onModalClose();
+          Swal.fire({
+            icon: 'success',
+            title: 'TOP-UP REQUEST SENT!',
+            text: 'A DPO agent will be in touch with you soon to complete the top-up process.'
+          });
+          this.balanceSubmit.emit(this.balance);
+        }
+      } catch (err) {
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'TOP-UP REQUEST ERROR!',
+          text: 'There was an error with your request.'
+        });
+      }
     }
   }
   checkValidity() {

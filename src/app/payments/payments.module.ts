@@ -12,6 +12,7 @@ import { PaymentViewComponent } from './payment-view/payment-view.component';
 import { DocumentPaymentComponent } from './document-payment/document-payment.component';
 import { DocumentPaymentDocumentsComponent } from './document-payment/document-payment-documents/document-payment-documents.component';
 import { DocumentPaymentDetailsComponent } from './document-payment/document-payment-details/document-payment-details.component';
+import { DpoWalletResolver } from './resolvers/dpo-wallet.resolver';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,6 @@ import { DocumentPaymentDetailsComponent } from './document-payment/document-pay
     DocumentPaymentDetailsComponent
   ],
   imports: [CommonModule, SharedModule, PaymentsRoutingModule],
-  providers: [DpoAccountResolver]
+  providers: [DpoAccountResolver, DpoWalletResolver]
 })
 export class PaymentsModule {}

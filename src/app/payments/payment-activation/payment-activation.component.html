@@ -17,13 +17,13 @@
             <span>Complete KYC form in the settings.</span>
           </div>
         </li>
-        <div class="under-list" *ngIf="topupReady">
+        <div class="under-list" *ngIf="dpoAccount && dpoAccount.status === 'pending-approval'">
           <p>Your info has been sent to DPO and is being processed.</p>
           <p>You will be contacted by DPO within 48 hours to complete the process.</p>
         </div>
         <li
           (click)="dontShow($event)"
-          [ngClass]="!topupReady ? 'disabled no-drop' : 'active click'"
+          [ngClass]="wallet && wallet.firstTopUpStatus ? 'completed disabled no-drop' : 'active click'"
           data-toggle="wizard"
           data-target="#topUpBalance"
         >
@@ -32,6 +32,18 @@
             <span>Send request to top-up your balance.</span>
           </div>
         </li>
+        <div
+          class="under-list"
+          *ngIf="
+            dpoAccount &&
+            dpoAccount.status === 'approved' &&
+            wallet &&
+            wallet.firstTopUpStatus &&
+            wallet.firstTopUpStatus === 'pending'
+          "
+        >
+          <p>Your request has been sent and a DPO agent will be in touch with you soon to complete the process.</p>
+        </div>
       </ul>
     </div>
   </div>

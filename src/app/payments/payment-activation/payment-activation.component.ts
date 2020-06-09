@@ -1,6 +1,6 @@
 import { SdkService } from './../../core/sdk.service';
-import { DPOAccount } from '@avenews/agt-sdk';
-import { Router } from '@angular/router';
+import { DPOAccount, DPOWallet } from '@avenews/agt-sdk';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 declare const $: any;
 @Component({
@@ -10,14 +10,20 @@ declare const $: any;
 })
 export class PaymentActivationComponent implements OnInit {
   topupReady = false; // will be getting it from sdk or user object depends
-  @Input() dpoAccount: DPOAccount;
-  constructor(private router: Router, private sdkService: SdkService) {}
+  dpoAccount: DPOAccount;
+  wallet: DPOWallet;
+  constructor(private route: ActivatedRoute, private router: Router, private sdkService: SdkService) {}
   ngOnInit() {
-    if (this.dpoAccount && this.dpoAccount.status !== 'approved') {
-      this.topupReady = false;
-    } else {
-      this.topupReady = true;
-    }
+    this.route.data.subscribe(data => {
+      console.log(data);
+      this.dpoAccount = data['account'];
+      this.wallet = data['wallet'];
+      if (this.dpoAccount && this.dpoAccount.status && this.dpoAccount.status !== 'denied') {
+        this.topupReady = true;
+      } else {
+        this.topupReady = false;
+      }
+    });
   }
   dontShow(e: any) {
     if (!this.topupReady) {

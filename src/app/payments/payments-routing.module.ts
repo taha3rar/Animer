@@ -8,13 +8,14 @@ import { Shell } from '@app/shell/shell.service';
 import { Routes, RouterModule } from '@angular/router';
 import { CurrentUserContactsResolver } from '@app/shared/resolvers/current-user-contacts.resolver';
 import { DocumentPaymentComponent } from './document-payment/document-payment.component';
+import { DpoWalletResolver } from './resolvers/dpo-wallet.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'payments',
       component: PaymentsListComponent,
-      resolve: { account: DpoAccountResolver },
+      resolve: { account: DpoAccountResolver, wallet: DpoWalletResolver },
       data: {
         title: 'Payments'
       }
