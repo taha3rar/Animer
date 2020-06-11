@@ -4,12 +4,14 @@
   <p>UNDER IMPLEMENTATION</p>
 </div>
 
-<h1 translate class="main-title">Financial Services List</h1>
+<div class="d-flex">
+  <h1 translate class="main-title">Financial Services List</h1>
 
-<div class="flex-pr">
-  <button class="bttn-primary bttn-add pull-right" routerLink="generator/loan">
-    <span>New Loan</span>
-  </button>
+  <div class="flex-pr">
+    <button class="bttn-primary bttn-add pull-right" routerLink="generator/loan">
+      <span>New Loan</span>
+    </button>
+  </div>
 </div>
 <table class="table main-table" *ngIf="loans.length">
   <thead>
@@ -51,5 +53,30 @@
     </tr>
   </tbody>
 </table>
+
+<div class="mobile-list-wrapper mb-5">
+  <div
+    *ngFor="let loan of loans | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index"
+    class="strip mt-4 mb-3"
+  >
+    <div class="flex-row">
+      <div># {{ loan?.numericId }}</div>
+      <div *ngIf="loan.status != 'submited'">{{ loan?.dateCreated | date: 'dd/MM/yyyy' }}</div>
+      <div *ngIf="loan.status === 'submited'">{{ loan?.dateSubmited | date: 'dd/MM/yyyy' }}</div>
+    </div>
+    <div class="flex-row">
+      <div>{{ refNumber(loan) }}</div>
+      <div *ngIf="loan.status === 'draft'" class="status status-blue">Saved</div>
+      <div *ngIf="loan.status === 'submitted'" class="status status-orange">Processing</div>
+    </div>
+    <div>{{ loan.qualification.businessType | titlecase }}</div>
+    <div *ngIf="loan.loanDetails.amountRequested">{{ loan.loanDetails.amountRequested | number: '1.2-2' }} KES</div>
+    <div *ngIf="!loan.loanDetails.amountRequested">N/A</div>
+    <div class="mt-3">
+      <a *ngIf="loan.status === 'draft'" [routerLink]="['/finance/generator/loan/', loan?._id]" id="view">View</a>
+      <a *ngIf="loan.status != 'draft'" [routerLink]="['/finance/loan/', loan?._id]" id="view">View</a>
+    </div>
+  </div>
+</div>
 
 <pagination-controls *ngIf="loans.length" (pageChange)="pageChanged($event)"></pagination-controls>
