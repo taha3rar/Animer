@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Shell } from '@app/shell/shell.service';
 import { Routes, RouterModule } from '@angular/router';
 import { CurrentUserContactsResolver } from '@app/shared/resolvers/current-user-contacts.resolver';
+import { DocumentPaymentComponent } from './document-payment/document-payment.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -19,6 +20,14 @@ const routes: Routes = [
     {
       path: 'payments/generator/contact',
       component: ContactPaymentComponent,
+      resolve: {
+        contacts: CurrentUserContactsResolver
+      },
+      runGuardsAndResolvers: 'always'
+    },
+    {
+      path: 'payments/generator/document',
+      component: DocumentPaymentComponent,
       resolve: {
         contacts: CurrentUserContactsResolver
       },

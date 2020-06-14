@@ -186,9 +186,18 @@ table {
 }
 
 .table-borderless {
+  font-size: 1.4rem;
   tbody > tr > td,
   thead > tr > th {
     border: none;
+  }
+
+  thead > tr > th {
+    color: #5a6c7b;
+  }
+
+  tbody > tr > td {
+    color: #455263;
   }
 }
 

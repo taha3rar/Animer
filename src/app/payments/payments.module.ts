@@ -1,3 +1,4 @@
+import { SharedModule } from '@app/shared';
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,6 +8,9 @@ import { ContactPaymentComponent } from './contact-payment/contact-payment.compo
 import { ContactPaymentDetailsComponent } from './contact-payment/contact-payment-details/contact-payment-details.component';
 import { PaymentDocumentComponent } from './payment-document/payment-document.component';
 import { PaymentViewComponent } from './payment-view/payment-view.component';
+import { DocumentPaymentComponent } from './document-payment/document-payment.component';
+import { DocumentPaymentDocumentsComponent } from './document-payment/document-payment-documents/document-payment-documents.component';
+import { DocumentPaymentDetailsComponent } from './document-payment/document-payment-details/document-payment-details.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +19,11 @@ import { PaymentViewComponent } from './payment-view/payment-view.component';
     ContactPaymentComponent,
     ContactPaymentDetailsComponent,
     PaymentDocumentComponent,
-    PaymentViewComponent
+    PaymentViewComponent,
+    DocumentPaymentComponent,
+    DocumentPaymentDocumentsComponent,
+    DocumentPaymentDetailsComponent
   ],
-  imports: [CommonModule, PaymentsRoutingModule]
+  imports: [CommonModule, PaymentsRoutingModule, SharedModule]
 })
 export class PaymentsModule {}

@@ -1,0 +1,62 @@
+<div class="strip">
+  <h4>Choose a trade document to pay:</h4>
+  <div class="mt-4 searchbar d-flex">
+    <input placeholder="Search goods received..." class="search-bar" type="search" />
+    <span></span>
+  </div>
+
+  <table class="table table-borderless ftd-small">
+    <thead>
+      <tr id="table-head">
+        <th></th>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Contact</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th class="text-right">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input type="radio" class="form_radio" id="doc-row1" name="document" />
+          <label for="doc-row1" class="form_radio_label"> <span class="form_radio_btn"></span></label>
+        </td>
+        <td>446</td>
+        <td>14/05/2019</td>
+        <td>AA BB</td>
+        <td>Green Coffee</td>
+        <td>54.00 KG</td>
+        <td>5000 KES</td>
+        <td><span class="status status-orange">Awaiting Payment</span></td>
+        <td class="text-right"><a id="view">View</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="mobile-list-wrapper mb-5">
+  <div class="strip mt-4 mb-3" (click)="onChooseDocument(2)">
+    <div>
+      <input type="radio" class="form_radio" id="doc-row2" name="document" />
+      <label for="doc-row2" class="form_radio_label"> <span class="form_radio_btn"></span></label>
+    </div>
+    <div class="flex-row">
+      <div># 888</div>
+      <div>18/05/2020</div>
+    </div>
+    <div class="flex-row">
+      <div>Riham Kharoub</div>
+      <div class="status status-green">Paid</div>
+    </div>
+    <div>Green Coffee</div>
+    <div>54.00 KG</div>
+    <div>5000 KES</div>
+    <div class="mt-3"><a id="view">View</a></div>
+  </div>
+</div>
+
+<button class="bttn-primary next-step btn-next flex-pr mt-5">Next &rarr;</button>

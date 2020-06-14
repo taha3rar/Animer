@@ -1,0 +1,33 @@
+@import "../../../../assets/sass/abstracts/mixins";
+
+#view {
+  text-decoration: underline;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#view {
+  color: #37c1ce !important;
+}
+
+table {
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.flex-row {
+  display: flex;
+
+  div:last-child {
+    margin-left: auto;
+  }
+}
+
+.mobile-list-wrapper {
+  display: none;
+
+  @include respond(phone) {
+    display: block;
+  }
+}

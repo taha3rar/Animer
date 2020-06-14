@@ -1,0 +1,31 @@
+@import "../../../../assets/sass/abstracts/mixins";
+
+#total-box {
+  text-align: center;
+  height: 100%;
+  align-items: center;
+
+  @include respond(small-desktop) {
+    flex-direction: column;
+  }
+}
+
+#signature {
+  height: 100%;
+}
+
+#email {
+  word-break: break-all;
+}
+
+.col-md-12 {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+#contact-info,
+#amount-balance {
+  @include respond(phone) {
+    margin-top: 25px;
+  }
+}
