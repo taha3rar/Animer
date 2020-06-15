@@ -18,7 +18,7 @@ export class PaymentActivationComponent implements OnInit {
       console.log(data);
       this.dpoAccount = data['account'];
       this.wallet = data['wallet'];
-      if (this.dpoAccount && this.dpoAccount.status && this.dpoAccount.status !== 'denied') {
+      if (this.dpoAccount && this.dpoAccount.status && this.dpoAccount.status !== 'rejected') {
         this.topupReady = true;
       } else {
         this.topupReady = false;
