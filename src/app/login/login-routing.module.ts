@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { title: extract('Login') } },
   { path: 'forgot-password', component: ForgotPasswordComponent, data: { title: extract('Forgot Password') } },
   { path: 'reset-password/:token', component: ResetPasswordComponent, data: { title: extract('Reset Password') } },
-  { path: 'validation/:id', component: LoginComponent }
+  { path: 'validation/:token', component: LoginComponent }
 ];
 
 @NgModule({

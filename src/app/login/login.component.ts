@@ -9,7 +9,8 @@ import { countries } from '@app/shared/helpers/countries';
 import * as libphonenumber from 'google-libphonenumber';
 import { AuthService as SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { Intercom } from 'ng-intercom';
-import { User, SocialNetworkName, OAuthContext } from '@avenews/agt-sdk';
+import { User, SocialNetworkName, OAuthContext, AGTError } from '@avenews/agt-sdk';
+import { SdkService } from '@app/core/sdk.service';
 
 const log = new Logger('Login');
 declare var $: any;
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private sdkService: SdkService,
     private i18nService: I18nService,
     private authenticationService: AuthenticationService,
     private socialAuthentificationService: SocialAuthService,
@@ -56,18 +57,12 @@ export class LoginComponent implements OnInit {
     this.regionCode = 'KE';
     this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
 
-    if (this.route.snapshot.params.id) {
+    if (this.route.snapshot.params.token) {
       this.userValidated = true;
-      const id = this.route.snapshot.params.id;
-      this.userService.updateUserValidation(id).subscribe(
-        data => {
-          const validatedUser = JSON.parse(data);
-          this.intercomLogin(validatedUser, false);
-        },
-        err => {
-          console.log(err);
-        }
-      );
+      const token = this.route.snapshot.params.token;
+      this.sdkService.activateAccount(token).then(user => {
+        this.intercomLogin(user, false);
+      });
     }
 
     setTimeout(function() {
@@ -95,7 +90,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([params.redirect || '/'], { replaceUrl: true })
         );
       })
-      .catch(error => {
+      .catch((error: AGTError) => {
         if (this.filledPhoneEmail) {
           this.loginForm.controls.username.setValue(this.phoneNumber);
           this.filledPhoneEmail = false;
@@ -103,7 +98,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.isLoading = false;
           log.debug(`Login error: ${error}`);
-          this.error = error;
+          this.error = error.message;
         }
       });
   }
