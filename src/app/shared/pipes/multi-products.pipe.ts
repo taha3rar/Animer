@@ -1,14 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+import { Utils } from '@avenews/agt-sdk';
+
 @Pipe({
   name: 'multiProduct'
 })
 export class MultiProductPipe implements PipeTransform {
   transform(products: any[]) {
-    if (products.length > 1) {
-      return 'Multiple Products';
-    } else {
-      return products[0].name;
-    }
+    return Utils.getMultiProductString(products);
   }
 }
