@@ -30,6 +30,7 @@ import { DateStringPipe } from './pipes/date-string.pipe';
 import { PaymentStatusPipe } from './pipes/paymentStatus.pipe';
 import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
 import { PluralPipe } from './pipes/plural.pipe';
+import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
 
 @NgModule({
   imports: [
@@ -66,7 +67,8 @@ import { PluralPipe } from './pipes/plural.pipe';
     ContactGeneratorComponent,
     UserProgressComponent,
     DpoDocumentsComponent,
-    PaymentStatusPipe
+    PaymentStatusPipe,
+    TransactionDocumentListComponent
   ],
   entryComponents: [],
   exports: [
@@ -85,7 +87,8 @@ import { PluralPipe } from './pipes/plural.pipe';
     PluralPipe,
     DpoDocumentsComponent,
     PaymentStatusPipe,
-    ReferenceCodePipe
+    ReferenceCodePipe,
+    TransactionDocumentListComponent
   ],
   providers: [CsvService, DatePipe, DecimalPipe]
 })

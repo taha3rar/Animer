@@ -1,0 +1,69 @@
+<div class="push-modal">
+  <div class="margin-all">
+    <p class="label-2">{{ uploadingFileName }}</p>
+    <p style="font-size:1.4rem;"><ngb-progressbar type="info" [value]="dynamic" [striped]="true"></ngb-progressbar></p>
+    <span class="t-light-gray">Uploading {{ dynamic }}%</span>
+  </div>
+</div>
+
+<button class="btn-icons pull-right mt-4 mr-4">
+  <i class="material-icons">keyboard_arrow_right</i>
+</button>
+<button class="btn-icons pull-right mt-4">
+  <i class="material-icons">keyboard_arrow_left</i>
+</button>
+<div class="mb-3" style="display: none;">
+  <progressbar
+    class="progress-striped active"
+    [max]="max"
+    style="height: 30px !important;"
+    [value]="dynamic"
+    type="success"
+    ><i>Uploading...</i></progressbar
+  >
+</div>
+<div class="strip">
+  <div class="docs-section clearfix">
+    <div class="doc-card-upload">
+      <div>
+        <label class="material-icons" id="add-btn" for="btn-input">add</label>
+        <input type="file" id="btn-input" class="btn-doc-uploader" (change)="onFileChange($event)" />
+        <p>Upload Document</p>
+      </div>
+    </div>
+    <div
+      *ngFor="let document of document.documents | paginate: { itemsPerPage: 5, currentPage: page }"
+      class="doc-card clearfix"
+    >
+      <div>
+        <!-- <span class="pull-left">#{{ document.numericId }}</span> -->
+        <!-- <span
+          class="material-icons pull-right icon"
+          placement="top"
+          data-container="body"
+          ngbTooltip="Delete"
+          (click)="warning(document._id)"
+          >delete</span
+        > -->
+        <a href="{{ document.url }}" download="{{ document.fileName }}" target="_blank"
+          ><span class="pull-right material-icons download" placement="top" ngbTooltip="Download"
+            >cloud_download</span
+          ></a
+        >
+      </div>
+      <div style="width:22rem;">
+        <div class="file-image-wrapper">
+          <img src="../../../assets/img/pdf.png" />
+          <a href="{{ document.url }}" target="_blank">
+            <span class="material-icons bttn-view">pageview</span> <span>View</span>
+          </a>
+        </div>
+        <p class="t-bold">{{ document.fileName }}</p>
+        <p class="t-light-gray">Uploaded by {{ document.uploadedBy.firstName }} {{ document.uploadedBy.lastName }}</p>
+      </div>
+      <div>
+        <p class="t-light-gray">{{ document.dateCreated | dateString }}</p>
+      </div>
+    </div>
+  </div>
+</div>
