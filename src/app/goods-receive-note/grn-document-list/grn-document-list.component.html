@@ -62,7 +62,7 @@
         <p class="t-light-gray">Uploaded by {{ document.uploadedBy.firstName }} {{ document.uploadedBy.lastName }}</p>
       </div>
       <div>
-        <p class="t-light-gray">{{ document.dateCreated | dateString }}</p>
+        <p class="t-light-gray">{{ document.dateCreated | date: 'dd/MM/yyyy' }}</p>
       </div>
     </div>
   </div>

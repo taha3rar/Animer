@@ -6,7 +6,7 @@
     <table>
       <tr>
         <td class="t-bold t-blue">ISSUE DATE</td>
-        <td>{{ grn?.issueDate | dateString }}</td>
+        <td>{{ grn?.issueDate | date: 'dd/MM/yyyy' }}</td>
       </tr>
       <tr>
         <td class="t-bold t-blue">REFERENCE</td>

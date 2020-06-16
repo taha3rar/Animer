@@ -135,7 +135,12 @@ export class GrnFirstStepComponent implements OnInit {
   }
 
   onDate(e: any) {
-    this.today = e;
+    this.today = {
+      day: parseInt(e.split('/')[0], 10),
+      month: parseInt(e.split('/')[1], 10),
+      year: parseInt(e.split('/')[2], 10)
+    };
+
     this.grn.issueDate = new Date(this.today.year, this.today.month - 1, this.today.day);
     this.grn.issueDate ? $('#date').removeClass('red-border') : $('#date').addClass('red-border');
   }

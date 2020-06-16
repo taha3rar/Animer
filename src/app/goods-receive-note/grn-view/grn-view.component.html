@@ -8,7 +8,7 @@
     <div id="grn-info">
       <div>
         <p class="sm-text-label">ISSUE DATE</p>
-        <P class="text-regular">{{ grn.issueDate | dateString }}</P>
+        <P class="text-regular">{{ grn.issueDate | date: 'dd/MM/yyyy' }}</P>
       </div>
       <div>
         <p class="sm-text-label">REFERENCE</p>
