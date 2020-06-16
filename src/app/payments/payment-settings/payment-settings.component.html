@@ -4,31 +4,9 @@
       <div class="icon-text">
         <i class="material-icons">payment</i> <span class="heading-2"> Payment Settings </span>
       </div>
-      <div class="show-hide">
-        <button
-          class="show-hide-btn"
-          type="button"
-          data-toggle="collapse"
-          data-target="#paymentSettings"
-          aria-expanded="false"
-        >
-          <i
-            [ngClass]="{ 'glyphicon-minus': showPaymentSection, 'glyphicon-plus': !showPaymentSection }"
-            class="glyphicon"
-          ></i>
-        </button>
-      </div>
     </div>
-    <div class="collapse" id="paymentSettings" [ngClass]="{ in: showPaymentSection }">
+    <div class="collapse in" id="paymentSettings">
       <div class="padding-all">
-        <div class="application-header">
-          <div class="dpo-img-wrapper">
-            <img src="../../../assets/img/dpo-logo.svg" class="dpo-img" />
-          </div>
-          <div *ngIf="applicationStatus" class="{{ applicationStatus | status }}">
-            {{ applicationStatus }}
-          </div>
-        </div>
         <div>
           <h4 class="mt-3">
             Avenews-GT uses <a href="https://www.dpogroup.com/africa/" target="_blank">DPO</a> to facilitate the payment

@@ -8,17 +8,29 @@ import { Shell } from '@app/shell/shell.service';
 import { Routes, RouterModule } from '@angular/router';
 import { CurrentUserContactsResolver } from '@app/shared/resolvers/current-user-contacts.resolver';
 import { DocumentPaymentComponent } from './document-payment/document-payment.component';
+import { PaymentSettingsComponent } from './payment-settings/payment-settings.component';
 import { DpoWalletResolver } from './resolvers/dpo-wallet.resolver';
+import { DpoTransactionResolver } from './resolvers/dpo-transaction.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'payments',
       component: PaymentsListComponent,
-      resolve: { account: DpoAccountResolver, wallet: DpoWalletResolver },
+      resolve: {
+        account: DpoAccountResolver,
+        wallet: DpoWalletResolver,
+        transactions: DpoTransactionResolver
+      },
       data: {
         title: 'Payments'
-      }
+      },
+      runGuardsAndResolvers: 'always'
+    },
+    {
+      path: 'payments/account',
+      component: PaymentSettingsComponent,
+      resolve: { account: DpoAccountResolver }
     },
     {
       path: 'payments/generator/contact',

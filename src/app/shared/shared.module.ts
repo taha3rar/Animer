@@ -30,7 +30,6 @@ import { DateStringPipe } from './pipes/date-string.pipe';
 import { PaymentStatusPipe } from './pipes/paymentStatus.pipe';
 import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
 import { PluralPipe } from './pipes/plural.pipe';
-import { TopupComponent } from './components/topup/topup.component';
 
 @NgModule({
   imports: [
@@ -62,7 +61,6 @@ import { TopupComponent } from './components/topup/topup.component';
     UnauthorizedPageComponent,
     FilterPipe,
     MultiProductPipe,
-    TopupComponent,
     ProductQuantityPipe,
     PluralPipe,
     ContactGeneratorComponent,
@@ -80,7 +78,6 @@ import { TopupComponent } from './components/topup/topup.component';
     ProductQuantityPipe,
     UploadPictureComponent,
     TutorialControlComponent,
-    TopupComponent,
     ContactGeneratorComponent,
     UserProgressComponent,
     FilterPipe,

@@ -1,13 +1,12 @@
 import { DPOAccount, RegisterDPOAccountDTO } from '@avenews/agt-sdk';
-import { SdkService } from './../../core/sdk.service';
-import { DashboardDataService } from './../../shared/services/dashboard-data-service';
-import { BaseValidationComponent } from './../../shared/components/base-validation/base-validation.component';
-import { AlertsService } from './../../core/alerts.service';
-import { countries } from './../../shared/helpers/countries';
+import { SdkService } from '../../core/sdk.service';
+import { DashboardDataService } from '../../shared/services/dashboard-data-service';
+import { BaseValidationComponent } from '../../shared/components/base-validation/base-validation.component';
+import { AlertsService } from '../../core/alerts.service';
+import { countries } from '../../shared/helpers/countries';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DpoInformation } from '@app/core/models/user/dpo-info';
 import swal from 'sweetalert';
 
 @Component({
@@ -20,14 +19,13 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
   user: any;
   userId: string;
   countries = countries;
-  @Input() showPaymentSection: boolean;
   applicationStatus: string;
   dpoAccount: DPOAccount;
   termsAccepted = false;
   nationalId: string;
   userTerms: string;
   certOfIncome: string;
-  userDPOInfo: DpoInformation = new DpoInformation();
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -51,43 +49,34 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
   }
 
   ngOnInit() {
-    this.route.data.subscribe(({ currentUser, account }) => {
-      this.user = currentUser;
+    this.route.data.subscribe(({ account }) => {
       this.dpoAccount = account;
-      this.userId = this.user._id;
+
       if (this.dpoAccount) {
-        this.applicationStatus = this.user.dpo.status;
-      }
-      if (this.dpoAccount) {
-        // temporary
+        this.applicationStatus = account.status;
         this.dpoForm.patchValue({
-          companyName: this.user.dpo.company_name || undefined,
-          companyRegistrationNo: this.user.dpo.registration_number || undefined,
-          tradeName: this.user.dpo.trade_name || undefined,
-          phoneNumber: this.user.dpo.phone_number || undefined,
-          address: this.user.dpo.address || undefined,
-          city: this.user.dpo.city || undefined,
-          country: this.user.dpo.country || undefined,
-          websiteURL: this.user.dpo.website || undefined,
-          companyEmail: this.user.dpo.company_email || undefined
+          companyName: this.dpoAccount.companyName || undefined,
+          companyRegistrationNo: this.dpoAccount.registrationNumber || undefined,
+          tradeName: this.dpoAccount.tradeName || undefined,
+          phoneNumber: this.dpoAccount.phoneNumber || undefined,
+          address: this.dpoAccount.address || undefined,
+          city: this.dpoAccount.city || undefined,
+          country: this.dpoAccount.country || undefined,
+          websiteURL: this.dpoAccount.website || undefined,
+          companyEmail: this.dpoAccount.companyEmail || undefined
         });
-      }
 
-      this.formInput = this.dpoForm;
-
-      if (this.dpoAccount && this.dpoAccount.status === 'approved') {
         this.dpoForm.disable();
       }
+      this.formInput = this.dpoForm;
     });
     this.formInput = this.dpoForm;
   }
+
   ngOnChanges(changes: any) {
-    if (changes['showPaymentSection']) {
-      if (this.showPaymentSection) {
-        this.dashboardDataService.saveIndexByName('payment');
-      }
-    }
+    this.dashboardDataService.saveIndexByName('payment');
   }
+
   ngOnDestroy() {
     this.dashboardDataService.saveIndexByName('none');
   }
@@ -114,14 +103,10 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
       };
       this.sdk
         .registerDPOAccount(dpoAccountRegister)
-        .then(res => {
-          if (res.companyName) {
-            this.alerts.showAlert('Your information has been sent successfully!');
-            this.router.navigateByUrl('/profile');
-            this.dpoForm.disable();
-          } else {
-            console.log(res);
-          } // error?
+        .then(() => {
+          this.alerts.showAlert('Your information has been sent successfully!');
+          this.router.navigateByUrl('/payments');
+          this.dpoForm.disable();
         })
         .catch(err => {
           console.log(err); // handle errors
@@ -142,6 +127,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
       this.userTerms = document.url;
     }
   }
+
   checkDocuments() {
     if (!this.nationalId) {
       // to trigger on changes in upload doc component
@@ -153,6 +139,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
       this.certOfIncome = '';
     }
   }
+
   acceptTerms($event: any) {
     $event.target.checked ? (this.termsAccepted = true) : (this.termsAccepted = false);
   }

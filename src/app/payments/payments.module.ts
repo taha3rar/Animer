@@ -12,7 +12,12 @@ import { PaymentViewComponent } from './payment-view/payment-view.component';
 import { DocumentPaymentComponent } from './document-payment/document-payment.component';
 import { DocumentPaymentDocumentsComponent } from './document-payment/document-payment-documents/document-payment-documents.component';
 import { DocumentPaymentDetailsComponent } from './document-payment/document-payment-details/document-payment-details.component';
+import { PaymentSettingsComponent } from './payment-settings/payment-settings.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TopupComponent } from './topup/topup.component';
 import { DpoWalletResolver } from './resolvers/dpo-wallet.resolver';
+import { DpoTransactionResolver } from './resolvers/dpo-transaction.resolver';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -21,12 +26,14 @@ import { DpoWalletResolver } from './resolvers/dpo-wallet.resolver';
     ContactPaymentComponent,
     ContactPaymentDetailsComponent,
     PaymentDocumentComponent,
+    TopupComponent,
     PaymentViewComponent,
+    PaymentSettingsComponent,
     DocumentPaymentComponent,
     DocumentPaymentDocumentsComponent,
     DocumentPaymentDetailsComponent
   ],
-  imports: [CommonModule, SharedModule, PaymentsRoutingModule],
-  providers: [DpoAccountResolver, DpoWalletResolver]
+  imports: [CommonModule, SharedModule, PaymentsRoutingModule, FormsModule, ReactiveFormsModule, NgxPaginationModule],
+  providers: [DpoAccountResolver, DpoWalletResolver, DpoTransactionResolver]
 })
 export class PaymentsModule {}

@@ -11,10 +11,9 @@ import { ProfilePasswordComponent } from './profile-password/profile-password.co
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTooltipModule } from '@angular/material';
 import { ProfileNotificationsComponent } from './profile-notifications/profile-notifications.component';
-import { PaymentSettingsComponent } from './payment-settings/payment-settings.component';
 
 @NgModule({
-  declarations: [ProfileComponent, ProfilePasswordComponent, ProfileNotificationsComponent, PaymentSettingsComponent],
+  declarations: [ProfileComponent, ProfilePasswordComponent, ProfileNotificationsComponent],
   imports: [
     CommonModule,
     TranslateModule,

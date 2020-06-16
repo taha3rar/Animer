@@ -169,11 +169,6 @@
         </div>
       </div>
     </div>
-    <div class="row" *ngIf="user.roles[0].includes('buyer') || user.roles[0] == 'agribusiness'">
-      <div class="col">
-        <app-payment-settings [showPaymentSection]="showPaymentSection"></app-payment-settings>
-      </div>
-    </div>
     <div class="row">
       <div class="col">
         <app-profile-password></app-profile-password>

@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
-import { SdkService } from './../../../core/sdk.service';
 import { Component, Output, EventEmitter } from '@angular/core';
 import Swal from 'sweetalert2';
+import { SdkService } from '@app/core/sdk.service';
 declare const $: any;
 @Component({
   selector: 'app-topup-modal',
@@ -19,19 +19,16 @@ export class TopupComponent {
   async onPaymentSubmit() {
     if (this.balance >= 1) {
       try {
-        const data = await this.sdkService.submitTopupRequest(this.balance);
-        console.log(data);
-        if (data.owner) {
-          this.onModalClose();
-          Swal.fire({
-            icon: 'success',
-            title: 'TOP-UP REQUEST SENT!',
-            text: 'A DPO agent will be in touch with you soon to complete the top-up process.'
-          });
-          this.balanceSubmit.emit(this.balance);
-        }
+        await this.sdkService.submitTopupRequest(this.balance);
+
+        this.onModalClose();
+        Swal.fire({
+          icon: 'success',
+          title: 'TOP-UP REQUEST SENT!',
+          text: 'A DPO agent will be in touch with you soon to complete the top-up process.'
+        });
+        this.balanceSubmit.emit(this.balance);
       } catch (err) {
-        console.log(err);
         Swal.fire({
           icon: 'error',
           title: 'TOP-UP REQUEST ERROR!',

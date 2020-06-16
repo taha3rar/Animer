@@ -14,10 +14,10 @@ export class PaymentActivationComponent implements OnInit {
   wallet: DPOWallet;
   constructor(private route: ActivatedRoute, private router: Router, private sdkService: SdkService) {}
   ngOnInit() {
-    this.route.data.subscribe(data => {
-      console.log(data);
-      this.dpoAccount = data['account'];
-      this.wallet = data['wallet'];
+    this.route.data.subscribe(({ account, wallet }) => {
+      this.dpoAccount = account;
+      this.wallet = wallet;
+
       if (this.dpoAccount && this.dpoAccount.status && this.dpoAccount.status !== 'rejected') {
         this.topupReady = true;
       } else {
@@ -25,26 +25,20 @@ export class PaymentActivationComponent implements OnInit {
       }
     });
   }
+
   dontShow(e: any) {
     if (!this.topupReady) {
       e.stopPropagation(); // stop the modal from popping up when disabled
     }
   }
+
   topup(e: any) {
-    // sdk topup method.
-    this.sdkService
-      .submitTopupRequest(e)
-      .then(data => {
-        // success message
-      })
-      .catch(err => {
-        console.log(err);
-        // error message
-      });
+    this.router.navigateByUrl('payments');
   }
+
   kyc() {
     if (!this.topupReady) {
-      this.router.navigate(['profile', 'kyc']);
+      this.router.navigateByUrl('payments/account');
     }
   }
 }
