@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   network: string;
   @ViewChild('email') email: ElementRef;
   user: any;
+  validationError = false;
 
   constructor(
     private router: Router,
@@ -76,6 +77,7 @@ export class LoginComponent implements OnInit {
 
   async login() {
     this.isLoading = true;
+    this.validationError = false;
     this.error = '';
 
     this.authenticationService
@@ -97,6 +99,9 @@ export class LoginComponent implements OnInit {
           this.login();
         } else {
           this.isLoading = false;
+          if (error.id === '037') {
+            this.validationError = true;
+          }
           log.debug(`Login error: ${error}`);
           this.error = error.message;
         }

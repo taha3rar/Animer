@@ -53,8 +53,15 @@
               </div>
               <div id="standardLogin" style="display: none;">
                 <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate class="mt-5">
-                  <div class="alert alert-danger" [hidden]="!error || filledPhoneEmail || isLoading" translate>
+                  <div
+                    class="alert alert-danger"
+                    [hidden]="!error || filledPhoneEmail || isLoading || validationError"
+                    translate
+                  >
                     Email address/phone number or password incorrect.
+                  </div>
+                  <div class="alert alert-danger" *ngIf="validationError">
+                    Please verify your Email Address/Phone Number.
                   </div>
                   <div class="email-phone-wrapper">
                     <div class="form-group">
