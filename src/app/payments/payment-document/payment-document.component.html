@@ -4,7 +4,7 @@
     <table>
       <tr>
         <td class="t-bold t-blue">ISSUE DATE</td>
-        <td>{{ transaction?.dateCreated | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ today | date: 'dd/MM/yyyy' }}</td>
       </tr>
       <tr>
         <td class="t-bold t-blue">REFERENCE</td>
@@ -16,34 +16,32 @@
   <div class="row mt-5">
     <div class="col">
       <p class="t-bold t-blue">SUPPLIER</p>
+      <p>{{ payment?.contact?.fullName }}</p>
+      <p>{{ payment?.contact?.businessName }}</p>
       <p>
-        {{ transaction?.contact?.fullName }}
+        {{ payment?.contact?.address }}, {{ payment?.contact?.location }}, {{ payment?.contact?.region }},
+        {{ payment?.contact?.country }}
       </p>
-      <p>{{ transaction?.contact?.businessName }}</p>
-      <p>
-        {{ transaction?.contact?.address }}, {{ transaction?.contact?.location }}, {{ transaction?.contact?.region }},
-        {{ transaction?.contact?.country }}
-      </p>
-      <p>{{ transaction?.contact?.phoneNumber }}</p>
-      <p>{{ transaction?.contact?.email }}</p>
+      <p>{{ payment?.contact?.phoneNumber }}</p>
+      <p>{{ payment?.contact?.email }}</p>
     </div>
   </div>
 
   <div class="row pt-4">
     <div class="col-md-9 mb-4">
       <p class="t-bold t-blue">SIGNED BY</p>
-      <p>{{ transaction?.signedBy?.name || '-' }}</p>
-      <p>{{ transaction?.signedBy?.businessName || '-' }}</p>
-      <p>{{ transaction?.signedBy?.phoneNumber || '-' }}</p>
+      <p>{{ payment?.signedBy?.name }}</p>
+      <p>{{ payment?.signedBy?.businessName }}</p>
+      <p>{{ payment?.signedBy?.phoneNumber }}</p>
     </div>
     <div class="col-md-3">
       <div class="border-box center-items pull-left">
-        <h2>{{ transaction?.amount | number: '1.2-2' }} {{ transaction?.currency || 'KES' }}</h2>
+        <h2>{{ payment?.amount | number: '1.2-2' }} KES</h2>
         <h5>AMOUNT</h5>
       </div>
     </div>
   </div>
 </div>
-<button *ngIf="isPayment" class="bttn-primary pull-right mt-5">
+<button (click)="sendPayment()" *ngIf="isPayment" class="bttn-primary pull-right mt-5">
   Submit
 </button>

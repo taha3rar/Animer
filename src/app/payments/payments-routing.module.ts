@@ -37,7 +37,8 @@ const routes: Routes = [
       path: 'payments/generator/contact',
       component: ContactPaymentComponent,
       resolve: {
-        contacts: CurrentUserContactsResolver
+        contacts: CurrentUserContactsResolver,
+        wallet: DpoWalletResolver
       },
       runGuardsAndResolvers: 'always'
     },

@@ -3,8 +3,16 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="contact">Contact</label>
-        <select required id="contact" data-live-search="true" class="selectpicker" data-size="7">
-          <option *ngFor="let contact of contacts; let i = index">{{ contact.fullName }}</option>
+        <select
+          (ngModelChange)="removeRed()"
+          [(ngModel)]="contact"
+          required
+          id="contact"
+          data-live-search="true"
+          class="select-picker form-control"
+          data-size="7"
+        >
+          <option [ngValue]="cont" *ngFor="let cont of contacts; let i = index">{{ cont.fullName }}</option>
         </select>
       </div>
       <a data-toggle="wizard" data-target="#addContactWizard" class="bttn-line">Add New Contact</a>
@@ -13,29 +21,29 @@
       <div class="row" id="contactInfo">
         <div class="col-md-4">
           <p class="sm-text-label">CONTACT</p>
-          <p class="text-regular"></p>
+          <p class="text-regular">{{ contact?.fullName || '-' }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">ORGANIZTION</p>
-          <p class="text-regular"></p>
+          <p class="text-regular">{{ contact?.businessName || '-' }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">COUNTRY</p>
-          <p class="text-regular"></p>
+          <p class="text-regular">{{ contact?.country || '-' }}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <p class="sm-text-label">LOCATION</p>
-          <p class="text-regular"></p>
+          <p class="text-regular">{{ contact?.location || '-' }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">PHONE</p>
-          <p class="text-regular"></p>
+          <p class="text-regular">{{ contact?.phoneNumber || '-' }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">EMAIL</p>
-          <p class="text-regular"></p>
+          <p class="text-regular">{{ contact?.email || '-' }}</p>
         </div>
       </div>
     </div>
@@ -52,13 +60,22 @@
           <div class="input-group-prepend">
             <span class="input-group-text">KES</span>
           </div>
-          <input type="number" name="amount" id="amount" min="1" class="form-control" />
+          <input
+            (ngModelChange)="removeRed()"
+            [(ngModel)]="amount"
+            type="number"
+            name="amount"
+            id="amount"
+            min="1"
+            [max]="wallet.available"
+            class="form-control"
+          />
         </div>
       </div>
     </div>
     <div class="balance">
       <p>Current Balance</p>
-      <p>30,000 KES</p>
+      <p>{{ wallet.available | number: '1.2-2' }} KES</p>
     </div>
   </div>
 </div>
@@ -68,20 +85,41 @@
   <div class="form-row" id="received-by">
     <div class="form-group col-md-4">
       <label for="name">Full Name *</label>
-      <input type="text" class="form-control" id="name" />
+      <input
+        (ngModelChange)="removeRed()"
+        [(ngModel)]="signed_by.fullName"
+        type="text"
+        class="form-control"
+        id="name"
+      />
     </div>
     <div class="form-group col-md-4 pl-3">
       <label for="business">Business Name *</label>
-      <input type="text" class="form-control" id="business" />
+      <input
+        (ngModelChange)="removeRed()"
+        [(ngModel)]="signed_by.businessName"
+        type="text"
+        class="form-control"
+        id="business"
+      />
     </div>
     <div class="form-group col-md-4 pl-3">
       <label for="phone">Phone Number *</label>
-      <input class="form-control" id="phone" type="tel" />
+      <input
+        (ngModelChange)="removeRed()"
+        [(ngModel)]="signed_by.phoneNumber"
+        class="form-control"
+        id="phone"
+        type="tel"
+      />
     </div>
   </div>
 </div>
-<button class="btn-next next-step flex-r bttn-primary mt-5">
+<button (click)="submit()" [hidden]="!canSubmit" class="btn-next next-step flex-r bttn-primary mt-5">
+  Next Step &rarr;
+</button>
+<button (click)="checkForm()" [hidden]="canSubmit" class="btn-next flex-r bttn-primary mt-5">
   Next Step &rarr;
 </button>
 
-<app-contact-generator></app-contact-generator>
+<app-contact-generator [isGrn]="true" (contactEmit)="newContact($event)"></app-contact-generator>

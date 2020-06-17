@@ -25,11 +25,11 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="payments-details">
-          <app-contact-payment-details></app-contact-payment-details>
+          <app-contact-payment-details (payUp)="pay($event)" [payment]="payment"></app-contact-payment-details>
         </div>
 
         <div class="tab-pane" id="review-grn">
-          <app-payment-document></app-payment-document>
+          <app-payment-document (pay)="sendPayment()" [payment]="payment"></app-payment-document>
         </div>
       </div>
     </div>

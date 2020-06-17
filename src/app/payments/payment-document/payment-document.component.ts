@@ -1,5 +1,5 @@
-import { DPOTransaction } from '@avenews/agt-sdk';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { RequestDPOPaymentDTO } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-payment-document',
@@ -8,8 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PaymentDocumentComponent implements OnInit {
   @Input() isPayment = true;
-  @Input() transaction: DPOTransaction;
+  @Input() payment: RequestDPOPaymentDTO;
+  @Output() pay = new EventEmitter<boolean>();
+  today = new Date();
   constructor() {}
 
   ngOnInit() {}
+  sendPayment() {
+    this.pay.emit(true);
+  }
 }
