@@ -7,11 +7,9 @@ declare const $: any;
   selector: 'app-grn-document-list',
   templateUrl: './grn-document-list.component.html'
 })
-export class GrnDocumentListComponent implements OnInit {
+export class GrnDocumentListComponent {
   @Input()
   grn: GoodsReceivedNote;
 
   constructor() {}
-
-  ngOnInit() {}
 }

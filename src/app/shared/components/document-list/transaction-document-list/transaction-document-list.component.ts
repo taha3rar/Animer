@@ -3,7 +3,7 @@ import { SdkService } from '@app/core/sdk.service';
 import { Router } from '@angular/router';
 import { AlertsService } from '@app/core/alerts.service';
 import { BaseListComponent } from '../../base-list/base-list.component';
-import { UploadFileDTO } from '@avenews/agt-sdk';
+import { UploadFileDTO, NecessaryDocument, GoodsReceivedNote, Contact } from '@avenews/agt-sdk';
 
 declare const $: any;
 
@@ -14,7 +14,9 @@ declare const $: any;
 })
 export class TransactionDocumentListComponent extends BaseListComponent implements OnInit {
   @Input()
-  document: any;
+  type: 'contact' | 'grn';
+  @Input()
+  container: GoodsReceivedNote | Contact;
   page = 1;
   max = 100;
   uploadingFileName: string;
@@ -52,12 +54,13 @@ export class TransactionDocumentListComponent extends BaseListComponent implemen
             fileName,
             mime: file.type
           };
-          this.sdkService.uploadGrnDocument(document, this.document._id).then(() => {
-            this.alerts.showAlert('Your document has been uploaded');
-            $('.push-modal').css('display', 'none');
-            this.router.navigate([this.router.url]);
-            this.dynamic = 0;
-          });
+          if (this.type === 'grn') {
+            this.sdkService.uploadGrnDocument(document, this.container._id).then(this.successfullyHandler.bind(this));
+          } else if (this.type === 'contact') {
+            this.sdkService
+              .uploadContactDocument(document, this.container._id)
+              .then(this.successfullyHandler.bind(this));
+          }
         };
         reader.onprogress = (data: any) => {
           this.dynamic = (data.loaded / data.total) * 100;
@@ -82,7 +85,31 @@ export class TransactionDocumentListComponent extends BaseListComponent implemen
     }
   }
 
+  successfullyHandler() {
+    this.alerts.showAlert('Your document has been uploaded');
+    $('.push-modal').css('display', 'none');
+    this.router.navigateByUrl(this.router.url);
+    this.dynamic = 0;
+  }
+
+  successfullyDeleteHandler() {
+    this.alerts.showAlert('Your document has been deleted');
+    $('.push-modal').css('display', 'none');
+    this.router.navigateByUrl(this.router.url);
+    this.dynamic = 0;
+  }
+
   validateFile(file: any) {
     return this.acceptedMimeTypes.includes(file.type) && file.size < 3e6;
+  }
+
+  delete(id: string) {
+    if (this.type === 'contact') {
+      return this.sdkService
+        .deleteContactDocument(this.container._id, id)
+        .then(this.successfullyDeleteHandler.bind(this));
+    } else if (this.type === 'grn') {
+      return this.sdkService.deleteGrnDocument(this.container._id, id).then(this.successfullyDeleteHandler.bind(this));
+    }
   }
 }

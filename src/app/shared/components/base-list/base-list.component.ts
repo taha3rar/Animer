@@ -37,14 +37,7 @@ export class BaseListComponent implements OnInit {
   ngOnInit() {}
 
   delete(id: string) {
-    this.service.delete(id).subscribe(
-      () => {
-        this.router.navigate([this.router.url]);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    throw new Error('Not implemented method');
   }
 
   warning(id: string) {
