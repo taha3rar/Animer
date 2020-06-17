@@ -3,27 +3,31 @@
     <div class="header-wrapper">
       <h1>Welcome to Payments!</h1>
       <p class="t-15">
-        Now you can pay suppliers & business contacts or pay trade documents directly using Avenews. Just follow the
-        simple steps to set up the payments feature.
+        Now you can pay suppliers & business contacts or pay trade documents directly using Avenews.<br />
+        Just follow the simple steps to set up the payments feature.
       </p>
     </div>
 
     <div class="body-wrapper">
       <h4>Steps to do to activate payments:</h4>
-      <ul>
-        <li [ngClass]="topupReady ? 'completed disabled no-drop' : 'active click'" (click)="kyc()">
+      <ul class="dpo-steps-wrapper">
+        <li [ngClass]="dpoAccount ? 'completed disabled no-drop' : 'active click'" (click)="kyc()">
           <div class="circle-wrapper"><span class="circle"></span></div>
           <div class="step-title">
             <span>Complete KYC form in the settings.</span>
           </div>
         </li>
         <div class="under-list" *ngIf="dpoAccount && dpoAccount.status === 'pending-approval'">
-          <p>Your info has been sent to DPO and is being processed.</p>
-          <p>You will be contacted by DPO within 48 hours to complete the process.</p>
+          <p class="mb-0 mt-0">Your info has been sent to DPO and is being processed.</p>
+          <p class="mt-0 mb-3">You will be contacted by DPO within 48 hours to complete the process.</p>
         </div>
         <li
           (click)="dontShow($event)"
-          [ngClass]="wallet && wallet.firstTopUpStatus ? 'completed disabled no-drop' : 'active click'"
+          [ngClass]="{
+            'completed disabled no-drop': wallet && wallet.firstTopUpStatus,
+            'active click': topupReady,
+            disabled: !topupReady
+          }"
           data-toggle="wizard"
           data-target="#topUpBalance"
         >

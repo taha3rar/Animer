@@ -17,8 +17,12 @@ export class PaymentActivationComponent implements OnInit {
     this.route.data.subscribe(({ account, wallet }) => {
       this.dpoAccount = account;
       this.wallet = wallet;
-
-      if (this.dpoAccount && this.dpoAccount.status && this.dpoAccount.status !== 'rejected') {
+      if (
+        this.dpoAccount &&
+        this.dpoAccount.status &&
+        this.dpoAccount.status !== 'rejected' &&
+        this.dpoAccount.status !== 'pending-approval'
+      ) {
         this.topupReady = true;
       } else {
         this.topupReady = false;
