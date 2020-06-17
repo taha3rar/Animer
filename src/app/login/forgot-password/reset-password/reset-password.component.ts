@@ -2,7 +2,7 @@ import { SdkService } from '@app/core/sdk.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ResetPasswordDTO } from '@avenews/agt-sdk';
+import { ResetPasswordByTokenDTO } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-reset-password',
@@ -31,7 +31,7 @@ export class ResetPasswordComponent implements OnInit {
       this.passwordForm.valid &&
       this.passwordForm.get('newPassword').value === this.passwordForm.get('confirmPassword').value
     ) {
-      const reset: ResetPasswordDTO = {
+      const reset: ResetPasswordByTokenDTO = {
         token: this.resetToken,
         newPwd: this.passwordForm.get('newPassword').value
       };
