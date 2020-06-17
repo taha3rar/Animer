@@ -1,4 +1,6 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { DPOTransaction } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-payment-view',
@@ -6,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment-view.component.scss']
 })
 export class PaymentViewComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+  transaction: DPOTransaction;
+  constructor(private route: ActivatedRoute) {}
+  ngOnInit() {
+    this.route.data.subscribe(data => {
+      console.log(data);
+      this.transaction = data.transaction;
+    });
+  }
 }

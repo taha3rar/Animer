@@ -1,3 +1,4 @@
+import { DPOTransaction } from '@avenews/agt-sdk';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PaymentDocumentComponent implements OnInit {
   @Input() isPayment = true;
-
+  @Input() transaction: DPOTransaction;
   constructor() {}
 
   ngOnInit() {}

@@ -14,6 +14,7 @@ export class PaymentsListComponent implements OnInit {
   wallet: DPOWallet;
   transactions: DPOTransaction[];
   topUpApproved = false;
+  currentPage = 1;
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
 
@@ -64,5 +65,11 @@ export class PaymentsListComponent implements OnInit {
     }
 
     return 'N/A';
+  }
+  pageChanged(page: number) {
+    this.currentPage = page;
+  }
+  paymentView(i: string) {
+    this.router.navigate(['/payments/payment', this.transactions[i]._id]);
   }
 }

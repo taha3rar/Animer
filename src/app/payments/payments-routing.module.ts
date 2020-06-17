@@ -11,6 +11,7 @@ import { DocumentPaymentComponent } from './document-payment/document-payment.co
 import { PaymentSettingsComponent } from './payment-settings/payment-settings.component';
 import { DpoWalletResolver } from './resolvers/dpo-wallet.resolver';
 import { DpoTransactionResolver } from './resolvers/dpo-transaction.resolver';
+import { TransactionViewResolver } from './resolvers/transaction-view.resolver';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -50,7 +51,8 @@ const routes: Routes = [
     },
     {
       path: 'payments/payment/:id',
-      component: PaymentViewComponent
+      component: PaymentViewComponent,
+      resolve: { transaction: TransactionViewResolver }
     }
   ])
 ];
