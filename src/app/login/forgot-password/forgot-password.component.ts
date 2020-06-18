@@ -81,17 +81,14 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   recoverPassword() {
-    // if (this.forgotPasswordForm.valid) {
-    //   this.username = this.forgotPasswordForm.value.email || this.forgotPasswordForm.value.phone;
-    //   this.sdkService.sendResetLink().subscribe(() => {
-    //     this.resetLinkStatus = 1
-    //   },
-    //     err => {
-    //       console.log(err);
-    //       this.resetLinkStatus = 2
-    //     });
-    // when sdk ready will be uncommented
-    // }
+    if (this.forgotPasswordForm.valid) {
+      this.username = this.forgotPasswordForm.value.email;
+      const resetPasswordDto: ResetPasswordDTO = { email: this.username };
+
+      this.sdkService.sendResetPasswordLink(resetPasswordDto).then(data => {
+        this.resetLinkStatus = 1;
+      });
+    }
     // this.checkMethod();
   }
 
