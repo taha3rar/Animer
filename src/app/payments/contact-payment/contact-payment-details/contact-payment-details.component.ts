@@ -1,7 +1,10 @@
+import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contact, DPOWallet, RequestDPOPaymentDTO } from '@avenews/agt-sdk';
 import { StepperService } from '@app/core/stepper.service';
+import { Signature } from '@avenews/agt-sdk/lib/types/shared';
 declare const $: any;
 
 @Component({
@@ -9,27 +12,43 @@ declare const $: any;
   templateUrl: './contact-payment-details.component.html',
   styleUrls: ['./contact-payment-details.component.scss']
 })
-export class ContactPaymentDetailsComponent implements OnInit {
+export class ContactPaymentDetailsComponent extends BaseValidationComponent implements OnInit {
   @Input() payment: RequestDPOPaymentDTO;
   @Output() payUp = new EventEmitter();
   contacts: Contact[];
   contact: Contact;
+  paymentForm: FormGroup;
   selectedContact: Contact;
-  amount = 0;
   wallet: DPOWallet;
-  signed_by: {
-    fullName: string;
-    businessName: string;
-    phoneNumber: string;
-  } = { fullName: '', businessName: '', phoneNumber: '' };
-  constructor(private stepperService: StepperService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private stepperService: StepperService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {
+    super();
+    this.paymentForm = this.fb.group({
+      name: [undefined, Validators.required],
+      businessName: [undefined, Validators.required],
+      phoneNumber: [undefined, Validators.required],
+      amount: [0, [Validators.required, Validators.min(1)]]
+    });
+  }
 
   ngOnInit() {
     this.stepperService.stepperInit();
     this.route.data.subscribe(({ contacts, wallet }) => {
       this.contacts = [...contacts];
       this.wallet = wallet;
+      this.paymentForm.controls['amount'].setValidators([
+        Validators.max(wallet.available),
+        Validators.required,
+        Validators.min(1)
+      ]);
+      this.paymentForm.controls['amount'].updateValueAndValidity();
     });
+    this.formInput = this.paymentForm;
+
     setTimeout(function() {
       $('.select-picker').selectpicker();
     }, 200);
@@ -46,44 +65,28 @@ export class ContactPaymentDetailsComponent implements OnInit {
     }, 200);
   }
   checkForm() {
-    !this.signed_by.fullName ? $('#name').addClass('red-border') : $('#name').removeClass('red-border');
-    !this.signed_by.businessName ? $('#business').addClass('red-border') : $('#business').removeClass('red-border');
-    !this.signed_by.phoneNumber ? $('#phone').addClass('red-border') : $('#phone').removeClass('red-border');
     !this.contact ? $('.select-picker').addClass('red-border') : $('.select-picker').removeClass('red-border');
-    this.amount <= 0 || this.amount > this.wallet.available
-      ? $('#amount').addClass('red-border')
-      : $('#amount').removeClass('red-border');
-  }
-  removeRed() {
-    // tslint:disable no-unused-expression
-    this.signed_by.fullName ? $('#name').removeClass('red-border') : '';
-    this.signed_by.businessName ? $('#business').removeClass('red-border') : '';
-    this.signed_by.phoneNumber ? $('#phone').removeClass('red-border') : '';
-    this.contact ? $('.select-picker').removeClass('red-border') : '';
-    this.amount > 0 && this.amount <= this.wallet.available ? $('#amount').removeClass('red-border') : '';
+    this.onSubmit(this.paymentForm);
   }
   get canSubmit(): boolean {
     return (
       // tslint:disable: triple-equals
-      this.signed_by &&
-      this.signed_by.fullName != undefined &&
-      this.signed_by.businessName != undefined &&
-      this.signed_by.phoneNumber != undefined &&
-      this.amount != undefined &&
-      this.amount <= this.wallet.available &&
-      this.amount >= 1 &&
-      this.contact != undefined
+      this.contact != undefined && this.paymentForm.valid
     );
   }
+  get paymentF() {
+    return this.paymentForm.controls;
+  }
   submit() {
+    this.onSubmit(this.paymentForm);
     if (this.canSubmit) {
       const request: RequestDPOPaymentDTO = {
         signedBy: {
-          name: this.signed_by.fullName,
-          businessName: this.signed_by.businessName,
-          phoneNumber: this.signed_by.phoneNumber
+          name: this.paymentF.name.value,
+          businessName: this.paymentF.businessName.value,
+          phoneNumber: this.paymentF.phoneNumber.value
         },
-        amount: this.amount,
+        amount: this.paymentF.amount.value,
         contact: this.contact
       };
       this.payUp.emit(request);

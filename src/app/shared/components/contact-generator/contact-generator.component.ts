@@ -39,7 +39,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   @Output() contactEmit = new EventEmitter<Contact>();
   @Input() contact: Contact;
   @Input() isEdit: boolean;
-  @Input() isGrn: boolean;
+  @Input() doEmit: boolean;
   phoneCode: string;
   newContact: RegisterContactDTO; // TODO new client model
   partialPhoneNumber: string;
@@ -209,7 +209,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           .registerContact(newContact)
           .then(data => {
             if (data._id) {
-              if (this.isGrn) {
+              if (this.doEmit) {
                 this.contactEmit.emit(data);
               }
               this.spinnerService.hideSpinner();
@@ -284,7 +284,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     if (!this.contactSubmitted && this.contactDetailsForm.dirty) {
       this.alerts.showAlertBack().then(value => {
         if (value) {
-          if (this.isGrn) {
+          if (this.doEmit) {
             $('#addContactWizard').fadeOut('fast');
             this.deleteData();
           } else {
@@ -295,7 +295,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
         }
       });
     } else {
-      if (this.isGrn) {
+      if (this.doEmit) {
         $('#addContactWizard').fadeOut('fast');
         this.deleteData();
       } else {

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StepperService } from '@app/core/forms/stepper.service';
 import { Contact, RequestDPOPaymentDTO } from '@avenews/agt-sdk';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contact-payment',
@@ -34,9 +35,19 @@ export class ContactPaymentComponent implements OnInit {
   async sendPayment() {
     try {
       const data = await this.sdkService.submitPayment(this.payment);
-      this.alerts.showAlert('Your Payment request has been sent.\n\n\n\n\n simple alert not final');
+      Swal.fire({
+        icon: 'success',
+        title: 'Payment has been succesfully sent. please wait until we approve it \n This may take up to 48 hours '
+      }).then(val => {
+        if (val) {
+          this.router.navigate(['payment']);
+        }
+      });
     } catch (error) {
-      this.alerts.showAlertDanger('There has been an error');
+      Swal.fire({
+        icon: 'error',
+        title: 'there was an error while trying to send your payment'
+      });
     }
   }
 }

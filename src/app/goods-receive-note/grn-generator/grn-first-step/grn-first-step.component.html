@@ -25,7 +25,7 @@
           <p class="text-regular">{{ selectedContact?.fullName || '-' }}</p>
         </div>
         <div class="col-md-4">
-          <p class="sm-text-label">ORGANIZTION</p>
+          <p class="sm-text-label">ORGANIZATION</p>
           <p class="text-regular">{{ selectedContact?.businessName || '-' }}</p>
         </div>
         <div class="col-md-4">
@@ -218,7 +218,7 @@
 </button>
 <app-contact-generator
   (contactEmit)="newContact($event)"
-  [isGrn]="true"
+  [doEmit]="true"
   [contact]="contact"
   [isEdit]="false"
 ></app-contact-generator>

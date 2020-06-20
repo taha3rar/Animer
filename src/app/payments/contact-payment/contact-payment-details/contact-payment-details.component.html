@@ -4,7 +4,6 @@
       <div class="form-group">
         <label for="contact">Contact</label>
         <select
-          (ngModelChange)="removeRed()"
           [(ngModel)]="contact"
           required
           id="contact"
@@ -24,7 +23,7 @@
           <p class="text-regular">{{ contact?.fullName || '-' }}</p>
         </div>
         <div class="col-md-4">
-          <p class="sm-text-label">ORGANIZTION</p>
+          <p class="sm-text-label">ORGANIZATION</p>
           <p class="text-regular">{{ contact?.businessName || '-' }}</p>
         </div>
         <div class="col-md-4">
@@ -49,77 +48,62 @@
     </div>
   </div>
 </div>
-
-<div class="strip mt-5">
-  <h3 class="t-bold mb-3">AMOUNT</h3>
-  <div class="d-flex">
-    <div class="form-row">
-      <div class="form-group col">
-        <label for="amount">How much do you want to pay? *</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">KES</span>
+<form [formGroup]="paymentForm">
+  <div class="strip mt-5">
+    <h3 class="t-bold mb-3">AMOUNT</h3>
+    <div class="d-flex">
+      <div class="form-row">
+        <div [ngClass]="showFieldStyle('amount')" class="form-group col">
+          <label for="amount">How much do you want to pay? *</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">KES</span>
+            </div>
+            <input formControlName="amount" type="number" name="amount" id="amount" class="form-control" />
           </div>
-          <input
-            (ngModelChange)="removeRed()"
-            [(ngModel)]="amount"
-            type="number"
-            name="amount"
-            id="amount"
-            min="1"
-            [max]="wallet.available"
-            class="form-control"
-          />
+          <div class="help-block" *ngIf="isFieldInvalid('amount')">
+            <p>This field is required</p>
+          </div>
+        </div>
+      </div>
+      <div class="balance">
+        <p>Current Balance</p>
+        <p>{{ wallet.available | number: '1.2-2' }} KES</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip mt-5">
+    <h3 class="t-bold mb-3">SIGNED BY</h3>
+    <div class="form-row" id="received-by">
+      <div [ngClass]="showFieldStyle('name')" class="form-group col-md-4">
+        <label for="name">Full Name *</label>
+        <input formControlName="name" type="text" class="form-control" id="name" />
+        <div class="help-block" *ngIf="isFieldInvalid('name')">
+          <p>This field is required</p>
+        </div>
+      </div>
+      <div [ngClass]="showFieldStyle('businessName')" class="form-group col-md-4 pl-3">
+        <label for="business">Business Name *</label>
+        <input formControlName="businessName" type="text" class="form-control" id="business" />
+        <div class="help-block" *ngIf="isFieldInvalid('businessName')">
+          <p>This field is required</p>
+        </div>
+      </div>
+      <div [ngClass]="showFieldStyle('phoneNumber')" class="form-group col-md-4 pl-3">
+        <label for="phone">Phone Number *</label>
+        <input formControlName="phoneNumber" class="form-control" id="phoneNumber" type="tel" />
+        <div class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
+          <p>This field is required</p>
         </div>
       </div>
     </div>
-    <div class="balance">
-      <p>Current Balance</p>
-      <p>{{ wallet.available | number: '1.2-2' }} KES</p>
-    </div>
   </div>
-</div>
-
-<div class="strip mt-5">
-  <h3 class="t-bold mb-3">SIGNED BY</h3>
-  <div class="form-row" id="received-by">
-    <div class="form-group col-md-4">
-      <label for="name">Full Name *</label>
-      <input
-        (ngModelChange)="removeRed()"
-        [(ngModel)]="signed_by.fullName"
-        type="text"
-        class="form-control"
-        id="name"
-      />
-    </div>
-    <div class="form-group col-md-4 pl-3">
-      <label for="business">Business Name *</label>
-      <input
-        (ngModelChange)="removeRed()"
-        [(ngModel)]="signed_by.businessName"
-        type="text"
-        class="form-control"
-        id="business"
-      />
-    </div>
-    <div class="form-group col-md-4 pl-3">
-      <label for="phone">Phone Number *</label>
-      <input
-        (ngModelChange)="removeRed()"
-        [(ngModel)]="signed_by.phoneNumber"
-        class="form-control"
-        id="phone"
-        type="tel"
-      />
-    </div>
-  </div>
-</div>
-<button (click)="submit()" [hidden]="!canSubmit" class="btn-next next-step flex-r bttn-primary mt-5">
-  Next Step &rarr;
-</button>
-<button (click)="checkForm()" [hidden]="canSubmit" class="btn-next flex-r bttn-primary mt-5">
-  Next Step &rarr;
-</button>
-
-<app-contact-generator [isGrn]="true" (contactEmit)="newContact($event)"></app-contact-generator>
+  <button (click)="submit()" [hidden]="!canSubmit" class="btn-next next-step flex-r bttn-primary mt-5">
+    Next Step &rarr;
+  </button>
+  <button (click)="checkForm()" [hidden]="canSubmit" class="btn-next flex-r bttn-primary mt-5">
+    Next Step &rarr;
+  </button>
+</form>
+<app-contact-generator [doEmit]="true" (contactEmit)="newContact($event)"></app-contact-generator>
