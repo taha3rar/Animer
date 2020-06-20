@@ -34,7 +34,6 @@ export class ResetPasswordComponent implements OnInit {
     if (group.value.newPassword !== group.value.confirmPassword) {
       return { passwordsNotMatch: true };
     }
-    return null;
   }
 
   passwordsNotMatch() {
