@@ -12,29 +12,11 @@ export class TransactionViewResolver implements Resolve<DPOTransaction> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<DPOTransaction> {
     const id = route.params['id'];
-    return from(this.help(id)).pipe(
+    return from(this.sdkService.getDPOTransactionById(id)).pipe(
       catchError(() => {
         this.router.navigateByUrl('/not-found');
         return EMPTY.pipe();
       })
     );
-
-    // uncomment this when its done
-    // return from(this.sdkService.getDPOTransactionById(id)).pipe(
-    //   catchError(() => {
-    //     this.router.navigateByUrl('/not-found');
-    //     return EMPTY.pipe();
-    //   })
-    // );
-  }
-  help(id: string): Promise<DPOTransaction> {
-    return new Promise(res => {
-      this.sdkService.getMyDPOTransactions().then(data => {
-        const index = data.findIndex(check => {
-          return check._id === id;
-        });
-        res(data[index]);
-      });
-    });
   }
 }

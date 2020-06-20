@@ -12,7 +12,6 @@ export class PaymentViewComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
   ngOnInit() {
     this.route.data.subscribe(data => {
-      console.log(data);
       this.transaction = data.transaction;
     });
   }
