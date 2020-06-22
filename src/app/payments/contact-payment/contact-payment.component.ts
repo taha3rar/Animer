@@ -37,10 +37,11 @@ export class ContactPaymentComponent implements OnInit {
       const data = await this.sdkService.submitPayment(this.payment);
       Swal.fire({
         icon: 'success',
-        title: 'Payment has been succesfully sent. We will let you know once it is approved.\n This may take up to 48 hours '
+        title:
+          'Payment has been succesfully sent. We will let you know once it is approved.\n This may take up to 48 hours '
       }).then(val => {
         if (val) {
-          this.router.navigate(['payment']);
+          this.router.navigateByUrl('payments');
         }
       });
     } catch (error) {

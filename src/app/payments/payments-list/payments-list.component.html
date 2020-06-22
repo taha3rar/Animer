@@ -33,7 +33,7 @@
           </button>
           <ul class="dropdown-menu">
             <li routerLink="/payments/generator/contact"><a>Pay a Contact</a></li>
-            <li><a>Pay a Trade Document</a></li>
+            <!-- <li><a>Pay a Trade Document</a></li> -->
           </ul>
         </div>
       </div>
@@ -76,7 +76,7 @@
           <td>
             <span class="{{ tx.status | status }}">{{ tx.status | titlecase }}</span>
           </td>
-          <td><a id="view" (click)="paymentView(i)">View</a></td>
+          <td><a id="view" *ngIf="tx.type === 'payment'" (click)="paymentView(i)">View</a></td>
         </tr>
       </tbody>
     </table>
