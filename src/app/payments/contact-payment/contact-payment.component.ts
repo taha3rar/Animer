@@ -1,3 +1,4 @@
+import { SpinnerToggleService } from '@app/shared/services/spinner-toggle.service';
 import { AlertsService } from './../../core/alerts.service';
 import { SdkService } from './../../core/sdk.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,7 +21,8 @@ export class ContactPaymentComponent implements OnInit {
     private router: Router,
     private sdkService: SdkService,
     private stepperService: StepperService,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private spinner: SpinnerToggleService
   ) {}
   ngOnInit() {
     this.stepperService.stepperInit();
@@ -38,8 +40,10 @@ export class ContactPaymentComponent implements OnInit {
     this.payment = e;
   }
   async sendPayment() {
+    this.spinner.showSpinner();
     try {
       const data = await this.sdkService.submitPayment(this.payment);
+      this.spinner.hideSpinner();
       Swal.fire({
         icon: 'success',
         title:
@@ -50,6 +54,7 @@ export class ContactPaymentComponent implements OnInit {
         }
       });
     } catch (error) {
+      this.spinner.hideSpinner();
       Swal.fire({
         icon: 'error',
         title: 'There was an error while trying to send your payment'
