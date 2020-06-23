@@ -297,17 +297,22 @@
     padding-bottom: 10px;
   }
 }
+
+mat-ink-bar {
+  background-color: #37c1ce !important;
+}
+
+.mat-tab-label .mat-tab-label-content {
+  color: #455263 !important;
+}
+
 #contact-view-tabs {
   margin-bottom: 95px;
-  mat-ink-bar {
-    background-color: #455263 !important;
-  }
+
   .mat-tab-label {
     opacity: 1 !important;
   }
-  .mat-tab-label .mat-tab-label-content {
-    color: #455263;
-  }
+
   mat-tab-header {
     border-bottom: none !important;
   }

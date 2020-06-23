@@ -19,6 +19,7 @@ import { DpoWalletResolver } from './resolvers/dpo-wallet.resolver';
 import { DpoTransactionResolver } from './resolvers/dpo-transaction.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TransactionViewResolver } from './resolvers/transaction-view.resolver';
+import { MatTabsModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,15 @@ import { TransactionViewResolver } from './resolvers/transaction-view.resolver';
     DocumentPaymentDocumentsComponent,
     DocumentPaymentDetailsComponent
   ],
-  imports: [CommonModule, SharedModule, PaymentsRoutingModule, FormsModule, ReactiveFormsModule, NgxPaginationModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    MatTabsModule,
+    PaymentsRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxPaginationModule
+  ],
   providers: [DpoAccountResolver, DpoWalletResolver, DpoTransactionResolver, TransactionViewResolver]
 })
 export class PaymentsModule {}

@@ -17,6 +17,9 @@ export class PaymentsListComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
+  payments: DPOTransaction[];
+  topups: DPOTransaction[];
+  listTitle = 'Payments History';
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -33,6 +36,15 @@ export class PaymentsListComponent implements OnInit {
         this.wallet.firstTopUpStatus === 'approved'
       ) {
         this.topUpApproved = true;
+      }
+
+      if (this.transactions.length > 0) {
+        this.topups = transactions.filter((t: DPOTransaction) => {
+          return t.type === 'topup';
+        });
+        this.payments = transactions.filter((t: DPOTransaction) => {
+          return t.type === 'payment';
+        });
       }
     });
   }
@@ -51,6 +63,14 @@ export class PaymentsListComponent implements OnInit {
     }
 
     return 'N/A';
+  }
+
+  toggleTitle(event: any) {
+    if (event === 0) {
+      this.listTitle = 'Payments History';
+    } else {
+      this.listTitle = 'Top-ups History';
+    }
   }
 
   getTxType(tx: DPOTransaction) {
