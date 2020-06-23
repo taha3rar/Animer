@@ -17,30 +17,24 @@ export class TopupComponent {
   }
 
   async onPaymentSubmit() {
-    // if (this.balance >= 1) {
-    //   try {
-    //     await this.sdkService.submitTopupRequest(this.balance);
-
-    //     this.onModalClose();
-    //     Swal.fire({
-    //       icon: 'success',
-    //       title: 'TOP-UP REQUEST SENT!',
-    //       text: 'A DPO agent will be in touch with you soon to complete the top-up process.'
-    //     });
-    //     this.balanceSubmit.emit(this.balance);
-    //   } catch (err) {
-    Swal.fire({
-      icon: 'error',
-      title: 'TOP-UP REQUEST ERROR!',
-      text: 'There was an error with your request.'
-    });
-    //   }
-    // }
-    // Swal.fire({
-    //     icon: 'success',
-    //     title: 'TOP-UP REQUEST SENT!',
-    //     text: 'A DPO agent will be in touch with you soon to complete the top-up process.'
-    //   });
+    if (this.balance >= 1) {
+      try {
+        await this.sdkService.submitTopupRequest(this.balance);
+        this.onModalClose();
+        Swal.fire({
+          icon: 'success',
+          title: 'TOP-UP REQUEST SENT!',
+          text: 'A DPO agent will be in touch with you soon to complete the top-up process.'
+        });
+        this.balanceSubmit.emit(this.balance);
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'TOP-UP REQUEST ERROR!',
+          text: 'There was an error with your request.'
+        });
+      }
+    }
   }
   checkValidity() {
     this.balance < 1 ? $('#balance').addClass('red-border') : $('#balance').removeClass('red-border');
