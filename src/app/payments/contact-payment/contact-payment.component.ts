@@ -27,7 +27,12 @@ export class ContactPaymentComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['payments']);
+    this.alerts.showAlertBack().then(val => {
+      if (val) {
+        this.payment = null;
+        this.router.navigate(['payments']);
+      }
+    });
   }
   pay(e: RequestDPOPaymentDTO) {
     this.payment = e;
