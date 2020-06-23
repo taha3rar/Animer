@@ -31,6 +31,7 @@ import { PaymentStatusPipe } from './pipes/paymentStatus.pipe';
 import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
 import { PluralPipe } from './pipes/plural.pipe';
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
+import { NumberFormatPipe } from './pipes/number-format.pipe';
 
 @NgModule({
   imports: [
@@ -68,7 +69,8 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
     UserProgressComponent,
     DpoDocumentsComponent,
     PaymentStatusPipe,
-    TransactionDocumentListComponent
+    TransactionDocumentListComponent,
+    NumberFormatPipe
   ],
   entryComponents: [],
   exports: [
@@ -88,6 +90,7 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
     DpoDocumentsComponent,
     PaymentStatusPipe,
     ReferenceCodePipe,
+    NumberFormatPipe,
     TransactionDocumentListComponent
   ],
   providers: [CsvService, DatePipe, DecimalPipe]

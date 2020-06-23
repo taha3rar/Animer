@@ -57,7 +57,7 @@
       <td>
         {{ grn?.products | measurement: (grn?.products | productQuantity) }}
       </td>
-      <td>{{ grn?.total | number: '1.2-2' }} {{ grn?.currency }}</td>
+      <td>{{ grn?.total | numberFormat }} {{ grn?.currency }}</td>
       <td>
         <span class="{{ grn?.paymentStatus | status }}">{{ grn?.paymentStatus | paymentStatus }}</span>
       </td>

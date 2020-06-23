@@ -45,9 +45,9 @@
         <tr *ngFor="let product of grn?.products">
           <td>{{ product?.name }}</td>
           <td>{{ product?.description || '-' }}</td>
-          <td>{{ product?.quantity | number: '1.2-2' }} {{ product?.measurement | plural: product?.quantity }}</td>
-          <td>{{ product?.rate | number: '1.2-2' }} per {{ product?.measurement }}</td>
-          <td>{{ product?.price | number: '1.2-2' }} {{ product?.currency }}</td>
+          <td>{{ product?.quantity | numberFormat }} {{ product?.measurement | plural: product?.quantity }}</td>
+          <td>{{ product?.rate | numberFormat }} per {{ product?.measurement }}</td>
+          <td>{{ product?.price | numberFormat }} {{ product?.currency }}</td>
         </tr>
       </tbody>
     </table>
@@ -62,18 +62,18 @@
         <div>
           <div class="d-flex bottom mt-2 flex-column">
             <div class="mr-1">
-              <p class="sm-text-label">Quanitiy</p>
+              <p class="sm-text-label">Quantity</p>
               <p class="text-regular">
-                {{ product?.quantity | number: '1.2-2' }} {{ product?.measurement | plural: product?.quantity }}
+                {{ product?.quantity | numberFormat }} {{ product?.measurement | plural: product?.quantity }}
               </p>
             </div>
             <div class="mr-1">
               <p class="sm-text-label">Rate</p>
-              <p class="text-regular">{{ product?.rate | number: '1.2-2' }} per {{ product?.measurement }}</p>
+              <p class="text-regular">{{ product?.rate | numberFormat }} per {{ product?.measurement }}</p>
             </div>
             <div>
               <p class="sm-text-label">Price</p>
-              <p class="text-regular">{{ product?.price | number: '1.2-2' }} {{ product?.currency }}</p>
+              <p class="text-regular">{{ product?.price | numberFormat }} {{ product?.currency }}</p>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@
         <div class="{{ grn?.paymentStatus | status }} mb-4">
           {{ grn?.paymentStatus | paymentStatus }}
         </div>
-        <h2>{{ grn?.currency }} {{ grn?.total | number: '1.2-2' }}</h2>
+        <h2>{{ grn?.currency }} {{ grn?.total | numberFormat }}</h2>
         <h5>TOTAL</h5>
       </div>
     </div>
