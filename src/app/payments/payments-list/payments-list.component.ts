@@ -28,7 +28,6 @@ export class PaymentsListComponent implements OnInit {
       this.dpoAccount = account;
       this.wallet = wallet;
       this.transactions = transactions;
-
       if (
         this.dpoAccount &&
         this.dpoAccount.status === 'approved' &&

@@ -1,0 +1,70 @@
+<h1 class="back-div main-title btn-main mb-4" routerLink="/payments">
+  <a class="main-color"><i class="material-icons">keyboard_backspace</i></a> Top-ups
+</h1>
+
+<div class="strip mb-5">
+  <h3 class="heading-1 mb-3">
+    TOP-UP #{{ transaction.numericId }}
+    <span class="{{ transaction.status | status }}">{{ transaction.status | titlecase }}</span>
+  </h3>
+
+  <div class="header-wrapper">
+    <div id="payment-info">
+      <div>
+        <p class="sm-text-label">ISSUE DATE</p>
+        <P class="text-regular">{{ transaction.dateCreated | date: 'dd/MM/yyyy' }}</P>
+      </div>
+    </div>
+    <div id="payment-actions">
+      <button class="bttn bttn-outline">Download PDF</button>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 mt-5">
+  <ul class="nav nav-tabs doc-view">
+    <li class="active">
+      <a data-toggle="tab" href="#topup">Top-up</a>
+    </li>
+  </ul>
+  <div class="tab-content mb-5">
+    <div class="tab-pane active" id="topup">
+      <div class="tabi">
+        <div class="border-box display-ib ">
+          <h2>TOP-UP #{{ transaction.numericId }}</h2>
+          <table>
+            <tr>
+              <td class="t-bold t-blue">ISSUE DATE</td>
+              <td>{{ transaction.dateCreated | date: 'dd/MM/yyyy' }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col">
+            <p class="t-bold t-blue">ISSUED BY</p>
+            <p>
+              {{ transaction?.emitter?.personalInformation?.firstName }}
+              {{ transaction?.emitter?.personalInformation?.lastName }}
+            </p>
+            <p>{{ transaction?.emitter?.companyInformation?.companyName }}</p>
+            <p>
+              {{ transaction?.emitter?.companyInformation?.street }},
+              {{ transaction?.emitter?.companyInformation?.city }},
+              {{ transaction?.emitter?.companyInformation?.stateProvinceRegion }},
+              {{ transaction?.emitter?.companyInformation?.country }}
+            </p>
+            <p>{{ transaction?.emitter?.personalInformation?.phoneNumber }}</p>
+            <p>{{ transaction?.emitter?.personalInformation?.email }}</p>
+          </div>
+          <div class="col-md-3">
+            <div class="border-box center-items ">
+              <h4 class="{{ transaction?.status | status }}">{{ transaction?.status | titlecase }}</h4>
+              <h2>{{ transaction?.amount | number: '1.2-2' }} KES</h2>
+              <h5>TOTAL</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

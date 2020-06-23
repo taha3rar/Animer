@@ -20,6 +20,7 @@ import { DpoTransactionResolver } from './resolvers/dpo-transaction.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TransactionViewResolver } from './resolvers/transaction-view.resolver';
 import { MatTabsModule } from '@angular/material';
+import { TopupViewComponent } from './topup-view/topup-view.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { MatTabsModule } from '@angular/material';
     PaymentSettingsComponent,
     DocumentPaymentComponent,
     DocumentPaymentDocumentsComponent,
-    DocumentPaymentDetailsComponent
+    TopupViewComponent,
+    DocumentPaymentDetailsComponent,
+    TopupViewComponent
   ],
   imports: [
     CommonModule,

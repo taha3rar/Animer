@@ -1,3 +1,4 @@
+import { TopupViewComponent } from './topup-view/topup-view.component';
 import { DpoAccountResolver } from './resolvers/dpo-account.resolver';
 import { PaymentViewComponent } from './payment-view/payment-view.component';
 import { ContactPaymentComponent } from './contact-payment/contact-payment.component';
@@ -53,6 +54,11 @@ const routes: Routes = [
     {
       path: 'payments/payment/:id',
       component: PaymentViewComponent,
+      resolve: { transaction: TransactionViewResolver }
+    },
+    {
+      path: 'payments/topup/:id',
+      component: TopupViewComponent,
       resolve: { transaction: TransactionViewResolver }
     }
   ])
