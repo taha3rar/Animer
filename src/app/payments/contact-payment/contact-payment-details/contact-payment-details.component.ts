@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Contact, DPOWallet, RequestDPOPaymentDTO } from '@avenews/agt-sdk';
 import { StepperService } from '@app/core/stepper.service';
 import { Signature } from '@avenews/agt-sdk/lib/types/shared';
+import Swal from 'sweetalert2';
 declare const $: any;
 
 @Component({
@@ -17,6 +18,7 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
   @Output() payUp = new EventEmitter();
   contacts: Contact[];
   contact: Contact;
+  amount = 0;
   paymentForm: FormGroup;
   selectedContact: Contact;
   wallet: DPOWallet;
@@ -31,7 +33,7 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
       name: [undefined, Validators.required],
       businessName: [undefined, Validators.required],
       phoneNumber: [undefined, Validators.required],
-      amount: [0, [Validators.required, Validators.min(1)]]
+      amount: [undefined, [Validators.required, Validators.min(1)]]
     });
   }
 
@@ -40,12 +42,6 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
     this.route.data.subscribe(({ contacts, wallet }) => {
       this.contacts = [...contacts];
       this.wallet = wallet;
-      this.paymentForm.controls['amount'].setValidators([
-        Validators.max(wallet.available),
-        Validators.required,
-        Validators.min(1)
-      ]);
-      this.paymentForm.controls['amount'].updateValueAndValidity();
     });
     this.formInput = this.paymentForm;
 
@@ -67,6 +63,34 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
   checkForm() {
     !this.contact ? $('.select-picker').addClass('red-border') : $('.select-picker').removeClass('red-border');
     this.onSubmit(this.paymentForm);
+    if (this.canSubmit && this.lowBalance) {
+      Swal.fire({
+        title: 'LOW BALANCE',
+        text:
+          'Your payment amount is higher than your balance amount. please top-up your balance to complete this payment',
+        icon: 'warning',
+        showConfirmButton: true,
+        confirmButtonText: 'Top-up your balance',
+        showCancelButton: true,
+        // tslint:disable-next-line: quotemark
+        cancelButtonText: "i'll do it later",
+        customClass: {
+          actions: 'actions',
+          confirmButton: 'top-up bttn bttn-primary',
+          cancelButton: 'later'
+        }
+      }).then(val => {
+        setTimeout(() => {
+          // wait for the sweet alert to dismiss then show this 200ms
+          if (val && val.value) {
+            $('.hidden').click();
+          }
+        }, 200);
+      });
+    }
+  }
+  topup(e: any) {
+    console.log(e);
   }
   get canSubmit(): boolean {
     return (
@@ -74,19 +98,22 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
       this.contact != undefined && this.paymentForm.valid
     );
   }
+  get lowBalance() {
+    return this.amount >= this.wallet.available;
+  }
   get paymentF() {
     return this.paymentForm.controls;
   }
   submit() {
     this.onSubmit(this.paymentForm);
-    if (this.canSubmit) {
+    if (this.canSubmit && this.amount > 0) {
       const request: RequestDPOPaymentDTO = {
         signedBy: {
           name: this.paymentF.name.value,
           businessName: this.paymentF.businessName.value,
           phoneNumber: this.paymentF.phoneNumber.value
         },
-        amount: this.paymentF.amount.value,
+        amount: this.amount,
         contact: this.contact
       };
       this.payUp.emit(request);

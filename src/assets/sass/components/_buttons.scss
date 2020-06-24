@@ -680,3 +680,18 @@ a.bttn-line {
   background: #04a8be12;
   border: 1.5px solid #37c1ce;
 }
+.top-up {
+  font-size: 1.4rem !important;
+  border-radius: 24px !important;
+  order: 1 !important;
+}
+.later {
+  display: inline-block !important;
+  background: transparent !important;
+  color: #37c1ce !important;
+  text-decoration: underline !important;
+  font-size: 1.4rem !important;
+}
+.actions {
+  justify-content: space-between !important;
+}

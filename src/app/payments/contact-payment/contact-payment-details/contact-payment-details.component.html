@@ -59,7 +59,14 @@
             <div class="input-group-prepend">
               <span class="input-group-text">KES</span>
             </div>
-            <input formControlName="amount" type="number" name="amount" id="amount" class="form-control" />
+            <input
+              formControlName="amount"
+              [(ngModel)]="amount"
+              type="number"
+              name="amount"
+              id="amount"
+              class="form-control"
+            />
           </div>
           <div class="help-block" *ngIf="isFieldInvalid('amount')">
             <p>This field is required</p>
@@ -99,11 +106,13 @@
       </div>
     </div>
   </div>
-  <button (click)="submit()" [hidden]="!canSubmit" class="btn-next next-step flex-r bttn-primary mt-5">
+  <button (click)="submit()" [hidden]="!canSubmit || lowBalance" class="btn-next next-step flex-r bttn-primary mt-5">
     Next Step &rarr;
   </button>
-  <button (click)="checkForm()" [hidden]="canSubmit" class="btn-next flex-r bttn-primary mt-5">
+  <button (click)="checkForm()" [hidden]="canSubmit && !lowBalance" class="btn-next flex-r bttn-primary mt-5">
     Next Step &rarr;
   </button>
 </form>
 <app-contact-generator [doEmit]="true" (contactEmit)="newContact($event)"></app-contact-generator>
+<app-topup-modal (balanceSubmit)="topup($event)"></app-topup-modal>
+<button class="hidden" data-toggle="wizard" data-target="#topUpBalance"></button>
