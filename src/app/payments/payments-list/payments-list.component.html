@@ -146,7 +146,7 @@
             <td>
               <span class="{{ tx.status | status }}">{{ tx.status | titlecase }}</span>
             </td>
-            <td><a id="view" [routerLink]="['payments/topup/', tx._id]">View</a></td>
+            <td><a id="view" [routerLink]="['topup/', tx._id]">View</a></td>
           </tr>
         </tbody>
       </table>
@@ -169,7 +169,7 @@
           </div>
           <div>{{ getTxType(tx) }}</div>
           <div>{{ tx.amount | number: '1.2-2' }} {{ tx.currency }}</div>
-          <div class="mt-3"><a id="view" [routerLink]="['payments/topup/', tx._id]">View</a></div>
+          <div class="mt-3"><a id="view" [routerLink]="['topup/', tx._id]">View</a></div>
         </div>
       </div>
     </mat-tab>

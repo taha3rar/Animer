@@ -89,9 +89,6 @@ export class PaymentsListComponent implements OnInit {
     this.currentPage = page;
   }
   paymentView(i: string) {
-    if (this.transactions[i].type === 'payment') {
-      this.router.navigate(['/payments/payment', this.transactions[i]._id]);
-    }
-    // for topup we should make a different view or maybe make it viewable
+    this.router.navigate(['/payments/payment', this.transactions[i]._id]);
   }
 }
