@@ -176,7 +176,6 @@
       z-index: 1;
       transform: rotate(45deg);
       margin-top: -1.25rem;
-      box-shadow: 0px 3px 8px rgba(94, 111, 148, 0.1);
       @include respond(phone) {
         display: none;
       }
