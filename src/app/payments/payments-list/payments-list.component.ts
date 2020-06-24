@@ -17,6 +17,7 @@ export class PaymentsListComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
+  searchPlaceholder = 'Search payments...';
   payments: DPOTransaction[];
   topups: DPOTransaction[];
   listTitle = 'Payments History';
@@ -67,8 +68,10 @@ export class PaymentsListComponent implements OnInit {
   toggleTitle(event: any) {
     if (event === 0) {
       this.listTitle = 'Payments History';
+      this.searchPlaceholder = 'Search payments...';
     } else {
       this.listTitle = 'Top-ups History';
+      this.searchPlaceholder = 'Search top-up...';
     }
   }
 
