@@ -89,9 +89,7 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
       });
     }
   }
-  topup(e: any) {
-    console.log(e);
-  }
+
   get canSubmit(): boolean {
     return (
       // tslint:disable: triple-equals
