@@ -461,46 +461,56 @@ const fetch = require("node-fetch");
 const performance = require("perf_hooks").performance;
 
 router.get("/check", async (req, res) => {
-  // let id = "hunter-x-hunter-2011";
+  let id = "darker-than-black-gaiden";
   // let start_id = 8714;
-  // let ep_number = 1;
-  // let episodes = [];
-  // let url = "https://storage.googleapis.com/auengine.appspot.com/393/sub/";
+  let ep_number = 1;
+  let episodes = [];
+  over = "";
+  let ep = 1;
+  // let url = "https://storage.googleapis.com/linear-theater-254209.appspot.com/v3.4animu.me/One-Piece/One-Piece-Episode-710-1080p.mp4";
   // let thing = "1_8714.mp4";
   // let new_url = url + thing;
-  // var t0 = performance.now();
-  // while (episodes.length != 148) {
-  //   new_url = `${url}${ep_number}_${start_id}.mp4`;
-  //   if (await exists.urlExists(new_url)) {
-  //     console.log(new_url);
-  //     episodes.push(new_url);
-  //     ep_number++;
-  //   }
-  //   start_id++;
-  // }
-  // var t1 = performance.now();
-  // console.log(episodes);
-  // console.log(
-  //   "this shit took" +
-  //     (t1 - t0) +
-  //     " milliseconds. to find " +
-  //     episodes.length +
-  //     "episodes lol wtf"
-  // );
+  var t0 = performance.now();
+  while (episodes.length != 4) {
+    // new_url = `${url}${ep_number}_${start_id}.mp4`;
+    ep = ep_number;
+    if (ep_number < 10) {
+      ep = "0" + ep_number;
+    }
+    // if (ep_number >= 1 && ep_number <= 9) {
+    //   over = "-Episode";
+    //   // 191-206
+    // }
+    new_url = `https://storage.googleapis.com/justawesome-183319.appspot.com/v1.4animu.me/Darker-than-Black-Gaiden/Darker-than-Black-Gaiden-Episode-${ep}-1080p.mp4`;
+    if (await exists.urlExists(new_url)) {
+      console.log(new_url);
+      episodes.push(new_url);
+      ep_number++;
+    }
+  }
+  var t1 = performance.now();
+  console.log(episodes);
+  console.log(
+    "this shit took" +
+      (t1 - t0) +
+      " milliseconds. to find " +
+      episodes.length +
+      "episodes lol wtf"
+  );
   // episodes.forEach((ep, i) => {
   //   episodes[i] =
   //     ep + "?GoogleAccessId=auevod%40auengine.iam.gserviceaccount.com";
   // });
-  // const animes = await mongoose.model("Animes").findOne({ name: id }).exec();
-  // console.log(animes);
-  // const animenz = {
-  //   name: id,
-  //   episodes: episodes,
-  // };
-  // const anim = mongoose.model("Animes", schemas.Animes);
-  // new anim(animenz).save().then((data) => {
-  //   res.status(200).json(data);
-  // });
+  const animes = await mongoose.model("Animes").findOne({ name: id }).exec();
+  console.log(animes);
+  const animenz = {
+    name: id,
+    episodes: episodes,
+  };
+  const anim = mongoose.model("Animes", schemas.Animes);
+  new anim(animenz).save().then((data) => {
+    res.status(200).json(data);
+  });
 });
 router.get("/episode/:name/:number", async (req, res) => {
   const name = req.params.name;
