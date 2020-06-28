@@ -12,7 +12,7 @@
       "angulartics": true,
       "analyticsProvider": "ga",
       "googleAnalyticsAccount": "UA-105421549-3",
-      "prettier": true,
+      "prettier": false,
       "projectName": "agt-platform",
       "packageManager": "npm",
       "mobile": []
