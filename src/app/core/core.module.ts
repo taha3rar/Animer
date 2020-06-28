@@ -8,8 +8,6 @@ import { RouteReusableStrategy } from './route-reusable-strategy';
 import { AuthenticationService } from './authentication/authentication.service';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AuthenticationGuard } from './authentication/authentication.guard';
-import { UserService } from './api/user.service';
-import { ApiService } from './api/api.service';
 import { AlertsService } from './alerts.service';
 import { I18nService } from './i18n.service';
 
@@ -19,8 +17,6 @@ import { I18nService } from './i18n.service';
   providers: [
     AuthenticationService,
     AuthenticationGuard,
-    ApiService,
-    UserService,
     AlertsService,
     StepperService,
     I18nService,

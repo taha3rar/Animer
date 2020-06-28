@@ -31,7 +31,7 @@ export class TransactionDocumentListComponent extends BaseListComponent implemen
   ];
 
   constructor(private sdkService: SdkService, protected router: Router, private alerts: AlertsService) {
-    super(undefined, router, {
+    super(router, {
       deleteText: 'Once deleted, you will not be able to recover this document!'
     });
   }

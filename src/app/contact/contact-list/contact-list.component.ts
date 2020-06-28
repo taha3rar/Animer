@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { defaultValues } from '@app/shared/helpers/default_values';
-import { AuthenticationService, UserService } from '@app/core';
+import { AuthenticationService } from '@app/core';
 import { BaseListComponent } from '@app/shared/components/base-list/base-list.component';
 import { Sort } from '@angular/material/sort';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
@@ -25,10 +25,9 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthenticationService,
-    protected userService: UserService,
     protected router: Router
   ) {
-    super(undefined, undefined, {
+    super(undefined, {
       pageName: 'contacts'
     });
   }

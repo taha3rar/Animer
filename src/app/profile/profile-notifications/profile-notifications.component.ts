@@ -1,6 +1,5 @@
 import { SpinnerToggleService } from './../../shared/services/spinner-toggle.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '@app/core';
 import { AlertsService } from '@app/core/alerts.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -18,7 +17,6 @@ export class ProfileNotificationsComponent implements OnInit {
   notificationsSettingsForm: FormGroup;
 
   constructor(
-    private userService: UserService,
     private route: ActivatedRoute,
     private alerts: AlertsService,
     private formBuilder: FormBuilder,
@@ -82,28 +80,28 @@ export class ProfileNotificationsComponent implements OnInit {
       notifications.push('quotation');
     }
 
-    this.userService.updateNotifications(this.user._id, notifications).subscribe(
-      () => {
-        this.spinnerService.hideSpinner();
-        this.alerts.showAlert('Your notifications settings have been updated!');
-      },
-      err => {
-        $.notify(
-          {
-            icon: 'notifications',
-            message: err.error.message
-          },
-          {
-            type: 'danger',
-            timer: 5000,
-            placement: {
-              from: 'top',
-              align: 'right'
-            },
-            offset: 78
-          }
-        );
-      }
-    );
+    // this.userService.updateNotifications(this.user._id, notifications).subscribe(
+    //   () => {
+    //     this.spinnerService.hideSpinner();
+    //     this.alerts.showAlert('Your notifications settings have been updated!');
+    //   },
+    //   err => {
+    //     $.notify(
+    //       {
+    //         icon: 'notifications',
+    //         message: err.error.message
+    //       },
+    //       {
+    //         type: 'danger',
+    //         timer: 5000,
+    //         placement: {
+    //           from: 'top',
+    //           align: 'right'
+    //         },
+    //         offset: 78
+    //       }
+    //     );
+    //   }
+    // );
   }
 }

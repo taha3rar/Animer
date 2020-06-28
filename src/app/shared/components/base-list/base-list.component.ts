@@ -1,8 +1,6 @@
-import { Component, OnInit, Optional } from '@angular/core';
-import { BaseService } from '@app/core/api/base.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { defaultValues } from '@app/shared/helpers/default_values';
-import { AuthenticationService } from '@app/core';
 import swal from 'sweetalert';
 import { FilterPipe } from '@app/shared/pipes/filter.pipe';
 
@@ -20,16 +18,8 @@ export class BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
   currentPage = 1;
   pageName: string;
-  // tslint:disable-next-line:max-line-length
-  usersWhiteList = [
-    'bendemoseller@gmail.com',
-    'ishai@avenews-gt.com',
-    'javier@avenews-gt.com',
-    'marcus.mika@gmail.com',
-    'mcsmicha@gmail.com'
-  ];
 
-  constructor(private service?: BaseService, protected router?: Router, private options?: ListOptions) {
+  constructor(protected router?: Router, private options?: ListOptions) {
     this.pageName = options ? options.pageName : '';
     this.currentPage = this.getCurrentPage(this.pageName);
   }
