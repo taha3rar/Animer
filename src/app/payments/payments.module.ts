@@ -1,3 +1,6 @@
+import { ProductQuantityPipe } from './../shared/pipes/product-quantity.pipe';
+import { MultiProductPipe } from './../shared/pipes/multi-products.pipe';
+import { MyGrnsResolver } from './../goods-receive-note/resolvers/grn-mine.resolver';
 import { DpoAccountResolver } from './resolvers/dpo-account.resolver';
 import { SharedModule } from './../shared/shared.module';
 import { PaymentsRoutingModule } from './payments-routing.module';
@@ -19,8 +22,9 @@ import { DpoWalletResolver } from './resolvers/dpo-wallet.resolver';
 import { DpoTransactionResolver } from './resolvers/dpo-transaction.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TransactionViewResolver } from './resolvers/transaction-view.resolver';
-import { MatTabsModule } from '@angular/material';
+import { MatTabsModule, MatSortModule, MatTooltipModule } from '@angular/material';
 import { TopupViewComponent } from './topup-view/topup-view.component';
+import { NotPaidPipe } from '@app/shared/pipes/not-paid.pipe';
 
 @NgModule({
   declarations: [
@@ -36,17 +40,28 @@ import { TopupViewComponent } from './topup-view/topup-view.component';
     DocumentPaymentDocumentsComponent,
     TopupViewComponent,
     DocumentPaymentDetailsComponent,
-    TopupViewComponent
+    TopupViewComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     MatTabsModule,
+    MatSortModule,
+    MatTooltipModule,
     PaymentsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
-  providers: [DpoAccountResolver, DpoWalletResolver, DpoTransactionResolver, TransactionViewResolver]
+  providers: [
+    DpoAccountResolver,
+    DpoWalletResolver,
+    DpoTransactionResolver,
+    TransactionViewResolver,
+    MyGrnsResolver,
+    MultiProductPipe,
+    ProductQuantityPipe,
+    NotPaidPipe
+  ],
 })
 export class PaymentsModule {}

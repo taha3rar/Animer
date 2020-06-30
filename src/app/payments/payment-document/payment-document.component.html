@@ -1,5 +1,5 @@
 <div class="strip">
-  <div class="border-box display-ib ">
+  <div class="border-box display-ib">
     <h2>PAYMENT <span style="font-size: 1.9rem;"> - </span></h2>
     <table>
       <tr>
@@ -8,7 +8,7 @@
       </tr>
       <tr>
         <td class="t-bold t-blue">REFERENCE</td>
-        <td>-</td>
+        <td>{{ payment?.goodsReceivedNote?.referenceCode || '-' }}</td>
       </tr>
     </table>
   </div>
@@ -16,14 +16,16 @@
   <div class="row mt-5">
     <div class="col">
       <p class="t-bold t-blue">SUPPLIER</p>
-      <p>{{ payment?.contact?.fullName }}</p>
-      <p>{{ payment?.contact?.businessName }}</p>
+      <p>{{ payment?.contact?.fullName || payment?.goodsReceivedNote?.supplier?.fullName }}</p>
+      <p>{{ payment?.contact?.businessName || payment?.goodsReceivedNote?.supplier?.businessName }}</p>
       <p>
-        {{ payment?.contact?.address }}, {{ payment?.contact?.location }}, {{ payment?.contact?.region }},
-        {{ payment?.contact?.country }}
+        {{ payment?.contact?.address || payment?.goodsReceivedNote?.supplier?.address }},
+        {{ payment?.contact?.location || payment?.goodsReceivedNote?.supplier?.location }},
+        {{ payment?.contact?.region || payment?.goodsReceivedNote?.supplier?.region }},
+        {{ payment?.contact?.country || payment?.goodsReceivedNote?.supplier?.country }}
       </p>
-      <p>{{ payment?.contact?.phoneNumber }}</p>
-      <p>{{ payment?.contact?.email }}</p>
+      <p>{{ payment?.contact?.phoneNumber || payment?.goodsReceivedNote?.supplier?.phoneNumber }}</p>
+      <p>{{ payment?.contact?.email || payment?.goodsReceivedNote?.supplier?.email }}</p>
     </div>
   </div>
 

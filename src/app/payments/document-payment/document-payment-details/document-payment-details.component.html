@@ -5,15 +5,15 @@
       <div class="row">
         <div class="col-md-4">
           <p class="sm-text-label">GRN NO</p>
-          <p class="text-regular">4455</p>
+          <p class="text-regular">{{ grn?.numericId }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">ISSUE DATE</p>
-          <p class="text-regular">14/05/2020</p>
+          <p class="text-regular">{{ grn?.issueDate | dateString }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">REFERENCE</p>
-          <p class="text-regular">PO-34543</p>
+          <p class="text-regular">{{ grn?.referenceCode }}</p>
         </div>
       </div>
     </div>
@@ -22,69 +22,83 @@
       <div class="row" id="contactInfo">
         <div class="col-md-4">
           <p class="sm-text-label">CONTACT</p>
-          <p class="text-regular">Contact Name</p>
+          <p class="text-regular">{{ grn?.supplier?.fullName }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">ORGANIZATION</p>
-          <p class="text-regular">Organisation name</p>
+          <p class="text-regular">{{ grn?.supplier?.businessName }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">COUNTRY</p>
-          <p class="text-regular">Country</p>
+          <p class="text-regular">{{ grn?.supplier?.country }}</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-4">
           <p class="sm-text-label">LOCATION</p>
-          <p class="text-regular">Location</p>
+          <p class="text-regular">{{ grn?.supplier?.location }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">PHONE</p>
-          <p class="text-regular">0547995458</p>
+          <p class="text-regular">{{ grn?.supplier?.phoneNumber }}</p>
         </div>
         <div class="col-md-4">
           <p class="sm-text-label">EMAIL</p>
-          <p class="text-regular" id="email">rihamkh.114@gmail.com</p>
+          <p class="text-regular" id="email">{{ grn?.supplier?.email }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="row mt-5">
-  <div class="col-md-8">
-    <div class="strip" id="signature">
-      <h3 class="t-bold">SIGNED BY</h3>
-      <div class="form-row">
-        <div class="form-group col-lg-4 col-md-12">
-          <label for="full-name">Full Name *</label>
-          <input type="text" class="form-control" id="full-name" />
+<form [formGroup]="signForm">
+  <div class="row mt-5">
+    <div class="col-md-8">
+      <div class="strip" id="signature">
+        <h3 class="t-bold">SIGNED BY</h3>
+        <div class="form-row">
+          <div [ngClass]="showFieldStyle('fullName')" class="form-group col-lg-4 col-md-12">
+            <label for="full-name">Full Name *</label>
+            <input formControlName="fullName" type="text" class="form-control" id="full-name" />
+            <div class="help-block" *ngIf="isFieldInvalid('fullName')">
+              <p>This field is required</p>
+            </div>
+          </div>
+          <div [ngClass]="showFieldStyle('businessName')" class="form-group col-lg-4 col-md-12">
+            <label for="business-name">Business Name *</label>
+            <input formControlName="businessName" type="text" class="form-control" id="business-name" />
+            <div class="help-block" *ngIf="isFieldInvalid('businessName')">
+              <p>This field is required</p>
+            </div>
+          </div>
+          <div [ngClass]="showFieldStyle('phoneNumber')" class="form-group col-lg-4 col-md-12">
+            <label for="phone">Phone Number *</label>
+            <input formControlName="phoneNumber" type="text" class="form-control" id="phone" />
+            <div class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
+              <p>This field is required</p>
+            </div>
+          </div>
         </div>
-        <div class="form-group col-lg-4 col-md-12">
-          <label for="business-name">Business Name *</label>
-          <input type="text" class="form-control" id="business-name" />
+      </div>
+    </div>
+    <div class="col-md-4" id="amount-balance">
+      <div class="strip d-flex" id="total-box">
+        <div class="flex-grow-1">
+          <p class="heading-2">Total Amount to be Paid</p>
+          <h3 class="t-blue">{{ grn?.currency }} {{ grn?.total | numberFormat }}</h3>
         </div>
-        <div class="form-group col-lg-4 col-md-12">
-          <label for="phone">Phone Number *</label>
-          <input type="text" class="form-control" id="phone" />
+        <div class="flex-grow-1">
+          <p class="heading-2">Current Balance</p>
+          <p class="heading-2">{{ grn?.currency }} {{ wallet?.available | numberFormat }}</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md-4" id="amount-balance">
-    <div class="strip d-flex" id="total-box">
-      <div class="flex-grow-1">
-        <p class="heading-2">Total Amount to be Paid</p>
-        <h3 class="t-blue">KES 5,000.00</h3>
-      </div>
-      <div class="flex-grow-1">
-        <p class="heading-2">Current Balance</p>
-        <p class="heading-2">KES 30,000</p>
-      </div>
-    </div>
-  </div>
-</div>
-<button class="btn-next next-step flex-pr bttn-primary mt-5">
+</form>
+<button id="next-1" hidden class="btn-next next-step flex-pr bttn-primary mt-5">
+  Next Step &rarr;
+</button>
+<button (click)="isValid()" class="btn-next flex-pr bttn-primary mt-5">
   Next Step &rarr;
 </button>

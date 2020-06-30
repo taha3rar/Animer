@@ -1,3 +1,4 @@
+import { MyGrnsResolver } from './../goods-receive-note/resolvers/grn-mine.resolver';
 import { TopupViewComponent } from './topup-view/topup-view.component';
 import { DpoAccountResolver } from './resolvers/dpo-account.resolver';
 import { PaymentViewComponent } from './payment-view/payment-view.component';
@@ -22,50 +23,52 @@ const routes: Routes = [
       resolve: {
         account: DpoAccountResolver,
         wallet: DpoWalletResolver,
-        transactions: DpoTransactionResolver
+        transactions: DpoTransactionResolver,
       },
       data: {
-        title: 'Payments'
+        title: 'Payments',
       },
-      runGuardsAndResolvers: 'always'
+      runGuardsAndResolvers: 'always',
     },
     {
       path: 'payments/account',
       component: PaymentSettingsComponent,
-      resolve: { account: DpoAccountResolver }
+      resolve: { account: DpoAccountResolver },
     },
     {
       path: 'payments/generator/contact',
       component: ContactPaymentComponent,
       resolve: {
         contacts: CurrentUserContactsResolver,
-        wallet: DpoWalletResolver
+        wallet: DpoWalletResolver,
       },
-      runGuardsAndResolvers: 'always'
+      runGuardsAndResolvers: 'always',
     },
     {
       path: 'payments/generator/document',
       component: DocumentPaymentComponent,
       resolve: {
-        contacts: CurrentUserContactsResolver
+        contacts: CurrentUserContactsResolver,
+        grn: MyGrnsResolver,
+        wallet: DpoWalletResolver,
       },
-      runGuardsAndResolvers: 'always'
+      runGuardsAndResolvers: 'always',
     },
     {
       path: 'payments/payment/:id',
       component: PaymentViewComponent,
-      resolve: { transaction: TransactionViewResolver }
+      resolve: { transaction: TransactionViewResolver },
     },
     {
       path: 'payments/topup/:id',
       component: TopupViewComponent,
-      resolve: { transaction: TransactionViewResolver }
-    }
-  ])
+      resolve: { transaction: TransactionViewResolver },
+    },
+  ]),
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PaymentsRoutingModule {}
