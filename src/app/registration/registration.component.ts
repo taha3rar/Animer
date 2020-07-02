@@ -76,6 +76,13 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     setTimeout(function() {
       $('.selectpicker').selectpicker();
     }, 200);
+
+    if (localStorage.getItem('networkToRegister')) {
+      const network = localStorage.getItem('networkToRegister');
+      localStorage.removeItem('networkToRegister');
+
+      this.preSignUp(network as SocialNetworkName);
+    }
   }
 
   // Method to sign in with facebook.
