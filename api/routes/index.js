@@ -327,7 +327,6 @@ router.post("/db/keep", async (req, res) => {
               keeps.keeper[index] = keep_object;
             }
           });
-          console.log(keeps)
           keeps.save().then((monData) => {
             res.status(200).json(monData);
           });
