@@ -442,7 +442,7 @@ const anime = async (url) => {
       return Promise.all(promises);
     }
     if (ep[0].servers[0].name === "4anime") {
-      return Promise.all(ep);
+      return Promise.all([ep[0].servers[0].iframe]);
     }
     return Promise.all("sad");
   }
