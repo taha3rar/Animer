@@ -290,7 +290,7 @@ router.post("/db/watched", async (req, res) => {
 
 router.post("/db/keep", async (req, res) => {
   let object = req.body;
-  let id = object.owner;
+  let id = object.id;
   let num = object.keeper.num;
   let episode = object.keeper.episode;
   let keep_object = {
@@ -320,24 +320,17 @@ router.post("/db/keep", async (req, res) => {
             .then((monData) => {
               res.status(200).json(monData);
             });
-        } else if (!toDelete) {
-          keeps.keeper.push(keep_object);
+        } else {
+          let foundAnime = -1;
+          keeps.keeper.forEach((k, index) => {
+            if (k.anime.title === keep_object.anime.title) {
+              keeps.keeper[index] = keep_object;
+            }
+          });
+          console.log(keeps)
           keeps.save().then((monData) => {
             res.status(200).json(monData);
           });
-        } else if (toDelete) {
-          index = keeps.keeper.findIndex((keeper) => {
-            return keeper.title == object.keeper.anime.title;
-          });
-          console.log(object.keeper.anime.title);
-          if (index !== -1) {
-            keeps.keeper.splice(index, 1);
-            keeps.save().then((monData) => {
-              res.status(200).json(monData);
-            });
-          } else {
-            res.status(400).json("this anime doesnt exist");
-          }
         }
       });
     }
@@ -458,6 +451,7 @@ router.get("/db/watched/:id", async (req, res) => {
   } catch (err) {}
 });
 const fetch = require("node-fetch");
+const { anime } = require("../api");
 const performance = require("perf_hooks").performance;
 
 router.get("/check", async (req, res) => {
