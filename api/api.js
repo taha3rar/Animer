@@ -402,21 +402,8 @@ const animeContentHandler = async (id) => {
 
 const decodeVidstreamingIframeURL = async (url) => {
   const _url = `${url}`;
-  let realUrl = "";
-  if (_url.includes("streaming")) {
-    realUrl = _url.replace(/streaming/g, "check").trim();
-    if (realUrl.includes("vidcheck.io")) {
-      realUrl = _url.replace(/vidcheck.io/g, "vidstreaming.io").trim();
-    }
-  }
-  if (_url.includes("load")) {
-    realUrl = _url.replace(/load/g, "check").trim();
-  }
-  if (_url.includes("server")) {
-    realUrl = _url.replace(/server/g, "check").trim();
-  }
-
-  const data = await cloudscraper(realUrl);
+  const res = await fetch(_url);
+  const data = await res.text();
   const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
   const _URLs = String(data)
     .match(match)
@@ -460,9 +447,16 @@ const anime = async (url) => {
     ) {
       let link = "https://" + ep[0].servers[0].iframe;
       console.log(ep[0].servers[0].iframe);
+      console.log(link);
       let vid = await decodeVidstreamingIframeURL(link);
       if (vid.length === 0) {
-        if (ep[0].servers) {
+        vid = await decodeVidstreamingIframeURL(
+          link.replace("streaming.php", "loadserver.php")
+        );
+        console.log(vid);
+        promises = vid;
+        if (ep[0].servers && vid.length === 0) {
+          console.log("here");
           let alt = ep[0].servers.find((e, i) => {
             if (e.name.toLowerCase().includes("mp4upload")) return e;
           });
