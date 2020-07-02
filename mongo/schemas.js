@@ -18,13 +18,12 @@ const anime = new Schema({
   genres: [String],
   img: String,
   otherName: String,
-  released: Number,
+  released: String,
   status: String,
   synopsis: String,
   totalEpisodes: Number,
 });
 const Animes = new Schema({
-
   name: String,
   episodes: [],
 });
@@ -71,5 +70,5 @@ module.exports = {
   watched,
   anime,
   user,
-  Animes
+  Animes,
 };
