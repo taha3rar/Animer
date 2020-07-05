@@ -155,22 +155,6 @@ export class LoginComponent implements OnInit {
             },
             error => {
               if (error.errorCode === 'SOCIAL_ACCOUNT_NOT_FOUND') {
-                $.notify(
-                  {
-                    icon: 'notifications',
-                    message: 'Please, sign up before signing in'
-                  },
-                  {
-                    type: 'warning',
-                    timer: 5000,
-                    placement: {
-                      from: 'top',
-                      align: 'right'
-                    },
-                    offset: 20
-                  }
-                );
-
                 localStorage.setItem('networkToRegister', network);
                 this.router.navigate(['registration'], {state: {'network': network }});
               } else {
