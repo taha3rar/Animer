@@ -91,7 +91,7 @@ export class PaymentsListComponent implements OnInit {
   pageChanged(page: number) {
     this.currentPage = page;
   }
-  paymentView(i: string) {
-    this.router.navigate(['/payments/payment', this.transactions[i]._id]);
+  paymentView(id: string) {
+    this.router.navigate(['/payments/payment', id]);
   }
 }
