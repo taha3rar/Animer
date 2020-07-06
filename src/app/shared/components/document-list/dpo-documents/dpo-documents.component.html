@@ -26,11 +26,11 @@
     <p class="pb-0" *ngIf="certificate_file_name">{{ certificate_file_name }}</p>
     <p *ngIf="documentCertValid === ''" class="help-block">This document is required</p>
   </div>
-  <div class="doc-card-upload mr-3">
+  <!-- <div class="doc-card-upload mr-3">
     <p class="pb-0 opt">Optional</p>
     <label class="material-icons" id="add-btn" for="terms">add</label>
     <input type="file" id="terms" class="btn-doc-uploader mt-0" (change)="onFileChange($event, 'terms')" />
     <p class="pb-2">Terms and Conditions</p>
     <p class="pb-0" *ngIf="terms_file_name">{{ terms_file_name }}</p>
-  </div>
+  </div> -->
 </div>
