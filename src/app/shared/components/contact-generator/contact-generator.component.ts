@@ -134,8 +134,8 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           phoneNumber: this.contact.phoneNumber,
           email: this.contact.email,
           country: this.contact.country,
-          region: this.contact.region,
-          location: this.contact.location,
+          region: this.contact.stateProvinceRegion,
+          location: this.contact.city,
           address: this.contact.address
         });
       } else if (!this.isEdit) {
@@ -197,8 +197,8 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
         phoneNumber: this.contactf.phoneNumber.value,
         email: this.contactf.email.value,
         country: this.contactf.country.value,
-        region: this.contactf.region.value,
-        location: this.contactf.location.value,
+        stateProvinceRegion: this.contactf.region.value,
+        city: this.contactf.location.value,
         address: this.contactf.address.value
       };
 
@@ -230,8 +230,8 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           phoneNumber: this.contactf.phoneNumber.value,
           email: this.contactf.email.value,
           country: this.contactf.country.value,
-          region: this.contactf.region.value,
-          location: this.contactf.location.value,
+          stateProvinceRegion: this.contactf.region.value,
+          city: this.contactf.location.value,
           address: this.contactf.address.value
         };
         this.sdkService

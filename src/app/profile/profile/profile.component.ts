@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
       companyName: [this.user.companyInformation.companyName],
       companyNumber: [this.user.companyInformation.companyRegisteredNumber],
       stateRegionProvince: [this.user.companyInformation.stateProvinceRegion],
-      address: [this.user.companyInformation.street],
+      address: [this.user.companyInformation.address],
       city: [this.user.companyInformation.city],
       zipcode: [this.user.companyInformation.zipcode],
       country: [this.user.companyInformation.country, [Validators.required]],
@@ -141,7 +141,7 @@ export class ProfileComponent implements OnInit {
     this.user.companyInformation.companyName = this.companyf.companyName.value;
     this.user.companyInformation.companyRegisteredNumber = this.companyf.companyNumber.value;
     this.user.companyInformation.stateProvinceRegion = this.companyf.stateRegionProvince.value;
-    this.user.companyInformation.street = this.companyf.address.value;
+    this.user.companyInformation.address = this.companyf.address.value;
     this.user.companyInformation.city = this.companyf.city.value;
     this.user.companyInformation.zipcode = this.companyf.zipcode.value;
     this.user.companyInformation.country = this.companyf.country.value;
