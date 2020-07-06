@@ -26,7 +26,7 @@
           <p>{{ user.companyInformation.companyEmail }}</p> -->
           <p class="t-light-gray">Location</p>
           <p>{{ user.companyInformation.city }}, {{ user.companyInformation.country }}</p>
-          <p>{{ user.companyInformation.street }}</p>
+          <p>{{ user.companyInformation.address }}</p>
           <p>{{ user.companyInformation.zipcode }}</p>
           <p>{{ user.companyInformation.stateProvinceRegion }}</p>
         </div>
@@ -169,7 +169,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="user.hasPassword">
       <div class="col">
         <app-profile-password></app-profile-password>
       </div>
