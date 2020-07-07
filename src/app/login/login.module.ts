@@ -1,3 +1,4 @@
+import { SharedModule } from '@app/shared';
 import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,18 +15,19 @@ import {
   SocialLoginModule,
   AuthServiceConfig,
   FacebookLoginProvider,
-  GoogleLoginProvider
+  GoogleLoginProvider,
 } from 'angularx-social-login';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 const config = new AuthServiceConfig([
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider(environment.oauthClientIds.facebook)
+    provider: new FacebookLoginProvider(environment.oauthClientIds.facebook),
   },
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider(environment.oauthClientIds.google)
-  }
+    provider: new GoogleLoginProvider(environment.oauthClientIds.google),
+  },
 ]);
 
 export function provideConfig() {
@@ -39,18 +41,20 @@ export function provideConfig() {
     FormsModule,
     NgbModule,
     LoginRoutingModule,
+    RecaptchaModule,
+    SharedModule,
     RouterModule,
     CommonModule,
     SocialLoginModule,
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
   ],
   declarations: [LoginComponent, ForgotPasswordComponent, ResetPasswordComponent],
   providers: [
     {
       provide: AuthServiceConfig,
-      useFactory: provideConfig
-    }
+      useFactory: provideConfig,
+    },
   ],
-  entryComponents: [LoginComponent]
+  entryComponents: [LoginComponent],
 })
 export class LoginModule {}

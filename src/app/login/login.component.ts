@@ -17,9 +17,16 @@ declare var $: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  get currentLanguage(): string {
+    return this.i18nService.language;
+  }
+
+  get languages(): string[] {
+    return this.i18nService.supportedLanguages;
+  }
   version: string = environment.version;
   error: string;
   loginForm: FormGroup;
@@ -60,12 +67,12 @@ export class LoginComponent implements OnInit {
     if (this.route.snapshot.params.token) {
       this.userValidated = true;
       const token = this.route.snapshot.params.token;
-      this.sdkService.activateAccount(token).then(user => {
+      this.sdkService.activateAccount(token).then((user) => {
         this.intercomLogin(user, false);
       });
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
       $('.selectpicker').selectpicker();
     }, 200);
   }
@@ -81,13 +88,13 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService
       .login(this.loginForm.value)
-      .then(credentials => {
+      .then((credentials) => {
         this.loginForm.markAsPristine();
         this.isLoading = false;
 
         log.debug(`${credentials.user.username} successfully logged in`);
         this.intercomLogin(credentials.user, true);
-        this.route.queryParams.subscribe(params =>
+        this.route.queryParams.subscribe((params) =>
           this.router.navigate([params.redirect || '/'], { replaceUrl: true })
         );
       })
@@ -130,11 +137,11 @@ export class LoginComponent implements OnInit {
       platform = GoogleLoginProvider.PROVIDER_ID;
     }
     this.socialAuthentificationService.signIn(platform).then(
-      response => {
+      (response) => {
         const context: OAuthContext = {
           email: response.email,
           personal_network_id: response.id,
-          access_token: response.authToken
+          access_token: response.authToken,
         };
         this.error = '';
         this.authenticationService
@@ -145,39 +152,39 @@ export class LoginComponent implements OnInit {
             })
           )
           .subscribe(
-            credentials => {
+            (credentials) => {
               log.debug(`${credentials.user.username} successfully logged in`);
               this.intercomLogin(credentials.user, true);
-              this.route.queryParams.subscribe(params =>
+              this.route.queryParams.subscribe((params) =>
                 this.router.navigate([params.redirect || '/'], { replaceUrl: true })
               );
               this.user = response;
             },
-            error => {
+            (error) => {
               if (error.errorCode === 'SOCIAL_ACCOUNT_NOT_FOUND') {
                 localStorage.setItem('networkToRegister', network);
-                this.router.navigate(['registration'], {state: {'network': network }});
+                this.router.navigate(['registration'], { state: { network: network } });
               } else {
                 $.notify(
                   {
                     icon: 'notifications',
-                    message: 'Please, sign up before signing in'
+                    message: 'Please, sign up before signing in',
                   },
                   {
                     type: 'danger',
                     timer: 5000,
                     placement: {
                       from: 'top',
-                      align: 'right'
+                      align: 'right',
                     },
-                    offset: 20
+                    offset: 20,
                   }
                 );
               }
             }
           );
       },
-      err => {
+      (err) => {
         this.isLoading = false;
       }
     );
@@ -189,14 +196,6 @@ export class LoginComponent implements OnInit {
 
   setLanguage(language: string) {
     this.i18nService.language = language;
-  }
-
-  get currentLanguage(): string {
-    return this.i18nService.language;
-  }
-
-  get languages(): string[] {
-    return this.i18nService.supportedLanguages;
   }
 
   changeRegionCode() {
@@ -229,15 +228,15 @@ export class LoginComponent implements OnInit {
       validated: true,
       logged_in: logged_in,
       widget: {
-        activator: '#intercom'
-      }
+        activator: '#intercom',
+      },
     });
   }
 
   private createForm() {
     this.loginForm = this.formBuilder.group({
       username: [''],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 }

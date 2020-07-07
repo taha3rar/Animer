@@ -56,6 +56,7 @@
     "moment": "^2.23.0",
     "ng-intercom": "^8.0.0",
     "ng-lottie": "^0.3.2",
+    "ng-recaptcha": "^5.0.0",
     "ngrok": "^3.2.5",
     "ngx-bootstrap": "^4.0.0",
     "ngx-pagination": "^3.2.1",

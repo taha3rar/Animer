@@ -43,7 +43,7 @@
                   </button>
                 </div>
               </div>
-              <form id="complement" style="display: none">
+              <form id="complement" style="display: none;">
                 <h1 class="mb-4">Welcome {{ socialUser?.name }}!</h1>
                 <h3 class="mb-4">We have few more info that we need from you.</h3>
                 <div class="row form-group">
@@ -82,14 +82,14 @@
                   <a class="icon-text" (click)="changeDiv('registrationType')"
                     ><i class="material-icons pb-0">keyboard_backspace</i> Go Back</a
                   >
-                  <button (click)="oAuthSignUp()" class="pull-right bttn-primary action-bttn" style="width: 35rem">
+                  <button (click)="oAuthSignUp()" class="pull-right bttn-primary action-bttn" style="width: 35rem;">
                     <span>Create Account with {{ network | titlecase }}</span>
                     <i class="ml-3 fas fa-cog fa-spin" [hidden]="!isLoading"></i>
                   </button>
                 </div>
               </form>
 
-              <form id="standardRegistration" style="display: none" [formGroup]="userRegistrationForm">
+              <form id="standardRegistration" style="display: none;" [formGroup]="userRegistrationForm">
                 <h1 class="mb-4">Sign up</h1>
                 <div class="error-block" *ngIf="showEmailPhoneError()">
                   <p>Please fill in the Phone Number or Email Address!</p>
@@ -242,6 +242,8 @@
                   <a routerLink="/terms-of-use" target="_blank">Terms of use</a> and
                   <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
                 </p>
+                <app-captcha (resolved)="captchaSubmit($event)"></app-captcha>
+                <p class="captcha-error">Please solve the captcha first</p>
                 <div class="f-bttns-wrapper">
                   <a class="icon-text" (click)="changeDiv('registrationType')"
                     ><i class="material-icons pb-0">keyboard_backspace</i> Go Back</a
@@ -276,7 +278,7 @@
                 <ng-template #elseBlock>
                   <p class="success-content">
                     We've sent you an sms with a special link to
-                    <strong>{{ user?.personalInformation.phone_number }}.</strong> Click the link to confirm your phone
+                    <strong>{{ user?.personalInformation.phoneNumber }}.</strong> Click the link to confirm your phone
                     number and get started.
                   </p>
                 </ng-template>

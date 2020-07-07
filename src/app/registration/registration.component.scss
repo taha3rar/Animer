@@ -1,7 +1,7 @@
-@import "src/theme/theme-variables";
-@import "~bootstrap/scss/mixins/_breakpoints";
-@import "../../assets/sass/abstracts/variables";
-@import "../../assets/sass/base/animations";
+@import 'src/theme/theme-variables';
+@import '~bootstrap/scss/mixins/_breakpoints';
+@import '../../assets/sass/abstracts/variables';
+@import '../../assets/sass/base/animations';
 
 h1,
 h3,
@@ -60,7 +60,7 @@ label {
   display: block;
   background-size: cover;
   background-position: center center;
-  background-image: url("../../assets/img/rsz_login_background_2.png");
+  background-image: url('../../assets/img/rsz_login_background_2.png');
 }
 
 .form-check {
@@ -279,4 +279,14 @@ label ~ span {
     margin: 0 auto;
     margin-bottom: 3.5rem;
   }
+}
+app-captcha {
+  display: flex;
+  justify-content: center;
+}
+.captcha-error {
+  display: none;
+  color: red;
+  font-weight: bold;
+  text-align: center;
 }

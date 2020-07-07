@@ -27,6 +27,7 @@ import { environment } from '@env/environment.local';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoodsReceiveNoteModule } from './goods-receive-note/goods-receive-note.module';
 import { FinanceModule } from './finance/finance.module';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 @NgModule({
   imports: [
@@ -46,6 +47,8 @@ import { FinanceModule } from './finance/finance.module';
     DashboardModule,
     ProfileModule,
     NotificationsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
     FinanceModule,
     LandingModule,
     PaymentsModule,
@@ -54,15 +57,15 @@ import { FinanceModule } from './finance/finance.module';
     GoodsReceiveNoteModule,
     IntercomModule.forRoot({
       appId: environment.intercom.app_id,
-      updateOnRouterChange: true // will automatically run `update` on router event changes. Default: `false`
+      updateOnRouterChange: true, // will automatically run `update` on router event changes. Default: `false`
     }),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     NgxPermissionsModule.forRoot(),
-    AppRoutingModule // must be imported as the last module as it contains the fallback route
+    AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],
   exports: [NgxPermissionsModule],
   declarations: [AppComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

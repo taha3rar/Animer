@@ -1,3 +1,4 @@
+import { CaptchaComponent } from './components/captcha/captcha.component';
 import { MeasurementPipe } from './pipes/measurement.pipe';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,6 +34,7 @@ import { PluralPipe } from './pipes/plural.pipe';
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
 import { NumberFormatPipe } from './pipes/number-format.pipe';
 import { NotPaidPipe } from './pipes/not-paid.pipe';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   imports: [
@@ -45,6 +47,7 @@ import { NotPaidPipe } from './pipes/not-paid.pipe';
     ProgressbarModule.forRoot(),
     MatTooltipModule,
     FormsModule,
+    RecaptchaModule,
     ReactiveFormsModule,
     MatSortModule,
   ],
@@ -58,6 +61,7 @@ import { NotPaidPipe } from './pipes/not-paid.pipe';
     BaseNavigationComponent,
     BaseListComponent,
     GooglePlacesDirective,
+    CaptchaComponent,
     UploadPictureComponent,
     TutorialControlComponent,
     NotFoundComponent,
@@ -88,6 +92,7 @@ import { NotPaidPipe } from './pipes/not-paid.pipe';
     UserProgressComponent,
     FilterPipe,
     NotPaidPipe,
+    CaptchaComponent,
     StatusPipe,
     PluralPipe,
     DpoDocumentsComponent,

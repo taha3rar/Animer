@@ -10,7 +10,7 @@ import {
   AuthService as SocialAuthService,
   FacebookLoginProvider,
   SocialUser,
-  GoogleLoginProvider
+  GoogleLoginProvider,
 } from 'angularx-social-login';
 import { environment } from '@env/environment';
 import { Intercom } from 'ng-intercom';
@@ -22,7 +22,7 @@ declare const $: any;
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent extends BaseValidationComponent implements OnInit {
   userRegistrationForm: FormGroup;
@@ -36,6 +36,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
   emailPhoneError = false;
   user: User;
   socialUser: SocialUser;
+  canRegister = false;
   accessToken: string;
   isLoading = false;
   network: SocialNetworkName;
@@ -66,14 +67,14 @@ export class RegistrationComponent extends BaseValidationComponent implements On
         country: [undefined, Validators.required],
         password: [undefined, [Validators.required, Validators.minLength(8)]],
         confirmPassword: [undefined, Validators.required],
-        companyName: [undefined]
+        companyName: [undefined],
       },
       { validator: [this.equalPasswordsValidator, this.emailAndPhoneValidator] }
     );
 
     this.formInput = this.userRegistrationForm;
 
-    setTimeout(function() {
+    setTimeout(function () {
       $('.selectpicker').selectpicker();
     }, 200);
 
@@ -100,23 +101,23 @@ export class RegistrationComponent extends BaseValidationComponent implements On
         $.notify(
           {
             icon: 'notifications',
-            message: 'Please, provide your email address'
+            message: 'Please, provide your email address',
           },
           {
             type: 'danger',
             timer: 5000,
             placement: {
               from: 'top',
-              align: 'right'
+              align: 'right',
             },
-            offset: 20
+            offset: 20,
           }
         );
       } else {
         this.accessToken = response.authToken;
         this.socialUser = response;
         this.changeDiv('complement');
-        setTimeout(function() {
+        setTimeout(function () {
           $('.selectpicker').selectpicker();
         }, 200);
       }
@@ -128,7 +129,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
     const socialuserInfo: SocialNetworkRegistrationDTO = {
       access_token: this.accessToken,
       country: this.countrySocialUser,
-      businessName: this.businessNameSocialUser
+      businessName: this.businessNameSocialUser,
     };
 
     this.authenticationService
@@ -139,8 +140,8 @@ export class RegistrationComponent extends BaseValidationComponent implements On
         })
       )
       .subscribe(
-        credentials => {
-          this.route.queryParams.subscribe(params =>
+        (credentials) => {
+          this.route.queryParams.subscribe((params) =>
             this.router.navigate([params.redirect || '/'], { replaceUrl: true })
           );
           this.intercomLogin(credentials.user, true);
@@ -150,16 +151,16 @@ export class RegistrationComponent extends BaseValidationComponent implements On
           $.notify(
             {
               icon: 'notifications',
-              message: err.message
+              message: err.message,
             },
             {
               type: 'danger',
               timer: 5000,
               placement: {
                 from: 'top',
-                align: 'right'
+                align: 'right',
               },
-              offset: 20
+              offset: 20,
             }
           );
         }
@@ -233,40 +234,48 @@ export class RegistrationComponent extends BaseValidationComponent implements On
       country: this.userf.country.value,
       password: this.userf.password.value,
       phoneNumber: this.userf.phoneNumber.value,
-      companyName: this.userf.companyName.value
+      companyName: this.userf.companyName.value,
     };
-
-    this.sdkService
-      .register(dto)
-      .then((user: User) => {
-        if (user._id) {
-          this.user = user;
-          $('#standardRegistration').css({ display: 'none' });
-          $('#confirmation').css({ display: 'flex' });
-          this.intercomLogin(user, false);
-        } else {
-          return;
-        }
-      })
-      .catch((err: AGTError) => {
-        $.notify(
-          {
-            icon: 'notifications',
-            message: err.message
-          },
-          {
-            type: 'danger',
-            timer: 5000,
-            placement: {
-              from: 'top',
-              align: 'right'
-            },
-            offset: 20
+    if (this.canRegister) {
+      this.sdkService
+        .register(dto)
+        .then((user: User) => {
+          if (user._id) {
+            this.user = user;
+            $('#standardRegistration').css({ display: 'none' });
+            $('#confirmation').css({ display: 'flex' });
+            this.intercomLogin(user, false);
+          } else {
+            return;
           }
-        );
-      });
+        })
+        .catch((err: AGTError) => {
+          $.notify(
+            {
+              icon: 'notifications',
+              message: err.message,
+            },
+            {
+              type: 'danger',
+              timer: 5000,
+              placement: {
+                from: 'top',
+                align: 'right',
+              },
+              offset: 20,
+            }
+          );
+        });
+    } else {
+      $('.captcha-error').show();
+    }
   }
-
+  captchaSubmit(e: any) {
+    if (e) {
+      this.canRegister = e;
+      $('.captcha-error').hide();
+    }
+  }
   get userf() {
     return this.userRegistrationForm.controls;
   }
@@ -292,8 +301,8 @@ export class RegistrationComponent extends BaseValidationComponent implements On
       validated: isOAuth,
       logged_in: isOAuth,
       widget: {
-        activator: '#intercom'
-      }
+        activator: '#intercom',
+      },
     });
   }
 }

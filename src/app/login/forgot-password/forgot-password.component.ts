@@ -12,7 +12,7 @@ declare const $: any;
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
   // resetLinkStatus indicates the status of the reset link button
@@ -25,6 +25,7 @@ export class ForgotPasswordComponent implements OnInit {
   countries = countries;
   phoneUtil: any;
   regionCode: string;
+  canReset = false;
   phoneCode: string;
   methodName: string;
   partialPhoneNumber: string;
@@ -43,10 +44,10 @@ export class ForgotPasswordComponent implements OnInit {
 
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required]
+      phone: ['', Validators.required],
     });
 
-    this.forgotPasswordForm.get('email').valueChanges.subscribe(email => {
+    this.forgotPasswordForm.get('email').valueChanges.subscribe((email) => {
       if (email) {
         this.forgotPasswordForm.get('phone').setValue('', { emitEvent: false });
         this.forgotPasswordForm.get('phone').setValidators([]);
@@ -54,7 +55,7 @@ export class ForgotPasswordComponent implements OnInit {
       }
     });
 
-    this.forgotPasswordForm.get('phone').valueChanges.subscribe(phone => {
+    this.forgotPasswordForm.get('phone').valueChanges.subscribe((phone) => {
       if (phone) {
         this.forgotPasswordForm.get('email').setValue('', { emitEvent: false });
         this.forgotPasswordForm.get('email').setValidators([]);
@@ -62,7 +63,7 @@ export class ForgotPasswordComponent implements OnInit {
       }
     });
 
-    setTimeout(function() {
+    setTimeout(function () {
       $('.selectpicker').selectpicker();
     }, 200);
   }
@@ -82,12 +83,16 @@ export class ForgotPasswordComponent implements OnInit {
 
   recoverPassword() {
     if (this.forgotPasswordForm.valid) {
-      this.username = this.forgotPasswordForm.value.email;
-      const resetPasswordDto: ResetPasswordDTO = { email: this.username };
+      if (this.canReset) {
+        this.username = this.forgotPasswordForm.value.email;
+        const resetPasswordDto: ResetPasswordDTO = { email: this.username };
 
-      this.sdkService.sendResetPasswordLink(resetPasswordDto).then(data => {
-        this.resetLinkStatus = 1;
-      });
+        this.sdkService.sendResetPasswordLink(resetPasswordDto).then((data) => {
+          this.resetLinkStatus = 1;
+        });
+      } else {
+        $('.captcha-error').show();
+      }
     }
     // this.checkMethod();
   }
@@ -101,6 +106,12 @@ export class ForgotPasswordComponent implements OnInit {
       this.methodName = 'email';
     } else {
       this.methodName = 'phone';
+    }
+  }
+  captchaSubmit(e: any) {
+    if (e) {
+      this.canReset = e;
+      $('.captcha-error').hide();
     }
   }
 }
