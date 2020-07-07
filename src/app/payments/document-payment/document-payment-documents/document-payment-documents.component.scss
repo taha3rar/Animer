@@ -1,19 +1,76 @@
-@import "../../../../assets/sass/abstracts/mixins";
+@import '../../../../assets/sass/abstracts/mixins';
 
-#view {
-  text-decoration: underline;
-  font-size: 14px;
+.grn-buttons {
+  flex: 1;
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+.table {
+  margin: 0;
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.strip {
+  margin-bottom: 3.5rem;
+}
+
+.mobile-list-wrapper {
+  display: none;
+
+  @include respond(phone) {
+    display: block;
+  }
+}
+
+.panel-body {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.panel {
+  margin-top: 0;
+  padding-top: 30px;
+}
+thead {
+  background: transparent;
+}
+
+#table-head {
+  background-color: transparent !important;
+  font-size: 1.4rem;
+  box-shadow: none !important;
+  color: #5a6c7b;
+  font-family: roboto;
   font-weight: 500;
+}
+tr:not(#table-head) {
+  height: 52px !important;
+  background: #ffffff 0% 0% no-repeat padding-box !important;
+  box-shadow: 0px 3px 13px #17515705 !important;
+  border-radius: 5px !important;
+  opacity: 1 !important;
+}
+tr {
+  text-align: center !important;
+}
+#view,
+#edit {
+  text-decoration: underline;
+  font-size: 13px;
+  font-family: roboto;
+  font-weight: 500;
+  letter-spacing: 0px;
+  opacity: 1;
   cursor: pointer;
 }
 #view {
   color: #37c1ce !important;
 }
-
-table {
-  @include respond(phone) {
-    display: none;
-  }
+#edit {
+  color: #d39b4b !important;
 }
 
 .flex-row {
@@ -24,10 +81,46 @@ table {
   }
 }
 
-.mobile-list-wrapper {
-  display: none;
+.bttn-primary {
+  @include respond(phone) {
+    min-width: 9rem;
+  }
+}
+
+.btn-primary-transp {
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.info {
+  font-size: 1.4rem;
+  color: #455263;
+  line-height: 29px;
+}
+
+.create-grn-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    width: 60%;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    @include respond(phone) {
+      width: 95%;
+    }
+  }
+}
+
+.helper-img {
+  width: 32.5rem;
 
   @include respond(phone) {
-    display: block;
+    width: 27.5rem;
   }
 }

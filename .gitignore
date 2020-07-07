@@ -50,3 +50,4 @@ Thumbs.db
 buildspec.yml
 
 .angulardoc.json
+.prettierrc

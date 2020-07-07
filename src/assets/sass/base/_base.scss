@@ -32,7 +32,7 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #455263;
 }
 
@@ -77,7 +77,7 @@ body {
   height: 58.5rem !important;
 }
 
-div[data-notify="container"] {
+div[data-notify='container'] {
   width: 88% !important;
 }
 
@@ -97,6 +97,28 @@ span {
 .mat-sort-header-container {
   justify-content: center;
 }
+#grn-pay-table {
+  .mat-sort-header-container {
+    justify-content: center;
+    left: 6px;
+    position: relative;
+  }
+  .mat-sort-header-arrow,
+  [dir='rtl'] .mat-sort-header-position-before .mat-sort-header-arrow {
+    margin: 0 !important;
+    position: relative;
+    left: 6px;
+  }
+}
+.click {
+  cursor: pointer;
+}
+.ftd-small tbody > tr > td:first-child {
+  width: auto !important;
+  .form_radio_btn {
+    cursor: pointer;
+  }
+}
 
 .intercom-lightweight-app-launcher.intercom-launcher,
 .intercom-launcher-frame.intercom-1esuaw8 {
@@ -107,7 +129,7 @@ span {
   }
 }
 
-[data-notify="container"] {
+[data-notify='container'] {
   @include respond(phone) {
     right: 12px !important;
   }

@@ -31,15 +31,15 @@
 
       <div class="tab-content">
         <div class="tab-pane active" id="documents">
-          <app-document-payment-documents></app-document-payment-documents>
+          <app-document-payment-documents (grnEmit)="grn = $event"></app-document-payment-documents>
         </div>
 
         <div class="tab-pane" id="payments-details">
-          <app-document-payment-details></app-document-payment-details>
+          <app-document-payment-details [grn]="grn" (paymentOutput)="payment = $event"></app-document-payment-details>
         </div>
 
         <div class="tab-pane" id="review-payment">
-          <app-payment-document></app-payment-document>
+          <app-payment-document [payment]="payment" (pay)="sendPayment()"></app-payment-document>
         </div>
       </div>
     </div>

@@ -32,6 +32,7 @@ import { ReferenceCodePipe } from './pipes/referenceCode.pipe';
 import { PluralPipe } from './pipes/plural.pipe';
 import { TransactionDocumentListComponent } from './components/document-list/transaction-document-list/transaction-document-list.component';
 import { NumberFormatPipe } from './pipes/number-format.pipe';
+import { NotPaidPipe } from './pipes/not-paid.pipe';
 
 @NgModule({
   imports: [
@@ -45,7 +46,7 @@ import { NumberFormatPipe } from './pipes/number-format.pipe';
     MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSortModule
+    MatSortModule,
   ],
   declarations: [
     LoaderComponent,
@@ -65,12 +66,13 @@ import { NumberFormatPipe } from './pipes/number-format.pipe';
     MultiProductPipe,
     ProductQuantityPipe,
     PluralPipe,
+    NotPaidPipe,
     ContactGeneratorComponent,
     UserProgressComponent,
     DpoDocumentsComponent,
     PaymentStatusPipe,
     TransactionDocumentListComponent,
-    NumberFormatPipe
+    NumberFormatPipe,
   ],
   entryComponents: [],
   exports: [
@@ -85,14 +87,15 @@ import { NumberFormatPipe } from './pipes/number-format.pipe';
     ContactGeneratorComponent,
     UserProgressComponent,
     FilterPipe,
+    NotPaidPipe,
     StatusPipe,
     PluralPipe,
     DpoDocumentsComponent,
     PaymentStatusPipe,
     ReferenceCodePipe,
     NumberFormatPipe,
-    TransactionDocumentListComponent
+    TransactionDocumentListComponent,
   ],
-  providers: [CsvService, DatePipe, DecimalPipe]
+  providers: [CsvService, DatePipe, DecimalPipe],
 })
 export class SharedModule {}
