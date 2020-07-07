@@ -29,7 +29,7 @@
   <div class="tab-content mb-5">
     <div class="tab-pane active" id="topup">
       <div class="tabi">
-        <div class="border-box display-ib ">
+        <div class="border-box display-ib">
           <h2>TOP-UP #{{ transaction.numericId }}</h2>
           <table>
             <tr>
@@ -57,9 +57,9 @@
             <p>{{ transaction?.emitter?.personalInformation?.email }}</p>
           </div>
           <div class="col-md-3">
-            <div class="border-box center-items ">
+            <div class="border-box center-items">
               <h4 class="{{ transaction?.status | status }}">{{ transaction?.status | titlecase }}</h4>
-              <h2>{{ transaction?.amount | number: '1.2-2' }} KES</h2>
+              <h2>{{ transaction?.amount | numberFormat }} KES</h2>
               <h5>TOTAL</h5>
             </div>
           </div>

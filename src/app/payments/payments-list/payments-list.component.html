@@ -78,14 +78,14 @@
             *ngFor="
               let tx of payments
                 | filter: searchTerm
-                | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+                | paginate: { itemsPerPage: itemsPerPage[0], currentPage: currentPage[0], id: 'payments' }
             "
           >
             <td>#{{ tx.numericId }}</td>
             <td>{{ tx.dateCreated | dateString }}</td>
             <td>{{ getTxContact(tx) }}</td>
             <td>{{ getTxType(tx) }}</td>
-            <td>{{ tx.amount | number: "1.2-2" }} {{ tx.currency }}</td>
+            <td>{{ tx.amount | numberFormat }} {{ tx.currency }}</td>
             <td>
               <span class="{{ tx.status | status }}">{{ tx.status | titlecase }}</span>
             </td>
@@ -100,7 +100,7 @@
           *ngFor="
             let tx of payments
               | filter: searchTerm
-              | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+              | paginate: { itemsPerPage: itemsPerPage[0], currentPage: currentPage[0], id: 'payments' }
           "
         >
           <div class="flex-row">
@@ -112,10 +112,15 @@
             <div class="{{ tx.status | status }}">{{ tx.status | titlecase }}</div>
           </div>
           <div>{{ getTxType(tx) }}</div>
-          <div>{{ tx.amount | number: '1.2-2' }} {{ tx.currency }}</div>
+          <div>{{ tx.amount | numberFormat }} {{ tx.currency }}</div>
           <div class="mt-3"><a id="view" (click)="paymentView(tx._id)">View</a></div>
         </div>
       </div>
+      <pagination-controls
+        id="payments"
+        *ngIf="payments.length"
+        (pageChange)="pageChanged($event, 0)"
+      ></pagination-controls>
     </mat-tab>
     <mat-tab color="#37c1ce" label="Top-ups" id="topupsTab">
       <table class="table main-table" matSort>
@@ -134,13 +139,13 @@
             *ngFor="
               let tx of topups
                 | filter: searchTerm
-                | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+                | paginate: { itemsPerPage: itemsPerPage[1], currentPage: currentPage[1] };
               let i = index
             "
           >
             <td>#{{ tx.numericId }}</td>
             <td>{{ tx.dateCreated | dateString }}</td>
-            <td>{{ tx.amount | number: "1.2-2" }} {{ tx.currency }}</td>
+            <td>{{ tx.amount | numberFormat }} {{ tx.currency }}</td>
             <td>
               <span class="{{ tx.status | status }}">{{ tx.status | titlecase }}</span>
             </td>
@@ -153,7 +158,9 @@
         <div
           class="strip mt-4 mb-3"
           *ngFor="
-            let tx of topups | filter: searchTerm | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };
+            let tx of topups
+              | filter: searchTerm
+              | paginate: { itemsPerPage: itemsPerPage[1], currentPage: currentPage[1] };
             let i = index
           "
         >
@@ -166,13 +173,13 @@
             <div class="{{ tx.status | status }}">{{ tx.status | titlecase }}</div>
           </div>
           <div>{{ getTxType(tx) }}</div>
-          <div>{{ tx.amount | number: "1.2-2" }} {{ tx.currency }}</div>
+          <div>{{ tx.amount | numberFormat }} {{ tx.currency }}</div>
           <div class="mt-3"><a id="view" [routerLink]="['topup/', tx._id]">View</a></div>
         </div>
       </div>
+      <pagination-controls *ngIf="topups.length" (pageChange)="pageChanged($event, 1)"></pagination-controls>
     </mat-tab>
   </mat-tab-group>
 </div>
-<pagination-controls *ngIf="transactions.length" (pageChange)="pageChanged($event)"></pagination-controls>
 
 <app-topup-modal (balanceSubmit)="topup($event)"></app-topup-modal>

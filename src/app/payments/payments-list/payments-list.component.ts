@@ -6,7 +6,7 @@ import { defaultValues } from '@app/shared/helpers/default_values';
 @Component({
   selector: 'app-payments-list',
   templateUrl: './payments-list.component.html',
-  styleUrls: ['./payments-list.component.scss']
+  styleUrls: ['./payments-list.component.scss'],
 })
 export class PaymentsListComponent implements OnInit {
   availablePayments = true;
@@ -14,8 +14,8 @@ export class PaymentsListComponent implements OnInit {
   wallet: DPOWallet;
   transactions: DPOTransaction[];
   topUpApproved = false;
-  currentPage = 1;
-  itemsPerPage = defaultValues.items_per_page;
+  currentPage = [1, 1];
+  itemsPerPage = [defaultValues.items_per_page, defaultValues.items_per_page];
   searchTerm: string;
   searchPlaceholder = 'Search payments...';
   payments: DPOTransaction[];
@@ -88,8 +88,8 @@ export class PaymentsListComponent implements OnInit {
 
     return 'N/A';
   }
-  pageChanged(page: number) {
-    this.currentPage = page;
+  pageChanged(page: number, i: number) {
+    this.currentPage[i] = page;
   }
   paymentView(id: string) {
     this.router.navigate(['/payments/payment', id]);

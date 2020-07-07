@@ -68,7 +68,7 @@
           (ngModelChange)="onDate($event)"
         />
         <div class="input-group-append">
-          <button class="btn glyphicon glyphicon-calendar" style="position:0;" type="button"></button>
+          <button class="btn glyphicon glyphicon-calendar" style="position: 0;" type="button"></button>
         </div>
       </div>
     </div>
@@ -100,9 +100,9 @@
         <td>
           {{ product.description || '-' }}
         </td>
-        <td>{{ product.quantity | number: '1.2-2' }} {{ product.measurement | plural: product?.quantity }}</td>
-        <td>{{ product.rate | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}</td>
-        <td>{{ product.price | number: '1.2-2' }} {{ product.currency }}</td>
+        <td>{{ product.quantity | numberFormat }} {{ product.measurement | plural: product?.quantity }}</td>
+        <td>{{ product.rate | numberFormat }} {{ product.currency }} per {{ product.measurement }}</td>
+        <td>{{ product.price | numberFormat }} {{ product.currency }}</td>
         <td class="text-right">
           <a (click)="edit(i)" data-toggle="wizard" data-target="#addGrnProductWizard" class="bttn-line">Edit</a>
         </td>
@@ -125,18 +125,18 @@
           <div>
             <p class="sm-text-label">Quantity</p>
             <p class="text-regular">
-              {{ product.quantity | number: '1.2-2' }} {{ product.measurement | plural: product?.quantity }}
+              {{ product.quantity | numberFormat }} {{ product.measurement | plural: product?.quantity }}
             </p>
           </div>
           <div>
             <p class="sm-text-label">Rate</p>
             <p class="text-regular">
-              {{ product.rate | number: '1.2-2' }} {{ product.currency }} per {{ product.measurement }}
+              {{ product.rate | numberFormat }} {{ product.currency }} per {{ product.measurement }}
             </p>
           </div>
           <div>
             <p class="sm-text-label">Price</p>
-            <p class="text-regular">{{ product.price | number: '1.2-2' }} {{ product.currency }}</p>
+            <p class="text-regular">{{ product.price | numberFormat }} {{ product.currency }}</p>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 ">
+  <div class="col-md-6">
     <div class="strip flex-strip" id="notes-sec">
       <div class="form-group" id="payment-status">
         <label for="status">Payment Status</label>
@@ -175,7 +175,7 @@
       </div>
 
       <div class="total-wrapper">
-        <h2>{{ currency }} {{ grn.total | number: '1.2-2' }}</h2>
+        <h2>{{ currency }} {{ grn.total | numberFormat }}</h2>
         <h5>TOTAL</h5>
       </div>
     </div>

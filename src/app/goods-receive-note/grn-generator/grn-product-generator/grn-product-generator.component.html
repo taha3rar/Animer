@@ -57,7 +57,7 @@
                         formControlName="rate"
                       />
                     </div>
-                    <div style="color:#a94442" class="help-block" *ngIf="isFieldInvalid('rate')">
+                    <div style="color: #a94442;" class="help-block" *ngIf="isFieldInvalid('rate')">
                       <p>This field is required</p>
                     </div>
                   </div>
@@ -115,7 +115,7 @@
                       id="price"
                     />
                     <input disabled type="text" class="form-control disabled" />
-                    <p id="price-trick">{{ productf?.price.value | number: '1.2-2' }}</p>
+                    <p id="price-trick">{{ productf?.price.value | numberFormat }}</p>
                   </div>
                 </div>
                 <div class="form-row">
