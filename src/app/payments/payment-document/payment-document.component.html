@@ -20,8 +20,8 @@
       <p>{{ payment?.contact?.businessName || payment?.goodsReceivedNote?.supplier?.businessName }}</p>
       <p>
         {{ payment?.contact?.address || payment?.goodsReceivedNote?.supplier?.address }},
-        {{ payment?.contact?.location || payment?.goodsReceivedNote?.supplier?.location }},
-        {{ payment?.contact?.region || payment?.goodsReceivedNote?.supplier?.region }},
+        {{ payment?.contact?.city || payment?.goodsReceivedNote?.supplier?.city }},
+        {{ payment?.contact?.stateProvinceRegion || payment?.goodsReceivedNote?.supplier?.stateProvinceRegion }},
         {{ payment?.contact?.country || payment?.goodsReceivedNote?.supplier?.country }}
       </p>
       <p>{{ payment?.contact?.phoneNumber || payment?.goodsReceivedNote?.supplier?.phoneNumber }}</p>

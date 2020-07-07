@@ -5,14 +5,14 @@ import Swal from 'sweetalert2';
 declare const $: any;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ErrorService {
   handleError(e: AGTError) {
     return Swal.fire({
       icon: 'error',
       title: `Error code: ${e.errorCode}`,
-      text: e.message
+      text: e.message,
     });
   }
 }

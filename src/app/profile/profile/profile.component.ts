@@ -13,7 +13,7 @@ declare const $: any;
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
   user: User;
@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
       phoneNumber: [this.user.personalInformation.phoneNumber],
       jobTitle: [this.user.personalInformation.jobTitle],
       bio: [this.user.personalInformation.bio],
-      userId: [this.user.personalInformation.nationalId]
+      userId: [this.user.personalInformation.nationalId],
     });
     this.companyDetailsForm = this.formBuilder.group({
       companyName: [this.user.companyInformation.companyName],
@@ -57,23 +57,15 @@ export class ProfileComponent implements OnInit {
       city: [this.user.companyInformation.city],
       zipcode: [this.user.companyInformation.zipcode],
       country: [this.user.companyInformation.country, [Validators.required]],
-      bio: [this.user.companyInformation.bio]
+      bio: [this.user.companyInformation.bio],
     });
 
     $('.collapse')
-      .on('shown.bs.collapse', function() {
-        $(this)
-          .parent()
-          .find('.glyphicon-plus')
-          .removeClass('glyphicon-plus')
-          .addClass('glyphicon-minus');
+      .on('shown.bs.collapse', function () {
+        $(this).parent().find('.glyphicon-plus').removeClass('glyphicon-plus').addClass('glyphicon-minus');
       })
-      .on('hidden.bs.collapse', function() {
-        $(this)
-          .parent()
-          .find('.glyphicon-minus')
-          .removeClass('glyphicon-minus')
-          .addClass('glyphicon-plus');
+      .on('hidden.bs.collapse', function () {
+        $(this).parent().find('.glyphicon-minus').removeClass('glyphicon-minus').addClass('glyphicon-plus');
       });
     this.sdkService.markMyAccountAsReviewed();
   }
@@ -103,7 +95,7 @@ export class ProfileComponent implements OnInit {
 
   showFieldStyle(field: string) {
     return {
-      'has-error': this.isFieldInvalid(field)
+      'has-error': this.isFieldInvalid(field),
     };
   }
 
@@ -113,7 +105,7 @@ export class ProfileComponent implements OnInit {
 
   showFieldStyleComp(field: string) {
     return {
-      'has-error': this.isFieldInvalidComp(field)
+      'has-error': this.isFieldInvalidComp(field),
     };
   }
 
@@ -126,7 +118,7 @@ export class ProfileComponent implements OnInit {
     this.user.personalInformation.phoneNumber = this.contactf.phoneNumber.value;
     this.user.personalInformation.jobTitle = this.contactf.jobTitle.value;
     this.user.personalInformation.bio = this.contactf.bio.value;
-    this.sdkService.updateMyPersonalDetails(this.user.personalInformation).then(data => {
+    this.sdkService.updateMyPersonalDetails(this.user.personalInformation).then((data) => {
       this.spinnerService.hideSpinner();
       const credentialsToUpdate = this.authenticationService.credentials;
       // credentialsToUpdate.user.personalInformation = data.personalInformation; // TODO!

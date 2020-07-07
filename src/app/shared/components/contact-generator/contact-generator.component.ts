@@ -11,7 +11,7 @@ import {
   OnChanges,
   EventEmitter,
   Output,
-  AfterViewInit
+  AfterViewInit,
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { countries } from '@app/shared/helpers/countries';
@@ -26,7 +26,7 @@ import { UpdateContactDTO } from '@avenews/agt-sdk/lib/types/contact';
 @Component({
   selector: 'app-contact-generator',
   templateUrl: './contact-generator.component.html',
-  styleUrls: ['./contact-generator.component.scss']
+  styleUrls: ['./contact-generator.component.scss'],
 })
 export class ContactGeneratorComponent extends BaseValidationComponent implements OnInit, OnChanges, AfterViewInit {
   currentUser: User;
@@ -75,10 +75,10 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       country: [undefined, Validators.required],
       region: [undefined],
       location: [undefined],
-      address: [undefined]
+      address: [undefined],
     });
     this.formInput = this.contactDetailsForm;
-    setTimeout(function() {
+    setTimeout(function () {
       $('.selectpicker').selectpicker();
       $('#region_code').selectpicker('refresh');
     }, 200);
@@ -136,7 +136,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           country: this.contact.country,
           region: this.contact.stateProvinceRegion,
           location: this.contact.city,
-          address: this.contact.address
+          address: this.contact.address,
         });
       } else if (!this.isEdit) {
         $('#region_code').selectpicker('refresh');
@@ -147,7 +147,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
     return this.contactDetailsForm.controls;
   }
   get viewValue() {
-    const country = this.countries.find(s => {
+    const country = this.countries.find((s) => {
       return s.value === this.regionCode;
     });
     return country.viewValue;
@@ -199,7 +199,11 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
         country: this.contactf.country.value,
         stateProvinceRegion: this.contactf.region.value,
         city: this.contactf.location.value,
+<<<<<<< HEAD
         address: this.contactf.address.value
+=======
+        address: this.contactf.address.value,
+>>>>>>> added error when phone number invalid
       };
 
       this.contactSubmitted = true;
@@ -207,7 +211,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       if (!this.isEdit) {
         this.sdkService
           .registerContact(newContact)
-          .then(data => {
+          .then((data) => {
             if (data._id) {
               if (this.doEmit) {
                 this.contactEmit.emit(data);
@@ -232,11 +236,15 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           country: this.contactf.country.value,
           stateProvinceRegion: this.contactf.region.value,
           city: this.contactf.location.value,
+<<<<<<< HEAD
           address: this.contactf.address.value
+=======
+          address: this.contactf.address.value,
+>>>>>>> added error when phone number invalid
         };
         this.sdkService
           .updateContact(this.contact._id, updateContact)
-          .then(data => {
+          .then((data) => {
             if (data._id) {
               this.spinnerService.hideSpinner();
               this.alerts.showAlert('Contact profile has been updated!');
@@ -272,7 +280,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       country: undefined,
       region: undefined,
       location: undefined,
-      address: undefined
+      address: undefined,
     });
     this.newContact = undefined;
     this.email = null;
@@ -282,7 +290,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
   }
   onModalClose() {
     if (!this.contactSubmitted && this.contactDetailsForm.dirty) {
-      this.alerts.showAlertBack().then(value => {
+      this.alerts.showAlertBack().then((value) => {
         if (value) {
           if (this.doEmit) {
             $('#addContactWizard').fadeOut('fast');
