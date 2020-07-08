@@ -197,13 +197,9 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
         phoneNumber: this.contactf.phoneNumber.value,
         email: this.contactf.email.value,
         country: this.contactf.country.value,
-        stateProvinceRegion: this.contactf.region.value,
-        city: this.contactf.location.value,
-<<<<<<< HEAD
-        address: this.contactf.address.value
-=======
+        stateProvinceRegion: this.contactf.stateProvinceRegion.value,
+        city: this.contactf.city.value,
         address: this.contactf.address.value,
->>>>>>> added error when phone number invalid
       };
 
       this.contactSubmitted = true;
@@ -236,11 +232,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           country: this.contactf.country.value,
           stateProvinceRegion: this.contactf.region.value,
           city: this.contactf.location.value,
-<<<<<<< HEAD
-          address: this.contactf.address.value
-=======
           address: this.contactf.address.value,
->>>>>>> added error when phone number invalid
         };
         this.sdkService
           .updateContact(this.contact._id, updateContact)
