@@ -13,6 +13,7 @@
           class="selectpicker"
           data-size="7"
         >
+          <option value="undefined" disabled>Choose a contact</option>
           <option *ngFor="let contact of contacts; let i = index" [ngValue]="contact">{{ contact.fullName }}</option>
         </select>
       </div>
@@ -182,7 +183,7 @@
 </div>
 
 <div class="strip mt-5">
-  <h3 class="t-bold mb-3">RECIEVED BY</h3>
+  <h3 class="t-bold mb-3">RECEIVED BY</h3>
   <div class="form-row" id="received-by">
     <div class="form-group col-md-4">
       <label for="name">Full Name *</label>

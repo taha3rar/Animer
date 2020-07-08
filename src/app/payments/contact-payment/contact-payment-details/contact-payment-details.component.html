@@ -11,6 +11,7 @@
           class="select-picker form-control"
           data-size="7"
         >
+          <option value="undefined" disabled>Choose a contact</option>
           <option [ngValue]="cont" *ngFor="let cont of contacts; let i = index">{{ cont.fullName }}</option>
         </select>
       </div>
