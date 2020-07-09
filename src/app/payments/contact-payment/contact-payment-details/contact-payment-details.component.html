@@ -9,9 +9,9 @@
           id="contact"
           data-live-search="true"
           class="select-picker form-control"
+          title="Choose a contact"
           data-size="7"
         >
-          <option value="undefined" disabled>Choose a contact</option>
           <option [ngValue]="cont" *ngFor="let cont of contacts; let i = index">{{ cont.fullName }}</option>
         </select>
       </div>
