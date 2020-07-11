@@ -35,6 +35,7 @@ import { TransactionDocumentListComponent } from './components/document-list/tra
 import { NumberFormatPipe } from './pipes/number-format.pipe';
 import { NotPaidPipe } from './pipes/not-paid.pipe';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { GrnModalComponent } from './components/grn-modal/grn-modal.component';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     PluralPipe,
     NotPaidPipe,
     ContactGeneratorComponent,
+    GrnModalComponent,
     UserProgressComponent,
     DpoDocumentsComponent,
     PaymentStatusPipe,
@@ -88,6 +90,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     ProductQuantityPipe,
     UploadPictureComponent,
     TutorialControlComponent,
+    GrnModalComponent,
     ContactGeneratorComponent,
     UserProgressComponent,
     FilterPipe,

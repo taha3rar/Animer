@@ -1,0 +1,119 @@
+<div class="modal-box" id="grnViewModal">
+  <div class="modal-box-content-wrapper">
+    <div class="modal-box-content">
+      <i class="click material-icons pull-right" (click)="onModalClose()" #closeModal>close</i>
+      <div class="modal-box-center">
+        <div class="grn-wrapper">
+          <div>
+            <button (click)="selectDocument()" class="bttn-primary pull-right mt-5">
+              Select Document
+            </button>
+          </div>
+          <div class="border-box display-ib">
+            <h2>
+              GOODS RECEIVED NOTE <span *ngIf="grn?.numericId" style="font-size: 1.9rem;"> #{{ grn?.numericId }} </span>
+            </h2>
+            <table>
+              <tr>
+                <td class="t-bold t-blue">ISSUE DATE</td>
+                <td>{{ grn?.issueDate | date: 'dd/MM/yyyy' }}</td>
+              </tr>
+              <tr>
+                <td class="t-bold t-blue">REFERENCE</td>
+                <td>{{ grn?.referenceCode | referenceCode }}</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col">
+              <p class="t-bold t-blue">SUPPLIER</p>
+              <p>{{ grn?.supplier?.fullName }}</p>
+              <p>{{ grn?.supplier?.businessName }}</p>
+              <p>
+                {{ grn?.supplier?.address }}, {{ grn?.supplier?.location }}, {{ grn?.supplier?.region }},
+                {{ grn?.supplier?.country }}
+              </p>
+              <p>{{ grn?.supplier?.phoneNumber }}</p>
+              <p>{{ grn?.supplier?.email }}</p>
+            </div>
+          </div>
+
+          <div class="pt-5 pb-4">
+            <p class="heading-3 t-blue">PRODUCTS</p>
+            <table class="products-table">
+              <thead>
+                <tr>
+                  <th>PRODUCT</th>
+                  <th>DESCRIPTION</th>
+                  <th>QUANTITY</th>
+                  <th>RATE</th>
+                  <th>PRICE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of grn?.products">
+                  <td>{{ product?.name }}</td>
+                  <td>{{ product?.description || '-' }}</td>
+                  <td>{{ product?.quantity | numberFormat }} {{ product?.measurement | plural: product?.quantity }}</td>
+                  <td>{{ product?.rate | numberFormat }} per {{ product?.measurement }}</td>
+                  <td>{{ product?.price | numberFormat }} {{ product?.currency }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="mobile-table">
+              <div *ngFor="let product of grn?.products" class="strip">
+                <div class="d-flex top">
+                  <div>
+                    <p class="product-name">{{ product?.name }}</p>
+                    <p class="mt-0">{{ product?.description || '-' }}</p>
+                  </div>
+                </div>
+                <div>
+                  <div class="d-flex bottom mt-2 flex-column">
+                    <div class="mr-1">
+                      <p class="sm-text-label">Quantity</p>
+                      <p class="text-regular">
+                        {{ product?.quantity | numberFormat }} {{ product?.measurement | plural: product?.quantity }}
+                      </p>
+                    </div>
+                    <div class="mr-1">
+                      <p class="sm-text-label">Rate</p>
+                      <p class="text-regular">{{ product?.rate | numberFormat }} per {{ product?.measurement }}</p>
+                    </div>
+                    <div>
+                      <p class="sm-text-label">Price</p>
+                      <p class="text-regular">{{ product?.price | numberFormat }} {{ product?.currency }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row pt-4">
+            <div class="col-md-3">
+              <p class="heading-3 t-blue mobile-header-txt">PAYMENT</p>
+              <div class="border-box center-items pull-left">
+                <div class="{{ grn?.paymentStatus | status }} mb-4">
+                  {{ grn?.paymentStatus | paymentStatus }}
+                </div>
+                <h2>{{ grn?.currency }} {{ grn?.total | numberFormat }}</h2>
+                <h5>TOTAL</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="row pt-5">
+            <div class="col">
+              <p class="t-bold t-blue">RECEIVED BY</p>
+              <p>{{ grn?.receivedBy?.name }}</p>
+              <p>{{ grn?.receivedBy?.businessName }}</p>
+              <p>{{ grn?.receivedBy?.phoneNumber }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

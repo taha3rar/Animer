@@ -47,7 +47,7 @@
         <td>
           <span class="{{ grn?.paymentStatus | status }}">{{ grn?.paymentStatus | paymentStatus }}</span>
         </td>
-        <td><a [routerLink]="['/grn', grn._id]" id="view">View</a></td>
+        <td><a (click)="viewGrn(grn, i)" id="view">View</a></td>
       </tr>
     </tbody>
   </table>
@@ -72,10 +72,12 @@
     <div>{{ grn?.products | multiProduct }}</div>
     <div>{{ grn?.products | measurement: (grn?.products | productQuantity) }}</div>
     <div>{{ grn?.total | numberFormat }} {{ grn?.currency }}</div>
-    <div class="mt-3"><a [routerLink]="['/grn', grn._id]" id="view">View</a></div>
+    <div class="mt-3"><a (click)="viewGrn(grn, i)" id="view">View</a></div>
   </div>
 </div>
 <pagination-controls *ngIf="grns.length" (pageChange)="pageChanged($event)"></pagination-controls>
 
 <button id="next" hidden class="bttn-primary next-step btn-next flex-pr mt-5">Next &rarr;</button>
 <button (click)="isPicked()" class="bttn-primary btn-next flex-pr mt-5">Next &rarr;</button>
+<button id="grnClick" hidden data-toggle="wizard" data-target="#grnViewModal"></button>
+<app-grn-modal [grn]="grn" (select)="selected($event)"></app-grn-modal>

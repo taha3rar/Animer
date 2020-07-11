@@ -16,6 +16,8 @@ declare const $: any;
 export class DocumentPaymentDocumentsComponent extends BaseListComponent implements OnInit {
   itemsPerPage = defaultValues.items_per_page;
   searchTerm: string;
+  grn: GoodsReceivedNote;
+  index = 0;
   @Output() grnEmit = new EventEmitter<GoodsReceivedNote>();
   grns: GoodsReceivedNote[] = [];
   constructor(
@@ -77,5 +79,16 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
         $('#next').click();
       }
     });
+  }
+  selected(e: boolean) {
+    if (e) {
+      this.onChooseDocument(this.index);
+      $('#doc-row' + this.index).trigger('click');
+    }
+  }
+  viewGrn(grn: GoodsReceivedNote, i: number) {
+    this.index = i;
+    this.grn = grn;
+    $('#grnClick').trigger('click');
   }
 }
