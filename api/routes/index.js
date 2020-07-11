@@ -299,7 +299,6 @@ router.post("/db/keep", async (req, res) => {
     episode: episode,
   };
   let toDelete = object.delete;
-
   const keep = mongoose.model("keep", schemas.keep);
   mongoose.model("user").findOne({ _id: id }, (err, data) => {
     if (err) {
@@ -325,8 +324,12 @@ router.post("/db/keep", async (req, res) => {
           keeps.keeper.forEach((k, index) => {
             if (k.anime.title === keep_object.anime.title) {
               keeps.keeper[index] = keep_object;
+              foundAnime = 1;
             }
           });
+          if (foundAnime === -1) {
+            keeps.keeper.push(keep_object);
+          }
           keeps.save().then((monData) => {
             res.status(200).json(monData);
           });
