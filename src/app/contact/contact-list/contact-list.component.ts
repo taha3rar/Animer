@@ -12,7 +12,7 @@ import { Contact } from '@avenews/agt-sdk';
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss'],
-  providers: [FilterPipe]
+  providers: [FilterPipe],
 })
 export class ContactListComponent extends BaseListComponent implements OnInit {
   contacts: Contact[];
@@ -22,13 +22,9 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
   tooltips = tooltips.contacts.contacts_list;
   contact: Contact;
   edit = false;
-  constructor(
-    private route: ActivatedRoute,
-    private authService: AuthenticationService,
-    protected router: Router
-  ) {
+  constructor(private route: ActivatedRoute, private authService: AuthenticationService, protected router: Router) {
     super(undefined, {
-      pageName: 'contacts'
+      pageName: 'contacts',
     });
   }
 
@@ -62,9 +58,9 @@ export class ContactListComponent extends BaseListComponent implements OnInit {
       }
     });
   }
-  editContact(i: number) {
+  editContact(contact: Contact) {
     this.edit = true;
-    this.contact = this.contacts[i];
+    this.contact = contact;
   }
   addContact() {
     this.edit = false;

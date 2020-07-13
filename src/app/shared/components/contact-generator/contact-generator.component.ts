@@ -73,7 +73,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       phoneNumber: [undefined, PhoneNumberValidator(this.regionCode)],
       email: [undefined, [Validators.required, Validators.email]],
       country: [undefined, Validators.required],
-      region: [undefined],
+      stateProvinceRegion: [undefined],
       location: [undefined],
       address: [undefined],
     });
@@ -134,7 +134,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           phoneNumber: this.contact.phoneNumber,
           email: this.contact.email,
           country: this.contact.country,
-          region: this.contact.stateProvinceRegion,
+          stateProvinceRegion: this.contact.stateProvinceRegion,
           location: this.contact.city,
           address: this.contact.address,
         });
@@ -197,7 +197,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
         phoneNumber: this.contactf.phoneNumber.value,
         email: this.contactf.email.value,
         country: this.contactf.country.value,
-        stateProvinceRegion: this.contactf.region.value,
+        stateProvinceRegion: this.contactf.stateProvinceRegion.value,
         city: this.contactf.location.value,
         address: this.contactf.address.value,
       };
@@ -230,7 +230,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           phoneNumber: this.contactf.phoneNumber.value,
           email: this.contactf.email.value,
           country: this.contactf.country.value,
-          stateProvinceRegion: this.contactf.region.value,
+          stateProvinceRegion: this.contactf.stateProvinceRegion.value,
           city: this.contactf.location.value,
           address: this.contactf.address.value,
         };
@@ -270,7 +270,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       phoneNumber: undefined,
       email: undefined,
       country: undefined,
-      region: undefined,
+      stateProvinceRegion: undefined,
       location: undefined,
       address: undefined,
     });

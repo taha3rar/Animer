@@ -74,7 +74,7 @@
       </td>
       <td>
         <a id="view" [routerLink]="['/contact', contact._id]">View</a>
-        <a (click)="editContact(i)" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
+        <a (click)="editContact(contact)" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
       </td>
     </tr>
   </tbody>
@@ -122,7 +122,7 @@
     </div>
     <div class="mt-3">
       <a id="view" [routerLink]="['/contact', contact._id]">View</a>
-      <a (click)="editContact(i)" class="ml-4" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
+      <a (click)="editContact(contact)" class="ml-4" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
     </div>
   </div>
 </div>

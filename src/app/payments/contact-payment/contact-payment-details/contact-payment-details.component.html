@@ -107,10 +107,10 @@
       </div>
     </div>
   </div>
-  <button (click)="submit()" [hidden]="!canSubmit || lowBalance" class="btn-next next-step flex-r bttn-primary mt-5">
+  <button (click)="submit()" id="next" hidden class="btn-next next-step flex-r bttn-primary mt-5">
     Next Step &rarr;
   </button>
-  <button (click)="checkForm()" [hidden]="canSubmit && !lowBalance" class="btn-next flex-r bttn-primary mt-5">
+  <button (click)="checkForm()" class="btn-next flex-r bttn-primary mt-5">
     Next Step &rarr;
   </button>
 </form>

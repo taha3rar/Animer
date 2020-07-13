@@ -15,4 +15,11 @@ export class ErrorService {
       text: e.message,
     });
   }
+  phoneError(e: { title: string; body: string }) {
+    return Swal.fire({
+      icon: 'error',
+      title: `${e.title}`,
+      text: e.body,
+    });
+  }
 }

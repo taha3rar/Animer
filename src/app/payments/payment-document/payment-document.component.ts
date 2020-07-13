@@ -17,23 +17,22 @@ export class PaymentDocumentComponent implements OnInit {
 
   ngOnInit() {}
   sendPayment() {
-    const error: AGTError = {
-      id: 'Invalid phone number',
-      message: 'The contact\'s phone number is invalid, please check it and try again later',
-      errorCode: undefined,
-      name: undefined,
+    const error = {
+      title: 'Phone number error',
+      body:
+        'Sorry, the online payment system currently supports payments to recipients with a Kenyan phone number only',
     };
     if (this.payment.contact && this.payment.contact.fullName) {
       if (!Utils.validateDPOPhoneNumber(this.payment.contact.phoneNumber)) {
-        this.err.handleError(error).then((data) => {
+        this.err.phoneError(error).then((data) => {
           if (data) {
             this.router.navigate(['/payments']);
           }
         });
-      }
+      } else { this.pay.emit(true); }
     } else if (this.payment.goodsReceivedNote && this.payment.goodsReceivedNote.supplier.fullName) {
       if (!Utils.validateDPOPhoneNumber(this.payment.goodsReceivedNote.supplier.phoneNumber)) {
-        this.err.handleError(error).then((data) => {
+        this.err.phoneError(error).then((data) => {
           if (data) {
             this.router.navigate(['/payments']);
           }

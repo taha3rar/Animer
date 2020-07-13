@@ -1,8 +1,9 @@
+import { ErrorService } from './../../../core/error.service';
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Contact, DPOWallet, RequestDPOPaymentDTO } from '@avenews/agt-sdk';
+import { Contact, DPOWallet, RequestDPOPaymentDTO, Utils } from '@avenews/agt-sdk';
 import { StepperService } from '@app/core/stepper.service';
 import { Signature } from '@avenews/agt-sdk/lib/types/shared';
 import Swal from 'sweetalert2';
@@ -11,7 +12,7 @@ declare const $: any;
 @Component({
   selector: 'app-contact-payment-details',
   templateUrl: './contact-payment-details.component.html',
-  styleUrls: ['./contact-payment-details.component.scss']
+  styleUrls: ['./contact-payment-details.component.scss'],
 })
 export class ContactPaymentDetailsComponent extends BaseValidationComponent implements OnInit {
   @Input() payment: RequestDPOPaymentDTO;
@@ -26,14 +27,15 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
     private stepperService: StepperService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private errorService: ErrorService
   ) {
     super();
     this.paymentForm = this.fb.group({
       name: [undefined, Validators.required],
       businessName: [undefined, Validators.required],
       phoneNumber: [undefined, Validators.required],
-      amount: [undefined, [Validators.required, Validators.min(1)]]
+      amount: [undefined, [Validators.required, Validators.min(1)]],
     });
   }
 
@@ -45,7 +47,7 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
     });
     this.formInput = this.paymentForm;
 
-    setTimeout(function() {
+    setTimeout(function () {
       $('.select-picker').selectpicker();
     }, 200);
   }
@@ -56,7 +58,7 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
   }
 
   refresh() {
-    setTimeout(function() {
+    setTimeout(function () {
       $('.select-picker').selectpicker('refresh');
     }, 200);
   }
@@ -77,9 +79,9 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
         customClass: {
           actions: 'actions',
           confirmButton: 'top-up bttn bttn-primary',
-          cancelButton: 'later'
-        }
-      }).then(val => {
+          cancelButton: 'later',
+        },
+      }).then((val) => {
         setTimeout(() => {
           // wait for the sweet alert to dismiss then show this 200ms
           if (val && val.value) {
@@ -87,6 +89,9 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
           }
         }, 200);
       });
+    }
+    if (this.canSubmit && !this.lowBalance) {
+      this.submit();
     }
   }
 
@@ -105,16 +110,26 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
   submit() {
     this.onSubmit(this.paymentForm);
     if (this.canSubmit && this.amount > 0) {
-      const request: RequestDPOPaymentDTO = {
-        signedBy: {
-          name: this.paymentF.name.value,
-          businessName: this.paymentF.businessName.value,
-          phoneNumber: this.paymentF.phoneNumber.value
-        },
-        amount: this.amount,
-        contact: this.contact
-      };
-      this.payUp.emit(request);
+      if (!Utils.validateDPOPhoneNumber(this.contact.phoneNumber)) {
+        const err = {
+          title: 'Phone number error',
+          body:
+            'Sorry, the online payment system currently supports payments to recipients with a Kenyan phone number only',
+        };
+        this.errorService.phoneError(err);
+      } else {
+        const request: RequestDPOPaymentDTO = {
+          signedBy: {
+            name: this.paymentF.name.value,
+            businessName: this.paymentF.businessName.value,
+            phoneNumber: this.paymentF.phoneNumber.value,
+          },
+          amount: this.amount,
+          contact: this.contact,
+        };
+        this.payUp.emit(request);
+        $('#next').trigger('click');
+      }
     }
   }
 }
