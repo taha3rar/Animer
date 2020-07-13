@@ -34,7 +34,7 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
   }
 
   onChooseDocument(id: number) {
-    $('.mobile-list-wrapper #doc-row' + id).trigger('click');
+    $('.mobile-list-wrapper #doc-mow' + id).trigger('click');
   }
   sortData(sort: Sort) {
     const data = this.grns.slice();

@@ -55,10 +55,10 @@
 
 <div class="mobile-list-wrapper mb-5">
   <div *ngFor="let grn of grns; let i = index" class="strip mt-4 mb-3">
-    <div (click)="onChooseDocument(i)">
+    <div>
       <div>
-        <input type="radio" class="form_radio" id="doc-row{{ i }}" name="document" />
-        <label for="doc-row{{ i }}" class="form_radio_label"> <span class="form_radio_btn"></span></label>
+        <input type="radio" class="form_radio" id="doc-mow{{ i }}" name="document" />
+        <label for="doc-mow{{ i }}" class="form_radio_label"> <span class="form_radio_btn"></span></label>
       </div>
       <div class="flex-row">
         <div># {{ grn.numericId }}</div>
