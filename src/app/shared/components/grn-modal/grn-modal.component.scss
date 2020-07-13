@@ -6,8 +6,12 @@
   box-shadow: 0px 3px 6px #1751570d;
 
   @include respond(phone) {
-    padding: 24px 24px;
+    padding: 92px 24px;
   }
+}
+
+.click.material-icons {
+  margin-left: auto;
 }
 
 p,
@@ -68,5 +72,25 @@ h5 {
 
   @include respond(phone) {
     display: block;
+  }
+}
+
+.m-header {
+  @include respond(phone) {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background: white;
+    border-bottom: 1px solid #e2e4e6;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .modal-box-content {
+    height: 100%;
+  }
+  .modal-box,
+  .modal-box-content {
+    overflow-y: scroll;
   }
 }

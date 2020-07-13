@@ -54,24 +54,26 @@
 </div>
 
 <div class="mobile-list-wrapper mb-5">
-  <div *ngFor="let grn of grns; let i = index" class="strip mt-4 mb-3" (click)="onChooseDocument(i)">
-    <div>
-      <input type="radio" class="form_radio" id="doc-row{{ i }}" name="document" />
-      <label for="doc-row{{ i }}" class="form_radio_label"> <span class="form_radio_btn"></span></label>
-    </div>
-    <div class="flex-row">
-      <div># {{ grn.numericId }}</div>
-      <div>{{ grn.issueDate | dateString }}</div>
-    </div>
-    <div class="flex-row">
-      <div>{{ grn?.supplier?.fullName }}</div>
+  <div *ngFor="let grn of grns; let i = index" class="strip mt-4 mb-3">
+    <div (click)="onChooseDocument(i)">
       <div>
-        <span class="{{ grn?.paymentStatus | status }}">{{ grn?.paymentStatus | paymentStatus }}</span>
+        <input type="radio" class="form_radio" id="doc-row{{ i }}" name="document" />
+        <label for="doc-row{{ i }}" class="form_radio_label"> <span class="form_radio_btn"></span></label>
       </div>
+      <div class="flex-row">
+        <div># {{ grn.numericId }}</div>
+        <div>{{ grn.issueDate | dateString }}</div>
+      </div>
+      <div class="flex-row">
+        <div>{{ grn?.supplier?.fullName }}</div>
+        <div>
+          <span class="{{ grn?.paymentStatus | status }}">{{ grn?.paymentStatus | paymentStatus }}</span>
+        </div>
+      </div>
+      <div>{{ grn?.products | multiProduct }}</div>
+      <div>{{ grn?.products | measurement: (grn?.products | productQuantity) }}</div>
+      <div>{{ grn?.total | numberFormat }} {{ grn?.currency }}</div>
     </div>
-    <div>{{ grn?.products | multiProduct }}</div>
-    <div>{{ grn?.products | measurement: (grn?.products | productQuantity) }}</div>
-    <div>{{ grn?.total | numberFormat }} {{ grn?.currency }}</div>
     <div class="mt-3"><a (click)="viewGrn(grn, i)" id="view">View</a></div>
   </div>
 </div>

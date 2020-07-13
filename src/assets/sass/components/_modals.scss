@@ -30,7 +30,7 @@
 
     @include respond(phone) {
       min-height: 95vh !important;
-      width: 92vw;
+      width: 100vw;
     }
   }
 
