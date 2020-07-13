@@ -76,7 +76,7 @@
                       />
                     </div>
                     <div
-                      style="color:#a94442"
+                      style="color: #a94442;"
                       class="help-block"
                       *ngIf="isFieldInvalid('phoneNumber') && isRequired(contactf.phoneNumber) === true"
                     >
@@ -102,6 +102,7 @@
                   <div class="form-group col-md-6">
                     <label for="country">Country *</label>
                     <select formControlName="country" class="form-control" id="country">
+                      <option value="null" disabled="true" [selected]="true">Choose a country</option>
                       <option *ngFor="let country of countries">{{ country.viewValue }}</option>
                     </select>
                   </div>
