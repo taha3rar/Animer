@@ -30,7 +30,6 @@
           let grn of grns
             | filter: searchTerm
             | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }
-            | notPaid;
           let i = index
         "
       >
@@ -54,7 +53,15 @@
 </div>
 
 <div class="mobile-list-wrapper mb-5">
-  <div *ngFor="let grn of grns; let i = index" class="strip mt-4 mb-3">
+  <div
+    *ngFor="
+      let grn of grns
+        | filter: searchTerm
+        | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }
+      let i = index
+    "
+    class="strip mt-4 mb-3"
+  >
     <div>
       <div>
         <input type="radio" class="form_radio" id="doc-mow{{ i }}" name="document" />
@@ -78,7 +85,6 @@
   </div>
 </div>
 <pagination-controls *ngIf="grns.length" (pageChange)="pageChanged($event)"></pagination-controls>
-
 <button id="next" hidden class="bttn-primary next-step btn-next flex-pr mt-5">Next &rarr;</button>
 <button (click)="isPicked()" class="bttn-primary btn-next flex-pr mt-5">Next &rarr;</button>
 <button id="grnClick" hidden data-toggle="wizard" data-target="#grnViewModal"></button>

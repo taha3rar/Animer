@@ -29,7 +29,9 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
   }
   ngOnInit() {
     this.route.data.subscribe((data) => {
-      this.grns = data['grn'];
+      this.grns = data['grn'].filter((grn: GoodsReceivedNote) => {
+        return grn.paymentStatus.toLowerCase() !== 'paid';
+      });
     });
   }
 
@@ -38,6 +40,7 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
   }
   sortData(sort: Sort) {
     const data = this.grns.slice();
+    console.log(data);
     if (!sort.active || sort.direction === '') {
       this.grns = data;
       return;
@@ -75,7 +78,10 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
         const grns = this.grns.filter((grn) => {
           return grn.paymentStatus !== 'paid';
         });
-        this.grnEmit.emit(grns[a]);
+        console.log(a, 'index');
+        console.log(this.currentPage, 'page');
+        console.log(this.itemsPerPage, 'items');
+        this.grnEmit.emit(grns[(this.currentPage - 1) * this.itemsPerPage + a]);
         $('#next').click();
       }
     });
