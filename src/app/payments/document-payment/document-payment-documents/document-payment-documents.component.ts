@@ -40,7 +40,6 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
   }
   sortData(sort: Sort) {
     const data = this.grns.slice();
-    console.log(data);
     if (!sort.active || sort.direction === '') {
       this.grns = data;
       return;
@@ -78,9 +77,6 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
         const grns = this.grns.filter((grn) => {
           return grn.paymentStatus !== 'paid';
         });
-        console.log(a, 'index');
-        console.log(this.currentPage, 'page');
-        console.log(this.itemsPerPage, 'items');
         this.grnEmit.emit(grns[(this.currentPage - 1) * this.itemsPerPage + a]);
         $('#next').click();
       }
