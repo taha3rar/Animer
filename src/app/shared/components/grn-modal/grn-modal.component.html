@@ -5,8 +5,8 @@
         <button (click)="selectDocument()" class="bttn-primary">
           Select Document
         </button>
-      <i class="click material-icons" (click)="onModalClose()" #closeModal>close</i>
-    </div>
+        <i class="click material-icons" (click)="onModalClose()" #closeModal>close</i>
+      </div>
       <div class="modal-box-center">
         <div class="grn-wrapper">
           <div class="border-box display-ib">
@@ -31,7 +31,7 @@
               <p>{{ grn?.supplier?.fullName }}</p>
               <p>{{ grn?.supplier?.businessName }}</p>
               <p>
-                {{ grn?.supplier?.address }}, {{ grn?.supplier?.location }}, {{ grn?.supplier?.region }},
+                {{ grn?.supplier?.address }}, {{ grn?.supplier?.city }}, {{ grn?.supplier?.stateProvinceRegion }},
                 {{ grn?.supplier?.country }}
               </p>
               <p>{{ grn?.supplier?.phoneNumber }}</p>
