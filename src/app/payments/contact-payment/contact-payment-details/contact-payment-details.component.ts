@@ -7,6 +7,9 @@ import { Contact, DPOWallet, RequestDPOPaymentDTO, Utils } from '@avenews/agt-sd
 import { StepperService } from '@app/core/stepper.service';
 import { Signature } from '@avenews/agt-sdk/lib/types/shared';
 import Swal from 'sweetalert2';
+import * as libphonenumber from 'google-libphonenumber';
+import { countries } from '@app/shared/helpers/countries';
+import { PhoneNumberValidator } from '@app/core/validators/phone.validator';
 declare const $: any;
 
 @Component({
@@ -19,7 +22,12 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
   @Output() payUp = new EventEmitter();
   contacts: Contact[];
   contact: Contact;
+  countries = countries;
+  phoneUtil: any;
   amount = 0;
+  regionCode = 'KE';
+  phoneCode: string;
+  partialPhoneNumber: string;
   paymentForm: FormGroup;
   selectedContact: Contact;
   wallet: DPOWallet;
@@ -34,13 +42,16 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
     this.paymentForm = this.fb.group({
       name: [undefined, Validators.required],
       businessName: [undefined, Validators.required],
-      phoneNumber: [undefined, Validators.required],
+      phoneNumber: [undefined, PhoneNumberValidator(this.regionCode)],
       amount: [undefined, [Validators.required, Validators.min(1)]],
     });
   }
 
   ngOnInit() {
     this.stepperService.stepperInit();
+    this.phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+    this.regionCode = 'KE';
+    this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
     this.route.data.subscribe(({ contacts, wallet }) => {
       this.contacts = [...contacts];
       this.wallet = wallet;
@@ -49,6 +60,7 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
 
     setTimeout(function () {
       $('.select-picker').selectpicker();
+      $('#region_code').selectpicker('refresh');
     }, 200);
   }
   newContact(contact: any) {
@@ -56,7 +68,18 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
     this.refresh();
     this.contact = contact;
   }
-
+  changeRegionCode() {
+    this.phoneCode = this.phoneUtil.getCountryCodeForRegion(this.regionCode);
+    const PNF = libphonenumber.PhoneNumberFormat;
+    let phoneNumber;
+    try {
+      phoneNumber = this.phoneUtil.parse(this.partialPhoneNumber, this.regionCode);
+    } catch (error) {
+      this.paymentForm.patchValue({ phoneNumber: undefined });
+      return;
+    }
+    this.paymentForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
+  }
   refresh() {
     setTimeout(function () {
       $('.select-picker').selectpicker('refresh');
@@ -94,7 +117,12 @@ export class ContactPaymentDetailsComponent extends BaseValidationComponent impl
       this.submit();
     }
   }
-
+  generateLink(code: any, country: any) {
+    return `<img src='../../../assets/img/flags/${code}.png' height='20' height='28'><span>\xa0\xa0${country}</span>`;
+  }
+  markAsTouched(formControl: string) {
+    this.paymentForm.get(formControl).markAsTouched();
+  }
   get canSubmit(): boolean {
     return (
       // tslint:disable: triple-equals

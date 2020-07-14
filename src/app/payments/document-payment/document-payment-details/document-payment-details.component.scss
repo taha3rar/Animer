@@ -1,4 +1,4 @@
-@import "../../../../assets/sass/abstracts/mixins";
+@import '../../../../assets/sass/abstracts/mixins';
 
 #total-box {
   text-align: center;
@@ -28,4 +28,7 @@
   @include respond(phone) {
     margin-top: 25px;
   }
+}
+#phone {
+  height: 3.7rem;
 }

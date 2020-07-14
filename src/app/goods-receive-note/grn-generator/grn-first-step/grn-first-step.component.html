@@ -199,16 +199,44 @@
         id="business"
       />
     </div>
-    <div class="form-group col-md-4 pl-3">
-      <label for="phone">Phone Number *</label>
-      <input
-        (change)="checkRec()"
-        [(ngModel)]="grn.receivedBy.phoneNumber"
-        class="form-control"
-        id="phone"
-        type="tel"
-      />
-    </div>
+    <div [ngClass]="showFieldStyle('phoneNumber')" class="form-group col-md-4">
+      <form>
+        <label for="region_code">Phone Number *</label>
+        <div class="input-group" [ngClass]="showFieldStyle('phoneNumber')">
+          <div id="input-group" class="input-group-prepend">
+            <select
+              data-width="65px"
+              id="region_code"
+              data-live-search="true"
+              class="selectpicker"
+              data-size="7"
+              [(ngModel)]="regionCode"
+              [ngModelOptions]="{ standalone: true }"
+              (change)="changeRegionCode()"
+            >
+              <option
+                *ngFor="let country of countries"
+                [value]="country.value"
+                [attr.data-content]="generateLink(country.value, country.viewValue)"
+              ></option>
+            </select>
+          </div>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            placeholder="Type phone number here..."
+            [(ngModel)]="partialPhoneNumber"
+            [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="changeRegionCode()"
+            (click)="markAsTouched('phoneNumber')"
+          />
+        </div>
+        <div style="color: #a94442;" class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
+          <p>This field is required</p>
+        </div>
+      </form>
+      </div>
   </div>
 </div>
 <button [hidden]="checkForm()" (click)="validate()" class="btn-next flex-r bttn-primary mt-5">
