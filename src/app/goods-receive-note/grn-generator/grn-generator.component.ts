@@ -12,7 +12,7 @@ import { CanComponentDeactivate } from '@app/shared/guards/confirmation.guard';
   selector: 'app-grn-generator',
   templateUrl: './grn-generator.component.html',
   styleUrls: ['./grn-generator.component.scss'],
-  providers: [{ provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }]
+  providers: [{ provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }],
 })
 export class GrnGeneratorComponent implements OnInit, CanComponentDeactivate {
   formDirty: boolean;
@@ -28,11 +28,11 @@ export class GrnGeneratorComponent implements OnInit, CanComponentDeactivate {
       businessName: undefined,
       name: undefined,
       phoneNumber: undefined,
-      countryPhoneCode: '',
+      countryPhoneCode: undefined,
     },
     referenceCode: undefined,
     supplier: undefined,
-    total: undefined
+    total: undefined,
   };
 
   constructor(private router: Router) {}
@@ -49,8 +49,8 @@ export class GrnGeneratorComponent implements OnInit, CanComponentDeactivate {
     return swal({
       text: 'Are you sure you want to leave this page? All information will be lost!',
       buttons: ['Cancel', 'Yes'],
-      icon: 'warning'
-    }).then(value => {
+      icon: 'warning',
+    }).then((value) => {
       if (value) {
         return true;
       } else {

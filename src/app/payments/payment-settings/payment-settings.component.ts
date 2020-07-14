@@ -12,7 +12,7 @@ import swal from 'sweetalert';
 @Component({
   selector: 'app-payment-settings',
   templateUrl: './payment-settings.component.html',
-  styleUrls: ['./payment-settings.component.scss']
+  styleUrls: ['./payment-settings.component.scss'],
 })
 export class PaymentSettingsComponent extends BaseValidationComponent implements OnInit, OnChanges, OnDestroy {
   dpoForm: FormGroup;
@@ -44,7 +44,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
       phoneNumber: [undefined, Validators.required],
       address: [undefined, Validators.required],
       country: [undefined, Validators.required],
-      city: [undefined, Validators.required]
+      city: [undefined, Validators.required],
     });
   }
 
@@ -63,7 +63,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
           city: this.dpoAccount.city || undefined,
           country: this.dpoAccount.country || undefined,
           websiteURL: this.dpoAccount.website || undefined,
-          companyEmail: this.dpoAccount.companyEmail || undefined
+          companyEmail: this.dpoAccount.companyEmail || undefined,
         });
 
         this.dpoForm.disable();
@@ -93,6 +93,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
         registrationNumber: this.userInfo.companyRegistrationNo.value,
         companyEmail: this.userInfo.companyEmail.value,
         website: this.userInfo.websiteURL.value,
+        countryPhoneCode: undefined, // will see
         phoneNumber: this.userInfo.phoneNumber.value,
         countryPhoneCode: '',
         address: this.userInfo.address.value,
@@ -100,7 +101,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
         city: this.userInfo.city.value,
         nationalIdUrl: this.nationalId,
         certificateOfIncorporationUrl: this.certOfIncome,
-        termsAndConditionsUrl: this.userTerms
+        termsAndConditionsUrl: this.userTerms,
       };
       this.sdk
         .registerDPOAccount(dpoAccountRegister)
@@ -109,7 +110,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
           this.router.navigateByUrl('/payments');
           this.dpoForm.disable();
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err); // handle errors
         });
     } else if (!this.nationalId || !this.certOfIncome) {
@@ -150,7 +151,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
       title: 'Just one more thing!',
       icon: 'warning',
       text: 'Please read and accept DPO terms and conditions',
-      buttons: [true, 'OK']
+      buttons: [true, 'OK'],
     });
   }
 }

@@ -232,6 +232,7 @@ export class RegistrationComponent extends BaseValidationComponent implements On
       lastName: this.userf.lastName.value,
       username: this.userf.email.value,
       country: this.userf.country.value,
+      countryPhoneCode: '+' + this.phoneCode,
       password: this.userf.password.value,
       phoneNumber: this.userf.phoneNumber.value,
       countryPhoneCode: '',
