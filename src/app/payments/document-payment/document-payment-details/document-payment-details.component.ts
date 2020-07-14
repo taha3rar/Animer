@@ -37,6 +37,7 @@ export class DocumentPaymentDetailsComponent extends BaseValidationComponent imp
       fullName: [undefined, Validators.required],
       businessName: [undefined, Validators.required],
       phoneNumber: [undefined, PhoneNumberValidator(this.regionCode)],
+      countryPhoneCode: [undefined],
     });
     this.formInput = this.signForm;
     setTimeout(function () {
@@ -54,7 +55,10 @@ export class DocumentPaymentDetailsComponent extends BaseValidationComponent imp
       this.signForm.patchValue({ phoneNumber: undefined });
       return;
     }
-    this.signForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
+    this.signForm.patchValue({
+      phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164),
+      countryPhoneCode: '+' + this.phoneCode,
+    });
   }
   isValid() {
     this.onSubmit(this.signForm);

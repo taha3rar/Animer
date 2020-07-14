@@ -97,6 +97,7 @@ export class GrnFirstStepComponent extends BaseValidationComponent implements On
     }
     this.phoneForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
     this.grn.receivedBy.phoneNumber = this.phoneForm.controls['phoneNumber'].value;
+    this.grn.receivedBy.countryPhoneCode = '+' + this.phoneCode;
   }
 
   change(e: Contact) {

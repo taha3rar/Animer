@@ -29,7 +29,9 @@ export class PaymentDocumentComponent implements OnInit {
             this.router.navigate(['/payments']);
           }
         });
-      } else { this.pay.emit(true); }
+      } else {
+        this.pay.emit(true);
+      }
     } else if (this.payment.goodsReceivedNote && this.payment.goodsReceivedNote.supplier.fullName) {
       if (!Utils.validateDPOPhoneNumber(this.payment.goodsReceivedNote.supplier.phoneNumber)) {
         this.err.phoneError(error).then((data) => {
@@ -37,9 +39,9 @@ export class PaymentDocumentComponent implements OnInit {
             this.router.navigate(['/payments']);
           }
         });
+      } else {
+        this.pay.emit(true);
       }
-    } else {
-      this.pay.emit(true);
     }
   }
 }

@@ -71,6 +71,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       nationalId: [undefined],
       businessName: [undefined],
       phoneNumber: [undefined, PhoneNumberValidator(this.regionCode)],
+      countryPhoneCode: [undefined],
       email: [undefined, [Validators.required, Validators.email]],
       country: [undefined, Validators.required],
       stateProvinceRegion: [undefined],
@@ -132,6 +133,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           nationalId: this.contact.nationalId,
           businessName: this.contact.businessName,
           phoneNumber: this.contact.phoneNumber,
+          countryPhoneCode: this.contact.countryPhoneCode,
           email: this.contact.email,
           country: this.contact.country,
           stateProvinceRegion: this.contact.stateProvinceRegion,
@@ -183,6 +185,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       return;
     }
     this.contactDetailsForm.patchValue({ phoneNumber: this.phoneUtil.format(phoneNumber, PNF.E164) });
+    this.contactDetailsForm.patchValue({ countryPhoneCode: this.phoneCode });
     this.onPhoneChanges();
   }
 
@@ -195,7 +198,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
         nationalId: this.contactf.nationalId.value,
         businessName: this.contactf.businessName.value,
         phoneNumber: this.contactf.phoneNumber.value,
-        countryPhoneCode: '',
+        countryPhoneCode: '+' + this.contactf.countryPhoneCode.value,
         email: this.contactf.email.value,
         country: this.contactf.country.value,
         stateProvinceRegion: this.contactf.stateProvinceRegion.value,
@@ -231,6 +234,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
           phoneNumber: this.contactf.phoneNumber.value,
           email: this.contactf.email.value,
           country: this.contactf.country.value,
+          countryPhoneCode: this.contact.countryPhoneCode,
           stateProvinceRegion: this.contactf.stateProvinceRegion.value,
           city: this.contactf.location.value,
           address: this.contactf.address.value,
@@ -274,6 +278,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
       stateProvinceRegion: undefined,
       location: undefined,
       address: undefined,
+      countryPhoneCode: undefined,
     });
     this.newContact = undefined;
     this.email = null;
