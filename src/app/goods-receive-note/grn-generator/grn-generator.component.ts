@@ -27,7 +27,8 @@ export class GrnGeneratorComponent implements OnInit, CanComponentDeactivate {
     receivedBy: {
       businessName: undefined,
       name: undefined,
-      phoneNumber: undefined
+      phoneNumber: undefined,
+      countryPhoneCode: '',
     },
     referenceCode: undefined,
     supplier: undefined,

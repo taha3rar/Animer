@@ -195,6 +195,7 @@ export class ContactGeneratorComponent extends BaseValidationComponent implement
         nationalId: this.contactf.nationalId.value,
         businessName: this.contactf.businessName.value,
         phoneNumber: this.contactf.phoneNumber.value,
+        countryPhoneCode: '',
         email: this.contactf.email.value,
         country: this.contactf.country.value,
         stateProvinceRegion: this.contactf.stateProvinceRegion.value,

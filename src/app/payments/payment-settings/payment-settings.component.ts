@@ -94,6 +94,7 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
         companyEmail: this.userInfo.companyEmail.value,
         website: this.userInfo.websiteURL.value,
         phoneNumber: this.userInfo.phoneNumber.value,
+        countryPhoneCode: '',
         address: this.userInfo.address.value,
         country: this.userInfo.country.value,
         city: this.userInfo.city.value,
