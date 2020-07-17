@@ -95,7 +95,6 @@ export class PaymentSettingsComponent extends BaseValidationComponent implements
         website: this.userInfo.websiteURL.value,
         countryPhoneCode: undefined, // will see
         phoneNumber: this.userInfo.phoneNumber.value,
-        countryPhoneCode: '',
         address: this.userInfo.address.value,
         country: this.userInfo.country.value,
         city: this.userInfo.city.value,

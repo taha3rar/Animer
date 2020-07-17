@@ -235,7 +235,6 @@ export class RegistrationComponent extends BaseValidationComponent implements On
       countryPhoneCode: '+' + this.phoneCode,
       password: this.userf.password.value,
       phoneNumber: this.userf.phoneNumber.value,
-      countryPhoneCode: '',
       companyName: this.userf.companyName.value,
     };
     if (this.canRegister) {
