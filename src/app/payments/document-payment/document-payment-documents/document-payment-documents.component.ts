@@ -30,7 +30,7 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.grns = data['grn'].filter((grn: GoodsReceivedNote) => {
-        return grn.paymentStatus.toLowerCase() !== 'paid';
+        return grn.paymentStatus !== 'paid';
       });
     });
   }
