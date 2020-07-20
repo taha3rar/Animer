@@ -30,7 +30,7 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.grns = data['grn'].filter((grn: GoodsReceivedNote) => {
-        return grn.paymentStatus === 'partially-paid' || grn.paymentStatus === 'awaiting';
+        return (grn.paymentStatus === 'partially-paid' || grn.paymentStatus === 'awaiting') && grn.currency === 'KES';
       });
     });
   }
@@ -75,7 +75,7 @@ export class DocumentPaymentDocumentsComponent extends BaseListComponent impleme
     $('.form_radio').each((a: any, b: any) => {
       if ($(b).is(':checked')) {
         const grns = this.grns.filter((grn) => {
-          return grn.paymentStatus === 'partially-paid' || grn.paymentStatus === 'awaiting';
+          return (grn.paymentStatus === 'partially-paid' || grn.paymentStatus === 'awaiting') && grn.currency === 'KES';
         });
         this.grnEmit.emit(grns[(this.currentPage - 1) * this.itemsPerPage + a]);
         $('#next').click();
