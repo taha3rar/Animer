@@ -19,12 +19,33 @@
       <p>{{ payment?.contact?.fullName || grn?.supplier?.fullName }}</p>
       <p>{{ payment?.contact?.businessName || grn?.supplier?.businessName }}</p>
       <p>
-        {{ payment?.contact?.address || grn?.supplier?.address }}, {{ payment?.contact?.city || grn?.supplier?.city }},
-        {{ payment?.contact?.stateProvinceRegion || grn?.supplier?.stateProvinceRegion }},
-        {{ payment?.contact?.country || grn?.supplier?.country }}
+        {{ payment?.contact?.fullName || grn?.supplier?.fullName || payment?.goodsReceivedNote?.supplier?.fullName }}
       </p>
-      <p>{{ payment?.contact?.phoneNumber || grn?.supplier?.phoneNumber }}</p>
-      <p>{{ payment?.contact?.email || grn?.supplier?.email }}</p>
+      <p>
+        {{
+          payment?.contact?.businessName ||
+            grn?.supplier?.businessName ||
+            payment?.goodsReceivedNote?.supplier?.businessName
+        }}
+      </p>
+      <p>
+        {{ payment?.contact?.address || grn?.supplier?.address || payment?.goodsReceivedNote?.supplier?.address }},
+        {{ payment?.contact?.city || grn?.supplier?.city || payment?.goodsReceivedNote?.supplier?.city }},
+        {{
+          payment?.contact?.stateProvinceRegion ||
+            grn?.supplier?.stateProvinceRegion ||
+            payment?.goodsReceivedNote?.supplier?.stateProvinceRegion
+        }},
+        {{ payment?.contact?.country || grn?.supplier?.country || payment?.goodsReceivedNote?.supplier?.country }}
+      </p>
+      <p>
+        {{
+          payment?.contact?.phoneNumber ||
+            grn?.supplier?.phoneNumber ||
+            payment?.goodsReceivedNote?.supplier?.phoneNumber
+        }}
+      </p>
+      <p>{{ payment?.contact?.email || grn?.supplier?.email || payment?.goodsReceivedNote?.supplier?.email }}</p>
     </div>
   </div>
 
