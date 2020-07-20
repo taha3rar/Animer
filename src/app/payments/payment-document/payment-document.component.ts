@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { ErrorService } from './../../core/error.service';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { RequestDPOPaymentDTO, Utils, AGTError } from '@avenews/agt-sdk';
+import { RequestDPOPaymentDTO, Utils, AGTError, GoodsReceivedNote } from '@avenews/agt-sdk';
 
 @Component({
   selector: 'app-payment-document',
@@ -10,6 +10,7 @@ import { RequestDPOPaymentDTO, Utils, AGTError } from '@avenews/agt-sdk';
 })
 export class PaymentDocumentComponent implements OnInit {
   @Input() isPayment = true;
+  @Input() grn: GoodsReceivedNote;
   @Input() payment: RequestDPOPaymentDTO;
   @Output() pay = new EventEmitter<boolean>();
   today = new Date();

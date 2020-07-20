@@ -1,4 +1,4 @@
-import { DPOAccount, DPOWallet, DPOTransaction } from '@avenews/agt-sdk';
+import { DPOAccount, DPOWallet, DPOTransaction, GoodsReceivedNote } from '@avenews/agt-sdk';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { defaultValues } from '@app/shared/helpers/default_values';
@@ -15,6 +15,7 @@ export class PaymentsListComponent implements OnInit {
   transactions: DPOTransaction[];
   topUpApproved = false;
   currentPage = [1, 1];
+  grns: GoodsReceivedNote[];
   itemsPerPage = [defaultValues.items_per_page, defaultValues.items_per_page];
   searchTerm: string;
   searchPlaceholder = 'Search payments...';
@@ -25,10 +26,11 @@ export class PaymentsListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({ account, wallet, transactions }) => {
+    this.route.data.subscribe(({ account, wallet, transactions, grns }) => {
       this.dpoAccount = account;
       this.wallet = wallet;
       this.transactions = transactions;
+      this.grns = grns;
       if (
         this.dpoAccount &&
         this.dpoAccount.status === 'approved' &&
@@ -57,8 +59,13 @@ export class PaymentsListComponent implements OnInit {
     if (tx.type === 'payment') {
       const contact = tx.contact || (tx.goodsReceivedNote && tx.goodsReceivedNote.supplier);
 
-      if (contact) {
+      if (contact && contact.fullName) {
         return contact.fullName;
+      } else {
+        const index = this.grns.findIndex((grn: any) => {
+          return tx.goodsReceivedNote === grn._id; // temporary fix
+        });
+        return this.grns[index].supplier.fullName;
       }
     }
 

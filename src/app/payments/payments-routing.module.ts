@@ -1,3 +1,4 @@
+import { GrnResolver } from './../goods-receive-note/resolvers/grn.resolver';
 import { MyGrnsResolver } from './../goods-receive-note/resolvers/grn-mine.resolver';
 import { TopupViewComponent } from './topup-view/topup-view.component';
 import { DpoAccountResolver } from './resolvers/dpo-account.resolver';
@@ -24,6 +25,7 @@ const routes: Routes = [
         account: DpoAccountResolver,
         wallet: DpoWalletResolver,
         transactions: DpoTransactionResolver,
+        grns: MyGrnsResolver,
       },
       data: {
         title: 'Payments',
@@ -57,7 +59,7 @@ const routes: Routes = [
     {
       path: 'payments/payment/:id',
       component: PaymentViewComponent,
-      resolve: { transaction: TransactionViewResolver },
+      resolve: { transaction: TransactionViewResolver, grns: MyGrnsResolver },
     },
     {
       path: 'payments/topup/:id',
