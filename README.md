@@ -1,4 +1,4 @@
-# agt-platform
+# One-Farm-Platform
 
 This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
 version 5.3.0
