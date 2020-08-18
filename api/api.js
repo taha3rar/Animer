@@ -438,6 +438,10 @@ const anime = async (url) => {
       if (AU) {
         promises.push(AU);
       }
+      const AR = await getAr(name, num);
+      if (AR) {
+        promises.push(AR);
+      }
       console.log(promises);
       return Promise.all(promises);
     }
@@ -485,6 +489,100 @@ const getEp = async (name, num) => {
     }
   } catch (err) {
     res.status(400).json(false);
+  }
+};
+const getAr = async (name, num) => {
+  console.log(name);
+  if (name === "naruto-shippuden") {
+    let id = "naruto-shippuden-ar";
+    // let start_id = 8714;
+    let episodes = [];
+    over = "";
+    let ep = 1;
+    ep_number = 1;
+    // let url = "https://storage.googleapis.com/linear-theater-254209.appspot.com/v3.4animu.me/One-Piece/One-Piece-Episode-710-1080p.mp4";
+    // let thing = "1_8714.mp4";
+    // let new_url = url + thing;
+    let wa = "%D9%88";
+    let new_url = `https://www.xsanime.com/episode/naruto-shippuuden-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-${num}/`;
+    var t0 = performance.now();
+    let reso = "";
+    let body;
+    let _URLs;
+    let i = 0;
+    reso = await fetch(new_url);
+    body = await reso.text();
+    const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+    _URLs = String(body)
+      .match(match)
+      .filter((url) => {
+        return url.includes("4shared") && url.includes("embed");
+      });
+    if (_URLs) {
+      reso = await fetch("https://" + _URLs);
+      let a = await reso.text();
+      let p = String(a)
+        .match(match)
+        .filter((url) => {
+          return url.includes(".mp4");
+        });
+      if (p) {
+        console.log(p);
+        i++;
+        return Promise.resolve(p);
+      }
+    } else {
+      console.log("nope");
+    }
+    // while (episodes.length != 1) {
+    // new_url = `${url}${ep_number}_${start_id}.mp4`;
+    // ep = ep_number;
+    // if (ep_number >= 1 && ep_number <= 9) {
+    //   over = "-Episode";
+    //   // 191-206
+    // }
+
+    // if (await exists.urlExists(new_url)) {
+    //   console.log(new_url);
+    //   episodes.push(new_url);
+    //   ep_number++;
+    // } else {
+    //   console.log("no");
+    // }
+    // }
+    // else {
+    //     ep = "Episode-" + ep_number;
+    //     new_url = `https://storage.googleapis.com/linear-theater-254209.appspot.com/v3.4animu.me/One-Piece/One-Piece-${ep}-1080p.mp4`;
+    //     if (await exists.urlExists(new_url)) {
+    //       console.log(new_url);
+    //       episodes.push(new_url);
+    //       ep_number++;
+    //     }
+    //   }
+    // }
+    // var t1 = performance.now();
+    // console.log(episodes);
+    // console.log(
+    //   "this shit took" +
+    //     (t1 - t0) +
+    //     " milliseconds. to find " +
+    //     episodes.length +
+    //     "episodes lol wtf"
+    // );
+    // // episodes.forEach((ep, i) => {
+    // //   episodes[i] =
+    // //     ep + "?GoogleAccessId=auevod%40auengine.iam.gserviceaccount.com";
+    // // });
+    // const animes = await mongoose.model("Animes").findOne({ name: id }).exec();
+    // const animenz = {
+    //   name: id,
+    //   episodes: episodes,
+    // };
+
+    // const anim = mongoose.model("Animes", schemas.Animes);
+    // new anim(animenz).save().then((data) => {
+    //   res.status(200).json(data);
+    // });
   }
 };
 module.exports = {

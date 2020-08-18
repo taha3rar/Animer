@@ -458,6 +458,7 @@ router.get("/db/watched/:id", async (req, res) => {
   } catch (err) {}
 });
 const fetch = require("node-fetch");
+const { html } = require("cheerio");
 const performance = require("perf_hooks").performance;
 
 router.get("/check", async (req, res) => {
@@ -471,22 +472,29 @@ router.get("/check", async (req, res) => {
   // let thing = "1_8714.mp4";
   // let new_url = url + thing;
   var t0 = performance.now();
-  while (episodes.length != 500) {
+  while (episodes.length != 932) {
     // new_url = `${url}${ep_number}_${start_id}.mp4`;
     ep = ep_number;
-    // if (ep_number < 10) {
-    //   ep = "0" + ep_number;
-    // }
+    if (ep_number < 10) {
+      ep = "0" + ep_number;
+    }
     // if (ep_number >= 1 && ep_number <= 9) {
     //   over = "-Episode";
     //   // 191-206
     // }
-    new_url = `https://storage.googleapis.com/linear-theater-254209.appspot.com/v5.4animu.me/Naruto-Shippuden/Naruto-Shippuden-Episode-${ep}-1080p.mp4`;
-    console.log(new_url);
+    new_url = `https://storage.googleapis.com/linear-theater-254209.appspot.com/v3.4animu.me/One-Piece/One-Piece-${ep}-1080p.mp4`;
     if (await exists.urlExists(new_url)) {
       console.log(new_url);
       episodes.push(new_url);
       ep_number++;
+    } else {
+      ep = "Episode-" + ep_number;
+      new_url = `https://storage.googleapis.com/linear-theater-254209.appspot.com/v3.4animu.me/One-Piece/One-Piece-${ep}-1080p.mp4`;
+      if (await exists.urlExists(new_url)) {
+        console.log(new_url);
+        episodes.push(new_url);
+        ep_number++;
+      }
     }
   }
   var t1 = performance.now();
@@ -520,5 +528,8 @@ router.get("/episode/:name/:number", async (req, res) => {
   if (episode) {
     res.status(200).json(episode);
   } else res.status(400).json(false);
+});
+router.get("/ch", async (req, res) => {
+  
 });
 module.exports = router;
