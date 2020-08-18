@@ -14,7 +14,7 @@ phases:
       - echo Finished building the Angular app
   post_build:
     commands:
-      - aws s3 sync ./dist s3://agt-frontend-prod --acl 'public-read' --delete
+      - aws s3 sync ./dist s3://one-farm-client-prod --acl 'public-read' --delete
     finally:
       - echo Synced the newest distribution to S3
 artifacts:
