@@ -20,22 +20,15 @@
 <div class="actions-section clearfix" *ngIf="hasContacts">
   <h1 class="main-title align-self-center">Contact List</h1>
   <div class="flex-pr">
-    <button
-      (click)="addContact()"
-      class="bttn-primary bttn-add"
-      data-toggle="wizard"
-      data-target="#addContactWizard"
-      matTooltip="{{ tooltips.add_contact }}"
-      matTooltipPosition="above"
-    >
-      <span class="btn-desktop-txt">Add a Contact</span>
+    <button (click)="addContact()" class="bttn-primary bttn-add" data-toggle="wizard" data-target="#addContactWizard">
+      <span class="btn-desktop-txt">New Contact</span>
       <span class="btn-mobile-txt">Add</span>
     </button>
   </div>
 </div>
 <div class="actions-section clearfix" *ngIf="hasContacts">
   <div class="searchbar d-flex">
-    <input [(ngModel)]="searchTerm" placeholder="Search contacts..." class="search-bar m-0" type="search" />
+    <input [(ngModel)]="searchTerm" placeholder="Search contacts" class="search-bar m-0" type="search" />
     <span class=""></span>
   </div>
 </div>
@@ -43,9 +36,9 @@
 <table class="table main-table" matSort (matSortChange)="sortData($event)" *ngIf="hasContacts">
   <thead>
     <tr id="table-head">
-      <th mat-sort-header="id">ID</th>
+      <th mat-sort-header="id">#</th>
+      <th mat-sort-header="name" class="text-center">Name</th>
       <th mat-sort-header="contact" class="text-center">Contact</th>
-      <th mat-sort-header="details" class="text-center">Details</th>
       <th mat-sort-header="country" class="text-center">Country</th>
       <th class="text-right">Actions</th>
     </tr>
@@ -59,9 +52,9 @@
         let i = index
       "
     >
-      <td>{{ contact.numericId }}</td>
+      <td>1</td>
       <td>
-        <span *ngIf="contact.companyName">{{ contact.companyName }} / </span>{{ contact.fullName }}
+        Some Name
       </td>
       <td>
         <span *ngIf="contact.email && contact.phoneNumber">{{ contact.email }} / {{ contact.phoneNumber }}</span>
@@ -73,7 +66,7 @@
         <span *ngIf="!contact.country">N/A</span>
       </td>
       <td>
-        <a id="view" [routerLink]="['/contact', contact._id]">View</a>
+        <a id="view">View</a>
         <a (click)="editContact(contact)" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
       </td>
     </tr>
@@ -105,10 +98,8 @@
       let i = index
     "
   >
-    <div># {{ contact.numericId }}</div>
-    <div>
-      <span *ngIf="contact.companyName">{{ contact.companyName }} / </span>{{ contact.fullName }}
-    </div>
+    <div>#1</div>
+
     <div>
       <span *ngIf="contact.email && contact.phoneNumber">{{ contact.email }} / {{ contact.phoneNumber }}</span>
       <span *ngIf="contact.email && !contact.phoneNumber">{{ contact.email }}</span>
@@ -121,8 +112,10 @@
       </div>
     </div>
     <div class="mt-3">
-      <a id="view" [routerLink]="['/contact', contact._id]">View</a>
-      <a (click)="editContact(contact)" class="ml-4" data-toggle="wizard" data-target="#addContactWizard" id="edit">Edit</a>
+      <a id="view">View</a>
+      <a (click)="editContact(contact)" class="ml-4" data-toggle="wizard" data-target="#addContactWizard" id="edit"
+        >Edit</a
+      >
     </div>
   </div>
 </div>

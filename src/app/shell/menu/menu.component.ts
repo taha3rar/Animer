@@ -26,24 +26,30 @@ export const ROUTES: RouteInfo[] = [
     type: 'link',
     icontype: 'icon-contacts'
   },
+  // {
+  //   path: '/grn',
+  //   title: 'Goods Received',
+  //   type: 'link',
+  //   icontype: 'icon-grn'
+  // },
   {
-    path: '/grn',
-    title: 'Goods Received',
+    path: '/ecosystem',
+    title: 'Ecosystem',
     type: 'link',
     icontype: 'icon-grn'
   },
-  {
-    path: '/finance',
-    title: 'Finance',
-    type: 'link',
-    icontype: 'icon-finance'
-  },
-  {
-    path: '/payments',
-    title: 'Payments',
-    type: 'link',
-    icontype: 'icon-finance'
-  }
+  // {
+  //   path: '/finance',
+  //   title: 'Finance',
+  //   type: 'link',
+  //   icontype: 'icon-finance'
+  // },
+  // {
+  //   path: '/payments',
+  //   title: 'Payments',
+  //   type: 'link',
+  //   icontype: 'icon-finance'
+  // }
 ];
 
 @Component({
