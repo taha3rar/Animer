@@ -489,6 +489,7 @@ const pup = async (alt) => {
         "--no-sandbox",
         "--disable-setuid-sandbox", // these two args for heroku to use puppeteer
       ],
+      headless: true,
     });
     const page = await browser.newPage();
     await page.goto(alt, { waitUntil: "domcontentloaded" });
@@ -500,6 +501,10 @@ const pup = async (alt) => {
         console.log(resp.url());
         resolve(ure);
         await browser.close();
+      } else if (uri && uri.includes("4shared") && uri.includes(".mp4")) {
+        ure.push(resp.url());
+        console.log(resp.url());
+        resolve(ure);
       }
     });
   });
@@ -548,37 +553,41 @@ const getAr = async (name, num) => {
         return url.includes("4shared") && url.includes("embed");
       });
     if (_URLs) {
-      reso = await fetch("https://" + _URLs, {
-        headers: {
-          accept:
-            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-          "accept-language": "en-GB,en;q=0.9,he-IL;q=0.8,he;q=0.7,en-US;q=0.6",
-          "cache-control": "max-age=0",
-          "sec-fetch-dest": "document",
-          "sec-fetch-mode": "navigate",
-          "sec-fetch-site": "none",
-          "sec-fetch-user": "?1",
-          "upgrade-insecure-requests": "1",
-          cookie:
-            "hostid=423655283; Login=1423343796; Password=96cdd64d029d16f47012e6c89ab93f3f; 4langcookie=en; ulin=true; day1host=h; cd1v=QQea9niq1Dea",
-        },
-        referrerPolicy: "no-referrer-when-downgrade",
-        body: null,
-        method: "GET",
-        mode: "cors",
-      });
-      let a = await reso.text();
-      let p = String(a)
-        .match(match)
-        .filter((url) => {
-          return url.includes(".mp4");
-        });
-      if (p) {
-        i++;
-        return Promise.resolve(p);
-      }
-    } else {
-      console.log("nope");
+      return Promise.resolve(await pup("https://" + _URLs));
+      // reso = await fetch("https://" + _URLs, {
+      //       headers: {
+      //         accept:
+      //           "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+      //         "accept-language": "en-GB,en;q=0.9,he-IL;q=0.8,he;q=0.7,en-US;q=0.6",
+      //         "cache-control": "max-age=0",
+      //         "sec-fetch-dest": "document",
+      //         "sec-fetch-mode": "navigate",
+      //         "sec-fetch-site": "none",
+      //         "sec-fetch-user": "?1",
+      //         "upgrade-insecure-requests": "1",
+      //         cookie:
+      //           "hostid=423655283; Login=1423343796; Password=96cdd64d029d16f47012e6c89ab93f3f; 4langcookie=en; ulin=true; day1host=h; cd1v=QQea9niq1Dea",
+      //       },
+      //       referrerPolicy: "no-referrer-when-downgrade",
+      //       body: null,
+      //       method: "GET",
+      //       mode: "cors",
+      //     });
+      //     let a = await reso.text();
+      //     let p = String(a)
+      //       .match(match)
+      //       .filter((url) => {
+      //         return url.includes(".mp4");
+      //       });
+      //     if (p) {
+      //       i++;
+      //       return Promise.resolve(p);
+      //     }
+      //   } else {
+      //     console.log("nope");
+      //   }
+      // }
+      // )
     }
   }
 };
