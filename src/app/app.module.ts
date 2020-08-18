@@ -1,3 +1,4 @@
+import { EcosystemModule } from './ecosystem/ecosystem.module';
 import { PaymentsModule } from './payments/payments.module';
 import { HelpCenterModule } from './help-center/help-center.module';
 import { ProfileModule } from './profile/profile.module';
@@ -45,6 +46,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     LoginModule,
     ContactModule,
     DashboardModule,
+    EcosystemModule,
     ProfileModule,
     NotificationsModule,
     RecaptchaModule,
@@ -68,4 +70,4 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

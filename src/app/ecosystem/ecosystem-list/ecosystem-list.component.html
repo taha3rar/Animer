@@ -1,0 +1,94 @@
+<div class="helper-panel clearfix">
+  <i class="material-icons pull-left">info</i>
+  <div class="d-flex flex-column">
+    <div>
+      <p class="info">
+        Ecosystems is the contact management system that enable you to organise and categorise different business
+        networks.
+      </p>
+    </div>
+    <div>
+      <p class="info">
+        Add new cooperatives, review existing ones, and centrally manage your ecosystems.
+      </p>
+    </div>
+  </div>
+</div>
+<div class="actions-section clearfix">
+  <h1 class="main-title align-self-center">Contact List</h1>
+  <div class="flex-pr">
+    <button class="bttn-primary bttn-add">
+      <span class="btn-desktop-txt">New Ecosystem</span>
+      <span class="btn-mobile-txt">Add</span>
+    </button>
+  </div>
+</div>
+<div class="actions-section clearfix">
+  <div class="searchbar d-flex">
+    <input placeholder="Search ecosystems" class="search-bar m-0" type="search" />
+    <span class=""></span>
+  </div>
+</div>
+<table matSort class="table main-table">
+  <thead>
+    <tr id="table-head">
+      <th mat-sort-header="id">#</th>
+      <th mat-sort-header="name" class="text-center">Name</th>
+      <th mat-sort-header="type" class="text-center">Type</th>
+      <th mat-sort-header="country" class="text-center">Country</th>
+      <th mat-sort-header="members" class="text-center">Members</th>
+      <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>
+        Some Name
+      </td>
+      <td>
+        Type
+      </td>
+      <td>
+        Uganda
+      </td>
+      <td>
+        Memba
+      </td>
+      <td>
+        <a id="view">View</a>
+        <a id="edit">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="strip mt-5" *ngIf="false">
+  <div class="add-supplier-box">
+    <img src="../../../assets/img/default/pi-po/noClient.png" width="340" />
+    <p>Add your first ecosystem and begin trading.</p>
+    <button class="bttn-primary bttn-add">
+      <span>Add your first ecosystem</span>
+    </button>
+  </div>
+</div>
+<div class="mobile-list-wrapper">
+  <div class="strip mt-4 mb-3">
+    <div>#1</div>
+    <div>
+      Some Name
+    </div>
+    <div>
+      Type
+    </div>
+    <div>
+      Uganda
+    </div>
+    <div>
+      Memba
+    </div>
+    <div class="mt-3">
+      <a id="view">View</a>
+      <a class="ml-4" id="edit">Edit</a>
+    </div>
+  </div>
+</div>
