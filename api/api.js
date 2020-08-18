@@ -498,6 +498,7 @@ const pup = async (alt) => {
       try {
         page.on("response", async (resp) => {
           uri = resp.url();
+          console.log(uri)
           if (uri && uri.includes("video.mp4") && uri.includes("mp4upload")) {
             ure.push(resp.url());
             console.log(resp.url());
