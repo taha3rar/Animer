@@ -491,22 +491,33 @@ const pup = async (alt) => {
       ],
       headless: true,
     });
-    const page = await browser.newPage();
-    await page.goto(alt, { waitUntil: "domcontentloaded" });
-    console.log(alt);
-    page.on("response", async (resp) => {
-      uri = resp.url();
-      if (uri && uri.includes("video.mp4") && uri.includes("mp4upload")) {
-        ure.push(resp.url());
-        console.log(resp.url());
-        resolve(ure);
-        await browser.close();
-      } else if (uri && uri.includes("4shared") && uri.includes(".mp4")) {
-        ure.push(resp.url());
-        console.log(resp.url());
-        resolve(ure);
+    try {
+      const page = await browser.newPage();
+      await page.goto(alt, { waitUntil: "domcontentloaded" });
+      console.log(alt);
+      try {
+        page.on("response", async (resp) => {
+          uri = resp.url();
+          if (uri && uri.includes("video.mp4") && uri.includes("mp4upload")) {
+            ure.push(resp.url());
+            console.log(resp.url());
+            resolve(ure);
+            await browser.close();
+          } else if (uri && uri.includes("4shared") && uri.includes(".mp4")) {
+            ure.push(resp.url());
+            console.log(resp.url());
+            browser.close();
+            resolve(ure);
+          }
+        });
+      } catch (e) {
+        console.log(e);
+        browser.close();
       }
-    });
+    } catch (e) {
+      console.log(e);
+      browser.close();
+    }
   });
 };
 const getEp = async (name, num) => {
