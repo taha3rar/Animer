@@ -533,6 +533,7 @@ const getAr = async (name, num) => {
     // let url = "https://storage.googleapis.com/linear-theater-254209.appspot.com/v3.4animu.me/One-Piece/One-Piece-Episode-710-1080p.mp4";
     // let thing = "1_8714.mp4";
     // let new_url = url + thing;
+
     let new_url = `https://www.xsanime.com/episode/naruto-shippuuden-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-${num}/`;
     let reso = "";
     let body;
@@ -547,7 +548,25 @@ const getAr = async (name, num) => {
         return url.includes("4shared") && url.includes("embed");
       });
     if (_URLs) {
-      reso = await fetch("https://" + _URLs);
+      reso = await fetch("https://" + _URLs, {
+        headers: {
+          accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+          "accept-language": "en-GB,en;q=0.9,he-IL;q=0.8,he;q=0.7,en-US;q=0.6",
+          "cache-control": "max-age=0",
+          "sec-fetch-dest": "document",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "none",
+          "sec-fetch-user": "?1",
+          "upgrade-insecure-requests": "1",
+          cookie:
+            "hostid=423655283; Login=1423343796; Password=96cdd64d029d16f47012e6c89ab93f3f; 4langcookie=en; ulin=true; day1host=h; cd1v=QQea9niq1Dea",
+        },
+        referrerPolicy: "no-referrer-when-downgrade",
+        body: null,
+        method: "GET",
+        mode: "cors",
+      });
       let a = await reso.text();
       let p = String(a)
         .match(match)
@@ -555,7 +574,6 @@ const getAr = async (name, num) => {
           return url.includes(".mp4");
         });
       if (p) {
-        console.log(p);
         i++;
         return Promise.resolve(p);
       }
