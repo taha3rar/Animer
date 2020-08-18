@@ -471,6 +471,10 @@ const anime = async (url) => {
       if (AU) {
         promises.push(AU);
       }
+      const AR = await getAr(name, num);
+      if (AR) {
+        promises.push(AR);
+      }
       console.log(promises);
       return Promise.all(promises);
     }
@@ -515,6 +519,49 @@ const getEp = async (name, num) => {
     }
   } catch (err) {
     res.status(400).json(false);
+  }
+};
+const getAr = async (name, num) => {
+  console.log(name);
+  if (name === "naruto-shippuden") {
+    let id = "naruto-shippuden-ar";
+    // let start_id = 8714;
+    let episodes = [];
+    over = "";
+    let ep = 1;
+    ep_number = 1;
+    // let url = "https://storage.googleapis.com/linear-theater-254209.appspot.com/v3.4animu.me/One-Piece/One-Piece-Episode-710-1080p.mp4";
+    // let thing = "1_8714.mp4";
+    // let new_url = url + thing;
+    let new_url = `https://www.xsanime.com/episode/naruto-shippuuden-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-${num}/`;
+    let reso = "";
+    let body;
+    let _URLs;
+    let i = 0;
+    reso = await fetch(new_url);
+    body = await reso.text();
+    const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+    _URLs = String(body)
+      .match(match)
+      .filter((url) => {
+        return url.includes("4shared") && url.includes("embed");
+      });
+    if (_URLs) {
+      reso = await fetch("https://" + _URLs);
+      let a = await reso.text();
+      let p = String(a)
+        .match(match)
+        .filter((url) => {
+          return url.includes(".mp4");
+        });
+      if (p) {
+        console.log(p);
+        i++;
+        return Promise.resolve(p);
+      }
+    } else {
+      console.log("nope");
+    }
   }
 };
 module.exports = {
