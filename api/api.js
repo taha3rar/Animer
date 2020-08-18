@@ -473,7 +473,7 @@ const anime = async (url) => {
       }
       const AR = await getAr(name, num);
       if (AR) {
-        promises.push(AR);
+        promises.push(...AR);
       }
       console.log(promises);
       return Promise.all(promises);
