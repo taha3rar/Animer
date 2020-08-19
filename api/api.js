@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const cloudscraper = require("cloudscraper");
 const cheerio = require("cheerio");
 const url = require("./urls");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-extra");
 const mongoose = require("mongoose");
 const ongoingSeries = async () => {
   const res = await fetch(`${url.BASE_URL}`);
@@ -481,6 +481,8 @@ const anime = async (url) => {
     return Promise.all("sad");
   }
 };
+const StealthPlugin = require("puppeteer-extra-plugin-stealth");
+puppeteer.use(StealthPlugin());
 const pup = async (alt) => {
   return new Promise(async (resolve) => {
     const ure = [];
@@ -498,7 +500,7 @@ const pup = async (alt) => {
       try {
         page.on("response", async (resp) => {
           uri = resp.url();
-          console.log(uri)
+          console.log(uri);
           if (uri && uri.includes("video.mp4") && uri.includes("mp4upload")) {
             ure.push(resp.url());
             console.log(resp.url());
