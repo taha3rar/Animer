@@ -471,10 +471,10 @@ const anime = async (url) => {
       if (AU) {
         promises.push(AU);
       }
-      const AR = await getAr(name, num);
-      if (AR) {
-        promises.push(AR);
-      }
+      // const AR = await getAr(name, num);
+      // if (AR) {
+      //   promises.push(AR);
+      // }
       console.log(promises);
       return Promise.all(promises);
     }
