@@ -471,10 +471,10 @@ const anime = async (url) => {
       if (AU) {
         promises.push(AU);
       }
-      // const AR = await getAr(name, num);
-      // if (AR) {
-      //   promises.push(AR);
-      // }
+      const AR = await getAr(name, num);
+      if (AR) {
+        promises.push(AR);
+      }
       console.log(promises);
       return Promise.all(promises);
     }
@@ -503,6 +503,57 @@ const pup = async (alt) => {
       }
     });
   });
+};
+const pupe = async (alt) => {
+  const res = await fetch("https://www.solidfiles.com/e/w3Mnk8kaYraAn");
+  const data = await res.text();
+  const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+  const _URLs = String(data)
+    .match(match)
+    .filter((url) => {
+      return url.includes(".mp4");
+    });
+console.log(_URLs)
+  // let i = -1;
+  // const re = await fetch(alt);
+  // const body = await re.text();
+  // const $ = cheerio.load(body);
+  // let match = "Solidfiles";
+  // $("ul.TPlayerNv li").each((index, element) => {
+  //   const $element = $(element);
+  //   if ($element.find("span").text().includes(match)) {
+  //     i = index + 1;
+  //     match = "oiasjdiowqdjijwqdiowq";
+  //     console.log(i);
+  //   }
+  // });
+  // return new Promise(async (resolve) => {
+  //   const ure = [];
+  //   const browser = await puppeteer.launch({
+  //     args: [
+  //       "--no-sandbox",
+  //       "--disable-setuid-sandbox", // these two args for heroku to use puppeteer
+  //     ],
+  //     headless: false,
+  //   });
+  //   try {
+  //     const page = await browser.newPage();
+  //     await page.goto(alt, { waitUntil: "domcontentloaded" });
+  //     await page.click(`ul.TPlayerNv li[data-tplayernv='Opt${i}']`);
+  //     page.on("response", async (resp) => {
+  //       uri = resp.url();
+  //       if (uri && uri.includes("solidfiles")) {
+  //         ure.push(resp.url());
+  //         console.log(resp.url());
+  //         resolve(ure);
+  //         await browser.close();
+  //       }
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //     await browser.close();
+  //   }
+  // });
 };
 const getEp = async (name, num) => {
   try {
@@ -557,4 +608,5 @@ module.exports = {
   decodeVidstreamingIframeURL,
   anime,
   getEp,
+  pupe,
 };
