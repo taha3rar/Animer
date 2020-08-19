@@ -457,10 +457,45 @@ const { anime } = require("../api");
 const performance = require("perf_hooks").performance;
 
 router.get("/check", async (req, res) => {
-  // let id = "hunter-x-hunter-2011";
+  let id = "naruto-shippuden-ar";
   // let start_id = 8714;
   // let ep_number = 1;
-  // let episodes = [];
+  let num = 1;
+  let episodes = [];
+  let new_url = `https://www.xsanime.com/episode/naruto-shippuuden-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-${num}/`;
+  let reso = "";
+  let body;
+  let _URLs;
+  while (num <= 500) {
+    new_url = `https://www.xsanime.com/episode/naruto-shippuuden-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-${num}/`;
+    reso = await fetch(new_url);
+    body = await reso.text();
+    const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+    _URLs = String(body)
+      .match(match)
+      .filter((url) => {
+        return url.includes("4shared") && url.includes("embed");
+      });
+    if (_URLs.length >= 1) {
+      reso = await fetch("https://" + _URLs);
+      let a = await reso.text();
+      let p = String(a)
+        .match(match)
+        .filter((url) => {
+          return url.includes(".mp4");
+        });
+      if (p) {
+        console.log(p[0]);
+        episodes.push(p[0]);
+        if (num % 10 == 0) console.log(num);
+        num++;
+      }
+    } else {
+      console.log("bad " + num);
+      episodes.push(num);
+      num++;
+    }
+  }
   // let url = "https://storage.googleapis.com/auengine.appspot.com/393/sub/";
   // let thing = "1_8714.mp4";
   // let new_url = url + thing;
@@ -487,16 +522,16 @@ router.get("/check", async (req, res) => {
   //   episodes[i] =
   //     ep + "?GoogleAccessId=auevod%40auengine.iam.gserviceaccount.com";
   // });
-  // const animes = await mongoose.model("Animes").findOne({ name: id }).exec();
-  // console.log(animes);
-  // const animenz = {
-  //   name: id,
-  //   episodes: episodes,
-  // };
-  // const anim = mongoose.model("Animes", schemas.Animes);
-  // new anim(animenz).save().then((data) => {
-  //   res.status(200).json(data);
-  // });
+  const animes = await mongoose.model("Animes").findOne({ name: id }).exec();
+  console.log(animes);
+  const animenz = {
+    name: id,
+    episodes: episodes,
+  };
+  const anim = mongoose.model("Animes", schemas.Animes);
+  new anim(animenz).save().then((data) => {
+    res.status(200).json(data);
+  });
 });
 router.get("/episode/:name/:number", async (req, res) => {
   const name = req.params.name;

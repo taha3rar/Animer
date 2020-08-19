@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const cloudscraper = require("cloudscraper");
 const cheerio = require("cheerio");
 const url = require("./urls");
-const puppeteer = require("puppeteer-extra");
+const puppeteer = require("puppeteer");
 const mongoose = require("mongoose");
 const ongoingSeries = async () => {
   const res = await fetch(`${url.BASE_URL}`);
@@ -473,7 +473,7 @@ const anime = async (url) => {
       }
       const AR = await getAr(name, num);
       if (AR) {
-        promises.push(...AR);
+        promises.push(AR);
       }
       console.log(promises);
       return Promise.all(promises);
@@ -481,8 +481,6 @@ const anime = async (url) => {
     return Promise.all("sad");
   }
 };
-const StealthPlugin = require("puppeteer-extra-plugin-stealth");
-puppeteer.use(StealthPlugin());
 const pup = async (alt) => {
   return new Promise(async (resolve) => {
     const ure = [];
@@ -491,36 +489,19 @@ const pup = async (alt) => {
         "--no-sandbox",
         "--disable-setuid-sandbox", // these two args for heroku to use puppeteer
       ],
-      headless: true,
     });
-    try {
-      const page = await browser.newPage();
-      await page.goto(alt, { waitUntil: "domcontentloaded" });
-      console.log(alt);
-      try {
-        page.on("response", async (resp) => {
-          uri = resp.url();
-          console.log(uri);
-          if (uri && uri.includes("video.mp4") && uri.includes("mp4upload")) {
-            ure.push(resp.url());
-            console.log(resp.url());
-            resolve(ure);
-            await browser.close();
-          } else if (uri && uri.includes("4shared") && uri.includes(".mp4")) {
-            ure.push(resp.url());
-            console.log(resp.url());
-            browser.close();
-            resolve(ure);
-          }
-        });
-      } catch (e) {
-        console.log(e);
-        browser.close();
+    const page = await browser.newPage();
+    await page.goto(alt, { waitUntil: "domcontentloaded" });
+    console.log(alt);
+    page.on("response", async (resp) => {
+      uri = resp.url();
+      if (uri && uri.includes("video.mp4") && uri.includes("mp4upload")) {
+        ure.push(resp.url());
+        console.log(resp.url());
+        resolve(ure);
+        await browser.close();
       }
-    } catch (e) {
-      console.log(e);
-      browser.close();
-    }
+    });
   });
 };
 const getEp = async (name, num) => {
@@ -541,67 +522,24 @@ const getEp = async (name, num) => {
   }
 };
 const getAr = async (name, num) => {
-  console.log(name);
-  if (name === "naruto-shippuden") {
-    let id = "naruto-shippuden-ar";
-    // let start_id = 8714;
-    let episodes = [];
-    over = "";
-    let ep = 1;
-    ep_number = 1;
-    // let url = "https://storage.googleapis.com/linear-theater-254209.appspot.com/v3.4animu.me/One-Piece/One-Piece-Episode-710-1080p.mp4";
-    // let thing = "1_8714.mp4";
-    // let new_url = url + thing;
-
-    let new_url = `https://www.xsanime.com/episode/naruto-shippuuden-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-${num}/`;
-    let reso = "";
-    let body;
-    let _URLs;
-    let i = 0;
-    reso = await fetch(new_url);
-    body = await reso.text();
-    const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
-    _URLs = String(body)
-      .match(match)
-      .filter((url) => {
-        return url.includes("4shared") && url.includes("embed");
-      });
-    if (_URLs) {
-      return Promise.resolve(await pup("https://" + _URLs));
-      // reso = await fetch("https://" + _URLs, {
-      //       headers: {
-      //         accept:
-      //           "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-      //         "accept-language": "en-GB,en;q=0.9,he-IL;q=0.8,he;q=0.7,en-US;q=0.6",
-      //         "cache-control": "max-age=0",
-      //         "sec-fetch-dest": "document",
-      //         "sec-fetch-mode": "navigate",
-      //         "sec-fetch-site": "none",
-      //         "sec-fetch-user": "?1",
-      //         "upgrade-insecure-requests": "1",
-      //         cookie:
-      //           "hostid=423655283; Login=1423343796; Password=96cdd64d029d16f47012e6c89ab93f3f; 4langcookie=en; ulin=true; day1host=h; cd1v=QQea9niq1Dea",
-      //       },
-      //       referrerPolicy: "no-referrer-when-downgrade",
-      //       body: null,
-      //       method: "GET",
-      //       mode: "cors",
-      //     });
-      //     let a = await reso.text();
-      //     let p = String(a)
-      //       .match(match)
-      //       .filter((url) => {
-      //         return url.includes(".mp4");
-      //       });
-      //     if (p) {
-      //       i++;
-      //       return Promise.resolve(p);
-      //     }
-      //   } else {
-      //     console.log("nope");
-      //   }
-      // }
-      // )
+  if (name == "naruto-shippuden") {
+    try {
+      const eps = await mongoose
+        .model("Animes")
+        .findOne({ name: "naruto-shippuden-ar" })
+        .exec();
+      if (eps == null) {
+        return Promise.resolve(false);
+      } else {
+        if (num > eps.episodes.length) {
+          return Promise.resolve(false);
+        } else if (num > 0) {
+          console.log(eps.episodes[num - 1]);
+          return Promise.resolve(eps.episodes[num - 1]);
+        }
+      }
+    } catch (err) {
+      res.status(400).json(false);
     }
   }
 };
