@@ -535,7 +535,7 @@ const getAr = async (name, num) => {
           return Promise.resolve(false);
         } else if (num > 0) {
           console.log(eps.episodes[num - 1]);
-          return Promise.resolve(eps.episodes[num - 1]);
+          return Promise.resolve("https://" + eps.episodes[num - 1]);
         }
       }
     } catch (err) {
