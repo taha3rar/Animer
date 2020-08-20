@@ -601,39 +601,47 @@ const getEp = async (name, num) => {
   }
 };
 const getAr = async (name, num) => {
-  if (name == "naruto-shippuden") {
-    try {
-      const eps = await mongoose
-        .model("Animes")
-        .findOne({ name: "naruto-shippuden-ar" })
-        .exec();
-      if (eps == null) {
+  try {
+    const eps = await mongoose
+      .model("Animes")
+      .findOne({ name: name + "-ar" })
+      .exec();
+    if (eps == null) {
+      console.log("not found");
+      return Promise.resolve(false);
+    } else {
+      if (num > eps.episodes.length) {
+        console.log("done");
         return Promise.resolve(false);
-      } else {
-        if (num > eps.episodes.length) {
-          console.log("done");
-          return Promise.resolve(false);
-        } else if (num > 0) {
-          console.log(eps.episodes[num - 1]);
-          return Promise.resolve(await ar(eps.episodes[num - 1]));
-        }
+      } else if (num > 0) {
+        console.log(eps.episodes[num - 1]);
+        return Promise.resolve(await ar(eps.episodes[num - 1]));
       }
-    } catch (err) {
-      // res.status(400).json(false);
-      console.log(err);
     }
+  } catch (err) {
+    // res.status(400).json(false);
+    console.log(err);
   }
 };
 const ar = async (link) => {
-  const res = await fetch(link);
-  const data = await res.text();
-  const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
-  const _URLs = String(data)
-    .match(match)
-    .filter((url) => {
-      return url.includes(".mp4");
-    });
-  return Promise.resolve("http://" + _URLs[0]);
+  return new Promise(async (resolve) => {
+    let a = false;
+    setTimeout(() => {
+      if (!a) {
+        resolve(link);
+      }
+    }, 3000);
+    const res = await fetch(link);
+    const data = await res.text();
+    const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+    const _URLs = String(data)
+      .match(match)
+      .filter((url) => {
+        a = true;
+        return url.includes(".mp4");
+      });
+    resolve("http://" + _URLs[0]);
+  });
 };
 module.exports = {
   animeEpisodeHandler,
