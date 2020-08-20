@@ -615,7 +615,7 @@ const getAr = async (name, num) => {
           return Promise.resolve(false);
         } else if (num > 0) {
           console.log(eps.episodes[num - 1]);
-          return Promise.resolve(await ar("http://" + eps.episodes[num - 1]));
+          return Promise.resolve(await ar(eps.episodes[num - 1]));
         }
       }
     } catch (err) {
@@ -633,7 +633,7 @@ const ar = async (link) => {
     .filter((url) => {
       return url.includes(".mp4");
     });
-  return Promise.resolve(_URLs[0]);
+  return Promise.resolve("http://" + _URLs[0]);
 };
 module.exports = {
   animeEpisodeHandler,
