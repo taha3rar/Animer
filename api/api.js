@@ -615,12 +615,12 @@ const getAr = async (name, num) => {
           return Promise.resolve(false);
         } else if (num > 0) {
           console.log(eps.episodes[num - 1]);
-         return  Promise.resolve(await ar(eps.episodes[num - 1]));
+          return Promise.resolve(await ar("http://" + eps.episodes[num - 1]));
         }
       }
     } catch (err) {
       // res.status(400).json(false);
-      console.log(err)
+      console.log(err);
     }
   }
 };
