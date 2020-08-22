@@ -143,6 +143,6 @@
     Next Step &rarr;
   </button>
 </form>
-<app-contact-generator [doEmit]="true" (contactEmit)="newContact($event)"></app-contact-generator>
+<app-contact-generator (contactEmit)="newContact($event)"></app-contact-generator>
 <app-topup-modal></app-topup-modal>
 <button class="hidden" data-toggle="wizard" data-target="#topUpBalance"></button>

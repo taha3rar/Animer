@@ -227,7 +227,7 @@
 }
 
 .bttn-add span:before {
-  content: "\f067";
+  content: '\f067';
   position: absolute;
   opacity: 0;
   top: -1px;
@@ -671,6 +671,15 @@ a.bttn-line {
 .bttn-outline {
   border: 1.5px solid #d7dee2;
   color: #455263;
+  padding-top: 1px;
+  background: white;
+  transition: all 0.2s ease-in-out;
+}
+.bttn-outline-primary {
+  background: #04a8be12;
+  border: 1.5px solid #37c1ce;
+  color: #37c1ce;
+  font-size: 15px;
   padding-top: 1px;
   background: white;
   transition: all 0.2s ease-in-out;

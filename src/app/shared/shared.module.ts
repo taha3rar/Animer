@@ -36,6 +36,9 @@ import { NumberFormatPipe } from './pipes/number-format.pipe';
 import { NotPaidPipe } from './pipes/not-paid.pipe';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { GrnModalComponent } from './components/grn-modal/grn-modal.component';
+import { FarmerDetailsComponent } from './components/contact-generator/farmer-details/farmer-details.component';
+import { AdditionalDetailsComponent } from './components/contact-generator/additional-details/additional-details.component';
+import { NgbDateCustomParserFormatter } from '@app/shared/customization/ngb-date-parser-il-format';
 
 @NgModule({
   imports: [
@@ -79,6 +82,8 @@ import { GrnModalComponent } from './components/grn-modal/grn-modal.component';
     PaymentStatusPipe,
     TransactionDocumentListComponent,
     NumberFormatPipe,
+    FarmerDetailsComponent,
+    AdditionalDetailsComponent,
   ],
   entryComponents: [],
   exports: [
@@ -89,6 +94,7 @@ import { GrnModalComponent } from './components/grn-modal/grn-modal.component';
     MeasurementPipe,
     ProductQuantityPipe,
     UploadPictureComponent,
+    AdditionalDetailsComponent,
     TutorialControlComponent,
     GrnModalComponent,
     ContactGeneratorComponent,
@@ -103,6 +109,7 @@ import { GrnModalComponent } from './components/grn-modal/grn-modal.component';
     ReferenceCodePipe,
     NumberFormatPipe,
     TransactionDocumentListComponent,
+    FarmerDetailsComponent,
   ],
   providers: [CsvService, DatePipe, DecimalPipe],
 })
