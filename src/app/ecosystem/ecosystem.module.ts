@@ -14,6 +14,11 @@ import { TutorialsModule } from '@app/tutorials/tutorials.module';
 import { MatSortModule, MatTabsModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EcosystemRoutingModule } from './ecosystem-routing.module';
+import { EcosystemProfileComponent } from './ecosystem-profile/ecosystem-profile.component';
+import { EcosystemMembersComponent } from './ecosystem-members/ecosystem-members.component';
+import { EcosystemDocumentsComponent } from './ecosystem-documents/ecosystem-documents.component';
+import { EcosystemServicesComponent } from './ecosystem-services/ecosystem-services.component';
+import { EcosystemLeadershipComponent } from './ecosystem-leadership/ecosystem-leadership.component';
 
 @NgModule({
   imports: [
@@ -33,7 +38,12 @@ import { EcosystemRoutingModule } from './ecosystem-routing.module';
   ],
   declarations: [
     EcosystemComponent,
-    EcosystemListComponent
+    EcosystemListComponent,
+    EcosystemProfileComponent,
+    EcosystemMembersComponent,
+    EcosystemDocumentsComponent,
+    EcosystemServicesComponent,
+    EcosystemLeadershipComponent
   ],
 })
 export class EcosystemModule { }

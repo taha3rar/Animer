@@ -19,6 +19,15 @@ const routes: Routes = [
             },
             runGuardsAndResolvers: 'always'
         },
+        {
+          path: 'ecosystem/:id',
+          component: EcosystemComponent,
+          canActivate: [PermissionGuard],
+          data: {
+              title: 'Ecosystem',
+          },
+          runGuardsAndResolvers: 'always'
+      },
     ])
 ];
 
