@@ -1,3 +1,18 @@
-<p>
-  additional-details works!
-</p>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label class="d-flex" for="member">Member of an ecosystem?</label>
+    <button (click)="member('yes')" id="yes" class="bttn bttn-outline member d-inline-block">Yes</button>
+    <button (click)="member('no')" id="no" class="bttn bttn-outline member d-inline-block">No</button>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-12">
+    <label class="d-flex" for="search">Choose the ecosystem from the list below</label>
+    <input type="search" placeholder="Search Ecosystem..." [(ngModel)]="searchTerm" />
+  </div>
+</div>
+<!-- Ecosystem list -->
+<div class="justify-content-between d-flex">
+  <button class="bttn prev-step bttn-outline-primary">Previous</button>
+  <button class="bttn-primary">Submit</button>
+</div>

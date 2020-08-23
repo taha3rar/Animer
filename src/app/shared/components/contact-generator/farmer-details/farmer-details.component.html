@@ -1,4 +1,4 @@
-<form [formGroup]="farmerDetailsForm" (ngSubmit)="onGeneralSubmit()">
+<form [formGroup]="farmerDetailsForm">
   <div class="col-md-12">
     <div class="form-row">
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('fullName')">
@@ -18,17 +18,20 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6" [ngClass]="showFieldStyle('file')">
-        <label for="file">Copy of identification document *</label>
+        <label class="file-upload" for="file">Copy of identification document *</label>
         <input hidden type="file" formControlName="file" class="form-control" id="file" />
         <button (click)="fileUpload()" class="bttn bttn-outline-primary">Upload</button>
         <div class="help-block" *ngIf="isFieldInvalid('file')">
           <p>This field is required</p>
         </div>
       </div>
-      <div class="form-group col-md-6">
-        <label class="d-flex" for="gender">Gender *</label>
-        <button (click)="gender('male')" id="male" class="bttn bttn-outline gender d-inline-flex">Male</button>
-        <button (click)="gender('female')" id="female" class="bttn bttn-outline gender d-inline-flex">Female</button>
+      <div [ngClass]="showFieldStyle('gender')" class="form-group col-md-6">
+        <label id="gender" class="d-flex" for="gender">Gender *</label>
+          <button (click)="gender('male')" id="male" class="bttn bttn-outline gender d-inline-flex">Male</button>
+          <button (click)="gender('female')" id="female" class="bttn bttn-outline gender d-inline-flex">Female</button>
+        <div class="help-block" *ngIf="isFieldInvalid('gender')">
+          <p>This field is required</p>
+        </div>
       </div>
     </div>
     <div class="form-row">
@@ -41,6 +44,7 @@
             class="form-control"
             placeholder="DD/MM/YYYY"
             name="birth"
+            formControlName="birth"
             ngbDatepicker
             #dp3="ngbDatepicker"
             [max]="today"
@@ -128,5 +132,5 @@
   <button (click)="onGeneralSubmit()" class="bttn-primary pull-right">
     Next
   </button>
-  <button id="next" class="bttn-primary pull-right"></button>
+  <button hidden id="next" class="next-step"></button>
 </form>

@@ -78,6 +78,9 @@ label {
     }
   }
 }
+.gender {
+  font-size: 1.4rem !important;
+}
 .bttn-primary {
   border-radius: 30px;
   background: #37c1ce;
@@ -111,4 +114,9 @@ button:disabled {
 .form-control[readonly] {
   background-color: #e9ecef !important;
   opacity: 1;
+}
+.has-error {
+  #gender ,.file-upload {
+    color: red !important;
+  }
 }

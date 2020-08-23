@@ -24,7 +24,7 @@ export class FarmerDetailsComponent extends BaseValidationComponent implements O
     this.farmerDetailsForm = this.fb.group({
       fullName: [undefined, Validators.required],
       nationalId: [undefined, Validators.required],
-      file: [undefined],
+      file: [undefined, Validators.required],
       gender: [undefined, Validators.required],
       birth: [undefined, Validators.required],
       nationality: [undefined, Validators.required],
@@ -41,6 +41,7 @@ export class FarmerDetailsComponent extends BaseValidationComponent implements O
   }
   fileUpload() {
     $('#file').trigger('click');
+    // need endpoint
   }
   get details() {
     return this.farmerDetailsForm.controls;
@@ -63,7 +64,6 @@ export class FarmerDetailsComponent extends BaseValidationComponent implements O
   onGeneralSubmit() {
     this.onSubmit(this.farmerDetailsForm);
     if (this.farmerDetailsForm.valid) {
-      console.log('so')
       $('#next').trigger('click');
     }
   }

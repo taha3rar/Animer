@@ -1,4 +1,4 @@
-<div class="wrapper modal-box" id="addContactWizard">
+<div class="modal-box" id="addContactWizard">
   <div class="modal-box-content-wrapper">
     <div class="modal-box-content">
       <div class="modal-box-heading">
@@ -12,6 +12,20 @@
       <div class="modal-box-center">
         <div class="stepper-wrapper">
           <div class="stepper desktop-stepper">
+            <ul hidden class="nav nav-tabs">
+              <li class="active">
+                <a data-toggle="tab" class="label" href="#farmer-details">
+                  <span class="round-tab horizantal-line">1</span>
+                  <span class="step-text">Add Payment Details</span>
+                </a>
+              </li>
+              <li>
+                <a data-toggle="tab" class="label" href="#additional-details">
+                  <span class="round-tab horizantal-line">2</span>
+                  <span class="step-text">Review and Submit</span></a
+                >
+              </li>
+            </ul>
             <div class="tab-content">
               <div class="row tab-pane active margin-none" id="farmer-details">
                 <app-farmer-details [contact]="contact" [isEdit]="isEdit"></app-farmer-details>
