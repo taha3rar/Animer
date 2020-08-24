@@ -1,103 +1,53 @@
 @import "../../../assets/sass/abstracts/variables";
+@import "../../../assets/sass/abstracts/mixins";
 
 .back {
   cursor: pointer;
 }
-.client-tabs {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  top: 0;
-  height: calc(100vh - 6rem);
-  width: 15%;
-  background-image: linear-gradient(white, #f2f2f2);
-  padding: 1.5rem 2rem;
-  border-right: 1px solid $light-gray-2;
-  display: flex;
-  flex-direction: column;
 
-  & div:nth-child(2) {
-    align-self: center;
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: bold;
+.header-right {
+  margin-left: auto;
+}
 
-    figure {
-      margin: 1.5rem auto;
-    }
-  }
+.header-part {
+  flex: 1;
+}
 
-  & div:nth-child(3) {
-    font-size: 1.55rem;
-    padding-left: 5rem;
-    margin-left: -1rem;
-    overflow: hidden;
-    ul {
-      list-style: none;
-
-      li {
-        margin-bottom: 1rem;
-      }
-
-      li a {
-        color: rgb(122, 122, 122);
-        text-decoration: none;
-      }
-
-      .active > a {
-        font-weight: bold;
-        font-size: 1.55rem;
-        color: $primary-color;
-        transition: all 0.3s;
-      }
-    }
-  }
-
-  & div:not(:last-child) {
-    margin-bottom: 5rem;
+.header-part:not(:first-child) {
+  border-left: 1px solid #37c1ce;
+  padding-left: 1.2rem;
+  @include respond(phone) {
+    border-left: none;
+    padding-left: 0rem;
   }
 }
 
-.tabs-content {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 85%;
-  height: 95%;
-  padding: 3.5rem 3.7rem;
+.header-part:not(:last-child) {
+  @include respond(phone) {
+    border-bottom: 1px solid #37c1ce;
+    padding:10px 0px;
+  }
 }
-.after-icon {
-  position: relative;
-  bottom: 5px;
-  font: 500 18px/24px Roboto;
-  letter-spacing: 0px;
-  color: #455263;
-  opacity: 1;
+
+.header-part:last-child {
+  @include respond(phone) {
+    padding-top: 10px;
+  }
 }
-.nav-link {
-  background-color: transparent !important;
-  border: none;
-  color: #455263 !important;
-  padding: 0;
-  font: Bold 14px/19px Roboto;
-  padding: 0;
-  margin: 5px 10px;
+
+#eco-header-wrapper {
+  @include respond(phone) {
+    flex-direction: column;
+  }
 }
-.nav-item {
-  margin-right: 32px;
+
+
+.social-media {
+  padding-top: 7px;
+  padding-right: 10px;
 }
-.active .nav-link {
-  border-bottom: 2px solid !important;
-}
-ul {
-  margin-bottom: 20px;
-}
-.fading {
-  transition: opacity 0.15s linear;
-}
-.tab-pane {
-  padding-bottom: 3.2rem;
-}
-.mat-tab-header {
-  border: none !important;
+
+.feather {
+  color: #d3d8df;
+  height: 20px;
 }
