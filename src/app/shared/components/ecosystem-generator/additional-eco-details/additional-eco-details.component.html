@@ -1,4 +1,50 @@
-<p>
-  additional-eco-details works!
-</p>
-<button class="prev-step">prev</button>
+<form [formGroup]="additionalForm">
+  <div class="col-md-12">
+    <div class="form-row">
+      <div class="form-group col-md-12" [ngClass]="showFieldStyle('file')">
+        <label class="file-upload" for="file">Official registration document of the organisation *</label>
+        <p>
+          Please upload a Constitution, Body Corporate Founding Statement, Certificate of Incorporation, or an
+          equivalent document
+        </p>
+        <input hidden type="file" formControlName="file" class="form-control" id="file" />
+        <button (click)="fileUpload()" class="bttn bttn-outline-primary">Upload</button>
+        <div class="help-block" *ngIf="isFieldInvalid('file')">
+          <p>This field is required</p>
+        </div>
+      </div>
+    </div>
+    <div formArrayName="services">
+      <div
+        class="form-row"
+        [formGroupName]="i"
+        *ngFor="let control of (additionalForm?.controls)['services']['controls']; let i = index"
+      >
+        <div class="form-group col-md-12">
+          <label for="service">Additional services</label>
+          <input
+            placeholder="e.g. sorting, drying, packing, etc."
+            type="text"
+            formControlName="service"
+            class="form-control"
+            id="service"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="add-service justify-content-between d-flex">
+      <p (click)="addNewInputField()">
+        Add Service +
+      </p>
+      <p *ngIf="additionalForm.controls['services']['length'] > 1" (click)="removeInputField()">
+        Remove Service -
+      </p>
+    </div>
+  </div>
+  <button (click)="prev()" class="prev-step bttn bttn-outline-primary pull-left">
+    Previous
+  </button>
+  <button (click)="onGeneralSubmit()" class="bttn-primary pull-right">
+    Next
+  </button>
+</form>

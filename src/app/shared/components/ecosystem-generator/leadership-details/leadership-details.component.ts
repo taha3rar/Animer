@@ -67,7 +67,7 @@ export class LeadershipDetailsComponent extends BaseValidationComponent implemen
       $('#next').trigger('click');
     }
   }
-  onPrev(){
+  onPrev() {
     this.titleStepper.emit({ step: 1, title: 'Organisation Details' });
   }
 }
