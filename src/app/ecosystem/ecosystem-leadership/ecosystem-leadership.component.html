@@ -1,3 +1,72 @@
-<p>
-  ecosystem-leadership works!
-</p>
+<div class="d-flex mt-5">
+  <div class="actions-section clearfix">
+    <div class="searchbar d-flex">
+      <input placeholder="Search leaders" class="search-bar m-0" type="search" />
+      <span class=""></span>
+    </div>
+  </div>
+  <div class="flex-pr">
+    <button class="bttn-primary bttn-add" data-toggle="wizard" data-target="#addContactWizard">
+      <span class="btn-desktop-txt">Add Leader</span>
+      <span class="btn-mobile-txt">Add</span>
+    </button>
+  </div>
+
+</div>
+<table class="table main-table" matSort>
+  <thead>
+    <tr id="table-head">
+      <th mat-sort-header="id">#</th>
+      <th mat-sort-header="name" class="text-center">Name</th>
+      <th mat-sort-header="role" class="text-center">Role</th>
+      <th mat-sort-header="contact" class="text-center">Contact</th>
+      <th mat-sort-header="country" class="text-center">Country</th>
+      <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>
+        Some Name
+      </td>
+      <td>
+        Role
+      </td>
+      <td>
+        Rihamkh.114@gmail.com / 050000000
+      </td>
+      <td>
+        Kenya
+      </td>
+      <td>
+        <a id="view">View</a>
+        <a id="edit">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="mobile-list-wrapper">
+  <div class="strip mt-4 mb-3">
+    <div>#1</div>
+    <div>Name</div>
+    <div>
+      Role
+    </div>
+    <div>
+      <span>Rihamkh.114@gmail.com / 050000000</span>
+    </div>
+    <div>
+      <div>
+        Kenya
+      </div>
+    </div>
+    <div class="mt-3">
+      <a id="view">View</a>
+      <a id="edit"
+        >Edit</a
+      >
+    </div>
+  </div>
+</div>
