@@ -39,6 +39,10 @@ import { GrnModalComponent } from './components/grn-modal/grn-modal.component';
 import { FarmerDetailsComponent } from './components/contact-generator/farmer-details/farmer-details.component';
 import { AdditionalDetailsComponent } from './components/contact-generator/additional-details/additional-details.component';
 import { NgbDateCustomParserFormatter } from '@app/shared/customization/ngb-date-parser-il-format';
+import { EcosystemGeneratorComponent } from './components/ecosystem-generator/ecosystem-generator.component';
+import { OrgDetailsComponent } from './components/ecosystem-generator/org-details/org-details.component';
+import { LeadershipDetailsComponent } from './components/ecosystem-generator/leadership-details/leadership-details.component';
+import { AdditionalEcoDetailsComponent } from './components/ecosystem-generator/additional-eco-details/additional-eco-details.component';
 
 @NgModule({
   imports: [
@@ -84,6 +88,10 @@ import { NgbDateCustomParserFormatter } from '@app/shared/customization/ngb-date
     NumberFormatPipe,
     FarmerDetailsComponent,
     AdditionalDetailsComponent,
+    EcosystemGeneratorComponent,
+    OrgDetailsComponent,
+    LeadershipDetailsComponent,
+    AdditionalEcoDetailsComponent,
   ],
   entryComponents: [],
   exports: [
@@ -104,6 +112,7 @@ import { NgbDateCustomParserFormatter } from '@app/shared/customization/ngb-date
     CaptchaComponent,
     StatusPipe,
     PluralPipe,
+    EcosystemGeneratorComponent,
     DpoDocumentsComponent,
     PaymentStatusPipe,
     ReferenceCodePipe,

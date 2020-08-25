@@ -1,0 +1,41 @@
+<div class="modal-box" id="addEcosystemWizard">
+  <div class="modal-box-content-wrapper">
+    <div class="modal-box-content">
+      <div class="modal-box-heading">
+        <i class="material-icons pull-right" (click)="onModalClose()" #closeModal>close</i>
+        <h2 translate class="modal-title">Add Ecosystem</h2>
+      </div>
+      <div class="modal-box-center">
+        <h3>{{ title }} - step {{ step }} of 3</h3>
+      </div>
+      <div class="modal-box-center">
+        <div class="stepper-wrapper">
+          <div class="stepper desktop-stepper">
+            <ul hidden class="nav nav-tabs">
+              <li class="active">
+                <a data-toggle="tab" class="label" href="#org-details"> </a>
+              </li>
+              <li>
+                <a data-toggle="tab" class="label" href="#leadership-details"></a>
+              </li>
+              <li>
+                <a data-toggle="tab" class="label" href="#additional-details"></a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="row tab-pane active margin-none" id="org-details">
+                <app-org-details (titleStepper)="changeStepTitle($event)"></app-org-details>
+              </div>
+              <div class="row tab-pane margin-none" id="leadership-details">
+                <app-leadership-details></app-leadership-details>
+              </div>
+              <div class="row tab-pane margin-none" id="additional-details">
+                <app-additional-eco-details></app-additional-eco-details>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
