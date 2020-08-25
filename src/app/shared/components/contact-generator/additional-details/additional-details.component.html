@@ -1,8 +1,22 @@
 <div class="form-row">
   <div class="form-group col-md-6">
     <label class="d-flex" for="member">Member of an ecosystem?</label>
-    <button (click)="member('yes')" id="yes" class="bttn bttn-outline member d-inline-block">Yes</button>
-    <button (click)="member('no')" id="no" class="bttn bttn-outline member d-inline-block">No</button>
+    <button
+      (click)="member('yes')"
+      [class.bttn-outline-primary]="isMember"
+      id="yes"
+      class="bttn bttn-outline member d-inline-block"
+    >
+      Yes
+    </button>
+    <button
+      (click)="member('no')"
+      [class.bttn-outline-primary]="!isMember && isMember !== undefined"
+      id="no"
+      class="bttn bttn-outline member d-inline-block"
+    >
+      No
+    </button>
   </div>
 </div>
 <div class="form-row">

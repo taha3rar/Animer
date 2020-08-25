@@ -7,18 +7,10 @@ declare const $: any;
 })
 export class AdditionalDetailsComponent implements OnInit {
   searchTerm: string;
+  isMember: boolean;
   constructor() {}
   ngOnInit() {}
   member(type: 'yes' | 'no') {
-    if (type === 'yes') {
-      $('#no').removeClass('bttn-outline-primary');
-      $('#no').addClass('bttn-outline');
-    } else {
-      $('#yes').removeClass('bttn-outline-primary');
-      $('#yes').addClass('bttn-outline');
-    }
-
-    $(`#${type}`).addClass('bttn-outline-primary');
-    $(`#${type}`).removeClass('bttn-outline');
+    type === 'yes' ? (this.isMember = true) : (this.isMember = false);
   }
 }
