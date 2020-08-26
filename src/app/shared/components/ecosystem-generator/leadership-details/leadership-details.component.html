@@ -27,8 +27,10 @@
       </div>
       <div [ngClass]="showFieldStyle('gender')" class="form-group col-md-6">
         <label id="gender" class="d-flex" for="gender">Gender *</label>
-        <button (click)="gender('male')" id="male" class="bttn bttn-outline gender d-inline-flex">Male</button>
-        <button (click)="gender('female')" id="female" class="bttn bttn-outline gender d-inline-flex">Female</button>
+        <button [class.bttn-outline-primary]="isMale" (click)="gender('male')" id="male"
+          class="bttn bttn-outline gender d-inline-flex">Male</button>
+        <button [class.bttn-outline-primary]="!isMale && isMale !== undefined" (click)="gender('female')" id="female"
+          class="bttn bttn-outline gender d-inline-flex">Female</button>
         <div class="help-block" *ngIf="isFieldInvalid('gender')">
           <p>This field is required</p>
         </div>
@@ -39,17 +41,8 @@
         <div class="form group" [ngClass]="showFieldStyle('birth')">
           <label class="d-flex" for="birth">Date of birth or Birth Year *</label>
           <div class="p-0 form-group date d-flex">
-            <input
-              (click)="dp3.toggle()"
-              id="birth"
-              class="form-control"
-              placeholder="DD/MM/YYYY"
-              name="birth"
-              formControlName="birth"
-              ngbDatepicker
-              #dp3="ngbDatepicker"
-              [max]="today"
-            />
+            <input (click)="dp3.toggle()" id="birth" class="form-control" placeholder="DD/MM/YYYY" name="birth"
+              formControlName="birth" ngbDatepicker #dp3="ngbDatepicker" [max]="today" />
             <div class="input-group-append">
               <button (click)="dp3.toggle()" class="btn btn-feather" style="position: 0;" type="button">
                 <i data-feather="calendar"></i>
@@ -63,13 +56,8 @@
       </div>
       <div [ngClass]="showFieldStyle('role')" class="form-group col-md-6">
         <label for="role">Role in the organisation *</label>
-        <input
-          placeholder="e.g. partner, shareholder, director, CEO, etc."
-          type="text"
-          formControlName="role"
-          class="form-control"
-          id="role"
-        />
+        <input placeholder="e.g. partner, shareholder, director, CEO, etc." type="text" formControlName="role"
+          class="form-control" id="role" />
         <div class="help-block" *ngIf="isFieldInvalid('role')">
           <p>This field is required</p>
         </div>
@@ -104,13 +92,8 @@
       </div>
       <div [ngClass]="showFieldStyle('address')" class="form-group col-md-6">
         <label for="address">Address *</label>
-        <input
-          placeholder="e.g. name of city, region, village, school nearby, etc."
-          type="text"
-          class="form-control"
-          formControlName="address"
-          id="address"
-        />
+        <input placeholder="e.g. name of city, region, village, school nearby, etc." type="text" class="form-control"
+          formControlName="address" id="address" />
         <div class="help-block" *ngIf="isFieldInvalid('address')">
           <p>This field is required</p>
         </div>

@@ -1,5 +1,5 @@
 import { BaseValidationComponent } from '@app/shared/components/base-validation/base-validation.component';
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { countries } from '@app/shared/helpers/countries';
 import * as Feather from 'feather-icons';
@@ -14,9 +14,10 @@ export class LeadershipDetailsComponent extends BaseValidationComponent implemen
   step = 1;
   today = new Date();
   leadershipForm: FormGroup;
+  isMale: boolean;
   countries = countries;
   @Output() titleStepper = new EventEmitter<{ title: string; step: number }>();
-
+  @ViewChild('next') next: ElementRef<HTMLElement>;
   constructor(private fb: FormBuilder) {
     super();
     this.leadershipForm = this.fb.group({
@@ -49,22 +50,14 @@ export class LeadershipDetailsComponent extends BaseValidationComponent implemen
     this.leadershipForm.patchValue({
       gender: type,
     });
-    if (type === 'male') {
-      $('#female').removeClass('bttn-outline-primary');
-      $('#female').addClass('bttn-outline');
-    } else {
-      $('#male').removeClass('bttn-outline-primary');
-      $('#male').addClass('bttn-outline');
-    }
-
-    $(`#${type}`).addClass('bttn-outline-primary');
-    $(`#${type}`).removeClass('bttn-outline');
+    type === 'male' ? (this.isMale = true) : (this.isMale = false);
   }
   onGeneralSubmit() {
     this.onSubmit(this.leadershipForm);
     if (this.leadershipForm.valid) {
       this.titleStepper.emit({ step: 3, title: 'Additional Details' });
-      $('#next').trigger('click');
+      const el: HTMLElement = this.next.nativeElement;
+      el.click();
     }
   }
   onPrev() {
