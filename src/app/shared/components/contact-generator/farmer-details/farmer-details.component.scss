@@ -9,7 +9,7 @@
 }
 label {
   font-size: 1.6rem !important;
-  color: #455263 !important;
+  color: #455263;
   font-family: roboto !important;
   font-weight: 400 !important;
 }
@@ -78,8 +78,9 @@ label {
     }
   }
 }
-.gender {
+.radio {
   font-size: 1.4rem !important;
+  color: #455263 !important;
 }
 .bttn-primary {
   border-radius: 30px;
@@ -87,6 +88,14 @@ label {
   @include respond(phone) {
     width: 100%;
   }
+}
+.has-error .input-group-append {
+  border: 1px solid #a94442 !important;
+}
+.btn-feather {
+  border-radius: 2px;
+  background: #e3e5f1;
+  color: #7d8796;
 }
 .date {
   display: inline-flex;
@@ -116,8 +125,9 @@ button:disabled {
   opacity: 1;
 }
 .has-error {
-  #gender,
-  .file-upload {
+  #radio,
+  .file-upload,
+  label {
     color: red !important;
   }
 }

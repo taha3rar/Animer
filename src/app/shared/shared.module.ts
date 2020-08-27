@@ -44,6 +44,7 @@ import { OrgDetailsComponent } from './components/ecosystem-generator/org-detail
 import { LeadershipDetailsComponent } from './components/ecosystem-generator/leadership-details/leadership-details.component';
 import { AdditionalEcoDetailsComponent } from './components/ecosystem-generator/additional-eco-details/additional-eco-details.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -92,6 +93,7 @@ import { AdditionalEcoDetailsComponent } from './components/ecosystem-generator/
     OrgDetailsComponent,
     LeadershipDetailsComponent,
     AdditionalEcoDetailsComponent,
+
   ],
   entryComponents: [],
   exports: [
@@ -119,6 +121,7 @@ import { AdditionalEcoDetailsComponent } from './components/ecosystem-generator/
     NumberFormatPipe,
     TransactionDocumentListComponent,
     FarmerDetailsComponent,
+
   ],
   providers: [CsvService, DatePipe, DecimalPipe],
 })

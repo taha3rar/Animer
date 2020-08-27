@@ -6,7 +6,7 @@ export class BaseValidationComponent {
   @ViewChildren('submitButton') submitButtons: QueryList<any>;
 
   disableSubmitButton(status: boolean) {
-    this.submitButtons.forEach(button => {
+    this.submitButtons.forEach((button) => {
       button.nativeElement.disabled = status;
     });
   }
@@ -23,12 +23,12 @@ export class BaseValidationComponent {
 
   showFieldStyle(field: string) {
     return {
-      'has-error': this.isFieldInvalid(field)
+      'has-error': this.isFieldInvalid(field),
     };
   }
 
   onSubmit(form: FormGroup) {
-    Object.keys(form.controls).forEach(field => {
+    Object.keys(form.controls).forEach((field) => {
       const control = form.get(field);
       if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
@@ -46,7 +46,7 @@ export class BaseValidationComponent {
 
   showFieldStyleNested(parent_field: string, sub_field: string) {
     return {
-      'has-error': this.isFieldInvalidNested(parent_field, sub_field)
+      'has-error': this.isFieldInvalidNested(parent_field, sub_field),
     };
   }
 }

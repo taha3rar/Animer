@@ -1,15 +1,77 @@
 <form [formGroup]="farmerDetailsForm">
   <div class="col-md-12">
     <div class="form-row" *ngFor="let j of arr; let i = index">
-      <ng-container *ngFor="let item of formJson">
+      <ng-container *ngFor="let item of formJson.inputs">
         <div
-          [ngClass]="showFieldStyle(item.fieldName)"
+          [ngClass]="item.required && showFieldStyle(item.fieldName)"
           *ngIf="item.rowNumber === i + 1"
           [class]="'form-group col-md-' + item.size"
         >
-          <label [for]="item.fieldName">{{ item.label }}<span *ngIf="item.validators">*</span></label>
-          <input class="form-control" [type]="item.type" [formControlName]="item.fieldName" [id]="item.fieldName" />
-          <div class="help-block" *ngIf="isFieldInvalid(item.fieldName)">
+          <ng-container *ngIf="item.type === 'text' || item.type === 'number'">
+            <label [for]="item.fieldName">{{ item.label }}<span *ngIf="item.required"> *</span></label>
+            <input class="form-control" [type]="item.type" [formControlName]="item.fieldName" [id]="item.fieldName" />
+          </ng-container>
+          <ng-container *ngIf="item.type === 'select'">
+            <label [for]="item.fieldName">{{ item.label }}<span *ngIf="item.required"> *</span></label>
+            <select formControlName="country" class="form-control" id="country">
+              <option value="null" disabled="true" [selected]="true">{{ item.selectLabel }}</option>
+              <option *ngFor="let country of item.options">{{ country.viewValue }}</option>
+            </select>
+          </ng-container>
+          <ng-container *ngIf="item.type === 'radio'">
+            <label class="d-flex" id="radio" [for]="item.fieldName"
+              >{{ item.label }}<span *ngIf="item.required"> *</span></label
+            >
+            <button
+              [class.bttn-outline-primary]="item.radioBoolean"
+              (click)="radio(item.radioOptions.first, item)"
+              id="{{ item.radioOptions.first }}"
+              class="bttn bttn-outline radio d-inline-flex"
+            >
+              {{ item.radioOptions.first | titlecase }}
+            </button>
+            <button
+              [class.bttn-outline-primary]="!item.radioBoolean && item.radioBoolean !== undefined"
+              (click)="radio(item.radioOptions.second, item)"
+              id="{{ item.radioOptions.second }}"
+              class="bttn bttn-outline radio d-inline-flex"
+            >
+              {{ item.radioOptions.second | titlecase }}
+            </button>
+          </ng-container>
+          <ng-container *ngIf="item.type === 'file'">
+            <label [for]="item.fieldName">{{ item.label }}<span *ngIf="item.required"> *</span></label>
+            <input
+              hidden
+              type="file"
+              [formControlName]="item.fieldName"
+              class="form-control"
+              id="{{ item.fieldName }}"
+            />
+            <button (click)="fileUpload(item.fieldName)" class="bttn bttn-outline-primary">Upload</button>
+          </ng-container>
+          <ng-container *ngIf="item.type === 'date'">
+            <label [for]="item.fieldName">{{ item.label }}<span *ngIf="item.required"> *</span></label>
+            <div class="p-0 form-group date d-flex">
+              <input
+                (click)="dp3.toggle()"
+                id="{{ item.fieldName }}"
+                class="form-control"
+                placeholder="{{ item.placeholder }}"
+                name="{{ item.fieldName }}"
+                formControlName="{{ item.fieldName }}"
+                ngbDatepicker
+                #dp3="ngbDatepicker"
+                [max]="item.max"
+              />
+              <div class="input-group-append">
+                <button (click)="dp3.toggle()" class="btn btn-feather" style="position: 0" type="button">
+                  <i data-feather="calendar"></i>
+                </button>
+              </div>
+            </div>
+          </ng-container>
+          <div class="help-block" *ngIf="isFieldInvalid(item.fieldName) && item.required">
             <p>This field is required</p>
           </div>
         </div>
