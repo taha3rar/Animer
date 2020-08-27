@@ -1,27 +1,22 @@
 <form [formGroup]="farmerDetailsForm">
   <div class="col-md-12">
-
     <div class="form-row" *ngFor="let j of arr; let i = index">
       <ng-container *ngFor="let item of formJson">
-        <div [ngClass]="showFieldStyle(item.fieldName)" *ngIf="item.rowNumber===i+1"
-          [class]="'form-group col-md-' + item.size">
-          <label [for]="item.fieldName">{{item.label}}<span *ngIf="item.validators">*</span></label>
-          <input {{item.actions}} class="form-control" [type]="item.type" [formControlName]="item.fieldName"
-            [id]="item.fieldName">
+        <div
+          [ngClass]="showFieldStyle(item.fieldName)"
+          *ngIf="item.rowNumber === i + 1"
+          [class]="'form-group col-md-' + item.size"
+        >
+          <label [for]="item.fieldName">{{ item.label }}<span *ngIf="item.validators">*</span></label>
+          <input class="form-control" [type]="item.type" [formControlName]="item.fieldName" [id]="item.fieldName" />
+          <div class="help-block" *ngIf="isFieldInvalid(item.fieldName)">
+            <p>This field is required</p>
+          </div>
         </div>
       </ng-container>
-
     </div>
   </div>
 
-  <button (click)="onGeneralSubmit()" class="bttn-primary pull-right">
-    Next
-  </button>
+  <button (click)="onGeneralSubmit()" class="bttn-primary pull-right">Next</button>
   <button hidden id="next" class="next-step"></button>
 </form>
-<!-- *ngIf="expression;else templateName" -->
-<!-- row 
-if i = 0;
-if i !=0 && rownumber[i] == rownumber[i-1]
-else
-row -->

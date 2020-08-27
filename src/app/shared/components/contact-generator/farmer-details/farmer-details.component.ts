@@ -16,45 +16,44 @@ export class FarmerDetailsComponent extends BaseValidationComponent implements O
   title = 'Farmer Details';
   step = 1;
   arr = new Array(3);
-  formJson = [{
-    fieldName: 'fullName',
-    'label': 'Full Name',
-    size: 6,
-    type: 'text',
-    validators: [Validators.required],
-    value: '',
-    rowNumber: 1,
-  },
-  {
-    fieldName: 'lastName',
-    'label': 'Last Name',
-    size: 6,
-    type: 'text',
-    validators: [Validators.required],
-    'value': undefined,
-    rowNumber: 1,
-
-  },
-  {
-    fieldName: 'Id',
-    'label': 'ID',
-    size: 6,
-    type: 'text',
-    validators: [Validators.required],
-    'value': undefined,
-    rowNumber: 2,
-
-  },
-  {
-    fieldName: 'price',
-    'label': 'Price',
-    size: 12,
-    type: 'number',
-    validators: [],
-    'value': undefined,
-    rowNumber: 3,
-
-  }];
+  formJson = [
+    {
+      fieldName: 'fullName',
+      label: 'Full Name',
+      size: 6,
+      type: 'text',
+      validators: [Validators.required],
+      value: '',
+      rowNumber: 1,
+    },
+    {
+      fieldName: 'lastName',
+      label: 'Last Name',
+      size: 6,
+      type: 'text',
+      validators: [Validators.required],
+      value: undefined,
+      rowNumber: 1,
+    },
+    {
+      fieldName: 'Id',
+      label: 'ID',
+      size: 6,
+      type: 'text',
+      validators: [Validators.required],
+      value: undefined,
+      rowNumber: 2,
+    },
+    {
+      fieldName: 'price',
+      label: 'Price',
+      size: 12,
+      type: 'number',
+      validators: [],
+      value: undefined,
+      rowNumber: 3,
+    },
+  ];
   today = new Date();
   farmerDetailsForm: FormGroup;
   countries = countries;

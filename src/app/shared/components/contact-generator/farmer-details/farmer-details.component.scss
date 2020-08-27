@@ -1,7 +1,7 @@
 @import '../../../../../assets/sass/abstracts/mixins';
 
 .form-group {
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.6rem !important;
 }
 
 .margin-bottom {
@@ -116,7 +116,8 @@ button:disabled {
   opacity: 1;
 }
 .has-error {
-  #gender ,.file-upload {
+  #gender,
+  .file-upload {
     color: red !important;
   }
 }
