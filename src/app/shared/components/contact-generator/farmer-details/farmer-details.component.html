@@ -1,136 +1,27 @@
 <form [formGroup]="farmerDetailsForm">
   <div class="col-md-12">
-    <div class="form-row">
-      <div class="form-group col-md-6" [ngClass]="showFieldStyle('fullName')">
-        <label for="first_name">Full Name *</label>
-        <input type="text" formControlName="fullName" class="form-control" id="fullName" />
-        <div class="help-block" *ngIf="isFieldInvalid('fullName')">
-          <p>This field is required</p>
+
+    <div class="form-row" *ngFor="let j of arr; let i = index">
+      <ng-container *ngFor="let item of formJson">
+        <div [ngClass]="showFieldStyle(item.fieldName)" *ngIf="item.rowNumber===i+1"
+          [class]="'form-group col-md-' + item.size">
+          <label [for]="item.fieldName">{{item.label}}<span *ngIf="item.validators">*</span></label>
+          <input {{item.actions}} class="form-control" [type]="item.type" [formControlName]="item.fieldName"
+            [id]="item.fieldName">
         </div>
-      </div>
-      <div [ngClass]="showFieldStyle('nationalId')" class="form-group col-md-6">
-        <label for="national_id">National Identity number *</label>
-        <input type="text" formControlName="nationalId" class="form-control" id="national_id" />
-        <div class="help-block" *ngIf="isFieldInvalid('nationalId')">
-          <p>This field is required</p>
-        </div>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6" [ngClass]="showFieldStyle('file')">
-        <label class="file-upload" for="file">Copy of identification document *</label>
-        <input hidden type="file" formControlName="file" class="form-control" id="file" />
-        <button (click)="fileUpload()" class="bttn bttn-outline-primary">Upload</button>
-        <div class="help-block" *ngIf="isFieldInvalid('file')">
-          <p>This field is required</p>
-        </div>
-      </div>
-      <div [ngClass]="showFieldStyle('gender')" class="form-group col-md-6">
-        <label id="gender" class="d-flex" for="gender">Gender *</label>
-          <button (click)="gender('male')" id="male" class="bttn bttn-outline gender d-inline-flex">Male</button>
-          <button (click)="gender('female')" id="female" class="bttn bttn-outline gender d-inline-flex">Female</button>
-        <div class="help-block" *ngIf="isFieldInvalid('gender')">
-          <p>This field is required</p>
-        </div>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form group col-md-6" [ngClass]="showFieldStyle('birth')">
-        <label class="d-flex" for="birth">Date of birth or Birth Year *</label>
-        <div class="p-0 form-group date col-md-6">
-          <input
-            (click)="dp3.toggle()"
-            id="birth"
-            class="form-control"
-            placeholder="DD/MM/YYYY"
-            name="birth"
-            formControlName="birth"
-            ngbDatepicker
-            #dp3="ngbDatepicker"
-            [max]="today"
-          />
-          <div class="input-group-append">
-            <button
-              (click)="dp3.toggle()"
-              class="btn glyphicon glyphicon-calendar"
-              style="position: 0;"
-              type="button"
-            ></button>
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <input
-            type="text"
-            max="4"
-            placeholder="YYYY"
-            formControlName="birth"
-            class="form-control d-inline-flex"
-            id="birth"
-          />
-        </div>
-        <div class="help-block" *ngIf="isFieldInvalid('birth')">
-          <p>This field is required</p>
-        </div>
-      </div>
-      <div [ngClass]="showFieldStyle('nationality')" class="form-group col-md-6">
-        <label for="nationality">Nationality *</label>
-        <input type="text" formControlName="nationality" class="form-control" id="nationality" />
-        <div class="help-block" *ngIf="isFieldInvalid('nationality')">
-          <p>This field is required</p>
-        </div>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6" [ngClass]="showFieldStyle('phoneNumber')">
-        <label for="phoneNumber">Phone Number *</label>
-        <input type="text" formControlName="phoneNumber" class="form-control" id="phoneNumber" />
-        <div class="help-block" *ngIf="isFieldInvalid('phoneNumber')">
-          <p>This field is required</p>
-        </div>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="email">Email</label>
-        <input type="text" formControlName="email" class="form-control" id="email" />
-      </div>
-    </div>
-    <div class="form-row">
-      <div [ngClass]="showFieldStyle('country')" class="form-group col-md-6">
-        <label for="country">Country *</label>
-        <select formControlName="country" class="form-control" id="country">
-          <option value="null" disabled="true" [selected]="true">Choose a country</option>
-          <option *ngFor="let country of countries">{{ country.viewValue }}</option>
-        </select>
-        <div class="help-block" *ngIf="isFieldInvalid('country')">
-          <p>This field is required</p>
-        </div>
-      </div>
-      <div [ngClass]="showFieldStyle('address')" class="form-group col-md-6">
-        <label for="address">Address *</label>
-        <input
-          placeholder="e.g. name of city, region, village, school nearby, etc."
-          type="text"
-          class="form-control"
-          formControlName="address"
-          id="address"
-        />
-        <div class="help-block" *ngIf="isFieldInvalid('address')">
-          <p>This field is required</p>
-        </div>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="lat">GPS - Latitude</label>
-        <input type="text" class="form-control" formControlName="lat" id="lat" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="long">GPS - Longitude</label>
-        <input type="text" class="form-control" formControlName="long" id="long" />
-      </div>
+      </ng-container>
+
     </div>
   </div>
+
   <button (click)="onGeneralSubmit()" class="bttn-primary pull-right">
     Next
   </button>
   <button hidden id="next" class="next-step"></button>
 </form>
+<!-- *ngIf="expression;else templateName" -->
+<!-- row 
+if i = 0;
+if i !=0 && rownumber[i] == rownumber[i-1]
+else
+row -->

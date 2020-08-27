@@ -1,3 +1,4 @@
+import { DynamicFormsService } from './forms/dynamic-forms-service';
 import { StepperService } from './forms/stepper.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,6 +20,7 @@ import { I18nService } from './i18n.service';
     AuthenticationGuard,
     AlertsService,
     StepperService,
+    DynamicFormsService,
     I18nService,
     {
       provide: RouteReuseStrategy,
