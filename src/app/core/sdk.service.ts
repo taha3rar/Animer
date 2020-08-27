@@ -7,6 +7,6 @@ import { environment } from 'environments/environment';
 })
 export class SdkService extends ApiService {
   constructor() {
-    super(environment.new_api_url);
+    super('sad');
   }
 }

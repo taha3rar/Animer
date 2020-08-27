@@ -43,6 +43,7 @@ import { EcosystemGeneratorComponent } from './components/ecosystem-generator/ec
 import { OrgDetailsComponent } from './components/ecosystem-generator/org-details/org-details.component';
 import { LeadershipDetailsComponent } from './components/ecosystem-generator/leadership-details/leadership-details.component';
 import { AdditionalEcoDetailsComponent } from './components/ecosystem-generator/additional-eco-details/additional-eco-details.component';
+import { FormTestComponent } from './components/forms/form-test/form-test.component';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import { AdditionalEcoDetailsComponent } from './components/ecosystem-generator/
     OrgDetailsComponent,
     LeadershipDetailsComponent,
     AdditionalEcoDetailsComponent,
+    FormTestComponent,
 
   ],
   entryComponents: [],

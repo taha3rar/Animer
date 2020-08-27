@@ -49,4 +49,16 @@ export class BaseValidationComponent {
       'has-error': this.isFieldInvalidNested(parent_field, sub_field),
     };
   }
+  isFieldInvalidArray(parent_field: string, name: string, sub_field: string) {
+    return (
+      this.formInput.get(parent_field).get(name).get(sub_field).invalid &&
+      this.formInput.get(parent_field).get(name).get(sub_field).touched
+    );
+  }
+
+  showFieldStyleArray(parent_field: string, name: string, sub_field: string) {
+    return {
+      'has-error': this.isFieldInvalidArray(parent_field, name, sub_field),
+    };
+  }
 }

@@ -20,14 +20,14 @@ export class Shell {
       path: '',
       component: ShellComponent,
       children: routes,
-      canActivate: [AuthenticationGuard],
+      // canActivate: [AuthenticationGuard],
       runGuardsAndResolvers: 'always',
       // Reuse ShellComponent instance when navigating between child views
       data: { reuse: true },
       resolve: {
         // notifications: NotificationListResolver,
-        currentUser: CurrentUserResolver,
-        progress: CurrentUserProgressResolver
+        // currentUser: CurrentUserResolver,
+        // progress: CurrentUserProgressResolver
       }
     };
   }

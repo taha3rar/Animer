@@ -1,3 +1,4 @@
+import { FormTestComponent } from './../shared/components/forms/form-test/form-test.component';
 import { ContactGRNResolver } from './resolvers/contact.grn.resolver';
 import { ContactComponent } from './contact/contact.component';
 import { NgModule } from '@angular/core';
@@ -17,14 +18,14 @@ const routes: Routes = [
       component: ContactListComponent,
       resolve: {
         currentUser: CurrentUserResolver,
-        contacts: CurrentUserContactsResolver
+        contacts: CurrentUserContactsResolver,
       },
       canActivate: [PermissionGuard],
       data: {
         title: 'Contacts',
-        permission: 'list-clients'
+        permission: 'list-clients',
       },
-      runGuardsAndResolvers: 'always'
+      runGuardsAndResolvers: 'always',
     },
     {
       path: 'contact/:id',
@@ -32,16 +33,20 @@ const routes: Routes = [
       canActivate: [ContactGuard],
       resolve: {
         contact: ContactResolver,
-        grn: ContactGRNResolver
+        grn: ContactGRNResolver,
       },
-      runGuardsAndResolvers: 'always'
-    }
-  ])
+      runGuardsAndResolvers: 'always',
+    },
+    {
+      path: 'form',
+      component: FormTestComponent,
+    },
+  ]),
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ContactGuard, PermissionGuard]
+  providers: [ContactGuard, PermissionGuard],
 })
 export class ContactRoutingModule {}

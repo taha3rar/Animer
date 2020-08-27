@@ -1,0 +1,146 @@
+@import '../../../../../assets/sass/abstracts/mixins';
+
+.form-group {
+  margin-bottom: 1.6rem;
+}
+.margin-bottom {
+  margin-bottom: 0.15rem;
+}
+label {
+  font-size: 1.6rem !important;
+  font-family: roboto !important;
+  font-weight: 400 !important;
+}
+.modal-box-content {
+  max-height: 85vh;
+  padding-bottom: 10px;
+  border-radius: 12px;
+  @include respond(phone) {
+    max-height: 95vh;
+    width: 91%;
+    overflow: auto;
+  }
+}
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 3px solid #37c1ce !important;
+}
+.prev-step {
+  min-width: 18rem;
+  display: block;
+}
+.btn-feather {
+  border-radius: 2px;
+  background: #e3e5f1;
+  color: #7d8796;
+}
+.or {
+  top: 0.8rem;
+}
+.modal-box-center {
+  padding: 1.6rem 3.2rem;
+}
+
+.stepper {
+  position: relative;
+  display: inline-block;
+}
+.modal-title {
+  font-size: 2rem !important;
+  font-family: roboto !important;
+  letter-spacing: 0px !important;
+  color: #455263 !important;
+  margin: 0;
+  font-weight: bold;
+}
+.contact-help-wrapper {
+  display: flex;
+  position: absolute;
+  bottom: 3rem;
+  margin-right: 3rem !important;
+  margin-left: 3rem;
+  width: 30%;
+
+  #contact-help-text {
+    margin-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    p:first-child {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 1.4rem;
+      margin-bottom: 0px;
+      font-size: 15px;
+    }
+
+    a {
+      font-size: 1.4rem;
+      color: #37c1ce;
+      text-decoration-line: underline;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+  }
+}
+.gender {
+  font-size: 1.4rem !important;
+}
+.bttn-primary {
+  border-radius: 30px;
+  background: #37c1ce;
+  @include respond(phone) {
+    width: 100%;
+  }
+}
+.bttn {
+  width: 18rem;
+  display: inline-block !important;
+}
+.date {
+  display: inline-flex;
+  button {
+    font-size: 1.4rem;
+  }
+}
+.has-error .input-group-append {
+  border: 1px solid #a94442 !important;
+}
+input,
+select {
+  background: #ffffff 0% 0% no-repeat padding-box !important;
+  border: 1px solid #e3e5f1;
+  border-radius: 3px !important;
+  height: 3.7rem;
+}
+#input-group .bootstrap-select > .dropdown-toggle,
+.bootstrap-select > .dropdown-toggle.bs-placeholder:active,
+.bootstrap-select > .dropdown-toggle.bs-placeholder:focus,
+.bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
+  height: 3.7rem !important;
+}
+button:disabled {
+  cursor: no-drop;
+}
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef !important;
+  opacity: 1;
+}
+.has-error {
+  #gender,
+  .file-upload {
+    color: red !important;
+  }
+}
+.form-row {
+  margin-bottom: 10px;
+}

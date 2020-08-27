@@ -1,0 +1,216 @@
+<div *ngIf="!showForm">
+  <form [formGroup]="form">
+    <div formArrayName="forms">
+      <div
+        class="form-row"
+        [formGroupName]="i.toString()"
+        *ngFor="let control of (form?.controls)['forms']['controls']; let i = index"
+      >
+        <div class="col-md-12">
+          <div class="form-row">
+            <div [ngClass]="showFieldStyleArray('forms', i.toString(), 'fieldName')" class="form-group col-md-6">
+              <label matTooltip="same as label but type it without spaces" matTooltipPosition="above" for="fieldName"
+                >Field Name *</label
+              >
+              <input type="text" formControlName="fieldName" class="form-control" id="fieldName" />
+            </div>
+            <div [ngClass]="showFieldStyleArray('forms', i.toString(), 'label')" class="form-group col-md-6">
+              <label matTooltip="Label" matTooltipPosition="above" for="label">Label *</label>
+              <input type="text" formControlName="label" class="form-control" id="label" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div [ngClass]="showFieldStyleArray('forms', i.toString(), 'type')" class="form-group col-md-6">
+              <label
+                matTooltip="text and number are normal inputs, radio is the two option input same as gender input, date is for dates, and file is for files. Countries is the dropdown we use for countries across the platform"
+                matTooltipPosition="above"
+                for="type"
+                >Type *</label
+              >
+              <select type="text" formControlName="type" class="form-control" id="type">
+                <option value="text">Text</option>
+                <option value="number">Number</option>
+                <option value="date">Date</option>
+                <option value="file">File</option>
+                <option value="radio">Radio</option>
+                <option value="countries">Countries</option>
+              </select>
+            </div>
+            <div [ngClass]="showFieldStyleArray('forms', i.toString(), 'size')" class="form-group col-md-6">
+              <label
+                matTooltip="Size is from 1 - 12, for 2 in same row just type 6 for both and make sure they are in the same Row Number"
+                matTooltipPosition="above"
+                for="size"
+                >Size *</label
+              >
+              <input type="number" formControlName="size" class="form-control" id="size" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div [ngClass]="showFieldStyleArray('forms', i.toString(), 'rowNumber')" class="form-group col-md-6">
+              <label
+                matTooltip="The number of the row that this field is place in, for example Field Name and Label are in row 1 "
+                matTooltipPosition="above"
+                for="rowNumber"
+                >Row Number *</label
+              >
+              <input type="number" formControlName="rowNumber" class="form-control" id="rowNumber" />
+            </div>
+            <div [ngClass]="showFieldStyleArray('forms', i.toString(), 'placeholder')" class="form-group col-md-6">
+              <label
+                matTooltip="What to show inside the input as an example"
+                matTooltipPosition="above"
+                for="placeholder"
+                >Place Holder *</label
+              >
+              <input
+                placeholder="This is a placeholder"
+                type="text"
+                formControlName="placeholder"
+                class="form-control"
+                id="placeholder"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label matTooltip="Should the field be required" matTooltipPosition="above" class="d-flex" for="required"
+                >Required *</label
+              >
+              <button
+                [class.bttn-outline-primary]="required[i]"
+                (click)="gender('yes', i)"
+                id="male"
+                class="bttn bttn-outline gender d-inline-flex"
+              >
+                Yes
+              </button>
+              <button
+                [class.bttn-outline-primary]="!required[i] && required[i] !== null"
+                (click)="gender('no', i)"
+                id="female"
+                class="bttn bttn-outline gender d-inline-flex"
+              >
+                No
+              </button>
+              <div class="help-block" *ngIf="isFieldInvalidArray('forms', i.toString(), 'required')">
+                <p>This field is required</p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label
+                matTooltip="If type is radio, type the name of the first option eg. if its about gender, then first option should be Male and second option should be Female"
+                matTooltipPosition="above"
+                for="first"
+                >First Options</label
+              >
+              <input type="text" formControlName="first" class="form-control" id="first" />
+            </div>
+            <div class="form-group col-md-3">
+              <label for="second">Second Options</label>
+              <input type="text" formControlName="second" class="form-control" id="second" />
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="d-flex">
+    <button class="d-block bttn bttn-outline-primary" (click)="addNewInputField()">Add</button>
+    <button class="d-block bttn bttn-primary pull-right" (click)="submit()">Submit</button>
+  </div>
+  <h5 class="text-center">Field Count: {{ counter }}</h5>
+</div>
+<div *ngIf="showForm">
+  <form [formGroup]="former">
+    <div class="col-md-12">
+      <div class="form-row" *ngFor="let j of size; let i = index">
+        <ng-container *ngFor="let item of dynamicForm.inputs">
+          <div
+            [ngClass]="item?.required && showFieldStyle(item?.fieldName)"
+            *ngIf="item?.rowNumber === i + 1"
+            [class]="'form-group col-md-' + item?.size"
+          >
+            <ng-container *ngIf="item?.type === 'text' || item?.type === 'number'">
+              <label [for]="item?.fieldName">{{ item?.label }}<span *ngIf="item?.required"> *</span></label>
+              <input
+                class="form-control"
+                [type]="item?.type"
+                [formControlName]="item?.fieldName"
+                [id]="item?.fieldName"
+              />
+            </ng-container>
+            <ng-container *ngIf="item?.type === 'select'">
+              <label [for]="item?.fieldName">{{ item?.label }}<span *ngIf="item?.required"> *</span></label>
+              <select [formControlName]="item?.fieldName" class="form-control" id="country">
+                <option value="null" disabled="true" [selected]="true">{{ item?.selectLabel }}</option>
+                <option *ngFor="let country of item?.options">{{ country.viewValue }}</option>
+              </select>
+            </ng-container>
+            <ng-container *ngIf="item?.type === 'radio'">
+              <label class="d-flex" id="radio" [for]="item?.fieldName"
+                >{{ item?.label }}<span *ngIf="item?.required"> *</span></label
+              >
+              <button
+                [class.bttn-outline-primary]="item?.radioBoolean"
+                (click)="radio(item?.radioOptions.first, item)"
+                id="{{ item?.radioOptions.first }}"
+                class="bttn bttn-outline radio d-inline-flex"
+              >
+                {{ item?.radioOptions.first | titlecase }}
+              </button>
+              <button
+                [class.bttn-outline-primary]="!item?.radioBoolean && item?.radioBoolean !== undefined"
+                (click)="radio(item?.radioOptions.second, item)"
+                id="{{ item?.radioOptions.second }}"
+                class="bttn bttn-outline radio d-inline-flex"
+              >
+                {{ item?.radioOptions.second | titlecase }}
+              </button>
+            </ng-container>
+            <ng-container *ngIf="item?.type === 'file'">
+              <label class="d-flex" [for]="item?.fieldName"
+                >{{ item?.label }}<span *ngIf="item?.required"> *</span></label
+              >
+              <input
+                hidden
+                type="file"
+                [formControlName]="item?.fieldName"
+                class="form-control"
+                id="{{ item?.fieldName }}"
+              />
+              <button (click)="fileUpload(item?.fieldName)" class="bttn bttn-outline-primary">Upload</button>
+            </ng-container>
+            <ng-container *ngIf="item?.type === 'date'">
+              <label [for]="item?.fieldName">{{ item?.label }}<span *ngIf="item?.required"> *</span></label>
+              <div class="p-0 form-group date d-flex">
+                <input
+                  (click)="dp3.toggle()"
+                  id="{{ item?.fieldName }}"
+                  class="form-control"
+                  placeholder="{{ item?.placeholder }}"
+                  name="{{ item?.fieldName }}"
+                  formControlName="{{ item?.fieldName }}"
+                  ngbDatepicker
+                  #dp3="ngbDatepicker"
+                  [max]="item?.max"
+                />
+                <div class="input-group-append">
+                  <button (click)="dp3.toggle()" class="btn btn-feather" style="position: 0" type="button">
+                    <i data-feather="calendar"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+            <div class="help-block" *ngIf="isFieldInvalid(item?.fieldName) && item?.required">
+              <p>This field is required</p>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <button (click)="onSubmit(former)" class="bttn-primary pull-right">Submit</button>
+    </div>
+  </form>
+</div>
