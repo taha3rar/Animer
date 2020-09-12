@@ -445,7 +445,14 @@ const anime = async (url) => {
       ep[0].servers[0] &&
       ep[0].servers[0].iframe
     ) {
-      let link = "https://" + ep[0].servers[0].iframe;
+      let link;
+      if (!ep[0].servers[0].iframe.includes("http")) {
+        console.log("xd");
+        link = "https://" + ep[0].servers[0].iframe;
+      } else {
+        link = ep[0].servers[0].iframe;
+        console.log("sad");
+      }
       console.log(ep[0].servers[0].iframe);
       console.log(link);
       let vid = await decodeVidstreamingIframeURL(link);

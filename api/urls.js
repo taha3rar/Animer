@@ -1,3 +1,3 @@
 module.exports = {
-    BASE_URL: 'https://www.gogoanime.io',
-  };
+  BASE_URL: "https://gogoanimes.tv/",
+};
