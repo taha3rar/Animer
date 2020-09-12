@@ -36,6 +36,8 @@ const ongoingSeries = async () => {
 };
 
 const search = async (query) => {
+  query = query.replace(/-/g, " ");
+  console.log(query);
   const res = await fetch(`${url.BASE_URL}/search.html?keyword=${query}`);
   const body = await res.text();
   const $ = cheerio.load(body);
@@ -451,7 +453,6 @@ const anime = async (url) => {
         link = "https://" + ep[0].servers[0].iframe;
       } else {
         link = ep[0].servers[0].iframe;
-        console.log("sad");
       }
       console.log(ep[0].servers[0].iframe);
       console.log(link);
