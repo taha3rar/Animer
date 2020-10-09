@@ -405,6 +405,7 @@ const animeContentHandler = async (id) => {
 const decodeVidstreamingIframeURL = async (url) => {
   const _url = `${url}`;
   const res = await fetch(_url);
+  console.log(url);
   const data = await res.text();
   const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
   const _URLs = String(data)
@@ -413,10 +414,12 @@ const decodeVidstreamingIframeURL = async (url) => {
       return (
         (!url.includes(".mp4upload") && url.includes(".mp4")) ||
         url.includes("m3u8") ||
-        url.includes("vidstreaming.io/goto.php")
+        url.includes("vidstreaming.io/goto.php") ||
+        (url.includes("gogo-stream.com") && url.includes("url"))
+        // ||url.includes("storage.googleapis.com")
       );
     });
-
+  console.log(_URLs);
   const URLs = [];
   Array.from({ length: _URLs.length }, (v, k) => {
     const option = k + 1;
