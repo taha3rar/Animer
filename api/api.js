@@ -415,8 +415,8 @@ const decodeVidstreamingIframeURL = async (url) => {
         (!url.includes(".mp4upload") && url.includes(".mp4")) ||
         url.includes("m3u8") ||
         url.includes("vidstreaming.io/goto.php") ||
-        (url.includes("gogo-stream.com") && url.includes("url"))
-        // ||url.includes("storage.googleapis.com")
+        (url.includes("gogo-stream.com") && url.includes("url")) ||
+        url.includes("storage.googleapis.com")
       );
     });
   console.log(_URLs);
@@ -439,7 +439,6 @@ const anime = async (url) => {
   let splitted = _url.split("-episode-");
   const name = splitted[0];
   const num = parseInt(splitted[1], 10);
-  console.log(name, num);
   console.log(_url); //anime name and episode in this case
   if (_url.includes("-episode")) {
     const ep = await animeEpisodeHandler(_url);
@@ -458,13 +457,11 @@ const anime = async (url) => {
         link = ep[0].servers[0].iframe;
       }
       console.log(ep[0].servers[0].iframe);
-      console.log(link);
       let vid = await decodeVidstreamingIframeURL(link);
       if (vid.length === 0) {
         vid = await decodeVidstreamingIframeURL(
           link.replace("streaming.php", "loadserver.php")
         );
-        console.log(vid);
         promises = vid;
         if (ep[0].servers && vid.length === 0) {
           console.log("here");
@@ -477,6 +474,19 @@ const anime = async (url) => {
         }
       } else {
         promises = vid;
+      }
+      console.log(splitted);
+      let vi = await decodeVidstreamingIframeURL(
+        "https://4anime.to/" + splitted[0] + "-episode-0" + splitted[1]
+      );
+      console.log(vi, "s");
+      if (vi.length === 0) {
+        vi = await decodeVidstreamingIframeURL(
+          "https://4anime.to/" + splitted[0] + "-episode-" + splitted[1]
+        );
+      }
+      if (vi.length !== 0) {
+        promises.push(vi[0]);
       }
       const AU = await getEp(name, num);
       if (AU) {
