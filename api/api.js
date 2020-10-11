@@ -475,14 +475,16 @@ const anime = async (url) => {
       } else {
         promises = vid;
       }
-      console.log(splitted);
-      let vi = await decodeVidstreamingIframeURL(
-        'https://4anime.to/' + splitted[0] + '-episode-0' + splitted[1]
-      );
-      if (vi.length === 0) {
+      let vi = [];
+      if (splitted && splitted[0] && !splitted[0].includes('one-piece')) {
         vi = await decodeVidstreamingIframeURL(
-          'https://4anime.to/' + splitted[0] + '-episode-' + splitted[1]
+          'https://4anime.to/' + splitted[0] + '-episode-0' + splitted[1]
         );
+        if (vi.length === 0) {
+          vi = await decodeVidstreamingIframeURL(
+            'https://4anime.to/' + splitted[0] + '-episode-' + splitted[1]
+          );
+        }
       }
       if (vi.length !== 0) {
         promises.push(vi[0]);
