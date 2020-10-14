@@ -476,6 +476,13 @@ const anime = async (url) => {
         promises = vid;
       }
       let vi = [];
+      if (
+        splitted[0].includes('shingeki-no-kyojin') &&
+        splitted[0].includes('season-3') &&
+        !splitted[0].includes('part-2')
+      ) {
+        splitted[0] = 'shingeki-no-kyojin-s3';
+      }
       if (splitted && splitted[0] && !splitted[0].includes('one-piece')) {
         vi = await decodeVidstreamingIframeURL(
           'https://4anime.to/' + splitted[0] + '-episode-0' + splitted[1]
