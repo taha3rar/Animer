@@ -403,7 +403,8 @@ const animeContentHandler = async (id) => {
 };
 
 const decodeVidstreamingIframeURL = async (url) => {
-  const _url = `${url}`;
+  var _url = `${url}`;
+  _url = url.replace('streaming.php', 'loadserver.php');
   const res = await fetch(_url);
   console.log(url);
   const data = await res.text();
@@ -415,7 +416,7 @@ const decodeVidstreamingIframeURL = async (url) => {
         (!url.includes('.mp4upload') && url.includes('.mp4')) ||
         url.includes('m3u8') ||
         url.includes('vidstreaming.io/goto.php') ||
-        (url.includes('gogo-stream.com') && url.includes('loadserver')) ||
+        (url.includes('gogo-stream.com') && url.includes('url')) ||
         url.includes('storage.googleapis.com')
       );
     });
