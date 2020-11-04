@@ -415,7 +415,7 @@ const decodeVidstreamingIframeURL = async (url) => {
         (!url.includes('.mp4upload') && url.includes('.mp4')) ||
         url.includes('m3u8') ||
         url.includes('vidstreaming.io/goto.php') ||
-        (url.includes('gogo-stream.com') && url.includes('url')) ||
+        (url.includes('gogo-stream.com') && url.includes('loadserver')) ||
         url.includes('storage.googleapis.com')
       );
     });
