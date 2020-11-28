@@ -276,6 +276,7 @@ const animeEpisodeHandler = async (id) => {
     const animeId = $element
       .find('div.anime_video_body div.anime_video_body_cate div.anime-info a')
       .attr('href');
+    console.log(animeId);
     const category = $element
       .find('div.anime_video_body div.anime_video_body_cate a')
       .attr('href')
@@ -315,8 +316,11 @@ const animeEpisodeHandler = async (id) => {
   });
   return await Promise.all(promises);
 };
-
+const getByName = async (name) => {
+  return animeContentHandler('/category/' + name);
+};
 const animeContentHandler = async (id) => {
+  console.log(id)
   const res = await fetch(`${url.BASE_URL}${id}`);
   const body = await res.text();
   const $ = cheerio.load(body);
@@ -332,7 +336,7 @@ const animeContentHandler = async (id) => {
     const genres = [];
     $element
       .find('div.anime_info_body_bg p.type')
-      .eq(2)
+      .eq(3)
       .find('a')
       .each((j, el) => {
         const $el = $(el);
@@ -340,18 +344,18 @@ const animeContentHandler = async (id) => {
         genres.push(genre);
       });
     const released = parseInt(
-      $element.find('div.anime_info_body_bg p.type').eq(3).text().match(/\d+/g),
+      $element.find('div.anime_info_body_bg p.type').eq(4).text().match(/\d+/g),
       10
     );
     const status = $element
       .find('div.anime_info_body_bg p.type')
-      .eq(4)
+      .eq(5)
       .text()
       .replace('Status:', '')
       .trim();
     const otherName = $element
       .find('div.anime_info_body_bg p.type')
-      .eq(5)
+      .eq(2)
       .text()
       .replace('Other name:', '')
       .trim();
@@ -690,4 +694,5 @@ module.exports = {
   anime,
   getEp,
   pupe,
+  getByName,
 };

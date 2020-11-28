@@ -7,20 +7,21 @@ router.get('/', (req, res) => {
     message: 'FBI OPEN UP',
     entries: [
       {
-        "Search": "/Search/:query",
-        "anime": "/Anime",
-        "AnimeEpisodeHandler": "/AnimeEpisodeHandler/:id",
-        "RecentReleaseEpisodes": "/RecentReleaseEpisodes/:page",
-        "RecentlyAddedSeries": "/RecentlyAddedSeries",
-        "OngoingSeries": "/OngoingSeries",
-        "Alphabet": "/Alphabet/:letter/:page",
-        "NewSeasons": "/NewSeasons/:page",
-        "Movies": "/Movies/:page",
-        "Popular": "/Popular/:page",
-        "Genre": "/Genre/:genre/:page",
-        "DecodeVidstreamingIframeURL": "/DecodeVidstreamingIframeURL"
-      }
-    ]
+        Search: '/Search/:query',
+        anime: '/Anime',
+        AnimeEpisodeHandler: '/AnimeEpisodeHandler/:id',
+        RecentReleaseEpisodes: '/RecentReleaseEpisodes/:page',
+        RecentlyAddedSeries: '/RecentlyAddedSeries',
+        OngoingSeries: '/OngoingSeries',
+        Alphabet: '/Alphabet/:letter/:page',
+        NewSeasons: '/NewSeasons/:page',
+        Movies: '/Movies/:page',
+        Popular: '/Popular/:page',
+        Genre: '/Genre/:genre/:page',
+        DecodeVidstreamingIframeURL: '/DecodeVidstreamingIframeURL',
+        getByName: '/name/:name',
+      },
+    ],
   });
 });
 

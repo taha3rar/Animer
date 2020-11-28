@@ -1,14 +1,14 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const api = require("../api");
-const schemas = require("../../mongo/schemas");
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const helpers = require("../../helpers/helper");
-const cheerio = require("cheerio");
-const exists = require("url-exists-promise");
+const api = require('../api');
+const schemas = require('../../mongo/schemas');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const helpers = require('../../helpers/helper');
+const cheerio = require('cheerio');
+const exists = require('url-exists-promise');
 
-router.get("/Search/:query", (req, res) => {
+router.get('/Search/:query', (req, res) => {
   const query = req.params.query;
   api.search(query).then((search) => {
     res.status(200).json({
@@ -17,7 +17,7 @@ router.get("/Search/:query", (req, res) => {
   });
 });
 
-router.get("/AnimeEpisodeHandler/:id", (req, res) => {
+router.get('/AnimeEpisodeHandler/:id', (req, res) => {
   const id = req.params.id;
   api.animeEpisodeHandler(id).then((anime) => {
     res.status(200).json({
@@ -26,7 +26,7 @@ router.get("/AnimeEpisodeHandler/:id", (req, res) => {
   });
 });
 
-router.get("/RecentReleaseEpisodes/:page", (req, res) => {
+router.get('/RecentReleaseEpisodes/:page', (req, res) => {
   const page = parseInt(req.params.page, 10);
   api.recentReleaseEpisodes(page).then((anime) => {
     res.status(200).json({
@@ -35,7 +35,7 @@ router.get("/RecentReleaseEpisodes/:page", (req, res) => {
   });
 });
 
-router.get("/RecentlyAddedSeries", (req, res) => {
+router.get('/RecentlyAddedSeries', (req, res) => {
   api.recentlyAddedSeries().then((anime) => {
     res.status(200).json({
       anime,
@@ -43,7 +43,7 @@ router.get("/RecentlyAddedSeries", (req, res) => {
   });
 });
 
-router.get("/OngoingSeries", (req, res) => {
+router.get('/OngoingSeries', (req, res) => {
   api.ongoingSeries().then((anime) => {
     res.status(200).json({
       anime,
@@ -51,7 +51,7 @@ router.get("/OngoingSeries", (req, res) => {
   });
 });
 
-router.get("/Alphabet/:letter/:page", (req, res) => {
+router.get('/Alphabet/:letter/:page', (req, res) => {
   const letter = req.params.letter.toUpperCase();
   const page = parseInt(req.params.page, 10);
   api.alphabetList(letter, page).then((anime) => {
@@ -60,8 +60,16 @@ router.get("/Alphabet/:letter/:page", (req, res) => {
     });
   });
 });
+router.get('/name/:name/', (req, res) => {
+  const name = req.params.name;
+  api.getByName(name).then((anime) => {
+    res.status(200).json({
+      anime,
+    });
+  });
+});
 
-router.get("/NewSeasons/:page", (req, res) => {
+router.get('/NewSeasons/:page', (req, res) => {
   const page = parseInt(req.params.page, 10);
   api.newSeasons(page).then((anime) => {
     res.status(200).json({
@@ -70,7 +78,7 @@ router.get("/NewSeasons/:page", (req, res) => {
   });
 });
 
-router.get("/Movies/:page", (req, res) => {
+router.get('/Movies/:page', (req, res) => {
   const page = parseInt(req.params.page, 10);
   api.movies(page).then((movies) => {
     res.status(200).json({
@@ -79,7 +87,7 @@ router.get("/Movies/:page", (req, res) => {
   });
 });
 
-router.get("/Popular/:page", (req, res) => {
+router.get('/Popular/:page', (req, res) => {
   const page = parseInt(req.params.page, 10);
   api.popular(page).then((popular) => {
     res.status(200).json({
@@ -88,7 +96,7 @@ router.get("/Popular/:page", (req, res) => {
   });
 });
 
-router.get("/Genre/:genre/:page", (req, res) => {
+router.get('/Genre/:genre/:page', (req, res) => {
   const genre = req.params.genre;
   const page = parseInt(req.params.page, 10);
   api.genres(genre, page).then((anime) => {
@@ -98,27 +106,27 @@ router.get("/Genre/:genre/:page", (req, res) => {
   });
 });
 
-router.get("/DecodeVidstreamingIframeURL/*", (req, res) => {
+router.get('/DecodeVidstreamingIframeURL/*', (req, res) => {
   const url = req.originalUrl;
-  const urlParts = url.split("/");
-  const _url = `${urlParts[4].concat("/" + urlParts[5])}`.trim();
+  const urlParts = url.split('/');
+  const _url = `${urlParts[4].concat('/' + urlParts[5])}`.trim();
   api.decodeVidstreamingIframeURL(_url).then((videos) => {
     res.status(200).json({
       videos,
     });
   });
 });
-router.get("/anime*", async (req, res) => {
+router.get('/anime*', async (req, res) => {
   const url = req.originalUrl;
-  const urlParts = url.split("/");
-  const _url = url.substr(url.indexOf("?") + 1);
+  const urlParts = url.split('/');
+  const _url = url.substr(url.indexOf('?') + 1);
   api.anime(_url).then((videos) => {
-    if (videos === "sad") {
-      res.status(404).json("sad");
+    if (videos === 'sad') {
+      res.status(404).json('sad');
     } else res.status(200).json(videos);
   });
 });
-router.post("/db/favorites", async (req, res) => {
+router.post('/db/favorites', async (req, res) => {
   let object = req.body;
   let id = object.id;
   let favorite = {
@@ -127,11 +135,11 @@ router.post("/db/favorites", async (req, res) => {
   };
   let toDelete = object.delete;
   console.log(toDelete);
-  const favorites = mongoose.model("favorites", schemas.favorites);
+  const favorites = mongoose.model('favorites', schemas.favorites);
   try {
     const userData = await helpers.getUser(id);
     if (userData === null) {
-      res.status(404).json("Id doesnt exist");
+      res.status(404).json('Id doesnt exist');
     } else {
       try {
         //favs
@@ -154,24 +162,24 @@ router.post("/db/favorites", async (req, res) => {
             favs.save().then((monData) => {
               res.status(200).json(monData);
             });
-          } else res.status(400).json("handle in frontend");
+          } else res.status(400).json('handle in frontend');
         }
       } catch (err) {
         //
       }
     }
   } catch (err) {
-    res.status(404).send("NOT FOUND");
+    res.status(404).send('NOT FOUND');
   }
 });
-router.post("/db/favorites/delete", async (req, res) => {
+router.post('/db/favorites/delete', async (req, res) => {
   let object = req.body;
   let id = object.id;
   let anime = object.anime;
   try {
     const userData = await helpers.getUser(id);
     if (userData === null) {
-      res.status(404).json("Id doesnt exist");
+      res.status(404).json('Id doesnt exist');
     } else {
       try {
         //favs
@@ -185,18 +193,18 @@ router.post("/db/favorites/delete", async (req, res) => {
       }
     }
   } catch (err) {
-    res.status(404).send("NOT FOUND");
+    res.status(404).send('NOT FOUND');
   }
 });
-router.post("/db/keeps/delete", async (req, res) => {
+router.post('/db/keeps/delete', async (req, res) => {
   let object = req.body;
   let id = object.id;
   let keeper = object.keeper;
-  const keep = mongoose.model("keep", schemas.keep);
+  const keep = mongoose.model('keep', schemas.keep);
   try {
     const userData = await helpers.getUser(id);
     if (userData === null) {
-      res.status(404).json("Id doesnt exist");
+      res.status(404).json('Id doesnt exist');
     } else {
       try {
         //favs
@@ -216,54 +224,54 @@ router.post("/db/keeps/delete", async (req, res) => {
       }
     }
   } catch (err) {
-    res.status(404).send("NOT FOUND");
+    res.status(404).send('NOT FOUND');
   }
 });
-router.post("/db/register", async (req, res) => {
+router.post('/db/register', async (req, res) => {
   let user = req.body;
   user.password = await helpers.encrypt(user.password);
-  const mongoUser = mongoose.model("user", schemas.user);
-  mongoose.model("user").findOne({ userName: user.userName }, (err, data) => {
+  const mongoUser = mongoose.model('user', schemas.user);
+  mongoose.model('user').findOne({ userName: user.userName }, (err, data) => {
     if (err) {
-      res.status(404).send("NOT FOUND");
+      res.status(404).send('NOT FOUND');
     } else if (data === null) {
       new mongoUser(user).save().then((data) => {
         res.status(200).json(data);
       });
     } else {
-      res.status(404).json("Username already exists");
+      res.status(404).json('Username already exists');
     }
   });
 });
-router.post("/db/login", async (req, res) => {
+router.post('/db/login', async (req, res) => {
   let user = req.body;
   let hash = await helpers.encrypt(user.password);
   mongoose
-    .model("user")
+    .model('user')
     .findOne({ userName: user.userName }, async (err, data) => {
       if (err) {
-        res.status(404).send("NOT FOUND");
+        res.status(404).send('NOT FOUND');
       } else if (data === null) {
-        res.status(404).json("Username doesnt exist");
+        res.status(404).json('Username doesnt exist');
       } else {
         if (await helpers.compare(user.password, data.password))
           res.status(200).json(data);
-        else res.status(401).json("Wrong username or password");
+        else res.status(401).json('Wrong username or password');
       }
     });
 });
-router.post("/db/watched", async (req, res) => {
+router.post('/db/watched', async (req, res) => {
   let selected_episode = req.body.watched;
   let id = req.body.id;
-  const watched = mongoose.model("watched", schemas.watched);
-  mongoose.model("user").findOne({ _id: id }, (err, data) => {
+  const watched = mongoose.model('watched', schemas.watched);
+  mongoose.model('user').findOne({ _id: id }, (err, data) => {
     if (err) {
       console.log(err);
-      res.status(404).send("NOT FOUND");
+      res.status(404).send('NOT FOUND');
     } else if (data === null) {
-      res.status(404).json("Id doesnt exist");
+      res.status(404).json('Id doesnt exist');
     } else {
-      mongoose.model("watched").findOne({ owner: id }, (err, watch) => {
+      mongoose.model('watched').findOne({ owner: id }, (err, watch) => {
         if (err) {
           console.log(err);
         } else if (watch === null) {
@@ -281,14 +289,14 @@ router.post("/db/watched", async (req, res) => {
             watch.save().then((episodes) => {
               res.status(200).json(episodes);
             });
-          } else res.status(400).json("exists");
+          } else res.status(400).json('exists');
         }
       });
     }
   });
 });
 
-router.post("/db/keep", async (req, res) => {
+router.post('/db/keep', async (req, res) => {
   let object = req.body;
   let id = object.id;
   let num = object.keeper.num;
@@ -299,15 +307,15 @@ router.post("/db/keep", async (req, res) => {
     episode: episode,
   };
   let toDelete = object.delete;
-  const keep = mongoose.model("keep", schemas.keep);
-  mongoose.model("user").findOne({ _id: id }, (err, data) => {
+  const keep = mongoose.model('keep', schemas.keep);
+  mongoose.model('user').findOne({ _id: id }, (err, data) => {
     if (err) {
       console.log(err);
-      res.status(404).send("NOT FOUND");
+      res.status(404).send('NOT FOUND');
     } else if (data === null) {
-      res.status(404).json("Id doesnt exist");
+      res.status(404).json('Id doesnt exist');
     } else {
-      mongoose.model("keep").findOne({ owner: id }, (err, keeps) => {
+      mongoose.model('keep').findOne({ owner: id }, (err, keeps) => {
         if (err) {
           console.log(err);
         } else if (keeps === null) {
@@ -338,30 +346,30 @@ router.post("/db/keep", async (req, res) => {
     }
   });
 });
-router.get("/db/all/:id", async (req, res) => {
+router.get('/db/all/:id', async (req, res) => {
   let id = req.params.id;
   const promise = {
     keeps: {
       keeper: [],
-      owner: "",
-      _id: "",
+      owner: '',
+      _id: '',
     },
     favorites: {
       anime: [],
-      owner: "",
-      _id: "",
+      owner: '',
+      _id: '',
     },
     watched: {
       episodes: [],
-      owner: "",
-      _id: "",
+      owner: '',
+      _id: '',
     },
   };
   try {
     //user
     const userData = await helpers.getUser(id);
     if (userData === null) {
-      res.status(404).json("Id doesnt exist");
+      res.status(404).json('Id doesnt exist');
     } else {
     }
     try {
@@ -394,16 +402,16 @@ router.get("/db/all/:id", async (req, res) => {
   } catch (err) {
     //no user
     console.log(err);
-    res.status(404).send("NOT FOUND");
+    res.status(404).send('NOT FOUND');
     return;
   }
 });
-router.get("/db/favorites/:id", async (req, res) => {
+router.get('/db/favorites/:id', async (req, res) => {
   const id = req.params.id;
   try {
     const userData = await helpers.getUser(id);
     if (userData === null) {
-      res.status(400).json("NOT FOUND");
+      res.status(400).json('NOT FOUND');
     } else {
       try {
         const favs = await helpers.getFavs(id);
@@ -411,17 +419,17 @@ router.get("/db/favorites/:id", async (req, res) => {
           res.status(200).json(favs);
         } else res.status(200).json({});
       } catch (err) {
-        res.status(400).json("FAVS NOT FOUND");
+        res.status(400).json('FAVS NOT FOUND');
       }
     }
   } catch (err) {}
 });
-router.get("/db/keeps/:id", async (req, res) => {
+router.get('/db/keeps/:id', async (req, res) => {
   const id = req.params.id;
   try {
     const userData = await helpers.getUser(id);
     if (userData === null) {
-      res.status(400).json("NOT FOUND");
+      res.status(400).json('NOT FOUND');
     } else {
       try {
         const keeps = await helpers.getKeeps(id);
@@ -429,17 +437,17 @@ router.get("/db/keeps/:id", async (req, res) => {
           res.status(200).json(keeps);
         } else res.status(200).json({});
       } catch (err) {
-        res.status(400).json("KEEPS NOT FOUND");
+        res.status(400).json('KEEPS NOT FOUND');
       }
     }
   } catch (err) {}
 });
-router.get("/db/watched/:id", async (req, res) => {
+router.get('/db/watched/:id', async (req, res) => {
   const id = req.params.id;
   try {
     const userData = await helpers.getUser(id);
     if (userData === null) {
-      res.status(400).json("NOT FOUND");
+      res.status(400).json('NOT FOUND');
     } else {
       try {
         const watched = await helpers.getWatched(id);
@@ -447,16 +455,16 @@ router.get("/db/watched/:id", async (req, res) => {
           res.status(200).json(watched);
         } else res.status(200).json({});
       } catch (err) {
-        res.status(400).json("watched NOT FOUND");
+        res.status(400).json('watched NOT FOUND');
       }
     }
   } catch (err) {}
 });
-const fetch = require("node-fetch");
-const { anime, pupe } = require("../api");
-const performance = require("perf_hooks").performance;
+const fetch = require('node-fetch');
+const { anime, pupe } = require('../api');
+const performance = require('perf_hooks').performance;
 
-router.get("/check", async (req, res) => {
+router.get('/check', async (req, res) => {
   let num = 1;
   let episodes = [];
   let a;
@@ -470,20 +478,20 @@ router.get("/check", async (req, res) => {
   }
   // res.json(a);
   const animes = await mongoose
-    .model("Animes")
-    .findOne({ name: "death-note-ar" })
+    .model('Animes')
+    .findOne({ name: 'death-note-ar' })
     .exec();
   console.log(animes);
   const animenz = {
-    name: "death-note-ar",
+    name: 'death-note-ar',
     episodes: episodes,
   };
-  const anim = mongoose.model("Animes", schemas.Animes);
+  const anim = mongoose.model('Animes', schemas.Animes);
   new anim(animenz).save().then((data) => {
     res.status(200).json(data);
   });
 });
-router.get("/episode/:name/:number", async (req, res) => {
+router.get('/episode/:name/:number', async (req, res) => {
   const name = req.params.name;
   const num = parseInt(req.params.number, 10);
   const episode = await api.getEp(name, num);
