@@ -320,7 +320,7 @@ const getByName = async (name) => {
   return animeContentHandler('/category/' + name);
 };
 const animeContentHandler = async (id) => {
-  console.log(id)
+  console.log(id);
   const res = await fetch(`${url.BASE_URL}${id}`);
   const body = await res.text();
   const $ = cheerio.load(body);
@@ -410,7 +410,7 @@ const decodeVidstreamingIframeURL = async (url) => {
   var _url = `${url}`;
   _url = url.replace('streaming.php', 'loadserver.php');
   const res = await fetch(_url);
-  console.log(url);
+  console.log(_url);
   const data = await res.text();
   const match = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
   const _URLs = String(data)
@@ -421,7 +421,8 @@ const decodeVidstreamingIframeURL = async (url) => {
         url.includes('m3u8') ||
         url.includes('vidstreaming.io/goto.php') ||
         (url.includes('gogo-stream.com') && url.includes('url')) ||
-        url.includes('storage.googleapis.com')
+        url.includes('storage.googleapis.com') ||
+        (url.includes('gogo-play')&&url.includes('url'))
       );
     });
   console.log(_URLs);
