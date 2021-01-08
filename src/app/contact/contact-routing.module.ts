@@ -37,10 +37,7 @@ const routes: Routes = [
       },
       runGuardsAndResolvers: 'always',
     },
-    {
-      path: 'form',
-      component: FormTestComponent,
-    },
+
   ]),
 ];
 

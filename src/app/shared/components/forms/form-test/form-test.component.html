@@ -1,4 +1,4 @@
-<div *ngIf="!showForm">
+<!-- <div *ngIf="!showForm">
   <form [formGroup]="form">
     <div formArrayName="forms">
       <div
@@ -32,7 +32,7 @@
                 <option value="number">Number</option>
                 <option value="date">Date</option>
                 <option value="file">File</option>
-                <option value="radio">Radio</option>
+                <option value="radio">2 Options</option>
                 <option value="countries">Countries</option>
               </select>
             </div>
@@ -43,7 +43,15 @@
                 for="size"
                 >Size *</label
               >
-              <input type="number" formControlName="size" class="form-control" id="size" />
+              <mat-slider
+                class="d-flex"
+                thumbLabel
+                id="size"
+                formControlName="size"
+                min="0"
+                max="12"
+                step="1"
+              ></mat-slider>
             </div>
           </div>
           <div class="form-row">
@@ -61,8 +69,8 @@
                 matTooltip="What to show inside the input as an example"
                 matTooltipPosition="above"
                 for="placeholder"
-                >Place Holder *</label
-              >
+                >Place Holder
+              </label>
               <input
                 placeholder="This is a placeholder"
                 type="text"
@@ -97,19 +105,24 @@
                 <p>This field is required</p>
               </div>
             </div>
-            <div class="form-group col-md-3">
-              <label
-                matTooltip="If type is radio, type the name of the first option eg. if its about gender, then first option should be Male and second option should be Female"
-                matTooltipPosition="above"
-                for="first"
-                >First Options</label
-              >
-              <input type="text" formControlName="first" class="form-control" id="first" />
-            </div>
-            <div class="form-group col-md-3">
-              <label for="second">Second Options</label>
-              <input type="text" formControlName="second" class="form-control" id="second" />
-            </div>
+            <ng-container *ngIf="isRadio(i)">
+              <div class="form-group col-md-3">
+                <label
+                  matTooltip="If type is radio, type the name of the first option eg. if its about gender, then first option should be Male and second option should be Female"
+                  matTooltipPosition="above"
+                  for="first"
+                  >First Options</label
+                >
+                <input type="text" formControlName="first" class="form-control" id="first" />
+              </div>
+              <div class="form-group col-md-3">
+                <label for="second">Second Options</label>
+                <input type="text" formControlName="second" class="form-control" id="second" />
+              </div>
+            </ng-container>
+          </div>
+          <div class="form-row">
+            <button class="bttn-primary" (click)="removeInputField(i)">Remove</button>
           </div>
           <hr />
         </div>
@@ -145,8 +158,12 @@
             <ng-container *ngIf="item?.type === 'select'">
               <label [for]="item?.fieldName">{{ item?.label }}<span *ngIf="item?.required"> *</span></label>
               <select [formControlName]="item?.fieldName" class="form-control" id="country">
-                <option value="null" disabled="true" [selected]="true">{{ item?.selectLabel }}</option>
-                <option *ngFor="let country of item?.options">{{ country.viewValue }}</option>
+                <option value="null" disabled="true" [selected]="true">
+                  {{ item?.selectLabel }}
+                </option>
+                <option *ngFor="let country of item?.options">
+                  {{ country.viewValue }}
+                </option>
               </select>
             </ng-container>
             <ng-container *ngIf="item?.type === 'radio'">
@@ -187,21 +204,18 @@
               <label [for]="item?.fieldName">{{ item?.label }}<span *ngIf="item?.required"> *</span></label>
               <div class="p-0 form-group date d-flex">
                 <input
-                  (click)="dp3.toggle()"
+                  (click)="picker.open()"
                   id="{{ item?.fieldName }}"
                   class="form-control"
                   placeholder="{{ item?.placeholder }}"
                   name="{{ item?.fieldName }}"
                   formControlName="{{ item?.fieldName }}"
-                  ngbDatepicker
-                  #dp3="ngbDatepicker"
                   [max]="item?.max"
+                  matInput
+                  [matDatepicker]="picker"
                 />
-                <div class="input-group-append">
-                  <button (click)="dp3.toggle()" class="btn btn-feather" style="position: 0" type="button">
-                    <i data-feather="calendar"></i>
-                  </button>
-                </div>
+                <i-feather matSuffix (click)="picker.open()"></i-feather>
+                <mat-datepicker #picker></mat-datepicker>
               </div>
             </ng-container>
             <div class="help-block" *ngIf="isFieldInvalid(item?.fieldName) && item?.required">
@@ -210,7 +224,72 @@
           </div>
         </ng-container>
       </div>
-      <button (click)="onSubmit(former)" class="bttn-primary pull-right">Submit</button>
+      <div class="button-holder d-flex justify-content-between">
+        <button (click)="onSubmit(former)" class="bttn-primary pull-right">Submit</button>
+        <button (click)="back()" class="bttn-primary pull-left">Back</button>
+      </div>
+      <div class="d-flex flex-columns">
+        <textarea readonly id="copy" formControlName="json" cols="30" rows="10"></textarea>
+        <button (click)="copy()" class="bttn-primary">Copy</button>
+      </div>
     </div>
   </form>
+</div>
+<div>
+  <form [formGroup]="jsonForm">
+    <textarea formControlName="form" cols="30" rows="10"></textarea>
+  </form>
+  <button (click)="go()">Go</button>
+</div> -->
+<div class="container pt-3">
+  <div cdkDropListGroup class="row">
+    <div class="col-md-3">
+      <div
+        [cdkDropListEnterPredicate]="returnFalse"
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListData]="movies"
+        cdkDropList
+        class="example-list"
+      >
+        <div class="example-box" *ngFor="let movie of movies" cdkDrag>
+          {{ movie.title }}
+          <div *cdkDragPreview class="form-row">
+            <div class="form-group col-md-12">
+              <label matTooltip="same as label but type it without spaces" matTooltipPosition="above" for="fieldName"
+                >Field Name *</label
+              >
+              <input type="text" class="form-control" id="fieldName" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="example-list" [cdkDropListData]="inputs" cdkDropList (cdkDropListDropped)="drop($event)">
+        <div cdkDragHandle cdkDrag class="example-box row" *ngFor="let input of inputs; let i = index">
+          <div
+            *ngFor="let title of input?.titles"
+            class="form-group col-md-{{ (12 / input?.titles.length | floor) || 6 }}"
+          >
+            <app-input [label]="title" cdkDragHandle cdkDrag *ngIf="title?.toLowerCase() === 'text'"></app-input>
+            <app-input
+              [label]="title"
+              cdkDragHandle
+              cdkDrag
+              [type]="'number'"
+              *ngIf="title?.toLowerCase() === 'number'"
+            ></app-input>
+            <div (click)="log(title)" *ngIf="title?.toLowerCase() === 'placeholder'" class="placeholder">
+              <i-feather [matMenuTriggerFor]="menu" class="icon-first" name="plus"></i-feather>
+              <i-feather (click)="done(input)" class="icon-second" name="check"></i-feather>
+              <mat-menu #menu="matMenu">
+                <button (click)="add(input, 'Text')" mat-menu-item>Text</button>
+                <button (click)="add(input, 'Number')" mat-menu-item>Number</button>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
