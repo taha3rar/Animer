@@ -183,6 +183,9 @@ button:disabled {
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
+.draggerr {
+  width: 100% !important;
+}
 
 .cdk-drag-placeholder {
   opacity: 0;
@@ -202,10 +205,12 @@ button:disabled {
 
 .placeholder {
   width: 100%;
-  height: 33px;
-  top: 14px;
+  height: 3.7rem;
+  border-radius: 7px;
+  top: 2.8rem;
   position: relative;
 }
+
 .placeholder {
   background: linear-gradient(90deg, gray 50%, transparent 50%), linear-gradient(90deg, gray 50%, transparent 50%),
     linear-gradient(0deg, gray 50%, transparent 50%), linear-gradient(0deg, gray 50%, transparent 50%);
@@ -247,4 +252,16 @@ $avenews: #37c1ce;
 .col-md-12 {
   padding-right: 15px !important;
   padding-left: 15px !important;
+}
+.icon-holder {
+  height: 0px;
+  i-feather {
+    bottom: 5.5rem !important;
+  }
+}
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: #37c1ce54 !important;
+}
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #37c1ce !important;
 }

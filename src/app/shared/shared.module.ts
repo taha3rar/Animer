@@ -45,11 +45,14 @@ import { LeadershipDetailsComponent } from "./components/ecosystem-generator/lea
 import { AdditionalEcoDetailsComponent } from "./components/ecosystem-generator/additional-eco-details/additional-eco-details.component";
 import { FormTestComponent } from "./components/forms/form-test/form-test.component";
 import { FeatherModule } from "angular-feather";
-import { Calendar, Plus, Check } from "angular-feather/icons";
+import { Calendar, Plus, Check, Edit2 } from "angular-feather/icons";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { MatMenuModule } from "@angular/material/menu";
 import { InputComponent } from "./components/forms/comp/input.component";
 import { FloorPipe } from "./pipes/floor.pipe";
+import { HoverDirective } from "./directives/hover.directive";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -63,10 +66,11 @@ import { FloorPipe } from "./pipes/floor.pipe";
     MatTooltipModule,
     MatSliderModule,
     DragDropModule,
-    FeatherModule.pick({ Calendar, Plus, Check }),
+    FeatherModule.pick({ Calendar, Plus, Check, Edit2 }),
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSlideToggleModule,
     RecaptchaModule,
     ReactiveFormsModule,
     MatSortModule,
@@ -82,6 +86,7 @@ import { FloorPipe } from "./pipes/floor.pipe";
     ReferenceCodePipe,
     BaseNavigationComponent,
     BaseListComponent,
+    HoverDirective,
     GooglePlacesDirective,
     CaptchaComponent,
     UploadPictureComponent,
@@ -119,6 +124,7 @@ import { FloorPipe } from "./pipes/floor.pipe";
     ProductQuantityPipe,
     UploadPictureComponent,
     AdditionalDetailsComponent,
+    HoverDirective,
     TutorialControlComponent,
     GrnModalComponent,
     ContactGeneratorComponent,

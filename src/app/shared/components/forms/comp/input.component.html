@@ -1,8 +1,12 @@
-<ng-container *ngIf="type !== 'number'">
-  <label matTooltip="Label" matTooltipPosition="above">{{ label }} <span *ngIf="required">*</span></label>
+<ng-container *ngIf="type === 'text'">
+  <label [ngStyle]="{ color: color }" matTooltip="{{ tooltip }}" matTooltipPosition="above"
+    >{{ label }} <span *ngIf="required">*</span></label
+  >
   <input [disabled]="isDisabled" type="text" class="form-control" />
 </ng-container>
 <ng-container *ngIf="type === 'number'">
-  <label matTooltip="Number" matTooltipPosition="above">{{ label }} <span *ngIf="required">*</span></label>
+  <label [ngStyle]="{ color: color }" matTooltip="{{ tooltip }}" matTooltipPosition="above"
+    >{{ label }} <span *ngIf="required">*</span></label
+  >
   <input [disabled]="isDisabled" type="number" class="form-control" />
 </ng-container>

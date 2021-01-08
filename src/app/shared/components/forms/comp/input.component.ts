@@ -11,7 +11,10 @@ export class InputComponent implements OnInit, OnChanges {
   @Input() isDisabled: boolean;
   @Input() required: boolean;
   @Input() col: number = 6;
+  @Input() color: string = "#000";
+  @Input() tooltip: string;
   constructor() {}
   ngOnInit(): void {}
-  ngOnChanges(changes: any): void {}
+  ngOnChanges(changes: any): void {
+  }
 }
