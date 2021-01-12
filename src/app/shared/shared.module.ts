@@ -18,7 +18,13 @@ import { TutorialControlComponent } from "./components/tutorial-control/tutorial
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { UnauthorizedPageComponent } from "./components/unauthorized-page/unauthorized-page.component";
-import { MatDatepickerModule, MatNativeDateModule, MatSliderModule, MatSortModule } from "@angular/material";
+import {
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatSortModule,
+} from "@angular/material";
 import { FilterPipe } from "@app/shared/pipes/filter.pipe";
 import { ContactGeneratorComponent } from "./components/contact-generator/contact-generator.component";
 import { UserProgressComponent } from "./components/user-progress/user-progress.component";
@@ -69,6 +75,7 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     FeatherModule.pick({ Calendar, Plus, Check, Edit2 }),
     FormsModule,
     MatDatepickerModule,
+    MatSelectModule,
     MatNativeDateModule,
     MatSlideToggleModule,
     RecaptchaModule,

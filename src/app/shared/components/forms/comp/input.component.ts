@@ -16,5 +16,6 @@ export class InputComponent implements OnInit, OnChanges {
   constructor() {}
   ngOnInit(): void {}
   ngOnChanges(changes: any): void {
+  
   }
 }

@@ -342,6 +342,39 @@
               <mat-slide-toggle [color]="'#37c1ce'" formControlName="req"></mat-slide-toggle>
             </div>
           </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Validators</label>
+              <mat-select (selectionChange)="log($event)" formControlName="validations" multiple>
+                <mat-select-trigger>
+                  <span *ngIf="currentConfig?.validators?.length" class="example-additional-selection">
+                    {{ currentConfig?.validators }}
+                  </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let validator of validatorNames" [value]="validator">{{ validator }}</mat-option>
+              </mat-select>
+            </div>
+          </div>
+          <div *ngIf="hasMinMax" class="row">
+            <div *ngIf="currentConfig?.validators?.includes('Min Value')" class="form-group col-md-6">
+              <label>Min Value *</label>
+              <input formControlName="min" class="form-control" type="number" />
+            </div>
+            <div *ngIf="currentConfig?.validators?.includes('Max Value')" class="form-group col-md-6">
+              <label>Max Value *</label>
+              <input formControlName="max" class="form-control" type="number" />
+            </div>
+          </div>
+          <div *ngIf="hasLengthValidator" class="row">
+            <div *ngIf="currentConfig?.validators?.includes('Min Length')" class="form-group col-md-6">
+              <label>Min Length *</label>
+              <input formControlName="minLength" class="form-control" type="number" />
+            </div>
+            <div *ngIf="currentConfig?.validators?.includes('Max Length')" class="form-group col-md-6">
+              <label>Max Length *</label>
+              <input formControlName="maxLength" class="form-control" type="number" />
+            </div>
+          </div>
         </form>
       </div>
     </div>
