@@ -13,6 +13,7 @@ export class InputComponent implements OnInit, OnChanges {
   @Input() col: number = 6;
   @Input() color: string = "#000";
   @Input() tooltip: string;
+  @Input() placeholder: string;
   constructor() {}
   ngOnInit(): void {}
   ngOnChanges(changes: any): void {

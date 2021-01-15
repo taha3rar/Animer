@@ -40,10 +40,10 @@ const fields = [
 ];
 @Component({
   selector: "app-form-test",
-  templateUrl: "./form-test.component.html",
-  styleUrls: ["./form-test.component.scss"],
+  templateUrl: "./form-list.component.html",
+  styleUrls: ["./form-list.component.scss"],
 })
-export class FormTestComponent extends BaseValidationComponent implements OnInit {
+export class FormListComponent extends BaseValidationComponent implements OnInit {
   form: FormGroup;
   iArray = new Array();
   testForm = new DynamicForm();
@@ -72,13 +72,15 @@ export class FormTestComponent extends BaseValidationComponent implements OnInit
   required: any[] = [null];
   constructor(private fb: FormBuilder, private dn: DynamicFormsService) {
     super();
+    console.log("hereee");
+    this.dynamicForm = JSON.parse(localStorage.getItem("currentForm"));
     this.form = this.fb.group({
       forms: this.fb.array([this.createForm()]),
     });
-    this.jsonForm = this.fb.group({
-      form: [undefined, Validators.required],
-    });
-    this.formInput = this.form;
+    // this.jsonForm = this.fb.group({
+    //   form: [undefined, Validators.required],
+    // });
+    // this.formInput = this.form;
     this.configForm = this.fb.group({
       label: [undefined],
       type: [undefined],
@@ -108,10 +110,28 @@ export class FormTestComponent extends BaseValidationComponent implements OnInit
         this.currentConfig["maxLength"] = data.maxLength;
       }
     });
+    console.log(this.dynamicForm);
+    this.initForm();
+    console.log(this.former);
   }
 
   ngOnInit() {
     this.formInput = this.form;
+  }
+  isFieldInvalid(field: string, errorType?: string) {
+    if (field === 'password' && errorType === 'minlength') {
+      return this.former.get(field).hasError('minlength') && this.former.get(field).touched;
+    } else if (field === 'password' && errorType === 'required') {
+      return this.former.get(field).hasError('required') && this.former.get(field).touched;
+    } else {
+      return this.former.get(field).invalid && this.former.get(field).touched;
+    }
+  }
+
+  showFieldStyle(field: string) {
+    return {
+      'has-error': this.isFieldInvalid(field),
+    };
   }
   createForm() {
     return this.fb.group({
@@ -258,6 +278,15 @@ export class FormTestComponent extends BaseValidationComponent implements OnInit
       this.former.addControl("json", new FormControl(this.json));
       this.showForm = true;
     }
+  }
+  initForm() {
+    this.size = new Array(this.dynamicForm.formRows);
+    // console.log(this.fb.group(obj));
+    this.former = this.dn.getJson(this.dynamicForm.inputs);
+    this.formInput = this.former;
+    // this.json = JSON.stringify(this.dynamicForm);
+    // this.former.addControl("json", new FormControl(this.json));
+    // this.showForm = true;
   }
   copy() {
     const copyText: any = document.getElementById("copy");
@@ -511,7 +540,6 @@ export class FormTestComponent extends BaseValidationComponent implements OnInit
     if (config.req) {
       validators.push(Validators.required);
     }
-    console.log(validators);
     return validators;
   }
 }

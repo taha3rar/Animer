@@ -1,3 +1,4 @@
+import { FormListerComponent } from "./components/forms/form-lister/form-lister.component";
 import { CaptchaComponent } from "./components/captcha/captcha.component";
 import { MeasurementPipe } from "./pipes/measurement.pipe";
 import { RouterModule } from "@angular/router";
@@ -8,6 +9,7 @@ import { CommonModule, DatePipe, DecimalPipe } from "@angular/common";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { LoaderComponent } from "./loader/loader.component";
 import { RoundUpPipe } from "./pipes/roundup.pipe";
+import { FormListComponent } from "./components/forms/form-list/form-list.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { BaseListComponent } from "./components/base-list/base-list.component";
@@ -51,7 +53,7 @@ import { LeadershipDetailsComponent } from "./components/ecosystem-generator/lea
 import { AdditionalEcoDetailsComponent } from "./components/ecosystem-generator/additional-eco-details/additional-eco-details.component";
 import { FormTestComponent } from "./components/forms/form-test/form-test.component";
 import { FeatherModule } from "angular-feather";
-import { Calendar, Plus, Check, Edit2 } from "angular-feather/icons";
+import { Calendar, Plus, Check, Edit2, Trash2 } from "angular-feather/icons";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { MatMenuModule } from "@angular/material/menu";
 import { InputComponent } from "./components/forms/comp/input.component";
@@ -72,7 +74,7 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     MatTooltipModule,
     MatSliderModule,
     DragDropModule,
-    FeatherModule.pick({ Calendar, Plus, Check, Edit2 }),
+    FeatherModule.pick({ Calendar, Plus, Check, Edit2, Trash2 }),
     FormsModule,
     MatDatepickerModule,
     MatSelectModule,
@@ -119,6 +121,8 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     LeadershipDetailsComponent,
     AdditionalEcoDetailsComponent,
     FormTestComponent,
+    FormListComponent,
+    FormListerComponent,
   ],
   entryComponents: [],
   exports: [

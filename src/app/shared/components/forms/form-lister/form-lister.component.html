@@ -1,0 +1,19 @@
+<table class="table main-table">
+  <thead>
+    <tr id="table-head">
+      <th>#</th>
+      <th class="text-center">Name</th>
+      <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let form of forms; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ name }}</td>
+      <td>
+        <a (click)="viewForm(form)" id="view">View</a>
+        <a (click)="editForm()" id="edit">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

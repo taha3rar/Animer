@@ -2,11 +2,11 @@
   <label [ngStyle]="{ color: color }" matTooltip="{{ tooltip }}" matTooltipPosition="above"
     >{{ label }} <span *ngIf="required">*</span></label
   >
-  <input [disabled]="isDisabled" type="text" class="form-control" />
+  <input [placeholder]="placeholder ? placeholder : ''" [disabled]="isDisabled" type="text" class="form-control" />
 </ng-container>
 <ng-container *ngIf="type === 'number'">
   <label [ngStyle]="{ color: color }" matTooltip="{{ tooltip }}" matTooltipPosition="above"
     >{{ label }} <span *ngIf="required">*</span></label
   >
-  <input [disabled]="isDisabled" type="number" class="form-control" />
+  <input [placeholder]="placeholder ? placeholder : ''" [disabled]="isDisabled" type="number" class="form-control" />
 </ng-container>

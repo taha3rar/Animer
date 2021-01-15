@@ -135,8 +135,8 @@
     <button class="d-block bttn bttn-primary pull-right" (click)="submit()">Submit</button>
   </div>
   <h5 class="text-center">Field Count: {{ counter }}</h5>
-</div>
-<div *ngIf="showForm">
+</div> -->
+<div>
   <form [formGroup]="former">
     <div class="col-md-12">
       <div class="form-row" *ngFor="let j of size; let i = index">
@@ -155,7 +155,7 @@
                 [id]="item?.fieldName"
               />
             </ng-container>
-            <ng-container *ngIf="item?.type === 'select'">
+            <!-- <ng-container *ngIf="item?.type === 'select'">
               <label [for]="item?.fieldName">{{ item?.label }}<span *ngIf="item?.required"> *</span></label>
               <select [formControlName]="item?.fieldName" class="form-control" id="country">
                 <option value="null" disabled="true" [selected]="true">
@@ -165,8 +165,8 @@
                   {{ country.viewValue }}
                 </option>
               </select>
-            </ng-container>
-            <ng-container *ngIf="item?.type === 'radio'">
+            </ng-container> -->
+            <!-- <ng-container *ngIf="item?.type === 'radio'">
               <label class="d-flex" id="radio" [for]="item?.fieldName"
                 >{{ item?.label }}<span *ngIf="item?.required"> *</span></label
               >
@@ -186,8 +186,8 @@
               >
                 {{ item?.radioOptions.second | titlecase }}
               </button>
-            </ng-container>
-            <ng-container *ngIf="item?.type === 'file'">
+            </ng-container> -->
+            <!-- <ng-container *ngIf="item?.type === 'file'">
               <label class="d-flex" [for]="item?.fieldName"
                 >{{ item?.label }}<span *ngIf="item?.required"> *</span></label
               >
@@ -199,8 +199,8 @@
                 id="{{ item?.fieldName }}"
               />
               <button (click)="fileUpload(item?.fieldName)" class="bttn bttn-outline-primary">Upload</button>
-            </ng-container>
-            <ng-container *ngIf="item?.type === 'date'">
+            </ng-container> -->
+            <!-- <ng-container *ngIf="item?.type === 'date'">
               <label [for]="item?.fieldName">{{ item?.label }}<span *ngIf="item?.required"> *</span></label>
               <div class="p-0 form-group date d-flex">
                 <input
@@ -217,200 +217,200 @@
                 <i-feather matSuffix (click)="picker.open()"></i-feather>
                 <mat-datepicker #picker></mat-datepicker>
               </div>
-            </ng-container>
-            <div class="help-block" *ngIf="isFieldInvalid(item?.fieldName) && item?.required">
+            </ng-container> -->
+            <!-- <div class="help-block" *ngIf="isFieldInvalid(item?.fieldName) && item?.required">
               <p>This field is required</p>
-            </div>
+            </div> -->
           </div>
         </ng-container>
       </div>
-      <div class="button-holder d-flex justify-content-between">
+      <!-- <div class="button-holder d-flex justify-content-between">
         <button (click)="onSubmit(former)" class="bttn-primary pull-right">Submit</button>
         <button (click)="back()" class="bttn-primary pull-left">Back</button>
-      </div>
-      <div class="d-flex flex-columns">
+      </div> -->
+      <!-- <div class="d-flex flex-columns">
         <textarea readonly id="copy" formControlName="json" cols="30" rows="10"></textarea>
         <button (click)="copy()" class="bttn-primary">Copy</button>
-      </div>
+      </div> -->
     </div>
   </form>
 </div>
 <div>
-  <form [formGroup]="jsonForm">
+  <!-- <form [formGroup]="jsonForm">
     <textarea formControlName="form" cols="30" rows="10"></textarea>
   </form>
-  <button (click)="go()">Go</button>
-</div> -->
-<div class="container pt-3">
-  <div cdkDropListGroup class="row">
-    <div class="col-md-3">
-      <div
-        [cdkDropListEnterPredicate]="returnFalse"
-        (cdkDropListDropped)="drop($event)"
-        [cdkDropListData]="movies"
-        cdkDropList
-        class="example-list"
-      >
-        <div class="example-box" *ngFor="let movie of movies" cdkDrag>
-          {{ movie.title }}
-          <div *cdkDragPreview class="form-row">
-            <div class="form-group col-md-12">
-              <label matTooltip="same as label but type it without spaces" matTooltipPosition="above" for="fieldName"
-                >Field Name *</label
-              >
-              <input type="text" class="form-control" id="fieldName" />
+  <button (click)="go()">Go</button> -->
+</div>
+<!-- <div class="container pt-3">
+    <div cdkDropListGroup class="row">
+      <div class="col-md-3">
+        <div
+          [cdkDropListEnterPredicate]="returnFalse"
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListData]="movies"
+          cdkDropList
+          class="example-list"
+        >
+          <div class="example-box" *ngFor="let movie of movies" cdkDrag>
+            {{ movie.title }}
+            <div *cdkDragPreview class="form-row">
+              <div class="form-group col-md-12">
+                <label matTooltip="same as label but type it without spaces" matTooltipPosition="above" for="fieldName"
+                  >Field Name *</label
+                >
+                <input type="text" class="form-control" id="fieldName" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="example-list" [cdkDropListData]="inputs" cdkDropList (cdkDropListDropped)="drop($event)">
-        <div cdkDrag class="example-box row" *ngFor="let input of inputs; let i = index">
-          <div
-            class="draggerr"
-            [cdkDropListData]="input?.titles"
-            cdkDropList
-            cdkDropListOrientation="horizontal"
-            (cdkDropListDropped)="drob($event, input?.titles, input)"
-          >
+      <div class="col-md-6">
+        <div class="example-list" [cdkDropListData]="inputs" cdkDropList (cdkDropListDropped)="drop($event)">
+          <div cdkDrag class="example-box row" *ngFor="let input of inputs; let i = index">
             <div
-              #item
-              *ngFor="let title of input?.titles; let j = index"
-              class="form-group {{ title?.id }} col-md-{{ (12 / input?.titles.length | floor) || 6 }}"
+              class="draggerr"
+              [cdkDropListData]="input?.titles"
+              cdkDropList
+              cdkDropListOrientation="horizontal"
+              (cdkDropListDropped)="drob($event, input?.titles, input)"
             >
               <div
-                [ngClass]="{ selected: title?.id == currentTitle?.id }"
-                cdkDrag
-                (click)="changeConfig(title)"
-                cdkDragHandle
-                (click)="log({ title: title, j: j, input: input })"
-                *ngIf="title?.name?.toLowerCase() === 'text' || title?.name?.toLowerCase() === 'number'"
-                class="w-auto"
+                #item
+                *ngFor="let title of input?.titles; let j = index"
+                class="form-group {{ title?.id }} col-md-{{ (12 / input?.titles.length | floor) || 6 }}"
               >
-                <app-input
-                  [required]="title?.config?.req"
-                  [tooltip]="title?.config?.tooltip"
-                  [placeholder]="title?.config?.placeholder"
-                  [color]="title?.config?.color"
-                  [type]="title?.config?.type?.toLowerCase()"
-                  [label]="title?.config?.label"
+                <div
+                  [ngClass]="{ selected: title?.id == currentTitle?.id }"
+                  cdkDrag
+                  (click)="changeConfig(title)"
+                  cdkDragHandle
+                  (click)="log({ title: title, j: j, input: input })"
+                  *ngIf="title?.name?.toLowerCase() === 'text' || title?.name?.toLowerCase() === 'number'"
+                  class="w-auto"
                 >
-                </app-input>
-                <div class="icon-holder" *ngIf="title?.id == currentTitle?.id">
-                  <i-feather [matMenuTriggerFor]="menu_1" class="icon-first" name="plus"></i-feather>
-                  <i-feather (click)="removeField(input, j)" class="icon-second" name="trash2"></i-feather>
-                  <mat-menu #menu_1="matMenu">
-                    <button (click)="add(input, 'Text')" mat-menu-item>Text</button>
-                    <button (click)="add(input, 'Number')" mat-menu-item>Number</button>
-                  </mat-menu>
+                  <app-input
+                    [required]="title?.config?.req"
+                    [tooltip]="title?.config?.tooltip"
+                    [placeholder]="title?.config?.placeholder"
+                    [color]="title?.config?.color"
+                    [type]="title?.config?.type?.toLowerCase()"
+                    [label]="title?.config?.label"
+                  >
+                  </app-input>
+                  <div class="icon-holder" *ngIf="title?.id == currentTitle?.id">
+                    <i-feather [matMenuTriggerFor]="menu_1" class="icon-first" name="plus"></i-feather>
+                    <i-feather (click)="removeField(input, j)" class="icon-second" name="trash2"></i-feather>
+                    <mat-menu #menu_1="matMenu">
+                      <button (click)="add(input, 'Text')" mat-menu-item>Text</button>
+                      <button (click)="add(input, 'Number')" mat-menu-item>Number</button>
+                    </mat-menu>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="button-submit">
+          <button (click)="submitConfigs()" class="d-block bttn bttn-outline-primary">Submit</button>
+        </div>
       </div>
-      <div class="button-submit">
-        <button (click)="submitConfigs()" class="d-block bttn bttn-outline-primary">Submit</button>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div *ngIf="currentConfig">
-        <form [formGroup]="configForm">
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label>Field Name</label>
-              <input class="form-control" type="text" formControlName="label" />
+      <div class="col-md-3">
+        <div *ngIf="currentConfig">
+          <form [formGroup]="configForm">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label>Field Name</label>
+                <input class="form-control" type="text" formControlName="label" />
+              </div>
+              <div class="form-group col-md-6">
+                <label>Color</label>
+                <input class="form-control" type="color" formControlName="color" />
+              </div>
             </div>
-            <div class="form-group col-md-6">
-              <label>Color</label>
-              <input class="form-control" type="color" formControlName="color" />
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label>Placeholder</label>
+                <input class="form-control" type="text" formControlName="placeholder" />
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-12">
-              <label>Placeholder</label>
-              <input class="form-control" type="text" formControlName="placeholder" />
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label>Tooltip</label>
+                <input class="form-control" type="text" formControlName="tooltip" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="d-flex">Required</label>
+                <mat-slide-toggle [color]="'#37c1ce'" formControlName="req"></mat-slide-toggle>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label>Tooltip</label>
-              <input class="form-control" type="text" formControlName="tooltip" />
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label>Validators</label>
+                <mat-select
+                  class="form-control"
+                  (selectionChange)="validatorChange($event)"
+                  formControlName="validators"
+                  multiple
+                >
+                  <mat-select-trigger>
+                    <span *ngIf="currentConfig?.validators?.length" class="example-additional-selection">
+                      {{ currentConfig?.validators }}
+                    </span>
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let validator of validatorNames" [value]="validator">{{ validator }}</mat-option>
+                </mat-select>
+              </div>
             </div>
-            <div class="form-group col-md-6">
-              <label class="d-flex">Required</label>
-              <mat-slide-toggle [color]="'#37c1ce'" formControlName="req"></mat-slide-toggle>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-12">
-              <label>Validators</label>
-              <mat-select
-                class="form-control"
-                (selectionChange)="validatorChange($event)"
-                formControlName="validators"
-                multiple
+            <div *ngIf="hasMinMax" class="row">
+              <div
+                [ngClass]="showFieldStyle2('min', configForm)"
+                *ngIf="currentConfig?.validators?.includes('Min Value')"
+                class="form-group col-md-6"
               >
-                <mat-select-trigger>
-                  <span *ngIf="currentConfig?.validators?.length" class="example-additional-selection">
-                    {{ currentConfig?.validators }}
-                  </span>
-                </mat-select-trigger>
-                <mat-option *ngFor="let validator of validatorNames" [value]="validator">{{ validator }}</mat-option>
-              </mat-select>
-            </div>
-          </div>
-          <div *ngIf="hasMinMax" class="row">
-            <div
-              [ngClass]="showFieldStyle2('min', configForm)"
-              *ngIf="currentConfig?.validators?.includes('Min Value')"
-              class="form-group col-md-6"
-            >
-              <label>Min Value *</label>
-              <input formControlName="min" class="form-control" type="number" />
-              <div class="help-block" *ngIf="isFieldInvalid2('min', configForm)">
-                <p>{{ errorMessage("min", configForm) }}</p>
+                <label>Min Value *</label>
+                <input formControlName="min" class="form-control" type="number" />
+                <div class="help-block" *ngIf="isFieldInvalid2('min', configForm)">
+                  <p>{{ errorMessage("min", configForm) }}</p>
+                </div>
+              </div>
+              <div
+                [ngClass]="showFieldStyle2('max', configForm)"
+                *ngIf="currentConfig?.validators?.includes('Max Value')"
+                class="form-group col-md-6"
+              >
+                <label>Max Value *</label>
+                <input formControlName="max" class="form-control" type="number" />
+                <div class="help-block" *ngIf="isFieldInvalid2('max', configForm)">
+                  <p>{{ errorMessage("max", configForm) }}</p>
+                </div>
               </div>
             </div>
-            <div
-              [ngClass]="showFieldStyle2('max', configForm)"
-              *ngIf="currentConfig?.validators?.includes('Max Value')"
-              class="form-group col-md-6"
-            >
-              <label>Max Value *</label>
-              <input formControlName="max" class="form-control" type="number" />
-              <div class="help-block" *ngIf="isFieldInvalid2('max', configForm)">
-                <p>{{ errorMessage("max", configForm) }}</p>
+            <div *ngIf="hasLengthValidator" class="row">
+              <div
+                [ngClass]="showFieldStyle2('minLength', configForm)"
+                *ngIf="currentConfig?.validators?.includes('Min Length')"
+                class="form-group col-md-6"
+              >
+                <label>Min Length *</label>
+                <input formControlName="minLength" class="form-control" type="number" />
+                <div class="help-block" *ngIf="isFieldInvalid2('minLength', configForm)">
+                  <p>{{ errorMessage("minLength", configForm) }}</p>
+                </div>
+              </div>
+              <div
+                [ngClass]="showFieldStyle2('maxLength', configForm)"
+                *ngIf="currentConfig?.validators?.includes('Max Length')"
+                class="form-group col-md-6"
+              >
+                <label>Max Length *</label>
+                <input formControlName="maxLength" class="form-control" type="number" />
+                <div class="help-block" *ngIf="isFieldInvalid2('maxLength', configForm)">
+                  <p>{{ errorMessage("maxLength", configForm) }}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div *ngIf="hasLengthValidator" class="row">
-            <div
-              [ngClass]="showFieldStyle2('minLength', configForm)"
-              *ngIf="currentConfig?.validators?.includes('Min Length')"
-              class="form-group col-md-6"
-            >
-              <label>Min Length *</label>
-              <input formControlName="minLength" class="form-control" type="number" />
-              <div class="help-block" *ngIf="isFieldInvalid2('minLength', configForm)">
-                <p>{{ errorMessage("minLength", configForm) }}</p>
-              </div>
-            </div>
-            <div
-              [ngClass]="showFieldStyle2('maxLength', configForm)"
-              *ngIf="currentConfig?.validators?.includes('Max Length')"
-              class="form-group col-md-6"
-            >
-              <label>Max Length *</label>
-              <input formControlName="maxLength" class="form-control" type="number" />
-              <div class="help-block" *ngIf="isFieldInvalid2('maxLength', configForm)">
-                <p>{{ errorMessage("maxLength", configForm) }}</p>
-              </div>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div> -->

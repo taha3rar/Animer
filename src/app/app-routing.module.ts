@@ -1,25 +1,35 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { NotFoundComponent } from './shared/components/not-found/not-found.component';
-import { UnauthorizedPageComponent } from './shared/components/unauthorized-page/unauthorized-page.component';
-import { LandingComponent } from './landing/landing.component';
-import { FormTestComponent } from './shared/components/forms/form-test/form-test.component';
+import { FormListerComponent } from "./shared/components/forms/form-lister/form-lister.component";
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
+import { NotFoundComponent } from "./shared/components/not-found/not-found.component";
+import { UnauthorizedPageComponent } from "./shared/components/unauthorized-page/unauthorized-page.component";
+import { LandingComponent } from "./landing/landing.component";
+import { FormTestComponent } from "./shared/components/forms/form-test/form-test.component";
+import { FormListComponent } from "./shared/components/forms/form-list/form-list.component";
 
 const routes: Routes = [
   // Fallback when no prior route is matched
   {
-    path: 'form',
+    path: "form",
     component: FormTestComponent,
   },
-  { path: 'not-found', component: NotFoundComponent },
-  { path: 'unauthorized', component: UnauthorizedPageComponent },
+  {
+    path: "form-view",
+    component: FormListComponent,
+  },
+  {
+    path: "form-list",
+    component: FormListerComponent,
+  },
+  { path: "not-found", component: NotFoundComponent },
+  { path: "unauthorized", component: UnauthorizedPageComponent },
   // { path: 'home', component: LandingComponent },
-  { path: '**', redirectTo: 'not-found' },
+  { path: "**", redirectTo: "not-found" },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: 'reload' })],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: "reload" })],
   exports: [RouterModule],
-  providers: []
+  providers: [],
 })
 export class AppRoutingModule {}
